@@ -5,4 +5,7 @@ tags={
 	"Events"
 }
 name="EaW: 1048"
-supported_version="1.8.2"
+dependencies={
+	"Equestria at War"
+}
+supported_version="1.9.*"
