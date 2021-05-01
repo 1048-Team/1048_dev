@@ -182,24 +182,188 @@ country_event = {
 				defense_skill = 1
 				planning_skill = 2
 				logistics_skill = 2
-		}
-	}
-		
-		effect_tooltip = {
-			EQS = {
-				remove_unit_leader = 19
-				create_corps_commander = {
-					name = "Aurora Shinespark"
-					portrait_path = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-					traits = { pony_race_trait solaris_inquisitionis protectress_of_the_empress_general promising_general }
-					skill = 2
-					id = 2
-					attack_skill = 3
-					defense_skill = 1
-					planning_skill = 2
-					logistics_skill = 2
-				}
 			}
 		}
 	}
+
+
+###Corruption Events###
+###Will go from solar.30 to solar.40###
+country_event = {
+	id = solar.40
+	title = solar.40.t
+	desc = solar.40.d
+	
+	is_triggered_only = yes
+	
+	option = { #Rise my new generals
+		name = solar.40.a
+		ai_chance = {
+			factor = 100
+			}
+			create_corps_commander = {
+				name = "Starlight Glimmer"
+				portrait_path = "gfx/leaders/EQS/Starlight_general.tga"
+				traits = { pony_race_trait military_genius brilliant_strategist }
+				skill = 4
+				id = 5
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 3
+			}
+			create_corps_commander = {
+				name = "Trixie Lulamoon"
+				portrait_path = "gfx/leaders/EQS/Trixie.tga"
+				traits = { pony_race_trait stage_performer infantry_leader }
+				skill = 3
+				id = 6
+				attack_skill = 4
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 5
+			}
+	}
 }
+
+
+###Crisis Events###
+###Events go from 80-100###
+###The fate of Daybreaker###
+country_event = { #Should have custom tooltips later
+	id = solar.99
+	title = solar.99.t
+	desc = solar.99.d
+	
+	is_triggered_only = yes
+	
+	option = { #Daybreaker is healed fully
+		name = solar.99.a
+		ai_chance = {
+			factor = 60
+			}
+			add_stability = 0.01
+			}
+	option = { #Daybreaker is healed but not fully
+		name = solar.99.b
+		ai_chance = {
+			factor = 30
+			}
+			hidden_effect = {
+			remove_unit_leader = 4
+			country_event = {
+				id = solar.100
+				days = 1
+			}
+			}
+			add_stability = -0.05
+		}
+		option = { #Celestia returns
+		name = solar.99.c
+		ai_chance = {
+			factor = 10
+			}
+			#hidden_effect = {
+			remove_unit_leader = 1
+			remove_unit_leader = 3
+			remove_unit_leader = 4
+			start_civil_war = {
+				ideology = fascism
+				size = 0.45
+				capital = 75
+				states = {
+					184 187 223 188 185 108 110 12
+				}
+				set_cosmetic_tag = EQS_SOL
+		}
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "Princess Celestia"
+				expire = "1965.1.1"
+				picture = GFX_CelestiaPortrait
+				desc = "POLITICS_CELESTIA_DESC"
+				ideology = harmonic_monarchy
+				female = yes
+				traits = {
+					princess_of_ponies
+					stout_defender
+				}
+			}
+			set_popularities = {
+				democratic = 45
+				fascism = 30
+				communism = 5
+				neutrality = 20
+				radical_borealist = 0
+				maresoc = 0
+			}
+			set_party_name = {
+				ideology = democratic
+				name = "Alicorn Rule"
+				long_name = "Alicorn Rule"
+			}
+			set_cosmetic_tag = EQS_CEL
+		#}
+			###start civil war here###
+	}
+}
+
+
+###Choosing a Regent###
+###Add more options with new paths over time, Sunset will always be favored, retire them from generalship if chosen###
+country_event = {
+	id = solar.100
+	title = solar.100.t
+	desc = solar.100.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset
+		name = solar.100.a
+		ai_chance = {
+			factor = 60
+			}
+			hidden_effect = {
+			retire_country_leader = yes
+			remove_unit_leader = 3
+			create_country_leader = {
+			name = "Sunset Shimmer"
+			expire = "1965.1.1"
+			picture = "gfx/leaders/EQS/Sunset.tga"
+			desc = "POLITICS_SUNSET_SHIMMER_DESC"
+			ideology = solarism
+			female = yes
+			traits = {
+				high_mage_shimmer
+				}
+			}
+		}
+		custom_effect_tooltip = sunset_regent
+	}
+	option = { #Aurora
+		name = solar.100.b
+		ai_chance = {
+			factor = 40
+			}
+			hidden_effect = {
+			retire_country_leader = yes
+			remove_unit_leader = 2
+			create_country_leader = {
+			name = "Aurora Shinespark"
+			expire = "1965.1.1"
+			picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
+			desc = "POLITICS_AURORA_SHINESPARK_DESC"
+			ideology = solarism
+			female = yes
+			traits = {
+				protectress_of_the_empress
+				}
+			}
+		}
+		custom_effect_tooltip = aurora_regent	
+	}
+}
+			
