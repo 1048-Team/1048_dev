@@ -182,10 +182,287 @@ country_event = {
 				defense_skill = 1
 				planning_skill = 2
 				logistics_skill = 2
+				female = yes
 			}
 		}
 	}
 
+###Opening focus events###
+###Left tree###
+
+country_event = {
+	id = solar.8
+	title = solar.8.t
+	desc = solar.8.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.8.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = -0.03
+	}
+}
+
+country_event = {
+	id = solar.10
+	title = solar.10.t
+	desc = solar.10.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.10.a
+		ai_chance = {
+			factor = 100
+		}
+		109 = {
+			add_manpower = -352
+		}
+		65 = {
+			add_manpower = -63
+		}
+		106 = {
+			add_manpower = -721
+		}
+	}
+}
+
+country_event = {
+	id = solar.11
+	title = solar.11.t
+	desc = solar.11.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.11.a
+		ai_chance = {
+			factor = 100
+		}
+		add_manpower = -1
+		hidden_effect = {
+			random_list = {
+				60 = {
+					set_country_flag = rebels_found
+				}
+				40 = {
+					set_country_flag = rebels_not_found
+				}
+			}
+		}
+	}
+}
+
+###Right side###
+country_event = {
+	id = solar.9
+	title = solar.9.t
+	desc = solar.9.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.9.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = solar.12
+	title = solar.12.t
+	desc = solar.12.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.12.a
+		ai_chance = {
+			factor = 100
+		}
+		add_political_power = 20
+	}
+}
+
+country_event = {
+	id = solar.13
+	title = solar.13.t
+	desc = solar.13.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.8.a
+		ai_chance = {
+			factor = 100
+		}
+		add_manpower = -1
+		add_stability = 0.01
+	}
+}
+
+country_event = {
+	id = solar.14
+	title = solar.14.t
+	desc = solar.14.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.14.a
+		ai_chance = {
+			factor = 100
+		}
+		add_manpower = -1
+	}
+}
+
+country_event = {
+	id = solar.15
+	title = solar.15.t
+	desc = solar.15.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.15.a
+		ai_chance = {
+			factor = 100
+		}
+		add_manpower = -1
+		add_war_support = 0.01
+	}
+}
+
+country_event = {
+	id = solar.16
+	title = solar.16.t
+	desc = solar.16.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.16.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = 0.05
+		hidden_effect = {
+			set_country_flag = rebels_found
+		}
+	}
+}
+
+country_event = {
+	id = solar.17
+	title = solar.17.t
+	desc = solar.17.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.17.a
+		ai_chance = {
+			factor = 100
+		}
+		#hidden_effect = {
+			IF = {
+				limit = {
+					TAG = EQS
+					AND = {
+					has_country_flag = rebels_found
+					}
+				}
+				country_event = {
+					id = solar.18
+					days = 34
+				}
+			}
+			ELSE = {
+				limit = {
+					TAG = EQS
+				}
+				country_event = {
+					id = solar.19
+					days = 34
+				}
+			}
+		#}
+	}
+}
+
+country_event = { #Rebels found, less damage, Starlight and Trixie captured
+	id = solar.18
+	title = solar.18.t
+	desc = solar.18.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.18.a
+		ai_chance = {
+			factor = 100
+		}
+		#hidden_effect = {
+			set_country_flag = starlight_and_trixie_captured
+			set_country_flag = unsuccessful_rebellion
+		#}
+		75 = {
+			add_manpower = -77213
+			damage_building = {
+				type = infrastructure
+				damage = 3
+			}
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+	}
+}
+
+country_event = { #Rebels found, less damage, Starlight and Trixie captured
+	id = solar.19
+	title = solar.19.t
+	desc = solar.19.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.19.a
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			set_country_flag = starlight_and_trixie_escaped
+			set_country_flag = successful_rebellion
+		}
+		75 = {
+			add_manpower = -204702
+			damage_building = {
+				type = infrastructure
+				damage = 8
+			}
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			remove_building = {
+				type = industrial_complex
+				level = 3
+			}
+		}
+	}
+}
 
 ###Corruption Events###
 ###Will go from solar.30 to solar.40###
@@ -211,6 +488,7 @@ country_event = {
 				defense_skill = 3
 				planning_skill = 4
 				logistics_skill = 3
+				female = yes
 			}
 			create_corps_commander = {
 				name = "Trixie Lulamoon"
@@ -222,6 +500,7 @@ country_event = {
 				defense_skill = 2
 				planning_skill = 2
 				logistics_skill = 5
+				female = yes
 			}
 	}
 }
