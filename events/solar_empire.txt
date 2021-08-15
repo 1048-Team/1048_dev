@@ -184,6 +184,7 @@ country_event = {
 				logistics_skill = 2
 				female = yes
 			}
+			set_country_flag = sentinel_killed
 		}
 	}
 
@@ -408,10 +409,11 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		ai_chance = {
 			factor = 100
 		}
-		#hidden_effect = {
+		hidden_effect = {
 			set_country_flag = starlight_and_trixie_captured
 			set_country_flag = unsuccessful_rebellion
-		#}
+			mark_focus_tree_layout_dirty = yes
+		}
 		75 = {
 			add_manpower = -77213
 			damage_building = {
@@ -445,6 +447,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		hidden_effect = {
 			set_country_flag = starlight_and_trixie_escaped
 			set_country_flag = successful_rebellion
+			mark_focus_tree_layout_dirty = yes
 		}
 		75 = {
 			add_manpower = -204702
@@ -465,7 +468,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 }
 
 ###Corruption Events###
-###Will go from solar.30 to solar.40###
+###Will go from solar.31 to solar.40###
 country_event = {
 	id = solar.40
 	title = solar.40.t
@@ -506,9 +509,40 @@ country_event = {
 }
 
 
+###Punishment Events for Manehattan###
+###Will go from solar.41 to solar.50###
+
+country_event = {
+	id = solar.50
+	title = solar.50.t
+	desc = solar.50.d
+	
+	is_triggered_only
+	
+	option { #Wipe them out, all of them
+		name = solar.50.a
+		ai_chance = {
+			factor = 100
+		}
+		
+		###Include damage to buildings in the surrounding states, and loss of ponypower###
+	}
+}
+		
+
 ###Crisis Events###
 ###Events go from 80-100###
 ###The fate of Daybreaker###
+country_event = { ###This event is needed for the rest to function. I don't know why, I don't care to know why, I just know it needs to be this way, or solar.80 will not fire
+	id = solar.9999
+	title = "The Derp Event"
+	desc = "HOI is a derp."
+	
+	option = {
+		name = "Yes."
+	}
+}
+
 country_event = { #Should have custom tooltips later
 	id = solar.99
 	title = solar.99.t
@@ -543,9 +577,21 @@ country_event = { #Should have custom tooltips later
 			factor = 10
 			}
 			#hidden_effect = {
+			end_puppet = WHY
 			remove_unit_leader = 1
 			remove_unit_leader = 3
 			remove_unit_leader = 4
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Nova Glow"
+				expire = "1965.1.1"
+				picture = ""
+				ideology = solarism
+				desc = "POLITICS_NOVA_GLOW_DESC"
+				traits = {
+					unprepared_warrior
+				}
+			}
 			start_civil_war = {
 				ideology = fascism
 				size = 0.45
@@ -584,8 +630,10 @@ country_event = { #Should have custom tooltips later
 				long_name = "Alicorn Rule"
 			}
 			set_cosmetic_tag = EQS_CEL
+			set_country_flag = equestria_returned
 		#}
-			###start civil war here###
+		
+		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
 	}
 }
 
