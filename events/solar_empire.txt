@@ -371,7 +371,7 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-		#hidden_effect = {
+		hidden_effect = {
 			IF = {
 				limit = {
 					TAG = EQS
@@ -390,7 +390,7 @@ country_event = {
 					days = 34
 				}
 			}
-		#}
+		}
 	}
 }
 
@@ -409,8 +409,13 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		hidden_effect = {
 			set_country_flag = starlight_and_trixie_captured
 			set_country_flag = unsuccessful_rebellion
-			mark_focus_tree_layout_dirty = yes
-		}
+			75 = {
+				add_dynamic_modifier = {
+					modifier = crushed_rebellion
+				}
+			}
+		mark_focus_tree_layout_dirty = yes
+	}
 		75 = {
 			add_manpower = -77213
 			damage_building = {
@@ -444,6 +449,11 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		hidden_effect = {
 			set_country_flag = starlight_and_trixie_escaped
 			set_country_flag = successful_rebellion
+			75 = {
+				add_dynamic_modifier = {
+					modifier = damaging_rebellion
+					}
+				}
 			mark_focus_tree_layout_dirty = yes
 		}
 		75 = {
@@ -546,32 +556,381 @@ country_event = { #Purging some heretical commanders
 
 ###Crisis Events###
 ###Events go from 80-100###
+###Daybreaker senses Celestia first appearing after Manehattan###
+country_event = { #Celestia first minute effects to Daybreaker, only whispers and a presence
+	id = solar.80
+	title = solar.80.t
+	desc = solar.80.d
+	
+	trigger = {
+		date > 1048.10.31
+		date < 1049.1.1
+		}
+		
+	mean_time_to_happen = {
+		days = 20
+		}
+	
+	option = {
+		name = solar.80.a
+		add_stability = -0.02
+		}
+	}
+	
+country_event = { #Celestia becomes more discernable, as she is now a shape in Daybreaker's vision at points as she tries a pony for heresy
+	id = solar.81
+	title = solar.81.t
+	desc = solar.81.d
+	
+	trigger = {
+		date > 1049.10.31
+		date < 1050.3.1
+		}
+		
+	mean_time_to_happen = {
+		days = 90
+		}
+	
+	option = {
+		name = solar.81.a
+		hidden_effect = {
+			set_variable = {
+				stability_change = -0.05
+				}
+			add_dynamic_modifier = {
+				modifier = slipping_sanity
+			}
+			country_event = {
+				id = solar.82
+				days = 60
+				random = 144
+				}
+			set_country_flag = daybreaker_crisis
+			}
+		}
+	}
+
+country_event = { #Celestia reveals herself and almost prevents Daybreaker from executing the heretic later and Daybreaker becomes more paranoid as she believes she's bewitched
+	id = solar.82
+	title = solar.82.t
+	desc = solar.82.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.82.a
+		hidden_effect = {
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			set_variable = {
+				war_support_change = -0.05
+				}
+			}
+		}
+	}
+	
+country_event = { #Sunset encounters Daybreaker smashing her mirror at the invisible Celestia and finds out what is going on and pledges to find a way to save Daybreaker even though Daybreaker protests
+	id = solar.83
+	title = solar.83.t
+	desc = solar.83.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.83.a
+		hidden_effect = {
+			set_variable = {
+				sunset_zealotry = 1
+			}
+			add_to_variable = {
+				stability_change = -0.1
+				}
+			set_variable = {
+				conscription_factor_change = -0.1
+				}
+			}
+		}
+	}
+	
+country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can either protest or be grateful for the help, former doesn't make her increase her zealotry, latter does
+	id = solar.84
+	title = solar.84.t
+	desc = solar.84.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset agrees with Daybreaker
+		name = solar.84.a
+		ai_chance = {
+			factor = 75
+		}
+		hidden_effect = {
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			add_to_variable {
+				war_support_change = -0.05
+				}
+			set_variable = {
+				army_speed_change = -0.1
+				}
+			}
+		}
+	option = { #Sunset protests against Daybreaker
+		name = solar.84.b
+		ai_chance = {
+			factor = 25
+		}
+		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = 2
+			}
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			add_to_variable {
+				war_support_change = -0.05
+				}
+			set_variable = {
+				army_speed_change = -0.1
+				}
+			}
+		}
+	}
+	
+country_event = { #Sunset and Aurora get to Bales and find reference to the Alicornis Restoris in the ancient library there; Nebula is encountered and severely injured, with Sunset either healing her or leaving her for dead, latter increasing zealotry; neither kill Nebula, however
+	id = solar.85
+	title = solar.85.t
+	desc = solar.85.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset heals Nebula
+		name = solar.85.a
+		ai_chance = {
+			factor = 80
+		}
+		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = -1
+			}
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			set_variable = {
+				factory_output_change = -0.15
+				}
+			}
+		}
+	option = { #Sunset leaves Nebula for dead
+		name = solar.85.b
+		ai_chance = {
+			factor = 20
+		}
+		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = 6
+			}
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			set_variable = {
+				factory_output_change = -0.15
+				}
+			}
+		}
+	}
+	
+country_event = { #Sunset and Aurora find the artifact and first mention of Solar Flare in the vault area, get captured by Bales; Sunset can fight or surrender for the time being, former increasing zealotry
+	id = solar.86
+	title = solar.86.t
+	desc = solar.86.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset fights
+		name = solar.86.a
+		ai_chance = {
+			factor = 90
+		}
+		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = 4
+			}
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			set_variable = {
+				conscription_change = -0.005
+				}
+			}
+		}
+	option = { #Sunset surrenders
+		name = solar.86.b
+		ai_chance = {
+			factor = 10
+		}
+		hidden_effect = {
+			add_to_variable = {
+				stability_change = -0.05
+				}
+			set_variable = {
+				conscription_change = -0.005
+				}
+			}
+		}
+	}
+	
+country_event = { #Sunset and Aurora get help from Astrum, and have a quick fight with Nebula, with Sunset either starting the fight or Aurora, former increasing zealotry
+	id = solar.87
+	title = solar.87.t
+	desc = solar.87.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset starts fight
+		name = solar.87.a
+		ai_chance = {
+			factor = 60
+		}
+		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = 4
+			}
+			add_to_variable = {
+				stability_change = -0.15
+				}
+			set_variable = {
+				research_speed_change = -0.2
+				}
+			}
+		}
+	option = { #Aurora starts fight
+		name = solar.87.b
+		ai_chance = {
+			factor = 40
+		}
+		hidden_effect = {
+			add_to_variable = {
+				stability_change = -0.15
+				}
+			set_variable = {
+				research_speed_change = -0.2
+				}
+			}
+		}
+	}
+	
+country_event = { #Sunset and the others race through the chaotic Canterlot to save Daybreaker with the Alicornis Restoris; Sunset can either be angry or sad to see Celestia in Daybreaker's mind, the former increasing zealotry
+	id = solar.88
+	title = solar.88.t
+	desc = solar.88.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset angy
+		name = solar.88.a
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = 2
+				}
+			}
+		}
+	option = { #Sunset sad
+		name = solar.88.b
+		ai_chance = {
+			factor = 30
+			}
+		}
+	}
+
 ###The fate of Daybreaker###
 country_event = { #Should have custom tooltips later
-	id = solar.99
-	title = solar.99.t
-	desc = solar.99.d
+	id = solar.96
+	title = solar.96.t
+	desc = solar.96.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.96.a
+		custom_effect_tooltip = mind_is_variable ###Have it be mysterious, along who knows what will affect Daybreaker's mind
+		IF = {
+			limit = {
+				check_variable = {
+					sunset_zealotry > 7
+				}
+			}
+			country_event = {
+				id = solar.97
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				check_variable = {
+					sunset_zealotry > 3
+					sunset_zealotry < 7
+				}
+			}
+			country_event = {
+				id = solar.98
+			}
+		}###Isn't working at the moment
+		ELSE_IF = {
+			limit = {
+				check_variable = {
+					sunset_zealotry < 3
+				}
+			}
+			country_event = {
+				id = solar.99
+			}
+		}
+		ELSE = {
+			country_event = {
+				id = solar.97
+			}
+		}
+	}
+}
+
+country_event = { #Daybreaker is healed and thankful to Sunset
+	id = solar.97
+	title = solar.97.t
+	desc = solar.97.d
 	
 	is_triggered_only = yes
 	
 	option = { #Daybreaker is healed fully
-		name = solar.99.a
-		ai_chance = {
-			factor = 60
+		name = solar.97.a
+		add_stability = 0.01
+		hidden_effect = {
+			set_country_flag = daybreaker_reigns
+			clr_country_flag = daybreaker_crisis
+			mark_focus_tree_layout_dirty = yes
 			}
-			add_stability = 0.01
-			hidden_effect = {
-				set_country_flag = daybreaker_reigns
-				mark_focus_tree_layout_dirty = yes
-			}
-			}
+		}
+	}
+	
+country_event = { #Daybreaker is partly healed, starts out fine, then collapses and is rushed to the throne room
+	id = solar.98
+	title = solar.98.t
+	desc = solar.98.d
+	
+	is_triggered_only = yes
+	
 	option = { #Daybreaker is healed but not fully
-		name = solar.99.b
+		name = solar.98.a
 		ai_chance = {
 			factor = 30
 			}
 			hidden_effect = {
 			remove_unit_leader = 4
+			clr_country_flag = daybreaker_crisis
 			country_event = {
 				id = solar.100
 				days = 1
@@ -579,12 +938,22 @@ country_event = { #Should have custom tooltips later
 			}
 			add_stability = -0.05
 		}
-		option = { #Celestia returns
-		name = solar.99.c
+	}
+	
+country_event = { #Celestia returns and knocks out Aurora and is disappointed in Sunset before knocking her out and starting a civil war
+	id = solar.99
+	title = solar.99.t
+	desc = solar.99.d
+	
+	is_triggered_only = yes
+	
+	option = { #Celestia returns
+		name = solar.99.a
 		ai_chance = {
 			factor = 10
 			}
-			#hidden_effect = {
+			hidden_effect = {
+			clr_country_flag = daybreaker_crisis
 			end_puppet = WHY
 			remove_unit_leader = 1
 			remove_unit_leader = 3
@@ -639,7 +1008,7 @@ country_event = { #Should have custom tooltips later
 			}
 			set_cosmetic_tag = EQS_CEL
 			set_country_flag = equestria_returned
-		#}
+		}
 		
 		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
 	}
@@ -648,7 +1017,7 @@ country_event = { #Should have custom tooltips later
 
 ###Choosing a Regent###
 ###Add more options with new paths over time, Sunset will always be favored, retire them from generalship if chosen###
-country_event = {
+country_event = { #After being sealed away, discussion is held over who will be the new regent
 	id = solar.100
 	title = solar.100.t
 	desc = solar.100.d
@@ -656,7 +1025,7 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = { #Sunset
-		name = solar.100.a
+		name = solar.98.a
 		ai_chance = {
 			factor = 60
 			}
