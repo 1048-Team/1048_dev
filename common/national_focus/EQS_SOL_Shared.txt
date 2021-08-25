@@ -950,9 +950,10 @@ shared_focus = {
 }
 
 ###Industry tree###
+###Left Side###
 shared_focus = {
 	id = capturing_economy
-	x = 17
+	x = 16
 	y = 1
 	
 	available = {
@@ -1002,6 +1003,132 @@ shared_focus = {
 	}
 }
 
+###Middle Path###
+shared_focus = {
+	id = new_imperial_bureaucracy
+	x = 4
+	y = 1
+	relative_position_id = capturing_economy
+		
+	bypass = {
+		}
+	
+	cost = 5
+	prerequisite = {
+		focus = capturing_economy
+		}
+	prerequisite = {
+		focus = working_wartime
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = red_tape_cut
+			days = 90
+			}
+		}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+shared_focus = {
+	id = all_empress_knowledge
+	x = 0
+	y = 1
+	relative_position_id = new_imperial_bureaucracy
+		
+	bypass = {
+		}
+	
+	cost = 3
+	prerequisite = {
+		focus = new_imperial_bureaucracy
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		set_variable = {
+			faster_research_change = 0.01
+			}
+		
+		add_dynamic_modifier = {
+			modifier = ibea
+			}
+		}
+	ai_will_do = {
+		factor = 25
+	}
+}
+
+shared_focus = {
+	id = citizen_board
+	x = -1
+	y = 1
+	relative_position_id = all_empress_knowledge
+		
+	bypass = {
+		}
+	
+	mutually_exclusive = {
+		focus = militarium_only
+		}
+	
+	cost = 5
+	prerequisite = {
+		focus = all_empress_knowledge
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		set_variable = {
+			construction_change = 0.1
+			}
+		}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = militarium_only
+	x = 1
+	y = 1
+	relative_position_id = all_empress_knowledge
+		
+	bypass = {
+		}
+	
+	mutually_exclusive = {
+		focus = citizen_board
+		}
+	
+	cost = 5
+	prerequisite = {
+		focus = all_empress_knowledge
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		set_variable = {
+			construction_change_2 = 0.1
+			}
+		}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+###Right Side###
 shared_focus = {
 	id = working_wartime
 	x = 24
