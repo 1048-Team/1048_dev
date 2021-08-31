@@ -2,7 +2,7 @@
 ###Starting Portion###
 shared_focus = {
 	id = flames_never_snuffed
-	x = 38
+	x = 5
 	y = 15
 	
 	available = {
@@ -486,6 +486,7 @@ shared_focus = {
 }
 
 ###Solaris Bellum Against Rump States###
+###Princessdom of Central Equestria###
 shared_focus = {
 	id = council_of_fools
 	x = -4
@@ -502,6 +503,9 @@ shared_focus = {
 	
 	prerequisite = { focus = solaris_bellum }
 	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
 	completion_reward = {
 		create_wargoal = {
 			type = annex_everything
@@ -513,6 +517,86 @@ shared_focus = {
 	}
 }
 
+shared_focus = { #Should refer to correcting the mistake of rebellion, rename New Canterlot to Sanctum Collis
+	id = burying_the_past
+	x = 0
+	y = 1
+	relative_position_id = council_of_fools
+	
+	available = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 7
+	
+	prerequisite = { focus = council_of_fools }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		113 = { add_manpower = -60000 }
+		120 = { add_manpower = -20000 }
+		22 = { add_manpower = -125000}
+		121 = { add_manpower = -40000 }
+		123 = { add_manpower = -30000 }
+		97 = { add_manpower = -65000 }
+		111 = { add_manpower = -25000 }
+		63 = { add_manpower = -15000}
+		122 = { add_manpower = -125000 }
+		112 = { add_manpower = -3000 }
+		115 = { add_manpower = -7500 }
+		116 = { add_manpower = -70000 }
+		
+		add_tech_bonus = {
+		name = race_bonus
+		bonus = 1
+		uses = 3
+		category = race_tech
+		}
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = { #Should refer to correcting the mistake of rebellion, rename New Canterlot to Sanctum Collis
+	id = imperial_breadbasket
+	x = 0
+	y = 1
+	relative_position_id = burying_the_past
+	
+	bypass = {
+	}
+	
+	cost = 8
+	
+	prerequisite = { focus = burying_the_past }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = CER
+			}
+			add_core_of = EQS
+		}
+		###Add spirit for +5% monthly pop###
+		set_province_name = { id = 782 name = "Sanctum Collis" }
+	}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+###Cloudsdale###
 shared_focus = {
 	id = plucking_heretics
 	x = -2
@@ -529,6 +613,9 @@ shared_focus = {
 	
 	prerequisite = { focus = solaris_bellum }
 	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
 	completion_reward = {
 		create_wargoal = {
 			type = annex_everything
@@ -540,6 +627,78 @@ shared_focus = {
 	}
 }
 
+shared_focus = {
+	id = grounding_the_clouds
+	x = 0
+	y = 1
+	relative_position_id = plucking_heretics
+	
+	available = {
+		NOT = {
+			country_exists = CLD
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 7
+	
+	prerequisite = { focus = plucking_heretics }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = CLD
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		###Insert population changes here after Laundry gives pop growth rate
+		###Give temp spirit for using rain clouds for growth speed for 1 year
+	}
+	ai_will_do = {
+		factor = 17
+	}
+}
+
+shared_focus = {
+	id = pegasi_for_the_empress
+	x = 0
+	y = 1
+	relative_position_id = grounding_the_clouds
+	
+	bypass = {
+	}
+	
+	cost = 8
+	
+	prerequisite = { focus = grounding_the_clouds }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = CLD
+			}
+			add_core_of = EQS
+		}
+		###Event for forming Solarbolts
+	}	
+	ai_will_do = {
+		factor = 23
+	}
+}
+
+###Bales###
 shared_focus = {
 	id = faith_over_science
 	x = 0
@@ -556,6 +715,9 @@ shared_focus = {
 	
 	prerequisite = { focus = solaris_bellum }
 	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
 	completion_reward = {
 		create_wargoal = {
 			type = annex_everything
@@ -567,6 +729,80 @@ shared_focus = {
 	}
 }
 
+shared_focus = {
+	id = scourging_the_scientists
+	x = 0
+	y = 1
+	relative_position_id = faith_over_science
+	
+	available = {
+		NOT = {
+			country_exists = BLS
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 7
+	
+	prerequisite = { focus = faith_over_science }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = BLS
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		74 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+		###Include all state pop losses###
+	}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+shared_focus = {
+	id = new_temple_for_empress
+	x = 0
+	y = 1
+	relative_position_id = scourging_the_scientists
+	
+	bypass = {
+	}
+	
+	cost = 8
+	
+	prerequisite = { focus = scourging_the_scientists }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = BLS
+			}
+			add_core_of = EQS
+		}
+		###Event for building new temple and appointing new archmage of Bales
+	}	
+	ai_will_do = {
+		factor = 25
+	}
+}
+
+###Marechester###
 shared_focus = {
 	id = hive_of_commies
 	x = 2
@@ -583,6 +819,9 @@ shared_focus = {
 	
 	prerequisite = { focus = solaris_bellum }
 	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
 	completion_reward = {
 		create_wargoal = {
 			type = annex_everything
@@ -594,6 +833,67 @@ shared_focus = {
 	}
 }
 
+shared_focus = {
+	id = work_ethic_lesson
+	x = 0
+	y = 1
+	relative_position_id = hive_of_commies
+	
+	available = {
+		NOT = {
+			country_exists = NER
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 7
+	
+	prerequisite = { focus = hive_of_commies }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###Include all state pop losses###
+	}
+	ai_will_do = {
+		factor = 16
+	}
+}
+
+shared_focus = {
+	id = cleansing_the_confused
+	x = 0
+	y = 1
+	relative_position_id = work_ethic_lesson
+	
+	bypass = {
+	}
+	
+	cost = 8
+	
+	prerequisite = { focus = work_ethic_lesson }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = NER
+			}
+			add_core_of = EQS
+		}
+		###Add more steel in Marechester and tungsten in Riverpool
+	}	
+	ai_will_do = {
+		factor = 19
+	}
+}
+
+###Whinnyapolis###
 shared_focus = {
 	id = faithless_deserters
 	x = 4
@@ -610,6 +910,9 @@ shared_focus = {
 	
 	prerequisite = { focus = solaris_bellum }
 	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
 	completion_reward = {
 		create_wargoal = {
 			type = annex_everything
@@ -618,5 +921,117 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 25
+	}
+}
+
+shared_focus = {
+	id = instruction_in_fidelity
+	x = 0
+	y = 1
+	relative_position_id = faithless_deserters
+	
+	available = {
+		NOT = {
+			country_exists = WHY
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 7
+	
+	prerequisite = { focus = faithless_deserters }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###Include all state pop losses###
+		###Spawn five garrison divisions###
+	}
+	ai_will_do = {
+		factor = 18
+	}
+}
+
+shared_focus = {
+	id = returning_to_the_fold
+	x = 0
+	y = 1
+	relative_position_id = instruction_in_fidelity
+	
+	bypass = {
+	}
+	
+	cost = 8
+	
+	prerequisite = { focus = instruction_in_fidelity }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = WHY
+			}
+			add_core_of = EQS
+		}
+		add_manpower = 30000
+		70 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		###Have event for bringing back faithful Militarium and Adoratio members and be greeted by Daybreaker and the new archmage of Whinnyapolis
+	}
+	ai_will_do = {
+		factor = 23
+	}
+}
+
+###Southeast Tree###
+shared_focus = {
+	id = restribution_is_just
+	x = 0
+	y = 1
+	relative_position_id = new_temple_for_empress
+	
+	bypass = {
+		NOT = {
+			country_exists = BAL
+		}
+	}
+	
+	cost = 6
+	
+	prerequisite = { focus = imperial_breadbasket }
+	prerequisite = { focus = pegasi_for_the_empress }
+	prerequisite = { focus = new_temple_for_empress }
+	prerequisite = { focus = cleansing_the_confused }
+	prerequisite = { focus = returning_to_the_fold }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = BAL
+		}
+		country_event = solar.9001
 	}
 }
