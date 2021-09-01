@@ -1,0 +1,1234 @@
+ideas = {
+
+	political_advisor = {
+
+		twilight_sparkle = {
+
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL = no
+			}
+			available = {
+				has_government = democratic
+				if = {
+					limit = { OR = { has_global_flag = SOL_twilight_converted is_EQS_SOL = yes } }
+					NOT = { has_global_flag = SOL_twilight_converted }
+					hidden_trigger = { always = no }
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					NOT = {
+						event_target:solar_empire = {
+							has_country_flag = SOL_has_twilight
+						}
+					}
+				}
+				NOT = { AND = {
+					any_country_with_original_tag = {
+						original_tag_to_check = CRY
+							exists = yes
+							has_country_leader = { id = 1000 ruling_only = yes name = "Princess Twilight Sparkle" }
+							} } }
+			}
+			traits = { element_of_magic }
+			research_bonus = {
+				magical_tech = 0.1
+			}
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+		cocopommel = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:equestria
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+					}
+				}
+			}
+
+			traits = { captain_of_industry }
+		}
+		flim = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				LSP = {
+					exists = no
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:solar_empire
+						AND = {
+							tag = event_target:equestria
+							NOT = { country_exists = event_target:solar_empire }
+						}
+					}
+				}
+			}
+
+			traits = { war_industrialists }
+		}
+		raven = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				OR = {
+					has_country_leader = { ruling_only = yes name = "Princess Celestia" }
+					has_country_leader = { ruling_only = yes name = "Princesses Celestia and Luna" }
+					has_country_leader = { ruling_only = yes name = "Daybreaker" }
+				}
+			}
+
+			traits = { silent_workhorse }
+		}
+		blueblood = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				NOT = { has_government = communism }
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:solar_empire
+						AND = {
+							tag = event_target:equestria
+							NOT = { country_exists = event_target:solar_empire }
+						}
+					}
+				}
+				OR = {
+					is_EQS_SOL = yes
+					if = {
+						limit = { is_original_EQS = yes }
+						has_country_flag = EQS_blueblood_allowed
+					}
+				}
+			}
+
+			traits = { prince_of_terror }
+		}
+		fancy_pants = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				has_government = democratic
+				NOT = { has_country_leader = { ruling_only = yes name = "Fancy Pants"} }
+			}
+
+			traits = { compassionate_gentleman }
+		}
+		filthy_rich = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				has_government = democratic
+				NOT = { has_country_leader = { ruling_only = yes name = "Filthy Rich"} }
+			}
+
+			traits = { smooth_talking_charmer }
+		}
+		#florina = {
+		#
+		#	allowed = {
+		#		original_tag = EQS
+		#	}
+		#	available = {
+		#		NOT = { has_government = fascism }
+		#		if = {
+		#			limit = { event_target:solar_empire = { exists = yes } }
+		#			OR = {
+		#				tag = event_target:equestria
+		#				AND = {
+		#					tag = event_target:solar_empire
+		#					NOT = { country_exists = event_target:equestria }
+		#				}
+		#			}
+		#		}
+		#	}
+		#	traits = { communist_revolutionary }
+		#
+		#}
+
+		sweetie_drops = {
+			picture = sweetie_drops
+			allowed = {
+				original_tag = EQS
+				NOT = {
+					has_dlc = "La Resistance"
+				}
+			}
+			available = {
+				has_government = democratic
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:equestria
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+					}
+				}
+			}
+			traits = { agent_of_smile }
+		}
+		sweetie_drops_lar = {
+			picture = sweetie_drops
+			name = sweetie_drops
+			cost = 200
+			allowed = {
+				original_tag = EQS
+				has_dlc = "La Resistance"
+			}
+			available = {
+				has_intelligence_agency = yes
+				has_government = democratic
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:equestria
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+					}
+				}
+			}
+			traits = { agent_of_smile_lar }
+		}
+	}
+
+
+	army_chief = {
+		grimhoof = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { is_original_EQS = yes }
+					has_completed_focus = Advisors
+				}
+				if = {
+					limit = { is_EQS_SOL = yes }
+					OR = {
+						has_global_flag = EQS_completed_advisors
+						has_completed_focus = SOL_new_officers
+					}
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:solar_empire
+						AND = {
+							tag = event_target:equestria
+							NOT = { country_exists = event_target:solar_empire }
+						}
+					}
+				}
+			}
+
+			traits = { army_chief_offensive_1 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		
+	}
+
+	air_chief = {
+
+		kittyhawk = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { is_original_EQS = yes }
+					has_completed_focus = Advisors
+				}
+				if = {
+					limit = { is_EQS_SOL = yes }
+					OR = {
+						has_global_flag = EQS_completed_advisors
+						has_completed_focus = SOL_new_officers
+					}
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+						tag = event_target:equestria
+					}
+				}
+			}
+			traits = { air_chief_reform_1 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+
+	}
+
+	navy_chief = {
+
+		cynosura = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { is_original_EQS = yes }
+					has_completed_focus = Advisors
+				}
+				if = {
+					limit = { is_EQS_SOL = yes }
+					has_global_flag = EQS_completed_advisors
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+						tag = event_target:equestria
+					}
+				}
+			}
+
+			traits = { navy_chief_decisive_battle_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		eqs6 = {
+			picture = unknown_advisor
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { is_original_EQS = yes }
+					has_completed_focus = Advisors
+				}
+				if = {
+					limit = { is_EQS_SOL = yes }
+					has_global_flag = EQS_completed_advisors
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+						tag = event_target:equestria
+					}
+				}
+			}
+			traits = { navy_chief_naval_aviation_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	high_command = {
+
+		wonderbolts = {
+			ledger = air
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { is_original_EQS = yes }
+					has_completed_focus = Advisors
+				}
+				if = {
+					limit = { is_EQS_SOL = yes }
+					OR = {
+						has_global_flag = EQS_completed_advisors
+						has_completed_focus = SOL_air_force
+					}
+				}
+				if = {
+					limit = { NOT = { tag = event_target:solar_empire } }
+					has_government = democratic
+				}
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { country_exists = event_target:equestria }
+						}
+						tag = event_target:equestria
+					}
+				}
+			}
+			traits = { air_combat_academy }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		EQS_sentinel = {
+			ledger = army
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { is_original_EQS = yes }
+					has_completed_focus = Hire_Generals
+				}
+				custom_trigger_tooltip = {
+					tooltip = HAS_UNIT_LEADER_SENTINEL
+					hidden_trigger = { has_unit_leader = 19 }
+				}
+			}
+			traits = { army_regrouping_1 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	theorist = {
+
+		flakesnow = {
+			ledger = air
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+			}
+
+
+			research_bonus = {
+				rocketry = 0.10
+			}
+
+			traits = { rocket_scientist }
+		}
+
+	}
+
+
+	# TEEQSOLOGY
+	tank_manufacturer = {
+
+		designer = yes
+
+		mustang = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = mustang } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = mustang } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				armor = 0.12
+			}
+
+			traits = { fast_tank_manufacturer }
+		}
+		shoof = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = shoof } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = shoof } }
+						}
+					}
+				}
+			}
+
+
+
+			research_bonus = {
+				armor = 0.10
+			}
+
+			traits = { medium_tank_manufacturer }
+
+			modifier = {
+			}
+		}
+		sirius = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = sirius } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = sirius } }
+						}
+					}
+				}
+			}
+
+
+
+			research_bonus = {
+				armor = 0.10
+			}
+
+			traits = { heavy_tank_manufacturer }
+
+			modifier = {
+			}
+		}
+	}
+
+	materiel_manufacturer = {
+
+		designer = yes
+
+		star_energy = {
+			picture = generic_artillery_manufacturer_3
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = star_energy } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = star_energy } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				artillery = 0.10
+			}
+
+			traits = { artillery_manufacturer }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		macintosh = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = macintosh } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = macintosh } }
+						}
+					}
+				}
+			}
+
+
+
+			research_bonus = {
+				infantry_weapons = 0.10
+			}
+
+			traits = { infantry_equipment_manufacturer }
+
+			modifier = {
+			}
+		}
+		fillydelphia_arms = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = fillydelphia_arms } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = fillydelphia_arms } }
+						}
+					}
+				}
+			}
+
+
+
+			research_bonus = {
+				motorized_equipment = 0.10
+				mot_rockets = 0.50
+			}
+
+			traits = { motorized_equipment_manufacturer }
+
+			modifier = {
+			}
+		}
+	}
+	industrial_concern = {
+
+		rainbow_factory = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = rainbow_factory } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = rainbow_factory } }
+						}
+					}
+				}
+			}
+
+
+
+			research_bonus = {
+				industry = 0.10
+			}
+
+			traits = { industrial_concern }
+
+			modifier = {
+			}
+		}
+
+		manehattan = {
+
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = manehattan } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = manehattan } }
+						}
+					}
+				}
+			}
+
+
+			research_bonus = {
+				electronics = 0.10
+			}
+
+			traits = { electronics_concern }
+
+			modifier = {
+			}
+		}
+	}
+	aircraft_manufacturer = {
+
+		designer = yes
+		wonderbolt_concern = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = wonderbolt_concern } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = wonderbolt_concern } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				air_equipment = 0.10
+			}
+
+			traits = { light_aircraft_manufacturer }
+
+			modifier = {
+			}
+		}
+		cloudsdale_research = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = cloudsdale_research } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = cloudsdale_research } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				air_equipment = 0.10
+			}
+
+			traits = { medium_aircraft_manufacturer }
+
+			modifier = {
+			}
+		}
+		northern = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			picture = generic_air_manufacturer_2
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = northern } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = northern } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				air_equipment = 0.10
+			}
+
+			traits = { heavy_aircraft_manufacturer }
+
+			modifier = {
+			}
+		}
+		EQS_ultramarine = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = EQS_ultramarine } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = EQS_ultramarine } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				air_equipment = 0.10
+			}
+
+			traits = { naval_aircraft_manufacturer }
+
+			modifier = {
+			}
+		}
+		EQS_stratus = {
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			available = {
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						AND = {
+							tag = event_target:equestria
+							NOT = { event_target:solar_empire = { has_idea = EQS_stratus } }
+						}
+						AND = {
+							tag = event_target:solar_empire
+							NOT = { event_target:equestria = { has_idea = EQS_stratus } }
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				air_equipment = 0.10
+			}
+
+			traits = { CAS_manufacturer }
+
+			modifier = {
+			}
+		}
+	}
+	naval_manufacturer = {
+
+		designer = yes
+
+		baltimare = {
+
+
+			allowed = {
+				OR = {
+					original_tag = EQS
+					original_tag = BAL
+					original_tag = CES
+					original_tag = NMS
+					original_tag = JUN
+					original_tag = TEM
+					original_tag = NLR
+				}
+			}
+
+			available = {
+				OR = {
+					owns_state = 13
+					AND = {
+						is_subject = yes
+						overlord = {
+							owns_state = 13
+							OR = {
+								original_tag = EQS
+								original_tag = BAL
+								original_tag = CES
+								original_tag = NMS
+								original_tag = JUN
+								original_tag = TEM
+								original_tag = NLR
+							}
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				naval_equipment = 0.10
+			}
+
+			traits = { atlantic_fleet_naval_manufacturer }
+
+			modifier = {
+			}
+		}
+
+		seaward = {
+
+
+			allowed = {
+				OR = {
+					original_tag = EQS
+					original_tag = BAL
+					original_tag = CES
+					original_tag = NMS
+					original_tag = JUN
+					original_tag = TEM
+					original_tag = NLR
+					original_tag = CRY
+				}
+			}
+
+			available = {
+				OR = {
+					owns_state = 14
+					AND = {
+						is_subject = yes
+						overlord = {
+							owns_state = 14
+							OR = {
+								original_tag = EQS
+								original_tag = BAL
+								original_tag = CES
+								original_tag = NMS
+								original_tag = JUN
+								original_tag = TEM
+								original_tag = NLR
+							}
+						}
+					}
+				}
+
+			}
+
+			research_bonus = {
+				naval_equipment = 0.10
+			}
+
+			traits = { pacific_fleet_naval_manufacturer }
+
+			modifier = {
+			}
+		}
+
+		mustangia_shipyards = {
+
+			picture = generic_naval_manufacturer_1
+
+			allowed = {
+				original_TAG = EQS
+			}
+
+			research_bonus = {
+				naval_equipment = 0.10
+			}
+
+			traits = { convoy_escort_naval_manufacturer }
+
+		}
+
+	}
+	
+###New Spirits###
+	country = {
+		solar_cult = {
+			#picture = temp
+			
+			allowed_civil_war = {
+				always = yes
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				stability_factor = 0.05
+				political_power_gain = 0.1
+				research_speed_factor = -0.05
+			}
+		}
+	
+		solar_inquisition = {
+			#picture = GFX/GOAL_SOLAR_CULT.TGA
+			
+			allowed_civil_war = {
+				always = yes
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				war_support_factor = 0.05
+				political_power_gain = 0.1
+				research_speed_factor = -0.05
+				conscription_factor = -0.05
+			}
+		}
+	
+		great_war_aftermath = {
+			#picture = temp
+			
+			removal_cost = -1
+			
+			allowed_civil_war = {
+				always = yes
+			}
+			
+			modifier = {
+				war_support_factor = -0.15
+				political_power_gain = -0.5
+				stability_factor = -0.15
+				consumer_goods_factor = 0.25
+			}
+		}
+		
+		soldiers_of_the_sun = {
+			#picture = temp
+			
+			allowed_civil_war = {
+				always = no
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				army_org_factor = -0.05
+				army_morale_factor = 0.025
+				army_attack_factor = 0.025
+				heat_attrition_factor = -0.05
+			}
+		}
+	
+		heretical_commanders = {
+			#picture = temp
+			
+			allowed_civil_war = {
+				always = no
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+			army_org_factor = -0.1
+			army_morale_factor = -0.05
+			training_time_factor = 0.1
+			command_power_gain_mult = -0.1
+			}
+		}
+		
+		perfection_improved = {
+			removal_cost = -1
+			
+			modifier = {
+			political_power_factor = 0.05
+			research_speed_factor = 0.03
+			}
+		}
+		searing_light = {
+			removal_cost = -1
+			
+			modifier = {
+				war_support_factor = 0.05
+				custom_modifier_tooltip = rump_state_bonus
+				hidden_modifier = {
+					targeted_modifier = {
+						tag = NER
+						attack_bonus_against = 0.05
+					}
+					targeted_modifier = {
+						tag = BLS
+						attack_bonus_against = 0.05
+					}
+					targeted_modifier = {
+						tag = WHY
+						attack_bonus_against = 0.05
+					}
+					targeted_modifier = {
+						tag = CER
+						attack_bonus_against = 0.05
+					}
+					targeted_modifier = {
+						tag = CLD
+						attack_bonus_against = 0.05
+					}
+				}
+			}
+		}
+	}
+	
+###Temp Spirits###
+
+	country = {
+		purified_soldiers = {
+			#picture = temp
+			
+			allowed_civil_war = {
+				always = no
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+			army_attack_factor = -0.1
+			army_defence_factor = -0.1
+			}
+		}
+	
+		purified_high_command = {
+			#picture = temp
+			
+			allowed_civil_war = {
+				always = no
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+			conscription = -0.005
+			war_support_factor = -0.1
+			}
+		}
+	
+		red_tape_cut = {
+			#picture = temp
+			
+			allowed_civil_war = {
+				always = no
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+			stability_weekly = 0.005
+			}
+		}
+		
+		rapid_recruitment = {
+			
+			removal_cost = -1
+			
+			modifier = {
+				training_time_factor = -0.1
+			}
+		}
+		
+		encouraged_workers = { #Localization should have sarcastic quotes around encouraged
+		
+			removal_cost = -1
+			
+			modifier = {
+				production_speed_buildings_factor = 0.2
+			}
+		}
+		
+		donated_assets = { #Localization should have sarcastic quotes around donated
+		
+			removal_cost = -1
+			
+			modifier = {
+				consumer_goods_factor = -0.05
+			}
+		}
+	}
+}
