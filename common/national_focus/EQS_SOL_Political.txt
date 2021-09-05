@@ -455,12 +455,129 @@ shared_focus = {
 	}
 }
 
+shared_focus = {
+	id = faithful_allies
+	x = -1
+	y = 1
+	relative_position_id = forging_new_future
+	
+	bypass = {
+	}
+	
+	cost = 3
+	
+	prerequisite = {
+		focus = forging_new_future
+	}
+	prerequisite = {
+		focus = all_shall_serve
+	}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_manpower = 3071
+		#event for Sunset protesting against Daybreaker using the Inquisitionis as soldiers
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = suns_finest_warriors
+	x = -1
+	y = 1
+	relative_position_id = faithful_allies
+	
+	bypass = {
+	}
+	
+	cost = 4
+	
+	prerequisite = {
+		focus = faithful_allies
+	}
+	
+	mutually_exclusive = {
+		focus = bestowing_grace
+	}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###spawn Inquisitionis x3 elite here; they are 7/2s with engineers and recon
+	}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+shared_focus = {
+	id = bestowing_grace
+	x = 1
+	y = 1
+	relative_position_id = faithful_allies
+	
+	bypass = {
+	}
+	
+	cost = 4
+	
+	prerequisite = {
+		focus = faithful_allies
+	}
+	
+	mutually_exclusive = {
+		focus = suns_finest_warriors
+	}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		#insert national spirit here
+	}
+	ai_will_do = {
+		factor = 17
+	}
+}
+
+shared_focus = {
+	id = in_the_name_of_the_empress
+	x = -1
+	y = 1
+	relative_position_id = bestowing_grace
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = {
+		focus = bestowing_grace
+		focus = suns_finest_warriors
+	}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		country_event = solar.104
+	}
+	ai_will_do = {
+		factor = 22
+	}
+}
+
 ###Capstone to Revival Tree###
 shared_focus = {
 	id = solaris_bellum
-	x = 1
+	x = 0
 	y = 1
-	relative_position_id = all_shall_serve
+	relative_position_id = in_the_name_of_the_empress
 	
 	bypass = {
 		}
@@ -468,10 +585,7 @@ shared_focus = {
 	cost = 6
 	
 	prerequisite = {
-		focus = all_shall_serve
-	}
-	prerequisite = {
-		focus = forging_new_future
+		focus = in_the_name_of_the_empress
 	}
 	
 	cancel_if_invalid = yes
@@ -1005,7 +1119,7 @@ shared_focus = {
 
 ###Southeast Tree###
 shared_focus = {
-	id = restribution_is_just
+	id = retribution_is_just
 	x = 0
 	y = 1
 	relative_position_id = new_temple_for_empress
@@ -1034,4 +1148,543 @@ shared_focus = {
 		}
 		country_event = solar.9001
 	}
+}
+
+###Left side###
+shared_focus = {
+	id = surging_through_swamps
+	x = -1
+	y = 1
+	relative_position_id = retribution_is_just
+	
+	bypass = {
+		NOT = {
+			###Add breakaway states if they somehow all die
+			country_exists = BAL
+		}
+	}
+	
+	cost = 3
+	
+	prerequisite = { focus = retribution_is_just }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = burning_water
+			days = 180
+		}
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = burn_the_daemons
+	x = 0
+	y = 1
+	relative_position_id = surging_through_swamps
+	
+	bypass = {
+		NOT = {
+			###Add breakaway states if they somehow all die
+			country_exists = BAL
+		}
+	}
+	
+	cost = 2
+	
+	prerequisite = { focus = surging_through_swamps }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = purging_the_daemons
+			days = 90
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = level_the_mountains
+	x = 0
+	y = 1
+	relative_position_id = burn_the_daemons
+	
+	bypass = {
+		NOT = {
+			###Add breakaway states if they somehow all die
+			country_exists = BAL
+		}
+	}
+	
+	cost = 3
+	
+	prerequisite = { focus = burn_the_daemons }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = adapted_defenses
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 12 }
+}
+
+###Right side###
+shared_focus = {
+	id = juking_jungle_warriors
+	x = 1
+	y = 1
+	relative_position_id = retribution_is_just
+	
+	bypass = {
+		NOT = {
+			###Add breakaway states if they somehow all die
+			country_exists = BAL
+		}
+	}
+	
+	cost = 2
+	
+	prerequisite = { focus = retribution_is_just }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = prepared_scouts
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = remind_the_empire
+	x = 0
+	y = 1
+	relative_position_id = juking_jungle_warriors
+	
+	bypass = {
+		NOT = {
+			###Add breakaway states if they somehow all die
+			country_exists = BAL
+		}
+	}
+	
+	cost = 2
+	
+	prerequisite = { focus = juking_jungle_warriors }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = revanchist_reminder
+			days = 30
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = communist_free_empire
+	x = 0
+	y = 1
+	relative_position_id = remind_the_empire
+	
+	bypass = {
+		NOT = {
+			###Add breakaway states if they somehow all die
+			country_exists = BAL
+		}
+	}
+	
+	cost = 3
+	
+	prerequisite = { focus = remind_the_empire }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = purge_the_communists
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###Capstone###
+shared_focus = {
+	id = born_from_ashes
+	x = -1
+	y = 1
+	relative_position_id = communist_free_empire
+	
+	bypass = {
+	}
+	
+	cost = 6
+	
+	prerequisite = { focus = communist_free_empire }
+	prerequisite = { focus = level_the_mountains }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		country_event = solar.105
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Stalliongrad assault###
+shared_focus = {
+	id = clearing_carnage_of_communism
+	x = -2
+	y = 1
+	relative_position_id = born_from_ashes
+	
+	bypass = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 4
+	
+	prerequisite = { focus = born_from_ashes }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = STG
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = AWR
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = CWR
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = MWR
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+###Crystal Empire assault###
+shared_focus = {
+	id = empire_to_heel
+	x = 2
+	y = 1
+	relative_position_id = born_from_ashes
+	
+	bypass = {
+		NOT = {
+			country_exists = CRY
+		}
+	}
+	
+	cost = 4
+	
+	prerequisite = { focus = born_from_ashes }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = CRY
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Coring tree###
+shared_focus = {
+	id = establishing_baseline
+	x = 15
+	y = 20
+	
+	allow_branch = {
+		has_country_flag = southeast_dead
+	}
+	
+	available = {
+		hidden_trigger = {
+			has_country_flag = southeast_dead
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 5
+	 
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		28 = {
+			add_core_of = EQS
+		}
+		27 = {
+			add_core_of = EQS
+		}
+		84 = {
+			add_core_of = EQS
+		}
+		37 = {
+			add_core_of = EQS
+		}
+		17 = {
+			add_core_of = EQS
+		}
+		35 = {
+			add_core_of = EQS
+		}
+		81 = {
+			add_core_of = EQS
+		}
+		50 = {
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = ending_reign_of_terror
+	x = -1
+	y = 1
+	relative_position_id = establishing_baseline
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = establishing_baseline }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		15 = {
+			add_core_of = EQS
+		}
+		26 = {
+			add_core_of = EQS
+		}
+		86 = {
+			add_core_of = EQS
+		}
+		34 = {
+			add_core_of = EQS
+		}
+		33 = {
+			add_core_of = EQS
+		}
+		687 = {
+			add_core_of = EQS
+		}
+		351 = {
+			add_core_of = EQS
+		}
+		221 = {
+			add_core_of = EQS
+		}
+		52 = {
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = felling_the_jungle
+	x = 0
+	y = 1
+	relative_position_id = ending_reign_of_terror
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = ending_reign_of_terror }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		79 = {
+			add_core_of = EQS
+		}
+		25 = {
+			add_core_of = EQS
+		}
+		353 = {
+			add_core_of = EQS
+		}
+		32 = {
+			add_core_of = EQS
+		}
+		36 = {
+			add_core_of = EQS
+		}
+		30 = {
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = despoiling_the_isles
+	x = 1
+	y = 1
+	relative_position_id = establishing_baseline
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = establishing_baseline }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		4 = {
+			add_core_of = EQS
+		}
+		686 = {
+			add_core_of = EQS
+		}
+		6 = {
+			add_core_of = EQS
+		}
+		7 = {
+			add_core_of = EQS
+		}
+		9 = {
+			add_core_of = EQS
+		}
+		8 = {
+			add_core_of = EQS
+		}
+		10 = {
+			add_core_of = EQS
+		}
+		328 = {
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = savages_into_modern_times
+	x = 0
+	y = 1
+	relative_position_id = despoiling_the_isles
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = despoiling_the_isles }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		83 = {
+			add_core_of = EQS
+		}
+		24 = {
+			add_core_of = EQS
+		}
+		352 = {
+			add_core_of = EQS
+		}
+		16 = {
+			add_core_of = EQS
+		}
+		88 = {
+			add_core_of = EQS
+		}
+		348 = {
+			add_core_of = EQS
+		}
+		350 = {
+			add_core_of = EQS
+		}
+		31 = {
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = new_governor
+	x = -1
+	y = 1
+	relative_position_id = savages_into_modern_times
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = savages_into_modern_times }
+	prerequisite = { focus = felling_the_jungle }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		90 = {
+			add_core_of = EQS
+		}
+		82 = {
+			add_core_of = EQS
+		}
+		352 = {
+			add_core_of = EQS
+		}
+		13 = {
+			add_core_of = EQS
+		}
+		688 = {
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
 }
