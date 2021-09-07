@@ -1352,6 +1352,32 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
+shared_focus = {
+	id = rewards_of_riches
+	x = 0
+	y = 2
+	relative_position_id = born_from_ashes
+	
+	bypass = {
+		}
+	
+	cost = 5
+	
+	prerequisite = { focus = born_from_ashes }
+	prerequisite = {
+		focus = clearing_carnage_of_communism
+		focus = empire_to_heel
+	}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###Create Fidelis, lvl2 3/1/1/2, Foresight, lv3 2/3/2/1 with custom trait for +5% recovery, -5% attack, Steel Sickle, 1/4/2/1, custom trait giving more attack, more entrenchment
+	}
+	ai_will_do = { focus = 25 }
+}
+
 ###Stalliongrad assault###
 shared_focus = {
 	id = clearing_carnage_of_communism
@@ -1393,6 +1419,78 @@ shared_focus = {
 	ai_will_do = { factor = 17 }
 }
 
+shared_focus = {
+	id = communism_is_an_affront
+	x = 0
+	y = 1
+	relative_position_id = clearing_carnage_of_communism
+	
+	bypass = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = clearing_carnage_of_communism }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		75 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = all_are_equal_in_guilt
+	x = 0
+	y = 1
+	relative_position_id = communism_is_an_affront
+	
+	cost = 5
+	
+	prerequisite = { focus = communism_is_an_affront }
+	prerequisite = { focus = rewards_of_riches }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###lower manpower in all Stalliongrad states
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = expunge_the_records
+	x = 1
+	y = 1
+	relative_position_id = all_are_equal_in_guilt
+	
+	cost = 4
+	
+	prerequisite = { focus = all_are_equal_in_guilt }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###rename Stalliongrad to Solargrad
+		###Add military factories and steel and aluminium from destroying the Supreme Soviet building
+		add_political_power = 100
+	}
+	ai_will_do = { factor = 25 }
+}
+
 ###Crystal Empire assault###
 shared_focus = {
 	id = empire_to_heel
@@ -1420,6 +1518,146 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = reunion
+	x = 0
+	y = 1
+	relative_position_id = empire_to_heel
+	
+	available = {
+		344 = {
+			is_owned_by = EQS
+		}
+	}
+	
+	bypass = {
+	}
+	
+	cost = 3
+	
+	prerequisite = { focus = empire_to_heel }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###Country event for fighting Luna and Twilight, gives extra stability and war support
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = shatter_crystal
+	x = 0
+	y = 1
+	relative_position_id = reunion
+	
+	bypass = {
+		}
+	
+	cost = 4
+	
+	prerequisite = { focus = reunion }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###reduce manpower in all crystal states
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = order_and_prosperity
+	x = -1
+	y = 1
+	relative_position_id = shatter_crystal
+	
+	bypass = {
+		}
+	
+	cost = 3
+	
+	prerequisite = { focus = shatter_crystal }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###create elite crystal guard unit
+		###Rename Crystal City to Burning Sun
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Chrysalia assault###
+
+shared_focus = {
+	id = operation_cauterize
+	x = 1
+	y = 1
+	relative_position_id = expunge_the_records
+	
+	bypass = {
+		}
+	
+	cost = 2
+	
+	prerequisite = { focus = expunge_the_records }
+	prerequisite = { focus = order_and_prosperity }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###add idea operation_cauterize for +5% attack against them
+		create_wargoal = {
+			type = annex_everything
+			target = CHN
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = CCA
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = NCA
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = SCS
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = OLE
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = squash_the_insects
+	x = 0
+	y = 1
+	relative_position_id = operation_cauterize
+	
+	bypass = {
+		}
+	
+	cost = 2
+	
+	prerequisite = { focus = operation_cauterize }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###add idea operation_purity for +10% planning speed and division speed
+	}
+	ai_will_do = { factor = 50 }
 }
 
 ###Coring tree###
