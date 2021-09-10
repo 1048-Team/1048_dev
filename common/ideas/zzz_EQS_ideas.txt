@@ -135,6 +135,8 @@ ideas = {
 			allowed = {
 				original_tag = EQS
 			}
+			
+			visible = { has_government = democratic }
 
 			available = {
 				has_government = democratic
@@ -142,19 +144,6 @@ ideas = {
 			}
 
 			traits = { compassionate_gentleman }
-		}
-		filthy_rich = {
-
-			allowed = {
-				original_tag = EQS
-			}
-
-			available = {
-				has_government = democratic
-				NOT = { has_country_leader = { ruling_only = yes name = "Filthy Rich"} }
-			}
-
-			traits = { smooth_talking_charmer }
 		}
 		#florina = {
 		#
@@ -390,31 +379,7 @@ ideas = {
 			}
 
 			available = {
-				if = {
-					limit = { is_original_EQS = yes }
-					has_completed_focus = Advisors
-				}
-				if = {
-					limit = { is_EQS_SOL = yes }
-					OR = {
-						has_global_flag = EQS_completed_advisors
-						has_completed_focus = SOL_air_force
-					}
-				}
-				if = {
-					limit = { NOT = { tag = event_target:solar_empire } }
-					has_government = democratic
-				}
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						AND = {
-							tag = event_target:solar_empire
-							NOT = { country_exists = event_target:equestria }
-						}
-						tag = event_target:equestria
-					}
-				}
+				
 			}
 			traits = { air_combat_academy }
 
@@ -429,10 +394,11 @@ ideas = {
 				original_tag = EQS
 			}
 
+			visible = { has_unit_leader = 19 }
+
 			available = {
 				if = {
 					limit = { is_original_EQS = yes }
-					has_completed_focus = Hire_Generals
 				}
 				custom_trigger_tooltip = {
 					tooltip = HAS_UNIT_LEADER_SENTINEL
@@ -1163,6 +1129,13 @@ ideas = {
 				war_support_factor = 0.05
 			}
 		}
+		
+		mercy_for_the_faithful = {
+			modifier = {
+				experience_loss_factor = -0.05
+				army_morale_factor = 0.03
+			}
+		}
 	}
 	
 ###Temp Spirits###
@@ -1281,6 +1254,13 @@ ideas = {
 				tag = BAL
 				attack_bonus_against = 0.05
 				defense_bonus_against = 0.05
+			}
+		}
+		
+		operation_cauterize = {
+			targeted_modifier = {
+				tag = CHN
+				attack_bonus_against = 0.05
 			}
 		}
 	}
