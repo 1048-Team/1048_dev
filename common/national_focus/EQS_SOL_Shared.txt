@@ -949,11 +949,383 @@ shared_focus = {
 	}
 }
 
+###Rebuilding Manehattan Tree###
+shared_focus = {
+	id = city_never_slept
+	icon = GFX_goal_daybreaker_god
+	x = 5
+	y = 11
+		
+	bypass = {
+		}
+	
+	allow_branch = {
+		OR = {
+			has_country_flag = starlight_and_trixie_captured
+			has_country_flag = starlight_and_trixie_escaped
+			}
+		}
+	
+	cost = 2
+	prerequisite = {
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_political_power = -100
+		}
+	ai_will_do = {
+		factor = 12
+	}
+}
+
+shared_focus = {
+	id = reinstating_local_order
+	icon = GFX_goal_daybreaker_god
+	x = -2
+	y = 1
+	relative_position_id = city_never_slept
+		
+	bypass = {
+		}
+	
+	cost = 3
+	prerequisite = {
+		focus = city_never_slept
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		75 = {
+			add_manpower = -15743
+			}
+		}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = assessing_destruction
+	icon = GFX_goal_daybreaker_god
+	x = 0
+	y = 1
+	relative_position_id = city_never_slept
+		
+	bypass = {
+		}
+	
+	cost = 3
+	prerequisite = {
+		focus = city_never_slept
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+	custom_effect_tooltip = assessing_destruction_tt
+		75 = {
+			add_to_variable = {
+				rebel_var_2 = 0.1
+				}
+			}
+		country_event = solar.42
+		}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = providing_for_pitiful
+	icon = GFX_goal_daybreaker_god
+	x = 2
+	y = 1
+	relative_position_id = city_never_slept
+		
+	bypass = {
+		}
+	
+	cost = 3
+	prerequisite = {
+		focus = city_never_slept
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+	custom_effect_tooltip = solar_austerity_tt
+		75 = {
+			set_variable = {
+				rebel_var_3 = 0.05
+				}
+			}
+		}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = new_inquisitionis_deal
+	icon = GFX_goal_daybreaker_god
+	x = 0
+	y = 1
+	relative_position_id = reinstating_local_order
+		
+	bypass = {
+		}
+	
+	cost = 2
+	prerequisite = {
+		focus = reinstating_local_order
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_stability = 0.02
+		country_event = solar.41
+		}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = operation_clean_slate
+	icon = GFX_goal_daybreaker_god
+	x = 0
+	y = 1
+	relative_position_id = assessing_destruction
+		
+	bypass = {
+		}
+	
+	cost = 2
+	prerequisite = {
+		focus = assessing_destruction
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		if = {
+			limit = {
+				has_country_flag = unsuccessful_rebellion
+			}
+			75 = {
+				remove_building = {
+					type = industrial_complex
+					level = 4
+				}
+				remove_building = {
+					type = arms_factory
+					level = 4
+				}
+				remove_building = {
+					type = dockyard
+					level = 1
+				}
+			}
+		}
+		
+		else = {
+			limit = {
+				has_country_flag = successful_rebellion
+			}
+			75 = {
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				remove_building = {
+					type = arms_factory
+					level = 3
+				}
+				remove_building = {
+					type = dockyard
+					level = 1
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = embrace_of_the_empress
+	icon = GFX_goal_daybreaker_god
+	x = 0
+	y = 1
+	relative_position_id = providing_for_pitiful
+		
+	bypass = {
+		}
+	
+	cost = 2
+	prerequisite = {
+		focus = providing_for_pitiful
+		}
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+	custom_effect_tooltip = embrace_of_empress_tt
+		75 = {
+			add_to_variable = {
+				rebel_var_1 = 0.15
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = show_trial_for_guilty
+	icon = GFX_goal_daybreaker_god
+	x = 1
+	y = 1
+	relative_position_id = new_inquisitionis_deal
+		
+	bypass = {
+		}
+	
+	cost = 2
+	prerequisite = { focus = new_inquisitionis_deal }
+	prerequisite = { focus = operation_clean_slate }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_stability = 0.05
+		if = {
+			limit = {
+				has_country_flag = starlight_and_trixie_captured
+			}
+			country_event = solar.43
+			}
+		else = {
+			limit = {
+				has_country_flag = starlight_and_trixie_escaped
+			}
+			country_event = solar.44
+			}
+		}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = capping_the_capstone
+	icon = GFX_goal_daybreaker_god
+	x = -1
+	y = 1
+	relative_position_id = embrace_of_the_empress
+		
+	bypass = {
+		}
+	
+	cost = 2
+	prerequisite = { focus = embrace_of_the_empress }
+	prerequisite = { focus = operation_clean_slate }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		75 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = {
+	id = city_of_lights
+	icon = GFX_goal_daybreaker_god
+	x = 1
+	y = 1
+	relative_position_id = show_trial_for_guilty
+		
+	bypass = {
+		}
+	
+	cost = 4
+	prerequisite = { focus = show_trial_for_guilty }
+	prerequisite = { focus = capping_the_capstone }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		75 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 4
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+			remove_dynamic_modifier = { modifier = manehattan }
+		}
+		custom_effect_tooltip = cleaned_manehattan
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
 ###Industry tree###
 ###Left Side###
 shared_focus = {
 	id = capturing_economy
-	x = 16
+	x = 15
 	y = 1
 	
 	available = {
@@ -975,7 +1347,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 7
+	cost = 5
 	prerequisite = {
 		}
 	
@@ -1003,10 +1375,211 @@ shared_focus = {
 	}
 }
 
+shared_focus = { #First census was done shortly after the treaty of Baltimare
+	id = second_census
+	x = 0
+	y = 1
+	relative_position_id = capturing_economy
+	
+	bypass = {}
+	
+	cost = 6
+	prerequisite = { focus = capturing_economy }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_political_power = 100
+		}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = { #Mention that the final bits of heresy from factories will be purged
+	id = heretics_not_apply
+	x = 0
+	y = 1
+	relative_position_id = second_census
+	
+	cost = 4
+	prerequisite = { focus = second_census }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_stability = 0.03
+		}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { 
+	id = reeducating_unions
+	x = -1
+	y = 1
+	relative_position_id = heretics_not_apply
+	
+	cost = 5
+	prerequisite = { focus = heretics_not_apply }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = quotas_harsh_but_necessary
+	x = 0
+	y = 1
+	relative_position_id = reeducating_unions
+	
+	cost = 5
+	prerequisite = { focus = reeducating_unions }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = dispersed_industry_category
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = imperial_committee
+	x = 1
+	y = 1
+	relative_position_id = heretics_not_apply
+	
+	cost = 5
+	prerequisite = { focus = heretics_not_apply }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = excavation_tech
+		}
+	}
+	ai_will_do = { factor = 12 }
+}
+
+shared_focus = {
+	id = build_up
+	x = 0
+	y = 1
+	relative_position_id = imperial_committee
+	
+	cost = 5
+	prerequisite = { focus = imperial_committee }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		3 = { add_extra_state_shared_building_slots = 2 }
+		75 = { add_extra_state_shared_building_slots = 2 }
+		12 = { add_extra_state_shared_building_slots = 2 }
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = reforming_imperial_infrastructure
+	x = -1
+	y = 1
+	relative_position_id = quotas_harsh_but_necessary
+	
+	cost = 5
+	prerequisite = { focus = quotas_harsh_but_necessary }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = construction_tech
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = imperial_innovation
+	x = 0
+	y = 1
+	relative_position_id = reforming_imperial_infrastructure
+	
+	cost = 7
+	prerequisite = { focus = reforming_imperial_infrastructure }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		add_research_slot = 1
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = imperial_projects
+	x = 1
+	y = 1
+	relative_position_id = quotas_harsh_but_necessary
+	
+	cost = 4
+	prerequisite = { focus = quotas_harsh_but_necessary }
+	prerequisite = { focus = build_up }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###do swap_ideas with a new version of the aftermath of great war spirit, reduce by +0.25 pp, +10% CS, +5% stab and WS
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = imperial_projects
+	x = 1
+	y = 1
+	relative_position_id = build_up
+	
+	cost = 5
+	prerequisite = { focus = build_up }
+	
+	cancel_if_invalid = yes
+	available_if_capitulated = no
+	
+	completion_reward = {
+		###add bit_evaluation spirit for +5% CS that gets reduced to +2% the next spirit
+	}
+	ai_will_do = { factor = 20 }
+}
+
 ###Middle Path###
 shared_focus = {
 	id = new_imperial_bureaucracy
-	x = 4
+	x = 5
 	y = 1
 	relative_position_id = capturing_economy
 		
@@ -1354,7 +1927,7 @@ shared_focus = {
 ###Right Side###
 shared_focus = {
 	id = working_wartime
-	x = 24
+	x = 25
 	y = 1
 	
 	available = {
@@ -1376,7 +1949,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 7
+	cost = 5
 	prerequisite = {
 		}
 	
