@@ -406,12 +406,21 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		ai_chance = {
 			factor = 100
 		}
+		75 = {
+		set_variable = { 
+			rebel_var_1 = -0.5 
+			}
+		set_variable = { 
+			rebel_var_2 = -0.2 
+			}
+		}
 		hidden_effect = {
 			set_country_flag = starlight_and_trixie_captured
 			set_country_flag = unsuccessful_rebellion
+			
 			75 = {
 				add_dynamic_modifier = {
-					modifier = crushed_rebellion
+					modifier = manehattan_rebellion
 				}
 			}
 		mark_focus_tree_layout_dirty = yes
@@ -446,12 +455,21 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		ai_chance = {
 			factor = 100
 		}
+		75 = {
+		set_variable = { 
+			rebel_var_1 = -0.9 
+			}
+		set_variable = { 
+			rebel_var_2 = -0.35 
+			}
+		}
 		hidden_effect = {
 			set_country_flag = starlight_and_trixie_escaped
 			set_country_flag = successful_rebellion
+			
 			75 = {
 				add_dynamic_modifier = {
-					modifier = damaging_rebellion
+					modifier = manehattan_rebellion
 					}
 				}
 			mark_focus_tree_layout_dirty = yes
@@ -516,8 +534,68 @@ country_event = {
 }
 
 
-###Punishment Events for Manehattan###
+###Events for Manehattan Rebuilding and Punishment###
 ###Will go from 41-50###
+
+country_event = { #The Inquisitionis is instated into the unions of Manehattan to maintain order
+	id = solar.41
+	title = solar.41.t
+	desc = solar.41.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.42.a
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+country_event = { #Daybreaker surveys the damage and executes the mayor of Manehattan, again
+	id = solar.42
+	title = solar.42.t
+	desc = solar.42.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.42.a
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+country_event = { #Show trial of Starlight and Trixie for their crimes and it builds more fervor
+	id = solar.43
+	title = solar.43.t
+	desc = solar.43.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.43.a
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+country_event = { #Execution of the captured commanders of the rebellion if Starlight and Trixie escaped
+	id = solar.44
+	title = solar.44.t
+	desc = solar.44.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.44.a
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
 
 country_event = {
 	id = solar.50
@@ -563,6 +641,11 @@ country_event = { #Celestia first minute effects to Daybreaker, only whispers an
 	desc = solar.80.d
 	
 	trigger = {
+		if = {
+			limit = {
+				tag = EQS
+			}
+		}
 		date > 1048.10.31
 		date < 1049.1.1
 		}
@@ -591,6 +674,11 @@ country_event = { #Celestia becomes more discernable, as she is now a shape in D
 	desc = solar.81.d
 	
 	trigger = {
+		if = {
+			limit = {
+				tag = EQS
+			}
+		}
 		date > 1049.10.31
 		date < 1050.3.1
 		}
@@ -632,6 +720,11 @@ country_event = { #Celestia reveals herself and almost prevents Daybreaker from 
 			set_variable = {
 				war_support_change = -0.05
 				}
+			country_event = {
+				id = solar.83
+				days = 30
+				random = 240
+				}
 			}
 		remove_country_leader_trait = daybreaker_god2
 		remove_unit_leader = 4
@@ -656,6 +749,11 @@ country_event = { #Sunset encounters Daybreaker smashing her mirror at the invis
 				}
 			set_variable = {
 				conscription_factor_change = -0.1
+				}
+			country_event = {
+				id = solar.84
+				days = 60
+				random = 148
 				}
 			}
 		}
@@ -683,6 +781,11 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 			set_variable = {
 				army_speed_change = -0.1
 				}
+			country_event = {
+				id = solar.85
+				days = 35
+				random = 60
+				}
 			}
 		}
 	option = { #Sunset protests against Daybreaker
@@ -702,6 +805,11 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 				}
 			set_variable = {
 				army_speed_change = -0.1
+				}
+			country_event = {
+				id = solar.85
+				days = 35
+				random = 60
 				}
 			}
 		}
@@ -729,6 +837,11 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 			set_variable = {
 				factory_output_change = -0.15
 				}
+			country_event = {
+				id = solar.86
+				days = 90
+				random = 48
+				}
 			}
 		}
 	option = { #Sunset leaves Nebula for dead
@@ -745,6 +858,11 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 				}
 			set_variable = {
 				factory_output_change = -0.15
+				}
+			country_event = {
+				id = solar.86
+				days = 90
+				random = 48
 				}
 			}
 		}
@@ -772,6 +890,11 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 			set_variable = {
 				conscription_change = -0.005
 				}
+			country_event = {
+				id = solar.87
+				days = 40
+				random = 72
+				}
 			}
 		}
 	option = { #Sunset surrenders
@@ -785,6 +908,11 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 				}
 			set_variable = {
 				conscription_change = -0.005
+				}
+			country_event = {
+				id = solar.87
+				days = 40
+				random = 72
 				}
 			}
 		}
@@ -812,6 +940,11 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 			set_variable = {
 				research_speed_change = -0.2
 				}
+			country_event = {
+				id = solar.88
+				days = 25
+				random = 96
+				}
 			}
 		}
 	option = { #Aurora starts fight
@@ -825,6 +958,11 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 				}
 			set_variable = {
 				research_speed_change = -0.2
+				}
+			country_event = {
+				id = solar.88
+				days = 25
+				random = 96
 				}
 			}
 		}
@@ -846,10 +984,20 @@ country_event = { #Sunset and the others race through the chaotic Canterlot to s
 			add_to_variable = {
 				sunset_zealotry = 2
 				}
+			country_event = {
+				id = solar.96
+				days = 1
+				}
 			}
 		}
 	option = { #Sunset sad
 		name = solar.88.b
+		hidden_effect = {
+			country_event = {
+				id = solar.96
+				days = 1
+				}
+			}
 		ai_chance = {
 			factor = 30
 			}
@@ -860,7 +1008,7 @@ country_event = { #Sunset and the others race through the chaotic Canterlot to s
 country_event = { #Should have custom tooltips later
 	id = solar.96
 	title = solar.96.t
-	desc = solar.96.d
+	desc = solar.96.d ###Have them return and be nervous about what's happening to Daybreaker, as it is not clear what happened to her
 	
 	is_triggered_only = yes
 	
@@ -908,7 +1056,7 @@ country_event = { #Should have custom tooltips later
 country_event = { #Daybreaker is healed and thankful to Sunset
 	id = solar.97
 	title = solar.97.t
-	desc = solar.97.d
+	desc = solar.97.d ###Daybreaker is ready and vengeful, and makes a few comments about missing Celestia being gone for good
 	
 	is_triggered_only = yes
 	
@@ -1174,7 +1322,7 @@ country_event = { #Daybreaker assembles some of the brightest of the Inquisition
 country_event = { #Daybreaker has a Hitler-like speech about reconquering the rump states and how it is only the beginning of the return of the Solar Empire
 	id = solar.105
 	title = solar.105.t
-	desc = solar.105.damage
+	desc = solar.105.d
 	
 	is_triggered_only = yes
 	
@@ -1203,6 +1351,43 @@ country_event = {
 		EQC = {
 			end_puppet = BAL
 			remove_from_faction = BAL
+		}
+	}
+}
+	
+	country_event = {
+	id = solar.9002
+	title = "Solar Strike departs"
+	desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		if = {
+			limit = {
+				tag = EQS
+			}
+		}
+		date > 1050.1.1
+		date < 1051.1.1
+		}
+	
+	fire_only_once = yes
+		
+	mean_time_to_happen = {
+		days = 20
+		}
+	
+	option = { #removes puppet from WHY
+		name = "He shall pay for his irreverence!"
+		EQS = {
+			end_puppet = WHY
+			remove_from_faction = WHY
+		}
+		hidden_effect = {
+			WHY = {
+				drop_cosmetic_tag = yes
+			}
 		}
 	}
 }
