@@ -538,8 +538,8 @@ shared_focus = {
 shared_focus = {
 	id = price_of_heresy
 	icon = GFX_goal_daybreaker_god
-	x = 10
-	y = 9
+	x = 9
+	y = 12
 	
 	available = {
 	}
@@ -703,8 +703,8 @@ shared_focus = {
 shared_focus = {
 	id = apostasy_cost
 	icon = GFX_goal_daybreaker_god
-	x = 10
-	y = 9
+	x = 9
+	y = 12
 	
 	available = {
 		}
@@ -895,8 +895,8 @@ shared_focus = {
 shared_focus = {
 	id = city_never_slept
 	icon = GFX_goal_daybreaker_god
-	x = 5
-	y = 11
+	x = 3
+	y = 12
 		
 	bypass = {
 		}
@@ -2311,8 +2311,7 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = {
-		}
-	
+		}	
 	
 	completion_reward = {
 		navy_experience = 50
@@ -2320,6 +2319,356 @@ shared_focus = {
 	ai_will_do = {
 		factor = 15
 	}
+}
+
+shared_focus = {
+	id = burning_the_mothballs
+	x = 0
+	y = 1
+	relative_position_id = old_sea_terror
+	
+	cost = 6
+	prerequisite = { focus = old_sea_terror }
+	
+	completion_reward = {
+		###add NS for one year that cuts production costs of heavy ships by 15%
+	}
+	ai_will_do = { factor = 12 }
+}
+
+shared_focus = {
+	id = clearing_the_barnicles
+	x = 0
+	y = 1
+	relative_position_id = burning_the_mothballs
+	
+	cost = 5
+	prerequisite = { focus = burning_the_mothballs }
+	
+	completion_reward = {
+		###add NS for 10% dockyard output for one year, maybe two
+	}
+	ai_will_do = { factor = 10 }
+}
+
+shared_focus = {
+	id = laying_new_keels
+	x = -2
+	y = 1
+	relative_position_id = clearing_the_barnicles
+	
+	cost = 4
+	prerequisite = { focus = clearing_the_barnicles }
+	mutually_exclusive = { focus = no_longer_civilian_armada }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = heavy_ship_bonus
+			bonus = 1
+			uses = 1
+			category = bb_tech
+		}
+		add_tech_bonus = {
+			name = fleet_in_being_bonus
+			bonus = 1
+			uses = 1
+			category = cat_fleet_in_being
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = unearthing_old_tactics
+	x = 0
+	y = 1
+	relative_position_id = laying_new_keels
+	
+	cost = 3
+	prerequisite = { focus = laying_new_keels }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = fleet_in_being_bonus
+			bonus = 1
+			uses = 1
+			category = cat_fleet_in_being
+		}
+		navy_experience = 20
+	}
+	ai_will_do = { factor = 10 }
+}
+
+shared_focus = {
+	id = pound_the_heretics
+	x = 0
+	y = 1
+	relative_position_id = unearthing_old_tactics
+	
+	cost = 5
+	prerequisite = { focus = unearthing_old_tactics }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = fleet_in_being_bonus
+			bonus = 1
+			uses = 1
+			category = cat_fleet_in_being
+		}
+		add_tech_bonus = {
+			name = heavy_ship_bonus
+			bonus = 1
+			uses = 1
+			category = ca_tech
+		}
+	}
+	ai_will_do = { factor = 12 }
+}
+
+shared_focus = {
+	id = unsinkable_titan
+	x = 0
+	y = 1
+	relative_position_id = pound_the_heretics
+	
+	cost = 5
+	prerequisite = { focus = pound_the_heretics }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = heavy_ship_bonus
+			bonus = 1
+			uses = 1
+			category = bb_tech
+		}
+		add_tech_bonus = {
+			name = carrier_bonus
+			bonus = 1
+			uses = 1
+			category = cv_tech
+		}
+		add_tech_bonus = {
+			name = fleet_in_being_bonus
+			bonus = 1
+			uses = 1
+			category = cat_fleet_in_being
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = no_longer_civilian_armada
+	x = 2
+	y = 1
+	relative_position_id = clearing_the_barnicles
+	
+	cost = 5
+	prerequisite = { focus = clearing_the_barnicles }
+	mutually_exclusive = { focus = laying_new_keels }
+	
+	completion_reward = {
+	###Add 10 destroyer 1s in Manehattan
+		add_tech_bonus = {
+			name = trade_interdiction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_trade_interdiction
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = piercing_light_from_shadows
+	x = 0
+	y = 1
+	relative_position_id = no_longer_civilian_armada
+	
+	cost = 4
+	prerequisite = { focus = no_longer_civilian_armada }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = submarine_bonus
+			bonus = 1
+			uses = 2
+			category = ss_tech
+		}
+		add_tech_bonus = {
+			name = trade_interdiction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_trade_interdiction
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = unleashing_hellfire
+	x = 0
+	y = 1
+	relative_position_id = piercing_light_from_shadows
+	
+	cost = 4
+	prerequisite = { focus = piercing_light_from_shadows }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = destroyer_bonus
+			bonus = 1
+			uses = 2
+			category = dd_tech
+		}
+	}
+	ai_will_do = { factor = 14 }
+}
+
+shared_focus = {
+	id = untouchable_dart
+	x = 0
+	y = 1
+	relative_position_id = unleashing_hellfire
+	
+	cost = 5
+	prerequisite = { focus = unleashing_hellfire }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = trade_interdiction_bonus
+			bonus = 1
+			uses = 2
+			category = cat_trade_interdiction
+		}
+		add_tech_bonus = {
+			name = light_cruiser_bonus
+			bonus = 1
+			uses = 1
+			category = cl_tech
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = imperial_modern_ship_mandate
+	x = 1
+	y = 1
+	relative_position_id = unsinkable_titan
+	
+	cost = 5
+	prerequisite = {
+		focus = unsinkable_titan
+		focus = untouchable_dart
+	}
+	
+	completion_reward = {
+		###add NS for -5% destroyer and BB production cost
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = revitalize_imperial_admirality
+	x = -1
+	y = 1
+	relative_position_id = untouchable_dart
+	
+	cost = 5
+	prerequisite = {
+		focus = unsinkable_titan
+		focus = untouchable_dart
+	}
+	
+	completion_reward = {
+		###add NS for +10% naval doctrine speed and heavy ship organization
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = floating_hives
+	x = -1
+	y = 1
+	relative_position_id = imperial_modern_ship_mandate
+	
+	cost = 4
+	prerequisite = { focus = imperial_modern_ship_mandate }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = transport_bonus
+			bonus = 1
+			uses = 2
+			technology = landing_craft
+			technology = tank_landing_craft
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = instruments_of_righteous_fury
+	x = 1
+	y = 1
+	relative_position_id = imperial_modern_ship_mandate
+	
+	cost = 4
+	prerequisite = { focus = imperial_modern_ship_mandate }
+	prerequisite = { focus = revitalize_imperial_admirality }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = naval_weapons_bonus
+			bonus = 1
+			uses = 2
+			technology = improved_light_battery
+			technology = improved_medium_battery
+			technology = improved_heavy_battery
+			technology = advanced_light_battery
+			technology = advanced_medium_battery
+			technology = advanced_heavy_battery
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = solaris_marinus
+	x = 1
+	y = 1
+	relative_position_id = revitalize_imperial_admirality
+	
+	cost = 4
+	prerequisite = { focus = revitalize_imperial_admirality }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = marine_bonus
+			bonus = 1
+			uses = 2
+			category = marine_tech
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = fleet_worthy_of_an_empire
+	x = 0
+	y = 1
+	relative_position_id = instruments_of_righteous_fury
+	
+	cost = 5
+	prerequisite = { focus = instruments_of_righteous_fury }
+	prerequisite = { focus = floating_hives }
+	prerequisite = { focus = solaris_marinus }
+	
+	completion_reward = {
+		###add NS for +5% range and +10% heavy attack
+	}
+	ai_will_do = { factor = 18 }
 }
 
 ###Army tree###
@@ -3376,9 +3725,75 @@ shared_focus = {
 			uses = 2
 			category = jet_technology
 		}
-		set_technology = {
-			suicide_craft = 1
-		}
+		set_rule = { can_use_kamikaze_pilots = yes }
 	}
 	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = improving_a_holy_weapon
+	x = 1
+	y = 1
+	relative_position_id = unified_command
+	
+	cost = 5
+	prerequisite = {
+		focus = unified_command
+		focus = brothers_and_sisters_of_battle
+	}
+	
+	completion_reward = {
+		###Add NS for +15% strat bombing for improved napalm
+		}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = enemies_shall_know_fear
+	x = -1
+	y = 1
+	relative_position_id = improving_a_holy_weapon
+	
+	cost = 5
+	prerequisite = { focus = improving_a_holy_weapon }
+	prerequisite = { focus = punishing_sound_barrier }
+	
+	completion_reward = {
+		###add NS for +5% fighter attack
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = only_hear_death
+	x = 1
+	y = 1
+	relative_position_id = improving_a_holy_weapon
+	
+	cost = 5
+	prerequisite = { focus = improving_a_holy_weapon }
+	prerequisite = { focus = honor_in_sacrifice }
+	
+	completion_reward = {
+		###add NS for +5% ground attack for CAS
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = heights_of_heaven
+	x = 1
+	y = 1
+	relative_position_id = enemies_shall_know_fear
+	
+	cost = 5
+	prerequisite = {
+		focus = enemies_shall_know_fear
+		focus = only_hear_death
+	}
+	
+	completion_reward = {
+		###add NS for +5% agility and +5% speed for fighters and CAS
+	}
+	ai_will_do = { factor = 15 }
 }
