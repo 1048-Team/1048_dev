@@ -2046,7 +2046,7 @@ shared_focus = {
 			add_building_construction = {
 				type = arms_factory
 				level = 2
-				instant_build = 2
+				instant_build = yes
 			}
 		}
 	}
@@ -3104,4 +3104,281 @@ shared_focus = {
 		factor = 15
 	}
 }
+
+shared_focus = {
+	id = scraping_the_rust
+	x = 0
+	y = 1
+	relative_position_id = airforce_revitalization
 	
+	cost = 5
+	prerequisite = { focus = airforce_revitalization }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = fighter_equipment
+			amount = 200
+			producer = EQS
+		}
+		add_tech_bonus = {
+			name = fighter_2_bonus
+			bonus = 1
+			uses = 1
+			technology = fighter2
+		}
+		2 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = developing_new_frame
+	x = -1
+	y = 1
+	relative_position_id = scraping_the_rust
+	
+	cost = 4
+	prerequisite = { focus = scraping_the_rust }
+	mutually_exclusive = { focus = improving_models }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = strat_bomber_bonus
+			bonus = 1
+			uses = 1
+			category = cat_strategic_bomber
+		}
+		add_tech_bonus = {
+			name = strat_destruction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_strategic_destruction
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = crows_to_buzzards
+	x = 0
+	y = 1
+	relative_position_id = developing_new_frame
+	
+	cost = 4
+	prerequisite = { focus = developing_new_frame }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = tac_bonus
+			bonus = 1
+			uses = 2
+			category = tactical_bomber
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = soaring_above_chaos
+	x = 0
+	y = 1
+	relative_position_id = crows_to_buzzards
+	
+	cost = 5
+	prerequisite = { focus = crows_to_buzzards }
+	
+	completion_reward = {
+	###Insert new spirit for increased range here
+		add_tech_bonus = {
+			name = strat_destruction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_strategic_destruction
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = unified_command
+	x = 0
+	y = 1
+	relative_position_id = soaring_above_chaos
+	
+	cost = 5
+	prerequisite = { focus = soaring_above_chaos }
+	
+	completion_reward = {
+	add_tech_bonus = {
+			name = heavy_fighter_bonus
+			bonus = 1
+			uses = 1
+			category = cat_heavy_fighter
+		}
+	add_tech_bonus = {
+			name = strat_bomber_bonus
+			bonus = 1
+			uses = 1
+			category = cat_strategic_bomber
+		}
+		add_tech_bonus = {
+			name = strat_destruction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_strategic_destruction
+		}
+	}
+	ai_will_do = { factor = 16 }
+}
+
+shared_focus = {
+	id = punishing_sound_barrier
+	x = -1
+	y = 1
+	relative_position_id = unified_command
+	
+	cost = 5
+	prerequisite = { focus = unified_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = strat_bomber_bonus
+			bonus = 1
+			uses = 1
+			category = cat_strategic_bomber
+		}
+		add_tech_bonus = {
+			name = jet_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			category = jet_technology
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = improving_models
+	x = 1
+	y = 1
+	relative_position_id = scraping_the_rust
+	
+	cost = 4
+	prerequisite = { focus = scraping_the_rust }
+	mutually_exclusive = { focus = developing_new_frame }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = cas_bonus
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+		}
+		add_tech_bonus = {
+			name = bat_support_bonus
+			bonus = 1
+			uses = 1
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = swarming_skies
+	x = 0
+	y = 1
+	relative_position_id = improving_models
+	
+	cost = 5
+	prerequisite = { focus = improving_models }
+	
+	completion_reward = {
+	###Add spirit for reduced cost and increased reliability for fighters and CAS by 5%
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = redefining_machinery
+	x = 0
+	y = 1
+	relative_position_id = swarming_skies
+	
+	cost = 4
+	prerequisite = { focus = swarming_skies }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = fighter_cas_bonus
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+			category = light_fighter
+		}
+		add_tech_bonus = {
+			name = bat_support_bonus
+			bonus = 1
+			uses = 2
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = brothers_and_sisters_of_battle
+	x = 0
+	y = 1
+	relative_position_id = redefining_machinery
+	
+	cost = 5
+	prerequisite = { focus = redefining_machinery }
+	
+	completion_reward = {
+	###Add +5% agility spirit here
+		add_tech_bonus = {
+			name = cas_bonus
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+		}
+		add_tech_bonus = {
+			name = bat_support_bonus
+			bonus = 1
+			uses = 2
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = honor_in_sacrifice
+	x = 1
+	y = 1
+	relative_position_id = brothers_and_sisters_of_battle
+	
+	cost = 4
+	prerequisite = { focus = brothers_and_sisters_of_battle }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = jet_bonus
+			bonus = 1
+			uses = 2
+			category = jet_technology
+		}
+		set_technology = {
+			suicide_craft = 1
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
