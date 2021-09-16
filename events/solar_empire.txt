@@ -1,6 +1,7 @@
 ###Solar Empire Events###
 
 add_namespace = solar
+add_namespace = celestia
 
 #Start event chain to introduce Aurora
 country_event = {
@@ -1141,8 +1142,6 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 			hidden_effect = {
 			clr_country_flag = daybreaker_crisis
 			end_puppet = WHY
-			remove_unit_leader = 1
-			remove_unit_leader = 3
 			retire_country_leader = yes
 			create_country_leader = {
 				name = "Nova Glow"
@@ -1162,7 +1161,10 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 					184 187 223 188 185 108 110 12
 				}
 				set_cosmetic_tag = EQS_SOL
-		}
+				keep_unit_leaders = {
+					1 3 
+				}
+			}
 			set_politics = {
 				ruling_party = democratic
 				elections_allowed = no
@@ -1191,6 +1193,11 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 			}
 			set_cosmetic_tag = EQS_CEL
 			set_country_flag = equestria_returned
+			remove_ideas = {
+				solar_cult
+				solar_inquisition
+			}
+			load_focus_tree = solar_empire_celestia_focus
 		}
 		
 		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
@@ -1399,6 +1406,58 @@ country_event = { #Aurora panics and believes she can't do the job of regent unt
 	option = {
 		name = solar.301.a
 		###reduce the modifier as discussed in tree
+	}
+}
+
+###Celestia Events###
+country_event = { #Celestia is glad to finally get replacement regalia as she sees the changes to the throne room
+	id = celestia.1
+	title = celestia.1.t
+	desc = celestia.1.d
+	
+	is_triggered_only = yes
+	
+	option = { #Tartarus, it's about time
+		name = celestia.1.a
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Sunset and the others are captured, and Celestia holds them for the time being and expressing her disappointment with Sunset
+	id = celestia.2
+	title = celestia.2.t
+	desc = celestia.2.d
+	
+	is_triggered_only = yes
+	
+	option = { #You've made your choice, Sunset. I will speak with you later
+		name = celestia.2.a
+		remove_unit_leader = 3
+	}
+}
+
+country_event = { #Celestia arrests Blueblood for his part and appoints herself new supreme commander of the armed forces
+	id = celestia.3
+	title = celestia.3.t
+	desc = celestia.3.d
+	
+	is_triggered_only = yes
+	
+	option = { #I've had far too many years to learn about war
+		name = celestia.3.a
+		remove_unit_leader = 1
+		create_field_marshal = {
+			name = "Princess Celestia"
+			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+			traits = { pony_race_trait pleasant_sun inspirational_leader }
+			id = 5000
+			skill = 2
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+			female = yes
+		}
 	}
 }
 
