@@ -1,3 +1,4 @@
+###Civil War Tree###
 shared_focus = {
 	id = return_of_the_princess
 	x = 3
@@ -6,18 +7,24 @@ shared_focus = {
 	available = {
 		hidden_trigger = {
 			has_country_flag = equestria_returned
+			NOT = {
+				has_country_flag = end_of_equestria_civil_war
+			}
 		}
 	}
 	allow_branch = {
 		hidden_trigger = {
 			has_country_flag = equestria_returned
+			NOT = {
+				has_country_flag = end_of_equestria_civil_war
+			}
 		}
 	}
 	cost = 1
 	
 	completion_reward = {
 		add_stability = 0.05
-		politcial_power = 50
+		add_political_power = 50
 	}
 	ai_will_do = { factor = 100 }
 }
@@ -199,4 +206,54 @@ shared_focus = {
 		country_event = celestia.3
 	}
 	ai_will_do = { factor = 20 }
+}
+
+###Celestia Political Tree###
+shared_focus = {
+	id = the_shattered_princess
+	x = 10
+	y = 1
+	
+	available = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	cost = 2
+	
+	completion_reward = {
+		country_event = celestia.6
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = a_broken_land
+	x = -1
+	y = 1
+	relative_position_id = the_shattered_princess
+	
+	cost = 2
+	prerequisite = { focus = the_shattered_princess }
+	
+	completion_reward = {
+		add_ideas = backbroken_economy
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = a_splintered_society
+	x = 1
+	y = 1
+	relative_position_id = the_shattered_princess
+	
+	cost = 2
+	prerequisite = { focus = the_shattered_princess }
+	
+	completion_reward = {
+		add_ideas = shattered_society
+	}
+	ai_will_do = { factor = 30 }
 }
