@@ -53,6 +53,23 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = unchaning_bureaucracy
+	x = -1
+	y = 1
+	relative_position_id = free_the_palace
+	
+	cost = 2
+	prerequisite = { focus = free_the_palace }
+	
+	bypass = { has_civil_war = no }
+	
+	completion_reward = {
+		###Unlock Harmonist Advisors here###
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
 	id = pardon_the_repentant
 	x = 1
 	y = 1
@@ -61,15 +78,110 @@ shared_focus = {
 	cost = 2
 	prerequisite = { focus = free_the_palace }
 	
-	bypass = {
-		has_civil_war = no
-	}
+	bypass = { has_civil_war = no }
 	
 	completion_reward = { 
 		add_manpower = 50000
 		add_war_support = 0.05
 	}
 	ai_will_do = { focus = 17 }
+}
+
+shared_focus = {
+	id = formulate_functional_industry
+	x = -1
+	y = 1
+	relative_position_id = pardon_the_repentant
+	
+	bypass = { has_civil_war = no }
+	
+	cost = 3
+	prerequisite = { focus = unchaning_bureaucracy }
+	prerequisite = { focus = pardon_the_repentant }
+	
+	completion_reward = {
+		add_ideas = hairstring_industry
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = salvation_to_the_lost
+	x = -1
+	y = 1
+	relative_position_id = the_wayward_student
+	
+	bypass = { has_civil_war = no }
+	
+	cost = 2
+	prerequisite = { focus = the_wayward_student }
+	
+	completion_reward = {
+		###Steal a Solar General, ideally one of the weaker ones that gets purged if they're alive
+		###Spawn three ten-width infantry loyalist divisions
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = one_alicorn_two_mindsets
+	x = 1
+	y = 1
+	relative_position_id = pardon_the_repentant
+	
+	cost = 3
+	prerequisite = { focus = pardon_the_repentant }
+	prerequisite = { focus = salvation_to_the_lost }
+	bypass = { has_civil_war = no }
+	
+	completion_reward = {
+		country_event = celestia.4
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = addressing_the_faithful_generals
+	x = 1
+	y = 1
+	relative_position_id = salvation_to_the_lost
+	
+	bypass = { has_civil_war = no }
+	
+	cost = 3
+	prerequisite = { focus = salvation_to_the_lost }
+	prerequisite = { focus = the_disloyal_prince }
+	
+	completion_reward = {
+		###Spawn three harmonist generals from vanilla EQS
+		###Spawn seven 8 widht divisions of loyalists and insurgents
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = a_princess_of_war_and_peace
+	x = 0
+	y = 1
+	relative_position_id = one_alicorn_two_mindsets
+	
+	bypass = { has_civil_war = no }
+	
+	cost = 3
+	prerequisite = {
+		focus = formulate_functional_industry
+		focus = one_alicorn_two_mindsets
+		focus = addressing_the_faithful_generals
+	}
+	
+	completion_reward = {
+		add_country_leader_trait = pragmatic_princess
+		add_timed_idea = {
+			idea = free_the_sun
+			days = 90
+		}
+	}
+	ai_will_do = { factor = 50 }
 }
 
 shared_focus = {
@@ -81,9 +193,7 @@ shared_focus = {
 	cost = 2
 	prerequisite = { focus = the_wayward_student }
 	
-	bypass = {
-		has_civil_war = no
-	}
+	bypass = { has_civil_war = no }
 	
 	completion_reward = {
 		country_event = celestia.3

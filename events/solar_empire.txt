@@ -1142,6 +1142,9 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 			hidden_effect = {
 			clr_country_flag = daybreaker_crisis
 			end_puppet = WHY
+			WHY = {
+				drop_cosmetic_tag = yes
+			}
 			retire_country_leader = yes
 			create_country_leader = {
 				name = "Nova Glow"
@@ -1461,6 +1464,88 @@ country_event = { #Celestia arrests Blueblood for his part and appoints herself 
 	}
 }
 
+country_event = { #Sunset asks to see Celestia and begs for proving her repentence by helping her win the civil war
+	id = celestia.4
+	title = celestia.4.t
+	desc = celestia.4.d
+	
+	is_triggered_only = yes
+	
+	option = { #Very well, my former student, you shall prove your sincerity in battle
+		name = celestia.4.a
+		create_field_marshal = {
+			name = "Sunset Shimmer"
+			portrait_path = "gfx/leaders/EQS/Sunset.tga"
+			traits = { fading_experience high_mage brilliant_strategist thorough_planner pony_race_trait }
+			skill = 4
+			attack_skill = 4
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 4
+			female = yes
+		}
+	}
+}
+
+country_event = { #wraps up any loose ends from finishing the war early, giving Celestia the pragmatic princess trait if needed, removes Blueblood and Sunset as marshals, Celestia sees the devastation
+	id = celestia.5
+	title = celestia.5.t
+	desc = celestia.5.d
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = EQS
+		AND = {
+			has_completed_focus = return_of_the_princess
+			has_civil_war = no
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = { #Now I must heal my country
+		name = celestia.5.a
+		IF = {
+			limit = {
+				has_unit_leader = 1
+			}
+		}
+		remove_unit_leader = 1
+		IF = {
+			limit = {
+				has_unit_leader = 3
+			}
+		}
+		remove_unit_leader = 3
+		IF = {
+			NOT = {
+				has_unit_leader = 5000
+			}
+		}
+		create_field_marshal = {
+			name = "Princess Celestia"
+			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+			traits = { pony_race_trait pleasant_sun inspirational_leader }
+			id = 5000
+			skill = 2
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+			female = yes
+		}
+		add_country_leader_trait = pragmatic_princess
+		add_stability = -0.05
+		add_war_support = -0.1
+	}
+}
+		
+
 ###Debug Events###
 country_event = {
 	id = solar.9001
@@ -1468,6 +1553,8 @@ country_event = {
 	desc = "Debug for testing southern war with Southeast."
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
 	
 	option = { #removes puppet from BAL
 		name = "Testing as always."
