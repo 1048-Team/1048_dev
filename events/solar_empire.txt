@@ -1475,7 +1475,7 @@ country_event = { #Sunset asks to see Celestia and begs for proving her repenten
 			name = "Sunset Shimmer"
 			portrait_path = "gfx/leaders/EQS/Sunset.tga"
 			traits = { fading_experience high_mage brilliant_strategist thorough_planner pony_race_trait }
-			id = 3
+			id = 5000
 			skill = 4
 			attack_skill = 4
 			defense_skill = 3
@@ -1509,32 +1509,47 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 			limit = {
 				has_unit_leader = 1
 			}
+			remove_unit_leader = 1
 		}
-		remove_unit_leader = 1
 		IF = {
 			limit = {
 				has_unit_leader = 3
 			}
+			remove_unit_leader = 3
 		}
-		remove_unit_leader = 3
 		IF = {
-			NOT = {
-				has_unit_leader = 5000
+			limit = {
+				has_unit_leader = 5001
+			}
+			remove_unit_leader = 5001
+		}
+		IF = {
+			limit = {
+				NOT = {
+					has_unit_leader = 5000
+				}
+			}
+			create_field_marshal = {
+				name = "Princess Celestia"
+				portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+				traits = { pony_race_trait pleasant_sun inspirational_leader }
+				id = 5000
+				skill = 2
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 2
+				female = yes
 			}
 		}
-		create_field_marshal = {
-			name = "Princess Celestia"
-			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
-			traits = { pony_race_trait pleasant_sun inspirational_leader }
-			id = 5000
-			skill = 2
-			attack_skill = 3
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 2
-			female = yes
+		IF = {
+			limit = {
+				NOT = {
+					has_country_leader_with_trait = pragmatic_princess
+				}
+			}
+			add_country_leader_trait = pragmatic_princess
 		}
-		add_country_leader_trait = pragmatic_princess
 		add_stability = -0.05
 		add_war_support = -0.1
 		set_country_flag = end_of_equestria_civil_war
