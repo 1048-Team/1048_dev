@@ -182,7 +182,6 @@ shared_focus = {
 	}
 	
 	completion_reward = {
-		add_country_leader_trait = pragmatic_princess
 		add_timed_idea = {
 			idea = free_the_sun
 			days = 90
@@ -282,6 +281,275 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = require_restitution_from_collaborators
+	x = -4
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		###swap ideas to reduce penalty of splintered society
+		add_stability = -0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = conscript_new_emergency_council
+	x = -2
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		add_political_power = -200
+		###Get Disgustingly Rich for industrialist, Scalding Light for a prince of terror, Flaky Itch for a unique -5% stability, +5% core stats
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = redesign_shattered_nobility
+	x = 0
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		###Add idea for cheaper advisors
+	}
+	ai_will_do = { factor = 23 }
+}
+
+shared_focus = {
+	id = break_the_backs_of_the_oppressors
+	x = 2
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		###Add construction idea
+	}
+	ai_will_do = { factor = 27 }
+}
+
+shared_focus = {
+	id = forced_integration_of_the_lost
+	x = 0
+	y = 1
+	relative_position_id = require_restitution_from_collaborators
+	
+	cost = 5
+	prerequisite = { focus = require_restitution_from_collaborators }
+	
+	completion_reward = {
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		###Reduce spirit
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = spark_the_magic_of_industry_again
+	x = 0
+	y = 1
+	relative_position_id = conscript_new_emergency_council
+	
+	cost = 5
+	prerequisite = { focus = conscript_new_emergency_council }
+	
+	completion_reward = {
+		3 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		75 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		12 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = empower_the_position_of_princess
+	x = 0
+	y = 1
+	relative_position_id = redesign_shattered_nobility
+	
+	cost = 4
+	prerequisite = { focus = redesign_shattered_nobility }
+	
+	completion_reward = {
+		###Add spirit for empowered princess
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = a_fate_worthy_of_their_crimes
+	x = 0
+	y = 1
+	relative_position_id = break_the_backs_of_the_oppressors
+	
+	cost = 5
+	prerequisite = { focus = break_the_backs_of_the_oppressors }
+	
+	completion_reward = {
+		###Event for executing solarists, which gives +5% ST and WS
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = harmonic_compliance_is_mandatory
+	x = 1
+	y = 1
+	relative_position_id = forced_integration_of_the_lost
+	
+	cost = 4
+	prerequisite = { focus = forced_integration_of_the_lost }
+	prerequisite = { focus = spark_the_magic_of_industry_again }
+	
+	completion_reward = {
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		###Reduce spirit more
+	}
+	ai_will_do = { focus = 25 }
+}
+
+shared_focus = {
+	id = princess_of_might_and_wealth
+	x = 1
+	y = 1
+	relative_position_id = spark_the_magic_of_industry_again
+	
+	cost = 3
+	prerequisite = { focus = spark_the_magic_of_industry_again }
+	prerequisite = { focus = empower_the_position_of_princess }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			uses = 1
+			bonus = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = princess_of_judgement_and_punishment
+	x = 1
+	y = 1
+	relative_position_id = empower_the_position_of_princess
+	
+	cost = 4
+	prerequisite = { focus = empower_the_position_of_princess }
+	prerequisite = { focus = a_fate_worthy_of_their_crimes }
+	
+	completion_reward = {
+		add_stability = -0.1
+		add_tech_bonus = {
+			name = unicorn_bonus
+			uses = 1
+			bonus = 1
+			category = unicorn_tech
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = agriculture_as_a_new_backbone
+	x = 1
+	y = 1
+	relative_position_id = harmonic_compliance_is_mandatory
+	
+	cost = 5
+	prerequisite = { focus = harmonic_compliance_is_mandatory }
+	prerequisite = { focus = princess_of_might_and_wealth }
+	
+	completion_reward = {
+		###Add spirit for increased pop growth and stability
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = stealing_the_wealth_of_the_corrupt
+	x = 1
+	y = 1
+	relative_position_id = princess_of_might_and_wealth
+	
+	cost = 5
+	prerequisite = { focus = princess_of_might_and_wealth }
+	prerequisite = { focus = princess_of_judgement_and_punishment }
+	
+	completion_reward = {
+		###Add spirit for reduced CS and increased construction
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = a_pragmatic_society
+	x = 1
+	y = 1
+	relative_position_id = stealing_the_wealth_of_the_corrupt
+	
+	cost = 5
+	prerequisite = { focus = agriculture_as_a_new_backbone }
+	prerequisite = { focus = stealing_the_wealth_of_the_corrupt }
+	
+	completion_reward = {
+		add_country_leader_trait = pragmatic_princess
+		###Add spirit for increased war support and -0.01 other ideologies
+	}
+	ai_will_do = { focus = factor = 50 }
+}
+
+shared_focus = {
 	id = a_proper_reunion
 	x = 1
 	y = 2
@@ -298,6 +566,84 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 40 }
 }
+
+shared_focus = {
+	id = to_begin_again
+	x = 0
+	y = 1
+	relative_position_id = a_proper_reunion
+	
+	cost = 2
+	prerequisite = { focus = a_proper_reunion }
+	
+	completion_reward = {
+		###Sunset worries about her first studying again for friendship and she gets a bit of final advice from Celestia to be herself, her true self
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = face_the_horrors_of_the_light
+	x = 0
+	y = 1
+	relative_position_id = to_begin_again
+	
+	cost = 3
+	prerequisite = { focus = to_begin_again }
+	
+	completion_reward = {
+		###Event for Sunset meeting with milder generals and trying to begin the work of friendship
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = reversing_the_brainwashing
+	x = -1
+	y = 1
+	relative_position_id = face_the_horrors_of_the_light
+	
+	cost = 3
+	prerequisite = { focus = face_the_horrors_of_the_light }
+	
+	completion_reward = {
+		###Event for Sunset informing about the falsehoods of Daybreaker and growing more emotional about it and Aurora getting a bit shocked as she sees how she was tricked
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = replace_faith_with_friendship
+	x = 1
+	y = 1
+	relative_position_id = face_the_horrors_of_the_light
+	
+	cost = 3
+	prerequisite = { focus = face_the_horrors_of_the_light }
+	
+	completion_reward = {
+		###Event for Sunset trying to socialize with some of the generals, and mostly focusing on trying to break Aurora's brainwashing, either calmly or pushing hard
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = exam_day
+	x = 1
+	y = 1
+	relative_position_id = reversing_the_brainwashing
+	
+	cost = 2
+	prerequisite = {
+		focus = reversing_the_brainwashing
+		focus = replace_faith_with_friendship
+	}
+	
+	completion_reward = {
+		###Event for Celestia evaluating Sunset's work, which will trigger another event for her either failing and being jailed or succeeding and being freed, and then another one that will either be the other generals reforming but staying civilians with Aurora refusing to reform, or reforming and joining as a generals
+	}
+	ai_will_do = { factor = 35 }
+}	
 
 shared_focus = {
 	id = once_a_society_filled_with_love
