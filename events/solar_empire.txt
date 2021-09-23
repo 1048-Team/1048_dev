@@ -1576,8 +1576,8 @@ country_event = { #Celestia meets with Sunset, who is currently moping in her ro
 	
 	option = { #Please do not disappoint me, my former ray of sunlight
 		name = celestia.7.a
-		set_variable = { sunset_redemption = 1 }
-		set_variable = { aurora_redemption = 1 }
+		set_variable = { sunset_redemption = 0 }
+		set_variable = { aurora_redemption = 0 }
 		###Should start a base variable for Sunset's effectiveness as a friendship student, and there will be branching events for her trying to befriend and teach Aurora the power of friendship, which will have its own variable
 		###Sunset's variable ranges from 1 to 10, with anything above a 5 being a pass for her; Aurora ranges from 1 to 100, with anything above 70 being a success for her
 	}
@@ -1683,7 +1683,7 @@ country_event = { #Sunset manages to get the generals to be more amicable with e
 		name = celestia.12.a
 		hidden_effect = {
 			add_to_variable = { sunset_redemption = 1 }
-			add_to_variable = { aurora_redemption = 14 }
+			add_to_variable = { aurora_redemption = 15 }
 		}
 	}
 }
@@ -1699,7 +1699,7 @@ country_event = { #Sunset decides that Aurora needs more focus and she heads to 
 		name = celestia.13.a
 		hidden_effect = {
 			add_to_variable = { sunset_redemption = 2 }
-			add_to_variable = { aurora_redemption = 24 }
+			add_to_variable = { aurora_redemption = 25 }
 		}
 	}
 }
@@ -1750,7 +1750,7 @@ country_event = { #Sunset decides to focus primarily on the generals, as she bel
 	}
 }
 
-country_event = { #Sunset manages to get the generals to be more amicable with each other, including getting them to joke around, and she feels more at ease, and she notices Aurora watching her with slight interest
+country_event = { #Sunset takes Aurora aside as she sees that Aurora is furious about the supposed lies about Daybreaker and starts to break down some of her biggest objections, giving Aurora pause
 	id = celestia.16
 	title = celestia.16.t
 	desc = celestia.16.d
@@ -1825,6 +1825,228 @@ country_event = { #Sunset lets Aurora rant a bit, but calmly tries to explain ho
 			add_to_variable = { sunset_redemption = 2 }
 			add_to_variable = { aurora_redemption = 5 }
 		}
+	}
+}
+
+country_event = { #Sunset is waiting nervously for Celestia to meet her again outside her chambers, her mind is racing, and she sees Aurora looking a bit dejected across the hall and she ponders Aurora's fate
+	id = celestia.20
+	title = celestia.20.t
+	desc = celestia.20.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset tries to prepare what she will say to Celestia a bit more
+		name = celestia.20.a
+		ai_chance = { factor = 50 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.21
+				days = 1
+				random = 1
+			}
+		}
+	}
+	option = { #Sunset forgoes any further prepartion and tries to bring Aurora's spirits up
+		name = celestia.20.b
+		ai_chance = { factor = 50 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.22
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset determines that Aurora will be something for the future, and she needs to provide her final points for her reformation to Celestia, and she goes over how she's been more altruistic, has made some minor friends in the reformers, and has tried to undo the mistakes of the Adoratio
+	id = celestia.21
+	title = celestia.21.t
+	desc = celestia.21.d
+	
+	is_triggered_only = yes
+	
+	option = { #Preparation is key, right?
+		name = celestia.21.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+			IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption > 69
+						}
+					}
+				}
+				country_event = { #Sunset fears that she will not be accepted, Aurora comes in to say that Sunset helped her see the light
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption < 70
+						}
+					}
+				}
+				country_event = { #Celestia determines that Sunset has proven her redemption, and Sunset sees Aurora being led away by guards when she leaves, with Aurora having little reaction
+					id = celestia.24
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					check_variable = {
+						sunset_redemption < 5
+					}
+				}
+				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
+					id = celestia.25
+					days = 1
+					random = 1
+				}
+			}
+			ELSE = {
+				country_event = {
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset determines to screw any more prep and she walks over to Aurora, and realizes that Aurora had been waiting for being taken away to jail for her crimes after Celestia determined she did not hold to Harmony, and Sunset tries to give her one last offer of friendship, which Aurora saldly accepts
+	id = celestia.22
+	title = celestia.22.t
+	desc = celestia.22.d
+	
+	is_triggered_only = yes
+	
+	option = { #Well, I suppose it's better than nothing. She'll have a friend to her end
+		name = celestia.22.a
+		add_to_variable = { sunset_redemption = 2 }
+		add_to_variable = { aurora_redemption = 10 }
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+			IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption > 69
+						}
+					}
+				}
+				country_event = { #Sunset fears that she will not be accepted, Aurora comes in to say that Sunset helped her see the light
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption < 70
+						}
+					}
+				}
+				country_event = { #Celestia determines that Sunset has proven her redemption, and Sunset sees Aurora being led away by guards when she leaves, with Aurora having little reaction
+					id = celestia.24
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					check_variable = {
+						sunset_redemption < 5
+					}
+				}
+				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
+					id = celestia.25
+					days = 1
+					random = 1
+				}
+			}
+			ELSE = {
+				country_event = {
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset meekly enters Celestia's chambers and awaits her determination, and the two fo them discuss Sunset's attempts, and Celestia plays coy to act like she will be sentencing Sunset before Aurora comes in a huff and declares that Sunset doesn't deserve punishment, since she helped her in her darkest hour to see harmony; only she is worthy of punishment, and Celestia knows that Sunset passed the test, and both are let free
+	id = celestia.23
+	title = celestia.23.t
+	desc = celestia.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #Friendship truly is magic!
+		set_country_flag = sunset_redeemed
+		create_corps_commander = { #Reformed Aurora
+			name = "Aurora Shinespark"
+			portrait_path = "gfx/leaders/EQS/Aurora_Reformed.tga"
+			traits = { pony_race_trait missionary_of_harmony promising_general former_cultist }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 1
+			female = yes
+		}
+	}
+}
+
+country_event = { #Celestia is excited to see Sunset and is proud of the work she's done to reform; she does admit she wishes that Sunset pushed a bit harder, but she has proven she has been redeemed; Sunset is a bit proud but after thanking Celestia, notices Aurora and asks her fate, which Celestia states is to be punished like other unrepentant generals
+	id = celestia.24
+	title = celestia.24.t
+	desc = celestia.24.d
+	
+	is_triggered_only = yes
+	
+	option = { #I pray that Aurora finds peace before the end
+		set_country_flag = sunset_redeemed
+		add_stability = 0.01
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = { #Celestia is calm and has a small conversation with Sunset, then states that she is saddened because she can tell that Sunset hasn't truly embraced harmony like she hoped; she tells Sunset that it's clear her heart isn't in it, and she can't freely let her back into society, and she will be held accountable like other unrepentant soldiers, and both she and Aurora are led away, with Sunset sighing in defeat
+	id = celestia.25
+	title = celestia.25.t
+	desc = celestia.25.d
+	
+	is_triggered_only = yes
+	
+	option = { #You've proven you never truly cared about me!
+		add_stability = -0.01
+		add_manpower = -1
 	}
 }
 
