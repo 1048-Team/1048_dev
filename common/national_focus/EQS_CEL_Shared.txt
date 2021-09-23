@@ -633,7 +633,7 @@ shared_focus = {
 	y = 1
 	relative_position_id = face_the_horrors_of_the_light
 	
-	allowed = { has_completed_focus = reversing_the_brainwashing }
+	available = { has_completed_focus = reversing_the_brainwashing }
 	
 	cost = 3
 	prerequisite = { focus = face_the_horrors_of_the_light }
@@ -748,7 +748,10 @@ shared_focus = {
 			ideology = democratic
 			popularity = 0.05
 		}
-		###modify spirit by +0.2, +5% ST, +5% RPF
+		swap_ideas = {
+			add_idea = shattered_society_light_1
+			remove_idea = shattered_society
+		}
 	}
 	ai_will_do = { factor = 22 }
 }
@@ -763,7 +766,7 @@ shared_focus = {
 	prerequisite = { focus = reach_out_to_the_hurting }
 	
 	completion_reward = {
-		###add spirit for +3% CS, +5% monthly pop, +5% RPF
+		add_ideas = patronage_of_the_princess
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -823,7 +826,10 @@ shared_focus = {
 			ideology = democratic
 			popularity = 0.1
 		}
-		###modify spirit by +5% WS and RPF
+		swap_ideas = {
+			add_idea = shattered_society_light_2
+			remove_idea = shattered_society_light_1
+		}
 	}
 	ai_will_do = { factor = 18 }
 }
@@ -863,8 +869,7 @@ shared_focus = {
 	prerequisite = { focus = utilizing_all_unique_gifts }
 	
 	completion_reward = {
-		###add peaceful advisors: Evening Glitter for industrialist, Warm Beam for theorist, and Sunrise Flicker for silent workpony
-		###add spirit for +10%pp, +5% RS
+		###add peaceful advisors: Evening Glitter for industrialist, Warm Beam for theorist, and Sunrise Flicker for silent workpony, Crow Magnate for +5% RS and +10% pp
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -880,7 +885,7 @@ shared_focus = {
 	prerequisite = { focus = promise_amnesty_to_the_misguided }
 	
 	completion_reward = {
-		###add spirit for -5% ST and +5% recovery rate and mobilization speed
+		add_ideas = adoring_adoratio
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -896,7 +901,7 @@ shared_focus = {
 	prerequisite = { focus = advertise_the_ear_of_the_princess }
 	
 	completion_reward = {
-		###regain some solarist advisors, add spirit for -10% advisor and law cost
+		add_ideas = waste_not_talent
 	}
 	ai_will_do = { factor = 22 }
 }
@@ -916,7 +921,10 @@ shared_focus = {
 			ideology = democratic
 			popularity = 0.05
 		}
-		###modify spirit by +5% RPF and +0.1PP
+		swap_ideas = {
+			remove_idea = shattered_society_light_2
+			add_idea = shattered_society_light_3
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -933,7 +941,8 @@ shared_focus = {
 	
 	completion_reward = {
 		add_country_leader_trait = loving_princess
-		###swap splintered society with tolerant society, +5% ST, +0.01 harmony
+		remove_ideas = shattered_society_light_3
+		add_ideas = a_tolerant_society
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -970,6 +979,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Event for preparing to meet with the rump state leaders, and sending out invitations to Canterlot
+		create_faction = equestria_faction
 		add_political_power = 50
 	}
 	ai_will_do = { factor = 20 }
@@ -989,6 +999,66 @@ shared_focus = {
 		###event for the two nations offering annexation and it promises additional funding for their projects, either for food or for research
 	}
 	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = revitalize_the_failing_ground_infrastructure
+	x = -1
+	y = 1
+	relative_position_id = twisted_hearts_of_loyalty_and_magic
+	
+	bypass = {
+		NOT = {
+			country_exists = CLD
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = twisted_hearts_of_loyalty_and_magic }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = rebuilding_the_clouds
+			days = 180
+		}
+		CLD = {
+			add_timed_idea = {
+				idea = rebuilding_the_clouds_CLD
+				days = 180
+			}
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = revitalize_the_failing_ground_infrastructure
+	x = -1
+	y = 1
+	relative_position_id = twisted_hearts_of_loyalty_and_magic
+	
+	bypass = {
+		NOT = {
+			country_exists = CLD
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = twisted_hearts_of_loyalty_and_magic }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = rebuilding_the_clouds
+			days = 180
+		}
+		CLD = {
+			add_timed_idea = {
+				idea = rebuilding_the_clouds_CLD
+				days = 180
+			}
+		}
+	}
+	ai_will_do = { factor = 18 }
 }
 
 ###Princessdom of Central Equestria###
