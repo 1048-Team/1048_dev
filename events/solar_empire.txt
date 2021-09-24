@@ -2053,6 +2053,177 @@ country_event = { #Celestia is calm and has a small conversation with Sunset, th
 	}
 }
 
+###Rump state events for Celestia###
+country_event = { #Celestia asks for puppeting of both Bales and Cloudsdale
+	id = celestia.500
+	title = celestia.500.t
+	desc = celestia.500.d
+	
+	is_triggered_only = yes
+	
+	option = { #Ask them. They will surely not object now
+		name = celestia.500.a
+		BLS = {
+			country_event = {
+				id = celestia.501
+				days = 1
+			}
+		}
+		CLD = {
+			country_event = {
+				id = celestia.502
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Bales gets the proposal
+	id = celestia.501
+	title = celestia.501.t
+	desc = celestia.501.d
+	
+	is_triggered_only = yes
+	
+	option = { #We will be better under them
+		name = celestia.501.a
+		ai_chance = { factor = 75 }
+		EQS = {
+			country_event = {
+				id = celestia.503
+				days = 1
+			}
+		}
+	}
+	option = { #We would be mad to bend to her wishes again!
+		name = celestia.501.b
+		ai_chance = { factor = 25 }
+		EQS = {
+			country_event = {
+				id = celestia.504
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Cloudsdale gets the proposal
+	id = celestia.502
+	title = celestia.502.t
+	desc = celestia.502.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is good to see that Celestia has returned
+		name = celestia.502.a
+		ai_chance = { factor = 85 }
+		EQS = {
+			country_event = {
+				id = celestia.506
+				days = 1
+			}
+		}
+	}
+	option = { #This could still be a trap
+		name = celestia.502.b
+		ai_chance = { factor = 15 }
+		EQS = {
+			country_event = {
+				id = celestia.507
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia receives the positive response from Bales and is pleased
+	id = celestia.503
+	title = celestia.503.t
+	desc = celestia.503.d
+	
+	is_triggered_only = yes
+	
+	option = { #Excellent! The transfer shall begin soon
+		name = celestia.503.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = BLS
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = BLS
+		}
+		BLS = {
+			set_cosmetic_tag = EQS_BLS
+		}
+	}
+}
+
+country_event = { #Celestia receives the negative response from Bales and is saddened about the war she will need to wage
+	id = celestia.504
+	title = celestia.504.t
+	desc = celestia.504.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is like disciplining a foal
+		name = celestia.504.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = BLS
+		}
+	}
+}
+
+country_event = { #Celestia receives the positive response from Cloudsdale and prepares integration
+	id = celestia.506
+	title = celestia.506.t
+	desc = celestia.506.d
+	
+	is_triggered_only = yes
+	
+	option = { #I knew that they would see reason
+		name = celestia.506.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = CLD
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = CLD
+		}
+		CLD = {
+			set_cosmetic_tag = EQS_CLD
+		}
+	}
+}
+
+country_event = { #Celestia receives the negative response from Bales and is disappointed in their stubbornness
+	id = celestia.507
+	title = celestia.507.t
+	desc = celestia.507.d
+	
+	is_triggered_only = yes
+	
+	option = { #I had hoped they would see reason
+		name = celestia.507.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = CLD
+		}
+	}
+}
+
 ###Debug Events###
 country_event = {
 	id = solar.9001

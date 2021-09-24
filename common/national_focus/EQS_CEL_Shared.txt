@@ -1032,10 +1032,10 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = revitalize_the_failing_ground_infrastructure
-	x = -1
+	id = ensure_pensions_for_the_heroes
+	x = 0
 	y = 1
-	relative_position_id = twisted_hearts_of_loyalty_and_magic
+	relative_position_id = revitalize_the_failing_ground_infrastructure
 	
 	bypass = {
 		NOT = {
@@ -1044,21 +1044,105 @@ shared_focus = {
 	}
 	
 	cost = 3
-	prerequisite = { focus = twisted_hearts_of_loyalty_and_magic }
+	prerequisite = { focus = revitalize_the_failing_ground_infrastructure }
 	
 	completion_reward = {
 		add_timed_idea = {
-			idea = rebuilding_the_clouds
+			idea = pension_payments
 			days = 180
 		}
 		CLD = {
 			add_timed_idea = {
-				idea = rebuilding_the_clouds_CLD
+				idea = pension_payments_CLD
 				days = 180
 			}
 		}
 	}
-	ai_will_do = { factor = 18 }
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = offer_funding_for_new_schools
+	x = 1
+	y = 1
+	relative_position_id = twisted_hearts_of_loyalty_and_magic
+	
+	bypass = {
+		NOT = {
+			country_exists = BLS
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = twisted_hearts_of_loyalty_and_magic }
+	
+	completion_reward = {
+		add_political_power = -150
+		hidden_effect = {
+			BLS = {
+				add_timed_idea = {
+					idea = funded_schools_BLS
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = recognize_intellectual_sovereignty
+	x = 0
+	y = 1
+	relative_position_id = offer_funding_for_new_schools
+	
+	bypass = {
+		NOT = {
+			country_exists = BLS
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = offer_funding_for_new_schools }
+	
+	completion_reward = {
+		add_political_power = -75
+		add_stability = -0.05
+		hidden_effect = {
+			BLS = {
+				add_timed_idea = {
+					idea = intellectual_recognition_BLS
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = draw_up_autonomous_plans
+	x = 1
+	y = 1
+	relative_position_id = ensure_pensions_for_the_heroes
+	
+	bypass = {
+		NOT = {
+			AND = {
+				country_exists = BLS
+				country_exists = CLD
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = ensure_pensions_for_the_heroes }
+	prerequisite = { focus = recognize_intellectual_sovereignty }
+	
+	completion_reward = {
+		country_event = celestia.500
+	}
+	ai_will_do = { factor = 25 }
 }
 
 ###Princessdom of Central Equestria###
