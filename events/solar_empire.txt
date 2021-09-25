@@ -2119,7 +2119,7 @@ country_event = { #Cloudsdale gets the proposal
 		ai_chance = { factor = 85 }
 		EQS = {
 			country_event = {
-				id = celestia.506
+				id = celestia.505
 				days = 1
 			}
 		}
@@ -2129,7 +2129,7 @@ country_event = { #Cloudsdale gets the proposal
 		ai_chance = { factor = 15 }
 		EQS = {
 			country_event = {
-				id = celestia.507
+				id = celestia.506
 				days = 1
 			}
 		}
@@ -2181,14 +2181,14 @@ country_event = { #Celestia receives the negative response from Bales and is sad
 }
 
 country_event = { #Celestia receives the positive response from Cloudsdale and prepares integration
-	id = celestia.506
-	title = celestia.506.t
-	desc = celestia.506.d
+	id = celestia.505
+	title = celestia.505.t
+	desc = celestia.505.d
 	
 	is_triggered_only = yes
 	
 	option = { #I knew that they would see reason
-		name = celestia.506.a
+		name = celestia.505.a
 		if = {
 			limit = {
 				has_dlc = "Together for Victory"
@@ -2208,18 +2208,279 @@ country_event = { #Celestia receives the positive response from Cloudsdale and p
 	}
 }
 
-country_event = { #Celestia receives the negative response from Bales and is disappointed in their stubbornness
+country_event = { #Celestia receives the negative response from Cloudsdale and is disappointed in the government's refusal to acknowledge her
+	id = celestia.506
+	title = celestia.506.t
+	desc = celestia.506.d
+	
+	is_triggered_only = yes
+	
+	option = { #I had hoped they would see reason
+		name = celestia.506.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = CLD
+		}
+	}
+}
+
+country_event = { #After assisting CER, Celestia sends an offer of puppeting
 	id = celestia.507
 	title = celestia.507.t
 	desc = celestia.507.d
 	
 	is_triggered_only = yes
 	
-	option = { #I had hoped they would see reason
+	option = { #Clearly they see that I am the same pony that I was before
 		name = celestia.507.a
+		CER = {
+			country_event = {
+				id = celestia.508
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #CER gets the proposal
+	id = celestia.508
+	title = celestia.508.t
+	desc = celestia.508.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is our princess, we will not resist
+		name = celestia.508.a
+		ai_chance = { factor = 90 }
+		EQS = {
+			country_event = {
+				id = celestia.509
+				days = 1
+			}
+		}
+	}
+	option = { #There is still something odd about her, we must be wary
+		name = celestia.508.b
+		ai_chance = { factor = 10 }
+		EQS = {
+			country_event = {
+				id = celestia.510
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #An ambassador from CER comes with their agreement to subjugation
+	id = celestia.509
+	title = celestia.509.t
+	desc = celestia.509.d
+	
+	is_triggered_only = yes
+	
+	option = { #I knew that they would see reason
+		name = celestia.509.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = CER
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = CER
+		}
+		CER = {
+			set_cosmetic_tag = EQS_CER
+		}
+	}
+}
+
+country_event = { #Another ambassador arrives and is nervous and declines the subjugation, and Celestia is saddened
+	id = celestia.510
+	title = celestia.510.t
+	desc = celestia.510.d
+	
+	is_triggered_only = yes
+	
+	option = { #Clearly Harmony is not enough for them. Prepare the soldiers
+		name = celestia.510.a
 		create_wargoal = {
 			type = puppet_wargoal_focus
-			target = CLD
+			target = CER
+		}
+	}
+}
+
+country_event = { #Celestia decides that she has done all she can, and she speaks for a bit on how to word the two communiques
+	id = celestia.511
+	title = celestia.511.t
+	desc = celestia.511.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is a longer shot, but I hope our assistance has shown our sincerity
+		name = celestia.511.a
+		WHY = {
+			country_event = {
+				id = celestia.512
+				days = 1
+			}
+		}
+		NER = {
+			country_event = {
+				id = celestia.513
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #WHY gets the proposal
+	id = celestia.512
+	title = celestia.512.t
+	desc = celestia.512.d
+	
+	is_triggered_only = yes
+	
+	option = { #Perhaps it is finally time to return to the fold
+		name = celestia.512.a
+		ai_chance = { factor = 30 }
+		EQS = {
+			country_event = {
+				id = celestia.514
+				days = 1
+			}
+		}
+	}
+	option = { #Never! She is up to something!
+		name = celestia.512.b
+		ai_chance = { factor = 70 }
+		EQS = {
+			country_event = {
+				id = celestia.515
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #NER gets the proposal
+	id = celestia.513
+	title = celestia.513.t
+	desc = celestia.513.d
+	
+	is_triggered_only = yes
+	
+	option = { #Getting all those free socks was really nice. Why not?
+		name = celestia.513.a
+		ai_chance = { factor = 55 }
+		EQS = {
+			country_event = {
+				id = celestia.516
+				days = 1
+			}
+		}
+	}
+	option = { #Nah, capitalists can stay with their money, we have a nice vibe
+		name = celestia.513.b
+		ai_chance = { factor = 45 }
+		EQS = {
+			country_event = {
+				id = celestia.517
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #WHY sends a simple message that they agree and Celestia is relieved
+	id = celestia.514
+	title = celestia.514.t
+	desc = celestia.514.d
+	
+	is_triggered_only = yes
+	
+	option = { #That was lucky, thank Faust!
+		name = celestia.514.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = WHY
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = WHY
+		}
+		WHY = {
+			set_cosmetic_tag = EQS_WHY
+		}
+	}
+}
+
+country_event = { #A single-worded message makes its way back to them, simply stating, "No" and Celestia is saddened
+	id = celestia.515
+	title = celestia.515.t
+	desc = celestia.515.d
+	
+	is_triggered_only = yes
+	
+	option = { #They are too far gone. They will need correction
+		name = celestia.515.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = WHY
+		}
+	}
+}
+
+country_event = { #NER aggrees by sending a smoky letter of casual acceptance, and Celestia wonders how they even have brains to answer it
+	id = celestia.516
+	title = celestia.516.t
+	desc = celestia.516.d
+	
+	is_triggered_only = yes
+	
+	option = { #Who smokes that stuff?
+		name = celestia.516.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = NER
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = NER
+		}
+		NER = {
+			set_cosmetic_tag = EQS_NER
+		}
+	}
+}
+
+country_event = { #A long, scrawling letter about capitalist evils tells her their reaction, and she isn't really surprised
+	id = celestia.517
+	title = celestia.517.t
+	desc = celestia.517.d
+	
+	is_triggered_only = yes
+	
+	option = { #Communists will be communists after all, even if they act more harmonic about it
+		name = celestia.517.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = NER
 		}
 	}
 }
@@ -2242,8 +2503,6 @@ country_event = {
 		}
 	}
 }
-
-
 	
 country_event = {
 	id = solar.9002
