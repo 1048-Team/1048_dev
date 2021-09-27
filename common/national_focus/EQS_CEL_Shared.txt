@@ -1654,3 +1654,52 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 35 }
 }
+
+###Southeast###
+###Left side if Southeast Mingsplodes###
+
+shared_focus = {
+	id = a_headless_state
+	x = -8
+	y = 1
+	relative_position_id = the_heartlands_beat_in_harmony
+	
+	available = {
+		has_global_flag = balsplosion
+	}
+	
+	cost = 4
+	prerequisite = { focus = the_heartlands_beat_in_harmony }
+	mutually_exclusive = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		add_political_power = 100
+		###Country event for planning on how to approach the harmonist-aligned nations
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###Right side if Southeast doesn't Mingsplode###
+shared_focus = {
+	id = puppet_of_greater_foe
+	x = 8
+	y = 1
+	relative_position_id = the_heartlands_beat_in_harmony
+	
+	available = {
+		NOT = {
+			has_global_flag = balsplosion
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = the_heartlands_beat_in_harmony }
+	mutually_exclusive = { focus = a_headless_state }
+	
+	completion_reward = {
+		add_political_power = 100
+		###Country event for planning on how to foment an uprising
+		###Unlock a few minor decisions for prep and terrorism support
+	}
+	ai_will_do = { factor = 15 }
+}
