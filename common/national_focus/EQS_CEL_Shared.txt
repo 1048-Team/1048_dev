@@ -1470,3 +1470,187 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 20 }
 }
+
+shared_focus = {
+	id = reaping_the_rewards_of_our_labor
+	x = 1
+	y = 1
+	relative_position_id = draw_up_autonomous_plans
+	
+	cost = 5
+	prerequisite = { focus = draw_up_autonomous_plans }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				AND = {
+					has_subject = CLD
+					has_subject = BLS
+				}
+			}
+			add_ideas = benefits_of_the_west
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = CLD
+					NOT = {
+						country_exists = BLS
+					}
+				}
+			}
+			add_ideas = benefits_of_the_west_2
+			every_state = {
+				limit = {
+					is_core_of = BLS
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = BLS
+					NOT = {
+						country_exists = CLD
+					}
+				}
+			}
+			add_ideas = benefits_of_the_west_3
+			every_state = {
+				limit = {
+					is_core_of = CLD
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = BLS
+						is_core_of = CLD
+					}
+				}
+				add_core_of = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = harvest_harmony
+	x = 0
+	y = 1
+	relative_position_id = integrate_the_petty_princessdom
+	
+	cost = 5
+	prerequisite = { focus = integrate_the_petty_princessdom }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_subject = CER
+			}
+		add_ideas = boon_of_harmony
+		}
+		ELSE = {
+			every_state = {
+				limit = {
+					is_core_of = CER
+				}
+			add_core_of = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = sewing_the_seeds_of_our_strength
+	x = -1
+	y = 1
+	relative_position_id = compromise_on_regional_governance
+	
+	cost = 5
+	prerequisite = { focus = compromise_on_regional_governance }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				AND = {
+					has_subject = NER
+					has_subject = WHY
+				}
+			}
+			add_ideas = bounty_of_the_north
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = NER
+					NOT = {
+						country_exists = WHY
+					}
+				}
+			}
+			add_ideas = bounty_of_the_north_2
+			every_state = {
+				limit = {
+					is_core_of = WHY
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = WHY
+					NOT = {
+						country_exists = NER
+					}
+				}
+			}
+			add_ideas = bounty_of_the_north_3
+			every_state = {
+				limit = {
+					is_core_of = NER
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = NER
+						is_core_of = WHY
+					}
+				}
+				add_core_of = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = the_heartlands_beat_in_harmony
+	x = 0
+	y = 1
+	relative_position_id = harvest_harmony
+	
+	cost = 5
+	prerequisite = { focus = reaping_the_rewards_of_our_labor }
+	prerequisite = { focus = sewing_the_seeds_of_our_strength }
+	prerequisite = { focus = harvest_harmony }
+	
+	completion_reward = {
+		swap_ideas = {
+			add_idea = equestria_reborn_2
+			remove_idea = equestria_reborn
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
