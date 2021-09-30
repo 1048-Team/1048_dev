@@ -1913,7 +1913,7 @@ shared_focus = {
 			add_core_of = EQS
 		}
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 30 }
 }
 
 shared_focus = {
@@ -1943,7 +1943,7 @@ shared_focus = {
 			add_core_of = EQS
 		}
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 30 }
 }
 
 ###Right side if Southeast doesn't Mingsplode###
@@ -1969,4 +1969,162 @@ shared_focus = {
 		###Unlock a few minor decisions for prep and terrorism support
 	}
 	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = highlight_the_lies_of_minitru
+	x = -3
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		BAL = {
+			add_popularity = {
+				ideology = communism
+				popularity = -0.05
+			}
+			add_war_support = -0.1
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = war_is_not_peace_peace_is_peace
+	x = -1
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		BAL = {
+			add_manpower = -50042
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = plenty_of_harmony_to_go_around
+	x = 1
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		BAL = {
+			add_timed_idea = {
+				idea = all_the_harmony_BAL
+				days = 180
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = governate_only_loves_itself
+	x = 3
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		BAL = {
+			add_ideas = exposed_lies_BAL
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = launch_operation_shattered_head
+	x = 1
+	y = 1
+	relative_position_id = war_is_not_peace_peace_is_peace
+	
+	cost = 2
+	prerequisite = { focus = war_is_not_peace_peace_is_peace }
+	prerequisite = { focus = governate_only_loves_itself }
+	prerequisite = { focus = plenty_of_harmony_to_go_around }
+	prerequisite = { focus = highlight_the_lies_of_minitru }
+	
+	completion_reward = {
+		declare_war_on = {
+			target = BAL
+			type = annex_everything
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = freed_from_the_collective_consciousness
+	x = 0
+	y = 1
+	relative_position_id = launch_operation_shattered_head
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 6
+	prerequisite = { focus = launch_operation_shattered_head }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = BAL
+			}
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###End of Rump Wars###
+shared_focus = {
+	id = harmony_reigns_in_the_southeast
+	x = 0
+	y = 5
+	relative_position_id = the_heartlands_beat_in_harmony
+	
+	available = {
+		OR = {
+			has_completed_focus = freed_from_the_collective_consciousness
+			AND = {
+				has_completed_focus = an_equestrian_seaboard
+				has_completed_focus = mangos_for_all
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = {
+		focus = an_equestrian_seaboard
+		focus = mangos_for_all
+		focus = freed_from_the_collective_consciousness
+	}
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = equestria_reborn_2
+			add_idea = equestria_reborn_3
+		}
+	}
+	ai_will_do = { factor = 40 }
 }
