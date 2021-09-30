@@ -1679,6 +1679,273 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
+shared_focus = {
+	id = a_spark_of_freedom
+	x = -2
+	y = 1
+	relative_position_id = a_headless_state
+	
+	bypass = {
+		NOT = {
+			country_exists = HUG
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_headless_state }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.518
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = art_of_the_deal
+	x = 0
+	y = 1
+	relative_position_id = a_headless_state
+	
+	bypass = {
+		NOT = {
+			country_exists = NID
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_headless_state }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.522
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = counter_the_royal_marriage
+	x = 2
+	y = 1
+	relative_position_id = a_headless_state
+	
+	bypass = {
+		NOT = {
+			country_exists = STB
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_headless_state }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.526
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = secure_the_eastern_jungle
+	x = 1
+	y = 1
+	relative_position_id = a_spark_of_freedom
+	
+	cost = 4
+	prerequisite = { focus = a_spark_of_freedom }
+	prerequisite = { focus = art_of_the_deal }
+	prerequisite = { focus = counter_the_royal_marriage }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				country_exists = NRP
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NRP
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+		}
+		IF = {
+			limit = {
+				NOT = {
+					STB = {
+						is_in_faction_with = EQS
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = STB
+			}
+		}
+		IF = {
+			limit = {
+				NOT = {
+					HUG = {
+						is_in_faction_with = EQS
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = HUG
+			}
+		}
+		IF = {
+			limit = {
+				NOT = {
+					NID = {
+						is_in_faction_with = EQS
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NID
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = slide_toward_the_celestial_sea
+	x = 1
+	y = 1
+	relative_position_id = art_of_the_deal
+	
+	cost = 4
+	prerequisite = { focus = a_spark_of_freedom }
+	prerequisite = { focus = art_of_the_deal }
+	prerequisite = { focus = counter_the_royal_marriage }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = NRP
+		}
+		IF = {
+			limit = {
+				country_exists = BAL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BAL
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = MTS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MTS
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = NEI
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NEI
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = EEE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = EEE
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = SPA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SPA
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = mangos_for_all
+	x = 0
+	y = 1
+	relative_position_id = secure_the_eastern_jungle
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 4
+	prerequisite = { focus = secure_the_eastern_jungle }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = STB
+					is_core_of = HUG
+					is_core_of = BUL
+					is_core_of = NID
+					is_core_of = NRP
+				}
+			}
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = an_equestrian_seaboard
+	x = 0
+	y = 1
+	relative_position_id = slide_toward_the_celestial_sea
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 4
+	prerequisite = { focus = slide_toward_the_celestial_sea }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = MTS
+					is_core_of = BAL
+					is_core_of = EEE
+					is_core_of = NEI
+					is_core_of = SPA
+				}
+			}
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
 ###Right side if Southeast doesn't Mingsplode###
 shared_focus = {
 	id = puppet_of_greater_foe
