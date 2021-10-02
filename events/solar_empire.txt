@@ -2652,7 +2652,7 @@ country_event = { #Celestia gets another letter from Stableside and she finally 
 	
 	option = { #If he keeps contacting me, I'll be getting a restraining order
 		name = celestia.526.a
-		HUG = {
+		STB = {
 			country_event = {
 				id = celestia.527
 				days = 1
@@ -2718,6 +2718,140 @@ country_event = { #Celestia is relieved that he won't join the faction
 			type = annex_everything
 			target = STB
 		}
+	}
+}
+
+country_event = { #Celestia returns home from the Crystal Empire estatic, with Twilight and Luna in tow and she prepares to begin the resurgence of the Alliance
+	id = celestia.530
+	title = celestia.530.t
+	desc = celestia.530.d
+	
+	is_triggered_only = yes
+	
+	option = { #It's been so long since the princessdoms of Equestria were in harmony!
+		name = celestia.530.a
+		add_to_faction = CRY
+		add_war_support = 0.05
+		add_stability = 0.1
+	}
+}
+
+country_event = { #Celestia is shocked that she is denied the alliance and is nearly heartbroken as she leaves
+	id = celestia.531
+	title = celestia.531.t
+	desc = celestia.531.d
+	
+	is_triggered_only = yes
+	
+	option = { #I suppose I must correct them
+		name = celestia.531.a
+		add_war_support = 0.1
+		add_stability = 0.05
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+country_event = { #Stalliongrad receives the letter penned by Celestia urging for the return of unclaimed 1007 territory for Equestria and the Crystal Empire and the Soviet debates as she points out her success in reviving the nation
+	id = celestia.532
+	title = celestia.532.t
+	desc = celestia.532.d
+	
+	is_triggered_only = yes
+	
+	option = { #Celestia has proven she is nearly unstoppable, we must agree
+		name = celestia.532.a
+		ai_chance = { factor = 25 }
+		EQS = {
+			country_event = {
+				id = celestia.533
+				days = 1
+			}
+		}
+		set_global_flag = stalliongrad_agrees
+	}
+	option = {
+		name = celestia.532.b
+		ai_chance = { factor = 75 }
+		EQS = {
+			country_event = {
+				id = celestia.534
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia receives news of the acceptance by Stalliongrad and is relieved for there will be no war
+	id = celestia.533
+	title = celestia.533.t
+	desc = celestia.533.d
+	
+	is_triggered_only = yes
+	
+	option = { #Celestia has proven she is nearly unstoppable, we must agree
+		name = celestia.533.a
+		IF = {
+			limit = {
+				country_exists = AWR
+			}
+		annex_country = { target = AWR }
+		}
+		ELSE = {
+			transfer_state = 102
+			transfer_state = 226
+			transfer_state = 228
+			transfer_state = 227
+			transfer_state = 230
+			transfer_state = 231
+			transfer_state = 232
+			transfer_state = 349
+			transfer_state = 525
+		}
+		IF = {
+			limit = {
+				country_exists = CWR
+			}
+			CRY = {
+				annex_country = { target = CWR }
+			}
+			every_state = {
+				limit = {
+					is_core_of = CWR
+				}
+				add_core_of = CRY
+			}
+		}
+		ELSE = {
+			CRY = {
+				transfer_state = 98
+				transfer_state = 151
+				transfer_state = 152
+				transfer_state = 236
+				transfer_state = 339
+				transfer_state = 689
+				add_state_core = 98
+				add_state_core = 151
+				add_state_core = 152
+				add_state_core = 236
+				add_state_core = 339
+				add_state_core = 339
+				add_state_core = 689
+			}
+		}
+	}
+}
+
+country_event = { #Celestia isn't surprised and she dispatches Luna back to the Crystal Empire to help prepare for war
+	id = celestia.534
+	title = celestia.534.t
+	desc = celestia.534.d
+	
+	is_triggered_only = yes
+	
+	option = { #It was only inevitable. We shall stand together against communism
+		name = celestia.534.a
+		add_war_support = 0.05
+		add_stability = 0.05
 	}
 }
 

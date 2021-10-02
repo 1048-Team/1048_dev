@@ -2128,3 +2128,100 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 40 }
 }
+
+shared_focus = {
+	id = reform_the_united_ponies_alliance
+	x = 0
+	y = 1
+	relative_position_id = harmony_reigns_in_the_southeast
+	
+	cost = 3
+	prerequisite = { focus = harmony_reigns_in_the_southeast }
+	
+	completion_reward = {
+		set_faction_name = equestria_faction_2
+		CRY = {
+			country_event = {
+				id = crystal.500
+				days = 1
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = shelter_for_the_refugees
+	x = -1
+	y = 1
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	available = {
+		CRY = {
+			is_in_faction_with = EQS
+		}
+	}
+	
+	mutually_exclusive = { focus = shattered_harmony }
+	
+	cost = 4
+	prerequisite = { focus = reform_the_united_ponies_alliance }
+	
+	completion_reward = {
+		###change state population###
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = shattered_harmony
+	x = 1
+	y = 1
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	available = {
+		CRY = {
+			NOT = {
+				is_in_faction_with = EQS
+			}
+		}
+	}
+	
+	mutually_exclusive = { focus = shelter_for_the_refugees }
+	
+	cost = 4
+	prerequisite = { focus = reform_the_united_ponies_alliance }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = CRY
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###War with Stalliongrad and the changelings###
+###Stalliongrad###
+shared_focus = {
+	id = recognize_old_demands
+	x = -2
+	y = 2
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 4
+	prerequisite = { focus = shelter_for_the_refugees }
+	prerequisite = { focus = shattered_harmony }
+	
+	completion_reward = {
+		STG = {
+			country_event = celestia.532
+			days = 1
+		}
+	}
+	ai_will_do = { factor = 25 }
+}

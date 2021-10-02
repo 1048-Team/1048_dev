@@ -1,6 +1,46 @@
 ###Crystal Empire Events###
 add_namespace = crystal
 
+###Ally with Equestria###
+country_event = { #Celestia appears in the Crystal Empire to all the princesses' surprise, and she attempts to explain why they should re-affirm the United Ponies Alliance
+	id = crystal.500
+	title = crystal.500.t
+	desc = crystal.500.d
+	
+	is_triggered_only = yes
+	
+	option = { #We will fix the mistake of 1011!
+		name = crystal.500.a
+		ai_chance = {
+			factor = 50
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" } factor = 100 }
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" } factor = 100 }
+		}
+		EQS = {
+			country_event = {
+				id = celestia.530
+				days = 1
+			}
+		}
+	}
+	option = { #Celestia is not who she was. We are better on our own
+		name = crystal.500.b
+		ai_chance = {
+			factor = 50
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Luna" } factor = 1.5 }
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Cadance" } factor = 1.25 }
+		}
+		add_war_support = 0.1
+		add_stability = 0.05
+		EQS = {
+			country_event = {
+				id = celestia.531
+				days = 1
+			}
+		}
+	}
+}
+
 country_event = { #Princess switching test event
 	id = crystal.9999
 	title = "Testing the Princess Switch"
