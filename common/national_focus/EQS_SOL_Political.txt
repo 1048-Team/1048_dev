@@ -3,7 +3,7 @@
 shared_focus = {
 	id = flames_never_snuffed
 	x = 5
-	y = 16
+	y = 1
 	
 	available = {
 		hidden_trigger = {
@@ -582,7 +582,7 @@ shared_focus = {
 ###Princessdom of Central Equestria###
 shared_focus = {
 	id = council_of_fools
-	x = -4
+	x = -8
 	y = 1
 	relative_position_id  = solaris_bellum
 	
@@ -592,7 +592,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
+	cost = 3
 	
 	prerequisite = { focus = solaris_bellum }
 	
@@ -610,7 +610,7 @@ shared_focus = {
 
 shared_focus = { #Should refer to correcting the mistake of rebellion, rename New Canterlot to Sanctum Collis
 	id = burying_the_past
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = council_of_fools
 	
@@ -620,8 +620,7 @@ shared_focus = { #Should refer to correcting the mistake of rebellion, rename Ne
 		}
 	}
 	
-	bypass = {
-	}
+	mutually_exclusive = { focus = cleansing_those_who_resist }
 	
 	cost = 5
 	
@@ -644,7 +643,7 @@ shared_focus = { #Should refer to correcting the mistake of rebellion, rename Ne
 		
 		add_tech_bonus = {
 		name = race_bonus
-		bonus = 1
+		bonus = 0.50
 		uses = 3
 		category = race_tech
 		}
@@ -655,7 +654,52 @@ shared_focus = { #Should refer to correcting the mistake of rebellion, rename Ne
 }
 
 shared_focus = { #Should refer to correcting the mistake of rebellion, rename New Canterlot to Sanctum Collis
-	id = imperial_breadbasket
+	id = cleansing_those_who_resist
+	x = 1
+	y = 1
+	relative_position_id = council_of_fools
+	
+	available = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	mutually_exclusive = { focus = burying_the_past }
+	
+	cost = 5
+	
+	prerequisite = { focus = council_of_fools }
+	
+	
+	completion_reward = {
+		113 = { add_manpower = -15000 }
+		120 = { add_manpower = -5000 }
+		22 = { add_manpower = -25000}
+		121 = { add_manpower = -10000 }
+		123 = { add_manpower = -7500 }
+		97 = { add_manpower = -12500 }
+		111 = { add_manpower = -1500 }
+		63 = { add_manpower = -1000 }
+		122 = { add_manpower = -40000 }
+		112 = { add_manpower = -500 }
+		115 = { add_manpower = -1250 }
+		116 = { add_manpower = -6000 }
+		
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+		add_stability = -0.05
+		add_war_support = -0.05
+	}
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+shared_focus = { #Should refer to correcting the mistake of rebellion, rename New Canterlot to Sanctum Collis
+	id = reclaim_the_green_vales
 	x = 0
 	y = 1
 	relative_position_id = burying_the_past
@@ -675,8 +719,36 @@ shared_focus = { #Should refer to correcting the mistake of rebellion, rename Ne
 			}
 			add_core_of = EQS
 		}
-		###Add spirit for +5% monthly pop###
-		set_province_name = { id = 782 name = "Sanctum Collis" }
+		set_province_name = { id = 782 name = renamed_new_canterlot }
+	}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+shared_focus = { #Should refer to correcting the mistake of rebellion, rename New Canterlot to Sanctum Collis
+	id = imperial_breadbasket
+	x = 0
+	y = 1
+	relative_position_id = cleansing_those_who_resist
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = cleansing_those_who_resist }
+	
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = CER
+			}
+			add_core_of = EQS
+		}
+		add_ideas = golden_fields_of_the_empire
+		set_province_name = { id = 782 name = renamed_new_canterlot }
 	}
 	ai_will_do = {
 		factor = 20
@@ -686,7 +758,7 @@ shared_focus = { #Should refer to correcting the mistake of rebellion, rename Ne
 ###Cloudsdale###
 shared_focus = {
 	id = plucking_heretics
-	x = -2
+	x = -4
 	y = 1
 	relative_position_id  = solaris_bellum
 	
@@ -696,7 +768,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
+	cost = 3
 	
 	prerequisite = { focus = solaris_bellum }
 	
@@ -714,7 +786,7 @@ shared_focus = {
 
 shared_focus = {
 	id = grounding_the_clouds
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = plucking_heretics
 	
@@ -724,8 +796,41 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
+	mutually_exclusive = { focus = clipping_the_wings }
+	
+	cost = 5
+	
+	prerequisite = { focus = plucking_heretics }
+	
+	
+	completion_reward = {
+		101 = { add_manpower = -50000 }
+		68 = { add_manpower = -250000 }
+		99 = { add_manpower = -150000 }
+		128 = { add_manpower = -10000 }
+		103 = { add_manpower = -175000 }
+		105 = { add_manpower = -62500 }
+		129 = { add_manpower = -125000 }
+		###Give temp spirit for using rain clouds for growth speed for 1 year
 	}
+	ai_will_do = {
+		factor = 17
+	}
+}
+
+shared_focus = {
+	id = clipping_the_wings
+	x = 1
+	y = 1
+	relative_position_id = plucking_heretics
+	
+	available = {
+		NOT = {
+			country_exists = CLD
+		}
+	}
+	
+	mutually_exclusive = { focus = grounding_the_clouds }
 	
 	cost = 5
 	
@@ -743,8 +848,19 @@ shared_focus = {
 				instant_build = yes
 			}
 		}
-		###Insert population changes here after Laundry gives pop growth rate
-		###Give temp spirit for using rain clouds for growth speed for 1 year
+		101 = { add_manpower = -7500 }
+		68 = { add_manpower = -25000 }
+		99 = { add_manpower = -20000 }
+		128 = { add_manpower = -2000 }
+		103 = { add_manpower = -17500 }
+		105 = { add_manpower = -6000 }
+		129 = { add_manpower = -12000 }
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.05
+		}
+		add_stability = -0.075
+		add_war_support = -0.075
 	}
 	ai_will_do = {
 		factor = 17
@@ -752,7 +868,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = pegasi_for_the_empress
+	id = evaporation_of_the_pegasus_identity
 	x = 0
 	y = 1
 	relative_position_id = grounding_the_clouds
@@ -772,7 +888,34 @@ shared_focus = {
 			}
 			add_core_of = EQS
 		}
-		###Event for forming Solarbolts
+	}	
+	ai_will_do = {
+		factor = 23
+	}
+}
+
+shared_focus = {
+	id = pegasi_for_the_empress
+	x = 0
+	y = 1
+	relative_position_id = clipping_the_wings
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = clipping_the_wings }
+	
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = CLD
+			}
+			add_core_of = EQS
+		}
+		add_ideas = imperial_wonderbolts
 	}	
 	ai_will_do = {
 		factor = 23
@@ -792,7 +935,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
+	cost = 3
 	
 	prerequisite = { focus = solaris_bellum }
 	
@@ -810,7 +953,7 @@ shared_focus = {
 
 shared_focus = {
 	id = scourging_the_scientists
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = faith_over_science
 	
@@ -820,8 +963,41 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
+	mutually_exclusive = { focus = utilize_the_most_talented }
+	
+	cost = 5
+	
+	prerequisite = { focus = faith_over_science }
+	
+	
+	completion_reward = {
+		74 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		###Include all state pop losses###
 	}
+	ai_will_do = {
+		factor = 20
+	}
+}
+
+shared_focus = {
+	id = utilize_the_most_talented
+	x = 1
+	y = 1
+	relative_position_id = faith_over_science
+	
+	available = {
+		NOT = {
+			country_exists = BLS
+		}
+	}
+	
+	mutually_exclusive = { focus = scourging_the_scientists }
 	
 	cost = 5
 	
@@ -835,14 +1011,14 @@ shared_focus = {
 			}
 			add_extra_state_shared_building_slots = 1
 		}
-		74 = {
-			add_building_construction = {
-				type = arms_factory
-				level = 2
-				instant_build = yes
-			}
-		}
 		###Include all state pop losses###
+		add_political_power = -200
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.1
+		}
+		add_stability = -0.1
+		add_war_support = -0.1
 	}
 	ai_will_do = {
 		factor = 20
@@ -877,10 +1053,38 @@ shared_focus = {
 	}
 }
 
+shared_focus = {
+	id = merge_faith_and_science
+	x = 0
+	y = 1
+	relative_position_id = utilize_the_most_talented
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = utilize_the_most_talented }
+	
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = BLS
+			}
+			add_core_of = EQS
+		}
+		###Add NS for increased research speed
+	}	
+	ai_will_do = {
+		factor = 25
+	}
+}
+
 ###Marechester###
 shared_focus = {
 	id = hive_of_commies
-	x = 2
+	x = 4
 	y = 1
 	relative_position_id  = solaris_bellum
 	
@@ -890,7 +1094,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
+	cost = 3
 	
 	prerequisite = { focus = solaris_bellum }
 	
@@ -908,7 +1112,7 @@ shared_focus = {
 
 shared_focus = {
 	id = work_ethic_lesson
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = hive_of_commies
 	
@@ -918,8 +1122,7 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
-	}
+	mutually_exclusive = { focus = take_notes_from_the_independent_spirit }
 	
 	cost = 5
 	
@@ -931,6 +1134,67 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 16
+	}
+}
+
+shared_focus = {
+	id = take_notes_from_the_independent_spirit
+	x = 1
+	y = 1
+	relative_position_id = hive_of_commies
+	
+	available = {
+		NOT = {
+			country_exists = NER
+		}
+	}
+	
+	mutually_exclusive = { focus = work_ethic_lesson }
+	
+	cost = 5
+	
+	prerequisite = { focus = hive_of_commies }
+	
+	
+	completion_reward = {
+		###Include all state pop losses###
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		add_stability = -0.05
+		add_war_support = -0.05
+	}
+	ai_will_do = {
+		factor = 16
+	}
+}
+
+shared_focus = {
+	id = congregate_the_communes
+	x = 0
+	y = 1
+	relative_position_id = take_notes_from_the_independent_spirit
+	
+	bypass = {
+	}
+	
+	cost = 5
+	
+	prerequisite = { focus = take_notes_from_the_independent_spirit }
+	
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = NER
+			}
+			add_core_of = EQS
+		}
+		###Add more steel in Marechester and tungsten in Riverpool
+	}	
+	ai_will_do = {
+		factor = 19
 	}
 }
 
@@ -955,7 +1219,6 @@ shared_focus = {
 			}
 			add_core_of = EQS
 		}
-		###Add more steel in Marechester and tungsten in Riverpool
 	}	
 	ai_will_do = {
 		factor = 19
@@ -965,7 +1228,7 @@ shared_focus = {
 ###Whinnyapolis###
 shared_focus = {
 	id = faithless_deserters
-	x = 4
+	x = 8
 	y = 1
 	relative_position_id  = solaris_bellum
 	
@@ -975,7 +1238,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
+	cost = 3
 	
 	prerequisite = { focus = solaris_bellum }
 	
@@ -993,7 +1256,7 @@ shared_focus = {
 
 shared_focus = {
 	id = instruction_in_fidelity
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = faithless_deserters
 	
@@ -1003,8 +1266,7 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
-	}
+	mutually_exclusive = { focus = forbid_court_martial }
 	
 	cost = 5
 	
@@ -1014,6 +1276,39 @@ shared_focus = {
 	completion_reward = {
 		###Include all state pop losses###
 		###Spawn five garrison divisions###
+	}
+	ai_will_do = {
+		factor = 18
+	}
+}
+
+shared_focus = {
+	id = forbid_court_martial
+	x = 1
+	y = 1
+	relative_position_id = faithless_deserters
+	
+	available = {
+		NOT = {
+			country_exists = WHY
+		}
+	}
+	
+	mutually_exclusive = { focus = instruction_in_fidelity }
+	
+	cost = 5
+	
+	prerequisite = { focus = faithless_deserters }
+	
+	
+	completion_reward = {
+		###Include all state pop losses###
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.03
+		}
+		add_stability = -0.05
+		add_war_support = -0.05
 	}
 	ai_will_do = {
 		factor = 18
@@ -1041,13 +1336,8 @@ shared_focus = {
 			}
 			add_core_of = EQS
 		}
-		add_manpower = 30000
+		add_manpower = 10000
 		70 = {
-			add_building_construction = {
-				type = arms_factory
-				level = 2
-				instant_build = yes
-			}
 			add_building_construction = {
 				type = industrial_complex
 				level = 1
@@ -1055,7 +1345,7 @@ shared_focus = {
 			}
 			add_building_construction = {
 				type = infrastructure
-				level = 2
+				level = 1
 				instant_build = yes
 			}
 		}
@@ -1066,35 +1356,78 @@ shared_focus = {
 	}
 }
 
-###Southeast Tree###
 shared_focus = {
-	id = retribution_is_just
+	id = amnesty_for_those_who_repent
 	x = 0
 	y = 1
-	relative_position_id = new_temple_for_empress
+	relative_position_id = forbid_court_martial
 	
 	bypass = {
-		NOT = {
-			country_exists = BAL
-		}
 	}
 	
-	cost = 6
+	cost = 5
 	
-	prerequisite = { focus = imperial_breadbasket }
-	prerequisite = { focus = pegasi_for_the_empress }
-	prerequisite = { focus = new_temple_for_empress }
-	prerequisite = { focus = cleansing_the_confused }
-	prerequisite = { focus = returning_to_the_fold }
+	prerequisite = { focus = forbid_court_martial }
 	
 	
 	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = BAL
+		every_state = {
+			limit = {
+				is_core_of = WHY
+			}
+			add_core_of = EQS
 		}
-		country_event = solar.9001
+		###Gain Horizon Sunrise for +0.005% compliance per day, -0.05% stability
+		###Potentially gain Solar Strike for +10% offense military high command
+		###Have event for bringing back faithful Militarium and Adoratio members and be greeted by Daybreaker and the new archmage of Whinnyapolis
 	}
+	ai_will_do = {
+		factor = 23
+	}
+}
+
+###Southeast Tree###
+shared_focus = {
+	id = retribution_is_just
+	x = 1
+	y = 1
+	relative_position_id = new_temple_for_empress
+	
+	cost = 6
+	
+	prerequisite = { focus = imperial_breadbasket focus = reclaim_the_green_vales }
+	prerequisite = { focus = pegasi_for_the_empress focus = evaporation_of_the_pegasus_identity }
+	prerequisite = { focus = new_temple_for_empress focus = merge_faith_and_science }
+	prerequisite = { focus = cleansing_the_confused focus = congregate_the_communes }
+	prerequisite = { focus = returning_to_the_fold focus = amnesty_for_those_who_repent }
+	
+	
+	completion_reward = {
+		every_country = {
+			limit = {
+				OR = {
+					owns_state = 688
+					owns_state = 84
+					owns_state = 81
+					owns_state = 15
+					owns_state = 26
+					owns_state = 221
+					owns_state = 79
+					owns_state = 352
+					owns_state = 7
+					owns_state = 31
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 40 }
 }
 
 ###Left side###
@@ -1490,7 +1823,7 @@ shared_focus = {
 	
 	available = {
 		344 = {
-			is_owned_by = EQS
+			is_controlled_by = EQS
 		}
 	}
 	
@@ -1575,7 +1908,10 @@ shared_focus = {
 	will_lead_to_war_with = CHN
 	
 	completion_reward = {
-		###add idea operation_cauterize for +5% attack against them
+		add_timed_idea = {
+			idea = operation_cauterize
+			days = 210
+		}
 		create_wargoal = {
 			type = annex_everything
 			target = CHN
@@ -1615,13 +1951,16 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		###add idea operation_purity for +10% planning speed and division speed
+		add_timed_idea = {
+			idea = operation_rising_sun
+			days = 180
+		}
 	}
 	ai_will_do = { factor = 50 }
 }
 
 shared_focus = {
-	id = like_a_moth
+	id = flame_to_moths
 	x = -2
 	y = 1
 	relative_position_id = squash_the_insects
@@ -1635,7 +1974,10 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		###add idea flame_for_moths for +5% support companies soft attack
+		add_timed_idea = {
+			idea = flamebringers_for_bugs
+			days = 180
+		}
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -1675,7 +2017,10 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		###add idea solaris_war for +10% factory output
+		add_timed_idea = {
+			idea = steel_for_the_war
+			days = 90
+		}
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -1684,7 +2029,7 @@ shared_focus = {
 	id = fate_worse_than_death
 	x = 0
 	y = 1
-	relative_position_id = like_a_moth
+	relative_position_id = flame_to_moths
 	
 	available = {
 		251 = {
@@ -1697,7 +2042,7 @@ shared_focus = {
 	
 	cost = 3
 	
-	prerequisite = { focus = like_a_moth }
+	prerequisite = { focus = flame_to_moths }
 	
 	
 	completion_reward = {
@@ -1721,7 +2066,7 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		###spirit called heretic_labor_camps for -5% non-core for +5% construction
+		add_ideas = retribution_for_the_great_war
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -1731,6 +2076,12 @@ shared_focus = {
 	x = 0
 	y = 1
 	relative_position_id = everything_for_the_war
+	
+	available = {
+		690 = {
+			is_controlled_by = EQS
+		}
+	}
 	
 	bypass = {
 		}
@@ -1771,7 +2122,7 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		###spirit called faithful_waves for +5% conscription factor
+		add_ideas = unending_waves
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -1825,7 +2176,7 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		###spirit called omnipresent_air_force for +5% range for air
+		add_ideas = strike_from_sanctum_solar
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -1909,7 +2260,7 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		##add righting_the_past spirit for +5% attack against Marelandia
+		add_ideas = righting_the_past
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -1965,10 +2316,64 @@ shared_focus = {
 	ai_will_do = { factor = 50 }
 }
 
+###Sunset Shimmer Tree###
+shared_focus = {
+	id = setting_of_the_sun
+	x = 5
+	y = 1
+	
+	available = {
+		hidden_trigger = {
+			has_country_flag = sunset_reigns
+			}
+		}
+	
+	allow_branch = {
+		hidden_trigger = {
+			has_country_flag = sunset_reigns
+		}
+	}
+	
+	cost = 1
+	
+	completion_reward = {
+		###reduce slipping_sanity by 10% stability and remove the speed reduction
+		country_event = solar.201
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Aurora Shinespark Tree###
+shared_focus = {
+	id = spark_shining_in_darkness
+	x = 5
+	y = 1
+	
+	available = {
+		hidden_trigger = {
+			has_country_flag = aurora_reigns
+		}
+	}
+	
+	allow_branch = {
+		hidden_trigger = {
+			has_country_flag = aurora_reigns
+		}
+	}
+	
+	cost = 1
+	
+	completion_reward = {
+		###reduce slipping_sanity by 10% war support and remove the recruitable population factor penalty
+		country_event = solar.301
+	}
+	ai_will_do = { factor = 50 }
+}
+
 ###Coring tree###
 shared_focus = {
 	id = establishing_baseline
-	x = 15
+	x = 11
 	y = 20
 	
 	allow_branch = {
@@ -1988,28 +2393,19 @@ shared_focus = {
 	 
 	
 	completion_reward = {
-		28 = {
-			add_core_of = EQS
-		}
-		27 = {
-			add_core_of = EQS
-		}
-		84 = {
-			add_core_of = EQS
-		}
-		37 = {
-			add_core_of = EQS
-		}
-		17 = {
-			add_core_of = EQS
-		}
-		35 = {
-			add_core_of = EQS
-		}
-		81 = {
-			add_core_of = EQS
-		}
-		50 = {
+		every_state = {
+			limit = {
+				OR = {
+					state = 28
+					state = 27
+					state = 84
+					state = 37
+					state = 17
+					state = 35
+					state = 81
+					state = 50
+				}
+			}
 			add_core_of = EQS
 		}
 	}
@@ -2031,31 +2427,20 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		15 = {
-			add_core_of = EQS
-		}
-		26 = {
-			add_core_of = EQS
-		}
-		86 = {
-			add_core_of = EQS
-		}
-		34 = {
-			add_core_of = EQS
-		}
-		33 = {
-			add_core_of = EQS
-		}
-		687 = {
-			add_core_of = EQS
-		}
-		351 = {
-			add_core_of = EQS
-		}
-		221 = {
-			add_core_of = EQS
-		}
-		52 = {
+		every_state = {
+			limit = {
+				OR = {
+					state = 15
+					state = 26
+					state = 86
+					state = 34
+					state = 33
+					state = 687
+					state = 351
+					state = 221
+					state = 52
+				}
+			}
 			add_core_of = EQS
 		}
 	}
@@ -2077,22 +2462,17 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		79 = {
-			add_core_of = EQS
-		}
-		25 = {
-			add_core_of = EQS
-		}
-		353 = {
-			add_core_of = EQS
-		}
-		32 = {
-			add_core_of = EQS
-		}
-		36 = {
-			add_core_of = EQS
-		}
-		30 = {
+		every_state = {
+			limit = {
+				OR = {
+					state = 79
+					state = 25
+					state = 353
+					state = 32
+					state = 36
+					state = 30
+				}
+			}
 			add_core_of = EQS
 		}
 	}
@@ -2114,28 +2494,19 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		4 = {
-			add_core_of = EQS
-		}
-		686 = {
-			add_core_of = EQS
-		}
-		6 = {
-			add_core_of = EQS
-		}
-		7 = {
-			add_core_of = EQS
-		}
-		9 = {
-			add_core_of = EQS
-		}
-		8 = {
-			add_core_of = EQS
-		}
-		10 = {
-			add_core_of = EQS
-		}
-		328 = {
+		every_state = {
+			limit = {
+				OR = {
+					state = 4
+					state = 686
+					state = 6
+					state = 7
+					state = 8
+					state = 9
+					state = 10
+					state = 328
+				}
+			}
 			add_core_of = EQS
 		}
 	}
@@ -2157,28 +2528,19 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		83 = {
-			add_core_of = EQS
-		}
-		24 = {
-			add_core_of = EQS
-		}
-		352 = {
-			add_core_of = EQS
-		}
-		16 = {
-			add_core_of = EQS
-		}
-		88 = {
-			add_core_of = EQS
-		}
-		348 = {
-			add_core_of = EQS
-		}
-		350 = {
-			add_core_of = EQS
-		}
-		31 = {
+		every_state = {
+			limit = {
+				OR = {
+					state = 83
+					state = 24
+					state = 352
+					state = 16
+					state = 88
+					state = 348
+					state = 350
+					state = 31
+				}
+			}
 			add_core_of = EQS
 		}
 	}
@@ -2201,19 +2563,15 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		90 = {
-			add_core_of = EQS
-		}
-		82 = {
-			add_core_of = EQS
-		}
-		352 = {
-			add_core_of = EQS
-		}
-		13 = {
-			add_core_of = EQS
-		}
-		688 = {
+		every_state = {
+			limit = {
+				OR = {
+					state = 90
+					state = 82
+					state = 13
+					state = 688
+				}
+			}
 			add_core_of = EQS
 		}
 	}
@@ -2427,10 +2785,14 @@ shared_focus = {
 	relative_position_id = twenty_four_karat_bad_luck
 	
 	available = {
-		NOT = {
-			country_exists = NCA
+		AND = {
+			NOT = {
+				country_exists = NCA
+			}
+			690 = {
+				is_controlled_by = EQS
+			}
 		}
-		###Chrysalia state is owned by EQS
 	}
 
 	bypass = {
@@ -2498,7 +2860,7 @@ shared_focus = {
 		316 = {
 			add_core_of = EQS
 		}
-		set_province_name = { id = 11690 name = "Sol Invicta" }
+		set_province_name = { id = 11690 name = renamed_volistad }
 		246 = {
 			add_core_of = EQS
 		}

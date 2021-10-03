@@ -1,6 +1,7 @@
 ###Solar Empire Events###
 
 add_namespace = solar
+add_namespace = celestia
 
 #Start event chain to introduce Aurora
 country_event = {
@@ -406,6 +407,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		ai_chance = {
 			factor = 100
 		}
+		save_current_manpower = yes
 		75 = {
 		set_variable = { 
 			rebel_var_1 = -0.5 
@@ -440,6 +442,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				level = 1
 			}
 		}
+		restore_previous_manpower = yes
 	}
 }
 
@@ -455,6 +458,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		ai_chance = {
 			factor = 100
 		}
+		save_current_manpower = yes
 		75 = {
 		set_variable = { 
 			rebel_var_1 = -0.9 
@@ -489,6 +493,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				level = 3
 			}
 		}
+		restore_previous_manpower = yes
 	}
 }
 
@@ -614,7 +619,7 @@ country_event = {
 	}
 }
 		
-###Military events###
+###Military events and industry events###
 ###Will go from 51-60###
 country_event = { #Purging some heretical commanders
 	id = solar.51
@@ -624,13 +629,54 @@ country_event = { #Purging some heretical commanders
 	is_triggered_only = yes
 	
 	option = {
+		remove_ideas = heretical_commanders
+		add_timed_idea = {
+			idea = purified_high_command
+			days = 365
+			}
 		name = solar.51.a
 		add_stability = 0.01
 		remove_unit_leader = 33
 		remove_unit_leader = 49
 		remove_unit_leader = 38
 		}
-	}	
+	}
+
+country_event = { #A new temple is consecrated in Sanctum Solar and production begins
+	id = solar.52
+	title = solar.52.t
+	desc = solar.52.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.52.a
+		add_timed_idea = {
+			idea = all_industry_for_the_empress
+			days = 365
+		}
+		hidden_effect = {
+			country_event = {
+				id = solar.53
+				days = 365
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celebrating the new temple's completion with sacrifices to Daybreaker to her disgust
+	id = solar.53
+	title = solar.53.t
+	desc = solar.53.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.53.a
+		add_stability = 0.1
+	}
+}
 
 ###Crisis Events###
 ###Events go from 80-100###
@@ -641,11 +687,7 @@ country_event = { #Celestia first minute effects to Daybreaker, only whispers an
 	desc = solar.80.d
 	
 	trigger = {
-		if = {
-			limit = {
-				tag = EQS
-			}
-		}
+		tag = EQS
 		date > 1048.10.31
 		date < 1049.1.1
 		}
@@ -674,11 +716,7 @@ country_event = { #Celestia becomes more discernable, as she is now a shape in D
 	desc = solar.81.d
 	
 	trigger = {
-		if = {
-			limit = {
-				tag = EQS
-			}
-		}
+		tag = EQS
 		date > 1049.10.31
 		date < 1050.3.1
 		}
@@ -1079,9 +1117,6 @@ country_event = { #Daybreaker is partly healed, starts out fine, then collapses 
 	
 	option = { #Daybreaker is healed but not fully
 		name = solar.98.a
-		ai_chance = {
-			factor = 30
-			}
 			hidden_effect = {
 				country_event = {
 					id = solar.100
@@ -1101,14 +1136,13 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 	
 	option = { #Celestia returns
 		name = solar.99.a
-		ai_chance = {
-			factor = 10
-			}
 			hidden_effect = {
 			clr_country_flag = daybreaker_crisis
 			end_puppet = WHY
-			remove_unit_leader = 1
-			remove_unit_leader = 3
+			remove_from_faction = WHY
+			WHY = {
+				drop_cosmetic_tag = yes
+			}
 			retire_country_leader = yes
 			create_country_leader = {
 				name = "Nova Glow"
@@ -1128,7 +1162,10 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 					184 187 223 188 185 108 110 12
 				}
 				set_cosmetic_tag = EQS_SOL
-		}
+				keep_unit_leaders = {
+					1 3 
+				}
+			}
 			set_politics = {
 				ruling_party = democratic
 				elections_allowed = no
@@ -1157,6 +1194,11 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 			}
 			set_cosmetic_tag = EQS_CEL
 			set_country_flag = equestria_returned
+			remove_ideas = {
+				solar_cult
+				solar_inquisition
+			}
+			load_focus_tree = solar_empire_celestia_focus
 		}
 		
 		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
@@ -1192,7 +1234,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				high_mage_shimmer
 				}
 			}
-		set_country_flag = sunset_is_regent
+		set_country_flag = sunset_reigns
 		mark_focus_tree_layout_dirty = yes
 		}
 		custom_effect_tooltip = sunset_regent
@@ -1216,7 +1258,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				protectress_of_the_empress
 				}
 			}
-			set_country_flag = aurora_is_regent
+			set_country_flag = aurora_reigns
 			mark_focus_tree_layout_dirty = yes
 		}
 		custom_effect_tooltip = aurora_regent	
@@ -1338,6 +1380,1481 @@ country_event = { #Daybreaker has a Hitler-like speech about reconquering the ru
 	}
 }
 
+###Sunset Events###
+###IDs will go from 201-300###
+country_event = { #Sunset breaks down at being the new regent and Daybreaker's fall, and Aurora attempts to calm her as Pulsar Sweep also comes in to see what is going on and is harsher
+	id = solar.201
+	title = solar.201.t
+	desc = solar.201.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.201.a
+		###reduce the modifier as discussed in tree
+	}
+}
+
+###Aurora Events###
+###IDs will go from 301-400###
+country_event = { #Aurora panics and believes she can't do the job of regent until she sees Daybreaker again and determines she must, for everypony's sake
+	id = solar.301
+	title = solar.301.t
+	desc = solar.301.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.301.a
+		###reduce the modifier as discussed in tree
+	}
+}
+
+###Celestia Events###
+country_event = { #Celestia is glad to finally get replacement regalia as she sees the changes to the throne room
+	id = celestia.1
+	title = celestia.1.t
+	desc = celestia.1.d
+	
+	is_triggered_only = yes
+	
+	option = { #Tartarus, it's about time
+		name = celestia.1.a
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Sunset and the others are captured, and Celestia holds them for the time being and expressing her disappointment with Sunset
+	id = celestia.2
+	title = celestia.2.t
+	desc = celestia.2.d
+	
+	is_triggered_only = yes
+	
+	option = { #You've made your choice, Sunset. I will speak with you later
+		name = celestia.2.a
+		remove_unit_leader = 3
+	}
+}
+
+country_event = { #Celestia arrests Blueblood for his part and appoints herself new supreme commander of the armed forces
+	id = celestia.3
+	title = celestia.3.t
+	desc = celestia.3.d
+	
+	is_triggered_only = yes
+	
+	option = { #I've had far too many years to learn about war
+		name = celestia.3.a
+		remove_unit_leader = 1
+		create_field_marshal = {
+			name = "Princess Celestia"
+			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+			traits = { pony_race_trait pleasant_sun inspirational_leader }
+			id = 5000
+			skill = 2
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+			female = yes
+		}
+	}
+}
+
+country_event = { #Sunset asks to see Celestia and begs for proving her repentence by helping her win the civil war
+	id = celestia.4
+	title = celestia.4.t
+	desc = celestia.4.d
+	
+	is_triggered_only = yes
+	
+	option = { #Very well, my former student, you shall prove your sincerity in battle
+		name = celestia.4.a
+		create_field_marshal = {
+			name = "Sunset Shimmer"
+			portrait_path = "gfx/leaders/EQS/Sunset.tga"
+			traits = { fading_experience high_mage brilliant_strategist thorough_planner pony_race_trait }
+			id = 5001
+			skill = 4
+			attack_skill = 4
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 4
+			female = yes
+		}
+	}
+}
+
+country_event = { #wraps up any loose ends from finishing the war early, giving Celestia the pragmatic princess trait if needed, removes Blueblood and Sunset as marshals, Celestia sees the devastation
+	id = celestia.5
+	title = celestia.5.t
+	desc = celestia.5.d
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = EQS
+		has_completed_focus = return_of_the_princess
+		has_civil_war = no
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = { #Now I must heal my country
+		name = celestia.5.a
+		IF = {
+			limit = {
+				has_unit_leader = 1
+			}
+			remove_unit_leader = 1
+		}
+		IF = {
+			limit = {
+				has_unit_leader = 3
+			}
+			remove_unit_leader = 3
+		}
+		IF = {
+			limit = {
+				has_unit_leader = 5001
+			}
+			remove_unit_leader = 5001
+		}
+		IF = {
+			limit = {
+				NOT = {
+					has_unit_leader = 5000
+				}
+			}
+			create_field_marshal = {
+				name = "Princess Celestia"
+				portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+				traits = { pony_race_trait pleasant_sun inspirational_leader }
+				id = 5000
+				skill = 2
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 2
+				female = yes
+			}
+		}
+		swap_ideas = {
+			add_idea = destitute_diarchy
+			remove_idea = great_war_aftermath
+		}
+		add_stability = -0.05
+		add_war_support = -0.15
+		set_country_flag = end_of_equestria_civil_war
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it
+	id = celestia.6
+	title = celestia.6.t
+	desc = celestia.6.d
+	
+	is_triggered_only = yes
+	
+	option = { #What have I let happen?
+		name = celestia.6.a
+		add_stability = -0.15
+		add_war_support = -0.15
+	}
+}
+
+country_event = { #Celestia meets with Sunset, who is currently moping in her room in the castle, and Sunset is repentant, and Celestia gives her a chance by proving if she truly has friendship in her heart
+	id = celestia.7
+	title = celestia.7.t
+	desc = celestia.7.d
+	
+	is_triggered_only = yes
+	
+	option = { #Please do not disappoint me, my former ray of sunlight
+		name = celestia.7.a
+		set_variable = { sunset_redemption = 0 }
+		set_variable = { aurora_redemption = 0 }
+		###Should start a base variable for Sunset's effectiveness as a friendship student, and there will be branching events for her trying to befriend and teach Aurora the power of friendship, which will have its own variable
+		###Sunset's variable ranges from 1 to 10, with anything above a 5 being a pass for her; Aurora ranges from 1 to 100, with anything above 70 being a success for her
+	}
+}
+
+country_event = { #Sunset starts to panic a bit about remembering her old friendship lessons, and Celestia comes in to give her one bit of advice: to be herself, and that what she remembers makes her proud of Sunset, which makes Sunset a bit moody but thankful
+	id = celestia.8
+	title = celestia.8.t
+	desc = celestia.8.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accepts Celestia's advice
+		name = celestia.8.a
+		ai_chance = { factor = 80 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.9
+				days = 1
+				random = 1
+			}
+		}
+	}
+	option = { #Isn't sure about the advice
+		name = celestia.8.b
+		ai_chance = { factor = 20 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.10
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset nervously agrees with Celestia and mutters that she can do what she needs, and the two talk a bit about the past before Celestia wishes her the best
+	id = celestia.9
+	title = celestia.9.t
+	desc = celestia.9.d
+	
+	is_triggered_only = yes
+	
+	option = { #I pray that her faith in me is well-founded
+		name = celestia.9.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+		}
+	}
+}
+
+country_event = { #Sunset grows more panicky and starts wondering what she can do, as she doesn't think that anypony would like the real her, and Celestia gives her a bit more advice to be patient and calm, then leaves Sunset to her fretting
+	id = celestia.10
+	title = celestia.10.t
+	desc = celestia.10.d
+	
+	is_triggered_only = yes
+	
+	option = { #You can do this, Sunset. You can do this
+		name = celestia.10.a
+	}
+}
+
+country_event = { #Sunset gathers most of the captured generals as a way to help them with their own reformation, as she is convinced that is what Celestia is looking for. There is distaste in the crowd, and she is most concerned with Aurora, since she is more aggressive than others there
+	id = celestia.11
+	title = celestia.11.t
+	desc = celestia.11.d
+	
+	is_triggered_only = yes
+	
+	option = { #Speaks with a few of the generals to help them settle down
+		name = celestia.11.a
+		ai_chance = { factor = 40 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.12
+				days = 1
+				random = 1
+			}
+		}
+	}
+	option = { #Takes Aurora aside and tries to break the ice with her
+		name = celestia.11.b
+		ai_chance = { factor = 60 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.13
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset manages to get the generals to be more amicable with each other, including getting them to joke around, and she feels more at ease, and she notices Aurora watching her with slight interest
+	id = celestia.12
+	title = celestia.12.t
+	desc = celestia.12.d
+	
+	is_triggered_only = yes
+	
+	option = { #Maybe this can be easier than I thought
+		name = celestia.12.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+			add_to_variable = { aurora_redemption = 15 }
+		}
+	}
+}
+
+country_event = { #Sunset decides that Aurora needs more focus and she heads to her, and Aurora lashes out at first for her being a traitor, but Sunset manages to talk to her a bit and at least get a bit of a foundation started with her in the end, getting her to calm down and make small talk and sit with another general who tries to talk with her more
+	id = celestia.13
+	title = celestia.13.t
+	desc = celestia.13.d
+	
+	is_triggered_only = yes
+	
+	option = { #You can do this, Sunset. You can do this
+		name = celestia.13.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 2 }
+			add_to_variable = { aurora_redemption = 25 }
+		}
+	}
+}
+
+country_event = { #Sunset begins, nervous, as she knows her past and she is now telling others how Daybreaker lied about everything, and goes through some of the basic details, and she sees most are not responsive, Aurora especially so
+	id = celestia.14
+	title = celestia.14.t
+	desc = celestia.14.d
+	
+	is_triggered_only = yes
+	
+	option = { #Helps multiple generals understand what Daybreaker did in the past
+		name = celestia.14.a
+		ai_chance = { factor = 70 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.15
+				days = 1
+				random = 1
+			}
+		}
+	}
+	option = { #Takes Aurora one-on-one to address some concerns she has about being lied to
+		name = celestia.14.b
+		ai_chance = { factor = 30 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.16
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset decides to focus primarily on the generals, as she believes she could befriend multiple to show Celestia how she is reforming, but it doesn't go well, even if she gets through with them
+	id = celestia.15
+	title = celestia.15.t
+	desc = celestia.15.d
+	
+	is_triggered_only = yes
+	
+	option = { #That could have gone better, but I think Steel Sickle is liking me
+		name = celestia.15.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 2 }
+		}
+	}
+}
+
+country_event = { #Sunset takes Aurora aside as she sees that Aurora is furious about the supposed lies about Daybreaker and starts to break down some of her biggest objections, giving Aurora pause
+	id = celestia.16
+	title = celestia.16.t
+	desc = celestia.16.d
+	
+	is_triggered_only = yes
+	
+	option = { #Maybe this can be easier than I thought
+		name = celestia.16.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+			add_to_variable = { aurora_redemption = 25 }
+		}
+	}
+}
+
+country_event = { #Sunset leads a group in a meeting about concerns about Celestia, and she uses it as a reason to try and befriend others, and soon an argument breaks out between a few generals and Aurora over Celestia's virtue, with the generals siding with Celestia, Aurora still holding to Daybreaker
+	id = celestia.17
+	title = celestia.17.t
+	desc = celestia.17.d
+	
+	is_triggered_only = yes
+	
+	option = { #Grows tired of Aurora's stubborness and calls her out, and tells her that Celestia is going to forgive her, unlike what Daybreaker would do if she failed and that alone proves Celestia's virtue, which makes Aurora think twice
+		name = celestia.17.a
+		ai_chance = { factor = 10 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.18
+				days = 1
+				random = 1
+			}
+		}
+	}
+	option = { #Agrees with the generals, and attempts to calmly explain to Aurora how Celestia is doing things to benefit them all, and that she would like to talk longer with Aurora if she wants, which Aurora takes poorly
+		name = celestia.17.b
+		ai_chance = { factor = 90 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.19
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset lets Aurora rant a bit longer then interrupts her and lays down the facts that Celestia is doing her best to heal the country, and that Sunset is doing everything she can to show them that harmony is the way forward, and that Aurora knows the truth, but refuses to acknowledge it, which makes Aurora settle down, but fume sadly
+	id = celestia.18
+	title = celestia.18.t
+	desc = celestia.18.d
+	
+	is_triggered_only = yes
+	
+	option = { #Oh Celestia, that was not a good choice
+		name = celestia.18.a
+		hidden_effect = {
+			add_to_variable = { aurora_redemption = 20 }
+		}
+	}
+}
+
+country_event = { #Sunset lets Aurora rant a bit, but calmly tries to explain how Celestia and friendship is the way forward, but Aurora feels betrayed and refuses to listen
+	id = celestia.19
+	title = celestia.19.t
+	desc = celestia.19.d
+	
+	is_triggered_only = yes
+	
+	option = { #She'll come around, I'm sure
+		name = celestia.19.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 2 }
+			add_to_variable = { aurora_redemption = 5 }
+		}
+	}
+}
+
+country_event = { #Sunset is waiting nervously for Celestia to meet her again outside her chambers, her mind is racing, and she sees Aurora looking a bit dejected across the hall and she ponders Aurora's fate
+	id = celestia.20
+	title = celestia.20.t
+	desc = celestia.20.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset tries to prepare what she will say to Celestia a bit more
+		name = celestia.20.a
+		ai_chance = { factor = 50 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.21
+				days = 1
+				random = 1
+			}
+		}
+	}
+	option = { #Sunset forgoes any further prepartion and tries to bring Aurora's spirits up
+		name = celestia.20.b
+		ai_chance = { factor = 50 }
+		hidden_effect = {
+			country_event = {
+				id = celestia.22
+				days = 1
+				random = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset determines that Aurora will be something for the future, and she needs to provide her final points for her reformation to Celestia, and she goes over how she's been more altruistic, has made some minor friends in the reformers, and has tried to undo the mistakes of the Adoratio
+	id = celestia.21
+	title = celestia.21.t
+	desc = celestia.21.d
+	
+	is_triggered_only = yes
+	
+	option = { #Preparation is key, right?
+		name = celestia.21.a
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+			IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption > 69
+						}
+					}
+				}
+				country_event = { #Sunset fears that she will not be accepted, Aurora comes in to say that Sunset helped her see the light
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption < 70
+						}
+					}
+				}
+				country_event = { #Celestia determines that Sunset has proven her redemption, and Sunset sees Aurora being led away by guards when she leaves, with Aurora having little reaction
+					id = celestia.24
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					check_variable = {
+						sunset_redemption < 5
+					}
+				}
+				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
+					id = celestia.25
+					days = 1
+					random = 1
+				}
+			}
+			ELSE = {
+				country_event = {
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset determines to screw any more prep and she walks over to Aurora, and realizes that Aurora had been waiting for being taken away to jail for her crimes after Celestia determined she did not hold to Harmony, and Sunset tries to give her one last offer of friendship, which Aurora saldly accepts
+	id = celestia.22
+	title = celestia.22.t
+	desc = celestia.22.d
+	
+	is_triggered_only = yes
+	
+	option = { #Well, I suppose it's better than nothing. She'll have a friend to her end
+		name = celestia.22.a
+		add_to_variable = { sunset_redemption = 2 }
+		add_to_variable = { aurora_redemption = 10 }
+		hidden_effect = {
+			add_to_variable = { sunset_redemption = 1 }
+			IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption > 69
+						}
+					}
+				}
+				country_event = { #Sunset fears that she will not be accepted, Aurora comes in to say that Sunset helped her see the light
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					AND = {
+						check_variable = {
+							sunset_redemption > 4
+						}
+						check_variable = {
+							aurora_redemption < 70
+						}
+					}
+				}
+				country_event = { #Celestia determines that Sunset has proven her redemption, and Sunset sees Aurora being led away by guards when she leaves, with Aurora having little reaction
+					id = celestia.24
+					days = 1
+					random = 1
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					check_variable = {
+						sunset_redemption < 5
+					}
+				}
+				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
+					id = celestia.25
+					days = 1
+					random = 1
+				}
+			}
+			ELSE = {
+				country_event = {
+					id = celestia.23
+					days = 1
+					random = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset meekly enters Celestia's chambers and awaits her determination, and the two fo them discuss Sunset's attempts, and Celestia plays coy to act like she will be sentencing Sunset before Aurora comes in a huff and declares that Sunset doesn't deserve punishment, since she helped her in her darkest hour to see harmony; only she is worthy of punishment, and Celestia knows that Sunset passed the test, and both are let free
+	id = celestia.23
+	title = celestia.23.t
+	desc = celestia.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #Friendship truly is magic!
+		name = celestia.23.a
+		set_country_flag = sunset_redeemed
+		create_corps_commander = { #Reformed Aurora
+			name = "Aurora Shinespark"
+			portrait_path = "gfx/leaders/EQS/Aurora_Reformed.tga"
+			traits = { pony_race_trait missionary_of_harmony promising_general former_cultist }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 1
+			female = yes
+		}
+	}
+}
+
+country_event = { #Celestia is excited to see Sunset and is proud of the work she's done to reform; she does admit she wishes that Sunset pushed a bit harder, but she has proven she has been redeemed; Sunset is a bit proud but after thanking Celestia, notices Aurora and asks her fate, which Celestia states is to be punished like other unrepentant generals
+	id = celestia.24
+	title = celestia.24.t
+	desc = celestia.24.d
+	
+	is_triggered_only = yes
+	
+	option = { #I pray that Aurora finds peace before the end
+		name = celestia.24.a
+		set_country_flag = sunset_redeemed
+		add_stability = 0.01
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = { #Celestia is calm and has a small conversation with Sunset, then states that she is saddened because she can tell that Sunset hasn't truly embraced harmony like she hoped; she tells Sunset that it's clear her heart isn't in it, and she can't freely let her back into society, and she will be held accountable like other unrepentant soldiers, and both she and Aurora are led away, with Sunset sighing in defeat
+	id = celestia.25
+	title = celestia.25.t
+	desc = celestia.25.d
+	
+	is_triggered_only = yes
+	
+	option = { #You've proven you never truly cared about me!
+		name = celestia.25.a
+		add_stability = -0.01
+		add_manpower = -1
+	}
+}
+
+###Rump state events for Celestia###
+country_event = { #Celestia asks for puppeting of both Bales and Cloudsdale
+	id = celestia.500
+	title = celestia.500.t
+	desc = celestia.500.d
+	
+	is_triggered_only = yes
+	
+	option = { #Ask them. They will surely not object now
+		name = celestia.500.a
+		BLS = {
+			country_event = {
+				id = celestia.501
+				days = 1
+			}
+		}
+		CLD = {
+			country_event = {
+				id = celestia.502
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Bales gets the proposal
+	id = celestia.501
+	title = celestia.501.t
+	desc = celestia.501.d
+	
+	is_triggered_only = yes
+	
+	option = { #We will be better under them
+		name = celestia.501.a
+		ai_chance = { factor = 75 }
+		EQS = {
+			country_event = {
+				id = celestia.503
+				days = 1
+			}
+		}
+	}
+	option = { #We would be mad to bend to her wishes again!
+		name = celestia.501.b
+		ai_chance = { factor = 25 }
+		EQS = {
+			country_event = {
+				id = celestia.504
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Cloudsdale gets the proposal
+	id = celestia.502
+	title = celestia.502.t
+	desc = celestia.502.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is good to see that Celestia has returned
+		name = celestia.502.a
+		ai_chance = { factor = 85 }
+		EQS = {
+			country_event = {
+				id = celestia.505
+				days = 1
+			}
+		}
+	}
+	option = { #This could still be a trap
+		name = celestia.502.b
+		ai_chance = { factor = 15 }
+		EQS = {
+			country_event = {
+				id = celestia.506
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia receives the positive response from Bales and is pleased
+	id = celestia.503
+	title = celestia.503.t
+	desc = celestia.503.d
+	
+	is_triggered_only = yes
+	
+	option = { #Excellent! The transfer shall begin soon
+		name = celestia.503.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = BLS
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = BLS
+		}
+		BLS = {
+			set_cosmetic_tag = EQS_BLS
+		}
+	}
+}
+
+country_event = { #Celestia receives the negative response from Bales and is saddened about the war she will need to wage
+	id = celestia.504
+	title = celestia.504.t
+	desc = celestia.504.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is like disciplining a foal
+		name = celestia.504.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = BLS
+		}
+	}
+}
+
+country_event = { #Celestia receives the positive response from Cloudsdale and prepares integration
+	id = celestia.505
+	title = celestia.505.t
+	desc = celestia.505.d
+	
+	is_triggered_only = yes
+	
+	option = { #I knew that they would see reason
+		name = celestia.505.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = CLD
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = CLD
+		}
+		CLD = {
+			set_cosmetic_tag = EQS_CLD
+		}
+	}
+}
+
+country_event = { #Celestia receives the negative response from Cloudsdale and is disappointed in the government's refusal to acknowledge her
+	id = celestia.506
+	title = celestia.506.t
+	desc = celestia.506.d
+	
+	is_triggered_only = yes
+	
+	option = { #I had hoped they would see reason
+		name = celestia.506.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = CLD
+		}
+	}
+}
+
+country_event = { #After assisting CER, Celestia sends an offer of puppeting
+	id = celestia.507
+	title = celestia.507.t
+	desc = celestia.507.d
+	
+	is_triggered_only = yes
+	
+	option = { #Clearly they see that I am the same pony that I was before
+		name = celestia.507.a
+		CER = {
+			country_event = {
+				id = celestia.508
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #CER gets the proposal
+	id = celestia.508
+	title = celestia.508.t
+	desc = celestia.508.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is our princess, we will not resist
+		name = celestia.508.a
+		ai_chance = { factor = 90 }
+		EQS = {
+			country_event = {
+				id = celestia.509
+				days = 1
+			}
+		}
+	}
+	option = { #There is still something odd about her, we must be wary
+		name = celestia.508.b
+		ai_chance = { factor = 10 }
+		EQS = {
+			country_event = {
+				id = celestia.510
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #An ambassador from CER comes with their agreement to subjugation
+	id = celestia.509
+	title = celestia.509.t
+	desc = celestia.509.d
+	
+	is_triggered_only = yes
+	
+	option = { #I knew that they would see reason
+		name = celestia.509.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = CER
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = CER
+		}
+		CER = {
+			set_cosmetic_tag = EQS_CER
+		}
+	}
+}
+
+country_event = { #Another ambassador arrives and is nervous and declines the subjugation, and Celestia is saddened
+	id = celestia.510
+	title = celestia.510.t
+	desc = celestia.510.d
+	
+	is_triggered_only = yes
+	
+	option = { #Clearly Harmony is not enough for them. Prepare the soldiers
+		name = celestia.510.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = CER
+		}
+	}
+}
+
+country_event = { #Celestia decides that she has done all she can, and she speaks for a bit on how to word the two communiques
+	id = celestia.511
+	title = celestia.511.t
+	desc = celestia.511.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is a longer shot, but I hope our assistance has shown our sincerity
+		name = celestia.511.a
+		WHY = {
+			country_event = {
+				id = celestia.512
+				days = 1
+			}
+		}
+		NER = {
+			country_event = {
+				id = celestia.513
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #WHY gets the proposal
+	id = celestia.512
+	title = celestia.512.t
+	desc = celestia.512.d
+	
+	is_triggered_only = yes
+	
+	option = { #Perhaps it is finally time to return to the fold
+		name = celestia.512.a
+		ai_chance = { factor = 30 }
+		EQS = {
+			country_event = {
+				id = celestia.514
+				days = 1
+			}
+		}
+	}
+	option = { #Never! She is up to something!
+		name = celestia.512.b
+		ai_chance = { factor = 70 }
+		EQS = {
+			country_event = {
+				id = celestia.515
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #NER gets the proposal
+	id = celestia.513
+	title = celestia.513.t
+	desc = celestia.513.d
+	
+	is_triggered_only = yes
+	
+	option = { #Getting all those free socks was really nice. Why not?
+		name = celestia.513.a
+		ai_chance = { factor = 55 }
+		EQS = {
+			country_event = {
+				id = celestia.516
+				days = 1
+			}
+		}
+	}
+	option = { #Nah, capitalists can stay with their money, we have a nice vibe
+		name = celestia.513.b
+		ai_chance = { factor = 45 }
+		EQS = {
+			country_event = {
+				id = celestia.517
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #WHY sends a simple message that they agree and Celestia is relieved
+	id = celestia.514
+	title = celestia.514.t
+	desc = celestia.514.d
+	
+	is_triggered_only = yes
+	
+	option = { #That was lucky, thank Faust!
+		name = celestia.514.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = WHY
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = WHY
+		}
+		WHY = {
+			set_cosmetic_tag = EQS_WHY
+		}
+	}
+}
+
+country_event = { #A single-worded message makes its way back to them, simply stating, "No" and Celestia is saddened
+	id = celestia.515
+	title = celestia.515.t
+	desc = celestia.515.d
+	
+	is_triggered_only = yes
+	
+	option = { #They are too far gone. They will need correction
+		name = celestia.515.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = WHY
+		}
+	}
+}
+
+country_event = { #NER aggrees by sending a smoky letter of casual acceptance, and Celestia wonders how they even have brains to answer it
+	id = celestia.516
+	title = celestia.516.t
+	desc = celestia.516.d
+	
+	is_triggered_only = yes
+	
+	option = { #Who smokes that stuff?
+		name = celestia.516.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = NER
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}
+			}
+			else = {
+				puppet = NER
+		}
+		NER = {
+			set_cosmetic_tag = EQS_NER
+		}
+	}
+}
+
+country_event = { #A long, scrawling letter about capitalist evils tells her their reaction, and she isn't really surprised
+	id = celestia.517
+	title = celestia.517.t
+	desc = celestia.517.d
+	
+	is_triggered_only = yes
+	
+	option = { #Communists will be communists after all, even if they act more harmonic about it
+		name = celestia.517.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = NER
+		}
+	}
+}
+
+###Shattered Bales events###
+country_event = { #Celestia believes that the ponies of Hughill will be receptive, given they are harmonist
+	id = celestia.518
+	title = celestia.518.t
+	desc = celestia.518.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is good to see a spark of hope
+		name = celestia.518.a
+		HUG = {
+			country_event = {
+				id = celestia.519
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #HUG gets the proposal
+	id = celestia.519
+	title = celestia.519.t
+	desc = celestia.519.d
+	
+	is_triggered_only = yes
+	
+	option = { #Wow, the Princess wants us to help?! Of course!
+		name = celestia.519.a
+		ai_chance = { factor = 30 modifier = { has_government = democratic factor = 7 } }
+		EQS = {
+			country_event = {
+				id = celestia.520
+				days = 1
+			}
+		}
+	}
+	option = { #We can hold our own just fine!
+		name = celestia.519.b
+		ai_chance = { factor = 70 }
+		EQS = {
+			country_event = {
+				id = celestia.521
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia receives the agreement from HUG and she is pleased
+	id = celestia.520
+	title = celestia.520.t
+	desc = celestia.520.d
+	
+	is_triggered_only = yes
+	
+	option = { #Excellent! My little ponies will soon be free from oppression again!
+		name = celestia.520.a
+		ROOT = {
+			add_to_faction = HUG
+		}
+	}
+}
+
+country_event = { #Celestia gets the no from Hughill, and she is upset taht such a small nation thinks can survive without her
+	id = celestia.521
+	title = celestia.521.t
+	desc = celestia.521.d
+	
+	is_triggered_only = yes
+	
+	option = { #What are they thinking?
+		name = celestia.521.a
+		create_wargoal = {
+			type = annex_everything
+			target = HUG
+		}
+	}
+}
+
+country_event = { #Celestia offers money for Nidhogg to join the alliance
+	id = celestia.522
+	title = celestia.522.t
+	desc = celestia.522.d
+	
+	is_triggered_only = yes
+	
+	option = { #It's deplorable, but money always talks
+		name = celestia.522.a
+		NID = {
+			country_event = {
+				id = celestia.523
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #NID gets the proposal
+	id = celestia.523
+	title = celestia.523.t
+	desc = celestia.523.d
+	
+	is_triggered_only = yes
+	
+	option = { #We could always use some more bits
+		name = celestia.523.a
+		ai_chance = { factor = 50 }
+		EQS = {
+			country_event = {
+				id = celestia.524
+				days = 1
+			}
+		}
+	}
+	option = { #Why would we tie ourselves to a faltering currency?
+		name = celestia.519.b
+		ai_chance = { factor = 50 }
+		EQS = {
+			country_event = {
+				id = celestia.525
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia sends the money and they form the alliance and she's a bit annoyed about it
+	id = celestia.524
+	title = celestia.524.t
+	desc = celestia.524.d
+	
+	is_triggered_only = yes
+	
+	option = { #Well, there goes my vacation when this is all over
+		name = celestia.524.a
+		add_political_power = -100
+		ROOT = {
+			add_to_faction = NID
+		}
+	}
+}
+
+country_event = { #Celestia gets spurned by the company and they send basically a massive amount of bits to show how useless the money is
+	id = celestia.525
+	title = celestia.525.t
+	desc = celestia.525.d
+	
+	is_triggered_only = yes
+	
+	option = { #Once the economy is back, that will be worth billions!
+		name = celestia.525.a
+		create_wargoal = {
+			type = annex_everything
+			target = NID
+		}
+	}
+}
+
+country_event = { #Celestia gets another letter from Stableside and she finally decides to jokingly reply and offer an alliance instead
+	id = celestia.526
+	title = celestia.526.t
+	desc = celestia.526.d
+	
+	is_triggered_only = yes
+	
+	option = { #If he keeps contacting me, I'll be getting a restraining order
+		name = celestia.526.a
+		STB = {
+			country_event = {
+				id = celestia.527
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #STB gets the proposal
+	id = celestia.527
+	title = celestia.527.t
+	desc = celestia.527.d
+	
+	is_triggered_only = yes
+	
+	option = { #At last! I'm comming Sunnykins!
+		name = celestia.527.a
+		ai_chance = { factor = 80 }
+		EQS = {
+			country_event = {
+				id = celestia.528
+				days = 1
+			}
+		}
+	}
+	option = { #No! I must prove to her myself that I'm worthy of her!
+		name = celestia.527.b
+		ai_chance = { factor = 20 }
+		EQS = {
+			country_event = {
+				id = celestia.529
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia gets the agreement with all kinds of romancy garbage and she feels sick
+	id = celestia.528
+	title = celestia.528.t
+	desc = celestia.528.d
+	
+	is_triggered_only = yes
+	
+	option = { #Was this a good idea? I think I'll need to visit the other royal throne for a bit
+		name = celestia.528.a
+		ROOT = {
+			add_to_faction = STB
+		}
+	}
+}
+
+country_event = { #Celestia is relieved that he won't join the faction
+	id = celestia.529
+	title = celestia.529.t
+	desc = celestia.529.d
+	
+	is_triggered_only = yes
+	
+	option = { #Oh, thank Faust!
+		name = celestia.529.a
+		create_wargoal = {
+			type = annex_everything
+			target = STB
+		}
+	}
+}
+
+country_event = { #Celestia returns home from the Crystal Empire estatic, with Twilight and Luna in tow and she prepares to begin the resurgence of the Alliance
+	id = celestia.530
+	title = celestia.530.t
+	desc = celestia.530.d
+	
+	is_triggered_only = yes
+	
+	option = { #It's been so long since the princessdoms of Equestria were in harmony!
+		name = celestia.530.a
+		add_to_faction = CRY
+		add_war_support = 0.05
+		add_stability = 0.1
+	}
+}
+
+country_event = { #Celestia is shocked that she is denied the alliance and is nearly heartbroken as she leaves
+	id = celestia.531
+	title = celestia.531.t
+	desc = celestia.531.d
+	
+	is_triggered_only = yes
+	
+	option = { #I suppose I must correct them
+		name = celestia.531.a
+		add_war_support = 0.1
+		add_stability = 0.05
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+country_event = { #Stalliongrad receives the letter penned by Celestia urging for the return of unclaimed 1007 territory for Equestria and the Crystal Empire and the Soviet debates as she points out her success in reviving the nation
+	id = celestia.532
+	title = celestia.532.t
+	desc = celestia.532.d
+	
+	is_triggered_only = yes
+	
+	option = { #Celestia has proven she is nearly unstoppable, we must agree
+		name = celestia.532.a
+		ai_chance = { factor = 25 }
+		EQS = {
+			country_event = {
+				id = celestia.533
+				days = 1
+			}
+		}
+		set_global_flag = stalliongrad_agrees
+	}
+	option = {
+		name = celestia.532.b
+		ai_chance = { factor = 75 }
+		EQS = {
+			country_event = {
+				id = celestia.534
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Celestia receives news of the acceptance by Stalliongrad and is relieved for there will be no war
+	id = celestia.533
+	title = celestia.533.t
+	desc = celestia.533.d
+	
+	is_triggered_only = yes
+	
+	option = { #Celestia has proven she is nearly unstoppable, we must agree
+		name = celestia.533.a
+		IF = {
+			limit = {
+				country_exists = AWR
+			}
+		annex_country = { target = AWR }
+		}
+		ELSE = {
+			transfer_state = 102
+			transfer_state = 226
+			transfer_state = 228
+			transfer_state = 227
+			transfer_state = 230
+			transfer_state = 231
+			transfer_state = 232
+			transfer_state = 349
+			transfer_state = 525
+		}
+		IF = {
+			limit = {
+				country_exists = CWR
+			}
+			CRY = {
+				annex_country = { target = CWR }
+			}
+			every_state = {
+				limit = {
+					is_core_of = CWR
+				}
+				add_core_of = CRY
+			}
+		}
+		ELSE = {
+			CRY = {
+				transfer_state = 98
+				transfer_state = 151
+				transfer_state = 152
+				transfer_state = 236
+				transfer_state = 339
+				transfer_state = 689
+				add_state_core = 98
+				add_state_core = 151
+				add_state_core = 152
+				add_state_core = 236
+				add_state_core = 339
+				add_state_core = 339
+				add_state_core = 689
+			}
+		}
+	}
+}
+
+country_event = { #Celestia isn't surprised and she dispatches Luna back to the Crystal Empire to help prepare for war
+	id = celestia.534
+	title = celestia.534.t
+	desc = celestia.534.d
+	
+	is_triggered_only = yes
+	
+	option = { #It was only inevitable. We shall stand together against communism
+		name = celestia.534.a
+		add_war_support = 0.05
+		add_stability = 0.05
+	}
+}
+
 ###Debug Events###
 country_event = {
 	id = solar.9001
@@ -1345,6 +2862,8 @@ country_event = {
 	desc = "Debug for testing southern war with Southeast."
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
 	
 	option = { #removes puppet from BAL
 		name = "Testing as always."
@@ -1355,19 +2874,13 @@ country_event = {
 	}
 }
 	
-	country_event = {
+country_event = {
 	id = solar.9002
 	title = "Solar Strike departs"
 	desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
 	
-	is_triggered_only = yes
-	
 	trigger = {
-		if = {
-			limit = {
-				tag = EQS
-			}
-		}
+		tag = EQS
 		date > 1050.1.1
 		date < 1051.1.1
 		}
