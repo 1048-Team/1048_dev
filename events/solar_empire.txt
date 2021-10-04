@@ -2769,7 +2769,7 @@ country_event = { #Stalliongrad receives the letter penned by Celestia urging fo
 		}
 		set_global_flag = stalliongrad_agrees
 	}
-	option = {
+	option = { #She is full of it
 		name = celestia.532.b
 		ai_chance = { factor = 75 }
 		EQS = {
@@ -2788,7 +2788,7 @@ country_event = { #Celestia receives news of the acceptance by Stalliongrad and 
 	
 	is_triggered_only = yes
 	
-	option = { #Celestia has proven she is nearly unstoppable, we must agree
+	option = { #No war? I was expecting them to put up a fight
 		name = celestia.533.a
 		IF = {
 			limit = {
@@ -2852,6 +2852,160 @@ country_event = { #Celestia isn't surprised and she dispatches Luna back to the 
 		name = celestia.534.a
 		add_war_support = 0.05
 		add_stability = 0.05
+	}
+}
+
+country_event = { #Celestia meets with Cadance in the Crystal Empire, and discusses the plans for partitioning Stalliongrad, ending up with half of the country going to CRY
+	id = celestia.535
+	title = celestia.535.t
+	desc = celestia.535.d
+	
+	is_triggered_only = yes
+	
+	option = { #Then it is agreed. Ponies of Stalliongrad shall soon be free once again
+		name = celestia.535.a
+		add_stability = 0.05
+		add_war_support = 0.05
+		set_country_flag = stalliongrad_partition_plans
+	}
+}
+
+country_event = { #Changelingia gets a broadcast for a face-to-face meeting with Celestia, and Celestia demands they cede all land that they stole in the Great War, or she will come to rescue her ponies
+	id = celestia.536
+	title = celestia.536.t
+	desc = celestia.536.d
+	
+	is_triggered_only = yes
+	
+	option = { #An alicorn angry and ready for war? We still remember 1002. We must agree
+		name = celestia.536.a
+		ai_chance = { factor = 10 }
+		EQS = {
+			country_event = {
+				id = celestia.537
+				days = 1
+			}
+		}
+		set_global_flag = stalliongrad_agrees
+	}
+	option = { #Never! The Hegemony will die fighting for what it rightfully acquired!
+		name = celestia.536.b
+		ai_chance = { factor = 90 }
+		EQS = {
+			country_event = {
+				id = celestia.538
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #After a long wait, Celestia is finally brought back on to be told the changelings accept, so long as they keep all Olenian territory for themselves, to which she agrees
+	id = celestia.537
+	title = celestia.537.t
+	desc = celestia.537.d
+	
+	is_triggered_only = yes
+	
+	option = { #Yes! A hundred times yes! My ponies are finally free!
+		name = celestia.537.a
+		set_global_flag = changelings_agreed
+		IF = {
+			limit = {
+				country_exists = NCA
+			}
+		annex_country = { target = NCA }
+		}
+		ELSE = {
+			transfer_state = 174
+			transfer_state = 169
+			transfer_state = 54
+			transfer_state = 132
+			transfer_state = 130
+			transfer_state = 133
+			transfer_state = 61
+			transfer_state = 60
+			transfer_state = 46
+			transfer_state = 73
+			transfer_state = 59
+			transfer_state = 72
+			transfer_state = 14
+			transfer_state = 45
+		}
+		IF = {
+			limit = {
+				country_exists = CCA
+			}
+			annex_country = { target = CCA }
+		}
+		ELSE = {
+			transfer_state = 18
+			transfer_state = 48
+			transfer_state = 127
+			transfer_state = 124
+			transfer_state = 125
+			transfer_state = 95
+			transfer_state = 41
+			transfer_state = 96
+			transfer_state = 95
+			transfer_state = 114
+			transfer_state = 117
+			transfer_state = 118
+			transfer_state = 66
+			transfer_state = 119
+		}
+		IF = {
+				limit = {
+					country_exists = SCS
+				}
+				annex_country = { target = SCS }
+			}
+		ELSE = {
+			transfer_state = 23
+			transfer_state = 19
+			transfer_state = 85
+			transfer_state = 80
+			transfer_state = 93
+			transfer_state = 89
+			transfer_state = 21
+			transfer_state = 87
+			transfer_state = 38
+			transfer_state = 91
+			transfer_state = 100
+			transfer_state = 94
+			transfer_state = 20
+			transfer_state = 78
+			transfer_state = 92
+			transfer_state = 43
+			transfer_state = 44
+			transfer_state = 51
+			transfer_state = 47
+			transfer_state = 71
+			transfer_state = 49
+			transfer_state = 42
+			transfer_state = 94
+		}
+		transfer_state = 173
+		transfer_state = 172
+		transfer_state = 175
+		transfer_state = 138
+		transfer_state = 137
+		transfer_state = 136
+		transfer_state = 690
+	}
+}
+
+country_event = { #Celestia is instantly laughed at by the meeting changelings, and she is told she will never take back their territory
+	id = celestia.538
+	title = celestia.538.t
+	desc = celestia.538.d
+	
+	is_triggered_only = yes
+	
+	option = { #Then I suppose we shall have a rematch
+		name = celestia.538.a
+		add_war_support = 0.15
+		add_stability = 0.15
 	}
 }
 

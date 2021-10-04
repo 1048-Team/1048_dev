@@ -161,7 +161,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Spawn three harmonist generals from vanilla EQS
-		###Spawn seven 8 widht divisions of loyalists and insurgents
+		###Spawn seven 8 width divisions of loyalists and insurgents
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -2214,8 +2214,10 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = shelter_for_the_refugees }
-	prerequisite = { focus = shattered_harmony }
+	prerequisite = { 
+		focus = shelter_for_the_refugees
+		focus = shattered_harmony 
+	}
 	
 	completion_reward = {
 		STG = {
@@ -2224,4 +2226,586 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = steal_stalliongradian_tank_designs
+	x = 1
+	y = 1
+	relative_position_id = recognize_old_demands
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 3
+	prerequisite = { focus = recognize_old_demands }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = medium_tank_equipment
+			amount = 250
+			producer = STG
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = cat_medium_armor
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = stubborness_got_nopony_anywhere
+	x = -1
+	y = 1
+	relative_position_id = recognize_old_demands
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 3
+	prerequisite = { focus = recognize_old_demands }
+	
+	completion_reward = {
+		223 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		184 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		176 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = pen_partitions_with_the_crystal_empire
+	x = 0
+	y = 1
+	relative_position_id = stubborness_got_nopony_anywhere
+	
+	available = {
+		CRY = {
+			is_in_faction_with = EQS
+		}
+	}
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	mutually_exclusive = { focus = fortify_the_crystal_border }
+	
+	cost = 2
+	prerequisite = { focus = stubborness_got_nopony_anywhere }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.535
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = fortify_the_crystal_border
+	x = -2
+	y = 1
+	relative_position_id = stubborness_got_nopony_anywhere
+	
+	available = {
+		CRY = {
+			NOT = {
+				is_in_faction_with = EQS
+			}
+		}
+	}
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	mutually_exclusive = { focus = pen_partitions_with_the_crystal_empire }
+	
+	cost = 2
+	prerequisite = { focus = stubborness_got_nopony_anywhere }
+	
+	completion_reward = {
+		###Add forts to CRY border
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = infiltrate_the_frontier
+	x = 0
+	y = 1
+	relative_position_id = steal_stalliongradian_tank_designs
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 3
+	prerequisite = { focus = steal_stalliongradian_tank_designs }
+	
+	completion_reward = {
+		###Either make OOB to create four 10 width infantry with engineers and support artillery, or make a NS that reduces recon and max entrenchment
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = bring_harmony_to_severnaya
+	x = 1
+	y = 1
+	relative_position_id = pen_partitions_with_the_crystal_empire
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 5
+	prerequisite = { 
+		focus = pen_partitions_with_the_crystal_empire
+		focus = fortify_the_crystal_border
+	}
+	prerequisite = { focus = infiltrate_the_frontier }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				country_exists = STG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = STG
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = AWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = CWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = MWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MWR
+			}
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = a_new_industrial_hub
+	x = 0
+	y = 1
+	relative_position_id = bring_harmony_to_severnaya
+	
+	cost = 5
+	prerequisite = { focus = bring_harmony_to_severnaya }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					OR = {
+						is_core_of = STG
+						is_claimed_by = STG
+					}
+					is_owned_by = ROOT
+				}
+			}
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+###Changelings###
+shared_focus = {
+	id = issue_a_final_warning
+	x = 2
+	y = 2
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	cost = 4
+	prerequisite = {
+		focus = shelter_for_the_refugees
+		focus = shattered_harmony
+	}
+	
+	completion_reward = {
+		CHN = {
+			country_event = {
+				id = celestia.536
+				days = 1
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = meet_with_the_general_staff
+	x = -1
+	y = 1
+	relative_position_id = issue_a_final_warning
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 3
+	prerequisite = { focus = issue_a_final_warning }
+	
+	completion_reward = {
+		###Add spirit for 10% max planning for 730 days
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = pair_down_the_borders
+	x = 1
+	y = 1
+	relative_position_id = issue_a_final_warning
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 3
+	prerequisite = { focus = issue_a_final_warning }
+	
+	completion_reward = {
+		###Add level 2 forts along the entire hegemony border
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = study_prisoners_of_war
+	x = 0
+	y = 1
+	relative_position_id = meet_with_the_general_staff
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 4
+	prerequisite = { focus = meet_with_the_general_staff }
+	
+	completion_reward = {
+		###Celestia reviews old information from POW files of changelings and uses it to base some tactics off them, +5% attack vs CHN for 365 days
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = ramp_up_recruitment
+	x = 0
+	y = 1
+	relative_position_id = pair_down_the_borders
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 3
+	prerequisite = { focus = pair_down_the_borders }
+	
+	completion_reward = {
+		###Add increased conscription modifier for 0.5% conscription
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = equestria_will_not_back_down
+	x = 1
+	y = 1
+	relative_position_id = study_prisoners_of_war
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 5
+	prerequisite = { focus = ramp_up_recruitment }
+	prerequisite = { focus = study_prisoners_of_war }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				country_exists = CHN
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CHN
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = NCA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NCA
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = CCA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CCA
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = SCS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SCS
+			}
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = a_final_end_to_the_great_war
+	x = 0
+	y = 1
+	relative_position_id = equestria_will_not_back_down
+	
+	cost = 5
+	prerequisite = { focus = equestria_will_not_back_down }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					OR = {
+						is_core_of = CHN
+						is_core_of = SCS
+						is_core_of = NCA
+						is_core_of = CCA
+					}
+					is_claimed_by = ROOT
+					is_owned_by = ROOT
+				}
+			}
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Marelandia War###
+shared_focus = {
+	id = contact_goldfeather
+	x = 0
+	y = 1
+	relative_position_id = a_new_industrial_hub
+	
+	cost = 5
+	prerequisite = { focus = a_new_industrial_hub }
+	prerequisite = { focus = a_final_end_to_the_great_war }
+	
+	completion_reward = {
+		###Event for Celestia meeting with Goldfeather, or providing him refuge, depending on country existence, and getting his assistance with toppling Marelandia
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = power_to_the_people
+	x = 2
+	y = 1
+	relative_position_id = a_new_industrial_hub
+	
+	cost = 5
+	prerequisite = { focus = a_new_industrial_hub }
+	prerequisite = { focus = a_final_end_to_the_great_war }
+	
+	completion_reward = {
+		###Give Marelandia NS for +0.05 daily harmony gain and launch OOB with ten 8 width divisions with recon when war starts
+		add_manpower = -25000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -5000
+			producer = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = reestablish_trade_with_skyfall
+	x = 0
+	y = 1
+	relative_position_id = a_final_end_to_the_great_war
+	
+	cost = 5
+	prerequisite = { focus = a_new_industrial_hub }
+	prerequisite = { focus = a_final_end_to_the_great_war }
+	
+	completion_reward = {
+		###Load OOB for 3 divisions of 12 width pony infantry with support artillery and engineers
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = end_the_terror_of_big_sister
+	x = 0
+	y = 1
+	relative_position_id = power_to_the_people
+	
+	cost = 6
+	prerequisite = { focus = power_to_the_people }
+	prerequisite = { focus = contact_goldfeather }
+	prerequisite = { focus = reestablish_trade_with_skyfall }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = EQC
+		}
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = integrating_aboriginal_militia
+	x = -2
+	y = 1
+	relative_position_id = end_the_terror_of_big_sister
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_core_of = EQC
+			is_controlled_by = ROOT
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = end_the_terror_of_big_sister }
+	
+	completion_reward = {
+		add_manpower = 10000
+		###Spawn one division that's a 7/2 with nothing else, partly equipped
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = under_the_ministries_shadow
+	x = 0
+	y = 1
+	relative_position_id = end_the_terror_of_big_sister
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	available = {
+		356 = {
+			is_controlled_by = ROOT
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = end_the_terror_of_big_sister }
+	
+	completion_reward = {
+		###Country event for taking Sunset with loss of life on both sides
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = landfall_on_the_cross
+	x = 2
+	y = 1
+	relative_position_id = end_the_terror_of_big_sister
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_core_of = EQC
+			is_controlled_by = ROOT
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = end_the_terror_of_big_sister }
+	
+	completion_reward = {
+		###Event for the fighting of taking the coastline of Marelandia, akin to D-Day
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = new_new_mareland
+	x = 0
+	y = 1
+	relative_position_id = under_the_ministries_shadow
+	
+	available = {
+		OR = {
+			NOT = {
+				country_exists = EQC
+			}
+			EQC = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = under_the_ministries_shadow }
+	prerequisite = { focus = integrating_aboriginal_militia }
+	prerequisite = { focus = landfall_on_the_cross }
+	
+	completion_reward = {
+		###Event for finding Jet Set nearly dead in the ruins of Miniluv, and then bringing him back out, to which he will then be the reinstated leader, which sets him as leader, with the same party names as vanilla, and the same colour through a cosmetic tag
+	}
+	ai_will_do = { factor = 30 }
 }
