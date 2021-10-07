@@ -2611,6 +2611,10 @@ shared_focus = {
 			}
 			add_core_of = ROOT
 		}
+		swap_ruler_traits = {
+			remove = princess_in_name_only
+			add = princess_of_ponies_1048
+		}
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -2860,6 +2864,342 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
+shared_focus = {
+	id = imprison_the_worst_offenders
+	x = -2
+	y = 1
+	relative_position_id = assess_the_state_of_the_militarium
+	
+	cost = 3
+	prerequisite = { focus = assess_the_state_of_the_militarium }
+	
+	completion_reward = {
+		###Remove Bellum Iceheart and one other fanatical general, possibly the head of the old Praetorian Guard
+		add_manpower = -50000
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = implement_anti_hate_training
+	x = 0
+	y = 1
+	relative_position_id = assess_the_state_of_the_militarium
+	
+	cost = 3
+	prerequisite = { focus = assess_the_state_of_the_militarium }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = anti-hate_mk_2
+			days = 365 #Maybe make this 180 days if it's too long
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = destroy_the_weapons_of_war_criminals
+	x = 2
+	y = 1
+	relative_position_id = assess_the_state_of_the_militarium
+	
+	cost = 3
+	prerequisite = { focus = assess_the_state_of_the_militarium }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		add_equipment_to_stockpile = {
+			type = light_tank_equipment
+			amount = -1000
+			producer = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = a_new_army_for_an_old_order
+	x = 0
+	y = 1
+	relative_position_id = implement_anti_hate_training
+	
+	available = {
+		NOT = {
+			has_idea = anti-hate_mk_2
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = imprison_the_worst_offenders }
+	prerequisite = { focus = implement_anti_hate_training }
+	prerequisite = { focus = destroy_the_weapons_of_war_criminals }
+	
+	completion_reward = {
+		remove_ideas = reevaluating_the_military
+		add_ideas = a_harmonic_army
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = an_army_without_a_marshal
+	x = 0
+	y = 1
+	relative_position_id = a_new_army_for_an_old_order
+	
+	cost = 3
+	prerequisite = { focus = a_new_army_for_an_old_order }
+	
+	completion_reward = {
+		###Event for Celestia hearing Blueblood arguing with a general over some military matters, or if Sunset is redeemed, him arguing with her over a new military curriculum and calling it stupid, and realizing she needs someone else to help her with planning the wars to come, and she knows who to choose
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Blueblood Side###
+shared_focus = {
+	id = cold_and_efficient
+	x = -2
+	y = 1
+	relative_position_id = an_army_without_a_marshal
+	
+	cost = 4
+	prerequisite = { focus = an_army_without_a_marshal }
+	mutually_exclusive = { focus = soothing_sunlight }
+	
+	completion_reward = {
+		create_field_marshal = {
+			name = "Prince Blueblood"
+			portrait_path = "gfx/leaders/EQS/Blueblood.tga"
+			traits = { pony_race_trait lord_commander media_personality not_stonks_genius politically_connected }
+			skill = 2
+			id = 5005
+			attack_skill = 1
+			defense_skill = 3
+			planning_skill = 4
+			logistics_skill = 2
+			desc = EQS_arrogant_cunt_desc
+		}
+	}
+	ai_will_do = { factor = 10 modifier = { NOT = { has_country_flag = sunset_redeemed } factor = 3 } }
+}
+
+shared_focus = {
+	id = stick_with_the_tried_and_true
+	x = 0
+	y = 1
+	relative_position_id = cold_and_efficient
+	
+	cost = 5
+	prerequisite = { focus = cold_and_efficient }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 2
+			category = cat_grand_battle_plan
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = discipline_and_order_is_key
+	x = 0
+	y = 1
+	relative_position_id = stick_with_the_tried_and_true
+	
+	cost = 4
+	prerequisite = { focus = stick_with_the_tried_and_true }
+	
+	completion_reward = {
+		add_ideas = the_old_guard
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = plan_and_then_plan_again
+	x = 0
+	y = 1
+	relative_position_id = discipline_and_order_is_key
+	
+	cost = 4
+	prerequisite = { focus = discipline_and_order_is_key }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_old_guard
+			add_idea = the_old_guard_2
+		}
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 1
+			category = cat_grand_battle_plan
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_loyal_army_for_a_young_nation
+	x = 0
+	y = 1
+	relative_position_id = plan_and_then_plan_again
+	
+	cost = 4
+	prerequisite = { focus = plan_and_then_plan_again }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_old_guard_2
+			add_idea = the_old_guard_3
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###Sunset Side###
+shared_focus = {
+	id = soothing_sunlight
+	x = 2
+	y = 1
+	relative_position_id = an_army_without_a_marshal
+	
+	available = {
+		has_country_flag = sunset_redeemed
+	}
+	
+	cost = 4
+	prerequisite = { focus = an_army_without_a_marshal }
+	mutually_exclusive = { focus = cold_and_efficient }
+	
+	completion_reward = {
+		create_field_marshal = {
+			name = "Sunset Shimmer"
+			portrait_path = "gfx/leaders/EQS/Sunset.tga"
+			traits = { fading_experience former_cultist brilliant_strategist thorough_planner pony_race_trait }
+			id = 5004
+			skill = 4
+			attack_skill = 4
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 4
+			female = yes
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = rewrite_the_military_curriculum
+	x = 0
+	y = 1
+	relative_position_id = soothing_sunlight
+	
+	cost = 5
+	prerequisite = { focus = soothing_sunlight }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 2
+			category = cat_mobile_warfare
+			category = cat_superior_firepower
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = innovation_and_experimentation_is_key
+	x = 0
+	y = 1
+	relative_position_id = rewrite_the_military_curriculum
+	
+	cost = 4
+	prerequisite = { focus = rewrite_the_military_curriculum }
+	
+	completion_reward = {
+		add_ideas = the_young_guard
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = plans_are_usless_but_planning_is_indespensible
+	x = 0
+	y = 1
+	relative_position_id = innovation_and_experimentation_is_key
+	
+	cost = 4
+	prerequisite = { focus = innovation_and_experimentation_is_key }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_young_guard
+			add_idea = the_young_guard_2
+		}
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 1
+			category = cat_mobile_warfare
+			category = cat_superior_firepower
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_modern_army_for_a_moder_nation
+	x = 0
+	y = 1
+	relative_position_id = plans_are_usless_but_planning_is_indespensible
+	
+	cost = 4
+	prerequisite = { focus = plans_are_usless_but_planning_is_indespensible }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_young_guard_2
+			add_idea = the_young_guard_3
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+###Unified Section###
+shared_focus = {
+	id = create_the_canterlot_command
+	x = -2
+	y = 1
+	relative_position_id = a_modern_army_for_a_moder_nation
+	
+	cost = 6
+	prerequisite = {
+		focus = a_modern_army_for_a_moder_nation
+		focus = a_loyal_army_for_a_young_nation
+	}
+	
+	completion_reward = {
+		add_research_slot = 1
+		swap_ideas = {
+			remove_idea = a_harmonic_army
+			add_idea = a_harmonic_army_2
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
 ###Air Tree###
 shared_focus = {
 	id = ground_the_solarbolts
@@ -2889,7 +3229,7 @@ shared_focus = {
 shared_focus = {
 	id = a_new_dawn
 	x = 35
-	y = 15
+	y = 20
 	
 	available = {
 		OR = {
@@ -2916,7 +3256,7 @@ shared_focus = {
 shared_focus = {
 	id = an_old_sun
 	x = 45
-	y = 15
+	y = 20
 	
 	available = {
 		OR = {
@@ -2939,3 +3279,81 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 30 }
 }
+
+###Minor Trees###
+###Starlight and Trixie Redemption###
+shared_focus = {
+	id = repeating_past_mistakes
+	x = 10
+	y = 20
+	
+	available = {
+		hidden_trigger = {
+			AND = {
+				OR = {
+					has_completed_focus = once_a_land_filled_with_magic
+					has_completed_focus = once_a_society_filled_with_love
+				}
+			has_country_flag = starlight_and_trixie_captured
+			}
+		}
+	}
+	
+	allow_branch = {
+		hidden_trigger = {
+			AND = {
+				has_country_flag = starlight_and_trixie_captured
+				has_country_flag = end_of_equestria_civil_war
+			}
+		}
+	}
+	
+	cost = 2
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.26
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###Fixing Manehattan###
+shared_focus = {
+	id = reparations_for_harmonist_failure
+	x = 10
+	y = 25
+	
+	available = {
+		hidden_trigger = {
+			AND = {
+				OR = {
+					has_completed_focus = once_a_land_filled_with_magic
+					has_completed_focus = once_a_society_filled_with_love
+				}
+				OR = {
+					has_country_flag = starlight_and_trixie_captured
+					has_country_flag = starlight_and_trixie_escaped
+				}
+				NOT = { has_country_flag = manehattan_repaired }
+			}
+		}
+	}
+	
+	allow_branch = {
+		OR = {
+			has_country_flag = starlight_and_trixie_captured
+			has_country_flag = starlight_and_trixie_escaped
+			}
+		}
+	
+	bypass = { has_completed_focus = city_never_slept }
+	
+	cost = 2
+	
+	completion_reward = {
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 18 }
+}
+	
