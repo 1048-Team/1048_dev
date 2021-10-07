@@ -2839,6 +2839,84 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
+shared_focus = { 
+	id = reform_the_equestrian_admirality
+	x = 0
+	y = 1
+	relative_position_id = anchor_the_imperial_navy
+	
+	cost = 4
+	prerequisite = { focus = anchor_the_imperial_navy }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = chained_imperial_navy
+			add_idea = chained_imperial_navy_1
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = a_revitalized_navy_for_a_reborn_nation
+	x = 0
+	y = 1
+	relative_position_id = reform_the_equestrian_admirality
+	
+	cost = 5
+	prerequisite = { focus = reform_the_equestrian_admirality }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = chained_imperial_navy_1
+			add_idea = reborn_navy
+		}
+	}
+	ai_will_do = { factor = 23 }
+}
+
+shared_focus = {
+	id = modernizing_old_tactics
+	x = -2
+	y = 1
+	relative_position_id = a_revitalized_navy_for_a_reborn_nation
+	
+	cost = 5
+	prerequisite = { focus = a_revitalized_navy_for_a_reborn_nation }
+	mutually_exclusive = { focus = adapting_to_the_world_situation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = base_strike_bonus
+			bonus = 1
+			uses = 2
+			category = cat_base_strike
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = adapting_to_the_world_situation
+	x = 2
+	y = 1
+	relative_position_id = a_revitalized_navy_for_a_reborn_nation
+	
+	cost = 5
+	prerequisite = { focus = a_revitalized_navy_for_a_reborn_nation }
+	mutually_exclusive = { focus = modernizing_old_tactics }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = base_strike_bonus
+			bonus = 1
+			uses = 2
+			category = cat_trade_interdiction
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
 ###Army Tree###
 shared_focus = {
 	id = assess_the_state_of_the_militarium
@@ -3160,7 +3238,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = a_modern_army_for_a_moder_nation
+	id = a_modern_army_for_a_modern_nation
 	x = 0
 	y = 1
 	relative_position_id = plans_are_usless_but_planning_is_indespensible
@@ -3182,11 +3260,11 @@ shared_focus = {
 	id = create_the_canterlot_command
 	x = -2
 	y = 1
-	relative_position_id = a_modern_army_for_a_moder_nation
+	relative_position_id = a_modern_army_for_a_modern_nation
 	
 	cost = 6
 	prerequisite = {
-		focus = a_modern_army_for_a_moder_nation
+		focus = a_modern_army_for_a_modern_nation
 		focus = a_loyal_army_for_a_young_nation
 	}
 	
@@ -3198,6 +3276,127 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = weapons_test_new_tank_designs
+	x = -2
+	y = 1
+	relative_position_id = create_the_canterlot_command
+	
+	cost = 4
+	prerequisite = { focus = create_the_canterlot_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = armor_bonus
+			bonus = 1
+			uses = 1
+			category = cat_armor
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = uncivilized_but_necessary
+	x = 0
+	y = 1
+	relative_position_id = create_the_canterlot_command
+	
+	cost = 4
+	prerequisite = { focus = create_the_canterlot_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = bringing_harmony_from_afar
+	x = 2
+	y = 1
+	relative_position_id = create_the_canterlot_command
+	
+	cost = 4
+	prerequisite = { focus = create_the_canterlot_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = artillery_bonus
+			bonus = 1
+			uses = 2
+			category = artillery
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = fund_project_aegis
+	x = 1
+	y = 1
+	relative_position_id = weapons_test_new_tank_designs
+	
+	cost = 4
+	prerequisite = { focus = weapons_test_new_tank_designs }
+	prerequisite = { focus = uncivilized_but_necessary }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = modern_tank_bonus
+			bonus = 1
+			uses = 1
+			technology = main_battle_tank
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = rebuild_the_equestrian_logistical_corps
+	x = 1
+	y = 1
+	relative_position_id = uncivilized_but_necessary
+	
+	cost = 4
+	prerequisite = { focus = bringing_harmony_from_afar }
+	prerequisite = { focus = uncivilized_but_necessary }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = modern_tank_bonus
+			bonus = 1
+			uses = 2
+			category = support_tech
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = fund_project_aegis
+	x = 1
+	y = 1
+	relative_position_id = fund_project_aegis
+	
+	cost = 5
+	prerequisite = { focus = fund_project_aegis }
+	prerequisite = { focus = rebuild_the_equestrian_logistical_corps }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = a_harmonic_army_2
+			add_idea = a_harmonic_army_3
+		}
+	}
+	ai_will_do = { factor = 17 }
 }
 
 ###Air Tree###
