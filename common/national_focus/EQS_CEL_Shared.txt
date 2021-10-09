@@ -2933,7 +2933,7 @@ shared_focus = {
 	prerequisite = { focus = the_workhorse_of_the_fleet }
 	
 	completion_reward = {
-		###Add spirit for more deck size nad sortie efficiency
+		add_ideas = swarming_the_skies
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -3054,7 +3054,7 @@ shared_focus = { #Mention that this is the culmination of surface and sudden str
 	prerequisite = { focus = study_the_changeling_naval_victories }
 	
 	completion_reward = {
-	###Add spirit for decreased deck size and increased speed here
+		add_ideas = patrol_carriers
 		add_tech_bonus = {
 			name = carrier_bonus_bonus
 			bonus = 1
@@ -3542,7 +3542,7 @@ shared_focus = {
 			name = armor_bonus
 			bonus = 1
 			uses = 1
-			category = cat_armor
+			category = armor
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -3631,7 +3631,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = fund_project_aegis
+	id = for_harmony_one_and_all
 	x = 1
 	y = 1
 	relative_position_id = fund_project_aegis
@@ -3672,6 +3672,377 @@ shared_focus = {
 		add_ideas = grounded_aces
 	}
 	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = expose_the_aces_of_the_empire
+	x = -2
+	y = 1
+	relative_position_id = ground_the_solarbolts
+	
+	cost = 3
+	prerequisite = { focus = ground_the_solarbolts }
+	
+	completion_reward = {
+		add_stability = -0.1
+		add_war_support = -0.1
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = ban_use_of_napalm
+	x = 2
+	y = 1
+	relative_position_id = ground_the_solarbolts
+	
+	cost = 3
+	prerequisite = { focus = ground_the_solarbolts }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = napalm_napalmed
+			days = 400
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_modernized_air_force_for_a_revived_nation
+	x = 2
+	y = 1
+	relative_position_id = expose_the_aces_of_the_empire
+	
+	available = {
+		NOT = {
+			has_idea = napalm_napalmed
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = expose_the_aces_of_the_empire }
+	prerequisite = { focus = ban_use_of_napalm }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = grounded_aces
+			add_idea = a_new_generation_of_aces
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = survival_of_the_sturdiest
+	x = -2
+	y = 1
+	relative_position_id = a_modernized_air_force_for_a_revived_nation
+	
+	mutually_exclusive = { focus = survival_of_the_strongest }
+	
+	cost = 5
+	prerequisite = { focus = a_modernized_air_force_for_a_revived_nation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 2
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = design_redundant_bomber_systems
+	x = 0
+	y = 1
+	relative_position_id = survival_of_the_sturdiest
+	
+	cost = 4
+	prerequisite = { focus = survival_of_the_sturdiest }
+	
+	completion_reward = {
+		add_ideas = careful_bombing_systems
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 1
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+shared_focus = {
+	id = push_the_boundary_of_flight_height
+	x = 0
+	y = 1
+	relative_position_id = design_redundant_bomber_systems
+	
+	cost = 4
+	prerequisite = { focus = design_redundant_bomber_systems }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = careful_bombing_systems
+			add_idea = careful_bombing_systems_2
+		}
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 1
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = reinvent_the_propeller
+	x = 0
+	y = 1
+	relative_position_id = push_the_boundary_of_flight_height
+	
+	cost = 4
+	prerequisite = { focus = push_the_boundary_of_flight_height }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 2
+			category = tactical_bomber
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = survival_of_the_strongest
+	x = 2
+	y = 1
+	relative_position_id = a_modernized_air_force_for_a_revived_nation
+	
+	mutually_exclusive = { focus = survival_of_the_sturdiest }
+	
+	cost = 5
+	prerequisite = { focus = a_modernized_air_force_for_a_revived_nation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = battlefield_support_bonus
+			bonus = 1
+			uses = 2
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = matrix_powered_flight
+	x = 0
+	y = 1
+	relative_position_id = survival_of_the_strongest
+	
+	cost = 4
+	prerequisite = { focus = survival_of_the_strongest }
+	
+	completion_reward = {
+		add_ideas = enhanced_dive_bombers
+		add_tech_bonus = {
+			name = cas_bonus
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+		}
+		add_tech_bonus = {
+			name = fighter_bonus
+			bonus = 1
+			uses = 1
+			category = light_fighter
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Have an I am Speed joke
+	id = push_the_limit_of_speed
+	x = 0
+	y = 1
+	relative_position_id = matrix_powered_flight
+	
+	cost = 4
+	prerequisite = { focus = matrix_powered_flight }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = enhanced_dive_bombers
+			add_idea = enhanced_dive_bombers_2
+		}
+		add_tech_bonus = {
+			name = battlefield_support_bonus
+			bonus = 1
+			uses = 1
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = synergetic_support_roles
+	x = 0
+	y = 1
+	relative_position_id = push_the_limit_of_speed
+	
+	cost = 4
+	prerequisite = { focus = push_the_limit_of_speed }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = battlefield_support_bonus
+			bonus = 1
+			uses = 2
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = shields_of_harmony
+	x = -1
+	y = 1
+	relative_position_id = reinvent_the_propeller
+	
+	cost = 5
+	prerequisite = { focus = reinvent_the_propeller }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = heavy_fighter_bonus
+			bonus = 1
+			uses = 2
+			category = cat_heavy_fighter
+		}
+	}
+	ai_will_do = { factor = 21 }
+}
+
+shared_focus = { #Mention how Fluttershy led nuclear development for a short time during the war and got quite far and how they should reuses it for good
+	id = declassify_fluttershys_nuclear_research
+	x = 2
+	y = 1
+	relative_position_id = reinvent_the_propeller
+	
+	cost = 5
+	prerequisite = {
+		focus = reinvent_the_propeller
+		focus = synergetic_support_roles
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = nuke_bonus
+			bonus = 1
+			uses = 2
+			category = nuclear
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = speeding_swords_of_love
+	x = 1
+	y = 1
+	relative_position_id = synergetic_support_roles
+	
+	cost = 5
+	prerequisite = { focus = synergetic_support_roles }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = jet_fighter_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			technology = jet_fighter1
+			technology = jet_fighter2
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = soaring_like_a_phoenix
+	x = 2
+	y = 1
+	relative_position_id = shields_of_harmony
+	
+	cost = 4
+	prerequisite = { focus = shields_of_harmony }
+	prerequisite = { focus = declassify_fluttershys_nuclear_research }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = tac_jet_bomber_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			technology = jet_tactical_bomber1
+			technology = jet_tactical_bomber2
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = deterrent_destruction_across_equus
+	x = -2
+	y = 1
+	relative_position_id = speeding_swords_of_love
+	
+	cost = 4
+	prerequisite = { focus = speeding_swords_of_love }
+	prerequisite = { focus = declassify_fluttershys_nuclear_research }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = strat_jet_bomber_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			technology = jet_strategic_bomber1
+			technology = jet_strategic_bomber_a
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = the_pride_of_celestia
+	x = 1
+	y = 1
+	relative_position_id = soaring_like_a_phoenix
+	
+	cost = 5
+	prerequisite = {
+		focus = soaring_like_a_phoenix
+		focus = deterrent_destruction_across_equus
+	}
+	
+	completion_reward = {
+		add_ideas = airforce_of_legends
+	}
+	ai_will_do = { factor = 35 }
 }
 
 ###Industry Tree###
