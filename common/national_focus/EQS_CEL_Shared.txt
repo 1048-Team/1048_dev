@@ -4046,6 +4046,7 @@ shared_focus = {
 }
 
 ###Industry Tree###
+###Left Side###
 shared_focus = {
 	id = a_new_dawn
 	x = 35
@@ -4074,6 +4075,161 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = assess_the_economic_situation
+	x = 0
+	y = 1
+	relative_position_id = a_new_dawn
+	
+	cost = 5
+	prerequisite = { focus = a_new_dawn }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = backbroken_economy_2
+			add_idea = backbroken_economy_3
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = form_the_celestial_board_of_ecnomic_recovery
+	x = 0
+	y = 1
+	relative_position_id = assess_the_economic_situation
+	
+	available = {
+		has_completed_focus = establish_new_industry_guidelines
+	}
+	
+	cost = 5
+	prerequisite = { focus = assess_the_economic_situation }
+	
+	completion_reward = {
+		remove_ideas = backbroken_economy_3
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = return_to_the_bit_standard
+	x = 0
+	y = 1
+	relative_position_id = form_the_celestial_board_of_ecnomic_recovery
+	
+	cost = 3
+	prerequisite = { focus = form_the_celestial_board_of_ecnomic_recovery }
+	
+	completion_reward = {
+		###Insert bit NS here###
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Left-left Side###
+shared_focus = {
+	id = intrinsic_value
+	x = -3
+	y = 1
+	relative_position_id = return_to_the_bit_standard
+	
+	cost = 4
+	mutually_exclusive = { focus = dictated_worth }
+	prerequisite = { focus = return_to_the_bit_standard }
+	
+	completion_reward = {
+		add_political_power = -50
+		add_stability = 0.03
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = rework_accounting_laws
+	x = 1
+	y = 1
+	relative_position_id = intrinsic_value
+	
+	cost = 3
+	prerequisite = { focus = intrinsic_value }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = concentrated_industry_bonus
+			bonus = 1
+			uses = 2
+			category = concentrated_industry_category
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+###Right-left Side###
+shared_focus = {
+	id = dictated_worth
+	x = 3
+	y = 1
+	relative_position_id = return_to_the_bit_standard
+	
+	cost = 4
+	mutually_exclusive = { focus = intrinsic_value }
+	prerequisite = { focus = return_to_the_bit_standard }
+	
+	completion_reward = {
+		add_political_power = 50
+		add_stability = -0.03
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = retabulate_the_income_of_the_nation
+	x = -1
+	y = 1
+	relative_position_id = dictated_worth
+	
+	cost = 4
+	prerequisite = { focus = dictated_worth }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = dispersed_industry_bonus
+			bonus = 1
+			uses = 2
+			category = dispersed_industry_category
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Middle Section###
+shared_focus = { #Equesrian Council of Economic Advisors
+	id = repurpose_ibea_into_ecea
+	x = 5
+	y = 1
+	relative_position_id = assess_the_economic_situation
+	
+	available = {
+		has_dynamic_modifier = {
+			modifier = ibea
+		}
+	}
+	
+	cost = 4
+	prerequisite = {
+		focus = assess_the_economic_situation
+		focus = establish_new_industry_guidelines
+	}
+	
+	completion_reward = {
+		remove_dynamic_modifier = { modifier = ibea }
+		###add idea for ECEA
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Right Side###
+shared_focus = {
 	id = an_old_sun
 	x = 45
 	y = 20
@@ -4098,6 +4254,49 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = establish_new_industry_guidelines
+	x = 0
+	y = 1
+	relative_position_id = an_old_sun
+	
+	cost = 5
+	prerequisite = { focus = an_old_sun }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = destitute_diarchy_2
+			add_idea = destitute_diarchy_3
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = incentivize_innovation
+	x = 0
+	y = 1
+	relative_position_id = establish_new_industry_guidelines
+	
+	available = {
+		has_completed_focus = assess_the_economic_situation
+	}
+	
+	cost = 5
+	prerequisite = { focus = establish_new_industry_guidelines }
+	
+	completion_reward = {
+		remove_ideas = destitute_diarchy_3
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 22 }
 }
 
 ###Minor Trees###
