@@ -369,29 +369,7 @@ country_event = {
 	
 	option = {
 		name = solar.17.a
-		ai_chance = {
-			factor = 100
-		}
-		hidden_effect = {
-			IF = {
-				limit = {
-					TAG = EQS
-					AND = {
-					has_country_flag = rebels_found
-					}
-				}
-				country_event = {
-					id = solar.18
-					days = 34
-				}
-			}
-			ELSE = {
-				country_event = {
-					id = solar.19
-					days = 34
-				}
-			}
-		}
+		add_political_power = 30
 	}
 }
 
@@ -400,49 +378,137 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 	title = solar.18.t
 	desc = solar.18.d
 	
-	is_triggered_only = yes
+	trigger = {
+		tag = EQS
+		date > 1048.11.1
+		date < 1048.12.1
+	}
 	
 	option = {
 		name = solar.18.a
 		ai_chance = {
 			factor = 100
 		}
-		save_current_manpower = yes
-		75 = {
-		set_variable = { 
-			rebel_var_1 = -0.5 
+		IF = {
+			limit = {
+				has_country_flag = rebels_found
 			}
-		set_variable = { 
-			rebel_var_2 = -0.2 
-			}
-		}
-		hidden_effect = {
-			set_country_flag = starlight_and_trixie_captured
-			set_country_flag = unsuccessful_rebellion
-			
+			save_current_manpower = yes
 			75 = {
-				add_dynamic_modifier = {
-					modifier = manehattan_rebellion
+			set_variable = { 
+				rebel_var_1 = -0.5 
+				}
+			set_variable = { 
+				rebel_var_2 = -0.2 
 				}
 			}
-		mark_focus_tree_layout_dirty = yes
-	}
-		75 = {
-			add_manpower = -77213
-			damage_building = {
-				type = infrastructure
-				damage = 3
+			hidden_effect = {
+				set_country_flag = starlight_and_trixie_captured
+				set_country_flag = unsuccessful_rebellion
+				
+				75 = {
+					add_dynamic_modifier = {
+						modifier = manehattan_rebellion
+					}
+				}
+			mark_focus_tree_layout_dirty = yes
 			}
-			remove_building = {
-				type = arms_factory
-				level = 1
+			75 = {
+				add_manpower = -77213
+				damage_building = {
+					type = infrastructure
+					damage = 3
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
 			}
-			remove_building = {
-				type = industrial_complex
-				level = 1
-			}
+			restore_previous_manpower = yes
 		}
-		restore_previous_manpower = yes
+		ELSE_IF = {
+			limit = {
+				has_country_flag = rebels_not_found
+			}
+			save_current_manpower = yes
+			75 = {
+			set_variable = { 
+				rebel_var_1 = -0.9 
+				}
+			set_variable = { 
+				rebel_var_2 = -0.35 
+				}
+			}
+			hidden_effect = {
+				set_country_flag = starlight_and_trixie_escaped
+				set_country_flag = successful_rebellion
+				
+				75 = {
+					add_dynamic_modifier = {
+						modifier = manehattan_rebellion
+						}
+					}
+				mark_focus_tree_layout_dirty = yes
+			}
+			75 = {
+				add_manpower = -204702
+				damage_building = {
+					type = infrastructure
+					damage = 8
+				}
+				remove_building = {
+					type = arms_factory
+					level = 2
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 3
+				}
+			}
+			restore_previous_manpower = yes
+		}
+		ELSE = {
+			save_current_manpower = yes
+			75 = {
+			set_variable = { 
+				rebel_var_1 = -0.9 
+				}
+			set_variable = { 
+				rebel_var_2 = -0.35 
+				}
+			}
+			hidden_effect = {
+				set_country_flag = starlight_and_trixie_escaped
+				set_country_flag = successful_rebellion
+				
+				75 = {
+					add_dynamic_modifier = {
+						modifier = manehattan_rebellion
+						}
+					}
+				mark_focus_tree_layout_dirty = yes
+			}
+			75 = {
+				add_manpower = -204702
+				damage_building = {
+					type = infrastructure
+					damage = 8
+				}
+				remove_building = {
+					type = arms_factory
+					level = 2
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 3
+				}
+			}
+			restore_previous_manpower = yes
+		}
 	}
 }
 
@@ -1377,6 +1443,20 @@ country_event = { #Daybreaker has a Hitler-like speech about reconquering the ru
 			set_country_flag = southeast_dead
 			mark_focus_tree_layout_dirty = yes
 		}
+	}
+}
+
+country_event = { #The temple is consecrated over the remains of Solar Beauty University and Fidelis is appointed as the new archmage of Bales, Ordo Scripturia
+	id = solar.106
+	title = solar.106.t
+	desc = solar.106.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.106.a
+		add_stability = 0.03
+		add_war_support = 0.03
 	}
 }
 
