@@ -4121,7 +4121,7 @@ shared_focus = {
 	prerequisite = { focus = form_the_celestial_board_of_ecnomic_recovery }
 	
 	completion_reward = {
-		###Insert bit NS here###
+		add_ideas = returning_to_standard
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -4145,6 +4145,41 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = melt_the_statues_of_daybreaker
+	x = -1
+	y = 1
+	relative_position_id = intrinsic_value
+	
+	cost = 4
+	prerequisite = { focus = intrinsic_value }
+	
+	completion_reward = {
+		add_stability = 0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.02
+		}
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = provide_from_the_riches_of_the_earth
+	x = 0
+	y = 1
+	relative_position_id = melt_the_statues_of_daybreaker
+	
+	cost = 4
+	prerequisite = { focus = melt_the_statues_of_daybreaker }
+	
+	completion_reward = {
+		add_ideas = bounties_of_equus
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
 	id = rework_accounting_laws
 	x = 1
 	y = 1
@@ -4163,6 +4198,21 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 22 }
 }
+
+shared_focus = {
+	id = allow_private_banks
+	x = 0
+	y = 1
+	relative_position_id = rework_accounting_laws
+	
+	cost = 4
+	prerequisite = { focus = rework_accounting_laws }
+	
+	completion_reward = {
+		add_ideas = a_bank_around_every_corner
+	}
+	ai_will_do = { factor = 25 }
+}	
 
 ###Right-left Side###
 shared_focus = {
@@ -4202,6 +4252,104 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
+shared_focus = { #Have it spout about the wonders of infinite money printing based off the actual economic output of the nation
+	id = it_just_prints_money
+	x = 0
+	y = 1
+	relative_position_id = retabulate_the_income_of_the_nation
+	
+	cost = 3
+	prerequisite = { focus = retabulate_the_income_of_the_nation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = centralize_the_equestrian_banking_system
+	x = 1
+	y = 1
+	relative_position_id = dictated_worth
+	
+	cost = 5
+	prerequisite = { focus = dictated_worth }
+	
+	completion_reward = {
+		add_ideas = centralized_monetary_system
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Have it include an asterisk that they need to go through a lot of red tape to get said subsidies
+	id = subsidize_all_that_need_it
+	x = 0
+	y = 1
+	relative_position_id = centralize_the_equestrian_banking_system
+	
+	cost = 4
+	prerequisite = { focus = centralize_the_equestrian_banking_system }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = centralized_monetary_system
+			add_idea = subsidization_for_all
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = a_stable_foundation
+	x = 0
+	y = 4
+	relative_position_id = return_to_the_bit_standard
+	
+	cost = 5
+	prerequisite = {
+		focus = provide_from_the_riches_of_the_earth
+		focus = it_just_prints_money
+	}
+	prerequisite = {
+		focus = allow_private_banks
+		focus = subsidize_all_that_need_it
+	}
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				AND = {
+					has_completed_focus = provide_from_the_riches_of_the_earth
+					has_completed_focus = allow_private_banks
+				}
+			}
+			swap_ideas = {
+				remove_idea = returning_to_standard
+				add_idea = stable_monetary_foundation
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_completed_focus = it_just_prints_money
+					has_completed_focus = subsidize_all_that_need_it
+				}
+			}
+			swap_ideas = {
+				remove_idea = returning_to_standard
+				add_idea = stable_monetary_foundation_2
+			}
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
 ###Middle Section###
 shared_focus = { #Equesrian Council of Economic Advisors
 	id = repurpose_ibea_into_ecea
@@ -4223,7 +4371,7 @@ shared_focus = { #Equesrian Council of Economic Advisors
 	
 	completion_reward = {
 		remove_dynamic_modifier = { modifier = ibea }
-		###add idea for ECEA
+		add_ideas = ecea
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -4297,6 +4445,327 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = the_magic_of_manufactories
+	x = 0
+	y = 1
+	relative_position_id = incentivize_innovation
+	
+	cost = 4
+	prerequisite = { focus = incentivize_innovation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Left-right Side###
+shared_focus = {
+	id = unearth_the_hidden_cornucopia
+	x = -3
+	y = 1
+	relative_position_id = the_magic_of_manufactories
+	
+	cost = 3
+	prerequisite = { focus = the_magic_of_manufactories }
+	mutually_exclusive = { focus = miniaturize_the_matrix }
+	
+	completion_reward = {
+		###Add resources here
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = survey_what_is_left
+	x = -1
+	y = 1
+	relative_position_id = unearth_the_hidden_cornucopia
+	
+	cost = 4
+	prerequisite = { focus = unearth_the_hidden_cornucopia }
+	
+	completion_reward = {
+		###Add resources here
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = commission_the_board_on_active_extraction
+	x = 0
+	y = 1
+	relative_position_id = survey_what_is_left
+	
+	cost = 5
+	prerequisite = { focus = survey_what_is_left }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = extraction_bonus
+			bonus = 1
+			uses = 2
+			category = excavation_tech
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = rebuild_the_cloud_infrastructure
+	x = 1
+	y = 1
+	relative_position_id = unearth_the_hidden_cornucopia
+	
+	cost = 4
+	prerequisite = { focus = unearth_the_hidden_cornucopia }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = construction_bonus
+			bonus = 1
+			uses = 1
+			category = construction_tech
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = { #Mention that the earth ponies have always had unique ways of solving things, and that they could be used to improve Equestria's knowledge
+	id = encourage_earth_pony_ingenuity
+	x = 0
+	y = 1
+	relative_position_id = rebuild_the_cloud_infrastructure
+	
+	cost = 6
+	prerequisite = { focus = rebuild_the_cloud_infrastructure }
+	
+	completion_reward = {
+		add_research_slot = 1
+		add_ideas = earth_pony_genius
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Right-right Side###
+shared_focus = {
+	id = miniaturize_the_matrix
+	x = 3
+	y = 1
+	relative_position_id = the_magic_of_manufactories
+	
+	cost = 3
+	prerequisite = { focus = the_magic_of_manufactories }
+	mutually_exclusive = { focus = unearth_the_hidden_cornucopia }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = electronics_bonus
+			bonus = 1
+			uses = 2
+			category = electronics
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = expand_the_forges
+	x = -1
+	y = 1
+	relative_position_id = miniaturize_the_matrix
+	
+	cost = 3
+	prerequisite = { focus = miniaturize_the_matrix }
+	
+	completion_reward = {
+		###Add resources here
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = light_a_new_fire
+	x = 0
+	y = 1
+	relative_position_id = expand_the_forges
+	
+	cost = 5
+	prerequisite = { focus = expand_the_forges }
+	
+	completion_reward = {
+		add_ideas = harmonic_fire
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = motivate_immigration
+	x = 1
+	y = 1
+	relative_position_id = miniaturize_the_matrix
+	
+	cost = 4
+	prerequisite = { focus = miniaturize_the_matrix }
+	
+	completion_reward = {
+		###Add building slots here
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = { #Mention since the uprising the once prestigious school for electronic innovation has massively declined, not helped by the Solar Empire's luddite tendencies
+	id = fund_the_manehattan_university
+	x = 0
+	y = 1
+	relative_position_id = motivate_immigration
+	
+	cost = 6
+	prerequisite = { focus = motivate_immigration }
+	
+	completion_reward = {
+		add_research_slot = 1
+		add_tech_bonus = {
+			name = electronics_bonus
+			bonus = 1
+			uses = 1
+			category = electronics
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = constant_improvement_constant_growth
+	x = 0
+	y = 4
+	relative_position_id = the_magic_of_manufactories
+	
+	cost = 5
+	prerequisite = {
+		focus = commission_the_board_on_active_extraction
+		focus = light_a_new_fire
+	}
+	prerequisite = {
+		focus = encourage_earth_pony_ingenuity
+		focus = fund_the_manehattan_university
+	}
+	
+	completion_reward = {
+		add_political_power = 100
+		add_ideas = infinite_growth
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Remainder of the Tree###
+shared_focus = {
+	id = redefine_eceas_function
+	x = 1
+	y = 1
+	relative_position_id = subsidize_all_that_need_it
+	
+	cost = 5
+	prerequisite = {
+		focus = provide_from_the_riches_of_the_earth
+		focus = it_just_prints_money
+	}
+	prerequisite = {
+		focus = allow_private_banks
+		focus = subsidize_all_that_need_it
+	}
+	prerequisite = {
+		focus = commission_the_board_on_active_extraction
+		focus = light_a_new_fire
+	}
+	prerequisite = {
+		focus = encourage_earth_pony_ingenuity
+		focus = fund_the_manehattan_university
+	}
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_idea = ecea
+			}
+			swap_ideas = {
+				remove_idea = ecea
+				add_idea = ecea_2
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				has_dynamic_modifier = { modifier = ibea }
+			}
+			remove_dynamic_modifier = { modifier = ibea }
+			add_ideas = ecea_2
+		}
+		ELSE = {
+			add_ideas = ecea_2
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = work_for_the_downtrodden
+	x = -1
+	y = 1
+	relative_position_id = redefine_eceas_function
+	
+	cost = 3
+	prerequisite = { focus = a_stable_foundation }
+	prerequisite = { focus = redefine_eceas_function }
+	
+	completion_reward = {
+		###Add building construction here
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = legalize_the_unions
+	x = 1
+	y = 1
+	relative_position_id = redefine_eceas_function
+	
+	cost = 4
+	prerequisite = { focus = redefine_eceas_function }
+	prerequisite = { focus = constant_improvement_constant_growth }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = communism
+			popularity = 0.15
+		}
+		add_stability = 0.1
+		###Add building construction here
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = the_envy_of_the_world_once_again
+	x = 1
+	y = 1
+	relative_position_id = work_for_the_downtrodden
+	
+	cost = 5
+	prerequisite = { focus = work_for_the_downtrodden }
+	prerequisite = { focus = legalize_the_unions }
+	
+	completion_reward = {
+		add_ideas = unbeatable_economy
+	}
+	ai_will_do = { factor = 35 }
 }
 
 ###Minor Trees###
