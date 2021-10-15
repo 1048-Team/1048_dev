@@ -72,6 +72,8 @@ shared_focus = {
 	
 	completion_reward = {
 		###Unlock Harmonist Advisors here###
+		show_ideas_tooltip = fancy_pants
+		set_country_flag = rescued_harmonic_advisors
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -124,7 +126,7 @@ shared_focus = {
 	prerequisite = { focus = the_wayward_student }
 	
 	completion_reward = {
-		###Steal a Solar General, ideally one of the weaker ones that gets purged if they're alive
+		###Steal a Solar General, ideally one of the weaker ones that gets purged if they're alive or can be a harmonist resistance general (if Solar General, have it be Swift Wing), if it's a resistance member, have it be a new leader and it will be Button Mash, who used his gaming skills to advantage, although he does have a trait that lowers his org and number of ponies he can lead
 		###Spawn three ten-width infantry loyalist divisions
 	}
 	ai_will_do = { factor = 15 }
@@ -160,7 +162,40 @@ shared_focus = {
 	prerequisite = { focus = the_disloyal_prince }
 	
 	completion_reward = {
-		###Spawn three harmonist generals from vanilla EQS
+		###Spawn three harmonist generals from vanilla EQS, most likely Bernard, Fireflight, Allen
+		create_corps_commander = {
+		name = "Allen Spark"
+		portrait_path = "gfx/leaders/EQS/Allen.tga"
+		traits = { commando pony_race_trait }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 1
+		logistics_skill = 3
+		id = 31
+	} custom_effect_tooltip = allen_spark_stats_tp
+	create_corps_commander = {
+		name = "Fireflight"
+		portrait_path = "gfx/leaders/EQS/Fireflight.tga"
+		traits = { fireflight pony_race_trait }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 2
+		id = 32
+	} custom_effect_tooltip = fireflight_stats_tp
+	create_corps_commander = {
+		name = "Bernard Hoofgonery"
+		portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
+		traits = { pony_race_trait }
+		skill = 2
+		attack_skill = 3
+		defense_skill = 2
+		planning_skill = 3
+		logistics_skill = 3
+		id = 30
+	} custom_effect_tooltip = bernard_hoofgonery_stats_tp
 		###Spawn seven 8 width divisions of loyalists and insurgents
 	}
 	ai_will_do = { factor = 20 }
@@ -316,6 +351,10 @@ shared_focus = {
 	completion_reward = {
 		add_political_power = -200
 		###Get Disgustingly Rich for industrialist, Scalding Light for a prince of terror, Flaky Itch for a unique -5% stability, +5% core army stats
+		show_ideas_tooltip = disgustingly_rich
+		show_ideas_tooltip = searing_light
+		show_ideas_tooltip = flaky_itch
+		set_country_flag = unlocked_evil_advisors
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -1026,10 +1065,12 @@ shared_focus = {
 			idea = rebuilding_the_clouds
 			days = 180
 		}
-		CLD = {
-			add_timed_idea = {
-				idea = rebuilding_the_clouds_CLD
-				days = 180
+		hidden_effect = {
+			CLD = {
+				add_timed_idea = {
+					idea = rebuilding_the_clouds_CLD
+					days = 180
+				}
 			}
 		}
 	}
@@ -1056,10 +1097,12 @@ shared_focus = {
 			idea = pension_payments
 			days = 180
 		}
-		CLD = {
-			add_timed_idea = {
-				idea = pension_payments_CLD
-				days = 180
+		hidden_effect = {
+			CLD = {
+				add_timed_idea = {
+					idea = pension_payments_CLD
+					days = 180
+				}
 			}
 		}
 	}
@@ -1162,7 +1205,7 @@ shared_focus = {
 	
 	completion_reward = {
 		country_event = {
-			id = celestia.552
+			id = celestia.553
 		}
 	}
 	ai_will_do = { factor = 15 }
@@ -2178,6 +2221,24 @@ shared_focus = {
 	
 	completion_reward = {
 		###change state population###
+		344 = {
+			add_manpower = -100000
+		}
+		3 = {
+			add_manpower = 100000
+		}
+		345 = {
+			add_manpower = -100000
+		}
+		12 = {
+			add_manpower = 100000
+		}
+		53 = {
+			add_manpower = -100000
+		}
+		75 = {
+			add_manpower = 100000
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -3296,7 +3357,19 @@ shared_focus = {
 	prerequisite = { focus = a_new_army_for_an_old_order }
 	
 	completion_reward = {
-		###Event for Celestia hearing Blueblood arguing with a general over some military matters, or if Sunset is redeemed, him arguing with her over a new military curriculum and calling it stupid, and realizing she needs someone else to help her with planning the wars to come, and she knows who to choose
+		IF = {
+			limit = {
+				has_country_flag = sunset_redeemed
+			}
+			country_event = {
+				id = celestia.44
+			}
+		}
+		ELSE = {
+			country_event = {
+				id = celestia.43
+			}
+		}
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -4491,7 +4564,16 @@ shared_focus = {
 	mutually_exclusive = { focus = miniaturize_the_matrix }
 	
 	completion_reward = {
-		###Add resources here
+		add_resource = {
+			type = crystals
+			amount = 10
+			state = 39
+		}
+		add_resource = {
+			type = chromium
+			amount = 6
+			state = 39
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -4506,7 +4588,16 @@ shared_focus = {
 	prerequisite = { focus = unearth_the_hidden_cornucopia }
 	
 	completion_reward = {
-		###Add resources here
+		add_resource = {
+			type = tungsten
+			amount = 4
+			state = 65
+		}
+		add_resource = {
+			type = aluminium
+			amount = 6
+			state = 65
+		}
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -4599,7 +4690,16 @@ shared_focus = {
 	prerequisite = { focus = miniaturize_the_matrix }
 	
 	completion_reward = {
-		###Add resources here
+		add_resource = {
+			type = steel
+			amount = 6
+			state = 12
+		}
+		add_resource = {
+			type = steel
+			amount = 12
+			state = 75
+		}
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -4629,7 +4729,12 @@ shared_focus = {
 	prerequisite = { focus = miniaturize_the_matrix }
 	
 	completion_reward = {
-		###Add building slots here
+		75 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		12 = {
+			add_extra_state_shared_building_slots = 1
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -4738,7 +4843,30 @@ shared_focus = {
 	prerequisite = { focus = redefine_eceas_function }
 	
 	completion_reward = {
-		###Add building construction here
+		12 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		75 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		3 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -4759,7 +4887,14 @@ shared_focus = {
 			popularity = 0.15
 		}
 		add_stability = 0.1
-		###Add building construction here
+		106 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
 	}
 	ai_will_do = { factor = 20 }
 }

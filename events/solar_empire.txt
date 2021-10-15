@@ -384,6 +384,8 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		date < 1048.12.1
 	}
 	
+	fire_only_once = yes
+	
 	option = {
 		name = solar.18.a
 		ai_chance = {
@@ -1217,7 +1219,7 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 				ideology = solarism
 				#desc = "POLITICS_MIDWINTER_HALO_DESC"
 				traits = {
-					unprepared_warrior
+					reluctant_regent
 				}
 			}
 			start_civil_war = {
@@ -1722,10 +1724,50 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 				female = yes
 			}
 		}
-		swap_ideas = {
-			add_idea = destitute_diarchy
-			remove_idea = great_war_aftermath
-		}
+		IF = {
+			limit = {
+				NOT = {
+					has_completed_focus = addressing_the_faithful_generals
+				}
+			}
+			create_corps_commander = {
+				name = "Allen Spark"
+				portrait_path = "gfx/leaders/EQS/Allen.tga"
+				traits = { commando pony_race_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 3
+				id = 31
+			} custom_effect_tooltip = allen_spark_stats_tp
+			create_corps_commander = {
+				name = "Fireflight"
+				portrait_path = "gfx/leaders/EQS/Fireflight.tga"
+				traits = { fireflight pony_race_trait }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 2
+				id = 32
+			} custom_effect_tooltip = fireflight_stats_tp
+			create_corps_commander = {
+				name = "Bernard Hoofgonery"
+				portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
+				traits = { pony_race_trait }
+				skill = 2
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 3
+				id = 30
+			} custom_effect_tooltip = bernard_hoofgonery_stats_tp
+				swap_ideas = {
+					add_idea = destitute_diarchy
+					remove_idea = great_war_aftermath
+				}
+			}
 		add_stability = -0.05
 		add_war_support = -0.15
 		set_country_flag = end_of_equestria_civil_war
@@ -2338,6 +2380,30 @@ country_event = { #Celestia holds a public sentence of many of the heads of the 
 			ideology = fascism
 			popularity = -0.02
 		}
+	}
+}
+
+country_event = { #Celestia pours over some of her plans for retaking Equestria where resistance is met, and she hears Blueblood fighting with some guards about being allowed into the planning room, and she gets an idea to get assistance and speaks with
+	id = celestia.43
+	title = celestia.43.t
+	desc = celestia.43.d
+	
+	is_triggered_only = yes
+	
+	option = { #Oh, come here my favorite nephew, I have a suggestion for you
+		name = celestia.43.a
+	}
+}
+
+country_event = { #Celestia pours over some of her plans for retaking Equestria where resistance is met, and she hears Blueblood fighting with Sunset over what the best plan of action for Equestria would be, and Celestia decides she needs one of them for help, but she knows it will not do to have both, as they disagree too much
+	id = celestia.44
+	title = celestia.44.t
+	desc = celestia.44.d
+	
+	is_triggered_only = yes
+	
+	option = { #The wayward student or the bloodthirsty nephew? This will not be an easy choice
+		name = celestia.44.a
 	}
 }
 
@@ -3442,13 +3508,13 @@ country_event = { #Celestia hopes that Whinnyapolis or Marechester will see the 
 		name = celestia.546.a
 		WHY = {
 			country_event = {
-				id = celestia.546
+				id = celestia.547
 				days = 1
 			}
 		}
 		NER = {
 			country_event = {
-				id = celestia.547
+				id = celestia.548
 				days = 1
 			}
 		}
@@ -3456,25 +3522,15 @@ country_event = { #Celestia hopes that Whinnyapolis or Marechester will see the 
 }
 
 country_event = { #Whinnyapolis receives the letter and instantly throws it out, as they are still loyal to Daybreaker or would rather focus on annhilating communists
-	id = celestia.546
-	title = celestia.546.t
-	desc = celestia.546.d
+	id = celestia.547
+	title = celestia.547.t
+	desc = celestia.547.d
 	
 	is_triggered_only = yes
 	
 	option = { #Celestia will aid us in our purge of communism!
-		name = celestia.546.a
+		name = celestia.547.a
 		ai_chance = { factor = 5 }
-		EQS = {
-			country_event = {
-				id = celestia.548
-				days = 1
-			}
-		}
-	}
-	option = { #Ha! No!
-		name = celestia.546.b
-		ai_chance = { factor = 95 }
 		EQS = {
 			country_event = {
 				id = celestia.549
@@ -3482,18 +3538,9 @@ country_event = { #Whinnyapolis receives the letter and instantly throws it out,
 			}
 		}
 	}
-}
-
-country_event = { #Marechester has trouble reading the letter, but eventually realizes what it's asking and convenes a meeting of communes to decide
-	id = celestia.547
-	title = celestia.547.t
-	desc = celestia.547.d
-	
-	is_triggered_only = yes
-	
-	option = { #This is far-out, man! We can chill with a princess!
-		name = celestia.547.a
-		ai_chance = { factor = 25 }
+	option = { #Ha! No!
+		name = celestia.547.b
+		ai_chance = { factor = 95 }
 		EQS = {
 			country_event = {
 				id = celestia.550
@@ -3501,9 +3548,18 @@ country_event = { #Marechester has trouble reading the letter, but eventually re
 			}
 		}
 	}
-	option = { #No way, we're not going to give up our free spirits that easily!
-		name = celestia.547.b
-		ai_chance = { factor = 75 }
+}
+
+country_event = { #Marechester has trouble reading the letter, but eventually realizes what it's asking and convenes a meeting of communes to decide
+	id = celestia.548
+	title = celestia.548.t
+	desc = celestia.548.d
+	
+	is_triggered_only = yes
+	
+	option = { #This is far-out, man! We can chill with a princess!
+		name = celestia.548.a
+		ai_chance = { factor = 25 }
 		EQS = {
 			country_event = {
 				id = celestia.551
@@ -3511,12 +3567,22 @@ country_event = { #Marechester has trouble reading the letter, but eventually re
 			}
 		}
 	}
+	option = { #No way, we're not going to give up our free spirits that easily!
+		name = celestia.548.b
+		ai_chance = { factor = 75 }
+		EQS = {
+			country_event = {
+				id = celestia.552
+				days = 1
+			}
+		}
+	}
 }
 
 country_event = { #Celestia gets the response from Whinnyapolis and is overjoyed at the region returning
-	id = celestia.548
-	title = celestia.548.t
-	desc = celestia.548.d
+	id = celestia.549
+	title = celestia.549.t
+	desc = celestia.549.d
 	
 	is_triggered_only = yes
 	
@@ -3527,22 +3593,22 @@ country_event = { #Celestia gets the response from Whinnyapolis and is overjoyed
 }
 
 country_event = { #Celestia gets a one word response of no and she is upset at it, but ultimately not surprised
-	id = celestia.549
-	title = celestia.549.t
-	desc = celestia.549.d
+	id = celestia.550
+	title = celestia.550.t
+	desc = celestia.550.d
 	
 	is_triggered_only = yes
 	
 	option = { #Well, another one bites the dust, I guess
-		name = celestia.549.a
+		name = celestia.550.a
 		add_political_power = -20
 	}
 }
 
 country_event = { #Celestia is contacted by one of the communes to inform them that they've changed borders, but still want to live free
-	id = celestia.550
-	title = celestia.550.t
-	desc = celestia.550.d
+	id = celestia.551
+	title = celestia.551.t
+	desc = celestia.551.d
 	
 	is_triggered_only = yes
 	
@@ -3553,30 +3619,30 @@ country_event = { #Celestia is contacted by one of the communes to inform them t
 }
 
 country_event = { #Celestia gets a shoddily worded letter about being rejected, and she's confused about what she reads
-	id = celestia.551
-	title = celestia.551.t
-	desc = celestia.551.d
-	
-	is_triggered_only = yes
-	
-	option = { #Is that an L or an I? What the heck is a "Mefluv?"
-		name = celestia.551.a
-		add_political_power = -20
-	}
-}
-
-country_event = { #Celestia writes to the Princessdom about returning and that she can be their princess once again, and appeals to their harmonism
 	id = celestia.552
 	title = celestia.552.t
 	desc = celestia.552.d
 	
 	is_triggered_only = yes
 	
-	option = { #They've been searching for a princess, now they have one
+	option = { #Is that an L or an I? What the heck is a "Mefluv?"
 		name = celestia.552.a
+		add_political_power = -20
+	}
+}
+
+country_event = { #Celestia writes to the Princessdom about returning and that she can be their princess once again, and appeals to their harmonism
+	id = celestia.553
+	title = celestia.553.t
+	desc = celestia.553.d
+	
+	is_triggered_only = yes
+	
+	option = { #They've been searching for a princess, now they have one
+		name = celestia.553.a
 		CER = {
 			country_event = {
-				id = celestia.553
+				id = celestia.554
 				days = 1
 			}
 		}
@@ -3584,25 +3650,15 @@ country_event = { #Celestia writes to the Princessdom about returning and that s
 }
 
 country_event = { #The princessdom receives the letter and is excited at first but still try to see if they can prove Celestia's intent
-	id = celestia.553
-	title = celestia.553.t
-	desc = celestia.553.d
+	id = celestia.554
+	title = celestia.554.t
+	desc = celestia.554.d
 	
 	is_triggered_only = yes
 	
 	option = { #At last we can say we've kept harmony alive!
-		name = celestia.553.a
+		name = celestia.554.a
 		ai_chance = { factor = 35 }
-		EQS = {
-			country_event = {
-				id = celestia.554
-				days = 1
-			}
-		}
-	}
-	option = { #It is a pretender! Daybreaker or somepony else is attempting to usurp the throne for themselves!
-		name = celestia.553.b
-		ai_chance = { factor = 65 }
 		EQS = {
 			country_event = {
 				id = celestia.555
@@ -3610,7 +3666,89 @@ country_event = { #The princessdom receives the letter and is excited at first b
 			}
 		}
 	}
+	option = { #It is a pretender! Daybreaker or somepony else is attempting to usurp the throne for themselves!
+		name = celestia.554.b
+		ai_chance = { factor = 65 }
+		EQS = {
+			country_event = {
+				id = celestia.556
+				days = 1
+			}
+		}
+	}
 }
+
+country_event = { #Celestia receives a response saying they are happy to return and that they want to make sure all live in harmony
+	id = celestia.555
+	title = celestia.555.t
+	desc = celestia.555.d
+	
+	is_triggered_only = yes
+	
+	option = { #I'm curious what "New Canterlot" looks like. Perhaps like it was a thousand years ago?
+		name = celestia.555.a
+		annex_country = { target = CER transfer_troops = yes }
+	}
+}
+
+country_event = { #Celestia is annoyed and insulted that they think she's a fake princess, but she isn't surprised
+	id = celestia.556
+	title = celestia.556.t
+	desc = celestia.556.d
+	
+	is_triggered_only = yes
+	
+	option = { #This seems to be a running pattern
+		name = celestia.556.a
+		add_political_power = -20
+	}
+}
+
+country_event = { #Celestia receives communique from the Crystal Empire about their agreement to partition Stalliongrad and she determines if she honors it
+	id = celestia.557
+	title = celestia.557.t
+	desc = celestia.557.d
+	
+	trigger = {
+		tag = EQS
+		OR = {
+			153 = {
+				is_owned_by = ROOT
+			}
+			153 = {
+				is_owned_by = CRY
+			}
+		}
+		CRY = {
+			is_in_faction_with = ROOT
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We shall honor our plans
+		name = celestia.557.a
+		CRY = {
+			transfer_state = 153
+			transfer_state = 57
+			transfer_state = 165
+			transfer_state = 240
+			transfer_state = 334
+			transfer_state = 235
+			transfer_state = 161
+			transfer_state = 162
+			transfer_state = 326
+			transfer_state = 156
+			transfer_state = 155
+			transfer_state = 163
+			transfer_state = 160
+			transfer_state = 164
+			transfer_state = 237
+		}
+	}
+	###Make section option later that renegs the deal, which makes the Crystal Empire leave and also give a -100 opinion modifier of dishonorable
+}
+
 
 ###Debug Events###
 country_event = {
@@ -3628,32 +3766,6 @@ country_event = {
 			end_puppet = BAL
 			remove_from_faction = BAL
 		}
-	}
-}
-
-country_event = { #Celestia receives a response saying they are happy to return and that they want to make sure all live in harmony
-	id = celestia.554
-	title = celestia.554.t
-	desc = celestia.554.d
-	
-	is_triggered_only = yes
-	
-	option = { #I'm curious what "New Canterlot" looks like. Perhaps like it was a thousand years ago?
-		name = celestia.554.a
-		annex_country = { target = CER transfer_troops = yes }
-	}
-}
-
-country_event = { #Celestia is annoyed and insulted that they think she's a fake princess, but she isn't surprised
-	id = celestia.555
-	title = celestia.555.t
-	desc = celestia.555.d
-	
-	is_triggered_only = yes
-	
-	option = { #This seems to be a running pattern
-		name = celestia.555.a
-		add_political_power = -20
 	}
 }
 	

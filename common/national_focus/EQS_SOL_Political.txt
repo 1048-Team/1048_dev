@@ -277,6 +277,7 @@ shared_focus = {
 				level = 1
 				instant_build = yes
 			}
+			add_extra_state_shared_building_slots = 2
 		}
 	}
 	ai_will_do = {
@@ -308,7 +309,10 @@ shared_focus = {
 	}
 	
 	completion_reward = {
-		add_ideas = searing_light
+		add_timed_idea = {
+			idea = purifying_light
+			days = 210
+		}
 	}
 	ai_will_do = {
 		factor = 25
@@ -390,6 +394,7 @@ shared_focus = {
 				level = 2
 				instant_build = yes
 			}
+			add_extra_state_shared_building_slots = 2
 		}
 		add_timed_idea = {
 			idea = donated_assets
@@ -1473,6 +1478,7 @@ shared_focus = {
 				level = 1
 				instant_build = yes
 			}
+			add_extra_state_shared_building_slots = 2
 		}
 		country_event = {
 			id = solar.107
@@ -1603,8 +1609,8 @@ shared_focus = {
 	
 	bypass = {
 		OR = {
-			NOT = {
-				AND = {
+			AND = {
+				NOT = {
 					has_global_flag = balsplosion
 					country_exists = BAL
 				}
@@ -1681,9 +1687,34 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		add_timed_idea = {
-			idea = purging_the_daemons
-			days = 90
+		IF = {
+			limit = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+					}
+					country_exists = BAL
+				}
+			}
+			add_timed_idea = {
+				idea = purging_the_secularists
+				days = 90
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_global_flag = balsplosion
+					OR = {
+						country_exists = EEE
+						country_exists = NEI
+					}
+				}
+			}
+			add_timed_idea = {
+				idea = purging_the_daemons
+				days = 90
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
@@ -2011,6 +2042,7 @@ shared_focus = {
 				level = 2
 				instant_build = yes
 			}
+			add_extra_state_shared_building_slots = 2
 		}
 	}
 	ai_will_do = { factor = 20 }
