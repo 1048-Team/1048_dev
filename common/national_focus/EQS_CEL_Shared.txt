@@ -127,7 +127,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Steal a Solar General, ideally one of the weaker ones that gets purged if they're alive or can be a harmonist resistance general (if Solar General, have it be Swift Wing), if it's a resistance member, have it be a new leader and it will be Button Mash, who used his gaming skills to advantage, although he does have a trait that lowers his org and number of ponies he can lead
-		###Spawn three ten-width infantry loyalist divisions
+		load_oob = "SOL_celestia_resistance_remnants"
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -196,7 +196,7 @@ shared_focus = {
 		logistics_skill = 3
 		id = 30
 	} custom_effect_tooltip = bernard_hoofgonery_stats_tp
-		###Spawn seven 8 width divisions of loyalists and insurgents
+		load_oob = "SOL_celestia_harmonist_generals"
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -912,6 +912,11 @@ shared_focus = {
 	
 	completion_reward = {
 		###add peaceful advisors: Evening Glitter for industrialist, Warm Beam for theorist, and Sunrise Flicker for silent workpony, Crow Magnate for +5% RS and +10% pp
+		set_country_flag = unlocked_nice_advisors
+		show_ideas_tooltip = evening_glitter
+		show_ideas_tooltip = warm_beam
+		show_ideas_tooltip = sunrise_flicker
+		show_ideas_tooltip = crow_magnate
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -2428,6 +2433,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Either make OOB to create four 10 width infantry with engineers and support artillery, or make a NS that reduces recon and max entrenchment
+		load_oob = "SOL_stalliongrad_insurgents"
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -2550,7 +2556,10 @@ shared_focus = {
 	prerequisite = { focus = issue_a_final_warning }
 	
 	completion_reward = {
-		###Add spirit for 10% max planning for 730 days
+		add_timed_idea = {
+			idea = reconvened_general_staff
+			days = 730
+		}
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -2584,7 +2593,9 @@ shared_focus = {
 	prerequisite = { focus = meet_with_the_general_staff }
 	
 	completion_reward = {
-		###Celestia reviews old information from POW files of changelings and uses it to base some tactics off them, +5% attack vs CHN for 365 days
+		country_event = {
+			id = celestia.45
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -2601,7 +2612,10 @@ shared_focus = {
 	prerequisite = { focus = pair_down_the_borders }
 	
 	completion_reward = {
-		###Add increased conscription modifier for 0.5% conscription
+		add_timed_idea = {
+			idea = for_a_free_equestria
+			days = 365
+		}
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -2704,7 +2718,9 @@ shared_focus = {
 	prerequisite = { focus = a_final_end_to_the_great_war }
 	
 	completion_reward = {
-		###Event for Celestia meeting with Goldfeather, or providing him refuge, depending on country existence, and getting his assistance with toppling Marelandia
+		country_event = {
+			id = celestia.46
+		}
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -2720,10 +2736,20 @@ shared_focus = {
 	prerequisite = { focus = a_final_end_to_the_great_war }
 	
 	completion_reward = {
-		###Give Marelandia NS for +0.05 daily harmony gain and launch OOB with ten 8 width divisions with recon when war starts
+		EQC = {
+			add_timed_idea = {
+				idea = awakening_the_proles
+				days = 180
+			}
+		}
 		add_manpower = -25000
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
+			amount = -25000
+			producer = EQS
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
 			amount = -5000
 			producer = EQS
 		}
@@ -2747,6 +2773,13 @@ shared_focus = {
 			type = infantry_equipment
 			amount = -10000
 			producer = EQS
+		}
+		TRD = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10000
+				producer = EQS
+			}
 		}
 	}
 	ai_will_do = { factor = 20 }
