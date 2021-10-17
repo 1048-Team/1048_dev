@@ -1793,6 +1793,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 		add_stability = -0.05
 		add_war_support = -0.15
 		set_country_flag = end_of_equestria_civil_war
+		set_country_flag = rescued_harmonic_advisors
 		mark_focus_tree_layout_dirty = yes
 	}
 }
@@ -2580,6 +2581,91 @@ country_event = { #Word arrives that some different harmonist cells have finally
 		custom_effect_tooltip = spawn_harmonists_tt
 		hidden_effect = {
 			load_oob = "SOL_celestia_harmonist_generals"
+		}
+	}
+}
+
+country_event = { #A harmonist general (a name like Blooming Lily or something) is surprised to see griffons and ponies coming to see her, claiming they are some resistance to Marelandia, and want to help, and she conscripts them
+	id = celestia.52
+	title = celestia.52.t
+	desc = celestia.52.d
+	
+	is_triggered_only = yes
+	
+	option = { #Very well, grab rifles and let's kick some flank!
+		name = celestia.52.a
+		custom_effect_tooltip = EQC_militias_tt
+		hidden_effect = {
+			load_oob = "SOL_celestia_EQC_militias"
+		}
+	}
+}
+
+country_event = { #Troops land on the coast of Marelandia and encounter insane resistance from bunkers and the like, and there is much bloodshed on both sides, especially the assailants
+	id = celestia.53
+	title = celestia.53.t
+	desc = celestia.53.d
+	
+	is_triggered_only = yes
+	
+	option = { #A million deaths are a statistic...
+		name = celestia.53.a
+	}
+}
+
+country_event = { #Sunset is invaded by Equestria and the resting fleet is scuttled to avoid capture as the Equestrians head toward the Ministries amongst heavy assault and loss of life
+	id = celestia.54
+	title = celestia.54.t
+	desc = celestia.54.d
+	
+	is_triggered_only = yes
+	
+	option = { #A single death there is a tragedy...
+		name = celestia.54.a
+	}
+}
+
+country_event = { #After the end of the war, as Equestria sifts through the rubble of the different ministries, they find a barely alive Jet Set amongst the ruins and bring him back from the brink to speak with Celestia
+	id = celestia.55
+	title = celestia.55.t
+	desc = celestia.55.d
+	
+	is_triggered_only = yes
+	
+	option = { #What in the world?!
+		name = celestia.55.a
+		country_event = {
+			id = celestia.56
+			days = 1
+		}
+	}
+}
+
+country_event = { #When Jet Set is well enough, he speaks with Celestia and although he is a bit twitchy from his torture, admits he never lost hope, and wishes to try and bring New Mareland from the brink, which Celestia decides he can do
+	id = celestia.56
+	title = celestia.56.t
+	desc = celestia.56.d
+	
+	is_triggered_only = yes
+	
+	option = { #My old friend, of course. But there are will be some additional oversight needed...
+		name = celestia.56.a
+		custom_effect_tooltip = EQC_reestablished_tt
+		IF = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			release_autonomy = {
+				target = EQC
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+			}
+		}
+		ELSE = {
+			release_puppet = EQC
+		}
+		EQC = {
+			set_cosmetic_tag = EQC_EQS
 		}
 	}
 }
