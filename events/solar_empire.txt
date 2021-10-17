@@ -1768,6 +1768,28 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 					remove_idea = great_war_aftermath
 				}
 			}
+		hidden_effect = {
+			IF = {
+				limit = {
+					has_completed_focus = addressing_the_faithful_generals
+				}
+				delete_unit_template_and_units = {
+					division_template = "Equestrian Veterans"
+				}
+				delete_unit_template_and_units = {
+					division_template = "Starlight's Remnants"
+				}
+			}
+			IF = {
+				limit = {
+					has_completed_focus = salvation_to_the_lost
+				}
+				delete_unit_template_and_units = {
+					division_template = "Solar Deserters"
+				}
+			}
+		}
+		custom_effect_tooltip = remove_solar_civil_war_divisions_tt
 		add_stability = -0.05
 		add_war_support = -0.15
 		set_country_flag = end_of_equestria_civil_war
@@ -2484,15 +2506,81 @@ country_event = { #Celestia is jubulant at having another to help with her war a
 }
 
 country_event = { #Celestia is downcast when she is denied, but she takes it gracefully and prepares to leave, dejected and disappointed
-	id = celestia.48
-	title = celestia.48.t
-	desc = celestia.48.d
+	id = celestia.49
+	title = celestia.49.t
+	desc = celestia.49.d
 	
 	is_triggered_only = yes
 	
 	option = { #I see. I wish you the best of luck
-		name = celestia.48.a
+		name = celestia.49.a
 		add_political_power = -150
+	}
+}
+
+country_event = { #Celestia is contacted via a mysterious letter and she finds its writer is Swift Wing, promising to serve Celestia as the true leader of Equestria along with some of her loyal soldiers
+	id = celestia.50
+	title = celestia.50.t
+	desc = celestia.50.d
+	
+	is_triggered_only = yes
+	
+	option = { #Your years of service will be most helpful
+		name = celestia.50.a
+		custom_effect_tooltip = spawn_defectors_tt
+		hidden_effect = {
+			load_oob = "SOL_celestia_resistance_remnants"
+			event_target:SOL_Swift_Wing = { set_nationality = EQS }
+		}
+	}
+}
+
+country_event = { #Word arrives that some different harmonist cells have finally gathered their forces and assemebled for helping in the civil war with the Solar Empire, and Celestia holds a speech with the few leaders left to tell them the odds
+	id = celestia.51
+	title = celestia.51.t
+	desc = celestia.51.d
+	
+	is_triggered_only = yes
+	
+	option = { #You honor your pledges to Equestria's defense. I pray that we all live long enough to see its freedom
+		name = celestia.51.a
+		create_corps_commander = {
+			name = "Allen Spark"
+			portrait_path = "gfx/leaders/EQS/Allen.tga"
+			traits = { commando infantry_leader pony_race_trait }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 5
+			id = 31
+		} custom_effect_tooltip = allen_spark_stats_tp
+		create_corps_commander = {
+			name = "Fireflight"
+			portrait_path = "gfx/leaders/EQS/Fireflight.tga"
+			traits = { fireflight pony_race_trait }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 4
+			logistics_skill = 3
+			id = 32
+		} custom_effect_tooltip = fireflight_stats_tp
+		create_corps_commander = {
+			name = "Bernard Hoofgonery"
+			portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
+			traits = { organizer pony_race_trait }
+			skill = 4
+			attack_skill = 3
+			defense_skill = 4
+			planning_skill = 6
+			logistics_skill = 3
+			id = 30
+		} custom_effect_tooltip = bernard_hoofgonery_stats_tp
+		custom_effect_tooltip = spawn_harmonists_tt
+		hidden_effect = {
+			load_oob = "SOL_celestia_harmonist_generals"
+		}
 	}
 }
 
@@ -3811,6 +3899,7 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 		CRY = {
 			is_in_faction_with = ROOT
 		}
+		has_country_flag = stalliongrad_partition_plans
 	}
 	
 	fire_only_once = yes
