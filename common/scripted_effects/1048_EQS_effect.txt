@@ -11,11 +11,9 @@ SOL_Celestia_Returned = {
 	}
 	retire_country_leader = yes
 	create_country_leader = {
-		name = "Various Orders"
+		name = "Plures Ordines Cultus"
 		expire = "1965.1.1"
-		#picture = "gfx/leaders/SOL/Midwinter.tga"
 		ideology = solarism
-		#desc = "POLITICS_MIDWINTER_HALO_DESC"
 		traits = {
 		}
 	}
@@ -51,6 +49,71 @@ SOL_Celestia_Returned = {
 		}
 		SLW = { transfer_state = PREV }
 	}
+	every_state = {
+		limit = {
+			is_controlled_by = SLW
+		}
+		teleport_armies = {
+			limit = { tag = EQS }
+		}
+	}
+	EQS = {
+		transfer_ship = {
+			prefer_name = "HMS Harmony in Order"
+			type = battleship
+			target = SLW
+		}
+		transfer_ship = {
+			prefer_name = "HMS Ravager"
+			type = battleship
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = light_cruiser
+			target = SLW
+		}
+		transfer_ship = {
+			type = light_cruiser
+			target = SLW
+		}
+		transfer_ship = {
+			type = battle_cruiser
+			target = SLW
+		}
+	}
+		
 		
 	#start_civil_war = {
 	#	ideology = fascism
@@ -103,5 +166,43 @@ SOL_Celestia_Returned = {
 		}
 		remove_ideas = heretical_commanders
 	}
+	IF = {
+		limit = {
+			has_idea = purified_high_command
+		}
+		remove_ideas = purified_high_command
+	}
+	load_oob = "SOL_civil_war_cel"
+	EQS = {
+		event_target:SOL_Midwinter_Halo = { set_nationality = SLW }
+		event_target:SOL_Swift_Wing = { set_nationality = SLW }
+		event_target:SOL_Orion_Star = { set_nationality = SLW }
+		IF = {
+			limit = { has_unit_leader = 2 }
+			remove_unit_leader = 2
+		}
+	}
+	add_ideas = eqs_slw_civil_war
+	SLW = {
+		add_ideas = eqs_slw_civil_war
+		random_unit_leader = {
+			limit = { has_id = 35 }
+			promote_leader = yes
+		}
+		IF = {
+			limit = { country_exists = EQS }
+			create_wargoal = {
+				type = annex_everything
+				target = EQS
+			}
+			declare_war_on = {
+				target = EQS type = annex_everything
+			}
+		}
+		load_oob = "SLW_civil_war"
+	}
 	load_focus_tree = solar_empire_celestia_focus
+	SLW = {
+		load_focus_tree = solar_empire_focus
+	}
 }
