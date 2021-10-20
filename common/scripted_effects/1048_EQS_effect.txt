@@ -177,6 +177,10 @@ SOL_Celestia_Returned = {
 		event_target:SOL_Midwinter_Halo = { set_nationality = SLW }
 		event_target:SOL_Swift_Wing = { set_nationality = SLW }
 		event_target:SOL_Orion_Star = { set_nationality = SLW }
+		event_target:SOL_Dust_Hoover = { set_nationality = SLW }
+		event_target:SOL_Iceheart = { set_nationality = SLW }
+		event_target:SOL_Molten_Song = { set_nationality = SLW }
+		event_target:SOL_Squal = { set_nationality = SLW }
 		IF = {
 			limit = { has_unit_leader = 2 }
 			remove_unit_leader = 2
@@ -188,6 +192,7 @@ SOL_Celestia_Returned = {
 		random_unit_leader = {
 			limit = { has_id = 35 }
 			promote_leader = yes
+			remove_unit_leader_trait = recently_promoted
 		}
 		IF = {
 			limit = { country_exists = EQS }
@@ -205,4 +210,111 @@ SOL_Celestia_Returned = {
 	SLW = {
 		load_focus_tree = solar_empire_focus
 	}
+}
+
+SOL_end_of_civil_war_CEL = {
+	IF = {
+		limit = {
+			has_unit_leader = 1
+		}
+		custom_effect_tooltip = blueblood_arrested_tt
+		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
+	}
+	IF = {
+		limit = {
+			has_unit_leader = 3
+		}
+		custom_effect_tooltip = sunset_arrested_tt
+		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+	}
+	IF = {
+		limit = {
+			NOT = {
+				has_unit_leader = 5000
+			}
+		}
+		create_field_marshal = {
+			name = "Princess Celestia"
+			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+			traits = { pony_race_trait pleasant_sun inspirational_leader }
+			id = 5000
+			skill = 2
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+			female = yes
+		}
+	}
+	IF = {
+		limit = {
+			NOT = {
+				has_completed_focus = addressing_the_faithful_generals
+			}
+		}
+		create_corps_commander = {
+			name = "Allen Spark"
+			portrait_path = "gfx/leaders/EQS/Allen.tga"
+			traits = { commando pony_race_trait }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 3
+			id = 31
+		} custom_effect_tooltip = allen_spark_stats_tp
+		create_corps_commander = {
+			name = "Fireflight"
+			portrait_path = "gfx/leaders/EQS/Fireflight.tga"
+			traits = { fireflight pony_race_trait }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			id = 32
+		} custom_effect_tooltip = fireflight_stats_tp
+		create_corps_commander = {
+			name = "Bernard Hoofgonery"
+			portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
+			traits = { pony_race_trait }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 3
+			id = 30
+		} custom_effect_tooltip = bernard_hoofgonery_stats_tp	
+	}
+	swap_ideas = {
+		add_idea = destitute_diarchy
+		remove_idea = great_war_aftermath
+	}
+	hidden_effect = {
+		IF = {
+			limit = {
+				has_completed_focus = addressing_the_faithful_generals
+			}
+			delete_unit_template_and_units = {
+				division_template = "Equestrian Veterans"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Starlight's Remnants"
+			}
+		}
+		IF = {
+			limit = {
+				has_completed_focus = salvation_to_the_lost
+			}
+			delete_unit_template_and_units = {
+				division_template = "Solar Deserters"
+			}
+		}
+	}
+	custom_effect_tooltip = remove_solar_civil_war_divisions_tt
+	add_stability = -0.05
+	add_war_support = -0.15
+	set_country_flag = end_of_equestria_civil_war
+	set_country_flag = rescued_harmonic_advisors
+	mark_focus_tree_layout_dirty = yes
 }

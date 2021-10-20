@@ -186,6 +186,10 @@ country_event = {
 				female = yes
 			}
 			set_country_flag = sentinel_killed
+			random_army_leader = {
+				limit = { has_id = 2 }
+				save_global_event_target_as = SOL_Aurora_Shinespark
+			}
 		}
 	}
 
@@ -618,7 +622,7 @@ country_event = { #The Inquisitionis is instated into the unions of Manehattan t
 	is_triggered_only = yes
 	
 	option = {
-		name = solar.42.a
+		name = solar.41.a
 		ai_chance = {
 			factor = 100
 		}
@@ -833,7 +837,8 @@ country_event = { #Celestia reveals herself and almost prevents Daybreaker from 
 				}
 			}
 		remove_country_leader_trait = daybreaker_god2
-		remove_unit_leader = 4
+		custom_effect_tooltip = daybreaker_bedridden_tt
+		hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = BAG } }
 		}
 	}
 	
@@ -1227,7 +1232,8 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			}
 			hidden_effect = {
 				retire_country_leader = yes
-				remove_unit_leader = 3
+				custom_effect_tooltip = sunset_arrested_tt
+				hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
 				create_country_leader = {
 				name = "Sunset Shimmer"
 				expire = "1965.1.1"
@@ -1255,7 +1261,8 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			}
 			hidden_effect = {
 				retire_country_leader = yes
-				remove_unit_leader = 2
+				custom_effect_tooltip = aurora_retires_tt
+				hidden_effect = { event_target:SOL_Aurora_Shinespark = { set_nationality = BAG } }
 				create_country_leader = {
 				name = "Aurora Shinespark"
 				expire = "1965.1.1"
@@ -1316,18 +1323,8 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 	
 	option = { 
 		name = solar.103.a
-		create_field_marshal = {
-			name = "Daybreaker"
-			portrait_path = "gfx/leaders/EQS/Daybreaker.tga"
-			traits = { pony_race_trait solar_fury }
-			id = 5100
-			skill = 3
-			attack_skill = 6
-			defense_skill = 2
-			planning_skill = 4
-			logistics_skill = 3
-			female = yes
-		}
+		custom_effect_tooltip = daybreaker_returns_tt
+		hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = EQS } }
 	}
 }
 
@@ -1354,7 +1351,7 @@ country_event = { #Daybreaker assembles some of the brightest of the Inquisition
 		}
 		create_corps_commander = {
 			name = "Nova Glow"
-			#portrait_path = "gfx/leaders/EQS/Nova_Glow.tga"
+			portrait_path = "gfx/leaders/EQS/Nova_Glow.tga"
 			traits = { pony_race_trait morning_star solaris_inquisitionis }
 			id = 5102
 			skill = 1
@@ -1552,7 +1549,8 @@ country_event = { #Sunset and the others are captured, and Celestia holds them f
 	
 	option = { #You've made your choice, Sunset. I will speak with you later
 		name = celestia.2.a
-		remove_unit_leader = 3
+		custom_effect_tooltip = sunset_arrested_tt
+		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
 	}
 }
 
@@ -1565,7 +1563,8 @@ country_event = { #Celestia arrests Blueblood for his part and appoints herself 
 	
 	option = { #I've had far too many years to learn about war
 		name = celestia.3.a
-		remove_unit_leader = 1
+		custom_effect_tooltip = blueblood_arrested_tt
+		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
 		create_field_marshal = {
 			name = "Princess Celestia"
 			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
@@ -1590,18 +1589,8 @@ country_event = { #Sunset asks to see Celestia and begs for proving her repenten
 	
 	option = { #Very well, my former student, you shall prove your sincerity in battle
 		name = celestia.4.a
-		create_field_marshal = {
-			name = "Sunset Shimmer"
-			portrait_path = "gfx/leaders/EQS/Sunset.tga"
-			traits = { fading_experience high_mage brilliant_strategist thorough_planner pony_race_trait }
-			id = 5001
-			skill = 4
-			attack_skill = 4
-			defense_skill = 3
-			planning_skill = 3
-			logistics_skill = 4
-			female = yes
-		}
+		custom_effect_tooltip = sunset_returns_tt
+		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = EQS } }
 	}
 }
 
@@ -1615,7 +1604,9 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 	trigger = {
 		tag = EQS
 		has_completed_focus = return_of_the_princess
-		has_civil_war = no
+		NOT = {
+			has_war_with = SLW
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -1624,114 +1615,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 	
 	option = { #Now I must heal my country
 		name = celestia.5.a
-		IF = {
-			limit = {
-				has_unit_leader = 1
-			}
-			remove_unit_leader = 1
-		}
-		IF = {
-			limit = {
-				has_unit_leader = 3
-			}
-			remove_unit_leader = 3
-		}
-		IF = {
-			limit = {
-				has_unit_leader = 5001
-			}
-			remove_unit_leader = 5001
-		}
-		IF = {
-			limit = {
-				NOT = {
-					has_unit_leader = 5000
-				}
-			}
-			create_field_marshal = {
-				name = "Princess Celestia"
-				portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
-				traits = { pony_race_trait pleasant_sun inspirational_leader }
-				id = 5000
-				skill = 2
-				attack_skill = 3
-				defense_skill = 3
-				planning_skill = 2
-				logistics_skill = 2
-				female = yes
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					has_completed_focus = addressing_the_faithful_generals
-				}
-			}
-			create_corps_commander = {
-				name = "Allen Spark"
-				portrait_path = "gfx/leaders/EQS/Allen.tga"
-				traits = { commando pony_race_trait }
-				skill = 2
-				attack_skill = 2
-				defense_skill = 1
-				planning_skill = 1
-				logistics_skill = 3
-				id = 31
-			} custom_effect_tooltip = allen_spark_stats_tp
-			create_corps_commander = {
-				name = "Fireflight"
-				portrait_path = "gfx/leaders/EQS/Fireflight.tga"
-				traits = { fireflight pony_race_trait }
-				skill = 2
-				attack_skill = 2
-				defense_skill = 1
-				planning_skill = 2
-				logistics_skill = 2
-				id = 32
-			} custom_effect_tooltip = fireflight_stats_tp
-			create_corps_commander = {
-				name = "Bernard Hoofgonery"
-				portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
-				traits = { pony_race_trait }
-				skill = 2
-				attack_skill = 3
-				defense_skill = 2
-				planning_skill = 3
-				logistics_skill = 3
-				id = 30
-			} custom_effect_tooltip = bernard_hoofgonery_stats_tp
-				swap_ideas = {
-					add_idea = destitute_diarchy
-					remove_idea = great_war_aftermath
-				}
-			}
-		hidden_effect = {
-			IF = {
-				limit = {
-					has_completed_focus = addressing_the_faithful_generals
-				}
-				delete_unit_template_and_units = {
-					division_template = "Equestrian Veterans"
-				}
-				delete_unit_template_and_units = {
-					division_template = "Starlight's Remnants"
-				}
-			}
-			IF = {
-				limit = {
-					has_completed_focus = salvation_to_the_lost
-				}
-				delete_unit_template_and_units = {
-					division_template = "Solar Deserters"
-				}
-			}
-		}
-		custom_effect_tooltip = remove_solar_civil_war_divisions_tt
-		add_stability = -0.05
-		add_war_support = -0.15
-		set_country_flag = end_of_equestria_civil_war
-		set_country_flag = rescued_harmonic_advisors
-		mark_focus_tree_layout_dirty = yes
+		SOL_end_of_civil_war_CEL = yes
 	}
 }
 
@@ -1746,6 +1630,7 @@ country_event = { #Celestia sees the destruction in Canterlot and the other regi
 		name = celestia.6.a
 		add_stability = -0.05
 		add_war_support = -0.05
+		remove_ideas = eqs_slw_civil_war
 	}
 }
 
@@ -2276,17 +2161,13 @@ country_event = { #After seeing the first successful batch of reformed generals,
 	
 	option = { #They shall always be welcome in harmony
 		name = celestia.41.a
-		create_corps_commander = {
-			name = "Novus Flux"
-			portrait_path = "gfx/leaders/EQS/Novus_Flux.tga"
-			traits = { pony_race_trait evening_star solaris_inquisitionis }
-			id = 5011
-			skill = 1
-			attack_skill = 1
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 1
-			female = yes
+		custom_effect_tooltip = novus_becomes_EQS_general_tt
+		hidden_effect = {
+			event_target:SOL_Novus_Flux = { remove_unit_leader_trait = evening_star }
+			event_target:SOL_Novus_Flux = { add_unit_leader_trait = twilight_beauty }
+			event_target:SOL_Novus_Flux = { remove_unit_leader_trait = solaris_inquisitionis }
+			event_target:SOL_Novus_Flux = { add_unit_leader_trait = former_cultist }
+			event_target:SOL_Novus_Flux = { set_nationality = EQS }
 		}
 		create_corps_commander = {
 			name = "Fidelis Flamma"
@@ -3998,5 +3879,35 @@ country_event = {
 				drop_cosmetic_tag = yes
 			}
 		}
+	}
+}
+
+country_event = {
+	id = solar.9003
+	title = "Test General transfers"
+	desc = "Gotta love all the testing."
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #removes puppet from BAL
+		name = "Yup."
+		event_target:SOL_Iceheart = { set_nationality = BAG }
+	}
+}
+
+country_event = {
+	id = solar.9004
+	title = "Test General transfers"
+	desc = "Gotta love all the testing."
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #removes puppet from BAL
+		name = "Yup."
+		event_target:SOL_Iceheart = { set_nationality = EQS }
 	}
 }
