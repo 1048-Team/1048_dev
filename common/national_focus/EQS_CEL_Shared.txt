@@ -73,7 +73,7 @@ shared_focus = {
 	completion_reward = {
 		###Unlock Harmonist Advisors here###
 		show_ideas_tooltip = fancy_pants
-		show_ideas_tooltip = upper_crust
+		show_ideas_tooltip = upper_crust_1048
 		show_ideas_tooltip = golden_fork
 		set_country_flag = rescued_harmonic_advisors
 	}
@@ -5202,18 +5202,16 @@ shared_focus = {
 ###Starlight and Trixie Redemption###
 shared_focus = {
 	id = repeating_past_mistakes
-	x = 10
-	y = 20
+	x = 25
+	y = 1
 	
 	available = {
-		hidden_trigger = {
-			AND = {
-				OR = {
-					has_completed_focus = once_a_land_filled_with_magic
-					has_completed_focus = once_a_society_filled_with_love
-				}
-			has_country_flag = starlight_and_trixie_captured
+		AND = {
+			OR = {
+				has_completed_focus = once_a_land_filled_with_magic
+				has_completed_focus = once_a_society_filled_with_love
 			}
+		has_country_flag = starlight_and_trixie_captured
 		}
 	}
 	
@@ -5236,25 +5234,71 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
+shared_focus = {
+	id = restoring_the_passion_of_a_trickster
+	x = -2
+	y = 1
+	relative_position_id = repeating_past_mistakes
+	
+	cost = 3
+	prerequisite = { focus = repeating_past_mistakes }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.27
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = reinvigorating_the_love_of_the_forgiven
+	x = 2
+	y = 1
+	relative_position_id = repeating_past_mistakes
+	
+	cost = 3
+	prerequisite = { focus = repeating_past_mistakes }
+	
+	completion_reward = {
+		country_event = { id = celestia.28 }
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = mending_the_gap
+	x = 2
+	y = 1
+	relative_position_id = restoring_the_passion_of_a_trickster
+	
+	cost = 3
+	prerequisite = { focus = restoring_the_passion_of_a_trickster }
+	prerequisite = { focus = reinvigorating_the_love_of_the_forgiven }
+	
+	completion_reward = {
+		country_event = { id = celestia.29 }
+	}
+	ai_will_do = { factor = 20 }
+}
+
 ###Fixing Manehattan###
 shared_focus = {
 	id = reparations_for_harmonist_failure
-	x = 10
-	y = 25
+	x = 32
+	y = 1
 	
 	available = {
-		hidden_trigger = {
-			AND = {
-				OR = {
-					has_completed_focus = once_a_land_filled_with_magic
-					has_completed_focus = once_a_society_filled_with_love
-				}
-				OR = {
-					has_country_flag = starlight_and_trixie_captured
-					has_country_flag = starlight_and_trixie_escaped
-				}
-				NOT = { has_country_flag = manehattan_repaired }
+		AND = {
+			OR = {
+				has_completed_focus = once_a_land_filled_with_magic
+				has_completed_focus = once_a_society_filled_with_love
 			}
+			OR = {
+				has_country_flag = starlight_and_trixie_captured
+				has_country_flag = starlight_and_trixie_escaped
+			}
+			NOT = { has_country_flag = manehattan_repaired }
 		}
 	}
 	
@@ -5274,4 +5318,73 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 18 }
 }
+
+shared_focus = {
+	id = guardians_for_the_orphans
+	x = -2
+	y = 1
+	relative_position_id = reparations_for_harmonist_failure
 	
+	cost = 3
+	prerequisite = { focus = reparations_for_harmonist_failure }
+	
+	completion_reward = {
+		add_political_power = -50
+		add_manpower = -10000
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = stimulus_for_the_local_economy
+	x = 0
+	y = 1
+	relative_position_id = reparations_for_harmonist_failure
+	
+	cost = 3
+	prerequisite = { focus = reparations_for_harmonist_failure }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = manehattan_stimulus
+			days = 90
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = invest_in_new_architecture
+	x = 2
+	y = 1
+	relative_position_id = reparations_for_harmonist_failure
+	
+	cost = 3
+	prerequisite = { focus = reparations_for_harmonist_failure }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = new_equestrian_architecture
+			days = 120
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = a_new_beacon_of_harmony
+	x = 0
+	y = 1
+	relative_position_id = stimulus_for_the_local_economy
+	
+	cost = 3
+	prerequisite = { focus = guardians_for_the_orphans }
+	prerequisite = { focus = stimulus_for_the_local_economy }
+	prerequisite = { focus = invest_in_new_architecture }
+	
+	completion_reward = {
+		75 = { remove_dynamic_modifier = { modifier = manehattan_rebellion } }
+		custom_effect_tooltip = cleaned_manehattan_CEL
+	}
+	ai_will_do = { factor = 25 }
+}

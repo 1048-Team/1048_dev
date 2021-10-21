@@ -2,6 +2,7 @@
 
 add_namespace = solar
 add_namespace = celestia
+add_namespace = solarwar
 
 #Start event chain to introduce Aurora
 country_event = {
@@ -571,7 +572,80 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 
 ###Corruption Events###
 ###Will go from 31-40###
-country_event = {
+country_event = { #Daybreaker lurks through the dungeon and mocks Starlight and Trixie, who are defiant at her at first, before speaking to Sunset about her plans
+	id = solar.31
+	title = solar.31.t
+	desc = solar.31.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will break soon enough
+		name = solar.31.a
+		country_event = { id = solar.32 }
+	}
+}
+
+country_event = { #Sunset protests at Daybreaker's plans, which earns her irritation for a bit, but she ultimately agrees to have inquisitors soften them up
+	id = solar.32
+	title = solar.32.t
+	desc = solar.32.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset is too soft some days. She will need correction later
+		name = solar.32.a
+	}
+}
+
+country_event = { #Daybreaker enters Trixie's cell and she mocks her a bit before using magic to twist her memories to hate Starlight
+	id = solar.33
+	title = solar.33.t
+	desc = solar.33.d
+	
+	is_triggered_only = yes
+	
+	option = { #I'll let you stew for a bit
+		name = solar.33.a
+	}
+}
+
+country_event = { #A day later, Daybreaker checks on Trixie and Trixie is despairing how she was so blinded by harmony and pledges herself to Daybreaker to learn more power
+	id = solar.34
+	title = solar.34.t
+	desc = solar.34.d
+	
+	is_triggered_only = yes
+	
+	option = { #Good, good!
+		name = solar.34.a
+	}
+}
+
+country_event = { #Daybreaker enters Starlight's cell and tries to use mind manipulation magic of Starlight, although Starlight has mental defenses up and is defiant about it
+	id = solar.35
+	title = solar.35.t
+	desc = solar.35.d
+	
+	is_triggered_only = yes
+	
+	option = { #You will see the effects of your lack of vision!
+		name = solar.35.a
+	}
+}
+
+country_event = { #Daybreaker enters again and mocks Starlight a bit, who retorts with more defiance, and then Daybreaker claims she won't be breaking Starlight, but Trixie will, to Starlight's horror
+	id = solar.36
+	title = solar.36.t
+	desc = solar.36.d
+	
+	is_triggered_only = yes
+	
+	option = { #Oh, the young fool. She'll come around soon
+		name = solar.36.a
+	}
+}
+
+country_event = { #Daybreaker brings Starlight and Trixie to perform the rites of entering the Adoratio, which is jumping through the flame, and they become loyal commanders
 	id = solar.40
 	title = solar.40.t
 	desc = solar.40.d
@@ -583,30 +657,38 @@ country_event = {
 		ai_chance = {
 			factor = 100
 			}
-			create_corps_commander = {
-				name = "Starlight Glimmer"
-				portrait_path = "gfx/leaders/EQS/Starlight_general_2.tga"
-				traits = { pony_race_trait military_genius brilliant_strategist }
-				skill = 4
-				id = 5
-				attack_skill = 2
-				defense_skill = 3
-				planning_skill = 4
-				logistics_skill = 3
-				female = yes
-			}
-			create_corps_commander = {
-				name = "Trixie Lulamoon"
-				portrait_path = "gfx/leaders/EQS/Trixie_2.tga"
-				traits = { pony_race_trait stage_performer infantry_leader }
-				skill = 3
-				id = 6
-				attack_skill = 4
-				defense_skill = 2
-				planning_skill = 2
-				logistics_skill = 5
-				female = yes
-			}
+		create_corps_commander = {
+			name = "Starlight Glimmer"
+			portrait_path = "gfx/leaders/EQS/Starlight_general_2.tga"
+			traits = { pony_race_trait military_genius brilliant_strategist }
+			skill = 4
+			id = 5
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 4
+			logistics_skill = 3
+			female = yes
+		}
+		create_corps_commander = {
+			name = "Trixie Lulamoon"
+			portrait_path = "gfx/leaders/EQS/Trixie_2.tga"
+			traits = { pony_race_trait stage_performer infantry_leader }
+			skill = 3
+			id = 6
+			attack_skill = 4
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 5
+			female = yes
+		}
+		random_army_leader = {
+			limit = { has_id = 5 }
+			save_global_event_target_as = SOL_Starlight_Glimmer
+		}
+		random_army_leader = {
+			limit = { has_id = 6 }
+			save_global_event_target_as = SOL_Trixie
+		}
 	}
 }
 
@@ -1456,6 +1538,18 @@ country_event = { #Daybreaker marches into Vesalipolis and fights her way to the
 	}
 }
 
+country_event = { #Sunset protests at Daybreaker requiring that the Inquisitionis be conscripted into the military, as they have better uses elsewhere, and it's asking for almost wiping out the Adoratio again, although when Daybreaker presses she relents
+	id = solar.110
+	title = solar.110.t
+	desc = solar.110.d
+	
+	is_triggered_only = yes
+	
+	option = { #She still knows her place
+		name = solar.110.a
+	}
+}
+
 country_event = { #Solar Empire soldiers land on the beaches of Marelandia, and there is much chaos and destruction and death as they establish a beachhead, with Daybreaker shoring them up at the end
 	id = solar.115
 	title = solar.115.t
@@ -1604,9 +1698,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 	trigger = {
 		tag = EQS
 		has_completed_focus = return_of_the_princess
-		NOT = {
-			has_war_with = SLW
-		}
+		NOT = { has_war_with = SLW }
 	}
 	
 	mean_time_to_happen = {
@@ -1664,7 +1756,6 @@ country_event = { #Sunset starts to panic a bit about remembering her old friend
 			country_event = {
 				id = celestia.9
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1675,7 +1766,6 @@ country_event = { #Sunset starts to panic a bit about remembering her old friend
 			country_event = {
 				id = celestia.10
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1722,7 +1812,6 @@ country_event = { #Sunset gathers most of the captured generals as a way to help
 			country_event = {
 				id = celestia.12
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1733,7 +1822,6 @@ country_event = { #Sunset gathers most of the captured generals as a way to help
 			country_event = {
 				id = celestia.13
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1762,7 +1850,7 @@ country_event = { #Sunset decides that Aurora needs more focus and she heads to 
 	
 	is_triggered_only = yes
 	
-	option = { #You can do this, Sunset. You can do this
+	option = { #Aurora will pick up quickly, I'm sure
 		name = celestia.13.a
 		hidden_effect = {
 			add_to_variable = { sunset_redemption = 2 }
@@ -1785,7 +1873,6 @@ country_event = { #Sunset begins, nervous, as she knows her past and she is now 
 			country_event = {
 				id = celestia.15
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1796,7 +1883,6 @@ country_event = { #Sunset begins, nervous, as she knows her past and she is now 
 			country_event = {
 				id = celestia.16
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1824,7 +1910,7 @@ country_event = { #Sunset takes Aurora aside as she sees that Aurora is furious 
 	
 	is_triggered_only = yes
 	
-	option = { #Maybe this can be easier than I thought
+	option = { #Yeah, that definitely could have gone smoother
 		name = celestia.16.a
 		hidden_effect = {
 			add_to_variable = { sunset_redemption = 1 }
@@ -1909,7 +1995,6 @@ country_event = { #Sunset is waiting nervously for Celestia to meet her again ou
 			country_event = {
 				id = celestia.21
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1920,7 +2005,6 @@ country_event = { #Sunset is waiting nervously for Celestia to meet her again ou
 			country_event = {
 				id = celestia.22
 				days = 1
-				random = 1
 			}
 		}
 	}
@@ -1951,7 +2035,6 @@ country_event = { #Sunset determines that Aurora will be something for the futur
 				country_event = { #Sunset fears that she will not be accepted, Aurora comes in to say that Sunset helped her see the light
 					id = celestia.23
 					days = 1
-					random = 1
 				}
 			}
 			ELSE_IF = {
@@ -1968,7 +2051,6 @@ country_event = { #Sunset determines that Aurora will be something for the futur
 				country_event = { #Celestia determines that Sunset has proven her redemption, and Sunset sees Aurora being led away by guards when she leaves, with Aurora having little reaction
 					id = celestia.24
 					days = 1
-					random = 1
 				}
 			}
 			ELSE_IF = {
@@ -1980,14 +2062,12 @@ country_event = { #Sunset determines that Aurora will be something for the futur
 				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
 					id = celestia.25
 					days = 1
-					random = 1
 				}
 			}
 			ELSE = {
 				country_event = {
 					id = celestia.23
 					days = 1
-					random = 1
 				}
 			}
 		}
@@ -2021,7 +2101,6 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 				country_event = { #Sunset fears that she will not be accepted, Aurora comes in to say that Sunset helped her see the light
 					id = celestia.23
 					days = 1
-					random = 1
 				}
 			}
 			ELSE_IF = {
@@ -2038,7 +2117,6 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 				country_event = { #Celestia determines that Sunset has proven her redemption, and Sunset sees Aurora being led away by guards when she leaves, with Aurora having little reaction
 					id = celestia.24
 					days = 1
-					random = 1
 				}
 			}
 			ELSE_IF = {
@@ -2050,14 +2128,12 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
 					id = celestia.25
 					days = 1
-					random = 1
 				}
 			}
 			ELSE = {
 				country_event = {
 					id = celestia.23
 					days = 1
-					random = 1
 				}
 			}
 		}
@@ -2132,6 +2208,47 @@ country_event = { #Celestia finally visits Starlight and Trixie in their cell an
 	
 	option = { #The truth shall set you free
 		name = celestia.26.a
+	}
+}
+
+country_event = { #Celestia visits Trixie, who remains mostly sulking and promises that what she will do will not hurt, much, and goes through Trixie's corrupted memories to set things straight
+	id = celestia.27
+	title = celestia.27.t
+	desc = celestia.27.d
+	
+	is_triggered_only = yes
+	
+	option = { #Let the magic of friendship fill you!
+		name = celestia.27.a
+	}
+}
+
+country_event = { #Celestia visits Starlight, who instantly starts to threaten her if only Starlight had her magic not blocked, and Celestia sighs before replaying her own memories and showing where Starlight was fooled
+	id = celestia.28
+	title = celestia.28.t
+	desc = celestia.28.d
+	
+	is_triggered_only = yes
+	
+	option = { #Twilight still had much to teach you
+		name = celestia.28.a
+	}
+}
+
+country_event = { #After finally making them see the light, Celestia brings the two back together and has them hug it out, and they promise to help Celestia rebuild Equestria
+	id = celestia.29
+	title = celestia.29.t
+	desc = celestia.29.d
+	
+	is_triggered_only = yes
+	
+	option = { #Welcome home, my little ponies
+		name = celestia.29.a
+		custom_effect_tooltip = starlight_and_trixie_uncorrupted_tt
+		hidden_effect = {
+			event_target:SOL_Starlight_Glimmer = { set_nationality = EQS }
+			event_target:SOL_Trixie = { set_nationality = EQS }
+		}
 	}
 }
 
@@ -3810,6 +3927,7 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 	
 	option = { #We shall honor our plans
 		name = celestia.557.a
+		ai_chance = { factor = 75 }
 		CRY = {
 			transfer_state = 153
 			transfer_state = 57
@@ -3828,9 +3946,52 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 			transfer_state = 237
 		}
 	}
+	option = {
+		name = celestia.557.b
+		ai_chance = { factor = 25 }
+		reverse_add_opinion_modifier = { target = CRY modifier = CRY_dishonorable }
+	}
 	###Make section option later that renegs the deal, which makes the Crystal Empire leave and also give a -100 opinion modifier of dishonorable
 }
 
+###Solar Civil War Events###
+country_event = { #After the end of the civil war, Midwinter realizes that she can't keep being the leader and begins her search for a proper Prefectress to lead the Solar Empire and settles on Nova, who is brought in with a massive ceremony as the successor to Daybreaker
+	id = solarwar.1
+	title = solarwar.1.t
+	desc = solarwar.1.d
+	
+	trigger = {
+		tag = SLW
+		NOT = {
+			country_exists = EQS
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #I will serve our fallen Empress with fire and devotion
+		name = solarwar.1.a
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Nova Glow"
+			expire = "1965.1.1"
+			picture = "gfx/leaders/EQS/Nova_Glow.tga"
+			#desc = "POLITICS_SUNSET_SHIMMER_DESC"
+			ideology = solarism
+			female = yes
+			traits = {
+				sword_of_the_empress
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = SLW
+		}
+		remove_ideas = eqs_slw_civil_war
+	}
+}		
 
 ###Debug Events###
 country_event = {
