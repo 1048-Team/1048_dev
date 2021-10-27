@@ -3034,10 +3034,139 @@ shared_focus = {
 	cost = 1
 	
 	completion_reward = {
-		###reduce slipping_sanity by 10% stability and remove the speed reduction
+		add_to_variable = { stability_change = 0.1 }
+		add_to_variable = { army_speed_change = 0.1 }
 		country_event = solar.201
 	}
 	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = the_empires_darkest_hour
+	x = 0
+	y = 1
+	relative_position_id = setting_of_the_sun
+	
+	cost = 1
+	prerequisite = { focus = setting_of_the_sun }
+	
+	completion_reward = {
+		add_to_variable = { research_speed_change = 0.1 }
+		country_event = solar.202
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = the_dawn_of_a_new_morning
+	x = 0
+	y = 1
+	relative_position_id = the_empires_darkest_hour
+	
+	cost = 2
+	prerequisite = { focus = the_empires_darkest_hour }
+	
+	completion_reward = {
+		add_to_variable = { stability_change = 0.1 }
+		add_to_variable = { war_support_change = 0.05 }
+		add_to_variable = { conscription_change = 0.001 }
+		country_event = solar.203
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = lowering_the_intensity_of_the_sun
+	x = -2
+	y = 1
+	relative_position_id = the_dawn_of_a_new_morning
+	
+	cost = 2
+	prerequisite = { focus = the_dawn_of_a_new_morning }
+	
+	completion_reward = {
+		add_to_variable = { conscription_factor_change = 0.1 }
+		add_to_variable = { stability_change = 0.1 }
+		add_to_variable = { factory_output_change = 0.075 }
+		add_to_variable = { conscription_change = 0.002 }
+		country_event = solar.204
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = reawakening_the_industry
+	x = 2
+	y = 1
+	relative_position_id = the_dawn_of_a_new_morning
+	
+	cost = 2
+	prerequisite = { focus = the_dawn_of_a_new_morning }
+	
+	completion_reward = {
+		add_to_variable = { conscription_change = 0.002 }
+		add_to_variable = { stability_change = 0.1 }
+		add_to_variable = { research_speed_change = 0.05 }
+		add_to_variable = { factory_output_change = 0.075 }
+		country_event = solar.205
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = converging_the_adoratio_primus
+	x = 2
+	y = 1
+	relative_position_id = lowering_the_intensity_of_the_sun
+	
+	cost = 3
+	prerequisite = { focus = lowering_the_intensity_of_the_sun }
+	prerequisite = { focus = reawakening_the_industry }
+	
+	completion_reward = {
+		###Have custom tooltip for removing the modifier
+		hidden_effect = {
+			remove_dynamic_modifier = { modifier = slipping_sanity }
+		}
+		country_event = solar.206
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Aurora side###
+shared_focus = {
+	id = a_message_of_mercy
+	x = -5
+	y = 1
+	relative_position_id = converging_the_adoratio_primus
+	
+	cost = 3
+	prerequisite = { focus = converging_the_adoratio_primus }
+	
+	mutually_exclusive = { focus = a_message_of_punishment }
+	
+	completion_reward = { 
+		country_event = solar.207
+	}
+	ai_will_do = { factor = 40 }
+}
+
+###Pulsar side###
+shared_focus = {
+	id = a_message_of_punishment
+	x = 5
+	y = 1
+	relative_position_id = converging_the_adoratio_primus
+	
+	cost = 3
+	prerequisite = { focus = converging_the_adoratio_primus }
+	
+	mutually_exclusive = { focus = a_message_of_mercy }
+	
+	completion_reward = {
+		country_event = solar.208
+	}
+	ai_will_do = { factor = 25 }
 }
 
 ###Aurora Shinespark Tree###
