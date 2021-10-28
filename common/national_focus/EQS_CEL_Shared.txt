@@ -1,0 +1,5405 @@
+###Civil War Tree###
+shared_focus = {
+	id = return_of_the_princess
+	x = 3
+	y = 1
+	
+	available = {
+		hidden_trigger = {
+			has_country_flag = equestria_returned
+			NOT = {
+				has_country_flag = end_of_equestria_civil_war
+			}
+		}
+	}
+	allow_branch = {
+		hidden_trigger = {
+			has_country_flag = equestria_returned
+			NOT = {
+				has_country_flag = end_of_equestria_civil_war
+			}
+		}
+	}
+	cost = 1
+	
+	completion_reward = {
+		add_stability = 0.05
+		add_political_power = 50
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = free_the_palace
+	x = -2
+	y = 1
+	relative_position_id = return_of_the_princess
+	
+	cost = 2
+	prerequisite = { focus = return_of_the_princess }
+	
+	completion_reward = {
+		country_event = celestia.1
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = the_wayward_student
+	x = 2
+	y = 1
+	relative_position_id = return_of_the_princess
+	
+	cost = 2
+	prerequisite = { focus = return_of_the_princess }
+	
+	completion_reward = {
+		country_event = celestia.2
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = unchaning_bureaucracy
+	x = -1
+	y = 1
+	relative_position_id = free_the_palace
+	
+	cost = 2
+	prerequisite = { focus = free_the_palace }
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	completion_reward = {
+		###Unlock Harmonist Advisors here###
+		show_ideas_tooltip = fancy_pants
+		show_ideas_tooltip = upper_crust_1048
+		show_ideas_tooltip = golden_fork
+		set_country_flag = rescued_harmonic_advisors
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = pardon_the_repentant
+	x = 1
+	y = 1
+	relative_position_id = free_the_palace
+	
+	cost = 2
+	prerequisite = { focus = free_the_palace }
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	completion_reward = { 
+		add_manpower = 50000
+		add_war_support = 0.05
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = formulate_functional_industry
+	x = -1
+	y = 1
+	relative_position_id = pardon_the_repentant
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	cost = 3
+	prerequisite = { focus = unchaning_bureaucracy }
+	prerequisite = { focus = pardon_the_repentant }
+	
+	completion_reward = {
+		add_ideas = hairstring_industry
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = salvation_to_the_lost
+	x = -1
+	y = 1
+	relative_position_id = the_wayward_student
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	cost = 2
+	prerequisite = { focus = the_wayward_student }
+	
+	completion_reward = {
+		###Steal a Solar General, ideally one of the weaker ones that gets purged if they're alive or can be a harmonist resistance general (if Solar General, have it be Swift Wing), if it's a resistance member, have it be a new leader and it will be Button Mash, who used his gaming skills to advantage, although he does have a trait that lowers his org and number of ponies he can lead
+		country_event = {
+			id = celestia.50
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = one_alicorn_two_mindsets
+	x = 1
+	y = 1
+	relative_position_id = pardon_the_repentant
+	
+	cost = 3
+	prerequisite = { focus = pardon_the_repentant }
+	prerequisite = { focus = salvation_to_the_lost }
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.4
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = addressing_the_faithful_generals
+	x = 1
+	y = 1
+	relative_position_id = salvation_to_the_lost
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	cost = 3
+	prerequisite = { focus = salvation_to_the_lost }
+	prerequisite = { focus = the_disloyal_prince }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.51
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = a_princess_of_war_and_peace
+	x = 0
+	y = 1
+	relative_position_id = one_alicorn_two_mindsets
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	cost = 3
+	prerequisite = {
+		focus = formulate_functional_industry
+		focus = one_alicorn_two_mindsets
+		focus = addressing_the_faithful_generals
+	}
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = free_the_sun
+			days = 90
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = the_disloyal_prince
+	x = 1
+	y = 1
+	relative_position_id = the_wayward_student
+	
+	cost = 2
+	prerequisite = { focus = the_wayward_student }
+	
+	bypass = { NOT = { has_war_with = SLW } }
+	
+	completion_reward = {
+		country_event = celestia.3
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Celestia Political Tree###
+shared_focus = {
+	id = the_shattered_princess
+	x = 10
+	y = 1
+	
+	available = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	cost = 2
+	
+	completion_reward = {
+		country_event = celestia.6
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = a_broken_land
+	x = -1
+	y = 1
+	relative_position_id = the_shattered_princess
+	
+	cost = 2
+	prerequisite = { focus = the_shattered_princess }
+	
+	completion_reward = {
+		add_ideas = backbroken_economy
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = a_splintered_society
+	x = 1
+	y = 1
+	relative_position_id = the_shattered_princess
+	
+	cost = 2
+	prerequisite = { focus = the_shattered_princess }
+	
+	completion_reward = {
+		add_ideas = shattered_society
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Harsh Celestia###
+shared_focus = {
+	id = once_a_land_filled_with_magic
+	x = -5
+	y = 1
+	relative_position_id = a_broken_land
+	
+	cost = 4
+	prerequisite = { focus = a_broken_land }
+	prerequisite = { focus = a_splintered_society }
+	
+	mutually_exclusive = { focus = once_a_society_filled_with_love }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = pony_bonus
+			bonus = 1
+			uses = 1
+			category = race_tech
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = require_restitution_from_collaborators
+	x = -4
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		swap_ideas = {
+			add_idea = shattered_society_harsh_1
+			remove_idea = shattered_society
+		}
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = conscript_new_emergency_council
+	x = -2
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		add_political_power = -200
+		###Get Disgustingly Rich for industrialist, Scalding Light for a prince of terror, Flaky Itch for a unique -5% stability, +5% core army stats
+		show_ideas_tooltip = disgustingly_rich
+		show_ideas_tooltip = searing_light
+		show_ideas_tooltip = flaky_itch
+		set_country_flag = unlocked_evil_advisors
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = redesign_shattered_nobility
+	x = 0
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		add_ideas = renegotiated_nobility
+	}
+	ai_will_do = { factor = 23 }
+}
+
+shared_focus = {
+	id = break_the_backs_of_the_oppressors
+	x = 2
+	y = 1
+	relative_position_id = once_a_land_filled_with_magic
+	
+	cost = 4
+	prerequisite = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = retribution_for_solarists
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 27 }
+}
+
+shared_focus = {
+	id = forced_integration_of_the_lost
+	x = 0
+	y = 1
+	relative_position_id = require_restitution_from_collaborators
+	
+	cost = 5
+	prerequisite = { focus = require_restitution_from_collaborators }
+	
+	completion_reward = {
+		add_stability = -0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+		swap_ideas = {
+			add_idea = shattered_society_harsh_2
+			remove_idea = shattered_society_harsh_1
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = spark_the_magic_of_industry_again
+	x = 0
+	y = 1
+	relative_position_id = conscript_new_emergency_council
+	
+	cost = 5
+	prerequisite = { focus = conscript_new_emergency_council }
+	
+	completion_reward = {
+		3 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		75 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		12 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = empower_the_position_of_princess
+	x = 0
+	y = 1
+	relative_position_id = redesign_shattered_nobility
+	
+	cost = 4
+	prerequisite = { focus = redesign_shattered_nobility }
+	
+	completion_reward = {
+		add_ideas = power_to_the_princess
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = a_fate_worthy_of_their_crimes
+	x = 0
+	y = 1
+	relative_position_id = break_the_backs_of_the_oppressors
+	
+	cost = 5
+	prerequisite = { focus = break_the_backs_of_the_oppressors }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.42
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = harmonic_compliance_is_mandatory
+	x = 1
+	y = 1
+	relative_position_id = forced_integration_of_the_lost
+	
+	cost = 4
+	prerequisite = { focus = forced_integration_of_the_lost }
+	prerequisite = { focus = spark_the_magic_of_industry_again }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.075
+		}
+		swap_ideas = {
+			add_idea = shattered_society_harsh_3
+			remove_idea = shattered_society_harsh_2
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = princess_of_might_and_wealth
+	x = 1
+	y = 1
+	relative_position_id = spark_the_magic_of_industry_again
+	
+	cost = 3
+	prerequisite = { focus = spark_the_magic_of_industry_again }
+	prerequisite = { focus = empower_the_position_of_princess }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			uses = 1
+			bonus = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = princess_of_judgement_and_punishment
+	x = 1
+	y = 1
+	relative_position_id = empower_the_position_of_princess
+	
+	cost = 4
+	prerequisite = { focus = empower_the_position_of_princess }
+	prerequisite = { focus = a_fate_worthy_of_their_crimes }
+	
+	completion_reward = {
+		add_stability = -0.05
+		add_tech_bonus = {
+			name = unicorn_bonus
+			uses = 1
+			bonus = 1
+			category = unicorn_tech
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = agriculture_as_a_new_backbone
+	x = 1
+	y = 1
+	relative_position_id = harmonic_compliance_is_mandatory
+	
+	cost = 5
+	prerequisite = { focus = harmonic_compliance_is_mandatory }
+	prerequisite = { focus = princess_of_might_and_wealth }
+	
+	completion_reward = {
+		add_ideas = life_in_rural_communities
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = stealing_the_wealth_of_the_corrupt
+	x = 1
+	y = 1
+	relative_position_id = princess_of_might_and_wealth
+	
+	cost = 5
+	prerequisite = { focus = princess_of_might_and_wealth }
+	prerequisite = { focus = princess_of_judgement_and_punishment }
+	
+	completion_reward = {
+		add_ideas = restitution_for_heresy
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = a_pragmatic_society
+	x = 1
+	y = 1
+	relative_position_id = stealing_the_wealth_of_the_corrupt
+	
+	cost = 5
+	prerequisite = { focus = agriculture_as_a_new_backbone }
+	prerequisite = { focus = stealing_the_wealth_of_the_corrupt }
+	
+	completion_reward = {
+		add_country_leader_trait = pragmatic_princess
+		remove_ideas = shattered_society_harsh_3
+		add_ideas = a_pragmatic_society
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Sunset Reformation Section###
+shared_focus = {
+	id = a_proper_reunion
+	x = 1
+	y = 2
+	relative_position_id = a_broken_land
+	
+	cost = 3
+	prerequisite = {
+		focus = a_broken_land
+		focus = a_splintered_society
+	}
+	
+	completion_reward = {
+		country_event = celestia.7
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = to_begin_again
+	x = 0
+	y = 1
+	relative_position_id = a_proper_reunion
+	
+	cost = 2
+	prerequisite = { focus = a_proper_reunion }
+	
+	completion_reward = {
+		country_event = celestia.8
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = face_the_horrors_of_the_light
+	x = 0
+	y = 1
+	relative_position_id = to_begin_again
+	
+	cost = 3
+	prerequisite = { focus = to_begin_again }
+	
+	completion_reward = {
+		country_event = celestia.11
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = reversing_the_brainwashing
+	x = -1
+	y = 1
+	relative_position_id = face_the_horrors_of_the_light
+	
+	cost = 3
+	prerequisite = { focus = face_the_horrors_of_the_light }
+	
+	completion_reward = {
+		country_event = celestia.14
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = replace_faith_with_friendship
+	x = 1
+	y = 1
+	relative_position_id = face_the_horrors_of_the_light
+	
+	available = { has_completed_focus = reversing_the_brainwashing }
+	
+	cost = 3
+	prerequisite = { focus = face_the_horrors_of_the_light }
+	
+	completion_reward = {
+		country_event = celestia.17
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = exam_day
+	x = 1
+	y = 1
+	relative_position_id = reversing_the_brainwashing
+	
+	cost = 2
+	prerequisite = {
+		focus = reversing_the_brainwashing
+		focus = replace_faith_with_friendship
+	}
+	
+	completion_reward = {
+		country_event = celestia.20
+	}
+	ai_will_do = { factor = 35 }
+}	
+
+###Nice Celestia###
+shared_focus = {
+	id = once_a_society_filled_with_love
+	x = 5
+	y = 1
+	relative_position_id = a_splintered_society
+	
+	cost = 4
+	prerequisite = { focus = a_broken_land }
+	prerequisite = { focus = a_splintered_society }
+	
+	mutually_exclusive = { focus = once_a_land_filled_with_magic }
+	
+	completion_reward = {
+		add_tech_bonus = {
+		name = pony_bonus
+		bonus = 1
+		uses = 1
+		category = race_tech
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = reach_out_to_the_hurting
+	x = -2
+	y = 1
+	relative_position_id = once_a_society_filled_with_love
+	
+	cost = 3
+	prerequisite = { focus = once_a_society_filled_with_love }
+	
+	completion_reward = {
+		add_stability = 0.05
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = mending_the_divide
+	x = 0
+	y = 1
+	relative_position_id = once_a_society_filled_with_love
+	
+	cost = 4
+	prerequisite = { focus = once_a_society_filled_with_love }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.40
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = neither_solarist_nor_harmonist_only_pony
+	x = 2
+	y = 1
+	relative_position_id = once_a_society_filled_with_love
+	
+	cost = 3
+	prerequisite = { focus = once_a_society_filled_with_love }
+	
+	completion_reward = {
+		add_stability = 0.03
+		add_war_support = 0.03
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = encourage_mediation_meetings
+	x = 4
+	y = 1
+	relative_position_id = once_a_society_filled_with_love
+	
+	cost = 3
+	prerequisite = { focus = once_a_society_filled_with_love }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		swap_ideas = {
+			add_idea = shattered_society_light_1
+			remove_idea = shattered_society
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = provide_from_the_princess_purse
+	x = 0
+	y = 1
+	relative_position_id = reach_out_to_the_hurting
+	
+	cost = 3
+	prerequisite = { focus = reach_out_to_the_hurting }
+	
+	completion_reward = {
+		add_ideas = patronage_of_the_princess
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = pardon_those_who_seek_forgiveness
+	x = 0
+	y = 1
+	relative_position_id = mending_the_divide
+	
+	cost = 4
+	prerequisite = { focus = mending_the_divide }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.41
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = utilizing_all_unique_gifts
+	x = 0
+	y = 1
+	relative_position_id = neither_solarist_nor_harmonist_only_pony
+	
+	cost = 5
+	prerequisite = { focus = neither_solarist_nor_harmonist_only_pony }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = pony_bonus
+			bonus = 0.5
+			uses = 3
+			category = race_tech
+		}
+		add_tech_bonus = {
+			name = magical_bonus
+			bonus = 0.5
+			uses = 1
+			category = magical_tech
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = promise_amnesty_to_the_misguided
+	x = 0
+	y = 1
+	relative_position_id = encourage_mediation_meetings
+	
+	cost = 4
+	prerequisite = { focus = encourage_mediation_meetings }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+		swap_ideas = {
+			add_idea = shattered_society_light_2
+			remove_idea = shattered_society_light_1
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = housing_for_every_pony
+	x = 1
+	y = 1
+	relative_position_id = provide_from_the_princess_purse
+	
+	cost = 4
+	prerequisite = { focus = provide_from_the_princess_purse }
+	prerequisite = { focus = pardon_those_who_seek_forgiveness }
+	
+	completion_reward = {
+		add_political_power = -150
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		3 = { add_extra_state_shared_building_slots = 1 }
+		12 = { add_extra_state_shared_building_slots = 1 }
+		75 = { add_extra_state_shared_building_slots = 1 }
+		2 = { add_extra_state_shared_building_slots = 1 }
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = advertise_the_ear_of_the_princess
+	x = 1
+	y = 1
+	relative_position_id = pardon_those_who_seek_forgiveness
+	
+	cost = 3
+	prerequisite = { focus = pardon_those_who_seek_forgiveness }
+	prerequisite = { focus = utilizing_all_unique_gifts }
+	
+	completion_reward = {
+		###add peaceful advisors: Evening Glitter for industrialist, Warm Beam for theorist, and Sunrise Flicker for silent workpony, Crow Magnate for +5% RS and +10% pp
+		set_country_flag = unlocked_nice_advisors
+		show_ideas_tooltip = evening_glitter
+		show_ideas_tooltip = warm_beam
+		show_ideas_tooltip = sunrise_flicker
+		show_ideas_tooltip = crow_magnate
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = reforming_the_adoratio
+	x = 1
+	y = 1
+	relative_position_id = utilizing_all_unique_gifts
+	
+	cost = 4
+	prerequisite = { focus = utilizing_all_unique_gifts }
+	prerequisite = { focus = promise_amnesty_to_the_misguided }
+	
+	completion_reward = {
+		add_ideas = adoring_adoratio
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = new_jobs_for_the_blind
+	x = 1
+	y = 1
+	relative_position_id = housing_for_every_pony
+	
+	cost = 4
+	prerequisite = { focus = housing_for_every_pony }
+	prerequisite = { focus = advertise_the_ear_of_the_princess }
+	
+	completion_reward = {
+		add_ideas = waste_not_talent
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = ensure_freedom_of_expression
+	x = 1
+	y = 1
+	relative_position_id = advertise_the_ear_of_the_princess
+	
+	cost = 4
+	prerequisite = { focus = advertise_the_ear_of_the_princess }
+	prerequisite = { focus = reforming_the_adoratio }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		swap_ideas = {
+			remove_idea = shattered_society_light_2
+			add_idea = shattered_society_light_3
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = a_tolerant_society
+	x = -1
+	y = 1
+	relative_position_id = new_jobs_for_the_blind
+	
+	cost = 5
+	prerequisite = { focus = new_jobs_for_the_blind }
+	prerequisite = { focus = ensure_freedom_of_expression }
+	
+	completion_reward = {
+		add_country_leader_trait = loving_princess
+		remove_ideas = shattered_society_light_3
+		add_ideas = a_tolerant_society
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = from_the_shadow_of_rage_equestria_rises
+	x = 0
+	y = 1
+	relative_position_id = exam_day
+	
+	cost = 5
+	prerequisite = { focus = exam_day }
+	prerequisite = { 
+		focus = a_pragmatic_society
+		focus = a_tolerant_society
+	}
+	
+	completion_reward = {
+		add_ideas = equestria_reborn
+		set_province_name = { id = 179 name = renamed_canterlot }		
+	}
+	ai_will_do = { factor = 75 }
+}
+
+###Rump States###
+shared_focus = {
+	id = approach_the_rumps
+	x = 0
+	y = 1
+	relative_position_id = from_the_shadow_of_rage_equestria_rises
+	
+	cost = 4
+	prerequisite = { focus = from_the_shadow_of_rage_equestria_rises }
+	
+	completion_reward = {
+		###Event for preparing to meet with the rump state leaders, and sending out invitations to Canterlot
+		create_faction = equestria_faction
+		add_political_power = 50
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Bales and Cloudsdale###
+shared_focus = {
+	id = twisted_hearts_of_loyalty_and_magic
+	x = -5
+	y = 1
+	relative_position_id = approach_the_rumps
+	
+	cost = 3
+	prerequisite = { focus = approach_the_rumps }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.539
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = revitalize_the_failing_ground_infrastructure
+	x = -1
+	y = 1
+	relative_position_id = twisted_hearts_of_loyalty_and_magic
+	
+	bypass = {
+		NOT = {
+			country_exists = CLD
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = twisted_hearts_of_loyalty_and_magic }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = rebuilding_the_clouds
+			days = 180
+		}
+		hidden_effect = {
+			CLD = {
+				add_timed_idea = {
+					idea = rebuilding_the_clouds_CLD
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = ensure_pensions_for_the_heroes
+	x = 0
+	y = 1
+	relative_position_id = revitalize_the_failing_ground_infrastructure
+	
+	bypass = {
+		NOT = {
+			country_exists = CLD
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = revitalize_the_failing_ground_infrastructure }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = pension_payments
+			days = 180
+		}
+		hidden_effect = {
+			CLD = {
+				add_timed_idea = {
+					idea = pension_payments_CLD
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = offer_funding_for_new_schools
+	x = 1
+	y = 1
+	relative_position_id = twisted_hearts_of_loyalty_and_magic
+	
+	bypass = {
+		NOT = {
+			country_exists = BLS
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = twisted_hearts_of_loyalty_and_magic }
+	
+	completion_reward = {
+		add_political_power = -150
+		hidden_effect = {
+			BLS = {
+				add_timed_idea = {
+					idea = funded_schools_BLS
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = recognize_intellectual_sovereignty
+	x = 0
+	y = 1
+	relative_position_id = offer_funding_for_new_schools
+	
+	bypass = {
+		NOT = {
+			country_exists = BLS
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = offer_funding_for_new_schools }
+	
+	completion_reward = {
+		add_political_power = -75
+		add_stability = -0.05
+		hidden_effect = {
+			BLS = {
+				add_timed_idea = {
+					idea = intellectual_recognition_BLS
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = draw_up_autonomous_plans
+	x = 1
+	y = 1
+	relative_position_id = ensure_pensions_for_the_heroes
+	
+	bypass = {
+		NOT = {
+			AND = {
+				country_exists = BLS
+				country_exists = CLD
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = ensure_pensions_for_the_heroes }
+	prerequisite = { focus = recognize_intellectual_sovereignty }
+	
+	completion_reward = {
+		country_event = celestia.500
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Princessdom of Central Equestria###
+shared_focus = {
+	id = the_bitter_heart_of_honesty
+	x = 0
+	y = 1
+	relative_position_id = approach_the_rumps
+	
+	cost = 3
+	prerequisite = { focus = approach_the_rumps }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.553
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = ignore_the_biting_tongue
+	x = -1
+	y = 1
+	relative_position_id = the_bitter_heart_of_honesty
+	
+	bypass = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = the_bitter_heart_of_honesty }
+	
+	completion_reward = {
+		add_political_power = -100
+		hidden_effect = {
+			CER = {
+				add_timed_idea = {
+					idea = forgiveness_for_wayward_comments_CER
+					days = 90
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = forgive_the_debts_of_the_central_cities
+	x = 1
+	y = 1
+	relative_position_id = the_bitter_heart_of_honesty
+	
+	bypass = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = the_bitter_heart_of_honesty }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = forgive_their_debts
+			days = 90
+		}
+		hidden_effect = {
+			CER = {
+				add_timed_idea = {
+					idea = forgive_their_debts_CER
+					days = 90
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = promise_freedom_from_repression
+	x = 0
+	y = 1
+	relative_position_id = ignore_the_biting_tongue
+	
+	bypass = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = ignore_the_biting_tongue }
+	
+	completion_reward = {
+		add_stability = -0.05
+		hidden_effect = {
+			CER = {
+				add_timed_idea = {
+					idea = promised_mercy_CER
+					days = 120
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = subsidize_farm_fertilizers
+	x = 0
+	y = 1
+	relative_position_id = forgive_the_debts_of_the_central_cities
+	
+	bypass = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = forgive_the_debts_of_the_central_cities }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = prop_up_the_farmers
+			days = 90
+		}
+		hidden_effect = {
+			CER = {
+				add_timed_idea = {
+					idea = prop_up_the_farmers_CER
+					days = 90
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = integrate_the_petty_princessdom
+	x = 1
+	y = 1
+	relative_position_id = promise_freedom_from_repression
+	
+	bypass = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = promise_freedom_from_repression }
+	prerequisite = { focus = subsidize_farm_fertilizers }
+	
+	completion_reward = {
+		country_event = celestia.507
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Marechester and Whinnyapolis###
+shared_focus = {
+	id = corrupted_hearts_of_kindness_and_laughter
+	x = 5
+	y = 1
+	relative_position_id = approach_the_rumps
+	
+	cost = 3
+	prerequisite = { focus = approach_the_rumps }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.546
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = pay_the_welfare_checks
+	x = -1
+	y = 1
+	relative_position_id = corrupted_hearts_of_kindness_and_laughter
+	
+	bypass = {
+		NOT = {
+			country_exists = NER
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = corrupted_hearts_of_kindness_and_laughter }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = universal_basic_income
+			days = 365
+		}
+		hidden_effect = {
+			NER = {
+				add_timed_idea = {
+					idea = universal_basic_income_NER
+					days = 365
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = allow_independent_communes
+	x = 0
+	y = 1
+	relative_position_id = pay_the_welfare_checks
+	
+	bypass = {
+		NOT = {
+			country_exists = NER
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = pay_the_welfare_checks }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = free_rein_of_the_land
+			days = 180
+		}
+		hidden_effect = {
+			NER = {
+				add_timed_idea = {
+					idea = free_rein_of_the_land_NER
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = pardon_the_militarium_of_their_crimes
+	x = 1
+	y = 1
+	relative_position_id = corrupted_hearts_of_kindness_and_laughter
+	
+	bypass = {
+		NOT = {
+			country_exists = WHY
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = corrupted_hearts_of_kindness_and_laughter }
+	
+	completion_reward = {
+		add_war_support = -0.05
+		hidden_effect = {
+			WHY = {
+				add_timed_idea = {
+					idea = no_longer_war_criminals_WHY
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = the_question_of_the_whinnyapolis_adoratio
+	x = 0
+	y = 1
+	relative_position_id = pardon_the_militarium_of_their_crimes
+	
+	bypass = {
+		NOT = {
+			country_exists = WHY
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = pardon_the_militarium_of_their_crimes }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = freedom_from_false_gods
+			days = 180
+		}
+		hidden_effect = {
+			WHY = {
+				add_timed_idea = {
+					idea = freedom_from_false_gods_WHY
+					days = 180
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = compromise_on_regional_governance
+	x = 1
+	y = 1
+	relative_position_id = allow_independent_communes
+	
+	bypass = {
+		NOT = {
+			AND = {
+				country_exists = WHY
+				country_exists = NER
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = allow_independent_communes }
+	prerequisite = { focus = the_question_of_the_whinnyapolis_adoratio }
+	
+	completion_reward = {
+		country_event = celestia.511
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = reaping_the_rewards_of_our_labor
+	x = 1
+	y = 1
+	relative_position_id = draw_up_autonomous_plans
+	
+	cost = 5
+	prerequisite = { focus = draw_up_autonomous_plans }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				AND = {
+					has_subject = CLD
+					has_subject = BLS
+				}
+			}
+			add_ideas = benefits_of_the_west
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = CLD
+					NOT = {
+						country_exists = BLS
+					}
+				}
+			}
+			add_ideas = benefits_of_the_west_2
+			every_state = {
+				limit = {
+					is_core_of = BLS
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = BLS
+					NOT = {
+						country_exists = CLD
+					}
+				}
+			}
+			add_ideas = benefits_of_the_west_3
+			every_state = {
+				limit = {
+					is_core_of = CLD
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = BLS
+						is_core_of = CLD
+					}
+				}
+				add_core_of = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = harvest_harmony
+	x = 0
+	y = 1
+	relative_position_id = integrate_the_petty_princessdom
+	
+	cost = 5
+	prerequisite = { focus = integrate_the_petty_princessdom }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_subject = CER
+			}
+		add_ideas = boon_of_harmony
+		}
+		ELSE = {
+			every_state = {
+				limit = {
+					is_core_of = CER
+				}
+			add_core_of = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = sewing_the_seeds_of_our_strength
+	x = -1
+	y = 1
+	relative_position_id = compromise_on_regional_governance
+	
+	cost = 5
+	prerequisite = { focus = compromise_on_regional_governance }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				AND = {
+					has_subject = NER
+					has_subject = WHY
+				}
+			}
+			add_ideas = bounty_of_the_north
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = NER
+					NOT = {
+						country_exists = WHY
+					}
+				}
+			}
+			add_ideas = bounty_of_the_north_2
+			every_state = {
+				limit = {
+					is_core_of = WHY
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_subject = WHY
+					NOT = {
+						country_exists = NER
+					}
+				}
+			}
+			add_ideas = bounty_of_the_north_3
+			every_state = {
+				limit = {
+					is_core_of = NER
+				}
+				add_core_of = EQS
+			}
+		}
+		ELSE = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = NER
+						is_core_of = WHY
+					}
+				}
+				add_core_of = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = the_heartlands_beat_in_harmony
+	x = 0
+	y = 1
+	relative_position_id = harvest_harmony
+	
+	cost = 5
+	prerequisite = { focus = reaping_the_rewards_of_our_labor }
+	prerequisite = { focus = sewing_the_seeds_of_our_strength }
+	prerequisite = { focus = harvest_harmony }
+	
+	completion_reward = {
+		swap_ideas = {
+			add_idea = equestria_reborn_2
+			remove_idea = equestria_reborn
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+###Southeast###
+###Left side if Southeast Mingsplodes###
+
+shared_focus = {
+	id = a_headless_state
+	x = -8
+	y = 1
+	relative_position_id = the_heartlands_beat_in_harmony
+	
+	available = {
+		has_global_flag = balsplosion
+	}
+	
+	cost = 4
+	prerequisite = { focus = the_heartlands_beat_in_harmony }
+	mutually_exclusive = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		add_political_power = 100
+		###Country event for planning on how to approach the harmonist-aligned nations
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = a_spark_of_freedom
+	x = -2
+	y = 1
+	relative_position_id = a_headless_state
+	
+	bypass = {
+		NOT = {
+			country_exists = HUG
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_headless_state }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.518
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = art_of_the_deal
+	x = 0
+	y = 1
+	relative_position_id = a_headless_state
+	
+	bypass = {
+		NOT = {
+			country_exists = NID
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_headless_state }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.522
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = counter_the_royal_marriage
+	x = 2
+	y = 1
+	relative_position_id = a_headless_state
+	
+	bypass = {
+		NOT = {
+			country_exists = STB
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_headless_state }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.526
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = secure_the_eastern_jungle
+	x = 1
+	y = 1
+	relative_position_id = a_spark_of_freedom
+	
+	cost = 4
+	prerequisite = { focus = a_spark_of_freedom }
+	prerequisite = { focus = art_of_the_deal }
+	prerequisite = { focus = counter_the_royal_marriage }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				country_exists = NRP
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NRP
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+		}
+		IF = {
+			limit = {
+				NOT = {
+					STB = {
+						is_in_faction_with = EQS
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = STB
+			}
+		}
+		IF = {
+			limit = {
+				NOT = {
+					HUG = {
+						is_in_faction_with = EQS
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = HUG
+			}
+		}
+		IF = {
+			limit = {
+				NOT = {
+					NID = {
+						is_in_faction_with = EQS
+					}
+				}
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NID
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = slide_toward_the_celestial_sea
+	x = 1
+	y = 1
+	relative_position_id = art_of_the_deal
+	
+	cost = 4
+	prerequisite = { focus = a_spark_of_freedom }
+	prerequisite = { focus = art_of_the_deal }
+	prerequisite = { focus = counter_the_royal_marriage }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = NRP
+		}
+		IF = {
+			limit = {
+				country_exists = BAL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BAL
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = MTS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MTS
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = NEI
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NEI
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = EEE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = EEE
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = SPA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SPA
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = mangos_for_all
+	x = 0
+	y = 1
+	relative_position_id = secure_the_eastern_jungle
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 4
+	prerequisite = { focus = secure_the_eastern_jungle }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = STB
+					is_core_of = HUG
+					is_core_of = BUL
+					is_core_of = NID
+					is_core_of = NRP
+				}
+			}
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = an_equestrian_seaboard
+	x = 0
+	y = 1
+	relative_position_id = slide_toward_the_celestial_sea
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 4
+	prerequisite = { focus = slide_toward_the_celestial_sea }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = MTS
+					is_core_of = BAL
+					is_core_of = EEE
+					is_core_of = NEI
+					is_core_of = SPA
+				}
+			}
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Right side if Southeast doesn't Mingsplode###
+shared_focus = {
+	id = puppet_of_greater_foe
+	x = 8
+	y = 1
+	relative_position_id = the_heartlands_beat_in_harmony
+	
+	available = {
+		NOT = {
+			has_global_flag = balsplosion
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = the_heartlands_beat_in_harmony }
+	mutually_exclusive = { focus = a_headless_state }
+	
+	completion_reward = {
+		add_political_power = 100
+		###Country event for planning on how to foment an uprising
+		###Unlock a few minor decisions for prep and terrorism support
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = highlight_the_lies_of_minitru
+	x = -3
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		BAL = {
+			add_popularity = {
+				ideology = communism
+				popularity = -0.05
+			}
+			add_war_support = -0.1
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = war_is_not_peace_peace_is_peace
+	x = -1
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		BAL = {
+			add_manpower = -50042
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = plenty_of_harmony_to_go_around
+	x = 1
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		BAL = {
+			add_timed_idea = {
+				idea = all_the_harmony_BAL
+				days = 180
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = governate_only_loves_itself
+	x = 3
+	y = 1
+	relative_position_id = puppet_of_greater_foe
+	
+	cost = 3
+	prerequisite = { focus = puppet_of_greater_foe }
+	
+	completion_reward = {
+		BAL = {
+			add_ideas = exposed_lies_BAL
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = launch_operation_shattered_head
+	x = 1
+	y = 1
+	relative_position_id = war_is_not_peace_peace_is_peace
+	
+	cost = 2
+	prerequisite = { focus = war_is_not_peace_peace_is_peace }
+	prerequisite = { focus = governate_only_loves_itself }
+	prerequisite = { focus = plenty_of_harmony_to_go_around }
+	prerequisite = { focus = highlight_the_lies_of_minitru }
+	
+	completion_reward = {
+		declare_war_on = {
+			target = BAL
+			type = annex_everything
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = freed_from_the_collective_consciousness
+	x = 0
+	y = 1
+	relative_position_id = launch_operation_shattered_head
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 6
+	prerequisite = { focus = launch_operation_shattered_head }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				is_core_of = BAL
+			}
+			add_core_of = EQS
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###End of Rump Wars###
+shared_focus = {
+	id = harmony_reigns_in_the_southeast
+	x = 0
+	y = 5
+	relative_position_id = the_heartlands_beat_in_harmony
+	
+	available = {
+		OR = {
+			has_completed_focus = freed_from_the_collective_consciousness
+			AND = {
+				has_completed_focus = an_equestrian_seaboard
+				has_completed_focus = mangos_for_all
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = {
+		focus = an_equestrian_seaboard
+		focus = mangos_for_all
+		focus = freed_from_the_collective_consciousness
+	}
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = equestria_reborn_2
+			add_idea = equestria_reborn_3
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = reform_the_united_ponies_alliance
+	x = 0
+	y = 1
+	relative_position_id = harmony_reigns_in_the_southeast
+	
+	cost = 3
+	prerequisite = { focus = harmony_reigns_in_the_southeast }
+	
+	completion_reward = {
+		set_faction_name = equestria_faction_2
+		CRY = {
+			country_event = {
+				id = crystal.500
+				days = 1
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = shelter_for_the_refugees
+	x = -1
+	y = 1
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	available = {
+		CRY = {
+			is_in_faction_with = EQS
+		}
+	}
+	
+	mutually_exclusive = { focus = shattered_harmony }
+	
+	cost = 4
+	prerequisite = { focus = reform_the_united_ponies_alliance }
+	
+	completion_reward = {
+		###change state population###
+		344 = {
+			add_manpower = -100000
+		}
+		3 = {
+			add_manpower = 100000
+		}
+		345 = {
+			add_manpower = -100000
+		}
+		12 = {
+			add_manpower = 100000
+		}
+		53 = {
+			add_manpower = -100000
+		}
+		75 = {
+			add_manpower = 100000
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = shattered_harmony
+	x = 1
+	y = 1
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	available = {
+		CRY = {
+			NOT = {
+				is_in_faction_with = EQS
+			}
+		}
+	}
+	
+	mutually_exclusive = { focus = shelter_for_the_refugees }
+	
+	cost = 4
+	prerequisite = { focus = reform_the_united_ponies_alliance }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = CRY
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###War with Stalliongrad and the changelings###
+###Stalliongrad###
+shared_focus = {
+	id = recognize_old_demands
+	x = -2
+	y = 2
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 4
+	prerequisite = { 
+		focus = shelter_for_the_refugees
+		focus = shattered_harmony 
+	}
+	
+	completion_reward = {
+		STG = {
+			country_event = {
+			id = celestia.532
+			days = 1
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = steal_stalliongradian_tank_designs
+	x = 1
+	y = 1
+	relative_position_id = recognize_old_demands
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 3
+	prerequisite = { focus = recognize_old_demands }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = medium_tank_equipment
+			amount = 250
+			producer = STG
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = cat_medium_armor
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = stubborness_got_nopony_anywhere
+	x = -1
+	y = 1
+	relative_position_id = recognize_old_demands
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 3
+	prerequisite = { focus = recognize_old_demands }
+	
+	completion_reward = {
+		223 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		184 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		176 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = pen_partitions_with_the_crystal_empire
+	x = 0
+	y = 1
+	relative_position_id = stubborness_got_nopony_anywhere
+	
+	available = {
+		CRY = {
+			is_in_faction_with = EQS
+		}
+	}
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	mutually_exclusive = { focus = fortify_the_crystal_border }
+	
+	cost = 2
+	prerequisite = { focus = stubborness_got_nopony_anywhere }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.535
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = fortify_the_crystal_border
+	x = -2
+	y = 1
+	relative_position_id = stubborness_got_nopony_anywhere
+	
+	available = {
+		CRY = {
+			NOT = {
+				is_in_faction_with = EQS
+			}
+		}
+	}
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	mutually_exclusive = { focus = pen_partitions_with_the_crystal_empire }
+	
+	cost = 2
+	prerequisite = { focus = stubborness_got_nopony_anywhere }
+	
+	completion_reward = {
+		custom_effect_tooltip = crystal_fort_border_tt
+		CRY = {
+			hidden_effect = {
+				53 = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 63
+						instant_build = yes
+					}
+				}
+				145 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 6066
+						instant_build = yes
+					}
+				}
+				145 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 11409
+						instant_build = yes
+					}
+				}
+				150 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 316
+						instant_build = yes
+					}
+				}
+				150 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 3174
+						instant_build = yes
+					}
+				}
+				64 = {
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 592
+						instant_build = yes
+					}
+				}
+				64 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 4452
+						instant_build = yes
+					}
+				}
+				64 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 9317
+						instant_build = yes
+					}
+				}
+				53 = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 6235
+						instant_build = yes
+					}
+				}
+				150 = {
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 3525
+						instant_build = yes
+					}
+				}
+				345 = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 11788
+						instant_build = yes
+					}
+				}
+				344 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 489
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = infiltrate_the_frontier
+	x = 0
+	y = 1
+	relative_position_id = steal_stalliongradian_tank_designs
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 3
+	prerequisite = { focus = steal_stalliongradian_tank_designs }
+	
+	completion_reward = {
+		###Either make OOB to create four 10 width infantry with engineers and support artillery, or make a NS that reduces recon and max entrenchment
+		load_oob = "SOL_stalliongrad_insurgents"
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = bring_harmony_to_severnaya
+	x = 1
+	y = 1
+	relative_position_id = pen_partitions_with_the_crystal_empire
+	
+	bypass = { has_global_flag = stalliongrad_agrees }
+	
+	cost = 5
+	prerequisite = { 
+		focus = pen_partitions_with_the_crystal_empire
+		focus = fortify_the_crystal_border
+	}
+	prerequisite = { focus = infiltrate_the_frontier }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				country_exists = STG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = STG
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = AWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = CWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = MWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MWR
+			}
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = a_new_industrial_hub
+	x = 0
+	y = 1
+	relative_position_id = bring_harmony_to_severnaya
+	
+	cost = 5
+	prerequisite = { focus = bring_harmony_to_severnaya }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					OR = {
+						is_core_of = STG
+						is_claimed_by = STG
+					}
+					is_owned_by = ROOT
+				}
+			}
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+###Changelings###
+shared_focus = {
+	id = issue_a_final_warning
+	x = 2
+	y = 2
+	relative_position_id = reform_the_united_ponies_alliance
+	
+	cost = 4
+	prerequisite = {
+		focus = shelter_for_the_refugees
+		focus = shattered_harmony
+	}
+	
+	completion_reward = {
+		CHN = {
+			country_event = {
+				id = celestia.536
+				days = 1
+			}
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = meet_with_the_general_staff
+	x = -1
+	y = 1
+	relative_position_id = issue_a_final_warning
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 3
+	prerequisite = { focus = issue_a_final_warning }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = reconvened_general_staff
+			days = 730
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = pair_down_the_borders
+	x = 1
+	y = 1
+	relative_position_id = issue_a_final_warning
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 3
+	prerequisite = { focus = issue_a_final_warning }
+	
+	completion_reward = {
+		###Add level 2 forts along the entire hegemony border
+		custom_effect_tooltip = changeling_fort_border_tt
+		hidden_effect = {
+			50 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9557
+					instant_build = yes
+				}
+			}
+			50 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 982
+					instant_build = yes
+				}
+			}
+			81 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11572
+					instant_build = yes
+				}
+			}
+			35 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9587
+					instant_build = yes
+				}
+			}
+			35 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 6531
+					instant_build = yes
+				}
+			}
+			22 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9454
+					instant_build = yes
+				}
+			}
+			120 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 584
+					instant_build = yes
+				}
+			}
+			121 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11507
+					instant_build = yes
+				}
+			}
+			121 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3482
+					instant_build = yes
+				}
+			}
+			123 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3521
+					instant_build = yes
+				}
+			}
+			123 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 773
+					instant_build = yes
+				}
+			}
+			97 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11568
+					instant_build = yes
+				}
+			}
+			50 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9557
+					instant_build = yes
+				}
+			}
+			99 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 279
+					instant_build = yes
+				}
+			}
+			99 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11232
+					instant_build = yes
+				}
+			}
+			99 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11372
+					instant_build = yes
+				}
+			}
+			128 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 1655
+					instant_build = yes
+				}
+			}
+			170 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3757
+					instant_build = yes
+				}
+			}
+			170 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9423
+					instant_build = yes
+				}
+			}
+			170 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3707
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3759
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11341
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9359
+					instant_build = yes
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = study_prisoners_of_war
+	x = 0
+	y = 1
+	relative_position_id = meet_with_the_general_staff
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 4
+	prerequisite = { focus = meet_with_the_general_staff }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.45
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = ramp_up_recruitment
+	x = 0
+	y = 1
+	relative_position_id = pair_down_the_borders
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 3
+	prerequisite = { focus = pair_down_the_borders }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = for_a_free_equestria
+			days = 365
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = equestria_will_not_back_down
+	x = 1
+	y = 1
+	relative_position_id = study_prisoners_of_war
+	
+	bypass = { has_global_flag = changelings_agreed }
+	
+	cost = 5
+	prerequisite = { focus = ramp_up_recruitment }
+	prerequisite = { focus = study_prisoners_of_war }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				country_exists = CHN
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CHN
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = NCA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NCA
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = CCA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CCA
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = SCS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SCS
+			}
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = a_final_end_to_the_great_war
+	x = 0
+	y = 1
+	relative_position_id = equestria_will_not_back_down
+	
+	cost = 5
+	prerequisite = { focus = equestria_will_not_back_down }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					OR = {
+						is_core_of = CHN
+						is_core_of = SCS
+						is_core_of = NCA
+						is_core_of = CCA
+					}
+					is_claimed_by = ROOT
+					is_owned_by = ROOT
+				}
+			}
+			add_core_of = ROOT
+		}
+		swap_ruler_traits = {
+			remove = princess_in_name_only
+			add = princess_of_ponies_1048
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Marelandia War###
+shared_focus = {
+	id = contact_goldfeather
+	x = 0
+	y = 1
+	relative_position_id = a_new_industrial_hub
+	
+	cost = 5
+	prerequisite = { focus = a_new_industrial_hub }
+	prerequisite = { focus = a_final_end_to_the_great_war }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.46
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = power_to_the_people
+	x = 2
+	y = 1
+	relative_position_id = a_new_industrial_hub
+	
+	cost = 5
+	prerequisite = { focus = a_new_industrial_hub }
+	prerequisite = { focus = a_final_end_to_the_great_war }
+	
+	completion_reward = {
+		EQC = {
+			add_timed_idea = {
+				idea = awakening_the_proles
+				days = 180
+			}
+		}
+		add_manpower = -25000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -25000
+			producer = EQS
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = -5000
+			producer = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = reestablish_trade_with_skyfall
+	x = 0
+	y = 1
+	relative_position_id = a_final_end_to_the_great_war
+	
+	cost = 5
+	prerequisite = { focus = a_new_industrial_hub }
+	prerequisite = { focus = a_final_end_to_the_great_war }
+	
+	completion_reward = {
+		###Load OOB for 3 divisions of 12 width pony infantry with support artillery and engineers
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		TRD = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10000
+				producer = EQS
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = end_the_terror_of_big_sister
+	x = 0
+	y = 1
+	relative_position_id = power_to_the_people
+	
+	cost = 6
+	prerequisite = { focus = power_to_the_people }
+	prerequisite = { focus = contact_goldfeather }
+	prerequisite = { focus = reestablish_trade_with_skyfall }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = EQC
+		}
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = integrating_aboriginal_militia
+	x = -2
+	y = 1
+	relative_position_id = end_the_terror_of_big_sister
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_core_of = EQC
+			is_controlled_by = ROOT
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = end_the_terror_of_big_sister }
+	
+	completion_reward = {
+		add_manpower = 10000
+		country_event = {
+			id = celestia.52
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = under_the_ministries_shadow
+	x = 0
+	y = 1
+	relative_position_id = end_the_terror_of_big_sister
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	available = {
+		356 = {
+			is_controlled_by = ROOT
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = end_the_terror_of_big_sister }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.54
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = landfall_on_the_cross
+	x = 2
+	y = 1
+	relative_position_id = end_the_terror_of_big_sister
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_core_of = EQC
+			is_controlled_by = ROOT
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = end_the_terror_of_big_sister }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.53
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = new_new_mareland
+	x = 0
+	y = 1
+	relative_position_id = under_the_ministries_shadow
+	
+	available = {
+		OR = {
+			NOT = {
+				country_exists = EQC
+			}
+			EQC = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = under_the_ministries_shadow }
+	prerequisite = { focus = integrating_aboriginal_militia }
+	prerequisite = { focus = landfall_on_the_cross }
+	
+	completion_reward = {
+		###Event for finding Jet Set nearly dead in the ruins of Miniluv, and then bringing him back out, to which he will then be the reinstated leader, which sets him as leader, with the same party names as vanilla, and the same colour through a cosmetic tag
+		country_event = {
+			id = celestia.55
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Military Trees###
+###Naval Tree###
+shared_focus = {
+	id = anchor_the_imperial_navy
+	x = 30
+	y = 5
+	
+	available = {
+		OR = {
+			has_completed_focus = once_a_land_filled_with_magic
+			has_completed_focus = once_a_society_filled_with_love
+		}
+	}
+	
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	
+	cost = 4
+	
+	completion_reward = {
+		add_ideas = chained_imperial_navy
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = { 
+	id = reform_the_equestrian_admirality
+	x = 0
+	y = 1
+	relative_position_id = anchor_the_imperial_navy
+	
+	cost = 4
+	prerequisite = { focus = anchor_the_imperial_navy }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = chained_imperial_navy
+			add_idea = chained_imperial_navy_1
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = a_revitalized_navy_for_a_reborn_nation
+	x = 0
+	y = 1
+	relative_position_id = reform_the_equestrian_admirality
+	
+	cost = 5
+	prerequisite = { focus = reform_the_equestrian_admirality }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = chained_imperial_navy_1
+			add_idea = reborn_navy
+		}
+	}
+	ai_will_do = { factor = 23 }
+}
+
+shared_focus = {
+	id = modernizing_old_tactics
+	x = -2
+	y = 1
+	relative_position_id = a_revitalized_navy_for_a_reborn_nation
+	
+	cost = 4
+	prerequisite = { focus = a_revitalized_navy_for_a_reborn_nation }
+	mutually_exclusive = { focus = adapting_to_the_world_situation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = base_strike_bonus
+			bonus = 1
+			uses = 2
+			category = cat_base_strike
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = the_workhorse_of_the_fleet
+	x = 0
+	y = 1
+	relative_position_id = modernizing_old_tactics
+	
+	cost = 5
+	prerequisite = { focus = modernizing_old_tactics }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = base_strike_bonus
+			bonus = 1
+			uses = 1
+			category = cat_base_strike
+		}
+		add_tech_bonus = {
+			name = screen_bonus
+			bonus = 1
+			uses = 2
+			category = dd_tech
+			category = cl_tech
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = appropriate_the_hive_concept
+	x = 0
+	y = 1
+	relative_position_id = the_workhorse_of_the_fleet
+	
+	cost = 3
+	prerequisite = { focus = the_workhorse_of_the_fleet }
+	
+	completion_reward = {
+		add_ideas = swarming_the_skies
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_new_generation_of_warship
+	x = 0
+	y = 1
+	relative_position_id = appropriate_the_hive_concept
+	
+	cost = 5
+	prerequisite = { focus = appropriate_the_hive_concept }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = base_strike_bonus
+			bonus = 1
+			uses = 1
+			category = cat_base_strike
+		}
+		add_tech_bonus = {
+			name = carrier_bonus
+			bonus = 1
+			uses = 2
+			category = cv_tech
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = adapting_to_the_world_situation
+	x = 2
+	y = 1
+	relative_position_id = a_revitalized_navy_for_a_reborn_nation
+	
+	cost = 4
+	prerequisite = { focus = a_revitalized_navy_for_a_reborn_nation }
+	mutually_exclusive = { focus = modernizing_old_tactics }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = trade_interdiction_bonus
+			bonus = 1
+			uses = 2
+			category = cat_trade_interdiction
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = like_a_knife_in_the_back
+	x = 0
+	y = 1
+	relative_position_id = adapting_to_the_world_situation
+	
+	cost = 4
+	prerequisite = { focus = adapting_to_the_world_situation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = trade_interdiction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_trade_interdiction
+		}
+		add_tech_bonus = {
+			name = sub_bonus
+			bonus = 1
+			uses = 1
+			category = ss_tech
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = { #Mention how the changeling kriegsmarine succeeded against a surface fleet through hit and run warfare with subs and how that can be adapted to Equestrian use
+	id = study_the_changeling_naval_victories
+	x = 0
+	y = 1
+	relative_position_id = like_a_knife_in_the_back
+	
+	cost = 5
+	prerequisite = { focus = like_a_knife_in_the_back }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = trade_interdiction_bonus
+			bonus = 1
+			uses = 1
+			category = cat_trade_interdiction
+		}
+		add_tech_bonus = {
+			name = screen_bonus
+			bonus = 1
+			uses = 1
+			category = dd_tech
+			category = cl_tech
+		}
+		add_tech_bonus = {
+			name = sub_bonus
+			bonus = 1
+			uses = 1
+			category = ss_tech
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Mention that this is the culmination of surface and sudden strike doctrines and that it will be the ultimate protection and against attack, and respond to any threat in record time
+	id = fund_the_loyalty_strike_carrier_project
+	x = 0
+	y = 1
+	relative_position_id = study_the_changeling_naval_victories
+	
+	cost = 5
+	prerequisite = { focus = study_the_changeling_naval_victories }
+	
+	completion_reward = {
+		add_ideas = patrol_carriers
+		add_tech_bonus = {
+			name = carrier_bonus_bonus
+			bonus = 1
+			uses = 1
+			category = cv_tech
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+###Unitied Section###
+shared_focus = { #Mention that there is no use of the battleship in the modern world, and is best used for heavy-hitting home defense
+	id = a_tertiary_battleship
+	x = 1
+	y = 1
+	relative_position_id = a_new_generation_of_warship
+	
+	cost = 4
+	prerequisite = { 
+	focus = a_new_generation_of_warship 
+	focus = fund_the_loyalty_strike_carrier_project 
+	}
+	
+	completion_reward = {
+		add_ideas = novel_battleship_support
+		add_tech_bonus = {
+			name = bb_bonus
+			bonus = 1
+			uses = 1
+			category = bb_tech
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Mention new spells that have been researched that allow light ships to punch well above their weight
+	id = shells_of_spells
+	x = -1
+	y = 1
+	relative_position_id = fund_the_loyalty_strike_carrier_project
+	
+	cost = 3
+	prerequisite = { 
+	focus = a_new_generation_of_warship 
+	focus = fund_the_loyalty_strike_carrier_project 
+	}
+	
+	completion_reward = {
+		add_ideas = diamond_shell_spells
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = semper_in_concordia_fidelium
+	x = 0
+	y = 1
+	relative_position_id = a_tertiary_battleship
+	
+	cost = 4
+	prerequisite = { focus = a_tertiary_battleship }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = marine_bonus
+			bonus = 1
+			uses = 2
+			category = marine_tech
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = harmony_ships
+	x = 0
+	y = 1
+	relative_position_id = shells_of_spells
+	
+	cost = 3
+	prerequisite = { focus = shells_of_spells }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = transport_bonus
+			bonus = 1
+			uses = 1
+			technology = landing_craft
+			technology = tank_landing_craft
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = { 
+	id = the_queen_of_the_celestial_sea
+	x = 1
+	y = 1
+	relative_position_id = semper_in_concordia_fidelium
+	
+	cost = 5
+	prerequisite = { 
+	focus = semper_in_concordia_fidelium
+	focus = harmony_ships
+	}
+	
+	completion_reward = {
+		add_ideas = queen_of_the_seas
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Army Tree###
+shared_focus = {
+	id = assess_the_state_of_the_militarium
+	x = 40
+	y = 5
+	
+	available = {
+		OR = {
+			has_completed_focus = once_a_land_filled_with_magic
+			has_completed_focus = once_a_society_filled_with_love
+		}
+	}
+	
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	
+	cost = 4
+	
+	completion_reward = {
+		add_ideas = reevaluating_the_military
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = imprison_the_worst_offenders
+	x = -2
+	y = 1
+	relative_position_id = assess_the_state_of_the_militarium
+	
+	cost = 3
+	prerequisite = { focus = assess_the_state_of_the_militarium }
+	
+	completion_reward = {
+		###Remove Bellum Iceheart and one other fanatical general, possibly the head of the old Praetorian Guard
+		add_manpower = -50000
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = implement_anti_hate_training
+	x = 0
+	y = 1
+	relative_position_id = assess_the_state_of_the_militarium
+	
+	cost = 3
+	prerequisite = { focus = assess_the_state_of_the_militarium }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = anti-hate_mk_2
+			days = 365 #Maybe make this 180 days if it's too long
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = destroy_the_weapons_of_war_criminals
+	x = 2
+	y = 1
+	relative_position_id = assess_the_state_of_the_militarium
+	
+	cost = 3
+	prerequisite = { focus = assess_the_state_of_the_militarium }
+	
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		add_equipment_to_stockpile = {
+			type = light_tank_equipment
+			amount = -1000
+			producer = EQS
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = a_new_army_for_an_old_order
+	x = 0
+	y = 1
+	relative_position_id = implement_anti_hate_training
+	
+	available = {
+		NOT = {
+			has_idea = anti-hate_mk_2
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = imprison_the_worst_offenders }
+	prerequisite = { focus = implement_anti_hate_training }
+	prerequisite = { focus = destroy_the_weapons_of_war_criminals }
+	
+	completion_reward = {
+		remove_ideas = reevaluating_the_military
+		add_ideas = a_harmonic_army
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = an_army_without_a_marshal
+	x = 0
+	y = 1
+	relative_position_id = a_new_army_for_an_old_order
+	
+	cost = 3
+	prerequisite = { focus = a_new_army_for_an_old_order }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_country_flag = sunset_redeemed
+			}
+			country_event = {
+				id = celestia.44
+			}
+		}
+		ELSE = {
+			country_event = {
+				id = celestia.43
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Blueblood Side###
+shared_focus = {
+	id = cold_and_efficient
+	x = -2
+	y = 1
+	relative_position_id = an_army_without_a_marshal
+	
+	cost = 4
+	prerequisite = { focus = an_army_without_a_marshal }
+	mutually_exclusive = { focus = soothing_sunlight }
+	
+	completion_reward = {
+		custom_effect_tooltip = blueblood_returns_tt
+		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = EQS } }
+	}
+	ai_will_do = { factor = 10 modifier = { NOT = { has_country_flag = sunset_redeemed } factor = 3 } }
+}
+
+shared_focus = {
+	id = stick_with_the_tried_and_true
+	x = 0
+	y = 1
+	relative_position_id = cold_and_efficient
+	
+	cost = 5
+	prerequisite = { focus = cold_and_efficient }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 2
+			category = cat_grand_battle_plan
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = discipline_and_order_is_key
+	x = 0
+	y = 1
+	relative_position_id = stick_with_the_tried_and_true
+	
+	cost = 4
+	prerequisite = { focus = stick_with_the_tried_and_true }
+	
+	completion_reward = {
+		add_ideas = the_old_guard
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = plan_and_then_plan_again
+	x = 0
+	y = 1
+	relative_position_id = discipline_and_order_is_key
+	
+	cost = 4
+	prerequisite = { focus = discipline_and_order_is_key }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_old_guard
+			add_idea = the_old_guard_2
+		}
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 1
+			category = cat_grand_battle_plan
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_loyal_army_for_a_young_nation
+	x = 0
+	y = 1
+	relative_position_id = plan_and_then_plan_again
+	
+	cost = 4
+	prerequisite = { focus = plan_and_then_plan_again }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_old_guard_2
+			add_idea = the_old_guard_3
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+###Sunset Side###
+shared_focus = {
+	id = soothing_sunlight
+	x = 2
+	y = 1
+	relative_position_id = an_army_without_a_marshal
+	
+	available = {
+		has_country_flag = sunset_redeemed
+	}
+	
+	cost = 4
+	prerequisite = { focus = an_army_without_a_marshal }
+	mutually_exclusive = { focus = cold_and_efficient }
+	
+	completion_reward = {
+		custom_effect_tooltip = sunset_returns_tt
+		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = EQS } }
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = rewrite_the_military_curriculum
+	x = 0
+	y = 1
+	relative_position_id = soothing_sunlight
+	
+	cost = 5
+	prerequisite = { focus = soothing_sunlight }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 2
+			category = cat_mobile_warfare
+			category = cat_superior_firepower
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = innovation_and_experimentation_is_key
+	x = 0
+	y = 1
+	relative_position_id = rewrite_the_military_curriculum
+	
+	cost = 4
+	prerequisite = { focus = rewrite_the_military_curriculum }
+	
+	completion_reward = {
+		add_ideas = the_young_guard
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = plans_are_usless_but_planning_is_indespensible
+	x = 0
+	y = 1
+	relative_position_id = innovation_and_experimentation_is_key
+	
+	cost = 4
+	prerequisite = { focus = innovation_and_experimentation_is_key }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_young_guard
+			add_idea = the_young_guard_2
+		}
+		add_tech_bonus = {
+			name = doctrine_bonus
+			bonus = 1
+			uses = 1
+			category = cat_mobile_warfare
+			category = cat_superior_firepower
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_modern_army_for_a_modern_nation
+	x = 0
+	y = 1
+	relative_position_id = plans_are_usless_but_planning_is_indespensible
+	
+	cost = 4
+	prerequisite = { focus = plans_are_usless_but_planning_is_indespensible }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = the_young_guard_2
+			add_idea = the_young_guard_3
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+###Unified Section###
+shared_focus = {
+	id = create_the_canterlot_command
+	x = -2
+	y = 1
+	relative_position_id = a_modern_army_for_a_modern_nation
+	
+	cost = 6
+	prerequisite = {
+		focus = a_modern_army_for_a_modern_nation
+		focus = a_loyal_army_for_a_young_nation
+	}
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				amount_research_slots < 5
+			}
+			add_research_slot = 1
+		}
+		swap_ideas = {
+			remove_idea = a_harmonic_army
+			add_idea = a_harmonic_army_2
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = weapons_test_new_tank_designs
+	x = -2
+	y = 1
+	relative_position_id = create_the_canterlot_command
+	
+	cost = 4
+	prerequisite = { focus = create_the_canterlot_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = armor_bonus
+			bonus = 1
+			uses = 1
+			category = armor
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = uncivilized_but_necessary
+	x = 0
+	y = 1
+	relative_position_id = create_the_canterlot_command
+	
+	cost = 4
+	prerequisite = { focus = create_the_canterlot_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = bringing_harmony_from_afar
+	x = 2
+	y = 1
+	relative_position_id = create_the_canterlot_command
+	
+	cost = 4
+	prerequisite = { focus = create_the_canterlot_command }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = artillery_bonus
+			bonus = 1
+			uses = 2
+			category = artillery
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = fund_project_aegis
+	x = 1
+	y = 1
+	relative_position_id = weapons_test_new_tank_designs
+	
+	cost = 4
+	prerequisite = { focus = weapons_test_new_tank_designs }
+	prerequisite = { focus = uncivilized_but_necessary }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = modern_tank_bonus
+			bonus = 1
+			uses = 1
+			technology = main_battle_tank
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = rebuild_the_equestrian_logistical_corps
+	x = 1
+	y = 1
+	relative_position_id = uncivilized_but_necessary
+	
+	cost = 4
+	prerequisite = { focus = bringing_harmony_from_afar }
+	prerequisite = { focus = uncivilized_but_necessary }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = modern_tank_bonus
+			bonus = 1
+			uses = 2
+			category = support_tech
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = for_harmony_one_and_all
+	x = 1
+	y = 1
+	relative_position_id = fund_project_aegis
+	
+	cost = 5
+	prerequisite = { focus = fund_project_aegis }
+	prerequisite = { focus = rebuild_the_equestrian_logistical_corps }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = a_harmonic_army_2
+			add_idea = a_harmonic_army_3
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+###Air Tree###
+shared_focus = {
+	id = ground_the_solarbolts
+	x = 50
+	y = 5
+	
+	available = {
+		OR = {
+			has_completed_focus = once_a_land_filled_with_magic
+			has_completed_focus = once_a_society_filled_with_love
+		}
+	}
+	
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	
+	cost = 4
+	
+	completion_reward = {
+		add_ideas = grounded_aces
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = expose_the_aces_of_the_empire
+	x = -2
+	y = 1
+	relative_position_id = ground_the_solarbolts
+	
+	cost = 3
+	prerequisite = { focus = ground_the_solarbolts }
+	
+	completion_reward = {
+		add_stability = -0.1
+		add_war_support = -0.1
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = ban_use_of_napalm
+	x = 2
+	y = 1
+	relative_position_id = ground_the_solarbolts
+	
+	cost = 3
+	prerequisite = { focus = ground_the_solarbolts }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = napalm_napalmed
+			days = 400
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = a_modernized_air_force_for_a_revived_nation
+	x = 2
+	y = 1
+	relative_position_id = expose_the_aces_of_the_empire
+	
+	available = {
+		NOT = {
+			has_idea = napalm_napalmed
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = expose_the_aces_of_the_empire }
+	prerequisite = { focus = ban_use_of_napalm }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = grounded_aces
+			add_idea = a_new_generation_of_aces
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = survival_of_the_sturdiest
+	x = -2
+	y = 1
+	relative_position_id = a_modernized_air_force_for_a_revived_nation
+	
+	mutually_exclusive = { focus = survival_of_the_strongest }
+	
+	cost = 5
+	prerequisite = { focus = a_modernized_air_force_for_a_revived_nation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 2
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = design_redundant_bomber_systems
+	x = 0
+	y = 1
+	relative_position_id = survival_of_the_sturdiest
+	
+	cost = 4
+	prerequisite = { focus = survival_of_the_sturdiest }
+	
+	completion_reward = {
+		add_ideas = careful_bombing_systems
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 1
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+shared_focus = {
+	id = push_the_boundary_of_flight_height
+	x = 0
+	y = 1
+	relative_position_id = design_redundant_bomber_systems
+	
+	cost = 4
+	prerequisite = { focus = design_redundant_bomber_systems }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = careful_bombing_systems
+			add_idea = careful_bombing_systems_2
+		}
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 1
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = reinvent_the_propeller
+	x = 0
+	y = 1
+	relative_position_id = push_the_boundary_of_flight_height
+	
+	cost = 4
+	prerequisite = { focus = push_the_boundary_of_flight_height }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = operation_integrity_bonus
+			bonus = 1
+			uses = 2
+			category = tactical_bomber
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = survival_of_the_strongest
+	x = 2
+	y = 1
+	relative_position_id = a_modernized_air_force_for_a_revived_nation
+	
+	mutually_exclusive = { focus = survival_of_the_sturdiest }
+	
+	cost = 5
+	prerequisite = { focus = a_modernized_air_force_for_a_revived_nation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = battlefield_support_bonus
+			bonus = 1
+			uses = 2
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = matrix_powered_flight
+	x = 0
+	y = 1
+	relative_position_id = survival_of_the_strongest
+	
+	cost = 4
+	prerequisite = { focus = survival_of_the_strongest }
+	
+	completion_reward = {
+		add_ideas = enhanced_dive_bombers
+		add_tech_bonus = {
+			name = cas_bonus
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+		}
+		add_tech_bonus = {
+			name = fighter_bonus
+			bonus = 1
+			uses = 1
+			category = light_fighter
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Have an I am Speed joke
+	id = push_the_limit_of_speed
+	x = 0
+	y = 1
+	relative_position_id = matrix_powered_flight
+	
+	cost = 4
+	prerequisite = { focus = matrix_powered_flight }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = enhanced_dive_bombers
+			add_idea = enhanced_dive_bombers_2
+		}
+		add_tech_bonus = {
+			name = battlefield_support_bonus
+			bonus = 1
+			uses = 1
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = synergetic_support_roles
+	x = 0
+	y = 1
+	relative_position_id = push_the_limit_of_speed
+	
+	cost = 4
+	prerequisite = { focus = push_the_limit_of_speed }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = battlefield_support_bonus
+			bonus = 1
+			uses = 2
+			category = cat_battlefield_support
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = shields_of_harmony
+	x = -1
+	y = 1
+	relative_position_id = reinvent_the_propeller
+	
+	cost = 5
+	prerequisite = { focus = reinvent_the_propeller }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = heavy_fighter_bonus
+			bonus = 1
+			uses = 2
+			category = cat_heavy_fighter
+		}
+	}
+	ai_will_do = { factor = 21 }
+}
+
+shared_focus = { #Mention how Fluttershy led nuclear development for a short time during the war and got quite far and how they should reuses it for good
+	id = declassify_fluttershys_nuclear_research
+	x = 2
+	y = 1
+	relative_position_id = reinvent_the_propeller
+	
+	cost = 5
+	prerequisite = {
+		focus = reinvent_the_propeller
+		focus = synergetic_support_roles
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = nuke_bonus
+			bonus = 1
+			uses = 2
+			category = nuclear
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = speeding_swords_of_love
+	x = 1
+	y = 1
+	relative_position_id = synergetic_support_roles
+	
+	cost = 5
+	prerequisite = { focus = synergetic_support_roles }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = jet_fighter_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			technology = jet_fighter1
+			technology = jet_fighter2
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = soaring_like_a_phoenix
+	x = 2
+	y = 1
+	relative_position_id = shields_of_harmony
+	
+	cost = 4
+	prerequisite = { focus = shields_of_harmony }
+	prerequisite = { focus = declassify_fluttershys_nuclear_research }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = tac_jet_bomber_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			technology = jet_tactical_bomber1
+			technology = jet_tactical_bomber2
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = deterrent_destruction_across_equus
+	x = -2
+	y = 1
+	relative_position_id = speeding_swords_of_love
+	
+	cost = 4
+	prerequisite = { focus = speeding_swords_of_love }
+	prerequisite = { focus = declassify_fluttershys_nuclear_research }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = strat_jet_bomber_bonus
+			bonus = 1
+			ahead_reduction = 2
+			uses = 1
+			technology = jet_strategic_bomber1
+			technology = jet_strategic_bomber_a
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = {
+	id = the_pride_of_celestia
+	x = 1
+	y = 1
+	relative_position_id = soaring_like_a_phoenix
+	
+	cost = 5
+	prerequisite = {
+		focus = soaring_like_a_phoenix
+		focus = deterrent_destruction_across_equus
+	}
+	
+	completion_reward = {
+		add_ideas = airforce_of_legends
+	}
+	ai_will_do = { factor = 35 }
+}
+
+###Industry Tree###
+###Left Side###
+shared_focus = {
+	id = a_new_dawn
+	x = 35
+	y = 20
+	
+	available = {
+		OR = {
+			has_completed_focus = once_a_land_filled_with_magic
+			has_completed_focus = once_a_society_filled_with_love
+		}
+	}
+	
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	
+	cost = 4
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = backbroken_economy
+			add_idea = backbroken_economy_2
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = assess_the_economic_situation
+	x = 0
+	y = 1
+	relative_position_id = a_new_dawn
+	
+	cost = 5
+	prerequisite = { focus = a_new_dawn }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = backbroken_economy_2
+			add_idea = backbroken_economy_3
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = form_the_celestial_board_of_ecnomic_recovery
+	x = 0
+	y = 1
+	relative_position_id = assess_the_economic_situation
+	
+	available = {
+		has_completed_focus = establish_new_industry_guidelines
+	}
+	
+	cost = 5
+	prerequisite = { focus = assess_the_economic_situation }
+	
+	completion_reward = {
+		remove_ideas = backbroken_economy_3
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = return_to_the_bit_standard
+	x = 0
+	y = 1
+	relative_position_id = form_the_celestial_board_of_ecnomic_recovery
+	
+	cost = 3
+	prerequisite = { focus = form_the_celestial_board_of_ecnomic_recovery }
+	
+	completion_reward = {
+		add_ideas = returning_to_standard
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Left-left Side###
+shared_focus = {
+	id = intrinsic_value
+	x = -3
+	y = 1
+	relative_position_id = return_to_the_bit_standard
+	
+	cost = 4
+	mutually_exclusive = { focus = dictated_worth }
+	prerequisite = { focus = return_to_the_bit_standard }
+	
+	completion_reward = {
+		add_political_power = -50
+		add_stability = 0.03
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = melt_the_statues_of_daybreaker
+	x = -1
+	y = 1
+	relative_position_id = intrinsic_value
+	
+	cost = 4
+	prerequisite = { focus = intrinsic_value }
+	
+	completion_reward = {
+		add_stability = 0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.02
+		}
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = provide_from_the_riches_of_the_earth
+	x = 0
+	y = 1
+	relative_position_id = melt_the_statues_of_daybreaker
+	
+	cost = 4
+	prerequisite = { focus = melt_the_statues_of_daybreaker }
+	
+	completion_reward = {
+		add_ideas = bounties_of_equus
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = rework_accounting_laws
+	x = 1
+	y = 1
+	relative_position_id = intrinsic_value
+	
+	cost = 3
+	prerequisite = { focus = intrinsic_value }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = concentrated_industry_bonus
+			bonus = 1
+			uses = 2
+			category = concentrated_industry_category
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = allow_private_banks
+	x = 0
+	y = 1
+	relative_position_id = rework_accounting_laws
+	
+	cost = 4
+	prerequisite = { focus = rework_accounting_laws }
+	
+	completion_reward = {
+		add_ideas = a_bank_around_every_corner
+	}
+	ai_will_do = { factor = 25 }
+}	
+
+###Right-left Side###
+shared_focus = {
+	id = dictated_worth
+	x = 3
+	y = 1
+	relative_position_id = return_to_the_bit_standard
+	
+	cost = 4
+	mutually_exclusive = { focus = intrinsic_value }
+	prerequisite = { focus = return_to_the_bit_standard }
+	
+	completion_reward = {
+		add_political_power = 50
+		add_stability = -0.03
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = retabulate_the_income_of_the_nation
+	x = -1
+	y = 1
+	relative_position_id = dictated_worth
+	
+	cost = 4
+	prerequisite = { focus = dictated_worth }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = dispersed_industry_bonus
+			bonus = 1
+			uses = 2
+			category = dispersed_industry_category
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = { #Have it spout about the wonders of infinite money printing based off the actual economic output of the nation
+	id = it_just_prints_money
+	x = 0
+	y = 1
+	relative_position_id = retabulate_the_income_of_the_nation
+	
+	cost = 3
+	prerequisite = { focus = retabulate_the_income_of_the_nation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = centralize_the_equestrian_banking_system
+	x = 1
+	y = 1
+	relative_position_id = dictated_worth
+	
+	cost = 5
+	prerequisite = { focus = dictated_worth }
+	
+	completion_reward = {
+		add_ideas = centralized_monetary_system
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Have it include an asterisk that they need to go through a lot of red tape to get said subsidies
+	id = subsidize_all_that_need_it
+	x = 0
+	y = 1
+	relative_position_id = centralize_the_equestrian_banking_system
+	
+	cost = 4
+	prerequisite = { focus = centralize_the_equestrian_banking_system }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = centralized_monetary_system
+			add_idea = subsidization_for_all
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = a_stable_foundation
+	x = 0
+	y = 4
+	relative_position_id = return_to_the_bit_standard
+	
+	cost = 5
+	prerequisite = {
+		focus = provide_from_the_riches_of_the_earth
+		focus = it_just_prints_money
+	}
+	prerequisite = {
+		focus = allow_private_banks
+		focus = subsidize_all_that_need_it
+	}
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				AND = {
+					has_completed_focus = provide_from_the_riches_of_the_earth
+					has_completed_focus = allow_private_banks
+				}
+			}
+			swap_ideas = {
+				remove_idea = returning_to_standard
+				add_idea = stable_monetary_foundation
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					has_completed_focus = it_just_prints_money
+					has_completed_focus = subsidize_all_that_need_it
+				}
+			}
+			swap_ideas = {
+				remove_idea = returning_to_standard
+				add_idea = stable_monetary_foundation_2
+			}
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Middle Section###
+shared_focus = { #Equesrian Council of Economic Advisors
+	id = repurpose_ibea_into_ecea
+	x = 5
+	y = 1
+	relative_position_id = assess_the_economic_situation
+	
+	available = {
+		has_dynamic_modifier = {
+			modifier = ibea
+		}
+	}
+	
+	cost = 4
+	prerequisite = {
+		focus = assess_the_economic_situation
+		focus = establish_new_industry_guidelines
+	}
+	
+	completion_reward = {
+		remove_dynamic_modifier = { modifier = ibea }
+		add_ideas = ecea
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Right Side###
+shared_focus = {
+	id = an_old_sun
+	x = 45
+	y = 20
+	
+	available = {
+		OR = {
+			has_completed_focus = once_a_land_filled_with_magic
+			has_completed_focus = once_a_society_filled_with_love
+		}
+	}
+	
+	allow_branch = {
+		has_country_flag = end_of_equestria_civil_war
+	}
+	
+	cost = 4
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = destitute_diarchy
+			add_idea = destitute_diarchy_2
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = establish_new_industry_guidelines
+	x = 0
+	y = 1
+	relative_position_id = an_old_sun
+	
+	cost = 5
+	prerequisite = { focus = an_old_sun }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = destitute_diarchy_2
+			add_idea = destitute_diarchy_3
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = incentivize_innovation
+	x = 0
+	y = 1
+	relative_position_id = establish_new_industry_guidelines
+	
+	available = {
+		has_completed_focus = assess_the_economic_situation
+	}
+	
+	cost = 5
+	prerequisite = { focus = establish_new_industry_guidelines }
+	
+	completion_reward = {
+		remove_ideas = destitute_diarchy_3
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = the_magic_of_manufactories
+	x = 0
+	y = 1
+	relative_position_id = incentivize_innovation
+	
+	cost = 4
+	prerequisite = { focus = incentivize_innovation }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Left-right Side###
+shared_focus = {
+	id = unearth_the_hidden_cornucopia
+	x = -3
+	y = 1
+	relative_position_id = the_magic_of_manufactories
+	
+	cost = 3
+	prerequisite = { focus = the_magic_of_manufactories }
+	mutually_exclusive = { focus = miniaturize_the_matrix }
+	
+	completion_reward = {
+		add_resource = {
+			type = crystals
+			amount = 10
+			state = 39
+		}
+		add_resource = {
+			type = chromium
+			amount = 6
+			state = 39
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = survey_what_is_left
+	x = -1
+	y = 1
+	relative_position_id = unearth_the_hidden_cornucopia
+	
+	cost = 4
+	prerequisite = { focus = unearth_the_hidden_cornucopia }
+	
+	completion_reward = {
+		add_resource = {
+			type = tungsten
+			amount = 4
+			state = 65
+		}
+		add_resource = {
+			type = aluminium
+			amount = 6
+			state = 65
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = commission_the_board_on_active_extraction
+	x = 0
+	y = 1
+	relative_position_id = survey_what_is_left
+	
+	cost = 5
+	prerequisite = { focus = survey_what_is_left }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = extraction_bonus
+			bonus = 1
+			uses = 2
+			category = excavation_tech
+		}
+	}
+	ai_will_do = { factor = 17 }
+}
+
+shared_focus = {
+	id = rebuild_the_cloud_infrastructure
+	x = 1
+	y = 1
+	relative_position_id = unearth_the_hidden_cornucopia
+	
+	cost = 4
+	prerequisite = { focus = unearth_the_hidden_cornucopia }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = construction_bonus
+			bonus = 1
+			uses = 1
+			category = construction_tech
+		}
+	}
+	ai_will_do = { factor = 19 }
+}
+
+shared_focus = { #Mention that the earth ponies have always had unique ways of solving things, and that they could be used to improve Equestria's knowledge
+	id = encourage_earth_pony_ingenuity
+	x = 0
+	y = 1
+	relative_position_id = rebuild_the_cloud_infrastructure
+	
+	cost = 6
+	prerequisite = { focus = rebuild_the_cloud_infrastructure }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				amount_research_slots < 5
+			}
+			add_research_slot = 1
+		}
+		add_ideas = earth_pony_genius
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Right-right Side###
+shared_focus = {
+	id = miniaturize_the_matrix
+	x = 3
+	y = 1
+	relative_position_id = the_magic_of_manufactories
+	
+	cost = 3
+	prerequisite = { focus = the_magic_of_manufactories }
+	mutually_exclusive = { focus = unearth_the_hidden_cornucopia }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = electronics_bonus
+			bonus = 1
+			uses = 2
+			category = electronics
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = expand_the_forges
+	x = -1
+	y = 1
+	relative_position_id = miniaturize_the_matrix
+	
+	cost = 3
+	prerequisite = { focus = miniaturize_the_matrix }
+	
+	completion_reward = {
+		add_resource = {
+			type = steel
+			amount = 6
+			state = 12
+		}
+		add_resource = {
+			type = steel
+			amount = 12
+			state = 75
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = light_a_new_fire
+	x = 0
+	y = 1
+	relative_position_id = expand_the_forges
+	
+	cost = 5
+	prerequisite = { focus = expand_the_forges }
+	
+	completion_reward = {
+		add_ideas = harmonic_fire
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = motivate_immigration
+	x = 1
+	y = 1
+	relative_position_id = miniaturize_the_matrix
+	
+	cost = 4
+	prerequisite = { focus = miniaturize_the_matrix }
+	
+	completion_reward = {
+		75 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		12 = {
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = { #Mention since the uprising the once prestigious school for electronic innovation has massively declined, not helped by the Solar Empire's luddite tendencies
+	id = fund_the_manehattan_university
+	x = 0
+	y = 1
+	relative_position_id = motivate_immigration
+	
+	cost = 6
+	prerequisite = { focus = motivate_immigration }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				amount_research_slots < 5
+			}
+			add_research_slot = 1
+		}
+		add_tech_bonus = {
+			name = electronics_bonus
+			bonus = 1
+			uses = 1
+			category = electronics
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = constant_improvement_constant_growth
+	x = 0
+	y = 4
+	relative_position_id = the_magic_of_manufactories
+	
+	cost = 5
+	prerequisite = {
+		focus = commission_the_board_on_active_extraction
+		focus = light_a_new_fire
+	}
+	prerequisite = {
+		focus = encourage_earth_pony_ingenuity
+		focus = fund_the_manehattan_university
+	}
+	
+	completion_reward = {
+		add_political_power = 100
+		add_ideas = infinite_growth
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Remainder of the Tree###
+shared_focus = {
+	id = redefine_eceas_function
+	x = 1
+	y = 1
+	relative_position_id = subsidize_all_that_need_it
+	
+	cost = 5
+	prerequisite = {
+		focus = provide_from_the_riches_of_the_earth
+		focus = it_just_prints_money
+	}
+	prerequisite = {
+		focus = allow_private_banks
+		focus = subsidize_all_that_need_it
+	}
+	prerequisite = {
+		focus = commission_the_board_on_active_extraction
+		focus = light_a_new_fire
+	}
+	prerequisite = {
+		focus = encourage_earth_pony_ingenuity
+		focus = fund_the_manehattan_university
+	}
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_idea = ecea
+			}
+			swap_ideas = {
+				remove_idea = ecea
+				add_idea = ecea_2
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				has_dynamic_modifier = { modifier = ibea }
+			}
+			remove_dynamic_modifier = { modifier = ibea }
+			add_ideas = ecea_2
+		}
+		ELSE = {
+			add_ideas = ecea_2
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = work_for_the_downtrodden
+	x = -1
+	y = 1
+	relative_position_id = redefine_eceas_function
+	
+	cost = 3
+	prerequisite = { focus = a_stable_foundation }
+	prerequisite = { focus = redefine_eceas_function }
+	
+	completion_reward = {
+		12 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		75 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		3 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = legalize_the_unions
+	x = 1
+	y = 1
+	relative_position_id = redefine_eceas_function
+	
+	cost = 4
+	prerequisite = { focus = redefine_eceas_function }
+	prerequisite = { focus = constant_improvement_constant_growth }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = communism
+			popularity = 0.15
+		}
+		add_stability = 0.1
+		106 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = the_envy_of_the_world_once_again
+	x = 1
+	y = 1
+	relative_position_id = work_for_the_downtrodden
+	
+	cost = 5
+	prerequisite = { focus = work_for_the_downtrodden }
+	prerequisite = { focus = legalize_the_unions }
+	
+	completion_reward = {
+		add_ideas = unbeatable_economy
+	}
+	ai_will_do = { factor = 35 }
+}
+
+###Minor Trees###
+###Starlight and Trixie Redemption###
+shared_focus = {
+	id = repeating_past_mistakes
+	x = 25
+	y = 1
+	
+	available = {
+		AND = {
+			OR = {
+				has_completed_focus = once_a_land_filled_with_magic
+				has_completed_focus = once_a_society_filled_with_love
+			}
+		has_country_flag = starlight_and_trixie_captured
+		}
+	}
+	
+	allow_branch = {
+		hidden_trigger = {
+			AND = {
+				has_country_flag = starlight_and_trixie_captured
+				has_country_flag = end_of_equestria_civil_war
+			}
+		}
+	}
+	
+	cost = 2
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.26
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = restoring_the_passion_of_a_trickster
+	x = -2
+	y = 1
+	relative_position_id = repeating_past_mistakes
+	
+	cost = 3
+	prerequisite = { focus = repeating_past_mistakes }
+	
+	completion_reward = {
+		country_event = {
+			id = celestia.27
+		}
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = reinvigorating_the_love_of_the_forgiven
+	x = 2
+	y = 1
+	relative_position_id = repeating_past_mistakes
+	
+	cost = 3
+	prerequisite = { focus = repeating_past_mistakes }
+	
+	completion_reward = {
+		country_event = { id = celestia.28 }
+	}
+	ai_will_do = { factor = 15 }
+}
+
+shared_focus = {
+	id = mending_the_gap
+	x = 2
+	y = 1
+	relative_position_id = restoring_the_passion_of_a_trickster
+	
+	cost = 3
+	prerequisite = { focus = restoring_the_passion_of_a_trickster }
+	prerequisite = { focus = reinvigorating_the_love_of_the_forgiven }
+	
+	completion_reward = {
+		country_event = { id = celestia.29 }
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Fixing Manehattan###
+shared_focus = {
+	id = reparations_for_harmonist_failure
+	x = 32
+	y = 1
+	
+	available = {
+		AND = {
+			OR = {
+				has_completed_focus = once_a_land_filled_with_magic
+				has_completed_focus = once_a_society_filled_with_love
+			}
+			OR = {
+				has_country_flag = starlight_and_trixie_captured
+				has_country_flag = starlight_and_trixie_escaped
+			}
+			NOT = { has_country_flag = manehattan_repaired }
+		}
+	}
+	
+	allow_branch = {
+		OR = {
+			has_country_flag = starlight_and_trixie_captured
+			has_country_flag = starlight_and_trixie_escaped
+			}
+		}
+	
+	bypass = { has_completed_focus = city_never_slept }
+	
+	cost = 2
+	
+	completion_reward = {
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 18 }
+}
+
+shared_focus = {
+	id = guardians_for_the_orphans
+	x = -2
+	y = 1
+	relative_position_id = reparations_for_harmonist_failure
+	
+	cost = 3
+	prerequisite = { focus = reparations_for_harmonist_failure }
+	
+	completion_reward = {
+		add_political_power = -50
+		add_manpower = -10000
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = stimulus_for_the_local_economy
+	x = 0
+	y = 1
+	relative_position_id = reparations_for_harmonist_failure
+	
+	cost = 3
+	prerequisite = { focus = reparations_for_harmonist_failure }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = manehattan_stimulus
+			days = 90
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = invest_in_new_architecture
+	x = 2
+	y = 1
+	relative_position_id = reparations_for_harmonist_failure
+	
+	cost = 3
+	prerequisite = { focus = reparations_for_harmonist_failure }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = new_equestrian_architecture
+			days = 120
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = a_new_beacon_of_harmony
+	x = 0
+	y = 1
+	relative_position_id = stimulus_for_the_local_economy
+	
+	cost = 3
+	prerequisite = { focus = guardians_for_the_orphans }
+	prerequisite = { focus = stimulus_for_the_local_economy }
+	prerequisite = { focus = invest_in_new_architecture }
+	
+	completion_reward = {
+		75 = { remove_dynamic_modifier = { modifier = manehattan_rebellion } }
+		custom_effect_tooltip = cleaned_manehattan_CEL
+	}
+	ai_will_do = { factor = 25 }
+}

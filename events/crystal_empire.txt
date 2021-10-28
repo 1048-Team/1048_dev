@@ -1,6 +1,46 @@
 ###Crystal Empire Events###
 add_namespace = crystal
 
+###Ally with Equestria###
+country_event = { #Celestia appears in the Crystal Empire to all the princesses' surprise, and she attempts to explain why they should re-affirm the United Ponies Alliance
+	id = crystal.500
+	title = crystal.500.t
+	desc = crystal.500.d
+	
+	is_triggered_only = yes
+	
+	option = { #We will fix the mistake of 1011!
+		name = crystal.500.a
+		ai_chance = {
+			factor = 50
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" } factor = 100 }
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" } factor = 100 }
+		}
+		EQS = {
+			country_event = {
+				id = celestia.530
+				days = 1
+			}
+		}
+	}
+	option = { #Celestia is not who she was. We are better on our own
+		name = crystal.500.b
+		ai_chance = {
+			factor = 50
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Luna" } factor = 1.5 }
+			modifier = { has_country_leader = { ruling_only = yes name = "Princess Cadance" } factor = 1.25 }
+		}
+		add_war_support = 0.1
+		add_stability = 0.05
+		EQS = {
+			country_event = {
+				id = celestia.531
+				days = 1
+			}
+		}
+	}
+}
+
 country_event = { #Princess switching test event
 	id = crystal.9999
 	title = "Testing the Princess Switch"
@@ -26,10 +66,6 @@ country_event = { #Princess switching test event
 			remove_idea = cadance_idea
 			add_idea = luna_idea
 		}
-		set_country_flag = cadance_ruling
-		clr_country_flag = luna_ruling
-		clr_country_flag = twilight_ruling
-		clr_country_flag = flurry_ruling
 	}
 	option = {
 		name = "Luna"
@@ -49,10 +85,6 @@ country_event = { #Princess switching test event
 			remove_idea = luna_idea
 			add_idea = cadance_idea
 		}
-		clr_country_flag = cadance_ruling
-		set_country_flag = luna_ruling
-		clr_country_flag = twilight_ruling
-		clr_country_flag = flurry_ruling
 	}
 	option = {
 		name = "Twilight"
@@ -87,9 +119,29 @@ country_event = { #Princess switching test event
 				naive_princess
 			}
 		}
-		clr_country_flag = cadance_ruling
-		clr_country_flag = luna_ruling
-		clr_country_flag = twilight_ruling
-		set_country_flag = flurry_ruling
+	}
+	option = {
+		name = "Nightmare Moon"
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Nightmare Moon"
+			desc = "POLITICS_NMM_1048_DESC"
+			picture = "NightmareMoon.tga"
+			expire = "1965.1.1"
+			female = yes
+			ideology = lunarism
+			traits = {
+				queen_of_the_night
+			}
+		}
+		set_politics = {
+			ruling_party = fascism
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = fascism
+			name = "Lunar Exaltare"
+			long_name = "Lunar Exaltare"
+		}
 	}
 }
