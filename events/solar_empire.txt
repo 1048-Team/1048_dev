@@ -1429,43 +1429,15 @@ country_event = { #Daybreaker assembles some of the brightest of the Inquisition
 	
 	is_triggered_only = yes
 	
-	option = { 
+	option = {
 		name = solar.104.a
-		create_corps_commander = {
-			name = "Novus Flux"
-			portrait_path = "gfx/leaders/EQS/Novus_Flux.tga"
-			traits = { pony_race_trait evening_star solaris_inquisitionis }
-			id = 5101
-			skill = 1
-			attack_skill = 1
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 1
-			female = yes
-		}
-		create_corps_commander = {
-			name = "Nova Glow"
-			portrait_path = "gfx/leaders/EQS/Nova_Glow.tga"
-			traits = { pony_race_trait morning_star solaris_inquisitionis }
-			id = 5102
-			skill = 1
-			attack_skill = 3
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-		}
-		create_corps_commander = {
-			name = "Quasar Pulse"
-			#portrait_path = "gfx/leaders/EQS/Quasar_Pulse.tga"
-			traits = { pony_race_trait crushing_death harsh_leader solaris_inquisitionis }
-			id = 5103
-			skill = 2
-			attack_skill = 4
-			defense_skill = 1
-			planning_skill = 2
-			logistics_skill = 1
-			female = yes
+		custom_effect_tooltip = novus_becomes_EQS_general_tt
+		custom_effect_tooltip = nova_becomes_EQS_general_tt
+		custom_effect_tooltip = quasar_becomes_EQS_general_tt
+		hidden_effect = {
+			event_target:SOL_Nova_Glow = { set_nationality = EQS }
+			event_target:SOL_Novus_Flux = { set_nationality = EQS }
+			event_target:SOL_Quasar_Pulse = { set_nationality = EQS }
 		}
 	}
 }
@@ -1703,6 +1675,8 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 		ELSE = {
 			add_ideas = aurora_shinespark_2
 		}
+		event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
+		event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = high_mage }
 	}
 }
 
