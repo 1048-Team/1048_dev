@@ -1123,6 +1123,7 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		ai_chance = {
 			factor = 60
 		}
+		event_target:SOL_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
 			add_to_variable = {
 				sunset_zealotry = 4
@@ -1145,6 +1146,7 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		ai_chance = {
 			factor = 40
 		}
+		event_target:SOL_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
 			add_to_variable = {
 				stability_change = -0.15
@@ -1975,10 +1977,8 @@ country_event = { #The emmissary returns nervous and states that they have a cou
 	option = { #No, if they will not bow willingly, they will bow by force
 		name = solar.223.b
 		ai_chance = { factor = 70 }
-		create_wargoal = {
-			type = annex_everything
-			target = CLD
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -1991,10 +1991,8 @@ country_event = { #The emmissary returns deflated and tells Sunset of Cloudsdale
 	
 	option = { #They have decided their fate, I suppose. Ready the soldiers for battle
 		name = solar.224.a
-		create_wargoal = {
-			type = annex_everything
-			target = CLD
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -2096,10 +2094,8 @@ country_event = { #After too long, the emmissary returns and gives Sunset the co
 	option = { #That's preposterious. They will be integrated whether they want to or not
 		name = solar.228.b
 		ai_chance = { factor = 70 }
-		create_wargoal = {
-			type = annex_everything
-			target = CER
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -2112,10 +2108,8 @@ country_event = { #Sunset finally receives the emmissary, who shows signs of bei
 	
 	option = { #Yeah, that is not surprising. At all
 		name = solar.229.a
-		create_wargoal = {
-			type = annex_everything
-			target = CER
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -2217,10 +2211,8 @@ country_event = { #A nervous telegram from Whinnyapolis arrives with the diploma
 	option = { #They have been a off their leash for long enough. They will regret defying the Empire again
 		name = solar.233.b
 		ai_chance = { factor = 50 }
-		create_wargoal = {
-			type = annex_everything
-			target = WHY
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -2233,10 +2225,8 @@ country_event = { #No word is ever heard from the diplomat, and Sunset assumes t
 	
 	option = { #Wars have been waged over less
 		name = solar.234.a
-		create_wargoal = {
-			type = annex_everything
-			target = WHY
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 		add_manpower = -1
 	}
 }
@@ -2339,12 +2329,11 @@ country_event = { #With some trepidation, the emmissary enters the throne room a
 	option = { #They think they can demand us to suppor them without being de facto of the Empire? Quaint
 		name = solar.238.b
 		ai_chance = { factor = 80 }
-		create_wargoal = {
-			type = annex_everything
-			target = NER
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
+
 
 country_event = { #Marechester sends the emmissary's head on a platter with the clear statement of death to tyrants, and Sunset is miffed
 	id = solar.239
@@ -2355,10 +2344,8 @@ country_event = { #Marechester sends the emmissary's head on a platter with the 
 	
 	option = { #Well that was a waste of time
 		name = solar.239.a
-		create_wargoal = {
-			type = annex_everything
-			target = NER
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 		add_manpower = -1
 	}
 }
@@ -2461,10 +2448,8 @@ country_event = { #The emmissary returns with a lot of embarrassment stating tha
 	option = { #We shall take that knowledge by force. They have burned their only chance for mercy
 		name = solar.243.b
 		ai_chance = { factor = 20 }
-		create_wargoal = {
-			type = annex_everything
-			target = BLS
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -2477,10 +2462,8 @@ country_event = { #The emmissary returns, although they are disfigured due to so
 	
 	option = { #Whatever abominations they are concocting, they will not save Bales from the wrath of the Empress
 		name = solar.244.a
-		create_wargoal = {
-			type = annex_everything
-			target = BLS
-		}
+		add_political_power = -25
+		add_war_support = 0.02
 	}
 }
 
@@ -2522,6 +2505,78 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 					type = annex_everything
 					target = PREV
 				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset decides to try and make peace with the thestrals by promising amnesty if they stop their rebellion against the Solar Empire
+	id = solar.246
+	title = solar.246.t
+	desc = solar.246.d
+	
+	is_triggered_only = yes
+	
+	option = { #I feel like this is a mistake
+		name = solar.246.a
+		random_list = {
+			20 = { #Peace
+				country_event = {
+					id = solar.247
+					days = 7
+				}
+			}
+			80 = { #No peace
+				country_event = {
+					id = solar.248
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset manages to convince the leaders that the Solar Empire will respect their existence and a few join, partly to keep an eye on the Empire itself
+	id = solar.247
+	title = solar.247.t
+	desc = solar.247.d
+	
+	is_triggered_only = yes
+	
+	option = { #That was honestly surprising. I feel like at least one were eyeing to suck my blood, though
+		name = solar.247.a
+		set_country_flag = thestrals_placated
+		EEE = {
+			random_army_leader = {
+				limit = { has_id = 7400 }
+				event_target:EEE_Gushing_Pulse = { set_nationality = EQS }
+			}
+			random_army_leader = {
+				limit = { has_id = 7401 }
+				event_target:EEE_Nocturne_Vision = { set_nationality = EQS }
+			}
+			random_army_leader = {
+				limit = { has_id = 7402 }
+				event_target:EEE_Screechy_Gale = { set_nationality = EQS }
+			}
+		}
+	}
+}
+
+country_event = { #Sunset is shot down almost instantly and she nearly gets captured by the thestrals although she blasts her way out and escapes
+	id = solar.248
+	title = solar.248.t
+	desc = solar.248.d
+	
+	is_triggered_only = yes
+	
+	option = { #I definitely think one of them would have sucked my blood if I didn't get out of there
+		name = solar.248.a
+		add_political_power = -50
+		event_target:SOL_Sunset_Shimmer = {
+			add_timed_unit_leader_trait = {
+				trait = wounded
+				days = 45
 			}
 		}
 	}
