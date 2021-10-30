@@ -1827,6 +1827,94 @@ country_event = { #Sunset and Aurora rework some of the heresy standards, as eve
 	}
 }
 
+country_event = { #Sunset is in another meeting with Blueblood and she finally has enough of him and has a long, long discussion about settling their differences, and in the end they do and she agrees with his general choices
+	id = solar.218
+	title = solar.218.t
+	desc = solar.218.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.218.a
+		event_target:SOL_Blueblood = { add_defense = 1 }
+		event_target:SOL_Blueblood = { remove_unit_leader_trait = politically_connected }
+		create_corps_commander = {
+			name = "Guardian Shield"
+			#portrait_path = "gfx/leaders/EQS/Guardian_Shield.tga"
+			traits = { pony_race_trait solaris_militarium infantry_leader }
+			id = 5205
+			skill = 2
+			attack_skill = 1
+			defense_skill = 4
+			planning_skill = 1
+			logistics_skill = 2
+			female = yes
+		}
+		create_corps_commander = {
+			name = "Golden Dawn"
+			#portrait_path = "gfx/leaders/EQS/Golden_Dawn.tga"
+			traits = { pony_race_trait solaris_militarium panzer_leader }
+			id = 5206
+			skill = 1
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+}
+
+###Sunset Rump Events###
+country_event = { #Sunset dispatches the last of the emissaries to the rump states and she communes in the throne room and worries about if they will accomplish their goal
+	id = solar.219
+	title = solar.219.t
+	desc = solar.219.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.219.a
+	}
+}
+
+country_event = { #Sunset looks at the chaos in the world and decides that it is time to return the Empire to its glory, and ignoring Stellar Breeze's warning, she decides to lead personally against the southeast and beyond
+	id = solar.250
+	title = solar.250.t
+	desc = solar.250.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solar.250.a
+		custom_effect_tooltip = sunset_returns_tt
+		event_target:SOL_Sunset_Shimmer = { set_nationality = EQS }
+		event_target:SOL_Sunset_Shimmer = { remove_unit_leader_trait = high_mage }
+		event_target:SOL_Sunset_Shimmer = { add_unit_leader_trait = princess_regent_general }
+		every_country = {
+			limit = {
+				OR = {
+					owns_state = 688
+					owns_state = 84
+					owns_state = 81
+					owns_state = 15
+					owns_state = 26
+					owns_state = 221
+					owns_state = 79
+					owns_state = 352
+					owns_state = 7
+					owns_state = 31
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+}
 
 ###Aurora Events###
 ###IDs will go from 301-400###
