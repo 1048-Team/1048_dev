@@ -4581,13 +4581,877 @@ shared_focus = {
 	relative_position_id = tame_the_southern_sun
 	
 	cost = 5
-	prerequisite = {
-		focus = tame_the_southern_sun
-		focus = once_a_creature_of_darkness_always_a_creature_of_darkness
-	}
+	prerequisite = { focus = tame_the_southern_sun }
+	prerequisite = { focus = once_a_creature_of_darkness_always_a_creature_of_darkness }
 	
 	completion_reward = {
 		country_event = solar.249
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Crystal Empire peacemaking path###
+shared_focus = {
+	id = burying_the_hatchet
+	x = 0
+	y = 1
+	relative_position_id = once_more_the_empire_stands_united
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = once_more_the_empire_stands_united }
+	
+	completion_reward = {
+		###Event for Sunset issuing comminques for meeting with Twilight or Cadance
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = peace_for_our_time
+	x = -3
+	y = 1
+	relative_position_id = burying_the_hatchet
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 2
+	prerequisite = { focus = burying_the_hatchet }
+	mutually_exclusive = { focus = its_called_aggressive_negotiations }
+	
+	completion_reward = {
+		###Event for Sunset determining that only through highlighting the good in the Empire and how they work together can she get an agreement with CRY
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = mingle_the_economies_again
+	x = -1
+	y = 1
+	relative_position_id = peace_for_our_time
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = peace_for_our_time }
+	
+	completion_reward = {
+		###Event for Sunset meeting with one of the economic leaders of the Crystal Empire and explaining how she could help benefit the Crystal Empire's economy after its teetering position
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = the_lesser_of_the_two_evils
+	x = 1
+	y = 1
+	relative_position_id = peace_for_our_time
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = peace_for_our_time }
+	
+	completion_reward = {
+		###Event for Sunset meeting with one of the ministers of the Crystal Empire and being disappointed that she insn't meeting with Twilight so she could see her again, but she shares how the Solar Empire has protected ponykind
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = no_longer_the_raging_she_demon
+	x = 1
+	y = 1
+	relative_position_id = mingle_the_economies_again
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = mingle_the_economies_again }
+	prerequisite = { focus = the_lesser_of_the_two_evils }
+	
+	completion_reward = {
+		###Event for when Sunset is leaving, she sees Twilight and stops her, and has a long, long chat with her to show how she's still the same pony as before, with a goal of protection in mind
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = its_called_aggressive_negotiations
+	x = 3
+	y = 1
+	relative_position_id = burying_the_hatchet
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 2
+	prerequisite = { focus = burying_the_hatchet }
+	mutually_exclusive = { focus = peace_for_our_time }
+	
+	completion_reward = {
+		###Event for Sunset deciding that she can force the Crystal Empire to see her way, since the Solar Empire is so much more powerful
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = demonstrate_the_might_of_the_empress
+	x = -1
+	y = 1
+	relative_position_id = its_called_aggressive_negotiations
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = its_called_aggressive_negotiations }
+	
+	completion_reward = {
+		###Event for Sunset holding military drills near the border of the Crystal Empire to show their strength, with an option to cause a minor altercation which they nearly win before pulling back; that could lead to war right away
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = sanction_the_crystal_economy
+	x = 1
+	y = 1
+	relative_position_id = its_called_aggressive_negotiations
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = its_called_aggressive_negotiations }
+	
+	completion_reward = {
+		###Event for traders being scrutinized at the border incredibly vigilantly, with option to seize all goods instead of taxing them more, which could cause more tension with the Crystal Empire
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = meet_in_the_glory_of_the_goddess
+	x = 1
+	y = 1
+	relative_position_id = demonstrate_the_might_of_the_empress
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = sanction_the_crystal_economy }
+	prerequisite = { focus = demonstrate_the_might_of_the_empress }
+	
+	completion_reward = {
+		###Event for Sunset meeting Cadance and Luna with a full procession of soldiers, and wearing her first appearance of her princess regent robes, and promising them no harm will come if they agree to her demands of alliance, which she can press harder or let them decide at their own pace
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = dealing_with_the_devil
+	x = -3
+	y = 1
+	relative_position_id = meet_in_the_glory_of_the_goddess
+	
+	bypass = {
+		OR = {
+			CRY = {
+				is_in_faction_with = ROOT
+			}
+			NOT = {
+				country_exists = CRY
+			}
+			has_global_flag = invitation_rejected
+		}
+	}
+	
+	cost = 5
+	prerequisite = {
+		focus = mingle_the_economies_again
+		focus = the_lesser_of_the_two_evils
+		focus = demonstrate_the_might_of_the_empress
+		focus = sanction_the_crystal_economy
+	}
+	
+	completion_reward = {
+		###Event for Sunset sending her final list of requests to the Crystal Empire for an alliance, reminding them of the promises she will keep if they do or don't do what she wants
+		###If promised ties, either have one trade of crystal, or two trades of crystal plus extra export for both countries to the other; if argued the lesser of two evils, exchange one advisor and general with each other, or both if promised
+		###If did military procession and pressed further, do one point of damage to infrastructure on the closest states; if threatened trade sanctions, then give a negative spirit to both for increased consumer goods and decreased resources to market until one is dead
+		###If in faction, promise to help with reclaiming de jure core territory, and helping with the warlord states, but not any de jure Equestrian core territory
+		###Positives will be in effect if signed, negatives if not signed; can be countered with an NA pact instead, which is basically telling them to screw off and leave the CE alone, and will give neither positive nor negatives
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = a_nation_blinded_by_the_past
+	x = -1
+	y = 1
+	relative_position_id = dealing_with_the_devil
+	
+	bypass = {
+		OR = {
+			CRY = {
+				OR = {
+					is_in_faction_with = ROOT
+					has_non_aggression_pact_with = ROOT
+				}
+			}
+		}
+	}
+	
+	cost = 2
+	prerequisite = { focus = dealing_with_the_devil }
+	
+	completion_reward = {
+		###Event for Sunset mourning that the Crystal Empire would not listen to her and then hearing word from the Speculatores that the CE is gearing for war, and she goes to the war room to prepare with the Militarium and Adoratio
+		###Add a spirit that decreasing the time to train by 25% for 90 days
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = carving_the_crystal_wall
+	x = 1
+	y = 1
+	relative_position_id = dealing_with_the_devil
+	
+	bypass = {
+		OR = {
+			CRY = {
+				OR = {
+					is_in_faction_with = ROOT
+					has_non_aggression_pact_with = ROOT
+				}
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = dealing_with_the_devil }
+	
+	completion_reward = {
+		###Event for hastily constructing bunkers and forts across most of the border with the CE, and Sunset worrying that it will not be enough
+	}
+	ai_will_do = { factor = 20 }
+}
+
+###Changelingia for Sunset###
+shared_focus = {
+	id = mercy_is_for_the_forgiven
+	x = -5
+	y = 2
+	relative_position_id = dealing_with_the_devil
+	
+	available = {
+		AND = {
+			OR = {
+				NOT = {
+					country_exists = CRY
+				}
+				CRY = {
+					OR = {
+						is_in_faction_with = ROOT
+						has_non_aggression_pact_with = ROOT
+					}
+				}
+			}
+			has_war = no
+		}
+	}
+	
+	bypass = {
+		NOT = {
+			country_exists = CHN
+		}
+	}
+	
+	cost = 3
+	prerequisite = {
+		focus = a_nation_blinded_by_the_past
+		focus = carving_the_crystal_wall
+	}
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = CHN
+		}
+		IF = {
+			limit = {
+				country_exists = CCA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CCA
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = OLE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = OLE
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = NCA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NCA
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = SCS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SCS
+			}
+		}
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = slice_through_the_swamps
+	x = -2
+	y = 1
+	relative_position_id = mercy_is_for_the_forgiven
+	
+	bypass = {
+		NOT = {
+			country_exists = CHN
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = mercy_is_for_the_forgiven }
+	
+	completion_reward = {
+		###Add timed idea that gives a speed boost and attrition reduction for 90 days
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = victory_is_in_those_that_love_the_empress
+	x = 0
+	y = 1
+	relative_position_id = mercy_is_for_the_forgiven
+	
+	cost = 4
+	prerequisite = { focus = mercy_is_for_the_forgiven }
+	
+	completion_reward = {
+		###Add idea for 10% planning and planning speed
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = weather_the_woods
+	x = 2
+	y = 1
+	relative_position_id = mercy_is_for_the_forgiven
+	
+	bypass = {
+		NOT = {
+			country_exists = CHN
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = mercy_is_for_the_forgiven }
+	
+	completion_reward = {
+		###Add idea for increased 5% attack and defense against the hegemony for 180 days
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = from_guns_to_plowshares
+	x = -1
+	y = 1
+	relative_position_id = victory_is_in_those_that_love_the_empress
+	
+	available = {
+		AND = {
+			NOT = {
+				country_exists = CHN
+			}
+			has_war = no
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = slice_through_the_swamps }
+	prerequisite = { focus = victory_is_in_those_that_love_the_empress }
+	
+	completion_reward = {
+		###Add timed idea for 15% increased factory and dockyard output for 90 days
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = repurpose_the_love_factories
+	x = 1
+	y = 1
+	relative_position_id = victory_is_in_those_that_love_the_empress
+	
+	available = {
+		AND = {
+			NOT = {
+				country_exists = CHN
+			}
+			has_war = no
+		}
+	}
+	
+	cost = 7
+	prerequisite = { focus = weather_the_woods }
+	prerequisite = { focus = victory_is_in_those_that_love_the_empress }
+	
+	completion_reward = {
+		690 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 3
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 6
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+###Stalliongrad for Sunset###
+shared_focus = {
+	id = toppling_a_sinister_legacy
+	x = 5
+	y = 2
+	relative_position_id = dealing_with_the_devil
+	
+	available = {
+		AND = {
+			OR = {
+				NOT = {
+					country_exists = CRY
+				}
+				CRY = {
+					OR = {
+						is_in_faction_with = ROOT
+						has_non_aggression_pact_with = ROOT
+					}
+				}
+			}
+			has_war = no
+		}
+	}
+	
+	bypass = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 3
+	prerequisite = {
+		focus = a_nation_blinded_by_the_past
+		focus = carving_the_crystal_wall
+	}
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = STG
+		}
+		IF = {
+			limit = {
+				country_exists = MWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = CWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = AWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AWR
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = operation_maietas
+	x = -2
+	y = 1
+	relative_position_id = toppling_a_sinister_legacy
+	
+	bypass = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = toppling_a_sinister_legacy }
+	
+	completion_reward = {
+		###Add timed idea for 10% increased armor speed and attack for 90 days
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = prepare_for_the_long_winter
+	x = 0
+	y = 1
+	relative_position_id = toppling_a_sinister_legacy
+	
+	bypass = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = toppling_a_sinister_legacy }
+	
+	completion_reward = {
+		###Add idea that will expire once all the Steel Shield members have been capitulated that gives -5% cold attrition
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = a_cry_to_the_faithful
+	x = 2
+	y = 1
+	relative_position_id = toppling_a_sinister_legacy
+	
+	bypass = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = toppling_a_sinister_legacy }
+	
+	completion_reward = {
+		###Load OOB that has three ten-width infantry with support artillery and engineers that are fully equipped by only partly trained, and are called Faithful of the Empress
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = a_monument_to_the_love_of_the_empress
+	x = -1
+	y = 1
+	relative_position_id = prepare_for_the_long_winter
+	
+	available = {
+		AND = {
+			NOT = {
+				country_exists = STG
+			}
+			has_war = no
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = operation_maietas }
+	prerequisite = { focus = prepare_for_the_long_winter }
+	
+	completion_reward = {
+		###Give state modifier for Stalliongrad that gives extra resources and a 10% increased recruitable population factor
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = scuttle_the_old_fleet_bless_the_new
+	x = 1
+	y = 1
+	relative_position_id = prepare_for_the_long_winter
+	
+	available = {
+		AND = {
+			NOT = {
+				country_exists = STG
+			}
+			has_war = no
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = prepare_for_the_long_winter }
+	prerequisite = { focus = a_cry_to_the_faithful }
+	
+	completion_reward = {
+		###Create new fleet of five destroyers, 5 light cruisers, 3 carries, 1 BB, and 1 SH
+	}
+	ai_will_do = { factor = 27 }
+}
+
+###Marelandia for Sunset###
+shared_focus = {
+	id = in_the_empress_name_griffonia_shall_be_freed
+	x = 0
+	y = 5
+	relative_position_id = dealing_with_the_devil
+	
+	bypass = {
+		OR = {
+			NOT = {
+				country_exists = EQC
+			}
+			EQC = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = from_guns_to_plowshares }
+	prerequisite = { focus = repurpose_the_love_factories }
+	prerequisite = { focus = a_monument_to_the_love_of_the_empress }
+	prerequisite = { focus = scuttle_the_old_fleet_bless_the_new }
+	
+	completion_reward = {
+		###Event for Sunset declaring that all of Equus is prepared to topple the curse of Big Sister, and the Empress will guide them
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = EQC
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = on_the_shores_of_a_foreign_continent
+	x = -2
+	y = 1
+	relative_position_id = in_the_empress_name_griffonia_shall_be_freed
+	
+	available = {
+		362 = {
+			is_controlled_by = ROOT
+		}
+	}
+	
+	bypass = {
+		OR = {
+			NOT = {
+				country_exists = EQC
+			}
+			EQC = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
+	cost = 2
+	prerequisite = { focus = in_the_empress_name_griffonia_shall_be_freed }
+	
+	completion_reward = {
+		###Event for soldiers taking New Manehattan and toppling the worst of the Ministries' outposts there
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = unearth_the_horrors_of_MARESOC
+	x = 0
+	y = 1
+	relative_position_id = in_the_empress_name_griffonia_shall_be_freed
+	
+	available = {
+		356 = {
+			is_controlled_by = ROOT
+		}
+	}
+	
+	bypass = {
+		OR = {
+			NOT = {
+				country_exists = EQC
+			}
+			EQC = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = in_the_empress_name_griffonia_shall_be_freed }
+	
+	completion_reward = {
+		###Event for soldiers fighting through Sunset and then finding the worst of MARESOC's perversions in the ministries before they are destroyed
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = appoint_a_new_high_mage_of_griffonia
+	x = 2
+	y = 1
+	relative_position_id = in_the_empress_name_griffonia_shall_be_freed
+	
+	available = {
+		AND = {
+			OR = {
+				NOT = {
+					country_exists = EQC
+				}
+				EQC = {
+					is_subject_of = ROOT
+				}
+			}
+			has_war = no
+		}	
+	}
+	
+	cost = 4
+	prerequisite = { focus = in_the_empress_name_griffonia_shall_be_freed }
+	
+	completion_reward = {
+		###Sunset meets with Stellar Breeze and congratulates her on being such a good assistant and that she will be the new high mage of Griffonia, and Stellar faints from the surprise, to Sunset's amusement
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = appoint_aurora_as_regent_of_militum_mareland
+	x = 0
+	y = 1
+	relative_position_id = unearth_the_horrors_of_MARESOC
+	
+	cost = 5
+	prerequisite = { focus = on_the_shores_of_a_foreign_continent }
+	prerequisite = { focus = unearth_the_horrors_of_MARESOC }
+	prerequisite = { focus = appoint_a_new_high_mage_of_griffonia }
+	
+	completion_reward = {
+		###Event for Sunset meeting with Aurora and having a heart-to-heart about her help, and rewarding her with regency of New Mareland, to Aurora's surprise and emotional response.
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -4633,9 +5497,6 @@ shared_focus = {
 		hidden_trigger = {
 			has_country_flag = southeast_dead
 		}
-	}
-	
-	bypass = {
 	}
 	
 	cost = 5
