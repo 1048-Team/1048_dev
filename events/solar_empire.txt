@@ -935,7 +935,7 @@ country_event = { #Sunset encounters Daybreaker smashing her mirror at the invis
 		name = solar.83.a
 		hidden_effect = {
 			set_variable = {
-				sunset_zealotry = 1
+				sunset_zealotry = 55
 			}
 			add_to_variable = {
 				stability_change = -0.1
@@ -979,6 +979,7 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 				days = 35
 				random = 60
 				}
+			set_country_flag = unlock_sunset_tracker
 			}
 		}
 	option = { #Sunset protests against Daybreaker
@@ -988,7 +989,7 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 2
+				sunset_zealotry = 5
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1004,6 +1005,7 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 				days = 35
 				random = 60
 				}
+			set_country_flag = unlock_sunset_tracker
 			}
 		}
 	}
@@ -1022,7 +1024,7 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = -1
+				sunset_zealotry = -35
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1044,7 +1046,7 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 6
+				sunset_zealotry = 10
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1075,7 +1077,7 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 4
+				sunset_zealotry = 5
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1096,6 +1098,9 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 			factor = 10
 		}
 		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = -10
+			}
 			add_to_variable = {
 				stability_change = -0.05
 				}
@@ -1126,7 +1131,7 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		event_target:SOL_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 4
+				sunset_zealotry = 10
 			}
 			add_to_variable = {
 				stability_change = -0.15
@@ -1148,6 +1153,9 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		}
 		event_target:SOL_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = -10
+			}
 			add_to_variable = {
 				stability_change = -0.15
 				}
@@ -1177,7 +1185,7 @@ country_event = { #Sunset and the others race through the chaotic Canterlot to s
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 2
+				sunset_zealotry = 10
 				}
 			country_event = {
 				id = solar.96
@@ -1188,6 +1196,9 @@ country_event = { #Sunset and the others race through the chaotic Canterlot to s
 	option = { #Sunset sad
 		name = solar.88.b
 		hidden_effect = {
+			add_to_variable = {
+				sunset_zealotry = -20
+			}
 			country_event = {
 				id = solar.96
 				days = 1
@@ -1213,7 +1224,7 @@ country_event = { #Should have custom tooltips later
 		IF = {
 			limit = {
 				check_variable = {
-					sunset_zealotry > 6
+					sunset_zealotry > 69
 				}
 			}
 			country_event = {
@@ -1223,7 +1234,7 @@ country_event = { #Should have custom tooltips later
 		ELSE_IF = {
 			limit = {
 				check_variable = {
-					sunset_zealotry > 2
+					sunset_zealotry > 39
 				}
 			}
 			country_event = {
@@ -1233,7 +1244,7 @@ country_event = { #Should have custom tooltips later
 		ELSE_IF = {
 			limit = {
 				check_variable = {
-					sunset_zealotry < 3
+					sunset_zealotry < 40
 				}
 			}
 			country_event = {
@@ -1947,6 +1958,10 @@ country_event = { #The emmissary returns with news of Cloudsdale's acceptance of
 	option = { #It is good that they saw reason. Prepare the governors
 		name = solar.222.a
 		annex_country = { target = CLD }
+		add_timed_idea = {
+			idea = independent_training_program
+			days = 210
+		}
 	}
 }
 
@@ -1972,6 +1987,10 @@ country_event = { #The emmissary returns nervous and states that they have a cou
 			}
 			else = {
 				puppet = CLD
+		}
+		add_timed_idea = {
+			idea = independent_training_program
+			days = 150
 		}
 	}
 	option = { #No, if they will not bow willingly, they will bow by force
@@ -2064,6 +2083,10 @@ country_event = { #Sunset receives the return of the emmissary and she is gladde
 	option = { #I never thought they would agree
 		name = solar.227.a
 		annex_country = { target = CER }
+		add_timed_idea = {
+			idea = fund_secular_experiments
+			days = 210
+		}
 	}
 }
 
@@ -2087,8 +2110,12 @@ country_event = { #After too long, the emmissary returns and gives Sunset the co
 				freedom_level = 0.5
 				}
 			}
-			else = {
-				puppet = CER
+		else = {
+			puppet = CER
+		}
+		add_timed_idea = {
+			idea = fund_secular_experiments
+			days = 150
 		}
 	}
 	option = { #That's preposterious. They will be integrated whether they want to or not
@@ -2181,6 +2208,10 @@ country_event = { #A comminque from Whinnyapolis bears the signature of the nego
 	option = { #At least there is still one loyal nation on this Faust-foresaken continent
 		name = solar.232.a
 		annex_country = { target = WHY }
+		add_timed_idea = {
+			idea = worst_ideas_implemented
+			days = 210
+		}
 	}
 }
 
@@ -2204,8 +2235,12 @@ country_event = { #A nervous telegram from Whinnyapolis arrives with the diploma
 				freedom_level = 0.5
 				}
 			}
-			else = {
-				puppet = WHY
+		else = {
+			puppet = WHY
+		}
+		add_timed_idea = {
+			idea = worst_ideas_implemented
+			days = 150
 		}
 	}
 	option = { #They have been a off their leash for long enough. They will regret defying the Empire again
@@ -2299,6 +2334,10 @@ country_event = { #After a short while the emmissary returns and lets Sunset kno
 	option = { #I guess that means we're good?
 		name = solar.237.a
 		annex_country = { target = NER }
+		add_timed_idea = {
+			idea = guaranteed_living_wage
+			days = 210
+		}
 	}
 }
 
@@ -2322,8 +2361,12 @@ country_event = { #With some trepidation, the emmissary enters the throne room a
 				freedom_level = 0.5
 				}
 			}
-			else = {
-				puppet = NER
+		else = {
+			puppet = NER
+		}
+		add_timed_idea = {
+			idea = guaranteed_living_wage
+			days = 150
 		}
 	}
 	option = { #They think they can demand us to suppor them without being de facto of the Empire? Quaint
@@ -2418,6 +2461,10 @@ country_event = { #Before even the negotiator returns, Sunset has heard of the a
 	option = { #They were the most stubborn off all. You've truly earned your reward
 		name = solar.242.a
 		annex_country = { target = BLS }
+		add_timed_idea = {
+			idea = incorporate_harmony_worship
+			days = 210
+		}
 	}
 }
 
@@ -2441,8 +2488,12 @@ country_event = { #The emmissary returns with a lot of embarrassment stating tha
 				freedom_level = 0.5
 				}
 			}
-			else = {
-				puppet = BLS
+		else = {
+			puppet = BLS
+		}
+		add_timed_idea = {
+			idea = incorporate_harmony_worship
+			days = 150
 		}
 	}
 	option = { #We shall take that knowledge by force. They have burned their only chance for mercy
@@ -2734,7 +2785,7 @@ country_event = { #Celestia meets with Sunset, who is currently moping in her ro
 		set_variable = { sunset_redemption = 0 }
 		set_variable = { aurora_redemption = 0 }
 		###Should start a base variable for Sunset's effectiveness as a friendship student, and there will be branching events for her trying to befriend and teach Aurora the power of friendship, which will have its own variable
-		###Sunset's variable ranges from 1 to 10, with anything above a 5 being a pass for her; Aurora ranges from 1 to 100, with anything above 70 being a success for her
+		###Sunset's variable ranges from 1 to 100, with anything above a 60 being a pass for her; Aurora ranges from 1 to 100, with anything above 75 being a success for her
 	}
 }
 
@@ -2777,7 +2828,7 @@ country_event = { #Sunset nervously agrees with Celestia and mutters that she ca
 	option = { #I pray that her faith in me is well-founded
 		name = celestia.9.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 1 }
+			add_to_variable = { sunset_redemption = 10 }
 		}
 	}
 }
@@ -2833,7 +2884,7 @@ country_event = { #Sunset manages to get the generals to be more amicable with e
 	option = { #Maybe this can be easier than I thought
 		name = celestia.12.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 1 }
+			add_to_variable = { sunset_redemption = 10 }
 			add_to_variable = { aurora_redemption = 15 }
 		}
 	}
@@ -2849,7 +2900,7 @@ country_event = { #Sunset decides that Aurora needs more focus and she heads to 
 	option = { #Aurora will pick up quickly, I'm sure
 		name = celestia.13.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 2 }
+			add_to_variable = { sunset_redemption = 20 }
 			add_to_variable = { aurora_redemption = 25 }
 		}
 	}
@@ -2894,7 +2945,7 @@ country_event = { #Sunset decides to focus primarily on the generals, as she bel
 	option = { #That could have gone better, but I think Steel Sickle is liking me
 		name = celestia.15.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 2 }
+			add_to_variable = { sunset_redemption = 20 }
 		}
 	}
 }
@@ -2909,7 +2960,7 @@ country_event = { #Sunset takes Aurora aside as she sees that Aurora is furious 
 	option = { #Yeah, that definitely could have gone smoother
 		name = celestia.16.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 1 }
+			add_to_variable = { sunset_redemption = 10 }
 			add_to_variable = { aurora_redemption = 25 }
 		}
 	}
@@ -2971,7 +3022,7 @@ country_event = { #Sunset lets Aurora rant a bit, but calmly tries to explain ho
 	option = { #She'll come around, I'm sure
 		name = celestia.19.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 2 }
+			add_to_variable = { sunset_redemption = 20 }
 			add_to_variable = { aurora_redemption = 5 }
 		}
 	}
@@ -3016,15 +3067,15 @@ country_event = { #Sunset determines that Aurora will be something for the futur
 	option = { #Preparation is key, right?
 		name = celestia.21.a
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 1 }
+			add_to_variable = { sunset_redemption = 10 }
 			IF = {
 				limit = {
 					AND = {
 						check_variable = {
-							sunset_redemption > 4
+							sunset_redemption > 59
 						}
 						check_variable = {
-							aurora_redemption > 69
+							aurora_redemption > 74
 						}
 					}
 				}
@@ -3037,10 +3088,10 @@ country_event = { #Sunset determines that Aurora will be something for the futur
 				limit = {
 					AND = {
 						check_variable = {
-							sunset_redemption > 4
+							sunset_redemption > 59
 						}
 						check_variable = {
-							aurora_redemption < 70
+							aurora_redemption < 75
 						}
 					}
 				}
@@ -3052,7 +3103,7 @@ country_event = { #Sunset determines that Aurora will be something for the futur
 			ELSE_IF = {
 				limit = {
 					check_variable = {
-						sunset_redemption < 5
+						sunset_redemption < 60
 					}
 				}
 				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
@@ -3079,7 +3130,7 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 	
 	option = { #Well, I suppose it's better than nothing. She'll have a friend to her end
 		name = celestia.22.a
-		add_to_variable = { sunset_redemption = 2 }
+		add_to_variable = { sunset_redemption = 20 }
 		add_to_variable = { aurora_redemption = 10 }
 		hidden_effect = {
 			add_to_variable = { sunset_redemption = 1 }
@@ -3087,10 +3138,10 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 				limit = {
 					AND = {
 						check_variable = {
-							sunset_redemption > 4
+							sunset_redemption > 59
 						}
 						check_variable = {
-							aurora_redemption > 69
+							aurora_redemption > 74
 						}
 					}
 				}
@@ -3103,10 +3154,10 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 				limit = {
 					AND = {
 						check_variable = {
-							sunset_redemption > 4
+							sunset_redemption > 59
 						}
 						check_variable = {
-							aurora_redemption < 70
+							aurora_redemption < 75
 						}
 					}
 				}
@@ -3118,7 +3169,7 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 			ELSE_IF = {
 				limit = {
 					check_variable = {
-						sunset_redemption < 5
+						sunset_redemption < 60
 					}
 				}
 				country_event = { #Celestia sees that Sunset tried, but she truly doesn't believe in Harmony, and she will be held accountable for her crimes, which Sunset resigns herself to
