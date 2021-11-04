@@ -291,6 +291,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 7
 		days_re_enable = 21
 		remove_effect = {
+			custom_effect_tooltip = sunset_redemption_small_increase
 			add_to_variable = { sunset_redemption = 5 }
 		}
 	}
@@ -301,6 +302,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 14
 		days_re_enable = 28
 		remove_effect = {
+			custom_effect_tooltip = sunset_redemption_small_increase
 			add_to_variable = { sunset_redemption = 10 }
 		}
 	}
@@ -311,6 +313,8 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 28
 		days_re_enable = 28
 		remove_effect = {
+			custom_effect_tooltip = sunset_redemption_small_increase
+			custom_effect_tooltip = aurora_redemption_increase
 			add_to_variable = { sunset_redemption = 5 }
 			add_to_variable = { aurora_redemption = 10 }
 		}
@@ -322,6 +326,8 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 28
 		days_re_enable = 21
 		remove_effect = {
+			custom_effect_tooltip = sunset_redemption_small_increase
+			custom_effect_tooltip = aurora_redemption_decrease
 			add_to_variable = { sunset_redemption = 10 }
 			add_to_variable = { aurora_redemption = -5 }
 		}
@@ -333,6 +339,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 14
 		days_re_enable = 28
 		remove_effect = {
+			custom_effect_tooltip = aurora_redemption_small_increase
 			add_to_variable = { aurora_redemption = 5 }
 		}
 	}
@@ -345,10 +352,14 @@ EQS_CEL_sunset_redemption_meter_category = {
 		remove_effect = {
 			random_list = {
 				65 = {
+					custom_effect_tooltip = sunset_redemption_small_increase
+					custom_effect_tooltip = aurora_redemption_small_increase
 					add_to_variable = { sunset_redemption = 5 }
 					add_to_variable = { aurora_redemption = 5 }
 				}
 				35 = {
+					custom_effect_tooltip = sunset_redemption_decrease
+					custom_effect_tooltip = aurora_redemption_decrease
 					add_to_variable = { sunset_redemption = -5 }
 					add_to_variable = { aurora_redemption = -5 }
 				}
@@ -362,6 +373,8 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 7
 		days_re_enable = 7
 		remove_effect = {
+			custom_effect_tooltip = sunset_redemption_decrease
+			custom_effect_tooltip = aurora_redemption_small_increase
 			add_to_variable = { sunset_redemption = -10 }
 			add_to_variable = { aurora_redemption = 5 }
 		}
@@ -370,11 +383,12 @@ EQS_CEL_sunset_redemption_meter_category = {
 		activation = {
 			original_tag = EQS
 			has_completed_focus = to_begin_again
+			NOT = { check_variable = { sunset_redemption > 99 } }
 		}
-		fire_only_once = yes
-		available = { check_variable = { var = sunset_redemption value = 100 compare = equals } }
+		is_good = yes
+		available = { check_variable = { sunset_redemption > 99 } }
 		days_mission_timeout = 180
-		timeout_effect = { }
+		complete_effect = { custom_effect_tooltip = reach_full_redemption_tt }
 	}
 }
 
