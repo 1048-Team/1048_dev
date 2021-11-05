@@ -1436,8 +1436,16 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 	
 	option = { 
 		name = solar.103.a
-		custom_effect_tooltip = daybreaker_returns_tt
-		hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = EQS } }
+		IF = {
+			custom_effect_tooltip = daybreaker_returns_tt
+			limit = { has_country_leader = { ruling_only = yes name = "Daybreaker" } }
+			hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = EQS } }
+		}
+		ELSE_IF = {
+			limit = { has_country_leader = { ruling_only = yes name = "Nova Glow" } }
+			event_target:SOL_Nova_Glow = { promote_leader = yes }
+			event_target:SOL_Nova_Glow = { remove_unit_leader_trait = recently_promoted }
+		}
 	}
 }
 
@@ -2691,11 +2699,11 @@ country_event = { #Sunset's comminique to the Crystal Empire is received and is 
 		ai_chance = {
 			modifier = {
 				OR = {
-					has_country_ruler = { ruling_only = yes name = "Princess Cadance" }
-					has_country_ruler = { ruling_only = yes name = "Princess Flurry Heart" }
-					has_country_ruler = { ruling_only = yes name = "Princess Twilight Sparkle" }
-					has_country_ruler = { ruling_only = yes name = "Princess Luna" }
-					has_country_ruler = { ruling_only = yes name = "Nightmare Moon" }
+					has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+					has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
+					has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+					has_country_leader = { ruling_only = yes name = "Princess Luna" }
+					has_country_leader = { ruling_only = yes name = "Nightmare Moon" }
 				}
 				factor = 100
 			}
@@ -2703,7 +2711,7 @@ country_event = { #Sunset's comminique to the Crystal Empire is received and is 
 				OR = {
 					has_government = communism
 					AND = {
-						NOT = { has_country_ruler = { ruling_only = yes name = "Nightmare Moon" } }
+						NOT = { has_country_leader = { ruling_only = yes name = "Nightmare Moon" } }
 						has_government = fascism
 					}
 				}
@@ -2712,10 +2720,8 @@ country_event = { #Sunset's comminique to the Crystal Empire is received and is 
 		}
 		EQS = {
 			country_event = {
-				country_event = {
-					id = solar.252
-					days = 1
-				}
+				id = solar.252
+				days = 1
 			}
 		}
 	}
@@ -2723,11 +2729,11 @@ country_event = { #Sunset's comminique to the Crystal Empire is received and is 
 		ai_chance = {
 			modifier = {
 				OR = {
-					has_country_ruler = { ruling_only = yes name = "Princess Cadance" }
-					has_country_ruler = { ruling_only = yes name = "Princess Flurry Heart" }
-					has_country_ruler = { ruling_only = yes name = "Princess Twilight Sparkle" }
-					has_country_ruler = { ruling_only = yes name = "Princess Luna" }
-					has_country_ruler = { ruling_only = yes name = "Nightmare Moon" }
+					has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+					has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
+					has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+					has_country_leader = { ruling_only = yes name = "Princess Luna" }
+					has_country_leader = { ruling_only = yes name = "Nightmare Moon" }
 				}
 				factor = 0
 			}
@@ -2735,7 +2741,7 @@ country_event = { #Sunset's comminique to the Crystal Empire is received and is 
 				OR = {
 					has_government = communism
 					AND = {
-						NOT = { has_country_ruler = { ruling_only = yes name = "Nightmare Moon" } }
+						NOT = { has_country_leader = { ruling_only = yes name = "Nightmare Moon" } }
 						has_government = fascism
 					}
 				}
@@ -2744,10 +2750,8 @@ country_event = { #Sunset's comminique to the Crystal Empire is received and is 
 		}
 		EQS = {
 			country_event = {
-				country_event = {
-					id = solar.253
-					days = 1
-				}
+				id = solar.253
+				days = 1
 			}
 		}
 	}
@@ -2803,12 +2807,14 @@ country_event = { #Sunset meets with some of the economic ministers and is disap
 	option = { #Yes, we'll start buying some crystals again, although we have other suppliers
 		name = solar.255.a
 		###Will make one trade for crystal
+		set_country_flag = minor_economic_ties
 		ai_chance = { factor = 40 }
 		add_to_variable = { nice_peace = 1 }
 	}
 	option = { #We will mingle our economies like the days of old, and help rebuild each other. The trade will flow!
 		name = solar.255.b
 		###Will make three trades for crystal and a trade for steel and aluminium
+		set_country_flag = major_economic_ties
 		ai_chance = { factor = 60 }
 		add_to_variable = { nice_peace = 2 }
 	}
@@ -2848,8 +2854,8 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 				OR = {
 					AND = {
 						OR = {
-							has_country_ruler = { ruling_only = yes name = "Princess Cadance" }
-							has_country_ruler = { ruling_only = yes name = "Princess Luna" }
+							has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+							has_country_leader = { ruling_only = yes name = "Princess Luna" }
 						}
 						AND = {
 							check_variable = { aggressive_peace > 2 }
@@ -2858,8 +2864,8 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 					}
 					AND = {
 						OR = {
-							has_country_ruler = { ruling_only = yes name = "Princess Twilight Sparkle" }
-							has_country_ruler = { ruling_only = yes name = "Princess Flurry Heart" }
+							has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+							has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
 						}
 						AND = {
 							check_variable = { nice_peace > 2 }
@@ -2868,6 +2874,31 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 					}
 				}
 				factor = 3
+			}
+			modifier = {
+				OR = {
+					AND = {
+						OR = {
+							has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+							has_country_leader = { ruling_only = yes name = "Princess Luna" }
+						}
+						check_variable = { aggressive_peace > 5 }
+					}
+					AND = {
+						OR = {
+							has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+							has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
+						}
+						check_variable = { nice_peace > 5 }
+					}
+				}
+				factor = 100
+			}
+		}
+		EQS = {
+			country_event = {
+				id = solar.264
+				days = 1
 			}
 		}
 	}
@@ -2880,8 +2911,8 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 				OR = {
 					AND = {
 						OR = {
-							has_country_ruler = { ruling_only = yes name = "Princess Cadance" }
-							has_country_ruler = { ruling_only = yes name = "Princess Luna" }
+							has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+							has_country_leader = { ruling_only = yes name = "Princess Luna" }
 						}
 						AND = {
 							check_variable = { aggressive_peace > 2 }
@@ -2890,8 +2921,8 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 					}
 					AND = {
 						OR = {
-							has_country_ruler = { ruling_only = yes name = "Princess Twilight Sparkle" }
-							has_country_ruler = { ruling_only = yes name = "Princess Flurry Heart" }
+							has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+							has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
 						}
 						AND = {
 							check_variable = { nice_peace > 2 }
@@ -2901,19 +2932,44 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 				}
 				factor = 2
 			}
+			modifier = {
+				OR = {
+					AND = {
+						OR = {
+							has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+							has_country_leader = { ruling_only = yes name = "Princess Luna" }
+						}
+						check_variable = { aggressive_peace > 5 }
+					}
+					AND = {
+						OR = {
+							has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+							has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
+						}
+						check_variable = { nice_peace > 5 }
+					}
+				}
+				factor = 1
+			}
+		}
+		EQS = {
+			country_event = {
+				id = solar.265
+				days = 1
+			}
 		}
 	}
 	option = { #No, she is showing weakness. We must capitalize on it!
 		name = solar.263.c
 		ai_chance = {
 			base = 20
-			###Alliance
+			###Rejection
 			modifier = {
 				OR = {
 					AND = {
 						OR = {
-							has_country_ruler = { ruling_only = yes name = "Princess Cadance" }
-							has_country_ruler = { ruling_only = yes name = "Princess Luna" }
+							has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+							has_country_leader = { ruling_only = yes name = "Princess Luna" }
 						}
 						AND = {
 							check_variable = { aggressive_peace > 2 }
@@ -2922,8 +2978,8 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 					}
 					AND = {
 						OR = {
-							has_country_ruler = { ruling_only = yes name = "Princess Twilight Sparkle" }
-							has_country_ruler = { ruling_only = yes name = "Princess Flurry Heart" }
+							has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+							has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
 						}
 						AND = {
 							check_variable = { nice_peace > 2 }
@@ -2933,7 +2989,97 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 				}
 				factor = 1
 			}
+			modifier = {
+				OR = {
+					AND = {
+						OR = {
+							has_country_leader = { ruling_only = yes name = "Princess Cadance" }
+							has_country_leader = { ruling_only = yes name = "Princess Luna" }
+						}
+						check_variable = { aggressive_peace > 5 }
+					}
+					AND = {
+						OR = {
+							has_country_leader = { ruling_only = yes name = "Princess Twilight Sparkle" }
+							has_country_leader = { ruling_only = yes name = "Princess Flurry Heart" }
+						}
+						check_variable = { nice_peace > 5 }
+					}
+				}
+				factor = 0
+			}
 		}
+		EQS = {
+			country_event = {
+				id = solar.266
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset is visited directly by Twilight, and the two of them have a small talk and make up, mostly before Twilgiht explains they agree to an alliance
+	id = solar.264
+	title = solar.264.t
+	desc = solar.264.d
+	
+	is_triggered_only = yes
+	
+	option = { #Yes, this will be a fruitful endeavour for both of our nations
+		name = solar.264.a
+		EQS = {
+			add_to_faction = CRY
+			add_ai_strategy = {
+				type = alliance
+				id = CRY
+				value = 1000
+			}
+		}
+		CRY = {
+			add_ai_strategy = {
+				type = alliance
+				id = EQS
+				value = 1000
+			}
+		}
+	}
+}
+
+country_event = { #Sunset receives word from the Crystal Empire that they will not press any claims on the Solar Empire, as it's evident it would be a stalemate, but they will not be allying themselves with her
+	id = solar.265
+	title = solar.265.t
+	desc = solar.265.d
+	
+	is_triggered_only = yes
+	
+	option = { #I guess... I can see why they wouldn't want to trust us
+		name = solar.265.a
+		EQS = {
+			diplomatic_relation = {
+				country = CRY
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		CRY = {
+			diplomatic_relation = {
+				country = EQS
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+	}
+}
+
+country_event = { #Sunset never receives word back from the Crystal Empire, and receives a report from the Speculatores of their preparation for war, and she is furious
+	id = solar.266
+	title = solar.266.t
+	desc = solar.266.d
+	
+	is_triggered_only = yes
+	
+	option = { #They--What--Why--?!
+		name = solar.266.a
 	}
 }
 
