@@ -2820,18 +2820,231 @@ country_event = { #Sunset meets with some of the economic ministers and is disap
 	}
 }
 
-country_event = { #Sunset proposes the alliance before she leaves and waits to hear when she returns to the Empire, the entire time incredibly nervous
+country_event = { #Sunset meets with some other ministers of the Empire, and hse is disappointed because she believed that Twilight would be leading it, and she does her best to hide her sadness as she starts her spiel
+	id = solar.256
+	title = solar.256.t
+	desc = solar.256.d
+	
+	is_triggered_only = yes
+	
+	option = { #As we're both dedicated to the same task, it is logical for us to work together
+		name = solar.256.a
+		ai_chance = { factor = 50 }
+		add_to_variable = { nice_peace = 1 }
+	}
+	option = { #We can be great allies again, and we will work together to rescue ponykind, starting with your former lands
+		name = solar.256.b
+		ai_chance = { factor = 50 }
+		add_to_variable = { nice_peace = 2 }
+		set_country_flag = sunset_promised_core_territory
+	}
+}
+
+country_event = { #As Sunset leaves she sees Twilight and a small entourage in the city and she bolts to see Twilight, and the two have an awkward encounter after years of not seeing each other and Sunset tries to show she's the same pony
+	id = solar.257
+	title = solar.257.t
+	desc = solar.257.d
+	
+	is_triggered_only = yes
+	
+	option = { #Do you want to grab something to eat sometime and catch up?
+		name = solar.257.a
+		ai_chance = { factor = 30 }
+		add_to_variable = { nice_peace = 1 }
+	}
+	option = { #Twilight. I... want to ask for forgiveness? That's what friends do, right?
+		name = solar.257.b
+		ai_chance = { factor = 70 }
+		add_to_variable = { nice_peace = 2 }
+	}
+}
+
+country_event = { #Sunset looks at the Crystal Empire and she sees that they pose a threat, but not right away, and she should be able to coerce them into being allies through force, although she doesn't like the decision
+	id = solar.258
+	title = solar.258.t
+	desc = solar.258.d
+	
+	is_triggered_only = yes
+	
+	option = { #They would be stupid to say now after they see the glory of the Solar Empire!
+		name = solar.258.a
+	}
+}
+
+country_event = { #Sunset leads a large military demonstration near the Umbrum border, as she believes it inhabited enough to be a staging ground, and she soon finds a small garrison there and her soldiers nearly fire on them, and she decides on what to do
+	id = solar.259
+	title = solar.259.t
+	desc = solar.259.d
+	
+	is_triggered_only = yes
+	
+	option = { #Hold your fire! We don't want them thinking we want to wage war on them!
+		name = solar.259.a
+		ai_chance = { factor = 80 }
+		add_to_variable = { aggressive_peace = 1 }
+	}
+	option = { #Let's give them a bit of an exercise. Don't kill them, just prisoners to release later
+		name = solar.259.b
+		ai_chance = { factor = 20 }
+		random_list = {
+			85 = {
+				add_to_variable = { aggressive_peace = 2 }
+			}
+			15 = {
+				CRY = {
+					country_event = {
+						id = solar.262
+						days = 7
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset pens up new laws for the tariffs of any goods coming from or to the Crystal Empire, and she prepares the last few lines before she sends it away
+	id = solar.260
+	title = solar.260.t
+	desc = solar.260.d
+	
+	is_triggered_only = yes
+	
+	option = { #Simply scaring them will be enough. Nothing too harsh
+		name = solar.260.a
+		ai_chance = { factor = 60 }
+		add_to_variable = { aggressive_peace = 1 }
+	}
+	option = { #Why stop at taxes? Just seize it!
+		name = solar.260.b
+		ai_chance = { factor = 40 }
+		random_list = {
+			90 = {
+				add_to_variable = { aggressive_peace = 2 }
+			}
+			10 = { 
+				CRY = {
+					country_event = {
+						id = solar.263
+						days = 7
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Sunset is sure that the Crystal Empire is open to talking, and arrives with a procession of soldiers and her royal robes, and speaks with Cadance and Luna about her expectations for an alliance
+	id = solar.261
+	title = solar.261.t
+	desc = solar.261.d
+	
+	is_triggered_only = yes
+	
+	option = { #You can take all the time in the world. We're in no rush
+		name = solar.261.a
+		ai_chance = { factor = 50 }
+		add_to_variable = { aggressive_peace = 1 }
+	}
+	option = { #I would advise you make a choice quickly. The Empress waits for nopony
+		name = solar.261.b
+		ai_chance = { factor = 50 }
+		random_list = {
+			80 = {
+				add_to_variable = { aggressive_peace = 2 }
+			}
+			20 = {
+				CRY = {
+					country_event = {
+						id = solar.264
+						days = 1
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #The Crystal Empire receives word from one or two soldiers that escaped the skirmish with Sunset about how the rest were held captive, and they determine if they work it out peacefully or not
 	id = solar.262
 	title = solar.262.t
 	desc = solar.262.d
 	
 	is_triggered_only = yes
 	
-	option = { #Well, it's in the Goddess' hooves, now
+	option = { #We can work this out. It was obviously an accident
 		name = solar.262.a
+		ai_chance = { factor = 70 }
+		add_to_variable = { aggressive_peace = 2 }
+	}
+	option = { #This is unnacceptable! We must rescue those ponies at once!
+		name = solar.262.b
+		ai_chance = { factor = 30 }
+		set_global_flag = invitation_rejected
+		EQS = {
+			country_event = {
+				id = solar.269
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #The Crystal Empire learns of its traders being scrutinized overly hard and some of their assets being seized and deliberates on what to do
+	id = solar.263
+	title = solar.263.t
+	desc = solar.263.d
+	
+	is_triggered_only = yes
+	
+	option = { #We must contact Sunset at once and work out this misunderstanding
+		name = solar.263.a
+		ai_chance = { factor = 75 }
+		add_to_variable = { aggressive_peace = 2 }
+	}
+	option = { #She seeks to starve us of resources! We have to retaliate!
+		name = solar.263.b
+		ai_chance = { factor = 25 }
+		set_global_flag = invitation_rejected
+		EQS = {
+			country_event = {
+				id = solar.269
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Luna and Cadance ticked off immensely at the amount of pressure that Sunset is putting on them, and they come to one conclusion: she is no longer welcome in the Crystal Empire, and they will meet on the battlefield
+	id = solar.264
+	title = solar.264.t
+	desc = solar.264.d
+	
+	is_triggered_only = yes
+	
+	option = { #No. You will see us again in war, Sunset Shimmer. Leave and never return!
+		name = solar.264.a
+		set_global_flag = invitation_rejected
+		EQS = {
+			country_event = {
+				id = solar.270
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Sunset proposes the alliance before she leaves and waits to hear when she returns to the Empire, the entire time incredibly nervous
+	id = solar.265
+	title = solar.265.t
+	desc = solar.265.d
+	
+	is_triggered_only = yes
+	
+	option = { #Well, it's in the Goddess' hooves, now
+		name = solar.266.a
 		CRY = {
 			country_event = {
-				id = solar.263
+				id = solar.266
 				days = 1
 			}
 		}
@@ -2839,14 +3052,14 @@ country_event = { #Sunset proposes the alliance before she leaves and waits to h
 }
 
 country_event = { #Cadance and the others meet to discuss the option of allying themselves with the Solar Empire for the good of all ponykind, and there is much intense debating
-	id = solar.263
-	title = solar.263.t
-	desc = solar.263.d
+	id = solar.266
+	title = solar.266.t
+	desc = solar.266.d
 	
 	is_triggered_only = yes
 	
 	option = { #We agree to the alliance. Inform Sunset that ponykind will stand united
-		name = solar.263.a
+		name = solar.266.a
 		ai_chance = {
 			base = 10
 			###Alliance
@@ -2897,13 +3110,13 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 		}
 		EQS = {
 			country_event = {
-				id = solar.264
+				id = solar.267
 				days = 1
 			}
 		}
 	}
 	option = { #We will not tie ourselves to them, but there is no point fighting any further
-		name = solar.263.b
+		name = solar.266.b
 		ai_chance = {
 			base = 25
 			###NA Pact
@@ -2954,13 +3167,13 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 		}
 		EQS = {
 			country_event = {
-				id = solar.265
+				id = solar.268
 				days = 1
 			}
 		}
 	}
 	option = { #No, she is showing weakness. We must capitalize on it!
-		name = solar.263.c
+		name = solar.266.c
 		ai_chance = {
 			base = 20
 			###Rejection
@@ -3011,7 +3224,7 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 		}
 		EQS = {
 			country_event = {
-				id = solar.266
+				id = solar.269
 				days = 1
 			}
 		}
@@ -3019,14 +3232,14 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 }
 
 country_event = { #Sunset is visited directly by Twilight, and the two of them have a small talk and make up, mostly before Twilgiht explains they agree to an alliance
-	id = solar.264
-	title = solar.264.t
-	desc = solar.264.d
+	id = solar.267
+	title = solar.267.t
+	desc = solar.267.d
 	
 	is_triggered_only = yes
 	
 	option = { #Yes, this will be a fruitful endeavour for both of our nations
-		name = solar.264.a
+		name = solar.267.a
 		EQS = {
 			add_to_faction = CRY
 			add_ai_strategy = {
@@ -3046,14 +3259,14 @@ country_event = { #Sunset is visited directly by Twilight, and the two of them h
 }
 
 country_event = { #Sunset receives word from the Crystal Empire that they will not press any claims on the Solar Empire, as it's evident it would be a stalemate, but they will not be allying themselves with her
-	id = solar.265
-	title = solar.265.t
-	desc = solar.265.d
+	id = solar.268
+	title = solar.268.t
+	desc = solar.268.d
 	
 	is_triggered_only = yes
 	
 	option = { #I guess... I can see why they wouldn't want to trust us
-		name = solar.265.a
+		name = solar.268.a
 		EQS = {
 			diplomatic_relation = {
 				country = CRY
@@ -3072,14 +3285,40 @@ country_event = { #Sunset receives word from the Crystal Empire that they will n
 }
 
 country_event = { #Sunset never receives word back from the Crystal Empire, and receives a report from the Speculatores of their preparation for war, and she is furious
-	id = solar.266
-	title = solar.266.t
-	desc = solar.266.d
+	id = solar.269
+	title = solar.269.t
+	desc = solar.269.d
 	
 	is_triggered_only = yes
 	
 	option = { #They--What--Why--?!
-		name = solar.266.a
+		name = solar.269.a
+	}
+}
+
+country_event = { #Sunset is flabergasted at being bluntly told to buck off, effectively, and she immediately realizes that she went too far in her attempts to bully the Crystal Empire
+	id = solar.270
+	title = solar.270.t
+	desc = solar.270.d
+	
+	is_triggered_only = yes
+	
+	option = { #Oh, I really bucked it up now
+		name = solar.270.a
+		add_political_power = -150
+	}
+}
+
+country_event = { #Sunset and her generals quickly do up a plan for constructing forts along most places of the border with the Empire, and Sunset believes it will not be enough as word of more soldiers on the front line worries her
+	id = solar.271
+	title = solar.271.t
+	desc = solar.271.d
+	
+	is_triggered_only = yes
+	
+	option = { #How likely are they to withstand the fury of an alicorn?
+		name = solar.271.a
+		###Add forts along the CRY border
 	}
 }
 
