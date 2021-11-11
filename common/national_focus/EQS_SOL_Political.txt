@@ -5979,18 +5979,179 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = reinforce_the_social_strata
-	x = 4
+	id = enshrine_the_red_tape
+	x = -4
+	y = 1
+	relative_position_id = inquisitorial_oversight
+	
+	cost = 5
+	prerequisite = { focus = inquisitorial_oversight }
+	
+	completion_reward = {
+		###Event for Aurora waiting in a bored manner as a member of the government prattles off a bunch of items on a list, and she groans that she agreed to keep the most of the bloat of the nation to keep stability
+	}
+	ai_will_do = { factor = 34 }
+}
+
+shared_focus = {
+	id = create_the_solaris_prefectus
+	x = -2
 	y = 1
 	relative_position_id = inquisitorial_oversight
 	
 	cost = 4
 	prerequisite = { focus = inquisitorial_oversight }
 	
+	completion_reward = {
+		###Event for the Prefectus doing its first job of finding cracks within the cracks by being nitpicky and causing issues for the Inquisitionis' own work in maintaining oversight
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = fulminate_the_fires_of_perdition
+	x = 0
+	y = 1
+	relative_position_id = inquisitorial_oversight
+	
+	cost = 4
+	prerequisite = { focus = inquisitorial_oversight }
+	
+	completion_reward = {
+		###Event for Aurora stoking up some of the lower nobles to keep them loyal to the Empire, mainly through deception and bribes
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = without_sacrifice_there_is_no_forgiveness
+	x = 2
+	y = 1
+	relative_position_id = inquisitorial_oversight
+	
+	cost = 3
+	prerequisite = { focus = inquisitorial_oversight }
+	
+	completion_reward = {
+		###Event for Aurora holding another sermon from the balcony of the palace, and pointing out ponies who haven't been faithful by their sacrifices, which she ensures they will do in their deaths
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = reinforce_the_social_strata
+	x = 4
+	y = 1
+	relative_position_id = inquisitorial_oversight
+	
+	cost = 3
+	prerequisite = { focus = inquisitorial_oversight }
+	
 	completion_reward = { 
 		###Insert national focus here
 	}
 	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = guaranteed_positions_in_government
+	x = 1
+	y = 1
+	relative_position_id = enshrine_the_red_tape
+	
+	cost = 3
+	prerequisite = { focus = enshrine_the_red_tape }
+	prerequisite = { focus = create_the_solaris_prefectus }
+	
+	completion_reward = {
+		###Event for Aurora getting fresh applications for government positions, which she moans about getting since there are other ponies who could deal with it, and her assistant explains how she has to deal with the high-level ones, and she is not impressed as they are all incompetent
+	}
+	ai_will_do = { factor = 27 }
+}
+
+shared_focus = {
+	id = draft_a_new_housing_plan
+	x = 1
+	y = 1
+	relative_position_id = create_the_solaris_prefectus
+	
+	cost = 3
+	prerequisite = { focus = create_the_solaris_prefectus }
+	prerequisite = { focus = fulminate_the_fires_of_perdition }
+	
+	completion_reward = {
+		###Event for getting a report about homeless ponies and she is not impressed that there is nothing for them to do, so she decides they will build their own houses if they want to stay in the Empire
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = ensure_the_governors_loyalties
+	x = 1
+	y = 1
+	relative_position_id = guaranteed_positions_in_government
+	
+	cost = 4
+	prerequisite = { focus = guaranteed_positions_in_government }
+	prerequisite = { focus = draft_a_new_housing_plan }
+	
+	completion_reward = {
+		###Event for Aurora visiting a slightly questionable governor of Fillydelphia and ensuring his loyalty, mainly through threats about the curse of the Empress after bribery didn't quite work and she refuses his romantic advances
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = promise_additional_benefits_for_the_militarium
+	x = 1
+	y = 1
+	relative_position_id = fulminate_the_fires_of_perdition
+	
+	cost = 4
+	prerequisite = { focus = fulminate_the_fires_of_perdition }
+	prerequisite = { focus = without_sacrifice_there_is_no_forgiveness }
+	
+	completion_reward = {
+		###Aurora gets interrupted from her work by Blueblood begging for more funds again and she is snarky about his eating and promiscuous habits, but he finally whittles her down and she agrees for new benefits, so long as he gets lost
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = the_common_pony_props_the_empire
+	x = 1
+	y = 1
+	relative_position_id = without_sacrifice_there_is_no_forgiveness
+	
+	cost = 3
+	prerequisite = { focus = without_sacrifice_there_is_no_forgiveness }
+	prerequisite = { focus = reinforce_the_social_strata }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = race_bonus
+			bonus = 1
+			uses = 1
+			category = race_tech
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = maintain_the_current_power_structure
+	x = 1
+	y = 1
+	relative_position_id = promise_additional_benefits_for_the_militarium
+	
+	cost = 4
+	prerequisite = { focus = promise_additional_benefits_for_the_militarium }
+	prerequisite = { focus = the_common_pony_props_the_empire }
+	
+	completion_reward = {
+		###Event for Aurora seeing the new training methods and she isn't happy about the changes as they are mostly useless
+	}
+	ai_will_do = { factor = 28 }
 }
 
 shared_focus = { #Mention that Aurora feels the Militarium is not fit for leadership any further, and she will be taking direct control of the army
@@ -6000,8 +6161,14 @@ shared_focus = { #Mention that Aurora feels the Militarium is not fit for leader
 	relative_position_id = formulate_new_battle_plans
 	
 	cost = 5
-	prerequisite = { focus = no_change_shall_hide_from_the_regent }
-	prerequisite = { focus = formulate_new_battle_plans }
+	prerequisite = { 
+		focus = no_change_shall_hide_from_the_regent 
+		focus = maintain_the_current_power_structure
+	}
+	prerequisite = { 
+		focus = formulate_new_battle_plans 
+		focus = ensure_the_governors_loyalties
+	}
 	
 	completion_reward = {
 		###Custom tooltip for Aurora becoming a field marshal here
