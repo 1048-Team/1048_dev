@@ -3191,7 +3191,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = 24_7_worship_times
+	id = twenty_four_seven_worship_times
 	x = 0
 	y = 1
 	relative_position_id = enshrining_the_empress
@@ -3244,10 +3244,10 @@ shared_focus = {
 	id = relax_heresy_standards_slightly
 	x = 1
 	y = 1
-	relative_position_id = 24_7_worship_times
+	relative_position_id = twenty_four_seven_worship_times
 	
 	cost = 4
-	prerequisite = { focus = 24_7_worship_times }
+	prerequisite = { focus = twenty_four_seven_worship_times }
 	prerequisite = { focus = no_shame_in_homemaking }
 	
 	completion_reward = {
@@ -5772,7 +5772,7 @@ shared_focus = {
 	
 	completion_reward = {
 		country_event = solar.307
-		###Country event for Aurora hearing moaning and complaining from the nobles she left about how they have to actually help administer instead of suplicate Daybreaker, and she executes one or two for their continued whining as an insult to the Empress
+		###Country event for Aurora hearing moaning and whining from the nobles she left about how they have to actually help administer instead of suplicate Daybreaker, and she executes one or two for their continued whining as an insult to the Empress
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -6245,6 +6245,133 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = ending_the_farcical_government
+	x = -1
+	y = 1
+	relative_position_id = a_lesson_in_humility
+	
+	bypass = {
+		AND = {
+			NOT = { country_exists = CLD }
+			692 = {
+				NOT = { is_owned_by = ROOT }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_lesson_in_humility }
+	
+	completion_reward = {
+		country_event = solar.327
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = institute_the_cloudsdale_chapter
+	x = 0
+	y = 1
+	relative_position_id = ending_the_farcical_government
+	
+	available = {
+		692 = { is_owned_by = ROOT }
+	}
+	
+	cost = 4
+	prerequisite = { focus = ending_the_farcical_government }
+	
+	completion_reward = {
+		692 = { add_manpower = -150000 }
+		add_war_support = 0.05
+	}
+	ai_will_do = { factor = 28 }
+}
+
+shared_focus = {
+	id = collapsing_the_communes
+	x = 1
+	y = 1
+	relative_position_id = a_lesson_in_humility
+	
+	cost = 4
+	prerequisite = { focus = a_lesson_in_humility }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = NER
+					is_owned_by = ROOT
+				}
+			}
+			add_manpower = -10000
+		}
+		add_stability = 0.05
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Be sarcastic and claim that he communists wanted such better working conditions, so they'll get it; once they die
+	id = enforce_ethical_working_conditions
+	x = 0
+	y = 1
+	relative_position_id = collapsing_the_communes
+	
+	available = {
+		170 = { is_owned_by = ROOT }
+	}
+	
+	cost = 4
+	prerequisite = { focus = collapsing_the_communes }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = NER
+					is_owned_by = ROOT
+				}
+			}
+			add_manpower = -7500
+		}
+		add_timed_idea = {
+			idea = imperial_work_standards #Be sarcastic with this loc, too
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = archmage_of_all_the_west
+	x = 1
+	y = 1
+	relative_position_id = institute_the_cloudsdale_chapter
+	
+	cost = 5
+	prerequisite = { focus = institute_the_cloudsdale_chapter }
+	prerequisite = { focus = enforce_ethical_working_conditions }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					is_owned_by = ROOT
+					OR = {
+						is_core_of = NER
+						is_core_of = CLD
+					}
+				}
+			}
+			add_core_of = ROOT
+		}
+		country_event = solar.328
+	}
+	ai_will_do = { factor = 30 }
 }
 
 ###Middle Side###
