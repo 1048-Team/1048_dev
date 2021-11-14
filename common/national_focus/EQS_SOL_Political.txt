@@ -6189,6 +6189,131 @@ shared_focus = { #Mention that Aurora feels the Militarium is not fit for leader
 	ai_will_do = { factor = 55 }
 }
 
+shared_focus = {
+	id = solaris_quorundam
+	x = 0
+	y = 1
+	relative_position_id = guiding_the_lesser_soldiers
+	
+	cost = 4
+	prerequisite = { focus = guiding_the_lesser_soldiers }
+	
+	completion_reward = {
+		country_event = solar.326
+	}
+	ai_will_do = { factor = 40 }
+}
+
+###Rump state war###
+###Left Side###
+shared_focus = {
+	id = a_lesson_in_humility
+	x = -4
+	y = 1
+	relative_position_id = solaris_quorundam
+	
+	bypass = {
+		AND = {
+			NOT = {
+				country_exists = CLD
+				country_exists = NER
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = solaris_quorundam }
+	
+	completion_reward = {
+		if = {
+			limit = {
+				country_exists = NER
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NER
+			}
+		}
+		if = {
+			limit = {
+				country_exists = CLD
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CLD
+			}
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Middle Side###
+shared_focus = {
+	id = a_lesson_in_submission
+	x = 0
+	y = 1
+	relative_position_id = solaris_quorundam
+	
+	bypass = {
+		NOT = {
+			country_exists = CER
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = solaris_quorundam }
+	
+	completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = CER
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+###Right Side###
+shared_focus = {
+	id = a_lesson_in_conformity
+	x = 4
+	y = 1
+	relative_position_id = solaris_quorundam
+	
+	bypass = {
+		AND = {
+			NOT = {
+				country_exists = WHY
+				country_exists = BLS
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite =  { focus = solaris_quorundam }
+	
+	completion_reward = {
+		if = { 
+			limit = {
+				country_exists = WHY
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = WHY
+			}
+		}
+		if = {
+			limit = {
+				country_exists = BLS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BLS
+			}
+		}
+	}
+	ai_will_do = { factor = 27 }
+}
+
 ###Coring tree###
 shared_focus = {
 	id = establishing_baseline
