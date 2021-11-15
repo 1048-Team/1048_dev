@@ -6253,6 +6253,10 @@ shared_focus = {
 	y = 1
 	relative_position_id = a_lesson_in_humility
 	
+	available = {
+		692 = { is_owned_by = ROOT }
+	}
+	
 	bypass = {
 		AND = {
 			NOT = { country_exists = CLD }
@@ -6277,10 +6281,6 @@ shared_focus = {
 	y = 1
 	relative_position_id = ending_the_farcical_government
 	
-	available = {
-		692 = { is_owned_by = ROOT }
-	}
-	
 	cost = 4
 	prerequisite = { focus = ending_the_farcical_government }
 	
@@ -6296,6 +6296,10 @@ shared_focus = {
 	x = 1
 	y = 1
 	relative_position_id = a_lesson_in_humility
+	
+	available = {
+		170 = { is_owned_by = ROOT }
+	}
 	
 	cost = 4
 	prerequisite = { focus = a_lesson_in_humility }
@@ -6399,6 +6403,87 @@ shared_focus = {
 	ai_will_do = { factor = 30 }
 }
 
+shared_focus = {
+	id = there_is_no_empress_but_daybreaker
+	x = 0
+	y = 1
+	relative_position_id = a_lesson_in_submission
+	
+	available = {
+		122 = { is_owned_by = ROOT }
+	}
+	
+	bypass = {
+		AND = {
+			NOT = {
+				country_exists = CER
+			}
+			122 = {
+				NOT = { is_owned_by = ROOT }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_lesson_in_submission }
+	
+	completion_reward = {
+		country_event = solar.329
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = feeding_the_fallow_fields
+	x = 0
+	y = 1
+	relative_position_id = there_is_no_empress_but_daybreaker
+	
+	available = {
+		122 = { is_owned_by = ROOT }
+	}
+	
+	cost = 4
+	prerequisite = { focus = there_is_no_empress_but_daybreaker }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = reseeding_the_fields
+			days = 365
+		}
+		hidden_effect = {
+			country_event = {
+				id = solar.332
+				days = 366
+			}
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = farming_the_breadbasket_of_equus
+	x = 0
+	y = 1
+	relative_position_id = feeding_the_fallow_fields
+	
+	cost = 4
+	prerequisite = { focus = feeding_the_fallow_fields }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					is_owned_by = ROOT
+					is_core_of = CER
+				}
+			}
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
 ###Right Side###
 shared_focus = {
 	id = a_lesson_in_conformity
@@ -6439,6 +6524,172 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 27 }
+}
+
+shared_focus = {
+	id = an_army_is_no_match_for_a_mage
+	x = -1
+	y = 1
+	relative_position_id = a_lesson_in_conformity
+	
+	available = {
+		70 = { is_owned_by = ROOT }
+	}
+	
+	bypass = {
+		AND = {
+			70 = { NOT = { is_owned_by = ROOT } }
+			NOT = {
+				country_exists = WHY
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = a_lesson_in_conformity }
+	
+	completion_reward = {
+		country_event = solar.330
+	}
+	ai_will_do = { factor = 27 }
+}
+
+shared_focus = {
+	id = remove_the_military_from_power
+	x = 0
+	y = 1
+	relative_position_id = an_army_is_no_match_for_a_mage
+	
+	available = {
+		70 = { is_owned_by = ROOT }
+	}
+	
+	bypass = {
+		AND = {
+			70 = { NOT = { is_owned_by = ROOT } }
+			NOT = { country_exists = WHY }
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = an_army_is_no_match_for_a_mage }
+	
+	completion_reward = {
+		country_event = solar.331
+	}
+	ai_will_do = { factor = 23 }
+}
+
+shared_focus = {
+	id = faith_triumphs_over_atheism
+	x = 1
+	y = 1
+	relative_position_id = a_lesson_in_conformity
+	
+	available = {
+		74 = { is_owned_by = ROOT }
+	}
+	
+	bypass = {
+		AND = {
+			74 = { NOT = { is_owned_by = ROOT } }
+			NOT = { country_exists = BLS }
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = a_lesson_in_conformity }
+	
+	completion_reward = {
+		add_ideas = religion_triumphant
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = enlighten_the_securlarists
+	x = 0
+	y = 1
+	relative_position_id = faith_triumphs_over_atheism
+	
+	cost = 5
+	prerequisite = { focus = faith_triumphs_over_atheism }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = religion_triumphant
+			add_idea = theistic_science
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = no_mercy_for_the_wicked
+	x = 1
+	y = 1
+	relative_position_id = remove_the_military_from_power
+	
+	cost = 5
+	prerequisite = { focus = remove_the_military_from_power }
+	prerequisite = { focus = enlighten_the_securlarists }
+	
+	completion_reward = {
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = BLS
+					is_owned_by = ROOT
+				}
+			}
+			add_manpower = -37500
+			add_core_of = ROOT
+		}
+		every_state = {
+			limit = {
+				AND = {
+					is_core_of = WHY
+					is_owned_by = ROOT
+				}
+			}
+			add_manpower = -25000
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 28 }
+}
+
+###Daybreaker Temple###
+shared_focus = {
+	id = completing_the_empresss_desire
+	x = 0
+	y = 1
+	relative_position_id = farming_the_breadbasket_of_equus
+	
+	cost = 4
+	prerequisite = { focus = archmage_of_all_the_west }
+	prerequisite = { focus = farming_the_breadbasket_of_equus }
+	prerequisite = { focus = no_mercy_for_the_wicked }
+	
+	completion_reward = {
+		country_event = solar.333
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = no_project_is_too_ambitious
+	x = 0
+	y = 1
+	relative_position_id = completing_the_empresss_desire
+	
+	cost = 4
+	prerequisite = { focus = completing_the_empresss_desire }
+	
+	completion_reward = {
+		country_event = solar.334
+	}
+	ai_will_do = { factor = 20 }
 }
 
 ###Coring tree###
