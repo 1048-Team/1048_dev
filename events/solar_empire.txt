@@ -4017,6 +4017,118 @@ country_event = { #Aurora wanders through the temple that she created in the hea
 	}
 }
 
+country_event = { #Blueblood meets with a few of his generals and Aurora barges into their discussion, with Fidelis in tow and introduces her as the new commander of the Militarium, after she shows his list of heresies that she documented
+	id = solar.336
+	title = solar.336.t
+	desc = solar.336.d
+	
+	is_triggered_only = yes
+	
+	option = { #You've been a naughty stallion, Blueblood
+		name = solar.336.a
+		custom_effect_tooltip = blueblood_arrested_tt
+		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
+		add_manpower = -10000
+		add_popularity = {
+			ideology = neutrality
+			popularity = -0.03
+		}
+		create_field_marshal = {
+			name = "Fidelis Flamma"
+			#portrait_path = "gfx/leaders/EQS/Fidelis.tga"
+			traits = { solaris_adoratio fire_pony pony_race_trait }
+			id = 5012
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+			female = yes
+		}
+	}
+}
+
+country_event = { #Aurora receives a report of armies gathering at the border with the Solar Empire and Stalliongrad, and she realizes taht they are preparing for a surprise attack, and she instantly calls an alert with her staff for war
+	id = solar.337
+	title = solar.337.t
+	desc = solar.337.d
+	
+	is_triggered_only = yes
+	
+	option = { #Prepare the legions! Stalliongrad will be coming
+		name = solar.337.a
+		add_timed_idea = {
+			idea = preparing_for_the_red_tide
+			days = 180
+		}
+	}
+}
+
+country_event = { #Aurora receives reports of Stalliongrad's current country health, and she determines that with the economy mostly back together, they are powerful enough to take on Stalliongrad, and she orders her armies to prepare for war
+	id = solar.338
+	title = solar.338.t
+	desc = solar.338.d
+	
+	is_triggered_only = yes
+	
+	option = { #I trust this will be adequate demonstration of our intentions
+		name = solar.338.a
+		IF = {
+			limit = {
+				country_exists = CWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = MWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MWR
+			}
+		}
+		IF = {
+			limit = {
+				country_exists = AWR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AWR
+			}
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = STG
+		}
+	}
+}
+
+country_event = { #Stalliongrad learns of the extreme economic weakness that the Solar Empire is still in and the Supreme Soviet deliberates on if they should invade
+	id = solar.399
+	title = solar.399.t
+	desc = solar.399.d
+	
+	is_triggered_only = yes
+	
+	option = { #They have let their ambition become their undoing!
+		name = solar.399.a
+		ai_chance = {
+			modifier = { is_ai = yes factor = 1000 }
+		}
+		set_global_flag = SOL_stalliongrad_war
+	}
+	option = { #We are still too weak ourselves. We have to bide our time
+		name = solar.399.b
+		ai_chance = { 
+			modifier = {is_ai = yes factor = 0 }
+		}
+	}
+}
+
 ###Celestia Events###
 country_event = { #Celestia is glad to finally get replacement regalia as she sees the changes to the throne room
 	id = celestia.1

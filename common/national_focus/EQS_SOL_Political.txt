@@ -6704,10 +6704,14 @@ shared_focus = {
 	mutually_exclusive = { focus = craft_an_ornate_entrance }
 	
 	completion_reward = {
-		###Trigger STG secret event for beginning to prepare for war
 		swap_ideas = {
 			remove_idea = solars_sanctum_2
 			add_idea = a_holy_temple
+		}
+		hidden_effect = {
+			STG = {
+				country_event = solar.399
+			}
 		}
 	}
 	ai_will_do = { factor = 35 }
@@ -6761,10 +6765,14 @@ shared_focus = {
 	mutually_exclusive = { focus = stretch_the_steeples_to_the_heavens }
 	
 	completion_reward = {
-	###Trigger STG secret event for beginning to prepare for war
 		swap_ideas = {
 			remove_idea = solars_sanctum_2
 			add_idea = temple_for_the_masses
+		}
+		hidden_effect = {
+			STG = {
+				country_event = solar.399
+			}
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -6855,7 +6863,7 @@ shared_focus = {
 	prerequisite = { focus = a_church_worthy_of_the_empress }
 	
 	completion_reward = {
-		###Insert NS here
+		add_ideas = family_in_the_empress
 	}
 	ai_will_do = { factor = 30 }
 }
@@ -6870,9 +6878,228 @@ shared_focus = {
 	prerequisite = { focus = a_church_worthy_of_the_empress }
 	
 	completion_reward = {
+		country_event = solar.336
 		###Event for Aurora arresting Blueblood for finding his potential plot to overthrow her, and she imprisons him, as she believes death is too kind for him as she shows his replacement, Fidelis
 	}
 	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = opportunistic_rats
+	x = 0
+	y = 1
+	relative_position_id = brothers_and_sisters_in_the_empress
+	
+	cost = 4
+	prerequisite = { focus = brothers_and_sisters_in_the_empress }
+	prerequisite = { focus = further_streamlining }
+	prerequisite = { focus = reminding_the_militarium_of_its_place }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_global_flag = SOL_stalliongrad_war
+			}
+			###Country event for Aurora learning of Stalliongrad's imminent war and making the Empire go into an emergency
+		}
+		ELSE = {
+			country_event = solar.338
+		}
+	}
+	ai_will_do = {
+		base = 25
+		modifier = { has_global_flag = SOL_stalliongrad_war factor = 3 }
+	}
+}
+
+shared_focus = {
+	id = toil_for_your_empress
+	x = -2
+	y = 1
+	relative_position_id = opportunistic_rats
+	
+	cost = 3
+	prerequisite = { focus = opportunistic_rats }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = sweat_for_salvation
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = apply_new_military_tactics
+	x = 0
+	y = 1
+	relative_position_id = opportunistic_rats
+	
+	cost = 3
+	prerequisite = { focus = opportunistic_rats }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = doctrine_bonus
+			uses = 1
+			bonus = 0.75
+			category = land_doctrine
+		}
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = unleash_the_warmth_of_the_empress_light
+	x = 2
+	y = 1
+	relative_position_id = opportunistic_rats
+	
+	cost = 4
+	prerequisite = { focus = opportunistic_rats }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = warmth_of_ages
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 27 }
+}
+
+shared_focus = {
+	id = turn_their_weapons_against_them
+	x = 1
+	y = 1
+	relative_position_id = toil_for_your_empress
+	
+	cost = 5
+	prerequisite = { focus = toil_for_your_empress }
+	prerequisite = { focus = apply_new_military_tactics }
+	
+	completion_reward = {
+		###Add 100 medium tanks
+		add_equipment_to_stockpile = {
+			type = medium_tank_equipment
+			amount = 100
+			producer = STG
+		}
+		add_tech_bonus = {
+			name = medium_tank_bonus
+			bonus = 1
+			uses = 1
+			category = cat_medium_armor
+		}
+	}
+	ai_will_do = { factor = 29 }
+}
+
+shared_focus = {
+	id = never_another_manehattan
+	x = 1
+	y = 1
+	relative_position_id = apply_new_military_tactics
+	
+	cost = 5
+	prerequisite = { focus = apply_new_military_tactics }
+	prerequisite = { focus = unleash_the_warmth_of_the_empress_light }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = no_step_back
+			days = 120
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = heresy_shall_never_triumph
+	x = 1
+	y = 1
+	relative_position_id = turn_their_weapons_against_them
+	
+	available = {
+		NOT = {
+			country_exists = STG
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = turn_their_weapons_against_them }
+	prerequisite = { focus = never_another_manehattan }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = triumph_over_heresy
+			days = 180
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+###Southeast war###
+shared_focus = {
+	id = to_the_land_of_darkness
+	x = 0
+	y = 1
+	relative_position_id = heresy_shall_never_triumph
+	
+	bypass = {
+		OR = {
+			AND = {
+				NOT = {
+					has_global_flag = balsplosion
+					country_exists = BAL
+				}
+			}
+			AND = {
+				has_global_flag = balsplosion
+				NOT = {
+					country_exists = MTS
+					country_exists = EEE
+					country_exists = NID
+					country_exists = NEI
+					country_exists = HUG
+					country_exists = SPA
+					country_exists = BUL
+					country_exists = STB
+					country_exists = NRP
+					country_exists = BAL
+				}
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = heresy_shall_never_triumph }
+	
+	completion_reward = {
+		every_country = {
+			limit = {
+				OR = {
+					owns_state = 688
+					owns_state = 84
+					owns_state = 81
+					owns_state = 15
+					owns_state = 26
+					owns_state = 221
+					owns_state = 79
+					owns_state = 352
+					owns_state = 7
+					owns_state = 31
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
 }
 
 ###Coring tree###
