@@ -392,7 +392,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		complete_effect = { custom_effect_tooltip = reach_full_redemption_tt }
 	}
 }
-EQS_SUN_stalliongrad_war_countdown = {
+EQS_SUN_stalliongrad_war_countdown_category = {
 	red_war = {
 		activation = {
 			original_tag = STG
@@ -403,6 +403,133 @@ EQS_SUN_stalliongrad_war_countdown = {
 		war_with_on_timeout = EQS
 		days_mission_timeout = 120
 		timeout_effect = { declare_war_on = { target = EQS type = annex_everything } }
+	}
+}
+EQS_SUN_high_mage_election_category = {
+	a_prime_seat = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 25
+		days_remove = 60
+		modifier = {
+			political_power_gain = -0.075
+		}
+		complete_effect = {
+			set_country_flag = seething_corona_support
+			add_to_variable = { aurora_support = 1 }
+		}
+	}
+	agricultural_backbone = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 20
+		days_remove = 60
+		modifier = {
+			consumer_goods_factor = 0.05
+		}
+		complete_effect = {
+			set_country_flag = steel_sickle_support
+			add_to_variable = { aurora_support = 1 }
+		}
+	}
+	heretic_support = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 25
+		days_remove = 60
+		modifier = {
+			weekly_manpower = -750
+		}
+		complete_effect = {
+			set_country_flag = ion_flash_support
+			add_to_variable = { aurora_support = 1 }
+		}
+	}
+	foundation_of_iron = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 15
+		days_remove = 60
+		modifier = {
+			local_resources_factor = -0.05
+			weekly_manpower = -100
+		}
+		complete_effect = {
+			set_country_flag = iron_tail_support
+			add_to_variable = { aurora_support = 1 }
+		}
+	}
+	a_sign_of_mercy = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 25
+		days_remove = 60
+		modifier = {
+			industrial_capacity_factory = -0.075
+		}
+		complete_effect = {
+			set_country_flag = burning_plage_support
+			add_to_variable = { aurora_support = 1 }
+		}
+	}
+	a_broken_tradition = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 5
+		days_remove = 365
+		modifier = {
+			custom_modifier_tooltip = bluebloods_support_tt
+		}
+		complete_effect = {
+			set_country_flag = blueblood_support
+			add_to_variable = { aurora_support = 1 }
+			hidden_effect = {
+				add_ideas = bluebloods_support_for_aurora
+			}
+		}
+		remove_effect = {
+			hidden_effect = {
+				remove_ideas = bluebloods_support_for_aurora
+			}
+		}
+	}
+	bloodthirsty_allies = {
+		available = { has_country_flag = debating_the_high_mage }
+		visible = { has_country_flag = debating_the_high_mage }
+		cost = 30
+		days_remove = 60
+		modifier = {
+			political_power_factor = -0.2
+			consumer_goods_factor = 0.05
+		}
+		complete_effect = {
+			set_country_flag = quasar_pulse_support
+			add_to_variable = { aurora_support = 1 }
+		}
+	}
+	high_mage_election = {
+		activation = {
+			original_tag = EQS
+			has_country_flag = debating_the_high_mage
+		}
+		available = { hidden_trigger = { NOT = { has_country_flag = debating_the_high_mage } } }
+		fire_only_once = yes
+		days_mission_timeout = 60
+		timeout_effect = {
+			IF = {
+				limit = {
+					check_variable = { aurora_support > 3 }
+				}
+				hidden_effect = {
+					country_event = solar.280
+				}
+			}
+			ELSE = {
+				hidden_effect = {
+					country_event = solar.279
+				}
+			}
+		}
 	}
 }
 EQS_SOL_society_interaction_category = {

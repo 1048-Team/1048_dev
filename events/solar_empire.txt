@@ -1567,9 +1567,9 @@ country_event = { #Daybreaker is furious at her former state and she brings in h
 	desc = solar.111.d
 	
 	is_triggered_only = yes
-		option = { #Another!
-			name = solar.111.a
-		}
+	
+	option = { #Another!
+		name = solar.111.a
 	}
 }
 
@@ -1618,11 +1618,17 @@ country_event = { #The current leader of the Solar Empire is presented with an o
 	title = solar.118.t
 	desc = solar.118.d
 	
-	is_triggered_only = yes
+	trigger = {
+		date > 1053.1.1
+		date < 1053.12.31
+	}
+	mean_time_to_happen = { days = 300 }
 	
 	option = { #This is an opportunity that cannot be missed. Those resources are imperative!
 		name = solar.118.a
+		add_political_power = -20
 		set_country_flag = settle_everfree
+		mark_focus_tree_layout_dirty = yes
 	}
 	option = { #This has been attempted before. It was a waste of time and life
 		name = solar.118.b
@@ -1652,6 +1658,11 @@ country_event = { #Following one of the settlers, they are soon attacked by a ro
 	option = { #It was inevitable, I suppose. Send in another group, with more guards
 		name = solar.120.a
 		add_stability = -0.05
+		save_current_manpower = yes
+		1 = {
+			add_manpower = -8273
+		}
+		restore_previous_manpower = yes
 	}
 }
 
@@ -1737,6 +1748,8 @@ country_event = { #Sunset meets with Aurora and then the two of them head into t
 	option = {
 		name = solar.206.a
 		custom_effect_tooltip = sunset_reduce_modifier_6_tt
+		set_country_flag = debating_the_high_mage
+		set_variable = { aurora_support = 0 }
 	}
 }
 
@@ -3562,6 +3575,7 @@ country_event = { #Aurora panics and believes she can't do the job of regent unt
 	
 	option = { #What were they thinking?!
 		name = solar.301.a
+		custom_effect_tooltip = aurora_reduce_modifier_1_tt
 		add_to_variable = { war_support_change = 0.1 }
 		add_to_variable = { conscription_factor_change = 0.1 }
 	}
@@ -3578,6 +3592,7 @@ country_event = { #Aurora and Sunset manage to get an idea of what to have her s
 		name = solar.302.a
 		add_stability = 0.03
 		add_war_support = 0.03
+		custom_effect_tooltip = aurora_reduce_modifier_2_tt
 		add_to_variable = { stability_change = 0.15 }
 		add_to_variable = { army_speed_change = 0.1 }
 		add_to_variable = { conscription_change = 0.001 }
@@ -3595,6 +3610,7 @@ country_event = { #Aurora finally begins her first bits of administrating the em
 	option = { #It will have growing pains, yes, but the Empire will survive
 		name = solar.303.a
 		add_ideas = separation_removed
+		custom_effect_tooltip = aurora_reduce_modifier_3_tt
 		add_to_variable = { stability_change = 0.1 }
 		add_to_variable = { research_speed_change = 0.075 }
 		add_to_variable = { factory_output_change = 0.05 }
@@ -3632,6 +3648,7 @@ country_event = { #Aurora sees some of the inefficiency in the government with h
 			uses = 1
 			category = industry
 		}
+		custom_effect_tooltip = aurora_reduce_modifier_4_tt
 		hidden_effect = {
 			remove_dynamic_modifier = { modifier = slipping_sanity }
 			add_ideas = aftershocks_of_the_crisis
@@ -3650,6 +3667,7 @@ country_event = { #Aurora sees how the government works, and while she isn't imp
 		name = solar.306.a
 		add_political_power = 100
 		add_stability = 0.05
+		custom_effect_tooltip = aurora_reduce_modifier_4_tt
 		hidden_effect = {
 			remove_dynamic_modifier = { modifier = slipping_sanity }
 			add_ideas = aftershocks_of_the_crisis

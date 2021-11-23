@@ -2267,6 +2267,125 @@ shared_focus = {
 	ai_will_do = { factor = 30 }
 }
 
+###Everfree Settlement Tree###
+shared_focus = {
+	id = taming_the_vestiges_of_chaos
+	x = 16
+	y = 20
+	
+	available = { has_country_flag = settle_everfree }
+	allow_branch = { has_country_flag = settle_everfree }
+	
+	cost = 3
+	
+	completion_reward = { 
+		1 = { add_manpower = 10000 }
+		save_current_manpower = yes
+		12 = { add_manpower = -2500 }
+		75 = { add_manpower = -2500 }
+		2 = { add_manpower = -2500 }
+		restore_previous_manpower = yes
+	}
+	ai_will_do = { factor = 25 }
+}
+
+shared_focus = {
+	id = ridding_the_curse_of_thorns
+	x = -2
+	y = 1
+	relative_position_id = taming_the_vestiges_of_chaos
+	
+	cost = 2
+	prerequisite = { focus = taming_the_vestiges_of_chaos }
+	
+	completion_reward = {
+		1 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { factor = 22 }
+}
+
+shared_focus = {
+	id = setting_a_level_foundation
+	x = 2
+	y = 1
+	relative_position_id = taming_the_vestiges_of_chaos
+	
+	cost = 2
+	prerequisite = { focus = taming_the_vestiges_of_chaos }
+	
+	completion_reward = {
+		1 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { factor = 24 }
+}
+
+shared_focus = {
+	id = forever_there_shall_be_order
+	x = 0
+	y = 2
+	relative_position_id = taming_the_vestiges_of_chaos
+	
+	cost = 3
+	prerequisite = { focus = taming_the_vestiges_of_chaos }
+	
+	completion_reward = {
+		1 = {
+			add_manpower = 5000
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+			add_resource = {
+				type = aluminium
+				amount = 4
+			}
+			hidden_effect = {
+				add_extra_state_shared_building_slots = 2
+				set_state_name = renamed_everfree
+				set_victory_points = {
+					province = 9582
+					value = 1
+				}
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				65 = {
+					country_event = {
+						id = solar.119
+						days = 125
+					}
+				}
+				35 = {
+					country_event = {
+						id = solar.120
+						days = 125
+					}
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 30 }
+}
+
 ###Military trees###
 ###Naval tree###
 shared_focus = {
