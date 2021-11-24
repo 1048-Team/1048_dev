@@ -65,4 +65,125 @@ characters = {
 			traits = { high_mage_shimmer }
 		}
 	}
+	
+	EQS_Aurora_Shinespark = {
+		name = EQS_Aurora_Shinespark_name
+		
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Aurora_Shinespark.tga"
+			}
+			civilian = {
+				small = "GFX_idea_aurora_shinespark"
+				large = "gfx/leaders/EQS/Aurora_Shinespark.tga"
+			}
+		}
+		
+		corps_commander = {
+			traits = { pony_race_trait solaris_inquisitionis protectress_of_the_empress_general promising_general }
+			skill = 2
+			id = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			female = yes
+		}
+		
+		create_country_leader = {
+			expire = "1965.1.1"
+			desc = "POLITICS_AURORA_SHINESPARK_DESC"
+			ideology = solarism
+			female = yes
+			traits = {
+				protectress_of_the_empress
+			}
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = aurora_shinespark
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL_1048 = yes
+				NOT = { has_country_flag = aurora_promoted }
+				NOT = { has_country_leader = { ruling_only = yes name = "Aurora Shinespark" } }
+			}
+			available = {
+				is_EQS_SOL_1048 = yes
+				NOT = { has_country_leader = { ruling_only = yes name = "Aurora Shinespark" } }
+			}
+
+			traits = { protectress_of_the_empress_advisor }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_Blueblood = {
+		name = EQS_Blueblood_name
+		
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Blueblood.tga"
+			}
+			civilian = {
+				small = "GFX_idea_blueblood"
+				large = "gfx/leaders/EQS/Blueblood.tga"
+			}
+		}
+		
+		field_marshal = {
+			traits = { pony_race_trait lord_commander media_personality not_stonks_genius politically_connected }
+			skill = 2
+			id = 1
+			attack_skill = 1
+			defense_skill = 3
+			planning_skill = 4
+			logistics_skill = 2
+			desc = EQS_arrogant_cunt_desc
+		}
+		
+		country_leader = {
+			expire = "1965.1.1"
+			ideology = authortitarian
+			desc = "POLITICS_BLUEBLOOD_DESC"
+			traits = {
+				the_stallion_who_would_be_god
+			}
+		}
+		
+		advisor = {
+			slot = political_advisor
+			token = blueblood
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+				NOT = { has_government = communism }
+				if = {
+					limit = { event_target:solar_empire = { exists = yes } }
+					OR = {
+						tag = event_target:solar_empire
+						AND = {
+							tag = event_target:equestria
+							NOT = { country_exists = event_target:solar_empire }
+						}
+					}
+				}
+				OR = {
+					is_EQS_SOL_1048 = yes
+					if = {
+						limit = { is_original_EQS = yes }
+						has_country_flag = EQS_blueblood_allowed
+					}
+				}
+			}
+			traits = { prince_of_terror }
+		}
+	}
 }
