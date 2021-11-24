@@ -10,3 +10,4 @@ dependencies={
 }
 supported_version="1.10.*"
 path="mod/1048_dev/"
+replace_path="common/characters"
