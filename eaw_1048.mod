@@ -11,3 +11,5 @@ dependencies={
 supported_version="1.10.*"
 path="mod/1048_dev/"
 replace_path="common/characters"
+replace_path="common/generation"
+replace_path="history/general"
