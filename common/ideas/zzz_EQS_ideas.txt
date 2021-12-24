@@ -8,12 +8,15 @@ ideas = {
 				original_tag = EQS
 			}
 			visible = {
-				is_EQS_SOL = no
+				is_EQS_SOL_1048 = no
+				NOT = {
+					original_tag = EQS
+				}
 			}
 			available = {
 				has_government = democratic
 				if = {
-					limit = { OR = { has_global_flag = SOL_twilight_converted is_EQS_SOL = yes } }
+					limit = { OR = { has_global_flag = SOL_twilight_converted is_EQS_SOL_1048 = yes } }
 					NOT = { has_global_flag = SOL_twilight_converted }
 					hidden_trigger = { always = no }
 				}
@@ -40,23 +43,18 @@ ideas = {
 				research_speed_factor = 0.05
 			}
 		}
-		cocopommel = {
+		disgustingly_rich = {
 
 			allowed = {
 				original_tag = EQS
 			}
+			
+			visible = {
+				has_country_flag = unlocked_evil_advisors
+			}
 
 			available = {
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						tag = event_target:equestria
-						AND = {
-							tag = event_target:solar_empire
-							NOT = { country_exists = event_target:equestria }
-						}
-					}
-				}
+				has_country_flag = unlocked_evil_advisors
 			}
 
 			traits = { captain_of_industry }
@@ -66,21 +64,13 @@ ideas = {
 			allowed = {
 				original_tag = EQS
 			}
+			
+			visible = {
+				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
+			}
 
 			available = {
-				LSP = {
-					exists = no
-				}
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						tag = event_target:solar_empire
-						AND = {
-							tag = event_target:equestria
-							NOT = { country_exists = event_target:solar_empire }
-						}
-					}
-				}
+				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
 			}
 
 			traits = { war_industrialists }
@@ -90,45 +80,99 @@ ideas = {
 			allowed = {
 				original_tag = EQS
 			}
+			
+			visible = {
+				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
+			}
 
 			available = {
 				OR = {
-					has_country_leader = { ruling_only = yes name = "Princess Celestia" }
-					has_country_leader = { ruling_only = yes name = "Princesses Celestia and Luna" }
-					has_country_leader = { ruling_only = yes name = "Daybreaker" }
+					has_government = fascism
+					has_government = neutrality
 				}
 			}
 
 			traits = { silent_workhorse }
 		}
-		blueblood = {
+		searing_light = {
 
 			allowed = {
 				original_tag = EQS
 			}
+			
+			visible = {
+				has_country_flag = unlocked_evil_advisors
+			}
 
 			available = {
-				NOT = { has_government = communism }
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						tag = event_target:solar_empire
-						AND = {
-							tag = event_target:equestria
-							NOT = { country_exists = event_target:solar_empire }
-						}
-					}
-				}
-				OR = {
-					is_EQS_SOL = yes
-					if = {
-						limit = { is_original_EQS = yes }
-						has_country_flag = EQS_blueblood_allowed
-					}
-				}
+				has_country_flag = unlocked_evil_advisors
 			}
 
 			traits = { prince_of_terror }
+		}
+		flaky_itch = {
+			
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			
+			available = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			
+			traits = { twitchy_planner }
+		}
+		evening_glitter = {
+			
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			
+			traits = { war_industrialists }
+		}
+		sunrise_flicker = {
+			
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			
+			traits = { silent_workhorse }
+		}
+		crow_magnate = {
+			
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			
+			traits = { pony_after_twilights_heart }
 		}
 		fancy_pants = {
 
@@ -136,14 +180,44 @@ ideas = {
 				original_tag = EQS
 			}
 			
-			visible = { has_government = democratic }
+			visible = { has_country_flag = rescued_harmonic_advisors }
 
 			available = {
 				has_government = democratic
-				NOT = { has_country_leader = { ruling_only = yes name = "Fancy Pants"} }
+				has_country_flag = rescued_harmonic_advisors
 			}
 
 			traits = { compassionate_gentleman }
+		}
+		upper_crust_1048 = {
+
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = { has_country_flag = rescued_harmonic_advisors }
+
+			available = {
+				has_government = democratic
+				has_country_flag = rescued_harmonic_advisors
+			}
+
+			traits = { vapid_socialite }
+		}
+		golden_fork = {
+
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = { has_country_flag = rescued_harmonic_advisors }
+
+			available = {
+				has_government = democratic
+				has_country_flag = rescued_harmonic_advisors
+			}
+
+			traits = { sycophantic_noble }
 		}
 		#florina = {
 		#
@@ -166,62 +240,7 @@ ideas = {
 		#	traits = { communist_revolutionary }
 		#
 		#}
-
-		sweetie_drops = {
-			picture = sweetie_drops
-			allowed = {
-				original_tag = EQS
-				NOT = {
-					has_dlc = "La Resistance"
-				}
-			}
-			
-			visible = { has_government = democratic }
-			
-			available = {
-				has_government = democratic
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						tag = event_target:equestria
-						AND = {
-							tag = event_target:solar_empire
-							NOT = { country_exists = event_target:equestria }
-						}
-					}
-				}
-			}
-			traits = { agent_of_smile }
-		}
-		sweetie_drops_lar = {
-			picture = sweetie_drops
-			name = sweetie_drops
-			cost = 200
-			allowed = {
-				original_tag = EQS
-				has_dlc = "La Resistance"
-			}
-			
-			visible = { has_government = democratic }
-			
-			available = {
-				has_intelligence_agency = yes
-				has_government = democratic
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						tag = event_target:equestria
-						AND = {
-							tag = event_target:solar_empire
-							NOT = { country_exists = event_target:equestria }
-						}
-					}
-				}
-			}
-			traits = { agent_of_smile_lar }
-		}
 	}
-
 
 	army_chief = {
 		grimhoof = {
@@ -266,7 +285,7 @@ ideas = {
 					has_completed_focus = Advisors
 				}
 				if = {
-					limit = { is_EQS_SOL = yes }
+					limit = { is_EQS_SOL_1048 = yes }
 					OR = {
 						has_global_flag = EQS_completed_advisors
 						has_completed_focus = SOL_new_officers
@@ -323,7 +342,7 @@ ideas = {
 					has_completed_focus = Advisors
 				}
 				if = {
-					limit = { is_EQS_SOL = yes }
+					limit = { is_EQS_SOL_1048 = yes }
 					has_global_flag = EQS_completed_advisors
 				}
 				if = {
@@ -391,6 +410,29 @@ ideas = {
 	}
 
 	theorist = {
+	
+	warm_beam = {
+			ledger = army
+
+			allowed = {
+				original_tag = EQS
+			}
+			
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+
+			research_bonus = {
+				land_doctrine = 0.075
+				magical_tech = 0.05
+			}
+
+			traits = { military_theorist }
+		}
 
 		flakesnow = {
 			ledger = air
@@ -1117,7 +1159,7 @@ ideas = {
 			}
 		}
 		
-		searing_light = {
+		purifying_light = {
 			removal_cost = -1
 			
 			modifier = {
@@ -1415,7 +1457,7 @@ ideas = {
 			modifier = {
 				stability_factor = 0.05
 				war_support_factor = 0.05
-				research_bonus = -0.05
+				research_speed_factor = -0.05
 			}
 		}
 		
@@ -1490,6 +1532,12 @@ ideas = {
 			}
 		}
 		
+		cloud_seeding = { #Joke that the clouds are seeding the ground instead of ponies seeding the clouds
+			modifier = {
+				monthly_population = 0.05
+			}
+		}
+		
 		burning_water = {
 			
 			removal_cost = -1
@@ -1499,8 +1547,18 @@ ideas = {
 			}
 		}
 		
-		purging_the_daemons = {
-			###Insert modifiers here for thestral nations when southeast breaks up
+		purging_the_daemons = { #Should talk about purging the demons of the night and the useless tribals
+			targeted_modifier = {
+				tag = EEE
+				attack_bonus_against = 0.1
+			}
+			targeted_modifier = {
+				tag = NEI
+				attack_bonus_against = 0.1
+			}
+		}
+		
+		purging_the_secularists = {
 			targeted_modifier = {
 				tag = BAL
 				attack_bonus_against = 0.1
@@ -1589,6 +1647,767 @@ ideas = {
 		}
 	}
 	
+	###Sunset Shimmer Spirits###
+	country = {
+	
+		sisters_of_fury = {
+			modifier = {
+				monthly_population = -0.05
+				war_support_factor = 0.05
+			}
+		}
+		
+		state_solarism = {
+			modifier = {
+				war_support_factor = 0.02
+				conscription = 0.002
+			}
+		}
+		
+		citizenry_of_worshipers = {
+			modifier = {
+				fascism_drift = 0.01
+				offensive_war_stability_factor = 0.1
+				industrial_capacity_factory = -0.05
+			}
+		}
+		
+		until_death_do_they_part = {
+			modifier = {
+				conscription_factor = 0.05
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+		}
+		
+		a_holy_priestesshood = {
+			modifier = {
+				war_support_factor = 0.05
+				army_attack_factor = 0.025
+				research_speed_factor = -0.05
+				fascism_drift = 0.01
+			}
+		}
+		
+		family_in_service = {
+			modifier = {
+				war_support_factor = 0.05
+				army_morale_factor = 0.05
+				monthly_population = -0.05
+				fascism_drift = 0.02
+			}
+		}
+		
+		sisters_in_the_empress = {
+			modifier = {
+				monthly_population = 0.05
+				stability_factor = 0.05
+			}
+		}
+		
+		sisters_in_the_empress_2 = {
+			modifier = {
+				monthly_population = 0.1
+				stability_factor = 0.1
+				conscription_factor = -0.05
+			}
+		}
+		
+		services_for_anypony = {
+			modifier = {
+				army_morale_factor = 0.03
+				war_support_factor = 0.03
+				army_org_factor = 0.03
+			}
+		}
+		
+		priestesses_for_the_ponies = {
+			modifier = {
+				stability_factor = 0.05
+				consumer_goods_factor = -0.01
+			}
+		}
+		
+		a_giant_family = {
+			modifier = {
+				monthly_population = 0.03
+				stability_factor = 0.05
+				war_support_factor = -0.05
+				fascism_drift = 0.02
+			}
+		}
+		
+		guidance_from_above = {
+			modifier = {
+				consumer_goods_factor = -0.01
+				stability_factor = 0.05
+				political_advisor_cost_factor = -0.05
+			}
+		}
+		
+		science_is_not_heresy = {
+			modifier = {
+				research_speed_factor = 0.05
+				war_support_factor = -0.05
+			}
+		}
+		
+		a_generation_of_learners = {
+			modifier = {
+				research_speed_factor = 0.08
+				war_support_factor = -0.05
+				stability_factor = -0.03
+			}
+		}
+		
+		smart_factory_workers = {
+			modifier = {
+				research_speed_factor = 0.08
+				war_support_factor = -0.05
+				stability_factor = -0.03
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		
+		tropical_delight = {
+			modifier = {
+				heat_attrition_factor = -0.05
+			}
+		}
+		
+		crack_the_crystal = {
+			allowed = {
+				OR = {
+					country_exists = CRY
+					CRY = {
+						NOT = {
+							is_subject_of = EQS
+						}
+					}
+				}
+			}
+			
+			removal_cost = -1
+			
+			targeted_modifier = {
+				tag = CRY
+				attack_bonus_against = 0.03
+				defense_bonus_against = 0.03
+			}
+		}
+		
+		outsmart_the_bugs = {
+			allowed = {
+				country_exists = CHN
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				max_planning_factor = 0.1
+				planning_speed = 0.1
+			}
+		}
+		
+		strengthen_against_ice = {
+			allowed = {
+				country_exists = STG
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				winter_attrition_factor = -0.05
+			}
+		}
+		
+		foresight_amor_forced = {
+			modifier = {
+				stability_factor = 0.04
+			}
+		}
+		
+		foresight_amor_secret = {
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = 0.025
+				army_morale_factor = 0.035
+			}
+		}
+		
+		foresight_amor_married = {
+			modifier = {
+				stability_factor = 0.05
+				political_power_factor = 0.03
+				army_core_defence_factor = 0.03
+			}
+		}
+		
+		###Temp spirits###
+		blessed_workers = {
+			modifier = {
+				consumer_goods_factor = -0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		
+		#Bales temp spirit
+		fund_secular_experiments = {
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.1
+				neutrality_drift = 0.02
+			}
+		}
+		
+		#Marechester temp spirit
+		guaranteed_living_wage = {
+			modifier = {
+				consumer_goods_factor = 0.05
+				industrial_capacity_factory = -0.05
+				industrial_capacity_dockyard = -0.05
+				communism_drift = 0.02
+			}
+		}
+		
+		#Whinnyapolis temp spirit
+		worst_ideas_implemented = {
+			modifier = {
+				army_attack_factor = -0.1
+				army_org_factor = -0.05
+				training_time_army_factor = 0.1
+			}
+		}
+		
+		#Princessdom temp spirit
+		incorporate_harmony_worship = {
+			modifier = {
+				stability_factor = -0.15
+				war_support_factor = -0.05
+				democratic_drift = 0.02
+			}
+		}
+		
+		#Cloudsdale temp spirit
+		independent_training_program = {
+			modifier = {
+				air_ace_generation_chance_factor = -0.1
+				air_agility_factor = -0.15
+				war_support_factor = -0.05
+				neutrality_drift = 0.01
+				democratic_drift = 0.01
+			}
+		}
+		
+		jungle_fever = {
+			modifier = {
+				army_speed_factor = 0.05
+			}
+		}
+		
+		impervious_to_the_elements = {
+			modifier = {
+				heat_attrition_factor = -0.1
+			}
+		}
+		
+		tireless_warriors = {
+			modifier = {
+				supply_consumption_factor = -0.05
+			}
+		}
+		
+		emergency_conscription_protocols = {
+			modifier = {
+				training_time_army_factor = -0.25
+			}
+		}
+		
+		marsh_training = {
+			modifier = {
+				attrition = -0.05
+				army_speed_factor = 0.1
+			}
+		}
+		
+		purify_the_hegemony = {
+			targeted_modifier = {
+				tag = CHN
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = CCA
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = NCA
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = SCS
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = OLE
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+		}
+		
+		swords_into_plowshares = {
+			modifier = {
+				industrial_capacity_dockyard = 0.15
+				industrial_capacity_factory = 0.15
+			}
+		}
+		
+		sear_the_snow = {
+			modifier = {
+				army_armor_speed_factor = 0.1
+				army_armor_attack_factor = 0.1
+			}
+		}
+	}
+	
+	hidden_ideas = {
+		bluebloods_support_for_aurora = {
+			research_bonus = {
+				land_doctrine = -0.15
+			}
+		}
+	}
+	
+	###Aurora Shinespark Spirits###
+	country = {
+		aftershocks_of_the_crisis = {
+			modifier = {
+				stability_factor = -0.2
+				conscription = -0.002
+				research_speed_factor = -0.05
+				industrial_capacity_factory = -0.075
+			}
+		}
+		
+		separation_removed = {
+			modifier = {
+				research_speed_factor = -0.03
+				stability_factor = 0.05
+			}
+		}
+		
+		###Centralization path###
+		slashed_bureaucracy = {
+			modifier = {
+				monthly_population = -0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+		
+		slashed_bureaucracy_2 = {
+			modifier = {
+				monthly_population = -0.05
+				industrial_capacity_factory = 0.05
+				production_factory_start_efficiency_factor = 0.05
+			}
+		}
+		
+		slashed_bureaucracy_3 = {
+			modifier = {
+				monthly_population = -0.05
+				industrial_capacity_factory = 0.1
+				production_factory_start_efficiency_factor = 0.05
+			}
+		}
+		
+		tithe_of_the_faithful = {
+			modifier = {
+				stability_factor = -0.05
+				consumer_goods_factor = -0.02
+			}
+		}
+		
+		no_lazy_pigs = {
+			modifier = {
+				stability_factor = -0.05
+				political_advisor_cost_factor = -0.05
+				political_power_factor = 0.05
+			}
+		}
+		
+		industrial_inquisitors = {
+			modifier = {
+				stability_factor = -0.03
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+		
+		solaris_administratum = {
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+				high_command_cost_factor = -0.05
+			}
+		}
+		
+		reformed_tax_code = {
+			modifier = {
+				stability_factor = -0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		
+		forced_migration = {
+			modifier = {
+				stability_factor = -0.05
+				production_speed_buildings_factor = 0.05
+				global_building_slots_factor = -0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+		
+		restructured_planning = {
+			modifier = {
+				planning_speed = -0.05
+				max_planning_factor = 0.05
+			}
+		}
+		
+		omniscient_regency = {
+			modifier = {
+				economy_cost_factor = -0.1
+				trade_laws_cost_factor = -0.1
+				political_power_gain = -0.1
+			}
+		}
+		
+		###Decentralization Status Quo###
+		inquisitionis_guidance = {
+			modifier = {
+				army_core_attack_factor = 0.05
+				army_morale_factor = -0.05
+			}
+		}
+		
+		solaris_praefectorious = {
+			modifier = {
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				army_morale_factor = -0.1
+			}
+		}
+		
+		orange_tape = {
+			modifier = {
+				trade_laws_cost_factor = 0.15
+				economy_cost_factor = 0.15
+				stability_factor = 0.1
+				political_power_gain = 0.05
+			}
+		}
+		
+		protected_nobility = {
+			modifier = {
+				trade_laws_cost_factor = 0.15
+				economy_cost_factor = 0.15
+				stability_factor = 0.1
+				war_support_factor = 0.05
+				fascism_drift = 0.01
+				political_advisor_cost_factor = 0.1
+			}
+		}
+		
+		a_religious_new_deal = {
+			modifier = {
+				global_building_slots_factor = 0.05
+				fascism_drift = 0.01
+			}
+		}
+		
+		ensured_loyalties = {
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = 0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		
+		a_functional_caste_system = {
+			modifier = {
+				monthly_population = -0.03
+				consumer_goods_factor = -0.05
+			}
+		}
+		
+		salvation_in_death = {
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = -0.05
+			}
+		}
+		
+		militarium_benefits = {
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = -0.05
+				military_leader_cost_factor = 0.5
+				conscription_factor = 0.05
+			}
+		}
+		
+		power_to_the_old_guard = {
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = -0.05
+				military_leader_cost_factor = 0.5
+				conscription_factor = 0.05
+				training_time_army_factor = 0.1
+				army_org_factor = 0.03
+				planning_speed = 0.05
+			}
+		}
+		
+		food_for_the_empires_mouths = {
+			modifier = {
+				monthly_population = 0.075
+				stability_factor = 0.03
+			}
+		}
+		
+		religion_triumphant = {
+			modifier = {
+				research_speed_factor = -0.02
+				war_support_factor = 0.05
+			}
+		}
+		
+		theistic_science = {
+			modifier = {
+				research_speed_factor = -0.05
+				war_support_factor = 0.05
+				political_power_factor = 0.05
+			}
+		}
+		
+		###Temple Spirits###
+		
+		solars_sanctum_1 = {
+			modifier = {
+				consumer_goods_factor = 0.05
+				stability_factor = -0.1
+				local_resources_factor = -0.1
+			}
+		}
+		
+		solars_sanctum_2 = {
+			modifier = {
+				consumer_goods_factor = 0.1
+				stability_factor = -0.1
+				local_resources_factor = -0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+		
+		temple_for_the_masses = {
+			modifier = {
+				consumer_goods_factor = 0.15
+				stability_factor = -0.1
+				local_resources_factor = -0.1
+				production_speed_buildings_factor = -0.15
+			}
+		}
+		
+		temple_for_the_masses_2 = {
+			modifier = {
+				consumer_goods_factor = 0.17
+				stability_factor = -0.1
+				local_resources_factor = -0.25
+				production_speed_buildings_factor = -0.15
+			}
+		}
+		
+		temple_for_the_masses_3 = {
+			modifier = {
+				consumer_goods_factor = 0.25
+				stability_factor = -0.1
+				local_resources_factor = -0.25
+				production_speed_buildings_factor = -0.25
+			}
+		}
+		
+		a_holy_temple = {
+			modifier = {
+				consumer_goods_factor = 0.13
+				stability_factor = -0.1
+				local_resources_factor = -0.1
+				production_speed_buildings_factor = -0.2
+			}
+		}
+		
+		a_holy_temple_2 = {
+			modifier = {
+				consumer_goods_factor = 0.16
+				stability_factor = -0.1
+				local_resources_factor = -0.1
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.1
+			}
+		}
+		
+		a_holy_temple_3 = {
+			modifier = {
+				consumer_goods_factor = 0.2
+				stability_factor = -0.1
+				local_resources_factor = -0.15
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.1
+			}
+		}
+		
+		solar_vulgate = {
+			modifier = {
+				research_speed_factor = -0.02
+				army_morale_factor = 0.03
+				stability_factor = 0.05
+				war_support_factor = 0.05
+				army_attack_factor = 0.025
+				fascism_drift = 0.01
+			}
+		}
+		
+		holy_of_holies = {
+			modifier = {
+				fascism_drift = 0.02
+				offensive_war_stability_factor = 0.1
+				army_defence_factor = 0.025
+				conscription_factor = 0.05
+				mobilization_speed = 0.05
+				army_org_factor = -0.03
+			}
+		}
+		
+		family_in_the_empress = {
+			modifier = {
+				mobilization_speed = 0.05
+				conscription_factor = 0.05
+			}
+		}
+		
+		###Temp Spirits###
+		imperial_work_standards = {
+			modifier = {
+				production_speed_buildings_factor = 0.15
+			}
+		}
+		
+		reseeding_the_fields = {
+			modifier = {
+				consumer_goods_factor = 0.05
+				stability_factor = -0.03
+			}
+		}
+		
+		preparing_for_the_red_tide = {
+			modifier = {
+				production_speed_bunker_factor = 0.1
+			}
+		}
+		
+		sweat_for_salvation = {
+			modifier = {
+				industrial_capacity_factory = 0.05
+			}
+		}
+		
+		warmth_of_ages = {
+			modifier = {
+				winter_attrition_factor = -0.05
+			}
+		}
+		
+		no_step_back = {
+			modifier = {
+				army_core_defence_factor = 0.1
+			}
+		}
+		
+		triumph_over_heresy = {
+			modifier = {
+				stability_factor = 0.1
+				fascism_drift = 0.03
+			}
+		}
+		
+		enemies_of_light = {
+			modifier = {
+				army_attack_factor = 0.03
+			}
+		}
+		
+		burn_the_bats_twice = {
+			modifier = {
+				land_night_attack = 0.05
+			}
+		}
+		
+		oppress_the_proles = {
+			targeted_modifier = {
+				attack_bonus_against = 0.05
+				tag = BAL
+			}
+		}
+		
+		operation_velvet_hoof_idea = {
+			modifier = {
+				army_speed_factor = 0.1
+				army_attack_factor = -0.03
+				org_loss_when_moving = 0.05
+			}
+		}
+		
+		operation_nova_punch_idea = {
+			modifier = {
+				army_org_factor = -0.1
+			}
+			targeted_modifier = {
+				attack_bonus_against = 0.1
+				tag = CRY
+			}
+		}
+		
+		speculatores_pride = {
+			modifier = {
+				army_speed_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+		
+		pony_meat_shields = {
+			modifier = {
+				army_morale_factor = -0.05
+				army_org_factor = -0.05
+				army_attack_factor = 0.1
+			}
+		}
+		
+		long_reach_of_the_empress = {
+			modifier = {
+				army_artillery_attack_factor = 0.15
+			}
+		}
+		
+		brush_with_the_empress = {
+			modifier = {
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.15
+			}
+		}
+	}
+	
 	###Balancing Branches Spirits###
 	country = {
 		heavy_speculatores_influence = {
@@ -1644,12 +2463,32 @@ ideas = {
 		hairstring_industry = {
 		
 			cancel = {
-				has_civil_war = no
+				NOT = { has_war_with = SLW }
 			}
 			
 			modifier = {
 				industrial_capacity_factory = 0.05
 				consumer_goods_factor = -0.05
+			}
+		}
+		
+		eqs_slw_civil_war = {
+			rule = {
+				can_join_factions = no
+				can_not_declare_war = yes
+			}
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor	= -0.1
+				training_time_army_factor = -0.1
+				production_speed_buildings_factor = -0.10
+				industry_free_repair_factor = -0.20
+				conscription_factor = 0.05
+				ai_get_ally_desire_factor = -2000
+				ai_focus_aggressive_factor = 3.0
+				democratic_drift = 0.01
+				fascism_drift = 0.01
+				army_core_defence_factor = 0.05
 			}
 		}
 		
@@ -1674,6 +2513,8 @@ ideas = {
 				local_resources_factor = -0.1
 				political_power_gain = -0.35
 				political_advisor_cost_factor = 1
+				stability_factor = -0.1
+				war_support_factor = -0.1
 			}
 		}
 		shattered_society_harsh_1 = {
@@ -1820,7 +2661,7 @@ ideas = {
 				army_morale_factor = 0.03
 			}
 			research_bonus = {
-				racial_tech = 0.1
+				race_tech = 0.1
 			}
 		}
 		equestria_reborn = {
@@ -1851,17 +2692,381 @@ ideas = {
 				democratic_drift = 0.02
 			}
 		}
+		###Military stuff###
+		###Navy stuff###
+		chained_imperial_navy = {
+			equipment_bonus = {
+				capital_ship = {
+					max_organisation = -0.3 instant = yes
+				}
+				screen_ship = {
+					max_organisation = -0.3 instant = yes
+				}
+				carrier = {
+					max_organisation = -0.3 instant = yes
+				}
+				submarine = {
+					max_organisation = -0.3 instant = yes
+				}
+			}
+			modifier = {
+				naval_damage_factor = -0.2
+			}
+		}
+		chained_imperial_navy_1 = {
+			equipment_bonus = {
+				capital_ship = {
+					max_organisation = -0.15 instant = yes
+				}
+				screen_ship = {
+					max_organisation = -0.15 instant = yes
+				}
+				carrier = {
+					max_organisation = -0.15 instant = yes
+				}
+				submarine = {
+					max_organisation = -0.15 instant = yes
+				}
+			}
+			modifier = {
+				naval_damage_factor = -0.1
+				navy_max_range_factor = 0.05
+			}
+		}
+		reborn_navy = {
+			modifier = {
+				navy_max_range_factor = 0.05
+				industrial_capacity_dockyard = 0.1
+			}
+		}
+		swarming_the_skies = {
+			equipment_bonus = {
+				carrier = {
+					carrier_size = 0.1 instant = yes
+				}
+			}
+			modifier = {
+				sortie_efficiency = -0.05
+			}
+		}
+		patrol_carriers = {
+			equipment_bonus = {
+				carrier = {
+					carrier_size = -0.2 maximum_speed = 0.1 instant = yes
+				}
+			}
+		}
+		novel_battleship_support = {
+			modifier = {
+				navy_capital_ship_attack_factor = -0.1
+			}
+			equipment_bonus = {
+				capital_ship = {
+					naval_speed = 0.1 instant = yes
+				}
+			}
+		}
+		diamond_shell_spells = {
+			equipment_bonus = {
+				screen_ship = {
+					lg_armor_piercing = 0.1 instant = yes
+				}
+				screen_ship = {
+					hg_armor_piercing = 0.1 instant = yes
+				}
+			}
+		}
+		queen_of_the_seas = {
+			equipment_bonus = {
+				capital_ship = {
+					max_organisation = 0.1 armor_value = 0.1 instant = yes
+				}
+				screen_ship = {
+					max_organisation = 0.1 instant = yes
+				}
+				carrier = {
+					max_organisation = 0.1 armor_value = 0.1 instant = yes
+				}
+				submarine = {
+					max_organisation = 0.1 instant = yes
+				}
+			}
+		}
+		###Army stuff###
+		reevaluating_the_military = {
+			modifier = {
+				conscription_factor = -0.3
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				training_time_factor = 0.2
+			}
+		}
+		a_harmonic_army = {
+			modifier = {
+				conscription_factor = 0.05
+				land_reinforce_rate = 0.01
+			}
+		}
+		a_harmonic_army_2 = { #Call it "Canterlot Control"
+			modifier = {
+				conscription_factor = 0.05
+				land_reinforce_rate = 0.01
+				supply_consumption_factor = -0.05
+			}
+		}
+		a_harmonic_army_3 = { #Call it "For Princess and Country!"
+			modifier = {
+				conscription_factor = 0.05
+				land_reinforce_rate = 0.01
+				army_attack_factor = 0.05
+				army_morale_factor = 0.05
+				supply_consumption_factor = -0.05
+				democratic_drift = 0.01
+			}
+		}
+		the_old_guard = {
+			modifier = {
+				army_org_factor = 0.03
+				army_speed_factor = -0.03
+			}
+		}
+		the_old_guard_2 = {
+			modifier = {
+				army_org_factor = 0.03
+				army_speed_factor = -0.03
+				max_planning_factor = 0.1
+			}
+		}
+		the_old_guard_3 = {
+			modifier = {
+				army_org_factor = 0.03
+				army_speed_factor = -0.03
+				max_planning_factor = 0.1
+				conscription_factor = 0.05
+				experience_gain_army_factor = -0.1
+			}
+		}
+		the_young_guard = {
+			modifier = {
+				experience_gain_army_factor = 0.1
+			}
+			research_bonus = {
+				infantry_equipment = 0.05
+			}
+		}
+		the_young_guard_2 = {
+			modifier = {
+				experience_gain_army_factor = 0.1
+				planning_speed = 0.1
+			}
+			research_bonus = {
+				infantry_equipment = 0.05
+			}
+		}
+		the_young_guard_3 = {
+			modifier = {
+				experience_gain_army_factor = 0.1
+				planning_speed = 0.1
+				conscription_factor = -0.05
+			}
+			research_bonus = {
+				infantry_equipment = 0.05
+			}
+			equipment_bonus = {
+				armor = {
+					soft_attack = 0.05
+					maximum_speed = 0.05
+					instant = yes
+				}
+			}
+		}
+		###Air stuff###
+		grounded_aces = { #Include sarcastic quotes around aces
+			modifier = {
+				air_agility_factor = -0.30
+				air_attack_factor = -0.30
+				air_defence_factor = -0.30
+				air_ace_generation_chance_factor = -0.50
+			}
+		}
+		a_new_generation_of_aces = {
+			modifier = {
+				air_ace_generation_chance_factor = 0.05
+			}
+		}
+		careful_bombing_systems = {
+			equipment_bonus = {
+				strat_bomber_equipment = {
+					air_range = 0.05 instant = yes
+				}
+				tac_bomber_equipment = {
+					air_range = 0.05 instant = yes
+				}
+			}
+		}
+		careful_bombing_systems_2 = {
+			equipment_bonus = {
+				strat_bomber_equipment = {
+					air_range = 0.05 air_defence = 0.05 instant = yes
+				}
+				tac_bomber_equipment = {
+					air_range = 0.05 air_defence = 0.05 instant = yes
+				}
+			}
+		}
+		enhanced_dive_bombers = {
+			equipment_bonus = {
+				CAS_equipment = {
+					air_agility = 0.05 instant = yes
+				}
+			}
+		}
+		enhanced_dive_bombers_2 = {
+			equipment_bonus = {
+				CAS_equipment = {
+					air_agility = 0.05 maximum_speed = 0.1 instant = yes
+				}
+			}
+		}
+		airforce_of_legends = {
+			modifier = {
+				air_agility_factor = 0.05
+				air_attack_factor = 0.05
+			}
+		}
+		###Industrial stuff###
+		backbroken_economy_2 = {
+			modifier = {
+				production_factory_max_efficiency_factor = -0.15
+				production_speed_buildings_factor = -0.35
+				industrial_capacity_factory = -0.15
+			}
+		}
+		backbroken_economy_3 = {
+			modifier = {
+				production_factory_max_efficiency_factor = -0.10
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.05
+			}
+		}
+		destitute_diarchy_2 = {
+			modifier = {
+				consumer_goods_factor = 0.20
+				local_resources_factor = -0.1
+				political_power_gain = -0.25
+				political_advisor_cost_factor = 0.75
+				stability_factor = -0.1
+				war_support_factor = -0.1
+			}
+		}
+		destitute_diarchy_3 = {
+			modifier = {
+				consumer_goods_factor = 0.10
+				local_resources_factor = -0.05
+				political_power_gain = -0.125
+				political_advisor_cost_factor = 0.40
+				stability_factor = -0.05
+				war_support_factor = -0.05
+			}
+		}
+		ecea = {
+			modifier = {
+				consumer_goods_factor = -0.03
+				production_speed_buildings_factor = 0.025
+				industrial_capacity_factory = 0.025
+				industrial_capacity_dockyard = 0.025
+			}
+		}
+		ecea_2 = {
+			modifier = {
+				consumer_goods_factor = -0.01
+				stability_factor = 0.05
+				industrial_capacity_factory = 0.025
+				industrial_capacity_dockyard = 0.025
+				production_factory_start_efficiency_factor = 0.025
+			}
+		}
+		returning_to_standard = {
+			modifier = {
+				production_speed_buildings_factor = -0.1
+				consumer_goods_factor = 0.1
+			}
+		}
+		bounties_of_equus = {
+			modifier = {
+				local_resources_factor = 0.075
+			}
+		}
+		a_bank_around_every_corner = {
+			modifier = {
+				political_power_gain = -0.05
+				min_export = -0.1
+			}
+		}
+		centralized_monetary_system = {
+			modifier = {
+				political_power_gain = 0.05
+				stability_factor = -0.03
+				min_export = 0.05
+			}
+		}
+		subsidization_for_all = {
+			modifier = {
+				political_power_gain = 0.05
+				stability_factor = -0.03
+				min_export = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				production_factory_start_efficiency_factor = 0.05
+				production_factory_efficiency_gain_factor = -0.05
+			}
+		}
+		stable_monetary_foundation = {
+			modifier = {
+				stability_factor = 0.03
+				consumer_goods_factor = -0.02
+			}
+		}
+		stable_monetary_foundation_2 = {
+			modifier = {
+				consumer_goods_factor = 0.03
+				line_change_production_efficiency_factor = 0.05
+			}
+		}
+		earth_pony_genius = {
+			modifier = {
+				monthly_population = 0.075
+				stability_factor = 0.05
+			}
+		}
+		harmonic_fire = {
+			modifier = {
+				industrial_capacity_dockyard = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+		infinite_growth = {
+			modifier = {
+				production_factory_max_efficiency_factor = 0.03
+			}
+		}
+		unbeatable_economy = { #Maybe be like Trump and say they are the bestest at everything, and, okay, they totally deserve all the greatness they're getting, and, like, they have the best economy ever
+			modifier = {
+				stability_factor = 0.05
+				democratic_drift = 0.01
+				industrial_capacity_factory = 0.1
+			}
+		}
 	}
 
 ###Celestia Temp###
 	country = {
 		free_the_sun = {
 			cancel = {
-				has_civil_war = no
+				NOT = { has_war_with = SLW }
 			}
 			
 			targeted_modifier = {
-				tag = D01 ###Until the breakaway can be given its own tag###
+				tag = SLW
 				attack_bonus_against = 0.1
 			}
 		}
@@ -1869,6 +3074,48 @@ ideas = {
 			modifier = {
 				stability_factor = -0.15
 				production_speed_buildings_factor = 0.2
+			}
+		}
+		anti-hate_mk_2 = {
+			modifier = {
+				war_support_factor = -0.1
+				democratic_drift = 0.02
+			}
+		}
+		manehattan_stimulus = {
+			modifier = {
+				consumer_goods_factor = 0.1
+			}
+		}
+		new_equestrian_architecture = {
+			modifier = {
+				production_speed_buildings_factor = -0.05
+				industrial_capacity_factory = -0.05
+			}
+		}
+		napalm_napalmed = {
+			modifier = {
+				ground_attack_factor = -0.15
+			}
+		}
+		reconvened_general_staff = {
+			modifier = {
+				max_planning_factor = 0.1
+			}
+		}
+		learn_from_pows = {
+			targeted_modifier = {
+				attack_bonus_against = 0.05
+			}
+		}
+		for_a_free_equestria = {
+			modifier = {
+				conscription = 0.005
+			}
+		}
+		awakening_the_proles = {
+			modifier = {
+				democratic_drift = 0.05
 			}
 		}
 	}

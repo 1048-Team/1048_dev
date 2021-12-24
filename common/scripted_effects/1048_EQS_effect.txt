@@ -1,0 +1,323 @@
+#Root is EQS
+SOL_Celestia_Returned = {
+	EQS = {
+		clr_country_flag = daybreaker_crisis
+	}
+	end_puppet = WHY
+	remove_from_faction = WHY
+	dismantle_faction = yes
+	WHY = {
+		drop_cosmetic_tag = yes
+	}
+	retire_country_leader = yes
+	create_country_leader = {
+		name = "Plures Ordines Cultus"
+		expire = "1965.1.1"
+		ideology = solarism
+		traits = {
+		}
+	}
+	every_state = {
+		limit = {
+			OR = {
+				state = 184
+				state = 187
+				state = 223
+				state = 188
+				state = 185
+				state = 108
+				state = 110
+				state = 12
+				state = 75
+			}
+		}
+		add_core_of = SLW
+	}
+	every_state = {
+		limit = {
+			NOT = { is_core_of = SLW }
+			OR = {
+				is_claimed_by = EQS
+				is_core_of = EQS
+			}
+		}
+		add_claim_by = SLW
+	}
+	every_state = {
+		limit = {
+			is_core_of = SLW
+		}
+		SLW = { transfer_state = PREV }
+	}
+	every_state = {
+		limit = {
+			is_controlled_by = SLW
+		}
+		teleport_armies = {
+			limit = { tag = EQS }
+		}
+	}
+	EQS = {
+		transfer_ship = {
+			prefer_name = "HMS Harmony in Order"
+			type = battleship
+			target = SLW
+		}
+		transfer_ship = {
+			prefer_name = "HMS Ravager"
+			type = battleship
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = destroyer
+			target = SLW
+		}
+		transfer_ship = {
+			type = light_cruiser
+			target = SLW
+		}
+		transfer_ship = {
+			type = light_cruiser
+			target = SLW
+		}
+		transfer_ship = {
+			type = battle_cruiser
+			target = SLW
+		}
+	}
+	
+	set_politics = {
+		ruling_party = democratic
+		elections_allowed = no
+	}
+	create_country_leader = {
+		name = "Princess Celestia"
+		expire = "1965.1.1"
+		picture = "gfx/leaders/EQS/Celestia_Armor.tga"
+		desc = "POLITICS_CELESTIA_DESC"
+		ideology = harmonic_monarchy
+		female = yes
+		traits = {
+			princess_in_name_only
+		}
+	}
+	set_popularities = {
+		democratic = 45
+		fascism = 30
+		communism = 5
+		neutrality = 20
+	}
+	set_party_name = {
+		ideology = democratic
+		name = "Alicorn Rule"
+		long_name = "Alicorn Rule"
+	}
+	set_cosmetic_tag = EQS_CEL
+	set_country_flag = equestria_returned
+	remove_ideas = {
+		solar_cult
+		solar_inquisition
+		soldiers_of_the_sun
+	}
+	IF = {
+		limit = {
+			has_idea = heretical_commanders
+		}
+		remove_ideas = heretical_commanders
+	}
+	IF = {
+		limit = {
+			has_idea = purified_high_command
+		}
+		remove_ideas = purified_high_command
+	}
+	load_oob = "SOL_civil_war_cel"
+	EQS = {
+		event_target:SOL_Midwinter_Halo = { set_nationality = SLW }
+		event_target:SOL_Swift_Wing = { set_nationality = SLW }
+		event_target:SOL_Orion_Star = { set_nationality = SLW }
+		event_target:SOL_Dust_Hoover = { set_nationality = SLW }
+		event_target:SOL_Iceheart = { set_nationality = SLW }
+		event_target:SOL_Molten_Song = { set_nationality = SLW }
+		event_target:SOL_Squall = { set_nationality = SLW }
+		IF = {
+			limit = { has_unit_leader = 2 }
+			remove_unit_leader = 2
+		}
+	}
+	add_ideas = eqs_slw_civil_war
+	SLW = {
+		add_ideas = eqs_slw_civil_war
+		random_unit_leader = {
+			limit = { has_id = 35 }
+			promote_leader = yes
+			remove_unit_leader_trait = recently_promoted
+		}
+		IF = {
+			limit = {
+				EQS = {
+					has_unit_leader = 5
+				}
+			}
+			event_target:SOL_Starlight_Glimmer = { set_nationality = SLW }
+		}
+		IF = {
+			limit = {
+				EQS = {
+					has_unit_leader = 6
+				}
+			}
+			event_target:SOL_Trixie = { set_nationality = SLW }
+		}
+		IF = {
+			limit = { country_exists = EQS }
+			create_wargoal = {
+				type = annex_everything
+				target = EQS
+			}
+			declare_war_on = {
+				target = EQS type = annex_everything
+			}
+		}
+		load_oob = "SLW_civil_war"
+	}
+	load_focus_tree = solar_empire_celestia_focus
+	SLW = {
+		load_focus_tree = solar_empire_focus
+	}
+}
+
+SOL_end_of_civil_war_CEL = {
+	IF = {
+		limit = {
+			has_unit_leader = 1
+		}
+		custom_effect_tooltip = blueblood_arrested_tt
+		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
+	}
+	IF = {
+		limit = {
+			has_unit_leader = 3
+		}
+		custom_effect_tooltip = sunset_arrested_tt
+		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+	}
+	IF = {
+		limit = {
+			NOT = {
+				has_unit_leader = 5000
+			}
+		}
+		create_field_marshal = {
+			name = "Princess Celestia"
+			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+			traits = { pony_race_trait pleasant_sun inspirational_leader }
+			id = 5000
+			skill = 2
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+			female = yes
+		}
+	}
+	IF = {
+		limit = {
+			NOT = {
+				has_completed_focus = addressing_the_faithful_generals
+			}
+		}
+		create_corps_commander = {
+			name = "Allen Spark"
+			portrait_path = "gfx/leaders/EQS/Allen.tga"
+			traits = { commando pony_race_trait }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 3
+			id = 31
+		} custom_effect_tooltip = allen_spark_stats_tp
+		create_corps_commander = {
+			name = "Fireflight"
+			portrait_path = "gfx/leaders/EQS/Fireflight.tga"
+			traits = { fireflight pony_race_trait }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			id = 32
+		} custom_effect_tooltip = fireflight_stats_tp
+		create_corps_commander = {
+			name = "Bernard Hoofgonery"
+			portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
+			traits = { pony_race_trait }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 3
+			id = 30
+		} custom_effect_tooltip = bernard_hoofgonery_stats_tp	
+	}
+	swap_ideas = {
+		add_idea = destitute_diarchy
+		remove_idea = great_war_aftermath
+	}
+	hidden_effect = {
+		IF = {
+			limit = {
+				has_completed_focus = addressing_the_faithful_generals
+			}
+			delete_unit_template_and_units = {
+				division_template = "Equestrian Veterans"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Starlight's Remnants"
+			}
+		}
+		IF = {
+			limit = {
+				has_completed_focus = salvation_to_the_lost
+			}
+			delete_unit_template_and_units = {
+				division_template = "Solar Deserters"
+			}
+		}
+	}
+	custom_effect_tooltip = remove_solar_civil_war_divisions_tt
+	add_stability = -0.05
+	add_war_support = -0.15
+	set_country_flag = end_of_equestria_civil_war
+	set_country_flag = rescued_harmonic_advisors
+	mark_focus_tree_layout_dirty = yes
+}
