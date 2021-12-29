@@ -2,7 +2,6 @@ characters = {
 	EQS_Daybreaker = {
 		name = EQS_Daybreaker_name
 		gender = female
-		
 		portraits = {
 			army = {
 				large = "gfx/leaders/EQS/Daybreaker.tga"
@@ -11,7 +10,6 @@ characters = {
 				large = "gfx/leaders/EQS/Daybreaker.tga"
 			}
 		}
-		
 		field_marshal = {
 			traits = { pony_race_trait solar_fury }
 			skill = 4
@@ -20,7 +18,6 @@ characters = {
 			planning_skill = 4
 			logistics_skill = 4
 		}
-		
 		country_leader = {
 			ideology = solarism
 			expire = "1965.1.1"
@@ -33,7 +30,6 @@ characters = {
 	EQS_Sunset_Shimmer_1048 = {
 		name = EQS_Sunset_Shimmer_1048_name
 		gender = female
-		
 		portraits = {
 			army = {
 				large = "gfx/leaders/EQS/Sunset.tga"
@@ -43,7 +39,6 @@ characters = {
 				large = "gfx/leaders/EQS/Sunset.tga"
 			}
 		}
-		
 		field_marshal = {
 			traits = { fading_experience high_mage brilliant_strategist thorough_planner pony_race_trait }
 			skill = 5
@@ -52,8 +47,6 @@ characters = {
 			planning_skill = 3
 			logistics_skill = 4
 		}
-		
-		
 		country_leader = {
 			expire = "1965.1.1"
 			desc = "POLITICS_SUNSET_SHIMMER_DESC"
@@ -61,7 +54,6 @@ characters = {
 			id = -1
 			traits = { high_mage_shimmer }
 		}
-		
 		advisor = {
 			slot = political_advisor
 			idea_token = sunset_shimmer
@@ -77,9 +69,7 @@ characters = {
 					NOT = { has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
 				}
 			}
-
 			traits = { high_mage_shimmer_advisor }
-
 			ai_will_do = {
 				factor = 1
 			}
@@ -89,7 +79,6 @@ characters = {
 	EQS_Aurora_Shinespark = {
 		name = EQS_Aurora_Shinespark_name
 		gender = female
-		
 		portraits = {
 			army = {
 				large = "gfx/leaders/EQS/Aurora_Shinespark.tga"
@@ -99,7 +88,6 @@ characters = {
 				large = "gfx/leaders/EQS/Aurora_Shinespark.tga"
 			}
 		}
-		
 		corps_commander = {
 			traits = { pony_race_trait solaris_inquisitionis protectress_of_the_empress_general promising_general }
 			skill = 2
@@ -107,8 +95,19 @@ characters = {
 			defense_skill = 1
 			planning_skill = 2
 			logistics_skill = 2
+			visible = {
+				limit = {
+					OR = {
+						original_tag = EQS
+						original_tag = SLW
+					}
+				}
+				OR = {
+					has_country_flag = aurora_general
+					original_tag = SLW
+				}
+			}
 		}
-		
 		country_leader = {
 			expire = "1965.1.1"
 			desc = "POLITICS_AURORA_SHINESPARK_DESC"
@@ -117,7 +116,6 @@ characters = {
 				protectress_of_the_empress
 			}
 		}
-		
 		advisor = {
 			slot = political_advisor
 			idea_token = aurora_shinespark
@@ -140,11 +138,41 @@ characters = {
 				factor = 1
 			}
 		}
+		advisor = {
+			slot = political_advisor
+			idea_token = aurora_shinespark_2
+			allowed = {
+				AND = {
+					original_tag = EQS
+					has_country_flag = aurora_promoted
+					has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+				}
+			}
+			visible = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+					has_country_flag = aurora_promoted
+				}
+			}
+			available = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+				}
+			}
+			removal_cost = -1
+
+			traits = { high_mage_shinespark }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
 	}
 	
 	EQS_Blueblood = {
 		name = EQS_Blueblood_name
-		
 		portraits = {
 			army = {
 				large = "gfx/leaders/EQS/Blueblood.tga"
@@ -154,7 +182,6 @@ characters = {
 				large = "gfx/leaders/EQS/Blueblood.tga"
 			}
 		}
-		
 		field_marshal = {
 			traits = { pony_race_trait lord_commander media_personality not_stonks_genius unyielding_defender politically_connected }
 			skill = 3
@@ -164,7 +191,6 @@ characters = {
 			logistics_skill = 2
 			desc = EQS_arrogant_cunt_desc
 		}
-		
 		country_leader = {
 			expire = "1965.1.1"
 			ideology = authoritarian
@@ -174,7 +200,6 @@ characters = {
 				the_stallion_who_would_be_god
 			}
 		}
-		
 		advisor = {
 			slot = political_advisor
 			idea_token = blueblood
@@ -202,6 +227,1033 @@ characters = {
 				}
 			}
 			traits = { prince_of_terror }
+		}
+	}
+	
+	EQS_Starlight_Glimmer_1048 = {
+		name = EQS_Starlight_Glimmer_name
+		gender = female
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Starlight_general_2.tga"
+			}
+		}
+		corps_commander = {
+			traits = { pony_race_trait military_genius brilliant_strategist }
+			skill = 4
+			legacy_id = 5
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 4
+			logistics_skill = 3
+			visible = {
+				limit = {
+					OR = {
+						original_tag = EQS
+						original_tag = CRY
+						original_tag = SLW
+					}
+				}
+				OR = {
+					has_country_flag = starlight_and_trixie_corrupted
+					has_country_flag = starlight_and_trixie_uncorrupted
+					has_country_flag = starlight_and_trixie_crystal_empire
+					original_tag = SLW
+				}
+			}
+		}
+	}
+	
+	EQS_Trixie_Lulamoon = {
+		name = EQS_Trixie_Lulamoon_name
+		gender = female
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Trixie_2.tga"
+				small="gfx/interface/ideas/Advisors/ELF/ELF_trixie.tga"
+			}
+		}
+		corps_commander = {
+			name = "Trixie Lulamoon"
+			traits = { pony_race_trait stage_performer infantry_leader }
+			skill = 3
+			legacy_id = 6
+			attack_skill = 4
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 5
+			visible = {
+				limit = {
+					OR = {
+						original_tag = EQS
+						original_tag = CRY
+						original_tag = SLW
+					}
+				}
+				OR = {
+					has_country_flag = starlight_and_trixie_corrupted
+					has_country_flag = starlight_and_trixie_uncorrupted
+					has_country_flag = starlight_and_trixie_crystal_empire
+					original_tag = SLW
+				}
+			}
+		}
+	}
+	
+	EQS_Novus_Flux = {
+		name = EQS_Novus_Flux_name
+		gender = female
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQS/Novus_Flux.tga"
+			}
+			army = {
+				large = "gfx/leaders/EQS/Novus_Flux.tga"
+				small = "GFX_idea_novus_flux"
+			}
+		}
+		corps_commander = {
+			traits = { pony_race_trait evening_star solaris_inquisitionis }
+			legacy_id = 5101
+			skill = 1
+			attack_skill = 1
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 1
+			visible = {
+				limit = {
+					original_tag = EQS
+					original_tag = SLW
+				}
+				OR = {
+					original_tag = SLW
+					has_country_flag = new_daybreaker_generals
+					has_country_flag = redeemed_solarist_generals
+				}
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = novus_flux_advisor
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_leader = { ruling_only = yes name = "Aurora Shinespark" }
+					has_country_flag = novus_advisor
+				}
+			}
+			available = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_leader = { ruling_only = yes name = "Aurora Shinespark" }
+					has_country_flag = novus_advisor
+				}
+			}
+			
+			traits = { imperial_conscience }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = novus_flux_military
+			cost = 100
+			ledger = army
+			allowed = {
+				original_tag = EQS
+				NOT = { has_country_flag = novus_advisor }
+			}
+			visible = {
+				is_EQS_SOL_1048 = yes
+				NOT = { has_country_flag = novus_advisor }
+			}
+			available = {
+				is_EQS_SOL_1048 = yes
+				NOT = { has_country_flag = novus_advisor }
+			}
+			traits = { army_regrouping_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_Nova_Glow = {
+		name = EQS_Nova_Glow_name
+		gender = female
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQS/Nova_Glow.tga"
+			}
+			army = {
+				large = "gfx/leaders/EQS/Nova_Glow.tga"
+			}
+		}
+		corps_commander = {
+			traits = { pony_race_trait morning_star solaris_inquisitionis }
+			legacy_id = 5102
+			skill = 1
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+			visible = {
+				limit = {
+					original_tag = EQS
+					original_tag = SLW
+				}
+				OR = {
+					original_tag = SLW
+					has_country_flag = new_daybreaker_generals
+					has_country_flag = redeemed_solarist_generals
+				}
+			}
+		}
+	}
+	
+	EQS_Quasar_Pulse = {
+		name = EQS_Quasar_Pulse_name
+		gender = female
+		portraits ={
+			civilian = {
+				#large = "gfx/leaders/EQS/Quasar_Pulse.tga"
+			}
+			army = {
+				#large = "gfx/leaders/EQS/Quasar_Pulse.tga"
+			}
+		}
+		corps_commander = {
+			traits = { pony_race_trait crushing_death harsh_leader solaris_inquisitionis }
+			legacy_id = 5103
+			skill = 2
+			attack_skill = 4
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 1
+			visible = {
+				limit = {
+					original_tag = EQS
+					original_tag = SLW
+				}
+				OR = {
+					original_tag = SLW
+					has_country_flag = new_daybreaker_generals
+					has_country_flag = redeemed_solarist_generals
+				}
+			}
+		}
+	}
+	
+	EQS_Pulsar_Sweep = {
+		name = EQS_Pulsar_Sweep_name
+		gender = female
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = pulsar_sweep
+			removal_cost = -1
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+					has_country_flag = pulsar_sweep_unlocked
+				}
+			}
+			available = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_flag = pulsar_sweep_unlocked
+				}
+			}
+
+			traits = { high_mage_sweep }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_Horizon_Sunrise = {
+		name = EQS_Horizon_Sunrise_name
+		gender = female
+		portraits = {
+		}
+		corps_commander = {
+			traits = { pony_race_trait solaris_adoratio the_friendly_heretic }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 1
+			visible = {
+				limit = {
+					original_tag = WHY
+				}
+				original_tag = WHY
+			}
+		}
+		country_leader = {
+			expire = "1965.1.1"
+			ideology = authoritarian
+			id = -1
+			traits = {
+				tolerated_heretic
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = horizon_sunrise_EQS
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_flag = horizon_sunrise_unlocked
+				}
+			}
+			available = {
+				AND = {
+					is_EQS_SOL_1048 = yes
+					has_country_flag = horizon_sunrise_unlocked
+				}
+			}
+
+			traits = { alternate_viewpoint }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		advisor = {
+
+			allowed = {
+				original_tag = WHY
+			}
+			visible = {
+				NOT = { has_country_leader = { ruling_only = yes name = "Horizon Sunrise" } }
+			}
+			available = {
+				NOT = { has_country_leader = { ruling_only = yes name = "Horizon Sunrise" } }
+			}
+
+			traits = { tolerated_heretic }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_Disgustingly_Rich = {
+		name = EQS_Disgustingly_Rich_name
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = disgustingly_rich
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			available = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			traits = { captain_of_industry }
+		}
+	}
+	
+	EQS_Searing_Light = {
+		name = EQS_Searing_Light_name
+		gender = female
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = searing_light
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			available = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			traits = { prince_of_terror }
+		}
+	}
+	
+	EQS_Flaky_Itch = {
+		name = EQS_Flaky_Itch_name
+		gender = female
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = flaky_itch
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			available = {
+				has_country_flag = unlocked_evil_advisors
+			}
+			traits = { twitchy_planner }
+		}
+	}
+	
+	EQS_Evening_Glitter = {
+		name = EQS_Evening_Glitter_name
+		gender = female
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = evening_glitter
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			traits = { war_industrialists }
+		}
+	}
+	
+	EQS_Sunrise_Flicker = {
+		name = EQS_Sunrise_Flicker_name
+		gender = female
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = sunrise_flicker
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			traits = { silent_workhorse }
+		}
+	}
+	
+	EQS_Crow_Magnate = {
+		name = EQS_Crow_Magnate_name
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = crow_magnate
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			traits = { pony_after_twilights_heart }
+		}
+	}
+	
+	EQS_Warm_Beam = {
+		name = EQS_Warm_Beam_name
+		gender = female
+		portraits = {
+		}
+		warm_beam = {
+			slot = theorist
+			idea_token = warm_beam
+			ledger = army
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			available = {
+				has_country_flag = unlocked_nice_advisors
+			}
+			research_bonus = {
+				magical_tech = 0.05
+			}
+
+			traits = { military_theorist }
+		}
+	}
+	
+	EQS_Flim_Flam_1048 = {
+		name = EQS_flim_flam
+		portraits = {
+			civilian = {
+				small = "GFX_idea_flim"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = flim
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+			}
+			traits = { war_industrialists }
+		}
+	}
+	
+	EQS_Raven_Inkwell_1048 = {
+		name = EQS_raven_inkwell
+		gender = female
+		portraits = {
+			civilian = {
+				small = "GFX_idea_raven"
+			}
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = raven
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
+			}
+			available = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+			}
+			traits = { silent_workhorse }
+		}
+	}
+	
+	EQS_Fancy_Pants_1048 = {
+		name = EQS_fancy_pants
+		portraits = {
+			civilian = {
+				small = "GFX_idea_fancy_pants"
+			}
+			
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = fancy_pants
+			allowed = {
+				original_tag = EQS
+			}
+			visible = { has_country_flag = rescued_harmonic_advisors }
+			available = {
+				has_government = democratic
+				has_country_flag = rescued_harmonic_advisors
+			}
+			traits = { compassionate_gentleman }
+		}
+	}
+	
+	EQS_Upper_Crust = {
+		name = EQS_Upper_Crust_name
+		gender = female
+		portraits = {
+			civilian = {
+				small = "GFX_idea_upper_crust"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = upper_crust
+			allowed = {
+				original_tag = EQS
+			}
+			visible = { has_country_flag = rescued_harmonic_advisors }
+			available = {
+				has_government = democratic
+				has_country_flag = rescued_harmonic_advisors
+			}
+			traits = { vapid_socialite }
+		}	
+	}
+	
+	EQS_Golden_Fork = {
+		name = EQS_Golden_Fork_name
+		gender = female
+		portraits = {
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = golden_fork
+			allowed = {
+				original_tag = EQS
+			}
+			visible = { has_country_flag = rescued_harmonic_advisors }
+			available = {
+				has_government = democratic
+				has_country_flag = rescued_harmonic_advisors
+			}
+			traits = { sycophantic_noble }
+		}
+	}
+	
+	EQS_Grimhoof_1048 = {
+		name = EQS_grimhoof
+		portraits = {
+			army = {
+				small = "GFX_idea_grimhoof"
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = grimhoof
+			cost = 50
+			allowed = {
+				original_tag = EQS
+			}
+			visible = { 
+				NOT = { has_government = democratic }
+			}
+			available = {
+				NOT = { has_government = democratic }
+			}
+			traits = { army_chief_offensive_1 }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_Sentinel_1048 = {
+		name = EQS_sentinel
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Sentinel.tga"
+				small = "GFX_idea_EQS_thunderbolt"
+			}
+		}
+		corps_commander = {
+			desc = "ancap_trench_boi_desc"
+			traits = { vigilant_sentinel solaris_militarium inflexible_strategist pony_race_trait }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 4
+			planning_skill = 3
+			logistics_skill = 3
+		}
+		advisor = {
+			slot = high_command
+			idea_token = EQS_sentinel
+			ledger = army
+			cost = 50
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = HAS_UNIT_LEADER_SENTINEL
+					EQS_sentinel_1048 = { is_unit_leader = yes }
+				}
+			}
+			traits = { army_regrouping_1 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	###Vanilla Characters###
+	EQS_dottedline = {
+		name = EQS_SOL_dottedline 
+		portraits = {
+			army = {
+				small = "GFX_idea_dottedline"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = dottedline
+			
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL = yes 
+			}
+			traits = { armaments_organizer }
+		}
+	}
+	
+	EQS_scope = {
+		name = EQS_SOL_scope 
+		portraits = {
+			army = {
+				small = "GFX_idea_scope"
+			}
+		}
+		
+		advisor = {
+			slot = army_chief
+			idea_token = scope
+			
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL = yes
+			}
+			available = {
+				is_EQS_SOL = yes
+			}
+
+			traits = { army_chief_organizational_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_summersweet = {
+		name = EQS_SOL_summersweet
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_summersweet"
+			}
+			
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = summersweet
+			
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL = yes
+			}
+			available = {
+				is_EQS_SOL = yes
+			}
+
+			traits = { air_airborne_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_morninglight = {
+		name = EQS_SOL_morninglight
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_morninglight"
+			}
+		}
+		
+		advisor = {
+			slot = high_command 
+			idea_token = morninglight
+			
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL = yes
+			}
+			available = {
+				is_EQS_SOL = yes
+			}
+
+			traits = { army_commando_1 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_sunnyflare = {
+		name = EQS_SOL_sunnyflare
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_sunnyflare"
+			}
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = sunnyflare
+			
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				is_EQS_SOL = yes
+			}
+			available = {
+				is_EQS_SOL = yes
+			}
+
+			traits = { army_artillery_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_blaze = {
+		name = EQS_SOL_blaze 
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_blaze"
+			}
+		}
+		
+		advisor = {
+			slot = air_chief
+			idea_token = blaze
+			
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+				is_EQS_SOL = yes
+			}
+			visible = {
+				is_EQS_SOL = yes
+			}
+
+			traits = { air_strategic_bombing_3 } #DO IT AGAIN BOMBER BLAZE
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_thunderlane = {
+		name = EQS_SOL_thunderlane
+		portraits = {
+			army = {
+				small = "GFX_idea_thunderlane"
+			}
+		}
+		advisor = {
+			slot = air_chief
+			idea_token = thunderlane
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+				is_EQS_SOL = yes
+			}
+			traits = { air_tactical_bombing_2 }
+
+			visible = {
+				is_EQS_SOL = yes
+			}
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_kittyhawk_1048 = {
+		name = EQS_kittyhawk 
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_kittyhawk"
+			}
+		}
+		advisor = {
+			slot = air_chief
+			idea_token = kittyhawk
+			cost = 50
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+			}
+			traits = { air_chief_reform_1 }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_eqs6_1048 = {
+		name = EQS_eqs6
+		portraits = {
+			army = {
+				small = "GFX_portrait_pony_generic_navy_9_small"
+			}
+		}
+		advisor = {
+			slot = navy_chief
+			idea_token = eqs6
+			cost = 100
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+			}
+			traits = { navy_chief_naval_aviation_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_cynosura_1048={
+		name=EQS_cynosura
+		gender = female
+		portraits={
+			army={
+				large="gfx/leaders/EQS/Cynosura.tga"
+				small="GFX_idea_cynosura"
+			}
+		}
+		navy_leader={
+			traits={ navy_career_officer pony_race_trait ironside }
+			skill=2
+			attack_skill=1
+			defense_skill=3
+			maneuvering_skill=2
+			coordination_skill=2
+			desc = EQS_cynosura_desc
+		}
+		advisor = {
+			slot = navy_chief
+			idea_token = cynosura
+			cost = 100
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+			}
+			traits = { navy_chief_decisive_battle_2 }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_wonderbolts_1048 = {
+		name = EQS_Wonderbolts_name
+		portraits = {
+			army = {
+				small = "GFX_idea_wonderbolts"
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = wonderbolts
+			ledger = air
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+			}
+			traits = { air_combat_academy }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	EQS_flakesnow_1048 = {
+		name = EQS_flakesnow
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_flakesnow"
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = flakesnow
+			ledger = air
+			cost = 100
+			allowed = {
+				original_tag = EQS
+			}
+			available = {
+			}
+			research_bonus = {
+				rocketry = 0.10
+			}
+			traits = { rocket_scientist }
+		}
+	}
+	
+	###Keep for easy access to her trait###
+	EQS_Sunrise_Sparkle = {
+		name = EQS_Sunrise_Sparkle_name
+		gender = female
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = evil_twilight
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				always = no
+			}
+			available = {
+				always = no
+				is_EQS_SOL_1048 = yes
+				has_country_leader = { ruling_only = yes name = "Daybreaker" }
+				has_global_flag = SOL_twilight_converted
+				NOT = {
+					any_country_with_original_tag = {
+						original_tag_to_check = CRY
+						has_country_leader = { ruling_only = yes name = "Grand Inquisitor Sunrise Sparkle" }
+					}
+				}
+				NOT = { has_country_flag = SOL_twilight_unavailable }
+			}
+			traits = { lady_inquisitor }
+			research_bonus = {
+				magical_tech = 0.1
+			}
+			ai_will_do = {
+				factor = 100
+			}
 		}
 	}
 }
