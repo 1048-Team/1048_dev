@@ -1,27 +1,24 @@
 ﻿capital = 251
 
-oob = "CHN_1007"
-
 set_research_slots = 4
 
 set_cosmetic_tag = VIC_CHN
 
 set_technology = {
 	changeling_race = 1
-	melee_weapons = 1 
+	melee_weapons = 1
 	melee_weapons1 = 1
 	pre_gw_artillery = 1
 	early_fighter = 1
 	early_bomber = 1
-	gwtank = 1
 	infantry_weapons = 1
 	infantry_weapons1 = 1
 	interwar_antitank = 1
 	gw_artillery = 1
 	tech_support = 1
 	motorised_infantry = 1
-	basic_light_tank = 1
 	fighter1 = 1
+	cv_early_fighter = 1
 	tech_jager = 1
 	tech_recon = 1
 	tech_engineers = 1
@@ -31,8 +28,36 @@ set_technology = {
 	fuel_refining = 1
 	interwar_antiair = 1
 	tech_military_police = 1
+	basic_train = 1
 }
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+		basic_light_tank = 1
+		improved_light_tank = 1
+		basic_heavy_tank = 1
+	}
+	set_oob = "CHN_1007"
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+		basic_light_tank_chassis = 1
+		improved_light_tank_chassis = 1
+		basic_medium_tank_chassis = 1
+		basic_heavy_tank_chassis = 1
+		armor_tech_1 = 1
+		engine_tech_1 = 1
+	}
+	set_oob = "CHN_1007_nsb"
+}
 if = {
 	limit = {
 		not = { has_dlc = "Man the Guns" }
@@ -50,6 +75,9 @@ if = {
 		basic_battleship = 1
 		early_battlecruiser = 1
 		early_carrier = 1
+		early_light_carrier = 1
+		pre_dreadnoughts_nomtg = 1
+		cruiser_submarines_nomtg = 1
 		transport = 1
 	}
 	set_naval_oob = "CHN_1007_naval_legacy"
@@ -70,6 +98,7 @@ if = {
 		early_ship_hull_submarine = 1
 		basic_ship_hull_submarine = 1
 		cruiser_submarines = 1
+		pre_dreadnoughts = 1
 		mtg_transport = 1
 		basic_torpedo = 1
 		improved_ship_torpedo_launcher = 1
@@ -81,8 +110,11 @@ if = {
 		improved_secondary_battery = 1
 		basic_depth_charges = 1
 		sonar = 1
+		basic_fire_control_system = 1
 		basic_cruiser_armor_scheme = 1
 		early_ship_hull_carrier = 1
+		basic_heavy_armor_scheme = 1
+		improved_airplane_launcher = 1
 	}
 	set_naval_oob = "CHN_1007_naval"
 }
@@ -174,7 +206,7 @@ create_country_leader = {
 	name = "Marsilio"
 	expire = "1965.1.1"
 	ideology = authoritarian
-	picture = "Chrysalis.tga"
+	picture = "GFX_ChrysalisPortrait"
 	traits = {
 	}
 }
@@ -182,7 +214,7 @@ create_country_leader = {
 create_country_leader = {
 	name = "Queen Chrysalis"
 	expire = "1965.1.1"
-	picture = "Chrysalis.tga"
+	picture = "GFX_ChrysalisPortrait"
 	ideology = changeling_ideology
 	desc = "POLITICS_CHRYSALIS_DESC"
 	female = yes
@@ -194,7 +226,7 @@ create_country_leader = {
 create_country_leader = {
 	name = "Marsilio"
 	expire = "1965.1.1"
-	picture = "Chrysalis.tga"
+	picture = "GFX_ChrysalisPortrait"
 	ideology = liberalism
 	traits = {
 
@@ -205,7 +237,7 @@ create_country_leader = {
 	name = "NON IDENTIFIED LEADER"
 	expire = "1965.1.1"
 	ideology = leninism
-	picture = "Chrysalis.tga"
+	picture = "GFX_ChrysalisPortrait"
 	traits = {
 
 	}
@@ -216,6 +248,106 @@ add_to_faction = SCS
 add_to_faction = NCA
 add_to_faction = CCA
 add_to_faction = OLE
+
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	create_equipment_variant = {
+		name = "Leichttraktor"
+		type = light_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 2
+			tank_nsb_armor_upgrade = 2
+		}
+		obsolete = yes
+		icon = "gfx/interface/technologies/gwtank.dds"
+	}
+	create_equipment_variant = {
+		name = "A7V"
+		type = medium_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon
+			turret_type_slot = tank_medium_fixed_superstructure_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = additional_machine_guns
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 4
+			tank_nsb_armor_upgrade = 3
+		}
+		obsolete = yes
+		icon = "gfx/interface/technologies/CHN_A7V.dds"
+	}
+	create_equipment_variant = {
+		name = "Panzer I Ausf. A"
+		type = light_tank_chassis_1
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_one_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 5
+			tank_nsb_armor_upgrade = 1
+		}
+		icon = "gfx/interface/technologies/CHN_panzeri.dds"
+	}
+	create_equipment_variant = {
+		name = "Panzer II Ausf. A"
+		type = light_tank_chassis_2
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_auto_cannon
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 3
+			tank_nsb_armor_upgrade = 2
+		}
+		icon = "gfx/interface/technologies/CHN_panzerii.dds"
+	}
+	create_equipment_variant = {
+		name = "Panzer III Ausf. A"
+		type = medium_tank_chassis_1
+			parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon
+			turret_type_slot = tank_medium_three_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_welded_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+			special_type_slot_2 = smoke_launchers
+			special_type_slot_3 = additional_machine_guns
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 2
+			tank_nsb_armor_upgrade = 0
+		}
+		icon = "gfx/interface/technologies/ger_basic_main_tank.dds"
+	}	
+}
 
 if = {
 	limit = { has_dlc = "Man the Guns" }
