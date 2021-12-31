@@ -176,10 +176,6 @@ country_event = {
 			retire_character = EQS_Sentinel_1048
 			set_country_flag = aurora_general
 			set_country_flag = sentinel_killed
-			random_army_leader = {
-				limit = { is_character = EQS_Aurora_Shinespark }
-				save_global_event_target_as = SOL_Aurora_Shinespark
-			}
 		}
 	}
 
@@ -1297,16 +1293,16 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			hidden_effect = {
 				retire_country_leader = yes
 				custom_effect_tooltip = sunset_arrested_tt
-				hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
-				create_country_leader = {
-				name = "Sunset Shimmer"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Sunset.tga"
-				desc = "POLITICS_SUNSET_SHIMMER_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					high_mage_shimmer
+				#hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+				add_country_leader_role = {
+					character = EQS_Sunset_Shimmer_1048
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						desc = "POLITICS_SUNSET_SHIMMER_DESC"
+						ideology = solarism
+						id = -1
+						traits = { high_mage_shimmer }
 					}
 				}
 				set_country_flag = sunset_reigns
@@ -1332,16 +1328,17 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			hidden_effect = {
 				retire_country_leader = yes
 				custom_effect_tooltip = aurora_retires_tt
-				hidden_effect = { event_target:SOL_Aurora_Shinespark = { set_nationality = BAG } }
-				create_country_leader = {
-				name = "Aurora Shinespark"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-				desc = "POLITICS_AURORA_SHINESPARK_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					protectress_of_the_empress
+				#hidden_effect = { event_target:SOL_Aurora_Shinespark = { set_nationality = BAG } }
+				add_country_leader_role = {
+					character = EQS_Aurora_Shinespark
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						desc = "POLITICS_AURORA_SHINESPARK_DESC"
+						ideology = solarism
+						traits = {
+							protectress_of_the_empress
+						}
 					}
 				}
 				set_country_flag = aurora_reigns
@@ -1726,16 +1723,94 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 			limit = {
 				has_idea = aurora_shinespark
 			}
-			swap_ideas = {
-				remove_idea = aurora_shinespark
-				add_idea = aurora_shinespark_2
+			hidden_effect = {
+				remove_ideas = aurora_shinespark
+				remove_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					slot = political_advisor
+				}
+				add_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					advisor = {
+						slot = political_advisor
+						idea_token = aurora_shinespark
+						allowed = {
+							AND = {
+								original_tag = EQS
+								has_country_flag = aurora_promoted
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						visible = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+								has_country_flag = aurora_promoted
+							}
+						}
+						available = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						removal_cost = -1
+
+						traits = { high_mage_shinespark }
+
+						ai_will_do = {
+							factor = 1
+						}
+					}
+					activate = yes
+				}
 			}
 		}
 		ELSE = {
-			add_ideas = aurora_shinespark_2
+			hidden_effect = {
+				remove_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					slot = political_advisor
+				}
+				add_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					advisor = {
+						slot = political_advisor
+						idea_token = aurora_shinespark
+						allowed = {
+							AND = {
+								original_tag = EQS
+								has_country_flag = aurora_promoted
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						visible = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+								has_country_flag = aurora_promoted
+							}
+						}
+						available = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						removal_cost = -1
+
+						traits = { high_mage_shinespark }
+
+						ai_will_do = {
+							factor = 1
+						}
+					}
+					activate = yes
+				}
+			}
 		}
-		event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
-		event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = high_mage }
+		EQS_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
+		EQS_Aurora_Shinespark = { add_unit_leader_trait = high_mage }
 	}
 }
 
@@ -2693,6 +2768,7 @@ country_event = { #Sunset speaks from the Imperial Palace in Canterlot to procla
 		}
 		hidden_effect = {
 			set_country_flag = southeast_dead
+			set_major = yes
 			mark_focus_tree_layout_dirty = yes
 		}
 	}
