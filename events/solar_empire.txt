@@ -879,7 +879,7 @@ country_event = { #Celestia reveals herself and almost prevents Daybreaker from 
 			}
 		remove_country_leader_trait = daybreaker_god2
 		custom_effect_tooltip = daybreaker_bedridden_tt
-		hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = BAG } }
+		set_country_flag = daybreaker_sick
 		}
 	}
 	
@@ -1293,7 +1293,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			hidden_effect = {
 				retire_country_leader = yes
 				custom_effect_tooltip = sunset_arrested_tt
-				#hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+				set_country_flag = sunset_arrested
 				add_country_leader_role = {
 					character = EQS_Sunset_Shimmer_1048
 					promote_leader = yes
@@ -1328,7 +1328,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			hidden_effect = {
 				retire_country_leader = yes
 				custom_effect_tooltip = aurora_retires_tt
-				#hidden_effect = { event_target:SOL_Aurora_Shinespark = { set_nationality = BAG } }
+				set_country_flag = aurora_removed
 				add_country_leader_role = {
 					character = EQS_Aurora_Shinespark
 					promote_leader = yes
@@ -1399,12 +1399,12 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 		IF = {
 			custom_effect_tooltip = daybreaker_returns_tt
 			limit = { has_country_leader = { ruling_only = yes name = "Daybreaker" } }
-			hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = EQS } }
+			clr_country_flag = daybreaker_sick
 		}
 		ELSE_IF = {
 			limit = { has_country_leader = { ruling_only = yes name = "Nova Glow" } }
-			event_target:SOL_Nova_Glow = { promote_leader = yes }
-			event_target:SOL_Nova_Glow = { remove_unit_leader_trait = recently_promoted }
+			EQS_Nova_Glow = { promote_leader = yes }
+			EQS_Nova_Glow = { remove_unit_leader_trait = recently_promoted }
 		}
 	}
 }
@@ -1619,6 +1619,90 @@ country_event = { #Following one of the settlers, they are soon attacked by a ro
 			add_manpower = -8273
 		}
 		restore_previous_manpower = yes
+	}
+}
+
+country_event = { #Hidden event for SOL so it will get Dyx to appear
+	id = solar.197
+	title = solar.197.t
+	desc = solar.197.d
+	
+	trigger = {
+		tag = EQS
+		EQS_Daybreaker = { is_country_leader = yes }
+		date > 1053.1.1
+	}
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	option = {
+		name = solar.197.a
+		random_list = {
+			1 = {
+				country_event = {
+					id = solar.198
+					days = 14
+					random = 240
+				}
+			}
+			99 = { }
+		}
+	}
+}
+
+country_event = { #Dyx barges into the throne room declaring nonchalantly that she is Daybreaker's daughter, and Daybreaker is nonplussed; she is not convinced until Dyx reveals she knows the location of Daybreaker's birthmark, something only a family member would know; Daybreaker is not amused and tries to find out more
+	id = solar.198
+	title = solar.198.t
+	desc = solar.198.d
+	
+	is_triggered_only = yes
+	
+	option = { #What did I drink in 673?
+		name = solar.198.a
+		set_country_flag = dyx_is_here_biatches
+		hidden_effect = {
+			country_event = {
+				id = solar.199
+				days = 7
+				random = 168
+			}
+		}
+	}
+}
+
+country_event = { #Dyx settles down in the castle and pesters Daybreaker about what she can do for fun; Daybreaker is already annoyed at being the parent, and sucks at it by telling Dyx to do whatever she wants, which makes Dyx very, very pleased
+	id = solar.199
+	title = solar.199.t
+	desc = solar.199.d
+	
+	is_triggered_only = yes
+	
+	option = { #Do I seriously need to be a mother and run a nation?
+		name = solar.199.a
+		hidden_effect = {
+			country_event = {
+				id = solar.200
+				days = 10
+				random = 120
+			}
+		}
+	}
+}
+
+country_event = { #Dyx is caught burning down a few heretics' houses, and Daybreaker has a stern talking with her; Dyx complains about not being allowed to cause more destruction, and Daybreaker decides that she could be used on the front lines, if only to get rid of her and the scandal she has caused as paparazzi try to get info from her
+	id = solar.200
+	title = solar.200.t
+	desc = solar.200.d
+	
+	is_triggered_only = yes
+	option = { #I'm not upset, just very disappointed
+		name = solar.200.a
+		set_country_flag = dyx_is_being_dyx
+		add_political_power = -20
+		add_manpower = -5
+		custom_effect_tooltip = general_dyx
 	}
 }
 
@@ -1972,29 +2056,7 @@ country_event = { #Sunset is in another meeting with Blueblood and she finally h
 		name = solar.218.a
 		event_target:SOL_Blueblood = { add_defense = 1 }
 		event_target:SOL_Blueblood = { remove_unit_leader_trait = politically_connected }
-		create_corps_commander = {
-			name = "Guardian Shield"
-			#portrait_path = "gfx/leaders/EQS/Guardian_Shield.tga"
-			traits = { pony_race_trait solaris_militarium infantry_leader }
-			id = 5205
-			skill = 2
-			attack_skill = 1
-			defense_skill = 4
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-		}
-		create_corps_commander = {
-			name = "Golden Dawn"
-			#portrait_path = "gfx/leaders/EQS/Golden_Dawn.tga"
-			traits = { pony_race_trait solaris_militarium panzer_leader }
-			id = 5206
-			skill = 1
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 1
-		}
+		set_country_flag = new_sunset_generals
 	}
 }
 
@@ -2653,9 +2715,9 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 			remove = high_mage_shimmer
 			add = shield_of_the_empire
 		}
-		event_target:SOL_Sunset_Shimmer = { set_nationality = EQS }
-		event_target:SOL_Sunset_Shimmer = { remove_unit_leader_trait = high_mage }
-		event_target:SOL_Sunset_Shimmer = { add_unit_leader_trait = princess_regent_general }
+		clr_country_flag = sunset_arrested
+		EQS_Sunset_Shimmer_1048 = { remove_unit_leader_trait = high_mage }
+		EQS_Sunset_Shimmer_1048 = { add_unit_leader_trait = princess_regent_general }
 		every_country = {
 			limit = {
 				OR = {
@@ -2719,18 +2781,9 @@ country_event = { #Sunset manages to convince the leaders that the Solar Empire 
 		name = solar.247.a
 		set_country_flag = thestrals_placated
 		EEE = {
-			random_army_leader = {
-				limit = { has_id = 7400 }
-				event_target:EEE_Gushing_Pulse = { set_nationality = EQS }
-			}
-			random_army_leader = {
-				limit = { has_id = 7401 }
-				event_target:EEE_Nocturne_Vision = { set_nationality = EQS }
-			}
-			random_army_leader = {
-				limit = { has_id = 7402 }
-				event_target:EEE_Screechy_Gale = { set_nationality = EQS }
-			}
+			EEE_Gushing_Pulse = { set_nationality = EQS }
+			EEE_Nocturne_Vision = { set_nationality = EQS }
+			EEE_Screechy_Gale = { set_nationality = EQS }
 		}
 	}
 }
@@ -3988,12 +4041,12 @@ country_event = { #Aurora is satisfied with the changes she made to the Empire, 
 	option = { #I shall deal with them myself
 		name = solar.325.a
 		###Custom tooltip for Aurora becoming a field marshal here
+		clr_country_flag = aurora_removed
 		hidden_effect = {
-			event_target:SOL_Aurora_Shinespark = { set_nationality = EQS }
-			event_target:SOL_Aurora_Shinespark = { promote_leader = yes }
-			event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = recently_promoted }
-			event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
-			event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = princess_regent_general }
+			EQS_Aurora_Shinespark= { promote_leader = yes }
+			EQS_Aurora_Shinespark = { remove_unit_leader_trait = recently_promoted }
+			EQS_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
+			EQS_Aurora_Shinespark = { add_unit_leader_trait = princess_regent_general }
 		}
 		add_war_support = 0.1
 	}
@@ -4037,7 +4090,7 @@ country_event = { #Aurora meets with Nova in Cloudsdale, and speaks with her tha
 	option = { #Just don't burn down the entire city
 		name = solar.328.a
 		custom_effect_tooltip = nova_becomes_EQS_general_tt
-		hidden_effect = { event_target:SOL_Nova_Glow = { set_nationality = ROOT } }
+		set_country_flag = nova_archmage_caelum
 	}
 }
 
@@ -4160,24 +4213,15 @@ country_event = { #Blueblood meets with a few of his generals and Aurora barges 
 	option = { #You've been a naughty stallion, Blueblood
 		name = solar.336.a
 		custom_effect_tooltip = blueblood_arrested_tt
-		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
+		set_country_flag = aurora_appoints_fidelis
+		set_country_flag = blueblood_arrested
 		add_manpower = -10000
 		add_popularity = {
 			ideology = neutrality
 			popularity = -0.03
 		}
-		create_field_marshal = {
-			name = "Fidelis Flamma"
-			#portrait_path = "gfx/leaders/EQS/Fidelis.tga"
-			traits = { solaris_adoratio fire_pony pony_race_trait }
-			id = 5012
-			skill = 2
-			attack_skill = 3
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-		}
+		EQS_Fidelis_Flamma = { promote_leader = yes }
+		hidden_effect = { EQS_Fidelis_Flamma = { remove_unit_leader_trait = recently_promoted } }
 	}
 }
 
@@ -4570,7 +4614,7 @@ country_event = { #Sunset and the others are captured, and Celestia holds them f
 	option = { #You've made your choice, Sunset. I will speak with you later
 		name = celestia.2.a
 		custom_effect_tooltip = sunset_arrested_tt
-		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+		set_country_flag = sunset_arrested
 	}
 }
 
@@ -4584,18 +4628,15 @@ country_event = { #Celestia arrests Blueblood for his part and appoints herself 
 	option = { #I've had far too many years to learn about war
 		name = celestia.3.a
 		custom_effect_tooltip = blueblood_arrested_tt
-		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
-		create_field_marshal = {
-			name = "Princess Celestia"
-			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+		set_country_flag = blueblood_arrested
+		add_field_marshal_role = {
+			character = EQS_Sunbutt
 			traits = { pony_race_trait pleasant_sun inspirational_leader }
-			id = 5000
 			skill = 2
 			attack_skill = 3
 			defense_skill = 3
 			planning_skill = 2
 			logistics_skill = 2
-			female = yes
 		}
 	}
 }
@@ -4610,7 +4651,7 @@ country_event = { #Sunset asks to see Celestia and begs for proving her repenten
 	option = { #Very well, my former student, you shall prove your sincerity in battle
 		name = celestia.4.a
 		custom_effect_tooltip = sunset_returns_tt
-		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = EQS } }
+		clr_country_flag = sunset_arrested
 	}
 }
 
@@ -5093,18 +5134,24 @@ country_event = { #Sunset meekly enters Celestia's chambers and awaits her deter
 		add_manpower = 1
 		add_stability = 0.03
 		set_country_flag = sunset_redeemed
-		create_corps_commander = { #Reformed Aurora
-			name = "Aurora Shinespark"
-			portrait_path = "gfx/leaders/EQS/Aurora_Reformed.tga"
-			traits = { pony_race_trait missionary_of_harmony promising_general former_cultist }
-			id = 5010
-			skill = 2
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 3
-			logistics_skill = 1
-			female = yes
+		hidden_effect = {
+			EQS_Aurora_Shinespark = {
+				remove_unit_leader_role = yes
+			}
+			add_corps_commander_role = {
+				character = EQS_Aurora_Shinespark
+				skill = 2
+				traits = { pony_race_trait missionary_of_harmony promising_general former_cultist }
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 1
+			}
+			EQS_Aurora_Shinespark = {
+				set_leader_portrait = "gfx/leaders/EQS/Aurora_Reformed.tga"
+			}
 		}
+		custom_effect_tooltip = aurora_returns
 	}
 }
 
@@ -5186,10 +5233,7 @@ country_event = { #After finally making them see the light, Celestia brings the 
 	option = { #Welcome home, my little ponies
 		name = celestia.29.a
 		custom_effect_tooltip = starlight_and_trixie_uncorrupted_tt
-		hidden_effect = {
-			event_target:SOL_Starlight_Glimmer = { set_nationality = EQS }
-			event_target:SOL_Trixie = { set_nationality = EQS }
-		}
+		set_country_flag = starlight_and_trixie_uncorrupted
 	}
 }
 
@@ -5221,47 +5265,12 @@ country_event = { #After seeing the first successful batch of reformed generals,
 		name = celestia.41.a
 		custom_effect_tooltip = novus_becomes_EQS_general_tt
 		hidden_effect = {
-			event_target:SOL_Novus_Flux = { remove_unit_leader_trait = evening_star }
-			event_target:SOL_Novus_Flux = { add_unit_leader_trait = twilight_beauty }
-			event_target:SOL_Novus_Flux = { remove_unit_leader_trait = solaris_inquisitionis }
-			event_target:SOL_Novus_Flux = { add_unit_leader_trait = former_cultist }
-			event_target:SOL_Novus_Flux = { set_nationality = EQS }
+			EQS_Novus_Flux = { remove_unit_leader_trait = evening_star }
+			EQS_Novus_Flux = { add_unit_leader_trait = twilight_beauty }
+			EQS_Novus_Flux = { remove_unit_leader_trait = solaris_inquisitionis }
+			EQS_Novus_Flux = { add_unit_leader_trait = former_cultist }
 		}
-		create_corps_commander = {
-			name = "Fidelis Flamma"
-			#portrait_path = "gfx/leaders/EQS/Fidelis.tga"
-			traits = { solaris_adoratio fire_pony pony_race_trait }
-			id = 5012
-			skill = 2
-			attack_skill = 3
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-			}
-		create_corps_commander = {
-			name = "Foresight Amour"
-			#portrait_path = "gfx/leaders/EQS/Foresight.tga"
-			traits = { solaris_militarium bleeding_heart_1048 pony_race_trait }
-			id = 5013
-			skill = 3
-			attack_skill = 2
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 3
-		}
-		create_corps_commander = {
-			name = "Stellar Breeze"
-			#portrait_path = "gfx/leaders/EQS/Stellar_Breeze.tga"
-			traits = { solaris_adoratio pony_race_trait } ###Have a trait called overworked_secretary and say how much pressure it puts on her from Sunset, which gives -10% experience gain, -5% recovery, but +5% organization and +3 division capacity
-			id = 5014
-			skill = 1
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 3
-			logistics_skill = 2
-			female = yes
-		}
+		set_country_flag = redeemed_solarist_generals
 	}
 }
 
@@ -5407,7 +5416,9 @@ country_event = { #Celestia is contacted via a mysterious letter and she finds i
 		custom_effect_tooltip = spawn_defectors_tt
 		hidden_effect = {
 			load_oob = "SOL_celestia_resistance_remnants"
-			event_target:SOL_Swift_Wing = { set_nationality = EQS }
+			SLW = {
+				EQS_Swift_Wing_1048 = { set_nationality = EQS }
+			}
 		}
 	}
 }
@@ -5421,39 +5432,7 @@ country_event = { #Word arrives that some different harmonist cells have finally
 	
 	option = { #You honor your pledges to Equestria's defense. I pray that we all live long enough to see its freedom
 		name = celestia.51.a
-		create_corps_commander = {
-			name = "Allen Spark"
-			portrait_path = "gfx/leaders/EQS/Allen.tga"
-			traits = { commando infantry_leader pony_race_trait }
-			skill = 3
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 5
-			id = 31
-		} custom_effect_tooltip = allen_spark_stats_tp
-		create_corps_commander = {
-			name = "Fireflight"
-			portrait_path = "gfx/leaders/EQS/Fireflight.tga"
-			traits = { fireflight pony_race_trait }
-			skill = 3
-			attack_skill = 2
-			defense_skill = 1
-			planning_skill = 4
-			logistics_skill = 3
-			id = 32
-		} custom_effect_tooltip = fireflight_stats_tp
-		create_corps_commander = {
-			name = "Bernard Hoofgonery"
-			portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
-			traits = { organizer pony_race_trait }
-			skill = 4
-			attack_skill = 3
-			defense_skill = 4
-			planning_skill = 6
-			logistics_skill = 3
-			id = 30
-		} custom_effect_tooltip = bernard_hoofgonery_stats_tp
+		set_country_flag = harmonist_commanders_return
 		custom_effect_tooltip = spawn_harmonists_tt
 		hidden_effect = {
 			load_oob = "SOL_celestia_harmonist_generals"

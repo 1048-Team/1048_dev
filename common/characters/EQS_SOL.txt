@@ -17,6 +17,14 @@ characters = {
 			defense_skill = 2
 			planning_skill = 4
 			logistics_skill = 4
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				NOT = { has_country_flag = daybreaker_sick }
+			}
 		}
 		country_leader = {
 			ideology = solarism
@@ -70,6 +78,14 @@ characters = {
 			defense_skill = 3
 			planning_skill = 3
 			logistics_skill = 4
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				NOT = { has_country_flag = sunset_arrested }
+			}
 		}
 		advisor = {
 			slot = political_advisor
@@ -79,12 +95,13 @@ characters = {
 			}
 			visible = {
 				is_EQS_SOL_1048 = yes
+				NOT = { has_country_flag = sunset_arrested }
 				NOT = { has_country_leader = { ruling_only = yes name = "Sunset Shimmer" } }
 			}
 			available = {
 				is_EQS_SOL_1048 = yes
-					NOT = { has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
-				}
+				NOT = { has_country_flag = sunset_arrested }
+				NOT = { has_country_leader = { ruling_only = yes name = "Sunset Shimmer" } }
 			}
 			traits = { high_mage_shimmer_advisor }
 			ai_will_do = {
@@ -120,9 +137,12 @@ characters = {
 							original_tag = SLW
 						}
 					}
-					OR = {
-						has_country_flag = aurora_general
-						original_tag = SLW
+					AND = {
+						OR = {
+							has_country_flag = aurora_general
+							original_tag = SLW
+						}
+						NOT = { has_country_flag = aurora_removed }
 					}
 				}
 			}
@@ -135,7 +155,6 @@ characters = {
 			}
 			visible = {
 				is_EQS_SOL_1048 = yes
-				NOT = { has_country_flag = aurora_promoted }
 				NOT = { has_country_leader = { ruling_only = yes name = "Aurora Shinespark" } }
 			}
 			available = {
@@ -170,6 +189,14 @@ characters = {
 			planning_skill = 4
 			logistics_skill = 2
 			desc = EQS_arrogant_cunt_desc
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				NOT = { has_country_flag = blueblood_arrested }
+			}
 		}
 		country_leader = {
 			expire = "1965.1.1"
@@ -185,25 +212,15 @@ characters = {
 			idea_token = blueblood
 			allowed = {
 				original_tag = EQS
+				hidden_trigger = { NOT = { has_government = democratic } }
+			}
+			visible = { 
+				original_tag = EQS
+				hidden_trigger = { NOT = { has_government = democratic } }
 			}
 			available = {
-				NOT = { has_government = communism }
-				if = {
-					limit = { event_target:solar_empire = { exists = yes } }
-					OR = {
-						tag = event_target:solar_empire
-						AND = {
-							tag = event_target:equestria
-							NOT = { country_exists = event_target:solar_empire }
-						}
-					}
-				}
-				OR = {
-					is_EQS_SOL_1048 = yes
-					if = {
-						limit = { is_original_EQS = yes }
-						has_country_flag = EQS_blueblood_allowed
-					}
+				hidden_trigger = {
+					NOT = { has_country_flag = blueblood_arrested }
 				}
 			}
 			traits = { prince_of_terror }
@@ -255,7 +272,6 @@ characters = {
 			}
 		}
 		corps_commander = {
-			name = "Trixie Lulamoon"
 			traits = { pony_race_trait stage_performer infantry_leader }
 			skill = 3
 			attack_skill = 4
@@ -396,7 +412,7 @@ characters = {
 					OR = {
 						original_tag = SLW
 						has_country_flag = new_daybreaker_generals
-						has_country_flag = redeemed_solarist_generals
+						has_country_flag = nova_archmage_caelum
 					}
 				}
 			}
@@ -431,7 +447,6 @@ characters = {
 					OR = {
 						original_tag = SLW
 						has_country_flag = new_daybreaker_generals
-						has_country_flag = redeemed_solarist_generals
 					}
 				}
 			}
@@ -709,7 +724,14 @@ characters = {
 			allowed = {
 				original_tag = EQS
 			}
+			visible = {
+				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
+			}
 			available = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
 			}
 			traits = { war_industrialists }
 		}
@@ -1019,7 +1041,275 @@ characters = {
 		}
 	}
 	
+	EQS_Guardian_Shield = {
+		name = EQS_Guardian_Shield_name
+		portraits = {
+		}
+		gender = female
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium infantry_leader }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 4
+			planning_skill = 1
+			logistics_skill = 2
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				has_country_flag = new_sunset_generals
+			}
+		}
+	}
 	
+	EQS_Golden_Dawn = {
+		name = EQS_Golden_Dawn_name
+		portraits = {
+		}
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium panzer_leader }
+			skill = 1
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 1
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				has_country_flag = new_sunset_generals
+			}
+		}
+	}
+	
+	EQS_Fidelis_Flamma = {
+		name = EQS_Fidelis_Flamma_name
+		gender = female
+		portraits = {
+		}
+		corps_commander = {
+			traits = { solaris_adoratio fire_pony pony_race_trait }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+					OR = {
+						has_country_flag = aurora_appoints_fidelis
+						has_country_flag = redeemed_solarist_generals
+					}
+				}
+			}
+		}
+	}
+	
+	EQS_Foresight_Amour = {
+		name = EQS_Foresight_Amour_name
+		portraits = {
+		}
+		corps_commander = {
+			traits = { solaris_militarium bleeding_heart_1048 pony_race_trait }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 3
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+					has_country_flag = redeemed_solarist_generals
+				}
+			}
+		}
+	}
+	
+	EQS_Stellar_Breeze = {
+		name = EQS_Stellar_Breeze_name
+		gender = female
+		portraits = {
+		}
+		corps_commander = {
+			traits = { solaris_adoratio pony_race_trait overworked_secretary } ###Have a trait called overworked_secretary and say how much pressure it puts on her from Sunset, which gives -10% experience gain, -5% recovery, but +5% organization and +3 division capacity
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 3
+			logistics_skill = 2
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+					has_country_flag = redeemed_solarist_generals
+				}
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = stellar_breeze
+			
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+			}
+			traits = { overworked_secretary_advisor }
+		}
+	}
+	
+	EQS_allen_spark_1048 = {
+		name = EQS_allen_spark
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Allen.tga"
+				small = "GFX_idea_EQS_allen_spark"
+			}
+		}
+		
+		corps_commander = {
+			traits = { commando infantry_leader pony_race_trait }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 5
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				has_country_flag = harmonist_commanders_return
+			}
+		}
+	}
+	
+	EQS_Fireflight_1048 = {
+		name = EQS_Fireflight
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Fireflight.tga"
+				small = "GFX_idea_EQS_Fireflight"
+			}
+		}
+		
+		corps_commander = {
+			traits = { fireflight pony_race_trait }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 4
+			logistics_skill = 3
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				has_country_flag = harmonist_commanders_return
+			}
+		} 
+	}
+	
+	EQS_bernard_hoofgonery_1048 = {
+		name = EQS_bernard_hoofgonery
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/ComradeKir.tga"
+				small = "GFX_idea_EQS_bernard_hoofgonery"
+			}
+		}
+		
+		
+		corps_commander = {
+			traits = { organizer pony_race_trait }
+			skill = 4
+			attack_skill = 3
+			defense_skill = 4
+			planning_skill = 6
+			logistics_skill = 3
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				has_country_flag = harmonist_commanders_return
+			}
+		}
+	}
+	
+	EQS_Sunbutt = {
+		name = EQS_Sunbutt_name
+		gender = female
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQS/Celestia_Armor.tga"
+			}
+		}
+		country_leader = {
+			expire = "1965.1.1"
+			desc = "POLITICS_CELESTIA_DESC"
+			ideology = harmonic_monarchy
+			traits = {
+				princess_in_name_only
+			}
+		}
+	}
+	
+	EQS_Dyx = { #Shhhh! Secret
+		name = EQS_Dyx_name
+		gender = female
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Dyx.tga"
+			}
+		}
+		corps_commander = {
+			traits = { harsh_leader pony_race_trait solar_punk }
+			skill = 1
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+				}
+				AND = {
+					EQS_Daybreaker = { is_country_leader = yes }
+					has_country_flag = dyx_is_being_dyx
+				}
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = dyx
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				original_tag = EQS
+				EQS_Daybreaker = { is_country_leader = yes }
+				has_country_flag = dyx_is_here_biatches
+			}
+			traits = { solar_punk_advisor }
+		}
+	}
 	
 	###Vanilla Characters###
 	EQS_dottedline = {
