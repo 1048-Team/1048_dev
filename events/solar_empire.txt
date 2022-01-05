@@ -2067,10 +2067,10 @@ country_event = { #Sunset is in another meeting with Blueblood and she finally h
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #Now please stop staring at my rump
 		name = solar.218.a
-		event_target:SOL_Blueblood = { add_defense = 1 }
-		event_target:SOL_Blueblood = { remove_unit_leader_trait = politically_connected }
+		EQS_Blueblood = { add_defense = 1 }
+		EQS_Blueblood = { remove_unit_leader_trait = politically_connected }
 		set_country_flag = new_sunset_generals
 	}
 }
@@ -2813,7 +2813,7 @@ country_event = { #Sunset is shot down almost instantly and she nearly gets capt
 	option = { #I definitely think one of them would have sucked my blood if I didn't get out of there
 		name = solar.248.a
 		add_political_power = -50
-		event_target:SOL_Sunset_Shimmer = {
+		EQS_Sunset_Shimmer_1048 = {
 			add_timed_unit_leader_trait = {
 				trait = wounded
 				days = 45
@@ -3586,18 +3586,22 @@ country_event = { #Sunset surprises Aurora with telling her of her next mission,
 			ELSE = {
 				release_puppet = EQC
 			}
-			EQC = {
-				create_country_leader = {
-				name = "Aurora Shinespark"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-				desc = "POLITICS_AURORA_SHINESPARK_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					protectress_of_the_empress
-					}
-				}
+			EQS_Aurora_Shinespark = { 
+				set_nationality = EQC
+				promote_character = yes
+			}
+			#EQC = {
+			#	create_country_leader = {
+			#	name = "Aurora Shinespark"
+			#	expire = "1965.1.1"
+			#	picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
+			#	desc = "POLITICS_AURORA_SHINESPARK_DESC"
+			#	ideology = solarism
+			#	female = yes
+			#	traits = {
+			#		protectress_of_the_empress
+			#		}
+			#	}
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -3902,9 +3906,9 @@ country_event = { #Aurora and Sunset hear some of the latest strategy proposals 
 	
 	option = { #I feel he has general qualities, don't you agree?
 		name = solar.315.a
-		add_tech_bonus = {
+		add_doctrine_cost_reduction = {
 			name = doctrine_bonus
-			bonus = 0.5
+			cost_reduction = 0.33
 			uses = 1
 			category = land_doctrine
 		}
@@ -4323,6 +4327,7 @@ country_event = { #Aurora holds a speech to parade the prisoners of the war, and
 	option = { #We rise like the phoenix on her wings!
 		name = solar.340.a
 		add_ideas = the_imperial_phoenix
+		set_major = yes
 		set_country_flag = southeast_dead
 		mark_focus_tree_layout_dirty = yes
 	}
@@ -4420,7 +4425,7 @@ country_event = { #Aurora enters the temple in Sanctum Solar to hold a final pra
 	
 	option = { #Soon I will right the wrong inflicted upon us
 		name = solar.347.a
-		event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = anointed_of_the_empress }
+		EQS_Aurora_Shinespark = { add_unit_leader_trait = anointed_of_the_empress }
 	}
 }
 
@@ -4544,18 +4549,22 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 			ELSE = {
 				release_puppet = EQC
 			}
-			EQC = {
-				create_country_leader = {
-				name = "Novus Flux"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Novus_Flux.tga"
-				#desc = "POLITICS_AURORA_SHINESPARK_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					novus_reformist
-					}
-				}
+			EQS_Novus_Flux = {
+				set_nationality = EQC
+				promote_character = yes
+			}
+			#EQC = {
+			#	create_country_leader = {
+			#	name = "Novus Flux"
+			#	expire = "1965.1.1"
+			#	picture = "gfx/leaders/EQS/Novus_Flux.tga"
+			#	#desc = "POLITICS_AURORA_SHINESPARK_DESC"
+			#	ideology = solarism
+			#	female = yes
+			#	traits = {
+			#		novus_reformist
+			#		}
+			#	}
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -7004,35 +7013,5 @@ country_event = {
 				drop_cosmetic_tag = yes
 			}
 		}
-	}
-}
-
-country_event = {
-	id = solar.9003
-	title = "Test General transfers"
-	desc = "Gotta love all the testing."
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = { #removes puppet from BAL
-		name = "Yup."
-		event_target:SOL_Iceheart = { set_nationality = BAG }
-	}
-}
-
-country_event = {
-	id = solar.9004
-	title = "Test General transfers"
-	desc = "Gotta love all the testing."
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = { #removes puppet from BAL
-		name = "Yup."
-		event_target:SOL_Iceheart = { set_nationality = EQS }
 	}
 }
