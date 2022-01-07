@@ -6708,11 +6708,6 @@ shared_focus = {
 			remove_idea = solars_sanctum_2
 			add_idea = a_holy_temple
 		}
-		hidden_effect = {
-			STG = {
-				country_event = solar.399
-			}
-		}
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -6768,11 +6763,6 @@ shared_focus = {
 		swap_ideas = {
 			remove_idea = solars_sanctum_2
 			add_idea = temple_for_the_masses
-		}
-		hidden_effect = {
-			STG = {
-				country_event = solar.399
-			}
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -6886,7 +6876,7 @@ shared_focus = {
 
 shared_focus = {
 	id = opportunistic_rats
-	x = 0
+	x = -3
 	y = 1
 	relative_position_id = brothers_and_sisters_in_the_empress
 	
@@ -6894,18 +6884,26 @@ shared_focus = {
 	prerequisite = { focus = brothers_and_sisters_in_the_empress }
 	prerequisite = { focus = further_streamlining }
 	prerequisite = { focus = reminding_the_militarium_of_its_place }
+	mutually_exclusive = { focus = to_the_land_of_darkness }
 	
 	completion_reward = {
-		IF = {
-			limit = {
-				has_global_flag = SOL_stalliongrad_war
-			}
-			country_event = solar.337
-			###Country event for Aurora learning of Stalliongrad's imminent war and making the Empire go into an emergency
+		declare_war_on = {
+			target = STG
+			type = annex_everything
 		}
-		ELSE = {
-			country_event = solar.338
-		}
+		custom_effect_tooltip = war_with_southeast_two_weeks
+		set_country_flag = southeast_war_prep
+		###Initiate timer for attacking in fourteen days
+		#IF = {
+		#	limit = {
+		#		has_global_flag = SOL_stalliongrad_war
+		#	}
+		#	country_event = solar.337
+		#	###Country event for Aurora learning of Stalliongrad's imminent war and making the Empire go into an emergency
+		#}
+		#ELSE = {
+		#	country_event = solar.338
+		#}
 	}
 	ai_will_do = {
 		base = 25
@@ -6920,7 +6918,10 @@ shared_focus = {
 	relative_position_id = opportunistic_rats
 	
 	cost = 3
-	prerequisite = { focus = opportunistic_rats }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -6938,7 +6939,10 @@ shared_focus = {
 	relative_position_id = opportunistic_rats
 	
 	cost = 3
-	prerequisite = { focus = opportunistic_rats }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_doctrine_cost_reduction = {
@@ -6958,7 +6962,10 @@ shared_focus = {
 	relative_position_id = opportunistic_rats
 	
 	cost = 4
-	prerequisite = { focus = opportunistic_rats }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -7043,9 +7050,9 @@ shared_focus = {
 ###Southeast war###
 shared_focus = {
 	id = to_the_land_of_darkness
-	x = 0
+	x = 3
 	y = 1
-	relative_position_id = heresy_shall_never_triumph
+	relative_position_id = brothers_and_sisters_in_the_empress
 	
 	bypass = {
 		OR = {
@@ -7074,7 +7081,10 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = heresy_shall_never_triumph }
+	prerequisite = { focus = brothers_and_sisters_in_the_empress }
+	prerequisite = { focus = further_streamlining }
+	prerequisite = { focus = reminding_the_militarium_of_its_place }
+	mutually_exclusive = { focus = opportunistic_rats }
 	
 	completion_reward = {
 		every_country = {
@@ -7094,11 +7104,14 @@ shared_focus = {
 			}
 		
 			EQS = {
-				create_wargoal = {
-					type = annex_everything
+				declare_war_on = {
 					target = PREV
+					type = annex_everything
 				}
 			}
+			custom_effect_tooltip = stg_war_two_weeks
+			set_country_flag = stg_prep
+			###Initiate timer for war with STG in two weeks
 		}
 	}
 }
@@ -7136,7 +7149,10 @@ shared_focus = {
 	}
 	
 	cost = 3
-	prerequisite = { focus = to_the_land_of_darkness }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -7224,7 +7240,10 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = to_the_land_of_darkness }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		country_event = solar.339
@@ -7310,7 +7329,10 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = to_the_land_of_darkness }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		29 = {
@@ -7413,18 +7435,35 @@ shared_focus = {
 	prerequisite = { focus = train_for_the_inevitable_slog }
 	
 	completion_reward = {
-		country_event = solar.340
-		###Event for Aurora having another Hitlerian spech about the joy of half the Empire being whole, and how they will punish the heretics in the rest of thel ands of the changelings and the Crystal Empire
+		country_event = solar.356
 	}
 	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = a_golden_age_of_order
+	x = 3
+	y = 1
+	relative_position_id = heresy_shall_never_triumph
+	
+	cost = 3
+	prerequisite = { focus = heresy_shall_never_triumph }
+	prerequisite = { focus = the_empress_shall_be_praised_from_sea_to_sea }
+	
+	completion_reward = {
+		country_event = solar.340
+		###Event for Aurora having another Hitlerian spech about the joy of half the Empire being whole, and how they will punish the heretics in the rest of the l nds of the changelings and the Crystal Empire
+	}
+	
+	ai_will_do = { factor = 50 }
 }
 
 ###Crystal Empire War###
 shared_focus = {
 	id = harmonys_end
-	x = -5
+	x = -3
 	y = 1
-	relative_position_id = the_empress_shall_be_praised_from_sea_to_sea
+	relative_position_id = a_golden_age_of_order
 	
 	available = {
 		has_war = no
@@ -7437,7 +7476,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = the_empress_shall_be_praised_from_sea_to_sea }
+	prerequisite = { focus = a_golden_age_of_order }
 	
 	completion_reward = {
 		country_event = solar.341
@@ -7601,9 +7640,9 @@ shared_focus = {
 ###Changeling War###
 shared_focus = {
 	id = end_the_great_tribulation
-	x = 5
+	x = 3
 	y = 1
-	relative_position_id = the_empress_shall_be_praised_from_sea_to_sea
+	relative_position_id = a_golden_age_of_order
 	
 	available = {
 		has_war = no
@@ -7616,7 +7655,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = the_empress_shall_be_praised_from_sea_to_sea }
+	prerequisite = { focus = a_golden_age_of_order }
 	
 	completion_reward = {
 		country_event = solar.346
@@ -7794,7 +7833,7 @@ shared_focus = {
 ###Marelandia War and Prep###
 shared_focus = {
 	id = crystal_ponies_for_the_crystal_mines
-	x = 3
+	x = 1
 	y = 1
 	relative_position_id = the_consequence_of_rebellion
 	
@@ -7840,7 +7879,7 @@ shared_focus = {
 
 shared_focus = {
 	id = swarming_the_air_with_the_empress_faithful
-	x = 5
+	x = 3
 	y = 1
 	relative_position_id = the_consequence_of_rebellion
 	
@@ -7878,7 +7917,7 @@ shared_focus = {
 
 shared_focus = { 
 	id = changelings_for_the_steel_mills
-	x = -3
+	x = -1
 	y = 1
 	relative_position_id = the_punishment_of_humuliation
 	
