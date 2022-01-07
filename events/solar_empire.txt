@@ -712,6 +712,11 @@ country_event = { #Execution of the captured commanders of the rebellion if Star
 		ai_chance = {
 			factor = 100
 		}
+		save_current_manpower = yes
+		75 = {
+			add_manpower = -73
+		}
+		restore_previous_manpower = yes
 	}
 }
 
@@ -1494,7 +1499,7 @@ country_event = { #Daybreaker finally arrives in the Crystal Empire among the ch
 	}
 }
 
-country_event = { #Daybreaker marches into Vesalipolis and fights her way to the palace of Chrysalis, where she finds and executes her in cold blood
+country_event = { #Daybreaker marches into Vesalipolis and fights her way to the palace of Chrysalis, where she finds, fights, and captures Chrysalis for a trial for the changeling
 	id = solar.109
 	title = solar.109.t
 	desc = solar.109.d
@@ -1504,7 +1509,27 @@ country_event = { #Daybreaker marches into Vesalipolis and fights her way to the
 	option = { #Never will her filth plague the Empire again
 		name = solar.109.a
 		add_stability = 0.05
-		###Can be a two-part event later, namely that it is her fighting Chrysalis, then a couple of weeks later the next event is her execution in Vesalipolis
+		hidden_effect = {
+			country_event = {
+				id = solar.121
+				days = 14
+				random = 120
+			}
+		}
+	}
+}
+
+country_event = { #Daybreaker brings Chrysalis back to Sanctum Solar and parades her through the street before executing her in the main square, with Chryslis remaining defiant against her to the end
+	id = solar.121
+	title = solar.121.t
+	desc = solar.121.d
+	
+	is_triggered_only = yes
+	
+	option = { #And thus ends the bug menace
+		name = solar.121
+		add_stability = 0.03
+		add_war_support = 0.03
 	}
 }
 
@@ -1733,7 +1758,6 @@ country_event = { #Sunset breaks down at being the new regent and Daybreaker's f
 	option = {
 		name = solar.201.a
 		custom_effect_tooltip = sunset_reduce_modifier_1_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1747,7 +1771,6 @@ country_event = { #Sunset is calmed by the two archmages and she mandates a nati
 	option = {
 		name = solar.202.a
 		custom_effect_tooltip = sunset_reduce_modifier_2_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1761,7 +1784,6 @@ country_event = { #Sunset gives herself one final pep talk before a speech about
 	option = {
 		name = solar.203.a
 		custom_effect_tooltip = sunset_reduce_modifier_3_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1775,7 +1797,6 @@ country_event = { #Sunset holds the first service of the Adoratio since Daybreak
 	option = {
 		name = solar.204.a
 		custom_effect_tooltip = sunset_reduce_modifier_4_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1789,7 +1810,6 @@ country_event = { #Sunset meets with some factory leads to reassure them that th
 	option = {
 		name = solar.205.a
 		custom_effect_tooltip = sunset_reduce_modifier_5_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -3495,7 +3515,112 @@ country_event = { #Sunset and her generals quickly do up a plan for constructing
 	
 	option = { #How likely are they to withstand the fury of an alicorn?
 		name = solar.271.a
-		###Add forts along the CRY border
+		hidden_effect = {
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 277
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9359
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 13296
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 535
+					instant_build = yes
+				}
+			}
+			180 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 572
+					instant_build = yes
+				}
+			}
+			180 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 6557
+					instant_build = yes
+				}
+			}
+			70 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 476
+					instant_build = yes
+				}
+			}
+			70 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 6055
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 3095
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 3009
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 6138
+					instant_build = yes
+				}
+			}
+			56 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 67
+					instant_build = yes
+				}
+			}
+			56 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9167
+					instant_build = yes
+				}
+			}
+		}
 	}
 }
 
@@ -3588,9 +3713,8 @@ country_event = { #Sunset surprises Aurora with telling her of her next mission,
 			}
 			EQS_Aurora_Shinespark = { 
 				set_nationality = EQC
-				promote_character = yes
 			}
-			#EQC = {
+			EQC = {
 			#	create_country_leader = {
 			#	name = "Aurora Shinespark"
 			#	expire = "1965.1.1"
@@ -3602,6 +3726,7 @@ country_event = { #Sunset surprises Aurora with telling her of her next mission,
 			#		protectress_of_the_empress
 			#		}
 			#	}
+				country_event = solar.290
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -3668,6 +3793,33 @@ country_event = { #Sunset giddily waits for the Adoratio Primus to finish their 
 	option = { #This has gone better than I hoped
 		name = solar.280.a
 		set_country_flag = aurora_promoted
+	}
+}
+
+country_event = { #PDX!
+	id = solar.290
+	title = solar.290.t
+	desc = solar.290.d
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	option = {
+		name = "Why is the character system so asinine?!"
+		EQS_Aurora_Shinespark = { 
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					expire = "1965.1.1"
+					desc = "POLITICS_AURORA_SHINESPARK_DESC"
+					ideology = solarism
+					traits = {
+						protectress_of_the_empress
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -4060,6 +4212,7 @@ country_event = { #Aurora is satisfied with the changes she made to the Empire, 
 	option = { #I shall deal with them myself
 		name = solar.325.a
 		###Custom tooltip for Aurora becoming a field marshal here
+		custom_effect_tooltip = aurora_does_it_herself_tt
 		clr_country_flag = aurora_removed
 		hidden_effect = {
 			EQS_Aurora_Shinespark= { promote_leader = yes }
@@ -4551,18 +4704,8 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 			}
 			EQS_Novus_Flux = {
 				set_nationality = EQC
-				add_country_leader_role = {
-					promote_leader = yes
-					country = {
-						ideology = solarism
-						expire = "1965.1.1"
-						traits = {
-							novus_reformist
-						}
-					}
-				}
 			}
-			#EQC = {
+			EQC = {
 			#	create_country_leader = {
 			#	name = "Novus Flux"
 			#	expire = "1965.1.1"
@@ -4574,6 +4717,7 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 			#		novus_reformist
 			#		}
 			#	}
+				country_event = solar.360
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -4596,6 +4740,32 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 					long_name = EQC_SOL_MIL_neutrality_party
 				}
 				set_cosmetic_tag = EQC_SOL_ADO
+			}
+		}
+	}
+}
+
+country_event = { #More hidden events because PDX is pains
+	id = solar.360
+	title = solar.360.t
+	desc = solar.360.d
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	option = {
+		name = "Why do you have to be finicky, logs?!"
+		EQS_Novus_Flux = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					traits = {
+						novus_reformist
+					}
+				}
 			}
 		}
 	}
@@ -6904,7 +7074,6 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 		ai_chance = { factor = 25 }
 		reverse_add_opinion_modifier = { target = CRY modifier = CRY_dishonorable }
 	}
-	###Make section option later that renegs the deal, which makes the Crystal Empire leave and also give a -100 opinion modifier of dishonorable
 }
 
 ###Solar Civil War Events###
