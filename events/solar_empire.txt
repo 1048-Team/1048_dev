@@ -488,7 +488,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				add_manpower = -204702
 				damage_building = {
 					type = infrastructure
-					damage = 8
+					damage = 3
 				}
 				remove_building = {
 					type = arms_factory
@@ -716,7 +716,7 @@ country_event = { #Daybreaker assembles the remaining survivors of Starlight's c
 	}
 }
 
-country_event = {
+country_event = { #The Inquisitionis manages to get details of the remaining cells in Ordo Multi and initiates a purge, weakening the harmonists in the future
 	id = solar.50
 	title = solar.50.t
 	desc = solar.50.d
@@ -724,7 +724,7 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = { #Wipe them out, all of them
-		name = solar.54.a
+		name = solar.50.a
 		add_political_power = 100
 		add_stability = 0.05
 		add_war_support = 0.05
@@ -733,7 +733,41 @@ country_event = {
 			ideology = democratic
 			popularity = -0.02
 		}
-		###Include damage to buildings in the surrounding states, and loss of ponypower###
+		save_current_manpower = yes
+		110 = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+			add_manpower = -12473
+		}
+		187 = {
+			damage_building = {
+				type = infrastructure
+				damage = 2
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 1
+			}
+			add_manpower = -19842
+		}
+		184 = {
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+			damage_building = {
+				type = arms_factory
+				damage = 2
+			}
+			add_manpower = -7691
+		}
+		restore_previous_manpower = yes
 	}
 }
 		
@@ -5652,10 +5686,22 @@ country_event = { #Word arrives that some different harmonist cells have finally
 	
 	option = { #You honor your pledges to Equestria's defense. I pray that we all live long enough to see its freedom
 		name = celestia.51.a
-		set_country_flag = harmonist_commanders_return
-		custom_effect_tooltip = spawn_harmonists_tt
-		hidden_effect = {
-			load_oob = "SOL_celestia_harmonist_generals"
+		IF = {
+			limit = {
+				has_country_flag = weaker_rebels
+			}
+			set_country_flag = reduced_harmonist_commanders
+			custom_effect_tooltip = spawn_weak_harmonists_tt
+			hidden_effect = {
+				load_oob = "SOL_celestia_harmonist_generals_weak"
+			}
+		}
+		ELSE = {
+			set_country_flag = harmonist_commanders_return
+			custom_effect_tooltip = spawn_harmonists_tt
+			hidden_effect = {
+				load_oob = "SOL_celestia_harmonist_generals"
+			}
 		}
 	}
 }
