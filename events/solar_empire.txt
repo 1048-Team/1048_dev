@@ -409,7 +409,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				add_manpower = -77213
 				damage_building = {
 					type = infrastructure
-					damage = 3
+					damage = 1
 				}
 				remove_building = {
 					type = arms_factory
@@ -450,7 +450,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				add_manpower = -204702
 				damage_building = {
 					type = infrastructure
-					damage = 8
+					damage = 3
 				}
 				remove_building = {
 					type = arms_factory
@@ -501,57 +501,6 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 			}
 			restore_previous_manpower = yes
 		}
-	}
-}
-
-country_event = { #Rebels found, less damage, Starlight and Trixie captured
-	id = solar.19
-	title = solar.19.t
-	desc = solar.19.d
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = solar.19.a
-		ai_chance = {
-			factor = 100
-		}
-		save_current_manpower = yes
-		75 = {
-		set_variable = { 
-			rebel_var_1 = -0.9 
-			}
-		set_variable = { 
-			rebel_var_2 = -0.35 
-			}
-		}
-		hidden_effect = {
-			set_country_flag = starlight_and_trixie_escaped
-			set_country_flag = successful_rebellion
-			
-			75 = {
-				add_dynamic_modifier = {
-					modifier = manehattan_rebellion
-					}
-				}
-			mark_focus_tree_layout_dirty = yes
-		}
-		75 = {
-			add_manpower = -204702
-			damage_building = {
-				type = infrastructure
-				damage = 8
-			}
-			remove_building = {
-				type = arms_factory
-				level = 2
-			}
-			remove_building = {
-				type = industrial_complex
-				level = 3
-			}
-		}
-		restore_previous_manpower = yes
 	}
 }
 
@@ -640,14 +589,6 @@ country_event = { #Daybreaker brings Starlight and Trixie to perform the rites o
 	option = { #Rise my new generals
 		name = solar.40.a
 		set_country_flag = starlight_and_trixie_corrupted
-		random_army_leader = {
-			limit = { is_character = EQS_Starlight_Glimmer_1048 }
-			save_global_event_target_as = SOL_Starlight_Glimmer
-		}
-		random_army_leader = {
-			limit = { is_character = EQS_Trixie_Lulamoon }
-			save_global_event_target_as = SOL_Trixie
-		}
 	}
 }
 
@@ -670,18 +611,16 @@ country_event = { #The Inquisitionis is instated into the unions of Manehattan t
 	}
 }
 
-country_event = { #Daybreaker surveys the damage and executes the mayor of Manehattan, again
+country_event = { #Daybreaker surveys the damage and executes some of the solar commanders who let it happen
 	id = solar.42
 	title = solar.42.t
 	desc = solar.42.d
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #They were all useless, anyway
 		name = solar.42.a
-		ai_chance = {
-			factor = 100
-		}
+		add_manpower = -13
 	}
 }
 
@@ -692,11 +631,8 @@ country_event = { #Show trial of Starlight and Trixie for their crimes and it bu
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #That should keep the populace happy
 		name = solar.43.a
-		ai_chance = {
-			factor = 100
-		}
 	}
 }
 
@@ -707,16 +643,76 @@ country_event = { #Execution of the captured commanders of the rebellion if Star
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #They sealed their fate long ago
 		name = solar.44.a
-		ai_chance = {
-			factor = 100
-		}
 		save_current_manpower = yes
 		75 = {
 			add_manpower = -73
 		}
 		restore_previous_manpower = yes
+	}
+}
+
+country_event = { #Daybreaker receives word that Starlight and Trixie escaped and she is furious, knowing they will flee to the Crystal Empire as it's the only safe place
+	id = solar.45
+	title = solar.45.t
+	desc = solar.45.d
+	
+	is_triggered_only = yes
+	
+	option = { #I want that commander's head on a platter by sundown!
+		name = solar.45.a
+		add_stability = -0.03
+		add_political_power = -20
+	}
+}
+
+country_event = { #Daybreaker visits Manehattan when she learns most of the remaining commanders of the rebellion were captured, and she hosts a grand execution for them in the ruins of the city
+	id = solar.46
+	title = solar.46.t
+	desc = solar.46.d
+	
+	is_triggered_only = yes
+	
+	option = { #They shall burn forever in Tartarus
+		name = solar.46.a
+		add_stability = 0.05
+		add_war_support = 0.02
+	}
+}
+
+country_event = { #Daybreaker visits Manehattan when she learns there is another small uprising of workers, and when she meets the new mayor she gives them one chance to explain their failures before she executes them on the spot
+	id = solar.47
+	title = solar.47.t
+	desc = solar.47.d
+	
+	is_triggered_only = yes
+	
+	option = { #I shall deal with these slime myself
+		name = solar.47.a
+		add_manpower = -1
+		save_current_manpower = yes
+		75 = {
+			add_manpower = -138
+		}
+		restore_previous_manpower = yes
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = { #Daybreaker assembles the remaining survivors of Starlight's cells and states they will be punished for their list of crimes, but not before being put to work to slave for the Empire to restore Manehattan
+	id = solar.48
+	title = solar.48.t
+	desc = solar.48.d
+	
+	is_triggered_only = yes
+	
+	option = { #You will die, but not before you serve me!
+		name = solar.48.a
+		add_political_power = 50
 	}
 }
 
@@ -728,11 +724,15 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = { #Wipe them out, all of them
-		name = solar.50.a
-		ai_chance = {
-			factor = 100
+		name = solar.54.a
+		add_political_power = 100
+		add_stability = 0.05
+		add_war_support = 0.05
+		set_country_flag = weaker_rebels
+		add_popularity = {
+			ideology = democratic
+			popularity = -0.02
 		}
-		
 		###Include damage to buildings in the surrounding states, and loss of ponypower###
 	}
 }
