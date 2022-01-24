@@ -751,6 +751,182 @@ EQS_SOL_society_interaction_category = {
 		}
 	}
 }
+EQS_SOL_project_solaris_category = {
+	EQS_SOL_ordo_meurom_new_mines = {
+		allowed = {
+			original_tag = EQS
+		}
+		visible = {
+			has_country_flag = EQS_SOL_new_mining_decisions
+			AND = {
+				has_full_control_of_state = 39
+				has_full_control_of_state = 107
+				has_full_control_of_state = 185
+				has_full_control_of_state = 188
+				has_full_control_of_state = 186
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 39
+				#state = 107
+				state = 185
+				state = 188
+				#state = 186
+			}
+		}
+		fire_only_once = yes
+		modifier = { civilian_factory_use = 3 }
+		cost = 50
+		days_remove = 90
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 15
+				has_political_power > 200
+			}
+		}
+		remove_effect = {
+			add_tech_bonus = {
+				name = excavation_bonus
+				bonus = 0.75
+				uses = 1
+				category = excavation_tech
+			}
+			set_country_flag = expanded_meurom
+		}
+	}
+	EQS_SOL_reactor_prototypes = {
+		allowed = {
+			original_tag = EQS
+		}
+		visible = {
+			has_country_flag = EQS_SOL_new_mining_decisions
+			has_tech = atomic_research
+		}
+		fire_only_once = yes
+		cost = 35
+		days_remove = 150
+		ai_will_do = {
+			base = 5
+		}
+		modifier = {
+			civilian_factory_use = 6
+			country_resource_crystals = -15
+		}
+		remove_effect = {
+			add_tech_bonus = {
+				name = nuke_bonus
+				bonus = 0.35
+				uses = 1
+				technology = nuclear_reactor
+			}
+		}
+	}
+	EQS_SOL_dig_deeper = {
+		allowed = {
+			original_tag = EQS
+		}
+		visible = {
+			has_country_flag = EQS_SOL_new_mining_decisions
+			has_full_control_of_state = 107
+		}
+		cost = 25
+		fire_only_once = yes
+		days_remove = 60
+		modifier = { civilian_factory_use = 3 }
+		highlight_states = {
+			highlight_state_targets = {
+				state = 107
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				has_political_power > 75
+			}
+		}
+		remove_effect = {
+			107 = {
+				add_resource = {
+					type = crystals
+					amount = 8
+				}
+			}
+		}
+	}
+	EQS_SOL_expand_meurom_further = {
+		allowed = {
+			original_tag = EQS
+		}
+		visible = {
+			has_country_flag = expanded_meurom
+		}
+		cost = 35
+		days_remove = 75
+		fire_only_once = yes
+		modifier = { civilian_factory_use = 5 }
+		ai_will_do = {
+			base = 3
+			modifier = {
+				add = 7
+				date > 1053.1.1
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 186
+			}
+		}
+		remove_effect = {
+			186 = {
+				add_resource = {
+					type = crystals
+					amount = 6
+				}
+			}
+		}
+	}
+	EQS_SOL_clear_skies_forges = {
+		allowed = {
+			original_tag = EQS
+		}
+		visible = {
+			has_country_flag = EQS_SOL_new_mining_decisions
+			has_full_control_of_state = 185
+		}
+		cost = 40
+		days_remove = 90
+		modifier = { civilian_factory_use = 3 }
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 20
+				num_of_civilian_factories > 49
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 185
+			}
+		}
+		remove_effect = {
+			185 = {
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
 
 ###Vanilla###
 political_actions = {
