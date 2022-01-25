@@ -3213,7 +3213,7 @@ country_event = { #The Crystal Empire receives word from one or two soldiers tha
 		set_global_flag = invitation_rejected
 		EQS = {
 			country_event = {
-				id = solar.269
+				id = solar.270
 				days = 1
 			}
 		}
@@ -3238,14 +3238,14 @@ country_event = { #The Crystal Empire learns of its traders being scrutinized ov
 		set_global_flag = invitation_rejected
 		EQS = {
 			country_event = {
-				id = solar.269
+				id = solar.270
 				days = 1
 			}
 		}
 	}
 }
 
-country_event = { #Luna and Cadance ticked off immensely at the amount of pressure that Sunset is putting on them, and they come to one conclusion: she is no longer welcome in the Crystal Empire, and they will meet on the battlefield
+country_event = { #Luna and Cadance are ticked off immensely at the amount of pressure that Sunset is putting on them, and they come to one conclusion: she is no longer welcome in the Crystal Empire, and they will meet on the battlefield
 	id = solar.264
 	title = solar.264.t
 	desc = solar.264.d
@@ -3272,7 +3272,7 @@ country_event = { #Sunset proposes the alliance before she leaves and waits to h
 	is_triggered_only = yes
 	
 	option = { #Well, it's in the Goddess' hooves, now
-		name = solar.266.a
+		name = solar.265.a
 		CRY = {
 			country_event = {
 				id = solar.266
@@ -3473,6 +3473,36 @@ country_event = { #Sunset is visited directly by Twilight, and the two of them h
 		name = solar.267.a
 		EQS = {
 			add_to_faction = CRY
+			IF = {
+				limit = {
+					has_country_flag = minor_economic_ties
+				}
+				create_import = {
+					resource = crystals
+					amount = 8
+					exporter = CRY
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					has_country_flag = major_economic_ties
+				}
+				create_import = {
+					resource = crystals
+					amount = 24
+					exporter = CRY
+				}
+				create_import = {
+					resource = steel
+					amount = 8
+					exporter = CRY
+				}
+				create_import = {
+					resource = aluminium
+					amount = 8
+					exporter = CRY
+				}
+			}
 			add_ai_strategy = {
 				type = alliance
 				id = CRY
@@ -3480,6 +3510,35 @@ country_event = { #Sunset is visited directly by Twilight, and the two of them h
 			}
 		}
 		CRY = {
+			IF = {
+				limit = {
+					EQS = {
+						has_country_flag = minor_economic_ties
+					}
+				}
+				create_import = {
+					resource = rubber
+					amount = 8
+					exporter = EQS
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					EQS = {
+						has_country_flag = major_economic_ties
+					}
+				}
+				create_import = {
+					resource = rubber
+					amount = 24
+					exporter = EQS
+				}
+				create_import = {
+					resource = oil
+					amount = 16
+					exporter = EQS
+				}
+			}
 			add_ai_strategy = {
 				type = alliance
 				id = EQS
@@ -3524,6 +3583,7 @@ country_event = { #Sunset never receives word back from the Crystal Empire, and 
 	
 	option = { #They--What--Why--?!
 		name = solar.269.a
+		set_global_flag = invitation_rejected
 	}
 }
 
