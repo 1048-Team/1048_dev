@@ -19,8 +19,6 @@ set_technology = {
 	naval_bomber1 = 1
 	cv_naval_bomber1 = 1
 	early_bomber = 1
-	gwtank = 1
-	basic_light_tank = 1
 	infantry_weapons = 1
 	infantry_weapons1 = 1
 	interwar_antitank = 1
@@ -33,8 +31,27 @@ set_technology = {
 	trench_warfare = 1
 	motorised_infantry = 1
 	interwar_antiair = 1
+	basic_train = 1
 }
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+		basic_light_tank = 1
+	}
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+		basic_light_tank_chassis = 1
+	}
+}
 if = {
 	limit = {
 		not = { has_dlc = "Man the Guns" }
@@ -167,99 +184,154 @@ set_stability = 0.55
 set_war_support = 0.75
 add_manpower = 35000
 
-create_country_leader = {
-	name = "Iron Hoof"
-	expire = "1965.1.1"
-	#picture = "Blueblood.tga"
-	ideology = authortitarian
-	#desc = "POLITICS_BLUEBLOOD_DESC"
-	traits = {
-	}
-}
-
-create_country_leader = {
-	name = "Midwinter Halo"
-	expire = "1965.1.1"
-	picture = "gfx/leaders/SOL/Midwinter.tga"
-	#desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
-	ideology = solarism
-	female = yes
-	traits = {
-		reluctant_regent
-	}
-}
-
-create_country_leader = {
-	name = "Rebel Scum"
-	expire = "1965.1.1"
-	#picture = ""
-	ideology = harmonic_monarchy
-	traits = {
-	}
-}
-
-create_country_leader = {
-	name = "Smoldering Carbon"
-	expire = "1965.1.1"
-	#picture = ""
-	#desc = ""
-	ideology = leninism
-	traits = {
-	}
-}
-
-create_corps_commander = {
-	name = "Novus Flux"
-	portrait_path = "gfx/leaders/EQS/Novus_Flux.tga"
-	traits = { pony_race_trait evening_star solaris_inquisitionis }
-	id = 5101
-	skill = 1
-	attack_skill = 1
-	defense_skill = 3
-	planning_skill = 2
-	logistics_skill = 1
-	female = yes
-}
-create_corps_commander = {
-	name = "Nova Glow"
-	portrait_path = "gfx/leaders/EQS/Nova_Glow.tga"
-	traits = { pony_race_trait morning_star solaris_inquisitionis }
-	id = 5102
-	skill = 1
-	attack_skill = 3
-	defense_skill = 1
-	planning_skill = 1
-	logistics_skill = 2
-	female = yes
-}
-create_corps_commander = {
-	name = "Quasar Pulse"
-	#portrait_path = "gfx/leaders/EQS/Quasar_Pulse.tga"
-	traits = { pony_race_trait crushing_death harsh_leader solaris_inquisitionis }
-	id = 5103
-	skill = 2
-	attack_skill = 4
-	defense_skill = 1
-	planning_skill = 2
-	logistics_skill = 1
-	female = yes
-}
-
-random_army_leader = {
-	limit = { has_id = 5101 }
-	save_global_event_target_as = SOL_Novus_Flux
-}
-random_army_leader = {
-	limit = { has_id = 5102 }
-	save_global_event_target_as = SOL_Nova_Glow
-}
-random_army_leader = {
-	limit = { has_id = 5103 }
-	save_global_event_target_as = SOL_Quasar_Pulse
-}
+recruit_character = SLW_Thundering_Hoofbeat
+recruit_character = SLW_Ordo_Multi
+recruit_character = SLW_Rebel_Scumbags
+recruit_character = SLW_Smoldering_Carbon
+recruit_character = SLW_Iron_Tail
+recruit_character = SLW_Raging_Sting
+recruit_character = SLW_Stern_Visage
+recruit_character = SLW_Seething_Corona
 
 set_rule = {
 	can_generate_female_aces = yes
+}
+
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	create_equipment_variant = {
+		name = "Shield-Bearer"
+		type = light_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_one_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 1
+			tank_nsb_armor_upgrade = 1
+		}
+		obsolete = yes
+		icon = "gfx/interface/technologies/EQS_armoured_tractor.dds"
+	}
+	create_equipment_variant = {
+		name = "Molten Pike"
+		type = light_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_fixed_superstructure_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 1
+			tank_nsb_armor_upgrade = 1
+		}
+		obsolete = yes
+		icon = "gfx/interface/technologies/ITA_.dds"
+	}	
+	create_equipment_variant = {
+		name = "Immortal Class A"
+		type = light_tank_chassis_1
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_one_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = secondary_turret_hmg
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 3
+			tank_nsb_engine_upgrade = 2
+		}
+		icon = "gfx/interface/equipmentdesigner/tanks/designer/ENG/ENG_light_BAB_camo.dds"
+		obsolete = yes #export only
+	}
+
+	create_equipment_variant = {
+		name = "Immortal Class B"
+		type = light_tank_chassis_1
+		parent_version = 1
+		modules = {
+			main_armament_slot = tank_small_cannon
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = empty
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 3
+			tank_nsb_engine_upgrade = 2
+		}
+		icon = "gfx/interface/equipmentdesigner/tanks/designer/ENG/ENG_light_BAB_camo.dds"
+		obsolete = yes #export only
+	}
+	create_equipment_variant = {
+		name = "Imperial Armor Mk. III Untouchable"
+		type = light_tank_chassis_1
+		parent_version = 2
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_one_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 2
+			tank_nsb_armor_upgrade = 1
+		}
+		icon = "gfx/interface/technologies/EQS_breezie_n.dds"
+		obsolete = yes #used for oob
+	}
+	create_equipment_variant = {
+		name = "Imperial Armor Mk. VII Invincible"
+		type = light_tank_chassis_1
+		parent_version = 3
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+			special_type_slot_2 = smoke_launchers
+		}
+		icon = "gfx/interface/technologies/EQS_breezie_n.dds"
+		upgrades = {
+			tank_nsb_engine_upgrade = 2
+			tank_nsb_armor_upgrade = 1
+		}
+	}
+
+	create_equipment_variant = {
+		name = "Imperial Medium Armor Mk. V Devestator"
+		type = medium_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon
+			turret_type_slot = tank_medium_three_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 1
+			tank_nsb_engine_upgrade = 2
+		}
+		icon = "gfx/interface/technologies/ENG_basic_light_tank.dds"
+	}
 }
 
 if = {

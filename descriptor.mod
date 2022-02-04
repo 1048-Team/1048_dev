@@ -8,7 +8,4 @@ name="EaW: 1048"
 dependencies={
 	"Equestria at War"
 }
-supported_version="1.10.*"
-replace_path="common/characters"
-replace_path="common/generation"
-replace_path="history/general"
+supported_version="1.11.*"

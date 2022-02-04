@@ -1505,7 +1505,9 @@ shared_focus = {
 			add_core_of = EQS
 		}
 		set_country_flag = horizon_sunrise_unlocked
-		show_ideas_tooltip = horizon_sunrise
+		WHY = {
+			show_ideas_tooltip = horizon_sunrise
+		}
 		IF = {
 			limit = {
 				WHY = {
@@ -1513,7 +1515,9 @@ shared_focus = {
 				}
 			}
 			set_country_flag = solar_strike_unlocked
-			show_ideas_tooltip = solar_strike
+			WHY = {
+				show_ideas_tooltip = solar_strike
+			}
 		}
 		country_event = {
 			id = solar.107
@@ -2415,13 +2419,9 @@ shared_focus = {
 	y = 1
 	relative_position_id = operation_cauterize
 	
-	bypass = {
-		}
-	
 	cost = 2
 	
 	prerequisite = { focus = operation_cauterize }
-	
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -2458,13 +2458,9 @@ shared_focus = {
 	y = 1
 	relative_position_id = squash_the_insects
 	
-	bypass = {
-		}
-	
 	cost = 3
 	
 	prerequisite = { focus = squash_the_insects }
-	
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -2481,13 +2477,9 @@ shared_focus = { #Should mention turnabout being fair play, and that the divisio
 	y = 1
 	relative_position_id = squash_the_insects
 	
-	bypass = {
-		}
-	
 	cost = 3
 	
 	prerequisite = { focus = squash_the_insects }
-	
 	
 	completion_reward = {
 		load_oob = "SOL_changeling_war_Daybreaker"
@@ -2500,14 +2492,10 @@ shared_focus = {
 	x = 2
 	y = 1
 	relative_position_id = squash_the_insects
-	
-	bypass = {
-		}
-	
+
 	cost = 3
 	
 	prerequisite = { focus = squash_the_insects }
-	
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -2525,18 +2513,15 @@ shared_focus = {
 	relative_position_id = flame_to_moths
 	
 	available = {
-		251 = {
-			is_owned_by = EQS
+		NOT = {
+			country_exists = CHN
+			has_war = yes
 		}
 	}
-	
-	bypass = {
-		}
 	
 	cost = 3
 	
 	prerequisite = { focus = flame_to_moths }
-	
 	
 	completion_reward = {
 		country_event = {
@@ -2551,14 +2536,17 @@ shared_focus = {
 	x = 0
 	y = 1
 	relative_position_id = infiltrate_the_infiltrators
-	
-	bypass = {
+
+	available = {
+		NOT = {
+			country_exists = CHN
+			has_war = yes
 		}
+	}
 	
 	cost = 3
 	
 	prerequisite = { focus = infiltrate_the_infiltrators }
-	
 	
 	completion_reward = {
 		add_ideas = retribution_for_the_great_war
@@ -2573,18 +2561,15 @@ shared_focus = {
 	relative_position_id = everything_for_the_war
 	
 	available = {
-		690 = {
-			is_controlled_by = EQS
+		NOT = {
+			country_exists = CHN
+			has_war = yes
 		}
 	}
-	
-	bypass = {
-		}
 	
 	cost = 3
 	
 	prerequisite = { focus = everything_for_the_war }
-	
 	
 	completion_reward = {
 		set_province_name = { id = 748 name = renamed_chrysalia }
@@ -2607,20 +2592,9 @@ shared_focus = {
 	y = 1
 	relative_position_id = fate_worse_than_death
 	
-	available = {
-		NOT = {
-			country_exists = CHN
-			has_war = yes
-		}
-	}
-	
-	bypass = {
-		}
-	
 	cost = 4
 	
 	prerequisite = { focus = fate_worse_than_death }
-	
 	
 	completion_reward = {
 		add_ideas = unending_waves
@@ -2634,20 +2608,9 @@ shared_focus = {
 	y = 1
 	relative_position_id = make_them_work
 	
-	available = {
-		NOT = {
-			country_exists = CHN
-			has_war = yes
-		}
-	}
-	
-	bypass = {
-		}
-	
 	cost = 4
 	
 	prerequisite = { focus = make_them_work }
-	
 	
 	completion_reward = {
 		custom_effect_tooltip = new_armada_tt
@@ -2806,20 +2769,9 @@ shared_focus = {
 	y = 1
 	relative_position_id = fix_the_great_mistake
 	
-	available = {
-		NOT = {
-			country_exists = CHN
-			has_war = yes
-		}
-	}
-	
-	bypass = {
-		}
-	
 	cost = 4
 	
 	prerequisite = { focus = fix_the_great_mistake }
-	
 	
 	completion_reward = {
 		add_ideas = strike_from_sanctum_solar
@@ -3661,9 +3613,9 @@ shared_focus = {
 	prerequisite = { focus = blood_spilled_is_blood_wasted }
 	
 	completion_reward = {
-		add_tech_bonus = {
+		add_doctrine_cost_reduction = {
 			name = doctrine_bonus
-			bonus = 1
+			cost_reduction = 0.4
 			uses = 1
 			category = land_doctrine
 		}
@@ -4903,7 +4855,6 @@ shared_focus = {
 			idea = emergency_conscription_protocols
 			days = 90
 		}
-		###Add a spirit that decreasing the time to train by 25% for 90 days
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -4930,7 +4881,6 @@ shared_focus = {
 	
 	completion_reward = {
 		country_event = solar.271
-		###Event for hastily constructing bunkers and forts across most of the border with the CE, and Sunset worrying that it will not be enough
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -5287,7 +5237,6 @@ shared_focus = {
 		hidden_effect = {
 			load_oob = "SOL_SUN_stalliongrad_loyalists"
 		}
-		###Load OOB that has three ten-width infantry with support artillery and engineers that are fully equipped by only partly trained, and are called Faithful of the Empress
 	}
 	ai_will_do = { factor = 22 }
 }
@@ -5341,66 +5290,66 @@ shared_focus = {
 	
 	completion_reward = {
 		custom_effect_tooltip = new_armada_tt
-			hidden_effect = {
-				create_equipment_variant = {
+		hidden_effect = {
+			create_equipment_variant = {
 				name = "Celestial Throne Class"
 				type = ship_hull_super_heavy_2
 				name_group = SOL_SHBB_HISTORICAL
 				parent_version = 0
-					modules = {
-						fixed_ship_battery_slot = ship_super_heavy_battery_2
-						fixed_ship_anti_air_slot = ship_anti_air_3
-						fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-						fixed_ship_radar_slot = ship_radar_1
-						fixed_ship_engine_slot = heavy_ship_engine_4
-						fixed_ship_secondaries_slot = ship_secondaries_2
-						fixed_ship_armor_slot = ship_armor_shbb_2
-						front_1_custom_slot = ship_super_heavy_battery_2
-						front_2_custom_slot = ship_super_heavy_battery_2
-						mid_1_custom_slot = empty
-						mid_2_custom_slot = ship_secondaries_2
-						mid_3_custom_slot = empty
-						rear_1_custom_slot = ship_airplane_launcher_1
-						rear_2_custom_slot = ship_super_heavy_battery_2
-					}
+				modules = {
+					fixed_ship_battery_slot = ship_super_heavy_battery_2
+					fixed_ship_anti_air_slot = ship_anti_air_3
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = heavy_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					fixed_ship_armor_slot = ship_armor_shbb_2
+					front_1_custom_slot = ship_super_heavy_battery_2
+					front_2_custom_slot = ship_super_heavy_battery_2
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = ship_secondaries_2
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = ship_airplane_launcher_1
+					rear_2_custom_slot = ship_super_heavy_battery_2
 				}
-				create_equipment_variant = {
+			}
+			create_equipment_variant = {
 				name = "Sanctifying Flame Class"
 				type = ship_hull_heavy_4
 				name_group = SOL_BB_HISTORICAL
 				parent_version = 0
-					modules = {
-						fixed_ship_battery_slot = ship_heavy_battery_4
-						fixed_ship_anti_air_slot = ship_anti_air_3
-						fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-						fixed_ship_radar_slot = ship_radar_1
-						fixed_ship_engine_slot = heavy_ship_engine_4
-						fixed_ship_secondaries_slot = ship_secondaries_2
-						fixed_ship_armor_slot = ship_armor_bb_3
-						front_1_custom_slot = ship_heavy_battery_4
-						mid_1_custom_slot = empty
-						mid_2_custom_slot = empty
-						mid_3_custom_slot = empty
-						rear_1_custom_slot = ship_airplane_launcher_1
-					}
+				modules = {
+					fixed_ship_battery_slot = ship_heavy_battery_4
+					fixed_ship_anti_air_slot = ship_anti_air_3
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = heavy_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					fixed_ship_armor_slot = ship_armor_bb_3
+					front_1_custom_slot = ship_heavy_battery_4
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = empty
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = ship_airplane_launcher_1
 				}
+			}
 			create_equipment_variant = {
 				name = "Nest Class"
 				type = ship_hull_carrier_3
 				name_group = SOL_CV_HISTORICAL
 				parent_version = 0
-					modules = {
-						fixed_ship_deck_slot_1 = ship_deck_space
-						fixed_ship_deck_slot_2 = ship_deck_space
-						fixed_ship_anti_air_slot = ship_anti_air_3
-						fixed_ship_radar_slot = ship_radar_1
-						fixed_ship_engine_slot = carrier_ship_engine_4
-						fixed_ship_secondaries_slot = ship_secondaries_2
-						mid_1_custom_slot = empty
-						mid_2_custom_slot = ship_deck_space
-						front_1_custom_slot = empty
-					}
+				modules = {
+					fixed_ship_deck_slot_1 = ship_deck_space
+					fixed_ship_deck_slot_2 = ship_deck_space
+					fixed_ship_anti_air_slot = ship_anti_air_3
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = carrier_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = ship_deck_space
+					front_1_custom_slot = empty
 				}
+			}
 			create_equipment_variant = {
 				name = "Guardian Angel Class"
 				type = ship_hull_cruiser_4
@@ -5426,87 +5375,86 @@ shared_focus = {
 				type = ship_hull_light_4
 				name_group = SOL_DD_HISTORICAL
 				parent_version = 0
-					modules = {
-						fixed_ship_battery_slot = ship_light_battery_3
-						fixed_ship_anti_air_slot = ship_anti_air_2
-						fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-						fixed_ship_radar_slot = ship_radar_1
-						fixed_ship_engine_slot = light_ship_engine_4
-						fixed_ship_torpedo_slot = ship_torpedo_2
-						mid_1_custom_slot = ship_torpedo_2
-						mid_2_custom_slot = empty
-						rear_1_custom_slot = ship_light_battery_3
-						front_1_custom_slot = ship_anti_air_2
-					}
-				}
-				create_ship = {
-					type = ship_hull_light_4
-					equipment_variant = "Cherubim Class"
-					name = "HMS Cherubim"
-				}
-				create_ship = {
-					type = ship_hull_light_4
-					equipment_variant = "Cherubim Class"
-				}
-				create_ship = {
-					type = ship_hull_light_4
-					equipment_variant = "Cherubim Class"
-				}
-				create_ship = {
-					type = ship_hull_light_4
-					equipment_variant = "Cherubim Class"
-				}
-				create_ship = {
-					type = ship_hull_light_4
-					equipment_variant = "Cherubim Class"
-				}
-				create_ship = {
-					type = ship_hull_cruiser_4
-					equipment_variant = "Guardian Angel Class"
-				}
-				create_ship = {
-					type = ship_hull_cruiser_4
-					equipment_variant = "Guardian Angel Class"
-				}
-				create_ship = {
-					type = ship_hull_cruiser_4
-					equipment_variant = "Guardian Angel Class"
-				}
-				create_ship = {
-					type = ship_hull_cruiser_4
-					equipment_variant = "Guardian Angel Class"
-				}
-				create_ship = {
-					type = ship_hull_cruiser_4
-					equipment_variant = "Guardian Angel Class"
-				}
-				create_ship = {
-					type = ship_hull_heavy_4
-					equipment_variant = "Sanctifying Flame Class"
-					name = "HMS Sanctifying Flame"
-				}
-				create_ship = {
-					type = ship_hull_carrier_3
-					equipment_variant = "Nest Class"
-					name = "HMS Nest"
-				}
-				create_ship = {
-					type = ship_hull_carrier_3
-					equipment_variant = "Nest Class"
-					name = "HMS Raging Swarm"
-				}
-				create_ship = {
-					type = ship_hull_carrier_3
-					equipment_variant = "Nest Class"
-					name = "HMS Pure Heat"
-				}
-				create_ship = {
-					type = ship_hull_super_heavy_2
-					equipment_variant = "Celestial Throne Class"
-					name = "HMS Celestial Throne"
+				modules = {
+					fixed_ship_battery_slot = ship_light_battery_3
+					fixed_ship_anti_air_slot = ship_anti_air_2
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = light_ship_engine_4
+					fixed_ship_torpedo_slot = ship_torpedo_2
+					mid_1_custom_slot = ship_torpedo_2
+					mid_2_custom_slot = empty
+					rear_1_custom_slot = ship_light_battery_3
+					front_1_custom_slot = ship_anti_air_2
 				}
 			}
-		###Create new fleet of five destroyers, 5 light cruisers, 3 carries, 1 BB, and 1 SH
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+				name = "HMS Cherubim"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_heavy_4
+				equipment_variant = "Sanctifying Flame Class"
+				name = "HMS Sanctifying Flame"
+			}
+			create_ship = {
+				type = ship_hull_carrier_3
+				equipment_variant = "Nest Class"
+				name = "HMS Nest"
+			}
+			create_ship = {
+				type = ship_hull_carrier_3
+				equipment_variant = "Nest Class"
+				name = "HMS Raging Swarm"
+			}
+			create_ship = {
+				type = ship_hull_carrier_3
+				equipment_variant = "Nest Class"
+				name = "HMS Pure Heat"
+			}
+			create_ship = {
+				type = ship_hull_super_heavy_2
+				equipment_variant = "Celestial Throne Class"
+				name = "HMS Celestial Throne"
+			}
+		}
 	}
 	ai_will_do = { factor = 27 }
 }
@@ -5677,7 +5625,6 @@ shared_focus = {
 	cost = 1
 	
 	completion_reward = {
-		###reduce slipping_sanity by 10% war support and remove the recruitable population factor penalty
 		country_event = solar.301
 	}
 	ai_will_do = { factor = 50 }
@@ -6708,11 +6655,6 @@ shared_focus = {
 			remove_idea = solars_sanctum_2
 			add_idea = a_holy_temple
 		}
-		hidden_effect = {
-			STG = {
-				country_event = solar.399
-			}
-		}
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -6768,11 +6710,6 @@ shared_focus = {
 		swap_ideas = {
 			remove_idea = solars_sanctum_2
 			add_idea = temple_for_the_masses
-		}
-		hidden_effect = {
-			STG = {
-				country_event = solar.399
-			}
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -6886,7 +6823,7 @@ shared_focus = {
 
 shared_focus = {
 	id = opportunistic_rats
-	x = 0
+	x = -3
 	y = 1
 	relative_position_id = brothers_and_sisters_in_the_empress
 	
@@ -6894,18 +6831,26 @@ shared_focus = {
 	prerequisite = { focus = brothers_and_sisters_in_the_empress }
 	prerequisite = { focus = further_streamlining }
 	prerequisite = { focus = reminding_the_militarium_of_its_place }
+	mutually_exclusive = { focus = to_the_land_of_darkness }
 	
 	completion_reward = {
-		IF = {
-			limit = {
-				has_global_flag = SOL_stalliongrad_war
-			}
-			country_event = solar.337
-			###Country event for Aurora learning of Stalliongrad's imminent war and making the Empire go into an emergency
+		declare_war_on = {
+			target = STG
+			type = annex_everything
 		}
-		ELSE = {
-			country_event = solar.338
-		}
+		custom_effect_tooltip = war_with_southeast_two_weeks
+		set_country_flag = southeast_war_prep
+		###Initiate timer for attacking in fourteen days
+		#IF = {
+		#	limit = {
+		#		has_global_flag = SOL_stalliongrad_war
+		#	}
+		#	country_event = solar.337
+		#	###Country event for Aurora learning of Stalliongrad's imminent war and making the Empire go into an emergency
+		#}
+		#ELSE = {
+		#	country_event = solar.338
+		#}
 	}
 	ai_will_do = {
 		base = 25
@@ -6920,7 +6865,10 @@ shared_focus = {
 	relative_position_id = opportunistic_rats
 	
 	cost = 3
-	prerequisite = { focus = opportunistic_rats }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -6938,13 +6886,16 @@ shared_focus = {
 	relative_position_id = opportunistic_rats
 	
 	cost = 3
-	prerequisite = { focus = opportunistic_rats }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
-		add_tech_bonus = {
+		add_doctrine_cost_reduction = {
 			name = doctrine_bonus
 			uses = 1
-			bonus = 0.75
+			cost_reduction = 0.35
 			category = land_doctrine
 		}
 	}
@@ -6958,7 +6909,10 @@ shared_focus = {
 	relative_position_id = opportunistic_rats
 	
 	cost = 4
-	prerequisite = { focus = opportunistic_rats }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -7043,9 +6997,9 @@ shared_focus = {
 ###Southeast war###
 shared_focus = {
 	id = to_the_land_of_darkness
-	x = 0
+	x = 3
 	y = 1
-	relative_position_id = heresy_shall_never_triumph
+	relative_position_id = brothers_and_sisters_in_the_empress
 	
 	bypass = {
 		OR = {
@@ -7074,7 +7028,10 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = heresy_shall_never_triumph }
+	prerequisite = { focus = brothers_and_sisters_in_the_empress }
+	prerequisite = { focus = further_streamlining }
+	prerequisite = { focus = reminding_the_militarium_of_its_place }
+	mutually_exclusive = { focus = opportunistic_rats }
 	
 	completion_reward = {
 		every_country = {
@@ -7094,11 +7051,14 @@ shared_focus = {
 			}
 		
 			EQS = {
-				create_wargoal = {
-					type = annex_everything
+				declare_war_on = {
 					target = PREV
+					type = annex_everything
 				}
 			}
+			custom_effect_tooltip = stg_war_two_weeks
+			set_country_flag = stg_prep
+			###Initiate timer for war with STG in two weeks
 		}
 	}
 }
@@ -7136,7 +7096,10 @@ shared_focus = {
 	}
 	
 	cost = 3
-	prerequisite = { focus = to_the_land_of_darkness }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -7224,7 +7187,10 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = to_the_land_of_darkness }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		country_event = solar.339
@@ -7310,7 +7276,10 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = to_the_land_of_darkness }
+	prerequisite = { 
+		focus = opportunistic_rats 
+		focus = to_the_land_of_darkness
+	}
 	
 	completion_reward = {
 		29 = {
@@ -7413,18 +7382,35 @@ shared_focus = {
 	prerequisite = { focus = train_for_the_inevitable_slog }
 	
 	completion_reward = {
-		country_event = solar.340
-		###Event for Aurora having another Hitlerian spech about the joy of half the Empire being whole, and how they will punish the heretics in the rest of thel ands of the changelings and the Crystal Empire
+		country_event = solar.356
 	}
 	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = a_golden_age_of_order
+	x = 3
+	y = 1
+	relative_position_id = heresy_shall_never_triumph
+	
+	cost = 3
+	prerequisite = { focus = heresy_shall_never_triumph }
+	prerequisite = { focus = the_empress_shall_be_praised_from_sea_to_sea }
+	
+	completion_reward = {
+		country_event = solar.340
+		###Event for Aurora having another Hitlerian spech about the joy of half the Empire being whole, and how they will punish the heretics in the rest of the l nds of the changelings and the Crystal Empire
+	}
+	
+	ai_will_do = { factor = 50 }
 }
 
 ###Crystal Empire War###
 shared_focus = {
 	id = harmonys_end
-	x = -5
+	x = -3
 	y = 1
-	relative_position_id = the_empress_shall_be_praised_from_sea_to_sea
+	relative_position_id = a_golden_age_of_order
 	
 	available = {
 		has_war = no
@@ -7437,7 +7423,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = the_empress_shall_be_praised_from_sea_to_sea }
+	prerequisite = { focus = a_golden_age_of_order }
 	
 	completion_reward = {
 		country_event = solar.341
@@ -7601,9 +7587,9 @@ shared_focus = {
 ###Changeling War###
 shared_focus = {
 	id = end_the_great_tribulation
-	x = 5
+	x = 3
 	y = 1
-	relative_position_id = the_empress_shall_be_praised_from_sea_to_sea
+	relative_position_id = a_golden_age_of_order
 	
 	available = {
 		has_war = no
@@ -7616,7 +7602,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = the_empress_shall_be_praised_from_sea_to_sea }
+	prerequisite = { focus = a_golden_age_of_order }
 	
 	completion_reward = {
 		country_event = solar.346
@@ -7794,7 +7780,7 @@ shared_focus = {
 ###Marelandia War and Prep###
 shared_focus = {
 	id = crystal_ponies_for_the_crystal_mines
-	x = 3
+	x = 1
 	y = 1
 	relative_position_id = the_consequence_of_rebellion
 	
@@ -7840,7 +7826,7 @@ shared_focus = {
 
 shared_focus = {
 	id = swarming_the_air_with_the_empress_faithful
-	x = 5
+	x = 3
 	y = 1
 	relative_position_id = the_consequence_of_rebellion
 	
@@ -7878,7 +7864,7 @@ shared_focus = {
 
 shared_focus = { 
 	id = changelings_for_the_steel_mills
-	x = -3
+	x = -1
 	y = 1
 	relative_position_id = the_punishment_of_humuliation
 	
@@ -8392,7 +8378,7 @@ shared_focus = {
 
 shared_focus = {
 	id = wild_no_more
-	x = 1
+	x = -1
 	y = 1
 	relative_position_id = eviscerating_experiment
 	
@@ -8402,16 +8388,12 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
-	}
-	
-	cost = 6
+	cost = 5
 	
 	prerequisite = {
 		focus = eviscerating_experiment
 		focus = taming_new_pony
 	}
-	
 	
 	completion_reward = {
 		every_state = {
@@ -8426,23 +8408,22 @@ shared_focus = {
 
 shared_focus = {
 	id = twenty_four_karat_bad_luck
-	x = 0
+	x = 3
 	y = 1
-	relative_position_id = wild_no_more
+	relative_position_id = eviscerating_experiment
 	
 	available = {
 		NOT = {
 			country_exists = CCA
 		}
 	}
-
-	bypass = {
-	}
 	
 	cost = 5
 	
-	prerequisite = { focus = wild_no_more }
-	
+	prerequisite = {
+		focus = eviscerating_experiment
+		focus = taming_new_pony
+	}
 	
 	completion_reward = {
 		every_state = {
@@ -8457,9 +8438,9 @@ shared_focus = {
 
 shared_focus = {
 	id = return_of_the_lost_generation
-	x = 0
+	x = 1
 	y = 1
-	relative_position_id = twenty_four_karat_bad_luck
+	relative_position_id = eviscerating_experiment
 	
 	available = {
 		AND = {
@@ -8472,13 +8453,12 @@ shared_focus = {
 		}
 	}
 
-	bypass = {
-	}
-	
 	cost = 5
 	
-	prerequisite = { focus = twenty_four_karat_bad_luck }
-	
+	prerequisite = {
+		focus = eviscerating_experiment
+		focus = taming_new_pony
+	}
 	
 	completion_reward = {
 		every_state = {
@@ -8507,11 +8487,11 @@ shared_focus = {
 	relative_position_id = return_of_the_lost_generation
 	
 	available = {
-		NOT = {
-			country_exists = CHN
-			has_war = yes
-		}
 		AND = {
+			NOT = {
+				country_exists = CHN
+				has_war = yes
+			}
 			OR = {
 				has_country_flag = daybreaker_reigns
 				has_country_flag = aurora_reigns
@@ -8519,13 +8499,11 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
-	}
-	
 	cost = 7
 	
 	prerequisite = { focus = return_of_the_lost_generation }
-	
+	prerequisite = { focus = twenty_four_karat_bad_luck }
+	prerequisite = { focus = wild_no_more }
 	
 	completion_reward = {
 		319 = {

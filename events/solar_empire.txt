@@ -173,24 +173,9 @@ country_event = {
 		ai_chance = {
 			factor = 100
 			}
-			remove_unit_leader = 19
-			create_corps_commander = {
-				name = "Aurora Shinespark"
-				portrait_path = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-				traits = { pony_race_trait solaris_inquisitionis protectress_of_the_empress_general promising_general }
-				skill = 2
-				id = 2
-				attack_skill = 3
-				defense_skill = 1
-				planning_skill = 2
-				logistics_skill = 2
-				female = yes
-			}
+			retire_character = EQS_Sentinel_1048
+			set_country_flag = aurora_general
 			set_country_flag = sentinel_killed
-			random_army_leader = {
-				limit = { has_id = 2 }
-				save_global_event_target_as = SOL_Aurora_Shinespark
-			}
 		}
 	}
 
@@ -424,7 +409,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				add_manpower = -77213
 				damage_building = {
 					type = infrastructure
-					damage = 3
+					damage = 1
 				}
 				remove_building = {
 					type = arms_factory
@@ -465,7 +450,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				add_manpower = -204702
 				damage_building = {
 					type = infrastructure
-					damage = 8
+					damage = 3
 				}
 				remove_building = {
 					type = arms_factory
@@ -503,7 +488,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 				add_manpower = -204702
 				damage_building = {
 					type = infrastructure
-					damage = 8
+					damage = 3
 				}
 				remove_building = {
 					type = arms_factory
@@ -516,57 +501,6 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 			}
 			restore_previous_manpower = yes
 		}
-	}
-}
-
-country_event = { #Rebels found, less damage, Starlight and Trixie captured
-	id = solar.19
-	title = solar.19.t
-	desc = solar.19.d
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = solar.19.a
-		ai_chance = {
-			factor = 100
-		}
-		save_current_manpower = yes
-		75 = {
-		set_variable = { 
-			rebel_var_1 = -0.9 
-			}
-		set_variable = { 
-			rebel_var_2 = -0.35 
-			}
-		}
-		hidden_effect = {
-			set_country_flag = starlight_and_trixie_escaped
-			set_country_flag = successful_rebellion
-			
-			75 = {
-				add_dynamic_modifier = {
-					modifier = manehattan_rebellion
-					}
-				}
-			mark_focus_tree_layout_dirty = yes
-		}
-		75 = {
-			add_manpower = -204702
-			damage_building = {
-				type = infrastructure
-				damage = 8
-			}
-			remove_building = {
-				type = arms_factory
-				level = 2
-			}
-			remove_building = {
-				type = industrial_complex
-				level = 3
-			}
-		}
-		restore_previous_manpower = yes
 	}
 }
 
@@ -654,41 +588,7 @@ country_event = { #Daybreaker brings Starlight and Trixie to perform the rites o
 	
 	option = { #Rise my new generals
 		name = solar.40.a
-		ai_chance = {
-			factor = 100
-			}
-		create_corps_commander = {
-			name = "Starlight Glimmer"
-			portrait_path = "gfx/leaders/EQS/Starlight_general_2.tga"
-			traits = { pony_race_trait military_genius brilliant_strategist }
-			skill = 4
-			id = 5
-			attack_skill = 2
-			defense_skill = 3
-			planning_skill = 4
-			logistics_skill = 3
-			female = yes
-		}
-		create_corps_commander = {
-			name = "Trixie Lulamoon"
-			portrait_path = "gfx/leaders/EQS/Trixie_2.tga"
-			traits = { pony_race_trait stage_performer infantry_leader }
-			skill = 3
-			id = 6
-			attack_skill = 4
-			defense_skill = 2
-			planning_skill = 2
-			logistics_skill = 5
-			female = yes
-		}
-		random_army_leader = {
-			limit = { has_id = 5 }
-			save_global_event_target_as = SOL_Starlight_Glimmer
-		}
-		random_army_leader = {
-			limit = { has_id = 6 }
-			save_global_event_target_as = SOL_Trixie
-		}
+		set_country_flag = starlight_and_trixie_corrupted
 	}
 }
 
@@ -711,18 +611,16 @@ country_event = { #The Inquisitionis is instated into the unions of Manehattan t
 	}
 }
 
-country_event = { #Daybreaker surveys the damage and executes the mayor of Manehattan, again
+country_event = { #Daybreaker surveys the damage and executes some of the solar commanders who let it happen
 	id = solar.42
 	title = solar.42.t
 	desc = solar.42.d
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #They were all useless, anyway
 		name = solar.42.a
-		ai_chance = {
-			factor = 100
-		}
+		add_manpower = -13
 	}
 }
 
@@ -733,11 +631,8 @@ country_event = { #Show trial of Starlight and Trixie for their crimes and it bu
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #That should keep the populace happy
 		name = solar.43.a
-		ai_chance = {
-			factor = 100
-		}
 	}
 }
 
@@ -748,15 +643,80 @@ country_event = { #Execution of the captured commanders of the rebellion if Star
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #They sealed their fate long ago
 		name = solar.44.a
-		ai_chance = {
-			factor = 100
+		save_current_manpower = yes
+		75 = {
+			add_manpower = -73
+		}
+		restore_previous_manpower = yes
+	}
+}
+
+country_event = { #Daybreaker receives word that Starlight and Trixie escaped and she is furious, knowing they will flee to the Crystal Empire as it's the only safe place
+	id = solar.45
+	title = solar.45.t
+	desc = solar.45.d
+	
+	is_triggered_only = yes
+	
+	option = { #I want that commander's head on a platter by sundown!
+		name = solar.45.a
+		add_stability = -0.03
+		add_political_power = -20
+	}
+}
+
+country_event = { #Daybreaker visits Manehattan when she learns most of the remaining commanders of the rebellion were captured, and she hosts a grand execution for them in the ruins of the city
+	id = solar.46
+	title = solar.46.t
+	desc = solar.46.d
+	
+	is_triggered_only = yes
+	
+	option = { #They shall burn forever in Tartarus
+		name = solar.46.a
+		add_stability = 0.05
+		add_war_support = 0.02
+	}
+}
+
+country_event = { #Daybreaker visits Manehattan when she learns there is another small uprising of workers, and when she meets the new mayor she gives them one chance to explain their failures before she executes them on the spot
+	id = solar.47
+	title = solar.47.t
+	desc = solar.47.d
+	
+	is_triggered_only = yes
+	
+	option = { #I shall deal with these slime myself
+		name = solar.47.a
+		add_manpower = -1
+		save_current_manpower = yes
+		75 = {
+			add_manpower = -138
+		}
+		restore_previous_manpower = yes
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.01
 		}
 	}
 }
 
-country_event = {
+country_event = { #Daybreaker assembles the remaining survivors of Starlight's cells and states they will be punished for their list of crimes, but not before being put to work to slave for the Empire to restore Manehattan
+	id = solar.48
+	title = solar.48.t
+	desc = solar.48.d
+	
+	is_triggered_only = yes
+	
+	option = { #You will die, but not before you serve me!
+		name = solar.48.a
+		add_political_power = 50
+	}
+}
+
+country_event = { #The Inquisitionis manages to get details of the remaining cells in Ordo Multi and initiates a purge, weakening the harmonists in the future
 	id = solar.50
 	title = solar.50.t
 	desc = solar.50.d
@@ -765,11 +725,49 @@ country_event = {
 	
 	option = { #Wipe them out, all of them
 		name = solar.50.a
-		ai_chance = {
-			factor = 100
+		add_political_power = 100
+		add_stability = 0.05
+		add_war_support = 0.05
+		set_country_flag = weaker_rebels
+		add_popularity = {
+			ideology = democratic
+			popularity = -0.02
 		}
-		
-		###Include damage to buildings in the surrounding states, and loss of ponypower###
+		save_current_manpower = yes
+		110 = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+			add_manpower = -12473
+		}
+		187 = {
+			damage_building = {
+				type = infrastructure
+				damage = 2
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 1
+			}
+			add_manpower = -19842
+		}
+		184 = {
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+			damage_building = {
+				type = arms_factory
+				damage = 2
+			}
+			add_manpower = -7691
+		}
+		restore_previous_manpower = yes
 	}
 }
 		
@@ -790,9 +788,9 @@ country_event = { #Purging some heretical commanders
 			}
 		name = solar.51.a
 		add_stability = 0.01
-		remove_unit_leader = 33
-		remove_unit_leader = 49
-		remove_unit_leader = 38
+		retire_character = EQS_Sun_Marble_1048
+		retire_character = EQS_Shining_Star
+		retire_character = EQS_Stormchaser
 		}
 	}
 
@@ -920,7 +918,7 @@ country_event = { #Celestia reveals herself and almost prevents Daybreaker from 
 			}
 		remove_country_leader_trait = daybreaker_god2
 		custom_effect_tooltip = daybreaker_bedridden_tt
-		hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = BAG } }
+		set_country_flag = daybreaker_sick
 		}
 	}
 	
@@ -969,7 +967,7 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 			add_to_variable = {
 				stability_change = -0.05
 				}
-			add_to_variable {
+			add_to_variable = {
 				war_support_change = -0.05
 				}
 			set_variable = {
@@ -995,18 +993,18 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 			}
 			add_to_variable = {
 				stability_change = -0.05
-				}
-			add_to_variable {
+			}
+			add_to_variable = {
 				war_support_change = -0.05
-				}
+			}
 			set_variable = {
 				army_speed_change = -0.1
-				}
+			}
 			country_event = {
 				id = solar.85
 				days = 35
 				random = 60
-				}
+			}
 			set_country_flag = unlock_sunset_tracker
 			}
 		}
@@ -1310,7 +1308,10 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 	
 	option = { #Celestia returns
 		name = solar.99.a
-		SOL_Celestia_Returned = yes
+		custom_effect_tooltip = celestias_back_gents
+		hidden_effect = {
+			SOL_Celestia_Returned = yes
+		}
 		
 		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
 	}
@@ -1334,16 +1335,16 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			hidden_effect = {
 				retire_country_leader = yes
 				custom_effect_tooltip = sunset_arrested_tt
-				hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
-				create_country_leader = {
-				name = "Sunset Shimmer"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Sunset.tga"
-				desc = "POLITICS_SUNSET_SHIMMER_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					high_mage_shimmer
+				set_country_flag = sunset_arrested
+				add_country_leader_role = {
+					character = EQS_Sunset_Shimmer_1048
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						desc = "POLITICS_SUNSET_SHIMMER_DESC"
+						ideology = solarism
+						id = -1
+						traits = { high_mage_shimmer }
 					}
 				}
 				set_country_flag = sunset_reigns
@@ -1369,16 +1370,17 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			hidden_effect = {
 				retire_country_leader = yes
 				custom_effect_tooltip = aurora_retires_tt
-				hidden_effect = { event_target:SOL_Aurora_Shinespark = { set_nationality = BAG } }
-				create_country_leader = {
-				name = "Aurora Shinespark"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-				desc = "POLITICS_AURORA_SHINESPARK_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					protectress_of_the_empress
+				set_country_flag = aurora_removed
+				add_country_leader_role = {
+					character = EQS_Aurora_Shinespark
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						desc = "POLITICS_AURORA_SHINESPARK_DESC"
+						ideology = solarism
+						traits = {
+							protectress_of_the_empress
+						}
 					}
 				}
 				set_country_flag = aurora_reigns
@@ -1439,12 +1441,12 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 		IF = {
 			custom_effect_tooltip = daybreaker_returns_tt
 			limit = { has_country_leader = { ruling_only = yes name = "Daybreaker" } }
-			hidden_effect = { event_target:SOL_Daybreaker = { set_nationality = EQS } }
+			clr_country_flag = daybreaker_sick
 		}
 		ELSE_IF = {
 			limit = { has_country_leader = { ruling_only = yes name = "Nova Glow" } }
-			event_target:SOL_Nova_Glow = { promote_leader = yes }
-			event_target:SOL_Nova_Glow = { remove_unit_leader_trait = recently_promoted }
+			EQS_Nova_Glow = { promote_leader = yes }
+			EQS_Nova_Glow = { remove_unit_leader_trait = recently_promoted }
 		}
 	}
 }
@@ -1461,11 +1463,7 @@ country_event = { #Daybreaker assembles some of the brightest of the Inquisition
 		custom_effect_tooltip = novus_becomes_EQS_general_tt
 		custom_effect_tooltip = nova_becomes_EQS_general_tt
 		custom_effect_tooltip = quasar_becomes_EQS_general_tt
-		hidden_effect = {
-			event_target:SOL_Nova_Glow = { set_nationality = EQS }
-			event_target:SOL_Novus_Flux = { set_nationality = EQS }
-			event_target:SOL_Quasar_Pulse = { set_nationality = EQS }
-		}
+		set_country_flag = new_daybreaker_generals
 	}
 }
 
@@ -1517,6 +1515,12 @@ country_event = { #Daybreaker arrives in the damaged Whinnyapolis and is met wit
 			ideology = fascism
 			popularity = 0.01
 		}
+		hidden_effect = {
+			WHY = {
+				WHY_Solar_Strike = { set_nationality = EQS }
+				WHY_Horizon_Sunrise = { set_nationality = EQS }
+			}
+		}
 	}
 }
 
@@ -1535,7 +1539,7 @@ country_event = { #Daybreaker finally arrives in the Crystal Empire among the ch
 	}
 }
 
-country_event = { #Daybreaker marches into Vesalipolis and fights her way to the palace of Chrysalis, where she finds and executes her in cold blood
+country_event = { #Daybreaker marches into Vesalipolis after its conquest, and she starts to search for Chrysalis, almost like a stalker of changelings and eventually finds the government cowering, aside from Chrysalis, in an emergency bunker under the palace; she fights and captures Chrysalis
 	id = solar.109
 	title = solar.109.t
 	desc = solar.109.d
@@ -1545,7 +1549,27 @@ country_event = { #Daybreaker marches into Vesalipolis and fights her way to the
 	option = { #Never will her filth plague the Empire again
 		name = solar.109.a
 		add_stability = 0.05
-		###Can be a two-part event later, namely that it is her fighting Chrysalis, then a couple of weeks later the next event is her execution in Vesalipolis
+		hidden_effect = {
+			country_event = {
+				id = solar.121
+				days = 14
+				random = 120
+			}
+		}
+	}
+}
+
+country_event = { #Daybreaker brings Chrysalis back to Sanctum Solar and parades her through the street before executing her in the main square, with Chryslis remaining defiant against her to the end
+	id = solar.121
+	title = solar.121.t
+	desc = solar.121.d
+	
+	is_triggered_only = yes
+	
+	option = { #And thus ends the bug menace
+		name = solar.121
+		add_stability = 0.03
+		add_war_support = 0.03
 	}
 }
 
@@ -1570,6 +1594,18 @@ country_event = { #Daybreaker is furious at her former state and she brings in h
 	
 	option = { #Another!
 		name = solar.111.a
+	}
+}
+
+country_event = { #Daybreaker reads up at some of the chaos that happened while she was in her state of sickness, and she is furious that the ponies had so little faith in her; she holds a meeting with some of the governmental leaders of Sanctum Solar and she executes them for their incompetence, and feels at ease and more mentally ready as ever after that baggage is dealt with
+	id = solar.112
+	title = solar.112.t
+	desc = solar.112.d
+	
+	is_triggered_only = yes #With focus improving_perfection, or whatever
+	
+	option = { #Apparently their talents were wasted. A pity
+		name = solar.112.a
 	}
 }
 
@@ -1666,6 +1702,90 @@ country_event = { #Following one of the settlers, they are soon attacked by a ro
 	}
 }
 
+country_event = { #Hidden event for SOL so it will get Dyx to appear
+	id = solar.197
+	title = solar.197.t
+	desc = solar.197.d
+	
+	trigger = {
+		tag = EQS
+		EQS_Daybreaker = { is_country_leader = yes }
+		date > 1053.1.1
+	}
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	option = {
+		name = solar.197.a
+		random_list = {
+			1 = {
+				country_event = {
+					id = solar.198
+					days = 14
+					random = 240
+				}
+			}
+			99 = { }
+		}
+	}
+}
+
+country_event = { #Dyx barges into the throne room declaring nonchalantly that she is Daybreaker's daughter, and Daybreaker is nonplussed; she is not convinced until Dyx reveals she knows the location of Daybreaker's birthmark, something only a family member would know; Daybreaker is not amused and tries to find out more
+	id = solar.198
+	title = solar.198.t
+	desc = solar.198.d
+	
+	is_triggered_only = yes
+	
+	option = { #What did I drink in 673?
+		name = solar.198.a
+		set_country_flag = dyx_is_here_biatches
+		hidden_effect = {
+			country_event = {
+				id = solar.199
+				days = 7
+				random = 168
+			}
+		}
+	}
+}
+
+country_event = { #Dyx settles down in the castle and pesters Daybreaker about what she can do for fun; Daybreaker is already annoyed at being the parent, and sucks at it by telling Dyx to do whatever she wants, which makes Dyx very, very pleased
+	id = solar.199
+	title = solar.199.t
+	desc = solar.199.d
+	
+	is_triggered_only = yes
+	
+	option = { #Do I seriously need to be a mother and run a nation?
+		name = solar.199.a
+		hidden_effect = {
+			country_event = {
+				id = solar.200
+				days = 10
+				random = 120
+			}
+		}
+	}
+}
+
+country_event = { #Dyx is caught burning down a few heretics' houses, and Daybreaker has a stern talking with her; Dyx complains about not being allowed to cause more destruction, and Daybreaker decides that she could be used on the front lines, if only to get rid of her and the scandal she has caused as paparazzi try to get info from her
+	id = solar.200
+	title = solar.200.t
+	desc = solar.200.d
+	
+	is_triggered_only = yes
+	option = { #I'm not upset, just very disappointed
+		name = solar.200.a
+		set_country_flag = dyx_is_being_dyx
+		add_political_power = -20
+		add_manpower = -5
+		custom_effect_tooltip = general_dyx
+	}
+}
+
 ###Sunset Events###
 ###IDs will go from 201-300###
 country_event = { #Sunset breaks down at being the new regent and Daybreaker's fall, and Aurora attempts to calm her as Pulsar Sweep also comes in to see what is going on and is harsher
@@ -1678,7 +1798,6 @@ country_event = { #Sunset breaks down at being the new regent and Daybreaker's f
 	option = {
 		name = solar.201.a
 		custom_effect_tooltip = sunset_reduce_modifier_1_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1692,7 +1811,6 @@ country_event = { #Sunset is calmed by the two archmages and she mandates a nati
 	option = {
 		name = solar.202.a
 		custom_effect_tooltip = sunset_reduce_modifier_2_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1706,7 +1824,6 @@ country_event = { #Sunset gives herself one final pep talk before a speech about
 	option = {
 		name = solar.203.a
 		custom_effect_tooltip = sunset_reduce_modifier_3_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1720,7 +1837,6 @@ country_event = { #Sunset holds the first service of the Adoratio since Daybreak
 	option = {
 		name = solar.204.a
 		custom_effect_tooltip = sunset_reduce_modifier_4_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1734,7 +1850,6 @@ country_event = { #Sunset meets with some factory leads to reassure them that th
 	option = {
 		name = solar.205.a
 		custom_effect_tooltip = sunset_reduce_modifier_5_tt
-		###have custom tooltips for reducing modifier
 	}
 }
 
@@ -1767,16 +1882,94 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 			limit = {
 				has_idea = aurora_shinespark
 			}
-			swap_ideas = {
-				remove_idea = aurora_shinespark
-				add_idea = aurora_shinespark_2
+			hidden_effect = {
+				remove_ideas = aurora_shinespark
+				remove_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					slot = political_advisor
+				}
+				add_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					advisor = {
+						slot = political_advisor
+						idea_token = aurora_shinespark
+						allowed = {
+							AND = {
+								original_tag = EQS
+								has_country_flag = aurora_promoted
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						visible = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+								has_country_flag = aurora_promoted
+							}
+						}
+						available = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						removal_cost = -1
+
+						traits = { high_mage_shinespark }
+
+						ai_will_do = {
+							factor = 1
+						}
+					}
+					activate = yes
+				}
 			}
 		}
 		ELSE = {
-			add_ideas = aurora_shinespark_2
+			hidden_effect = {
+				remove_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					slot = political_advisor
+				}
+				add_advisor_role = {
+					character = EQS_Aurora_Shinespark
+					advisor = {
+						slot = political_advisor
+						idea_token = aurora_shinespark
+						allowed = {
+							AND = {
+								original_tag = EQS
+								has_country_flag = aurora_promoted
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						visible = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+								has_country_flag = aurora_promoted
+							}
+						}
+						available = {
+							AND = {
+								is_EQS_SOL_1048 = yes
+								has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+							}
+						}
+						removal_cost = -1
+
+						traits = { high_mage_shinespark }
+
+						ai_will_do = {
+							factor = 1
+						}
+					}
+					activate = yes
+				}
+			}
 		}
-		event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
-		event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = high_mage }
+		EQS_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
+		EQS_Aurora_Shinespark = { add_unit_leader_trait = high_mage }
 	}
 }
 
@@ -1934,33 +2127,11 @@ country_event = { #Sunset is in another meeting with Blueblood and she finally h
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #Now please stop staring at my rump
 		name = solar.218.a
-		event_target:SOL_Blueblood = { add_defense = 1 }
-		event_target:SOL_Blueblood = { remove_unit_leader_trait = politically_connected }
-		create_corps_commander = {
-			name = "Guardian Shield"
-			#portrait_path = "gfx/leaders/EQS/Guardian_Shield.tga"
-			traits = { pony_race_trait solaris_militarium infantry_leader }
-			id = 5205
-			skill = 2
-			attack_skill = 1
-			defense_skill = 4
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-		}
-		create_corps_commander = {
-			name = "Golden Dawn"
-			#portrait_path = "gfx/leaders/EQS/Golden_Dawn.tga"
-			traits = { pony_race_trait solaris_militarium panzer_leader }
-			id = 5206
-			skill = 1
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 1
-		}
+		EQS_Blueblood = { add_defense = 1 }
+		EQS_Blueblood = { remove_unit_leader_trait = politically_connected }
+		set_country_flag = new_sunset_generals
 	}
 }
 
@@ -2619,9 +2790,9 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 			remove = high_mage_shimmer
 			add = shield_of_the_empire
 		}
-		event_target:SOL_Sunset_Shimmer = { set_nationality = EQS }
-		event_target:SOL_Sunset_Shimmer = { remove_unit_leader_trait = high_mage }
-		event_target:SOL_Sunset_Shimmer = { add_unit_leader_trait = princess_regent_general }
+		clr_country_flag = sunset_arrested
+		EQS_Sunset_Shimmer_1048 = { remove_unit_leader_trait = high_mage }
+		EQS_Sunset_Shimmer_1048 = { add_unit_leader_trait = princess_regent_general }
 		every_country = {
 			limit = {
 				OR = {
@@ -2685,18 +2856,9 @@ country_event = { #Sunset manages to convince the leaders that the Solar Empire 
 		name = solar.247.a
 		set_country_flag = thestrals_placated
 		EEE = {
-			random_army_leader = {
-				limit = { has_id = 7400 }
-				event_target:EEE_Gushing_Pulse = { set_nationality = EQS }
-			}
-			random_army_leader = {
-				limit = { has_id = 7401 }
-				event_target:EEE_Nocturne_Vision = { set_nationality = EQS }
-			}
-			random_army_leader = {
-				limit = { has_id = 7402 }
-				event_target:EEE_Screechy_Gale = { set_nationality = EQS }
-			}
+			EEE_Gushing_Pulse = { set_nationality = EQS }
+			EEE_Nocturne_Vision = { set_nationality = EQS }
+			EEE_Screechy_Gale = { set_nationality = EQS }
 		}
 	}
 }
@@ -2711,7 +2873,7 @@ country_event = { #Sunset is shot down almost instantly and she nearly gets capt
 	option = { #I definitely think one of them would have sucked my blood if I didn't get out of there
 		name = solar.248.a
 		add_political_power = -50
-		event_target:SOL_Sunset_Shimmer = {
+		EQS_Sunset_Shimmer_1048 = {
 			add_timed_unit_leader_trait = {
 				trait = wounded
 				days = 45
@@ -2734,6 +2896,7 @@ country_event = { #Sunset speaks from the Imperial Palace in Canterlot to procla
 		}
 		hidden_effect = {
 			set_country_flag = southeast_dead
+			set_major = yes
 			mark_focus_tree_layout_dirty = yes
 		}
 	}
@@ -2880,14 +3043,14 @@ country_event = { #Sunset meets with some of the economic ministers and is disap
 	
 	option = { #Yes, we'll start buying some crystals again, although we have other suppliers
 		name = solar.255.a
-		###Will make one trade for crystal
+		#Will make one trade for crystal
 		set_country_flag = minor_economic_ties
 		ai_chance = { factor = 40 }
 		add_to_variable = { nice_peace = 1 }
 	}
 	option = { #We will mingle our economies like the days of old, and help rebuild each other. The trade will flow!
 		name = solar.255.b
-		###Will make three trades for crystal and a trade for steel and aluminium
+		#Will make three trades for crystal and a trade for steel and aluminium
 		set_country_flag = major_economic_ties
 		ai_chance = { factor = 60 }
 		add_to_variable = { nice_peace = 2 }
@@ -3056,7 +3219,7 @@ country_event = { #The Crystal Empire receives word from one or two soldiers tha
 		set_global_flag = invitation_rejected
 		EQS = {
 			country_event = {
-				id = solar.269
+				id = solar.270
 				days = 1
 			}
 		}
@@ -3081,14 +3244,14 @@ country_event = { #The Crystal Empire learns of its traders being scrutinized ov
 		set_global_flag = invitation_rejected
 		EQS = {
 			country_event = {
-				id = solar.269
+				id = solar.270
 				days = 1
 			}
 		}
 	}
 }
 
-country_event = { #Luna and Cadance ticked off immensely at the amount of pressure that Sunset is putting on them, and they come to one conclusion: she is no longer welcome in the Crystal Empire, and they will meet on the battlefield
+country_event = { #Luna and Cadance are ticked off immensely at the amount of pressure that Sunset is putting on them, and they come to one conclusion: she is no longer welcome in the Crystal Empire, and they will meet on the battlefield
 	id = solar.264
 	title = solar.264.t
 	desc = solar.264.d
@@ -3115,7 +3278,7 @@ country_event = { #Sunset proposes the alliance before she leaves and waits to h
 	is_triggered_only = yes
 	
 	option = { #Well, it's in the Goddess' hooves, now
-		name = solar.266.a
+		name = solar.265.a
 		CRY = {
 			country_event = {
 				id = solar.266
@@ -3136,7 +3299,7 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 		name = solar.266.a
 		ai_chance = {
 			base = 10
-			###Alliance
+			#Alliance
 			modifier = {
 				OR = {
 					AND = {
@@ -3193,7 +3356,7 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 		name = solar.266.b
 		ai_chance = {
 			base = 25
-			###NA Pact
+			#NA Pact
 			modifier = {
 				OR = {
 					AND = {
@@ -3250,7 +3413,7 @@ country_event = { #Cadance and the others meet to discuss the option of allying 
 		name = solar.266.c
 		ai_chance = {
 			base = 20
-			###Rejection
+			#Rejection
 			modifier = {
 				OR = {
 					AND = {
@@ -3316,6 +3479,36 @@ country_event = { #Sunset is visited directly by Twilight, and the two of them h
 		name = solar.267.a
 		EQS = {
 			add_to_faction = CRY
+			IF = {
+				limit = {
+					has_country_flag = minor_economic_ties
+				}
+				create_import = {
+					resource = crystals
+					amount = 8
+					exporter = CRY
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					has_country_flag = major_economic_ties
+				}
+				create_import = {
+					resource = crystals
+					amount = 24
+					exporter = CRY
+				}
+				create_import = {
+					resource = steel
+					amount = 8
+					exporter = CRY
+				}
+				create_import = {
+					resource = aluminium
+					amount = 8
+					exporter = CRY
+				}
+			}
 			add_ai_strategy = {
 				type = alliance
 				id = CRY
@@ -3323,6 +3516,35 @@ country_event = { #Sunset is visited directly by Twilight, and the two of them h
 			}
 		}
 		CRY = {
+			IF = {
+				limit = {
+					EQS = {
+						has_country_flag = minor_economic_ties
+					}
+				}
+				create_import = {
+					resource = rubber
+					amount = 8
+					exporter = EQS
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					EQS = {
+						has_country_flag = major_economic_ties
+					}
+				}
+				create_import = {
+					resource = rubber
+					amount = 24
+					exporter = EQS
+				}
+				create_import = {
+					resource = oil
+					amount = 16
+					exporter = EQS
+				}
+			}
 			add_ai_strategy = {
 				type = alliance
 				id = EQS
@@ -3367,6 +3589,7 @@ country_event = { #Sunset never receives word back from the Crystal Empire, and 
 	
 	option = { #They--What--Why--?!
 		name = solar.269.a
+		set_global_flag = invitation_rejected
 	}
 }
 
@@ -3392,7 +3615,112 @@ country_event = { #Sunset and her generals quickly do up a plan for constructing
 	
 	option = { #How likely are they to withstand the fury of an alicorn?
 		name = solar.271.a
-		###Add forts along the CRY border
+		hidden_effect = {
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 277
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9359
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 13296
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 535
+					instant_build = yes
+				}
+			}
+			180 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 572
+					instant_build = yes
+				}
+			}
+			180 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 6557
+					instant_build = yes
+				}
+			}
+			70 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 476
+					instant_build = yes
+				}
+			}
+			70 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 6055
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 3095
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 3009
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 6138
+					instant_build = yes
+				}
+			}
+			56 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 67
+					instant_build = yes
+				}
+			}
+			56 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9167
+					instant_build = yes
+				}
+			}
+		}
 	}
 }
 
@@ -3483,18 +3811,22 @@ country_event = { #Sunset surprises Aurora with telling her of her next mission,
 			ELSE = {
 				release_puppet = EQC
 			}
+			EQS_Aurora_Shinespark = { 
+				set_nationality = EQC
+			}
 			EQC = {
-				create_country_leader = {
-				name = "Aurora Shinespark"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-				desc = "POLITICS_AURORA_SHINESPARK_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					protectress_of_the_empress
-					}
-				}
+			#	create_country_leader = {
+			#	name = "Aurora Shinespark"
+			#	expire = "1965.1.1"
+			#	picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
+			#	desc = "POLITICS_AURORA_SHINESPARK_DESC"
+			#	ideology = solarism
+			#	female = yes
+			#	traits = {
+			#		protectress_of_the_empress
+			#		}
+			#	}
+				country_event = solar.290
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -3561,6 +3893,33 @@ country_event = { #Sunset giddily waits for the Adoratio Primus to finish their 
 	option = { #This has gone better than I hoped
 		name = solar.280.a
 		set_country_flag = aurora_promoted
+	}
+}
+
+country_event = { #PDX!
+	id = solar.290
+	title = solar.290.t
+	desc = solar.290.d
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	option = {
+		name = "Why is the character system so asinine?!"
+		EQS_Aurora_Shinespark = { 
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					expire = "1965.1.1"
+					desc = "POLITICS_AURORA_SHINESPARK_DESC"
+					ideology = solarism
+					traits = {
+						protectress_of_the_empress
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -3799,9 +4158,9 @@ country_event = { #Aurora and Sunset hear some of the latest strategy proposals 
 	
 	option = { #I feel he has general qualities, don't you agree?
 		name = solar.315.a
-		add_tech_bonus = {
+		add_doctrine_cost_reduction = {
 			name = doctrine_bonus
-			bonus = 0.5
+			cost_reduction = 0.35
 			uses = 1
 			category = land_doctrine
 		}
@@ -3952,13 +4311,13 @@ country_event = { #Aurora is satisfied with the changes she made to the Empire, 
 	
 	option = { #I shall deal with them myself
 		name = solar.325.a
-		###Custom tooltip for Aurora becoming a field marshal here
+		custom_effect_tooltip = aurora_does_it_herself_tt
+		clr_country_flag = aurora_removed
 		hidden_effect = {
-			event_target:SOL_Aurora_Shinespark = { set_nationality = EQS }
-			event_target:SOL_Aurora_Shinespark = { promote_leader = yes }
-			event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = recently_promoted }
-			event_target:SOL_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
-			event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = princess_regent_general }
+			EQS_Aurora_Shinespark= { promote_leader = yes }
+			EQS_Aurora_Shinespark = { remove_unit_leader_trait = recently_promoted }
+			EQS_Aurora_Shinespark = { remove_unit_leader_trait = solaris_inquisitionis }
+			EQS_Aurora_Shinespark = { add_unit_leader_trait = princess_regent_general }
 		}
 		add_war_support = 0.1
 	}
@@ -4002,7 +4361,7 @@ country_event = { #Aurora meets with Nova in Cloudsdale, and speaks with her tha
 	option = { #Just don't burn down the entire city
 		name = solar.328.a
 		custom_effect_tooltip = nova_becomes_EQS_general_tt
-		hidden_effect = { event_target:SOL_Nova_Glow = { set_nationality = ROOT } }
+		set_country_flag = nova_archmage_caelum
 	}
 }
 
@@ -4125,24 +4484,15 @@ country_event = { #Blueblood meets with a few of his generals and Aurora barges 
 	option = { #You've been a naughty stallion, Blueblood
 		name = solar.336.a
 		custom_effect_tooltip = blueblood_arrested_tt
-		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
+		set_country_flag = aurora_appoints_fidelis
+		set_country_flag = blueblood_arrested
 		add_manpower = -10000
 		add_popularity = {
 			ideology = neutrality
 			popularity = -0.03
 		}
-		create_field_marshal = {
-			name = "Fidelis Flamma"
-			#portrait_path = "gfx/leaders/EQS/Fidelis.tga"
-			traits = { solaris_adoratio fire_pony pony_race_trait }
-			id = 5012
-			skill = 2
-			attack_skill = 3
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-		}
+		EQS_Fidelis_Flamma = { promote_leader = yes }
+		hidden_effect = { EQS_Fidelis_Flamma = { remove_unit_leader_trait = recently_promoted } }
 	}
 }
 
@@ -4229,6 +4579,7 @@ country_event = { #Aurora holds a speech to parade the prisoners of the war, and
 	option = { #We rise like the phoenix on her wings!
 		name = solar.340.a
 		add_ideas = the_imperial_phoenix
+		set_major = yes
 		set_country_flag = southeast_dead
 		mark_focus_tree_layout_dirty = yes
 	}
@@ -4326,7 +4677,7 @@ country_event = { #Aurora enters the temple in Sanctum Solar to hold a final pra
 	
 	option = { #Soon I will right the wrong inflicted upon us
 		name = solar.347.a
-		event_target:SOL_Aurora_Shinespark = { add_unit_leader_trait = anointed_of_the_empress }
+		EQS_Aurora_Shinespark = { add_unit_leader_trait = anointed_of_the_empress }
 	}
 }
 
@@ -4450,18 +4801,22 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 			ELSE = {
 				release_puppet = EQC
 			}
+			EQS_Novus_Flux = {
+				set_nationality = EQC
+			}
 			EQC = {
-				create_country_leader = {
-				name = "Novus Flux"
-				expire = "1965.1.1"
-				picture = "gfx/leaders/EQS/Novus_Flux.tga"
-				#desc = "POLITICS_AURORA_SHINESPARK_DESC"
-				ideology = solarism
-				female = yes
-				traits = {
-					novus_reformist
-					}
-				}
+			#	create_country_leader = {
+			#	name = "Novus Flux"
+			#	expire = "1965.1.1"
+			#	picture = "gfx/leaders/EQS/Novus_Flux.tga"
+			#	#desc = "POLITICS_AURORA_SHINESPARK_DESC"
+			#	ideology = solarism
+			#	female = yes
+			#	traits = {
+			#		novus_reformist
+			#		}
+			#	}
+				country_event = solar.360
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -4484,6 +4839,49 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 					long_name = EQC_SOL_MIL_neutrality_party
 				}
 				set_cosmetic_tag = EQC_SOL_ADO
+			}
+		}
+	}
+}
+
+country_event = { #Aurora tasks some of the communist survivors to erect a statue to Daybreaker smashing Big Sister with magic and otherwise proclaiming the defeat of communism in the southeast
+	id = solar.356
+	title = solar.356.t
+	desc = solar.356.d
+	
+	is_triggered_only = yes
+	
+	option = { #You've finally earned your keep, traitors
+		name = solar.356.a
+		add_stability = 0.03
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.02
+		}
+	}
+}
+
+country_event = { #More hidden events because PDX is pains
+	id = solar.360
+	title = solar.360.t
+	desc = solar.360.d
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	option = {
+		name = "Why do you have to be finicky, logs?!"
+		EQS_Novus_Flux = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					traits = {
+						novus_reformist
+					}
+				}
 			}
 		}
 	}
@@ -4535,7 +4933,7 @@ country_event = { #Sunset and the others are captured, and Celestia holds them f
 	option = { #You've made your choice, Sunset. I will speak with you later
 		name = celestia.2.a
 		custom_effect_tooltip = sunset_arrested_tt
-		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+		set_country_flag = sunset_arrested
 	}
 }
 
@@ -4549,18 +4947,15 @@ country_event = { #Celestia arrests Blueblood for his part and appoints herself 
 	option = { #I've had far too many years to learn about war
 		name = celestia.3.a
 		custom_effect_tooltip = blueblood_arrested_tt
-		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
-		create_field_marshal = {
-			name = "Princess Celestia"
-			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+		set_country_flag = blueblood_arrested
+		add_field_marshal_role = {
+			character = EQS_Sunbutt
 			traits = { pony_race_trait pleasant_sun inspirational_leader }
-			id = 5000
 			skill = 2
 			attack_skill = 3
 			defense_skill = 3
 			planning_skill = 2
 			logistics_skill = 2
-			female = yes
 		}
 	}
 }
@@ -4575,7 +4970,7 @@ country_event = { #Sunset asks to see Celestia and begs for proving her repenten
 	option = { #Very well, my former student, you shall prove your sincerity in battle
 		name = celestia.4.a
 		custom_effect_tooltip = sunset_returns_tt
-		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = EQS } }
+		clr_country_flag = sunset_arrested
 	}
 }
 
@@ -4602,7 +4997,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 	}
 }
 
-country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it
+country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it; she asks to be called by her full name, Celestia Solaria, not to be referred to as princess
 	id = celestia.6
 	title = celestia.6.t
 	desc = celestia.6.d
@@ -4628,9 +5023,9 @@ country_event = { #Celestia meets with Sunset, who is currently moping in her ro
 		name = celestia.7.a
 		set_variable = { sunset_redemption = 0 }
 		set_variable = { aurora_redemption = 0 }
-		###Look at making some of the results remove redemption for Sunset or Aurora, to ensure that it is impossible to achieve the best result (or a redemption result period) without taking decisions
-		###Should start a base variable for Sunset's effectiveness as a friendship student, and there will be branching events for her trying to befriend and teach Aurora the power of friendship, which will have its own variable
-		###Sunset's variable ranges from 1 to 100, with anything above a 60 being a pass for her; Aurora ranges from 1 to 100, with anything above 75 being a success for her
+		#Look at making some of the results remove redemption for Sunset or Aurora, to ensure that it is impossible to achieve the best result (or a redemption result period) without taking decisions
+		#Should start a base variable for Sunset's effectiveness as a friendship student, and there will be branching events for her trying to befriend and teach Aurora the power of friendship, which will have its own variable
+		#Sunset's variable ranges from 1 to 100, with anything above a 60 being a pass for her; Aurora ranges from 1 to 100, with anything above 75 being a success for her
 	}
 }
 
@@ -5058,18 +5453,24 @@ country_event = { #Sunset meekly enters Celestia's chambers and awaits her deter
 		add_manpower = 1
 		add_stability = 0.03
 		set_country_flag = sunset_redeemed
-		create_corps_commander = { #Reformed Aurora
-			name = "Aurora Shinespark"
-			portrait_path = "gfx/leaders/EQS/Aurora_Reformed.tga"
-			traits = { pony_race_trait missionary_of_harmony promising_general former_cultist }
-			id = 5010
-			skill = 2
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 3
-			logistics_skill = 1
-			female = yes
+		hidden_effect = {
+			EQS_Aurora_Shinespark = {
+				remove_unit_leader_role = yes
+			}
+			add_corps_commander_role = {
+				character = EQS_Aurora_Shinespark
+				skill = 2
+				traits = { pony_race_trait missionary_of_harmony promising_general former_cultist }
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 1
+			}
+			EQS_Aurora_Shinespark = {
+				set_portraits = { army = { large = "gfx/leaders/EQS/Aurora_Reformed.tga" } }
+			}
 		}
+		custom_effect_tooltip = aurora_returns
 	}
 }
 
@@ -5151,10 +5552,7 @@ country_event = { #After finally making them see the light, Celestia brings the 
 	option = { #Welcome home, my little ponies
 		name = celestia.29.a
 		custom_effect_tooltip = starlight_and_trixie_uncorrupted_tt
-		hidden_effect = {
-			event_target:SOL_Starlight_Glimmer = { set_nationality = EQS }
-			event_target:SOL_Trixie = { set_nationality = EQS }
-		}
+		set_country_flag = starlight_and_trixie_uncorrupted
 	}
 }
 
@@ -5186,47 +5584,12 @@ country_event = { #After seeing the first successful batch of reformed generals,
 		name = celestia.41.a
 		custom_effect_tooltip = novus_becomes_EQS_general_tt
 		hidden_effect = {
-			event_target:SOL_Novus_Flux = { remove_unit_leader_trait = evening_star }
-			event_target:SOL_Novus_Flux = { add_unit_leader_trait = twilight_beauty }
-			event_target:SOL_Novus_Flux = { remove_unit_leader_trait = solaris_inquisitionis }
-			event_target:SOL_Novus_Flux = { add_unit_leader_trait = former_cultist }
-			event_target:SOL_Novus_Flux = { set_nationality = EQS }
+			EQS_Novus_Flux = { remove_unit_leader_trait = evening_star }
+			EQS_Novus_Flux = { add_unit_leader_trait = twilight_beauty }
+			EQS_Novus_Flux = { remove_unit_leader_trait = solaris_inquisitionis }
+			EQS_Novus_Flux = { add_unit_leader_trait = former_cultist }
 		}
-		create_corps_commander = {
-			name = "Fidelis Flamma"
-			#portrait_path = "gfx/leaders/EQS/Fidelis.tga"
-			traits = { solaris_adoratio fire_pony pony_race_trait }
-			id = 5012
-			skill = 2
-			attack_skill = 3
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 2
-			female = yes
-			}
-		create_corps_commander = {
-			name = "Foresight Amour"
-			#portrait_path = "gfx/leaders/EQS/Foresight.tga"
-			traits = { solaris_militarium bleeding_heart_1048 pony_race_trait }
-			id = 5013
-			skill = 3
-			attack_skill = 2
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 3
-		}
-		create_corps_commander = {
-			name = "Stellar Breeze"
-			#portrait_path = "gfx/leaders/EQS/Stellar_Breeze.tga"
-			traits = { solaris_adoratio pony_race_trait } ###Have a trait called overworked_secretary and say how much pressure it puts on her from Sunset, which gives -10% experience gain, -5% recovery, but +5% organization and +3 division capacity
-			id = 5014
-			skill = 1
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 3
-			logistics_skill = 2
-			female = yes
-		}
+		set_country_flag = redeemed_solarist_generals
 	}
 }
 
@@ -5372,7 +5735,9 @@ country_event = { #Celestia is contacted via a mysterious letter and she finds i
 		custom_effect_tooltip = spawn_defectors_tt
 		hidden_effect = {
 			load_oob = "SOL_celestia_resistance_remnants"
-			event_target:SOL_Swift_Wing = { set_nationality = EQS }
+			SLW = {
+				EQS_Swift_Wing_1048 = { set_nationality = EQS }
+			}
 		}
 	}
 }
@@ -5386,42 +5751,22 @@ country_event = { #Word arrives that some different harmonist cells have finally
 	
 	option = { #You honor your pledges to Equestria's defense. I pray that we all live long enough to see its freedom
 		name = celestia.51.a
-		create_corps_commander = {
-			name = "Allen Spark"
-			portrait_path = "gfx/leaders/EQS/Allen.tga"
-			traits = { commando infantry_leader pony_race_trait }
-			skill = 3
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 1
-			logistics_skill = 5
-			id = 31
-		} custom_effect_tooltip = allen_spark_stats_tp
-		create_corps_commander = {
-			name = "Fireflight"
-			portrait_path = "gfx/leaders/EQS/Fireflight.tga"
-			traits = { fireflight pony_race_trait }
-			skill = 3
-			attack_skill = 2
-			defense_skill = 1
-			planning_skill = 4
-			logistics_skill = 3
-			id = 32
-		} custom_effect_tooltip = fireflight_stats_tp
-		create_corps_commander = {
-			name = "Bernard Hoofgonery"
-			portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
-			traits = { organizer pony_race_trait }
-			skill = 4
-			attack_skill = 3
-			defense_skill = 4
-			planning_skill = 6
-			logistics_skill = 3
-			id = 30
-		} custom_effect_tooltip = bernard_hoofgonery_stats_tp
-		custom_effect_tooltip = spawn_harmonists_tt
-		hidden_effect = {
-			load_oob = "SOL_celestia_harmonist_generals"
+		IF = {
+			limit = {
+				has_country_flag = weaker_rebels
+			}
+			set_country_flag = reduced_harmonist_commanders
+			custom_effect_tooltip = spawn_weak_harmonists_tt
+			hidden_effect = {
+				load_oob = "SOL_celestia_harmonist_generals_weak"
+			}
+		}
+		ELSE = {
+			set_country_flag = harmonist_commanders_return
+			custom_effect_tooltip = spawn_harmonists_tt
+			hidden_effect = {
+				load_oob = "SOL_celestia_harmonist_generals"
+			}
 		}
 	}
 }
@@ -6450,6 +6795,9 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		transfer_state = 137
 		transfer_state = 136
 		transfer_state = 690
+		CRY = {
+			transfer_state = 694
+		}
 	}
 }
 
@@ -6857,14 +7205,159 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 		ai_chance = { factor = 25 }
 		reverse_add_opinion_modifier = { target = CRY modifier = CRY_dishonorable }
 	}
-	###Make section option later that renegs the deal, which makes the Crystal Empire leave and also give a -100 opinion modifier of dishonorable
 }
 
 ###Solar Civil War Events###
-country_event = { #After the end of the civil war, Midwinter realizes that she can't keep being the leader and begins her search for a proper Prefectress to lead the Solar Empire and settles on Nova, who is brought in with a massive ceremony as the successor to Daybreaker
+country_event = { #Midwinter and the rest of the surviving archmages arrive in Manehattan and the rest decide she is fit for becoming the regent in the war, although she is adamant she'd rather be on the front lines with the soldiers; she is crowned regent
 	id = solarwar.1
 	title = solarwar.1.t
 	desc = solarwar.1.d
+	
+	is_triggered_only = yes
+	
+	option = { #I hope I have the wisdom to guide us through this war
+		name = solarwar.1.a
+		EQS_Midwinter_Halo = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					expire = "1965.1.1"
+					#desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
+					ideology = solarism
+					traits = {
+						reluctant_regent
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			EQS_Midwinter_Halo = {
+				promote_leader = yes
+				remove_unit_leader_trait = recently_promoted
+			}
+		}
+		custom_effect_tooltip = midwinter_boss_tt
+		add_stability = -0.1
+		add_political_power = 150
+	}
+}
+
+country_event = { #Midwinter as one of her first decress as the Princess Regent forces the unions that are still protesting in Manehattan back to work, which leads to a large clash between some the depleted Adoratio reserves and the strikers
+	id = solarwar.2
+	title = solarwar.2.t
+	desc = solarwar.2.d
+	
+	is_triggered_only = yes
+	
+	option = { #They shall work, or they shall die
+		name = solarwar.2.a
+		save_current_manpower = yes
+		75 = {
+			add_manpower = -1734
+		}
+		restore_previous_manpower = yes
+		add_ideas = grind_to_dust
+	}
+}
+
+country_event = { #Midwinter pours over some charts and statistics in the governor's quarters of the old mayoral building in Manehattan, and she learns of the overflowing nature of the current prison system, and gets an idea to conscript them as frontline soldiers, claiming they will be absolved of heresy
+	id = solarwar.3
+	title = solarwar.3.t
+	desc = solarwar.3.d
+	
+	is_triggered_only = yes
+	
+	option = { #Any that survive will be shot afterwards
+		name = solarwar.3.a
+		add_manpower = 35000
+		add_stability = -0.05
+	}
+}
+
+country_event = { #During a general staff meeting of the current shape of the war, Midwinter is interrupted by a commotion outside and Thundering Hoofbeat barges in and demands to find whoever killed the Empress; he is convinced it was one of them, since they are what's left of picking over the bones of the Empire; she manages to convince him to fight for her after calming him and pointing to Celestia
+	id = solarwar.4
+	title = solarwar.4.t
+	desc = solarwar.4.d
+	
+	is_triggered_only = yes
+	
+	option = { #You shall have all the vengeance you seek, lumbering brute
+		name = solarwar.4.a
+		set_country_flag = ride_the_lightning
+		custom_effect_tooltip = hoofbeat_general_tt
+	}
+}
+
+country_event = { #An alert goes through Manehattan that indicates some of Celestia's forces have approached through a gap in the front lines, and the soldiers prepare to fight them off; Seething Corona is at the head of it, running and disheveled from her chase; she arrives panicked and begging to be let in and protected, and Midwinter sets her up as a general
+	id = solarwar.5
+	title = solarwar.5.t
+	desc = solarwar.5.d
+	
+	is_triggered_only = yes
+	
+	option = { #A surprise to be sure, but a welcome one
+		name = solarwar.5.a
+		set_country_flag = politician_archmage_is_here
+		custom_effect_tooltip = corona_general_tt
+	}
+}
+
+country_event = { #In the middle of the night, some of the Adoratio and Inquisitionis infiltrate and arrest many camps of the Militarium, as Midwinter has determined that they were sufficiently suspect, and also because Blueblood is no longer there to protect them; she is pleased at the damage sewn in the ranks, to keep them loyal
+	id = solarwar.6
+	title = solarwar.6.t
+	desc = solarwar.6.d
+	
+	is_triggered_only = yes
+	
+	option = { #The rabble has been mopped up. For now
+		name = solarwar.6.a
+		add_manpower = -10000
+		add_war_support = 0.05
+		add_stability = 0.05
+	}
+}
+
+country_event = { #With the war beginning to worsen, the new head of the unified unions in Manehattan, Smoldering Carbon, approaches Midwinter. She offers to provide assistance, in exchange for some leniency after the war, to which Midwinter is immediately suspicious, but ultimately has to decide which way to go
+	id = solarwar.7
+	title = solarwar.7.t
+	desc = solarwar.7.d
+	
+	trigger = {
+		original_tag = SLW
+		surrender_progress > 0.25
+	}
+	
+	mean_time_to_happen = {
+		days = 30
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We need all the help we can get in these times
+		name = solarwar.7.a
+		ai_chance = { factor = 35 }
+		set_country_flag = accepted_commie_help
+		custom_effect_tooltip = carbon_and_commie_assistance_tt
+		hidden_effect = {
+			###Set OOB to spawn two ten-width divisions here, called Angry Unionists
+		}
+		add_popularity = {
+			ideology = communism
+			popularity = 0.08
+		}
+	}
+	option = { #We will never accept aid from communist scum
+		name = solarwar.7.b
+		ai_chance = { factor = 65 }
+		add_political_power = 50
+		add_stability = 0.03
+	}
+}
+
+country_event = { #After the end of the civil war, Midwinter realizes that she can't keep being the leader and begins her search for a proper Prefectress to lead the Solar Empire and settles on Nova, who is brought in with a massive ceremony as the successor to Daybreaker
+	id = solarwar.10
+	title = solarwar.10.t
+	desc = solarwar.10.d
 	
 	trigger = {
 		tag = SLW
@@ -6876,17 +7369,18 @@ country_event = { #After the end of the civil war, Midwinter realizes that she c
 	fire_only_once = yes
 	
 	option = { #I will serve our fallen Empress with fire and devotion
-		name = solarwar.1.a
+		name = solarwar.10.a
 		retire_country_leader = yes
-		create_country_leader = {
-			name = "Nova Glow"
-			expire = "1965.1.1"
-			picture = "gfx/leaders/EQS/Nova_Glow.tga"
-			#desc = "POLITICS_SUNSET_SHIMMER_DESC"
-			ideology = solarism
-			female = yes
-			traits = {
-				sword_of_the_empress
+		EQS_Nova_Glow = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					traits = {
+						sword_of_the_empress
+					}
+				}
 			}
 		}
 		every_state = {
@@ -6946,35 +7440,5 @@ country_event = {
 				drop_cosmetic_tag = yes
 			}
 		}
-	}
-}
-
-country_event = {
-	id = solar.9003
-	title = "Test General transfers"
-	desc = "Gotta love all the testing."
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = { #removes puppet from BAL
-		name = "Yup."
-		event_target:SOL_Iceheart = { set_nationality = BAG }
-	}
-}
-
-country_event = {
-	id = solar.9004
-	title = "Test General transfers"
-	desc = "Gotta love all the testing."
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = { #removes puppet from BAL
-		name = "Yup."
-		event_target:SOL_Iceheart = { set_nationality = EQS }
 	}
 }

@@ -41,16 +41,14 @@ CHN_unit_production = {
 		OR = { original_tag = CHN original_tag = CCN }
 	}
 	enable = {
-		OR = { original_tag = CHN original_tag = CCN }
+		always = yes
 	}
-	abort = {
-		always = no
-	}
+	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = role_ratio
 		id = garrison
-		value = 3
+		value = 4
 	}
 
 	#ai_strategy = {
@@ -80,7 +78,7 @@ CHN_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = cavalry
-		value = 0
+		value = -100
 	}
 
 	ai_strategy = {
@@ -104,7 +102,7 @@ CHN_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 55 #88 to 70
+		value = 65 #88 to 70
 	}
 
 	ai_strategy = {
@@ -123,25 +121,25 @@ CHN_unit_production = {
 	ai_strategy = {
 		type = unit_ratio
 		id = fighter
-		value = 70
+		value = 100
 	}
 
 	ai_strategy = {
 		type = unit_ratio
 		id = cas
-		value = -30 #because doctrine this = 20
+		value = 5 #because doctrine this = 20
 	}
 
 	ai_strategy = {
 		type = unit_ratio
 		id = tactical_bomber
-		value = 5
+		value = -40
 	}
 
 	ai_strategy = {
 		type = unit_ratio
 		id = strategic_bomber
-		value = 5
+		value = -10
 	}
 
 	ai_strategy = {
@@ -152,6 +150,23 @@ CHN_unit_production = {
 
 
 	# Naval unit factors
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 15
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = -50 #because doctrine this = 50
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 90
+	}
 
 	ai_strategy = {
 		type = unit_ratio
@@ -162,25 +177,123 @@ CHN_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = fighter
-		value = 20
+		value = 120
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = cas
+		value = 15
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = tactical_bomber
+		value = 1
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = naval_bomber
+		value = -120
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = strategic_bomber
+		value = -200
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 50 #30 to 50
+		value = 20 #30 to 50
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 20
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_air
+		value = 25
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = artillery
-		value = 40 #20 to 40
+		value = 100 #20 to 40
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = armor
-		value = 20
+		value = -10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = -10
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories #Build these up over time, don't stall
+		id = anti_air
+		value = 2
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 4
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = fighter
+		value = 4
+	}
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = strat_bomber_equipment
+		value = -100
+	}
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = support_equipment
+		value = 30
+	}
+
+	ai_strategy = { #added to railway gun define (set to 0 by default, increased in default strategies)
+		type = railway_gun_divisions_ratio
+		value = 1
+	}
+}
+
+CHN_anti_armor = {
+	allowed = {
+		OR = { original_tag = CHN original_tag = CCN }
+	}
+	enable = {
+		ai_wants_divisions > 5 #Decreasing the amount of motorized the AI wants
+
+		any_enemy_country = {
+			ROOT = {
+				estimated_intel_max_armor = {
+					tag = PREV
+					value > 25
+				}
+			}
+		}
+	}
+	abort = {
+		ai_wants_divisions < 6 #Decreasing the amount of motorized the AI wants
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = anti_armor
+		value = 15
 	}
 }
 
@@ -190,12 +303,9 @@ CHN_armored_production = {
 	}
 	enable = {
 		date > 1010.1.1
-		OR = { original_tag = CHN original_tag = CCN }
 		ai_wants_divisions > 24 #Decreasing the amount of tanks the AI wants
 	}
-	abort = {
-		ai_wants_divisions < 25 #Decreasing the amount of tanks the AI wants
-	}
+	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = role_ratio
@@ -204,17 +314,30 @@ CHN_armored_production = {
 	}
 }
 
+CHN_stockpile_less_early_game = {
+	allowed = {
+		OR = { original_tag = CHN original_tag = CCN }
+	}
+
+	enable = {
+		date < 1011.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = -20 # reduce while we build up in case of CZE or Austria issues
+	}
+}
+
 CHN_highered_armored_production = {
 	allowed = {
 		OR = { original_tag = CHN original_tag = CCN }
 	}
 	enable = {
-		OR = { original_tag = CHN original_tag = CCN }
 		num_of_military_factories > 109
 	}
-	abort = {
-		num_of_military_factories < 110
-	}
+	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = role_ratio
@@ -228,7 +351,7 @@ CHN_dont_waste_xp_until_medium_armor = {
 		OR = { original_tag = CHN original_tag = CCN }
 	}
 	enable = {
-		OR = { original_tag = CHN original_tag = CCN }
+		always = yes
 	}
 
 	abort = {
@@ -253,8 +376,10 @@ CHN_super_boost_light_for_med_armor = {
 		OR = { original_tag = CHN original_tag = CCN }
 	}
 	enable = {
-		OR = { original_tag = CHN original_tag = CCN }
-		has_tech = basic_medium_tank
+		OR = {
+			has_tech = basic_medium_tank
+			has_tech = basic_medium_tank_chassis
+		}
 		NOT = { has_template_ai_majority_unit = medium_armor }
 	}
 
@@ -264,8 +389,9 @@ CHN_super_boost_light_for_med_armor = {
 
 	# lets do changes more often during this period too
 	ai_strategy = {
-		type = template_xp_reserve
-		value = -125
+		type = land_xp_spend_priority
+		id = division_template
+		value = 100
 	}
 
 	# this is gateway
@@ -280,6 +406,13 @@ CHN_super_boost_light_for_med_armor = {
 		id = medium_armor
 		value = 150
 	}
+
+	# Germany is set up to change their SS division into medium armor.
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 200
+	}
 }
 
 CHN_super_boost_light_for_modern_armor = {
@@ -287,8 +420,10 @@ CHN_super_boost_light_for_modern_armor = {
 		OR = { original_tag = CHN original_tag = CCN }
 	}
 	enable = {
-		OR = { original_tag = CHN original_tag = CCN }
-		has_tech = main_battle_tank
+		OR = {
+			has_tech = main_battle_tank
+			has_tech = main_battle_tank_chassis
+		}
 		NOT = { has_template_ai_majority_unit = modern_armor }
 	}
 
@@ -298,8 +433,9 @@ CHN_super_boost_light_for_modern_armor = {
 
 	# lets do changes more often during this period too
 	ai_strategy = {
-		type = template_xp_reserve
-		value = -125
+		type = land_xp_spend_priority
+		id = division_template
+		value = 100
 	}
 
 	# this is gateway
@@ -316,24 +452,127 @@ CHN_super_boost_light_for_modern_armor = {
 	}
 }
 
+
+CHN_template_design = {
+	allowed = {
+		OR = { original_tag = CHN original_tag = CCN }
+	}
+	enable = {
+		date < 1011.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = artillery
+		value = 20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = cavalry
+		value = -100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 30
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = paratroopers
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = magical_infantry
+		value = 5
+	}
+}
+
+war_with_olenia = {
+	allowed = {
+		tag = CHN
+	}
+	enable = {
+		tag = CHN
+		OR = {
+			has_completed_focus = pressure_olenia
+			has_war_with = OLE
+		}
+		OLE = {
+			exists = yes
+			NOT = { is_subject_of = ROOT }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = invade
+		id = "OLE"
+		value = 300
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "OLE"
+		value = 500
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = 12
+	}
+}
+
 dont_invade_equestria = {
 	allowed = {
 		original_tag = CHN
 	}
 	enable = {
 		original_tag = CHN
-		NOT = { has_tech = landing_craft }
+		NOT = {
+			OR = {
+				has_tech = landing_craft
+				has_tech = mtg_landing_craft
+			}
+		}
 		NOT = { has_tech = marines }
 		date < 1011.1.1
 	}
 	abort = {
 		OR = {
+			date > 1012.1.1
 			AND = {
-				has_tech = landing_craft
+				OR = {
+					has_tech = landing_craft
+					has_tech = mtg_landing_craft
+				}
 				has_tech = marines
 				date > 1011.1.1
 			}
-			date > 1012.1.1
 		}
 	}
 
@@ -353,6 +592,35 @@ dont_invade_equestria = {
 		type = invade
 		id = "EQC"
 		value = -200
+	}
+}
+
+cover_your_rear = {
+	allowed = {
+		tag = CHN
+	}
+	enable = {
+		tag = CHN
+		has_war_with = OLE
+		OLE = {
+			has_government = democratic
+			is_in_faction = no
+			focus_progress = {
+				focus = OLE_join_equestria
+				progress > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "EQS"
+		value = 50
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = "EQS"
+		value = 100
 	}
 }
 
@@ -402,6 +670,71 @@ CHN_naval_role_ratios_ahistorical = {
 	}
 }
 
+CHN_leave_MAN_be = {
+	allowed = {
+		original_tag = CHN
+	}
+	enable = {
+		original_tag = CHN
+		MAN = {
+			#is_subject_of = CHN 
+			#has_autonomy_state = autonomy_de_jure_puppet
+			#has_country_flag = MAN_has_become_de_jure_puppet
+			#has_country_flag = MAN_has_an_expansionist_war
+			is_in_faction_with = CHN
+			has_completed_focus = MAN_republic_finale
+		}
+	}
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = "MAN"
+		value = 300
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = STG
+		value = 500
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = DRG
+		value = 500
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = EQC
+		value = 500
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = HAU
+		value = 500
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = FEZ
+		value = 500
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = PNG
+		value = 500
+	}
+	ai_strategy = {
+		type = dont_join_wars_with
+		id = MAN
+		target_country = VED
+		value = 500
+	}
+}
+
 stick_with_SCS = {
 	allowed = {
 		original_tag = CHN
@@ -435,7 +768,7 @@ nobody_help_bugs = {
 			has_government = fascism
 		}
 		NOT = {
-			is_ally_with = CHN
+			is_in_faction_with  = CHN
 		}
 	}
 	abort_when_not_enabled = yes

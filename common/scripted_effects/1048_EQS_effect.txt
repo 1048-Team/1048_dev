@@ -10,13 +10,7 @@ SOL_Celestia_Returned = {
 		drop_cosmetic_tag = yes
 	}
 	retire_country_leader = yes
-	create_country_leader = {
-		name = "Plures Ordines Cultus"
-		expire = "1965.1.1"
-		ideology = solarism
-		traits = {
-		}
-	}
+	EQS_Plures_Ordines_Cultus = { promote_character = yes }
 	every_state = {
 		limit = {
 			OR = {
@@ -118,17 +112,7 @@ SOL_Celestia_Returned = {
 		ruling_party = democratic
 		elections_allowed = no
 	}
-	create_country_leader = {
-		name = "Princess Celestia"
-		expire = "1965.1.1"
-		picture = "gfx/leaders/EQS/Celestia_Armor.tga"
-		desc = "POLITICS_CELESTIA_DESC"
-		ideology = harmonic_monarchy
-		female = yes
-		traits = {
-			princess_in_name_only
-		}
-	}
+	EQS_Sunbutt = { promote_character = yes }
 	set_popularities = {
 		democratic = 45
 		fascism = 30
@@ -161,41 +145,33 @@ SOL_Celestia_Returned = {
 	}
 	load_oob = "SOL_civil_war_cel"
 	EQS = {
-		event_target:SOL_Midwinter_Halo = { set_nationality = SLW }
-		event_target:SOL_Swift_Wing = { set_nationality = SLW }
-		event_target:SOL_Orion_Star = { set_nationality = SLW }
-		event_target:SOL_Dust_Hoover = { set_nationality = SLW }
-		event_target:SOL_Iceheart = { set_nationality = SLW }
-		event_target:SOL_Molten_Song = { set_nationality = SLW }
-		event_target:SOL_Squall = { set_nationality = SLW }
+		EQS_Midwinter_Halo = { set_nationality = SLW }
+		EQS_Swift_Wing_1048 = { set_nationality = SLW }
+		EQS_Orion_Star_1048 = { set_nationality = SLW }
+		EQS_dust_hoover_1048 = { set_nationality = SLW }
+		EQS_Bellum_Iceheart = { set_nationality = SLW }
+		EQS_Molten_Song = { set_nationality = SLW }
+		EQS_evening_squall_1048 = { set_nationality = SLW }
 		IF = {
-			limit = { has_unit_leader = 2 }
-			remove_unit_leader = 2
+			limit = { 
+				has_country_flag = aurora_general
+			}
+			clr_country_flag = aurora_general
 		}
 	}
 	add_ideas = eqs_slw_civil_war
 	SLW = {
 		add_ideas = eqs_slw_civil_war
-		random_unit_leader = {
-			limit = { has_id = 35 }
-			promote_leader = yes
-			remove_unit_leader_trait = recently_promoted
-		}
 		IF = {
 			limit = {
 				EQS = {
-					has_unit_leader = 5
+					has_country_flag = starlight_and_trixie_corrupted
 				}
 			}
-			event_target:SOL_Starlight_Glimmer = { set_nationality = SLW }
-		}
-		IF = {
-			limit = {
-				EQS = {
-					has_unit_leader = 6
-				}
+			EQS = {
+				EQS_Starlight_Glimmer_1048 = { set_nationality = SLW }
+				EQS_Trixie_Lulamoon = { set_nationality = SLW }
 			}
-			event_target:SOL_Trixie = { set_nationality = SLW }
 		}
 		IF = {
 			limit = { country_exists = EQS }
@@ -210,43 +186,35 @@ SOL_Celestia_Returned = {
 		load_oob = "SLW_civil_war"
 	}
 	load_focus_tree = solar_empire_celestia_focus
-	SLW = {
-		load_focus_tree = solar_empire_focus
-	}
 }
 
 SOL_end_of_civil_war_CEL = {
 	IF = {
 		limit = {
-			has_unit_leader = 1
+			NOT = { has_country_flag = blueblood_arrested }
 		}
 		custom_effect_tooltip = blueblood_arrested_tt
-		hidden_effect = { event_target:SOL_Blueblood = { set_nationality = BAG } }
+		set_country_flag = blueblood_arrested
 	}
 	IF = {
 		limit = {
-			has_unit_leader = 3
+			NOT = { has_country_flag = sunset_arrested }
 		}
 		custom_effect_tooltip = sunset_arrested_tt
-		hidden_effect = { event_target:SOL_Sunset_Shimmer = { set_nationality = BAG } }
+		set_country_flag = sunset_arrested
 	}
 	IF = {
 		limit = {
-			NOT = {
-				has_unit_leader = 5000
-			}
+			EQS_Sunbutt = { is_unit_leader = no }
 		}
-		create_field_marshal = {
-			name = "Princess Celestia"
-			portrait_path = "gfx/leaders/EQS/Celestia_Armor.tga"
+		add_field_marshal_role = {
+			character = EQS_Sunbutt
 			traits = { pony_race_trait pleasant_sun inspirational_leader }
-			id = 5000
 			skill = 2
 			attack_skill = 3
 			defense_skill = 3
 			planning_skill = 2
 			logistics_skill = 2
-			female = yes
 		}
 	}
 	IF = {
@@ -255,39 +223,7 @@ SOL_end_of_civil_war_CEL = {
 				has_completed_focus = addressing_the_faithful_generals
 			}
 		}
-		create_corps_commander = {
-			name = "Allen Spark"
-			portrait_path = "gfx/leaders/EQS/Allen.tga"
-			traits = { commando pony_race_trait }
-			skill = 2
-			attack_skill = 2
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 3
-			id = 31
-		} custom_effect_tooltip = allen_spark_stats_tp
-		create_corps_commander = {
-			name = "Fireflight"
-			portrait_path = "gfx/leaders/EQS/Fireflight.tga"
-			traits = { fireflight pony_race_trait }
-			skill = 2
-			attack_skill = 2
-			defense_skill = 1
-			planning_skill = 2
-			logistics_skill = 2
-			id = 32
-		} custom_effect_tooltip = fireflight_stats_tp
-		create_corps_commander = {
-			name = "Bernard Hoofgonery"
-			portrait_path = "gfx/leaders/EQS/ComradeKir.tga"
-			traits = { pony_race_trait }
-			skill = 2
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 3
-			logistics_skill = 3
-			id = 30
-		} custom_effect_tooltip = bernard_hoofgonery_stats_tp	
+		set_country_flag = harmonist_commanders_return
 	}
 	swap_ideas = {
 		add_idea = destitute_diarchy
@@ -319,5 +255,6 @@ SOL_end_of_civil_war_CEL = {
 	add_war_support = -0.15
 	set_country_flag = end_of_equestria_civil_war
 	set_country_flag = rescued_harmonic_advisors
+	clr_country_flag = starlight_and_trixie_corrupted
 	mark_focus_tree_layout_dirty = yes
 }
