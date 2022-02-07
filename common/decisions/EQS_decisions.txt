@@ -408,19 +408,58 @@ EQS_CEL_sunset_redemption_meter_category = {
 EQS_AUR_stalliongrad_war_countdown_category = {
 	operation_fiery_wastes = {
 		activation = {
-			original_tag = EQS
+			OR = {
+				original_tag = EQS
+				original_tag = BAL
+				original_tag = EEE
+				original_tag = NRP
+				original_tag = BGL
+				original_tag = SPF
+				original_tag = STB
+				original_tag = HUG
+				original_tag = MTS
+				original_tag = NEI
+				original_tag = NID
+			}
 			EQS = {
 				has_country_flag = southeast_war_prep
 			}
 		}
-		available = { NOT = { has_country_flag = southeast_war_prep } }
+		available = { EQS = { NOT = { has_country_flag = southeast_war_prep } } }
 		fire_only_once = yes
 		days_mission_timeout = 14
-		war_with_on_complete = BAL
+		war_with_on_timeout = BAL
+		war_with_on_timeout = EEE
+		war_with_on_timeout = NRP
+		war_with_on_timeout = BGL
+		war_with_on_timeout = SPF
+		war_with_on_timeout = STB
+		war_with_on_timeout = HUG
+		war_with_on_timeout = MTS
+		war_with_on_timeout = NEI
+		war_with_on_timeout = NID
 		timeout_effect = { 
-			IF = { 
-				limit = { original_tag = EQS }
-				declare_war_on = { target = BAL type = annex_everything }
+			IF = {
+				limit = {
+					original_tag = EQS
+				}
+				every_country = { #Yes, this could probably be cleaned up, but at least it works
+					limit = {
+						OR = {
+							owns_state = 688
+							owns_state = 84
+							owns_state = 81
+							owns_state = 15
+							owns_state = 26
+							owns_state = 221
+							owns_state = 79
+							owns_state = 352
+							owns_state = 7
+							owns_state = 31
+						}
+					}
+					EQS = { declare_war_on = { target = PREV type = annex_everything } }
+				}
 			}
 			ELSE = {
 				custom_effect_tooltip = aurora_gunning_for_dat_territory_tt
@@ -429,7 +468,10 @@ EQS_AUR_stalliongrad_war_countdown_category = {
 	}
 	operation_rusted_shield = {
 		activation = {
-			original_tag = EQS
+			OR = { 
+				original_tag = EQS
+				original_tag = STG
+			}
 			EQS = {
 				has_country_flag = stg_prep
 			}
@@ -437,11 +479,11 @@ EQS_AUR_stalliongrad_war_countdown_category = {
 		available = { EQS = { NOT = { has_country_flag = stg_prep } } }
 		fire_only_once = yes
 		days_mission_timeout = 14
-		war_with_on_complete = STG
+		war_with_on_timeout = STG
 		timeout_effect = { 
 			IF = { 
 				limit = { original_tag = EQS }
-				declare_war_on = { target = BAL type = annex_everything }
+				declare_war_on = { target = STG type = annex_everything }
 			}
 			ELSE = {
 				custom_effect_tooltip = aurora_gunning_for_dat_territory_tt
