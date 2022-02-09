@@ -2189,17 +2189,11 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
-shared_focus = { ###Make this a single focus with dynamic loc and effects
+shared_focus = { ###Make this a focus with dynamic loc and effects; shelter for refugees for nice; called a quick correction for aggressive attack and annex
 	id = shelter_for_the_refugees
 	x = -1
 	y = 1
 	relative_position_id = reform_the_united_ponies_alliance
-	
-	available = {
-		CRY = {
-			is_in_faction_with = EQS
-		}
-	}
 	
 	mutually_exclusive = { focus = shattered_harmony }
 	
@@ -2208,41 +2202,71 @@ shared_focus = { ###Make this a single focus with dynamic loc and effects
 	
 	completion_reward = {
 		###change state population###
-		344 = {
-			add_manpower = -100000
+		IF = {
+			limit = {
+				CRY = {
+					is_in_faction_with = EQS
+				}
+			}
+			add_stability = -0.03
+			###Add divisions in Whinnyapolis and Bales here
+			344 = {
+				add_manpower = -100000
+			}
+			3 = {
+				add_manpower = 100000
+			}
+			345 = {
+				add_manpower = -100000
+			}
+			12 = {
+				add_manpower = 100000
+			}
+			53 = {
+				add_manpower = -100000
+			}
+			75 = {
+				add_manpower = 100000
+			}
 		}
-		3 = {
-			add_manpower = 100000
-		}
-		345 = {
-			add_manpower = -100000
-		}
-		12 = {
-			add_manpower = 100000
-		}
-		53 = {
-			add_manpower = -100000
-		}
-		75 = {
-			add_manpower = 100000
+		ELSE = {
+			create_wargoal = {
+				type = annex_everything
+				target = CRY
+			}
+			add_stability = -0.1
+			add_war_support = -0.05
+			689 = {
+				add_core_of = ROOT
+			}
+			145 = {
+				add_core_of = ROOT
+			}
+			149 = {
+				add_core_of = ROOT
+			}
+			148 = {
+				add_core_of = ROOT
+			}
+			146 = {
+				add_core_of = ROOT
+			}
+			324 = {
+				add_core_of = ROOT
+			}
+			147 = {
+				add_core_of = ROOT
+			}
 		}
 	}
 	ai_will_do = { factor = 15 }
 }
 
-shared_focus = {
+shared_focus = { ###Make focus with dynamic loc and effects; shattered harmony for puppet goal; new crystal patriots for integration with CRY
 	id = shattered_harmony
 	x = 1
 	y = 1
 	relative_position_id = reform_the_united_ponies_alliance
-	
-	available = {
-		CRY = {
-			NOT = {
-				is_in_faction_with = EQS
-			}
-		}
-	}
 	
 	mutually_exclusive = { focus = shelter_for_the_refugees }
 	
@@ -2250,9 +2274,20 @@ shared_focus = {
 	prerequisite = { focus = reform_the_united_ponies_alliance }
 	
 	completion_reward = {
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = CRY
+		IF = {
+			limit = {
+				CRY = {
+					is_in_faction_with = EQS
+				}
+			}
+			add_stability = 0.03
+			###Give opinion boost and CRY troops here
+		}
+		ELSE = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = CRY
+			}
 		}
 	}
 	ai_will_do = { factor = 15 }
@@ -2350,156 +2385,242 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
+shared_focus = { ###Have dynamic loc of either pen partitions with the crystal empire or fortify the crystal border
 	id = pen_partitions_with_the_crystal_empire
 	x = 0
 	y = 1
 	relative_position_id = stubborness_got_nopony_anywhere
 	
-	available = {
-		CRY = {
-			is_in_faction_with = EQS
-		}
-	}
 	bypass = { has_global_flag = stalliongrad_agrees }
 	
-	mutually_exclusive = { focus = fortify_the_crystal_border }
+	#mutually_exclusive = { focus = fortify_the_crystal_border }
 	
 	cost = 2
 	prerequisite = { focus = stubborness_got_nopony_anywhere }
 	
 	completion_reward = {
-		country_event = {
-			id = celestia.535
+		IF = {
+			limit = {
+				CRY = {
+					is_in_faction_with = EQS
+				}
+			}
+			country_event = {
+				id = celestia.535
+			}
+		}
+		ELSE = {
+			custom_effect_tooltip = crystal_fort_border_tt
+			IF = {
+				limit = {
+					CRY = {
+						is_subject_of = ROOT
+					}
+				}
+				CRY = {
+					hidden_effect = {
+						53 = {
+							add_building_construction = {
+								type = bunker
+								level = 3
+								province = 63
+								instant_build = yes
+							}
+						}
+						145 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 6066
+								instant_build = yes
+							}
+						}
+						145 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 11409
+								instant_build = yes
+							}
+						}
+						150 = {
+							add_building_construction = {
+								type = bunker
+								level = 4
+								province = 316
+								instant_build = yes
+							}
+						}
+						150 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 3174
+								instant_build = yes
+							}
+						}
+						64 = {
+							add_building_construction = {
+								type = bunker
+								level = 1
+								province = 592
+								instant_build = yes
+							}
+						}
+						64 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 4452
+								instant_build = yes
+							}
+						}
+						64 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 9317
+								instant_build = yes
+							}
+						}
+						53 = {
+							add_building_construction = {
+								type = bunker
+								level = 3
+								province = 6235
+								instant_build = yes
+							}
+						}
+						150 = {
+							add_building_construction = {
+								type = bunker
+								level = 1
+								province = 3525
+								instant_build = yes
+							}
+						}
+						345 = {
+							add_building_construction = {
+								type = bunker
+								level = 3
+								province = 11788
+								instant_build = yes
+							}
+						}
+						344 = {
+							add_building_construction = {
+								type = bunker
+								level = 4
+								province = 489
+								instant_build = yes
+							}
+						}
+					}
+				}
+			}
+			ELSE = {
+				hidden_effect = {
+					53 = {
+						add_building_construction = {
+							type = bunker
+							level = 3
+							province = 63
+							instant_build = yes
+						}
+					}
+					145 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 6066
+							instant_build = yes
+						}
+					}
+					145 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 11409
+							instant_build = yes
+						}
+					}
+					150 = {
+						add_building_construction = {
+							type = bunker
+							level = 4
+							province = 316
+							instant_build = yes
+						}
+					}
+					150 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 3174
+							instant_build = yes
+						}
+					}
+					64 = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 592
+							instant_build = yes
+						}
+					}
+					64 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 4452
+							instant_build = yes
+						}
+					}
+					64 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 9317
+							instant_build = yes
+						}
+					}
+					53 = {
+						add_building_construction = {
+							type = bunker
+							level = 3
+							province = 6235
+							instant_build = yes
+						}
+					}
+					150 = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 3525
+							instant_build = yes
+						}
+					}
+					345 = {
+						add_building_construction = {
+							type = bunker
+							level = 3
+							province = 11788
+							instant_build = yes
+						}
+					}
+					344 = {
+						add_building_construction = {
+							type = bunker
+							level = 4
+							province = 489
+							instant_build = yes
+						}
+					}
+				}
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = fortify_the_crystal_border
-	x = -2
-	y = 1
-	relative_position_id = stubborness_got_nopony_anywhere
-	
-	available = {
-		CRY = {
-			NOT = {
-				is_in_faction_with = EQS
-			}
-		}
-	}
-	bypass = { has_global_flag = stalliongrad_agrees }
-	
-	mutually_exclusive = { focus = pen_partitions_with_the_crystal_empire }
-	
-	cost = 2
-	prerequisite = { focus = stubborness_got_nopony_anywhere }
-	
-	completion_reward = {
-		custom_effect_tooltip = crystal_fort_border_tt
-		CRY = {
-			hidden_effect = {
-				53 = {
-					add_building_construction = {
-						type = bunker
-						level = 3
-						province = 63
-						instant_build = yes
-					}
-				}
-				145 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 6066
-						instant_build = yes
-					}
-				}
-				145 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 11409
-						instant_build = yes
-					}
-				}
-				150 = {
-					add_building_construction = {
-						type = bunker
-						level = 4
-						province = 316
-						instant_build = yes
-					}
-				}
-				150 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 3174
-						instant_build = yes
-					}
-				}
-				64 = {
-					add_building_construction = {
-						type = bunker
-						level = 1
-						province = 592
-						instant_build = yes
-					}
-				}
-				64 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 4452
-						instant_build = yes
-					}
-				}
-				64 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 9317
-						instant_build = yes
-					}
-				}
-				53 = {
-					add_building_construction = {
-						type = bunker
-						level = 3
-						province = 6235
-						instant_build = yes
-					}
-				}
-				150 = {
-					add_building_construction = {
-						type = bunker
-						level = 1
-						province = 3525
-						instant_build = yes
-					}
-				}
-				345 = {
-					add_building_construction = {
-						type = bunker
-						level = 3
-						province = 11788
-						instant_build = yes
-					}
-				}
-				344 = {
-					add_building_construction = {
-						type = bunker
-						level = 4
-						province = 489
-						instant_build = yes
-					}
-				}
-			}
-		}
-	}
-	ai_will_do = { factor = 15 }
 }
 
 shared_focus = {
@@ -2530,7 +2651,6 @@ shared_focus = {
 	cost = 5
 	prerequisite = { 
 		focus = pen_partitions_with_the_crystal_empire
-		focus = fortify_the_crystal_border
 	}
 	prerequisite = { focus = infiltrate_the_frontier }
 	
