@@ -4,28 +4,130 @@ country_event = {
 	id = southeast.1
 	title = southeast.1.t
 	desc = southeast.1.d
+	fire_only_once = yes
+	is_triggered_only = yes
 
 	trigger = {
 		tag = BAL
 		date = 1048.1.25
 	}
-	fire_only_once = yes
 	option = {
 		name = southeast.1.a
+		custom_effect_tooltip = BAL_health_decrease
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						var = BAL.cobalts_health
+						value = 100
+						compare = equals
+					}
+				}
+			}
+			subtract_from_variable = {
+				var = BAL.cobalts_health
+				value = 20
+			}
+		}
 	}
 	option = {
 		name = southeast.1.b
+		custom_effect_tooltip = BAL_health_maintain
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						var = BAL.party_loyalty
+						value = 100
+						compare = equals
+					}
+				}
+				
+			}
+			subtract_from_variable = {
+				var = BAL.party_loyalty
+				value = 20
+			}
+		}
 	}
 }
+
+country_event = {
+	id = southeast.3
+	title = southeast.3.t
+	desc = southeast.3.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = BAL
+		if = {
+			limit = {
+				check_variable = {
+					var = BAL.cobalts_health
+					value = 0
+					compare = equals
+				}
+			}
+		}
+	}
+	option = {
+		name = southeast.3.a
+		set_country_flag = BAL_cobalt_dead
+		retire_character = BAL_cobalt_hoof
+		add_country_leader_role = {
+			character = BAL_maresoc
+			promote_leader = yes
+			country_leader = {
+				expire = "1965.1.1"
+				desc = "POLITICS_MARESOC_DESC"
+				ideology = mareland_socialism
+				traits = {
+					maresoc_leader_trait
+				}
+			}
+		}
+	}
+}
+
+
+
+
+country_event = {
+	id = southeast.4
+	title = southeast.4.t
+	desc = southeast.4.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = southeast.4.a
+		
+	}
+	option = {
+		name = southeast.4.b
+	}
+}
+
+
+
 
 country_event = { ###Debug event to spawn the Mingsplosion
 	id = southeast.2
 	title = southeast.2.t
 	desc = southeast.2.d
-	
+	fire_only_once = yes
+	is_triggered_only = yes
 	trigger = {
 		tag = BAL
-		NOT = { has_country_leader = { ruling_only = yes name = "Cobalt Hoof" } }
+		NOT = {
+			has_country_leader = {
+				ruling_only = yes 
+				name = "Cobalt Hoof"
+			}
+		}
+		NOT = {
+			has_country_flag = BAL_successor_chosen
+		}
+		has_country_flag = BAL_cobalt_dead
 	}
 	
 	fire_only_once = yes
