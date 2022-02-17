@@ -1749,247 +1749,127 @@ shared_focus = {
 
 ###Southeast###
 ###Left side if Southeast Mingsplodes###
+###It's now Celestia attempting to integrate through peaceful means###
 
 shared_focus = {
-	id = a_headless_state
-	x = -8
+	id = from_the_head_down
+	x = -4
 	y = 1
 	relative_position_id = the_heartlands_beat_in_harmony
 	
-	available = {
-		has_global_flag = balsplosion
-	}
-	
 	cost = 4
 	prerequisite = { focus = the_heartlands_beat_in_harmony }
-	mutually_exclusive = { focus = puppet_of_greater_foe }
+	mutually_exclusive = { focus = from_the_bottom_up }
 	
 	completion_reward = {
 		add_political_power = 100
-		###Country event for planning on how to approach the harmonist-aligned nations
+		###Country event for planning on how to approach the southeast and finding out about the instability it's still suffering as a region
 	}
 	ai_will_do = { factor = 15 }
 }
 
 shared_focus = {
-	id = a_spark_of_freedom
+	id = establish_new_trade_links
 	x = -2
 	y = 1
-	relative_position_id = a_headless_state
-	
-	bypass = {
-		NOT = {
-			country_exists = HUG
-		}
-	}
+	relative_position_id = from_the_head_down
 	
 	cost = 3
-	prerequisite = { focus = a_headless_state }
+	prerequisite = { focus = from_the_head_down }
 	
 	completion_reward = {
 		country_event = {
-			id = celestia.518
+			id = celestia.561
+			#id = celestia.518
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = art_of_the_deal
+	id = joint_military_mission
 	x = 0
 	y = 1
-	relative_position_id = a_headless_state
-	
-	bypass = {
-		NOT = {
-			country_exists = NID
-		}
-	}
+	relative_position_id = from_the_head_down
 	
 	cost = 3
-	prerequisite = { focus = a_headless_state }
+	prerequisite = { focus = from_the_head_down }
 	
 	completion_reward = {
+		###Equestria can propose a military mission to give joint learning for both militaries, as the jungle has been untamed for a generation, and the southeast needs more veteran input
+		###Equestria can decide to not do it, and the different nations can reject it
 		country_event = {
-			id = celestia.522
+			id = celestia.562
+			#id = celestia.522
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = counter_the_royal_marriage
+	id = root_out_extremists
 	x = 2
 	y = 1
-	relative_position_id = a_headless_state
-	
-	bypass = {
-		NOT = {
-			country_exists = STB
-		}
-	}
+	relative_position_id = from_the_head_down
 	
 	cost = 3
-	prerequisite = { focus = a_headless_state }
+	prerequisite = { focus = from_the_head_down }
 	
 	completion_reward = {
 		country_event = {
-			id = celestia.526
+			id = celestia.563
+			#id = celestia.526
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = secure_the_eastern_jungle
-	x = 1
+	id = propose_final_solution
+	x = 0
 	y = 1
-	relative_position_id = a_spark_of_freedom
+	relative_position_id = joint_military_mission
 	
 	cost = 4
-	prerequisite = { focus = a_spark_of_freedom }
-	prerequisite = { focus = art_of_the_deal }
-	prerequisite = { focus = counter_the_royal_marriage }
+	prerequisite = { focus = establish_new_trade_links }
+	prerequisite = { focus = joint_military_mission }
+	prerequisite = { focus = root_out_extremists }
 	
 	completion_reward = {
-		IF = {
-			limit = {
-				country_exists = NRP
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NRP
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = BGL
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = BGL
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					STB = {
-						is_in_faction_with = EQS
-					}
-				}
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = STB
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					HUG = {
-						is_in_faction_with = EQS
-					}
-				}
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = HUG
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					NID = {
-						is_in_faction_with = EQS
-					}
-				}
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NID
-			}
-		}
+		###Event for Celestia meeting with the different regional deligates to propose a proper alliance/subjugation, which has various results depending on countries existing and things Equestria did
+		country_event = { id = celestia.560 }
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = slide_toward_the_celestial_sea
-	x = 1
+	id = the_last_marriage_offer
+	x = 0
 	y = 1
-	relative_position_id = art_of_the_deal
+	relative_position_id = propose_final_solution
 	
 	cost = 4
-	prerequisite = { focus = a_spark_of_freedom }
-	prerequisite = { focus = art_of_the_deal }
-	prerequisite = { focus = counter_the_royal_marriage }
+	prerequisite = { focus = propose_final_solution }
 	
 	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = NRP
-		}
-		IF = {
-			limit = {
-				country_exists = BAL
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = BAL
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = MTS
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = MTS
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = NEI
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NEI
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = EEE
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = EEE
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = SPF
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = SPF
-			}
-		}
+		###Celestia gets begged by Lucky Star to marry him as she integrates things and she gives him a straightforward no
+		country_event = { id = celestia.559 }
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
 	id = mangos_for_all
-	x = 0
+	x = -2
 	y = 1
-	relative_position_id = secure_the_eastern_jungle
+	relative_position_id = propose_final_solution
 	
 	available = {
 		has_war = no
 	}
 	
 	cost = 4
-	prerequisite = { focus = secure_the_eastern_jungle }
+	prerequisite = { focus = propose_final_solution }
 	
 	completion_reward = {
 		every_state = {
@@ -2010,16 +1890,16 @@ shared_focus = {
 
 shared_focus = {
 	id = an_equestrian_seaboard
-	x = 0
+	x = 2
 	y = 1
-	relative_position_id = slide_toward_the_celestial_sea
+	relative_position_id = propose_final_solution
 	
 	available = {
 		has_war = no
 	}
 	
 	cost = 4
-	prerequisite = { focus = slide_toward_the_celestial_sea }
+	prerequisite = { focus = propose_final_solution }
 	
 	completion_reward = {
 		every_state = {
@@ -2039,21 +1919,16 @@ shared_focus = {
 }
 
 ###Right side if Southeast doesn't Mingsplode###
+###Now is aggressive option for subverting the southeast###
 shared_focus = {
-	id = puppet_of_greater_foe
-	x = 8
+	id = from_the_bottom_up
+	x = 4
 	y = 1
 	relative_position_id = the_heartlands_beat_in_harmony
 	
-	available = {
-		NOT = {
-			has_global_flag = balsplosion
-		}
-	}
-	
 	cost = 4
 	prerequisite = { focus = the_heartlands_beat_in_harmony }
-	mutually_exclusive = { focus = a_headless_state }
+	mutually_exclusive = { focus = from_the_head_down }
 	
 	completion_reward = {
 		add_political_power = 100
@@ -2064,15 +1939,16 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = highlight_the_lies_of_minitru
+	id = highlight_true_harmony
 	x = -3
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
+		###Event in southeast where Celestia converts some citizens to harmony, which destablizes the nations and increases harmony's popularity
 		BAL = {
 			add_popularity = {
 				ideology = communism
@@ -2085,13 +1961,13 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = war_is_not_peace_peace_is_peace
+	id = prop_up_celestial_loyalists
 	x = -1
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
 		add_equipment_to_stockpile = {
@@ -2099,23 +1975,22 @@ shared_focus = {
 			amount = -10000
 			producer = EQS
 		}
-		BAL = {
-			add_manpower = -50042
-		}
+		###Give event of harmonist insurgency to BAL or all of its splinter states that will damage one building and one infrastructure in a random state
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = plenty_of_harmony_to_go_around
+	id = plenty_of_tolerance_to_go_around
 	x = 1
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
+		###Event in the southeast for pamphlets being dropped by Equestria that shows how great Equestria is under Celestia again and how they could return to that
 		BAL = {
 			add_timed_idea = {
 				idea = all_the_harmony_BAL
@@ -2127,15 +2002,16 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = governate_only_loves_itself
+	id = promise_forgiveness_of_deserters
 	x = 3
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
+		###Event in southeast of some troops being caught by Equestrian armed forces and being pardoned
 		BAL = {
 			add_ideas = exposed_lies_BAL
 		}
@@ -2147,25 +2023,43 @@ shared_focus = {
 	id = launch_operation_shattered_head
 	x = 1
 	y = 1
-	relative_position_id = war_is_not_peace_peace_is_peace
+	relative_position_id = prop_up_celestial_loyalists
 	
 	cost = 2
-	prerequisite = { focus = war_is_not_peace_peace_is_peace }
-	prerequisite = { focus = governate_only_loves_itself }
-	prerequisite = { focus = plenty_of_harmony_to_go_around }
-	prerequisite = { focus = highlight_the_lies_of_minitru }
+	prerequisite = { focus = prop_up_celestial_loyalists }
+	prerequisite = { focus = highlight_true_harmony }
+	prerequisite = { focus = plenty_of_tolerance_to_go_around }
+	prerequisite = { focus = promise_forgiveness_of_deserters }
 	
 	completion_reward = {
-		declare_war_on = {
-			target = BAL
-			type = annex_everything
+		every_country = {
+			limit = {
+				OR = {
+					owns_state = 688
+					owns_state = 84
+					owns_state = 81
+					owns_state = 15
+					owns_state = 26
+					owns_state = 221
+					owns_state = 79
+					owns_state = 352
+					owns_state = 7
+					owns_state = 31
+				}
+			}
+			EQS = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
 }
 
 shared_focus = {
-	id = freed_from_the_collective_consciousness
+	id = a_harmonic_peninsula
 	x = 0
 	y = 1
 	relative_position_id = launch_operation_shattered_head
@@ -2180,7 +2074,10 @@ shared_focus = {
 	completion_reward = {
 		every_state = {
 			limit = {
-				is_core_of = BAL
+				OR = {
+					is_core_of = BAL
+					is_claimed_by = BAL
+				}
 			}
 			add_core_of = EQS
 		}
@@ -2197,10 +2094,11 @@ shared_focus = {
 	
 	available = {
 		OR = {
-			has_completed_focus = freed_from_the_collective_consciousness
+			has_completed_focus = a_harmonic_peninsula
 			AND = {
-				has_completed_focus = an_equestrian_seaboard
+				has_completed_focus = the_last_marriage_offer
 				has_completed_focus = mangos_for_all
+				has_completed_focus = an_equestrian_seaboard
 			}
 		}
 	}
@@ -2209,7 +2107,8 @@ shared_focus = {
 	prerequisite = {
 		focus = an_equestrian_seaboard
 		focus = mangos_for_all
-		focus = freed_from_the_collective_consciousness
+		focus = the_last_marriage_offer
+		focus = a_harmonic_peninsula
 	}
 	
 	completion_reward = {
