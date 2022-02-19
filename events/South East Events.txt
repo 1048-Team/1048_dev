@@ -251,4 +251,59 @@ country_event = { ###Debug event to spawn the Mingsplosion
 		}
 	}
 }
+
+###Southeast generic events for Celestia###
+country_event = { #The country leader receives word that some harmonist instigations most likely from Celestia have led to damage in one of the states under the control
+	id = southeast.500
+	title = southeast.500.t
+	desc = southeast.500.d
 	
+	is_triggered_only = yes
+	
+	option = { #And Celestia claims she's the one in the right?
+		name = southeast.500.a
+		log = "[GetDateText] [ROOT.GetName] executed southeast.500"
+		random_state = {
+			limit = { 
+				is_owned_by = ROOT
+			}
+			damage_building = {
+				type = infrastructure
+				damage = 2
+			}
+			damage_building = {
+				type = arms_factory
+				damage = 1
+			}
+		}
+	}
+}
+
+country_event = { #The country leader receives a communique from Equestria stating that since they have become more reliant on Equestria they should consider submitting to become a vassal to Equestria
+	id = southeast.501
+	title = southeast.501.t
+	desc = southeast.501.d
+	
+	is_triggered_only = yes
+	
+	option = { #We must work together, but as equals
+		name = southeast.501.a
+		log = "[GetDateText] [ROOT.GetName] executed southeast.501"
+		###Propose alliance back
+		add_to_array = { global.alliance_array = ROOT.id }
+		#set_variable = { global.alliance_tracker = ROOT.id }
+		EQS = {
+			country_event = celestia.564
+		}
+	}
+	#option = { #She is right, we will return to Equestrian control
+	#	name = southeast.501.b
+	#	log = "[GetDateText] [ROOT.GetName] executed southeast.501"
+	#	###Submit
+	#}
+	#option = { #Equestria will have to take our land from our cold, dead hooves!
+	#	name = southeast.501.c
+	#	log = "[GetDateText] [ROOT.GetName] executed southeast.501"
+	#	###Refuse to submit
+	#}
+}

@@ -7216,6 +7216,18 @@ country_event = { #Celestia speaks with her advisors on the logistics of support
 	
 	option = { #Hopefully we don't cause more suffering
 		name = celestia.558.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			limit = {
+				exists = yes
+			}
+			
+			country_event = {
+				id = southeast.500
+				days = 30
+				random_days = 7
+			}
+		}
 		###Trigger southeast event in BAL and any splinter states for generic harmonist instigation in about a month
 	}
 }
@@ -7242,6 +7254,18 @@ country_event = { #Celestia grows nervous as she pens a letter to the southeast 
 	
 	option = { #Will they see reason in an old way of thinking?
 		name = celestia.560.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			limit = {
+				exists = yes
+			}
+			
+			country_event = {
+				id = southeast.501
+				days = 1
+				random_days = 2
+			}
+		}
 		###Event for generic offer of submission, which can be rejected
 	}
 }
@@ -7282,6 +7306,24 @@ country_event = { #Celestia and some of SMILE prepare to execute a mission with 
 	option = { #No mercy. Just arrest and apprehend, nothing more
 		name = celestia.563.a
 		###Event for the proposal to other governments, which will reduce either fascism or communism (based on the ruling party's government) by 10% and remove a proportional amount of ponypower, and provide another +25 opinion
+	}
+}
+
+country_event = { #Celestia receives a telegram back from the nations she contacted and she is offered instead a potential alliance with them, to which she is not overly happy about but considers
+	id = celestia.564
+	title = celestia.564.t
+	desc = celestia.564.d
+	
+	is_triggered_only = yes
+	
+	option = { #It is not ideal, but there is no need for more war
+		name = celestia.564.t
+		ai_chance = { factor = 55 }
+		find_highest_in_array = {
+			array = global.alliance_array
+			
+			EQS = { add_to_faction = var:global.alliance_tracker }
+		}
 	}
 }
 
