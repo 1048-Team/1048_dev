@@ -7218,14 +7218,16 @@ country_event = { #Celestia speaks with her advisors on the logistics of support
 		name = celestia.558.a
 		for_each_scope_loop = {
 			array = global.southeast_countries
-			limit = {
-				exists = yes
-			}
 			
-			country_event = {
-				id = southeast.500
-				days = 30
-				random_days = 7
+			IF = {
+				limit = {
+					exists = yes
+				}
+				country_event = {
+					id = southeast.500
+					days = 30
+					random_days = 7
+				}
 			}
 		}
 		###Trigger southeast event in BAL and any splinter states for generic harmonist instigation in about a month
@@ -7256,14 +7258,16 @@ country_event = { #Celestia grows nervous as she pens a letter to the southeast 
 		name = celestia.560.a
 		for_each_scope_loop = {
 			array = global.southeast_countries
-			limit = {
-				exists = yes
-			}
 			
-			country_event = {
-				id = southeast.501
-				days = 1
-				random_days = 2
+			IF = {
+				limit = {
+					exists = yes
+				}
+				country_event = {
+					id = southeast.501
+					#days = 1
+					#random_days = 2
+				}
 			}
 		}
 		###Event for generic offer of submission, which can be rejected
@@ -7319,10 +7323,20 @@ country_event = { #Celestia receives a telegram back from the nations she contac
 	option = { #It is not ideal, but there is no need for more war
 		name = celestia.564.t
 		ai_chance = { factor = 55 }
-		find_highest_in_array = {
+		for_each_loop = {
 			array = global.alliance_array
+			break = 1
 			
-			EQS = { add_to_faction = var:global.alliance_tracker }
+			IF = {
+				limit = {
+					exists = yes
+				}
+				EQS = { add_to_faction = ROOT }
+			}
+		}
+		remove_from_array = {
+			array = global.alliance_array
+			index = 0
 		}
 	}
 }
