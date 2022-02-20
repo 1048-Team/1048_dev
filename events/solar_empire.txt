@@ -7321,22 +7321,16 @@ country_event = { #Celestia receives a telegram back from the nations she contac
 	is_triggered_only = yes
 	
 	option = { #It is not ideal, but there is no need for more war
-		name = celestia.564.t
+		name = celestia.564.a
 		ai_chance = { factor = 55 }
-		for_each_loop = {
-			array = global.alliance_array
-			break = 1
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				EQS = { add_to_faction = ROOT }
-			}
-		}
-		remove_from_array = {
-			array = global.alliance_array
-			index = 0
+		add_to_faction = FROM
+	}
+	option = { #That is not acceptable. Equestria must be whole again, one way or another
+		name = celestia.564.b
+		ai_chance = { factor = 45 }
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
 		}
 	}
 }
