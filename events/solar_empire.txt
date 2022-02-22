@@ -4997,7 +4997,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 	}
 }
 
-country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it; she asks to be called by her full name, Celestia Solaria, not to be referred to as princess
+country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it; she asks to be called by her full name, Celestia Solaria, not to be referred to as princess; also mention already how the all branches of the military are getting rebellious
 	id = celestia.6
 	title = celestia.6.t
 	desc = celestia.6.d
@@ -5009,6 +5009,12 @@ country_event = { #Celestia sees the destruction in Canterlot and the other regi
 		add_stability = -0.05
 		add_war_support = -0.05
 		remove_ideas = eqs_slw_civil_war
+		add_ideas = militarium_resistance
+		add_ideas = mutinous_navy
+		add_ideas = awol_air_force
+		hidden_effect = {
+			country_lock_all_division_template = yes
+		}
 	}
 }
 
@@ -7243,7 +7249,15 @@ country_event = { #Celestia gets one final offer from Lucky Star as they're begi
 	
 	option = { #Is that a stuffed toy of me?!
 		name = celestia.559.a
-		###Add most of the western coastal states as cores
+		every_state = {
+			limit = {				
+				is_in_array = {
+					array = global.west_southeast
+					value = THIS
+				}
+			}
+			add_core_of = ROOT
+		}
 	}
 }
 
@@ -7265,12 +7279,11 @@ country_event = { #Celestia grows nervous as she pens a letter to the southeast 
 				}
 				country_event = {
 					id = southeast.501
-					#days = 1
-					#random_days = 2
+					days = 1
+					random_days = 5
 				}
 			}
 		}
-		###Event for generic offer of submission, which can be rejected
 	}
 }
 
@@ -7294,7 +7307,7 @@ country_event = { #Celestia meets with her generals to discuss a couple of them 
 	
 	is_triggered_only = yes
 	
-	option = { #It's a double-edged sword, but to who?
+	option = { #It's a double-edged sword, but to whom?
 		name = celestia.562.a
 		###Event for generic offer to have a military expedition, which gives -3% RPF and increase army xp gain and another +25 opinion
 	}
@@ -7328,6 +7341,35 @@ country_event = { #Celestia receives a telegram back from the nations she contac
 	option = { #That is not acceptable. Equestria must be whole again, one way or another
 		name = celestia.564.b
 		ai_chance = { factor = 45 }
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #Celestia reaceives word back from the communicated nation that they will transfer administrative control to her, and she is pleased
+	id = celestia.565
+	title = celestia.565.t
+	desc = celestia.565.d
+	
+	is_triggered_only = yes
+	
+	option = { #Excellent! My little ponies are returning to their homeland!
+		name = celestia.565.a
+		annex_country = { target = FROM }
+	}
+}
+
+country_event = { #Celestia is told off by a short communique from one of the jungle nations that they will never submit to her and that she will need to take their land by force; she is regretful that they push her to war
+	id = celestia.566
+	title = celestia.566.t
+	desc = celestia.566.d
+	
+	is_triggered_only = yes
+	
+	option = { #I suppose they have been under a different flag for too long. Very well, they shall have their war
+		name = celestia.566.a
 		create_wargoal = {
 			target = FROM
 			type = annex_everything

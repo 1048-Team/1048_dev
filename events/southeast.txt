@@ -204,22 +204,54 @@ country_event = { #The country leader receives a communique from Equestria stati
 	
 	option = { #We must work together, but as equals
 		name = southeast.501.a
-		log = "[GetDateText] [ROOT.GetName] executed southeast.501"
+		ai_chance = {
+			base = 10
+			modifier = { has_government = neutrality factor = 5 }
+			modifier = { has_government = democratic factor = 7 }
+			modifier = { 
+				OR = {
+					has_government = fascist
+					has_government = communist
+				}
+				factor = 2.5
+			}
+			modifier = { NOT = { has_global_flag = balsplosion } factor = 2 }
+		}
+		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		###Propose alliance back
-		add_to_array = { global.alliance_array = ROOT.id }
-		#set_variable = { global.alliance_tracker = ROOT.id }
 		EQS = {
 			country_event = celestia.564
 		}
 	}
-	#option = { #She is right, we will return to Equestrian control
-	#	name = southeast.501.b
-	#	log = "[GetDateText] [ROOT.GetName] executed southeast.501"
-	#	###Submit
-	#}
-	#option = { #Equestria will have to take our land from our cold, dead hooves!
-	#	name = southeast.501.c
-	#	log = "[GetDateText] [ROOT.GetName] executed southeast.501"
-	#	###Refuse to submit
-	#}
+	option = { #She is right, we will return to Equestrian control
+		name = southeast.501.b
+		log = "[GetDateText] [ROOT.GetName]: southeast.501"
+		ai_chance = {
+			base = 10
+			modifier = { has_government = neutrality factor = 2.5 }
+			modifier = { has_government = democratic factor = 3 }
+			modifier = { has_government = fascist factor = 0.5 }
+			modifier = { has_government = communist factor = 1.5 }
+			modifier = { NOT = { has_global_flag = balsplosion } factor = 0 }
+		}
+		###Submit to becoming a vassal
+		EQS = {
+			country_event = celestia.565
+		}
+	}
+	option = { #Equestria will have to take our land from our cold, dead hooves!
+		name = southeast.501.c
+		ai_chance = {
+			base = 10
+			modifier = { has_government = neutrality factor = 2.5 }
+			modifier = { has_government = democratic factor = 0 }
+			modifier = { has_government = fascist factor = 7 }
+			modifier = { has_government = communist factor = 6 }
+		}
+		log = "[GetDateText] [ROOT.GetName]: southeast.501"
+		###Refuse to submit
+		EQS = {
+			country_event = celestia.566
+		}
+	}
 }
