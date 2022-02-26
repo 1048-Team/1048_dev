@@ -7222,6 +7222,11 @@ country_event = { #Celestia speaks with her advisors on the logistics of support
 	
 	option = { #Hopefully we don't cause more suffering
 		name = celestia.558.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
 		for_each_scope_loop = {
 			array = global.southeast_countries
 			
@@ -7373,6 +7378,84 @@ country_event = { #Celestia is told off by a short communique from one of the ju
 		create_wargoal = {
 			target = FROM
 			type = annex_everything
+		}
+	}
+}
+
+country_event = { #Celestia reads up on one of the pamphlets that has been approved for the southeast propaganda war, and she fears that it appears too good for ponies to believe; she gives a slight critique about the amount of cake in the nation
+	id = celestia.567
+	title = celestia.567.t
+	desc = celestia.567.d
+	
+	is_triggered_only = yes
+	
+	option = { #Perhaps entice them with some sweets?
+		name = celestia.567.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				country_event = {
+					id = southeast.503
+					days = 1
+					random_days = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Celestia rehearses her speech one more time with Fancy Pants, and he has her fix a couple of things, and gets Fleur to provide a few more pointers, as Celestia is overly nervous, since they are effectively inviting a potential swamp of insurgents into their land, although she is reassured that there will be no issue
+	id = celestia.568
+	title = celestia.568.t
+	desc = celestia.568.d
+	
+	is_triggered_only = yes
+	
+	option = { #Because when has an unchecked militia ever gone wrong?
+		name = celestia.568.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				country_event = {
+					id = southeast.504
+					days = 3
+					random_days = 2
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Celestia speaks with some of the spies that she will be sending out to agitate the ponies of the southeast; she thanks them for their service, and also that they must be careful there is little violence before she leaves to stress about the coming war with the southeast
+	id = celestia.569
+	title = celestia.569.t
+	desc = celestia.569.d
+	
+	is_triggered_only = yes
+	
+	option = { #I feel the need for a bit of cake
+		name = celestia.569.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				country_event = {
+					id = southeast.502
+					days = 1
+					random_days = 7
+				}
+			}
 		}
 	}
 }

@@ -294,8 +294,8 @@ country_event = { #The country leader receives a communique from Equestria stati
 			modifier = { has_government = democratic factor = 7 }
 			modifier = { 
 				OR = {
-					has_government = fascist
-					has_government = communist
+					has_government = fascism
+					has_government = communism
 				}
 				factor = 2.5
 			}
@@ -314,8 +314,8 @@ country_event = { #The country leader receives a communique from Equestria stati
 			base = 10
 			modifier = { has_government = neutrality factor = 2.5 }
 			modifier = { has_government = democratic factor = 3 }
-			modifier = { has_government = fascist factor = 0.5 }
-			modifier = { has_government = communist factor = 1.5 }
+			modifier = { has_government = fascism factor = 0.5 }
+			modifier = { has_government = communism factor = 1.5 }
 			modifier = { NOT = { has_global_flag = balsplosion } factor = 0 }
 		}
 		###Submit to becoming a vassal
@@ -329,13 +329,87 @@ country_event = { #The country leader receives a communique from Equestria stati
 			base = 10
 			modifier = { has_government = neutrality factor = 2.5 }
 			modifier = { has_government = democratic factor = 0 }
-			modifier = { has_government = fascist factor = 7 }
-			modifier = { has_government = communist factor = 6 }
+			modifier = { has_government = fascism factor = 7 }
+			modifier = { has_government = communism factor = 6 }
 		}
 		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		###Refuse to submit
 		EQS = {
 			country_event = celestia.566
+		}
+	}
+}
+
+country_event = { #Protests and marches organized by Celestia's spies begin to march across the different Southeast nations, with them being mostly peaceful albeit with some provocation by police
+	id = southeast.502
+	title = southeast.502.t
+	desc = southeast.502.d
+	
+	is_triggered_only = yes
+	
+	option = { #This is only the beginning
+		name = southeast.502
+		IF = {
+			limit = {
+				NOT = {
+					has_government = democratic
+				}
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+		}
+		ELSE = {
+			add_stability = -0.05
+			add_war_support = -0.05
+		}
+	}
+}
+
+country_event = { #Celestia flies some bombers over the different cities of the southeast, dropping pamphlets showing how life has improved in Equestria, and ponies can return to it once again if they overthrow their governments
+	id = southeast.503
+	title = southeast.503.t
+	desc = southeast.503.d
+	
+	is_triggered_only = yes
+	
+	option = { #These are lies! We must correct the fake news immediately!
+		name = southeast.503.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				add_timed_idea = {
+					idea = all_the_harmony_BAL
+					days = 180
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Celestia takes to the radio waves and breaks into the stations in the southeast to inform the military especially that anypony who deserts to Equestria will be forgiven, and that it is open until the region is under her control again
+	id = southeast.504
+	title = southeast.504.t
+	desc = southeast.504.d
+	
+	is_triggered_only = yes
+	
+	option = { #Turn that damned radio off now!
+		name = southeast.504.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				add_ideas = exposed_lies_BAL
+			}
 		}
 	}
 }
