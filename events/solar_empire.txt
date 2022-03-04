@@ -1702,6 +1702,88 @@ country_event = { #Following one of the settlers, they are soon attacked by a ro
 	}
 }
 
+country_event = { #The currently leader is informed that Scorched Earth has gone AWOL, citing that the Empire is being inactive at the opportunity in the southeast, and has taken the seventh Holy Flame army to march across the border to attack the southeast
+	id = solar.122
+	title = solar.122.t
+	desc = solar.122.d
+	
+	is_triggered_only = yes
+	
+	option = { #Stop him at once! We must not have a repeat of Solar Strike!
+		name = solar.122.a
+		random_list = {
+			80 = { #Arrest fails
+				country_event = {
+					id = solar.123
+					days = 1
+					random_days = 2
+				}
+			}
+			20 = { #Arrest succeeds
+				country_event = {
+					id = solar.124
+					days = 1
+					random_days = 2
+				}
+			}
+		}
+	}
+	option = { #There is nothing we can do. Brothers must not fight brothers
+		name = solar.122.b
+		hidden_effect = {
+			BAL = {
+				country_event = {
+					id = southeast.600
+					days = 7
+					random_days = 7
+				}
+			}
+			EQS_Scorched_Earth = { set_nationality = MTS }
+		}
+		custom_effect_tooltip = scorched_earth_departs_tt
+	}
+}
+
+country_event = { #Scorched Earth is alerted by some of his scouts that a Solar army is approaching to apprehend him, and he communicates with the archmage leading it (Ion Trail) and refuses to surrender, and after a brief fight escapes into the southeast
+	id = solar.123
+	title = solar.123.t
+	desc = solar.123.d
+	
+	is_triggered_only = yes
+	
+	option = { #Another prodigal general
+		name = solar.123.a
+		add_manpower = -734
+		add_political_power = -35
+		custom_effect_tooltip = scorched_earth_departs_tt
+		hidden_effect = {
+			BAL = {
+				country_event = {
+					id = southeast.600
+					days = 7
+					random_days = 7
+				}
+			}
+			EQS_Scorched_Earth = { set_nationality = MTS }
+		}
+	}
+}
+
+country_event = { #Scorched Earth is caught by surprise by Ion Trail's ambush for him near the southeast border, and after a brief battle, he is captured and taken back to the Solar Empire; Ion Trail jokes she hopes he likes heat as he's going to be feeling it soon
+	id = solar.124
+	title = solar.124.t
+	desc = solar.124.d
+	
+	is_triggered_only = yes
+	
+	option = { #One less heretic to deal with
+		name = solar.124.a
+		add_political_power = 40
+		add_war_support = 0.03
+		retire_character = EQS_Scorched_Earth
+	}
+}
+
 country_event = { #Hidden event for SOL so it will get Dyx to appear
 	id = solar.197
 	title = solar.197.t
