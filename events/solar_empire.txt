@@ -374,12 +374,17 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		date < 1048.12.1
 	}
 	
+	mean_time_to_happen = { days = 10 }
+	
 	fire_only_once = yes
 	
 	option = {
 		name = solar.18.a
-		ai_chance = {
-			factor = 100
+		hidden_effect = {
+			add_named_threat = {
+				threat = 2
+				name = EQS_manehattan_uprising
+			}
 		}
 		IF = {
 			limit = {
@@ -1276,9 +1281,13 @@ country_event = { #Daybreaker is healed and thankful to Sunset
 		hidden_effect = {
 			set_country_flag = daybreaker_reigns
 			mark_focus_tree_layout_dirty = yes
+			add_named_threat = {
+				threat = 1
+				name = EQS_Daybreakers_back_bois
 			}
 		}
 	}
+}
 	
 country_event = { #Daybreaker is partly healed, starts out fine, then collapses and is rushed to the throne room
 	id = solar.98
@@ -1289,15 +1298,19 @@ country_event = { #Daybreaker is partly healed, starts out fine, then collapses 
 	
 	option = { #Daybreaker is healed but not fully
 		name = solar.98.a
-			hidden_effect = {
-				country_event = {
-					id = solar.100
-					days = 1
-				}
+		hidden_effect = {
+			country_event = {
+				id = solar.100
+				days = 1
 			}
-			add_stability = -0.05
+			add_named_threat = {
+				threat = -3
+				name = EQS_Daybreaker_vegified
+			}
 		}
+		add_stability = -0.05
 	}
+}
 	
 country_event = { #Celestia returns and knocks out Aurora and is disappointed in Sunset before knocking her out and starting a civil war
 	id = solar.99
@@ -1349,6 +1362,10 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				}
 				set_country_flag = sunset_reigns
 				mark_focus_tree_layout_dirty = yes
+				add_named_threat = {
+					threat = -1
+					name = EQS_regent_chosen
+				}
 			}
 		custom_effect_tooltip = sunset_regent
 		add_ideas = {
@@ -1385,7 +1402,10 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				}
 				set_country_flag = aurora_reigns
 				mark_focus_tree_layout_dirty = yes
-				
+				add_named_threat = {
+					threat = -1
+					name = EQS_regent_chosen
+				}
 			}
 		custom_effect_tooltip = aurora_regent
 		add_ideas = {
@@ -1438,6 +1458,12 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 	
 	option = { 
 		name = solar.103.a
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_empire_is_mad
+			}
+		}
 		IF = {
 			custom_effect_tooltip = daybreaker_returns_tt
 			limit = { has_country_leader = { ruling_only = yes name = "Daybreaker" } }
@@ -2879,25 +2905,23 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 		EQS_Sunset_Shimmer_1048 = { add_unit_leader_trait = princess_regent_general }
 		every_country = {
 			limit = {
-				OR = {
-					owns_state = 688
-					owns_state = 84
-					owns_state = 81
-					owns_state = 15
-					owns_state = 26
-					owns_state = 221
-					owns_state = 79
-					owns_state = 352
-					owns_state = 7
-					owns_state = 31
+				is_in_array = {
+					array = global.southeast_countries
+					value = THIS
 				}
 			}
 		
 			EQS = {
 				create_wargoal = {
-					type = annex_everything
 					target = PREV
+					type = annex_everything
 				}
+			}
+		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_southeast_war
 			}
 		}
 	}
@@ -3951,6 +3975,12 @@ country_event = { #Sunset holds a final speech to the Solar Empire and claims th
 			type = puppet_wargoal_focus
 			target = EQC
 		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 3
+				name = EQS_marelandia_war
+			}
+		}
 	}
 }
 
@@ -4418,6 +4448,12 @@ country_event = { #Aurora speaks with a couple of her generals about the initial
 		name = solar.326.a
 		add_stability = 0.03
 		add_war_support = 0.03
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_solaris_quorundam
+			}
+		}
 	}
 }
 
@@ -4822,6 +4858,12 @@ country_event = { #Aurora takes to the radio, repeating a speech she prepared wi
 	option = { #The days of your insolence are numbered. The Solar Empire stands ready to reclaim what was theirs
 		name = solar.351.a
 		add_war_support = 0.02
+		hidden_effect = {
+			add_named_threat = {
+				threat = 10
+				name = EQS_marelandia_war
+			}
+		}
 	}
 }
 
