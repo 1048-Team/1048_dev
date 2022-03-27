@@ -1,7 +1,7 @@
 scripted_gui = {
 	sol_ordo_management_ui = {
 		context_type = decision_category
-		window_name = "sol_ordo_management_ui_window"
+		window_name = "sol_ordo_management_equestria"
 		
 		ai_enabled = { always = no }
 		
@@ -9,11 +9,38 @@ scripted_gui = {
 			always = yes
 		}
 		
+		effects = {
+			equestria_button_click = {
+				set_country_flag = ordo_map_open
+			}
+		}
+		
+		triggers = {
+			###Have triggers for eventually showing CRY and CHN states
+		}
+		
+		properties = {
+			equestria_button = {
+				image = [Get_Equestria_Button_GFX]
+			}
+		}
+		
+	}
+	
+	sol_ordo_management_map = {
+		context_type = player_context
+		window_name = "ordo_map_window_background"
+		
+		ai_enabled = { always = no }
+		
+		visible = {
+			has_country_flag = ordo_map_open
+		}
+		
 		#Each Ordo should be clickable, and when it is clicked, it should then display the archmage and what can be done to improve their loyalty and what can be done to exploit the Ordo.
 		#The loyalty of an Ordo should be displayed by the colour of the Ordo: 25% or lower is red, 26-50% is orange, 51%-75% is yellow, 76% or higher is green.
 		#Alternatively, the Ordos can be listed underneath the map, with each archmage's name and what they can do for the Empire, and if they're giving a buff or a penalty
 		effects = {
-		
 			ordo_multi_gfx_click = {
 				set_country_flag = ordo_management_open
 				set_variable = { ordo_selection = 1 }
@@ -35,7 +62,10 @@ scripted_gui = {
 					max = 100
 				}
 			}
-		
+			
+			ordo_map_close_button_click = {
+				clr_country_flag = ordo_map_open
+			}
 		}
 		
 		triggers = {
@@ -52,9 +82,8 @@ scripted_gui = {
 		}
 		
 		properties = {
-			
-		}
 		
+		}
 	}
 	
 	sol_ordo_management_gui = {
