@@ -7,9 +7,9 @@ SOL_ordo_special_effect = {
 			}
 		}
 		SOL_special_production_effect = yes
-		add_to_variable = { EQS.ordo_loyalty_array^var:ordo_selection = 25 }
+		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = 25 }
 		clamp_variable = { 
-			var = EQS.ordo_loyalty_array^var:ordo_selection
+			var = global.ordo_loyalty_array^var:ordo_selection
 			min = 0
 			max = 100
 		}
@@ -25,9 +25,9 @@ SOL_ordo_normal_effect_1 = {
 		limit = {
 			check_ordo_selection_1 = yes
 		}
-		add_to_variable = { EQS.ordo_loyalty_array^var:ordo_selection = 3 }
+		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = 3 }
 		clamp_variable = { 
-			var = EQS.ordo_loyalty_array^var:ordo_selection
+			var = global.ordo_loyalty_array^var:ordo_selection
 			min = 0
 			max = 100
 		}
@@ -42,9 +42,9 @@ SOL_ordo_normal_effect_2 = {
 		limit = {
 			check_ordo_selection_2 = yes
 		}
-		add_to_variable = { EQS.ordo_loyalty_array^var:ordo_selection = -4 }
+		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = -4 }
 		clamp_variable = { 
-			var = EQS.ordo_loyalty_array^var:ordo_selection
+			var = global.ordo_loyalty_array^var:ordo_selection
 			min = 0
 			max = 100
 		}
@@ -57,9 +57,9 @@ SOL_ordo_normal_effect_3 = {
 		limit = {
 			check_ordo_selection_3 = yes
 		}
-		add_to_variable = { EQS.ordo_loyalty_array^var:ordo_selection = -3 }
+		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = -3 }
 		clamp_variable = { 
-			var = EQS.ordo_loyalty_array^var:ordo_selection
+			var = global.ordo_loyalty_array^var:ordo_selection
 			min = 0
 			max = 100
 		}
@@ -872,104 +872,180 @@ SOL_ordo_set_flag_3 = {
 SOL_check_ordo_loyalty = {
 	set_temp_variable = { ordo_loyalty_average = 0 }
 	set_temp_variable = { loyalty_divisor = 0 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^1 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^2 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^3 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^4 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^5 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^6 }
-	add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^7 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^2 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^3 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+		}		
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^4 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^5 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^6 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^7 }
+	}
 	IF = {
 		limit = {
 			SOL_ordo_lapidis_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^8 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^8 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_doctrina_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^9 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^9 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_caellum_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^10 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^10 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_munificus_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^11 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^11 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_velocitas_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^12 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^12 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_diligentia_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^13 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^13 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_confundas_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^14 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^14 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_servus_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^15 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^15 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_ferox_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^16 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^16 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_praeda_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^17 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^17 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_infernum_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^18 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^18 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_mercatura_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^19 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^19 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_litus_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^20 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^20 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_salus_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^21 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^21 }
 	}
 	IF = {
 		limit = {
 			SOL_ordo_tenuis_visible = yes
 		}
-		add_to_temp_variable = { ordo_loyalty_average = ordo_loyalty_array^22 }
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^22 }
 	}
-	add_to_temp_variable = { loyalty_divisor = 7 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+		}		
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
 	IF = {
 		limit = {
 			SOL_ordo_lapidis_visible = yes
@@ -1061,6 +1137,7 @@ SOL_check_ordo_loyalty = {
 		add_to_temp_variable = { loyalty_divisor = 1 }
 	}
 	divide_temp_variable = { ordo_loyalty_average = loyalty_divisor }
+	set_variable = { loyalty_divisor_debug = loyalty_divisor }
 	round_temp_variable = ordo_loyalty_average
 	set_variable = { SOL_ordo_average_loyalty = ordo_loyalty_average }
 	SOL_ordo_loyalty_bonus = yes
@@ -1068,42 +1145,49 @@ SOL_check_ordo_loyalty = {
 SOL_ordo_loyalty_bonus = {
 	IF = {
 		limit = {
-			check_variable = { SOL_ordo_average_loyalty > 84 }
-		}
-		SOL_ordo_loyalty_very_high = yes
-	}
-	ELSE_IF = {
-		limit = {
-			AND = {
-				check_variable = { SOL_ordo_average_loyalty < 85 }
-				check_variable = { SOL_ordo_average_loyalty > 60 }
+			ROOT = {
+				is_ai = no
 			}
 		}
-		SOL_ordo_loyalty_high = yes
-	}
-	ELSE_IF = {
-		limit = {
-			AND = {
-				check_variable = { SOL_ordo_average_loyalty < 61 }
-				check_variable = { SOL_ordo_average_loyalty > 44 }
+		IF = {
+			limit = {
+				check_variable = { SOL_ordo_average_loyalty > 84 }
 			}
+			SOL_ordo_loyalty_very_high = yes
 		}
-		SOL_ordo_loyalty_average = yes
-	}
-	ELSE_IF = {
-		limit = {
-			AND = {
-				check_variable = { SOL_ordo_average_loyalty < 45 }
-				check_variable = { SOL_ordo_average_loyalty > 20 }
+		ELSE_IF = {
+			limit = {
+				AND = {
+					check_variable = { SOL_ordo_average_loyalty < 85 }
+					check_variable = { SOL_ordo_average_loyalty > 60 }
+				}
 			}
+			SOL_ordo_loyalty_high = yes
 		}
-		SOL_ordo_loyalty_low = yes
-	}
-	ELSE_IF = {
-		limit = {
-			check_variable = { SOL_ordo_average_loyalty < 21 }
+		ELSE_IF = {
+			limit = {
+				AND = {
+					check_variable = { SOL_ordo_average_loyalty < 61 }
+					check_variable = { SOL_ordo_average_loyalty > 44 }
+				}
+			}
+			SOL_ordo_loyalty_average = yes
 		}
-		SOL_ordo_loyalty_very_low = yes
+		ELSE_IF = {
+			limit = {
+				AND = {
+					check_variable = { SOL_ordo_average_loyalty < 45 }
+					check_variable = { SOL_ordo_average_loyalty > 20 }
+				}
+			}
+			SOL_ordo_loyalty_low = yes
+		}
+		ELSE_IF = {
+			limit = {
+				check_variable = { SOL_ordo_average_loyalty < 21 }
+			}
+			SOL_ordo_loyalty_very_low = yes
+		}
 	}
 	ELSE = {
 		SOL_ordo_loyalty_average = yes
