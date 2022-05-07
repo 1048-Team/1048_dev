@@ -374,17 +374,12 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		date < 1048.12.1
 	}
 	
-	mean_time_to_happen = { days = 10 }
-	
 	fire_only_once = yes
 	
 	option = {
 		name = solar.18.a
-		hidden_effect = {
-			add_named_threat = {
-				threat = 2
-				name = EQS_manehattan_uprising
-			}
+		ai_chance = {
+			factor = 100
 		}
 		IF = {
 			limit = {
@@ -1281,13 +1276,9 @@ country_event = { #Daybreaker is healed and thankful to Sunset
 		hidden_effect = {
 			set_country_flag = daybreaker_reigns
 			mark_focus_tree_layout_dirty = yes
-			add_named_threat = {
-				threat = 1
-				name = EQS_Daybreakers_back_bois
 			}
 		}
 	}
-}
 	
 country_event = { #Daybreaker is partly healed, starts out fine, then collapses and is rushed to the throne room
 	id = solar.98
@@ -1298,19 +1289,15 @@ country_event = { #Daybreaker is partly healed, starts out fine, then collapses 
 	
 	option = { #Daybreaker is healed but not fully
 		name = solar.98.a
-		hidden_effect = {
-			country_event = {
-				id = solar.100
-				days = 1
+			hidden_effect = {
+				country_event = {
+					id = solar.100
+					days = 1
+				}
 			}
-			add_named_threat = {
-				threat = -3
-				name = EQS_Daybreaker_vegified
-			}
+			add_stability = -0.05
 		}
-		add_stability = -0.05
 	}
-}
 	
 country_event = { #Celestia returns and knocks out Aurora and is disappointed in Sunset before knocking her out and starting a civil war
 	id = solar.99
@@ -1362,10 +1349,6 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				}
 				set_country_flag = sunset_reigns
 				mark_focus_tree_layout_dirty = yes
-				add_named_threat = {
-					threat = -1
-					name = EQS_regent_chosen
-				}
 			}
 		custom_effect_tooltip = sunset_regent
 		add_ideas = {
@@ -1402,10 +1385,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				}
 				set_country_flag = aurora_reigns
 				mark_focus_tree_layout_dirty = yes
-				add_named_threat = {
-					threat = -1
-					name = EQS_regent_chosen
-				}
+				
 			}
 		custom_effect_tooltip = aurora_regent
 		add_ideas = {
@@ -1458,12 +1438,6 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 	
 	option = { 
 		name = solar.103.a
-		hidden_effect = {
-			add_named_threat = {
-				threat = 5
-				name = EQS_empire_is_mad
-			}
-		}
 		IF = {
 			custom_effect_tooltip = daybreaker_returns_tt
 			limit = { has_country_leader = { ruling_only = yes name = "Daybreaker" } }
@@ -1508,7 +1482,6 @@ country_event = { #Daybreaker has a Hitler-like speech about reconquering the ru
 		hidden_effect = {
 			set_country_flag = southeast_dead
 			mark_focus_tree_layout_dirty = yes
-			set_variable = { equestria_conquest = 2 }
 		}
 	}
 }
@@ -1726,90 +1699,6 @@ country_event = { #Following one of the settlers, they are soon attacked by a ro
 			add_manpower = -8273
 		}
 		restore_previous_manpower = yes
-	}
-}
-
-country_event = { #The currently leader is informed that Scorched Earth has gone AWOL, citing that the Empire is being inactive at the opportunity in the southeast, and has taken the seventh Holy Flame army and a rogue inquisitor to march across the border to attack the southeast
-	id = solar.122
-	title = solar.122.t
-	desc = solar.122.d
-	
-	is_triggered_only = yes
-	
-	option = { #Stop him at once! We must not have a repeat of Solar Strike!
-		name = solar.122.a
-		random_list = {
-			80 = { #Arrest fails
-				country_event = {
-					id = solar.123
-					days = 1
-					random_days = 2
-				}
-			}
-			20 = { #Arrest succeeds
-				country_event = {
-					id = solar.124
-					days = 1
-					random_days = 2
-				}
-			}
-		}
-	}
-	option = { #There is nothing we can do. Brothers must not fight brothers
-		name = solar.122.b
-		hidden_effect = {
-			BAL = {
-				country_event = {
-					id = southeast.600
-					days = 7
-					random_days = 7
-				}
-			}
-			EQS_Scorched_Earth = { set_nationality = MTS }
-			EQS_Luminous_Blade = { set_nationality = MTS }
-		}
-		custom_effect_tooltip = scorched_earth_departs_tt
-	}
-}
-
-country_event = { #Scorched Earth is alerted by some of his scouts that a Solar army is approaching to apprehend him, and he communicates with the archmage leading it (Ion Trail) and refuses to surrender, and after a brief fight escapes into the southeast
-	id = solar.123
-	title = solar.123.t
-	desc = solar.123.d
-	
-	is_triggered_only = yes
-	
-	option = { #Another prodigal general
-		name = solar.123.a
-		add_manpower = -734
-		add_political_power = -35
-		custom_effect_tooltip = scorched_earth_departs_tt
-		hidden_effect = {
-			BAL = {
-				country_event = {
-					id = southeast.600
-					days = 7
-					random_days = 7
-				}
-			}
-			EQS_Scorched_Earth = { set_nationality = MTS }
-			EQS_Luminous_Blade = { set_nationality = MTS }
-		}
-	}
-}
-
-country_event = { #Scorched Earth is caught by surprise by Ion Trail's ambush for him near the southeast border, and after a brief battle, he is captured and taken back to the Solar Empire; Ion Trail jokes she hopes he likes heat as he's going to be feeling it soon
-	id = solar.124
-	title = solar.124.t
-	desc = solar.124.d
-	
-	is_triggered_only = yes
-	
-	option = { #One less heretic to deal with
-		name = solar.124.a
-		add_political_power = 40
-		add_war_support = 0.03
-		retire_character = EQS_Scorched_Earth
 	}
 }
 
@@ -2906,23 +2795,25 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 		EQS_Sunset_Shimmer_1048 = { add_unit_leader_trait = princess_regent_general }
 		every_country = {
 			limit = {
-				is_in_array = {
-					array = global.southeast_countries
-					value = THIS
+				OR = {
+					owns_state = 688
+					owns_state = 84
+					owns_state = 81
+					owns_state = 15
+					owns_state = 26
+					owns_state = 221
+					owns_state = 79
+					owns_state = 352
+					owns_state = 7
+					owns_state = 31
 				}
 			}
 		
 			EQS = {
 				create_wargoal = {
-					target = PREV
 					type = annex_everything
+					target = PREV
 				}
-			}
-		}
-		hidden_effect = {
-			add_named_threat = {
-				threat = 5
-				name = EQS_southeast_war
 			}
 		}
 	}
@@ -3976,12 +3867,6 @@ country_event = { #Sunset holds a final speech to the Solar Empire and claims th
 			type = puppet_wargoal_focus
 			target = EQC
 		}
-		hidden_effect = {
-			add_named_threat = {
-				threat = 3
-				name = EQS_marelandia_war
-			}
-		}
 	}
 }
 
@@ -4449,12 +4334,6 @@ country_event = { #Aurora speaks with a couple of her generals about the initial
 		name = solar.326.a
 		add_stability = 0.03
 		add_war_support = 0.03
-		hidden_effect = {
-			add_named_threat = {
-				threat = 5
-				name = EQS_solaris_quorundam
-			}
-		}
 	}
 }
 
@@ -4859,12 +4738,6 @@ country_event = { #Aurora takes to the radio, repeating a speech she prepared wi
 	option = { #The days of your insolence are numbered. The Solar Empire stands ready to reclaim what was theirs
 		name = solar.351.a
 		add_war_support = 0.02
-		hidden_effect = {
-			add_named_threat = {
-				threat = 10
-				name = EQS_marelandia_war
-			}
-		}
 	}
 }
 
@@ -5124,7 +4997,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 	}
 }
 
-country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it; she asks to be called by her full name, Celestia Solaria, not to be referred to as princess; also mention already how the all branches of the military are getting rebellious
+country_event = { #Celestia sees the destruction in Canterlot and the other regions of Equestria, and she believes that things will be impossible to recover from, and she grows colder because of it; she asks to be called by her full name, Celestia Solaria, not to be referred to as princess
 	id = celestia.6
 	title = celestia.6.t
 	desc = celestia.6.d
@@ -5136,12 +5009,6 @@ country_event = { #Celestia sees the destruction in Canterlot and the other regi
 		add_stability = -0.05
 		add_war_support = -0.05
 		remove_ideas = eqs_slw_civil_war
-		add_ideas = militarium_resistance
-		add_ideas = mutinous_navy
-		add_ideas = awol_air_force
-		hidden_effect = {
-			country_lock_all_division_template = yes
-		}
 	}
 }
 
@@ -7198,12 +7065,12 @@ country_event = { #Celestia is contacted by one of the communes to inform them t
 	is_triggered_only = yes
 	
 	option = { #How have they kept their cities running after all these years?
-		name = celestia.551.a
+		name = celestia.550.a
 		annex_country = { target = NER transfer_troops = yes }
 	}
 }
 
-country_event = { #Celestia gets a shoddily worded letter about being rejected, and she's confused about what she reads (they can't even call her a motherbucker correctly)
+country_event = { #Celestia gets a shoddily worded letter about being rejected, and she's confused about what she reads
 	id = celestia.552
 	title = celestia.552.t
 	desc = celestia.552.d
@@ -7337,253 +7204,6 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 		name = celestia.557.b
 		ai_chance = { factor = 25 }
 		reverse_add_opinion_modifier = { target = CRY modifier = CRY_dishonorable }
-	}
-}
-
-country_event = { #Celestia speaks with her advisors on the logistics of supporting a dubious number of ponies in the southeast and they assure her things are fine and will help prepare for the coming invasion
-	id = celestia.558
-	title = celestia.558.t
-	desc = celestia.558.d
-	
-	is_triggered_only = yes
-	
-	option = { #Hopefully we don't cause more suffering
-		name = celestia.558.a
-		add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = -10000
-			producer = EQS
-		}
-		for_each_scope_loop = {
-			array = global.southeast_countries
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				country_event = {
-					id = southeast.500
-					days = 30
-					random_days = 7
-				}
-			}
-		}
-		###Trigger southeast event in BAL and any splinter states for generic harmonist instigation in about a month
-	}
-}
-
-country_event = { #Celestia gets one final offer from Lucky Star as they're beginning to tear down all of his work on the western coast of marriage, and Celestia finally manages to laugh in his face that she doesn't agree
-	id = celestia.559
-	title = celestia.559.t
-	desc = celestia.559.d
-	
-	is_triggered_only = yes
-	
-	option = { #Is that a stuffed toy of me?!
-		name = celestia.559.a
-		every_state = {
-			limit = {				
-				is_in_array = {
-					array = global.west_southeast
-					value = THIS
-				}
-			}
-			add_core_of = ROOT
-		}
-	}
-}
-
-country_event = { #Celestia grows nervous as she pens a letter to the southeast regional leaders to become a subject of Equestria, now that they were more dependent on them
-	id = celestia.560
-	title = celestia.560.t
-	desc = celestia.560.d
-	
-	is_triggered_only = yes
-	
-	option = { #Will they see reason in an old way of thinking?
-		name = celestia.560.a
-		for_each_scope_loop = {
-			array = global.southeast_countries
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				country_event = {
-					id = southeast.501
-					days = 1
-					random_days = 5
-				}
-			}
-		}
-	}
-}
-
-country_event = { #Celestia meets with a few of the different trade organizations from across the southeast, including Nidhogg, and she declares that Equestria will recognize the region and seek trade with them, which she nervously hopes will be accepted
-	id = celestia.561
-	title = celestia.561.t
-	desc = celestia.561.d
-	
-	is_triggered_only = yes
-	
-	option = { #Everypony loves money, right?
-		name = celestia.561.a
-		###Event for getting a generic offer of a national spirit that increases trade to EQS and also a +25 opinion increase and a bit of increased production cap
-	}
-}
-
-country_event = { #Celestia meets with her generals to discuss a couple of them heading to the southeast on a new joint venture to share experience, and she gets pushback at first but is eventually agreed to
-	id = celestia.562
-	title = celestia.562.t
-	desc = celestia.562.d
-	
-	is_triggered_only = yes
-	
-	option = { #It's a double-edged sword, but to whom?
-		name = celestia.562.a
-		###Event for generic offer to have a military expedition, which gives -3% RPF and increase army xp gain and another +25 opinion
-	}
-}
-
-country_event = { #Celestia and some of SMILE prepare to execute a mission with members of the local governments to wipe out the worst of the extremists that still live in the southeast, so long as the operation is okayed by the other governments
-	id = celestia.563
-	title = celestia.563.t
-	desc = celestia.563.d
-	
-	is_triggered_only = yes
-	
-	option = { #No mercy. Just arrest and apprehend, nothing more
-		name = celestia.563.a
-		###Event for the proposal to other governments, which will reduce either fascism or communism (based on the ruling party's government) by 10% and remove a proportional amount of ponypower, and provide another +25 opinion
-	}
-}
-
-country_event = { #Celestia receives a telegram back from the nations she contacted and she is offered instead a potential alliance with them, to which she is not overly happy about but considers
-	id = celestia.564
-	title = celestia.564.t
-	desc = celestia.564.d
-	
-	is_triggered_only = yes
-	
-	option = { #It is not ideal, but there is no need for more war
-		name = celestia.564.a
-		ai_chance = { factor = 55 }
-		add_to_faction = FROM
-	}
-	option = { #That is not acceptable. Equestria must be whole again, one way or another
-		name = celestia.564.b
-		ai_chance = { factor = 45 }
-		create_wargoal = {
-			target = FROM
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #Celestia reaceives word back from the communicated nation that they will transfer administrative control to her, and she is pleased
-	id = celestia.565
-	title = celestia.565.t
-	desc = celestia.565.d
-	
-	is_triggered_only = yes
-	
-	option = { #Excellent! My little ponies are returning to their homeland!
-		name = celestia.565.a
-		annex_country = { target = FROM }
-	}
-}
-
-country_event = { #Celestia is told off by a short communique from one of the jungle nations that they will never submit to her and that she will need to take their land by force; she is regretful that they push her to war
-	id = celestia.566
-	title = celestia.566.t
-	desc = celestia.566.d
-	
-	is_triggered_only = yes
-	
-	option = { #I suppose they have been under a different flag for too long. Very well, they shall have their war
-		name = celestia.566.a
-		create_wargoal = {
-			target = FROM
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #Celestia reads up on one of the pamphlets that has been approved for the southeast propaganda war, and she fears that it appears too good for ponies to believe; she gives a slight critique about the amount of cake in the nation
-	id = celestia.567
-	title = celestia.567.t
-	desc = celestia.567.d
-	
-	is_triggered_only = yes
-	
-	option = { #Perhaps entice them with some sweets?
-		name = celestia.567.a
-		for_each_scope_loop = {
-			array = global.southeast_countries
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				country_event = {
-					id = southeast.503
-					days = 1
-					random_days = 3
-				}
-			}
-		}
-	}
-}
-
-country_event = { #Celestia rehearses her speech one more time with Fancy Pants, and he has her fix a couple of things, and gets Fleur to provide a few more pointers, as Celestia is overly nervous, since they are effectively inviting a potential swamp of insurgents into their land, although she is reassured that there will be no issue
-	id = celestia.568
-	title = celestia.568.t
-	desc = celestia.568.d
-	
-	is_triggered_only = yes
-	
-	option = { #Because when has an unchecked militia ever gone wrong?
-		name = celestia.568.a
-		for_each_scope_loop = {
-			array = global.southeast_countries
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				country_event = {
-					id = southeast.504
-					days = 3
-					random_days = 2
-				}
-			}
-		}
-	}
-}
-
-country_event = { #Celestia speaks with some of the spies that she will be sending out to agitate the ponies of the southeast; she thanks them for their service, and also that they must be careful there is little violence before she leaves to stress about the coming war with the southeast
-	id = celestia.569
-	title = celestia.569.t
-	desc = celestia.569.d
-	
-	is_triggered_only = yes
-	
-	option = { #I feel the need for a bit of cake
-		name = celestia.569.a
-		for_each_scope_loop = {
-			array = global.southeast_countries
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				country_event = {
-					id = southeast.502
-					days = 1
-					random_days = 7
-				}
-			}
-		}
 	}
 }
 
