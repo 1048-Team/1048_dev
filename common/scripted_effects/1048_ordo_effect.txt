@@ -2,28 +2,52 @@
 SOL_ordo_special_effect = {
 	IF = {
 		limit = {
-			NOT = {
-				has_idea = EQS_great_ordo_work_funding
+			AND = {
+				NOT = {
+					has_idea = EQS_great_ordo_work_funding
+				}
+				has_political_power > 99
 			}
 		}
-		SOL_special_production_effect = yes
-		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = 25 }
-		clamp_variable = { 
-			var = global.ordo_loyalty_array^var:ordo_selection
-			min = 0
-			max = 100
+		IF = {
+			limit = {
+				AND = {
+					OR = {
+						AND = {
+							check_variable = { ordo_selection = 22 }
+							SOL_owns_northern_tenuis_states = yes
+						}
+						NOT = { check_variable = { ordo_selection = 22 } }
+					}
+				}
+			}
+			SOL_special_production_effect = yes
+			add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = 25 }
+			clamp_variable = { 
+				var = global.ordo_loyalty_array^var:ordo_selection
+				min = 0
+				max = 100
+			}
+			add_timed_idea = {
+				idea = EQS_great_ordo_work_funding
+				days = 365
+			}
+			add_political_power = -100
+			SOL_ordo_set_flag_special = yes
 		}
-		add_timed_idea = {
-			idea = EQS_great_ordo_work_funding
-			days = 365
+		ELSE = {
+			country_event = solarordo.26
 		}
-		SOL_ordo_set_flag_special = yes
 	}
 }
 SOL_ordo_normal_effect_1 = {
 	IF = {
 		limit = {
-			check_ordo_selection_1 = yes
+			AND = {
+				has_political_power > 34
+				has_manpower > 399
+				check_ordo_selection_1 = yes
+			}
 		}
 		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = 3 }
 		clamp_variable = { 
@@ -33,14 +57,17 @@ SOL_ordo_normal_effect_1 = {
 		}
 		add_political_power = -35
 		add_manpower = -400
-		add_stability = -0.02
 		SOL_ordo_set_flag_1 = yes
 	}
 }
 SOL_ordo_normal_effect_2 = {
 	IF = {
 		limit = {
-			check_ordo_selection_2 = yes
+			AND = {
+				has_political_power > 24
+				has_army_experience > 4
+				check_ordo_selection_2 = yes
+			}
 		}
 		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = -4 }
 		clamp_variable = { 
@@ -48,6 +75,8 @@ SOL_ordo_normal_effect_2 = {
 			min = 0
 			max = 100
 		}
+		add_political_power = -25
+		army_experience = -5
 		add_manpower = 1000
 		SOL_ordo_set_flag_2 = yes
 	}
@@ -55,7 +84,10 @@ SOL_ordo_normal_effect_2 = {
 SOL_ordo_normal_effect_3 = {
 	IF = {
 		limit = {
-			check_ordo_selection_3 = yes
+			AND = {
+				has_political_power > 24
+				check_ordo_selection_3 = yes
+			}
 		}
 		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = -3 }
 		clamp_variable = { 
@@ -63,6 +95,7 @@ SOL_ordo_normal_effect_3 = {
 			min = 0
 			max = 100
 		}
+		add_political_power = -25
 		SOL_ordo_production_effect = yes
 		SOL_ordo_set_flag_3 = yes
 	}
@@ -1271,6 +1304,10 @@ SOL_ordo_production_effect = {
 			idea = EQS_funding_more_guns
 			days = 100
 		}
+		country_event = {
+			id = solarordo.27
+			days = 100
+		}
 	}
 	ELSE_IF = {
 		limit = {
@@ -1280,13 +1317,21 @@ SOL_ordo_production_effect = {
 			idea = EQS_funding_more_magic_guns
 			days = 100
 		}
+		country_event = {
+			id = solarordo.29
+			days = 100
+		}
 	}
 	ELSE_IF = {
 		limit = {
 			SOL_ordo_tank_manufacturer = yes
 		}
 		add_timed_idea = {
-			idea = EQS_funding_more_guns
+			idea = EQS_funding_more_tanks
+			days = 100
+		}
+		country_event = {
+			id = solarordo.28
 			days = 100
 		}
 	}
