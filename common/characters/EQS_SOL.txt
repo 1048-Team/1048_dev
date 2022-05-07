@@ -539,6 +539,49 @@ characters = {
 		}
 	}
 	
+	EQS_Locust_Glow = {
+		name = EQS_Locust_Glow_name
+		gender = female
+		portraits = {
+		}
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+	
+	EQS_Scorched_Earth = {
+		name = MTS_Scorched_Earth_name
+		portraits = {
+		}
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium harsh_leader immovable_furor }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 2
+		}
+	}
+	
+	EQS_Luminous_Blade = {
+		name = EQS_Luminous_Blade_name
+		portraits = {
+		}
+		corps_commander = {
+			traits = { pony_race_trait solaris_inquisitionis ambusher }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+		}
+	}
+	
 	EQS_Disgustingly_Rich = {
 		name = EQS_Disgustingly_Rich_name
 		portraits = {
@@ -689,6 +732,86 @@ characters = {
 		}
 	}
 	
+	EQS_Long_Shot = {
+		name = EQS_Long_Shot_name
+		portraits = {
+			army = {
+				small = "GFX_idea_long_shot"
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = long_shot
+			cost = 100
+			ledger = army
+			allowed = {
+				original_tag = EQS
+			}
+			traits = { military_theorist }
+		}
+	}
+	
+	EQS_Keel_Haul = {
+		name = EQS_Keel_Haul_name
+		portraits = {
+			army = {
+				small = "GFX_idea_keel_haul"
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = keel_haul
+			cost = 100
+			ledger = navy
+			allowed = {
+				original_tag = EQS
+			}
+			traits = { naval_theorist }
+		}
+	}
+	
+	EQS_Morning_Gale = {
+		name = EQS_Morning_Gale_name
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_morning_gale"
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = morning_gale
+			cost = 100
+			ledger = air
+			allowed = {
+				original_tag = EQS
+			}
+			traits = { air_warfare_theorist }
+		}
+	}
+	
+	EQS_Nightfall_Expanse = {
+		name = EQS_Nightfall_Expanse_name
+		gender = female
+		portraits = {
+			army = {
+				small = "GFX_idea_nightfall_expanse"
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = nightfall_expanse
+			cost = 125
+			ledger = army
+			allowed = {
+				original_tag = EQS
+				is_EQS_SOL_1048 = yes
+			}
+			research_bonus = { magical_tech = 0.075 }
+			traits = { mage_supremacist }
+		}
+	}
+	
 	EQS_Flim_Flam_1048 = {
 		name = EQS_flim_flam
 		portraits = {
@@ -703,15 +826,42 @@ characters = {
 				original_tag = EQS
 			}
 			visible = {
-				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
+				AND = {
+					has_country_flag = EQS_mercatura_advisors
+					NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
+				}
 			}
 			available = {
-				OR = {
-					has_government = fascism
-					has_government = neutrality
+				AND = {
+					has_country_flag = EQS_mercatura_advisors
+					OR = {
+						has_government = fascism
+						has_government = neutrality
+					}
 				}
 			}
 			traits = { war_industrialists }
+		}
+	}
+	
+	EQS_Gilded_Pouch = {
+		name = EQS_Gilded_Pouch_name
+		portraits = {
+			
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = gilded_pouch
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				has_country_flag = EQS_mercatura_advisors
+			}
+			available = {
+				has_country_flag = EQS_mercatura_advisors
+			}
+			traits = { ruthless_capitalist }
 		}
 	}
 	
@@ -1350,6 +1500,7 @@ characters = {
 			}
 			available = {
 			}
+			cost = 100
 
 			traits = { army_chief_organizational_2 }
 
@@ -1468,6 +1619,7 @@ characters = {
 			}
 			visible = {
 			}
+			cost = 200
 
 			traits = { air_strategic_bombing_3 } #DO IT AGAIN BOMBER BLAZE
 
@@ -1496,6 +1648,7 @@ characters = {
 
 			visible = {
 			}
+			cost = 100
 
 			ai_will_do = {
 				factor = 1
