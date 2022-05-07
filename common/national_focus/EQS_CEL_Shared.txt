@@ -1516,6 +1516,27 @@ shared_focus = {
 	y = 1
 	relative_position_id = draw_up_autonomous_plans
 	
+	available = {
+		AND = {
+			OR = {
+				NOT = {
+					country_exists = CLD
+				}
+				CLD = {
+					is_subject_of = ROOT
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = BLS
+				}
+				BLS = {
+					is_subject_of = ROOT
+				}
+			}
+		}
+	}
+	
 	cost = 5
 	prerequisite = { focus = draw_up_autonomous_plans }
 	
@@ -1584,6 +1605,17 @@ shared_focus = {
 	y = 1
 	relative_position_id = integrate_the_petty_princessdom
 	
+	available = {
+		OR = {
+			NOT = {
+				country_exists = CER
+			}
+			CER = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
 	cost = 5
 	prerequisite = { focus = integrate_the_petty_princessdom }
 	
@@ -1611,6 +1643,27 @@ shared_focus = {
 	x = -1
 	y = 1
 	relative_position_id = compromise_on_regional_governance
+	
+	available = {
+		AND = {
+			OR = {
+				NOT = {
+					country_exists = NER
+				}
+				NER = {
+					is_subject_of = ROOT
+				}
+			}
+			OR = {
+				NOT = {
+					country_exists = WHY
+				}
+				WHY = {
+					is_subject_of = ROOT
+				}
+			}
+		}
+	}
 	
 	cost = 5
 	prerequisite = { focus = compromise_on_regional_governance }
@@ -1696,260 +1749,137 @@ shared_focus = {
 
 ###Southeast###
 ###Left side if Southeast Mingsplodes###
+###It's now Celestia attempting to integrate through peaceful means###
 
 shared_focus = {
-	id = a_headless_state
-	x = -8
+	id = from_the_head_down
+	x = -4
 	y = 1
 	relative_position_id = the_heartlands_beat_in_harmony
 	
-	available = {
-		has_global_flag = balsplosion
-	}
-	
 	cost = 4
 	prerequisite = { focus = the_heartlands_beat_in_harmony }
-	mutually_exclusive = { focus = puppet_of_greater_foe }
+	mutually_exclusive = { focus = from_the_bottom_up }
 	
 	completion_reward = {
 		add_political_power = 100
-		###Country event for planning on how to approach the harmonist-aligned nations
+		###Country event for planning on how to approach the southeast and finding out about the instability it's still suffering as a region
 	}
 	ai_will_do = { factor = 15 }
 }
 
 shared_focus = {
-	id = a_spark_of_freedom
+	id = establish_new_trade_links
 	x = -2
 	y = 1
-	relative_position_id = a_headless_state
-	
-	bypass = {
-		NOT = {
-			country_exists = HUG
-		}
-	}
+	relative_position_id = from_the_head_down
 	
 	cost = 3
-	prerequisite = { focus = a_headless_state }
+	prerequisite = { focus = from_the_head_down }
 	
 	completion_reward = {
 		country_event = {
-			id = celestia.518
+			id = celestia.561
+			#id = celestia.518
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = art_of_the_deal
+	id = joint_military_mission
 	x = 0
 	y = 1
-	relative_position_id = a_headless_state
-	
-	bypass = {
-		NOT = {
-			country_exists = NID
-		}
-	}
+	relative_position_id = from_the_head_down
 	
 	cost = 3
-	prerequisite = { focus = a_headless_state }
+	prerequisite = { focus = from_the_head_down }
 	
 	completion_reward = {
+		###Equestria can propose a military mission to give joint learning for both militaries, as the jungle has been untamed for a generation, and the southeast needs more veteran input
+		###Equestria can decide to not do it, and the different nations can reject it
 		country_event = {
-			id = celestia.522
+			id = celestia.562
+			#id = celestia.522
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = counter_the_royal_marriage
+	id = root_out_extremists
 	x = 2
 	y = 1
-	relative_position_id = a_headless_state
-	
-	bypass = {
-		NOT = {
-			country_exists = STB
-		}
-	}
+	relative_position_id = from_the_head_down
 	
 	cost = 3
-	prerequisite = { focus = a_headless_state }
+	prerequisite = { focus = from_the_head_down }
 	
 	completion_reward = {
 		country_event = {
-			id = celestia.526
+			id = celestia.563
+			#id = celestia.526
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = secure_the_eastern_jungle
-	x = 1
+	id = propose_final_solution
+	x = 0
 	y = 1
-	relative_position_id = a_spark_of_freedom
+	relative_position_id = joint_military_mission
 	
 	cost = 4
-	prerequisite = { focus = a_spark_of_freedom }
-	prerequisite = { focus = art_of_the_deal }
-	prerequisite = { focus = counter_the_royal_marriage }
+	prerequisite = { focus = establish_new_trade_links }
+	prerequisite = { focus = joint_military_mission }
+	prerequisite = { focus = root_out_extremists }
 	
 	completion_reward = {
-		IF = {
-			limit = {
-				country_exists = NRP
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NRP
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = BGL
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = BGL
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					STB = {
-						is_in_faction_with = EQS
-					}
-				}
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = STB
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					HUG = {
-						is_in_faction_with = EQS
-					}
-				}
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = HUG
-			}
-		}
-		IF = {
-			limit = {
-				NOT = {
-					NID = {
-						is_in_faction_with = EQS
-					}
-				}
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NID
-			}
-		}
+		###Event for Celestia meeting with the different regional deligates to propose a proper alliance/subjugation, which has various results depending on countries existing and things Equestria did
+		country_event = { id = celestia.560 }
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = slide_toward_the_celestial_sea
-	x = 1
+	id = the_last_marriage_offer
+	x = 0
 	y = 1
-	relative_position_id = art_of_the_deal
+	relative_position_id = propose_final_solution
 	
 	cost = 4
-	prerequisite = { focus = a_spark_of_freedom }
-	prerequisite = { focus = art_of_the_deal }
-	prerequisite = { focus = counter_the_royal_marriage }
+	prerequisite = { focus = propose_final_solution }
 	
 	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = NRP
-		}
-		IF = {
-			limit = {
-				country_exists = BAL
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = BAL
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = MTS
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = MTS
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = NEI
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NEI
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = EEE
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = EEE
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = SPF
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = SPF
-			}
-		}
+		###Celestia gets begged by Lucky Star to marry him as she integrates things and she gives him a straightforward no
+		country_event = { id = celestia.559 }
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
 	id = mangos_for_all
-	x = 0
+	x = -2
 	y = 1
-	relative_position_id = secure_the_eastern_jungle
+	relative_position_id = propose_final_solution
 	
 	available = {
 		has_war = no
 	}
 	
 	cost = 4
-	prerequisite = { focus = secure_the_eastern_jungle }
+	prerequisite = { focus = propose_final_solution }
 	
 	completion_reward = {
 		every_state = {
 			limit = {
-				OR = {
-					is_core_of = STB
-					is_core_of = HUG
-					is_core_of = BGL
-					is_core_of = NID
-					is_core_of = NRP
+				is_in_array = {
+					array = global.central_southeast
+					value = THIS
 				}
 			}
-			add_core_of = EQS
+			add_core_of = ROOT
 		}
 	}
 	ai_will_do = { factor = 30 }
@@ -1957,50 +1887,42 @@ shared_focus = {
 
 shared_focus = {
 	id = an_equestrian_seaboard
-	x = 0
+	x = 2
 	y = 1
-	relative_position_id = slide_toward_the_celestial_sea
+	relative_position_id = propose_final_solution
 	
 	available = {
 		has_war = no
 	}
 	
 	cost = 4
-	prerequisite = { focus = slide_toward_the_celestial_sea }
+	prerequisite = { focus = propose_final_solution }
 	
 	completion_reward = {
 		every_state = {
 			limit = {
-				OR = {
-					is_core_of = MTS
-					is_core_of = BAL
-					is_core_of = EEE
-					is_core_of = NEI
-					is_core_of = SPF
+				is_in_array = {
+					array = global.eastern_southeast
+					value = THIS
 				}
 			}
-			add_core_of = EQS
+			add_core_of = ROOT
 		}
 	}
 	ai_will_do = { factor = 30 }
 }
 
 ###Right side if Southeast doesn't Mingsplode###
+###Now is aggressive option for subverting the southeast###
 shared_focus = {
-	id = puppet_of_greater_foe
-	x = 8
+	id = from_the_bottom_up
+	x = 4
 	y = 1
 	relative_position_id = the_heartlands_beat_in_harmony
 	
-	available = {
-		NOT = {
-			has_global_flag = balsplosion
-		}
-	}
-	
 	cost = 4
 	prerequisite = { focus = the_heartlands_beat_in_harmony }
-	mutually_exclusive = { focus = a_headless_state }
+	mutually_exclusive = { focus = from_the_head_down }
 	
 	completion_reward = {
 		add_political_power = 100
@@ -2011,81 +1933,65 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = highlight_the_lies_of_minitru
+	id = highlight_true_harmony
 	x = -3
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
-		BAL = {
-			add_popularity = {
-				ideology = communism
-				popularity = -0.05
-			}
-			add_war_support = -0.1
-		}
+		###Event in southeast where Celestia converts some citizens to harmony, which destablizes the nations and increases harmony's popularity
+		country_event = celestia.569
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = war_is_not_peace_peace_is_peace
+	id = prop_up_celestial_loyalists
 	x = -1
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
-		add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = -10000
-			producer = EQS
-		}
-		BAL = {
-			add_manpower = -50042
-		}
+		###Give event of harmonist insurgency to BAL or all of its splinter states that will damage one building and one infrastructure in a random state
+		country_event = celestia.558
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = plenty_of_harmony_to_go_around
+	id = plenty_of_tolerance_to_go_around
 	x = 1
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
-		BAL = {
-			add_timed_idea = {
-				idea = all_the_harmony_BAL
-				days = 180
-			}
-		}
+		###Event in the southeast for pamphlets being dropped by Equestria that shows how great Equestria is under Celestia again and how they could return to that
+		country_event = celestia.567
 	}
 	ai_will_do = { factor = 20 }
 }
 
 shared_focus = {
-	id = governate_only_loves_itself
+	id = promise_forgiveness_of_deserters
 	x = 3
 	y = 1
-	relative_position_id = puppet_of_greater_foe
+	relative_position_id = from_the_bottom_up
 	
 	cost = 3
-	prerequisite = { focus = puppet_of_greater_foe }
+	prerequisite = { focus = from_the_bottom_up }
 	
 	completion_reward = {
-		BAL = {
-			add_ideas = exposed_lies_BAL
-		}
+		###Event in southeast of some troops being caught by Equestrian armed forces and being pardoned
+		country_event = celestia.568
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -2094,25 +2000,41 @@ shared_focus = {
 	id = launch_operation_shattered_head
 	x = 1
 	y = 1
-	relative_position_id = war_is_not_peace_peace_is_peace
+	relative_position_id = prop_up_celestial_loyalists
 	
 	cost = 2
-	prerequisite = { focus = war_is_not_peace_peace_is_peace }
-	prerequisite = { focus = governate_only_loves_itself }
-	prerequisite = { focus = plenty_of_harmony_to_go_around }
-	prerequisite = { focus = highlight_the_lies_of_minitru }
+	prerequisite = { focus = prop_up_celestial_loyalists }
+	prerequisite = { focus = highlight_true_harmony }
+	prerequisite = { focus = plenty_of_tolerance_to_go_around }
+	prerequisite = { focus = promise_forgiveness_of_deserters }
 	
 	completion_reward = {
-		declare_war_on = {
-			target = BAL
-			type = annex_everything
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.southeast_countries
+					value = THIS
+				}
+			}
+			EQS = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_southeast_war
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
 }
 
 shared_focus = {
-	id = freed_from_the_collective_consciousness
+	id = a_harmonic_peninsula
 	x = 0
 	y = 1
 	relative_position_id = launch_operation_shattered_head
@@ -2127,7 +2049,10 @@ shared_focus = {
 	completion_reward = {
 		every_state = {
 			limit = {
-				is_core_of = BAL
+				OR = {
+					is_core_of = BAL
+					is_claimed_by = BAL
+				}
 			}
 			add_core_of = EQS
 		}
@@ -2144,10 +2069,11 @@ shared_focus = {
 	
 	available = {
 		OR = {
-			has_completed_focus = freed_from_the_collective_consciousness
+			has_completed_focus = a_harmonic_peninsula
 			AND = {
-				has_completed_focus = an_equestrian_seaboard
+				has_completed_focus = the_last_marriage_offer
 				has_completed_focus = mangos_for_all
+				has_completed_focus = an_equestrian_seaboard
 			}
 		}
 	}
@@ -2156,7 +2082,8 @@ shared_focus = {
 	prerequisite = {
 		focus = an_equestrian_seaboard
 		focus = mangos_for_all
-		focus = freed_from_the_collective_consciousness
+		focus = the_last_marriage_offer
+		focus = a_harmonic_peninsula
 	}
 	
 	completion_reward = {
@@ -2189,17 +2116,11 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
-shared_focus = { ###Make this a single focus with dynamic loc and effects
+shared_focus = { ###Make this a focus with dynamic loc and effects; shelter for refugees for nice; called a quick correction for aggressive attack and annex
 	id = shelter_for_the_refugees
 	x = -1
 	y = 1
 	relative_position_id = reform_the_united_ponies_alliance
-	
-	available = {
-		CRY = {
-			is_in_faction_with = EQS
-		}
-	}
 	
 	mutually_exclusive = { focus = shattered_harmony }
 	
@@ -2208,41 +2129,71 @@ shared_focus = { ###Make this a single focus with dynamic loc and effects
 	
 	completion_reward = {
 		###change state population###
-		344 = {
-			add_manpower = -100000
+		IF = {
+			limit = {
+				CRY = {
+					is_in_faction_with = EQS
+				}
+			}
+			add_stability = -0.03
+			###Add divisions in Whinnyapolis and Bales here
+			344 = {
+				add_manpower = -100000
+			}
+			3 = {
+				add_manpower = 100000
+			}
+			345 = {
+				add_manpower = -100000
+			}
+			12 = {
+				add_manpower = 100000
+			}
+			53 = {
+				add_manpower = -100000
+			}
+			75 = {
+				add_manpower = 100000
+			}
 		}
-		3 = {
-			add_manpower = 100000
-		}
-		345 = {
-			add_manpower = -100000
-		}
-		12 = {
-			add_manpower = 100000
-		}
-		53 = {
-			add_manpower = -100000
-		}
-		75 = {
-			add_manpower = 100000
+		ELSE = {
+			create_wargoal = {
+				type = annex_everything
+				target = CRY
+			}
+			add_stability = -0.1
+			add_war_support = -0.05
+			689 = {
+				add_core_of = ROOT
+			}
+			145 = {
+				add_core_of = ROOT
+			}
+			149 = {
+				add_core_of = ROOT
+			}
+			148 = {
+				add_core_of = ROOT
+			}
+			146 = {
+				add_core_of = ROOT
+			}
+			324 = {
+				add_core_of = ROOT
+			}
+			147 = {
+				add_core_of = ROOT
+			}
 		}
 	}
 	ai_will_do = { factor = 15 }
 }
 
-shared_focus = {
+shared_focus = { ###Make focus with dynamic loc and effects; shattered harmony for puppet goal; new crystal patriots for integration with CRY
 	id = shattered_harmony
 	x = 1
 	y = 1
 	relative_position_id = reform_the_united_ponies_alliance
-	
-	available = {
-		CRY = {
-			NOT = {
-				is_in_faction_with = EQS
-			}
-		}
-	}
 	
 	mutually_exclusive = { focus = shelter_for_the_refugees }
 	
@@ -2250,9 +2201,20 @@ shared_focus = {
 	prerequisite = { focus = reform_the_united_ponies_alliance }
 	
 	completion_reward = {
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = CRY
+		IF = {
+			limit = {
+				CRY = {
+					is_in_faction_with = EQS
+				}
+			}
+			add_stability = 0.03
+			###Give opinion boost and CRY troops here
+		}
+		ELSE = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = CRY
+			}
 		}
 	}
 	ai_will_do = { factor = 15 }
@@ -2300,7 +2262,7 @@ shared_focus = {
 	
 	completion_reward = {
 		add_equipment_to_stockpile = {
-			type = medium_tank_equipment
+			type = medium_tank_chassis
 			amount = 250
 			producer = STG
 		}
@@ -2350,156 +2312,242 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
+shared_focus = { ###Have dynamic loc of either pen partitions with the crystal empire or fortify the crystal border
 	id = pen_partitions_with_the_crystal_empire
 	x = 0
 	y = 1
 	relative_position_id = stubborness_got_nopony_anywhere
 	
-	available = {
-		CRY = {
-			is_in_faction_with = EQS
-		}
-	}
 	bypass = { has_global_flag = stalliongrad_agrees }
 	
-	mutually_exclusive = { focus = fortify_the_crystal_border }
+	#mutually_exclusive = { focus = fortify_the_crystal_border }
 	
 	cost = 2
 	prerequisite = { focus = stubborness_got_nopony_anywhere }
 	
 	completion_reward = {
-		country_event = {
-			id = celestia.535
+		IF = {
+			limit = {
+				CRY = {
+					is_in_faction_with = EQS
+				}
+			}
+			country_event = {
+				id = celestia.535
+			}
+		}
+		ELSE = {
+			custom_effect_tooltip = crystal_fort_border_tt
+			IF = {
+				limit = {
+					CRY = {
+						is_subject_of = ROOT
+					}
+				}
+				CRY = {
+					hidden_effect = {
+						53 = {
+							add_building_construction = {
+								type = bunker
+								level = 3
+								province = 63
+								instant_build = yes
+							}
+						}
+						145 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 6066
+								instant_build = yes
+							}
+						}
+						145 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 11409
+								instant_build = yes
+							}
+						}
+						150 = {
+							add_building_construction = {
+								type = bunker
+								level = 4
+								province = 316
+								instant_build = yes
+							}
+						}
+						150 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 3174
+								instant_build = yes
+							}
+						}
+						64 = {
+							add_building_construction = {
+								type = bunker
+								level = 1
+								province = 592
+								instant_build = yes
+							}
+						}
+						64 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 4452
+								instant_build = yes
+							}
+						}
+						64 = {
+							add_building_construction = {
+								type = bunker
+								level = 2
+								province = 9317
+								instant_build = yes
+							}
+						}
+						53 = {
+							add_building_construction = {
+								type = bunker
+								level = 3
+								province = 6235
+								instant_build = yes
+							}
+						}
+						150 = {
+							add_building_construction = {
+								type = bunker
+								level = 1
+								province = 3525
+								instant_build = yes
+							}
+						}
+						345 = {
+							add_building_construction = {
+								type = bunker
+								level = 3
+								province = 11788
+								instant_build = yes
+							}
+						}
+						344 = {
+							add_building_construction = {
+								type = bunker
+								level = 4
+								province = 489
+								instant_build = yes
+							}
+						}
+					}
+				}
+			}
+			ELSE = {
+				hidden_effect = {
+					53 = {
+						add_building_construction = {
+							type = bunker
+							level = 3
+							province = 63
+							instant_build = yes
+						}
+					}
+					145 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 6066
+							instant_build = yes
+						}
+					}
+					145 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 11409
+							instant_build = yes
+						}
+					}
+					150 = {
+						add_building_construction = {
+							type = bunker
+							level = 4
+							province = 316
+							instant_build = yes
+						}
+					}
+					150 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 3174
+							instant_build = yes
+						}
+					}
+					64 = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 592
+							instant_build = yes
+						}
+					}
+					64 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 4452
+							instant_build = yes
+						}
+					}
+					64 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							province = 9317
+							instant_build = yes
+						}
+					}
+					53 = {
+						add_building_construction = {
+							type = bunker
+							level = 3
+							province = 6235
+							instant_build = yes
+						}
+					}
+					150 = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 3525
+							instant_build = yes
+						}
+					}
+					345 = {
+						add_building_construction = {
+							type = bunker
+							level = 3
+							province = 11788
+							instant_build = yes
+						}
+					}
+					344 = {
+						add_building_construction = {
+							type = bunker
+							level = 4
+							province = 489
+							instant_build = yes
+						}
+					}
+				}
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = fortify_the_crystal_border
-	x = -2
-	y = 1
-	relative_position_id = stubborness_got_nopony_anywhere
-	
-	available = {
-		CRY = {
-			NOT = {
-				is_in_faction_with = EQS
-			}
-		}
-	}
-	bypass = { has_global_flag = stalliongrad_agrees }
-	
-	mutually_exclusive = { focus = pen_partitions_with_the_crystal_empire }
-	
-	cost = 2
-	prerequisite = { focus = stubborness_got_nopony_anywhere }
-	
-	completion_reward = {
-		custom_effect_tooltip = crystal_fort_border_tt
-		CRY = {
-			hidden_effect = {
-				53 = {
-					add_building_construction = {
-						type = bunker
-						level = 3
-						province = 63
-						instant_build = yes
-					}
-				}
-				145 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 6066
-						instant_build = yes
-					}
-				}
-				145 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 11409
-						instant_build = yes
-					}
-				}
-				150 = {
-					add_building_construction = {
-						type = bunker
-						level = 4
-						province = 316
-						instant_build = yes
-					}
-				}
-				150 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 3174
-						instant_build = yes
-					}
-				}
-				64 = {
-					add_building_construction = {
-						type = bunker
-						level = 1
-						province = 592
-						instant_build = yes
-					}
-				}
-				64 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 4452
-						instant_build = yes
-					}
-				}
-				64 = {
-					add_building_construction = {
-						type = bunker
-						level = 2
-						province = 9317
-						instant_build = yes
-					}
-				}
-				53 = {
-					add_building_construction = {
-						type = bunker
-						level = 3
-						province = 6235
-						instant_build = yes
-					}
-				}
-				150 = {
-					add_building_construction = {
-						type = bunker
-						level = 1
-						province = 3525
-						instant_build = yes
-					}
-				}
-				345 = {
-					add_building_construction = {
-						type = bunker
-						level = 3
-						province = 11788
-						instant_build = yes
-					}
-				}
-				344 = {
-					add_building_construction = {
-						type = bunker
-						level = 4
-						province = 489
-						instant_build = yes
-					}
-				}
-			}
-		}
-	}
-	ai_will_do = { factor = 15 }
 }
 
 shared_focus = {
@@ -2530,45 +2578,29 @@ shared_focus = {
 	cost = 5
 	prerequisite = { 
 		focus = pen_partitions_with_the_crystal_empire
-		focus = fortify_the_crystal_border
 	}
 	prerequisite = { focus = infiltrate_the_frontier }
 	
 	completion_reward = {
-		IF = {
+		every_country = {
 			limit = {
-				country_exists = STG
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
 			}
-			create_wargoal = {
-				type = annex_everything
-				target = STG
+		
+			EQS = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
 			}
 		}
-		IF = {
-			limit = {
-				country_exists = AWR
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = AWR
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = CWR
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = CWR
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = MWR
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = MWR
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_stalliongrad_war
 			}
 		}
 	}
@@ -2900,40 +2932,25 @@ shared_focus = {
 	prerequisite = { focus = study_prisoners_of_war }
 	
 	completion_reward = {
-		IF = {
+		every_country = {
 			limit = {
-				country_exists = CHN
+				is_in_array = {
+					array = global.changeling_hegemony
+					value = THIS
+				}
 			}
-			create_wargoal = {
-				type = annex_everything
-				target = CHN
+		
+			EQS = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
 			}
 		}
-		IF = {
-			limit = {
-				country_exists = NCA
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = NCA
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = CCA
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = CCA
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = SCS
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = SCS
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_f_for_changelings
 			}
 		}
 	}
@@ -3217,7 +3234,10 @@ shared_focus = {
 	cost = 4
 	
 	completion_reward = {
-		add_ideas = chained_imperial_navy
+		swap_ideas = {
+			remove_idea = mutinous_navy
+			add_idea = chained_imperial_navy
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -3570,7 +3590,10 @@ shared_focus = {
 	cost = 4
 	
 	completion_reward = {
-		add_ideas = reevaluating_the_military
+		swap_ideas = {
+			remove_idea = militarium_resistance
+			add_idea = reevaluating_the_military
+		}
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -3629,7 +3652,7 @@ shared_focus = {
 			producer = EQS
 		}
 		add_equipment_to_stockpile = {
-			type = light_tank_equipment
+			type = light_tank_chassis
 			amount = -1000
 			producer = EQS
 		}
@@ -3657,6 +3680,10 @@ shared_focus = {
 	completion_reward = {
 		remove_ideas = reevaluating_the_military
 		add_ideas = a_harmonic_army
+		custom_effect_tooltip = troops_for_you
+		hidden_effect = {
+			country_lock_all_division_template = no
+		}
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -4053,7 +4080,10 @@ shared_focus = {
 	cost = 4
 	
 	completion_reward = {
-		add_ideas = grounded_aces
+		swap_ideas = {
+			remove_idea = awol_air_force
+			add_idea = grounded_aces
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
