@@ -89,9 +89,6 @@ country_event = {
 	}
 }
 
-
-
-
 country_event = {
 	id = southeast.4
 	title = southeast.4.t
@@ -107,15 +104,12 @@ country_event = {
 	}
 }
 
-
-
-
 country_event = { ###Debug event to spawn the Mingsplosion
 	id = southeast.2
 	title = southeast.2.t
 	desc = southeast.2.d
+  
 	fire_only_once = yes
-	is_triggered_only = yes
 	trigger = {
 		tag = BAL
 		NOT = {
@@ -179,14 +173,6 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			add_state_core = 351
 			add_state_core = 33
 		}
-		MTS = {
-			transfer_state = 27
-			transfer_state = 28
-			transfer_state = 84
-			add_state_core = 84
-			add_state_core = 28
-			add_state_core = 27
-		}
 		EEE = {
 			transfer_state = 31
 			transfer_state = 350
@@ -198,12 +184,6 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			add_state_core = 30
 			add_state_core = 17
 			add_state_core = 37
-		}
-		HUG = {
-			transfer_state = 35
-			transfer_state = 81
-			add_state_core = 35
-			add_state_core = 81
 		}
 		NEI = {
 			transfer_state = 88
@@ -251,4 +231,201 @@ country_event = { ###Debug event to spawn the Mingsplosion
 		}
 	}
 }
+
+###Southeast generic events for Celestia###
+country_event = { #The country leader receives word that some harmonist instigations most likely from Celestia have led to damage in one of the states under the control
+	id = southeast.500
+	title = southeast.500.t
+	desc = southeast.500.d
 	
+	is_triggered_only = yes
+	
+	option = { #And Celestia claims she's the one in the right?
+		name = southeast.500.a
+		log = "[GetDateText] [ROOT.GetName] executed southeast.500"
+		random_state = {
+			limit = { 
+				is_owned_by = ROOT
+			}
+			damage_building = {
+				type = infrastructure
+				damage = 2
+			}
+			damage_building = {
+				type = arms_factory
+				damage = 1
+			}
+		}
+	}
+}
+
+country_event = { #The country leader receives a communique from Equestria stating that since they have become more reliant on Equestria they should consider submitting to become a vassal to Equestria
+	id = southeast.501
+	title = southeast.501.t
+	desc = southeast.501.d
+	
+	is_triggered_only = yes
+	
+	option = { #We must work together, but as equals
+		name = southeast.501.a
+		ai_chance = {
+			base = 10
+			modifier = { has_government = neutrality factor = 5 }
+			modifier = { has_government = democratic factor = 7 }
+			modifier = { 
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 2.5
+			}
+			modifier = { NOT = { has_global_flag = balsplosion } factor = 2 }
+		}
+		log = "[GetDateText] [ROOT.GetName]: southeast.501"
+		###Propose alliance back
+		EQS = {
+			country_event = celestia.564
+		}
+	}
+	option = { #She is right, we will return to Equestrian control
+		name = southeast.501.b
+		log = "[GetDateText] [ROOT.GetName]: southeast.501"
+		ai_chance = {
+			base = 10
+			modifier = { has_government = neutrality factor = 2.5 }
+			modifier = { has_government = democratic factor = 3 }
+			modifier = { has_government = fascism factor = 0.5 }
+			modifier = { has_government = communism factor = 1.5 }
+			modifier = { NOT = { has_global_flag = balsplosion } factor = 0 }
+		}
+		###Submit to becoming a vassal
+		EQS = {
+			country_event = celestia.565
+		}
+	}
+	option = { #Equestria will have to take our land from our cold, dead hooves!
+		name = southeast.501.c
+		ai_chance = {
+			base = 10
+			modifier = { has_government = neutrality factor = 2.5 }
+			modifier = { has_government = democratic factor = 0 }
+			modifier = { has_government = fascism factor = 7 }
+			modifier = { has_government = communism factor = 6 }
+		}
+		log = "[GetDateText] [ROOT.GetName]: southeast.501"
+		###Refuse to submit
+		EQS = {
+			country_event = celestia.566
+		}
+	}
+}
+
+country_event = { #Protests and marches organized by Celestia's spies begin to march across the different Southeast nations, with them being mostly peaceful albeit with some provocation by police
+	id = southeast.502
+	title = southeast.502.t
+	desc = southeast.502.d
+	
+	is_triggered_only = yes
+	
+	option = { #This is only the beginning
+		name = southeast.502
+		IF = {
+			limit = {
+				NOT = {
+					has_government = democratic
+				}
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+		}
+		ELSE = {
+			add_stability = -0.05
+			add_war_support = -0.05
+		}
+	}
+}
+
+country_event = { #Celestia flies some bombers over the different cities of the southeast, dropping pamphlets showing how life has improved in Equestria, and ponies can return to it once again if they overthrow their governments
+	id = southeast.503
+	title = southeast.503.t
+	desc = southeast.503.d
+	
+	is_triggered_only = yes
+	
+	option = { #These are lies! We must correct the fake news immediately!
+		name = southeast.503.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				add_timed_idea = {
+					idea = all_the_harmony_BAL
+					days = 180
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Celestia takes to the radio waves and breaks into the stations in the southeast to inform the military especially that anypony who deserts to Equestria will be forgiven, and that it is open until the region is under her control again
+	id = southeast.504
+	title = southeast.504.t
+	desc = southeast.504.d
+	
+	is_triggered_only = yes
+	
+	option = { #Turn that damned radio off now!
+		name = southeast.504.a
+		for_each_scope_loop = {
+			array = global.southeast_countries
+			
+			IF = {
+				limit = {
+					exists = yes
+				}
+				add_ideas = exposed_lies_BAL
+			}
+		}
+	}
+}
+
+###Southeast random events###
+country_event = { #The current leader of Baltimare is informed of an incursion by the Solar Empire by Scorched Earth, and how he's already killed many innocents and established a small area of Solar control in the Southeast
+	id = southeast.600
+	title = southeast.600.t
+	desc = southeast.600.d
+	
+	is_triggered_only = yes
+	
+	option = { #Won't somepony do SOMETHING?
+		name = southeast.600.a
+		MTS = {
+			transfer_state = 27
+			transfer_state = 28
+			transfer_state = 84
+			add_state_core = 84
+			add_state_core = 28
+			add_state_core = 27
+		}
+		MTS = {
+			EQS_Scorched_Earth = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = solarism
+						desc = POLITICS_1048_SCORCHED_EARTH_DESC
+						traits = {
+							
+						}
+					}
+				}
+			}
+		}
+	}
+}
