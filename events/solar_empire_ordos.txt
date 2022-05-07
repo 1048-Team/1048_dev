@@ -762,7 +762,7 @@ country_event = { #Ordo Tenuis report for striking it rich in crystals
 			}
 		}
 		IF = {
-			limit = { owns_state = 694 }
+			limit = { controls_state = 694 }
 			694 = {
 				add_resource = {
 					type = crystals
@@ -782,6 +782,100 @@ country_event = { #Debug to get the ordo loyalty calculated instantly
 	option = {
 		ROOT = {
 			SOL_check_ordo_loyalty = yes
+		}
+	}
+}
+
+country_event = { #Warning event for initiating Tenuis special project without fully completing the Ordo
+	id = solarordo.26
+	title = solarordo.26.t
+	desc = solarordo.26.d
+	picture = GFX_event_solarempire
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solarordo.26.a
+		set_variable = { ordo_selection = 22 }
+		SOL_special_production_effect = yes
+		add_to_variable = { global.ordo_loyalty_array^var:ordo_selection = 25 }
+		clamp_variable = { 
+			var = global.ordo_loyalty_array^var:ordo_selection
+			min = 0
+			max = 100
+		}
+		add_timed_idea = {
+			idea = EQS_great_ordo_work_funding
+			days = 365
+		}
+		SOL_ordo_set_flag_special = yes
+		clr_variable = ordo_selection
+	}
+	option = {
+		name = solarordo.26.b
+	}
+}
+
+country_event = { #Guns
+	id = solarordo.27
+	title = solarordo.27.t
+	desc = solarordo.27.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solarordo.27.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 750
+			producer = EQS
+		}
+	}
+}
+
+country_event = { #Tanks
+	id = solarordo.28
+	title = solarordo.27.t
+	desc = solarordo.27.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solarordo.27.a
+		IF = {
+			limit = {
+				has_dlc = "No Step Back"
+			}
+			add_equipment_to_stockpile = {
+				type = light_tank_chassis_1
+				amount = 200
+				producer = EQS
+				variant_name = "Imperial Armor Mk. VII Invincible"
+			}
+		}
+		ELSE = {
+			add_equipment_to_stockpile = {
+				type = light_tank_equipment_1
+				amount = 200
+				producer = EQS
+			}
+		}
+	}
+}
+
+country_event = { #Magical Guns
+	id = solarordo.29
+	title = solarordo.27.t
+	desc = solarordo.27.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = solarordo.27.a
+		add_equipment_to_stockpile = {
+			type = magical_equipment
+			amount = 450
+			producer = EQS
 		}
 	}
 }
