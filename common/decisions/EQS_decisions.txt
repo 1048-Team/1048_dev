@@ -405,114 +405,17 @@ EQS_CEL_sunset_redemption_meter_category = {
 #		timeout_effect = { declare_war_on = { target = EQS type = annex_everything } }
 #	}
 #}
-EQS_AUR_stalliongrad_war_countdown_category = {
-	operation_fiery_wastes = {
-		activation = {
-			OR = {
-				original_tag = EQS
-				original_tag = BAL
-				original_tag = EEE
-				original_tag = NRP
-				original_tag = BGL
-				original_tag = SPF
-				original_tag = STB
-				original_tag = HUG
-				original_tag = MTS
-				original_tag = NEI
-				original_tag = NID
-			}
-			EQS = {
-				has_country_flag = southeast_war_prep
-			}
-		}
-		available = { EQS = { NOT = { has_country_flag = southeast_war_prep } } }
-		fire_only_once = yes
-		days_mission_timeout = 14
-		war_with_on_timeout = BAL
-		war_with_on_timeout = EEE
-		war_with_on_timeout = NRP
-		war_with_on_timeout = BGL
-		war_with_on_timeout = SPF
-		war_with_on_timeout = STB
-		war_with_on_timeout = HUG
-		war_with_on_timeout = MTS
-		war_with_on_timeout = NEI
-		war_with_on_timeout = NID
-		timeout_effect = { 
-			IF = {
-				limit = {
-					original_tag = EQS
-				}
-				every_country = { #Yes, this could probably be cleaned up, but at least it works
-					limit = {
-						OR = {
-							owns_state = 688
-							owns_state = 84
-							owns_state = 81
-							owns_state = 15
-							owns_state = 26
-							owns_state = 221
-							owns_state = 79
-							owns_state = 352
-							owns_state = 7
-							owns_state = 31
-						}
-					}
-					EQS = { declare_war_on = { target = PREV type = annex_everything } }
-				}
-			}
-			ELSE = {
-				custom_effect_tooltip = aurora_gunning_for_dat_territory_tt
-			}
-		}
-	}
-	operation_rusted_shield = {
-		activation = {
-			OR = { 
-				original_tag = EQS
-				original_tag = STG
-			}
-			EQS = {
-				has_country_flag = stg_prep
-			}
-		}
-		available = { EQS = { NOT = { has_country_flag = stg_prep } } }
-		fire_only_once = yes
-		days_mission_timeout = 14
-		war_with_on_timeout = STG
-		timeout_effect = { 
-			IF = { 
-				limit = { original_tag = EQS }
-				declare_war_on = { target = STG type = annex_everything }
-			}
-			ELSE = {
-				custom_effect_tooltip = aurora_gunning_for_dat_territory_tt
-			}
-		}
-	}
-}
 EQS_SUN_crystal_empire_war_countdown_category = {
 	war_of_empires = {
 		activation = {
-			OR = {
-				original_tag = CRY
-				original_tag = EQS
-			}
+			original_tag = CRY
 			has_global_flag = invitation_rejected
 		}
 		available = { hidden_trigger = { NOT = { has_global_flag = invitation_rejected } } }
 		fire_only_once = yes
 		war_with_on_timeout = EQS
 		days_mission_timeout = 60
-		timeout_effect = { 
-			IF = { 
-				limit = { original_tag = CRY }
-				CRY = { declare_war_on = { target = EQS type = annex_everything } }
-			}
-			ELSE = {
-				custom_effect_tooltip = sunset_bucked_up_tt
-			}
-		}
+		timeout_effect = { declare_war_on = { target = EQS type = annex_everything } }
 	}
 }
 EQS_SUN_high_mage_election_category = {
@@ -642,225 +545,225 @@ EQS_SUN_high_mage_election_category = {
 		}
 	}
 }
-#EQS_SOL_society_interaction_category = {
-#	root_out_heresy = {
-#		available = {
-#			original_tag = EQS
-#		}
-#		cost = 25
-#		days_remove = 70
-#		days_re_enable = 280
-#		modifier = {
-#			stability_weekly = 0.0025
-#			fascism_drift = 0.02
-#			weekly_manpower = -1000
-#		}
-#	}
-#	hold_adoratio_ceremony = {
-#		available = {
-#			original_tag = EQS
-#		}
-#		cost = 25
-#		days_remove = 35
-#		days_re_enable = 140
-#		modifier = {
-#			war_support_weekly = 0.005
-#			political_power_gain = -0.05
-#		}
-#	}
-#	forced_recruitment = {
-#		available = {
-#			original_tag = EQS
-#		}
-#		cost = 75
-#		days_remove = 70
-#		days_re_enable = 140
-#		modifier = {
-#			weekly_manpower = 500
-#			stability_weekly = -0.001
-#			war_support_weekly = -0.001
-#		}
-#	}
-#	proclaim_new_prophesy = {
-#		available = {
-#			original_tag = EQS
-#		}
-#		cost = 50
-#		days_remove = 35
-#		days_re_enable = 365
-#		modifier = {
-#			stability_weekly = 0.001
-#			fascism_drift = 0.02
-#			political_power_factor = -0.1
-#		}
-#	}
-#	destroy_remnants_of_equestria = {
-#		available = {
-#			original_tag = EQS
-#		}
-#		cost = 100
-#		days_re_enable = 720
-#		complete_effect = {
-#			add_stability = 0.02
-#			add_war_support = 0.02
-#		}
-#	}
-#	investigate_militarium_heresy = {
-#		available = {
-#			original_tag = EQS
-#			#has_country_flag = sentinel_killed
-#			OR = {
-#				EQS_Daybreaker = { is_country_leader = yes }
-#				EQS_Nova_Glow = { is_country_leader = yes }
-#				EQS_Aurora_Shinespark = { is_country_leader = yes }
-#			}
-#			NOT = {
-#				check_variable = { purged_commanders > 3 }
-#			}
-#		}
-#		visible = {
-#			check_variable = { purged_commanders < 4 }
-#		}
-#		custom_cost_trigger = {
-#			command_power > 24.9
-#			has_political_power > 124.9
-#		}
-#		days_remove = 90
-#		days_re_enable = 180
-#		modifier = {
-#			command_power_gain = -0.25
-#			political_power_gain = -0.25
-#			war_support_weekly = -0.005
-#		}
-#		complete_effect = {
-#			custom_effect_tooltip = leader_will_be_purged_tt
-#			hidden_effect = {
-#				random_list = {
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Bellum_Iceheart = { is_unit_leader = yes }
-#							}
-#							retire_character = EQS_Bellum_Iceheart
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Swift_Wing_1048 = { is_unit_leader = yes }
-#							}
-#							retire_character = EQS_Swift_Wing_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Sun_Marble_1048 = { is_unit_leader = yes }
-#							}
-#							retire_character = EQS_Sun_Marble_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Orion_Star_1048 = { is_unit_leader = yes }
-#							}
-#							retire_character = EQS_Orion_Star_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Shining_Star = { is_unit_leader = yes }
-#							}
-#							retire_character = EQS_Shining_Star
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Stormchaser = { is_unit_leader = yes }
-#							}
-#							retire_character = EQS_Stormchaser
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Flim_Flam_1048 = { is_advisor = yes }
-#							}
-#							retire_character = EQS_Flim_Flam_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_Grimhoof_1048 = { is_advisor = yes }
-#							}
-#							retire_character = EQS_Grimhoof_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_evening_squall_1048 = { is_navy_leader = yes }
-#							}
-#							retire_character = EQS_evening_squall_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#					10 = {
-#						if = {
-#							limit = {
-#								EQS_copper_gearheart_cog_1048 = { is_navy_leader = yes }
-#							}
-#							retire_character = EQS_copper_gearheart_cog_1048
-#							add_stability = 0.05
-#							add_political_power = 50
-#							add_war_support = 0.03
-#							add_to_variable = { purged_commanders = 1 }
-#						}
-#					}
-#				}
-#			}
-#		}
-#	}
-#}
+EQS_SOL_society_interaction_category = {
+	root_out_heresy = {
+		available = {
+			original_tag = EQS
+		}
+		cost = 25
+		days_remove = 70
+		days_re_enable = 280
+		modifier = {
+			stability_weekly = 0.0025
+			fascism_drift = 0.02
+			weekly_manpower = -1000
+		}
+	}
+	hold_adoratio_ceremony = {
+		available = {
+			original_tag = EQS
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 140
+		modifier = {
+			war_support_weekly = 0.005
+			political_power_gain = -0.05
+		}
+	}
+	forced_recruitment = {
+		available = {
+			original_tag = EQS
+		}
+		cost = 75
+		days_remove = 70
+		days_re_enable = 140
+		modifier = {
+			weekly_manpower = 500
+			stability_weekly = -0.001
+			war_support_weekly = -0.001
+		}
+	}
+	proclaim_new_prophesy = {
+		available = {
+			original_tag = EQS
+		}
+		cost = 50
+		days_remove = 35
+		days_re_enable = 365
+		modifier = {
+			stability_weekly = 0.001
+			fascism_drift = 0.02
+			political_power_factor = -0.1
+		}
+	}
+	destroy_remnants_of_equestria = {
+		available = {
+			original_tag = EQS
+		}
+		cost = 100
+		days_re_enable = 720
+		complete_effect = {
+			add_stability = 0.02
+			add_war_support = 0.02
+		}
+	}
+	investigate_militarium_heresy = {
+		available = {
+			original_tag = EQS
+			#has_country_flag = sentinel_killed
+			OR = {
+				EQS_Daybreaker = { is_country_leader = yes }
+				EQS_Nova_Glow = { is_country_leader = yes }
+				EQS_Aurora_Shinespark = { is_country_leader = yes }
+			}
+			NOT = {
+				check_variable = { purged_commanders > 3 }
+			}
+		}
+		visible = {
+			check_variable = { purged_commanders < 4 }
+		}
+		custom_cost_trigger = {
+			command_power > 24.9
+			has_political_power > 124.9
+		}
+		days_remove = 90
+		days_re_enable = 180
+		modifier = {
+			command_power_gain = -0.25
+			political_power_gain = -0.25
+			war_support_weekly = -0.005
+		}
+		complete_effect = {
+			custom_effect_tooltip = leader_will_be_purged_tt
+			hidden_effect = {
+				random_list = {
+					10 = {
+						if = {
+							limit = {
+								EQS_Bellum_Iceheart = { is_unit_leader = yes }
+							}
+							retire_character = EQS_Bellum_Iceheart
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Swift_Wing_1048 = { is_unit_leader = yes }
+							}
+							retire_character = EQS_Swift_Wing_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Sun_Marble_1048 = { is_unit_leader = yes }
+							}
+							retire_character = EQS_Sun_Marble_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Orion_Star_1048 = { is_unit_leader = yes }
+							}
+							retire_character = EQS_Orion_Star_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Shining_Star = { is_unit_leader = yes }
+							}
+							retire_character = EQS_Shining_Star
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Stormchaser = { is_unit_leader = yes }
+							}
+							retire_character = EQS_Stormchaser
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Flim_Flam_1048 = { is_advisor = yes }
+							}
+							retire_character = EQS_Flim_Flam_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_Grimhoof_1048 = { is_advisor = yes }
+							}
+							retire_character = EQS_Grimhoof_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_evening_squall_1048 = { is_navy_leader = yes }
+							}
+							retire_character = EQS_evening_squall_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+					10 = {
+						if = {
+							limit = {
+								EQS_copper_gearheart_cog_1048 = { is_navy_leader = yes }
+							}
+							retire_character = EQS_copper_gearheart_cog_1048
+							add_stability = 0.05
+							add_political_power = 50
+							add_war_support = 0.03
+							add_to_variable = { purged_commanders = 1 }
+						}
+					}
+				}
+			}
+		}
+	}
+}
 EQS_SOL_project_solaris_category = {
 	EQS_SOL_ordo_meurom_new_mines = {
 		allowed = {
