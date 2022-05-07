@@ -1,99 +1,183 @@
 add_namespace = southeast
 
-country_event = { ###Debug event to kill Cobalt Hoof
+country_event = {
 	id = southeast.1
 	title = southeast.1.t
 	desc = southeast.1.d
-	
+	fire_only_once = yes
+	is_triggered_only = yes
+
 	trigger = {
 		tag = BAL
-		date > 1048.6.1
-		date < 1048.6.30
-		has_country_leader = { ruling_only = yes name = "Cobalt Hoof" }
+		date = 1048.1.25
 	}
-	
-	fire_only_once = yes
-	
 	option = {
 		name = southeast.1.a
-		kill_country_leader = yes
-		create_country_leader = {
-			name = "Steel Frame"
-			expire = "1965.1.1"
-			ideology = mareland_socialism
-			traits = { }
+		custom_effect_tooltip = BAL_health_decrease
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						var = BAL.cobalts_health
+						value = 100
+						compare = equals
+					}
+				}
+			}
+			subtract_from_variable = {
+				var = BAL.cobalts_health
+				value = 20
+			}
+		}
+	}
+	option = {
+		name = southeast.1.b
+		custom_effect_tooltip = BAL_health_maintain
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						var = BAL.party_loyalty
+						value = 100
+						compare = equals
+					}
+				}
+				
+			}
+			subtract_from_variable = {
+				var = BAL.party_loyalty
+				value = 20
+			}
 		}
 	}
 }
+
+country_event = {
+	id = southeast.3
+	title = southeast.3.t
+	desc = southeast.3.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = BAL
+		if = {
+			limit = {
+				check_variable = {
+					var = BAL.cobalts_health
+					value = 0
+					compare = equals
+				}
+			}
+		}
+	}
+	option = {
+		name = southeast.3.a
+		set_country_flag = BAL_cobalt_dead
+		retire_character = BAL_cobalt_hoof
+		add_country_leader_role = {
+			character = BAL_maresoc
+			promote_leader = yes
+			country_leader = {
+				expire = "1965.1.1"
+				desc = "POLITICS_MARESOC_DESC"
+				ideology = mareland_socialism
+				traits = {
+					maresoc_leader_trait
+				}
+			}
+		}
+	}
+}
+
+
+
+
+country_event = {
+	id = southeast.4
+	title = southeast.4.t
+	desc = southeast.4.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = southeast.4.a
+		
+	}
+	option = {
+		name = southeast.4.b
+	}
+}
+
+
+
 
 country_event = { ###Debug event to spawn the Mingsplosion
 	id = southeast.2
 	title = southeast.2.t
 	desc = southeast.2.d
-	
+	fire_only_once = yes
+	is_triggered_only = yes
 	trigger = {
 		tag = BAL
-		NOT = { has_country_leader = { ruling_only = yes name = "Cobalt Hoof" } }
+		NOT = {
+			has_country_leader = {
+				ruling_only = yes 
+				name = "Cobalt Hoof"
+			}
+		}
+		NOT = {
+			has_country_flag = BAL_successor_chosen
+		}
+		has_country_flag = BAL_cobalt_dead
 	}
 	
 	fire_only_once = yes
 	
 	option = {
-		name = southeast.2.a
-		ai_chance = { factor = 35 }
-		add_stability = 0.05
-		add_war_support = 0.05
-		EQC = {
-			end_puppet = BAL
-			remove_from_faction = BAL
-		}
-	}
-	option = {
 		name = southeast.2.b
 		ai_chance = { factor = 65 }
 		set_cosmetic_tag = BAL_new_red_front
 		set_global_flag = balsplosion
-		EQC = {
-			end_puppet = BAL
-			remove_from_faction = BAL
-		}
 		SPF = {
 			transfer_state = 4
-			transfer_state = 328
 			transfer_state = 686
+			transfer_state = 328
+			add_state_core = 4
+			add_state_core = 328
+			add_state_core = 686
+		}
+		CLI = {
 			transfer_state = 6
 			transfer_state = 7
 			transfer_state = 8
 			transfer_state = 9
 			transfer_state = 10
-			add_state_core = 4
-			add_state_core = 328
 			add_state_core = 6
-			add_state_core = 686
 			add_state_core = 7
 			add_state_core = 8
 			add_state_core = 9
 			add_state_core = 10
 		}
 		STB = {
-			transfer_state = 33
 			transfer_state = 34
 			transfer_state = 15
 			transfer_state = 50
+			transfer_state = 35
+			transfer_state = 81
 			add_state_core = 50
 			add_state_core = 15
 			add_state_core = 34
-			add_state_core = 33
+			add_state_core = 35
+			add_state_core = 81
 		}
 		NID = {
 			transfer_state = 351
 			transfer_state = 687
-			transfer_state = 52
 			transfer_state = 221
+			transfer_state = 33
 			add_state_core = 221
-			add_state_core = 52
 			add_state_core = 687
 			add_state_core = 351
+			add_state_core = 33
 		}
 		MTS = {
 			transfer_state = 27
@@ -140,15 +224,15 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			transfer_state = 32
 			transfer_state = 86
 			transfer_state = 26
+			transfer_state = 353
+			transfer_state = 25
+			transfer_state = 79
+			transfer_state = 52
+			add_state_core = 52
 			add_state_core = 36
 			add_state_core = 32
 			add_state_core = 86
 			add_state_core = 26
-		}
-		BGL = {
-			transfer_state = 353
-			transfer_state = 25
-			transfer_state = 79
 			add_state_core = 353
 			add_state_core = 25
 			add_state_core = 79
