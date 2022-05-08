@@ -116,7 +116,7 @@ SOL_Celestia_Returned = {
 		ruling_party = democratic
 		elections_allowed = no
 	}
-	EQS_Sunbutt = { promote_character = yes }
+	event_target:EQS_Sunbutt_target = { promote_character = yes }
 	set_popularities = {
 		democratic = 45
 		fascism = 30
@@ -128,55 +128,48 @@ SOL_Celestia_Returned = {
 		name = "Alicorn Rule"
 		long_name = "Alicorn Rule"
 	}
-	set_cosmetic_tag = EQS_CEL
+	drop_cosmetic_tag = yes
 	set_country_flag = equestria_returned
 	remove_ideas = {
-		solar_cult
-		solar_inquisition
-		soldiers_of_the_sun
+		EQS_solar_cult
+		EQS_solar_inquisition
 	}
 	IF = {
 		limit = {
-			has_idea = heretical_commanders
+			has_idea = EQS_heretical_commanders
 		}
-		remove_ideas = heretical_commanders
+		remove_ideas = EQS_heretical_commanders
 	}
 	IF = {
 		limit = {
-			has_idea = purified_high_command
+			has_idea = EQS_purified_high_command
 		}
-		remove_ideas = purified_high_command
+		remove_ideas = EQS_purified_high_command
 	}
 	load_oob = "SOL_civil_war_cel"
-	EQS = {
-		EQS_Midwinter_Halo = { set_nationality = SLW }
-		EQS_Swift_Wing_1048 = { set_nationality = SLW }
-		EQS_Orion_Star_1048 = { set_nationality = SLW }
-		EQS_dust_hoover_1048 = { set_nationality = SLW }
-		EQS_Bellum_Iceheart = { set_nationality = SLW }
-		EQS_Molten_Song = { set_nationality = SLW }
-		EQS_evening_squall_1048 = { set_nationality = SLW }
-		IF = {
-			limit = { 
-				has_country_flag = aurora_general
-			}
-			clr_country_flag = aurora_general
+	event_target:EQS_Midwinter_Halo_target = { set_nationality = SLW }
+	event_target:EQS_Swift_Wing_target = { set_nationality = SLW }
+	event_target:EQS_Orion_Star_target = { set_nationality = SLW }
+	event_target:EQS_dust_hoover_target = { set_nationality = SLW }
+	event_target:EQS_Bellum_Iceheart_target = { set_nationality = SLW }
+	event_target:EQS_Molten_Song_target = { set_nationality = SLW }
+	event_target:EQS_evening_squall_target = { set_nationality = SLW }
+	IF = {
+		limit = { 
+			has_country_flag = aurora_general
 		}
+		clr_country_flag = aurora_general
 	}
 	add_ideas = eqs_slw_civil_war
+	IF = {
+		limit = {
+			has_country_flag = starlight_and_trixie_corrupted
+		}
+		event_target:EQS_Starlight_Glimmer_target = { set_nationality = SLW }
+		event_target:EQS_Trixie_Lulamoon_target = { set_nationality = SLW }
+	}
 	SLW = {
 		add_ideas = eqs_slw_civil_war
-		IF = {
-			limit = {
-				EQS = {
-					has_country_flag = starlight_and_trixie_corrupted
-				}
-			}
-			EQS = {
-				EQS_Starlight_Glimmer_1048 = { set_nationality = SLW }
-				EQS_Trixie_Lulamoon = { set_nationality = SLW }
-			}
-		}
 		IF = {
 			limit = { country_exists = EQS }
 			create_wargoal = {
@@ -210,34 +203,35 @@ SOL_end_of_civil_war_CEL = {
 	}
 	IF = {
 		limit = {
-			EQS_Sunbutt = { is_unit_leader = no }
+			event_target:EQS_Sunbutt_target = { is_unit_leader = no }
 		}
-		add_field_marshal_role = {
-			character = EQS_Sunbutt
-			traits = { pony_race_trait pleasant_sun inspirational_leader }
-			skill = 2
-			attack_skill = 3
-			defense_skill = 3
-			planning_skill = 2
-			logistics_skill = 2
+		event_target:EQS_Sunbutt_target = {
+			add_field_marshal_role = {
+				traits = { pony_race_trait pleasant_sun inspirational_leader }
+				skill = 2
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 2
+			}
 		}
 	}
 	IF = {
 		limit = {
 			NOT = {
-				has_completed_focus = addressing_the_faithful_generals
+				has_completed_focus = EQS_addressing_the_faithful_generals
 			}
 		}
 		set_country_flag = harmonist_commanders_return
 	}
 	swap_ideas = {
-		add_idea = destitute_diarchy
-		remove_idea = great_war_aftermath
+		add_idea = EQS_destitute_diarchy
+		remove_idea = EQS_great_war_aftermath
 	}
 	hidden_effect = {
 		IF = {
 			limit = {
-				has_completed_focus = addressing_the_faithful_generals
+				has_completed_focus = EQS_addressing_the_faithful_generals
 			}
 			delete_unit_template_and_units = {
 				division_template = "Equestrian Veterans"
@@ -248,7 +242,7 @@ SOL_end_of_civil_war_CEL = {
 		}
 		IF = {
 			limit = {
-				has_completed_focus = salvation_to_the_lost
+				has_completed_focus = EQS_salvation_to_the_lost
 			}
 			delete_unit_template_and_units = {
 				division_template = "Solar Deserters"
