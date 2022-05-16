@@ -319,7 +319,7 @@ shared_focus = {
 	relative_position_id = EQS_they_shall_know
 	
 	bypass = {
-		has_idea = EQS_service_by_requirement
+		has_idea = service_by_requirement
 	}
 	
 	cost = 5
@@ -332,24 +332,24 @@ shared_focus = {
 	completion_reward = {
 		if = {
 			limit = { 
-			    has_idea = EQS_disarmed_nation 
+			    has_idea = disarmed_nation 
 				}
-			add_ideas = EQS_service_by_requirement
+			add_ideas = service_by_requirement
 			}
 		else_if = {
 			limit = { 
-			    has_idea = EQS_volunteer_only 
+			    has_idea = volunteer_only 
 				}
-			add_ideas = EQS_service_by_requirement
+			add_ideas = service_by_requirement
 			}
 		else_if = {
 			limit = { 
-			    has_idea = EQS_limited_conscription 
+			    has_idea = limited_conscription 
 				}
-			add_ideas = EQS_service_by_requirement
+			add_ideas = service_by_requirement
 			}
 		else = {
-			add_ideas = EQS_service_by_requirement
+			add_ideas = service_by_requirement
 		}
 	}
 	ai_will_do = {
@@ -407,7 +407,7 @@ shared_focus = {
 	relative_position_id = EQS_cleansing_corruption
 	
 	bypass = {
-		has_idea = EQS_tot_economic_mobilisation
+		has_idea = tot_economic_mobilisation
 	}
 	
 	cost = 5
@@ -418,7 +418,7 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		add_ideas = EQS_tot_economic_mobilisation
+		add_ideas = tot_economic_mobilisation
 	}
 	ai_will_do = {
 		factor = 20
@@ -2166,6 +2166,15 @@ shared_focus = {
 	
 	prerequisite = { focus = EQS_all_are_equal_in_guilt }
 	
+	select_effect = {
+		IF = {
+			limit = { check_variable = { equestria_conquest = 5 } }
+			set_variable = { equestria_conquest = 6 }
+		}
+		ELSE = {
+			set_variable = { equestria_conquest = 4 }
+		}
+	}
 	
 	completion_reward = {
 		set_province_name = { id = 488 name = renamed_stalliongrad }
@@ -2347,6 +2356,15 @@ shared_focus = {
 	
 	prerequisite = { focus = EQS_shatter_crystal }
 	
+	select_effect = { 
+		IF = {
+			limit = { check_variable = { equestria_conquest = 2 } }
+			set_variable = { equestria_conquest = 5 }
+		}
+		ELSE = {
+			set_variable = { equestria_conquest = 6 }
+		}
+	}
 	
 	completion_reward = {
 		set_province_name = { id = 489 name = renamed_crystal_city }
@@ -2361,40 +2379,41 @@ shared_focus = {
 }
 
 ###Chrysalia assault###
+#shared_focus = {
+#	id = EQS_operation_cauterize
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_expunge_the_records
+#	
+#	bypass = {
+#		}
+#	
+#	cost = 2
+#	
+#	prerequisite = { focus = EQS_expunge_the_records }
+#	prerequisite = { focus = EQS_order_and_prosperity }
+#	
+#	will_lead_to_war_with = CHN
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_operation_cauterize
+#			days = 210
+#		}
+#	}
+#	ai_will_do = { factor = 50 }
+#}
+
 shared_focus = {
-	id = EQS_operation_cauterize
+	id = EQS_squash_the_insects
 	x = 1
 	y = 1
 	relative_position_id = EQS_expunge_the_records
-	
-	bypass = {
-		}
 	
 	cost = 2
 	
 	prerequisite = { focus = EQS_expunge_the_records }
 	prerequisite = { focus = EQS_order_and_prosperity }
-	
-	will_lead_to_war_with = CHN
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_operation_cauterize
-			days = 210
-		}
-	}
-	ai_will_do = { factor = 50 }
-}
-
-shared_focus = {
-	id = EQS_squash_the_insects
-	x = 0
-	y = 1
-	relative_position_id = EQS_operation_cauterize
-	
-	cost = 2
-	
-	prerequisite = { focus = EQS_operation_cauterize }
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -4883,6 +4902,17 @@ shared_focus = {
 		focus = EQS_carving_the_crystal_wall
 	}
 	
+	select_effect = {
+		IF = {
+			limit = { 
+				AND = {
+					check_variable = { equestria_conquest = 2 } }
+					NOT = { country_exists = CRY }
+				}
+			set_variable = { equestria_conquest = 5 }
+		}
+	}
+	
 	completion_reward = {
 		every_country = {
 			limit = {
@@ -4988,6 +5018,20 @@ shared_focus = {
 	prerequisite = { focus = EQS_slice_through_the_swamps }
 	prerequisite = { focus = EQS_victory_is_in_those_that_love_the_empress }
 	
+	select_effect = {
+		IF = {
+			limit = { check_variable = { equestria_conquest = 5 } }
+			set_variable = { equestria_conquest = 11 } #Changelings conquered and CRY conquered before STG
+		}
+		ELSE_IF = {
+			limit = { check_variable = { equestria_conquest = 4 } } #Stalliongrad conquered first
+			set_variable = { equestria_conquest = 12 }
+		}
+		ELSE = {
+			set_variable = { equestria_conquest = 10 }
+		}
+	}
+	
 	completion_reward = {
 		add_timed_idea = {
 			idea = EQS_swords_into_plowshares
@@ -5016,6 +5060,20 @@ shared_focus = {
 	cost = 7
 	prerequisite = { focus = EQS_weather_the_woods }
 	prerequisite = { focus = EQS_victory_is_in_those_that_love_the_empress }
+	
+	select_effect = {
+		IF = {
+			limit = { check_variable = { equestria_conquest = 5 } }
+			set_variable = { equestria_conquest = 11 } #Changelings conquered and CRY conquered before STG
+		}
+		ELSE_IF = {
+			limit = { check_variable = { equestria_conquest = 4 } } #Stalliongrad conquered first
+			set_variable = { equestria_conquest = 12 } #Whole Equestria
+		}
+		ELSE = {
+			set_variable = { equestria_conquest = 10 }
+		}
+	}
 	
 	completion_reward = {
 		690 = {
@@ -5069,6 +5127,18 @@ shared_focus = {
 	prerequisite = {
 		focus = EQS_a_nation_blinded_by_the_past
 		focus = EQS_carving_the_crystal_wall
+	}
+	
+	select_effect = {
+		IF = {
+			limit = { 
+				AND = {
+					check_variable = { equestria_conquest = 2 } 
+					NOT = { country_exists = CRY } 
+				}
+			}
+			set_variable = { equestria_conquest = 5 }
+		}
 	}
 	
 	completion_reward = {
@@ -5197,6 +5267,20 @@ shared_focus = {
 	prerequisite = { focus = EQS_operation_melted_wastes }
 	prerequisite = { focus = EQS_prepare_for_the_long_winter }
 	
+	select_effect = {
+		IF = {
+			limit = { check_variable = { equestria_conquest = 5 } }
+			set_variable = { equestria_conquest = 6 }
+		}
+		ELSE_IF = {
+			limit = { check_variable = { equestria_conquest = 10 } } #Changelings conquered first
+			set_variable = { equestria_conquest = 11 }
+		}
+		ELSE = {
+			set_variable = { equestria_conquest = 4 }
+		}
+	}
+	
 	completion_reward = {
 		153 = {
 			add_dynamic_modifier = { modifier = EQS_supremely_solar }
@@ -5224,6 +5308,20 @@ shared_focus = {
 	cost = 4
 	prerequisite = { focus = EQS_prepare_for_the_long_winter }
 	prerequisite = { focus = EQS_a_cry_to_the_faithful }
+	
+	select_effect = {
+		IF = {
+			limit = { check_variable = { equestria_conquest = 5 } }
+			set_variable = { equestria_conquest = 6 }
+		}
+		ELSE_IF = {
+			limit = { check_variable = { equestria_conquest = 10 } } #Changelings conquered first
+			set_variable = { equestria_conquest = 11 }
+		}
+		ELSE = {
+			set_variable = { equestria_conquest = 4 }
+		}
+	}
 	
 	completion_reward = {
 		custom_effect_tooltip = new_armada_tt
@@ -8318,6 +8416,19 @@ shared_focus = {
 		focus = EQS_taming_new_pony
 	}
 	
+	select_effect = {
+		IF = {
+			limit = {
+				AND = {
+					has_completed_focus = EQS_return_of_the_lost_generation
+					has_completed_focus = EQS_twenty_four_karat_bad_luck
+					check_variable = { equestria_conquest = 6 }
+				}
+			}
+			set_variable = { equestria_conquest = 7 }
+		}
+	}
+	
 	completion_reward = {
 		every_state = {
 			limit = {
@@ -8346,6 +8457,19 @@ shared_focus = {
 	prerequisite = {
 		focus = EQS_eviscerating_experiment
 		focus = EQS_taming_new_pony
+	}
+	
+	select_effect = {
+		IF = {
+			limit = {
+				AND = {
+					has_completed_focus = EQS_return_of_the_lost_generation
+					has_completed_focus = EQS_wild_no_more
+					check_variable = { equestria_conquest = 6 }
+				}
+			}
+			set_variable = { equestria_conquest = 7 }
+		}
 	}
 	
 	completion_reward = {
@@ -8381,6 +8505,19 @@ shared_focus = {
 	prerequisite = {
 		focus = EQS_eviscerating_experiment
 		focus = EQS_taming_new_pony
+	}
+	
+	select_effect = {
+		IF = {
+			limit = {
+				AND = {
+					has_completed_focus = EQS_wild_no_more
+					has_completed_focus = EQS_twenty_four_karat_bad_luck
+					check_variable = { equestria_conquest = 6 }
+				}
+			}
+			set_variable = { equestria_conquest = 7 }
+		}
 	}
 	
 	completion_reward = {
@@ -8427,6 +8564,10 @@ shared_focus = {
 	prerequisite = { focus = EQS_return_of_the_lost_generation }
 	prerequisite = { focus = EQS_twenty_four_karat_bad_luck }
 	prerequisite = { focus = EQS_wild_no_more }
+	
+	select_effect = {
+		set_variable = { equestria_conquest = 8 }
+	}
 	
 	completion_reward = {
 		319 = {

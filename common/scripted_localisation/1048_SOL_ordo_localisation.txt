@@ -419,28 +419,50 @@ defined_text = { #Ordo Archmages
 		trigger = {
 			AND = {
 				check_variable = { ordo_selection = 1 }
-				NOT = { EQS_Aurora_Shinespark = { is_country_leader = yes } } 
-				NOT = { has_country_flag = nova_archmage_caelum }
+				EQS = {
+					NOT = { EQS_Aurora_Shinespark = { is_country_leader = yes } }
+				}
+				NOT = { tag = SLW }
 			}
 		}
 		localization_key = ordo_archmage_1 # Aurora Shinespark
 	}
 	text = {
 		trigger = {
-			AND = {
-				check_variable = { ordo_selection = 1 }
-				EQS_Aurora_Shinespark = { is_country_leader = yes } 
-				NOT = { has_country_flag = nova_archmage_caelum }
+			OR = {
+				AND = {
+					tag = SLW
+					check_variable = { ordo_selection = 1 }
+					NOT = { EQS_Nova_Glow = { is_country_leader = yes } }
+				}
+				AND = {
+					tag = EQS
+					check_variable = { ordo_selection = 1 }
+					EQS = {
+						EQS_Aurora_Shinespark = { is_country_leader = yes }
+					}
+					NOT = { has_country_flag = nova_archmage_caelum }
+				}
 			}
 		}
 		localization_key = ordo_archmage_1_alt_1 # Nova Glow
 	}
 	text = {
 		trigger = {
-			AND = {
-				check_variable = { ordo_selection = 1 }
-				EQS_Aurora_Shinespark = { is_country_leader = yes } 
-				has_country_flag = nova_archmage_caelum
+			OR = {
+				AND = {
+					tag = SLW
+					check_variable = { ordo_selection = 1 }
+					EQS_Nova_Glow = { is_country_leader = yes }
+				}
+				AND = {
+					tag = EQS
+					check_variable = { ordo_selection = 1 }
+					EQS = {
+						EQS_Aurora_Shinespark = { is_country_leader = yes }
+					}
+					has_country_flag = nova_archmage_caelum
+				}
 			}
 		}
 		localization_key = ordo_archmage_1_alt_2 # Fidelis Flamma
@@ -590,8 +612,10 @@ defined_text = { #Ordo Archmage GFX
 		trigger = {
 			AND = {
 				check_variable = { ordo_selection = 1 }
-				NOT = { EQS_Aurora_Shinespark = { is_country_leader = yes } } 
-				NOT = { has_country_flag = nova_archmage_caelum }
+				EQS = {
+					NOT = { EQS_Aurora_Shinespark = { is_country_leader = yes } }
+				}
+				NOT = { tag = SLW }
 			}
 		}
 		localization_key = "GFX_aurora_shinespark" # Aurora
@@ -604,10 +628,20 @@ defined_text = { #Ordo Archmage GFX
 					EQS_Aurora_Shinespark = { is_country_leader = yes }
 					has_country_flag = nova_archmage_caelum
 				}
-				AND = {
-					check_variable = { ordo_selection = 1 }
-					EQS_Aurora_Shinespark = { is_country_leader = yes }
-					NOT = { has_country_flag = nova_archmage_caelum }
+				OR = {
+					AND = {
+						tag = SLW
+						check_variable = { ordo_selection = 1 }
+						NOT = { EQS_Nova_Glow = { is_country_leader = yes } }
+					}
+					AND = {
+						tag = EQS
+						check_variable = { ordo_selection = 1 }
+						EQS = {
+							EQS_Aurora_Shinespark = { is_country_leader = yes }
+						}
+						NOT = { has_country_flag = nova_archmage_caelum }
+					}
 				}
 			}
 		}
@@ -615,10 +649,20 @@ defined_text = { #Ordo Archmage GFX
 	}
 	text = {
 		trigger = {
-			AND = {
-				check_variable = { ordo_selection = 1 }
-				EQS_Aurora_Shinespark = { is_country_leader = yes }
-				has_country_flag = nova_archmage_caelum
+			OR = {
+				AND = {
+					tag = SLW
+					check_variable = { ordo_selection = 1 }
+					EQS_Nova_Glow = { is_country_leader = yes }
+				}
+				AND = {
+					tag = EQS
+					check_variable = { ordo_selection = 1 }
+					EQS = {
+						EQS_Aurora_Shinespark = { is_country_leader = yes }
+					}
+					has_country_flag = nova_archmage_caelum
+				}
 			}
 		}
 		localization_key = "GFX_fidelis_flamma" # Fidelis
@@ -628,6 +672,12 @@ defined_text = { #Ordo Archmage GFX
 			check_variable = { ordo_selection = 2 }
 		}
 		localization_key = "GFX_burning_plage" # Burning Plage
+	}
+	text = {
+		trigger = {
+			check_variable = { ordo_selection = 4 }
+		}
+		localization_key = "GFX_ion_trail" # Ion Trail
 	}
 	text = {
 		localization_key = "GFX_portrait_unknown_leader"
