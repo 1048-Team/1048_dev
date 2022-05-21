@@ -6077,6 +6077,133 @@ country_event = { #When Jet Set is well enough, he speaks with Celestia and alth
 	}
 }
 
+country_event = { #TRD receives a communique from EQS stating that they know they are still suffering against both GRI and EQC and are offering to provide volunteers and equipment in exchange for support against EQC in the future
+	id = celestia.57
+	title = celestia.57.t
+	desc = celestia.57.d
+	
+	is_triggered_only = yes
+	
+	option = { #Definitely; it is good that Celestia is back
+		name = celestia.57.a
+		ai_chance = {
+			factor = 25
+			modifier = { has_government = democratic factor = 1.5 }
+			modifier = { has_government = neutrality factor = 3 }
+			modifier = { is_subject_of = GRI factor = 0 }
+		}
+		EQS = { 
+			country_event = {
+				id = celestia.58
+				days = 1
+				random_days = 6
+			}
+		}
+	}
+	option = { #How about we sweeten it a bit further?
+		name = celestia.57.b
+		ai_chance = {
+			factor = 10
+			modifier = { has_government = democratic factor = 5 }
+			modifier = { has_government = neutrality factor = 2.5 }
+			modifier = { has_government = fascism factor = 0 }
+			modifier = { is_subject_of = GRI factor = 0 }
+		}
+		EQS = { 
+			country_event = {
+				id = celestia.59
+				days = 1
+				random_days = 6
+			}
+		}
+	}
+	option = { #She thinks we need her help? Hah!
+		name = celestia.57.c
+		ai_chance = {
+			factor = 50
+			modifier = { has_government = democratic factor = 0 }
+			modifier = { has_government = neutrality factor = 0.2 }
+		}
+		EQS = { 
+			country_event = {
+				id = celestia.60
+				days = 1
+				random_days = 6
+			}
+		}
+	}
+}
+
+country_event = { #Celestia receives a reply back from TRD stating that they'll begin sending convoys for shipments, and she is greatly pleased
+	id = celestia.58
+	title = celestia.58.t
+	desc = celestia.58.d
+	
+	is_triggered_only = yes
+	
+	option = { #Wonderful. Start shipping those crates immediately!
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		FROM = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10000
+				producer = EQS
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.075
+			}
+			load_oob = "TRD_pony_help" ###Load OOB for 3 divisions of 12 width pony infantry with support artillery and engineers
+			set_country_flag = TRD_will_help_with_EQC ###This will give TRD an option once the EQC war starts to join in with FLO
+		}
+	}
+}
+
+country_event = { #Celestia receives a reply back from TRD stating that they'll begin sending convoys for shipments and that they want to join her alliance, and she is overjoyed
+	id = celestia.59
+	title = celestia.59.t
+	desc = celestia.59.d
+	
+	is_triggered_only = yes
+	
+	option = { #They better not drag us into another war, though
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -10000
+			producer = EQS
+		}
+		TRD = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10000
+				producer = EQS
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.075
+			}
+			load_oob = "TRD_pony_help" ###Load OOB for 3 divisions of 12 width pony infantry with support artillery and engineers
+			add_to_faction = TRD
+		}
+	}
+}
+
+country_event = { #After waiting for far too long, Celestia finally learns that TRD rejected any concept of help and she sighs as she scratches another potential ally off the list
+	id = celestia.60
+	title = celestia.60.t
+	desc = celestia.60.d
+	
+	is_triggered_only = yes
+	
+	option = { #It has been a while, I suppose
+		add_political_power = -20
+	}
+}
+
 ###Rump state events for Celestia###
 country_event = { #Celestia asks for puppeting of both Bales and Cloudsdale
 	id = celestia.500
@@ -7948,6 +8075,7 @@ country_event = { #With the war beginning to worsen, the new head of the unified
 		custom_effect_tooltip = carbon_and_commie_assistance_tt
 		hidden_effect = {
 			###Set OOB to spawn two ten-width divisions here, called Angry Unionists
+			load_oob = "SLW_helpful_commies"
 		}
 		add_popularity = {
 			ideology = communism
@@ -7998,6 +8126,13 @@ country_event = { #After the end of the civil war, Midwinter realizes that she c
 			add_core_of = SLW
 		}
 		remove_ideas = eqs_slw_civil_war
+		if = {
+			limit = { has_country_flag = accepted_commie_help }
+			delete_unit_template_and_units = {
+				division_template = "Smoldering Carbon's Unionists"
+				disband = yes
+			}
+		}
 	}
 }		
 
