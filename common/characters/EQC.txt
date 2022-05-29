@@ -1,4 +1,5 @@
 characters={
+	### 1048 Character ###
 	EQC_big_sister={
 		name="Big Sister"
 		portraits={
@@ -78,7 +79,7 @@ characters={
 				small=""
 			}
 			army={
-				large="gfx/leaders/EQS/Nightlight_Charm.tga"
+				large="gfx/leaders/EQC/Nightlight_Charm.tga"
 			}
 		}
 		corps_commander={
@@ -196,7 +197,6 @@ characters={
 			defense_skill=2
 			maneuvering_skill=1
 			coordination_skill=1
-			legacy_id=714
 		}
 	}
 	###MINISTERS###
@@ -267,5 +267,889 @@ characters={
 			}
 			traits = { minitrue_trait }
 		}	
+	}
+	###Vanilla ###
+	### Advisors ###
+	EQC_fascist_pony = {
+		name = "EQC_fascist_pony"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_eqc_fascist_pony"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = EQC_fascist_pony
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				OR = {
+					has_completed_focus = EQC_let_all_have_a_say
+					has_government = fascism
+				}
+				NOT = {
+				    fascism > 0.6
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = EQC_fascist_pony } } 
+				}
+			}
+			do_effect = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+			traits = { fascist_demagogue }
+		}
+	}
+	EQC_harmony_pony = {
+		name = "EQC_harmony_pony"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_eqc_harmony_pony"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = EQC_harmony_pony
+			cost = 150
+			allowed = {
+				original_tag = EQC
+
+			}
+			available = {
+				OR = {
+					has_completed_focus = EQC_strengthen_equestrian_ties
+					has_completed_focus = EQC_support_the_harmonists
+				}
+				NOT = {
+				    democratic > 0.6
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = EQC_harmony_pony } } 
+				}
+			}
+			do_effect = {
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits = { democratic_reformer }
+		}
+	}
+	EQC_commie_pony = {
+		name = "EQC_commie_pony"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_eqc_commie_pony"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = EQC_commie_pony
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				OR = {
+					has_completed_focus = EQC_recognise_stalliongrad
+					has_government = communism
+				}
+				NOT = {
+				    communism > 0.6
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = EQC_commie_pony } } 
+				}
+			}
+			do_effect = {
+				NOT = {
+					has_government = communism
+				}
+			}
+			traits = { communist_revolutionary }
+		}
+	}
+	EQC_neutral_pony = {
+		name = "EQC_neutral_pony"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_eqc_neutral_pony"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = EQC_neutral_pony
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				OR = {
+					has_completed_focus = EQC_let_all_have_a_say
+					has_government = neutrality
+				}
+				NOT = {
+				    neutrality > 0.6
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = EQC_neutral_pony } } 
+				}
+			}
+			do_effect = {
+				NOT = {
+					has_government = neutrality
+				}
+			}
+			traits = { staunch_republican }
+		}
+	}
+	EQC_sunny_flare = {
+		name = "sunny_flare"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_sunny_flare"
+				large = "gfx/leaders/EQC/Sunny_Flare.tga"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = sunny_flare
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = {
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = sunny_flare } } 
+				}
+			}
+			traits = { captain_of_industry }
+		}	
+	}
+	EQC_sour_sweet = {
+		name = "sour_sweet"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_sour_sweet"
+				large = "gfx/leaders/EQC/SourSweet.tga"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = sour_sweet
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = { has_country_leader = { ruling_only = yes character = EQC_sour_sweet } }
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = sour_sweet } }
+				}
+			}
+			traits = { war_industrialist }
+		}	
+	}
+	EQC_sugarcoat = {
+		name = "sugarcoat"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_sugarcoat"
+				large = "gfx/leaders/EQC/Sugarcoat.tga"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = sugarcoat
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = sugarcoat } } 
+				}
+			}
+			traits = { princess_of_terror }
+		}	
+	}
+	EQC_lemon_zest = {
+		name = "lemon_zest"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_lemon_zest"
+				large = "gfx/leaders/EQC/Lemon_Zest.tga"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = lemon_zest
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = lemon_zest } } 
+				}
+			}
+			traits = { known_pony }
+		}	
+	}
+	EQC_wallflower_blush = {
+		name = "wallflower_blush"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_wallflower_blush"
+				large = "gfx/leaders/leader_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = wallflower_blush
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = {
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = wallflower_blush } } 
+				}
+			}
+			traits = { backroom_backstabber }
+		}	
+	}
+	EQC_juniper_montage = {
+		name = "juniper_montage"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_juniper_montage"
+				large = "gfx/leaders/leader_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = juniper_montage
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = juniper_montage } } 
+				}
+			}
+			traits = { silent_workhorse }
+		}	
+	}
+	EQC_amethyst_star = {
+		name = "amethyst_star"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_amethyst_star"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = amethyst_star
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = amethyst_star } } 
+				}
+			}
+			traits = { quartermaster_general }
+		}	
+	}
+	EQC_upper_crust = {
+		name = "upper_crust"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_upper_crust"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = upper_crust
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				has_government = democratic
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = upper_crust } } 
+				}
+			}
+			traits = { ideological_crusader }
+		}	
+	}
+	EQC_neon_lights = {
+		name = "neon_lights"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_neon_lights"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = neon_lights
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = neon_lights } } 
+				}
+			}
+			traits = { compassionate_gentleman }
+		}	
+	}
+	EQC_royal_pin = {
+		name = "royal_pin"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_royal_pin"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = royal_pin
+			cost = 150
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = {
+					limit = { OR = { has_country_flag = has_purged has_country_flag = is_maresoc } }
+					NOT = {
+						has_country_flag = has_purged
+					}
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = royal_pin } } 
+				}
+			}
+			traits = { smooth_talking_charmer }
+		}	
+	}
+	### EQC Puppet Leaders ###
+	EQC_TAL_antonio_saleviso = {
+		name = "EQC_TAL_antonio_saleviso"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/WNG/Portrait_Wingbardy_Generic_land_1.dds"
+			}
+		}
+	}
+	EQC_WNG_leonora_piumagrigia = {
+		name = "EQC_WNG_leonora_piumagrigia"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/Asia/portrait_griffon_generic_operative_female_4.tga"
+			}
+		}
+		gender = female
+	}
+	EQC_FAL_sofronia_carda = {
+		name = "EQC_FAL_sofronia_carda"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/Asia/portrait_griffon_generic_operative_female_3.tga"
+			}
+		}
+		gender = female
+	}
+	EQC_SIC_enrique_arias = {
+		name = "EQC_SIC_enrique_arias"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/Asia/portrait_griffon_generic_operative_male_9.tga"
+			}
+		}
+	}
+	EQC_FRN_vittorio_felice = {
+		name = "EQC_FRN_vittorio_felice"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/WNG/Portrait_Wingbardy_Generic_land_2.dds"
+			}
+		}
+	}
+	EQC_ARA_fago_faggolini = {
+		name = "EQC_ARA_fago_faggolini"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/WNG/Portrait_Wingbardy_Generic_land_3.dds"
+			}
+		}
+	}
+	EQC_CYA_mideia_vlaha = {
+		name = "EQC_CYA_mideia_vlaha"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/Asia/portrait_griffon_generic_land_11.dds"
+			}
+		}
+		gender = female
+	}
+	EQC_MIT_mommy_cow = {
+		name = "EQC_MIT_mommy_cow"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/MIT/portrait_minotaur_generic_operative_female_1.tga"
+			}
+		}
+		gender = female
+	}
+	### Leaders ###
+	EQC_gladmane={
+		name="EQC_gladmane"
+		portraits={
+			civilian={
+				large="gfx/leaders/EQC/Gladmane.tga"
+			}
+		}
+		country_leader={
+			desc="TRUMP_desc"
+			ideology=oligarchism
+			traits={ dealbroker }
+			expire="1965.1.1.1"
+			id=701
+		}
+	}
+	EQC_duke_haygle={
+		name="EQC_duke_haygle"
+		portraits={
+			civilian={
+				large="gfx/leaders/EQC/Erebus.tga"
+			}
+		}
+		country_leader={
+			desc="probably_mosley_desc"
+			ideology=fascism_ideology
+			traits={ demagogue }
+			expire="1965.1.1.1"
+			id=702
+		}
+	}
+	EQC_jet_set={
+		name="EQC_jet_set"
+		portraits={
+			civilian={
+				large="gfx/leaders/EQC/JetSet.tga"
+			}
+		}
+		country_leader={
+			desc="snooty_noble_desc"
+			ideology=liberalism
+			expire="1965.1.1.1"
+			id=700
+		}
+	}
+	EQC_lufty_star={
+		name="EQC_lufty_star"
+		portraits={
+			civilian={
+				large="gfx/leaders/EQC/Lefty.tga"
+			}
+		}
+		country_leader={
+			desc="generic_gommie_pony_desc"
+			ideology=marxism
+			traits={ populist }
+			expire="1965.1.1.1"
+			id=703
+		}
+		gender = female
+	}
+	EQC_blueberry_frost = {
+		name = "EQC_blueberry_frost"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQC/BlueberryFrost.tga"
+			}
+		}
+		gender = female
+	}
+	EQC_picket_fence = {
+		name = "EQC_picket_fence"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQC/Picket_Fence.tga"
+			}
+		}
+	}
+	EQC_kingfisher = {
+		name = "EQC_kingfisher"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQC/Kingfisher.tga"
+			}
+		}
+	}
+	EQC_evening_dew = {
+		name = "EQC_evening_dew"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/EQC/Dew.tga"
+			}
+		}
+	}
+	### Starting Generals ###
+	EQC_sunny_shield={
+		name="EQC_sunny_shield"
+		portraits={
+			army={
+				small="GFX_idea_EQC_sunny_shield"
+			}
+			army={
+				large="gfx/leaders/EQC/SunnyShield.tga"
+			}
+		}
+		corps_commander={
+			traits={ infantry_officer pony_race_trait }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=710
+		}
+	}
+	EQC_candy_garden={
+		name="EQC_candy_garden"
+		portraits={
+			army={
+				small="GFX_idea_EQC_candy_garden"
+			}
+			army={
+				large="gfx/leaders/EQC/LordSpore.tga"
+			}
+		}
+		corps_commander={
+			traits={ newmareland_digger pony_race_trait }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=3
+			logistics_skill=2
+			legacy_id=711
+		}
+	}
+	EQC_anja_snow={
+		name="EQC_anja_snow"
+		portraits={
+			army={
+				small="GFX_idea_EQC_anja_is_cringe"
+			}
+			army={
+				large="gfx/leaders/EQC/anja_snow.tga"
+			}
+		}
+		corps_commander={
+			traits={ night_guard inflexible_strategist thestral_race_trait paratrooper }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=718
+		}
+		gender = female
+	}
+	EQC_sparky_starfall={
+		name="EQC_sparky_starfall"
+		portraits={
+			army={
+				small="GFX_idea_EQC_nammers"
+			}
+			army={
+				large="gfx/leaders/EQC/Sparky.tga"
+			}
+		}
+		corps_commander={
+			traits={ promising_general pony_race_trait trickster }
+			skill=2
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=4
+			legacy_id=1595
+		}
+	}
+	EQC_grand_wingsword={
+		name="EQC_grand_wingsword"
+		portraits={
+			army={
+				small="GFX_idea_EQC_grand_wingswod"
+			}
+			army={
+				large="gfx/leaders/EQC/grand_wingsword.tga"
+			}
+		}
+		corps_commander={
+			traits={ thestral_race_trait cavalry_leader ranger }
+			skill=2
+			attack_skill=2
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=9279
+		}
+	}
+	EQC_chifundo={
+		name="EQC_chifundo"
+		portraits={
+			army={
+				small="GFX_idea_EQC_chifundo"
+			}
+			army={
+				large="gfx/leaders/EQC/Chifundo.tga"
+			}
+		}
+		corps_commander={
+			traits={ promising_general zebra_race_trait }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=719
+		}
+	}
+	EQC_moonlight_poppy={
+		name="EQC_moonlight_poppy"
+		portraits={
+			army={
+				small="GFX_idea_EQC_moonlight_poppy"
+			}
+			army={
+				large="gfx/leaders/EQC/Midnight_Poppy.tga"
+			}
+		}
+		field_marshal={
+			traits={ midnight_poppy pony_race_trait }
+			skill=3
+			attack_skill=4
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=712
+		}
+		gender = female
+	}
+	EQC_rain_rider={
+		name="EQC_rain_rider"
+		portraits={
+			army={
+				small="GFX_portrait_pony_generic_navy_1_small"
+			}
+			army={
+				large="GFX_portrait_pony_generic_navy_1"
+			}
+		}
+		navy_leader={
+			traits={ aviation_enthusiast naval_lineage pony_race_trait }
+			skill=3
+			attack_skill=2
+			defense_skill=2
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=713
+		}
+	}
+	EQC_grey_shore={
+		name="EQC_grey_shore"
+		portraits={
+			army={
+				small="GFX_idea_EQC_grey_shore"
+			}
+			army={
+				large="gfx/leaders/EQC/Schro_admiral.tga"
+			}
+		}
+		navy_leader={
+			traits={ navy_media_personality pony_race_trait ironside }
+			skill=2
+			attack_skill=2
+			defense_skill=3
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	EQC_ryan_celer={
+		name="EQC_ryan_celer"
+		portraits={
+			army={
+				small="GFX_idea_EQC_ryanboi"
+			}
+			army={
+				large="gfx/leaders/EQC/Ryan_Admiral.tga"
+			}
+		}
+		navy_leader={
+			traits={ bold pony_race_trait big_guns_expert }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=714
+		}
+	}
+	### Air Chiefs ###
+	EQC_indigo_zap = {
+		name = "indigo_zap"
+		portraits = {
+			army= {
+				small = "GFX_idea_indigo_zap"
+				large = "gfx/leaders/EQC/Indigo_Zap.tga"
+			}
+		}
+		advisor = {
+			slot = air_chief
+			idea_token = indigo_zap
+			cost = 100
+			allowed = {
+				original_tag = EQC
+			}
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = indigo_zap } } 
+				}
+			}
+			traits = { air_air_combat_training_2 }
+		}
+	}
+	### High Command ###
+	EQC_suri_polomare = {
+		name = "suri_polomare"
+		portraits = {
+			army= {
+				small = "GFX_idea_suri_polomare"
+				large = "gfx/leaders/leader_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = suri_polomare
+			cost = 50
+			ledger = army
+			allowed = {
+				original_tag = EQC
+			}
+			visible = { MAN = { exists = no } }
+			available = {
+				NOT = {
+					has_completed_focus = EQC_SOL_destroy_shadowbolts
+				}
+				if = { 
+					limit = { has_civil_war = yes } 
+					NOT = { any_enemy_country = { has_idea = suri_polomare } } 
+				}
+			}
+			traits = { uniform_designer }
+		}
+		gender = female
 	}
 }

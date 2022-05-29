@@ -9,7 +9,7 @@ country_event = {
 
 	trigger = {
 		tag = BAL
-		date = 1048.1.25
+		date > 1048.1.24
 	}
 	option = {
 		name = southeast.1.a
@@ -114,7 +114,6 @@ country_event = { ###Debug event to spawn the Mingsplosion
 	id = southeast.2
 	title = southeast.2.t
 	desc = southeast.2.d
-	fire_only_once = yes
 	is_triggered_only = yes
 	trigger = {
 		tag = BAL
@@ -235,6 +234,13 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			remove_core_of = BAL
 			add_claim_by = BAL
 		}
+		EQS = {
+			country_event = {
+				id = solar.122
+				days = 90
+				random_days = 30
+			}
+		}
 	}
 }
 
@@ -275,17 +281,18 @@ country_event = { #The country leader receives a communique from Equestria stati
 	option = { #We must work together, but as equals
 		name = southeast.501.a
 		ai_chance = {
-			base = 10
-			modifier = { has_government = neutrality factor = 5 }
-			modifier = { has_government = democratic factor = 7 }
+			base = 30
+			modifier = { has_opinion_modifier = EQS_southeast_trade factor = 1.5 }
+			modifier = { has_opinion_modifier = EQS_southeast_exercises factor = 1.25 }
+			modifier = { has_opinion_modifier = EQS_southeast_arrests factor = 1.25 }
 			modifier = { 
 				OR = {
 					has_government = fascism
 					has_government = communism
 				}
-				factor = 2.5
+				factor = 0.5
 			}
-			modifier = { NOT = { has_global_flag = balsplosion } factor = 2 }
+			modifier = { NOT = { has_global_flag = balsplosion } factor = 3 }
 		}
 		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		###Propose alliance back
@@ -297,11 +304,13 @@ country_event = { #The country leader receives a communique from Equestria stati
 		name = southeast.501.b
 		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		ai_chance = {
-			base = 10
-			modifier = { has_government = neutrality factor = 2.5 }
-			modifier = { has_government = democratic factor = 3 }
-			modifier = { has_government = fascism factor = 0.5 }
-			modifier = { has_government = communism factor = 1.5 }
+			base = 25
+			modifier = { has_opinion_modifier = EQS_southeast_trade factor = 1.5 }
+			modifier = { has_opinion_modifier = EQS_southeast_exercises factor = 1.25 }
+			modifier = { has_opinion_modifier = EQS_southeast_arrests factor = 2 }
+			modifier = { has_government = democratic factor = 1.25 }
+			modifier = { has_government = fascism factor = 0.25 }
+			modifier = { has_government = communism factor = 0.4 }
 			modifier = { NOT = { has_global_flag = balsplosion } factor = 0 }
 		}
 		###Submit to becoming a vassal
@@ -312,11 +321,13 @@ country_event = { #The country leader receives a communique from Equestria stati
 	option = { #Equestria will have to take our land from our cold, dead hooves!
 		name = southeast.501.c
 		ai_chance = {
-			base = 10
-			modifier = { has_government = neutrality factor = 2.5 }
+			base = 50
+			modifier = { has_opinion_modifier = EQS_southeast_trade factor = 0.5 }
+			modifier = { has_opinion_modifier = EQS_southeast_exercises factor = 0.5 }
+			modifier = { has_opinion_modifier = EQS_southeast_arrests factor = 0.5 }
 			modifier = { has_government = democratic factor = 0 }
-			modifier = { has_government = fascism factor = 7 }
-			modifier = { has_government = communism factor = 6 }
+			modifier = { has_government = fascism factor = 2.5 }
+			modifier = { has_government = communism factor = 1.75 }
 		}
 		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		###Refuse to submit
@@ -370,7 +381,7 @@ country_event = { #Celestia flies some bombers over the different cities of the 
 					exists = yes
 				}
 				add_timed_idea = {
-					idea = all_the_harmony_BAL
+					idea = EQS_all_the_harmony_BAL
 					days = 180
 				}
 			}
@@ -394,8 +405,98 @@ country_event = { #Celestia takes to the radio waves and breaks into the station
 				limit = {
 					exists = yes
 				}
-				add_ideas = exposed_lies_BAL
+				add_ideas = EQS_exposed_lies_BAL
 			}
+		}
+	}
+}
+
+country_event = { #A trade offer comes from Celestia after returning to Equestria after trade talks with different economic leaders of the southeast, and the leader of the nation has the opportunity to accept or decline
+	id = southeast.505
+	title = southeast.505.t
+	desc = southeast.505.d
+	
+	is_triggered_only = yes
+	
+	option = { #More money is always good!
+		ai_chance = { factor = 55 }
+		name = southeast.505.a
+		set_country_flag = EQS_accepted_trade_deal
+		add_ideas = EQS_let_the_bits_flow
+		EQS = {
+			country_event = celestia.570
+		}
+	}
+	option = { #We don't need her bits
+		ai_chance = { factor = 45 }
+		name = southeast.505.b
+		EQS = {
+			country_event = celestia.571
+		}
+	}
+}
+
+country_event = { #A communique from Equestria arrives that comes from a messenger from Equestria, proposing a military mission, and there is an underlying tone that it is not the wisest idea to refuse
+	id = southeast.506
+	title = southeast.506.t
+	desc = southeast.506.d
+	
+	is_triggered_only = yes
+	
+	option = { #Our generals are already enough; we don't need to divulge our tactics
+		ai_chance = { factor = 40 }
+		name = southeast.506.a
+		EQS = {
+			country_event = celestia.573
+		}
+	}
+	option = { #I was afraid we'd have to rely on militia forever!
+		ai_chance = { factor = 60 }
+		name = southeast.506.b
+		add_ideas = EQS_advanced_jungle_initiatives
+		set_country_flag = EQS_accepted_military_help
+		EQS = {
+			country_event = celestia.572
+		}
+	}
+}
+
+country_event = { #Some SMILE agents meet with the leader of the nation and show how the most extreme elements of the country are preparing to cause problems and that the evidence was not doctored and they can help take them down without causing issue
+	id = southeast.507
+	title = southeast.507.t
+	desc = southeast.507.d
+	
+	is_triggered_only = yes
+	
+	option = { #This needs to be stopped immediately!
+		ai_chance = { factor = 35 }
+		name = southeast.507.a
+		set_country_flag = EQS_accepted_anti_extremisim
+		IF = {
+			limit = {
+				has_government = fascism
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = -0.1
+			}
+		}
+		ELSE = {
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.1
+			}
+		}
+		add_manpower = -1250
+		EQS = {
+			country_event = celestia.574
+		}
+	}
+	option = { #These are lies! Deceptions!
+		ai_chance = { factor = 65 }
+		name = southeast.507.b
+		EQS = {
+			country_event = celestia.575
 		}
 	}
 }
@@ -419,16 +520,16 @@ country_event = { #The current leader of Baltimare is informed of an incursion b
 			add_state_core = 27
 		}
 		MTS = {
-			EQS_Scorched_Earth = {
-				add_country_leader_role = {
-					promote_leader = yes
-					country_leader = {
-						expire = "1965.1.1"
-						ideology = solarism
-						desc = POLITICS_1048_SCORCHED_EARTH_DESC
-						traits = {
-							
-						}
+			add_country_leader_role = {
+				character = event_target:EQS_Scorched_Earth_target
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = solarism
+					desc = POLITICS_SCORCHED_EARTH_1048_DESC
+					traits = {
+						
 					}
 				}
 			}
