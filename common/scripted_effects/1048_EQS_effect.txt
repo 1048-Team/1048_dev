@@ -260,3 +260,59 @@ SOL_end_of_civil_war_CEL = {
 	clr_country_flag = starlight_and_trixie_corrupted
 	mark_focus_tree_layout_dirty = yes
 }
+
+EQS_destroy_solar_temple = {
+	IF = {
+		limit = {
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 20 } }
+			has_country_flag = EQS_finishing_touches
+		}
+		four_random_industrial_complex = yes
+		add_resource = { type = steel amount = 15 state = 3 }
+		add_resource = { type = crystals amount = 6 state = 3 }
+		add_resource = { type = steel amount = 6 state = 12 }
+	}
+	IF = {
+		limit = {
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 20 } }
+			NOT = { has_country_flag = EQS_finishing_touches }
+		}
+		four_random_industrial_complex = yes
+		add_resource = { type = steel amount = 12 state = 3 }
+		add_resource = { type = crystals amount = 4 state = 3 }
+	}
+	IF = {
+		limit = {
+			NOT = { check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals } }
+			check_variable = { var = EQS_temple_construction value = 15 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 15 } }
+		}
+		three_random_industrial_complex = yes
+		add_resource = { type = steel amount = 12 state = 3 }
+	}
+	IF = {
+		limit = {
+			NOT = { check_variable = { var = EQS_temple_construction value = 15 compare = greater_than_or_equals } }
+			check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 10 } }
+		}
+		two_random_industrial_complex = yes
+		add_resource = { type = steel amount = 9 state = 3 }
+	}
+	IF = {
+		limit = {
+			NOT = { check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals } }
+			check_variable = { var = EQS_temple_construction value = 1 compare = greater_than_or_equals }
+		}
+		one_random_industrial_complex = yes
+		add_resource = { type = steel amount = 6 state = 3 }
+	}
+	IF = {
+		limit = {
+			check_variable = { EQS_temple_construction = 0 }
+		}
+		add_resource = { type = steel amount = 4 state = 3 }
+	}
+}

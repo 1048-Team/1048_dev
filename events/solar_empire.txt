@@ -4495,7 +4495,7 @@ country_event = { #They find the last few bits of resistance from the Whinnyapol
 	is_triggered_only = yes
 	
 	option = { #And that settles the last of the theological disagreemens
-		name = solar.331
+		name = solar.331.a
 	}
 }
 
@@ -4519,31 +4519,37 @@ country_event = { #With the rump states integrated, Aurora looks over her newly 
 	
 	is_triggered_only = yes
 	
-	option = { #It shall be a glorious monument! Nothing shall stop us!
+	option = { #It shall be glorious, but the laypony must not be allowed in
 		name = solar.333.a
-		swap_ideas = {
-			remove_idea = EQS_aftershocks_of_the_crisis
-			add_idea = EQS_solars_sanctum_2
-		}
-		set_variable = { equestria_conquest = 1 }
+		ai_chance = { factor = 85 }
+		add_ideas = EQS_solars_sanctum
+		set_country_flag = EQS_building_temple
+		set_country_flag = EQS_mystic_temple
+	}
+	option = { #We must allow all to worship the Empress in her new home
+		name = solar.333.b
+		ai_chance = { factor = 15 }
+		add_ideas = EQS_solars_sanctum
+		set_country_flag = EQS_building_temple
+		set_country_flag = EQS_laypony_temple
 	}
 }
 
-country_event = { #Aurora goes over the new plans for a temple to Daybreaker, that she and Nova specifically pioneered, and she learns of delays that are ocurring, and she promises to allocate more funds, against the wishes of her other advisors
-	id = solar.334
-	title = solar.334.t
-	desc = solar.334.d
-	
-	is_triggered_only = yes
-	
-	option = { #The material cost will be outweighed by the spiritual!
-		name = solar.334.a
-		swap_ideas = {
-			remove_idea = EQS_solars_sanctum_1
-			add_idea = EQS_solars_sanctum_2
-		}
-	}
-}
+#country_event = { #Aurora goes over the new plans for a temple to Daybreaker, that she and Nova specifically pioneered, and she learns of delays that are ocurring, and she promises to allocate more funds, against the wishes of her other advisors
+#	id = solar.334
+#	title = solar.334.t
+#	desc = solar.334.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #The material cost will be outweighed by the spiritual!
+#		name = solar.334.a
+#		swap_ideas = {
+#			remove_idea = EQS_solars_sanctum
+#			add_idea = EQS_solars_sanctum_2
+#		}
+#	}
+#}
 
 country_event = { #Aurora wanders through the temple that she created in the heart of Sanctum Solar, and visits the new holy place for Daybreaker's rest, and meets with Sunset to discuss the new abode, and the two of them agree it is better for the Empress to be seen as a bigger deity than she ever was
 	id = solar.335
@@ -4554,18 +4560,17 @@ country_event = { #Aurora wanders through the temple that she created in the hea
 	
 	option = { #It is better if they never knew her moments of weakness
 		name = solar.335.a
+		remove_ideas = EQS_solars_sanctum
 		IF = {
 			limit = {
-				has_idea = EQS_temple_for_the_masses_3
+				has_country_flag = EQS_laypony_temple
 			}
-			remove_ideas = EQS_temple_for_the_masses_3
 			add_ideas = EQS_solar_vulgate
 		}
 		IF = {
 			limit = {
-				has_idea = EQS_a_holy_temple_3
+				has_country_flag = EQS_mystic_temple
 			}
-			remove_ideas = EQS_a_holy_temple_3
 			add_ideas = EQS_holy_of_holies
 		}
 	}
@@ -5075,6 +5080,173 @@ country_event = { #Determines which order the map is changed when doing the dual
 		}
 		ELSE = {
 			set_variable = { equestria_conquest = 4 }
+		}
+	}
+}
+
+country_event = { #One of the storehouses for goods in Cloudsdale is raided by the Inquistionis, who arrest anypony who resists for heresy after they claim that the Empire is owed what is stored inside, for the decades of no taxes from that region
+	id = solar.358
+	title = solar.358.t
+	desc = solar.358.d
+	
+	is_triggered_only = yes
+	
+	option = { #Blood money is still money
+		name = solar.358.a
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		set_variable = { equestria_conquest = 1 }
+		remove_ideas = EQS_aftershocks_of_the_crisis
+	}
+}
+
+country_event = { #Nebula is brought forward to Aurora, who is sitting almost smugly on her own throne, and she brags a bit to Nebula before Nebula demands for Aurora to just get it over with, which leads to Aurora making a decision
+	id = solar.359
+	title = solar.359.t
+	desc = solar.359.d
+	
+	is_triggered_only = yes
+	
+	option = { #You have defied the Empress for too long!
+		name = solar.359.a
+		ai_chance = { factor = 75 }
+		country_event = {
+			id = solar.360
+			days = 5
+		}
+	}
+	option = { #No, I have better plans for you
+		name = solar.359.b
+		ai_chance = { factor = 25 }
+		country_event = {
+			id = solar.361
+			days = 14
+			random_days = 5
+		}
+	}
+}
+
+country_event = { #Nebula is taken before the heretic pyre, with Aurora watching from where Daybreaker would normally be, and Nebula gives one more defiant statement about Daybreaker being no god before she is thrust onto the flame, which causes her to panic because of her pyrophobia
+	id = solar.360
+	title = solar.360.t
+	desc = solar.360.d
+	
+	is_triggered_only = yes
+	
+	option = { #An ironic end
+		name = solar.360.a
+		add_stability = 0.02
+		add_political_power = 30
+		hidden_effect = {
+			BLS = { retire_character = event_target:BLS_Nebula_Flare_target }
+		}
+	}
+}
+
+country_event = { #A couple of weeks later Aurora heads to the dungeons where Nebula is being kept, and it is clear she's already been beaten and tortured, and Aurora says that she enjoys seeing her in pain for everything that she did when she fled, and Nebula is defiant, until Aurora brings out a flame to scorch her with
+	id = solar.361
+	title = solar.361.t
+	desc = solar.361.d
+	
+	is_triggered_only = yes
+	
+	option = { #Let us see how faithful you truly are
+		name = solar.361.a
+		hidden_effect = {
+			country_event = {
+				id = solar.362
+				days = 30
+				random_days = 30
+			}
+		}
+	}
+}
+
+country_event = { #Aurora goes into the dungeon one more time to break Nebula further, who by this point is severely wounded, and Aurora offers a way out: to return to Daybreaker, who can heal her wounds and nurse her back to health, and Nebula, after a bit more torture finally agrees
+	id = solar.362
+	title = solar.362.t
+	desc = solar.362
+	
+	is_triggered_only = yes
+	
+	option = { #I knew the Holy Flame would convince you
+		name = solar.362.a
+		custom_effect_tooltip = BLS_nebula_general_tt
+		hidden_effect = {
+			event_target:BLS_Nebula_Flare_target = { set_nationality = ROOT }
+			event_target:BLS_Nebula_Flare_target = { 
+				remove_trait = { trait = former_cultist } 
+				remove_trait = { trait = mechanicus_deus }
+				add_trait = { trait = solaris_inquisitionis }
+			}
 		}
 	}
 }
