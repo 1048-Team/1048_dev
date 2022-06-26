@@ -60,7 +60,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = EQS_unchaning_bureaucracy
+	id = EQS_unchaining_bureaucracy
 	x = -1
 	y = 1
 	relative_position_id = EQS_free_the_palace
@@ -106,7 +106,7 @@ shared_focus = {
 	bypass = { NOT = { has_war_with = SLW } }
 	
 	cost = 3
-	prerequisite = { focus = EQS_unchaning_bureaucracy }
+	prerequisite = { focus = EQS_unchaining_bureaucracy }
 	prerequisite = { focus = EQS_pardon_the_repentant }
 	
 	completion_reward = {
@@ -560,7 +560,7 @@ shared_focus = {
 	completion_reward = {
 		add_country_leader_trait = pragmatic_princess
 		remove_ideas = EQS_shattered_society_harsh_3
-		add_ideas = EQS_a_pragmatic_society
+		add_ideas = EQS_a_pragmatic_society_idea
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -959,7 +959,7 @@ shared_focus = {
 	completion_reward = {
 		add_country_leader_trait = loving_princess
 		remove_ideas = EQS_shattered_society_light_3
-		add_ideas = EQS_a_tolerant_society
+		add_ideas = EQS_a_tolerant_society_idea
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -1821,6 +1821,22 @@ shared_focus = {
 	y = 1
 	relative_position_id = EQS_propose_final_solution
 	
+	available = {
+		has_war = no
+		custom_trigger_tooltip = {
+			tooltip = EQS_southeast_pacified_tt
+			all_of_scopes = {
+				array = global.southeast_countries
+				
+				OR = {
+					NOT = { country_exists = THIS }
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+				}
+			}
+		}
+	}
+	
 	cost = 4
 	prerequisite = { focus = EQS_propose_final_solution }
 	
@@ -1839,6 +1855,18 @@ shared_focus = {
 	
 	available = {
 		has_war = no
+		custom_trigger_tooltip = {
+			tooltip = EQS_southeast_pacified_tt
+			all_of_scopes = {
+				array = global.southeast_countries
+				
+				OR = {
+					NOT = { country_exists = THIS }
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+				}
+			}
+		}
 	}
 	
 	cost = 4
@@ -1866,6 +1894,18 @@ shared_focus = {
 	
 	available = {
 		has_war = no
+		custom_trigger_tooltip = {
+			tooltip = EQS_southeast_pacified_tt
+			all_of_scopes = {
+				array = global.southeast_countries
+				
+				OR = {
+					NOT = { country_exists = THIS }
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+				}
+			}
+		}
 	}
 	
 	cost = 4
@@ -2222,35 +2262,35 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_steal_stalliongradian_tank_designs
-	x = 1
-	y = 1
-	relative_position_id = EQS_recognize_old_demands
-	
-	bypass = { has_global_flag = stalliongrad_agrees }
-	
-	cost = 3
-	prerequisite = { focus = EQS_recognize_old_demands }
-	
-	completion_reward = {
-		add_equipment_to_stockpile = {
-			type = medium_tank_chassis
-			amount = 250
-			producer = STG
-		}
-		add_tech_bonus = {
-			bonus = 0.5
-			uses = 1
-			category = cat_medium_armor
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
+#shared_focus = {
+#	id = EQS_steal_stalliongradian_tank_designs
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_recognize_old_demands
+#	
+#	bypass = { has_global_flag = stalliongrad_agrees }
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_recognize_old_demands }
+#	
+#	completion_reward = {
+#		add_equipment_to_stockpile = {
+#			type = medium_tank_chassis
+#			amount = 250
+#			producer = STG
+#		}
+#		add_tech_bonus = {
+#			bonus = 0.5
+#			uses = 1
+#			category = cat_medium_armor
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
 shared_focus = {
 	id = EQS_stubborness_got_nopony_anywhere
-	x = -1
+	x = 1
 	y = 1
 	relative_position_id = EQS_recognize_old_demands
 	
@@ -2287,16 +2327,16 @@ shared_focus = {
 
 shared_focus = { ###Have dynamic loc of either pen partitions with the crystal empire or fortify the crystal border
 	id = EQS_pen_partitions_with_the_crystal_empire
-	x = 0
+	x = -1
 	y = 1
-	relative_position_id = EQS_stubborness_got_nopony_anywhere
+	relative_position_id = EQS_recognize_old_demands
 	
 	bypass = { has_global_flag = stalliongrad_agrees }
 	
 	#mutually_exclusive = { focus = EQS_fortify_the_crystal_border }
 	
 	cost = 2
-	prerequisite = { focus = EQS_stubborness_got_nopony_anywhere }
+	prerequisite = { focus = EQS_recognize_old_demands }
 	
 	completion_reward = {
 		IF = {
@@ -2521,71 +2561,77 @@ shared_focus = { ###Have dynamic loc of either pen partitions with the crystal e
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_infiltrate_the_frontier
-	x = 0
-	y = 1
-	relative_position_id = EQS_steal_stalliongradian_tank_designs
-	
-	bypass = { has_global_flag = stalliongrad_agrees }
-	
-	cost = 3
-	prerequisite = { focus = EQS_steal_stalliongradian_tank_designs }
-	
-	completion_reward = {
-		load_oob = "SOL_stalliongrad_insurgents"
-	}
-	ai_will_do = { factor = 15 }
-}
+#shared_focus = {
+#	id = EQS_infiltrate_the_frontier
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_steal_stalliongradian_tank_designs
+#	
+#	bypass = { has_global_flag = stalliongrad_agrees }
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_steal_stalliongradian_tank_designs }
+#	
+#	completion_reward = {
+#		load_oob = "SOL_stalliongrad_insurgents"
+#	}
+#	ai_will_do = { factor = 15 }
+#}
+
+#shared_focus = {
+#	id = EQS_bring_harmony_to_severnaya
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_pen_partitions_with_the_crystal_empire
+#	
+#	bypass = { has_global_flag = stalliongrad_agrees }
+#	
+#	cost = 5
+#	prerequisite = { 
+#		focus = EQS_pen_partitions_with_the_crystal_empire
+#	}
+#	prerequisite = { focus = EQS_infiltrate_the_frontier }
+#	
+#	completion_reward = {
+#		every_country = {
+#			limit = {
+#				is_in_array = {
+#					array = global.shield_of_steel
+#					value = THIS
+#				}
+#			}
+#		
+#			EQS = {
+#				create_wargoal = {
+#					target = PREV
+#					type = annex_everything
+#				}
+#			}
+#		}
+#		hidden_effect = {
+#			add_named_threat = {
+#				threat = 5
+#				name = EQS_stalliongrad_war
+#			}
+#		}
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 shared_focus = {
-	id = EQS_bring_harmony_to_severnaya
+	id = EQS_a_new_industrial_hub
 	x = 1
 	y = 1
 	relative_position_id = EQS_pen_partitions_with_the_crystal_empire
 	
-	bypass = { has_global_flag = stalliongrad_agrees }
+	available = {
+		has_war = no
+		NOT = { country_exists = STG }
+	}
 	
 	cost = 5
-	prerequisite = { 
-		focus = EQS_pen_partitions_with_the_crystal_empire
-	}
-	prerequisite = { focus = EQS_infiltrate_the_frontier }
-	
-	completion_reward = {
-		every_country = {
-			limit = {
-				is_in_array = {
-					array = global.shield_of_steel
-					value = THIS
-				}
-			}
-		
-			EQS = {
-				create_wargoal = {
-					target = PREV
-					type = annex_everything
-				}
-			}
-		}
-		hidden_effect = {
-			add_named_threat = {
-				threat = 5
-				name = EQS_stalliongrad_war
-			}
-		}
-	}
-	ai_will_do = { factor = 30 }
-}
-
-shared_focus = {
-	id = EQS_a_new_industrial_hub
-	x = 0
-	y = 1
-	relative_position_id = EQS_bring_harmony_to_severnaya
-	
-	cost = 5
-	prerequisite = { focus = EQS_bring_harmony_to_severnaya }
+	prerequisite = { focus = EQS_stubborness_got_nopony_anywhere }
+	prerequisite = { focus = EQS_pen_partitions_with_the_crystal_empire }
 	
 	completion_reward = {
 		every_state = {
@@ -2851,89 +2897,95 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_study_prisoners_of_war
-	x = 0
-	y = 1
-	relative_position_id = EQS_meet_with_the_general_staff
-	
-	bypass = { has_global_flag = changelings_agreed }
-	
-	cost = 4
-	prerequisite = { focus = EQS_meet_with_the_general_staff }
-	
-	completion_reward = {
-		country_event = celestia.45
-	}
-	ai_will_do = { factor = 15 }
-}
+#shared_focus = {
+#	id = EQS_study_prisoners_of_war
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_meet_with_the_general_staff
+#	
+#	bypass = { has_global_flag = changelings_agreed }
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_meet_with_the_general_staff }
+#	
+#	completion_reward = {
+#		country_event = celestia.45
+#	}
+#	ai_will_do = { factor = 15 }
+#}
 
-shared_focus = {
-	id = EQS_ramp_up_recruitment
-	x = 0
-	y = 1
-	relative_position_id = EQS_pair_down_the_borders
-	
-	bypass = { has_global_flag = changelings_agreed }
-	
-	cost = 3
-	prerequisite = { focus = EQS_pair_down_the_borders }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_for_a_free_equestria
-			days = 365
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
+#shared_focus = {
+#	id = EQS_ramp_up_recruitment
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_pair_down_the_borders
+#	
+#	bypass = { has_global_flag = changelings_agreed }
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_pair_down_the_borders }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_for_a_free_equestria
+#			days = 365
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
 
-shared_focus = {
-	id = EQS_equestria_will_not_back_down
-	x = 1
-	y = 1
-	relative_position_id = EQS_study_prisoners_of_war
-	
-	bypass = { has_global_flag = changelings_agreed }
-	
-	cost = 5
-	prerequisite = { focus = EQS_ramp_up_recruitment }
-	prerequisite = { focus = EQS_study_prisoners_of_war }
-	
-	completion_reward = {
-		every_country = {
-			limit = {
-				is_in_array = {
-					array = global.changeling_hegemony
-					value = THIS
-				}
-			}
-		
-			EQS = {
-				create_wargoal = {
-					target = PREV
-					type = annex_everything
-				}
-			}
-		}
-		hidden_effect = {
-			add_named_threat = {
-				threat = 5
-				name = EQS_f_for_changelings
-			}
-		}
-	}
-	ai_will_do = { factor = 50 }
-}
+#shared_focus = {
+#	id = EQS_equestria_will_not_back_down
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_study_prisoners_of_war
+#	
+#	bypass = { has_global_flag = changelings_agreed }
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_ramp_up_recruitment }
+#	prerequisite = { focus = EQS_study_prisoners_of_war }
+#	
+#	completion_reward = {
+#		every_country = {
+#			limit = {
+#				is_in_array = {
+#					array = global.changeling_hegemony
+#					value = THIS
+#				}
+#			}
+#		
+#			EQS = {
+#				create_wargoal = {
+#					target = PREV
+#					type = annex_everything
+#				}
+#			}
+#		}
+#		hidden_effect = {
+#			add_named_threat = {
+#				threat = 5
+#				name = EQS_f_for_changelings
+#			}
+#		}
+#	}
+#	ai_will_do = { factor = 50 }
+#}
 
 shared_focus = {
 	id = EQS_a_final_end_to_the_great_war
-	x = 0
+	x = 1
 	y = 1
-	relative_position_id = EQS_equestria_will_not_back_down
+	relative_position_id = EQS_meet_with_the_general_staff
+	
+	available = {
+		NOT = { country_exists = CHN }
+		has_war = no
+	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_equestria_will_not_back_down }
+	prerequisite = { focus = EQS_pair_down_the_borders }
+	prerequisite = { focus = EQS_meet_with_the_general_staff }
 	
 	completion_reward = {
 		every_state = {
@@ -3167,24 +3219,41 @@ shared_focus = {
 }
 
 ###Military Trees###
-###Naval Tree###
 shared_focus = {
-	id = EQS_anchor_the_imperial_navy
-	x = 30
-	y = 5
+	id = EQS_shutter_militarium
+	x = 40
+	y = 3
 	
-	available = {
+	available = { always = no }
+	
+	bypass = {
 		OR = {
 			has_completed_focus = EQS_once_a_land_filled_with_magic
 			has_completed_focus = EQS_once_a_society_filled_with_love
 		}
 	}
 	
+	cost = 5
+	
 	allow_branch = {
 		has_country_flag = end_of_equestria_civil_war
 	}
 	
+	completion_reward = {
+	
+	}
+	ai_will_do = { factor = 1 }
+}
+	
+###Naval Tree###
+shared_focus = {
+	id = EQS_anchor_the_imperial_navy
+	x = -10
+	y = 2
+	relative_position_id = EQS_shutter_militarium
+	
 	cost = 4
+	prerequisite = { focus = EQS_shutter_militarium }
 	
 	completion_reward = {
 		swap_ideas = {
@@ -3526,21 +3595,12 @@ shared_focus = {
 ###Army Tree###
 shared_focus = {
 	id = EQS_assess_the_state_of_the_militarium
-	x = 40
-	y = 5
-	
-	available = {
-		OR = {
-			has_completed_focus = EQS_once_a_land_filled_with_magic
-			has_completed_focus = EQS_once_a_society_filled_with_love
-		}
-	}
-	
-	allow_branch = {
-		has_country_flag = end_of_equestria_civil_war
-	}
+	x = 0
+	y = 2
+	relative_position_id = EQS_shutter_militarium
 	
 	cost = 4
+	prerequisite = { focus = EQS_shutter_militarium }
 	
 	completion_reward = {
 		swap_ideas = {
@@ -4012,21 +4072,12 @@ shared_focus = {
 ###Air Tree###
 shared_focus = {
 	id = EQS_ground_the_solarbolts
-	x = 50
-	y = 5
-	
-	available = {
-		OR = {
-			has_completed_focus = EQS_once_a_land_filled_with_magic
-			has_completed_focus = EQS_once_a_society_filled_with_love
-		}
-	}
-	
-	allow_branch = {
-		has_country_flag = end_of_equestria_civil_war
-	}
+	x = 10
+	y = 2
+	relative_position_id = EQS_shutter_militarium
 	
 	cost = 4
+	prerequisite = { focus = EQS_shutter_militarium }
 	
 	completion_reward = {
 		swap_ideas = {

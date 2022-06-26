@@ -5002,25 +5002,27 @@ country_event = { #Determines which order the map is changed when doing the dual
 	hidden = yes
 	
 	trigger = {
-		AND = {
-			EQS_Aurora_Shinespark = { is_country_leader = yes }
-			OR = {
-				AND = {
-					NOT = { country_exists = STG }
-					NOT = { country_exists = CWR }
-					NOT = { country_exists = AWR }
+		ROOT = {
+			AND = {
+				EQS_Aurora_Shinespark = { is_country_leader = yes }
+				OR = {
+					AND = {
+						NOT = { country_exists = STG }
+						NOT = { country_exists = CWR }
+						NOT = { country_exists = AWR }
+					}
+					AND = {
+						NOT = { country_exists = BAL }
+						NOT = { country_exists = MTS }
+						NOT = { country_exists = EEE }
+						NOT = { country_exists = STB }
+						NOT = { country_exists = NID }
+						NOT = { country_exists = NRP }
+						NOT = { country_exists = NEI }
+						NOT = { country_exists = SPF }
+						NOT = { country_exists = CLI }
+					}	
 				}
-				AND = {
-					NOT = { country_exists = BAL }
-					NOT = { country_exists = MTS }
-					NOT = { country_exists = EEE }
-					NOT = { country_exists = STB }
-					NOT = { country_exists = NID }
-					NOT = { country_exists = NRP }
-					NOT = { country_exists = NEI }
-					NOT = { country_exists = SPF }
-					NOT = { country_exists = CLI }
-				}	
 			}
 		}
 	}
@@ -6312,11 +6314,13 @@ country_event = { #Celestia receives a reply back from TRD stating that they'll 
 	is_triggered_only = yes
 	
 	option = { #They better not drag us into another war, though
+		name = celestia.59.a
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
 			amount = -10000
 			producer = EQS
 		}
+		add_to_faction = TRD
 		TRD = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
@@ -6328,7 +6332,6 @@ country_event = { #Celestia receives a reply back from TRD stating that they'll 
 				popularity = 0.075
 			}
 			load_oob = "TRD_pony_help" ###Load OOB for 3 divisions of 12 width pony infantry with support artillery and engineers
-			add_to_faction = TRD
 		}
 	}
 }
@@ -6342,6 +6345,57 @@ country_event = { #After waiting for far too long, Celestia finally learns that 
 	
 	option = { #It has been a while, I suppose
 		add_political_power = -20
+	}
+}
+
+country_event = { #Event for TRD to join like they promised they would, and the current leader has a bit of contemplation given that EQC is not a small foe
+	id = celestia.61
+	title = celestia.61.t
+	desc = celestia.61.d
+	
+	trigger = {
+		original_tag = TRD
+		EQS = {
+			has_war_with = EQC
+		}
+		has_country_flag = TRD_will_help_with_EQC
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = { #We must honor our promise to our friends
+		name = celestia.61.a
+		ai_chance = {
+			factor = 20
+			modifier = {
+				has_government = democratic
+				factor = 4
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 3
+			}
+		}
+		declare_war_on = {
+			target = EQC
+			type = annex_everything
+		}
+	}
+	option = { #Thanks for the guns, Celestia!
+		name = celestia.61.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				has_government = neutrality
+				factor = 2
+			}
+		}
+		reverse_add_opinion_modifier = {
+			target = EQS
+			modifier = CRY_dishonorable
+		}
 	}
 }
 
@@ -6451,7 +6505,7 @@ country_event = { #Celestia receives the positive response from Bales and is ple
 				puppet = BLS
 		}
 		BLS = {
-			set_cosmetic_tag = EQS_BLS
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6495,7 +6549,7 @@ country_event = { #Celestia receives the positive response from Cloudsdale and p
 				puppet = CLD
 		}
 		CLD = {
-			set_cosmetic_tag = EQS_CLD
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6586,7 +6640,7 @@ country_event = { #An ambassador from CER comes with their agreement to subjugat
 				puppet = CER
 		}
 		CER = {
-			set_cosmetic_tag = EQS_CER
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6712,7 +6766,7 @@ country_event = { #WHY sends a simple message that they agree and Celestia is re
 				puppet = WHY
 		}
 		WHY = {
-			set_cosmetic_tag = EQS_WHY
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6756,7 +6810,7 @@ country_event = { #NER agrees by sending a smoky letter of casual acceptance, an
 				puppet = NER
 		}
 		NER = {
-			set_cosmetic_tag = EQS_NER
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6778,23 +6832,23 @@ country_event = { #A long, scrawling letter about capitalist evils tells her the
 }
 
 ###Shattered Bales events###
-country_event = { #Celestia believes that the ponies of Hughill will be receptive, given they are harmonist
-	id = celestia.518
-	title = celestia.518.t
-	desc = celestia.518.d
-	
-	is_triggered_only = yes
-	
-	option = { #It is good to see a spark of hope
-		name = celestia.518.a
-		#HUG = {
-		#	country_event = {
-		#		id = celestia.519
-		#		days = 1
-		#	}
-		#}
-	}
-}
+#country_event = { #Celestia believes that the ponies of Hughill will be receptive, given they are harmonist
+#	id = celestia.518
+#	title = celestia.518.t
+#	desc = celestia.518.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It is good to see a spark of hope
+#		name = celestia.518.a
+#		#HUG = {
+#		#	country_event = {
+#		#		id = celestia.519
+#		#		days = 1
+#		#	}
+#		#}
+#	}
+#}
 
 country_event = { #HUG gets the proposal
 	id = celestia.519
@@ -6914,7 +6968,7 @@ country_event = { #Celestia sends the money and they form the alliance and she's
 		name = celestia.524.a
 		add_political_power = -100
 		ROOT = {
-			add_to_faction = NID
+			add_to_faction = FROM
 		}
 	}
 }
@@ -6992,7 +7046,7 @@ country_event = { #Celestia gets the agreement with all kinds of romancy garbage
 	option = { #Was this a good idea? I think I'll need to visit the other royal throne for a bit
 		name = celestia.528.a
 		ROOT = {
-			add_to_faction = STB
+			add_to_faction = FROM
 		}
 	}
 }
@@ -7020,11 +7074,11 @@ country_event = { #Celestia returns home from the Crystal Empire estatic, with T
 	
 	is_triggered_only = yes
 	
-	option = { #It's been so long since the princessdoms of Equestria were in harmony!
+	option = { #It's been so long since the princesses of Equestria were in harmony!
 		name = celestia.530.a
 		add_to_faction = CRY
-		add_war_support = 0.05
-		add_stability = 0.1
+		add_stability = 0.05
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -7037,9 +7091,7 @@ country_event = { #Celestia is shocked that she is denied the alliance and is ne
 	
 	option = { #I suppose I must correct them
 		name = celestia.531.a
-		add_war_support = 0.1
-		add_stability = 0.05
-		mark_focus_tree_layout_dirty = yes
+		add_war_support = 0.05
 	}
 }
 
@@ -7085,6 +7137,7 @@ country_event = { #Celestia receives news of the acceptance by Stalliongrad and 
 		IF = {
 			limit = {
 				country_exists = AWR
+				is_in_faction_with = STG
 			}
 		annex_country = { target = AWR }
 		}
@@ -7102,6 +7155,7 @@ country_event = { #Celestia receives news of the acceptance by Stalliongrad and 
 		IF = {
 			limit = {
 				country_exists = CWR
+				is_in_faction_with = STG
 			}
 			CRY = {
 				annex_country = { target = CWR }
@@ -7158,7 +7212,7 @@ country_event = { #Celestia meets with Cadance in the Crystal Empire, and discus
 		name = celestia.535.a
 		add_stability = 0.05
 		add_war_support = 0.05
-		set_country_flag = stalliongrad_partition_plans
+		set_country_flag = EQS_stalliongrad_partition_plans
 	}
 }
 
@@ -7174,7 +7228,7 @@ country_event = { #Changelingia gets a broadcast for a face-to-face meeting with
 		ai_chance = { factor = 10 }
 		EQS = {
 			country_event = {
-				id = celestia.537
+				id = celestia.537 #This should be an event with NCA, CCA, and SCS, so long as they're in the hegemony and exist; they can resist or agree
 				days = 1
 			}
 		}
@@ -7205,6 +7259,7 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		IF = {
 			limit = {
 				country_exists = NCA
+				is_in_faction_with = CHN
 			}
 		annex_country = { target = NCA }
 		}
@@ -7227,6 +7282,7 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		IF = {
 			limit = {
 				country_exists = CCA
+				is_in_faction_with = CHN
 			}
 			annex_country = { target = CCA }
 		}
@@ -7249,6 +7305,7 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		IF = {
 				limit = {
 					country_exists = SCS
+					is_in_faction_with = CHN
 				}
 				annex_country = { target = SCS }
 			}
@@ -7299,8 +7356,23 @@ country_event = { #Celestia is instantly laughed at by the meeting changelings, 
 	
 	option = { #Then I suppose we shall have a rematch
 		name = celestia.538.a
-		add_war_support = 0.15
-		add_stability = 0.15
+		add_war_support = 0.1
+		add_stability = 0.1
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.changeling_hegemony
+					value = THIS
+				}
+			}
+			
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
 	}
 }
 
@@ -7663,14 +7735,14 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 		CRY = {
 			is_in_faction_with = ROOT
 		}
-		has_country_flag = stalliongrad_partition_plans
+		has_country_flag = EQS_stalliongrad_partition_plans
 	}
 	
 	fire_only_once = yes
 	
 	option = { #We shall honor our plans
 		name = celestia.557.a
-		ai_chance = { factor = 75 }
+		ai_chance = { factor = 85 }
 		CRY = {
 			transfer_state = 153
 			transfer_state = 57
@@ -7691,8 +7763,9 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 	}
 	option = {
 		name = celestia.557.b
-		ai_chance = { factor = 25 }
+		ai_chance = { factor = 15 }
 		reverse_add_opinion_modifier = { target = CRY modifier = CRY_dishonorable }
+		CRY = { leave_faction = yes }
 	}
 }
 
