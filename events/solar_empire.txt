@@ -5002,27 +5002,26 @@ country_event = { #Determines which order the map is changed when doing the dual
 	hidden = yes
 	
 	trigger = {
-		ROOT = {
-			AND = {
-				EQS_Aurora_Shinespark = { is_country_leader = yes }
-				OR = {
-					AND = {
-						NOT = { country_exists = STG }
-						NOT = { country_exists = CWR }
-						NOT = { country_exists = AWR }
-					}
-					AND = {
-						NOT = { country_exists = BAL }
-						NOT = { country_exists = MTS }
-						NOT = { country_exists = EEE }
-						NOT = { country_exists = STB }
-						NOT = { country_exists = NID }
-						NOT = { country_exists = NRP }
-						NOT = { country_exists = NEI }
-						NOT = { country_exists = SPF }
-						NOT = { country_exists = CLI }
-					}	
+		original_tag = EQS
+		EQS_Aurora_Shinespark = { is_country_leader = yes }
+		AND = {
+			OR = {
+				AND = {
+					NOT = { country_exists = STG }
+					NOT = { country_exists = CWR }
+					NOT = { country_exists = AWR }
 				}
+				AND = {
+					NOT = { country_exists = BAL }
+					NOT = { country_exists = MTS }
+					NOT = { country_exists = EEE }
+					NOT = { country_exists = STB }
+					NOT = { country_exists = NID }
+					NOT = { country_exists = NRP }
+					NOT = { country_exists = NEI }
+					NOT = { country_exists = SPF }
+					NOT = { country_exists = CLI }
+				}	
 			}
 		}
 	}
@@ -6365,6 +6364,8 @@ country_event = { #Event for TRD to join like they promised they would, and the 
 		days = 1
 	}
 	
+	fire_only_once = yes
+	
 	option = { #We must honor our promise to our friends
 		name = celestia.61.a
 		ai_chance = {
@@ -6433,7 +6434,30 @@ country_event = { #Bales gets the proposal
 	
 	option = { #We will be better under them
 		name = celestia.501.a
-		ai_chance = { factor = 75 }
+		ai_chance = { 
+			factor = 10 
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_offer_funding_for_new_schools
+				}
+				factor = 3
+			}
+			modifier = {
+				has_government = democratic
+				factor = 2.5
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 1.25
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 0.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.503
@@ -6443,7 +6467,30 @@ country_event = { #Bales gets the proposal
 	}
 	option = { #We would be mad to bend to her wishes again!
 		name = celestia.501.b
-		ai_chance = { factor = 25 }
+		ai_chance = { 
+			factor = 20
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_offer_funding_for_new_schools
+				}
+				factor = 0.5
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 1.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 2
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.504
@@ -6462,7 +6509,30 @@ country_event = { #Cloudsdale gets the proposal
 	
 	option = { #It is good to see that Celestia has returned
 		name = celestia.502.a
-		ai_chance = { factor = 85 }
+		ai_chance = { 
+			factor = 5
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_ensure_pensions_for_the_heroes
+				}
+				factor = 5.5
+			}
+			modifier = {
+				has_government = democratic
+				factor = 3
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 1.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 1.25
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.505
@@ -6472,7 +6542,30 @@ country_event = { #Cloudsdale gets the proposal
 	}
 	option = { #This could still be a trap
 		name = celestia.502.b
-		ai_chance = { factor = 15 }
+		ai_chance = { 
+			factor = 15
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_ensure_pensions_for_the_heroes
+				}
+				factor = 0.75
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 2
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 4
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.506
@@ -6597,7 +6690,33 @@ country_event = { #CER gets the proposal
 	
 	option = { #It is our princess, we will not resist
 		name = celestia.508.a
-		ai_chance = { factor = 90 }
+		ai_chance = { 
+			factor = 5
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
+				}
+				factor = 3
+			}
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_subsidize_farm_fertilizers
+				}
+				factor = 3
+			}
+			modifier = {
+				has_government = democratic
+				factor = 1.75
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 0
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.509
@@ -6607,7 +6726,33 @@ country_event = { #CER gets the proposal
 	}
 	option = { #There is still something odd about her, we must be wary
 		name = celestia.508.b
-		ai_chance = { factor = 10 }
+		ai_chance = { 
+			factor = 2
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
+				}
+				factor = 0.5
+			}
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_subsidize_farm_fertilizers
+				}
+				factor = 0.5
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 20
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.510
@@ -6694,7 +6839,27 @@ country_event = { #WHY gets the proposal
 	
 	option = { #Perhaps it is finally time to return to the fold
 		name = celestia.512.a
-		ai_chance = { factor = 30 }
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
+				}
+				factor = 4
+			}
+			modifier = {
+				has_government = democratic
+				factor = 1.25
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 0.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.514
@@ -6704,7 +6869,27 @@ country_event = { #WHY gets the proposal
 	}
 	option = { #Never! She is up to something!
 		name = celestia.512.b
-		ai_chance = { factor = 70 }
+		ai_chance = { 
+			factor = 30
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
+				}
+				factor = 0.75
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.75
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 2.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.515
@@ -6723,7 +6908,29 @@ country_event = { #NER gets the proposal
 	
 	option = { #Getting all those free socks was really nice. Why not?
 		name = celestia.513.a
-		ai_chance = { factor = 55 }
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_pay_the_welfare_checks
+				}
+				factor = 2
+			}
+			modifier = {
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+				factor = 1.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+				factor = 0.33
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.516
@@ -6733,7 +6940,29 @@ country_event = { #NER gets the proposal
 	}
 	option = { #Nah, capitalists can stay with their money, we have a nice vibe
 		name = celestia.513.b
-		ai_chance = { factor = 45 }
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_pay_the_welfare_checks
+				}
+				factor = 0.5
+			}
+			modifier = {
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+				factor = 0.75
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+				factor = 3.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.517
@@ -7198,6 +7427,20 @@ country_event = { #Celestia isn't surprised and she dispatches Luna back to the 
 		name = celestia.534.a
 		add_war_support = 0.05
 		add_stability = 0.05
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
+			}
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
 	}
 }
 
@@ -7373,25 +7616,100 @@ country_event = { #Celestia is instantly laughed at by the meeting changelings, 
 				}
 			}
 		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_f_for_changelings
+			}
+		}
 	}
 }
 
-country_event = { #Celestia sends an offer of annexation to Cloudsdale and Bales and offers them proper reintigration now that she is returned
+country_event = { #Celestia sends a letter to the leader of the rump nation demanding that they integrate, since they've had time to adjust to harmonic rule
 	id = celestia.539
 	title = celestia.539.t
 	desc = celestia.539.d
 	
 	is_triggered_only = yes
 	
-	option = { #I don't see why they would say no. It's clear I'm not Daybreaker
+	option = { #I suppose it is time we return to the fold
 		name = celestia.539.a
-		CLD = {
+		ai_chance = {
+			factor = 10
+			modifier = {
+				ROOT = {
+					original_tag = CLD
+				}
+				factor = 5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = WHY
+				}
+				factor = 3
+			}
+			modifier = {
+				ROOT = {
+					original_tag = BLS
+				}
+				factor = 4.5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = CER
+				}
+				factor = 9
+			}
+			modifier = {
+				ROOT = {
+					original_tag = NER
+				}
+				factor = 6
+			}
+		}
+		EQS = {
 			country_event = {
 				id = celestia.540
 				days = 1
 			}
 		}
-		BLS = {
+	}
+	option = { #We will not give up what freedom we have left!
+		name = celestia.539.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				ROOT = {
+					original_tag = CLD
+				}
+				factor = 5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = WHY
+				}
+				factor = 7
+			}
+			modifier = {
+				ROOT = {
+					original_tag = BLS
+				}
+				factor = 5.5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = CER
+				}
+				factor = 1
+			}
+			modifier = {
+				ROOT = {
+					original_tag = NER
+				}
+				factor = 4
+			}
+		}
+		EQS = {
 			country_event = {
 				id = celestia.541
 				days = 1
@@ -7400,76 +7718,132 @@ country_event = { #Celestia sends an offer of annexation to Cloudsdale and Bales
 	}
 }
 
-country_event = { #Cloudsdale receives the offer of annexation and ponders it for hardly any time
+country_event = { #Celestia receives the agreement from the targeted country, which pleases her as she orders some administrators to move out and assist with it
 	id = celestia.540
 	title = celestia.540.t
 	desc = celestia.540.d
 	
 	is_triggered_only = yes
 	
-	option = { #Our princess has returned!
+	option = { #A prodigal nation returns
 		name = celestia.540.a
-		ai_chance = { factor = 30 }
-		EQS = {
-			country_event = {
-				id = celestia.542
-				days = 1
-			}
-		}
-	}
-	option = { #It is a trap by Daybreaker! Let them know what we think of this deception!
-		name = celestia.540.b
-		ai_chance = { factor = 70 }
-		EQS = {
-			country_event = {
-				id = celestia.543
-				days = 1
-			}
-		}
+		annex_country = { target = FROM transfer_troops = yes }
 	}
 }
 
-country_event = { #Bales receives the offer and the Directorate checks to see if it's authentic
+country_event = { #Celestia is told by the targeted country that they will not bend the knee and she is disturbed and orders that the army be mobilized
 	id = celestia.541
 	title = celestia.541.t
 	desc = celestia.541.d
 	
 	is_triggered_only = yes
 	
-	option = { #There is only one conclusion: Celestia has returned and she will let us research in peace
+	option = { #Why would they not want to come back?
 		name = celestia.541.a
-		ai_chance = { factor = 15 }
-		EQS = {
-			country_event = {
-				id = celestia.544
-				days = 1
-			}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
 		}
-	}
-	option = { #Daybreaker thinks us fools if we would stand down so easily!
-		name = celestia.541.b
-		ai_chance = { factor = 85 }
-		EQS = {
-			country_event = {
-				id = celestia.545
-				days = 1
-			}
-		}
+		FROM = { leave_faction = yes }
+		end_puppet = FROM
+		drop_cosmetic_tag = yes
 	}
 }
 
-country_event = { #Celestia receives word that Cloudsdale is standing down and will be annexed
-	id = celestia.542
-	title = celestia.542.t
-	desc = celestia.542.d
-	
-	is_triggered_only = yes
-	
-	option = { #It will be great to visit the pegasus cities again! Their architecture has always astounded
-		name = celestia.542.a
-		annex_country = { target = CLD transfer_troops = yes }
-	}
-}
+#country_event = { #Celestia sends an offer of annexation to Cloudsdale and Bales and offers them proper reintigration now that she is returned
+#	id = celestia.539
+#	title = celestia.539.t
+#	desc = celestia.539.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #I don't see why they would say no. It's clear I'm not Daybreaker
+#		name = celestia.539.a
+#		CLD = {
+#			country_event = {
+#				id = celestia.540
+#				days = 1
+#			}
+#		}
+#		BLS = {
+#			country_event = {
+#				id = celestia.541
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Cloudsdale receives the offer of annexation and ponders it for hardly any time
+#	id = celestia.540
+#	title = celestia.540.t
+#	desc = celestia.540.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Our princess has returned!
+#		name = celestia.540.a
+#		ai_chance = { factor = 30 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.542
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #It is a trap by Daybreaker! Let them know what we think of this deception!
+#		name = celestia.540.b
+#		ai_chance = { factor = 70 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.543
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Bales receives the offer and the Directorate checks to see if it's authentic
+#	id = celestia.541
+#	title = celestia.541.t
+#	desc = celestia.541.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #There is only one conclusion: Celestia has returned and she will let us research in peace
+#		name = celestia.541.a
+#		ai_chance = { factor = 15 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.544
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #Daybreaker thinks us fools if we would stand down so easily!
+#		name = celestia.541.b
+#		ai_chance = { factor = 85 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.545
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Celestia receives word that Cloudsdale is standing down and will be annexed
+#	id = celestia.542
+#	title = celestia.542.t
+#	desc = celestia.542.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It will be great to visit the pegasus cities again! Their architecture has always astounded
+#		name = celestia.542.a
+#		annex_country = { target = CLD transfer_troops = yes }
+#	}
+#}
 
 country_event = { #Celestia is basically laughed at by Cloudsdale, and she is rather annoyed
 	id = celestia.543

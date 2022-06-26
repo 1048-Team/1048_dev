@@ -372,123 +372,51 @@ EQS_AUR_new_temple_construction_category = {
 }
 
 EQS_CEL_annex_puppeted_rump_states_category = {
-	CEL_annex_CLD = {
+	CEL_annex_puppets = {
 		available = {
-			CLD = {
-				is_subject_of = ROOT
+			custom_trigger_tooltip = {
+				tooltip = EQS_owns_a_puppet_tt
+				any_of_scopes = {
+					array = global.solar_empire_rumps
+					
+					AND = {
+						exists = yes
+						is_subject_of = ROOT
+					}
+				}
 			}
 		}
 		visible = {
-			CLD = {
-				is_subject_of = ROOT
+			any_of_scopes = {
+				array = global.solar_empire_rumps
+				
+				AND = {
+					exists = yes
+					is_subject_of = ROOT
+				}
 			}
 		}
 		cost = 200
 		days_remove = 30
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
-			annex_country = { target = CLD }
-			every_state = {
-				limit = {
-					is_core_of = CLD
+			custom_effect_tooltip = EQS_puppeted_states_event_tt
+			for_each_scope_loop = {
+				array = global.solar_empire_rumps
+				
+				IF = {
+					limit = {
+						exists = yes
+						is_subject_of = ROOT
+					}
+					country_event = celestia.539
+					every_state = {
+						limit = {
+							is_owned_by = THIS
+						}
+						add_core_of = ROOT
+					}
 				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_BLS = {
-		available = {
-			BLS = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			BLS = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = BLS }
-			every_state = {
-				limit = {
-					is_core_of = BLS
-				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_NER = {
-		available = {
-			NER = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			NER = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = NER }
-			every_state = {
-				limit = {
-					is_core_of = NER
-				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_CER = {
-		available = {
-			CER = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			CER = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = CER }
-			every_state = {
-				limit = {
-					is_core_of = CER
-				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_WHY = {
-		available = {
-			WHY = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			WHY = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = WHY }
-			every_state = {
-				limit = {
-					is_core_of = WHY
-				}
-				add_core_of = ROOT
 			}
 		}
 	}
