@@ -1,3 +1,4 @@
+###Civil War###
 shared_focus = {
 	id = SLW_light_unperceived
 	x = 5
@@ -7,7 +8,7 @@ shared_focus = {
 	
 	allow_branch = {
 		hidden_trigger = {
-			NOT = { EQS_Nova_Glow = { is_country_leader = yes } }
+			NOT = { has_country_flag = SLW_searching_for_prefectress }
 		}
 	}
 
@@ -204,4 +205,397 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 100 }
+}
+
+###Political###
+shared_focus = {
+	id = SLW_glowing_corpse
+	x = 5
+	y = 1
+	
+	allow_branch = {
+		has_country_flag = SLW_searching_for_prefectress
+	}
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = SLW_proper_successor_tt
+			EQS_Nova_Glow = { is_country_leader = yes }
+		}
+	}
+	
+	cost = 1
+	
+	completion_reward = {
+		country_event = solarwar.13
+	}
+	
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = SLW_ease_minds
+	x = -2
+	y = 1
+	relative_position_id = SLW_glowing_corpse
+	
+	cost = 2
+	prerequisite = { focus = SLW_glowing_corpse }
+	
+	completion_reward = {
+		country_event = solarwar.22
+	}
+	
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = SLW_tenuous_control
+	x = 0
+	y = 1
+	relative_position_id = SLW_glowing_corpse
+	
+	cost = 2
+	prerequisite = { focus = SLW_glowing_corpse }
+	
+	completion_reward = {
+		country_event = solarwar.24
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_teetering_edge
+	x = 2
+	y = 1
+	relative_position_id = SLW_glowing_corpse
+	
+	cost = 2
+	prerequisite = { focus = SLW_glowing_corpse }
+	
+	completion_reward = {
+		country_event = solarwar.23
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_status_quo
+	x = 0
+	y = 1
+	relative_position_id = SLW_ease_minds
+	
+	cost = 2
+	prerequisite = { focus = SLW_ease_minds }
+	prerequisite = { focus = SLW_tenuous_control }
+	prerequisite = { focus = SLW_teetering_edge }
+	mutually_exclusive = { focus = SLW_compromise_location }
+	mutually_exclusive = { focus = SLW_faithful_city }
+	
+	completion_reward = {
+		add_stability = 0.05
+		set_capital = { state = 3 }
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_compromise_location
+	x = 0
+	y = 1
+	relative_position_id = SLW_tenuous_control
+	
+	cost = 2
+	prerequisite = { focus = SLW_ease_minds }
+	prerequisite = { focus = SLW_tenuous_control }
+	prerequisite = { focus = SLW_teetering_edge }
+	mutually_exclusive = { focus = SLW_status_quo }
+	mutually_exclusive = { focus = SLW_faithful_city }
+	
+	completion_reward = {
+		add_political_power = 100
+		set_capital = { state = 12 }
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = SLW_faithful_city
+	x = 0
+	y = 1
+	relative_position_id = SLW_teetering_edge
+	
+	cost = 2
+	prerequisite = { focus = SLW_ease_minds }
+	prerequisite = { focus = SLW_tenuous_control }
+	prerequisite = { focus = SLW_teetering_edge }
+	mutually_exclusive = { focus = SLW_status_quo }
+	mutually_exclusive = { focus = SLW_compromise_location }
+	
+	completion_reward = {
+		add_war_support = 0.05
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_execute_ringleaders
+	x = 0
+	y = 1
+	relative_position_id = SLW_status_quo
+	
+	cost = 4
+	prerequisite = {
+		focus = SLW_status_quo
+		focus = SLW_compromise_location
+		focus = SLW_faithful_city
+	}
+	
+	completion_reward = {
+		country_event = solarwar.19
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_everypony_mourn
+	x = 0
+	y = 1
+	relative_position_id = SLW_faithful_city
+	
+	cost = 4
+	prerequisite = {
+		focus = SLW_status_quo
+		focus = SLW_compromise_location
+		focus = SLW_faithful_city
+	}
+	
+	completion_reward = {
+		country_event = solarwar.15
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_everypony_to_daybreaker
+	x = 0
+	y = 1
+	relative_position_id = SLW_execute_ringleaders
+	
+	available = {
+		hidden_trigger = {
+			NOT = { has_global_flag = SLW_nova_snaps }
+		}
+	}
+	
+	cost = 6
+	mutually_exclusive = { focus = SLW_continue_fight }
+	prerequisite = { focus = SLW_execute_ringleaders }
+	prerequisite = { focus = SLW_everypony_mourn }
+	
+	completion_reward = {
+		country_event = solarwar.20
+	}
+	ai_will_do = { 
+		factor = 50 
+		modifier = {
+			has_country_flag = SLW_nova_didnt_break
+			factor = 1.2
+		}
+		modifier = {
+			has_country_flag = SLW_nova_is_haunted
+			factor = 0.8
+		}
+	}
+}
+
+shared_focus = {
+	id = SLW_continue_fight
+	x = 0
+	y = 1
+	relative_position_id = SLW_everypony_mourn
+	
+	cost = 6
+	mutually_exclusive = { focus = SLW_everypony_to_daybreaker }
+	prerequisite = { focus = SLW_execute_ringleaders }
+	prerequisite = { focus = SLW_everypony_mourn }
+	
+	completion_reward = {
+		country_event = solarwar.21
+	}
+	ai_will_do = { 
+		factor = 50
+		modifier = {
+			has_country_flag = SLW_nova_didnt_break
+			factor = 0.3
+		}
+		modifier = {
+			has_country_flag = SLW_nova_snaps
+			factor = 100
+		}
+	}
+}
+
+###Shared Focuses###
+shared_focus = {
+	id = SLW_witch_hunts
+	x = 0
+	y = 1
+	relative_position_id = SLW_everypony_to_daybreaker
+	
+	cost = 4
+	prerequisite = {
+		focus = SLW_everypony_to_daybreaker
+		focus = SLW_continue_fight
+	}
+	
+	completion_reward = {
+		country_event = solarwar.25
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_jumpstart_economy
+	x = 2
+	y = 1
+	relative_position_id = SLW_everypony_to_daybreaker
+	
+	cost = 5
+	prerequisite = {
+		focus = SLW_everypony_to_daybreaker
+		focus = SLW_continue_fight
+	}
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_idea = SLW_deadened_economy
+			}
+			swap_ideas = {
+				add_idea = SLW_deadened_economy_2
+				remove_idea = SLW_deadened_economy
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				has_idea = SLW_deadened_economy_2
+			}
+			swap_ideas = {
+				add_idea = SLW_deadened_economy_3
+				remove_idea = SLW_deadened_economy_2
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				has_idea = SLW_deadened_economy_3
+			}
+			remove_ideas = SLW_deadened_economy_3
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_scrutinize_cult
+	x = 0
+	y = 1
+	relative_position_id = SLW_continue_fight
+	
+	cost = 5
+	prerequisite = {
+		focus = SLW_everypony_to_daybreaker
+		focus = SLW_continue_fight
+	}
+	
+	completion_reward = {
+		country_event = solarwar.26
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_fund_speculatores
+	x = 1
+	y = 1
+	relative_position_id = SLW_witch_hunts
+	
+	cost = 4
+	prerequisite = { focus = SLW_witch_hunts }
+	prerequisite = { focus = SLW_jumpstart_economy }
+	
+	completion_reward = {
+		IF = {
+			limit = { has_dlc = "La Resistance" }
+			add_ideas = SLW_special_speculatores
+		}
+		ELSE = {
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = electronics
+			}
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = SLW_expand_praetorians
+	x = -1
+	y = 1
+	relative_position_id = SLW_scrutinize_cult
+	
+	cost = 3
+	prerequisite = { focus = SLW_jumpstart_economy }
+	prerequisite = { focus = SLW_scrutinize_cult }
+	
+	completion_reward = {
+		add_ideas = SLW_praetorian_expansion
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_observe_everypony
+	x = -1
+	y = 1
+	relative_position_id = SLW_expand_praetorians
+	
+	cost = 5
+	prerequisite = { focus = SLW_fund_speculatores }
+	prerequisite = { focus = SLW_expand_praetorians }
+	#prerequisite = {
+	#	focus = SLW_sanctified_unicorns
+	#	focus = SLW_dissolve_government
+	#}
+	
+	completion_reward = {
+		country_event = solarwar.27
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_execute_false_empress
+	x = 0
+	y = 1
+	relative_position_id = SLW_observe_everypony
+	
+	cost = 5
+	prerequisite = { focus = SLW_observe_everypony }
+	
+	completion_reward = {
+		IF = {
+			limit = { has_country_flag = SLW_nova_snaps }
+			country_event = solarwar.29
+		}
+		ELSE = { country_event = solarwar.28 }
+	}
+	ai_will_do = { factor = 150 }
 }

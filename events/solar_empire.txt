@@ -2,7 +2,6 @@
 
 add_namespace = solar
 add_namespace = celestia
-add_namespace = solarwar
 
 #Start event chain to introduce Aurora
 country_event = {
@@ -1303,6 +1302,16 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 		}
 		
 		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
+	}
+	option = { #We will protect the Empire from this false Empress!
+		name = solar.99.b
+		custom_effect_tooltip = celestias_back_gents
+		hidden_effect = {
+			SOL_Celestia_Returned = yes
+		}
+		SLW = {
+			change_tag_from = ROOT
+		}
 	}
 }
 
@@ -8530,201 +8539,6 @@ country_event = { #A single letter arrives from the SMILE agents claiming they w
 		add_political_power = -15
 	}
 }
-
-###Solar Civil War Events###
-country_event = { #Midwinter and the rest of the surviving archmages arrive in Manehattan and the rest decide she is fit for becoming the regent in the war, although she is adamant she'd rather be on the front lines with the soldiers; she is crowned regent
-	id = solarwar.1
-	title = solarwar.1.t
-	desc = solarwar.1.d
-	
-	is_triggered_only = yes
-	
-	option = { #I hope I have the wisdom to guide us through this war
-		name = solarwar.1.a
-		add_country_leader_role = {
-			character = event_target:EQS_Midwinter_Halo_target
-			promote_leader = yes
-			country_leader = {
-				expire = "1965.1.1"
-				#desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
-				ideology = solarism
-				traits = {
-					reluctant_regent
-				}
-			}
-		}
-		hidden_effect = {
-			event_target:EQS_Midwinter_Halo_target = {
-				promote_leader = yes
-				remove_trait = { trait = recently_promoted }
-			}
-		}
-		custom_effect_tooltip = midwinter_boss_tt
-		add_stability = -0.1
-		add_political_power = 150
-	}
-}
-
-country_event = { #Midwinter as one of her first decress as the Princess Regent forces the unions that are still protesting in Manehattan back to work, which leads to a large clash between some the depleted Adoratio reserves and the strikers
-	id = solarwar.2
-	title = solarwar.2.t
-	desc = solarwar.2.d
-	
-	is_triggered_only = yes
-	
-	option = { #They shall work, or they shall die
-		name = solarwar.2.a
-		save_current_manpower = yes
-		75 = {
-			add_manpower = -1734
-		}
-		restore_previous_manpower = yes
-		add_ideas = SLW_grind_to_dust
-	}
-}
-
-country_event = { #Midwinter pours over some charts and statistics in the governor's quarters of the old mayoral building in Manehattan, and she learns of the overflowing nature of the current prison system, and gets an idea to conscript them as frontline soldiers, claiming they will be absolved of heresy
-	id = solarwar.3
-	title = solarwar.3.t
-	desc = solarwar.3.d
-	
-	is_triggered_only = yes
-	
-	option = { #Any that survive will be shot afterwards
-		name = solarwar.3.a
-		add_manpower = 35000
-		add_stability = -0.05
-	}
-}
-
-country_event = { #During a general staff meeting of the current shape of the war, Midwinter is interrupted by a commotion outside and Thundering Hoofbeat barges in and demands to find whoever killed the Empress; he is convinced it was one of them, since they are what's left of picking over the bones of the Empire; she manages to convince him to fight for her after calming him and pointing to Celestia
-	id = solarwar.4
-	title = solarwar.4.t
-	desc = solarwar.4.d
-	
-	is_triggered_only = yes
-	
-	option = { #You shall have all the vengeance you seek, lumbering brute
-		name = solarwar.4.a
-		set_country_flag = ride_the_lightning
-		custom_effect_tooltip = hoofbeat_general_tt
-	}
-}
-
-country_event = { #An alert goes through Manehattan that indicates some of Celestia's forces have approached through a gap in the front lines, and the soldiers prepare to fight them off; Seething Corona is at the head of it, running and disheveled from her chase; she arrives panicked and begging to be let in and protected, and Midwinter sets her up as a general
-	id = solarwar.5
-	title = solarwar.5.t
-	desc = solarwar.5.d
-	
-	is_triggered_only = yes
-	
-	option = { #A surprise to be sure, but a welcome one
-		name = solarwar.5.a
-		set_country_flag = politician_archmage_is_here
-		custom_effect_tooltip = corona_general_tt
-	}
-}
-
-country_event = { #In the middle of the night, some of the Adoratio and Inquisitionis infiltrate and arrest many camps of the Militarium, as Midwinter has determined that they were sufficiently suspect, and also because Blueblood is no longer there to protect them; she is pleased at the damage sewn in the ranks, to keep them loyal
-	id = solarwar.6
-	title = solarwar.6.t
-	desc = solarwar.6.d
-	
-	is_triggered_only = yes
-	
-	option = { #The rabble has been mopped up. For now
-		name = solarwar.6.a
-		add_manpower = -10000
-		add_war_support = 0.05
-		add_stability = 0.05
-	}
-}
-
-country_event = { #With the war beginning to worsen, the new head of the unified unions in Manehattan, Smoldering Carbon, approaches Midwinter. She offers to provide assistance, in exchange for some leniency after the war, to which Midwinter is immediately suspicious, but ultimately has to decide which way to go
-	id = solarwar.7
-	title = solarwar.7.t
-	desc = solarwar.7.d
-	
-	trigger = {
-		original_tag = SLW
-		surrender_progress > 0.25
-	}
-	
-	mean_time_to_happen = {
-		days = 30
-	}
-	
-	fire_only_once = yes
-	
-	option = { #We need all the help we can get in these times
-		name = solarwar.7.a
-		ai_chance = { factor = 35 }
-		set_country_flag = accepted_commie_help
-		custom_effect_tooltip = carbon_and_commie_assistance_tt
-		hidden_effect = {
-			###Set OOB to spawn two ten-width divisions here, called Angry Unionists
-			load_oob = "SLW_helpful_commies"
-		}
-		add_popularity = {
-			ideology = communism
-			popularity = 0.08
-		}
-	}
-	option = { #We will never accept aid from communist scum
-		name = solarwar.7.b
-		ai_chance = { factor = 65 }
-		add_political_power = 50
-		add_stability = 0.03
-	}
-}
-
-country_event = { #After the end of the civil war, Midwinter realizes that she can't keep being the leader and begins her search for a proper Prefectress to lead the Solar Empire and settles on Nova, who is brought in with a massive ceremony as the successor to Daybreaker
-	id = solarwar.10
-	title = solarwar.10.t
-	desc = solarwar.10.d
-	
-	trigger = {
-		tag = SLW
-		NOT = {
-			country_exists = EQS
-		}
-	}
-	
-	fire_only_once = yes
-	
-	option = { #I will serve our fallen Empress with fire and devotion
-		name = solarwar.10.a
-		retire_country_leader = yes
-		add_country_leader_role = {
-			character = event_target:EQS_Nova_Glow_target
-			promote_leader = yes
-			
-			country_leader = {
-				ideology = solarism
-				expire = "1965.1.1"
-				traits = {
-					sword_of_the_empress
-				}
-			}
-		}
-		every_state = {
-			limit = {
-				is_core_of = EQS
-			}
-			add_core_of = SLW
-		}
-		remove_ideas = eqs_slw_civil_war
-		if = {
-			limit = { has_country_flag = accepted_commie_help }
-			delete_unit_template_and_units = {
-				division_template = "Smoldering Carbon's Unionists"
-				disband = yes
-			}
-		}
-		set_variable = { equestria_conquest = 0 }
-		load_focus_tree = solar_empire_focus
-	}
-}		
 
 ###Debug Events###
 country_event = {

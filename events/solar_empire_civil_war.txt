@@ -1,0 +1,643 @@
+add_namespace = solarwar
+
+###Solar Civil War Events###
+country_event = { #Midwinter and the rest of the surviving archmages arrive in Manehattan and the rest decide she is fit for becoming the regent in the war, although she is adamant she'd rather be on the front lines with the soldiers; she is crowned regent
+	id = solarwar.1
+	title = solarwar.1.t
+	desc = solarwar.1.d
+	
+	is_triggered_only = yes
+	
+	option = { #I hope I have the wisdom to guide us through this war
+		name = solarwar.1.a
+		add_country_leader_role = {
+			character = event_target:EQS_Midwinter_Halo_target
+			promote_leader = yes
+			country_leader = {
+				expire = "1965.1.1"
+				#desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
+				ideology = solarism
+				traits = {
+					reluctant_regent
+				}
+			}
+		}
+		hidden_effect = {
+			event_target:EQS_Midwinter_Halo_target = {
+				promote_leader = yes
+				remove_trait = { trait = recently_promoted }
+			}
+		}
+		custom_effect_tooltip = midwinter_boss_tt
+		add_stability = -0.1
+		add_political_power = 150
+	}
+}
+
+country_event = { #Midwinter as one of her first decress as the Princess Regent forces the unions that are still protesting in Manehattan back to work, which leads to a large clash between some the depleted Adoratio reserves and the strikers
+	id = solarwar.2
+	title = solarwar.2.t
+	desc = solarwar.2.d
+	
+	is_triggered_only = yes
+	
+	option = { #They shall work, or they shall die
+		name = solarwar.2.a
+		save_current_manpower = yes
+		75 = {
+			add_manpower = -1734
+		}
+		restore_previous_manpower = yes
+		add_ideas = SLW_grind_to_dust
+	}
+}
+
+country_event = { #Midwinter pours over some charts and statistics in the governor's quarters of the old mayoral building in Manehattan, and she learns of the overflowing nature of the current prison system, and gets an idea to conscript them as frontline soldiers, claiming they will be absolved of heresy
+	id = solarwar.3
+	title = solarwar.3.t
+	desc = solarwar.3.d
+	
+	is_triggered_only = yes
+	
+	option = { #Any that survive will be shot afterwards
+		name = solarwar.3.a
+		add_manpower = 35000
+		add_stability = -0.05
+	}
+}
+
+country_event = { #During a general staff meeting of the current shape of the war, Midwinter is interrupted by a commotion outside and Thundering Hoofbeat barges in and demands to find whoever killed the Empress; he is convinced it was one of them, since they are what's left of picking over the bones of the Empire; she manages to convince him to fight for her after calming him and pointing to Celestia
+	id = solarwar.4
+	title = solarwar.4.t
+	desc = solarwar.4.d
+	
+	is_triggered_only = yes
+	
+	option = { #You shall have all the vengeance you seek, lumbering brute
+		name = solarwar.4.a
+		set_country_flag = ride_the_lightning
+		custom_effect_tooltip = hoofbeat_general_tt
+	}
+}
+
+country_event = { #An alert goes through Manehattan that indicates some of Celestia's forces have approached through a gap in the front lines, and the soldiers prepare to fight them off; Seething Corona is at the head of it, running and disheveled from her chase; she arrives panicked and begging to be let in and protected, and Midwinter sets her up as a general
+	id = solarwar.5
+	title = solarwar.5.t
+	desc = solarwar.5.d
+	
+	is_triggered_only = yes
+	
+	option = { #A surprise to be sure, but a welcome one
+		name = solarwar.5.a
+		set_country_flag = politician_archmage_is_here
+		custom_effect_tooltip = corona_general_tt
+	}
+}
+
+country_event = { #In the middle of the night, some of the Adoratio and Inquisitionis infiltrate and arrest many camps of the Militarium, as Midwinter has determined that they were sufficiently suspect, and also because Blueblood is no longer there to protect them; she is pleased at the damage sewn in the ranks, to keep them loyal
+	id = solarwar.6
+	title = solarwar.6.t
+	desc = solarwar.6.d
+	
+	is_triggered_only = yes
+	
+	option = { #The rabble has been mopped up. For now
+		name = solarwar.6.a
+		add_manpower = -10000
+		add_war_support = 0.05
+		add_stability = 0.05
+	}
+}
+
+country_event = { #With the war beginning to worsen, the new head of the unified unions in Manehattan, Smoldering Carbon, approaches Midwinter. She offers to provide assistance, in exchange for some leniency after the war, to which Midwinter is immediately suspicious, but ultimately has to decide which way to go
+	id = solarwar.7
+	title = solarwar.7.t
+	desc = solarwar.7.d
+	
+	trigger = {
+		original_tag = SLW
+		surrender_progress > 0.25
+	}
+	
+	mean_time_to_happen = {
+		days = 30
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We need all the help we can get in these times
+		name = solarwar.7.a
+		ai_chance = { factor = 35 }
+		set_country_flag = accepted_commie_help
+		custom_effect_tooltip = carbon_and_commie_assistance_tt
+		hidden_effect = {
+			###Set OOB to spawn two ten-width divisions here, called Angry Unionists
+			load_oob = "SLW_helpful_commies"
+		}
+		add_popularity = {
+			ideology = communism
+			popularity = 0.08
+		}
+		hidden_effect = {
+			random_list = {
+				65 = { }
+				35 = {
+					country_event = {
+						id = solarwar.8
+						days = 90
+						random_days = 45
+					}
+				}
+			}
+		}
+	}
+	option = { #We will never accept aid from communist scum
+		name = solarwar.7.b
+		ai_chance = { factor = 65 }
+		add_political_power = 50
+		add_stability = 0.03
+	}
+}
+
+country_event = { #Reports of communist agitation and destruction while the civil war is going on, and Midwinter is not impressed as she sends some ponies to take down the worst of the offenders, and she also prepares to send something to Smoldering for the lack of control
+	id = solarwar.8
+	title = solarwar.8.t
+	desc = solarwar.8.d
+	
+	is_triggered_only = yes
+	
+	option = { #This was not part of our agreement!
+		name = solarwar.8.a
+		add_political_power = -50
+		add_popularity = {
+			ideology = communism
+			popularity = 0.02
+		}
+		###Do damage to a random factory and state population
+	}
+}
+
+country_event = { #Solar forces march into Sanctum Solar and begin to retake the city, with descriptions of the destruction and shock that many feel at the amount of damage there is to it
+	id = solarwar.9
+	title = solarwar.9.t
+	desc = solarwar.9.d
+	
+	trigger = {
+		tag = SLW
+		3 = {
+			is_controlled_by = ROOT
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #Dear Empress
+		name = solarwar.9.a
+	}
+}
+
+country_event = { #After the end of the civil war, Midwinter realizes after she falls ill or that she has a small physical injury that she can't keep being the leader and begins her search for a proper Prefectress
+	id = solarwar.10
+	title = solarwar.10.t
+	desc = solarwar.10.d
+	
+	trigger = {
+		tag = SLW
+		NOT = {
+			country_exists = EQS
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #I will serve our fallen Empress with fire and devotion
+		name = solarwar.10.a
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = SLW
+		}
+		if = {
+			limit = { has_country_flag = accepted_commie_help }
+			delete_unit_template_and_units = {
+				division_template = "Smoldering Carbon's Unionists"
+				disband = yes
+			}
+		}
+		set_variable = { equestria_conquest = 0 }
+		country_event = {
+			id = solarwar.11
+			days = 14
+			random_days = 7
+		}
+		set_country_flag = SLW_searching_for_prefectress
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+###Post-civil war events###
+country_event = { #Nova is found by Midwinter, after an intense investigation to try and find the best candidate, and Nova is not initially convinced she is worthy, but Midwinter explains how others are not trustworthy, and Quasar is too unstable (explain some insane thing she did), and Nova reluctantly agrees
+	id = solarwar.11
+	title = solarwar.11.t
+	desc = solarwar.11.d
+	
+	is_triggered_only = yes
+	
+	option = { #You will be the chosen one, the first Prefectress
+		name = solarwar.11.a
+		hidden_effect = {
+			country_event = {
+				id = solarwar.12
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Nova's ceremony is elaborate and beatific, and Nova accepts the responsibility with a bit of nervousness, but nonetheless is made Prefectress of the Empire to guide it into the future
+	id = solarwar.12
+	title = solarwar.12.t
+	desc = solarwar.12.d
+	
+	is_triggered_only = yes
+	
+	option = { #I will serve the Empire with fire and devotion!
+		name = solarwar.12.a
+		retire_country_leader = yes
+		add_country_leader_role = {
+			character = event_target:EQS_Nova_Glow_target
+			promote_leader = yes
+			
+			country_leader = {
+				ideology = solarism
+				expire = "1965.1.1"
+				traits = {
+					prefectress
+				}
+			}
+		}
+		remove_ideas = eqs_slw_civil_war
+	}
+}
+
+country_event = { #Nova has her first few days as Prefectress and she is already growing more nervous and has a bit of a breakdown where she sees Daybreaker haunting her and every decision she makes, but she eventually steels herself and grows harsher in her conviction
+	id = solarwar.13
+	title = solarwar.13.t
+	desc = solarwar.13.d
+	
+	is_triggered_only = yes
+	
+	option = { #Why am I being tormented?!
+		name = solarwar.13.a
+		hidden_effect = {
+			country_event = {
+				id = solarwar.14
+				days = 30
+				random_days = 30
+			}
+		}
+	}
+}
+
+country_event = { #Nova has another horrible night and she eventually has a true breakdown, believing that Daybreaker is trying to possess her, and she goes into a frenzy and almost kills one of her guards before she freezes and has an epiphany
+	id = solarwar.14
+	title = solarwar.14.t
+	desc = solarwar.14.d
+	
+	is_triggered_only = yes
+	
+	option = { #I know she is proud. I will lead us all to glory!
+		name = solarwar.14.a
+		ai_chance = {
+			factor = 64
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 0
+			}
+		}
+		set_country_flag = SLW_nova_didnt_break
+	}
+	option = { #She is haunting me, but I must ignore her
+		name = solarwar.14.b
+		ai_chance = {
+			factor = 35
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 0
+			}
+		}
+		set_country_flag = SLW_nova_is_haunted
+	}
+	option = { #She is me, and I am her!
+		name = solarwar.14.c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = SLW_this_is_not_good_tt #Warn that Nova will fully snap if this option is chosen; mention that an unprepared mind can snap at too much pressure
+		set_country_flag = SLW_nova_went_insane
+		hidden_effect = {
+			country_event = {
+				id = solarwar.16
+				days = 14
+				random_days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Mourners work through the streets of Sanctum Solar as a massive procession through the entire city before finally stopping in front of the palace where Nova has a long speech on how the Empress must be avenged
+	id = solarwar.15
+	title = solarwar.15.t
+	desc = solarwar.15.d
+	
+	is_triggered_only = yes
+	
+	option = { #We must not forget her!
+		name = solarwar.15.a
+		add_war_support = 0.03
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = { #Midwinter finds Nova mumbling and cackling to herself like Daybreaker and startles her out of her mind, and has a long inquiry about what's going on, and Nova can admit the truth, and Midwinter helps her cope, or hide it
+	id = solarwar.16
+	title = solarwar.16.t
+	desc = solarwar.16.d
+	
+	is_triggered_only = yes
+	
+	option = { #There is nothing wrong with me, I was merely thinking
+		name = solarwar.16.a
+		ai_chance = {
+			factor = 20
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 100
+			}
+		}
+	}
+	option = { #She is haunting me, I... need assistance
+		name = solarwar.16.a
+		ai_chance = {
+			factor = 70
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 0
+			}
+		}
+		clr_country_flag = SLW_nova_went_insane
+		country_event = solarwar.18
+	}
+	option = { #Yes, there is something that I need to talk to you about privately
+		name = solarwar.16.c
+		trigger = {
+			has_global_flag = SLW_nova_snaps
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 100
+			}
+		}
+		hidden_effect = {
+			country_event = solarwar.17
+		}
+	}
+}
+
+country_event = { #As Midwinter enters a more private room with Nova, Nova declares that Midwinter cannot know the truth about Daybreaker's return, and she knocks her out before implying that she will execute her
+	id = solarwar.17
+	title = solarwar.17.t
+	desc = solarwar.17.d
+	
+	is_triggered_only = yes
+	
+	option = { #Now to get rid of you...
+		name = solarwar.17.a
+		retire_character = event_target:EQS_Midwinter_Halo_target
+	}
+}
+
+country_event = { #Midwinter listens to what Nova is describing and she offers some advice and that she can always be spoken to if anxious, along with some of the other higher inquisitors, and Nova already looks relieved
+	id = solarwar.18
+	title = solarwar.18.t
+	desc = solarwar.18.d
+	
+	is_triggered_only = yes
+	
+	option = { #I do not know if I'll ever be rid of this
+		name = solarwar.18.a
+		ai_chance = {
+			factor = 45
+		}
+		set_country_flag = SLW_nova_is_haunted
+	}
+	option = { #Thank you, I believe that this is beginning of something
+		name = solarwar.18.b
+		ai_chance = {
+			factor = 55
+		}
+		set_country_flag = SLW_nova_didnt_break
+	}
+}
+
+country_event = { #Nova stands in front of a number of harmonists, whom she looks at for a moment before gazing at the crowd and declaring that they will be punished for their crimes, and uses some small white phosphorous bombs on them instead of fire
+	id = solarwar.19
+	title = solarwar.19.a
+	desc = solarwar.19.d
+	
+	is_triggered_only = yes
+	
+	option = { #They better not look away
+		name = solarwar.17.a
+		add_stability = 0.02
+		add_political_power = 35
+	}
+}
+
+country_event = { #Nova assembles a number of inquisitors to hear that she is declaring the old government moot and that the Inquisitionis will take over most of the duties of the country, as the regular leaders cannot be trusted
+	id = solarwar.20
+	title = solarwar.20.t
+	desc = solarwar.20.d
+	
+	is_triggered_only = yes
+	
+	option = { #May the Empress protect us all
+		name = solarwar.20.a
+		add_stability = 0.03
+	}
+}
+
+country_event = { #Ponies awake to a repeating decree by Nova that she is solely taking control of country affairs, and barely slips that she believes she's Daybreaker, and she will expect everypony to be loyal to her as they were Daybreaker
+	id = solarwar.21
+	title = solarwar.21.t
+	desc = solarwar.21.d
+	
+	is_triggered_only = yes
+	
+	option = { #What has happened to our country?!
+		name = solarwar.21.a
+		add_stability = -0.03
+	}
+}
+
+country_event = { #Nova holds in Manehattan a short speech about how she will protect the Empire from further aggression, and she is already visibly nervous about her new leadership
+	id = solarwar.22
+	title = solarwar.22.t
+	desc = solarwar.22.d
+	
+	is_triggered_only = yes
+	
+	option = { #Empress... give me strength
+		name = solarwar.22.a
+		add_ideas = SLW_rampant_disunity
+	}
+}
+
+country_event = { #Nova is first briefed on the economy and how it is in ruins and she is clearly uncomfortable although it's not regarding the economy itself, and she eventually is jostled back to reality to be demanded assistance on ideas for solving the economic crises
+	id = solarwar.23
+	title = solarwar.23.t
+	desc = solarwar.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #Have you tried throwing money at it?
+		name = solarwar.23.a
+		add_ideas = SLW_deadened_economy
+	}
+}
+
+country_event = { #Nova is nearly arrested or killed by some rogue Militarium members who believe she is not worthy of replacing Daybreaker as leader and Nova manages to survive as they are captured before she is harmed, and she learns about how precarious things are in the Empire
+	id = solarwar.24
+	title = solarwar.24.t
+	desc = solarwar.24.d
+	
+	is_triggered_only = yes
+	
+	option = { #How do we not have an army?!
+		name = solarwar.24.a
+		add_ideas = SLW_militarium_impunity
+		add_ideas = SLW_naval_deserters
+		add_ideas = SLW_airforce_heresy
+	}
+}
+
+###Shared events for starting the rebuild of the nation###
+country_event = { #An Imperial citizen is mugged by multiple other civilians, who believe that she is a heretic, and she is left battered and bloodied as supposed punishment for siding with the harmonists, although it's implied she is not
+	id = solarwar.25 ###Have focus mention that it's a good way to let ponies' fear and anger out for the civil war
+	title = solarwar.25.t
+	desc = solarwar.25.d
+	
+	is_triggered_only = yes
+	
+	option = { #Let it serve as a reminder
+		name = solarwar.25.a
+		IF = {
+			limit = {
+				has_idea = SLW_rampant_disunity
+			}
+			swap_ideas = {
+				add_idea = SLW_rampant_disunity_2
+				remove_idea = SLW_rampant_disunity
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				has_idea = SLW_rampant_disunity_2
+			}
+			swap_ideas = {
+				add_idea = SLW_rampant_disunity_3
+				remove_idea = SLW_rampant_disunity_2
+			}
+		}
+	}
+}
+
+country_event = { #Nova calls Quasar forward to begin an inquisitionis in the cult itself, and Quasar is actually quite excited for the opportunity, which perturbs Nova for a short while
+	id = solarwar.26
+	title = solarwar.26.t
+	desc = solarwar.26.d
+	
+	is_triggered_only = yes
+	
+	option = { #She was too eager for that
+		name = solarwar.26.a
+		add_stability = 0.03
+		add_manpower = -2031
+	}
+}
+
+country_event = { #Nova has a meeting with Absconditus Lumen about further expanding operations of the Speculatores, and Nova makes it clear that everypony is not to be trusted, even the Speculatores, which makes him feel a bit nervous
+	id = solarwar.27
+	title = solarwar.27.t
+	desc = solarwar.27.d
+	
+	is_triggered_only = yes
+	
+	option = { #I appreciate the trust, Prefectress
+		name = solarwar.27.a
+		IF = {
+			limit = {
+				has_dlc = "La Resistance"
+			}
+			add_ideas = SLW_prefectress_is_watching_la
+		}
+		ELSE = {
+			add_ideas = SLW_prefectress_is_watching
+		}
+	}
+}
+
+country_event = { #Nova, as the prefectress, stands outside the Imperial Palace as Celestia is hauled out, and she gives a speech to the assembled crowds about how the demon who killed Daybreaker will be killed herself, and Celestia gives her a single last words of how she wanted to protect her ponies, before Nova sets her on fire
+	id = solarwar.28
+	title = solarwar.28.t
+	desc = solarwar.28.d
+	
+	is_triggered_only = yes
+	
+	option = { #Justice has been served
+		name = solarwar.28.a
+		add_war_support = 0.05
+		add_stability = 0.05
+		add_political_power = 50
+	}
+}
+
+country_event = { #Nova waltzes into Celestia's cell and gloats at her, which Celestia finds odd, until she notices that Nova is mimicking some of Daybreaker's mannerisms; the two talk briefly, and Celestia can tell that Nova insanely believes that she is Daybreaker, and is horrified at it
+	id = solarwar.29
+	title = solarwar.29.t
+	desc = solarwar.29.d
+	
+	is_triggered_only = yes
+	
+	option = { #You will suffer at my horn, Celestia!
+		name = solarwar.29.a
+		country_event = solarwar.30
+	}
+}
+
+country_event = { #Nova watches from the balcony of the palace as Celestia is set on a heretic pyre, and she then gives a short, Daybreaker-like speech about executing Celestia, and she cackles as Celestia is executed
+	id = solarwar.30
+	title = solarwar.30.t
+	desc = solarwar.30.d
+	
+	is_triggered_only = yes
+	
+	option = { #She had a bit too much sun!
+		name = solarwar.30.a
+		add_stability = 0.03
+		add_war_support = 0.03
+		add_political_power = -25
+	}
+}
+
+###Nova as Daybreaker's Second Coming###
