@@ -234,11 +234,34 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			remove_core_of = BAL
 			add_claim_by = BAL
 		}
-		EQS = {
-			country_event = {
-				id = solar.122
-				days = 90
-				random_days = 30
+		IF = {
+			limit = {
+				AND = {
+					country_exists = EQS
+					NOT = { country_exists = SLW }
+				}
+			}
+			EQS = {
+				country_event = {
+					id = solar.122
+					days = 90
+					random_days = 30
+				}
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				AND = {
+					country_exists = SLW
+					NOT = { country_exists = EQS }
+				}
+			}
+			SLW = {
+				country_event = {
+					id = solar.122
+					days = 90
+					random_days = 30
+				}
 			}
 		}
 	}
