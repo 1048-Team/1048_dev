@@ -269,6 +269,49 @@ SOL_end_of_civil_war_CEL = {
 	clr_country_flag = starlight_and_trixie_corrupted
 	mark_focus_tree_layout_dirty = yes
 }
+SOL_end_of_civil_war_SLW = {
+	custom_effect_tooltip = SLW_searching_for_leader_tt
+	hidden_effect = {
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = SLW
+		}
+		IF = {
+			limit = { has_country_flag = accepted_commie_help }
+			delete_unit_template_and_units = {
+				division_template = "Smoldering Carbon's Unionists"
+				disband = yes
+			}
+		}
+		set_variable = { equestria_conquest = 0 }
+		country_event = {
+			id = solarwar.11
+			days = 14
+			random_days = 7
+		}
+		country_event = {
+			id = solarwar.87
+			days = 180
+			random_days = 210
+		}
+		set_country_flag = SLW_searching_for_prefectess
+		mark_focus_tree_layout_dirty = yes
+	}
+	add_stability = -0.035
+	add_war_support = -0.065
+	custom_effect_tooltip = SLW_solar_empire_generals_tt
+	hidden_effect = {
+		event_target:EQS_Blueblood_target = { set_nationality = ROOT }
+		event_target:EQS_Aurora_Shinespark_target = { set_nationality = ROOT }
+		event_target:EQS_Sunset_Shimmer_target = { set_nationality = ROOT }
+		event_target:EQS_Luminous_Blade_target = { set_nationality = ROOT }
+		event_target:EQS_Scorched_Earth_target = { set_nationality = ROOT }
+		event_target:EQS_Sun_Marble_target = { set_nationality = ROOT }
+		event_target:EQS_Locust_Glow_target = { set_nationality = ROOT }
+	}
+}
 
 EQS_destroy_solar_temple = {
 	IF = {

@@ -83,10 +83,22 @@ characters = {
 			visible = {
 				if = {
 					limit = {
-						original_tag = EQS
+						OR = {
+							original_tag = EQS
+							original_tag = SLW
+						}
 					}
 				}
-				NOT = { has_country_flag = sunset_arrested }
+				OR = {
+					AND = {
+						original_tag = SLW
+						has_country_flag = SLW_sunset_restored
+					}
+					AND = {
+						original_tag = EQS
+						NOT = { has_country_flag = sunset_arrested }
+					}
+				}
 			}
 		}
 		advisor = {
@@ -139,13 +151,16 @@ characters = {
 							original_tag = SLW
 						}
 					}
-					AND = {
-						OR = {
-							has_country_flag = aurora_general
-							has_country_flag = aurora_redeemed
-							original_tag = SLW
+					OR = {
+						original_tag = SLW
+						AND = {
+							original_tag = EQS
+							OR = {
+								has_country_flag = aurora_general
+								has_country_flag = aurora_redeemed
+							}
+							NOT = { has_country_flag = aurora_removed }
 						}
-						NOT = { has_country_flag = aurora_removed }
 					}
 				}
 			}
@@ -204,10 +219,16 @@ characters = {
 			visible = {
 				if = {
 					limit = {
-						original_tag = EQS
+						OR = {
+							original_tag = EQS
+							original_tag = SLW
+						}
 					}
 				}
-				NOT = { has_country_flag = blueblood_arrested }
+				OR = {
+					original_tag = SLW
+					NOT = { has_country_flag = blueblood_arrested }
+				}
 			}
 		}
 		country_leader = {
@@ -236,6 +257,39 @@ characters = {
 				}
 			}
 			traits = { prince_of_terror }
+		}
+	}
+	
+	EQS_Absconditus_Lumen = {
+		name = EQS_Absconditus_Lumen_name
+		portrait_path = {
+			
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = absconditus_lumen
+			allowed = {
+				original_tag = EQS
+				has_dlc = "La Resistance"
+				hidden_trigger = { NOT = { has_government = democratic } }
+			}
+			visible = {
+				can_create_intelligence_agency = yes
+				hidden_trigger = { NOT = { has_government = democratic } }
+			}
+			available = {
+				has_intelligence_agency = yes
+				hidden_trigger = { NOT = { has_government = democratic } }
+			}
+			traits = { head_of_intelligence }
+			
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					has_intelligence_agency = no
+					factor = 0
+				}
+			}
 		}
 	}
 	

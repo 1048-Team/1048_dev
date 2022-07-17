@@ -8,7 +8,7 @@ shared_focus = {
 	
 	allow_branch = {
 		hidden_trigger = {
-			NOT = { has_country_flag = SLW_searching_for_prefectress }
+			NOT = { has_country_flag = SLW_searching_for_prefectess }
 		}
 	}
 
@@ -214,7 +214,7 @@ shared_focus = {
 	y = 1
 	
 	allow_branch = {
-		has_country_flag = SLW_searching_for_prefectress
+		has_country_flag = SLW_searching_for_prefectess
 	}
 	
 	available = {
@@ -2045,7 +2045,7 @@ shared_focus = {
 			type = annex_everything
 			target = EQC
 		}
-		###Event for Nova inspecting ships and troops in preparation for a war with EQC
+		###Event for Nova inspecting ships and troops as they ready for a war with EQC
 	}
 	ai_will_do = { factor = 100 }
 }
@@ -2151,8 +2151,8 @@ shared_focus = {
 ###Dealing with Communists###
 shared_focus = {
 	id = SLW_meeting_devil
-	x = 10
-	y = 10
+	x = 14
+	y = 12
 	
 	allow_branch = {
 		has_country_flag = SLW_communist_strikes
@@ -2174,9 +2174,59 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = SLW_hear_their_side
+	x = -2
+	y = 1
+	relative_position_id = SLW_meeting_devil
+	
+	cost = 4
+	prerequisite = { focus = SLW_meeting_devil }
+	
+	completion_reward = {
+		country_event = solarwar.89
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = SLW_provide_audience
+	x = 0
+	y = 1
+	relative_position_id = SLW_meeting_devil
+	
+	cost = 5
+	prerequisite = { focus = SLW_meeting_devil }
+	
+	completion_reward = {
+		country_event = solarwar.90
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_safer_industry
+	x = 1
+	y = 1
+	relative_position_id = SLW_hear_their_side
+	
+	cost = 5
+	prerequisite = { focus = SLW_hear_their_side }
+	prerequisite = { focus = SLW_provide_audience }
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = communism
+			popularity = 0.1
+		}
+		add_ideas = SLW_integrated_unions
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
 	id = SLW_never_negotiate
-	x = 12
-	y = 10
+	x = 16
+	y = 12
 	
 	allow_branch = {
 		has_country_flag = SLW_communist_strikes
@@ -2196,4 +2246,1112 @@ shared_focus = {
 			factor = 1.5
 		}
 	}
+}
+
+shared_focus = {
+	id = SLW_pulverize_protesters
+	x = 0
+	y = 1
+	relative_position_id = SLW_never_negotiate
+	
+	cost = 2
+	prerequisite = { focus = SLW_never_negotiate }
+	
+	completion_reward = {
+		country_event = solarwar.92
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_monitor_members
+	x = 2
+	y = 1
+	relative_position_id = SLW_never_negotiate
+	
+	cost = 3
+	prerequisite = { focus = SLW_never_negotiate }
+	
+	completion_reward = {
+		###New advisor here###
+		add_popularity = {
+			ideology = communism
+			popularity = -0.05
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_lob_heads
+	x = 1
+	y = 1
+	relative_position_id = SLW_pulverize_protesters
+	
+	cost = 4
+	prerequisite = { focus = SLW_pulverize_protesters }
+	prerequisite = { focus = SLW_monitor_members }
+	
+	completion_reward = {
+		country_event = solarwar.93
+	}
+	ai_will_do = { factor = 70 }
+}
+
+###Military Trees###
+shared_focus = {
+	id = SLW_traitors_in_midst
+	x = 30
+	y = 1
+	
+	available = {
+		always = no
+	}
+	
+	allow_branch = { has_country_flag = SLW_searching_for_prefectess }
+	
+	cost = 5
+	
+	completion_reward = {
+		add_political_power = -100
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Navy Tree###
+shared_focus = {
+	id = SLW_scrape_barnacles
+	x = -8
+	y = 1
+	relative_position_id = SLW_traitors_in_midst
+	
+	cost = 5
+	prerequisite = { focus = SLW_traitors_in_midst }
+	
+	completion_reward = {
+		country_event = solarwar.100
+		###Event for Inquisitors going through the admirality and purging some of them
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_punish_deserters
+	x = 0
+	y = 1
+	
+	relative_position_id = SLW_scrape_barnacles
+	
+	cost = 5
+	prerequisite = { focus = SLW_scrape_barnacles }
+	
+	completion_reward = {
+		###Delete some ships
+		add_war_support = -0.1
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_no_civilian_sea
+	x = -2
+	y = 1
+	relative_position_id = SLW_punish_deserters
+	
+	cost = 4
+	prerequisite = { focus = SLW_punish_deserters }
+	
+	completion_reward = {
+		###Spawn some more early destroyers and a couple of light cruisers
+	}
+	ai_will_do = { factor = 48 }
+}
+
+shared_focus = {
+	id = SLW_fire_up_forges
+	x = 2
+	y = 1
+	relative_position_id = SLW_punish_deserters
+	
+	cost = 5
+	prerequisite = { focus = SLW_punish_deserters }
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = SLW_dedicated_warship_forges
+			days = 365
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_refactored_roles
+	x = -2
+	y = 1
+	relative_position_id = SLW_no_civilian_sea
+	
+	cost = 5
+	prerequisite = { focus = SLW_no_civilian_sea }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = dd_tech
+		}
+		add_ideas = SLW_rebuilt_screens
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_realign_doctrines
+	x = 0
+	y = 1
+	relative_position_id = SLW_no_civilian_sea
+	
+	cost = 6
+	mutually_exclusive = { focus = SLW_double_down }
+	prerequisite = { focus = SLW_no_civilian_sea }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_base_strike
+		}
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = cv_tech
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_double_down
+	x = 0
+	y = 1
+	relative_position_id = SLW_fire_up_forges
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_realign_doctrines }
+	prerequisite = { focus = SLW_fire_up_forges }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_fleet_in_being
+		}
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_modular_hulls
+	x = 2
+	y = 1
+	relative_position_id = SLW_fire_up_forges
+	
+	cost = 5
+	prerequisite = { focus = SLW_fire_up_forges }
+	
+	completion_reward = {
+		add_ideas = SLW_modular_designs
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_innovate_upon_heretics
+	x = 1
+	y = 1
+	relative_position_id = SLW_refactored_roles
+	
+	cost = 7
+	prerequisite = { focus = SLW_refactored_roles }
+	prerequisite = { focus = SLW_realign_doctrines }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = naval_bomber
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_base_strike
+		}
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_improvements_to_weapons
+	x = 1
+	y = 1
+	relative_position_id = SLW_double_down
+	
+	cost = 7
+	prerequisite = { focus = SLW_double_down }
+	prerequisite = { focus = SLW_modular_hulls }
+	
+	completion_reward = {
+		###Tech and doctrine bonuses
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = ca_tech
+			category = bb_tech
+		}
+		add_doctrine_cost_reduction = {
+			uses = 2
+			cost_reduction = 0.5
+			category = cat_fleet_in_being
+		}
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = SLW_across_sea
+	x = 0
+	y = 1
+	relative_position_id = SLW_innovate_upon_heretics
+	
+	cost = 4
+	prerequisite = { focus = SLW_innovate_upon_heretics }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_base_strike
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_finalize_rulebooks
+	x = 0
+	y = 1
+	relative_position_id = SLW_improvements_to_weapons
+	
+	cost = 3
+	prerequisite = { focus = SLW_improvements_to_weapons }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_fleet_in_being
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = SLW_heavier_is_better
+	x = 1
+	y = 1
+	relative_position_id = SLW_across_sea
+	
+	cost = 5
+	prerequisite = {
+		focus = SLW_across_sea
+		focus = SLW_finalize_rulebooks
+	}
+	
+	completion_reward = {
+		add_ideas = SLW_biggest_stick
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_beachheads_to_spearheads
+	x = -1
+	y = 1
+	relative_position_id = SLW_finalize_rulebooks
+	
+	cost = 4
+	prerequisite = {
+		focus = SLW_across_sea
+		focus = SLW_finalize_rulebooks
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			technology = mtg_landing_craft
+			technology = mtg_tank_landing_craft
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_no_obstacle
+	x = 0
+	y = 1
+	relative_position_id = SLW_heavier_is_better
+	
+	cost = 5
+	prerequisite = { focus = SLW_heavier_is_better }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = marine_tech
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_everywhere_at_once
+	x = 0
+	y = 1
+	relative_position_id = SLW_beachheads_to_spearheads
+	
+	cost = 5
+	prerequisite = { focus = SLW_beachheads_to_spearheads }
+	
+	completion_reward = {
+		add_ideas = SLW_embodiments_of_speed
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_oceans_of_faithful
+	x = 2
+	y = 1
+	relative_position_id = SLW_no_obstacle
+	
+	cost = 6
+	prerequisite = { focus = SLW_no_obstacle }
+	prerequisite = { focus = SLW_everywhere_at_once }
+	
+	completion_reward = {
+		add_ideas = SLW_solar_sea
+	}
+	ai_will_do = { factor = 60 }
+}
+
+###Army Tree###
+shared_focus = {
+	id = SLW_imprison_sympathizers
+	x = 0
+	y = 1
+	relative_position_id = SLW_traitors_in_midst
+	
+	cost = 5
+	prerequisite = { focus = SLW_traitors_in_midst }
+	
+	completion_reward = {
+		country_event = solarwar.94
+		swap_ideas = {
+			remove_idea = SLW_militarium_impunity
+			add_idea = SLW_militarium_impunity_2
+		}
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_try_blueblood
+	x = -2
+	y = 1
+	relative_position_id = SLW_imprison_sympathizers
+	
+	cost = 4
+	prerequisite = { focus = SLW_imprison_sympathizers }
+	
+	completion_reward = {
+		country_event = solarwar.95
+		###Event for Blueblood's trial as somepony who is in charge of leading resistance against Nova
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_cleanse_ranks
+	x = 0
+	y = 1
+	relative_position_id = SLW_imprison_sympathizers
+	
+	cost = 4
+	prerequisite = { focus = SLW_imprison_sympathizers }
+	
+	completion_reward = {
+		country_event = solarwar.96
+		###Event for choosing how many generals will be killed, and then purging some for potential heresy, or at least for resisting Nova
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_purify_troops
+	x = 2
+	y = 1
+	relative_position_id = SLW_imprison_sympathizers
+	
+	cost = 4
+	prerequisite = { focus = SLW_imprison_sympathizers }
+	
+	completion_reward = {
+		country_event = solarwar.97
+		###Event for potentially purging many of the troops to get rid of those who resist
+	}
+	ai_will_do = { factor = 43 }
+}
+
+shared_focus = {
+	id = SLW_keep_militarium_command
+	x = 0
+	y = 1
+	relative_position_id = SLW_try_blueblood
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_modernize_supply_system }
+	mutually_exclusive = { focus = SLW_praetorian_leadership }
+	prerequisite = { focus = SLW_try_blueblood }
+	prerequisite = { focus = SLW_cleanse_ranks }
+	prerequisite = { focus = SLW_purify_troops }
+	
+	completion_reward = {
+		add_ideas = SLW_traditional_structure
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = SLW_modernize_supply_system
+	x = 0
+	y = 1
+	relative_position_id = SLW_cleanse_ranks
+	
+	cost = 5
+	mutually_exclusive = { focus = SLW_keep_militarium_command }
+	mutually_exclusive = { focus = SLW_praetorian_leadership }
+	prerequisite = { focus = SLW_try_blueblood }
+	prerequisite = { focus = SLW_cleanse_ranks }
+	prerequisite = { focus = SLW_purify_troops }
+	
+	completion_reward = {
+		add_ideas = SLW_modern_supply_system
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_praetorian_leadership
+	x = 0
+	y = 1
+	relative_position_id = SLW_purify_troops
+	
+	cost = 5
+	mutually_exclusive = { focus = SLW_keep_militarium_command }
+	mutually_exclusive = { focus = SLW_modernize_supply_system }
+	prerequisite = { focus = SLW_try_blueblood }
+	prerequisite = { focus = SLW_cleanse_ranks }
+	prerequisite = { focus = SLW_purify_troops }
+	
+	completion_reward = {
+		add_ideas = SLW_praetorian_primacy
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = SLW_loyalty_bred
+	x = 0
+	y = 1
+	relative_position_id = SLW_modernize_supply_system
+	
+	cost = 6
+	prerequisite = {
+		focus = SLW_keep_militarium_command
+		focus = SLW_modernize_supply_system
+		focus = SLW_praetorian_leadership
+	}
+	
+	completion_reward = {
+		remove_ideas = SLW_militarium_impunity_4
+		add_research_slot = 1
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_armored_swarms
+	x = -2
+	y = 1
+	relative_position_id = SLW_loyalty_bred
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_endless_hordes }
+	prerequisite = { focus = SLW_loyalty_bred }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = armor
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_mass_assault
+		}
+	}
+	ai_will_do = {
+		factor = 60
+		modifier = {
+			has_completed_focus = SLW_continue_fight
+			factor = 0.5
+		}
+		modifier = {
+			has_global_flag = SLW_nova_snaps
+			modifier = 0
+		}
+	}
+}
+
+shared_focus = {
+	id = SLW_fully_mechanized
+	x = 0
+	y = 1
+	relative_position_id = SLW_armored_swarms
+	
+	cost = 4
+	prerequisite = { focus = SLW_armored_swarms }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = cat_mechanized_equipment
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_mass_assault
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_point_blank
+	x = 0
+	y = 1
+	relative_position_id = SLW_fully_mechanized
+	
+	cost = 5
+	prerequisite = { focus = SLW_fully_mechanized }
+	
+	completion_reward = {
+		add_ideas = SLW_cleansing_fire
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_tank_wave
+	x = 0
+	y = 1
+	relative_position_id = SLW_point_blank
+	
+	cost = 5
+	prerequisite = { focus = SLW_point_blank }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_mass_assault
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_praetorious_maximus
+	x = 2
+	y = 1
+	relative_position_id = SLW_point_blank
+	
+	cost = 6
+	prerequisite = {
+		focus = SLW_point_blank
+		focus = SLW_figure_it_out
+	}
+	
+	completion_reward = {
+		add_ideas = SLW_complete_praetorian_control
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = special_forces_tech
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = SLW_endless_hordes
+	x = 2
+	y = 1
+	relative_position_id = SLW_loyalty_bred
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_armored_swarms }
+	prerequisite = { focus = SLW_loyalty_bred }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = infantry_tech
+		}
+		add_doctrine_cost_reduction = {
+			uses = 1
+			cost_reduction = 0.5
+			category = cat_mass_assault
+		}
+	}
+	ai_will_do = {
+		factor = 40
+		modifier = {
+			has_completed_focus = SLW_continue_fight
+			factor = 1.5
+		}
+		modifier = {
+			has_global_flag = SLW_nova_snaps
+			factor = 1.5
+		}
+	}
+}
+
+shared_focus = {
+	id = SLW_streamlined_auxiliaries
+	x = 0
+	y = 1
+	relative_position_id = SLW_endless_hordes
+	
+	cost = 4
+	prerequisite = { focus = SLW_endless_hordes }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = support_tech
+		}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_mass_assault
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_figure_it_out
+	x = 0
+	y = 1
+	relative_position_id = SLW_streamlined_auxiliaries
+	
+	cost = 5
+	prerequisite = { focus = SLW_streamlined_auxiliaries }
+	
+	completion_reward = {
+		add_ideas = SLW_pony_wave_tactics
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_drown_in_blood
+	x = 0
+	y = 1
+	relative_position_id = SLW_figure_it_out
+	
+	cost = 5
+	prerequisite = { focus = SLW_figure_it_out }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_mass_assault
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_for_empress_and_country
+	x = 0
+	y = 1
+	relative_position_id = SLW_praetorious_maximus
+	
+	cost = 5
+	prerequisite = { focus = SLW_praetorious_maximus }
+	prerequisite = {
+		focus = SLW_tank_wave
+		focus = SLW_drown_in_blood
+	}
+	
+	completion_reward = {
+		###Potentially event for Nova holding a ceremony in the Imperial Palace for Daybreaker as some soldiers attend and grow more radicalized
+		add_ideas = SLW_daybreakers_memory
+	}
+	ai_will_do = { factor = 75 }
+}
+
+###Airforce Tree###
+shared_focus = {
+	id = SLW_blame_solarbolts
+	x = 8
+	y = 1
+	relative_position_id = SLW_traitors_in_midst
+	
+	cost = 5
+	prerequisite = { focus = SLW_traitors_in_midst }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SLW_airforce_heresy
+			add_idea = SLW_airforce_heresy_2
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_empires_scapegoats
+	x = 0
+	y = 1
+	relative_position_id = SLW_blame_solarbolts
+	
+	cost = 5
+	prerequisite = { focus = SLW_blame_solarbolts }
+	
+	completion_reward = {
+		###Potentially an event for ponies seeing propaganda posters showing how bad the Solarbolts are and some foals who loved them becoming devestated
+		swap_ideas = {
+			remove_idea = SLW_airforce_heresy_2
+			add_idea = SLW_airforce_heresy_3
+		}
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_discredit_remains
+	x = 0
+	y = 1
+	relative_position_id = SLW_empires_scapegoats
+	
+	cost = 4
+	prerequisite = { focus = SLW_empires_scapegoats }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SLW_airforce_heresy_3
+			add_idea = SLW_airforce_heresy_4
+		}
+		add_war_support = -0.05
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_where_the_plane_failed
+	x = -2
+	y = 1
+	relative_position_id = SLW_discredit_remains
+	
+	cost = 4
+	prerequisite = { focus = SLW_discredit_remains }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = light_fighter
+		}
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_reliance_isnt_problematic
+	x = 0
+	y = 1
+	relative_position_id = SLW_discredit_remains
+	
+	cost = 5
+	prerequisite = { focus = SLW_discredit_remains }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = cat_strategic_bomber
+		}
+		#add_ideas = SLW_refined_destruction
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_remember_heritage
+	x = 2
+	y = 1
+	relative_position_id = SLW_discredit_remains
+	
+	cost = 3
+	prerequisite = { focus = SLW_discredit_remains }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+		}
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_mutilate_air
+	x = 1
+	y = 1
+	relative_position_id = SLW_where_the_plane_failed
+	
+	cost = 5
+	mutually_exclusive = { focus = SLW_flexible_air }
+	prerequisite = { focus = SLW_where_the_plane_failed }
+	prerequisite = { focus = SLW_reliance_isnt_problematic }
+	prerequisite = { focus = SLW_remember_heritage }
+	
+	completion_reward = {
+		remove_ideas = SLW_airforce_heresy_4
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = cat_strategic_bomber
+		}
+		add_doctrine_cost_reduction = {
+			uses = 1
+			cost_reduction = 0.5
+			category = cat_strategic_destruction
+		}
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = SLW_enlarged_bays
+	x = 0
+	y = 1
+	relative_position_id = SLW_mutilate_air
+	
+	cost = 5
+	prerequisite = { focus = SLW_mutilate_air }
+	
+	completion_reward ={
+		add_ideas = SLW_endless_bomb_bays
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_strategic_destruction
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_reach_anywhere
+	x = 0
+	y = 1
+	relative_position_id = SLW_enlarged_bays
+	
+	cost = 4
+	prerequisite = { focus = SLW_enlarged_bays }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_strategic_destruction
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_flexible_air
+	x = 1
+	y = 1
+	relative_position_id = SLW_reliance_isnt_problematic
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_mutilate_air }
+	prerequisite = { focus = SLW_where_the_plane_failed }
+	prerequisite = { focus = SLW_reliance_isnt_problematic }
+	prerequisite = { focus = SLW_remember_heritage }
+	
+	completion_reward = {
+		remove_ideas = SLW_airforce_heresy_4
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = tactical_bomber
+		}
+		add_doctrine_cost_reduction = {
+			uses = 1
+			cost_reduction = 0.5
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_expanded_formations
+	x = 0
+	y = 1
+	relative_position_id = SLW_flexible_air
+	
+	cost = 4
+	prerequisite = { focus = SLW_flexible_air }
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_square_pegs
+	x = 0
+	y = 1
+	relative_position_id = SLW_expanded_formations
+	
+	cost = 4
+	prerequisite = { focus = SLW_expanded_formations }
+	
+	completion_reward = {
+		add_ideas = SLW_flexible_mission_ranges
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_operational_integrity
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_spears_of_destruction
+	x = -1
+	y = 1
+	relative_position_id = SLW_reach_anywhere
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_balanced_winds }
+	mutually_exclusive = { focus = SLW_lances_of_purity }
+	prerequisite = { focus = SLW_reach_anywhere }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = cat_strategic_bomber
+		}
+		add_ideas = SLW_pinpoint_devestation
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_balanced_winds
+	x = 1
+	y = 1
+	relative_position_id = SLW_reach_anywhere
+	
+	cost = 5
+	mutually_exclusive = { focus = SLW_spears_of_destruction }
+	mutually_exclusive = { focus = SLW_lances_of_purity }
+	prerequisite = {
+		focus = SLW_reach_anywhere
+		focus = SLW_square_pegs
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1.25
+			category = jet_technology
+		}
+		add_ideas = SLW_balanced_airforce
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_lances_of_purity
+	x = 1
+	y = 1
+	relative_position_id = SLW_square_pegs
+	
+	cost = 4
+	mutually_exclusive = { focus = SLW_balanced_winds }
+	mutually_exclusive = { focus = SLW_spears_of_destruction }
+	prerequisite = { focus = SLW_square_pegs }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = tactical_bomber
+		}
+		add_ideas = SLW_many_trades
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_heavens_guardian
+	x = 0
+	y = 1
+	relative_position_id = SLW_balanced_winds
+	
+	cost = 3
+	prerequisite = {
+		focus = SLW_spears_of_destruction
+		focus = SLW_balanced_winds
+		focus = SLW_lances_of_purity
+	}
+	
+	completion_reward = {
+		add_ideas = SLW_protectors_of_heaven
+	}
+	ai_will_do = { factor = 80 }
 }

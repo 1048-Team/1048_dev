@@ -210,36 +210,9 @@ country_event = { #After the end of the civil war, Midwinter realizes after she 
 	
 	fire_only_once = yes
 	
-	option = { #I will serve our fallen Empress with fire and devotion
+	option = { #Somepony other than me has to lead
 		name = solarwar.10.a
-		every_state = {
-			limit = {
-				is_core_of = EQS
-			}
-			add_core_of = SLW
-		}
-		if = {
-			limit = { has_country_flag = accepted_commie_help }
-			delete_unit_template_and_units = {
-				division_template = "Smoldering Carbon's Unionists"
-				disband = yes
-			}
-		}
-		set_variable = { equestria_conquest = 0 }
-		country_event = {
-			id = solarwar.11
-			days = 14
-			random_days = 7
-		}
-		hidden_effect = {
-			country_event = {
-				id = solarwar.87
-				days = 180
-				random_days = 210
-			}
-		}
-		set_country_flag = SLW_searching_for_prefectress
-		mark_focus_tree_layout_dirty = yes
+		SOL_end_of_civil_war_SLW = yes
 	}
 }
 
@@ -481,6 +454,9 @@ country_event = { #Nova assembles a number of inquisitors to hear that she is de
 	option = { #May the Empress protect us all
 		name = solarwar.20.a
 		add_stability = 0.03
+		hidden_effect = {
+			complete_national_focus = SLW_traitors_in_midst
+		}
 	}
 }
 
@@ -494,6 +470,9 @@ country_event = { #Ponies awake to a repeating decree by Nova that she is solely
 	option = { #What has happened to our country?!
 		name = solarwar.21.a
 		add_stability = -0.03
+		hidden_effect = {
+			complete_national_focus = SLW_traitors_in_midst
+		}
 	}
 }
 
@@ -1538,5 +1517,164 @@ country_event = { #After the last of the members are arrested, Nova gives them o
 			ideology = communism
 			popularity = -0.15
 		}
+	}
+}
+
+country_event = { #After dealing with some of the most vocal critics of herself, Nova then moves to put some of the other suspected dissenters on trial for heresy or other crimes against the Empire, and she knows who to start with
+	id = solarwar.94
+	title = solarwar.94.t
+	desc = solarwar.94.d
+	
+	is_triggered_only = yes
+	
+	option = { #He won't be missed, much
+		name = solarwar.94.a
+		set_variable = { SLW_trial_tracker = 0 }
+	}
+}
+
+country_event = { #Blueblood is hauled before Nova in the throne room, completely unprepared, and he is accused of heresy and of sedition, and he defends himself as being locked up - to which ponies could attest - while Celestia was around, and that he wanted her gone, too, along with other points that could sway him to be freed
+	id = solarwar.95
+	title = solarwar.95.t
+	desc = solarwar.95.d
+	
+	is_triggered_only = yes
+	
+	option = { #He's obviously guilty
+		name = solarwar.95.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				has_global_flag = SLW_nova_snaps
+				factor = 3
+			}
+		}
+		retire_character = EQS_Blueblood
+		add_to_variable = { SLW_trial_tracker = 1 }
+	}
+	option = { #Release him
+		name = solarwar.95.b
+		ai_chance = {
+			factor = 50
+		}
+		add_tech_bonus = {
+			bonus = 0.67
+			uses = 1
+			category = artillery
+		}
+	}
+}
+
+country_event = { #Various generals are put on trial for sedition, and evidence is brought forward that proves they are guilty, which they weakly try to defend against
+	id = solarwar.96
+	title = solarwar.96.t
+	desc = solarwar.96.d
+	
+	is_triggered_only = yes
+	
+	option = { #There is only one punishment for traitors
+		name = solarwar.96.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				has_completed_focus = SLW_continue_fight
+				factor = 1.25
+			}
+		}
+		###Remove generals###
+		add_to_variable = { SLW_trial_tracker = 2 }
+	}
+	option = { #Show them mercy
+		name = solarwar.96.b
+		ai_chance = { factor = 40 }
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = support_tech
+		}
+	}
+}
+
+country_event = { #Nova is given reports about the amount of anger and dissention in the general soldiers of the Empire and she is told that the Inquisitionis is ready to purge where needed
+	id = solarwar.97
+	title = solarwar.97.t
+	desc = solarwar.97.d
+	
+	is_triggered_only = yes
+	
+	option = { #Yes, destroy them!
+		name = solarwar.97.a
+		ai_chance = { factor = 75 }
+		add_manpower = -150000
+		add_to_variable = { SLW_trial_tracker = 2 }
+	}
+	option = { #No, they can be won over
+		name = solarwar.97.b
+		ai_chance = { factor = 25 }
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = infantry_tech
+		}
+	}
+}
+
+country_event = { #Wraps up the trials, with Nova satisfied that things have been settled for good
+	id = solarwar.98
+	title = solarwar.98.t
+	desc = solarwar.98.d
+	
+	is_triggered_only = yes
+	
+	option = { #We can move on to other things
+		add_political_power = 25
+		IF = {
+			limit = {
+				check_variable = { SLW_trial_tracker < 2 }
+			}
+			hidden_effect = {
+				country_event = {
+					id = solarwar.99
+					days = 150
+					random_days = 60
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Nova is surprised when there is an uprising in the nation from the Militarium, but it gets put down rather quickly regardless, as Blueblood tries to capture her but fails and the rebellion falls apart
+	id = solarwar.99
+	title = solarwar.99.t
+	desc = solarwar.99.d
+	
+	is_triggered_only = yes
+	
+	option = { #There were traitors after all
+		###Remove Blueblood and generals, add back in last idea
+	}
+}
+
+country_event = { #A trial goes on for some of the heads of the Imperial Admirality that were protesting against Nova, with their fates being sealed as executions
+	id = solarwar.100
+	title = solarwar.100.t
+	desc = solarwar.100.d
+	
+	is_triggered_only = yes
+	
+	option = { #Who needs admirals, anyway?
+		###Remove admiral, apply reduced spirit
+	}
+}
+
+country_event = { #Nova watches a demonstration of some new capital ship weapons, and they end up destroying some buildings in Manehattan, although she doesn't really care
+	id = solarwar.101
+	title = solarwar.101.t
+	desc = solarwar.101.d
+	
+	is_triggered_only = yes
+	
+	option = { #What are a few blocks in the name of progress?
+		add_ideas = SLW_biggest_stick
 	}
 }
