@@ -3355,3 +3355,788 @@ shared_focus = {
 	}
 	ai_will_do = { factor = 80 }
 }
+
+###Industry Tree###
+shared_focus = {
+	id = SLW_reparations_by_force
+	x = 19
+	y = 20
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = SLW_proper_successor_tt
+			EQS_Nova_Glow = { is_country_leader = yes }
+		}
+	}
+	
+	allow_branch = { has_country_flag = SLW_searching_for_prefectess }
+	
+	cost = 5
+	
+	completion_reward = {
+		###Country event for inquisitors breaking into businesses, homes, and other places that are from harmonist areas and looting them for money
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_levy_more_taxes
+	x = 25
+	y = 20
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = SLW_proper_successor_tt
+			EQS_Nova_Glow = { is_country_leader = yes }
+		}
+	}
+	
+	allow_branch = { has_country_flag = SLW_searching_for_prefectess }
+	
+	cost = 5
+	
+	completion_reward = {
+		###Event for ponies protesting outside of the palace where Nova rules and Nova looking down on them with disdain before they burn an depiction of her because of her increased taxes, and she has them driven off
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = SLW_rebuild_manehattan
+	x = 0
+	y = 1
+	relative_position_id = SLW_reparations_by_force
+	
+	cost = 4
+	prerequisite = { focus = SLW_reparations_by_force }
+	
+	completion_reward = {
+		75 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { 
+		factor = 40
+		modifier = {
+			has_completed_focus = SLW_faithful_city
+			factor = 1.5
+		}
+	}
+}
+
+shared_focus = {
+	id = SLW_further_culling
+	x = -2
+	y = 1
+	relative_position_id = SLW_reparations_by_force
+	
+	cost = 3
+	prerequisite = { focus = SLW_reparations_by_force }
+	
+	completion_reward = {
+		###Event for inquisitors rampaging through the factories to drag out more suspected harmonists in the workforce, with the loyal ones just thankful they're all right
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_bless_loyalty
+	x = 0
+	y = 1
+	relative_position_id = SLW_levy_more_taxes
+	
+	cost = 4
+	prerequisite = { focus = SLW_levy_more_taxes }
+	
+	completion_reward = {
+		12 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = { 
+		factor = 50
+		modifier = {
+			has_completed_focus = SLW_compromise_location
+			modifier = 1.3
+		}
+	}
+}
+
+shared_focus = {
+	id = SLW_oppressing_unfaithful
+	x = 2
+	y = 1
+	relative_position_id = SLW_levy_more_taxes
+	
+	cost = 4
+	prerequisite = { focus = SLW_levy_more_taxes }
+	
+	completion_reward = {
+		###Insert focus
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_melt_scrap
+	x = 0
+	y = 1
+	relative_position_id = SLW_rebuild_manehattan
+	
+	cost = 4
+	prerequisite = { focus = SLW_rebuild_manehattan }
+	
+	completion_reward = {
+		75 = {
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = SLW_no_homeless_exceptions
+	x = 3
+	y = 1
+	relative_position_id = SLW_rebuild_manehattan
+	
+	cost = 6
+	prerequisite = { focus = SLW_levy_more_taxes }
+	prerequisite = { focus = SLW_reparations_by_force }
+	prerequisite = { focus = SLW_rebuild_manehattan }
+	prerequisite = { focus = SLW_bless_loyalty }
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = EQS_great_war_aftermath
+			add_idea = EQS_great_war_aftermath_2
+		}
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = SLW_drain_marshes
+	x = 0
+	y = 1
+	relative_position_id = SLW_bless_loyalty
+	
+	cost = 3
+	prerequisite = { focus = SLW_bless_loyalty }
+	
+	completion_reward = {
+		###Add building slots to a random assortment of states that are fairly rural
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_iron_tails_fun
+	x = 0
+	y = 1
+	relative_position_id = SLW_drain_marshes
+	
+	cost = 4
+	prerequisite = { focus = SLW_drain_marshes }
+	prerequisite = { focus = SLW_no_homeless_exceptions }
+	
+	completion_reward = {
+		add_manpower = -15049
+		39 = {
+			add_resource = {
+				type = crystals
+				amount = 16
+			}
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_expand_tartarus_industries
+	x = 0
+	y = 1
+	relative_position_id = SLW_melt_scrap
+	
+	cost = 4
+	prerequisite = { focus = SLW_melt_scrap }
+	prerequisite = { focus = SLW_no_homeless_exceptions }
+	
+	completion_reward = {
+		###Idea, also add Tartarus Industries
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_dont_meddle
+	x = 0
+	y = 1
+	relative_position_id = SLW_expand_tartarus_industries
+	
+	cost = 5
+	mutually_exclusive = { focus = SLW_formalize_control }
+	prerequisite = { focus = SLW_expand_tartarus_industries }
+	prerequisite = { focus = SLW_no_growth_heresy }
+	
+	completion_reward = {
+		###Add idea
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_formalize_control
+	x = 0
+	y = 1
+	relative_position_id = SLW_iron_tails_fun
+	
+	cost = 5
+	mutually_exclusive = { focus = SLW_dont_meddle }
+	prerequisite = { focus = SLW_iron_tails_fun }
+	prerequisite = { focus = SLW_inflate_to_pay }
+	
+	completion_reward = {
+		###Add idea
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_no_growth_heresy
+	x = -1
+	y = 1
+	relative_position_id = SLW_no_homeless_exceptions
+	
+	cost = 7
+	prerequisite = { focus = SLW_no_homeless_exceptions }
+	
+	completion_reward = {
+		###Event for ponies being shut down for losing money for too long
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_inflate_to_pay
+	x = 1
+	y = 1
+	relative_position_id = SLW_no_homeless_exceptions
+	
+	cost = 6
+	prerequisite = { focus = SLW_no_homeless_exceptions }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				has_idea = EQS_great_war_aftermath_2
+			}
+			swap_ideas = {
+				remove_idea = EQS_great_war_aftermath_2
+				add_idea = EQS_great_war_aftermath_3
+			}
+		}
+		ELSE = {
+			remove_ideas = EQS_great_war_aftermath_3
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###Left Side###
+shared_focus = {
+	id = SLW_require_quotas
+	x = 0
+	y = 1
+	relative_position_id = SLW_dont_meddle
+	
+	cost = 4
+	prerequisite = {
+		focus = SLW_dont_meddle
+		focus = SLW_formalize_control
+	}
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = SLW_grant_subsidies
+	x = -2
+	y = 1
+	relative_position_id = SLW_dont_meddle
+	
+	cost = 5
+	prerequisite = { focus = SLW_dont_meddle }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = dispersed_industry_category
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_reusable_consumerism
+	x = 0
+	y = 1
+	relative_position_id = SLW_grant_subsidies
+	
+	cost = 4
+	prerequisite = { focus = SLW_grant_subsidies }
+	prerequisite = { focus = SLW_require_quotas }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_extract_everything
+	x = 0
+	y = 1
+	relative_position_id = SLW_require_quotas
+	
+	cost = 3
+	prerequisite = { focus = SLW_require_quotas }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = excavation_tech
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = SLW_prevent_disruption_risks
+	x = 0
+	y = 1
+	relative_position_id = SLW_reusable_consumerism
+	
+	cost = 5
+	prerequisite = { focus = SLW_reusable_consumerism }
+	prerequisite = { focus = SLW_extract_everything }
+	
+	completion_reward = {
+		###Idea
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = dispersed_industry_category
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = SLW_excavate_depths
+	x = 0
+	y = 1
+	relative_position_id = SLW_extract_everything
+	
+	cost = 4
+	prerequisite = { focus = SLW_reusable_consumerism }
+	prerequisite = { focus = SLW_extract_everything }
+	
+	completion_reward = {
+		###Decision unlock
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_reactive_manufacturing_lines
+	x = 1
+	y = 1
+	relative_position_id = SLW_prevent_disruption_risks
+	
+	cost = 6
+	prerequisite = { focus = SLW_prevent_disruption_risks }
+	prerequisite = { focus = SLW_excavate_depths }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 60 }
+}
+
+###Center###
+shared_focus = {
+	id = SLW_minimal_involvement
+	x = 2
+	y = 1
+	relative_position_id = SLW_dont_meddle
+	
+	cost = 3
+	prerequisite = {
+		focus = SLW_dont_meddle
+		focus = SLW_formalize_control
+	}
+	mutually_exclusive = { focus = SLW_ban_heretical_education }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = SLW_allow_some_innovation
+	x = 0
+	y = 1
+	relative_position_id = SLW_minimal_involvement
+	
+	cost = 5
+	prerequisite = { focus = SLW_minimal_involvement }
+	
+	completion_reward = {
+		add_political_power = -75
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = electronics_tech
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_matrix_sight
+	x = 0
+	y = 1
+	relative_position_id = SLW_allow_some_innovation
+	
+	cost = 5
+	prerequisite = { focus = SLW_allow_some_innovation }
+	
+	completion_reward = {
+		###Idea
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = electronics_tech
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_faithful_scientists
+	x = 0
+	y = 1
+	relative_position_id = SLW_matrix_sight
+	
+	cost = 4
+	prerequisite = { focus = SLW_matrix_sight }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				amount_research_slots < 5
+			}
+			add_research_slot = 1
+		}
+		add_stability = -0.03
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = SLW_ban_heretical_education
+	x = -2
+	y = 1
+	relative_position_id = SLW_formalize_control
+	
+	cost = 4
+	prerequisite = {
+		focus = SLW_dont_meddle
+		focus = SLW_formalize_control
+	}
+	mutually_exclusive = { focus = SLW_minimal_involvement }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_hall_icons
+	x = 0
+	y = 1
+	relative_position_id = SLW_ban_heretical_education
+	
+	cost = 4
+	prerequisite = { focus = SLW_ban_heretical_education }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_holier_than_napalm
+	x = 0
+	y = 1
+	relative_position_id = SLW_hall_icons
+	
+	cost = 5
+	prerequisite = { focus = SLW_hall_icons }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = nuclear
+		}
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = SLW_religious_teachers
+	x = 0
+	y = 1
+	relative_position_id = SLW_holier_than_napalm
+	
+	cost = 3
+	prerequisite = { focus = SLW_holier_than_napalm }
+	
+	completion_reward = {
+		IF = {
+			limit = {
+				amount_research_slots < 5
+			}
+			add_research_slot = 1
+		}
+		###Adjust idea
+	}
+	ai_will_do = { factor = 75 }
+}
+
+###Right Side###
+shared_focus = {
+	id = SLW_theocratic_industry
+	x = 0
+	y = 1
+	relative_position_id = SLW_formalize_control
+	
+	cost = 3
+	prerequisite = {
+		focus = SLW_dont_meddle
+		focus = SLW_formalize_control
+	}
+	
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = industry
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_all_through_IBEA
+	x = 2
+	y = 1
+	relative_position_id = SLW_formalize_control
+	
+	cost = 4
+	prerequisite = { focus = SLW_formalize_control }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 2
+			bonus = 2
+			category = concentrated_industry_category
+		}
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = SLW_loosen_regulations
+	x = 0
+	y = 1
+	relative_position_id = SLW_theocratic_industry
+	
+	cost = 3
+	prerequisite = { focus = SLW_theocratic_industry }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_projects_sake
+	x = 0
+	y = 1
+	relative_position_id = SLW_all_through_IBEA
+	
+	cost = 4
+	prerequisite = { focus = SLW_theocratic_industry }
+	prerequisite = { focus = SLW_all_through_IBEA }
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = industry
+		}
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = construction_tech
+		}
+	}
+	ai_will_do = { factor = 48 }
+}
+
+shared_focus = {
+	id = SLW_let_empress_decide
+	x = 0
+	y = 1
+	relative_position_id = SLW_loosen_regulations
+	
+	cost = 5
+	prerequisite = { focus = SLW_loosen_regulations }
+	prerequisite = { focus = SLW_projects_sake }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = SLW_faithful_conglomerations
+	x = 0
+	y = 1
+	relative_position_id = SLW_projects_sake
+	
+	cost = 4
+	prerequisite = { focus = SLW_loosen_regulations }
+	prerequisite = { focus = SLW_projects_sake }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = SLW_continual_industrial_planning
+	x = 1
+	y = 1
+	relative_position_id = SLW_let_empress_decide
+	
+	cost = 6
+	prerequisite = { focus = SLW_let_empress_decide }
+	prerequisite = { focus = SLW_faithful_conglomerations }
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = SLW_level_slums
+	x = 0
+	y = 1
+	relative_position_id = SLW_religious_teachers
+	
+	cost = 3
+	prerequisite = {
+		focus = SLW_faithful_scientists
+		focus = SLW_religious_teachers
+	}
+	prerequisite = {
+		focus = SLW_reactive_manufacturing_lines
+		focus = SLW_continual_industrial_planning
+	}
+	
+	completion_reward = {
+		75 = {
+			add_extra_state_shared_building_slots = 2
+		}
+		12 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		3 = {
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = SLW_prioritize_markets
+	x = 0
+	y = 1
+	relative_position_id = SLW_faithful_scientists
+	
+	cost = 5
+	prerequisite = {
+		focus = SLW_faithful_scientists
+		focus = SLW_religious_teachers
+	}
+	prerequisite = {
+		focus = SLW_reactive_manufacturing_lines
+		focus = SLW_continual_industrial_planning
+	}
+	
+	completion_reward = {
+		###Idea
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = SLW_labor_to_salvation
+	x = 1
+	y = 1
+	relative_position_id = SLW_prioritize_markets
+	
+	cost = 6
+	prerequisite = { focus = SLW_prioritize_markets }
+	prerequisite = { focus = SLW_level_slums }
+	
+	completion_reward = {
+		###Event for Nova overseeing one of the new industrial sectors of the Empire, giving some final instructions and orders, despite how pushed and exhausted the workers are, as one tries to escape their harsh life
+	}
+	ai_will_do = { factor = 60 }
+}
