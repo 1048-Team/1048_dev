@@ -710,7 +710,16 @@ country_event = { #Quasar is summoned by Nova to the throne room and Nova has a 
 	
 	option = { #It'd be wise to say yes
 		name = solarwar.35.a
-		###Give Nova her new advisor ability here
+		event_target:EQS_Nova_Glow_target = {
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = nova_glow
+					traits = { empress_high_mage }
+					allowed = { original_tag = SLW }
+				}
+			}
+		}
 	}
 }
 
@@ -763,6 +772,10 @@ country_event = { #Sunset is brought before Nova, along with some others, includ
 	option = { #To think I was betrayed by my former student
 		name = solarwar.39.a
 		###Add new advisors here
+		set_country_flag = SLW_replaced_advisors
+		show_ideas_tooltip = rotary
+		show_ideas_tooltip = sunrise_passion
+		show_ideas_tooltip = updraft
 	}
 }
 
@@ -851,7 +864,16 @@ country_event = { #Nova assembles the Adoratio Primus and declares that as Sunse
 	
 	option = { #This better not be a mistake
 		name = solarwar.52.a
-		###Add Quasar's high mage role here
+		event_target:EQS_Quasar_Pulse_target = {
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = quasar_pulse
+					traits = { fanatic_high_mage }
+					allowed = { original_tag = SLW }
+				}
+			}
+		}
 	}
 }
 
@@ -932,8 +954,21 @@ country_event = { #Nova enters the palace dungeons to speak with Sunset, who has
 		custom_effect_tooltip = EQS_sunset_general_tt
 		custom_effect_tooltip = EQS_aurora_general_tt
 		hidden_effect = {
-			event_target:EQS_Sunset_Shimmer_1048_target = { set_nationality = ROOT }
-			event_target:EQS_Aurora_Shinespark_target = { set_nationality = ROOT }
+			event_target:EQS_Sunset_Shimmer_target = { 
+				set_character_flag = SLW_sunset_restored
+				remove_advisor_role = { slot = political_advisor }
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = sunset_shimmer
+						traits = { analytical_inquisitor }
+						allowed = {
+							original_tag = SLW
+						}
+					}
+				}
+			}
+			event_target:EQS_Aurora_Shinespark_target = { set_character_flag = SLW_aurora_released }
 		}
 	}
 }
@@ -947,7 +982,16 @@ country_event = { #A ceremony honoring Midwinter as the leader who kept them fro
 	
 	option = { #Your service is your reward!
 		name = solarwar.59.a
-		###Add Midwinter as a final idea here or as a potential advisor
+		event_target:EQS_Midwinter_Halo_target = {
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = midwinter_halo
+					traits = { honored_archmage }
+					allowed = { original_tag = SLW }
+				}
+			}
+		}
 	}
 }
 
@@ -1793,6 +1837,173 @@ country_event = { #Nova tours the largest of a new block of factories, which hav
 	is_triggered_only = yes
 	
 	option = { #There is no escape
+		name= solarwar.106.a
 		add_ideas = SLW_sanctification_through_sweat
+	}
+}
+
+###Rebuilding Manehattan###
+country_event = { #With the war winding down, Nova learns more about the total amount of devestation that was wrought on Manehattan, and how many ponies are living in destitution, which she swears she will end to show how she is just as good as Daybreaker
+	id = solarwar.107
+	title = solarwar.107.t
+	desc = solarwar.107.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will love me
+		name = solarwar.107.a
+		add_political_power = -75
+	}
+}
+
+country_event = { #Nova meets with Fidelis as they both overlook some ponies being worked to the bone, as Fidelis talks about how they are beginning to rebuild the city; one of the harmonist workesr attempts to flee, but is taken down by a couple of soldiers
+	id = solarwar.108
+	title = solarwar.108.t
+	desc = solarwar.108.d
+	
+	is_triggered_only = yes
+	
+	option = { #This is too good for them; work them harder
+		name = solarwar.108.a
+		IF = {
+			limit = {
+				EQS = { has_country_flag = unsuccessful_rebellion }
+			}
+			add_to_variable = { rebel_var_1 = -0.1 }
+			add_to_variable = { rebel_var_2 = 0.05 }
+		}
+		ELSE = {
+			add_to_variable = { rebel_var_1 = -0.05 }
+			add_to_variable = { rebel_var_2 = 0.1 }
+		}
+	}
+}
+
+country_event = { #Fidelis leads a small number of inquisitors into a bar in a slightly less damaged area of Manehattan and declares everypony there under arrest for heresy, and a fight breaks out between the last few harmonists there and the inquisitors, which ends up in defeat for the harmonists
+	id = solarwar.109
+	title = solarwar.109.t
+	desc = solarwar.109.d
+	
+	is_triggered_only = yes
+	
+	option = { #Heretics dealt with
+		name = solarwar.109.a
+		add_stability = 0.03
+		add_political_power = 25
+		IF = {
+			limit = {
+				EQS = { has_country_flag = unsuccessful_rebellion }
+			}
+			add_to_variable = { rebel_var_1 = 0.1 }
+		}
+		ELSE = {
+			add_to_variable = { rebel_var_1 = 0.25 }
+		}
+	}
+}
+
+###Starlight and Trixie Stuff###
+country_event = { #Nova is rushed to by a few guards who report that they have found something of interest in the dungeons, and Nova sees that Trixie and Starlight are still held in captivity, which makes her most pleased at the opportunity to do her own work on them
+	id = solarwar.110
+	title = solarwar.110.t
+	desc = solarwar.110.d
+	
+	is_triggered_only = yes
+	
+	option = { #Somepony was hiding something...
+		name = solarwar.110.a
+	}
+}
+
+country_event = { #Nova sneers as she enters Starlight's cell, as one of the last things done to them was separate Trixie and Starlight, and Starlight remains confident in front of Nova, making an insinuation she isn't nearly as capable as the alicorn; Nova does assault her for that, but Starlight refuses to break and laughs at Nova's attempts
+	id = solarwar.111
+	title = solarwar.111.t
+	desc = solarwar.111.d
+	
+	is_triggered_only = yes
+	
+	option = { #I am in control! Not some useless prisoner!
+		name = solarwar.111.a
+	}
+}
+
+country_event = { #Trixie at first holds against Nova's tortures but Nova reveals that she dug up some of Trixie's time spent in Manehattan, and some of the connections she still has, and she threatens to have one of her old friends killed in her stead if she doesn't submit, which Trixie does and disgusts Nova
+	id = solarwar.112
+	title = solarwar.112.t
+	desc = solarwar.112.d
+	
+	is_triggered_only = yes
+	
+	option = { #It's made you weak
+		name = solarwar.112.a
+	}
+}
+
+country_event = { #Starlight remains defiant against Nova but Nova has another plan for her, as after Starlight remains steadfast against Nova's torture, she brings in Trixie, whom she threatens to jupm out of the window to her death, and Starlight finally breaks to serve Nova
+	id = solarwar.113
+	title = solarwar.113.t
+	desc = solarwar.113.d
+	
+	is_triggered_only = yes
+	
+	option = { #Friends are liabilities, which you now know
+		name = solarwar.113.a
+		set_country_flag = starlight_and_trixie_corrupted
+		custom_effect_tooltip = SLW_starlight_and_trixie_generals_tt
+		hidden_effect = {
+			event_target:EQS_Starlight_Glimmer_target = { set_nationality = SLW }
+			event_target:EQS_Trixie_Lulamoon_target = { set_nationality = SLW }
+		}
+	}
+}
+
+country_event = { #Nova scoffs at some of the things she learned that Daybreaker tried to do to break Starlight and Trixie, and she orders that ponies prepare for a grand execution, as she will be glad to see two leading heretics go up in smoke
+	id = solarwar.114
+	title = solarwar.114.t
+	desc = solarwar.114.d
+	
+	is_triggered_only = yes
+	
+	option = { #And I'll have front-row seats
+		name = solarwar.114.a
+	}
+}
+
+country_event = { #Nova waltzes in after some inquisitors have done their work with Trixie, who is ready, according to them, to speak with Nova about her crimes, and Nova is much pleased and demands that Trixie recant of Celestia and also sign her confession of heresy, which Trixie almost resists doing before Nova smacks her a couple of times to get the result
+	id = solarwar.115
+	title = solarwar.115.t
+	desc = solarwar.115.d ###Trixie is wounded, missing a few teeth, and has a chipped horn, among other injuries
+	
+	is_triggered_only = yes
+	
+	option = { #Be thankful you kept your horn
+		name = solarwar.115
+	}
+}
+
+country_event = { #Nova enters into Starlight's cell when it is clear she won't break regarding a confession, and Nova ponders a moment before she gets an idea to offer Starlight a deal, where Trixie will supposedly get off scott-free; Starlight takes some convincing, but since she is distressed it is easier, and Nova laughs when she says she lied
+	id = solarwar.116
+	title = solarwar.116.t
+	desc = solarwar.116.d
+	
+	is_triggered_only = yes
+	
+	option = { #Never trust anypony
+		name = solarwar.116.a
+	}
+}
+
+country_event = { #Starlight and Trixie are led to the heretic pyre in Manehattan specifically, where Nova is already watching, and Starlight and Trixie share a couple of final words with each other, as Trixie expresses her fear of death and Starlight her regret about Sunburst; Starlight faces the pyre bravely while Trixie nervously follows her as Nova watches on
+	id = solarwar.117
+	title = solarwar.117.t
+	desc = solarwar.117.d
+	
+	is_triggered_only = yes
+	
+	option = { #An end of an era
+		name = solarwar.117.a
+		add_stability = 0.05
+		add_war_support = 0.075
+		add_political_power = 100
 	}
 }
