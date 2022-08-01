@@ -7,13 +7,19 @@ shared_focus = {
 	
 	available = {
 		hidden_trigger = {
-			has_country_flag = daybreaker_reigns
+			OR = {
+				has_country_flag = daybreaker_reigns
+				EQS_Nova_Glow = { is_country_leader = yes }
+			}
 		}
 	}
 		
 	allow_branch = {
 		hidden_trigger = {
-			has_country_flag = daybreaker_reigns
+			OR = {
+				has_country_flag = daybreaker_reigns
+				EQS_Nova_Glow = { is_country_leader = yes }
+			}
 		}
 	}
 	
@@ -279,44 +285,44 @@ shared_focus = {
 }
 
 ###Middle-left Tree###
-shared_focus = {
-	id = EQS_they_shall_know
-	x = -1
-	y = 1
-	relative_position_id = EQS_improving_perfection
-	
-	bypass = {
-		}
-		
-	cost = 5
-	
-	
-	prerequisite = {
-		focus = EQS_undying_loyalty
-	}
-	prerequisite = {
-		focus = EQS_improving_perfection
-	}
-	prerequisite = { 
-		focus = EQS_in_the_empress_service
-	}
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_purifying_light
-			days = 210
-		}
-	}
-	ai_will_do = {
-		factor = 25
-	}
-}
+#shared_focus = {
+#	id = EQS_they_shall_know
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_improving_perfection
+#	
+#	bypass = {
+#		}
+#		
+#	cost = 5
+#	
+#	
+#	prerequisite = {
+#		focus = EQS_undying_loyalty
+#	}
+#	prerequisite = {
+#		focus = EQS_improving_perfection
+#	}
+#	prerequisite = { 
+#		focus = EQS_in_the_empress_service
+#	}
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_purifying_light
+#			days = 210
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 25
+#	}
+#}
 
 shared_focus = {
 	id = EQS_all_shall_serve
-	x = 0
+	x = -1
 	y = 1
-	relative_position_id = EQS_they_shall_know
+	relative_position_id = EQS_improving_perfection
 	
 	bypass = {
 		has_idea = service_by_requirement
@@ -325,8 +331,10 @@ shared_focus = {
 	cost = 5
 	
 	prerequisite = {
-		focus = EQS_they_shall_know
+		focus = EQS_undying_loyalty
 	}
+	prerequisite = { focus = EQS_improving_perfection }
+	prerequisite = { focus = EQS_in_the_empress_service }
 	
 	
 	completion_reward = {
@@ -358,53 +366,53 @@ shared_focus = {
 }
 
 ###Middle-Right Tree###
-shared_focus = {
-	id = EQS_cleansing_corruption
-	x = 1
-	y = 1
-	relative_position_id = EQS_improving_perfection
-	
-	bypass = {
-		}
-	
-	cost = 5
-	
-	prerequisite = {
-		focus = EQS_undying_loyalty
-	}
-	prerequisite = {
-		focus = EQS_improving_perfection
-	}
-	prerequisite = { 
-		focus = EQS_in_the_empress_service
-	}
-	
-	
-	completion_reward = {
-		75 = {
-			add_building_construction = {
-				type = industrial_complex
-				level = 2
-				instant_build = yes
-			}
-			add_extra_state_shared_building_slots = 2
-		}
-		add_timed_idea = {
-			idea = EQS_donated_assets
-			days = 60
-		}
-		country_event = solar.102
-	}
-	ai_will_do = {
-		factor = 17
-	}
-}
+#shared_focus = {
+#	id = EQS_cleansing_corruption
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_improving_perfection
+#	
+#	bypass = {
+#		}
+#	
+#	cost = 5
+#	
+#	prerequisite = {
+#		focus = EQS_undying_loyalty
+#	}
+#	prerequisite = {
+#		focus = EQS_improving_perfection
+#	}
+#	prerequisite = { 
+#		focus = EQS_in_the_empress_service
+#	}
+#	
+#	
+#	completion_reward = {
+#		75 = {
+#			add_building_construction = {
+#				type = industrial_complex
+#				level = 2
+#				instant_build = yes
+#			}
+#			add_extra_state_shared_building_slots = 2
+#		}
+#		add_timed_idea = {
+#			idea = EQS_donated_assets
+#			days = 60
+#		}
+#		country_event = solar.102
+#	}
+#	ai_will_do = {
+#		factor = 17
+#	}
+#}
 
 shared_focus = {
 	id = EQS_forging_new_future
-	x = 0
+	x = 1
 	y = 1
-	relative_position_id = EQS_cleansing_corruption
+	relative_position_id = EQS_improving_perfection
 	
 	bypass = {
 		has_idea = tot_economic_mobilisation
@@ -413,8 +421,10 @@ shared_focus = {
 	cost = 5
 	
 	prerequisite = {
-		focus = EQS_cleansing_corruption
+		focus = EQS_undying_loyalty
 	}
+	prerequisite = { focus = EQS_improving_perfection }
+	prerequisite = { focus = EQS_in_the_empress_service }
 	
 	
 	completion_reward = {
@@ -1580,8 +1590,125 @@ shared_focus = {
 }
 
 ###Left side###
+#shared_focus = {
+#	id = EQS_surging_through_swamps
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_retribution_is_just
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	
+#	prerequisite = { focus = EQS_retribution_is_just }
+#	
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_burning_water
+#			days = 180
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 15
+#	}
+#}
+
+#shared_focus = {
+#	id = EQS_burn_the_daemons
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_retribution_is_just
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	
+#	prerequisite = { focus = EQS_retribution_is_just }
+#	
+#	
+#	completion_reward = {
+#		IF = {
+#			limit = {
+#				AND = {
+#					NOT = {
+#						has_global_flag = balsplosion
+#					}
+#					country_exists = BAL
+#				}
+#			}
+#			add_timed_idea = {
+#				idea = EQS_purging_the_secularists
+#				days = 90
+#			}
+#		}
+#		ELSE_IF = {
+#			limit = {
+#				AND = {
+#					has_global_flag = balsplosion
+#					OR = {
+#						country_exists = EEE
+#						country_exists = NEI
+#					}
+#				}
+#			}
+#			add_timed_idea = {
+#				idea = EQS_purging_the_daemons
+#				days = 90
+#			}
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+
 shared_focus = {
-	id = EQS_surging_through_swamps
+	id = EQS_level_the_mountains
 	x = -1
 	y = 1
 	relative_position_id = EQS_retribution_is_just
@@ -1611,126 +1738,9 @@ shared_focus = {
 		}
 	}
 	
-	cost = 3
+	cost = 5
 	
 	prerequisite = { focus = EQS_retribution_is_just }
-	
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_burning_water
-			days = 180
-		}
-	}
-	ai_will_do = {
-		factor = 15
-	}
-}
-
-shared_focus = {
-	id = EQS_burn_the_daemons
-	x = 0
-	y = 1
-	relative_position_id = EQS_surging_through_swamps
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 2
-	
-	prerequisite = { focus = EQS_surging_through_swamps }
-	
-	
-	completion_reward = {
-		IF = {
-			limit = {
-				AND = {
-					NOT = {
-						has_global_flag = balsplosion
-					}
-					country_exists = BAL
-				}
-			}
-			add_timed_idea = {
-				idea = EQS_purging_the_secularists
-				days = 90
-			}
-		}
-		ELSE_IF = {
-			limit = {
-				AND = {
-					has_global_flag = balsplosion
-					OR = {
-						country_exists = EEE
-						country_exists = NEI
-					}
-				}
-			}
-			add_timed_idea = {
-				idea = EQS_purging_the_daemons
-				days = 90
-			}
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_level_the_mountains
-	x = 0
-	y = 1
-	relative_position_id = EQS_burn_the_daemons
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_burn_the_daemons }
 	
 	
 	completion_reward = {
@@ -1743,8 +1753,53 @@ shared_focus = {
 }
 
 ###Right side###
+#shared_focus = {
+#	id = EQS_juking_jungle_warriors
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_retribution_is_just
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	
+#	prerequisite = { focus = EQS_retribution_is_just }
+#	
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_prepared_scouts
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 15 }
+#}
+
 shared_focus = {
-	id = EQS_juking_jungle_warriors
+	id = EQS_remind_the_empire
 	x = 1
 	y = 1
 	relative_position_id = EQS_retribution_is_just
@@ -1774,120 +1829,100 @@ shared_focus = {
 		}
 	}
 	
-	cost = 2
+	cost = 4
 	
 	prerequisite = { focus = EQS_retribution_is_just }
 	
 	
 	completion_reward = {
 		add_timed_idea = {
-			idea = EQS_prepared_scouts
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 15 }
-}
-
-shared_focus = {
-	id = EQS_remind_the_empire
-	x = 0
-	y = 1
-	relative_position_id = EQS_juking_jungle_warriors
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 2
-	
-	prerequisite = { focus = EQS_juking_jungle_warriors }
-	
-	
-	completion_reward = {
-		add_timed_idea = {
 			idea = EQS_revanchist_reminder
-			days = 30
+			days = 60
 		}
 	}
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
-	id = EQS_communist_free_empire
-	x = 0
-	y = 1
-	relative_position_id = EQS_remind_the_empire
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_remind_the_empire }
-	
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_purge_the_communists
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 15 }
-}
+#shared_focus = {
+#	id = EQS_communist_free_empire
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_remind_the_empire
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	
+#	prerequisite = { focus = EQS_remind_the_empire }
+#	
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_purge_the_communists
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 15 }
+#}
 
 ###Capstone###
 shared_focus = {
 	id = EQS_born_from_ashes
 	x = -1
 	y = 1
-	relative_position_id = EQS_communist_free_empire
+	relative_position_id = EQS_remind_the_empire
+	
+	available = {
+		OR = {
+			AND = {
+				NOT = {
+					has_global_flag = balsplosion
+					country_exists = BAL
+				}
+			}
+			AND = {
+				has_global_flag = balsplosion
+				NOT = {
+					country_exists = MTS
+					country_exists = EEE
+					country_exists = NID
+					country_exists = NEI
+					country_exists = CLI
+					country_exists = SPF
+					country_exists = STB
+					country_exists = NRP
+					country_exists = BAL
+				}
+			}
+		}
+	}
 	
 	cost = 6
 	
-	prerequisite = { focus = EQS_communist_free_empire }
+	prerequisite = { focus = EQS_remind_the_empire }
 	prerequisite = { focus = EQS_level_the_mountains }
 	
 	
@@ -2445,65 +2480,65 @@ shared_focus = {
 	ai_will_do = { factor = 50 }
 }
 
-shared_focus = {
-	id = EQS_flame_to_moths
-	x = -2
-	y = 1
-	relative_position_id = EQS_squash_the_insects
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_squash_the_insects }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_flamebringers_for_bugs
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
+#shared_focus = {
+#	id = EQS_flame_to_moths
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_squash_the_insects
+#	
+#	cost = 3
+#	
+#	prerequisite = { focus = EQS_squash_the_insects }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_flamebringers_for_bugs
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
-shared_focus = { #Should mention turnabout being fair play, and that the divisions will be expected to die
-	id = EQS_infiltrate_the_infiltrators
-	x = 0
-	y = 1
-	relative_position_id = EQS_squash_the_insects
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_squash_the_insects }
-	
-	completion_reward = {
-		load_oob = "SOL_changeling_war_Daybreaker"
-	}
-	ai_will_do = { factor = 20 }
-}
+#shared_focus = { #Should mention turnabout being fair play, and that the divisions will be expected to die
+#	id = EQS_infiltrate_the_infiltrators
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_squash_the_insects
+#	
+#	cost = 3
+#	
+#	prerequisite = { focus = EQS_squash_the_insects }
+#	
+#	completion_reward = {
+#		load_oob = "SOL_changeling_war_Daybreaker"
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
-shared_focus = {
-	id = EQS_everything_for_the_war
-	x = 2
-	y = 1
-	relative_position_id = EQS_squash_the_insects
-
-	cost = 3
-	
-	prerequisite = { focus = EQS_squash_the_insects }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_steel_for_the_war
-			days = 90
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
+#shared_focus = {
+#	id = EQS_everything_for_the_war
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_squash_the_insects
+#
+#	cost = 3
+#	
+#	prerequisite = { focus = EQS_squash_the_insects }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_steel_for_the_war
+#			days = 90
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
 shared_focus = {
 	id = EQS_fate_worse_than_death
-	x = 0
+	x = -2
 	y = 1
-	relative_position_id = EQS_flame_to_moths
+	relative_position_id = EQS_squash_the_insects
 	
 	available = {
 		NOT = {
@@ -2514,7 +2549,7 @@ shared_focus = {
 	
 	cost = 3
 	
-	prerequisite = { focus = EQS_flame_to_moths }
+	prerequisite = { focus = EQS_squash_the_insects }
 	
 	completion_reward = {
 		country_event = solar.109
@@ -2526,7 +2561,7 @@ shared_focus = {
 	id = EQS_make_them_work
 	x = 0
 	y = 1
-	relative_position_id = EQS_infiltrate_the_infiltrators
+	relative_position_id = EQS_squash_the_insects
 
 	available = {
 		NOT = {
@@ -2537,7 +2572,7 @@ shared_focus = {
 	
 	cost = 3
 	
-	prerequisite = { focus = EQS_infiltrate_the_infiltrators }
+	prerequisite = { focus = EQS_squash_the_insects }
 	
 	completion_reward = {
 		add_ideas = EQS_retribution_for_the_great_war
@@ -2547,9 +2582,9 @@ shared_focus = {
 
 shared_focus = {
 	id = EQS_fix_the_great_mistake
-	x = 0
+	x = 2
 	y = 1
-	relative_position_id = EQS_everything_for_the_war
+	relative_position_id = EQS_squash_the_insects
 	
 	available = {
 		NOT = {
@@ -2560,7 +2595,7 @@ shared_focus = {
 	
 	cost = 3
 	
-	prerequisite = { focus = EQS_everything_for_the_war }
+	prerequisite = { focus = EQS_squash_the_insects }
 	
 	completion_reward = {
 		set_province_name = { id = 748 name = renamed_chrysalia }
@@ -2588,7 +2623,7 @@ shared_focus = {
 	prerequisite = { focus = EQS_fate_worse_than_death }
 	
 	completion_reward = {
-		add_ideas = EQS_unending_waves
+		add_ideas = EQS_unending_waves_idea
 	}
 	ai_will_do = { factor = 25 }
 }
@@ -2954,13 +2989,13 @@ shared_focus = {
 	
 	available = {
 		hidden_trigger = {
-			has_country_flag = sunset_reigns
-			}
+			EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 		}
+	}
 	
 	allow_branch = {
 		hidden_trigger = {
-			has_country_flag = sunset_reigns
+			EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 		}
 	}
 	
@@ -3258,7 +3293,10 @@ shared_focus = {
 	prerequisite = { focus = EQS_elect_your_priestess }
 	
 	completion_reward = {
-		add_ideas = EQS_a_giant_family
+		swap_ideas = {
+			remove_idea = EQS_sisters_in_the_empress_2
+			add_idea = EQS_a_giant_family
+		}
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -3459,41 +3497,43 @@ shared_focus = {
 	prerequisite = { focus = EQS_priestesses_of_the_god_empress }
 	
 	completion_reward = {
-		add_ideas = EQS_family_in_service
+		swap_ideas = {
+			remove_idea = EQS_sisters_of_fury
+			add_idea = EQS_family_in_service
+		}
 	}
 	ai_will_do = { factor = 40 }
 }
 
 ###Central portion###
-shared_focus = {
-	id = EQS_gleanings_from_the_empress
-	x = 0
-	y = 7
-	relative_position_id = EQS_converging_the_adoratio_primus
-	
-	cost = 5
-	prerequisite = {
-		focus = EQS_a_family_for_heart_and_home
-		focus = EQS_a_family_through_thick_and_thin
-	}
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_blessed_workers
-			days = 365
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
+#shared_focus = {
+#	id = EQS_gleanings_from_the_empress
+#	x = 0
+#	y = 7
+#	relative_position_id = EQS_converging_the_adoratio_primus
+#	
+#	cost = 5
+#	prerequisite = {
+#		focus = EQS_a_family_for_heart_and_home
+#		focus = EQS_a_family_through_thick_and_thin
+#	}
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_blessed_workers
+#			days = 365
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
 
 shared_focus = {
 	id = EQS_ordain_the_scientific_method
 	x = -2
-	y = 1
-	relative_position_id = EQS_gleanings_from_the_empress
+	y = 8
+	relative_position_id = EQS_converging_the_adoratio_primus
 	
 	cost = 4
-	prerequisite = { focus = EQS_gleanings_from_the_empress }
 	prerequisite = { focus = EQS_a_family_for_heart_and_home }
 	
 	completion_reward = {
@@ -3542,11 +3582,14 @@ shared_focus = {
 shared_focus = {
 	id = EQS_guided_by_the_celestial_throne
 	x = 0
-	y = 1
-	relative_position_id = EQS_gleanings_from_the_empress
+	y = 8
+	relative_position_id = EQS_converging_the_adoratio_primus
 	
 	cost = 5
-	prerequisite = { focus = EQS_gleanings_from_the_empress }
+	prerequisite = { 
+		focus = EQS_a_family_for_heart_and_home 
+		focus = EQS_a_family_through_thick_and_thin
+	}
 	
 	completion_reward = {
 		add_ideas = EQS_guidance_from_above
@@ -3572,11 +3615,11 @@ shared_focus = {
 shared_focus = {
 	id = EQS_blood_spilled_is_blood_wasted
 	x = 2
-	y = 1
-	relative_position_id = EQS_gleanings_from_the_empress
+	y = 8
+	relative_position_id = EQS_converging_the_adoratio_primus
 	
 	cost = 3
-	prerequisite = { focus = EQS_gleanings_from_the_empress }
+	#prerequisite = { focus = EQS_gleanings_from_the_empress }
 	prerequisite = { focus = EQS_a_family_through_thick_and_thin }
 	
 	completion_reward = {
@@ -3683,71 +3726,71 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_only_a_fool_would_trust_in_science
-	x = 0
-	y = 1
-	relative_position_id = EQS_approach_the_directorate
-	
-	bypass = {
-		OR = {
-			NOT = {
-				country_exists = BLS
-			}
-			BLS = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	
-	cost = 2
-	prerequisite = { focus = EQS_approach_the_directorate }
-	
-	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = BLS
-		}
-	}
-	ai_will_do = { factor = 35 }
-}
-
-shared_focus = {
-	id = EQS_appoint_a_new_balish_archmage
-	x = 0
-	y = 1
-	relative_position_id = EQS_only_a_fool_would_trust_in_science
-	
-	available = {
-		NOT = {
-			country_exists = BLS
-		}
-	}
-	
-	bypass = {
-		BLS = {
-			is_subject_of = ROOT
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_only_a_fool_would_trust_in_science }
-	
-	completion_reward = {
-		every_state = {
-			limit = {
-				is_core_of = BLS
-			}
-			add_core_of = ROOT
-		}
-	}
-	ai_will_do = { factor = 40 }
-}
+#shared_focus = {
+#	id = EQS_only_a_fool_would_trust_in_science
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_approach_the_directorate
+#	
+#	bypass = {
+#		OR = {
+#			NOT = {
+#				country_exists = BLS
+#			}
+#			BLS = {
+#				is_subject_of = ROOT
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	prerequisite = { focus = EQS_approach_the_directorate }
+#	
+#	completion_reward = {
+#		create_wargoal = {
+#			type = annex_everything
+#			target = BLS
+#		}
+#	}
+#	ai_will_do = { factor = 35 }
+#}
+#
+#shared_focus = {
+#	id = EQS_appoint_a_new_balish_archmage
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_only_a_fool_would_trust_in_science
+#	
+#	available = {
+#		NOT = {
+#			country_exists = BLS
+#		}
+#	}
+#	
+#	bypass = {
+#		BLS = {
+#			is_subject_of = ROOT
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_only_a_fool_would_trust_in_science }
+#	
+#	completion_reward = {
+#		every_state = {
+#			limit = {
+#				is_core_of = BLS
+#			}
+#			add_core_of = ROOT
+#		}
+#	}
+#	ai_will_do = { factor = 40 }
+#}
 
 ###Marechester for Sunset###
 shared_focus = {
 	id = EQS_commune_with_the_slothful
-	x = -2
+	x = 2
 	y = 1
 	relative_position_id = EQS_envoys_to_the_lost
 	
@@ -3771,71 +3814,108 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
+#shared_focus = {
+#	id = EQS_ignorance_and_stupidity_rules_the_land
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_commune_with_the_slothful
+#	
+#	bypass = {
+#		OR = {
+#			NOT = {
+#				country_exists = NER
+#			}
+#			NER = {
+#				is_subject_of = ROOT
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	prerequisite = { focus = EQS_commune_with_the_slothful }
+#	
+#	completion_reward = {
+#		create_wargoal = {
+#			type = annex_everything
+#			target = NER
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
+#
+#shared_focus = {
+#	id = EQS_liven_the_lazy_communists
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_ignorance_and_stupidity_rules_the_land
+#	
+#	available = {
+#		NOT = {
+#			country_exists = NER
+#		}
+#	}
+#	
+#	bypass = {
+#		NER = {
+#			is_subject_of = ROOT
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_ignorance_and_stupidity_rules_the_land }
+#	
+#	completion_reward = {
+#		every_state = {
+#			limit = {
+#				is_core_of = NER
+#			}
+#			add_core_of = ROOT
+#		}
+#	}
+#	ai_will_do = { factor = 22 }
+#}
+
 shared_focus = {
-	id = EQS_ignorance_and_stupidity_rules_the_land
+	id = EQS_subjugating_the_central_wilds
 	x = 0
 	y = 1
 	relative_position_id = EQS_commune_with_the_slothful
 	
-	bypass = {
-		OR = {
-			NOT = {
-				country_exists = NER
-			}
-			NER = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	
-	cost = 2
-	prerequisite = { focus = EQS_commune_with_the_slothful }
-	
-	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = NER
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
-
-shared_focus = {
-	id = EQS_liven_the_lazy_communists
-	x = 0
-	y = 1
-	relative_position_id = EQS_ignorance_and_stupidity_rules_the_land
-	
 	available = {
-		NOT = {
-			country_exists = NER
+		AND = {
+			OR = {
+				NOT = { country_exists = NER }
+				NER = { is_subject_of = ROOT }
+			}
+			OR = {
+				NOT = { country_exists = CLD }
+				CLD = { is_subject_of = ROOT }
+			}
 		}
 	}
 	
-	bypass = {
-		NER = {
-			is_subject_of = ROOT
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_ignorance_and_stupidity_rules_the_land }
+	cost = 5
+	prerequisite = { focus = EQS_commune_with_the_slothful }
+	prerequisite = { focus = EQS_parlay_with_soarin }
 	
 	completion_reward = {
 		every_state = {
 			limit = {
-				is_core_of = NER
+				OR = {
+					is_core_of = NER
+					is_core_of = CLD
+				}
 			}
 			add_core_of = ROOT
 		}
 	}
-	ai_will_do = { factor = 22 }
+	ai_will_do = { factor = 45 }
 }
 
 ###Whinnyapolis for Sunset###
 shared_focus = {
 	id = EQS_remind_whinnyapolis_of_their_duty
-	x = 0
+	x = -2
 	y = 1
 	relative_position_id = EQS_envoys_to_the_lost
 	
@@ -3859,71 +3939,108 @@ shared_focus = {
 	ai_will_do = { factor = 17 }
 }
 
+#shared_focus = {
+#	id = EQS_traitors_one_and_all
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_remind_whinnyapolis_of_their_duty
+#	
+#	bypass = {
+#		OR = {
+#			NOT = {
+#				country_exists = WHY
+#			}
+#			WHY = {
+#				is_subject_of = ROOT
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	prerequisite = { focus = EQS_remind_whinnyapolis_of_their_duty }
+#	
+#	completion_reward = {
+#		create_wargoal = {
+#			type = annex_everything
+#			target = WHY
+#		}
+#	}
+#	ai_will_do = { factor = 23 }
+#}
+#
+#shared_focus = {
+#	id = EQS_integrate_the_remaining_solaris_militarium
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_traitors_one_and_all
+#	
+#	available = {
+#		NOT = {
+#			country_exists = WHY
+#		}
+#	}
+#	
+#	bypass = {
+#		WHY = {
+#			is_subject_of = ROOT
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_traitors_one_and_all }
+#	
+#	completion_reward = {
+#		every_state = {
+#			limit = {
+#				is_core_of = WHY
+#			}
+#			add_core_of = ROOT
+#		}
+#	}
+#	ai_will_do = { factor = 30 }
+#}
+
 shared_focus = {
-	id = EQS_traitors_one_and_all
+	id = EQS_correct_the_wayward_legions
 	x = 0
 	y = 1
 	relative_position_id = EQS_remind_whinnyapolis_of_their_duty
 	
-	bypass = {
-		OR = {
-			NOT = {
-				country_exists = WHY
-			}
-			WHY = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	
-	cost = 2
-	prerequisite = { focus = EQS_remind_whinnyapolis_of_their_duty }
-	
-	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = WHY
-		}
-	}
-	ai_will_do = { factor = 23 }
-}
-
-shared_focus = {
-	id = EQS_integrate_the_remaining_solaris_militarium
-	x = 0
-	y = 1
-	relative_position_id = EQS_traitors_one_and_all
-	
 	available = {
-		NOT = {
-			country_exists = WHY
+		AND = {
+			OR = {
+				NOT = { country_exists = BLS }
+				BLS = { is_subject_of = ROOT }
+			}
+			OR = {
+				NOT = { country_exists = WHY }
+				WHY = { is_subject_of = ROOT }
+			}
 		}
 	}
 	
-	bypass = {
-		WHY = {
-			is_subject_of = ROOT
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_traitors_one_and_all }
+	cost = 5
+	prerequisite = { focus = EQS_approach_the_directorate }
+	prerequisite = { focus = EQS_remind_whinnyapolis_of_their_duty }
 	
 	completion_reward = {
 		every_state = {
 			limit = {
-				is_core_of = WHY
+				OR = {
+					is_core_of = BLS
+					is_core_of = WHY
+				}
 			}
 			add_core_of = ROOT
 		}
 	}
-	ai_will_do = { factor = 30 }
+	ai_will_do = { factor = 45 }
 }
 
-###Princessdom for Sunset###
+###Principality for Sunset###
 shared_focus = {
 	id = EQS_an_envoy_to_the_royal_regent
-	x = 2
+	x = 0
 	y = 1
 	relative_position_id = EQS_envoys_to_the_lost
 	
@@ -3947,55 +4064,52 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_without_an_empress_they_are_lost
-	x = 0
-	y = 1
-	relative_position_id = EQS_an_envoy_to_the_royal_regent
-	
-	bypass = {
-		OR = {
-			NOT = {
-				country_exists = CER
-			}
-			CER = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	
-	cost = 2
-	prerequisite = { focus = EQS_an_envoy_to_the_royal_regent }
-	
-	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = CER
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
+#shared_focus = {
+#	id = EQS_without_an_empress_they_are_lost
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_an_envoy_to_the_royal_regent
+#	
+#	bypass = {
+#		OR = {
+#			NOT = {
+#				country_exists = CER
+#			}
+#			CER = {
+#				is_subject_of = ROOT
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	prerequisite = { focus = EQS_an_envoy_to_the_royal_regent }
+#	
+#	completion_reward = {
+#		create_wargoal = {
+#			type = annex_everything
+#			target = CER
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
 shared_focus = {
 	id = EQS_restoring_the_crown_of_the_heartlands
 	x = 0
 	y = 1
-	relative_position_id = EQS_without_an_empress_they_are_lost
+	relative_position_id = EQS_an_envoy_to_the_royal_regent
 	
 	available = {
-		NOT = {
-			country_exists = CER
+		OR = {
+			NOT = {
+				country_exists = CER
+			}
+			CER = { is_subject_of = ROOT }
 		}
 	}
 	
-	bypass = {
-		CER = {
-			is_subject_of = ROOT
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_without_an_empress_they_are_lost }
+	cost = 5
+	prerequisite = { focus = EQS_an_envoy_to_the_royal_regent }
 	
 	completion_reward = {
 		every_state = {
@@ -4005,7 +4119,7 @@ shared_focus = {
 			add_core_of = ROOT
 		}
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 45 }
 }
 
 ###Cloudsdale for Sunset###
@@ -4035,77 +4149,75 @@ shared_focus = {
 	ai_will_do = { factor = 18 }
 }
 
-shared_focus = {
-	id = EQS_soarin_did_not_savvy
-	x = 0
-	y = 1
-	relative_position_id = EQS_parlay_with_soarin
-	
-	bypass = {
-		OR = {
-			NOT = {
-				country_exists = CLD
-			}
-			CLD = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	
-	cost = 2
-	prerequisite = { focus = EQS_parlay_with_soarin }
-	
-	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = CLD
-		}
-	}
-	ai_will_do = { factor = 22 }
-}
-
-shared_focus = {
-	id = EQS_in_the_rainbow_factory_where_beauty_is_born
-	x = 0
-	y = 1
-	relative_position_id = EQS_soarin_did_not_savvy
-	
-	available = {
-		NOT = {
-			country_exists = CLD
-		}
-	}
-	
-	bypass = {
-		CLD = {
-			is_subject_of = ROOT
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_soarin_did_not_savvy }
-	
-	completion_reward = {
-		every_state = {
-			limit = { is_core_of = CLD }
-			add_core_of = ROOT
-		}
-	}
-	ai_will_do = { factor = 27 }
-}
+#shared_focus = {
+#	id = EQS_soarin_did_not_savvy
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_parlay_with_soarin
+#	
+#	bypass = {
+#		OR = {
+#			NOT = {
+#				country_exists = CLD
+#			}
+#			CLD = {
+#				is_subject_of = ROOT
+#			}
+#		}
+#	}
+#	
+#	cost = 2
+#	prerequisite = { focus = EQS_parlay_with_soarin }
+#	
+#	completion_reward = {
+#		create_wargoal = {
+#			type = annex_everything
+#			target = CLD
+#		}
+#	}
+#	ai_will_do = { factor = 22 }
+#}
+#
+#shared_focus = {
+#	id = EQS_in_the_rainbow_factory_where_beauty_is_born
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_soarin_did_not_savvy
+#	
+#	available = {
+#		NOT = {
+#			country_exists = CLD
+#		}
+#	}
+#	
+#	bypass = {
+#		CLD = {
+#			is_subject_of = ROOT
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_soarin_did_not_savvy }
+#	
+#	completion_reward = {
+#		every_state = {
+#			limit = { is_core_of = CLD }
+#			add_core_of = ROOT
+#		}
+#	}
+#	ai_will_do = { factor = 27 }
+#}
 
 shared_focus = {
 	id = EQS_blessings_of_the_adoratio
 	x = 1
 	y = 1
-	relative_position_id = EQS_liven_the_lazy_communists
+	relative_position_id = EQS_correct_the_wayward_legions
 	
 	cost = 4
-	prerequisite = { focus = EQS_appoint_a_new_balish_archmage }
-	prerequisite = { focus = EQS_liven_the_lazy_communists }
-	prerequisite = { focus = EQS_integrate_the_remaining_solaris_militarium }
+	prerequisite = { focus = EQS_correct_the_wayward_legions }
+	prerequisite = { focus = EQS_subjugating_the_central_wilds }
 	prerequisite = { focus = EQS_restoring_the_crown_of_the_heartlands }
-	prerequisite = { focus = EQS_in_the_rainbow_factory_where_beauty_is_born }
 	
 	completion_reward = {
 		every_state = {
@@ -4133,16 +4245,14 @@ shared_focus = {
 
 shared_focus = { #Have it describe how any losses of heretics used in the clearing of new land is of no consequence
 	id = EQS_inspiration_from_the_inquisitionis
-	x = 1
+	x = -1
 	y = 1
-	relative_position_id = EQS_integrate_the_remaining_solaris_militarium
+	relative_position_id = EQS_subjugating_the_central_wilds
 	
 	cost = 3
-	prerequisite = { focus = EQS_appoint_a_new_balish_archmage }
-	prerequisite = { focus = EQS_liven_the_lazy_communists }
-	prerequisite = { focus = EQS_integrate_the_remaining_solaris_militarium }
+	prerequisite = { focus = EQS_correct_the_wayward_legions }
 	prerequisite = { focus = EQS_restoring_the_crown_of_the_heartlands }
-	prerequisite = { focus = EQS_in_the_rainbow_factory_where_beauty_is_born }
+	prerequisite = { focus = EQS_subjugating_the_central_wilds }
 	
 	completion_reward = {
 		every_state = {
@@ -4207,140 +4317,140 @@ shared_focus = { #Mention how if Sunset was given more control with the original
 	ai_will_do = { factor = 50 }
 }
 
-shared_focus = {
-	id = EQS_in_the_darkness_of_the_jungle
-	x = -2
-	y = 1
-	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_jungle_fever
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
-
-shared_focus = {
-	id = EQS_through_the_searing_badlands
-	x = 0
-	y = 1
-	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_impervious_to_the_elements
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_the_empress_will_protect
-	x = 2
-	y = 1
-	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_tireless_warriors
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
+#shared_focus = {
+#	id = EQS_in_the_darkness_of_the_jungle
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_jungle_fever
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
+#
+#shared_focus = {
+#	id = EQS_through_the_searing_badlands
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_impervious_to_the_elements
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+#
+#shared_focus = {
+#	id = EQS_the_empress_will_protect
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_tireless_warriors
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
 
 shared_focus = {
 	id = EQS_blessing_the_flora
 	x = -1
 	y = 1
-	relative_position_id = EQS_through_the_searing_badlands
+	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
 	
 	available = {
 		OR = {
@@ -4367,9 +4477,8 @@ shared_focus = {
 		}
 	}
 	
-	cost = 3
-	prerequisite = { focus = EQS_in_the_darkness_of_the_jungle }
-	prerequisite = { focus = EQS_through_the_searing_badlands }
+	cost = 5
+	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
 	
 	completion_reward = {
 		random_state = {
@@ -4416,7 +4525,7 @@ shared_focus = {
 	y = 1
 	relative_position_id = EQS_blessing_the_flora
 	
-	cost = 5
+	cost = 6
 	prerequisite = { focus = EQS_blessing_the_flora }
 	
 	completion_reward = {
@@ -4429,7 +4538,7 @@ shared_focus = {
 	id = EQS_a_batty_matter
 	x = 1
 	y = 1
-	relative_position_id = EQS_through_the_searing_badlands
+	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
 	
 	available = {
 		OR = {
@@ -4456,9 +4565,8 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
-	prerequisite = { focus = EQS_through_the_searing_badlands }
-	prerequisite = { focus = EQS_the_empress_will_protect }
+	cost = 5
+	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
 	
 	completion_reward = {
 		country_event = solar.246
@@ -4467,7 +4575,7 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = EQS_once_a_creature_of_darkness_always_a_creature_of_darkness
+	id = EQS_a_creature_of_darkness
 	x = 0
 	y = 1
 	relative_position_id = EQS_a_batty_matter
@@ -4509,7 +4617,7 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = { focus = EQS_tame_the_southern_sun }
-	prerequisite = { focus = EQS_once_a_creature_of_darkness_always_a_creature_of_darkness }
+	prerequisite = { focus = EQS_a_creature_of_darkness }
 	
 	completion_reward = {
 		country_event = solar.249
@@ -4869,7 +4977,7 @@ shared_focus = {
 ###Changelingia for Sunset###
 shared_focus = {
 	id = EQS_mercy_is_for_the_forgiven
-	x = -5
+	x = -3
 	y = 2
 	relative_position_id = EQS_dealing_with_the_devil
 	
@@ -4922,7 +5030,7 @@ shared_focus = {
 				}
 			}
 		
-			EQS = {
+			ROOT = {
 				create_wargoal = {
 					target = PREV
 					type = annex_everything
@@ -4933,77 +5041,77 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
-	id = EQS_slice_through_the_swamps
-	x = -2
-	y = 1
-	relative_position_id = EQS_mercy_is_for_the_forgiven
-	
-	bypass = {
-		NOT = {
-			country_exists = CHN
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_marsh_training
-			days = 120
-		}
-		###Add timed idea that gives a speed boost and attrition reduction for 90 days
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_victory_is_in_those_that_love_the_empress
-	x = 0
-	y = 1
-	relative_position_id = EQS_mercy_is_for_the_forgiven
-	
-	cost = 4
-	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
-	
-	completion_reward = {
-		add_ideas = EQS_outsmart_the_bugs
-		###Add idea for 10% planning and planning speed
-	}
-	ai_will_do = { factor = 30 }
-}
-
-shared_focus = {
-	id = EQS_weather_the_woods
-	x = 2
-	y = 1
-	relative_position_id = EQS_mercy_is_for_the_forgiven
-	
-	bypass = {
-		NOT = {
-			country_exists = CHN
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_purify_the_hegemony
-			days = 180
-		}
-		###Add idea for increased 5% attack and defense against the hegemony for 180 days
-	}
-	ai_will_do = { factor = 25 }
-}
+#shared_focus = {
+#	id = EQS_slice_through_the_swamps
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_mercy_is_for_the_forgiven
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = CHN
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_marsh_training
+#			days = 120
+#		}
+#		###Add timed idea that gives a speed boost and attrition reduction for 90 days
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+#
+#shared_focus = {
+#	id = EQS_victory_is_in_those_that_love_the_empress
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_mercy_is_for_the_forgiven
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
+#	
+#	completion_reward = {
+#		add_ideas = EQS_outsmart_the_bugs
+#		###Add idea for 10% planning and planning speed
+#	}
+#	ai_will_do = { factor = 30 }
+#}
+#
+#shared_focus = {
+#	id = EQS_weather_the_woods
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_mercy_is_for_the_forgiven
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = CHN
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_purify_the_hegemony
+#			days = 180
+#		}
+#		###Add idea for increased 5% attack and defense against the hegemony for 180 days
+#	}
+#	ai_will_do = { factor = 25 }
+#}
 
 shared_focus = {
 	id = EQS_from_guns_to_plowshares
 	x = -1
 	y = 1
-	relative_position_id = EQS_victory_is_in_those_that_love_the_empress
+	relative_position_id = EQS_mercy_is_for_the_forgiven
 	
 	available = {
 		AND = {
@@ -5015,8 +5123,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = EQS_slice_through_the_swamps }
-	prerequisite = { focus = EQS_victory_is_in_those_that_love_the_empress }
+	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
 	
 	select_effect = {
 		IF = {
@@ -5046,7 +5153,7 @@ shared_focus = {
 	id = EQS_repurpose_the_love_factories
 	x = 1
 	y = 1
-	relative_position_id = EQS_victory_is_in_those_that_love_the_empress
+	relative_position_id = EQS_mercy_is_for_the_forgiven
 	
 	available = {
 		AND = {
@@ -5058,8 +5165,7 @@ shared_focus = {
 	}
 	
 	cost = 7
-	prerequisite = { focus = EQS_weather_the_woods }
-	prerequisite = { focus = EQS_victory_is_in_those_that_love_the_empress }
+	prerequisite = { focus = EQS_mercy_is_for_the_forgiven }
 	
 	select_effect = {
 		IF = {
@@ -5096,7 +5202,7 @@ shared_focus = {
 ###Stalliongrad for Sunset###
 shared_focus = {
 	id = EQS_toppling_a_sinister_legacy
-	x = 5
+	x = 3
 	y = 2
 	relative_position_id = EQS_dealing_with_the_devil
 	
@@ -5142,117 +5248,101 @@ shared_focus = {
 	}
 	
 	completion_reward = {
-		create_wargoal = {
-			type = annex_everything
-			target = STG
-		}
-		IF = {
+		every_country = {
 			limit = {
-				country_exists = MWR
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
 			}
-			create_wargoal = {
-				type = annex_everything
-				target = MWR
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = CWR
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = CWR
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = AWR
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = AWR
+			
+			ROOT = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
 			}
 		}
 	}
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_operation_melted_wastes
-	x = -2
-	y = 1
-	relative_position_id = EQS_toppling_a_sinister_legacy
-	
-	bypass = {
-		NOT = {
-			country_exists = STG
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_sear_the_snow
-			days = 90
-		}
-		###Add timed idea for 10% increased armor speed and attack for 90 days
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_prepare_for_the_long_winter
-	x = 0
-	y = 1
-	relative_position_id = EQS_toppling_a_sinister_legacy
-	
-	bypass = {
-		NOT = {
-			country_exists = STG
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
-	
-	completion_reward = {
-		add_ideas = EQS_strengthen_against_ice
-		###Add idea that will expire once all the Steel Shield members have been capitulated that gives -5% cold attrition
-	}
-	ai_will_do = { factor = 30 }
-}
-
-shared_focus = {
-	id = EQS_a_cry_to_the_faithful
-	x = 2
-	y = 1
-	relative_position_id = EQS_toppling_a_sinister_legacy
-	
-	bypass = {
-		NOT = {
-			country_exists = STG
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
-	
-	completion_reward = {
-		custom_effect_tooltip = sunset_spawn_loyalists_tt
-		hidden_effect = {
-			load_oob = "SOL_SUN_stalliongrad_loyalists"
-		}
-	}
-	ai_will_do = { factor = 22 }
-}
+#shared_focus = {
+#	id = EQS_operation_melted_wastes
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_toppling_a_sinister_legacy
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = STG
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_sear_the_snow
+#			days = 90
+#		}
+#		###Add timed idea for 10% increased armor speed and attack for 90 days
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+#
+#shared_focus = {
+#	id = EQS_prepare_for_the_long_winter
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_toppling_a_sinister_legacy
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = STG
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+#	
+#	completion_reward = {
+#		add_ideas = EQS_strengthen_against_ice
+#		###Add idea that will expire once all the Steel Shield members have been capitulated that gives -5% cold attrition
+#	}
+#	ai_will_do = { factor = 30 }
+#}
+#
+#shared_focus = {
+#	id = EQS_a_cry_to_the_faithful
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_toppling_a_sinister_legacy
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = STG
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+#	
+#	completion_reward = {
+#		custom_effect_tooltip = sunset_spawn_loyalists_tt
+#		hidden_effect = {
+#			load_oob = "SOL_SUN_stalliongrad_loyalists"
+#		}
+#	}
+#	ai_will_do = { factor = 22 }
+#}
 
 shared_focus = {
 	id = EQS_a_monument_to_the_love_of_the_empress
 	x = -1
 	y = 1
-	relative_position_id = EQS_prepare_for_the_long_winter
+	relative_position_id = EQS_toppling_a_sinister_legacy
 	
 	available = {
 		AND = {
@@ -5264,8 +5354,7 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_operation_melted_wastes }
-	prerequisite = { focus = EQS_prepare_for_the_long_winter }
+	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
 	
 	select_effect = {
 		IF = {
@@ -5294,7 +5383,7 @@ shared_focus = {
 	id = EQS_scuttle_the_old_fleet_bless_the_new
 	x = 1
 	y = 1
-	relative_position_id = EQS_prepare_for_the_long_winter
+	relative_position_id = EQS_toppling_a_sinister_legacy
 	
 	available = {
 		AND = {
@@ -5306,8 +5395,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = EQS_prepare_for_the_long_winter }
-	prerequisite = { focus = EQS_a_cry_to_the_faithful }
+	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
 	
 	select_effect = {
 		IF = {
@@ -5647,13 +5735,13 @@ shared_focus = {
 	
 	available = {
 		hidden_trigger = {
-			has_country_flag = aurora_reigns
+			EQS_Aurora_Shinespark = { is_country_leader = yes }
 		}
 	}
 	
 	allow_branch = {
 		hidden_trigger = {
-			has_country_flag = aurora_reigns
+			EQS_Aurora_Shinespark = { is_country_leader = yes }
 		}
 	}
 	
@@ -6148,8 +6236,31 @@ shared_focus = {
 	ai_will_do = { factor = 28 }
 }
 
-shared_focus = { #Mention that Aurora feels the Militarium is not fit for leadership any further, and she will be taking direct control of the army
-	id = EQS_guiding_the_lesser_soldiers
+#shared_focus = { #Mention that Aurora feels the Militarium is not fit for leadership any further, and she will be taking direct control of the army
+#	id = EQS_guiding_the_lesser_soldiers
+#	x = 3
+#	y = 1
+#	relative_position_id = EQS_formulate_new_battle_plans
+#	
+#	cost = 5
+#	prerequisite = { 
+#		focus = EQS_no_change_shall_hide_from_the_regent 
+#		focus = EQS_maintain_the_current_power_structure
+#	}
+#	prerequisite = { 
+#		focus = EQS_formulate_new_battle_plans 
+#		focus = EQS_ensure_the_governors_loyalties
+#	}
+#	
+#	completion_reward = {
+#		country_event = solar.325
+#		###Maybe include event of Aurora determining this herself, and that she hears of growing dissent in the military so she steps in herself
+#	}
+#	ai_will_do = { factor = 55 }
+#}
+
+shared_focus = {
+	id = EQS_solaris_quorundam
 	x = 3
 	y = 1
 	relative_position_id = EQS_formulate_new_battle_plans
@@ -6165,25 +6276,9 @@ shared_focus = { #Mention that Aurora feels the Militarium is not fit for leader
 	}
 	
 	completion_reward = {
-		country_event = solar.325
-		###Maybe include event of Aurora determining this herself, and that she hears of growing dissent in the military so she steps in herself
-	}
-	ai_will_do = { factor = 55 }
-}
-
-shared_focus = {
-	id = EQS_solaris_quorundam
-	x = 0
-	y = 1
-	relative_position_id = EQS_guiding_the_lesser_soldiers
-	
-	cost = 4
-	prerequisite = { focus = EQS_guiding_the_lesser_soldiers }
-	
-	completion_reward = {
 		country_event = solar.326
 	}
-	ai_will_do = { factor = 40 }
+	ai_will_do = { factor = 70 }
 }
 
 ###Rump state war###
@@ -6229,42 +6324,47 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
+#shared_focus = {
+#	id = EQS_ending_the_farcical_government
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_humility
+#	
+#	available = {
+#		692 = { is_owned_by = ROOT }
+#	}
+#	
+#	bypass = {
+#		AND = {
+#			NOT = { country_exists = CLD }
+#			692 = {
+#				NOT = { is_owned_by = ROOT }
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_a_lesson_in_humility }
+#	
+#	completion_reward = {
+#		country_event = solar.327
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+
 shared_focus = {
-	id = EQS_ending_the_farcical_government
+	id = EQS_institute_the_cloudsdale_chapter
 	x = -1
 	y = 1
 	relative_position_id = EQS_a_lesson_in_humility
 	
 	available = {
 		692 = { is_owned_by = ROOT }
+		NOT = { country_exists = CLD }
 	}
 	
-	bypass = {
-		AND = {
-			NOT = { country_exists = CLD }
-			692 = {
-				NOT = { is_owned_by = ROOT }
-			}
-		}
-	}
-	
-	cost = 3
+	cost = 5
 	prerequisite = { focus = EQS_a_lesson_in_humility }
-	
-	completion_reward = {
-		country_event = solar.327
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_institute_the_cloudsdale_chapter
-	x = 0
-	y = 1
-	relative_position_id = EQS_ending_the_farcical_government
-	
-	cost = 4
-	prerequisite = { focus = EQS_ending_the_farcical_government }
 	
 	completion_reward = {
 		692 = { add_manpower = -150000 }
@@ -6281,9 +6381,10 @@ shared_focus = {
 	
 	available = {
 		170 = { is_owned_by = ROOT }
+		NOT = { country_exists = NER }
 	}
 	
-	cost = 4
+	cost = 5
 	prerequisite = { focus = EQS_a_lesson_in_humility }
 	
 	completion_reward = {
@@ -6301,36 +6402,36 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = { #Be sarcastic and claim that he communists wanted such better working conditions, so they'll get it; once they die
-	id = EQS_enforce_ethical_working_conditions
-	x = 0
-	y = 1
-	relative_position_id = EQS_collapsing_the_communes
-	
-	available = {
-		170 = { is_owned_by = ROOT }
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_collapsing_the_communes }
-	
-	completion_reward = {
-		every_state = {
-			limit = {
-				AND = {
-					is_core_of = NER
-					is_owned_by = ROOT
-				}
-			}
-			add_manpower = -7500
-		}
-		add_timed_idea = {
-			idea = EQS_imperial_work_standards #Be sarcastic with this loc, too
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 22 }
-}
+#shared_focus = { #Be sarcastic and claim that he communists wanted such better working conditions, so they'll get it; once they die
+#	id = EQS_enforce_ethical_working_conditions
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_collapsing_the_communes
+#	
+#	available = {
+#		170 = { is_owned_by = ROOT }
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_collapsing_the_communes }
+#	
+#	completion_reward = {
+#		every_state = {
+#			limit = {
+#				AND = {
+#					is_core_of = NER
+#					is_owned_by = ROOT
+#				}
+#			}
+#			add_manpower = -7500
+#		}
+#		add_timed_idea = {
+#			idea = EQS_imperial_work_standards #Be sarcastic with this loc, too
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 22 }
+#}
 
 shared_focus = {
 	id = EQS_archmage_of_all_the_west
@@ -6340,7 +6441,7 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = { focus = EQS_institute_the_cloudsdale_chapter }
-	prerequisite = { focus = EQS_enforce_ethical_working_conditions }
+	prerequisite = { focus = EQS_collapsing_the_communes }
 	
 	completion_reward = {
 		every_state = {
@@ -6393,6 +6494,7 @@ shared_focus = {
 	
 	available = {
 		122 = { is_owned_by = ROOT }
+		NOT = { country_exists = CER }
 	}
 	
 	bypass = {
@@ -6406,7 +6508,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 3
+	cost = 5
 	prerequisite = { focus = EQS_a_lesson_in_submission }
 	
 	completion_reward = {
@@ -6415,42 +6517,42 @@ shared_focus = {
 	ai_will_do = { factor = 30 }
 }
 
-shared_focus = {
-	id = EQS_feeding_the_fallow_fields
-	x = 0
-	y = 1
-	relative_position_id = EQS_there_is_no_empress_but_daybreaker
-	
-	available = {
-		122 = { is_owned_by = ROOT }
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_there_is_no_empress_but_daybreaker }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_reseeding_the_fields
-			days = 365
-		}
-		hidden_effect = {
-			country_event = {
-				id = solar.332
-				days = 366
-			}
-		}
-	}
-	ai_will_do = { factor = 35 }
-}
+#shared_focus = {
+#	id = EQS_feeding_the_fallow_fields
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_there_is_no_empress_but_daybreaker
+#	
+#	available = {
+#		122 = { is_owned_by = ROOT }
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_there_is_no_empress_but_daybreaker }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_reseeding_the_fields
+#			days = 365
+#		}
+#		hidden_effect = {
+#			country_event = {
+#				id = solar.332
+#				days = 366
+#			}
+#		}
+#	}
+#	ai_will_do = { factor = 35 }
+#}
 
 shared_focus = {
 	id = EQS_farming_the_breadbasket_of_equus
 	x = 0
 	y = 1
-	relative_position_id = EQS_feeding_the_fallow_fields
+	relative_position_id = EQS_there_is_no_empress_but_daybreaker
 	
-	cost = 4
-	prerequisite = { focus = EQS_feeding_the_fallow_fields }
+	cost = 5
+	prerequisite = { focus = EQS_there_is_no_empress_but_daybreaker }
 	
 	completion_reward = {
 		every_state = {
@@ -6508,42 +6610,43 @@ shared_focus = {
 	ai_will_do = { factor = 27 }
 }
 
+#shared_focus = {
+#	id = EQS_an_army_is_no_match_for_a_mage
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_conformity
+#	
+#	available = {
+#		70 = { is_owned_by = ROOT }
+#	}
+#	
+#	bypass = {
+#		AND = {
+#			70 = { NOT = { is_owned_by = ROOT } }
+#			NOT = {
+#				country_exists = WHY
+#			}
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_a_lesson_in_conformity }
+#	
+#	completion_reward = {
+#		country_event = solar.330
+#	}
+#	ai_will_do = { factor = 27 }
+#}
+
 shared_focus = {
-	id = EQS_an_army_is_no_match_for_a_mage
+	id = EQS_remove_the_military_from_power
 	x = -1
 	y = 1
 	relative_position_id = EQS_a_lesson_in_conformity
 	
 	available = {
 		70 = { is_owned_by = ROOT }
-	}
-	
-	bypass = {
-		AND = {
-			70 = { NOT = { is_owned_by = ROOT } }
-			NOT = {
-				country_exists = WHY
-			}
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_a_lesson_in_conformity }
-	
-	completion_reward = {
-		country_event = solar.330
-	}
-	ai_will_do = { factor = 27 }
-}
-
-shared_focus = {
-	id = EQS_remove_the_military_from_power
-	x = 0
-	y = 1
-	relative_position_id = EQS_an_army_is_no_match_for_a_mage
-	
-	available = {
-		70 = { is_owned_by = ROOT }
+		NOT = { country_exists = WHY }
 	}
 	
 	bypass = {
@@ -6553,8 +6656,8 @@ shared_focus = {
 		}
 	}
 	
-	cost = 3
-	prerequisite = { focus = EQS_an_army_is_no_match_for_a_mage }
+	cost = 5
+	prerequisite = { focus = EQS_a_lesson_in_conformity }
 	
 	completion_reward = {
 		country_event = solar.331
@@ -6562,7 +6665,7 @@ shared_focus = {
 	ai_will_do = { factor = 23 }
 }
 
-shared_focus = {
+shared_focus = { ###Takes out the two larger universities, namely Sol Victoria and Solar Beauty
 	id = EQS_faith_triumphs_over_atheism
 	x = 1
 	y = 1
@@ -6570,6 +6673,7 @@ shared_focus = {
 	
 	available = {
 		74 = { is_owned_by = ROOT }
+		NOT = { country_exists = BLS }
 	}
 	
 	bypass = {
@@ -6579,32 +6683,32 @@ shared_focus = {
 		}
 	}
 	
-	cost = 3
+	cost = 5
 	prerequisite = { focus = EQS_a_lesson_in_conformity }
 	
 	completion_reward = {
-		add_ideas = EQS_religion_triumphant
+		add_ideas = EQS_theistic_science
 	}
 	ai_will_do = { factor = 35 }
 }
 
-shared_focus = {
-	id = EQS_enlighten_the_securlarists
-	x = 0
-	y = 1
-	relative_position_id = EQS_faith_triumphs_over_atheism
-	
-	cost = 5
-	prerequisite = { focus = EQS_faith_triumphs_over_atheism }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_religion_triumphant
-			add_idea = EQS_theistic_science
-		}
-	}
-	ai_will_do = { factor = 40 }
-}
+#shared_focus = {
+#	id = EQS_enlighten_the_securlarists
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_faith_triumphs_over_atheism
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_faith_triumphs_over_atheism }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_religion_triumphant
+#			add_idea = EQS_theistic_science
+#		}
+#	}
+#	ai_will_do = { factor = 40 }
+#}
 
 shared_focus = {
 	id = EQS_no_mercy_for_the_wicked
@@ -6614,7 +6718,7 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = { focus = EQS_remove_the_military_from_power }
-	prerequisite = { focus = EQS_enlighten_the_securlarists }
+	prerequisite = { focus = EQS_faith_triumphs_over_atheism }
 	
 	completion_reward = {
 		every_state = {
@@ -6644,11 +6748,11 @@ shared_focus = {
 ###Daybreaker Temple###
 shared_focus = {
 	id = EQS_completing_the_empresss_desire
-	x = 0
-	y = 1
-	relative_position_id = EQS_farming_the_breadbasket_of_equus
+	x = 2
+	y = 2
+	relative_position_id = EQS_no_mercy_for_the_wicked
 	
-	cost = 4
+	cost = 5
 	prerequisite = { focus = EQS_archmage_of_all_the_west }
 	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
 	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
@@ -6660,159 +6764,193 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = EQS_no_project_is_too_ambitious
+	id = EQS_reclaim_for_the_empress
 	x = 0
 	y = 1
-	relative_position_id = EQS_completing_the_empresss_desire
+	relative_position_id = EQS_farming_the_breadbasket_of_equus
 	
-	cost = 4
-	prerequisite = { focus = EQS_completing_the_empresss_desire }
+	cost = 7
+	prerequisite = { focus = EQS_archmage_of_all_the_west }
+	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
+	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
 	
 	completion_reward = {
-		country_event = solar.334
+		country_event = solar.358
 	}
-	ai_will_do = { factor = 20 }
+	ai_will_do = { factor = 40 }
 }
+
+shared_focus = {
+	id = EQS_the_last_heretic
+	x = -2
+	y = 2
+	relative_position_id = EQS_archmage_of_all_the_west
+	
+	cost = 5
+	prerequisite = { focus = EQS_archmage_of_all_the_west }
+	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
+	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
+	
+	completion_reward = {
+		country_event = solar.359
+	}
+	ai_will_do = { factor = 30 }
+}
+
+#shared_focus = {
+#	id = EQS_no_project_is_too_ambitious
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_completing_the_empresss_desire
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_completing_the_empresss_desire }
+#	
+#	completion_reward = {
+#		country_event = solar.334
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
 ###Keep Worshipers Out###
-shared_focus = {
-	id = EQS_stretch_the_steeples_to_the_heavens
-	x = -2
-	y = 1
-	relative_position_id = EQS_no_project_is_too_ambitious
-	
-	cost = 3
-	prerequisite = { focus = EQS_no_project_is_too_ambitious }
-	mutually_exclusive = { focus = EQS_craft_an_ornate_entrance }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_solars_sanctum_2
-			add_idea = EQS_a_holy_temple
-		}
-	}
-	ai_will_do = { factor = 35 }
-}
-
-shared_focus = {
-	id = EQS_gild_the_mantles_with_precious_gems
-	x = 0
-	y = 1
-	relative_position_id = EQS_stretch_the_steeples_to_the_heavens
-	
-	cost = 4
-	prerequisite = { focus = EQS_stretch_the_steeples_to_the_heavens }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_a_holy_temple
-			add_idea = EQS_a_holy_temple_2
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_create_the_holies_for_the_empress
-	x = 0
-	y = 1
-	relative_position_id = EQS_gild_the_mantles_with_precious_gems
-	
-	cost = 4
-	prerequisite = { focus = EQS_gild_the_mantles_with_precious_gems }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_a_holy_temple_2
-			add_idea = EQS_a_holy_temple_3
-		}
-	}
-	ai_will_do = { factor = 27 }
-}
-
-###Allow Worshipers###
-shared_focus = {
-	id = EQS_craft_an_ornate_entrance
-	x = 2
-	y = 1
-	relative_position_id = EQS_no_project_is_too_ambitious
-	
-	cost = 3
-	prerequisite = { focus = EQS_no_project_is_too_ambitious }
-	mutually_exclusive = { focus = EQS_stretch_the_steeples_to_the_heavens }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_solars_sanctum_2
-			add_idea = EQS_temple_for_the_masses
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
-
-shared_focus = {
-	id = EQS_provide_room_for_the_masses
-	x = 0
-	y = 1
-	relative_position_id = EQS_craft_an_ornate_entrance
-	
-	cost = 4
-	prerequisite = { focus = EQS_craft_an_ornate_entrance }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_temple_for_the_masses
-			add_idea = EQS_temple_for_the_masses_2
-		}
-	}
-	ai_will_do = { factor = 28 }
-}
-
-shared_focus = {
-	id = EQS_construct_shrines_for_the_faithful
-	x = 0
-	y = 1
-	relative_position_id = EQS_provide_room_for_the_masses
-	
-	cost = 4
-	prerequisite = { focus = EQS_provide_room_for_the_masses }
-	
-	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_temple_for_the_masses_2
-			add_idea = EQS_temple_for_the_masses_3
-		}
-	}
-	ai_will_do = { factor = 23 }
-}
-
-shared_focus = {
-	id = EQS_a_church_worthy_of_the_empress
-	x = 2
-	y = 1
-	relative_position_id = EQS_create_the_holies_for_the_empress
-	
-	cost = 6
-	prerequisite = { 
-		focus = EQS_create_the_holies_for_the_empress
-		focus = EQS_construct_shrines_for_the_faithful
-	}
-	
-	completion_reward = {
-		country_event = solar.335
-	}
-	ai_will_do = { factor = 35 }
-}
+#shared_focus = {
+#	id = EQS_stretch_the_steeples_to_the_heavens
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_completing_the_empresss_desire
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_completing_the_empresss_desire }
+#	mutually_exclusive = { focus = EQS_craft_an_ornate_entrance }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_solars_sanctum_2
+#			add_idea = EQS_a_holy_temple
+#		}
+#	}
+#	ai_will_do = { factor = 35 }
+#}
+#
+#shared_focus = {
+#	id = EQS_gild_the_mantles_with_precious_gems
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_stretch_the_steeples_to_the_heavens
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_stretch_the_steeples_to_the_heavens }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_a_holy_temple
+#			add_idea = EQS_a_holy_temple_2
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+#
+#shared_focus = {
+#	id = EQS_create_the_holies_for_the_empress
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_gild_the_mantles_with_precious_gems
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_gild_the_mantles_with_precious_gems }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_a_holy_temple_2
+#			add_idea = EQS_a_holy_temple_3
+#		}
+#	}
+#	ai_will_do = { factor = 27 }
+#}
+#
+####Allow Worshipers###
+#shared_focus = {
+#	id = EQS_craft_an_ornate_entrance
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_completing_the_empresss_desire
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_completing_the_empresss_desire }
+#	mutually_exclusive = { focus = EQS_stretch_the_steeples_to_the_heavens }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_solars_sanctum_2
+#			add_idea = EQS_temple_for_the_masses
+#		}
+#	}
+#	ai_will_do = { factor = 20 }
+#}
+#
+#shared_focus = {
+#	id = EQS_provide_room_for_the_masses
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_craft_an_ornate_entrance
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_craft_an_ornate_entrance }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_temple_for_the_masses
+#			add_idea = EQS_temple_for_the_masses_2
+#		}
+#	}
+#	ai_will_do = { factor = 28 }
+#}
+#
+#shared_focus = {
+#	id = EQS_construct_shrines_for_the_faithful
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_provide_room_for_the_masses
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_provide_room_for_the_masses }
+#	
+#	completion_reward = {
+#		swap_ideas = {
+#			remove_idea = EQS_temple_for_the_masses_2
+#			add_idea = EQS_temple_for_the_masses_3
+#		}
+#	}
+#	ai_will_do = { factor = 23 }
+#}
+#
+#shared_focus = {
+#	id = EQS_a_church_worthy_of_the_empress
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_create_the_holies_for_the_empress
+#	
+#	cost = 6
+#	prerequisite = { 
+#		focus = EQS_create_the_holies_for_the_empress
+#		focus = EQS_construct_shrines_for_the_faithful
+#	}
+#	
+#	completion_reward = {
+#		country_event = solar.335
+#	}
+#	ai_will_do = { factor = 35 }
+#}
 
 ###Post-construction portion and Stalliongrad war###
 shared_focus = {
 	id = EQS_further_streamlining
 	x = -2
 	y = 1
-	relative_position_id = EQS_a_church_worthy_of_the_empress
+	relative_position_id = EQS_reclaim_for_the_empress
 	
 	cost = 5
-	prerequisite = { focus = EQS_a_church_worthy_of_the_empress }
+	prerequisite = { focus = EQS_reclaim_for_the_empress }
 	
 	completion_reward = {
 		add_tech_bonus = {
@@ -6829,10 +6967,10 @@ shared_focus = {
 	id = EQS_brothers_and_sisters_in_the_empress
 	x = 0
 	y = 1
-	relative_position_id = EQS_a_church_worthy_of_the_empress
+	relative_position_id = EQS_reclaim_for_the_empress
 	
 	cost = 4
-	prerequisite = { focus = EQS_a_church_worthy_of_the_empress }
+	prerequisite = { focus = EQS_reclaim_for_the_empress }
 	
 	completion_reward = {
 		add_ideas = EQS_family_in_the_empress
@@ -6844,10 +6982,10 @@ shared_focus = {
 	id = EQS_reminding_the_militarium_of_its_place
 	x = 2
 	y = 1
-	relative_position_id = EQS_a_church_worthy_of_the_empress
+	relative_position_id = EQS_reclaim_for_the_empress
 	
 	cost = 4
-	prerequisite = { focus = EQS_a_church_worthy_of_the_empress }
+	prerequisite = { focus = EQS_reclaim_for_the_empress }
 	
 	completion_reward = {
 		country_event = solar.336
@@ -6899,30 +7037,30 @@ shared_focus = {
 	}
 }
 
-shared_focus = {
-	id = EQS_toil_for_your_empress
-	x = -2
-	y = 1
-	relative_position_id = EQS_opportunistic_rats
-	
-	cost = 3
-	prerequisite = { 
-		focus = EQS_opportunistic_rats 
-		focus = EQS_to_the_land_of_darkness
-	}
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_sweat_for_salvation
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_toil_for_your_empress
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_opportunistic_rats
+#	
+#	cost = 3
+#	prerequisite = { 
+#		focus = EQS_opportunistic_rats 
+#		focus = EQS_to_the_land_of_darkness
+#	}
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_sweat_for_salvation
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 shared_focus = {
 	id = EQS_apply_new_military_tactics
-	x = 0
+	x = -2
 	y = 1
 	relative_position_id = EQS_opportunistic_rats
 	
@@ -6943,36 +7081,38 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
+#shared_focus = {
+#	id = EQS_unleash_the_warmth_of_the_empress_light
+#	x = 2
+#	y = 1
+#	relative_position_id = EQS_opportunistic_rats
+#	
+#	cost = 4
+#	prerequisite = { 
+#		focus = EQS_opportunistic_rats 
+#		focus = EQS_to_the_land_of_darkness
+#	}
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_warmth_of_ages
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 27 }
+#}
+
 shared_focus = {
-	id = EQS_unleash_the_warmth_of_the_empress_light
+	id = EQS_turn_their_weapons_against_them
 	x = 2
 	y = 1
 	relative_position_id = EQS_opportunistic_rats
 	
-	cost = 4
-	prerequisite = { 
-		focus = EQS_opportunistic_rats 
+	cost = 5
+	prerequisite = {
+		focus = EQS_opportunistic_rats
 		focus = EQS_to_the_land_of_darkness
 	}
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_warmth_of_ages
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 27 }
-}
-
-shared_focus = {
-	id = EQS_turn_their_weapons_against_them
-	x = 1
-	y = 1
-	relative_position_id = EQS_toil_for_your_empress
-	
-	cost = 5
-	prerequisite = { focus = EQS_toil_for_your_empress }
-	prerequisite = { focus = EQS_apply_new_military_tactics }
 	
 	completion_reward = {
 		###Add 100 medium tanks
@@ -6991,28 +7131,28 @@ shared_focus = {
 	ai_will_do = { factor = 29 }
 }
 
-shared_focus = {
-	id = EQS_never_another_manehattan
-	x = 1
-	y = 1
-	relative_position_id = EQS_apply_new_military_tactics
-	
-	cost = 5
-	prerequisite = { focus = EQS_apply_new_military_tactics }
-	prerequisite = { focus = EQS_unleash_the_warmth_of_the_empress_light }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_no_step_back
-			days = 120
-		}
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_never_another_manehattan
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_apply_new_military_tactics
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_apply_new_military_tactics }
+#	prerequisite = { focus = EQS_unleash_the_warmth_of_the_empress_light }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_no_step_back
+#			days = 120
+#		}
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 shared_focus = {
 	id = EQS_heresy_shall_never_triumph
-	x = 1
+	x = -2
 	y = 1
 	relative_position_id = EQS_turn_their_weapons_against_them
 	
@@ -7024,7 +7164,7 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = { focus = EQS_turn_their_weapons_against_them }
-	prerequisite = { focus = EQS_never_another_manehattan }
+	prerequisite = { focus = EQS_apply_new_military_tactics }
 	
 	completion_reward = {
 		add_timed_idea = {
@@ -7106,98 +7246,98 @@ shared_focus = {
 	}
 }
 
-shared_focus = {
-	id = EQS_burn_the_bats
-	x = -2
-	y = 1
-	relative_position_id = EQS_to_the_land_of_darkness
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { 
-		focus = EQS_opportunistic_rats 
-		focus = EQS_to_the_land_of_darkness
-	}
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_enemies_of_light
-			days = 90
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_burn_the_bats_again
-	x = 0
-	y = 1
-	relative_position_id = EQS_burn_the_bats
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_burn_the_bats }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_burn_the_bats_twice
-			days = 90
-		}
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_burn_the_bats
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_to_the_land_of_darkness
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { 
+#		focus = EQS_opportunistic_rats 
+#		focus = EQS_to_the_land_of_darkness
+#	}
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_enemies_of_light
+#			days = 90
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+#
+#shared_focus = {
+#	id = EQS_burn_the_bats_again
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_burn_the_bats
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_burn_the_bats }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_burn_the_bats_twice
+#			days = 90
+#		}
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 shared_focus = {
 	id = EQS_correct_the_empires_folly
-	x = 0
+	x = -2
 	y = 1
 	relative_position_id = EQS_to_the_land_of_darkness
 	
@@ -7239,48 +7379,48 @@ shared_focus = {
 	ai_will_do = { factor = 35 }
 }
 
-shared_focus = {
-	id = EQS_remove_the_power_of_the_proles
-	x = 0
-	y = 1
-	relative_position_id = EQS_correct_the_empires_folly
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_correct_the_empires_folly }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_oppress_the_proles
-			days = 90
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
+#shared_focus = {
+#	id = EQS_remove_the_power_of_the_proles
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_correct_the_empires_folly
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 3
+#	prerequisite = { focus = EQS_correct_the_empires_folly }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_oppress_the_proles
+#			days = 90
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
 
 shared_focus = {
 	id = EQS_rain_hellfire_upon_them
@@ -7336,56 +7476,56 @@ shared_focus = {
 	ai_will_do = { factor = 28 }
 }
 
-shared_focus = {
-	id = EQS_train_for_the_inevitable_slog
-	x = 0
-	y = 1
-	relative_position_id = EQS_rain_hellfire_upon_them
-	
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_rain_hellfire_upon_them }
-	
-	completion_reward = {
-		add_tech_bonus = {
-			name = special_forces_bonus
-			bonus = 1
-			uses = 2
-			category = special_forces_tech
-		}
-	}
-	ai_will_do = { factor = 23 }
-}
+#shared_focus = {
+#	id = EQS_train_for_the_inevitable_slog
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_rain_hellfire_upon_them
+#	
+#	bypass = {
+#		OR = {
+#			AND = {
+#				NOT = {
+#					has_global_flag = balsplosion
+#					country_exists = BAL
+#				}
+#			}
+#			AND = {
+#				has_global_flag = balsplosion
+#				NOT = {
+#					country_exists = MTS
+#					country_exists = EEE
+#					country_exists = NID
+#					country_exists = NEI
+#					country_exists = CLI
+#					country_exists = SPF
+#					country_exists = STB
+#					country_exists = NRP
+#					country_exists = BAL
+#				}
+#			}
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_rain_hellfire_upon_them }
+#	
+#	completion_reward = {
+#		add_tech_bonus = {
+#			name = special_forces_bonus
+#			bonus = 1
+#			uses = 2
+#			category = special_forces_tech
+#		}
+#	}
+#	ai_will_do = { factor = 23 }
+#}
 
 shared_focus = {
 	id = EQS_the_empress_shall_be_praised_from_sea_to_sea
-	x = 0
+	x = 2
 	y = 1
-	relative_position_id = EQS_remove_the_power_of_the_proles
+	relative_position_id = EQS_correct_the_empires_folly
 	
 	available = {
 		OR = {
@@ -7413,9 +7553,8 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_remove_the_power_of_the_proles }
-	prerequisite = { focus = EQS_burn_the_bats_again }
-	prerequisite = { focus = EQS_train_for_the_inevitable_slog }
+	prerequisite = { focus = EQS_rain_hellfire_upon_them }
+	prerequisite = { focus = EQS_correct_the_empires_folly }
 	
 	completion_reward = {
 		country_event = solar.356
@@ -7475,7 +7614,7 @@ shared_focus = {
 shared_focus = {
 	id = EQS_operation_velvet_hoof
 	x = -2
-	y = 1
+	y = 2
 	relative_position_id = EQS_harmonys_end
 	
 	bypass = {
@@ -7495,41 +7634,35 @@ shared_focus = {
 	ai_will_do = { factor = 30 }
 }
 
-shared_focus = { #Mention that old ciphers from before the Great War were found of the Crystal Empire, and they decide to test it out, to see what they get
-	id = EQS_crack_open_the_ciphers
-	x = 0
-	y = 1
-	relative_position_id = EQS_operation_velvet_hoof
-	
-	bypass = {
-		NOT = {
-			country_exists = CRY
-		}
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_operation_velvet_hoof }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_speculatores_pride
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 22 }
-}
+#shared_focus = { #Mention that old ciphers from before the Great War were found of the Crystal Empire, and they decide to test it out, to see what they get
+#	id = EQS_crack_open_the_ciphers
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_operation_velvet_hoof
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = CRY
+#		}
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_operation_velvet_hoof }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_speculatores_pride
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 22 }
+#}
 
 shared_focus = {
 	id = EQS_a_kingdom_of_false_gods
 	x = 0
-	y = 2
+	y = 1
 	relative_position_id = EQS_harmonys_end
-	
-	available = {
-		344 = {
-			is_controlled_by = ROOT
-		}
-	}
 	
 	bypass = {
 		NOT = {
@@ -7550,7 +7683,7 @@ shared_focus = {
 shared_focus = {
 	id = EQS_operation_nova_punch
 	x = 2
-	y = 1
+	y = 2
 	relative_position_id = EQS_harmonys_end
 	
 	bypass = {
@@ -7570,34 +7703,34 @@ shared_focus = {
 	ai_will_do = { factor = 35 }
 }
 
-shared_focus = { #Mention how already there have been many soldiers captured, and they can be returned for a price to the Crystal Empire
-	id = EQS_unleash_the_waves_of_captured_heretics
-	x = 0
-	y = 1
-	relative_position_id = EQS_operation_nova_punch
-	
-	bypass = {
-		NOT = {
-			country_exists = CRY
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_operation_nova_punch }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_pony_meat_shields
-			days = 180
-		}
-	}
-	ai_will_do = { factor = 27 }
-}
+#shared_focus = { #Mention how already there have been many soldiers captured, and they can be returned for a price to the Crystal Empire
+#	id = EQS_unleash_the_waves_of_captured_heretics
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_operation_nova_punch
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = CRY
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_operation_nova_punch }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_pony_meat_shields
+#			days = 180
+#		}
+#	}
+#	ai_will_do = { factor = 27 }
+#}
 
 shared_focus = {
 	id = EQS_the_consequence_of_rebellion
 	x = 0
-	y = 1
+	y = 2
 	relative_position_id = EQS_a_kingdom_of_false_gods
 	
 	available = {
@@ -7609,8 +7742,8 @@ shared_focus = {
 	cost = 5
 	prerequisite = { focus = EQS_a_kingdom_of_false_gods }
 	prerequisite = {
-		focus = EQS_crack_open_the_ciphers
-		focus = EQS_unleash_the_waves_of_captured_heretics
+		focus = EQS_operation_nova_punch
+		focus = EQS_operation_velvet_hoof
 	}
 	
 	completion_reward = {
@@ -7665,7 +7798,7 @@ shared_focus = {
 shared_focus = {
 	id = EQS_appease_the_machine_spirit
 	x = -2
-	y = 1
+	y = 2
 	relative_position_id = EQS_end_the_great_tribulation
 	
 	bypass = {
@@ -7674,7 +7807,9 @@ shared_focus = {
 		}
 	}
 	
-	cost = 3
+	mutually_exclusive = { focus = EQS_bless_the_militariums_weapons }
+	
+	cost = 4
 	prerequisite = { focus = EQS_end_the_great_tribulation }
 	
 	completion_reward = {
@@ -7689,17 +7824,21 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = EQS_anointed_in_the_empress_light
+	id = EQS_annointed_in_the_empress_light
 	x = 0
 	y = 1
 	relative_position_id = EQS_end_the_great_tribulation
+	
+	bypass = {
+		NOT = { country_exists = CHN }
+	}
 	
 	cost = 5
 	prerequisite = { focus = EQS_end_the_great_tribulation }
 	
 	completion_reward = {
 		country_event = solar.347
-		###Country event for Aurora holding one final prayer in Daybreaker's temple, and she is feels like the Empress is with her as ponies follow her once she leaves, believing she is the only pony who can save them from the remaining threats
+		###Country event for Aurora holding one final prayer in Daybreaker's temple, and she feels like the Empress is with her as ponies follow her once she leaves, believing she is the only pony who can save them from the remaining threats
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -7707,7 +7846,7 @@ shared_focus = {
 shared_focus = {
 	id = EQS_bless_the_militariums_weapons
 	x = 2
-	y = 1
+	y = 2
 	relative_position_id = EQS_end_the_great_tribulation
 	
 	bypass = {
@@ -7715,6 +7854,8 @@ shared_focus = {
 			country_exists = CHN
 		}
 	}
+	
+	mutually_exclusive = { focus = EQS_appease_the_machine_spirit }
 	
 	cost = 4
 	prerequisite = { focus = EQS_end_the_great_tribulation }
@@ -7730,59 +7871,59 @@ shared_focus = {
 	ai_will_do = { factor = 28 }
 }
 
-shared_focus = {
-	id = EQS_rain_the_fire_of_the_empress_upon_them
-	x = 1
-	y = 1
-	relative_position_id = EQS_appease_the_machine_spirit
-	
-	bypass = {
-		NOT = {
-			country_exists = CHN
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_appease_the_machine_spirit }
-	prerequisite = { focus = EQS_anointed_in_the_empress_light }
-	mutually_exclusive = { focus = EQS_operation_daybreakers_horn }
-	
-	completion_reward = {
-		country_event = solar.348
-		###Event for Aurora being suggested by Fidelis to use softer, but more effective tactics to bombard the changelings into submission, which Aurora takes under advisement and issues further production of artillery shells for the war
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_operation_daybreakers_horn
-	x = 1
-	y = 1
-	relative_position_id = EQS_anointed_in_the_empress_light
-	
-	bypass = {
-		NOT = {
-			country_exists = CHN
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_anointed_in_the_empress_light }
-	prerequisite = { focus = EQS_bless_the_militariums_weapons }
-	mutually_exclusive = { focus = EQS_rain_the_fire_of_the_empress_upon_them }
-	
-	completion_reward = {
-		country_event = solar.349
-		###Event for Aurora being interrupted in her latest Militarium assembly to be confronted by Stellar Breeze, who looks like she has been slowly going insane, as she claims she has poured over the tactics of the changelings and found a weak spot for armoured warfare
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_rain_the_fire_of_the_empress_upon_them
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_appease_the_machine_spirit
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = CHN
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_appease_the_machine_spirit }
+#	prerequisite = { focus = EQS_anointed_in_the_empress_light }
+#	mutually_exclusive = { focus = EQS_operation_daybreakers_horn }
+#	
+#	completion_reward = {
+#		country_event = solar.348
+#		###Event for Aurora being suggested by Fidelis to use softer, but more effective tactics to bombard the changelings into submission, which Aurora takes under advisement and issues further production of artillery shells for the war
+#	}
+#	ai_will_do = { factor = 25 }
+#}
+#
+#shared_focus = {
+#	id = EQS_operation_daybreakers_horn
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_anointed_in_the_empress_light
+#	
+#	bypass = {
+#		NOT = {
+#			country_exists = CHN
+#		}
+#	}
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_anointed_in_the_empress_light }
+#	prerequisite = { focus = EQS_bless_the_militariums_weapons }
+#	mutually_exclusive = { focus = EQS_rain_the_fire_of_the_empress_upon_them }
+#	
+#	completion_reward = {
+#		country_event = solar.349
+#		###Event for Aurora being interrupted in her latest Militarium assembly to be confronted by Stellar Breeze, who looks like she has been slowly going insane, as she claims she has poured over the tactics of the changelings and found a weak spot for armoured warfare
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 shared_focus = {
 	id = EQS_the_punishment_of_humuliation
-	x = 1
-	y = 1
-	relative_position_id = EQS_rain_the_fire_of_the_empress_upon_them
+	x = 0
+	y = 2
+	relative_position_id = EQS_annointed_in_the_empress_light
 	
 	available = {
 		NOT = {
@@ -7792,9 +7933,10 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = { 
-		focus = EQS_rain_the_fire_of_the_empress_upon_them
-		focus = EQS_operation_daybreakers_horn
+		focus = EQS_appease_the_machine_spirit
+		focus = EQS_bless_the_militariums_weapons
 	}
+	prerequisite = { focus = EQS_annointed_in_the_empress_light }
 	
 	completion_reward = {
 		country_event = solar.350
@@ -7814,7 +7956,6 @@ shared_focus = {
 		has_war = no
 		NOT = {
 			country_exists = CRY
-			country_exists = CHN
 		}
 	}
 	
@@ -7850,43 +7991,43 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
-	id = EQS_swarming_the_air_with_the_empress_faithful
-	x = 3
-	y = 1
-	relative_position_id = EQS_the_consequence_of_rebellion
-	
-	available = {
-		has_war = no
-		NOT = {
-			country_exists = CRY
-			country_exists = CHN
-		}
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_the_consequence_of_rebellion }
-	prerequisite = { focus = EQS_the_punishment_of_humuliation }
-	
-	completion_reward = {
-		add_equipment_to_stockpile = {
-			type = fighter_equipment
-			amount = 500
-			producer = EQS
-		}
-		add_equipment_to_stockpile = {
-			type = CAS_equipment
-			amount = 300
-			producer = EQS
-		}
-		add_equipment_to_stockpile = {
-			type = strat_bomber_equipment
-			amount = 200
-			producer = EQS
-		}
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_swarming_the_air_with_the_empress_faithful
+#	x = 3
+#	y = 1
+#	relative_position_id = EQS_the_consequence_of_rebellion
+#	
+#	available = {
+#		has_war = no
+#		NOT = {
+#			country_exists = CRY
+#			country_exists = CHN
+#		}
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_the_consequence_of_rebellion }
+#	prerequisite = { focus = EQS_the_punishment_of_humuliation }
+#	
+#	completion_reward = {
+#		add_equipment_to_stockpile = {
+#			type = fighter_equipment
+#			amount = 500
+#			producer = EQS
+#		}
+#		add_equipment_to_stockpile = {
+#			type = CAS_equipment
+#			amount = 300
+#			producer = EQS
+#		}
+#		add_equipment_to_stockpile = {
+#			type = strat_bomber_equipment
+#			amount = 200
+#			producer = EQS
+#		}
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 shared_focus = { 
 	id = EQS_changelings_for_the_steel_mills
@@ -7897,7 +8038,6 @@ shared_focus = {
 	available = {
 		has_war = no
 		NOT = {
-			country_exists = CRY
 			country_exists = CHN
 		}
 	}
@@ -7924,9 +8064,9 @@ shared_focus = {
 
 shared_focus = {
 	id = EQS_end_the_bastion_of_heresy
-	x = 0
+	x = 2
 	y = 1
-	relative_position_id = EQS_swarming_the_air_with_the_empress_faithful
+	relative_position_id = EQS_crystal_ponies_for_the_crystal_mines
 	
 	bypass = {
 		NOT = {
@@ -7936,7 +8076,7 @@ shared_focus = {
 	
 	cost = 5
 	prerequisite = { focus = EQS_crystal_ponies_for_the_crystal_mines }
-	prerequisite = { focus = EQS_swarming_the_air_with_the_empress_faithful }
+	#prerequisite = { focus = EQS_swarming_the_air_with_the_empress_faithful }
 	prerequisite = { focus = EQS_changelings_for_the_steel_mills }
 	
 	completion_reward = {
@@ -8552,15 +8692,20 @@ shared_focus = {
 	relative_position_id = EQS_return_of_the_lost_generation
 	
 	available = {
+		NOT = {
+			country_exists = CHN
+			has_war = yes
+		}
+	}
+	
+	allow_branch = {
 		AND = {
-			NOT = {
-				country_exists = CHN
-				has_war = yes
-			}
 			OR = {
-				has_country_flag = daybreaker_reigns
-				has_country_flag = aurora_reigns
+				EQS_Daybreaker = { is_country_leader = yes }
+				EQS_Aurora_Shinespark = { is_country_leader = yes }
+				EQS_Quasar_Pulse = { is_country_leader = yes }
 			}
+			has_country_flag = southeast_dead
 		}
 	}
 	

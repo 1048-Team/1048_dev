@@ -19,8 +19,8 @@ shared_focus = {
 				NOT = {
 					has_country_flag = equestria_returned
 					has_country_flag = daybreaker_reigns
-					has_country_flag = aurora_reigns
-					has_country_flag = sunset_reigns
+					EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
+					EQS_Aurora_Shinespark = { is_country_leader = yes }
 				}
 			}
 		}
@@ -1268,7 +1268,7 @@ shared_focus = {
 	
 	
 	completion_reward = {
-		add_ideas = EQS_bit_reevaluation
+		add_ideas = EQS_bit_reevaluation_idea
 	}
 	ai_will_do = { factor = 30 }
 }
@@ -1305,7 +1305,7 @@ shared_focus = {
 	completion_reward = {
 		swap_ideas = {
 			add_idea = EQS_bit_reevaluation_2
-			remove_idea = EQS_bit_reevaluation
+			remove_idea = EQS_bit_reevaluation_idea
 		}
 	}
 	ai_will_do = { factor = 25 }
@@ -1325,10 +1325,13 @@ shared_focus = {
 	prerequisite = { focus = EQS_new_imperial_standard }
 	
 	completion_reward = {
-		remove_ideas = EQS_great_war_aftermath_3
-		swap_ideas = {
-			add_idea = EQS_new_imperial_bit
-			remove_idea = EQS_bit_reevaluation_2
+		remove_ideas = {
+			EQS_great_war_aftermath_3
+			EQS_bit_reevaluation_2
+		}
+		add_timed_idea = {
+			idea = EQS_new_imperial_bit
+			days = 730
 		}
 	}
 	ai_will_do = { factor = 40 }
@@ -1361,21 +1364,21 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
-	id = EQS_integral_industry
-	x = 0
-	y = 1
-	icon = GFX_imperial_initiative_for_integral_industry
-	relative_position_id = EQS_burning_path_through_countryside
-	
-	cost = 5
-	prerequisite = { focus = EQS_burning_path_through_countryside }
-	
-	completion_reward = {
-		add_ideas = EQS_imperial_industry_subsidies
-	}
-	ai_will_do = { factor = 15 }
-}
+#shared_focus = {
+#	id = EQS_integral_industry
+#	x = 0
+#	y = 1
+#	icon = GFX_imperial_initiative_for_integral_industry
+#	relative_position_id = EQS_burning_path_through_countryside
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_burning_path_through_countryside }
+#	
+#	completion_reward = {
+#		add_ideas = EQS_imperial_industry_subsidies
+#	}
+#	ai_will_do = { factor = 15 }
+#}
 
 ###Middle Path###
 shared_focus = {
@@ -1759,7 +1762,10 @@ shared_focus = {
 	prerequisite = { focus = EQS_reassessing_commitments }
 	
 	completion_reward = {
-		add_ideas = EQS_holy_guidance
+		add_timed_idea = {
+			idea = EQS_holy_guidance
+			days = 475
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -1983,25 +1989,25 @@ shared_focus = {
 	ai_will_do = { factor = 15 }
 }
 
-shared_focus = {
-	id = EQS_empress_gives
-	x = 0
-	y = 1
-	icon = GFX_the_empress_gives_and_takes_away
-	relative_position_id = EQS_found_tartarus_industries
-	
-	cost = 5
-	prerequisite = { focus = EQS_found_tartarus_industries }
-	prerequisite = {
-		focus = EQS_project_gloria
-		focus = EQS_manehattan_mandate
-	}
-	
-	completion_reward = {
-		add_ideas = EQS_empress_judgement
-	}
-	ai_will_do = { factor = 15 }
-}
+#shared_focus = {
+#	id = EQS_empress_gives
+#	x = 0
+#	y = 1
+#	icon = GFX_the_empress_gives_and_takes_away
+#	relative_position_id = EQS_found_tartarus_industries
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_found_tartarus_industries }
+#	prerequisite = {
+#		focus = EQS_project_gloria
+#		focus = EQS_manehattan_mandate
+#	}
+#	
+#	completion_reward = {
+#		add_ideas = EQS_empress_judgement
+#	}
+#	ai_will_do = { factor = 15 }
+#}
 
 shared_focus = {
 	id = EQS_greater_monument
@@ -2013,8 +2019,8 @@ shared_focus = {
 	cost = 6
 	prerequisite = { focus = EQS_imperial_board_of_economic_advisory }
 	prerequisite = {
+		focus = EQS_bless_archanum_mechanicus
 		focus = EQS_burning_path_through_countryside
-		focus = EQS_empress_gives
 	}
 	
 	completion_reward = {
@@ -2028,13 +2034,22 @@ shared_focus = {
 	x = 0
 	y = 1
 	icon = GFX_bless_the_archanum_mechanicus
-	relative_position_id = EQS_empress_gives
+	relative_position_id = EQS_found_tartarus_industries
 	
 	cost = 4
-	prerequisite = { focus = EQS_empress_gives }
+	prerequisite = {
+		focus = EQS_project_gloria
+		focus = EQS_manehattan_mandate
+	}
+	prerequisite = { focus = EQS_found_tartarus_industries }
 	
 	completion_reward = {
-		add_ideas = EQS_archanum_mechanicus
+		#add_ideas = EQS_archanum_mechanicus
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = industry
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -2048,10 +2063,6 @@ shared_focus = {
 	
 	cost = 7
 	prerequisite = { focus = EQS_greater_monument }
-	prerequisite = {
-		focus = EQS_bless_archanum_mechanicus
-		focus = EQS_integral_industry
-	}
 	
 	completion_reward = {
 		add_ideas = EQS_full_industrial_utilization
@@ -2179,22 +2190,14 @@ shared_focus = {
 }
 
 ###Military trees###
-###Naval tree###
 shared_focus = {
-	id = EQS_old_sea_terror
-	x = 34
+	id = EQS_scour_militarium
+	x = 41
 	y = 1
 	
 	available = {
-		hidden_trigger = {
-			NOT = {
-				has_country_flag = equestria_returned
-			}
-		}
+		has_country_flag = sentinel_killed
 	}
-
-	bypass = {
-		}
 	
 	allow_branch = {
 		hidden_trigger = {
@@ -2205,12 +2208,29 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = {
-		}	
+	
+	completion_reward = {
+		add_war_support = -0.05
+		add_political_power = 10
+	}
+	ai_will_do = {
+		factor = 45
+	}
+}	
+	
+###Naval tree###
+shared_focus = {
+	id = EQS_old_sea_terror
+	x = -7
+	y = 2
+	relative_position_id = EQS_scour_militarium
+	
+	cost = 5
+	prerequisite = { focus = EQS_scour_militarium }	
 	
 	completion_reward = {
 		navy_experience = 50
-		}
+	}
 	ai_will_do = {
 		factor = 15
 	}
@@ -2234,32 +2254,32 @@ shared_focus = {
 	ai_will_do = { factor = 12 }
 }
 
-shared_focus = {
-	id = EQS_clearing_the_barnicles
-	x = 0
-	y = 1
-	relative_position_id = EQS_burning_the_mothballs
-	
-	cost = 5
-	prerequisite = { focus = EQS_burning_the_mothballs }
-	
-	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_reignited_navy
-			days = 730
-		}
-	}
-	ai_will_do = { factor = 10 }
-}
+#shared_focus = {
+#	id = EQS_clearing_the_barnicles
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_burning_the_mothballs
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_burning_the_mothballs }
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_reignited_navy
+#			days = 730
+#		}
+#	}
+#	ai_will_do = { factor = 10 }
+#}
 
 shared_focus = {
 	id = EQS_laying_new_keels
 	x = -2
 	y = 1
-	relative_position_id = EQS_clearing_the_barnicles
+	relative_position_id = EQS_burning_the_mothballs
 	
 	cost = 4
-	prerequisite = { focus = EQS_clearing_the_barnicles }
+	prerequisite = { focus = EQS_burning_the_mothballs }
 	mutually_exclusive = { focus = EQS_no_longer_civilian_armada }
 	
 	completion_reward = {
@@ -2362,10 +2382,10 @@ shared_focus = {
 	id = EQS_no_longer_civilian_armada
 	x = 2
 	y = 1
-	relative_position_id = EQS_clearing_the_barnicles
+	relative_position_id = EQS_burning_the_mothballs
 	
 	cost = 5
-	prerequisite = { focus = EQS_clearing_the_barnicles }
+	prerequisite = { focus = EQS_burning_the_mothballs }
 	mutually_exclusive = { focus = EQS_laying_new_keels }
 	
 	completion_reward = {
@@ -2628,24 +2648,12 @@ shared_focus = {
 
 shared_focus = {
 	id = EQS_militarium_reassessment
-	x = 41
-	y = 1
-	
-	available = {
-		has_country_flag = sentinel_killed
-	}
-
-	#custom_effect_tooltip = inquisitionis_inspect_militarium
-	
-	allow_branch = {
-		hidden_trigger = {
-			NOT = {
-				has_country_flag = equestria_returned
-			}
-		}
-	}
+	x = 0
+	y = 2
+	relative_position_id = EQS_scour_militarium
 	
 	cost = 5
+	prerequisite = { focus = EQS_scour_militarium }
 	
 	completion_reward = {
 		army_experience = 30
@@ -3347,35 +3355,14 @@ shared_focus = {
 }
 
 ###Air tree###
-
 shared_focus = {
 	id = EQS_airforce_revitalization
-	x = 48
-	y = 1
-	
-	available = {
-		hidden_trigger = {
-			NOT = {
-				has_country_flag = equestria_returned
-			}
-		}
-	}
-		
-	bypass = {
-		}
-	
-	allow_branch = {
-		hidden_trigger = {
-			NOT = {
-				has_country_flag = equestria_returned
-			}
-		}
-	}
+	x = 7
+	y = 2
+	relative_position_id = EQS_scour_militarium
 	
 	cost = 5
-	prerequisite = {
-		}
-	
+	prerequisite = { focus = EQS_scour_militarium }
 	
 	completion_reward = {
 		air_experience = 50

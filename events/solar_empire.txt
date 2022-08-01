@@ -2,7 +2,6 @@
 
 add_namespace = solar
 add_namespace = celestia
-add_namespace = solarwar
 
 #Start event chain to introduce Aurora
 country_event = {
@@ -14,9 +13,6 @@ country_event = {
 	
 	option = { #Aurora goes to Sanctum Solar
 		name = solar.1.a
-		ai_chance = { 
-		factor = 100 
-		}
 		
 		hidden_effect = {
 			EQS = {
@@ -40,9 +36,6 @@ country_event = {
 		
 	option = { #Aurora begins to search for heresy
 		name = solar.2.a
-		ai_chance = {
-			factor = 100
-		}
 		
 		hidden_effect = {
 			EQS = {
@@ -66,9 +59,6 @@ country_event = {
 
 	option = { #Thunderbolt worries about the declared heretics
 		name = solar.3.a
-		ai_chance = {
-			factor = 100
-		}
 		
 		hidden_effect = {
 			EQS = {
@@ -92,9 +82,6 @@ country_event = {
 
 	option = { #Thunderbolt grows wary of Aurora
 		name = solar.4.a
-		ai_chance = {
-			factor = 100
-		}
 		
 		hidden_effect = {
 			EQS = {
@@ -118,9 +105,6 @@ country_event = {
 
 	option = { #Aurora begins to search for heresy
 		name = solar.5.a
-		ai_chance = {
-			factor = 100
-		}
 		
 		hidden_effect = {
 			EQS = {
@@ -144,9 +128,6 @@ country_event = {
 
 	option = { #Aurora muses at his impending death
 		name = solar.6.a
-		ai_chance = {
-			factor = 100
-		}
 		
 		hidden_effect = {
 			EQS = {
@@ -170,18 +151,17 @@ country_event = {
 
 	option = { #Aurora is wary but throws the picture away, not trusting of Thunderbolt
 		name = solar.7.a
-		ai_chance = {
-			factor = 100
-			}
-			retire_character = EQS_Sentinel_1048
-			set_country_flag = aurora_general
-			set_country_flag = sentinel_killed
+		retire_character = EQS_Sentinel_1048
+		set_country_flag = aurora_general
+		set_country_flag = sentinel_killed
+		hidden_effect = {
+			complete_national_focus = EQS_scour_militarium
 		}
 	}
+}
 
 ###Opening focus events###
 ###Left tree###
-
 country_event = {
 	id = solar.8
 	title = solar.8.t
@@ -191,9 +171,6 @@ country_event = {
 	
 	option = {
 		name = solar.8.a
-		ai_chance = {
-			factor = 100
-		}
 		add_stability = -0.03
 	}
 }
@@ -207,9 +184,6 @@ country_event = {
 	
 	option = {
 		name = solar.10.a
-		ai_chance = {
-			factor = 100
-		}
 		109 = {
 			add_manpower = -352
 		}
@@ -231,9 +205,6 @@ country_event = {
 	
 	option = {
 		name = solar.11.a
-		ai_chance = {
-			factor = 100
-		}
 		add_manpower = -1
 		hidden_effect = {
 			random_list = {
@@ -258,9 +229,6 @@ country_event = {
 	
 	option = {
 		name = solar.9.a
-		ai_chance = {
-			factor = 100
-		}
 		add_stability = -0.05
 	}
 }
@@ -274,9 +242,6 @@ country_event = {
 	
 	option = {
 		name = solar.12.a
-		ai_chance = {
-			factor = 100
-		}
 		add_political_power = 20
 	}
 }
@@ -289,10 +254,7 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-		name = solar.8.a
-		ai_chance = {
-			factor = 100
-		}
+		name = solar.13.a
 		add_manpower = -1
 		add_stability = 0.01
 	}
@@ -307,9 +269,6 @@ country_event = {
 	
 	option = {
 		name = solar.14.a
-		ai_chance = {
-			factor = 100
-		}
 		add_manpower = -1
 	}
 }
@@ -323,9 +282,6 @@ country_event = {
 	
 	option = {
 		name = solar.15.a
-		ai_chance = {
-			factor = 100
-		}
 		add_manpower = -1
 		add_war_support = 0.01
 	}
@@ -340,9 +296,6 @@ country_event = {
 	
 	option = {
 		name = solar.16.a
-		ai_chance = {
-			factor = 100
-		}
 		add_stability = 0.05
 		hidden_effect = {
 			set_country_flag = rebels_found
@@ -382,7 +335,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 		name = solar.18.a
 		hidden_effect = {
 			add_named_threat = {
-				threat = 2
+				threat = 1
 				name = EQS_manehattan_uprising
 			}
 		}
@@ -392,11 +345,11 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 			}
 			save_current_manpower = yes
 			75 = {
-			set_variable = { 
-				rebel_var_1 = -0.5 
+				set_variable = { 
+					rebel_var_1 = -0.5 
 				}
-			set_variable = { 
-				rebel_var_2 = -0.2 
+				set_variable = { 
+					rebel_var_2 = -0.2 
 				}
 			}
 			hidden_effect = {
@@ -427,55 +380,14 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 			}
 			restore_previous_manpower = yes
 		}
-		ELSE_IF = {
-			limit = {
-				has_country_flag = rebels_not_found
-			}
-			save_current_manpower = yes
-			75 = {
-			set_variable = { 
-				rebel_var_1 = -0.9 
-				}
-			set_variable = { 
-				rebel_var_2 = -0.35 
-				}
-			}
-			hidden_effect = {
-				set_country_flag = starlight_and_trixie_escaped
-				set_country_flag = successful_rebellion
-				
-				75 = {
-					add_dynamic_modifier = {
-						modifier = EQS_manehattan_rebellion
-						}
-					}
-				mark_focus_tree_layout_dirty = yes
-			}
-			75 = {
-				add_manpower = -204702
-				damage_building = {
-					type = infrastructure
-					damage = 3
-				}
-				remove_building = {
-					type = arms_factory
-					level = 2
-				}
-				remove_building = {
-					type = industrial_complex
-					level = 3
-				}
-			}
-			restore_previous_manpower = yes
-		}
 		ELSE = {
 			save_current_manpower = yes
 			75 = {
-			set_variable = { 
-				rebel_var_1 = -0.9 
+				set_variable = { 
+					rebel_var_1 = -0.9 
 				}
-			set_variable = { 
-				rebel_var_2 = -0.35 
+				set_variable = { 
+					rebel_var_2 = -0.35 
 				}
 			}
 			hidden_effect = {
@@ -1091,7 +1003,7 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 	}
 	
 country_event = { #Sunset and Aurora find the artifact and first mention of Solar Flare in the vault area, get captured by Bales; Sunset can fight or surrender for the time being, former increasing zealotry
-	id = solar.86
+	id = solar.86 ###Alternatively, could be found by NER militia instead and have to talk or fight their way out of it then
 	title = solar.86.t
 	desc = solar.86.d
 	
@@ -1144,7 +1056,7 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 	}
 	
 country_event = { #Sunset and Aurora get help from Astrum, and have a quick fight with Nebula, with Sunset either starting the fight or Aurora, former increasing zealotry
-	id = solar.87
+	id = solar.87 ###Alternatively could be either a generic Bales fight or fighting through NER instead, where they are helped by Astrum at the border
 	title = solar.87.t
 	desc = solar.87.d
 	
@@ -1350,6 +1262,16 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 		
 		###start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins###
 	}
+	option = { #We will protect the Empire from this false Empress!
+		name = solar.99.b
+		custom_effect_tooltip = celestias_back_gents
+		hidden_effect = {
+			SOL_Celestia_Returned = yes
+		}
+		SLW = {
+			change_tag_from = ROOT
+		}
+	}
 }
 
 
@@ -1383,7 +1305,6 @@ country_event = { #After being sealed away, discussion is held over who will be 
 						traits = { high_mage_shimmer }
 					}
 				}
-				set_country_flag = sunset_reigns
 				mark_focus_tree_layout_dirty = yes
 				add_named_threat = {
 					threat = -1
@@ -1392,7 +1313,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			}
 		custom_effect_tooltip = sunset_regent
 		add_ideas = {
-			EQS_daybreaker_tts
+			#EQS_daybreaker_tts
 			EQS_celestia_throne
 		}
 		IF = {
@@ -1423,7 +1344,6 @@ country_event = { #After being sealed away, discussion is held over who will be 
 						}
 					}
 				}
-				set_country_flag = aurora_reigns
 				mark_focus_tree_layout_dirty = yes
 				add_named_threat = {
 					threat = -1
@@ -1432,7 +1352,7 @@ country_event = { #After being sealed away, discussion is held over who will be 
 			}
 		custom_effect_tooltip = aurora_regent
 		add_ideas = {
-			EQS_daybreaker_tts
+			#EQS_daybreaker_tts
 			EQS_celestia_throne
 		}
 		IF = {
@@ -1703,6 +1623,10 @@ country_event = { #The current leader of the Solar Empire is presented with an o
 	desc = solar.118.d
 	
 	trigger = {
+		OR = {
+			tag = EQS
+			tag = SLW
+		}
 		date > 1053.1.1
 		date < 1053.12.31
 	}
@@ -1750,7 +1674,7 @@ country_event = { #Following one of the settlers, they are soon attacked by a ro
 	}
 }
 
-country_event = { #The currently leader is informed that Scorched Earth has gone AWOL, citing that the Empire is being inactive at the opportunity in the southeast, and has taken the seventh Holy Flame army and a rogue inquisitor to march across the border to attack the southeast
+country_event = { #The current leader is informed that Scorched Earth has gone AWOL, citing that the Empire is being inactive at the opportunity in the southeast, and has taken the seventh Holy Flame army and a rogue inquisitor to march across the border to attack the southeast
 	id = solar.122
 	title = solar.122.t
 	desc = solar.122.d
@@ -1789,7 +1713,7 @@ country_event = { #The currently leader is informed that Scorched Earth has gone
 					random_days = 7
 				}
 			}
-			event_target:EQS_Scorched_Earth_target = { set_nationality = MTS }
+			event_target:EQS_Scorched_Earth_target = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
 			event_target:EQS_Luminous_Blade_target = { set_nationality = MTS }
 		}
 		custom_effect_tooltip = EQS_scorched_earth_departs_tt
@@ -1816,7 +1740,7 @@ country_event = { #Scorched Earth is alerted by some of his scouts that a Solar 
 					random_days = 7
 				}
 			}
-			event_target:EQS_Scorched_Earth_target = { set_nationality = MTS }
+			event_target:EQS_Scorched_Earth_target = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
 			event_target:EQS_Luminous_Blade_target = { set_nationality = MTS }
 		}
 	}
@@ -2477,7 +2401,7 @@ country_event = { #Sunset receives the return of the emmissary and she is gladde
 		name = solar.227.a
 		annex_country = { target = CER }
 		add_timed_idea = {
-			idea = EQS_fund_secular_experiments
+			idea = EQS_incorporate_harmony_worship
 			days = 210
 		}
 	}
@@ -2507,7 +2431,7 @@ country_event = { #After too long, the emmissary returns and gives Sunset the co
 			puppet = CER
 		}
 		add_timed_idea = {
-			idea = EQS_fund_secular_experiments
+			idea = EQS_incorporate_harmony_worship
 			days = 150
 		}
 	}
@@ -2855,7 +2779,7 @@ country_event = { #Before even the negotiator returns, Sunset has heard of the a
 		name = solar.242.a
 		annex_country = { target = BLS }
 		add_timed_idea = {
-			idea = EQS_incorporate_harmony_worship
+			idea = EQS_fund_secular_experiments
 			days = 210
 		}
 	}
@@ -2885,7 +2809,7 @@ country_event = { #The emmissary returns with a lot of embarrassment stating tha
 			puppet = BLS
 		}
 		add_timed_idea = {
-			idea = EQS_incorporate_harmony_worship
+			idea = EQS_fund_secular_experiments
 			days = 150
 		}
 	}
@@ -3906,7 +3830,7 @@ country_event = { #After the war ends, Sunset calls for Stellar to come with her
 }
 
 country_event = { #Sunset meets with Aurora, and the two stand in front of the throne of Daybreaker, pondering everything that has happened since the crisis, and Sunset thanks Aurora for being a supporter of her since the beginning, to which Aurora is happy to reciprocate
-	id = solar.276
+	id = solar.276 ###Potentially change this to be either Aurora, if she's not high mage, or Stellar as her second role as high mage of Griffonia
 	title = solar.276.t
 	desc = solar.276.d
 	
@@ -4191,7 +4115,10 @@ country_event = { #Nova leads a group of inquisitors, and she is irritated becau
 	
 	option = { #Waste of my time and talents
 		name = solar.309.a
-		add_ideas = EQS_industrial_inquisitors
+		swap_ideas = {
+			add_idea = EQS_industrial_inquisitors
+			remove_idea = EQS_separation_removed
+		}
 	}
 }
 
@@ -4286,7 +4213,7 @@ country_event = { #Aurora and Sunset hear some of the latest strategy proposals 
 			uses = 1
 			category = land_doctrine
 		}
-		add_ideas = EQS_restructured_planning
+		army_experience = 25
 	}
 }
 
@@ -4299,7 +4226,10 @@ country_event = { #A few inquisitors are boredly waiting around in a small chamb
 	
 	option = { #There has to be something exciting to do here, right?!
 		name = solar.316.a
-		add_ideas = EQS_inquisitionis_guidance
+		swap_ideas = {
+			add_idea = EQS_inquisitionis_guidance
+			remove_idea = EQS_separation_removed
+		}
 	}
 }
 
@@ -4388,7 +4318,10 @@ country_event = { #Aurora is not happy as she enters the office of the mayor of 
 	
 	option = { #Stallions never change
 		name = solar.322.a
-		add_ideas = EQS_ensured_loyalties
+		swap_ideas = {
+			add_idea = EQS_ensured_loyalties
+			remove_idea = EQS_protected_nobility
+		}
 	}
 }
 
@@ -4424,26 +4357,26 @@ country_event = { #Aurora is presented with some of the training results of the 
 	}
 }
 
-country_event = { #Aurora is satisfied with the changes she made to the Empire, and she prepares for the phase of the Solaris Bellum by gearing up, against Novus' recommendations and prepares to lead the armies
-	id = solar.325
-	title = solar.325.t
-	desc = solar.325.d
-	
-	is_triggered_only = yes
-	
-	option = { #I shall deal with them myself
-		name = solar.325.a
-		custom_effect_tooltip = aurora_does_it_herself_tt
-		clr_country_flag = aurora_removed
-		hidden_effect = {
-			event_target:EQS_Aurora_Shinespark_target = { promote_leader = yes }
-			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = recently_promoted } }
-			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
-			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = princess_regent_general } }
-		}
-		add_war_support = 0.1
-	}
-}
+#country_event = { #Aurora is satisfied with the changes she made to the Empire, and she prepares for the phase of the Solaris Bellum by gearing up, against Novus' recommendations and prepares to lead the armies
+#	id = solar.325
+#	title = solar.325.t
+#	desc = solar.325.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #I shall deal with them myself
+#		name = solar.325.a
+#		custom_effect_tooltip = aurora_does_it_herself_tt
+#		clr_country_flag = aurora_removed
+#		hidden_effect = {
+#			event_target:EQS_Aurora_Shinespark_target = { promote_leader = yes }
+#			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = recently_promoted } }
+#			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
+#			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = princess_regent_general } }
+#		}
+#		add_war_support = 0.1
+#	}
+#}
 
 country_event = { #Aurora speaks with a couple of her generals about the initial strike plans before she has a long prayer to Daybreaker in the throne room for leading them to victory
 	id = solar.326
@@ -4454,9 +4387,16 @@ country_event = { #Aurora speaks with a couple of her generals about the initial
 	
 	option = { #Praise the burning eye of the sky!
 		name = solar.326.a
-		add_stability = 0.03
-		add_war_support = 0.03
+		custom_effect_tooltip = aurora_does_it_herself_tt
+		clr_country_flag = aurora_removed
+		#add_stability = 0.03
+		#add_war_support = 0.03
+		add_war_support = 0.1
 		hidden_effect = {
+			event_target:EQS_Aurora_Shinespark_target = { promote_leader = yes }
+			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = recently_promoted } }
+			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
+			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = princess_regent_general } }
 			add_named_threat = {
 				threat = 5
 				name = EQS_solaris_quorundam
@@ -4527,7 +4467,7 @@ country_event = { #They find the last few bits of resistance from the Whinnyapol
 	is_triggered_only = yes
 	
 	option = { #And that settles the last of the theological disagreemens
-		name = solar.331
+		name = solar.331.a
 	}
 }
 
@@ -4551,31 +4491,37 @@ country_event = { #With the rump states integrated, Aurora looks over her newly 
 	
 	is_triggered_only = yes
 	
-	option = { #It shall be a glorious monument! Nothing shall stop us!
+	option = { #It shall be glorious, but the laypony must not be allowed in
 		name = solar.333.a
-		swap_ideas = {
-			remove_idea = EQS_aftershocks_of_the_crisis
-			add_idea = EQS_solars_sanctum_1
-		}
-		set_variable = { equestria_conquest = 1 }
+		ai_chance = { factor = 85 }
+		add_ideas = EQS_solars_sanctum
+		set_country_flag = EQS_building_temple
+		set_country_flag = EQS_mystic_temple
+	}
+	option = { #We must allow all to worship the Empress in her new home
+		name = solar.333.b
+		ai_chance = { factor = 15 }
+		add_ideas = EQS_solars_sanctum
+		set_country_flag = EQS_building_temple
+		set_country_flag = EQS_laypony_temple
 	}
 }
 
-country_event = { #Aurora goes over the new plans for a temple to Daybreaker, that she and Nova specifically pioneered, and she learns of delays that are ocurring, and she promises to allocate more funds, against the wishes of her other advisors
-	id = solar.334
-	title = solar.334.t
-	desc = solar.334.d
-	
-	is_triggered_only = yes
-	
-	option = { #The material cost will be outweighed by the spiritual!
-		name = solar.334.a
-		swap_ideas = {
-			remove_idea = EQS_solars_sanctum_1
-			add_idea = EQS_solars_sanctum_2
-		}
-	}
-}
+#country_event = { #Aurora goes over the new plans for a temple to Daybreaker, that she and Nova specifically pioneered, and she learns of delays that are ocurring, and she promises to allocate more funds, against the wishes of her other advisors
+#	id = solar.334
+#	title = solar.334.t
+#	desc = solar.334.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #The material cost will be outweighed by the spiritual!
+#		name = solar.334.a
+#		swap_ideas = {
+#			remove_idea = EQS_solars_sanctum
+#			add_idea = EQS_solars_sanctum_2
+#		}
+#	}
+#}
 
 country_event = { #Aurora wanders through the temple that she created in the heart of Sanctum Solar, and visits the new holy place for Daybreaker's rest, and meets with Sunset to discuss the new abode, and the two of them agree it is better for the Empress to be seen as a bigger deity than she ever was
 	id = solar.335
@@ -4586,18 +4532,17 @@ country_event = { #Aurora wanders through the temple that she created in the hea
 	
 	option = { #It is better if they never knew her moments of weakness
 		name = solar.335.a
+		remove_ideas = EQS_solars_sanctum
 		IF = {
 			limit = {
-				has_idea = EQS_temple_for_the_masses_3
+				has_country_flag = EQS_laypony_temple
 			}
-			remove_ideas = EQS_temple_for_the_masses_3
 			add_ideas = EQS_solar_vulgate
 		}
 		IF = {
 			limit = {
-				has_idea = EQS_a_holy_temple_3
+				has_country_flag = EQS_mystic_temple
 			}
-			remove_ideas = EQS_a_holy_temple_3
 			add_ideas = EQS_holy_of_holies
 		}
 	}
@@ -4622,6 +4567,7 @@ country_event = { #Blueblood meets with a few of his generals and Aurora barges 
 		}
 		event_target:EQS_Fidelis_Flamma_target = { promote_leader = yes }
 		hidden_effect = { event_target:EQS_Fidelis_Flamma_target = { remove_trait = { trait = recently_promoted } } }
+		###Potentially remove EQS_power_to_the_old_guard or replace it again with EQS_salvation_in_death
 	}
 }
 
@@ -4759,19 +4705,20 @@ country_event = { #Nova intercepts Aurora before she can reach the tent for meet
 }
 
 country_event = { #Aurora leads a large number of mages into the Crystal City, and she sees Cadance holding off an army elsewhere, and she and the mages rush into battle, destroying some of the crystal pony weaponry, and manages to surprise Cadance, who, as the city falls around her, urges the other princesses to flee for another day
-	id = solar.344
+	id = solar.344 #Alternatively, Aurora making a speech about how the other false gods of the Crystal Empire, the other princesses, will not stand against the might of their faith to Daybreaker, which motivates the entire crowd gathered as she sneers at an image of the current ruler (use dynamic loc) be set alight on a pyre
 	title = solar.344.t
 	desc = solar.344.d
 	
 	is_triggered_only = yes
 	
-	option = { #You do not have Harmony on your side now, defiler
+	option = { #You do not have Harmony on your side now, defilers
 		name = solar.344.a
 		add_war_support = 0.02
+		add_manpower = 7500
 	}
 }
 
-country_event = { #Aurora leads Cadance through the streets of Sanctum Solar after defeating the Crystal Empire, although the other princesses have escaped to parts unknown, and she brings Cadance tao the courtyard of the Imperial Palace, where she gives Cadance last words before having her burned at the stake for heresy, to which Cadance is resigned to
+country_event = { #Aurora leads Cadance through the streets of Sanctum Solar after defeating the Crystal Empire, although the other princesses have escaped to parts unknown, and she brings Cadance to the courtyard of the Imperial Palace, where she gives Cadance last words before having her burned at the stake for heresy, to which Cadance is resigned to
 	id = solar.345
 	title = solar.345.t
 	desc = solar.345.d
@@ -5022,13 +4969,14 @@ country_event = { #Aurora tasks some of the communist survivors to erect a statu
 	}
 }
 
-country_event = {
+country_event = { #Determines which order the map is changed when doing the dual war
 	id = solar.357
 	hidden = yes
 	
 	trigger = {
+		original_tag = EQS
+		EQS_Aurora_Shinespark = { is_country_leader = yes }
 		AND = {
-			EQS_Aurora_Shinespark = { is_country_leader = yes }
 			OR = {
 				AND = {
 					NOT = { country_exists = STG }
@@ -5105,6 +5053,173 @@ country_event = {
 		}
 		ELSE = {
 			set_variable = { equestria_conquest = 4 }
+		}
+	}
+}
+
+country_event = { #One of the storehouses for goods in Cloudsdale is raided by the Inquistionis, who arrest anypony who resists for heresy after they claim that the Empire is owed what is stored inside, for the decades of no taxes from that region
+	id = solar.358
+	title = solar.358.t
+	desc = solar.358.d
+	
+	is_triggered_only = yes
+	
+	option = { #Blood money is still money
+		name = solar.358.a
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				arms_factory > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = arms_factory level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		random_state = {
+			limit = {
+				industrial_complex > 0
+				is_SOL_AUR_destroyable_building = yes
+			}
+			remove_building = { type = industrial_complex level = 1 }
+		}
+		set_variable = { equestria_conquest = 1 }
+		remove_ideas = EQS_aftershocks_of_the_crisis
+	}
+}
+
+country_event = { #Nebula is brought forward to Aurora, who is sitting almost smugly on her own throne, and she brags a bit to Nebula before Nebula demands for Aurora to just get it over with, which leads to Aurora making a decision
+	id = solar.359
+	title = solar.359.t
+	desc = solar.359.d
+	
+	is_triggered_only = yes
+	
+	option = { #You have defied the Empress for too long!
+		name = solar.359.a
+		ai_chance = { factor = 75 }
+		country_event = {
+			id = solar.360
+			days = 5
+		}
+	}
+	option = { #No, I have better plans for you
+		name = solar.359.b
+		ai_chance = { factor = 25 }
+		country_event = {
+			id = solar.361
+			days = 14
+			random_days = 5
+		}
+	}
+}
+
+country_event = { #Nebula is taken before the heretic pyre, with Aurora watching from where Daybreaker would normally be, and Nebula gives one more defiant statement about Daybreaker being no god before she is thrust onto the flame, which causes her to panic because of her pyrophobia
+	id = solar.360
+	title = solar.360.t
+	desc = solar.360.d
+	
+	is_triggered_only = yes
+	
+	option = { #An ironic end
+		name = solar.360.a
+		add_stability = 0.02
+		add_political_power = 30
+		hidden_effect = {
+			BLS = { retire_character = event_target:BLS_Nebula_Flare_target }
+		}
+	}
+}
+
+country_event = { #A couple of weeks later Aurora heads to the dungeons where Nebula is being kept, and it is clear she's already been beaten and tortured, and Aurora says that she enjoys seeing her in pain for everything that she did when she fled, and Nebula is defiant, until Aurora brings out a flame to scorch her with
+	id = solar.361
+	title = solar.361.t
+	desc = solar.361.d
+	
+	is_triggered_only = yes
+	
+	option = { #Let us see how faithful you truly are
+		name = solar.361.a
+		hidden_effect = {
+			country_event = {
+				id = solar.362
+				days = 30
+				random_days = 30
+			}
+		}
+	}
+}
+
+country_event = { #Aurora goes into the dungeon one more time to break Nebula further, who by this point is severely wounded, and Aurora offers a way out: to return to Daybreaker, who can heal her wounds and nurse her back to health, and Nebula, after a bit more torture finally agrees
+	id = solar.362
+	title = solar.362.t
+	desc = solar.362
+	
+	is_triggered_only = yes
+	
+	option = { #I knew the Holy Flame would convince you
+		name = solar.362.a
+		custom_effect_tooltip = BLS_nebula_general_tt
+		hidden_effect = {
+			event_target:BLS_Nebula_Flare_target = { set_nationality = ROOT }
+			event_target:BLS_Nebula_Flare_target = { 
+				remove_trait = { trait = former_cultist } 
+				remove_trait = { trait = mechanicus_deus }
+				add_trait = { trait = solaris_inquisitionis }
+			}
 		}
 	}
 }
@@ -6170,11 +6285,13 @@ country_event = { #Celestia receives a reply back from TRD stating that they'll 
 	is_triggered_only = yes
 	
 	option = { #They better not drag us into another war, though
+		name = celestia.59.a
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
 			amount = -10000
 			producer = EQS
 		}
+		add_to_faction = TRD
 		TRD = {
 			add_equipment_to_stockpile = {
 				type = infantry_equipment
@@ -6186,7 +6303,6 @@ country_event = { #Celestia receives a reply back from TRD stating that they'll 
 				popularity = 0.075
 			}
 			load_oob = "TRD_pony_help" ###Load OOB for 3 divisions of 12 width pony infantry with support artillery and engineers
-			add_to_faction = TRD
 		}
 	}
 }
@@ -6200,6 +6316,59 @@ country_event = { #After waiting for far too long, Celestia finally learns that 
 	
 	option = { #It has been a while, I suppose
 		add_political_power = -20
+	}
+}
+
+country_event = { #Event for TRD to join like they promised they would, and the current leader has a bit of contemplation given that EQC is not a small foe
+	id = celestia.61
+	title = celestia.61.t
+	desc = celestia.61.d
+	
+	trigger = {
+		original_tag = TRD
+		EQS = {
+			has_war_with = EQC
+		}
+		has_country_flag = TRD_will_help_with_EQC
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We must honor our promise to our friends
+		name = celestia.61.a
+		ai_chance = {
+			factor = 20
+			modifier = {
+				has_government = democratic
+				factor = 4
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 3
+			}
+		}
+		declare_war_on = {
+			target = EQC
+			type = annex_everything
+		}
+	}
+	option = { #Thanks for the guns, Celestia!
+		name = celestia.61.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				has_government = neutrality
+				factor = 2
+			}
+		}
+		reverse_add_opinion_modifier = {
+			target = EQS
+			modifier = CRY_dishonorable
+		}
 	}
 }
 
@@ -6237,7 +6406,30 @@ country_event = { #Bales gets the proposal
 	
 	option = { #We will be better under them
 		name = celestia.501.a
-		ai_chance = { factor = 75 }
+		ai_chance = { 
+			factor = 10 
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_offer_funding_for_new_schools
+				}
+				factor = 3
+			}
+			modifier = {
+				has_government = democratic
+				factor = 2.5
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 1.25
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 0.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.503
@@ -6247,7 +6439,30 @@ country_event = { #Bales gets the proposal
 	}
 	option = { #We would be mad to bend to her wishes again!
 		name = celestia.501.b
-		ai_chance = { factor = 25 }
+		ai_chance = { 
+			factor = 20
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_offer_funding_for_new_schools
+				}
+				factor = 0.5
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 1.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 2
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.504
@@ -6266,7 +6481,30 @@ country_event = { #Cloudsdale gets the proposal
 	
 	option = { #It is good to see that Celestia has returned
 		name = celestia.502.a
-		ai_chance = { factor = 85 }
+		ai_chance = { 
+			factor = 5
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_ensure_pensions_for_the_heroes
+				}
+				factor = 5.5
+			}
+			modifier = {
+				has_government = democratic
+				factor = 3
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 1.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 1.25
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.505
@@ -6276,7 +6514,30 @@ country_event = { #Cloudsdale gets the proposal
 	}
 	option = { #This could still be a trap
 		name = celestia.502.b
-		ai_chance = { factor = 15 }
+		ai_chance = { 
+			factor = 15
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_ensure_pensions_for_the_heroes
+				}
+				factor = 0.75
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+			modifier = {
+				has_government = neutrality
+				factor = 2
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 4
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.506
@@ -6309,7 +6570,7 @@ country_event = { #Celestia receives the positive response from Bales and is ple
 				puppet = BLS
 		}
 		BLS = {
-			set_cosmetic_tag = EQS_BLS
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6353,7 +6614,7 @@ country_event = { #Celestia receives the positive response from Cloudsdale and p
 				puppet = CLD
 		}
 		CLD = {
-			set_cosmetic_tag = EQS_CLD
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6401,7 +6662,33 @@ country_event = { #CER gets the proposal
 	
 	option = { #It is our princess, we will not resist
 		name = celestia.508.a
-		ai_chance = { factor = 90 }
+		ai_chance = { 
+			factor = 5
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
+				}
+				factor = 3
+			}
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_subsidize_farm_fertilizers
+				}
+				factor = 3
+			}
+			modifier = {
+				has_government = democratic
+				factor = 1.75
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 0
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.509
@@ -6411,7 +6698,33 @@ country_event = { #CER gets the proposal
 	}
 	option = { #There is still something odd about her, we must be wary
 		name = celestia.508.b
-		ai_chance = { factor = 10 }
+		ai_chance = { 
+			factor = 2
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
+				}
+				factor = 0.5
+			}
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_subsidize_farm_fertilizers
+				}
+				factor = 0.5
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 20
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.510
@@ -6444,7 +6757,7 @@ country_event = { #An ambassador from CER comes with their agreement to subjugat
 				puppet = CER
 		}
 		CER = {
-			set_cosmetic_tag = EQS_CER
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6498,7 +6811,27 @@ country_event = { #WHY gets the proposal
 	
 	option = { #Perhaps it is finally time to return to the fold
 		name = celestia.512.a
-		ai_chance = { factor = 30 }
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
+				}
+				factor = 4
+			}
+			modifier = {
+				has_government = democratic
+				factor = 1.25
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 0.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.514
@@ -6508,7 +6841,27 @@ country_event = { #WHY gets the proposal
 	}
 	option = { #Never! She is up to something!
 		name = celestia.512.b
-		ai_chance = { factor = 70 }
+		ai_chance = { 
+			factor = 30
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
+				}
+				factor = 0.75
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.75
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+					has_government = neutrality
+				}
+				factor = 2.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.515
@@ -6527,7 +6880,29 @@ country_event = { #NER gets the proposal
 	
 	option = { #Getting all those free socks was really nice. Why not?
 		name = celestia.513.a
-		ai_chance = { factor = 55 }
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_pay_the_welfare_checks
+				}
+				factor = 2
+			}
+			modifier = {
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+				factor = 1.5
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+				factor = 0.33
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.516
@@ -6537,7 +6912,29 @@ country_event = { #NER gets the proposal
 	}
 	option = { #Nah, capitalists can stay with their money, we have a nice vibe
 		name = celestia.513.b
-		ai_chance = { factor = 45 }
+		ai_chance = { 
+			factor = 10
+			modifier = {
+				EQS = {
+					has_completed_focus = EQS_pay_the_welfare_checks
+				}
+				factor = 0.5
+			}
+			modifier = {
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+				factor = 0.75
+			}
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+				factor = 3.5
+			}
+		}
 		EQS = {
 			country_event = {
 				id = celestia.517
@@ -6570,7 +6967,7 @@ country_event = { #WHY sends a simple message that they agree and Celestia is re
 				puppet = WHY
 		}
 		WHY = {
-			set_cosmetic_tag = EQS_WHY
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6614,7 +7011,7 @@ country_event = { #NER agrees by sending a smoky letter of casual acceptance, an
 				puppet = NER
 		}
 		NER = {
-			set_cosmetic_tag = EQS_NER
+			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
@@ -6636,23 +7033,23 @@ country_event = { #A long, scrawling letter about capitalist evils tells her the
 }
 
 ###Shattered Bales events###
-country_event = { #Celestia believes that the ponies of Hughill will be receptive, given they are harmonist
-	id = celestia.518
-	title = celestia.518.t
-	desc = celestia.518.d
-	
-	is_triggered_only = yes
-	
-	option = { #It is good to see a spark of hope
-		name = celestia.518.a
-		#HUG = {
-		#	country_event = {
-		#		id = celestia.519
-		#		days = 1
-		#	}
-		#}
-	}
-}
+#country_event = { #Celestia believes that the ponies of Hughill will be receptive, given they are harmonist
+#	id = celestia.518
+#	title = celestia.518.t
+#	desc = celestia.518.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It is good to see a spark of hope
+#		name = celestia.518.a
+#		#HUG = {
+#		#	country_event = {
+#		#		id = celestia.519
+#		#		days = 1
+#		#	}
+#		#}
+#	}
+#}
 
 country_event = { #HUG gets the proposal
 	id = celestia.519
@@ -6772,7 +7169,7 @@ country_event = { #Celestia sends the money and they form the alliance and she's
 		name = celestia.524.a
 		add_political_power = -100
 		ROOT = {
-			add_to_faction = NID
+			add_to_faction = FROM
 		}
 	}
 }
@@ -6850,7 +7247,7 @@ country_event = { #Celestia gets the agreement with all kinds of romancy garbage
 	option = { #Was this a good idea? I think I'll need to visit the other royal throne for a bit
 		name = celestia.528.a
 		ROOT = {
-			add_to_faction = STB
+			add_to_faction = FROM
 		}
 	}
 }
@@ -6878,11 +7275,11 @@ country_event = { #Celestia returns home from the Crystal Empire estatic, with T
 	
 	is_triggered_only = yes
 	
-	option = { #It's been so long since the princessdoms of Equestria were in harmony!
+	option = { #It's been so long since the princesses of Equestria were in harmony!
 		name = celestia.530.a
 		add_to_faction = CRY
-		add_war_support = 0.05
-		add_stability = 0.1
+		add_stability = 0.05
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -6895,9 +7292,7 @@ country_event = { #Celestia is shocked that she is denied the alliance and is ne
 	
 	option = { #I suppose I must correct them
 		name = celestia.531.a
-		add_war_support = 0.1
-		add_stability = 0.05
-		mark_focus_tree_layout_dirty = yes
+		add_war_support = 0.05
 	}
 }
 
@@ -6943,6 +7338,7 @@ country_event = { #Celestia receives news of the acceptance by Stalliongrad and 
 		IF = {
 			limit = {
 				country_exists = AWR
+				is_in_faction_with = STG
 			}
 		annex_country = { target = AWR }
 		}
@@ -6960,6 +7356,7 @@ country_event = { #Celestia receives news of the acceptance by Stalliongrad and 
 		IF = {
 			limit = {
 				country_exists = CWR
+				is_in_faction_with = STG
 			}
 			CRY = {
 				annex_country = { target = CWR }
@@ -7002,6 +7399,20 @@ country_event = { #Celestia isn't surprised and she dispatches Luna back to the 
 		name = celestia.534.a
 		add_war_support = 0.05
 		add_stability = 0.05
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
+			}
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
 	}
 }
 
@@ -7016,7 +7427,7 @@ country_event = { #Celestia meets with Cadance in the Crystal Empire, and discus
 		name = celestia.535.a
 		add_stability = 0.05
 		add_war_support = 0.05
-		set_country_flag = stalliongrad_partition_plans
+		set_country_flag = EQS_stalliongrad_partition_plans
 	}
 }
 
@@ -7032,7 +7443,7 @@ country_event = { #Changelingia gets a broadcast for a face-to-face meeting with
 		ai_chance = { factor = 10 }
 		EQS = {
 			country_event = {
-				id = celestia.537
+				id = celestia.537 #This should be an event with NCA, CCA, and SCS, so long as they're in the hegemony and exist; they can resist or agree
 				days = 1
 			}
 		}
@@ -7063,6 +7474,7 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		IF = {
 			limit = {
 				country_exists = NCA
+				is_in_faction_with = CHN
 			}
 		annex_country = { target = NCA }
 		}
@@ -7085,6 +7497,7 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		IF = {
 			limit = {
 				country_exists = CCA
+				is_in_faction_with = CHN
 			}
 			annex_country = { target = CCA }
 		}
@@ -7107,6 +7520,7 @@ country_event = { #After a long wait, Celestia is finally brought back on to be 
 		IF = {
 				limit = {
 					country_exists = SCS
+					is_in_faction_with = CHN
 				}
 				annex_country = { target = SCS }
 			}
@@ -7157,27 +7571,117 @@ country_event = { #Celestia is instantly laughed at by the meeting changelings, 
 	
 	option = { #Then I suppose we shall have a rematch
 		name = celestia.538.a
-		add_war_support = 0.15
-		add_stability = 0.15
+		add_war_support = 0.1
+		add_stability = 0.1
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.changeling_hegemony
+					value = THIS
+				}
+			}
+			
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 5
+				name = EQS_f_for_changelings
+			}
+		}
 	}
 }
 
-country_event = { #Celestia sends an offer of annexation to Cloudsdale and Bales and offers them proper reintigration now that she is returned
+country_event = { #Celestia sends a letter to the leader of the rump nation demanding that they integrate, since they've had time to adjust to harmonic rule
 	id = celestia.539
 	title = celestia.539.t
 	desc = celestia.539.d
 	
 	is_triggered_only = yes
 	
-	option = { #I don't see why they would say no. It's clear I'm not Daybreaker
+	option = { #I suppose it is time we return to the fold
 		name = celestia.539.a
-		CLD = {
+		ai_chance = {
+			factor = 10
+			modifier = {
+				ROOT = {
+					original_tag = CLD
+				}
+				factor = 5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = WHY
+				}
+				factor = 3
+			}
+			modifier = {
+				ROOT = {
+					original_tag = BLS
+				}
+				factor = 4.5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = CER
+				}
+				factor = 9
+			}
+			modifier = {
+				ROOT = {
+					original_tag = NER
+				}
+				factor = 6
+			}
+		}
+		EQS = {
 			country_event = {
 				id = celestia.540
 				days = 1
 			}
 		}
-		BLS = {
+	}
+	option = { #We will not give up what freedom we have left!
+		name = celestia.539.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				ROOT = {
+					original_tag = CLD
+				}
+				factor = 5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = WHY
+				}
+				factor = 7
+			}
+			modifier = {
+				ROOT = {
+					original_tag = BLS
+				}
+				factor = 5.5
+			}
+			modifier = {
+				ROOT = {
+					original_tag = CER
+				}
+				factor = 1
+			}
+			modifier = {
+				ROOT = {
+					original_tag = NER
+				}
+				factor = 4
+			}
+		}
+		EQS = {
 			country_event = {
 				id = celestia.541
 				days = 1
@@ -7186,76 +7690,132 @@ country_event = { #Celestia sends an offer of annexation to Cloudsdale and Bales
 	}
 }
 
-country_event = { #Cloudsdale receives the offer of annexation and ponders it for hardly any time
+country_event = { #Celestia receives the agreement from the targeted country, which pleases her as she orders some administrators to move out and assist with it
 	id = celestia.540
 	title = celestia.540.t
 	desc = celestia.540.d
 	
 	is_triggered_only = yes
 	
-	option = { #Our princess has returned!
+	option = { #A prodigal nation returns
 		name = celestia.540.a
-		ai_chance = { factor = 30 }
-		EQS = {
-			country_event = {
-				id = celestia.542
-				days = 1
-			}
-		}
-	}
-	option = { #It is a trap by Daybreaker! Let them know what we think of this deception!
-		name = celestia.540.b
-		ai_chance = { factor = 70 }
-		EQS = {
-			country_event = {
-				id = celestia.543
-				days = 1
-			}
-		}
+		annex_country = { target = FROM transfer_troops = yes }
 	}
 }
 
-country_event = { #Bales receives the offer and the Directorate checks to see if it's authentic
+country_event = { #Celestia is told by the targeted country that they will not bend the knee and she is disturbed and orders that the army be mobilized
 	id = celestia.541
 	title = celestia.541.t
 	desc = celestia.541.d
 	
 	is_triggered_only = yes
 	
-	option = { #There is only one conclusion: Celestia has returned and she will let us research in peace
+	option = { #Why would they not want to come back?
 		name = celestia.541.a
-		ai_chance = { factor = 15 }
-		EQS = {
-			country_event = {
-				id = celestia.544
-				days = 1
-			}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
 		}
-	}
-	option = { #Daybreaker thinks us fools if we would stand down so easily!
-		name = celestia.541.b
-		ai_chance = { factor = 85 }
-		EQS = {
-			country_event = {
-				id = celestia.545
-				days = 1
-			}
-		}
+		FROM = { leave_faction = yes }
+		end_puppet = FROM
+		drop_cosmetic_tag = yes
 	}
 }
 
-country_event = { #Celestia receives word that Cloudsdale is standing down and will be annexed
-	id = celestia.542
-	title = celestia.542.t
-	desc = celestia.542.d
-	
-	is_triggered_only = yes
-	
-	option = { #It will be great to visit the pegasus cities again! Their architecture has always astounded
-		name = celestia.542.a
-		annex_country = { target = CLD transfer_troops = yes }
-	}
-}
+#country_event = { #Celestia sends an offer of annexation to Cloudsdale and Bales and offers them proper reintigration now that she is returned
+#	id = celestia.539
+#	title = celestia.539.t
+#	desc = celestia.539.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #I don't see why they would say no. It's clear I'm not Daybreaker
+#		name = celestia.539.a
+#		CLD = {
+#			country_event = {
+#				id = celestia.540
+#				days = 1
+#			}
+#		}
+#		BLS = {
+#			country_event = {
+#				id = celestia.541
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Cloudsdale receives the offer of annexation and ponders it for hardly any time
+#	id = celestia.540
+#	title = celestia.540.t
+#	desc = celestia.540.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Our princess has returned!
+#		name = celestia.540.a
+#		ai_chance = { factor = 30 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.542
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #It is a trap by Daybreaker! Let them know what we think of this deception!
+#		name = celestia.540.b
+#		ai_chance = { factor = 70 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.543
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Bales receives the offer and the Directorate checks to see if it's authentic
+#	id = celestia.541
+#	title = celestia.541.t
+#	desc = celestia.541.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #There is only one conclusion: Celestia has returned and she will let us research in peace
+#		name = celestia.541.a
+#		ai_chance = { factor = 15 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.544
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #Daybreaker thinks us fools if we would stand down so easily!
+#		name = celestia.541.b
+#		ai_chance = { factor = 85 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.545
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #Celestia receives word that Cloudsdale is standing down and will be annexed
+#	id = celestia.542
+#	title = celestia.542.t
+#	desc = celestia.542.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It will be great to visit the pegasus cities again! Their architecture has always astounded
+#		name = celestia.542.a
+#		annex_country = { target = CLD transfer_troops = yes }
+#	}
+#}
 
 country_event = { #Celestia is basically laughed at by Cloudsdale, and she is rather annoyed
 	id = celestia.543
@@ -7521,14 +8081,14 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 		CRY = {
 			is_in_faction_with = ROOT
 		}
-		has_country_flag = stalliongrad_partition_plans
+		has_country_flag = EQS_stalliongrad_partition_plans
 	}
 	
 	fire_only_once = yes
 	
 	option = { #We shall honor our plans
 		name = celestia.557.a
-		ai_chance = { factor = 75 }
+		ai_chance = { factor = 85 }
 		CRY = {
 			transfer_state = 153
 			transfer_state = 57
@@ -7549,8 +8109,9 @@ country_event = { #Celestia receives communique from the Crystal Empire about th
 	}
 	option = {
 		name = celestia.557.b
-		ai_chance = { factor = 25 }
+		ai_chance = { factor = 15 }
 		reverse_add_opinion_modifier = { target = CRY modifier = CRY_dishonorable }
+		CRY = { leave_faction = yes }
 	}
 }
 
@@ -7942,199 +8503,6 @@ country_event = { #A single letter arrives from the SMILE agents claiming they w
 	}
 }
 
-###Solar Civil War Events###
-country_event = { #Midwinter and the rest of the surviving archmages arrive in Manehattan and the rest decide she is fit for becoming the regent in the war, although she is adamant she'd rather be on the front lines with the soldiers; she is crowned regent
-	id = solarwar.1
-	title = solarwar.1.t
-	desc = solarwar.1.d
-	
-	is_triggered_only = yes
-	
-	option = { #I hope I have the wisdom to guide us through this war
-		name = solarwar.1.a
-		add_country_leader_role = {
-			character = event_target:EQS_Midwinter_Halo_target
-			promote_leader = yes
-			country_leader = {
-				expire = "1965.1.1"
-				#desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
-				ideology = solarism
-				traits = {
-					reluctant_regent
-				}
-			}
-		}
-		hidden_effect = {
-			event_target:EQS_Midwinter_Halo_target = {
-				promote_leader = yes
-				remove_trait = { trait = recently_promoted }
-			}
-		}
-		custom_effect_tooltip = midwinter_boss_tt
-		add_stability = -0.1
-		add_political_power = 150
-	}
-}
-
-country_event = { #Midwinter as one of her first decress as the Princess Regent forces the unions that are still protesting in Manehattan back to work, which leads to a large clash between some the depleted Adoratio reserves and the strikers
-	id = solarwar.2
-	title = solarwar.2.t
-	desc = solarwar.2.d
-	
-	is_triggered_only = yes
-	
-	option = { #They shall work, or they shall die
-		name = solarwar.2.a
-		save_current_manpower = yes
-		75 = {
-			add_manpower = -1734
-		}
-		restore_previous_manpower = yes
-		add_ideas = SLW_grind_to_dust
-	}
-}
-
-country_event = { #Midwinter pours over some charts and statistics in the governor's quarters of the old mayoral building in Manehattan, and she learns of the overflowing nature of the current prison system, and gets an idea to conscript them as frontline soldiers, claiming they will be absolved of heresy
-	id = solarwar.3
-	title = solarwar.3.t
-	desc = solarwar.3.d
-	
-	is_triggered_only = yes
-	
-	option = { #Any that survive will be shot afterwards
-		name = solarwar.3.a
-		add_manpower = 35000
-		add_stability = -0.05
-	}
-}
-
-country_event = { #During a general staff meeting of the current shape of the war, Midwinter is interrupted by a commotion outside and Thundering Hoofbeat barges in and demands to find whoever killed the Empress; he is convinced it was one of them, since they are what's left of picking over the bones of the Empire; she manages to convince him to fight for her after calming him and pointing to Celestia
-	id = solarwar.4
-	title = solarwar.4.t
-	desc = solarwar.4.d
-	
-	is_triggered_only = yes
-	
-	option = { #You shall have all the vengeance you seek, lumbering brute
-		name = solarwar.4.a
-		set_country_flag = ride_the_lightning
-		custom_effect_tooltip = hoofbeat_general_tt
-	}
-}
-
-country_event = { #An alert goes through Manehattan that indicates some of Celestia's forces have approached through a gap in the front lines, and the soldiers prepare to fight them off; Seething Corona is at the head of it, running and disheveled from her chase; she arrives panicked and begging to be let in and protected, and Midwinter sets her up as a general
-	id = solarwar.5
-	title = solarwar.5.t
-	desc = solarwar.5.d
-	
-	is_triggered_only = yes
-	
-	option = { #A surprise to be sure, but a welcome one
-		name = solarwar.5.a
-		set_country_flag = politician_archmage_is_here
-		custom_effect_tooltip = corona_general_tt
-	}
-}
-
-country_event = { #In the middle of the night, some of the Adoratio and Inquisitionis infiltrate and arrest many camps of the Militarium, as Midwinter has determined that they were sufficiently suspect, and also because Blueblood is no longer there to protect them; she is pleased at the damage sewn in the ranks, to keep them loyal
-	id = solarwar.6
-	title = solarwar.6.t
-	desc = solarwar.6.d
-	
-	is_triggered_only = yes
-	
-	option = { #The rabble has been mopped up. For now
-		name = solarwar.6.a
-		add_manpower = -10000
-		add_war_support = 0.05
-		add_stability = 0.05
-	}
-}
-
-country_event = { #With the war beginning to worsen, the new head of the unified unions in Manehattan, Smoldering Carbon, approaches Midwinter. She offers to provide assistance, in exchange for some leniency after the war, to which Midwinter is immediately suspicious, but ultimately has to decide which way to go
-	id = solarwar.7
-	title = solarwar.7.t
-	desc = solarwar.7.d
-	
-	trigger = {
-		original_tag = SLW
-		surrender_progress > 0.25
-	}
-	
-	mean_time_to_happen = {
-		days = 30
-	}
-	
-	fire_only_once = yes
-	
-	option = { #We need all the help we can get in these times
-		name = solarwar.7.a
-		ai_chance = { factor = 35 }
-		set_country_flag = accepted_commie_help
-		custom_effect_tooltip = carbon_and_commie_assistance_tt
-		hidden_effect = {
-			###Set OOB to spawn two ten-width divisions here, called Angry Unionists
-			load_oob = "SLW_helpful_commies"
-		}
-		add_popularity = {
-			ideology = communism
-			popularity = 0.08
-		}
-	}
-	option = { #We will never accept aid from communist scum
-		name = solarwar.7.b
-		ai_chance = { factor = 65 }
-		add_political_power = 50
-		add_stability = 0.03
-	}
-}
-
-country_event = { #After the end of the civil war, Midwinter realizes that she can't keep being the leader and begins her search for a proper Prefectress to lead the Solar Empire and settles on Nova, who is brought in with a massive ceremony as the successor to Daybreaker
-	id = solarwar.10
-	title = solarwar.10.t
-	desc = solarwar.10.d
-	
-	trigger = {
-		tag = SLW
-		NOT = {
-			country_exists = EQS
-		}
-	}
-	
-	fire_only_once = yes
-	
-	option = { #I will serve our fallen Empress with fire and devotion
-		name = solarwar.10.a
-		retire_country_leader = yes
-		add_country_leader_role = {
-			character = event_target:EQS_Nova_Glow_target
-			promote_leader = yes
-			
-			country_leader = {
-				ideology = solarism
-				expire = "1965.1.1"
-				traits = {
-					sword_of_the_empress
-				}
-			}
-		}
-		every_state = {
-			limit = {
-				is_core_of = EQS
-			}
-			add_core_of = SLW
-		}
-		remove_ideas = eqs_slw_civil_war
-		if = {
-			limit = { has_country_flag = accepted_commie_help }
-			delete_unit_template_and_units = {
-				division_template = "Smoldering Carbon's Unionists"
-				disband = yes
-			}
-		}
-	}
-}		
-
 ###Debug Events###
 country_event = {
 	id = solar.9001
@@ -8176,6 +8544,7 @@ country_event = {
 		EQS = {
 			end_puppet = WHY
 			remove_from_faction = WHY
+			set_variable = { equestria_conquest = 0 }
 		}
 		hidden_effect = {
 			WHY = {

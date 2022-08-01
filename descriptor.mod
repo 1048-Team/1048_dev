@@ -4,10 +4,10 @@ tags={
 	"National Focuses"
 	"Events"
 }
-name="EaW: 1048"
+name="EaW: Fractured Harmony"
 dependencies={
 	"Equestria at War"
 }
-replace_path = "events"
+#replace_path = "events"
 
 supported_version="1.11.*"

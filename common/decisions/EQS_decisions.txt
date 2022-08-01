@@ -1,122 +1,422 @@
 ###1048###
+EQS_AUR_new_temple_construction_category = {
+	EQS_AUR_abandon_construction = {
+		available = {
+			has_war = no
+			NOT = {
+				OR = {
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+				}
+			}
+			has_completed_focus = EQS_completing_the_empresss_desire
+		}
+		cost = 100
+		ai_will_do = {
+			base = 3
+			modifier = {
+				date < 1055.10.31
+				factor = 0
+			}
+		}
+		fire_only_once = yes
+		visible = {
+			has_war = no
+			has_completed_focus = EQS_completing_the_empresss_desire
+			NOT = {
+				OR = {
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_abandon_construction"
+			add_stability = -0.125
+			add_war_support = -0.05
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.075
+			}
+			remove_ideas = EQS_solars_sanctum
+			set_country_flag = EQS_abandoned_temple_construction
+			EQS_destroy_solar_temple = yes
+		}
+	}
+	EQS_AUR_abandon_construction_wartime = {
+		available = {
+			has_war = yes
+			NOT = {
+				OR = {
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+					has_country_flag = EQS_abandoned_temple_construction
+				}
+			}
+			has_completed_focus = EQS_completing_the_empresss_desire
+		}
+		cost = 75
+		ai_will_do = {
+			base = 3
+			modifier = {
+				date < 1055.10.31
+				factor = 0
+			}
+		}
+		fire_only_once = yes
+		visible = {
+			has_war = yes
+			has_completed_focus = EQS_completing_the_empresss_desire
+			NOT = {
+				OR = {
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+					has_country_flag = EQS_abandoned_temple_construction
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_abandon_construction_wartime"
+			add_stability = -0.075
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.03
+			}
+			set_country_flag = EQS_abandoned_temple_construction
+			EQS_destroy_solar_temple = yes
+			remove_ideas = EQS_solars_sanctum
+			IF = {
+				limit = {
+					check_variable = { var = EQS_temple_construction value = 14 compare = greater_than_or_equals }
+				}
+				one_random_arms_factory = yes
+			}
+		}
+	}
+	EQS_AUR_ornate_temple = {
+		available = {
+			has_completed_focus = EQS_completing_the_empresss_desire
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			is_subject = no
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+		}
+		visible = {
+			has_completed_focus = EQS_completing_the_empresss_desire
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+			has_country_flag = EQS_mystic_temple
+		}
+		
+		cost = 75
+		days_remove = 75
+		fire_only_once = yes
+		
+		cancel_trigger = {
+			OR = {
+				has_idea = EQS_solar_vulgate
+				has_idea = EQS_holy_of_holies
+				has_country_flag = EQS_abandoned_temple_construction
+			}
+		}
+		modifier = {
+			civilian_factory_use = 3
+			political_power_factor = -0.065
+			country_resource_chromium = -2
+			country_resource_crystals = -3
+			country_resource_tungsten = -3
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_AUR_ornate_temple"
+			set_country_flag = EQS_finishing_touches
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_ornate_temple"
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	EQS_AUR_open_temple = {
+		available = {
+			has_completed_focus = EQS_completing_the_empresss_desire
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			is_subject = no
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+		}
+		visible = {
+			has_completed_focus = EQS_completing_the_empresss_desire
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+			has_country_flag = EQS_laypony_temple
+		}
+		
+		cost = 50
+		days_remove = 90
+		fire_only_once = yes
+		
+		cancel_trigger = {
+			OR = {
+				has_idea = EQS_solar_vulgate
+				has_idea = EQS_holy_of_holies
+				has_country_flag = EQS_abandoned_temple_construction
+			}
+		}
+		modifier = {
+			civilian_factory_use = 5
+			political_power_gain = -0.075
+			country_resource_steel = -8
+			country_resource_crystals = -5
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_AUR_open_temple"
+			set_country_flag = EQS_finishing_touches
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_open_temple"
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	EQS_AUR_temple_phase_three = {
+		available = {
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			has_country_flag = EQS_finishing_touches
+			is_subject = no
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+		}
+		visible = {
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+			has_completed_focus = EQS_completing_the_empresss_desire
+		}
+		cost = 75
+		days_remove = 210
+		
+		fire_only_once = yes
+		cancel_trigger = {
+			OR = {
+				has_country_flag = EQS_abandoned_temple_construction
+				has_idea = EQS_solar_vulgate
+				has_idea = EQS_holy_of_holies
+			}
+		}
+		modifier = {
+			stability_weekly = 0.0025
+			war_support_weekly = 0.0015
+			fascism_drift = 0.01
+			civilian_factory_use = 10
+			country_resource_steel = -25
+			country_resource_crystals = -15
+			country_resource_chromium = -4
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_AUR_temple_phase_three"
+			set_country_flag = EQS_temple_finished
+			country_event = solar.335
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_temple_phase_three"
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	EQS_AUR_temple_phase_two = {
+		available = {
+			is_subject = no
+			check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals }
+			check_variable = { EQS_temple_construction < 20 }
+			NOT = {
+				has_country_flag = EQS_abandoned_temple_construction
+			}
+		}
+		visible = {
+			check_variable = { EQS_temple_construction < 20 }
+			NOT = { has_country_flag = EQS_abandoned_temple_construction }
+			has_completed_focus = EQS_completing_the_empresss_desire
+		}
+		cost = 45
+		days_remove = 80
+		
+		cancel_trigger = {
+			OR = {
+				has_country_flag = EQS_abandoned_temple_construction
+				has_idea = EQS_solar_vulgate
+				has_idea = EQS_holy_of_holies
+			}
+		}
+		modifier = {
+			stability_weekly = 0.0015
+			war_support_weekly = 0.001
+			civilian_factory_use = 5
+			country_resource_steel = -14
+			country_resource_crystals = -5
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_AUR_temple_phase_two"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_temple_phase_two"
+			IF = {
+				limit = { has_war = yes }
+				add_to_variable = { var = EQS_temple_construction value = 3 }
+			}
+			ELSE_IF = {
+				limit = { has_war = no }
+				add_to_variable = { var = EQS_temple_construction value = 4 }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				has_war = no
+				factor = 4
+			}
+		}
+	}
+		
+		
+	EQS_AUR_temple_phase_one = {
+		available = {
+			has_country_flag = EQS_building_temple
+			has_completed_focus = EQS_completing_the_empresss_desire
+			has_country_leader = { ruling_only = yes character = EQS_Aurora_Shinespark }
+			is_subject = no
+			has_political_power > 0
+			NOT = {
+				OR = {
+					has_country_flag = EQS_abandoned_temple_construction
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+				}
+			}
+		}
+		activation = {
+			has_country_flag = EQS_building_temple
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = EQS_Aurora_Shinespark }
+			NOT = {
+				OR = {
+					check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals }
+					has_country_flag = EQS_abandoned_temple_construction
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+				}
+			}
+		}
+		cost = 20
+		
+		days_remove = 28
+		selectable_mission = yes
+		is_good = yes
+		days_mission_timeout = 365
+		fire_only_once = yes
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = EQS_abandoned_temple_construction
+					has_idea = EQS_solar_vulgate
+					has_idea = EQS_holy_of_holies
+				}
+			}
+		}
+		modifier = {
+			stability_weekly = 0.001
+			civilian_factory_use = 2
+			country_resource_steel = -6
+		}
+		
+		cancel_trigger = {
+			OR = {
+				check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals }
+				has_country_flag = EQS_abandoned_temple_construction
+				has_idea = EQS_solar_vulgate
+				has_idea = EQS_holy_of_holies
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_AUR_temple_phase_one"
+			hidden_effect = {
+				activate_mission = EQS_AUR_temple_phase_one
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_AUR_temple_phase_one"
+			add_stability = 0.005
+			IF = {
+				limit = { has_war = yes }
+				add_to_variable = { var = EQS_temple_construction value = 2 }
+			}
+			ELSE_IF = {
+				limit = { has_war = no }
+				add_to_variable = { var = EQS_temple_construction value = 3 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				has_war = no
+				factor = 4
+			}
+		}
+	}
+}
+
 EQS_CEL_annex_puppeted_rump_states_category = {
-	CEL_annex_CLD = {
+	CEL_annex_puppets = {
 		available = {
-			CLD = {
-				is_subject_of = ROOT
+			custom_trigger_tooltip = {
+				tooltip = EQS_owns_a_puppet_tt
+				any_of_scopes = {
+					array = global.solar_empire_rumps
+					
+					AND = {
+						exists = yes
+						is_subject_of = ROOT
+					}
+				}
 			}
 		}
 		visible = {
-			CLD = {
-				is_subject_of = ROOT
+			any_of_scopes = {
+				array = global.solar_empire_rumps
+				
+				AND = {
+					exists = yes
+					is_subject_of = ROOT
+				}
 			}
 		}
 		cost = 200
 		days_remove = 30
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
-			annex_country = { target = CLD }
-			every_state = {
-				limit = {
-					is_core_of = CLD
+			custom_effect_tooltip = EQS_puppeted_states_event_tt
+			for_each_scope_loop = {
+				array = global.solar_empire_rumps
+				
+				IF = {
+					limit = {
+						exists = yes
+						is_subject_of = ROOT
+					}
+					country_event = celestia.539
+					every_state = {
+						limit = {
+							is_owned_by = THIS
+						}
+						add_core_of = ROOT
+					}
 				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_BLS = {
-		available = {
-			BLS = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			BLS = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = BLS }
-			every_state = {
-				limit = {
-					is_core_of = BLS
-				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_NER = {
-		available = {
-			NER = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			NER = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = NER }
-			every_state = {
-				limit = {
-					is_core_of = NER
-				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_CER = {
-		available = {
-			CER = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			CER = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = CER }
-			every_state = {
-				limit = {
-					is_core_of = CER
-				}
-				add_core_of = ROOT
-			}
-		}
-	}
-	CEL_annex_WHY = {
-		available = {
-			WHY = {
-				is_subject_of = ROOT
-			}
-		}
-		visible = {
-			WHY = {
-				is_subject_of = ROOT
-			}
-		}
-		cost = 200
-		days_remove = 30
-		modifier = { political_power_gain = -0.25 }
-		remove_effect = {
-			annex_country = { target = WHY }
-			every_state = {
-				limit = {
-					is_core_of = WHY
-				}
-				add_core_of = ROOT
 			}
 		}
 	}
@@ -138,7 +438,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				is_subject_of = ROOT
 			}
 			hidden_trigger = {
-				has_country_flag = sunset_reigns
+				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
 		cost = 150
@@ -170,7 +470,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				is_subject_of = ROOT
 			}
 			hidden_trigger = {
-					has_country_flag = sunset_reigns
+				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
 		cost = 150
@@ -202,7 +502,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				is_subject_of = ROOT
 			}
 			hidden_trigger = {
-				has_country_flag = sunset_reigns
+				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
 		cost = 150
@@ -234,7 +534,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				is_subject_of = ROOT
 			}
 			hidden_trigger = {
-				has_country_flag = sunset_reigns
+				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
 		cost = 150
@@ -266,7 +566,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				is_subject_of = ROOT
 			}
 			hidden_trigger = {
-				has_country_flag = sunset_reigns
+				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
 		cost = 150

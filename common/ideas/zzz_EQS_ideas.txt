@@ -161,10 +161,14 @@ ideas = {
 
 
 			allowed = {
-				original_tag = EQS
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
 			}
 
 			available = {
+				owns_state = 12
 			}
 
 
@@ -186,10 +190,14 @@ ideas = {
 
 
 			allowed = {
-				original_tag = EQS
+				OR = {
+					original_tag = EQS
+					original_tag = CLD
+				}
 			}
 
 			available = {
+				owns_state = 692
 			}
 
 
@@ -208,11 +216,27 @@ ideas = {
 
 
 			allowed = {
-				original_tag = EQS
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
 			}
 
 			available = {
-				has_country_flag = tartarus_industries_founded
+				OR = {
+					has_country_flag = tartarus_industries_founded
+					AND = {
+						original_tag = SLW
+						NOT = { country_exists = EQS }
+					}
+				}
+			}
+			
+			visible = {
+				OR = {
+					has_country_flag = tartarus_industries_founded
+					original_tag = SLW
+				}
 			}
 
 			research_bonus = {
@@ -222,6 +246,7 @@ ideas = {
 			traits = { industrial_concern }
 
 			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
 			}
 		}
 
@@ -229,10 +254,14 @@ ideas = {
 
 
 			allowed = {
-				original_tag = EQS
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
 			}
 
 			available = {
+				owns_state = 75
 			}
 
 
@@ -270,10 +299,14 @@ ideas = {
 		cloudsdale_research = {
 
 			allowed = {
-				original_tag = EQS
+				OR = {
+					original_tag = EQS
+					original_tag = CLD
+				}
 			}
 
 			available = {
+				owns_state = 692
 			}
 
 			research_bonus = {
@@ -358,16 +391,17 @@ ideas = {
 					original_tag = JUN
 					original_tag = TEM
 					original_tag = NLR
+					original_tag = SLW
 				}
 			}
 
 			available = {
 				OR = {
-					owns_state = 13
+					owns_state = 688
 					AND = {
 						is_subject = yes
 						overlord = {
-							owns_state = 13
+							owns_state = 688
 							OR = {
 								original_tag = EQS
 								original_tag = BAL
@@ -376,6 +410,7 @@ ideas = {
 								original_tag = JUN
 								original_tag = TEM
 								original_tag = NLR
+								original_tag = SLW
 							}
 						}
 					}
@@ -405,6 +440,7 @@ ideas = {
 					original_tag = TEM
 					original_tag = NLR
 					original_tag = CRY
+					original_tag = SLW
 				}
 			}
 
@@ -423,6 +459,7 @@ ideas = {
 								original_tag = JUN
 								original_tag = TEM
 								original_tag = NLR
+								original_tag = SLW
 							}
 						}
 					}
@@ -445,7 +482,7 @@ ideas = {
 			picture = generic_naval_manufacturer_1
 
 			allowed = {
-				original_TAG = EQS
+				original_tag = EQS
 			}
 
 			research_bonus = {
@@ -648,7 +685,7 @@ ideas = {
 			}
 		}
 		
-		EQS_unending_waves = {
+		EQS_unending_waves_idea = {
 			modifier = {
 				conscription_factor = 0.05
 			}
@@ -667,7 +704,7 @@ ideas = {
 			}
 		}
 		
-		EQS_bit_reevaluation = {
+		EQS_bit_reevaluation_idea = {
 			removal_cost = -1
 			modifier = {
 				consumer_goods_factor = 0.05
@@ -710,8 +747,8 @@ ideas = {
 		
 		EQS_holy_guidance = {
 			modifier = {
-				conversion_cost_civ_to_mil_factor = 0.15
-				conversion_cost_mil_to_civ_factor = -0.1
+				conversion_cost_civ_to_mil_factor = -0.15
+				conversion_cost_mil_to_civ_factor = 0.1
 			}
 		}
 		
@@ -878,9 +915,9 @@ ideas = {
 		
 		EQS_celestia_throne = {
 			modifier = {
-				stability_factor = 0.05
-				army_attack_factor = 0.05
-				research_speed_factor = -0.05
+				defensive_war_stability_factor = 0.20
+				surrender_limit = 0.1
+				research_speed_factor = -0.11
 			}
 		}
 	}
@@ -1092,9 +1129,9 @@ ideas = {
 		
 		EQS_until_death_do_they_part = {
 			modifier = {
-				conscription_factor = 0.05
-				army_core_attack_factor = 0.05
-				army_core_defence_factor = 0.05
+				mobilization_speed = 0.125
+				army_core_attack_factor = 0.025
+				army_core_defence_factor = 0.025
 			}
 		}
 		
@@ -1109,9 +1146,9 @@ ideas = {
 		
 		EQS_family_in_service = {
 			modifier = {
-				war_support_factor = 0.05
+				war_support_factor = 0.075
 				army_morale_factor = 0.05
-				monthly_population = -0.05
+				monthly_population = -0.075
 				fascism_drift = 0.02
 			}
 		}
@@ -1148,9 +1185,10 @@ ideas = {
 		
 		EQS_a_giant_family = {
 			modifier = {
-				monthly_population = 0.03
-				stability_factor = 0.05
+				monthly_population = 0.13
+				stability_factor = 0.125
 				war_support_factor = -0.05
+				conscription_factor = -0.05
 				fascism_drift = 0.02
 			}
 		}
@@ -1239,27 +1277,28 @@ ideas = {
 			}
 		}
 		
-		EQS_foresight_amor_forced = {
-			modifier = {
-				stability_factor = 0.04
-			}
-		}
-		
-		EQS_foresight_amor_secret = {
-			modifier = {
-				stability_factor = -0.03
-				political_power_factor = 0.025
-				army_morale_factor = 0.035
-			}
-		}
-		
-		EQS_foresight_amor_married = {
-			modifier = {
-				stability_factor = 0.05
-				political_power_factor = 0.03
-				army_core_defence_factor = 0.03
-			}
-		}
+		###Deprecated###
+		#EQS_foresight_amor_forced = {
+		#	modifier = {
+		#		stability_factor = 0.04
+		#	}
+		#}
+		#
+		#EQS_foresight_amor_secret = {
+		#	modifier = {
+		#		stability_factor = -0.03
+		#		political_power_factor = 0.025
+		#		army_morale_factor = 0.035
+		#	}
+		#}
+		#
+		#EQS_foresight_amor_married = {
+		#	modifier = {
+		#		stability_factor = 0.05
+		#		political_power_factor = 0.03
+		#		army_core_defence_factor = 0.03
+		#	}
+		#}
 		
 		###Temp spirits###
 		EQS_blessed_workers = {
@@ -1450,25 +1489,26 @@ ideas = {
 		
 		EQS_no_lazy_pigs = {
 			modifier = {
-				stability_factor = -0.05
-				political_advisor_cost_factor = -0.05
-				political_power_factor = 0.05
+				stability_factor = -0.04
+				political_advisor_cost_factor = -0.10
 			}
 		}
 		
 		EQS_industrial_inquisitors = {
 			modifier = {
-				stability_factor = -0.03
+				stability_factor = 0.02
 				production_factory_efficiency_gain_factor = 0.05
+				research_speed_factor = -0.05
 			}
 		}
 		
 		EQS_solaris_administratum = {
 			modifier = {
-				stability_factor = -0.03
-				political_power_factor = 0.05
+				stability_factor = 0.02
+				political_power_factor = 0.075
 				production_factory_efficiency_gain_factor = 0.05
 				high_command_cost_factor = -0.05
+				research_speed_factor = -0.075
 			}
 		}
 		
@@ -1506,6 +1546,8 @@ ideas = {
 		###Decentralization Status Quo###
 		EQS_inquisitionis_guidance = {
 			modifier = {
+				research_speed_factor = -0.03
+				stability_factor = 0.05
 				army_core_attack_factor = 0.05
 				army_morale_factor = -0.05
 			}
@@ -1513,6 +1555,8 @@ ideas = {
 		
 		EQS_solaris_praefectorious = {
 			modifier = {
+				research_speed_factor = -0.06
+				stability_factor = 0.05
 				army_core_attack_factor = 0.05
 				army_core_defence_factor = 0.05
 				army_morale_factor = -0.1
@@ -1549,14 +1593,20 @@ ideas = {
 		EQS_ensured_loyalties = {
 			modifier = {
 				political_power_factor = -0.05
-				stability_factor = 0.05
+				stability_factor = 0.125
 				production_speed_buildings_factor = 0.05
+				trade_laws_cost_factor = 0.15
+				economy_cost_factor = 0.15
+				war_support_factor = 0.05
+				fascism_drift = 0.01
+				political_advisor_cost_factor = 0.1
 			}
 		}
 		
 		EQS_a_functional_caste_system = {
 			modifier = {
 				monthly_population = -0.03
+				stability_factor = -0.075
 				consumer_goods_factor = -0.05
 			}
 		}
@@ -1564,15 +1614,15 @@ ideas = {
 		EQS_salvation_in_death = {
 			modifier = {
 				army_attack_factor = 0.05
-				army_defence_factor = -0.05
+				experience_loss_factor = 0.075
 			}
 		}
 		
 		EQS_militarium_benefits = {
 			modifier = {
 				army_attack_factor = 0.05
-				army_defence_factor = -0.05
-				military_leader_cost_factor = 0.5
+				experience_loss_factor = 0.075
+				military_leader_cost_factor = 0.20
 				conscription_factor = 0.05
 			}
 		}
@@ -1580,11 +1630,10 @@ ideas = {
 		EQS_power_to_the_old_guard = {
 			modifier = {
 				army_attack_factor = 0.05
-				army_defence_factor = -0.05
-				military_leader_cost_factor = 0.5
+				experience_loss_factor = 0.075
+				military_leader_cost_factor = 0.25
 				conscription_factor = 0.05
 				training_time_army_factor = 0.1
-				army_org_factor = 0.03
 				planning_speed = 0.05
 			}
 		}
@@ -1613,78 +1662,79 @@ ideas = {
 		
 		###Temple Spirits###
 		
-		EQS_solars_sanctum_1 = {
+		EQS_solars_sanctum = {
 			modifier = {
 				consumer_goods_factor = 0.05
-				stability_factor = -0.1
 				local_resources_factor = -0.1
+				production_speed_buildings_factor = -0.075
+				industrial_capacity_factory = -0.035
 			}
 		}
 		
-		EQS_solars_sanctum_2 = {
-			modifier = {
-				consumer_goods_factor = 0.1
-				stability_factor = -0.1
-				local_resources_factor = -0.1
-				production_speed_buildings_factor = -0.1
-			}
-		}
-		
-		EQS_temple_for_the_masses = {
-			modifier = {
-				consumer_goods_factor = 0.15
-				stability_factor = -0.1
-				local_resources_factor = -0.1
-				production_speed_buildings_factor = -0.15
-			}
-		}
-		
-		EQS_temple_for_the_masses_2 = {
-			modifier = {
-				consumer_goods_factor = 0.17
-				stability_factor = -0.1
-				local_resources_factor = -0.25
-				production_speed_buildings_factor = -0.15
-			}
-		}
-		
-		EQS_temple_for_the_masses_3 = {
-			modifier = {
-				consumer_goods_factor = 0.25
-				stability_factor = -0.1
-				local_resources_factor = -0.25
-				production_speed_buildings_factor = -0.25
-			}
-		}
-		
-		EQS_a_holy_temple = {
-			modifier = {
-				consumer_goods_factor = 0.13
-				stability_factor = -0.1
-				local_resources_factor = -0.1
-				production_speed_buildings_factor = -0.2
-			}
-		}
-		
-		EQS_a_holy_temple_2 = {
-			modifier = {
-				consumer_goods_factor = 0.16
-				stability_factor = -0.1
-				local_resources_factor = -0.1
-				production_speed_buildings_factor = -0.2
-				industrial_capacity_factory = -0.1
-			}
-		}
-		
-		EQS_a_holy_temple_3 = {
-			modifier = {
-				consumer_goods_factor = 0.2
-				stability_factor = -0.1
-				local_resources_factor = -0.15
-				production_speed_buildings_factor = -0.2
-				industrial_capacity_factory = -0.1
-			}
-		}
+		#EQS_solars_sanctum_2 = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.1
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.1
+		#		production_speed_buildings_factor = -0.1
+		#	}
+		#}
+		#
+		#EQS_temple_for_the_masses = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.15
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.1
+		#		production_speed_buildings_factor = -0.15
+		#	}
+		#}
+		#
+		#EQS_temple_for_the_masses_2 = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.17
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.25
+		#		production_speed_buildings_factor = -0.15
+		#	}
+		#}
+		#
+		#EQS_temple_for_the_masses_3 = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.25
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.25
+		#		production_speed_buildings_factor = -0.25
+		#	}
+		#}
+		#
+		#EQS_a_holy_temple = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.13
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.1
+		#		production_speed_buildings_factor = -0.2
+		#	}
+		#}
+		#
+		#EQS_a_holy_temple_2 = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.16
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.1
+		#		production_speed_buildings_factor = -0.2
+		#		industrial_capacity_factory = -0.1
+		#	}
+		#}
+		#
+		#EQS_a_holy_temple_3 = {
+		#	modifier = {
+		#		consumer_goods_factor = 0.2
+		#		stability_factor = -0.1
+		#		local_resources_factor = -0.15
+		#		production_speed_buildings_factor = -0.2
+		#		industrial_capacity_factory = -0.1
+		#	}
+		#}
 		
 		EQS_solar_vulgate = {
 			modifier = {
@@ -1980,7 +2030,8 @@ ideas = {
 		EQS_power_to_the_princess = {
 			modifier = {
 				political_power_factor = 0.05
-				political_advisor_cost_factor = -0.1
+				stability_factor = -0.05
+				political_advisor_cost_factor = -0.15
 			}
 		}
 		EQS_life_in_rural_communities = {
@@ -1995,7 +2046,7 @@ ideas = {
 				production_speed_buildings_factor = 0.05
 			}
 		}
-		EQS_a_pragmatic_society = {
+		EQS_a_pragmatic_society_idea = {
 			modifier = {
 				war_support_factor = 0.05
 				neutrality_drift = -0.01
@@ -2048,7 +2099,7 @@ ideas = {
 				mobilization_laws_cost_factor = -0.1
 			}
 		}
-		EQS_a_tolerant_society = {
+		EQS_a_tolerant_society_idea = {
 			modifier = {
 				stability_factor = 0.05
 				democratic_drift = 0.01
@@ -2218,7 +2269,7 @@ ideas = {
 			}
 			equipment_bonus = {
 				capital_ship = {
-					naval_speed = 0.1 instant = yes
+					maximum_speed = 0.1 instant = yes
 				}
 			}
 		}
@@ -2414,6 +2465,7 @@ ideas = {
 		}
 		EQS_airforce_of_legends = {
 			modifier = {
+				air_ace_generation_chance_factor = 0.05
 				air_agility_factor = 0.05
 				air_attack_factor = 0.05
 			}

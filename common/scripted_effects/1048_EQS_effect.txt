@@ -166,6 +166,7 @@ SOL_Celestia_Returned = {
 		limit = {
 			has_country_flag = starlight_and_trixie_corrupted
 		}
+		SLW = { set_country_flag = starlight_and_trixie_corrupted }
 		event_target:EQS_Starlight_Glimmer_target = { set_nationality = SLW }
 		event_target:EQS_Trixie_Lulamoon_target = { set_nationality = SLW }
 	}
@@ -183,8 +184,17 @@ SOL_Celestia_Returned = {
 		}
 		load_oob = "SLW_civil_war"
 		country_event = solarordo.25
+		set_variable = { equestria_conquest = 9 }
+		IF = {
+			limit = {
+				EQS = { has_intelligence_agency = yes }
+			}
+			create_intelligence_agency = {
+				name = "Solaris Speculatores"
+				icon = GFX_intelligence_agency_logo_eqs_sol
+			}
+		}
 	}
-	set_variable = { equestria_conquest = 9 }
 	transfer_technology = yes
 	load_focus_tree = solar_empire_celestia_focus
 }
@@ -259,4 +269,121 @@ SOL_end_of_civil_war_CEL = {
 	set_country_flag = rescued_harmonic_advisors
 	clr_country_flag = starlight_and_trixie_corrupted
 	mark_focus_tree_layout_dirty = yes
+}
+SOL_end_of_civil_war_SLW = {
+	custom_effect_tooltip = SLW_searching_for_leader_tt
+	hidden_effect = {
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = SLW
+		}
+		IF = {
+			limit = { has_country_flag = accepted_commie_help }
+			delete_unit_template_and_units = {
+				division_template = "Smoldering Carbon's Unionists"
+				disband = yes
+			}
+		}
+		IF = {
+			limit = { NOT = { has_country_flag = SLW_new_advisors } }
+			set_country_flag = SLW_new_advisors
+		}
+		IF = {
+			limit = { NOT = { has_country_flag = ride_the_lightning } }
+			set_country_flag = ride_the_lightning
+		}
+		IF = {
+			limit = { NOT = { has_country_flag = politician_archmage_is_here } }
+			set_country_flag = politician_archmage_is_here
+		}
+		set_variable = { equestria_conquest = 0 }
+		country_event = {
+			id = solarwar.11
+			days = 14
+			random_days = 7
+		}
+		country_event = {
+			id = solarwar.87
+			days = 180
+			random_days = 210
+		}
+		set_country_flag = SLW_searching_for_prefectess
+		mark_focus_tree_layout_dirty = yes
+	}
+	add_stability = -0.035
+	add_war_support = -0.065
+	custom_effect_tooltip = SLW_solar_empire_generals_tt
+	hidden_effect = {
+		event_target:EQS_Blueblood_target = { set_nationality = ROOT }
+		event_target:EQS_Aurora_Shinespark_target = { set_nationality = ROOT }
+		event_target:EQS_Sunset_Shimmer_target = { set_nationality = ROOT }
+		event_target:EQS_Luminous_Blade_target = { set_nationality = ROOT }
+		event_target:EQS_Scorched_Earth_target = { set_nationality = ROOT }
+		event_target:EQS_Sun_Marble_target = { set_nationality = ROOT }
+		event_target:EQS_Locust_Glow_target = { set_nationality = ROOT }
+		event_target:EQS_Quasar_Pulse_target = { set_nationality = ROOT }
+		EQS = {
+			EQS_Morning_Gale = { set_nationality = SLW }
+			EQS_wonderbolts_1048 = { set_nationality = SLW }
+			EQS_grimhoof_1048 = { set_nationality = SLW }
+		}	
+	}
+}
+
+EQS_destroy_solar_temple = {
+	IF = {
+		limit = {
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 20 } }
+			has_country_flag = EQS_finishing_touches
+		}
+		four_random_industrial_complex = yes
+		add_resource = { type = steel amount = 15 state = 3 }
+		add_resource = { type = crystals amount = 6 state = 3 }
+		add_resource = { type = steel amount = 6 state = 12 }
+	}
+	IF = {
+		limit = {
+			check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 20 } }
+			NOT = { has_country_flag = EQS_finishing_touches }
+		}
+		four_random_industrial_complex = yes
+		add_resource = { type = steel amount = 12 state = 3 }
+		add_resource = { type = crystals amount = 4 state = 3 }
+	}
+	IF = {
+		limit = {
+			NOT = { check_variable = { var = EQS_temple_construction value = 20 compare = greater_than_or_equals } }
+			check_variable = { var = EQS_temple_construction value = 15 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 15 } }
+		}
+		three_random_industrial_complex = yes
+		add_resource = { type = steel amount = 12 state = 3 }
+	}
+	IF = {
+		limit = {
+			NOT = { check_variable = { var = EQS_temple_construction value = 15 compare = greater_than_or_equals } }
+			check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals }
+			NOT = { check_variable = { EQS_temple_construction < 10 } }
+		}
+		two_random_industrial_complex = yes
+		add_resource = { type = steel amount = 9 state = 3 }
+	}
+	IF = {
+		limit = {
+			NOT = { check_variable = { var = EQS_temple_construction value = 10 compare = greater_than_or_equals } }
+			check_variable = { var = EQS_temple_construction value = 1 compare = greater_than_or_equals }
+		}
+		one_random_industrial_complex = yes
+		add_resource = { type = steel amount = 6 state = 3 }
+	}
+	IF = {
+		limit = {
+			check_variable = { EQS_temple_construction = 0 }
+		}
+		add_resource = { type = steel amount = 4 state = 3 }
+	}
 }

@@ -1,10 +1,10 @@
 ###Solar Empire###
 
 EQS_manehattan_rebellion = {
-icon = GFX_goal_daybreaker_god
+	icon = GFX_goal_daybreaker_god
+	
 	recruitable_population_factor = rebel_var_1
 	state_production_speed_buildings_factor = rebel_var_2
-	monthly_population = rebel_var_3
 }
 
 EQS_slipping_sanity = {
@@ -48,10 +48,24 @@ EQS_supremely_solar = {
 	recruitable_population_factor = 0.1
 }
 
+SLW_jewel_of_the_empire = {
+	icon = GFX_goal_daybreaker_god
+	
+	local_building_slots_factor = reward_var_1
+	state_production_speed_buildings_factor = reward_var_2
+	state_resources_factor = reward_var_3
+	recruitable_population_factor = reward_var_4
+}
+
 ###Bales###
 BLS_necropolis = {
 	remove_trigger = {
-		NOT = { has_idea = BLS_ancient_necropolis }
+		OR = {
+			BLS = {
+				NOT = { has_idea = BLS_ancient_necropolis }
+			}
+			NOT = { is_owned_by = BLS }
+		}
 	}
 	local_building_slots = -2
 }
