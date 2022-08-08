@@ -233,6 +233,12 @@ SOL_ordo_set_flag_special = {
 		}
 		set_country_flag = selected_special_22
 	}
+	ELSE_IF = {
+		limit = {
+			check_variable = { ordo_selection = 23 }
+		}
+		set_country_flag = selected_special_23
+	}
 }
 SOL_ordo_set_flag_1 = {
 	IF = {
@@ -451,6 +457,16 @@ SOL_ordo_set_flag_1 = {
 		}
 		set_country_flag = {
 			flag = selected_normal_1_22
+			days = 90
+			value = 1
+		}
+	}
+	ELSE_IF = {
+		limit = {
+			check_variable = { ordo_selection = 23 }
+		}
+		set_country_flag = {
+			flag = selected_normal_1_23
 			days = 90
 			value = 1
 		}
@@ -677,6 +693,16 @@ SOL_ordo_set_flag_2 = {
 			value = 1
 		}
 	}
+	ELSE_IF = {
+		limit = {
+			check_variable = { ordo_selection = 23 }
+		}
+		set_country_flag = {
+			flag = selected_normal_2_23
+			days = 75
+			value = 1
+		}
+	}
 }
 SOL_ordo_set_flag_3 = {
 	IF = {
@@ -899,6 +925,16 @@ SOL_ordo_set_flag_3 = {
 			value = 1
 		}
 	}
+	ELSE_IF = {
+		limit = {
+			check_variable = { ordo_selection = 23 }
+		}
+		set_country_flag = {
+			flag = selected_normal_3_23
+			days = 100
+			value = 1
+		}
+	}
 }
 ###Checking for Ordo loyalty average###
 ###This checks for total loyalty of active Ordos###
@@ -1039,6 +1075,12 @@ SOL_check_ordo_loyalty = {
 	}
 	IF = {
 		limit = {
+			SOL_ordo_serenum_visible = yes
+		}
+		add_to_temp_variable = { ordo_loyalty_average = global.ordo_loyalty_array^23 }
+	}
+	IF = {
+		limit = {
 			SOL_ordo_multi_visible = yes
 		}
 		add_to_temp_variable = { loyalty_divisor = 1 }
@@ -1172,6 +1214,12 @@ SOL_check_ordo_loyalty = {
 				SOL_ordo_tenuis_CRY_CHN_visible = yes
 				SOL_ordo_tenuis_full_visible = yes
 			}
+		}
+		add_to_temp_variable = { loyalty_divisor = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
 		}
 		add_to_temp_variable = { loyalty_divisor = 1 }
 	}
@@ -1530,6 +1578,15 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.24
+			days = 365
+		}
+	}
+	ELSE_IF = {
+		limit = {
+			check_variable = { ordo_selection = 23 }
+		}
+		country_event = {
+			id = solarordo.30
 			days = 365
 		}
 	}
