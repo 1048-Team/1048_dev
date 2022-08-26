@@ -1362,6 +1362,12 @@ country_event = { #Ponies watch on in the Crystal Empire as workers for the Sola
 	
 	option = { #This is much better, anyway
 		name = solarwar.79.a
+		344 = {
+			add_dynamic_modifier = { modifier = SLW_imperial_monument }
+		}
+		345 = {
+			add_dynamic_modifier = { modifier = SLW_imperial_monument }
+		}
 	}
 }
 
@@ -1458,12 +1464,61 @@ country_event = { #Nova breathes deeply before she walks through the empty stree
 		name = solarwar.86.a
 		add_stability = 0.15
 		add_war_support = 0.15
-		every_state = {
+		IF = {
 			limit = {
-				is_core_of = EQC
-				is_owned_by = ROOT
+				has_dlc = "Together for Victory"
 			}
-			add_core_of = ROOT
+			release_autonomy = {
+				target = EQC
+				autonomy_state = autonomy_reichskommissariat
+				freedom_level = 0.5
+			}
+		}
+		ELSE = {
+			release_puppet = EQC
+		}
+		IF = {
+			limit = { has_cosmetic_tag = SLW_NOV }
+			EQC = {	set_cosmetic_tag = SLW_NOV } ###These should become East and West Nova Imperium/Ministorum
+		}
+		ELSE = {
+			EQC = { set_cosmetic_tag = SLW_church_state }
+		}
+		hidden_effect = {
+			EQC = {
+				promote_character = EQC_Nova_Glow
+			}
+			IF = {
+				limit = {
+					SLW = { has_cosmetic_tag = SLW_NOV }
+				}
+				EQC = {
+					EQC_Nova_Glow = { 
+						add_trait = {
+							ideology = solarism
+							trait = empress_prefectess 
+						}
+					}
+					set_country_leader_description = {
+						ideology = fascism
+						desc = SLW_nova_empress
+					}
+				}
+			}
+			ELSE = {
+				EQC = {
+					EQC_Nova_Glow = { 
+						add_trait = { 
+							ideology = solarism
+							trait = arch_prefectess
+						} 
+					}
+					set_country_leader_description = {
+						ideology = fascism
+						desc = SLW_nova_arch_prefectess
+					}
+				}
+			}
 		}
 	}
 }
