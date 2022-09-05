@@ -118,9 +118,90 @@ shared_focus = {
 	cost = 8
 	completion_reward = {
 		country_event = crystal.9
+		set_country_flag = CRY_convent_convened
+		mark_focus_tree_layout_dirty = yes
 	}
 	
 	ai_will_do = {
 		factor = 100
+	}
+}
+
+###Industry Tree###
+shared_focus = {
+	id = CRY_industrial_crisis
+	cost = 5
+	x = 15
+	y = 5
+
+	allow_branch = {
+		has_country_flag = CRY_convent_convened
+	}
+
+	completion_reward = { 
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		factor = 65
+	}
+}
+
+shared_focus = {
+	id = CRY_withdraw_from_treaty
+	cost = 5
+	relative_position_id = CRY_industrial_crisis
+	x = 0
+	y = 1
+	
+	prerequisite = {
+		focus = CRY_industrial_crisis
+	}
+
+	completion_reward = { 
+		###Event for withdrawing from treaty, which angers Chrysalis. This should also probably be in political trees, not industrial. Perhaps renegotiate the treaty instead
+	}
+
+	ai_will_do = {
+		factor = 45
+	}
+}
+
+shared_focus = {
+	id = CRY_kickstart_development
+	cost = 5
+	x = 0
+	y = 1
+	relative_position_id = CRY_withdraw_from_treaty
+
+	prerequisite = {
+		focus = CRY_withdraw_from_treaty
+	}
+
+	completion_reward = { 
+		###add_ideas = CRY_great_industrial_plan
+	}
+
+	ai_will_do = {
+		factor = 55
+	}
+}
+
+shared_focus = {
+	id = CRY_problematic_economy
+	cost = 5
+	x = 25
+	y = 5
+
+	allow_branch = {
+		has_country_flag = CRY_convent_convened
+	}
+
+	completion_reward = { 
+
+	}
+
+	ai_will_do = {
+		factor = 50
 	}
 }
