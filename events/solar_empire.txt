@@ -6,6 +6,7 @@ add_namespace = celestia
 #Start event chain to introduce Aurora
 country_event = {
 	id = solar.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.1"}
 	title = solar.1.t
 	desc = solar.1.d
 	
@@ -306,13 +307,26 @@ country_event = {
 country_event = {
 	id = solar.17
 	title = solar.17.t
-	desc = solar.17.d
+	desc = {
+		text = solar.17.d_found
+		trigger = { has_country_flag = rebels_found }
+	}
+	desc = {
+		text = solar.17.d_not_found
+		trigger = { has_country_flag = rebels_not_found }
+	}
 	
 	is_triggered_only = yes
 	
 	option = {
 		name = solar.17.a
+		trigger = { has_country_flag = rebels_found }
 		add_political_power = 30
+	}
+	option = {
+		name = solar.17.b
+		trigger = { has_country_flag = rebels_not_found }
+		add_political_power = -25
 	}
 }
 
