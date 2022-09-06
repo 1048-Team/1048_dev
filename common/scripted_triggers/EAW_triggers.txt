@@ -2177,3 +2177,65 @@ interested_in_magic = {
 		original_tag = CER
 	}
 }
+
+any_enemy_is_on_the_same_landmass = {
+	has_war = yes
+	capital_scope = {
+		set_temp_variable = { capital = THIS }
+	}
+	any_enemy_country = {
+		capital_scope = {
+			var:capital = {
+				check_variable = {
+					state_land_connection_index = PREV.state_land_connection_index
+				}
+			}
+		}
+	}
+}
+
+any_potential_enemy_is_on_the_same_landmass = {
+	check_variable = { potential_and_current_enemies^num > 0 }
+	capital_scope = {
+		set_temp_variable = { capital = THIS }
+	}
+	any_of_scopes = {
+		array = potential_and_current_enemies
+		capital_scope = {
+			var:capital = {
+				check_variable = {
+					state_land_connection_index = PREV.state_land_connection_index
+				}
+			}
+		}
+	}
+}
+
+naval_focused_nation = {
+	OR = {
+		is_major = yes
+		original_tag = CHN
+		original_tag = CCN
+		original_tag = OLE
+		original_tag = TRD
+		original_tag = MCW
+		original_tag = WNG
+		original_tag = EQS
+		original_tag = NLR
+		original_tag = BAK
+		original_tag = HIP
+		AND = {
+			tag = NIM
+			date > "1011.1.1"
+		}
+		AND = {
+			original_tag = CTL
+			date > "1011.1.1"
+		}
+		AND = {
+			original_tag = GRI
+			owns_state = 381
+		}
+	}
+	any_controlled_state_is_coastal = yes
+}
