@@ -1224,7 +1224,7 @@ SOL_check_ordo_loyalty = {
 		add_to_temp_variable = { loyalty_divisor = 1 }
 	}
 	divide_temp_variable = { ordo_loyalty_average = loyalty_divisor }
-	set_variable = { loyalty_divisor_debug = loyalty_divisor }
+	#set_variable = { loyalty_divisor_debug = loyalty_divisor }
 	round_temp_variable = ordo_loyalty_average
 	set_variable = { SOL_ordo_average_loyalty = ordo_loyalty_average }
 	SOL_ordo_loyalty_bonus = yes
@@ -1590,4 +1590,708 @@ SOL_special_production_effect = {
 			days = 365
 		}
 	}
+}
+
+#Yoinked from HIP_SIR
+SOL_imperial_authority_change = {
+	add_to_variable = {
+		SOL_imperial_authority_pool = SOL_authority_change_var #This is a temp variable
+	}
+	clamp_variable = {
+		var = SOL_imperial_authority_pool
+		min = SOL_imperial_authority_min
+		max = SOL_imperial_authority_max
+	}
+	if = {
+		limit = {
+			check_variable = {
+				SOL_authority_change_var < 0
+			}
+		}
+		custom_effect_tooltip =  EQS_authority_loss_tt
+	}
+	else = {
+		custom_effect_tooltip =  EQS_authority_gain_tt
+	}
+}
+SOL_calculate_loyal_ordos = {
+	set_temp_variable = { SOL_loyal_ordos = 0 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^1
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^2
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^3
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^4
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}		
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^5
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^6
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^7
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_lapidis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^8
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_doctrina_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^9
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_caellum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^10
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_munificus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^11
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_velocitas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^12
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_diligentia_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^13
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_confundas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^14
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_servus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^15
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_ferox_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^16
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_praeda_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^17
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_infernum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^18
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mercatura_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^19
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_litus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^20
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_salus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^21
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			OR = {
+				SOL_ordo_tenuis_visible = yes
+				SOL_ordo_tenuis_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CHN_visible = yes
+				SOL_ordo_tenuis_full_visible = yes
+			}
+			check_variable = {
+				var = global.ordo_loyalty_array^22
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^23
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	divide_temp_variable = { SOL_loyal_ordos = 100 }
+	multiply_temp_variable = { SOL_loyal_ordos = 2 }
+	set_variable = { SOL_loyal_ordos_bonus = SOL_loyal_ordos }
+}
+
+SOL_calculate_disloyal_ordos = {
+	set_temp_variable = { SOL_disloyal_ordos = 0 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^1
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^2
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^3
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^4
+				value = 30
+				compare = less_than_or_equals
+			}
+		}		
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^5
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^6
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^7
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_lapidis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^8
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_doctrina_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^9
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_caellum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^10
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_munificus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^11
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_velocitas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^12
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_diligentia_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^13
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_confundas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^14
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_servus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^15
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_ferox_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^16
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_praeda_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^17
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_infernum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^18
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mercatura_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^19
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_litus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^20
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_salus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^21
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			OR = {
+				SOL_ordo_tenuis_visible = yes
+				SOL_ordo_tenuis_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CHN_visible = yes
+				SOL_ordo_tenuis_full_visible = yes
+			}
+			check_variable = {
+				var = global.ordo_loyalty_array^22
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^23
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	divide_temp_variable = { SOL_disloyal_ordos = 100 }
+	multiply_temp_variable = { SOL_disloyal_ordos = -1 }
+	multiply_temp_variable = { SOL_disloyal_ordos = 2 }
+	set_variable = { SOL_disloyal_ordos_malus = SOL_disloyal_ordos }
+}
+SOL_ordos_number_bonus = {
+	set_temp_variable = { SOL_ordo_count = 0 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+		}		
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_lapidis_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_doctrina_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_caellum_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_munificus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_velocitas_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_diligentia_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_confundas_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_servus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_ferox_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_praeda_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_infernum_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mercatura_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_litus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_salus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			OR = {
+				SOL_ordo_tenuis_visible = yes
+				SOL_ordo_tenuis_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CHN_visible = yes
+				SOL_ordo_tenuis_full_visible = yes
+			}
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	set_variable = { SOL_number_of_ordos_bonus = SOL_ordo_count }
+	divide_variable = { SOL_number_of_ordos_bonus = 100 }
 }
