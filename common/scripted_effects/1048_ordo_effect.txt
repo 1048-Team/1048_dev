@@ -2311,18 +2311,32 @@ SOL_ordos_number_bonus = {
 	set_variable = { SOL_number_of_ordos_bonus = SOL_ordo_count }
 	divide_variable = { SOL_number_of_ordos_bonus = 100 }
 }
-SOL_high_authority_bonus = {
-	set_temp_variable = { SOL_ordo_authority_bonus_factor = SOL_imperial_authority_pool }
-	divide_temp_variable = { SOL_ordo_authority_bonus_factor = 100 }
-	#These should be moved to their own calculation for each month
+SOL_high_authority_derived_stats = {
+	set_temp_variable = { SOL_ordo_derived_authority_factor = SOL_imperial_authority_pool }
+	divide_temp_variable = { SOL_ordo_derived_authority_factor = 100 }
 	set_variable = { SOL_ordo_pp_gain = 0.1 }
 	set_variable = { SOL_ordo_war_support_factor = 0.05 }
 	set_variable = { SOL_ordo_stability_factor = 0.05 }
-	multiply_variable = { SOL_ordo_pp_gain = SOL_ordo_authority_bonus_factor }
-	multiply_variable = { SOL_ordo_war_support_factor = SOL_ordo_authority_bonus_factor }
-	multiply_variable = { SOL_ordo_stability_factor = SOL_ordo_authority_bonus_factor }
-	#These should be moved to their own calculation for each month
-	set_temp_variable = { SOL_ordo_loyalty_gain = 0.001 }
+	multiply_variable = { SOL_ordo_pp_gain = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_war_support_factor = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_stability_factor = SOL_ordo_derived_authority_factor }
+}
+SOL_low_authority_derived_stats = {
+	set_temp_variable = { SOL_ordo_derived_authority_factor = 100 }
+	set_temp_variable = { SOL_ordo_divisor = SOL_imperial_authority_pool }
+	add_to_temp_variable = { SOL_ordo_divisor = 1 }
+	divide_temp_variable = { SOL_ordo_derived_authority_factor = SOL_ordo_divisor }
+	set_variable = { SOL_ordo_pp_gain = -0.25 }
+	set_variable = { SOL_ordo_war_support_factor = -0.15 }
+	set_variable = { SOL_ordo_stability_factor = -0.15 }
+	multiply_variable = { SOL_ordo_pp_gain = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_war_support_factor = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_stability_factor = SOL_ordo_derived_authority_factor }
+}
+SOL_high_authority_bonus = {
+	set_temp_variable = { SOL_ordo_authority_bonus_factor = SOL_imperial_authority_pool }
+	divide_temp_variable = { SOL_ordo_authority_bonus_factor = 100 }
+	set_temp_variable = { SOL_ordo_loyalty_gain = 0.01 }
 	multiply_temp_variable = { SOL_ordo_loyalty_gain = SOL_ordo_authority_bonus_factor }
 	for_each_loop = {
 		array = global.ordo_loyalty_array
@@ -2332,7 +2346,32 @@ SOL_high_authority_bonus = {
 			limit = {
 				SOL_is_visible_ordo = yes
 			}
-			add_to_variable = { global.ordo_loyalty_array^i = 1 }
+			add_to_variable = { global.ordo_loyalty_array^i = SOL_ordo_loyalty_gain }
+			clamp_variable = {
+				var = global.ordo_loyalty_array^i
+				min = 0
+				max = 100
+			}
+			#log = "[?global.ordo_loyalty_array^i]"
+		}
+	}
+}
+SOL_low_authority_malus = {
+	set_temp_variable = { SOL_ordo_authority_malus_factor = 100 }
+	set_temp_variable = { SOL_ordo_authority_malus_divisor = SOL_imperial_authority_pool }
+	add_to_temp_variable = { SOL_ordo_authority_malus_divisor = 1 }
+	divide_temp_variable = { SOL_ordo_authority_malus_factor = SOL_ordo_authority_malus_divisor }
+	set_temp_variable = { SOL_ordo_loyalty_loss = -0.015 }
+	divide_temp_variable = { SOL_ordo_loyalty_loss = SOL_ordo_authority_malus_factor }
+	for_each_loop = {
+		array = global.ordo_loyalty_array
+		
+		set_temp_variable = { SOL_ordo_authority_check = i }
+		IF = {
+			limit = {
+				SOL_is_visible_ordo = yes
+			}
+			add_to_variable = { global.ordo_loyalty_array^i = SOL_ordo_loyalty_loss }
 			clamp_variable = {
 				var = global.ordo_loyalty_array^i
 				min = 0
