@@ -33,183 +33,257 @@ shared_focus = {
 		factor = 100
 	}
 }
-
-###Left Tree###
+###New###
 shared_focus = {
-	id = EQS_roaring_inferno
+	id = EQS_laypony_fear
 	x = -2
 	y = 1
 	relative_position_id = EQS_flames_never_snuffed
 	
-	bypass = {
-		}
-	
 	cost = 2
-	
-	prerequisite = {
-		focus = EQS_flames_never_snuffed
-	}
-	
+	prerequisite = { focus = EQS_flames_never_snuffed }
+	mutually_exclusive = { focus = EQS_placate_clergy }
 	
 	completion_reward = {
-		add_war_support = 0.1
-		add_manpower = 100000
+		#Event for Daybreaker speaking to the workers and driving them into a fanantical frenzy to make them work harder
 	}
-	ai_will_do = {
-		factor = 18
-	}
+	ai_will_do = { factor = 45 }
 }
 
 shared_focus = {
-	id = EQS_raging_fanaticism
-	x = 0
-	y = 1
-	relative_position_id = EQS_roaring_inferno
-	
-	bypass = {
-		}
-	
-	cost = 2
-	
-	prerequisite = {
-		focus = EQS_roaring_inferno
-	}
-	
-	
-	completion_reward = {
-		add_manpower = 10000
-		add_timed_idea = {
-			idea = EQS_rapid_recruitment
-			days = 180
-		}
-	}
-	ai_will_do = {
-		factor = 17
-	}
-}
-
-shared_focus = {
-	id = EQS_undying_loyalty
-	x = 0
-	y = 1
-	relative_position_id = EQS_raging_fanaticism
-	
-	bypass = {
-		}
-	
-	cost = 3
-	
-	prerequisite = {
-		focus = EQS_raging_fanaticism
-	}
-	
-	
-	completion_reward = {
-		add_manpower = 1000
-		3 = {
-			create_unit = {
-				division = "name = \"The Empress' Chosen\" division_template = \"Praetorian Guards\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
-				owner = EQS
-			}
-		}
-	}
-	ai_will_do = {
-		factor = 15
-	}
-}
-
-###Center Tree###
-shared_focus = {
-	id = EQS_forever_angry
-	x = 0
+	id = EQS_placate_clergy
+	x = 2
 	y = 1
 	relative_position_id = EQS_flames_never_snuffed
 	
-	bypass = {
-		}
-	
 	cost = 2
-	
-	prerequisite = {
-		focus = EQS_flames_never_snuffed
-	}
-	
+	prerequisite = { focus = EQS_flames_never_snuffed }
+	mutually_exclusive = { focus = EQS_laypony_fear }
 	
 	completion_reward = {
-		add_country_leader_trait = daybreaker_god2
+		#Event for Daybreaker gathering the closest Adoratio and reassuring she is now fine, if weak
 	}
-	
-	ai_will_do = {
-	factor = 30
-	}
+	ai_will_do = { factor = 65 }
 }
 
 shared_focus = {
-	id = EQS_renewing_mind
-	x = 0
+	id = EQS_improve_inadequacy
+	x = -2
 	y = 1
-	relative_position_id = EQS_forever_angry
+	relative_position_id = EQS_laypony_fear
 	
-	bypass = {
-	}
-	
-	cost = 2
-	
+	cost = 3
 	prerequisite = {
-		focus = EQS_forever_angry
+		focus = EQS_laypony_fear
+		focus = EQS_placate_clergy
 	}
-	
+	mutually_exclusive = { focus = EQS_improving_perfection }
 	
 	completion_reward = {
-	add_stability = 0.05
-	add_political_power = 150
+		add_political_power = -50
+		add_stability = -0.03
 	}
-	
-	ai_will_do = {
-		factor = 20
-	}
+	ai_will_do = { factor = 40 }
 }
 
 shared_focus = {
 	id = EQS_improving_perfection
 	x = 0
 	y = 1
-	relative_position_id = EQS_renewing_mind
+	relative_position_id = EQS_laypony_fear
 	
-	bypass = {
-	}
-	
-	cost = 4
-	
+	cost = 3
 	prerequisite = {
-		focus = EQS_renewing_mind
+		focus = EQS_laypony_fear
+		focus = EQS_placate_clergy
 	}
-	
+	mutually_exclusive = { focus = EQS_improve_inadequacy }
 	
 	completion_reward = {
-		add_ideas = EQS_perfection_improved
+		#Event for Daybreaker being irritated with how slow she is after recovering, as she almost lets a heretic go when he is brought before her
+		add_political_power = 75
+		add_stability = 0.03
 	}
 	
 	ai_will_do = {
-		factor = 12
+		factor = 55
 	}
 }
 
-###Right Tree###
 shared_focus = {
-	id = EQS_punish_heresy
+	id = EQS_revisiting_cult
+	x = 0
+	y = 1
+	relative_position_id = EQS_placate_clergy
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_laypony_fear
+		focus = EQS_placate_clergy
+	}
+	mutually_exclusive = { focus = EQS_fix_weak_link }
+	
+	completion_reward = {
+		###Daybreaker is cornered by Quasar after news breaks of Daybreaker's intended inspection, and Daybreaker puts her in her placed
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_fix_weak_link
 	x = 2
 	y = 1
-	relative_position_id = EQS_flames_never_snuffed
+	relative_position_id = EQS_placate_clergy
 	
-	bypass = {
+	cost = 3
+	prerequisite = {
+		focus = EQS_laypony_fear
+		focus = EQS_placate_clergy
 	}
+	mutually_exclusive = { focus = EQS_revisiting_cult }
+	
+	completion_reward = {
+		###Event for Blueblood learning from one of his assistants that Daybreaker is planning an inspection, before they are thrown to the side, and Blueblood panics a bit as Daybreaker speaks with him about her intentions
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_sack_nobles
+	x = 0
+	y = 1
+	relative_position_id = EQS_improve_inadequacy
+	
+	cost = 3
+	prerequisite = { focus = EQS_improve_inadequacy }
+	
+	completion_reward = {
+		###Some nobles beg Daybreaker to let them stay before they are removed from the palace, and she doesn't hear any of it
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_two_hours_hate
+	x = 0
+	y = 1
+	relative_position_id = EQS_improving_perfection
 	
 	cost = 4
+	prerequisite = { focus = EQS_improving_perfection }
+	
+	completion_reward = {
+		###Daybreaker learns of how much the Empire crumbled without her, and she tears apart some of her room as she screams about idiocy around her, and she summons her diet, to speak her mind
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_forever_angry
+	x = 2
+	y = 1
+	relative_position_id = EQS_improving_perfection
+	
+	cost = 3
 	
 	prerequisite = {
-		focus = EQS_flames_never_snuffed
+		focus = EQS_improve_inadequacy
+		focus = EQS_improving_perfection
+		focus = EQS_revisiting_cult
+		focus = EQS_fix_weak_link
 	}
+	
+	completion_reward = {
+		add_country_leader_trait = daybreaker_god2
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_unicornist_ideals
+	x = 0
+	y = 1
+	relative_position_id = EQS_revisiting_cult
+	
+	cost = 5
+	prerequisite = { focus = EQS_revisiting_cult }
+	
+	completion_reward = {
+		###Add idea here
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_instill_honor
+	x = 0
+	y = 1
+	relative_position_id = EQS_fix_weak_link
+	
+	cost = 3
+	prerequisite = { focus = EQS_fix_weak_link }
+	
+	completion_reward = {
+		###Add idea
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_prove_themselves
+	x = -2
+	y = 1
+	relative_position_id = EQS_sack_nobles
+	
+	cost = 4
+	prerequisite = { focus = EQS_sack_nobles }
+	
+	completion_reward = {
+		###Daybreaker reads over some reports about her program to force usefulness in the government, and how some progress has been made, despite hiccups and damage to the city
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = EQS_counsel_councilors
+	x = 0
+	y = 1
+	relative_position_id = EQS_sack_nobles
+	
+	cost = 3
+	prerequisite = { focus = EQS_sack_nobles }
+	
+	completion_reward = {
+		###Daybreaker rips into her councilors about how incapable they were and that she will be taking full control, like she always wanted
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_lonely_top
+	x = 0
+	y = 1
+	relative_position_id = EQS_two_hours_hate
+	
+	cost = 2
+	prerequisite = { focus = EQS_two_hours_hate }
+	
+	completion_reward = {
+		###Daybreaker is approached by Sunset because she's become more cold, and Daybreaker states she is doing that purposefully; she doesn't need anypony to protect her, as that was a weakness before, and she only needs servants, like Sunset
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_punish_heresy
+	x = 0
+	y = 1
+	relative_position_id = EQS_forever_angry
+
+	cost = 4
+	
+	prerequisite = { focus = EQS_forever_angry }
 	
 	
 	completion_reward = {
@@ -217,294 +291,172 @@ shared_focus = {
 	}
 	
 	ai_will_do = {
-		factor = 20
+		factor = 35
 	}
 }
 
 shared_focus = {
-	id = EQS_workers_to_work
+	id = EQS_force_sides_together
 	x = 0
 	y = 1
-	relative_position_id = EQS_punish_heresy
+	relative_position_id = EQS_unicornist_ideals
 	
-	bypass = {
+	cost = 4
+	prerequisite = { focus = EQS_unicornist_ideals }
+	
+	completion_reward = {
+		###Event for Daybreaker mediating conflict herself between Sunset and Quasar regarding what to do about a certain op against heresy
 	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_tighten_loins
+	x = 0
+	y = 1
+	relative_position_id = EQS_instill_honor
+	
+	cost = 5
+	prerequisite = { focus = EQS_instill_honor }
+	
+	completion_reward = {
+		###Add idea here
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_no_complacency
+	x = 2
+	y = 1
+	relative_position_id = EQS_instill_honor
+	
+	cost = 5
+	prerequisite = { focus = EQS_instill_honor }
+	
+	completion_reward = {
+		###Event for Blueblood freaking out as Daybreaker is sending him to more training, as he's not done any in forever and he has some struggles with basic war things
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_goddess_of_battle
+	x = 0
+	y = 1
+	relative_position_id = EQS_lonely_top
+	
+	cost = 4
+	prerequisite = { focus = EQS_lonely_top }
+	
+	completion_reward = {
+		###Daybreaker in a training session, as she goes against some different, advanced golemns from special spells she used to practice fighting against soldiers and assassins, as a couple of inquisitors watch in fear
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = EQS_master_student
+	x = 0
+	y = 1
+	relative_position_id = EQS_force_sides_together
 	
 	cost = 3
-	
-	
-	prerequisite = {
-		focus = EQS_punish_heresy
-	}
+	prerequisite = { focus = EQS_force_sides_together }
 	
 	completion_reward = {
-		add_timed_idea = {
-			idea = EQS_encouraged_workers
-			days = 90
-		}
+		###Add Sunset stats here, or maybe event of her proving some of her skills against Blueblood
 	}
-	ai_will_do = {
-		factor = 20
-	}
+	ai_will_do = { factor = 30 }
 }
 
 shared_focus = {
-	id = EQS_in_the_empress_service
-	x = 0
-	y = 1
-	relative_position_id = EQS_workers_to_work
-	
-	bypass = {
-		}
-		
-	cost = 5
-	
-	
-	prerequisite = {
-		focus = EQS_workers_to_work
-	}
-	
-	completion_reward = {
-		3 = {
-			add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-			}
-			add_extra_state_shared_building_slots = 2
-		}
-	}
-	ai_will_do = {
-		factor = 17
-	}
-}
-
-###Middle-left Tree###
-#shared_focus = {
-#	id = EQS_they_shall_know
-#	x = -1
-#	y = 1
-#	relative_position_id = EQS_improving_perfection
-#	
-#	bypass = {
-#		}
-#		
-#	cost = 5
-#	
-#	
-#	prerequisite = {
-#		focus = EQS_undying_loyalty
-#	}
-#	prerequisite = {
-#		focus = EQS_improving_perfection
-#	}
-#	prerequisite = { 
-#		focus = EQS_in_the_empress_service
-#	}
-#	
-#	completion_reward = {
-#		add_timed_idea = {
-#			idea = EQS_purifying_light
-#			days = 210
-#		}
-#	}
-#	ai_will_do = {
-#		factor = 25
-#	}
-#}
-
-shared_focus = {
-	id = EQS_all_shall_serve
+	id = EQS_everypony_fight
 	x = -1
-	y = 1
-	relative_position_id = EQS_improving_perfection
+	y = 2
+	relative_position_id = EQS_lonely_top
 	
-	bypass = {
-		has_idea = service_by_requirement
-	}
-	
-	cost = 5
-	
+	cost = 4
 	prerequisite = {
-		focus = EQS_undying_loyalty
+		focus = EQS_counsel_councilors
+		focus = EQS_lonely_top
 	}
-	prerequisite = { focus = EQS_improving_perfection }
-	prerequisite = { focus = EQS_in_the_empress_service }
-	
+	prerequisite = {
+		focus = EQS_force_sides_together
+		focus = EQS_tighten_loins
+	}
 	
 	completion_reward = {
-		if = {
-			limit = { 
-			    has_idea = disarmed_nation 
-				}
-			add_ideas = service_by_requirement
-			}
-		else_if = {
-			limit = { 
-			    has_idea = volunteer_only 
-				}
-			add_ideas = service_by_requirement
-			}
-		else_if = {
-			limit = { 
-			    has_idea = limited_conscription 
-				}
-			add_ideas = service_by_requirement
-			}
-		else = {
-			add_ideas = service_by_requirement
-		}
+		###Conscription laws here, maybe a short event of somepony reading propaganda on the radio
 	}
-	ai_will_do = {
-		factor = 20
-	}
-}
-
-###Middle-Right Tree###
-#shared_focus = {
-#	id = EQS_cleansing_corruption
-#	x = 1
-#	y = 1
-#	relative_position_id = EQS_improving_perfection
-#	
-#	bypass = {
-#		}
-#	
-#	cost = 5
-#	
-#	prerequisite = {
-#		focus = EQS_undying_loyalty
-#	}
-#	prerequisite = {
-#		focus = EQS_improving_perfection
-#	}
-#	prerequisite = { 
-#		focus = EQS_in_the_empress_service
-#	}
-#	
-#	
-#	completion_reward = {
-#		75 = {
-#			add_building_construction = {
-#				type = industrial_complex
-#				level = 2
-#				instant_build = yes
-#			}
-#			add_extra_state_shared_building_slots = 2
-#		}
-#		add_timed_idea = {
-#			idea = EQS_donated_assets
-#			days = 60
-#		}
-#		country_event = solar.102
-#	}
-#	ai_will_do = {
-#		factor = 17
-#	}
-#}
-
-shared_focus = {
-	id = EQS_forging_new_future
-	x = 1
-	y = 1
-	relative_position_id = EQS_improving_perfection
-	
-	bypass = {
-		has_idea = tot_economic_mobilisation
-	}
-	
-	cost = 5
-	
-	prerequisite = {
-		focus = EQS_undying_loyalty
-	}
-	prerequisite = { focus = EQS_improving_perfection }
-	prerequisite = { focus = EQS_in_the_empress_service }
-	
-	
-	completion_reward = {
-		add_ideas = tot_economic_mobilisation
-	}
-	ai_will_do = {
-		factor = 20
-	}
+	ai_will_do = { factor = 55 }
 }
 
 shared_focus = {
 	id = EQS_faithful_allies
-	x = -1
-	y = 1
-	relative_position_id = EQS_forging_new_future
-	
-	bypass = {
-	}
+	x = 2
+	y = 2
+	relative_position_id = EQS_lonely_top
 	
 	cost = 3
 	
 	prerequisite = {
-		focus = EQS_forging_new_future
+		focus = EQS_counsel_councilors
+		focus = EQS_lonely_top
 	}
 	prerequisite = {
-		focus = EQS_all_shall_serve
+		focus = EQS_force_sides_together
+		focus = EQS_tighten_loins
 	}
-	
 	
 	completion_reward = {
 		add_manpower = 3071
 		country_event = solar.110
 	}
 	ai_will_do = {
-		factor = 15
+		factor = 45
 	}
 }
 
 shared_focus = {
-	id = EQS_suns_finest_warriors
+	id = EQS_mandatory_sacrifice
+	x = 1
+	y = 2
+	relative_position_id = EQS_force_sides_together
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_counsel_councilors
+		focus = EQS_lonely_top
+	}
+	prerequisite = {
+		focus = EQS_force_sides_together
+		focus = EQS_tighten_loins
+	}
+	
+	completion_reward = {
+		###Mob laws here
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_in_the_name_of_the_empress
 	x = -1
 	y = 1
 	relative_position_id = EQS_faithful_allies
 	
-	bypass = {
-	}
-	
 	cost = 4
-	
-	prerequisite = {
-		focus = EQS_faithful_allies
-	}
-	
-	mutually_exclusive = {
-		focus = EQS_bestowing_grace
-	}
-	
+	prerequisite = { focus = EQS_everypony_fight }
+	prerequisite = { focus = EQS_faithful_allies }
+	prerequisite = { focus = EQS_mandatory_sacrifice }
+	mutually_exclusive = { focus = EQS_bestowing_grace }
 	
 	completion_reward = {
-		3 = {
-			create_unit = {
-				division = "name = \"Solaris Solus\" division_template = \"Praetorian Guards\" start_experience_factor = 1 start_equipment_factor = 1.0"
-				owner = EQS
-			}
-		}
-		75 = {
-			create_unit = {
-				division = "name = \"Manehattan Chapter\" division_template = \"Praetorian Guards\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
-				owner = EQS
-			}
-		}
-		12 = {
-			create_unit = {
-				division = "name = \"Fillydelphia Chapter\" division_template = \"Praetorian Guards\" start_experience_factor = 0.5 start_equipment_factor = 1.0"
-				owner = EQS
-			}
-		}
+		country_event = solar.104
 	}
 	ai_will_do = {
-		factor = 20
+		factor = 75
 	}
 }
 
@@ -514,63 +466,407 @@ shared_focus = {
 	y = 1
 	relative_position_id = EQS_faithful_allies
 	
-	bypass = {
-	}
-	
 	cost = 4
-	
-	prerequisite = {
-		focus = EQS_faithful_allies
-	}
-	
-	mutually_exclusive = {
-		focus = EQS_suns_finest_warriors
-	}
+	prerequisite = { focus = EQS_everypony_fight }
+	prerequisite = { focus = EQS_faithful_allies }
+	prerequisite = { focus = EQS_mandatory_sacrifice }
+	mutually_exclusive = { focus = EQS_in_the_name_of_the_empress }
 	
 	completion_reward = {
 		add_ideas = EQS_mercy_for_the_faithful
 	}
 	ai_will_do = {
-		factor = 17
+		factor = 45
 	}
 }
 
-shared_focus = {
-	id = EQS_in_the_name_of_the_empress
-	x = -1
-	y = 1
-	relative_position_id = EQS_bestowing_grace
-	
-	bypass = {
-	}
-	
-	cost = 5
-	
-	prerequisite = {
-		focus = EQS_bestowing_grace
-		focus = EQS_suns_finest_warriors
-	}
-	
-	completion_reward = {
-		country_event = solar.104
-	}
-	ai_will_do = {
-		factor = 22
-	}
-}
+###Old###
+###Left Tree###
+#shared_focus = {
+#	id = EQS_roaring_inferno
+#	x = -2
+#	y = 1
+#	relative_position_id = EQS_flames_never_snuffed
+#	
+#	bypass = {
+#		}
+#	
+#	cost = 2
+#	
+#	prerequisite = {
+#		focus = EQS_flames_never_snuffed
+#	}
+#	
+#	
+#	completion_reward = {
+#		add_war_support = 0.1
+#		add_manpower = 100000
+#	}
+#	ai_will_do = {
+#		factor = 18
+#	}
+#}
+#
+#shared_focus = {
+#	id = EQS_raging_fanaticism
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_roaring_inferno
+#	
+#	bypass = {
+#		}
+#	
+#	cost = 2
+#	
+#	prerequisite = {
+#		focus = EQS_roaring_inferno
+#	}
+#	
+#	
+#	completion_reward = {
+#		add_manpower = 10000
+#		add_timed_idea = {
+#			idea = EQS_rapid_recruitment
+#			days = 180
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 17
+#	}
+#}
+#
+#shared_focus = {
+#	id = EQS_undying_loyalty
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_raging_fanaticism
+#	
+#	bypass = {
+#		}
+#	
+#	cost = 3
+#	
+#	prerequisite = {
+#		focus = EQS_raging_fanaticism
+#	}
+#	
+#	
+#	completion_reward = {
+#		add_manpower = 1000
+#		3 = {
+#			create_unit = {
+#				division = "name = \"The Empress' Chosen\" division_template = \"Praetorian Guards\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+#				owner = EQS
+#			}
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 15
+#	}
+#}
+#
+####Center Tree###
+#
+#shared_focus = {
+#	id = EQS_renewing_mind
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_forever_angry
+#	
+#	bypass = {
+#	}
+#	
+#	cost = 2
+#	
+#	prerequisite = {
+#		focus = EQS_forever_angry
+#	}
+#	
+#	
+#	completion_reward = {
+#	add_stability = 0.05
+#	add_political_power = 150
+#	}
+#	
+#	ai_will_do = {
+#		factor = 20
+#	}
+#}
+#
+####Right Tree###
+#
+#shared_focus = {
+#	id = EQS_workers_to_work
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_punish_heresy
+#	
+#	bypass = {
+#	}
+#	
+#	cost = 3
+#	
+#	
+#	prerequisite = {
+#		focus = EQS_punish_heresy
+#	}
+#	
+#	completion_reward = {
+#		add_timed_idea = {
+#			idea = EQS_encouraged_workers
+#			days = 90
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 20
+#	}
+#}
+#
+#shared_focus = {
+#	id = EQS_in_the_empress_service
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_workers_to_work
+#	
+#	bypass = {
+#		}
+#		
+#	cost = 5
+#	
+#	
+#	prerequisite = {
+#		focus = EQS_workers_to_work
+#	}
+#	
+#	completion_reward = {
+#		3 = {
+#			add_building_construction = {
+#				type = industrial_complex
+#				level = 1
+#				instant_build = yes
+#			}
+#			add_building_construction = {
+#				type = arms_factory
+#				level = 1
+#				instant_build = yes
+#			}
+#			add_extra_state_shared_building_slots = 2
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 17
+#	}
+#}
+#
+####Middle-left Tree###
+##shared_focus = {
+##	id = EQS_they_shall_know
+##	x = -1
+##	y = 1
+##	relative_position_id = EQS_improving_perfection
+##	
+##	bypass = {
+##		}
+##		
+##	cost = 5
+##	
+##	
+##	prerequisite = {
+##		focus = EQS_undying_loyalty
+##	}
+##	prerequisite = {
+##		focus = EQS_improving_perfection
+##	}
+##	prerequisite = { 
+##		focus = EQS_in_the_empress_service
+##	}
+##	
+##	completion_reward = {
+##		add_timed_idea = {
+##			idea = EQS_purifying_light
+##			days = 210
+##		}
+##	}
+##	ai_will_do = {
+##		factor = 25
+##	}
+##}
+#
+#shared_focus = {
+#	id = EQS_all_shall_serve
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_improving_perfection
+#	
+#	bypass = {
+#		has_idea = service_by_requirement
+#	}
+#	
+#	cost = 5
+#	
+#	prerequisite = {
+#		focus = EQS_undying_loyalty
+#	}
+#	prerequisite = { focus = EQS_improving_perfection }
+#	prerequisite = { focus = EQS_in_the_empress_service }
+#	
+#	
+#	completion_reward = {
+#		if = {
+#			limit = { 
+#			    has_idea = disarmed_nation 
+#				}
+#			add_ideas = service_by_requirement
+#			}
+#		else_if = {
+#			limit = { 
+#			    has_idea = volunteer_only 
+#				}
+#			add_ideas = service_by_requirement
+#			}
+#		else_if = {
+#			limit = { 
+#			    has_idea = limited_conscription 
+#				}
+#			add_ideas = service_by_requirement
+#			}
+#		else = {
+#			add_ideas = service_by_requirement
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 20
+#	}
+#}
+#
+####Middle-Right Tree###
+##shared_focus = {
+##	id = EQS_cleansing_corruption
+##	x = 1
+##	y = 1
+##	relative_position_id = EQS_improving_perfection
+##	
+##	bypass = {
+##		}
+##	
+##	cost = 5
+##	
+##	prerequisite = {
+##		focus = EQS_undying_loyalty
+##	}
+##	prerequisite = {
+##		focus = EQS_improving_perfection
+##	}
+##	prerequisite = { 
+##		focus = EQS_in_the_empress_service
+##	}
+##	
+##	
+##	completion_reward = {
+##		75 = {
+##			add_building_construction = {
+##				type = industrial_complex
+##				level = 2
+##				instant_build = yes
+##			}
+##			add_extra_state_shared_building_slots = 2
+##		}
+##		add_timed_idea = {
+##			idea = EQS_donated_assets
+##			days = 60
+##		}
+##		country_event = solar.102
+##	}
+##	ai_will_do = {
+##		factor = 17
+##	}
+##}
+#
+#shared_focus = {
+#	id = EQS_forging_new_future
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_improving_perfection
+#	
+#	bypass = {
+#		has_idea = tot_economic_mobilisation
+#	}
+#	
+#	cost = 5
+#	
+#	prerequisite = {
+#		focus = EQS_undying_loyalty
+#	}
+#	prerequisite = { focus = EQS_improving_perfection }
+#	prerequisite = { focus = EQS_in_the_empress_service }
+#	
+#	
+#	completion_reward = {
+#		add_ideas = tot_economic_mobilisation
+#	}
+#	ai_will_do = {
+#		factor = 20
+#	}
+#}
+#
+#
+#shared_focus = {
+#	id = EQS_suns_finest_warriors
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_faithful_allies
+#	
+#	bypass = {
+#	}
+#	
+#	cost = 4
+#	
+#	prerequisite = {
+#		focus = EQS_faithful_allies
+#	}
+#	
+#	mutually_exclusive = {
+#		focus = EQS_bestowing_grace
+#	}
+#	
+#	
+#	completion_reward = {
+#		3 = {
+#			create_unit = {
+#				division = "name = \"Solaris Solus\" division_template = \"Praetorian Guards\" start_experience_factor = 1 start_equipment_factor = 1.0"
+#				owner = EQS
+#			}
+#		}
+#		75 = {
+#			create_unit = {
+#				division = "name = \"Manehattan Chapter\" division_template = \"Praetorian Guards\" start_experience_factor = 0.75 start_equipment_factor = 1.0"
+#				owner = EQS
+#			}
+#		}
+#		12 = {
+#			create_unit = {
+#				division = "name = \"Fillydelphia Chapter\" division_template = \"Praetorian Guards\" start_experience_factor = 0.5 start_equipment_factor = 1.0"
+#				owner = EQS
+#			}
+#		}
+#	}
+#	ai_will_do = {
+#		factor = 20
+#	}
+#}
+#
 
 ###Capstone to Revival Tree###
 shared_focus = {
 	id = EQS_solaris_bellum
-	x = 0
+	x = -1
 	y = 1
-	relative_position_id = EQS_in_the_name_of_the_empress
+	relative_position_id = EQS_bestowing_grace
 	
 	cost = 1
 	
-	prerequisite = {
-		focus = EQS_in_the_name_of_the_empress
-	}
+	prerequisite = { focus = EQS_bestowing_grace }
+	prerequisite = { focus = EQS_in_the_name_of_the_empress }
 	
 	completion_reward = {
 		country_event = solar.103
