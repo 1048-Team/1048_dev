@@ -26,7 +26,6 @@ shared_focus = {
 	cost = 1
 	
 	completion_reward = {
-		add_stability = 0.03
 		country_event = solar.101
 	}
 	ai_will_do = {
@@ -46,6 +45,7 @@ shared_focus = {
 	
 	completion_reward = {
 		#Event for Daybreaker speaking to the workers and driving them into a fanantical frenzy to make them work harder
+		country_event = solar.125
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -62,6 +62,7 @@ shared_focus = {
 	
 	completion_reward = {
 		#Event for Daybreaker gathering the closest Adoratio and reassuring she is now fine, if weak
+		country_event = solar.102
 	}
 	ai_will_do = { factor = 65 }
 }
@@ -103,6 +104,9 @@ shared_focus = {
 		#Event for Daybreaker being irritated with how slow she is after recovering, as she almost lets a heretic go when he is brought before her
 		add_political_power = 75
 		add_stability = 0.03
+		hidden_effect = {
+			country_event = solar.111
+		}
 	}
 	
 	ai_will_do = {
@@ -125,6 +129,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker is cornered by Quasar after news breaks of Daybreaker's intended inspection, and Daybreaker puts her in her placed
+		country_event = solar.131
 	}
 	ai_will_do = { factor = 70 }
 }
@@ -144,6 +149,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Event for Blueblood learning from one of his assistants that Daybreaker is planning an inspection, before they are thrown to the side, and Blueblood panics a bit as Daybreaker speaks with him about her intentions
+		country_event = solar.133
 	}
 	ai_will_do = { factor = 55 }
 }
@@ -159,6 +165,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Some nobles beg Daybreaker to let them stay before they are removed from the palace, and she doesn't hear any of it
+		country_event = solar.128
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -174,6 +181,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker learns of how much the Empire crumbled without her, and she tears apart some of her room as she screams about idiocy around her, and she summons her diet, to speak her mind
+		country_event = solar.126
 	}
 	ai_will_do = { factor = 60 }
 }
@@ -210,7 +218,7 @@ shared_focus = {
 	prerequisite = { focus = EQS_revisiting_cult }
 	
 	completion_reward = {
-		###Add idea here
+		add_ideas = EQS_unicorn_supremacy
 	}
 	ai_will_do = { factor = 55 }
 }
@@ -225,7 +233,7 @@ shared_focus = {
 	prerequisite = { focus = EQS_fix_weak_link }
 	
 	completion_reward = {
-		###Add idea
+		add_ideas = EQS_generals_reminded
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -241,6 +249,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker reads over some reports about her program to force usefulness in the government, and how some progress has been made, despite hiccups and damage to the city
+		country_event = solar.129
 	}
 	ai_will_do = { factor = 30 }
 }
@@ -256,6 +265,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker rips into her councilors about how incapable they were and that she will be taking full control, like she always wanted
+		country_event = solar.130
 	}
 	ai_will_do = { factor = 55 }
 }
@@ -271,6 +281,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker is approached by Sunset because she's become more cold, and Daybreaker states she is doing that purposefully; she doesn't need anypony to protect her, as that was a weakness before, and she only needs servants, like Sunset
+		country_event = solar.127
 	}
 	ai_will_do = { factor = 60 }
 }
@@ -306,6 +317,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Event for Daybreaker mediating conflict herself between Sunset and Quasar regarding what to do about a certain op against heresy
+		country_event = solar.132
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -320,7 +332,10 @@ shared_focus = {
 	prerequisite = { focus = EQS_instill_honor }
 	
 	completion_reward = {
-		###Add idea here
+		swap_ideas = {
+			remove_idea = EQS_generals_reminded
+			add_idea = EQS_trimmed_fat
+		}
 	}
 	ai_will_do = { factor = 60 }
 }
@@ -336,6 +351,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Event for Blueblood freaking out as Daybreaker is sending him to more training, as he's not done any in forever and he has some struggles with basic war things
+		country_event = solar.134
 	}
 	ai_will_do = { factor = 40 }
 }
@@ -351,6 +367,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker in a training session, as she goes against some different, advanced golemns from special spells she used to practice fighting against soldiers and assassins, as a couple of inquisitors watch in fear
+		country_event = solar.135
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -366,6 +383,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Add Sunset stats here, or maybe event of her proving some of her skills against Blueblood
+		country_event = solar.136
 	}
 	ai_will_do = { factor = 30 }
 }
@@ -375,6 +393,8 @@ shared_focus = {
 	x = -1
 	y = 2
 	relative_position_id = EQS_lonely_top
+	
+	bypass = { has_idea = service_by_requirement }
 	
 	cost = 4
 	prerequisite = {
@@ -388,6 +408,31 @@ shared_focus = {
 	
 	completion_reward = {
 		###Conscription laws here, maybe a short event of somepony reading propaganda on the radio
+		country_event = solar.137
+		if = {
+			limit = { 
+			    has_idea = disarmed_nation 
+			}
+			add_ideas = volunteer_only
+		}
+		else_if = {
+			limit = { 
+			    has_idea = volunteer_only 
+			}
+			add_ideas = limited_conscription
+		}
+		else_if = {
+			limit = { 
+			    has_idea = limited_conscription 
+			}
+			add_ideas = extensive_conscription
+		}
+		else_if = {
+			limit = { 
+			    has_idea = extensive_conscription 
+			}
+			add_ideas = service_by_requirement
+		}
 	}
 	ai_will_do = { factor = 55 }
 }
@@ -424,6 +469,8 @@ shared_focus = {
 	y = 2
 	relative_position_id = EQS_force_sides_together
 	
+	bypass = { has_idea = tot_economic_mobilisation }
+	
 	cost = 4
 	prerequisite = {
 		focus = EQS_counsel_councilors
@@ -435,7 +482,23 @@ shared_focus = {
 	}
 	
 	completion_reward = {
-		###Mob laws here
+		if = {
+			limit = { has_idea = civilian_economy }
+			add_ideas = low_economic_mobilisation
+		}
+		else_if = {
+			limit = { has_idea = low_economic_mobilisation }
+			add_ideas = partial_economic_mobilisation
+		}
+		else_if = {
+			limit = { has_idea = partial_economic_mobilisation }
+			add_ideas = war_economy
+		}
+		else_if = {
+			limit = { has_idea = war_economy }
+			add_ideas = tot_economic_mobilisation
+			add_stability = -0.05
+		}
 	}
 	ai_will_do = { factor = 60 }
 }
@@ -865,8 +928,10 @@ shared_focus = {
 	
 	cost = 1
 	
-	prerequisite = { focus = EQS_bestowing_grace }
-	prerequisite = { focus = EQS_in_the_name_of_the_empress }
+	prerequisite = { 
+		focus = EQS_bestowing_grace
+		focus = EQS_in_the_name_of_the_empress 
+	}
 	
 	completion_reward = {
 		country_event = solar.103
@@ -1840,6 +1905,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker is approached by Quasar regarding how to treat the heretics of their conquered territory
+		country_event = solar.106
 	}
 	ai_will_do = { factor = 75 }
 }
@@ -1862,6 +1928,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Sunset stops Daybreaker in a hallway to request that she be smart and not decimate the lands
+		country_event = solar.107
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -1884,6 +1951,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Daybreaker learns of Burning Plage helping ponies, and is upset at first, but sees logic as it could help her image
+		country_event = solar.138
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -1903,6 +1971,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Report about how there has been conflict already with Adoratio priestesses moving in and ponies of the conquered lands attacking them
+		country_event = solar.139
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -1922,6 +1991,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Report of the number of ponies who are prisoners and how it's overflowing the prisons in the Empire, and that they have to be dealt with somehow
+		country_event = solar.140
 	}
 	ai_will_do = { factor = 55 }
 }
@@ -1941,6 +2011,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Report of the damage of cities from the conquest, and how encouragement needs to be done somehow to keep society functioning, with some recommendations
+		country_event = solar.141
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -1960,6 +2031,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Report on how former soldiers were found, as well as how to handle the rogue legion of Whinnyapolis
+		country_event = solar.143
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -1979,6 +2051,7 @@ shared_focus = {
 	
 	completion_reward = {
 		###Report on the number of fled citizens that are attempting to hide the Empire and how they should be dealt with
+		country_event = solar.142
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -2010,6 +2083,7 @@ shared_focus = {
 			}
 			add_core_of = ROOT
 		}
+		set_province_name = { id = 782 name = renamed_new_canterlot }
 	}
 	ai_will_do = { factor = 60 }
 }

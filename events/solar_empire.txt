@@ -1,6 +1,7 @@
 ###Solar Empire Events###
 
 add_namespace = solar
+add_namespace = solar.debug
 add_namespace = celestia
 
 #Start event chain to introduce Aurora
@@ -324,11 +325,11 @@ country_event = {
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.17"}
 	title = solar.17.t
 	desc = {
-		text = solar.17.d_found
+		text = solar.17.d
 		trigger = { has_country_flag = rebels_found }
 	}
 	desc = {
-		text = solar.17.d_not_found
+		text = solar.17.d
 		trigger = { has_country_flag = rebels_not_found }
 	}
 	
@@ -1400,28 +1401,317 @@ country_event = { #After being sealed away, discussion is held over who will be 
 ###Daybreaker Restoration Events####
 ###Range goes from 101-200###
 
-country_event = {
+country_event = { #Daybreaker is still semi-lucid from the crisis, and she is furious when she learns how the Empire was falling apart
 	id = solar.101
 	title = solar.101.t
 	desc = solar.101.d
 	
 	is_triggered_only = yes
 	
-	option = { #At last my vengeance shall be had
+	option = { #Is there nopony competent here?!
 		name = solar.101.a
 		clr_country_flag = daybreaker_crisis
+		add_stability = 0.03
 	}
 }
 
 country_event = { #Daybreaker purges the rest of the capitalist influence in the Solar Empire. It is all for her now
-	id = solar.102
+	id = solar.102 #Daybreaker barges into a meeting of the Adoratio Primus that she summoned, and orders them all to double their efforts, since they obviously slackened while she was gone
 	title = solar.102.t
 	desc = solar.102.d
 	
 	is_triggered_only = yes
 	
-	option = { 
+	option = { #And take away Ion Trail's zapper!
 		name = solar.102.a
+		add_political_power = 50
+		set_temp_variable = { SOL_authority_change_var = 5 }
+		SOL_imperial_authority_change = yes
+	}
+}
+
+country_event = { #Numerous ponies are gathered outside the palace and Daybreaker soon appears to speak to them all, before riling them up to serve her more
+	id = solar.125
+	title = solar.125.t
+	desc = solar.125.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will be useful for a while
+		name = solar.125.a
+		add_timed_idea = {
+			idea = EQS_encouraged_workers
+			days = 90
+		}
+	}
+}
+
+country_event = { #Daybreaker learns about more of what has been going on in the Empire since she was waylayed, and she destroys most of her room in a rage before she summons Sunset to declare her intentions to control more of the Empire
+	id = solar.126
+	title = solar.126.t
+	desc = solar.126.d
+	
+	is_triggered_only = yes
+	
+	option = { #How did anything get done before?!
+		name = solar.126.a
+		add_ideas = EQS_direct_control
+	}
+}
+
+country_event = { #Sunset sees Daybreaker in the hallway, looking out at the rebuilt Sanctum Solar, and tries to speak with her, but Daybreaker is mostly aloof and states she will not trust anypony with the Empire again, now that she is whole
+	id = solar.127
+	title = solar.127.t
+	desc = solar.127.d
+	
+	is_triggered_only = yes
+	
+	option = { #They are beneath me. Only I know what is right.
+		name = solar.127.a
+		swap_ideas = {
+			remove_idea = EQS_direct_control
+			add_idea = EQS_sole_sane_pony
+		}
+	}
+}
+
+country_event = { #Fat Stacks is one of the nobles who learns about Daybreaker's intended culling and he barges into her quarters and begs to be kept, which only makes her resolve that he will be culled, as she wasn't before, but he's proved his ineptitude just through this
+	id = solar.128
+	title = solar.128.t
+	desc = solar.128.d
+	
+	is_triggered_only = yes
+	
+	option = { #Wait! That wasn't what I wanted!
+		name = solar.128.a
+		add_ideas = EQS_culled_nobility
+	}
+}
+
+country_event = { #Daybreaker gets a report about how Flim and Flam, in a desire to remain useful in their old age, attempted a new manufacturing process which led to a magic overload and leveled a portion of the city, and also another section about how Blueblood's tactics on suppressing rebels has led to nightmares everywhere
+	id = solar.129
+	title = solar.129.t
+	desc = solar.129.d
+	
+	is_triggered_only = yes
+	
+	option = { #At least some are trying	
+		name = solar.129.a
+		if = {
+			limit = { has_idea = blueblood }
+			hidden_effect = {
+				remove_advisor_role = {
+					character = EQS_Blueblood
+					slot = political_advisor
+				}
+			}
+			EQS_Blueblood = {
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = blueblood
+						traits = { tormentor_of_heretics }
+					}
+					activate = yes
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				remove_advisor_role = {
+					character = event_target:EQS_Blueblood_target
+					slot = political_advisor
+				}
+			}
+			event_target:EQS_Blueblood_target = {
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = blueblood
+						traits = { tormentor_of_heretics }
+					}
+				}
+			}
+		}
+		if = {
+			limit = { has_idea = flim }
+			remove_advisor_role = {
+				character = EQS_Flim_Flam_1048
+				slot = political_advisor
+			}
+			EQS_Flim_Flam_1048 = {
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = flim
+						traits = { frightened_industrialists }
+					}
+					activate = yes
+				}
+			}
+		}
+		else = {
+			remove_advisor_role = {
+				character = EQS_Flim_Flam_1048
+				slot = political_advisor
+			}
+			EQS_Flim_Flam_1048 = {
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = flim
+						traits = { frightened_industrialists }
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Daybreaker assembles her diet and after they settle in, berates all of them about how they couldn't bother running the Empire; one tries to protest, who she slams to the ground as she states she is taking full control, and they are all released from duty
+	id = solar.130
+	title = solar.130.t
+	desc = solar.130.d
+	
+	is_triggered_only = yes
+	
+	option = { #Be thankful you'll live!
+		name = solar.130.a
+		add_ideas = EQS_council_of_one
+	}
+}
+
+country_event = { #Quasar barges into the throne room while Daybreaker is in the middle of a trial and she demands to speak with her, and when things are cleared, she inquires why the Inquisitionis is going to be inspected, which gets Daybreaker frustrated and give a short answer of it's not working well enough, and she will resolve it personally
+	id = solar.131
+	title = solar.131.t
+	desc = solar.131.d
+	
+	is_triggered_only = yes
+	
+	option = { #Is there an issue with that?
+		name = solar.131.a
+		set_temp_variable = { SOL_authority_change_var = 5 }
+		SOL_imperial_authority_change = yes
+	}
+}
+
+country_event = { #Daybreaker waits as she listens to both Sunset and Quasar argue with each other over how to handle a specific heretic problem in Ordo Silva, which she finally snaps that they have to compromise, or Sunset actually use her technical authority
+	id = solar.132 #Have her ask why she came back, or that she is getting a headache
+	title = solar.132.t
+	desc = solar.132.d
+	
+	is_triggered_only = yes
+	
+	option = { #Don't make me get up and make you behave!
+		name = solar.132.a
+		add_ideas = EQS_blunt_resolution
+	}
+}
+
+country_event = { #Blueblood is surprised (and not properly dressed in his role) by one of his assistants who warns about Daybreaker's intended inspection before they're tossed to the side as Daybreaker walks in, looking furious because of the Militarium's state, which leaves Blueblood antsy
+	id = solar.133
+	title = solar.133.t
+	desc = solar.133.d
+	
+	is_triggered_only = yes
+	
+	option = { #Auntie! Wh-what a surprise!
+		name = solar.133.a
+		army_experience = 20
+	}
+}
+
+country_event = { #Blueblood grumbles to himself as he starts a new training regimen put in specifically by Daybreaker, and he complains as he swears that even thinking about it makes him tired, but he also knows that he's dead if he doesn't agree to it
+	id = solar.134
+	title = solar.134.t
+	desc = solar.134.d
+	
+	is_triggered_only = yes
+	
+	option = { #Damn! Twisted my back!
+		name = solar.134.a
+		event_target:EQS_Blueblood_target = {
+			remove_trait = { trait = politically_connected }
+			add_attack = 1
+		}
+	}
+}
+
+country_event = { #In the training halls of the Imperial Palace a couple of inquisitors watch as Daybreaker goes to town on some golems she created with her magic, one even managing to grapple her and another attack her with lethal magic, and they are in awe at how she fights
+	id = solar.135 #Have them gossip a bit about how hard she's going, too, and how she almost died more than once there
+	title = solar.135.t
+	desc = solar.135.d
+	
+	is_triggered_only = yes
+	
+	option = { #The heretics will never stand a chance.
+		name = solar.135.a
+		event_target:EQS_Daybreaker_target = {
+			add_skill_level = 1
+			add_planning = 2
+			add_logistics = 1
+		}
+	}
+}
+
+country_event = { #Sunset plays an infrequent game of checkers or some other mental game with Blueblood, and easily beats him again, even faster than before, and she smugly talks about how her training under Daybreaker has ramped up again, and it's been quite helpful
+	id = solar.136
+	title = solar.136.t
+	desc = solar.136.d
+	
+	is_triggered_only = yes
+	
+	option = { #You'll just have to start waddling, Blue. ;P
+		name = solar.136.a
+		event_target:EQS_Sunset_Shimmer_target = {
+			add_skill_level = 1
+			add_defense = 2
+			add_attack = 1
+		}
+		if = {
+			limit = { has_idea = sunset_shimmer }
+			remove_advisor_role = {
+				character = EQS_Sunset_Shimmer_1048
+				slot = political_advisor
+			}
+			EQS_Sunset_Shimmer_1048 = {
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = sunset_shimmer
+						traits = { high_mage_shimmer_advisor_better }
+					}
+					activate = yes
+				}
+			}
+		}
+		else = {
+			remove_advisor_role = {
+				character = EQS_Sunset_Shimmer_1048
+				slot = political_advisor
+			}
+			EQS_Sunset_Shimmer_1048 = {
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = sunset_shimmer
+						traits = { high_mage_shimmer_advisor_better }
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #A radio announcer speaks quickly about a new announcement of Daybreaker, about how ponies must sign up to their local recruitment center, with propaganda about how it is their duty to stop heresy
+	id = solar.137
+	title = solar.137.t
+	desc = solar.137.d
+	
+	is_triggered_only = yes
+	
+	option = { #Everypony will serve the Empire!
+		name = solar.137.a
 	}
 }
 
@@ -1480,39 +1770,316 @@ country_event = { #Daybreaker has a Hitler-like speech about reconquering the ru
 }
 
 country_event = { #The temple is consecrated over the remains of Solar Beauty University and Fidelis is appointed as the new archmage of Bales, Ordo Scripturia
-	id = solar.106
+	id = solar.106 #Quasar provides a personal report of how the new territories are acting, and she recommends harsh punishment, in accordance with the Solaris' mission, to which Daybreaker agrees
 	title = solar.106.t
 	desc = solar.106.d
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #I've always anticipated this moment.
 		name = solar.106.a
-		add_stability = 0.03
-		add_war_support = 0.03
+		add_ideas = EQS_what_they_deserve
+		set_country_flag = EQS_harsh_punishment
 	}
 }
 
 country_event = { #Daybreaker arrives in the damaged Whinnyapolis and is met with a parade by the faithful for being liberated and her bringing the new archmage, Celestial Pillar, to the city
-	id = solar.107
+	id = solar.107 #Daybreaker is sidelined by Sunset in a hall and Sunset states that things are too thinly spread to do a full purge, and that only the obvious heretics should be punished
 	title = solar.107.t
 	desc = solar.107.d
 	
 	is_triggered_only = yes
 	
-	option = {
+	option = { #I think I'll go a bit further than that, my servant.
 		name = solar.107.a
-		add_stability = 0.01
-		add_war_support = 0.01
+		add_ideas = EQS_a_restrained_hoof
+		set_country_flag = EQS_flexible_punishment
+	}
+}
+
+country_event = { #Daybreaker receives a report from Ordo Silva of one of Burning Plage's subordinates reporting that Burning Plage is nearly helping the heretics by alleviating their suffering, and while angry at first, Daybreaker realizes there is merit to this
+	id = solar.138
+	title = solar.138.t
+	desc = solar.138.d
+	
+	is_triggered_only = yes
+	
+	option = { #I see where this can be utilized
+		name = solar.138.a
+		add_ideas = EQS_a_light_hoof
+		set_country_flag = EQS_light_punishment
+	}
+}
+
+country_event = { #A report arrives talking about a recent clash between some Adoratio priestesses trying to spread Solarism and some ponies who ridiculed and later stirred up the crowd against them, with a request for more Inquistionis presence and for the Empress to assist
+	id = solar.139
+	title = solar.139.t
+	desc = solar.139.d
+	
+	is_triggered_only = yes
+	
+	option = { #Then we will convert them through force!
+		name = solar.139.a
+		trigger = { 
+			OR = {
+				has_country_flag = EQS_harsh_punishment
+				has_country_flag = EQS_flexible_punishment
+			}
+		}
+		set_temp_variable = { SOL_authority_change_var = 10 }
+		SOL_imperial_authority_change = yes
+		hidden_effect = {
+			for_each_loop = {
+				array = global.ordo_loyalty_array
+				
+				set_temp_variable = { SOL_ordo_authority_check = i }
+				IF = {
+					limit = {
+						SOL_is_visible_ordo = yes
+					}
+					add_to_variable = { global.ordo_loyalty_array^i = 3 }
+					clamp_variable = {
+						var = global.ordo_loyalty_array^i
+						min = 0
+						max = 100
+					}
+				}
+			}
+		}
+	}
+	option = { #Require everypony to attend worship and up Militarium presence.
+		name = solar.139.b
+		trigger = { 
+			OR = {
+				has_country_flag = EQS_flexible_punishment 
+				has_country_flag = EQS_light_punishment
+			}
+		}
+		set_temp_variable = { SOL_authority_change_var = 5 }
+		SOL_imperial_authority_change = yes
+		add_stability = 0.03
+	}
+	option = { #We mustn't provoke another rebellion. Keep things passive.
+		name = solar.139.c
+		trigger = {
+			OR = {
+				has_country_flag = EQS_flexible_punishment
+				has_country_flag = EQS_light_punishment
+			}
+		}
+		set_temp_variable = { SOL_authority_change_var = -5 }
+		SOL_imperial_authority_change = yes
+		hidden_effect = {
+			for_each_loop = {
+				array = global.ordo_loyalty_array
+				
+				set_temp_variable = { SOL_ordo_authority_check = i }
+				IF = {
+					limit = {
+						SOL_is_visible_ordo = yes
+					}
+					add_to_variable = { global.ordo_loyalty_array^i = -4 }
+					clamp_variable = {
+						var = global.ordo_loyalty_array^i
+						min = 0
+						max = 100
+					}
+				}
+			}
+		}
+		add_stability = 0.05
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.02
+		}
+	}
+}
+
+country_event = { #A report arrives discussing that the prisons are overflowing and that there have a number of escape attempts; the guards and the citizens are antsy at the number of prisoners, and a decision must be made
+	id = solar.140
+	title = solar.140.t
+	desc = solar.140.d
+	
+	is_triggered_only = yes
+	
+	option = { #Exceute them all, and their families!
+		name = solar.140.a
+		trigger = { has_country_flag = EQS_harsh_punishment }
+		hidden_effect = { EQS_harsh_pop_loss = yes }
+		custom_effect_tooltip = EQS_lots_of_dead_heretics_tt
+		add_stability = 0.02
+	}
+	option = { #Execute the proven heretics and release some of our former soldiers.
+		name = solar.140.b
+		trigger = {
+			OR = {
+				has_country_flag = EQS_harsh_punishment
+				has_country_flag = EQS_flexible_punishment
+				has_country_flag = EQS_light_punishment
+			}
+		}
+		hidden_effect = { EQS_light_pop_loss = yes }
+		custom_effect_tooltip = EQS_less_dead_heretics_tt
+		hidden_effect = {
+			###Throw in a CER and a NER advisor here
+		}
+		CER = { CER_Kaiser_Roll = { set_nationality = ROOT } }
+	}
+	option = { #Put them all on trial, no matter the cost!
+		name = solar.140.c
+		trigger = {
+			OR = {
+				has_country_flag = EQS_flexible_punishment
+				has_country_flag = EQS_light_punishment
+			}
+		}
+		add_stability = -0.05
 		add_popularity = {
 			ideology = fascism
-			popularity = 0.01
+			popularity = -0.03
 		}
 		hidden_effect = {
-			WHY = {
-				WHY_Solar_Strike = { set_nationality = EQS }
-				WHY_Horizon_Sunrise = { set_nationality = EQS }
+			###Throw in a CLD or BLS advisor here plus the others
+		}
+		CER = { CER_Kaiser_Roll = { set_nationality = ROOT } }
+	}
+}
+
+country_event = { #A report is given of how there is a lot of damage to the various cities of the conquered territories, and they provide opportunities to spread Solarism through new religious monuments, but can also be repaired to improve the industrial base
+	id = solar.141
+	title = solar.141.t
+	desc = solar.141.d
+	
+	is_triggered_only = yes
+	
+	option = { #Construct some new temples. Level anything if needed!
+		name = solar.141.a
+		trigger = { has_country_flag = EQS_harsh_punishment }
+		74 = { add_extra_state_shared_building_slots = 4 }
+		1218 = { add_extra_state_shared_building_slots = 2 }
+		70 = { add_extra_state_shared_building_slots = 1 }
+		122 = { add_extra_state_shared_building_slots = 1 }
+	}
+	option = { #End any new construction. It will be our plans now.
+		name = solar.141.b
+		trigger = {
+			OR = {
+				has_country_flag = EQS_harsh_punishment
+				has_country_flag = EQS_flexible_punishment
 			}
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.03
+		}
+		add_war_support = 0.03
+		add_political_power = 25
+	}
+	option = { #Block any further plans, but we will adapt to what is there.
+		name = solar.141.c
+		trigger = {
+			OR = {
+				has_country_flag = EQS_flexible_punishment
+				has_country_flag = EQS_light_punishment
+			}
+		}
+		74 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		1218 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}	
+	}
+}
+
+country_event = { #A report of ponies that had fled the Solar Empire originally turning up either for mercy or for causing problems with the occupiers, plus the topic of how to handle high-profile expatriates, such as Solar Strike or Soarin'
+	id = solar.142
+	title = solar.142.t
+	desc = solar.142.d
+	
+	is_triggered_only = yes
+	
+	option = { #Kill them all. They're worthless now.
+		name = solar.142.a
+		trigger = { has_country_flag = EQS_harsh_punishment }
+		add_stability = 0.05
+		add_political_power = 50
+	}
+	option = { #They have some use. Those who want to stay can do so.
+		name = solar.142.b
+		trigger = {
+			OR = {
+				has_country_flag = EQS_harsh_punishment
+				has_country_flag = EQS_flexible_punishment
+				has_country_flag = EQS_light_punishment
+			}
+		}
+		WHY = {
+			WHY_Solar_Strike = { set_nationality = ROOT }
+			#WHY_Horizon_Sunrise = { set_nationality = ROOT }
+			###Have one other general come over
+		}
+	}
+	option = { #They were once Solar citizens; they have that privilege again.
+		name = solar.142.c
+		trigger = { has_country_flag = EQS_light_punishment }
+		WHY = {
+			WHY_Solar_Strike = { set_nationality = ROOT }
+			WHY_Horizon_Sunrise = { set_nationality = ROOT }
+			###One more WHY general
+		}
+		CLD = {
+			###Put Soarin' here
+		}
+		add_stability = -0.05
+		add_political_power = -25
+	}
+}
+
+country_event = { #A report arrives of draft dodging and also the rogue legion from Solar Strike refusing to fully integrate back into the Militarium, and that the situation is almost boiling over in Whinnyapolis again, and the larger Militarium can go in with force to fix the issue
+	id = solar.143
+	title = solar.143.t
+	desc = solar.143.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will honor their oaths, living or dead.
+		name = solar.143.a
+		trigger = {
+			OR = {
+				has_country_flag = EQS_harsh_punishment
+				has_country_flag = EQS_flexible_punishment
+			}
+		}
+		add_manpower = -10378
+		hidden_effect = { EQS_full_drafting = yes }
+		custom_effect_tooltip = EQS_snatched_all_divisions_tt
+	}
+	option = { #They have served their duty. Let the ones who want to leave go.
+		name = solar.143.b
+		trigger = { has_country_flag = EQS_flexible_punishment }
+		add_manpower = 7500
+		hidden_effect = { EQS_light_drafting = yes }
+		custom_effect_tooltip = EQS_got_only_some_divisions_tt
+	}
+	option = { #They are not needed. We could adapt some of their experience, though.
+		name = solar.143.c
+		trigger = { has_country_flag = EQS_light_punishment }
+		add_ideas = EQS_imperial_wonderbolts
+		add_stability = -0.04
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.03
 		}
 	}
 }
@@ -8518,7 +9085,7 @@ country_event = { #A single letter arrives from the SMILE agents claiming they w
 
 ###Debug Events###
 #country_event = {
-#	id = solar.9001
+#	id = solar.debug.3
 #	title = "Remove Baltimare Puppet Status"
 #	desc = "Debug for testing southern war with Southeast."
 #	
@@ -8536,7 +9103,7 @@ country_event = { #A single letter arrives from the SMILE agents claiming they w
 #}
 	
 country_event = {
-	id = solar.9002
+	id = solar.debug.1
 	title = "Solar Strike departs"
 	desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
 	
@@ -8568,7 +9135,7 @@ country_event = {
 }
 
 country_event = {
-	id = solar.9003
+	id = solar.debug.2
 	title = "Test Imperial Authority"
 	desc = "Daybreaker is HARMONY!"
 	
