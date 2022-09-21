@@ -353,15 +353,7 @@ country_event = { #Rebels found, less damage, Starlight and Trixie captured
 	title = solar.18.t
 	desc = solar.18.d
 	
-	trigger = {
-		tag = EQS
-		date > 1048.11.1
-		date < 1048.12.1
-	}
-	
-	mean_time_to_happen = { days = 10 }
-	
-	fire_only_once = yes
+	is_triggered_only = yes
 	
 	option = {
 		name = solar.18.a
@@ -798,6 +790,133 @@ country_event = { #Celebrating the new temple's completion with sacrifices to Da
 		#add_stability = 0.1
 		#Remove equipment here
 		add_war_support = -0.03
+	}
+}
+
+country_event = { #A message to Quasar Pulse about the growing concerns in Ordo Multi
+	id = solar.54
+	title = solar.54.t
+	desc = solar.54.d
+	
+	is_triggered_only = yes
+	
+	option = { #Those setbacks will not stop us!
+		name = solar.54.a
+		hidden_effect = {
+			country_event = {
+				id = solar.55
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #A heretic is planted in the crowds of communist protesters in prepartion for the uprising in Manehattan
+	id = solar.55
+	title = solar.55.t
+	desc = solar.55.d
+	
+	is_triggered_only = yes
+	
+	option = { #I will be ready.
+		name = solar.54.a
+		hidden_effect = {
+			country_event = {
+				id = solar.57
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Some heretics slip around the Militarium garrison and plant some explosives in preparation for the uprising in Manehattan
+	id = solar.56
+	title = solar.56.t
+	desc = solar.56.d
+	
+	is_triggered_only = yes
+	
+	option = { #That was too close.
+		name = solar.56.a
+		hidden_effect = {
+			country_event = {
+				id = solar.55
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Aurora prepares for her day and she senses that something is brewing, which only causes her concern
+	id = solar.57
+	title = solar.57.t
+	desc = solar.57.d
+	
+	is_triggered_only = yes
+	
+	option = { #Whatever it is, I will be ready.
+		name = solar.57.a
+		hidden_effect = {
+			country_event = {
+				id = solar.18
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Daybreaker enters Raven's quarters to speak with her, as she has been unwell, and effectively watches as she dies while they speak about some of their early good memories
+	id = solar.58
+	title = solar.58.t
+	desc = solar.58.d
+	
+	is_triggered_only = yes
+	
+	option = { #Goodbye, faithful servant.
+		name = solar.58.a
+		retire_character = EQS_Raven_Inkwell_1048
+		add_manpower = -1
+		add_stability = -0.03
+		hidden_effect = {
+			country_event = {
+				id = solar.59
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Dotted Quill wakes up in a start as he hears Daybreaker angrily searching for something and eventually helps, which gets him chosen to be Raven's replacement, to his chagrin
+	id = solar.59
+	title = solar.59.t
+	desc = solar.59.d
+	
+	is_triggered_only = yes
+	
+	option = { #You shall do nicely.
+		name = solar.59.a
+		EQS_Dotted_Quill = {
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = dotted_quill
+					allowed = {
+						original_tag = EQS
+					}
+					visible = {
+						NOT = { EQS_Sunbutt = { is_country_leader = yes } }
+					}
+					available = {
+						OR = {
+							has_government = fascism
+							has_government = neutrality
+						}
+					}
+					#traits = { silent_workhorse }
+					traits = { chief_scribe }
+				}
+			}
+		}
 	}
 }
 
@@ -1960,7 +2079,7 @@ country_event = { #A report is given of how there is a lot of damage to the vari
 		70 = { add_extra_state_shared_building_slots = 1 }
 		122 = { add_extra_state_shared_building_slots = 1 }
 	}
-	option = { #End any new construction. It will be our plans now.
+	option = { #Finish what can be completed. Destroy what can't be salvaged.
 		name = solar.141.b
 		trigger = {
 			OR = {
@@ -1972,10 +2091,22 @@ country_event = { #A report is given of how there is a lot of damage to the vari
 			ideology = fascism
 			popularity = 0.03
 		}
-		add_war_support = 0.03
+		70 = { 
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		122 = { 
+			add_resource = {
+				type = steel
+				amount = 4
+			}
+		}
 		add_political_power = 25
 	}
-	option = { #Block any further plans, but we will adapt to what is there.
+	option = { #Repair every project, but do not allow further plans without approval.
 		name = solar.141.c
 		trigger = {
 			OR = {
@@ -1983,6 +2114,7 @@ country_event = { #A report is given of how there is a lot of damage to the vari
 				has_country_flag = EQS_light_punishment
 			}
 		}
+		add_political_power = -100
 		74 = {
 			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
