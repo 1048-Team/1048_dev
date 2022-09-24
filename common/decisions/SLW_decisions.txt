@@ -1,0 +1,82 @@
+#####1048#####
+
+SLW_exploit_the_land_category = {
+	SLW_ordo_meurom_new_mines = {
+		allowed = {
+			original_tag = SLW
+		}
+		visible = {
+			has_country_flag = SLW_new_mining_decisions
+			NOT = { EQS = { has_country_flag = expanded_meurom } }
+			AND = {
+				has_full_control_of_state = 39
+				has_full_control_of_state = 107
+				has_full_control_of_state = 185
+				has_full_control_of_state = 188
+				has_full_control_of_state = 186
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 39
+				state = 107
+				state = 185
+				state = 188
+				state = 186
+			}
+		}
+		fire_only_once = yes
+		modifier = { civilian_factory_use = 3 }
+		cost = 50
+		days_remove = 90
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 15
+				has_political_power > 200
+			}
+		}
+		remove_effect = {
+			add_tech_bonus = {
+				name = excavation_bonus
+				bonus = 0.75
+				uses = 1
+				category = excavation_tech
+			}
+			set_country_flag = expanded_meurom
+		}
+	}
+	SLW_expand_meurom_further = {
+		allowed = {
+			original_tag = SLW
+		}
+		visible = {
+			NOT = { EQS = { has_country_flag = EQS_finished_meurom_expansion } }
+			has_country_flag = expanded_meurom
+		}
+		cost = 35
+		days_remove = 75
+		fire_only_once = yes
+		modifier = { civilian_factory_use = 5 }
+		ai_will_do = {
+			base = 3
+			modifier = {
+				add = 7
+				date > 1053.1.1
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 186
+			}
+		}
+		remove_effect = {
+			186 = {
+				add_resource = {
+					type = crystals
+					amount = 12
+				}
+			}
+		}
+	}
+}
