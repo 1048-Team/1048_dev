@@ -1,3 +1,4 @@
+###Solar Empire civil war version###
 add_namespace = solarwar
 
 ###Solar Civil War Events###
@@ -132,7 +133,7 @@ country_event = { #With the war beginning to worsen, the new head of the unified
 		set_country_flag = accepted_commie_help
 		custom_effect_tooltip = carbon_and_commie_assistance_tt
 		hidden_effect = {
-			###Set OOB to spawn two ten-width divisions here, called Angry Unionists
+			#Set OOB to spawn two ten-width divisions here, called Angry Unionists
 			load_oob = "SLW_helpful_commies"
 		}
 		add_popularity = {
@@ -174,7 +175,16 @@ country_event = { #Reports of communist agitation and destruction while the civi
 			ideology = communism
 			popularity = 0.02
 		}
-		###Do damage to a random factory and state population
+		random_state = {
+			limit = {
+				is_fully_controlled_by = ROOT
+				num_of_military_factories > 0
+			}
+			damage_building = {
+				type = arms_factory
+				level = 0.5
+			}
+		}
 	}
 }
 
@@ -698,7 +708,24 @@ country_event = { #From a distance, some Adoratio priestesses observe a fight ha
 	
 	option = { #What could have happened there?
 		name = solarwar.34.a
-		###Remove two random generals here
+		hidden_effect = {
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_army_leader = yes
+				}
+				save_event_target_as = SOL_purge_1
+			}
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_army_leader = yes
+				}
+				save_event_target_as = SOL_purge_2
+			}
+		}
+		retire_character = event_target:SOL_purge_1
+		retire_character = event_target:SOL_purge_2
 		add_political_power = 75
 		add_war_support = 0.07
 	}
@@ -774,7 +801,6 @@ country_event = { #Sunset is brought before Nova, along with some others, includ
 	
 	option = { #To think I was betrayed by my former student
 		name = solarwar.39.a
-		###Add new advisors here
 		set_country_flag = SLW_replaced_advisors
 		show_ideas_tooltip = rotary
 		show_ideas_tooltip = sunrise_passion
@@ -1048,7 +1074,7 @@ country_event = { #Nova adamantly meets with the generals and declares that Stal
 			limit = {
 				is_in_array = {
 					array = global.shield_of_steel
-					value = This
+					value = THIS
 				}
 			}
 			IF = {
@@ -1112,7 +1138,20 @@ country_event = { #Solarists raid the Supreme Soviet in Stalliongrad to set it a
 			}
 			add_core_of = ROOT
 		}
-		###Add STG north state cores
+		237 = { add_core_of = ROOT }
+		235 = { add_core_of = ROOT }
+		225 = { add_core_of = ROOT }
+		233 = { add_core_of = ROOT }
+		332 = { add_core_of = ROOT }
+		234 = { add_core_of = ROOT }
+		165 = { add_core_of = ROOT }
+		153 = { add_core_of = ROOT }
+		334 = { add_core_of = ROOT }
+		240 = { add_core_of = ROOT }
+		57 = { add_core_of = ROOT }
+		241 = { add_core_of = ROOT }
+		678 = { add_core_of = ROOT }
+		333 = { add_core_of = ROOT }
 	}
 }
 
@@ -1132,6 +1171,26 @@ country_event = { #Nova leads a charge against the last few AWR members, includi
 			}
 			add_core_of = ROOT
 		}
+		163 = { add_core_of = ROOT }
+		161 = { add_core_of = ROOT }
+		168 = { add_core_of = ROOT }
+		67 = { add_core_of = ROOT }
+		164 = { add_core_of = ROOT }
+		160 = { add_core_of = ROOT }
+		162 = { add_core_of = ROOT }
+		167 = { add_core_of = ROOT }
+		653 = { add_core_of = ROOT }
+		229 = { add_core_of = ROOT }
+		159 = { add_core_of = ROOT }
+		158 = { add_core_of = ROOT }
+		157 = { add_core_of = ROOT }
+		154 = { add_core_of = ROOT }
+		156 = { add_core_of = ROOT }
+		155 = { add_core_of = ROOT }
+		662 = { add_core_of = ROOT }
+		661 = { add_core_of = ROOT }
+		326 = { add_core_of = ROOT }
+		166 = { add_core_of = ROOT }
 	}
 }
 
@@ -1691,7 +1750,24 @@ country_event = { #Various generals are put on trial for sedition, and evidence 
 				factor = 1.25
 			}
 		}
-		###Remove generals###
+		hidden_effect = {
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_army_leader = yes
+				}
+				save_event_target_as = SOL_purge_1
+			}
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_army_leader = yes
+				}
+				save_event_target_as = SOL_purge_2
+			}
+		}
+		retire_character = event_target:SOL_purge_1
+		retire_character = event_target:SOL_purge_2
 		add_to_variable = { SLW_trial_tracker = 2 }
 	}
 	option = { #Show them mercy
@@ -1762,6 +1838,25 @@ country_event = { #Nova is surprised when there is an uprising in the nation fro
 	
 	option = { #There were traitors after all
 		###Remove Blueblood and generals, add back in last idea
+		hidden_effect = {
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_army_leader = yes
+				}
+				save_event_target_as = SOL_purge_1
+			}
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_army_leader = yes
+				}
+				save_event_target_as = SOL_purge_2
+			}
+		}
+		retire_character = event_target:SOL_purge_1
+		retire_character = event_target:SOL_purge_2
+		retire_character = EQS_Blueblood
 	}
 }
 
@@ -1774,6 +1869,20 @@ country_event = { #A trial goes on for some of the heads of the Imperial Admiral
 	
 	option = { #Who needs admirals, anyway?
 		###Remove admiral, apply reduced spirit
+		hidden_effect = {
+			random_character = {
+				limit = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_navy_leader = yes
+				}
+				save_event_target_as = SOL_purge_1
+			}
+		}
+		retire_character = event_target:SOL_purge_1
+		swap_ideas = {
+			remove_idea = SLW_naval_deserters
+			add_idea = SLW_naval_deserters_2
+		}
 	}
 }
 
@@ -1969,7 +2078,7 @@ country_event = { #Fidelis leads a small number of inquisitors into a bar in a s
 }
 
 ###Starlight and Trixie Stuff###
-country_event = { #Nova is rushed to by a few guards who report that they have found something of interest in the dungeons, and Nova sees that Trixie and Starlight are still held in captivity, which makes her most pleased at the opportunity to do her own work on them
+country_event = { #Nova is rushed to by a few guards who report that they have found something of interest in the dungeons, and Nova sees that Trixie and Starlight are still held in captivity, which makes her most pleased at the opportunity presented to her
 	id = solarwar.110
 	title = solarwar.110.t
 	desc = solarwar.110.d
@@ -1981,39 +2090,51 @@ country_event = { #Nova is rushed to by a few guards who report that they have f
 	}
 }
 
-country_event = { #Nova sneers as she enters Starlight's cell, as one of the last things done to them was separate Trixie and Starlight, and Starlight remains confident in front of Nova, making an insinuation she isn't nearly as capable as the alicorn; Nova does assault her for that, but Starlight refuses to break and laughs at Nova's attempts
+country_event = { #Nova enters the cells again, and she muses at the shape that Starlight and Trixie are in, as she believes that she should have no trouble finishing what Daybreaker started, and do it even better, and she also mocks the two of them for a short while, as well
 	id = solarwar.111
 	title = solarwar.111.t
 	desc = solarwar.111.d
 	
 	is_triggered_only = yes
 	
-	option = { #I am in control! Not some useless prisoner!
+	option = { #I will do what she couldn't
 		name = solarwar.111.a
 	}
 }
 
-country_event = { #Trixie at first holds against Nova's tortures but Nova reveals that she dug up some of Trixie's time spent in Manehattan, and some of the connections she still has, and she threatens to have one of her old friends killed in her stead if she doesn't submit, which Trixie does and disgusts Nova
+country_event = { #Nova sneers as she enters Starlight's cell, as one of the last things done to them was separate Trixie and Starlight, and Starlight remains confident in front of Nova, making an insinuation she isn't nearly as capable as the alicorn; Nova does assault her for that, but Starlight refuses to break and laughs at Nova's attempts
 	id = solarwar.112
 	title = solarwar.112.t
 	desc = solarwar.112.d
 	
 	is_triggered_only = yes
 	
-	option = { #It's made you weak
+	option = { #I am in control! Not some useless prisoner!
 		name = solarwar.112.a
 	}
 }
 
-country_event = { #Starlight remains defiant against Nova but Nova has another plan for her, as after Starlight remains steadfast against Nova's torture, she brings in Trixie, whom she threatens to jupm out of the window to her death, and Starlight finally breaks to serve Nova
+country_event = { #Trixie at first holds against Nova's tortures but Nova reveals that she dug up some of Trixie's time spent in Manehattan, and some of the connections she still has, and she threatens to have one of her old friends killed in her stead if she doesn't submit, which Trixie does and disgusts Nova
 	id = solarwar.113
 	title = solarwar.113.t
 	desc = solarwar.113.d
 	
 	is_triggered_only = yes
 	
-	option = { #Friends are liabilities, which you now know
+	option = { #It's made you weak
 		name = solarwar.113.a
+	}
+}
+
+country_event = { #Starlight remains defiant against Nova but Nova has another plan for her, as after Starlight remains steadfast against Nova's torture, she brings in Trixie, whom she threatens to jupm out of the window to her death, and Starlight finally breaks to serve Nova
+	id = solarwar.114
+	title = solarwar.114.t
+	desc = solarwar.114.d
+	
+	is_triggered_only = yes
+	
+	option = { #Friends are liabilities, which you now know
+		name = solarwar.114.a
 		set_country_flag = starlight_and_trixie_corrupted
 		custom_effect_tooltip = SLW_starlight_and_trixie_generals_tt
 		hidden_effect = {
@@ -2034,50 +2155,50 @@ country_event = { #Starlight remains defiant against Nova but Nova has another p
 }
 
 country_event = { #Nova scoffs at some of the things she learned that Daybreaker tried to do to break Starlight and Trixie, and she orders that ponies prepare for a grand execution, as she will be glad to see two leading heretics go up in smoke
-	id = solarwar.114
-	title = solarwar.114.t
-	desc = solarwar.114.d
+	id = solarwar.115
+	title = solarwar.115.t
+	desc = solarwar.115.d
 	
 	is_triggered_only = yes
 	
 	option = { #And I'll have front-row seats
-		name = solarwar.114.a
+		name = solarwar.115.a
 	}
 }
 
 country_event = { #Nova waltzes in after some inquisitors have done their work with Trixie, who is ready, according to them, to speak with Nova about her crimes, and Nova is much pleased and demands that Trixie recant of Celestia and also sign her confession of heresy, which Trixie almost resists doing before Nova smacks her a couple of times to get the result
-	id = solarwar.115
-	title = solarwar.115.t
-	desc = solarwar.115.d ###Trixie is wounded, missing a few teeth, and has a chipped horn, among other injuries
+	id = solarwar.116
+	title = solarwar.116.t
+	desc = solarwar.116.d ###Trixie is wounded, missing a few teeth, and has a chipped horn, among other injuries
 	
 	is_triggered_only = yes
 	
 	option = { #Be thankful you kept your horn
-		name = solarwar.115
+		name = solarwar.116
 	}
 }
 
 country_event = { #Nova enters into Starlight's cell when it is clear she won't break regarding a confession, and Nova ponders a moment before she gets an idea to offer Starlight a deal, where Trixie will supposedly get off scott-free; Starlight takes some convincing, but since she is distressed it is easier, and Nova laughs when she says she lied
-	id = solarwar.116
-	title = solarwar.116.t
-	desc = solarwar.116.d
-	
-	is_triggered_only = yes
-	
-	option = { #Never trust anypony
-		name = solarwar.116.a
-	}
-}
-
-country_event = { #Starlight and Trixie are led to the heretic pyre in Manehattan specifically, where Nova is already watching, and Starlight and Trixie share a couple of final words with each other, as Trixie expresses her fear of death and Starlight her regret about Sunburst; Starlight faces the pyre bravely while Trixie nervously follows her as Nova watches on
 	id = solarwar.117
 	title = solarwar.117.t
 	desc = solarwar.117.d
 	
 	is_triggered_only = yes
 	
-	option = { #An end of an era
+	option = { #Never trust anypony
 		name = solarwar.117.a
+	}
+}
+
+country_event = { #Starlight and Trixie are led to the heretic pyre in Manehattan specifically, where Nova is already watching, and Starlight and Trixie share a couple of final words with each other, as Trixie expresses her fear of death and Starlight her regret about Sunburst; Starlight faces the pyre bravely while Trixie nervously follows her as Nova watches on
+	id = solarwar.118
+	title = solarwar.118.t
+	desc = solarwar.118.d
+	
+	is_triggered_only = yes
+	
+	option = { #An end of an era
+		name = solarwar.118.a
 		add_stability = 0.05
 		add_war_support = 0.075
 		add_political_power = 100
