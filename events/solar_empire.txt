@@ -3,6 +3,8 @@
 add_namespace = solar
 add_namespace = solar.debug
 add_namespace = celestia
+add_namespace = aurora
+add_namespace = sunset
 
 #Start event chain to introduce Aurora
 country_event = {
@@ -959,26 +961,21 @@ country_event = { #Celestia first minute effects to Daybreaker, only whispers an
 	title = solar.80.t
 	desc = solar.80.d
 	
-	trigger = {
-		tag = EQS
-		date > 1048.10.31
-		date < 1049.1.1
-		}
-	
-	fire_only_once = yes
-		
-	mean_time_to_happen = {
-		days = 20
-		}
+	is_triggered_only = yes
 	
 	option = {
 		name = solar.80.a
 		add_stability = -0.02
 			hidden_effect = {
 				add_dynamic_modifier = {
-				modifier = EQS_slipping_sanity
+					modifier = EQS_slipping_sanity
 				}
-			set_country_flag = daybreaker_crisis
+				set_country_flag = daybreaker_crisis
+				country_event = {
+					id = solar.81
+					days = 365
+					random_days = 30
+				}
 			}
 		}
 	}
@@ -989,17 +986,7 @@ country_event = { #Celestia becomes more discernable, as she is now a shape in D
 	title = solar.81.t
 	desc = solar.81.d
 	
-	trigger = {
-		tag = EQS
-		date > 1049.10.31
-		date < 1050.3.1
-		}
-		
-	fire_only_once = yes
-		
-	mean_time_to_happen = {
-		days = 90
-		}
+	is_triggered_only = yes
 	
 	option = {
 		name = solar.81.a
@@ -1090,6 +1077,9 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 		custom_effect_tooltip = check_decisions_zealotry_tt
 		hidden_effect = {
 			add_to_variable = {
+				sunset_zealotry = 5
+			}
+			add_to_variable = {
 				stability_change = -0.05
 				}
 			add_to_variable = {
@@ -1110,11 +1100,12 @@ country_event = { #Sunset is assigned Aurora and heads to Bales; Sunset can eith
 		name = solar.84.b
 		ai_chance = {
 			factor = 25
+			modifier = { is_historical_focus_on = yes factor = 0 }
 		}
 		custom_effect_tooltip = check_decisions_zealotry_tt
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 5
+				sunset_zealotry = 10
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1148,9 +1139,13 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 		ai_chance = {
 			factor = 80
 		}
+		add_opinion_modifier = {
+			target = BLS
+			modifier = BLS_violated_neutrality
+		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = -35
+				sunset_zealotry = -25
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1169,6 +1164,11 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 		name = solar.85.b
 		ai_chance = {
 			factor = 20
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
+		add_opinion_modifier = {
+			target = BLS
+			modifier = BLS_violated_neutrality
 		}
 		hidden_effect = {
 			add_to_variable = {
@@ -1191,7 +1191,7 @@ country_event = { #Sunset and Aurora get to Bales and find reference to the Alic
 	
 country_event = { #Sunset and Aurora find the artifact and first mention of Solar Flare in the vault area, get captured by Bales; Sunset can fight or surrender for the time being, former increasing zealotry
 	id = solar.86 ###Alternatively, could be found by NER militia instead and have to talk or fight their way out of it then
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.86 ###Alternatively, could be found by NER militia instead and have to talk or fight their way out of it then"}
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.86"}
 	title = solar.86.t
 	desc = solar.86.d
 	
@@ -1204,7 +1204,7 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 5
+				sunset_zealotry = 10
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1223,10 +1223,11 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 		name = solar.86.b
 		ai_chance = {
 			factor = 10
+			modifier = { is_historical_focus_on = yes factor = 0 }
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = -10
+				sunset_zealotry = -5
 			}
 			add_to_variable = {
 				stability_change = -0.05
@@ -1245,7 +1246,7 @@ country_event = { #Sunset and Aurora find the artifact and first mention of Sola
 	
 country_event = { #Sunset and Aurora get help from Astrum, and have a quick fight with Nebula, with Sunset either starting the fight or Aurora, former increasing zealotry
 	id = solar.87 ###Alternatively could be either a generic Bales fight or fighting through NER instead, where they are helped by Astrum at the border
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.87 ###Alternatively could be either a generic Bales fight or fighting through NER instead, where they are helped by Astrum at the border"}
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.87"}
 	title = solar.87.t
 	desc = solar.87.d
 	
@@ -1257,6 +1258,10 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 			factor = 60
 		}
 		EQS_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
+		add_opinion_modifier = {
+			target = BLS
+			modifier = BLS_stole_artifact
+		}
 		hidden_effect = {
 			add_to_variable = {
 				sunset_zealotry = 10
@@ -1278,6 +1283,11 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		name = solar.87.b
 		ai_chance = {
 			factor = 40
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
+		add_opinion_modifier = {
+			target = BLS
+			modifier = BLS_stole_artifact
 		}
 		EQS_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
@@ -1307,50 +1317,65 @@ country_event = { #Sunset and the others race through the chaotic Canterlot to s
 	
 	is_triggered_only = yes
 	
-	option = { #Sunset angy
+	option = { #Sunset dives into Daybreaker's consciousness
 		name = solar.88.a
+		country_event = solar.89
+	}
+}
+
+country_event = { #Sunset awakens in Daybreaker's mind and almost instantly finds her and Celestia doing battle; Celestia is astonished she's there, Daybreaker begs for help; Celestia is too locked to do anything, and resigns to whatever Sunset chooses
+	id = solar.89
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.89"}
+	title = solar.89.t
+	desc = solar.89.d
+	
+	is_triggered_only = yes
+	
+	option = { #Sunset angy
+		name = solar.89.a
 		ai_chance = {
 			factor = 70
 		}
 		hidden_effect = {
 			add_to_variable = {
-				sunset_zealotry = 10
-				}
+				sunset_zealotry = 15
+			}
 			country_event = {
-				id = solar.96
+				id = solar.95
 				days = 1
-				}
 			}
 		}
+	}
 	option = { #Sunset sad
-		name = solar.88.b
+		name = solar.89.b
 		hidden_effect = {
 			add_to_variable = {
 				sunset_zealotry = -20
 			}
 			country_event = {
-				id = solar.96
+				id = solar.95
 				days = 1
-				}
-			}
-		ai_chance = {
-			factor = 30
 			}
 		}
+		ai_chance = {
+			factor = 30
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
 	}
+}
 
 ###The fate of Daybreaker###
 country_event = { #Should have custom tooltips later
-	id = solar.96
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.96"}
-	title = solar.96.t
-	desc = solar.96.d ###Have them return and be nervous about what's happening to Daybreaker, as it is not clear what happened to her
+	id = solar.95
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.95"}
+	title = solar.95.t
+	desc = solar.95.d ###Have them return and be nervous about what's happening to Daybreaker, as it is not clear what happened to her
 	
 	is_triggered_only = yes
 	
 	option = {
-		name = solar.96.a
-		custom_effect_tooltip = mind_is_variable ###Have it be mysterious, along who knows what will affect Daybreaker's mind
+		name = solar.95.a
+		custom_effect_tooltip = EQS_mind_is_variable_tt ###Have it be mysterious, along who knows what will affect Daybreaker's mind
 		IF = {
 			limit = {
 				check_variable = {
@@ -1358,7 +1383,7 @@ country_event = { #Should have custom tooltips later
 				}
 			}
 			country_event = {
-				id = solar.97
+				id = solar.96
 			}
 			clr_country_flag = unlock_sunset_tracker
 		}
@@ -1369,7 +1394,7 @@ country_event = { #Should have custom tooltips later
 				}
 			}
 			country_event = {
-				id = solar.98
+				id = solar.97
 			}
 			clr_country_flag = unlock_sunset_tracker
 		}
@@ -1380,13 +1405,13 @@ country_event = { #Should have custom tooltips later
 				}
 			}
 			country_event = {
-				id = solar.99
+				id = solar.98
 			}
 			clr_country_flag = unlock_sunset_tracker
 		}
 		ELSE = {
 			country_event = {
-				id = solar.97
+				id = solar.96
 			}
 			clr_country_flag = unlock_sunset_tracker
 		}
@@ -1394,15 +1419,15 @@ country_event = { #Should have custom tooltips later
 }
 
 country_event = { #Daybreaker is healed and thankful to Sunset
-	id = solar.97
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.97"}
-	title = solar.97.t
-	desc = solar.97.d ###Daybreaker is ready and vengeful, and makes a few comments about missing Celestia being gone for good
+	id = solar.96
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.96"}
+	title = solar.96.t
+	desc = solar.96.d ###Daybreaker is ready and vengeful, and makes a few comments about missing Celestia being gone for good
 	
 	is_triggered_only = yes
 	
 	option = { #Daybreaker is healed fully
-		name = solar.97.a
+		name = solar.96.a
 		add_stability = 0.01
 		hidden_effect = {
 			set_country_flag = daybreaker_reigns
@@ -1411,20 +1436,24 @@ country_event = { #Daybreaker is healed and thankful to Sunset
 				threat = 1
 				name = EQS_Daybreakers_back_bois
 			}
+			news_event = {
+				id = solarempirenews.1
+				days = 3
+			}
 		}
 	}
 }
 	
 country_event = { #Daybreaker is partly healed, starts out fine, then collapses and is rushed to the throne room
-	id = solar.98
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.98"}
-	title = solar.98.t
-	desc = solar.98.d
+	id = solar.97
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.97"}
+	title = solar.97.t
+	desc = solar.97.d
 	
 	is_triggered_only = yes
 	
 	option = { #Daybreaker is healed but not fully
-		name = solar.98.a
+		name = solar.97.a
 		hidden_effect = {
 			country_event = {
 				id = solar.100
@@ -1438,32 +1467,59 @@ country_event = { #Daybreaker is partly healed, starts out fine, then collapses 
 		add_stability = -0.05
 	}
 }
+
+country_event = { #Celestia returns, and Astrum flees the room to warn approaching inquisitors, but Celestia locks them safely out, so she can greet, and decide what to do, with Sunset
+	id = solar.98
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.98"}
+	title = solar.98.t
+	desc = solar.98.d
 	
+	is_triggered_only = yes
+	
+	option = { #Buck
+		name = solar.98.a
+		hidden_effect = {
+			country_event = {
+				id = solar.99
+				days = 3
+			}
+		}
+	}
+}
+
 country_event = { #Celestia returns and knocks out Aurora and is disappointed in Sunset before knocking her out and starting a civil war
 	id = solar.99
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.99"}
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.98"}
 	title = solar.99.t
 	desc = solar.99.d
 	
 	is_triggered_only = yes
 	
 	option = { #Celestia returns
-		name = solar.99.a
+		name = solar.98.a
 		custom_effect_tooltip = celestias_back_gents
 		hidden_effect = {
 			SOL_Celestia_Returned = yes
+			news_event = {
+				id = solarempirenews.3
+				days = 3
+			}
 		}
 		
 		#start civil war here like with NMM civil war and include event for both sides, load new tree for EQS and tag rebels as SOL. Both should have civil war-only trees, Nova Glow gets a trait that is switched if SOL wins#
 	}
 	option = { #We will protect the Empire from this false Empress!
 		name = solar.99.b
-		custom_effect_tooltip = celestias_back_gents
+		custom_effect_tooltip = celestias_back_gents_SLW
 		hidden_effect = {
 			SOL_Celestia_Returned = yes
-		}
-		SLW = {
-			change_tag_from = ROOT
+			news_event = {
+				id = solarempirenews.3
+				days = 3
+			}
+			SLW = {
+				change_tag_from = ROOT
+			}
 		}
 	}
 }
@@ -1507,6 +1563,16 @@ country_event = { #After being sealed away, discussion is held over who will be 
 					name = EQS_regent_chosen
 				}
 			}
+			mark_focus_tree_layout_dirty = yes
+			add_named_threat = {
+				threat = -1
+				name = EQS_regent_chosen
+			}
+			news_event = {
+				id = solarempirenews.2
+				days = 3
+			}
+		}
 		custom_effect_tooltip = sunset_regent
 		add_ideas = {
 			#EQS_daybreaker_tts
@@ -1541,12 +1607,17 @@ country_event = { #After being sealed away, discussion is held over who will be 
 						}
 					}
 				}
-				mark_focus_tree_layout_dirty = yes
-				add_named_threat = {
-					threat = -1
-					name = EQS_regent_chosen
-				}
 			}
+			mark_focus_tree_layout_dirty = yes
+			add_named_threat = {
+				threat = 1
+				name = EQS_regent_chosen
+			}
+			news_event = {
+				id = solarempirenews.2
+				days = 3
+			}
+		}
 		custom_effect_tooltip = aurora_regent
 		add_ideas = {
 			#EQS_daybreaker_tts
@@ -2675,6 +2746,12 @@ country_event = { #Dyx is caught burning down a few heretics' houses, and Daybre
 		add_political_power = -20
 		add_manpower = -5
 		custom_effect_tooltip = general_dyx
+		hidden_effect = {
+			news_event = {
+				id = solarempirenews.4
+				days = 3
+			}
+		}
 	}
 }
 
@@ -6219,6 +6296,7 @@ country_event = { #Celestia is glad to finally get replacement regalia as she se
 	option = { #Tartarus, it's about time
 		name = celestia.1.a
 		add_war_support = 0.05
+		EQS_Sunbutt = { set_character_name = EQS_Sunbutt_name }
 	}
 }
 
