@@ -6295,8 +6295,9 @@ country_event = { #Celestia is glad to finally get replacement regalia as she se
 	
 	option = { #Tartarus, it's about time
 		name = celestia.1.a
-		add_war_support = 0.05
 		EQS_Sunbutt = { set_character_name = EQS_Sunbutt_name }
+		custom_effect_tooltip = blueblood_arrested_tt
+		set_country_flag = blueblood_arrested
 	}
 }
 
@@ -6310,6 +6311,7 @@ country_event = { #Sunset and the others are captured, and Celestia holds them f
 	
 	option = { #You've made your choice, Sunset. I will speak with you later
 		name = celestia.2.a
+		add_political_power = 15
 		custom_effect_tooltip = sunset_arrested_tt
 		set_country_flag = sunset_arrested
 	}
@@ -6325,8 +6327,8 @@ country_event = { #Celestia arrests Blueblood for his part and appoints herself 
 	
 	option = { #I've had far too many years to learn about war
 		name = celestia.3.a
-		custom_effect_tooltip = blueblood_arrested_tt
-		set_country_flag = blueblood_arrested
+		add_war_support = 0.03
+		add_stability = 0.03
 		add_field_marshal_role = {
 			character = EQS_Sunbutt
 			traits = { pony_race_trait pleasant_sun inspirational_leader }
@@ -6349,9 +6351,21 @@ country_event = { #Sunset asks to see Celestia and begs for proving her repenten
 	
 	option = { #Very well, my former student, you shall prove your sincerity in battle
 		name = celestia.4.a
+		ai_chance = {
+			factor = 70
+		}
 		custom_effect_tooltip = sunset_returns_tt
 		clr_country_flag = sunset_arrested
+		set_country_flag = EQS_sunset_trusted
 	}
+	option = { #I cannot take that risk
+		name = celestia.4.b
+		ai_chance = {
+			factor = 30
+		}
+		set_country_flag = EQS_sunset_not_trusted
+		custom_effect_tooltip = EQS_sunset_upset_tt
+	}	
 }
 
 country_event = { #wraps up any loose ends from finishing the war early, giving Celestia the pragmatic princess trait if needed, removes Blueblood and Sunset as marshals, Celestia sees the devastation
@@ -6366,10 +6380,7 @@ country_event = { #wraps up any loose ends from finishing the war early, giving 
 		tag = EQS
 		has_completed_focus = EQS_return_of_the_princess
 		NOT = { has_war_with = SLW }
-	}
-	
-	mean_time_to_happen = {
-		days = 1
+		NOT = { country_exists = SLW }
 	}
 	
 	option = { #Now I must heal my country
@@ -6390,7 +6401,6 @@ country_event = { #Celestia sees the destruction in Canterlot and the other regi
 		name = celestia.6.a
 		add_stability = -0.05
 		add_war_support = -0.05
-		remove_ideas = eqs_slw_civil_war
 		add_ideas = EQS_militarium_resistance
 		add_ideas = EQS_mutinous_navy
 		add_ideas = EQS_awol_air_force
@@ -6410,8 +6420,15 @@ country_event = { #Celestia meets with Sunset, who is currently moping in her ro
 	
 	option = { #Please do not disappoint me, my former ray of sunlight
 		name = celestia.7.a
-		set_variable = { sunset_redemption = 0 }
 		set_variable = { aurora_redemption = 0 }
+		IF = {
+			limit = { has_country_flag = EQS_sunset_trusted }
+			set_variable = { sunset_redemption = 5 }
+		}
+		ELSE_IF = {
+			limit = { has_country_flag = EQS_sunset_not_trusted }
+			set_variable = { sunset_redemption = -5 }
+		}
 		#Look at making some of the results remove redemption for Sunset or Aurora, to ensure that it is impossible to achieve the best result (or a redemption result period) without taking decisions
 		#Should start a base variable for Sunset's effectiveness as a friendship student, and there will be branching events for her trying to befriend and teach Aurora the power of friendship, which will have its own variable
 		#Sunset's variable ranges from 1 to 100, with anything above a 60 being a pass for her; Aurora ranges from 1 to 100, with anything above 75 being a success for her
@@ -6449,7 +6466,7 @@ country_event = { #Sunset starts to panic a bit about remembering her old friend
 }
 
 country_event = { #Sunset nervously agrees with Celestia and mutters that she can do what she needs, and the two talk a bit about the past before Celestia wishes her the best
-	id = celestia.9
+	id = celestia.9 ###Have Celestia look at one of those photos in celestia.8, and they quickly talk about that memory
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.9"}
 	title = celestia.9.t
 	desc = celestia.9.d
@@ -6518,10 +6535,10 @@ country_event = { #Sunset manages to get the generals to be more amicable with e
 	
 	option = { #Maybe this can be easier than I thought
 		name = celestia.12.a
-		custom_effect_tooltip = sunset_redemption_small_increase
+		custom_effect_tooltip = sunset_redemption_increase
 		custom_effect_tooltip = aurora_redemption_increase
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 10 }
+			add_to_variable = { sunset_redemption = 20 }
 			add_to_variable = { aurora_redemption = 15 }
 		}
 	}
@@ -6537,10 +6554,10 @@ country_event = { #Sunset decides that Aurora needs more focus and she heads to 
 	
 	option = { #Aurora will pick up quickly, I'm sure
 		name = celestia.13.a
-		custom_effect_tooltip = sunset_redemption_increase
+		custom_effect_tooltip = sunset_redemption_small_increase
 		custom_effect_tooltip = aurora_redemption_large_increase
 		hidden_effect = {
-			add_to_variable = { sunset_redemption = 20 }
+			add_to_variable = { sunset_redemption = 10 }
 			add_to_variable = { aurora_redemption = 25 }
 		}
 	}
@@ -6845,7 +6862,7 @@ country_event = { #Sunset determines to screw any more prep and she walks over t
 	}
 }
 
-country_event = { #Sunset meekly enters Celestia's chambers and awaits her determination, and the two fo them discuss Sunset's attempts, and Celestia plays coy to act like she will be sentencing Sunset before Aurora comes in a huff and declares that Sunset doesn't deserve punishment, since she helped her in her darkest hour to see harmony; only she is worthy of punishment, and Celestia knows that Sunset passed the test, and both are let free
+country_event = { #Sunset meekly enters Celestia's chambers and awaits her determination, and the two of them discuss Sunset's attempts, and Celestia plays coy to act like she will be sentencing Sunset before Aurora comes in a huff and declares that Sunset doesn't deserve punishment, since she helped her in her darkest hour to see harmony; only she is worthy of punishment, and Celestia knows that Sunset passed the test, and both are let free
 	id = celestia.23
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.23"}
 	title = celestia.23.t
@@ -6958,6 +6975,45 @@ country_event = { #After finally making them see the light, Celestia brings the 
 	}
 }
 
+country_event = { #Hidden event to fire Aurora and Celestia event
+	id = celestia.30
+	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.30"}
+	title = celestia.30.t
+	desc = celestia.30.d
+	
+	hidden = yes
+	
+	trigger = {
+		original_tag = EQS
+		NOT = { has_war_with = SLW }
+		NOT = { country_exists = SLW }
+	}
+	
+	fire_only_once = yes
+	
+	option = { #Trigger event
+		name = celestia.30.a
+		country_event = {
+			id = celestia.31
+			days = 7
+			random_days = 14
+		}
+	}
+}
+
+country_event = { #Celestia first visits Aurora and some other Solarist prisoners, and Aurora is hostile toward her, although Celestia cuts through and knows that Aurora is just scared more than anything
+	id = celestia.31
+	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.31"}
+	title = celestia.31.t
+	desc = celestia.31.d
+	
+	is_triggered_only = yes
+	
+	option = { #You will change. I know it
+		name = celestia.31.a
+	}
+}
+
 country_event = { #Celestia gathers a large number of ponies from both sides of the war to honor the dead, and holds a speech about how she will protect both, unlike Daybreaker
 	id = celestia.40
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.40"}
@@ -7017,7 +7073,7 @@ country_event = { #Celestia holds a public sentence of many of the heads of the 
 }
 
 country_event = { #Celestia pours over some of her plans for retaking Equestria where resistance is met, and she hears Blueblood fighting with some guards about being allowed into the planning room, and she gets an idea to get assistance and speaks with
-	id = celestia.43
+	id = celestia.43 #Or rather, he attempts to barge into her room, and apologizes for his lack of sanity earlier, since he was rather stressed
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.43"}
 	title = celestia.43.t
 	desc = celestia.43.d
@@ -7149,9 +7205,7 @@ country_event = { #Celestia is contacted via a mysterious letter and she finds i
 		custom_effect_tooltip = spawn_defectors_tt
 		hidden_effect = {
 			load_oob = "SOL_celestia_resistance_remnants"
-			SLW = {
-				EQS_Swift_Wing_1048 = { set_nationality = EQS }
-			}
+			event_target:EQS_Swift_Wing_target = { set_nationality = EQS }
 		}
 	}
 }
@@ -7420,10 +7474,6 @@ country_event = { #Event for TRD to join like they promised they would, and the 
 			has_war_with = EQC
 		}
 		has_country_flag = TRD_will_help_with_EQC
-	}
-	
-	mean_time_to_happen = {
-		days = 1
 	}
 	
 	fire_only_once = yes
