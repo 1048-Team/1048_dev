@@ -400,6 +400,7 @@ EQS_CEL_annex_puppeted_rump_states_category = {
 		days_remove = 30
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CEL_annex_puppets"
 			custom_effect_tooltip = EQS_puppeted_states_event_tt
 			for_each_scope_loop = {
 				array = global.solar_empire_rumps
@@ -445,6 +446,8 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 		days_remove = 20
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_CLD"
+			#Going to need to replace the annex with a generic country event that gives the player one more chance to fight against EQS
 			annex_country = { target = CLD }
 			every_state = {
 				limit = {
@@ -477,6 +480,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 		days_remove = 20
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_BLS"
 			annex_country = { target = BLS }
 			every_state = {
 				limit = {
@@ -509,6 +513,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 		days_remove = 20
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_NER"
 			annex_country = { target = NER }
 			every_state = {
 				limit = {
@@ -541,6 +546,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 		days_remove = 20
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_CER"
 			annex_country = { target = CER }
 			every_state = {
 				limit = {
@@ -562,6 +568,7 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 			}
 		}
 		visible = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_WHY"
 			WHY = {
 				is_subject_of = ROOT
 			}
@@ -591,6 +598,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 7
 		days_re_enable = 21
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove write_friendship_report"
 			custom_effect_tooltip = sunset_redemption_small_increase
 			add_to_variable = { sunset_redemption = 5 }
 		}
@@ -602,6 +610,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 14
 		days_re_enable = 28
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove assist_ponies_in_need"
 			custom_effect_tooltip = sunset_redemption_small_increase
 			add_to_variable = { sunset_redemption = 10 }
 		}
@@ -613,6 +622,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 28
 		days_re_enable = 28
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove teach_a_class_on_friendship"
 			custom_effect_tooltip = sunset_redemption_small_increase
 			custom_effect_tooltip = aurora_redemption_increase
 			add_to_variable = { sunset_redemption = 5 }
@@ -626,6 +636,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 28
 		days_re_enable = 21
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove lead_adoratio_reformation_class"
 			custom_effect_tooltip = sunset_redemption_small_increase
 			custom_effect_tooltip = aurora_redemption_decrease
 			add_to_variable = { sunset_redemption = 10 }
@@ -639,6 +650,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 14
 		days_re_enable = 28
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove plan_day_trip_with_others"
 			custom_effect_tooltip = aurora_redemption_small_increase
 			add_to_variable = { aurora_redemption = 5 }
 		}
@@ -650,6 +662,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 14
 		days_re_enable = 21
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove volunteer_at_shelter"
 			random_list = {
 				65 = {
 					custom_effect_tooltip = sunset_redemption_small_increase
@@ -673,6 +686,7 @@ EQS_CEL_sunset_redemption_meter_category = {
 		days_remove = 7
 		days_re_enable = 7
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove slack_off"
 			custom_effect_tooltip = sunset_redemption_decrease
 			custom_effect_tooltip = aurora_redemption_small_increase
 			add_to_variable = { sunset_redemption = -10 }
@@ -689,7 +703,10 @@ EQS_CEL_sunset_redemption_meter_category = {
 		available = { check_variable = { sunset_redemption > 99 } }
 		fire_only_once = yes
 		days_mission_timeout = 180
-		complete_effect = { custom_effect_tooltip = reach_full_redemption_tt }
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission exam_day_looming"
+			custom_effect_tooltip = reach_full_redemption_tt
+		}
 	}
 }
 #EQS_AUR_stalliongrad_war_countdown_category = { #Placeholder, but this is dummied out in favour of Aurora attacking either STG or Southeast first with a short timer to attack the other in 14 days
@@ -736,7 +753,8 @@ EQS_AUR_stalliongrad_war_countdown_category = {
 		war_with_on_timeout = MTS
 		war_with_on_timeout = NEI
 		war_with_on_timeout = NID
-		timeout_effect = { 
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout operation_fiery_wastes"
 			IF = {
 				limit = {
 					original_tag = EQS
@@ -756,7 +774,10 @@ EQS_AUR_stalliongrad_war_countdown_category = {
 							owns_state = 31
 						}
 					}
-					EQS = { declare_war_on = { target = PREV type = annex_everything } }
+					declare_war_on = { target = PREV type = annex_everything }
+					hidden_effect = {
+						EQS = { clr_country_flag = EQS_southeast_war_prep }
+					}
 				}
 			}
 			ELSE = {
@@ -778,10 +799,14 @@ EQS_AUR_stalliongrad_war_countdown_category = {
 		fire_only_once = yes
 		days_mission_timeout = 14
 		war_with_on_timeout = STG
-		timeout_effect = { 
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout operation_rusted_shield"
 			IF = { 
 				limit = { original_tag = EQS }
 				declare_war_on = { target = STG type = annex_everything }
+				hidden_effect = {
+					EQS = { clr_country_flag = EQS_stg_prep }
+				}
 			}
 			ELSE = {
 				custom_effect_tooltip = EQS_aurora_gunning_for_dat_territory_tt
@@ -802,7 +827,8 @@ EQS_SUN_crystal_empire_war_countdown_category = {
 		fire_only_once = yes
 		war_with_on_timeout = EQS
 		days_mission_timeout = 60
-		timeout_effect = { 
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout war_of_empires"
 			IF = { 
 				limit = { original_tag = CRY }
 				CRY = { declare_war_on = { target = EQS type = annex_everything } }
@@ -819,10 +845,12 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 25
 		days_remove = 60
+		fire_only_once = yes
 		modifier = {
 			political_power_gain = -0.075
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision a_prime_seat"
 			set_country_flag = seething_corona_support
 			add_to_variable = { aurora_support = 1 }
 		}
@@ -832,10 +860,12 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 20
 		days_remove = 60
+		fire_only_once = yes
 		modifier = {
 			consumer_goods_factor = 0.05
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision agricultural_backbone"
 			set_country_flag = steel_sickle_support
 			add_to_variable = { aurora_support = 1 }
 		}
@@ -845,10 +875,12 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 25
 		days_remove = 60
+		fire_only_once = yes
 		modifier = {
 			weekly_manpower = -750
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision heretic_support"
 			set_country_flag = ion_flash_support
 			add_to_variable = { aurora_support = 1 }
 		}
@@ -858,11 +890,13 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 15
 		days_remove = 60
+		fire_only_once = yes
 		modifier = {
 			local_resources_factor = -0.05
 			weekly_manpower = -100
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision foundation_of_iron"
 			set_country_flag = iron_tail_support
 			add_to_variable = { aurora_support = 1 }
 		}
@@ -872,10 +906,12 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 25
 		days_remove = 60
+		fire_only_once = yes
 		modifier = {
 			industrial_capacity_factory = -0.075
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision a_sign_of_mercy"
 			set_country_flag = burning_plage_support
 			add_to_variable = { aurora_support = 1 }
 		}
@@ -885,10 +921,12 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 5
 		days_remove = 365
+		fire_only_once = yes
 		modifier = {
 			custom_modifier_tooltip = bluebloods_support_tt
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision a_broken_tradition"
 			set_country_flag = blueblood_support
 			add_to_variable = { aurora_support = 1 }
 			hidden_effect = {
@@ -897,6 +935,7 @@ EQS_SUN_high_mage_election_category = {
 		}
 		remove_effect = {
 			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: Decision remove a_broken_tradition"
 				remove_ideas = EQS_bluebloods_support_for_aurora
 			}
 		}
@@ -906,11 +945,13 @@ EQS_SUN_high_mage_election_category = {
 		visible = { has_country_flag = debating_the_high_mage }
 		cost = 30
 		days_remove = 60
+		fire_only_once = yes
 		modifier = {
 			political_power_factor = -0.2
 			consumer_goods_factor = 0.05
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision bloodthirsty_allies"
 			set_country_flag = quasar_pulse_support
 			add_to_variable = { aurora_support = 1 }
 		}
@@ -924,6 +965,7 @@ EQS_SUN_high_mage_election_category = {
 		fire_only_once = yes
 		days_mission_timeout = 60
 		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Mission timeout high_mage_election"
 			IF = {
 				limit = {
 					check_variable = { aurora_support > 3 }
@@ -1191,6 +1233,7 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_ordo_meurom_new_mines"
 			add_tech_bonus = {
 				name = excavation_bonus
 				bonus = 0.75
@@ -1219,9 +1262,10 @@ EQS_SOL_project_solaris_category = {
 			country_resource_crystals = -15
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_reactor_prototypes"
 			add_tech_bonus = {
 				name = nuke_bonus
-				bonus = 0.66
+				bonus = 0.75
 				uses = 1
 				technology = nuclear_reactor
 			}
@@ -1252,6 +1296,7 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_dig_deeper"
 			107 = {
 				add_resource = {
 					type = crystals
@@ -1284,6 +1329,7 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_expand_meurom_further"
 			186 = {
 				add_resource = {
 					type = crystals
@@ -1317,6 +1363,7 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_clear_skies_forges"
 			185 = {
 				add_resource = {
 					type = steel
