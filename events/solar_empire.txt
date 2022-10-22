@@ -1503,7 +1503,7 @@ country_event = { #Celestia returns and knocks out Aurora and is disappointed in
 	is_triggered_only = yes
 	
 	option = { #Celestia returns
-		name = solar.98.a
+		name = solar.99.a
 		custom_effect_tooltip = celestias_back_gents
 		hidden_effect = {
 			SOL_Celestia_Returned = yes
@@ -2647,6 +2647,19 @@ country_event = { #Scorched Earth is caught by surprise by Ion Trail's ambush fo
 		add_political_power = 40
 		add_war_support = 0.03
 		retire_character = EQS_Scorched_Earth
+	}
+}
+
+country_event = { #Some changelings are holding down a bunker as a frontline starts to collapse, and they believe they are getting most of the Solarists when they hear over the radio screams and an unknown assailant, before they get attacked themselves by Daybreaker
+	id = solar.144
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.144"}
+	title = solar.144.t
+	desc = solar.144.d
+	
+	is_triggered_only = yes
+	
+	option = { #Holy crap!
+		name = solar.144.a
 	}
 }
 
@@ -6375,7 +6388,7 @@ country_event = { #Sunset asks to see Celestia and begs for proving her repenten
 			factor = 30
 		}
 		set_country_flag = EQS_sunset_not_trusted
-		custom_effect_tooltip = EQS_sunset_upset_tt
+		custom_effect_tooltip = EQS_sunset_upseti_tt
 	}	
 }
 
@@ -6970,6 +6983,7 @@ country_event = { #Hidden event to fire Aurora and Celestia event
 	
 	trigger = {
 		original_tag = EQS
+		event_target:EQS_Sunbutt_target = { is_country_leader = yes }
 		NOT = { has_war_with = SLW }
 		NOT = { country_exists = SLW }
 	}
@@ -7084,7 +7098,7 @@ country_event = { #Celestia pours over some of her plans for retaking Equestria 
 }
 
 country_event = { #Celestia receives bulletins and reports about changeling prisoners from the Great War and she begins to have the general staff analyze them, as she wants them to be used for any and all assessment of exploitation for the war with the changelings
-	id = celestia.45
+	id = celestia.45 ###Morning Mist has her lunch break in one of the factories, and she slips some Solarist language which gets her co-workers, who are all harmonist, upset as she tries to backpedal and claim she supports Celestia
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.45"}
 	title = celestia.45.t
 	desc = celestia.45.d
@@ -7092,16 +7106,24 @@ country_event = { #Celestia receives bulletins and reports about changeling pris
 	is_triggered_only = yes
 	
 	option = { #Did you know that changelings have a total of at least fifteen weak points in their chitin at any one time?
-		name = celestia.45.a
-		add_timed_idea = {
-			idea = EQS_learn_from_pows
-			days = 365
+		name = celestia.45.a ###Crap, crap, crap
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.075
 		}
+		swap_ideas = {
+			add_idea = EQS_shattered_society_harsh_3
+			remove_idea = EQS_shattered_society_harsh_2
+		}
+		#add_timed_idea = {
+		#	idea = EQS_learn_from_pows
+		#	days = 365
+		#}
 	}
 }
 
 country_event = { #Celestia manages to meet with Goldfeather and promises him the chance to free his homeland of Aquilea if his resistance helps with taking down Marelandia
-	id = celestia.46
+	id = celestia.46 #This may need to get reworked to see how it can be chance-based on if FLO will rise up in the war or not, if they're not already out
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.46"}
 	title = celestia.46.t
 	desc = celestia.46.d
@@ -7252,6 +7274,8 @@ country_event = { #Troops land on the coast of Marelandia and encounter insane r
 	
 	option = { #A million deaths are a statistic...
 		name = celestia.53.a
+		add_war_support = -0.02
+		add_manpower = -5000
 	}
 }
 
@@ -7265,11 +7289,13 @@ country_event = { #Sunset is invaded by Equestria and the resting fleet is scutt
 	
 	option = { #A single death there is a tragedy...
 		name = celestia.54.a
+		add_war_support = 0.03
+		add_manpower = -2550
 	}
 }
 
 country_event = { #After the end of the war, as Equestria sifts through the rubble of the different ministries, they find a barely alive Jet Set amongst the ruins and bring him back from the brink to speak with Celestia
-	id = celestia.55
+	id = celestia.55 #Have ths instead her finding an old recording of his execution, after he was tortured and never gave into the Room 101 punishment
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.55"}
 	title = celestia.55.t
 	desc = celestia.55.d
@@ -7286,7 +7312,7 @@ country_event = { #After the end of the war, as Equestria sifts through the rubb
 }
 
 country_event = { #When Jet Set is well enough, he speaks with Celestia and although he is a bit twitchy from his torture, admits he never lost hope, and wishes to try and bring New Mareland from the brink, which Celestia decides he can do
-	id = celestia.56
+	id = celestia.56 #She instead goes to Jet Set's daughter, who she lets know what happened to him, and after she mourns for a bit, she wishes to help Celestia in any way, since she's in the nobility anyway, and Celestia decides to make her the new governor, in her father's legacy
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.56"}
 	title = celestia.56.t
 	desc = celestia.56.d
@@ -7458,7 +7484,10 @@ country_event = { #Event for TRD to join like they promised they would, and the 
 		EQS = {
 			has_war_with = EQC
 		}
-		has_country_flag = TRD_will_help_with_EQC
+		OR = {
+			has_country_flag = TRD_will_help_with_EQC
+			is_in_faction_with = EQS
+		}
 	}
 	
 	fire_only_once = yes
@@ -7493,6 +7522,14 @@ country_event = { #Event for TRD to join like they promised they would, and the 
 		reverse_add_opinion_modifier = {
 			target = EQS
 			modifier = CRY_dishonorable
+		}
+		IF = {
+			limit = { is_in_faction_with = EQS }
+			leave_faction = yes
+		}
+		IF = {
+			limit = { has_war_with = EQC }
+			white_peace = EQC
 		}
 	}
 }
@@ -8194,68 +8231,68 @@ country_event = { #A long, scrawling letter about capitalist evils tells her the
 #	}
 #}
 
-country_event = { #HUG gets the proposal
-	id = celestia.519
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.519"}
-	title = celestia.519.t
-	desc = celestia.519.d
-	
-	is_triggered_only = yes
-	
-	option = { #Wow, the Princess wants us to help?! Of course!
-		name = celestia.519.a
-		ai_chance = { factor = 30 modifier = { has_government = democratic factor = 7 } }
-		EQS = {
-			country_event = {
-				id = celestia.520
-				days = 1
-			}
-		}
-	}
-	option = { #We can hold our own just fine!
-		name = celestia.519.b
-		ai_chance = { factor = 70 }
-		EQS = {
-			country_event = {
-				id = celestia.521
-				days = 1
-			}
-		}
-	}
-}
+#country_event = { #HUG gets the proposal
+#	id = celestia.519
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.519"}
+#	title = celestia.519.t
+#	desc = celestia.519.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Wow, the Princess wants us to help?! Of course!
+#		name = celestia.519.a
+#		ai_chance = { factor = 30 modifier = { has_government = democratic factor = 7 } }
+#		EQS = {
+#			country_event = {
+#				id = celestia.520
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #We can hold our own just fine!
+#		name = celestia.519.b
+#		ai_chance = { factor = 70 }
+#		EQS = {
+#			country_event = {
+#				id = celestia.521
+#				days = 1
+#			}
+#		}
+#	}
+#}
 
-country_event = { #Celestia receives the agreement from HUG and she is pleased
-	id = celestia.520
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.520"}
-	title = celestia.520.t
-	desc = celestia.520.d
-	
-	is_triggered_only = yes
-	
-	option = { #Excellent! My little ponies will soon be free from oppression again!
-		name = celestia.520.a
-		ROOT = {
-			add_to_faction = HUG
-		}
-	}
-}
+#country_event = { #Celestia receives the agreement from HUG and she is pleased
+#	id = celestia.520
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.520"}
+#	title = celestia.520.t
+#	desc = celestia.520.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Excellent! My little ponies will soon be free from oppression again!
+#		name = celestia.520.a
+#		ROOT = {
+#			add_to_faction = HUG
+#		}
+#	}
+#}
 
-country_event = { #Celestia gets the no from Hughill, and she is upset taht such a small nation thinks can survive without her
-	id = celestia.521
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.521"}
-	title = celestia.521.t
-	desc = celestia.521.d
-	
-	is_triggered_only = yes
-	
-	option = { #What are they thinking?
-		name = celestia.521.a
-		create_wargoal = {
-			type = annex_everything
-			target = HUG
-		}
-	}
-}
+#country_event = { #Celestia gets the no from Hughill, and she is upset taht such a small nation thinks can survive without her
+#	id = celestia.521
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.521"}
+#	title = celestia.521.t
+#	desc = celestia.521.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #What are they thinking?
+#		name = celestia.521.a
+#		create_wargoal = {
+#			type = annex_everything
+#			target = HUG
+#		}
+#	}
+#}
 
 country_event = { #Celestia offers money for Nidhogg to join the alliance
 	id = celestia.522
