@@ -7547,20 +7547,20 @@ country_event = { #Celestia asks for puppeting of both Bales and Cloudsdale
 		name = celestia.500.a
 		BLS = {
 			country_event = {
-				id = celestia.501
+				id = celestia.503
 				days = 1
 			}
 		}
 		CLD = {
 			country_event = {
-				id = celestia.502
+				id = celestia.503
 				days = 1
 			}
 		}
 	}
 }
 
-country_event = { #Bales gets the proposal
+country_event = { #Celestia asks for puppeting CER
 	id = celestia.501
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.501"}
 	title = celestia.501.t
@@ -7570,73 +7570,35 @@ country_event = { #Bales gets the proposal
 	
 	option = { #We will be better under them
 		name = celestia.501.a
-		ai_chance = { 
-			factor = 10 
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_offer_funding_for_new_schools
-				}
-				factor = 3
-			}
-			modifier = {
-				has_government = democratic
-				factor = 2.5
-			}
-			modifier = {
-				has_government = neutrality
-				factor = 1.25
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-				}
-				factor = 0.5
+		trigger = {
+			CER = {
+				NOT = { CER_Fleur_de_Lis = { is_country_leader = yes } }
 			}
 		}
-		EQS = {
+		CER = {
 			country_event = {
 				id = celestia.503
 				days = 1
 			}
 		}
 	}
-	option = { #We would be mad to bend to her wishes again!
+	option = { #They have their own Celestia, hmm?
 		name = celestia.501.b
-		ai_chance = { 
-			factor = 20
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_offer_funding_for_new_schools
-				}
-				factor = 0.5
-			}
-			modifier = {
-				has_government = democratic
-				factor = 0.5
-			}
-			modifier = {
-				has_government = neutrality
-				factor = 1.5
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-				}
-				factor = 2
+		trigger = {
+			CER = {
+				CER_Fleur_de_Lis = { is_country_leader = yes }
 			}
 		}
-		EQS = {
-			country_event = {
-				id = celestia.504
+		CER = {
+			country_event = { #Repurpose this to be Celestia arriving in CER and having a long, mirthful talk with "Celestia" and Fleur finally giving up the act
+				id = celestia.506
 				days = 1
 			}
 		}
 	}
 }
 
-country_event = { #Cloudsdale gets the proposal
+country_event = { #Celestia asks for puppeting NER and WHY
 	id = celestia.502
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.502"}
 	title = celestia.502.t
@@ -7646,73 +7608,22 @@ country_event = { #Cloudsdale gets the proposal
 	
 	option = { #It is good to see that Celestia has returned
 		name = celestia.502.a
-		ai_chance = { 
-			factor = 5
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_ensure_pensions_for_the_heroes
-				}
-				factor = 5.5
-			}
-			modifier = {
-				has_government = democratic
-				factor = 3
-			}
-			modifier = {
-				has_government = neutrality
-				factor = 1.5
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-				}
-				factor = 1.25
-			}
-		}
-		EQS = {
+		NER = {
 			country_event = {
-				id = celestia.505
+				id = celestia.503
 				days = 1
 			}
 		}
-	}
-	option = { #This could still be a trap
-		name = celestia.502.b
-		ai_chance = { 
-			factor = 15
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_ensure_pensions_for_the_heroes
-				}
-				factor = 0.75
-			}
-			modifier = {
-				has_government = democratic
-				factor = 0.5
-			}
-			modifier = {
-				has_government = neutrality
-				factor = 2
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-				}
-				factor = 4
-			}
-		}
-		EQS = {
+		WHY = {
 			country_event = {
-				id = celestia.506
+				id = celestia.503
 				days = 1
 			}
 		}
 	}
 }
 
-country_event = { #Celestia receives the positive response from Bales and is pleased
+country_event = { #The rump state chosen gets the proposal
 	id = celestia.503
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.503"}
 	title = celestia.503.t
@@ -7721,22 +7632,138 @@ country_event = { #Celestia receives the positive response from Bales and is ple
 	is_triggered_only = yes
 	
 	option = { #Excellent! The transfer shall begin soon
-		name = celestia.503.a
-		if = {
-			limit = {
-				has_dlc = "Together for Victory"
+		name = celestia.503.a #Accepts
+		ai_chance = { #BEEEEEEG AI modifier block. Is good for health.
+			factor = 10
+			modifier = {
+				tag = BLS
+				EQS = { has_completed_focus = EQS_offer_funding_for_new_schools }
+				factor = 2.5
 			}
-			set_autonomy = {
-				target = BLS
-				autonomy_state = autonomy_puppet
-				freedom_level = 0.5
+			modifier = {
+				tag = CLD
+				EQS = { has_completed_focus = EQS_ensure_pensions_for_the_heroes }
+				factor = 3
+			}
+			modifier = {
+				tag = BLS
+				has_government = neutrality
+				factor = 1.25
+			}
+			modifier = {
+				tag = BLS
+				OR = {
+					BLS_Solar_Flare = { is_country_leader = yes }
+					event_target:BLS_Nebula_Flare_target = { is_country_leader = yes }
+					BLS_Blazing_Sheath = { is_country_leader = yes }
 				}
+				factor = 0
 			}
-			else = {
-				puppet = BLS
+			modifier = {
+				tag = CLD
+				has_government = neutrality
+				factor = 1.5
+			}
+			modifier = {
+				tag = CLD
+				CLD_Soarin = { is_country_leader = yes }
+				factor = 2
+			}
+			modifier = {
+				tag = CER
+				has_government = democratic
+				factor = 1.5
+			}
+			modifier = {
+				tag = CER
+				EQS = { has_completed_focus = EQS_forgive_the_debts_of_the_central_cities }
+				factor = 1.5
+			}
+			modifier = {
+				tag = CER
+				EQS = { has_completed_focus = EQS_subsidize_farm_fertilizers }
+				factor = 1.5
+			}
+			modifier = {
+				tag = NER
+				EQS = { has_completed_focus = EQS_pay_the_welfare_checks }
+				factor = 3.5
+			}
+			modifier = {
+				tag = WHY
+				EQS = { has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio }
+				factor = 2
+			}
+			modifier = {
+				tag = WHY
+				has_government = fascism
+				factor = 0.5
+			}
 		}
-		BLS = {
-			set_cosmetic_tag = EQS_puppet
+		EQS = {
+			country_event = {
+				id = celestia.505
+				days = 7
+				random_days = 5
+			}
+		}
+	}
+	option = { #Rejects proposal
+		name = celestia.503.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				tag = BLS
+				EQS = { has_completed_focus = EQS_offer_funding_for_new_schools }
+				factor = 0.75
+			}
+			modifier = {
+				tag = CLD
+				EQS = { has_completed_focus = EQS_ensure_pensions_for_the_heroes }
+				factor = 0.5
+			}
+			modifier = {
+				tag = BLS
+				BLS_Bunsen_Beaker = { is_country_leader = yes }
+				factor = 1.5
+			}
+			modifier = {
+				tag = CLD
+				has_government = neutrality
+				factor = 1.25
+			}
+			modifier = {
+				tag = CLD
+				CLD_Soarin = { is_country_leader = yes }
+				factor = 0.75
+			}
+			modifier = {
+				tag = CER
+				has_government = democratic
+				factor = 0.33
+			}
+			modifier = {
+				tag = CER
+				EQS = { has_completed_focus = EQS_forgive_the_debts_of_the_central_cities }
+				factor = 0.33
+			}
+			modifier = {
+				tag = CER
+				EQS = { has_completed_focus = EQS_subsidize_farm_fertilizers }
+				factor = 0.33
+			}
+			modifier = {
+				tag = WHY
+				WHY_Solar_Strike = { is_country_leader = yes }
+				factor = 2
+			}
+		}
+		EQS = {
+			country_event = {
+				id = celestia.504
+				days = 7
+				random_days = 5
+			}
 		}
 	}
 }
@@ -7753,7 +7780,7 @@ country_event = { #Celestia receives the negative response from Bales and is sad
 		name = celestia.504.a
 		create_wargoal = {
 			type = puppet_wargoal_focus
-			target = BLS
+			target = FROM
 		}
 	}
 }
@@ -7773,22 +7800,22 @@ country_event = { #Celestia receives the positive response from Cloudsdale and p
 				has_dlc = "Together for Victory"
 			}
 			set_autonomy = {
-				target = CLD
+				target = FROM
 				autonomy_state = autonomy_puppet
 				freedom_level = 0.5
 				}
 			}
 			else = {
-				puppet = CLD
+				puppet = FROM
 		}
-		CLD = {
+		FROM = {
 			set_cosmetic_tag = EQS_puppet
 		}
 	}
 }
 
 country_event = { #Celestia receives the negative response from Cloudsdale and is disappointed in the government's refusal to acknowledge her
-	id = celestia.506
+	id = celestia.506 #Celestia arrives unexpectedly in New Canterlot, and some ponies are freaked by her at first, thinking she's a trick by Daybreaker, but after a bit of panicking, she does find a guard and is taken to Fleur, who almost instantly breaks when she sees Celestia; Celestia makes a small joke that causes Fleur to faint
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.506"}
 	title = celestia.506.t
 	desc = celestia.506.d
@@ -7796,421 +7823,446 @@ country_event = { #Celestia receives the negative response from Cloudsdale and i
 	is_triggered_only = yes
 	
 	option = { #I had hoped they would see reason
-		name = celestia.506.a
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = CLD
+		name = celestia.506.a #I like her. We should chat more
+		CER = {
+			country_event = {
+				id = celestia.507
+				days = 1
+			}
 		}
 	}
 }
 
 country_event = { #After assisting CER, Celestia sends an offer of puppeting
-	id = celestia.507
+	id = celestia.507 #CER learns of Fleur's deception via Celestia and they will either submit to annexation directly, or fight for independence
 	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.507"}
 	title = celestia.507.t
 	desc = celestia.507.d
 	
 	is_triggered_only = yes
 	
-	option = { #Clearly they see that I am the same pony that I was before
+	option = { #We were lied to! Long live Celestia!
 		name = celestia.507.a
-		CER = {
-			country_event = {
-				id = celestia.508
-				days = 1
+		ai_chance = { 
+			factor = 75
+		}
+		EQS = {
+			annex_country = {
+				target = ROOT
 			}
+			every_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_core_of = EQS
+			}
+			unlock_national_focus = EQS_harvest_harmony
 		}
 	}
-}
-
-country_event = { #CER gets the proposal
-	id = celestia.508
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.508"}
-	title = celestia.508.t
-	desc = celestia.508.d
-	
-	is_triggered_only = yes
-	
-	option = { #It is our princess, we will not resist
-		name = celestia.508.a
-		ai_chance = { 
-			factor = 5
+	option = { #These are lies! We must fight against Daybreaker till the end!
+		name = celestia.507.b
+		ai_chance = {
+			factor = 25
 			modifier = {
-				EQS = {
-					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
-				}
-				factor = 3
-			}
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_subsidize_farm_fertilizers
-				}
-				factor = 3
-			}
-			modifier = {
-				has_government = democratic
-				factor = 1.75
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-					has_government = neutrality
-				}
+				is_historical_focus_on = yes
 				factor = 0
 			}
 		}
-		EQS = {
-			country_event = {
-				id = celestia.509
-				days = 1
-			}
-		}
-	}
-	option = { #There is still something odd about her, we must be wary
-		name = celestia.508.b
-		ai_chance = { 
-			factor = 2
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
-				}
-				factor = 0.5
-			}
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_subsidize_farm_fertilizers
-				}
-				factor = 0.5
-			}
-			modifier = {
-				has_government = democratic
-				factor = 0.5
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-					has_government = neutrality
-				}
-				factor = 20
-			}
-		}
-		EQS = {
-			country_event = {
-				id = celestia.510
-				days = 1
-			}
+		declare_war_on = {
+			target = EQS
+			type = annex_everything
 		}
 	}
 }
 
-country_event = { #An ambassador from CER comes with their agreement to subjugation
-	id = celestia.509
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.509"}
-	title = celestia.509.t
-	desc = celestia.509.d
-	
-	is_triggered_only = yes
-	
-	option = { #I knew that they would see reason
-		name = celestia.509.a
-		if = {
-			limit = {
-				has_dlc = "Together for Victory"
-			}
-			set_autonomy = {
-				target = CER
-				autonomy_state = autonomy_puppet
-				freedom_level = 0.5
-				}
-			}
-			else = {
-				puppet = CER
-		}
-		CER = {
-			set_cosmetic_tag = EQS_puppet
-		}
-	}
-}
-
-country_event = { #Another ambassador arrives and is nervous and declines the subjugation, and Celestia is saddened
-	id = celestia.510
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.510"}
-	title = celestia.510.t
-	desc = celestia.510.d
-	
-	is_triggered_only = yes
-	
-	option = { #Clearly Harmony is not enough for them. Prepare the soldiers
-		name = celestia.510.a
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = CER
-		}
-	}
-}
-
-country_event = { #Celestia decides that she has done all she can, and she speaks for a bit on how to word the two communiques
-	id = celestia.511
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.511"}
-	title = celestia.511.t
-	desc = celestia.511.d
-	
-	is_triggered_only = yes
-	
-	option = { #It is a longer shot, but I hope our assistance has shown our sincerity
-		name = celestia.511.a
-		WHY = {
-			country_event = {
-				id = celestia.512
-				days = 1
-			}
-		}
-		NER = {
-			country_event = {
-				id = celestia.513
-				days = 1
-			}
-		}
-	}
-}
-
-country_event = { #WHY gets the proposal
-	id = celestia.512
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.512"}
-	title = celestia.512.t
-	desc = celestia.512.d
-	
-	is_triggered_only = yes
-	
-	option = { #Perhaps it is finally time to return to the fold
-		name = celestia.512.a
-		ai_chance = { 
-			factor = 10
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
-				}
-				factor = 4
-			}
-			modifier = {
-				has_government = democratic
-				factor = 1.25
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-					has_government = neutrality
-				}
-				factor = 0.5
-			}
-		}
-		EQS = {
-			country_event = {
-				id = celestia.514
-				days = 1
-			}
-		}
-	}
-	option = { #Never! She is up to something!
-		name = celestia.512.b
-		ai_chance = { 
-			factor = 30
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
-				}
-				factor = 0.75
-			}
-			modifier = {
-				has_government = democratic
-				factor = 0.75
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = communism
-					has_government = neutrality
-				}
-				factor = 2.5
-			}
-		}
-		EQS = {
-			country_event = {
-				id = celestia.515
-				days = 1
-			}
-		}
-	}
-}
-
-country_event = { #NER gets the proposal
-	id = celestia.513
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.513"}
-	title = celestia.513.t
-	desc = celestia.513.d
-	
-	is_triggered_only = yes
-	
-	option = { #Getting all those free socks was really nice. Why not?
-		name = celestia.513.a
-		ai_chance = { 
-			factor = 10
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_pay_the_welfare_checks
-				}
-				factor = 2
-			}
-			modifier = {
-				OR = {
-					has_government = democratic
-					has_government = communism
-				}
-				factor = 1.5
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = neutrality
-				}
-				factor = 0.33
-			}
-		}
-		EQS = {
-			country_event = {
-				id = celestia.516
-				days = 1
-			}
-		}
-	}
-	option = { #Nah, capitalists can stay with their money, we have a nice vibe
-		name = celestia.513.b
-		ai_chance = { 
-			factor = 10
-			modifier = {
-				EQS = {
-					has_completed_focus = EQS_pay_the_welfare_checks
-				}
-				factor = 0.5
-			}
-			modifier = {
-				OR = {
-					has_government = democratic
-					has_government = communism
-				}
-				factor = 0.75
-			}
-			modifier = {
-				OR = {
-					has_government = fascism
-					has_government = neutrality
-				}
-				factor = 3.5
-			}
-		}
-		EQS = {
-			country_event = {
-				id = celestia.517
-				days = 1
-			}
-		}
-	}
-}
-
-country_event = { #WHY sends a simple message that they agree and Celestia is relieved
-	id = celestia.514
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.514"}
-	title = celestia.514.t
-	desc = celestia.514.d
-	
-	is_triggered_only = yes
-	
-	option = { #That was lucky, thank Faust!
-		name = celestia.514.a
-		if = {
-			limit = {
-				has_dlc = "Together for Victory"
-			}
-			set_autonomy = {
-				target = WHY
-				autonomy_state = autonomy_puppet
-				freedom_level = 0.5
-				}
-			}
-			else = {
-				puppet = WHY
-		}
-		WHY = {
-			set_cosmetic_tag = EQS_puppet
-		}
-	}
-}
-
-country_event = { #A single-worded message makes its way back to them, simply stating, "No" and Celestia is saddened
-	id = celestia.515
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.515"}
-	title = celestia.515.t
-	desc = celestia.515.d
-	
-	is_triggered_only = yes
-	
-	option = { #They are too far gone. They will need correction
-		name = celestia.515.a
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = WHY
-		}
-	}
-}
-
-country_event = { #NER agrees by sending a smoky letter of casual acceptance, and Celestia wonders how they even have brains to answer it
-	id = celestia.516
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.516"}
-	title = celestia.516.t
-	desc = celestia.516.d
-	
-	is_triggered_only = yes
-	
-	option = { #Who smokes that stuff?
-		name = celestia.516.a
-		if = {
-			limit = {
-				has_dlc = "Together for Victory"
-			}
-			set_autonomy = {
-				target = NER
-				autonomy_state = autonomy_puppet
-				freedom_level = 0.5
-				}
-			}
-			else = {
-				puppet = NER
-		}
-		NER = {
-			set_cosmetic_tag = EQS_puppet
-		}
-	}
-}
-
-country_event = { #A long, scrawling letter about capitalist evils tells her their reaction, and she isn't really surprised
-	id = celestia.517
-	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.517"}
-	title = celestia.517.t
-	desc = celestia.517.d
-	
-	is_triggered_only = yes
-	
-	option = { #Communists will be communists after all, even if they act more harmonic about it
-		name = celestia.517.a
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = NER
-		}
-	}
-}
+#country_event = { #CER gets the proposal
+#	id = celestia.508
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.508"}
+#	title = celestia.508.t
+#	desc = celestia.508.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It is our princess, we will not resist
+#		name = celestia.508.a
+#		ai_chance = { 
+#			factor = 5
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
+#				}
+#				factor = 3
+#			}
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_subsidize_farm_fertilizers
+#				}
+#				factor = 3
+#			}
+#			modifier = {
+#				has_government = democratic
+#				factor = 1.75
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = fascism
+#					has_government = communism
+#					has_government = neutrality
+#				}
+#				factor = 0
+#			}
+#		}
+#		EQS = {
+#			country_event = {
+#				id = celestia.509
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #There is still something odd about her, we must be wary
+#		name = celestia.508.b
+#		ai_chance = { 
+#			factor = 2
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_forgive_the_debts_of_the_central_cities
+#				}
+#				factor = 0.5
+#			}
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_subsidize_farm_fertilizers
+#				}
+#				factor = 0.5
+#			}
+#			modifier = {
+#				has_government = democratic
+#				factor = 0.5
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = fascism
+#					has_government = communism
+#					has_government = neutrality
+#				}
+#				factor = 20
+#			}
+#		}
+#		EQS = {
+#			country_event = {
+#				id = celestia.510
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #An ambassador from CER comes with their agreement to subjugation
+#	id = celestia.509
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.509"}
+#	title = celestia.509.t
+#	desc = celestia.509.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #I knew that they would see reason
+#		name = celestia.509.a
+#		if = {
+#			limit = {
+#				has_dlc = "Together for Victory"
+#			}
+#			set_autonomy = {
+#				target = CER
+#				autonomy_state = autonomy_puppet
+#				freedom_level = 0.5
+#				}
+#			}
+#			else = {
+#				puppet = CER
+#		}
+#		CER = {
+#			set_cosmetic_tag = EQS_puppet
+#		}
+#	}
+#}
+#
+#country_event = { #Another ambassador arrives and is nervous and declines the subjugation, and Celestia is saddened
+#	id = celestia.510
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.510"}
+#	title = celestia.510.t
+#	desc = celestia.510.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Clearly Harmony is not enough for them. Prepare the soldiers
+#		name = celestia.510.a
+#		create_wargoal = {
+#			type = puppet_wargoal_focus
+#			target = CER
+#		}
+#	}
+#}
+#
+#country_event = { #Celestia decides that she has done all she can, and she speaks for a bit on how to word the two communiques
+#	id = celestia.511
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.511"}
+#	title = celestia.511.t
+#	desc = celestia.511.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It is a longer shot, but I hope our assistance has shown our sincerity
+#		name = celestia.511.a
+#		WHY = {
+#			country_event = {
+#				id = celestia.512
+#				days = 1
+#			}
+#		}
+#		NER = {
+#			country_event = {
+#				id = celestia.513
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #WHY gets the proposal
+#	id = celestia.512
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.512"}
+#	title = celestia.512.t
+#	desc = celestia.512.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Perhaps it is finally time to return to the fold
+#		name = celestia.512.a
+#		ai_chance = { 
+#			factor = 10
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
+#				}
+#				factor = 4
+#			}
+#			modifier = {
+#				has_government = democratic
+#				factor = 1.25
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = fascism
+#					has_government = communism
+#					has_government = neutrality
+#				}
+#				factor = 0.5
+#			}
+#		}
+#		EQS = {
+#			country_event = {
+#				id = celestia.514
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #Never! She is up to something!
+#		name = celestia.512.b
+#		ai_chance = { 
+#			factor = 30
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_the_question_of_the_whinnyapolis_adoratio
+#				}
+#				factor = 0.75
+#			}
+#			modifier = {
+#				has_government = democratic
+#				factor = 0.75
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = fascism
+#					has_government = communism
+#					has_government = neutrality
+#				}
+#				factor = 2.5
+#			}
+#		}
+#		EQS = {
+#			country_event = {
+#				id = celestia.515
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #NER gets the proposal
+#	id = celestia.513
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.513"}
+#	title = celestia.513.t
+#	desc = celestia.513.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Getting all those free socks was really nice. Why not?
+#		name = celestia.513.a
+#		ai_chance = { 
+#			factor = 10
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_pay_the_welfare_checks
+#				}
+#				factor = 2
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = democratic
+#					has_government = communism
+#				}
+#				factor = 1.5
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = fascism
+#					has_government = neutrality
+#				}
+#				factor = 0.33
+#			}
+#		}
+#		EQS = {
+#			country_event = {
+#				id = celestia.516
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #Nah, capitalists can stay with their money, we have a nice vibe
+#		name = celestia.513.b
+#		ai_chance = { 
+#			factor = 10
+#			modifier = {
+#				EQS = {
+#					has_completed_focus = EQS_pay_the_welfare_checks
+#				}
+#				factor = 0.5
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = democratic
+#					has_government = communism
+#				}
+#				factor = 0.75
+#			}
+#			modifier = {
+#				OR = {
+#					has_government = fascism
+#					has_government = neutrality
+#				}
+#				factor = 3.5
+#			}
+#		}
+#		EQS = {
+#			country_event = {
+#				id = celestia.517
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #WHY sends a simple message that they agree and Celestia is relieved
+#	id = celestia.514
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.514"}
+#	title = celestia.514.t
+#	desc = celestia.514.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #That was lucky, thank Faust!
+#		name = celestia.514.a
+#		if = {
+#			limit = {
+#				has_dlc = "Together for Victory"
+#			}
+#			set_autonomy = {
+#				target = WHY
+#				autonomy_state = autonomy_puppet
+#				freedom_level = 0.5
+#				}
+#			}
+#			else = {
+#				puppet = WHY
+#		}
+#		WHY = {
+#			set_cosmetic_tag = EQS_puppet
+#		}
+#	}
+#}
+#
+#country_event = { #A single-worded message makes its way back to them, simply stating, "No" and Celestia is saddened
+#	id = celestia.515
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.515"}
+#	title = celestia.515.t
+#	desc = celestia.515.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #They are too far gone. They will need correction
+#		name = celestia.515.a
+#		create_wargoal = {
+#			type = puppet_wargoal_focus
+#			target = WHY
+#		}
+#	}
+#}
+#
+#country_event = { #NER agrees by sending a smoky letter of casual acceptance, and Celestia wonders how they even have brains to answer it
+#	id = celestia.516
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.516"}
+#	title = celestia.516.t
+#	desc = celestia.516.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Who smokes that stuff?
+#		name = celestia.516.a
+#		if = {
+#			limit = {
+#				has_dlc = "Together for Victory"
+#			}
+#			set_autonomy = {
+#				target = NER
+#				autonomy_state = autonomy_puppet
+#				freedom_level = 0.5
+#				}
+#			}
+#			else = {
+#				puppet = NER
+#		}
+#		NER = {
+#			set_cosmetic_tag = EQS_puppet
+#		}
+#	}
+#}
+#
+#country_event = { #A long, scrawling letter about capitalist evils tells her their reaction, and she isn't really surprised
+#	id = celestia.517
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event celestia.517"}
+#	title = celestia.517.t
+#	desc = celestia.517.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Communists will be communists after all, even if they act more harmonic about it
+#		name = celestia.517.a
+#		create_wargoal = {
+#			type = puppet_wargoal_focus
+#			target = NER
+#		}
+#	}
+#}
 
 ###Shattered Bales events###
 #country_event = { #Celestia believes that the ponies of Hughill will be receptive, given they are harmonist
