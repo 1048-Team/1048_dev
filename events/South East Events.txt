@@ -282,21 +282,66 @@ country_event = { #The country leader receives word that some harmonist instigat
 		random_state = {
 			limit = { 
 				is_owned_by = ROOT
+				OR = {
+					arms_factory > 0
+					industrial_complex > 0
+				}
 			}
-			damage_building = {
-				type = infrastructure
-				damage = 2
+			IF = {
+				limit = { infrastructure > 1 }
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
 			}
-			damage_building = {
-				type = arms_factory
-				damage = 1
+			ELSE_IF = {
+				limit = { 
+					AND = {
+						infrastructure > 0
+						infrastructure < 2
+					}
+				}
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
 			}
+			IF = {
+				limit = { arms_factory > 0 }
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			ELSE_IF = {
+				limit = { industrial_complex > 0 }
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+		}
+		hidden_effect = {
+			IF = {
+				limit = { check_variable = { terrorism_counter = 0 }
+				set_variable = { terrorism_counter = 0 }
+			}
+			IF = {
+				limit = { check_variable = { terrorism_counter > 1 } }
+				country_event = {
+					id = southeast.500
+					days = 30
+					random_days = 30
+				}
+			}
+			add_to_variable = { terrorism_counter = 1 }
 		}
 	}
 }
 
 country_event = { #The country leader receives a communique from Equestria stating that since they have become more reliant on Equestria they should consider submitting to become a vassal to Equestria
 	id = southeast.501
+	immediate = {log = "[GetDateText] [ROOT.GetName]: southeast.501"}
 	title = southeast.501.t
 	desc = southeast.501.d
 	
@@ -318,7 +363,6 @@ country_event = { #The country leader receives a communique from Equestria stati
 			}
 			modifier = { NOT = { has_global_flag = balsplosion } factor = 3 }
 		}
-		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		###Propose alliance back
 		EQS = {
 			country_event = celestia.564
@@ -353,7 +397,6 @@ country_event = { #The country leader receives a communique from Equestria stati
 			modifier = { has_government = fascism factor = 2.5 }
 			modifier = { has_government = communism factor = 1.75 }
 		}
-		log = "[GetDateText] [ROOT.GetName]: southeast.501"
 		###Refuse to submit
 		EQS = {
 			country_event = celestia.566
@@ -397,17 +440,9 @@ country_event = { #Celestia flies some bombers over the different cities of the 
 	
 	option = { #These are lies! We must correct the fake news immediately!
 		name = southeast.503.a
-		for_each_scope_loop = {
-			array = global.southeast_countries
-			
-			IF = {
-				limit = {
-					exists = yes
-				}
-				add_timed_idea = {
-					idea = EQS_all_the_harmony_BAL
-					days = 180
-				}
+			add_timed_idea = {
+				idea = EQS_all_the_harmony_BAL
+				days = 180
 			}
 		}
 	}
