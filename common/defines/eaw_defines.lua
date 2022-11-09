@@ -7,7 +7,8 @@ NDefines.NDiplomacy.VOLUNTEERS_DIVISIONS_REQUIRED = 10
 NDefines.NDiplomacy.MAX_OPINION_VALUE = 200							-- Max opinion value cap.
 NDefines.NDiplomacy.MIN_OPINION_VALUE = -200						-- Min opinion value cap.
 NDefines.NDiplomacy.TENSION_PUPPET = 0
-NDefines.NDiplomacy.TENSION_DECAY = 0.25 -- default 0.1
+NDefines.NDiplomacy.PEACE_SCORE_DISTRIBUTION = { 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 } -- How much of the total peace conference score you get during the first n turns.
+NDefines.NDiplomacy.PEACE_CONTEST_REFUND_FACTOR = { 1.0, 0.90, 0.80, 0.70, 0.60, 0.50 } -- How much of the spent peace conference score that gets refunded in a contest. First element applies for the first round of conflicts, second element for the second round of conflicts, etc. The final element is used for each consecutive turn, so setting that to e.g. 0.7 means you get 70 % of the spent score back for every turn thereafter.
 
 NDefines.NCountry.SPECIAL_FORCES_CAP_BASE = 0.1					-- Max ammount of special forces battalions is total number of non-special forces battalions multiplied by this and modified by a country modifier
 NDefines.NCountry.SPECIAL_FORCES_CAP_MIN = 32					-- You can have a minimum of this many special forces battalions, regardless of the number of non-special forces battalions you have, this can also be modified by a country modifier
@@ -36,11 +37,18 @@ NDefines.NMilitary.DEPLOY_TRAINING_MAX_LEVEL = 5
 NDefines.NMilitary.UNIT_EXP_LEVELS = {0.02,	0.04,	0.06,	0.08,	0.1,	0.14,	0.18,	0.22,	0.26,	0.3,	0.39,	0.48,	0.57,	0.66,	0.75,	0.78,	0.81,	0.84,	0.87,	0.9}		-- Experience needed to progress to the next level
 NDefines.NMilitary.EXPERIENCE_COMBAT_FACTOR = 0.05
 NDefines.NMilitary.ARMY_EXP_BASE_LEVEL = 5
+NDefines.NMilitary.BASE_CAPTURE_EQUIPMENT_RATIO = 0.02
+NDefines.NMilitary.BASE_FEMALE_DIVISIONAL_COMMANDER_CHANCE = 0.5 -- 50% of time by default, female_divisional_commander_chance modifier is additive
 
 NDefines.NNavy.SHORE_BOMBARDMENT_CAP = 0.3 -- Vanilla is 0.25
 NDefines.NNavy.SCREENS_TO_CAPITAL_RATIO = 3.0 -- Vanilla is 4.0, mostly AI stuff
 
 NDefines.NAir.NAVAL_COMBAT_EXTERNAL_PLANES_JOIN_RATIO = 0.03 	-- Max planes that can join a combat comparing to the total strength of the ships, vanilla is 0.05
+NDefines.NAir.AIR_WING_MAX_STATS_ATTACK = 400					-- Max stats, all quadrupled from vanilla to account for our late timeframe
+NDefines.NAir.AIR_WING_MAX_STATS_DEFENCE = 400
+NDefines.NAir.AIR_WING_MAX_STATS_AGILITY = 400
+NDefines.NAir.AIR_WING_MAX_STATS_SPEED = 3200
+NDefines.NAir.AIR_WING_MAX_STATS_BOMBING = 400
 
 NDefines.NAI.RESEARCH_LAND_DOCTRINE_NEED_GAIN_FACTOR = 0.12 -- Multiplies value based on relative military industry size / country size.
 NDefines.NAI.DYNAMIC_STRATEGIES_THREAT_FACTOR = 6.0
@@ -63,8 +71,8 @@ NDefines.NAI.AI_FRONT_MOVEMENT_FACTOR_FOR_READY = 0.1 --default 0.25
 NDefines.NAI.PLAN_VALUE_TO_EXECUTE = -0.2 --default -0.5
 NDefines.NAI.DEPLOY_MIN_TRAINING_SURRENDER_FACTOR = 0.1		-- Required percentage of training (1.0 = 100%) for AI to deploy unit in wartime while surrender progress is higher than 0
 NDefines.NAI.DEPLOY_MIN_EQUIPMENT_SURRENDER_FACTOR = 0.5	-- Required percentage of equipment (1.0 = 100%) for AI to deploy unit in wartime while surrender progress is higher than 0
-NDefines.NAI.DEPLOY_MIN_TRAINING_WAR_FACTOR = 0.5	--default 0.95	-- Required percentage of training (1.0 = 100%) for AI to deploy unit in wartime
-NDefines.NAI.DEPLOY_MIN_EQUIPMENT_WAR_FACTOR = 0.80	--default 0.95	-- Required percentage of equipment (1.0 = 100%) for AI to deploy unit in wartime
+NDefines.NAI.DEPLOY_MIN_TRAINING_WAR_FACTOR = 0.5		-- Required percentage of training (1.0 = 100%) for AI to deploy unit in wartime
+NDefines.NAI.DEPLOY_MIN_EQUIPMENT_WAR_FACTOR = 0.80		-- Required percentage of equipment (1.0 = 100%) for AI to deploy unit in wartime
 NDefines.NAI.DEPLOY_MIN_TRAINING_PEACE_FACTOR = 0.95		-- Required percentage of training (1.0 = 100%) for AI to deploy unit in peacetime
 NDefines.NAI.DEPLOY_MIN_EQUIPMENT_PEACE_FACTOR = 0.95	-- Required percentage of equipment (1.0 = 100%) for AI to deploy unit in peacetime
 
@@ -88,8 +96,6 @@ NDefines.NAI.DIPLOMACY_ACCEPT_VOLUNTEERS_BASE = 100
 NDefines.NAI.RESEARCH_AHEAD_OF_TIME_FACTOR = 4.5 		-- To which extent AI should care about ahead of time penalties to research
 NDefines.NAI.RESEARCH_AHEAD_BONUS_FACTOR = 2.5          -- To which extent AI should care about ahead of time bonuses to research
 NDefines.NAI.RESEARCH_BONUS_FACTOR = 2.0 				-- To which extent AI should care about bonuses to research
-NDefines.NAI.AIR_WING_REINFORCEMENT_LIMIT = 50
-NDefines.NAI.AIR_WING_SCOUT_REINFORCEMENT_LIMIT = 20
 
 NDefines.NOperatives.AGENCY_CREATION_FACTORIES = 3
 NDefines.NOperatives.AGENCY_UPGRADE_PER_OPERATIVE_SLOT = 4			-- Number of upgrade needed to unlock an additional operative slot
@@ -98,8 +104,8 @@ NDefines.NSupply.VP_TO_SUPPLY_BASE = 0.2 -- Bonus to supply from a VP, no matter
 NDefines.NSupply.AVAILABLE_MANPOWER_STATE_SUPPLY = 0.5 --Factor for state supply from max manpower (population) (Base is 0.18, this is PER MILLION.)
 NDefines.NSupply.VP_TO_SUPPLY_BONUS_CONVERSION = 0.05 -- Bonus to supply local supplies from Victory Points, multiplied by this aspect and rounded to closest integer (Base is 0.05)
 NDefines.NSupply.CAPITAL_INITIAL_SUPPLY_FLOW = 5.0 -- starting supply from
-NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.3 -- starting penalty that will be added as supply moves away from its origin (modified by stuff like terrain) (Default is 0.5)
-NDefines.NSupply.CAPITAL_ADDED_PENALTY_PER_PROVINCE = 1.0 -- added penalty as we move away from origin (Default is 1.2)
+NDefines.NSupply.CAPITAL_STARTING_PENALTY_PER_PROVINCE = 0.5 -- starting penalty that will be added as supply moves away from its origin (modified by stuff like terrain) (Default is 0.5)
+NDefines.NSupply.CAPITAL_ADDED_PENALTY_PER_PROVINCE = 1.2 -- added penalty as we move away from origin (Default is 1.2)
 
 -- defines that are used for supply reach for built nodes
 NDefines.NSupply.NODE_INITIAL_SUPPLY_FLOW = 2.8
