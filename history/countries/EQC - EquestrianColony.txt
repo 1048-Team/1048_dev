@@ -8,16 +8,11 @@ set_technology = {
 	melee_weapons1 = 1
 	pre_gw_artillery = 1
 	tech_pegasi = 1
-	early_fighter = 1
-	cv_early_fighter = 1
-	early_bomber = 1
 	infantry_weapons = 1
 	infantry_weapons1 = 1
 	interwar_antitank = 1
 	gw_artillery = 1
 	tech_support = 1
-	naval_bomber1 = 1
-	cv_naval_bomber1 = 1
 	tech_recon = 1
 	tech_engineers = 1
 	trench_warfare = 1
@@ -30,20 +25,41 @@ set_technology = {
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
 if = {
 	limit = {
-		NOT = { has_dlc = "No Step Back" }
-	}
-	set_technology = {
-		gwtank = 1
-		basic_light_tank = 1 
-	}
-}
-if = {
-	limit = {
 		has_dlc = "No Step Back"
 	}
 	set_technology = {
 		gwtank_chassis = 1
-		basic_light_tank_chassis = 1
+	}
+
+	create_equipment_variant = {
+		name = "Bitty Simple"
+		type = light_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_one_man_tank_turret
+			suspension_type_slot = tank_torsion_bar_suspension
+			armor_type_slot = tank_welded_armor
+			engine_type_slot = tank_diesel_engine
+			special_type_slot_1 = additional_machine_guns
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 2
+			tank_nsb_armor_upgrade = 1
+		}
+		icon = "gfx/interface/technologies/NZL_basic_light_tank.dds"
+	}
+
+	add_equipment_to_stockpile = {
+		type = light_tank_chassis_0
+		amount = 3
+		variant_name = "Bitty Simple"
+	}
+	
+	else = {
+		set_technology = {
+			gwtank = 1
+		}
 	}
 }
 if = {
@@ -90,14 +106,180 @@ if = {
 		sonar = 1
 		smoke_generator = 1
 		basic_depth_charges = 1
-		basic_secondary_battery = 1
 		basic_cruiser_armor_scheme = 1
 		basic_heavy_armor_scheme = 1
 		mtg_transport = 1
-		improved_secondary_battery = 1
 		basic_fire_control_system = 1
 	}
 	set_naval_oob = "EQC_1048_naval"
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_technology = {
+		aa_lmg = 1
+		engines_1 = 1
+		engines_2 = 1
+		early_bombs = 1
+		aircraft_construction = 1
+		iw_small_airframe = 1
+		iw_medium_airframe = 1
+		iw_large_airframe = 1
+	}
+
+	create_equipment_variant = {
+		name = "Bales Bulldog"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+	}
+	create_equipment_variant = {
+		name = "Hollow Shades Demon"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_ENG_light_plane_5_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Hollow Shades Fury" #also covers Gloster Gauntlet
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_ENG_light_plane_5_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Hollow Shades Nimrod" 
+		type = cv_small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_EQS_early_fighter_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Breezie Seal" 
+		type = cv_small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+	}
+	create_equipment_variant = {
+		name = "Breezie IIIF" 
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = floats
+		}
+		obsolete = yes
+		icon = "GFX_ENG_CAS1_medium"
+	}
+	create_equipment_variant = {
+		name = "Breezie Gordon" 
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_ENG_CAS1_medium"
+	}
+	create_equipment_variant = {
+		name = "Vickers Parasprite" 
+		type = small_plane_naval_bomber_airframe_0
+		modules = {
+			fixed_main_weapon_slot = torpedo_mounting
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_ENG_naval_bomber1_medium" #TODO GABRIEL: change if art in before release
+	}
+	create_equipment_variant = {
+		name = "Blackbuck Shark" 
+		type = cv_small_plane_naval_bomber_airframe_0
+		modules = {
+			fixed_main_weapon_slot = torpedo_mounting
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_ENG_naval_bomber1_medium"
+	}
+	create_equipment_variant = {
+		name = "Handley Page Hayford" 
+		type = medium_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_1_2x
+			special_type_slot_1 = lmg_defense_turret
+		}
+	}
+	create_equipment_variant = {
+		name = "Supermarine Baltimare" 
+		type = medium_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_1_2x
+			special_type_slot_1 = flying_boat_medium
+			special_type_slot_2 = lmg_defense_turret
+		}
+	}
+	create_equipment_variant = {
+		name = "Flimflam Rodeo" 
+		type = medium_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_1_3x
+			special_type_slot_1 = flying_boat_medium
+			special_type_slot_2 = lmg_defense_turret
+		}
+	}
+	create_equipment_variant = {
+		name = "Gelding Gladiator" 
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_4x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_ENG_early_fighter_medium"
+	}
+	create_equipment_variant = {
+		name = "Gelding Sea Gladiator" 
+		type = cv_small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_4x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_ENG_early_fighter_medium"
+	}
+	set_air_oob = "EQC_1048_air_bba"
+
+	else = {
+		set_technology = {
+			early_fighter = 1
+			cv_early_fighter = 1
+			cv_naval_bomber1 = 1
+			naval_bomber1 = 1
+			early_bomber = 1
+		}
+		set_air_oob = "EQC_1048_air_legacy"
+	}
 }
 
 add_ideas = {
@@ -419,4 +601,6 @@ if = {
 
 set_rule = {
 	can_generate_female_aces = yes
+	can_generate_female_unit_leaders  = yes
+	can_generate_female_country_leaders = yes
 }

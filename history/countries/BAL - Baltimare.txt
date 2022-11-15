@@ -1,6 +1,13 @@
 ﻿capital = 1214
 
-oob = "BAL_1048"
+IF = {
+	limit = { has_dlc = "No Step Back" }
+	set_oob = "BAL_1048_nsb"
+	
+	else = {
+		set_oob = "BAL_1048"
+	}
+}
 
 set_research_slots = 3
 
@@ -33,6 +40,23 @@ if = {
 	set_technology = {
 		gwtank_chassis = 1
 	}
+	create_equipment_variant = {
+		name = "Prole Protector"
+		type = light_tank_chassis_0
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_one_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 1
+			tank_nsb_armor_upgrade = 1
+		}
+		icon = "gfx/interface/technologies/EQS_armoured_tractor.dds"
+	}
 }
 if = {
 	limit = { has_dlc = "By Blood Alone" }
@@ -46,7 +70,7 @@ if = {
 	}
 
 	create_equipment_variant = {
-		name = "Early Fighter"
+		name = "Baltimare Zapper"
 		type = small_plane_airframe_0
 		modules = {
 			fixed_main_weapon_slot = light_mg_2x
@@ -56,7 +80,7 @@ if = {
 		icon = "GFX_commonwealth_2d_early_fighter_medium"
 	}
 	create_equipment_variant = {
-		name = "Early Bomber"
+		name = "Stableside Star"
 		type = medium_plane_airframe_0
 		modules = {
 			fixed_main_weapon_slot = medium_bomb_bay
@@ -65,14 +89,14 @@ if = {
 		}
 		icon = "GFX_commonwealth_2d_early_bomber_medium"
 	}
-	#oob = "BAL_1048_air_bba"
+	set_air_oob = "BAL_1048_air_bba"
 
 	else = {
 		set_technology = {
 			early_fighter = 1
 			early_bomber = 1
 		}
-		#oob = "BAL_1048_air_legacy"
+		set_air_oob = "BAL_1048_air_legacy"
 	}
 }
 if = {
