@@ -116,7 +116,7 @@ SOL_Celestia_Returned = {
 		ruling_party = democratic
 		elections_allowed = no
 	}
-	event_target:EQS_Sunbutt_target = { promote_character = yes }
+	EQS_Sunbutt = { promote_character = yes }
 	set_popularities = {
 		democratic = 45
 		fascism = 30
@@ -147,14 +147,14 @@ SOL_Celestia_Returned = {
 		remove_ideas = EQS_purified_high_command
 	}
 	load_oob = "SOL_civil_war_cel"
-	event_target:EQS_Midwinter_Halo_target = { set_nationality = SLW }
-	event_target:EQS_Swift_Wing_target = { set_nationality = SLW }
-	event_target:EQS_Orion_Star_target = { set_nationality = SLW }
-	event_target:EQS_dust_hoover_target = { set_nationality = SLW }
-	event_target:EQS_Bellum_Iceheart_target = { set_nationality = SLW }
-	event_target:EQS_Molten_Song_target = { set_nationality = SLW }
-	event_target:EQS_evening_squall_target = { set_nationality = SLW }
-	event_target:EQS_Nova_Glow_target = { set_nationality = SLW }
+	EQS_Midwinter_Halo = { set_nationality = SLW }
+	EQS_Swift_Wing_1048 = { set_nationality = SLW }
+	EQS_Orion_Star_1048 = { set_nationality = SLW }
+	EQS_dust_hoover_1048 = { set_nationality = SLW }
+	EQS_Bellum_Iceheart = { set_nationality = SLW }
+	EQS_Molten_Song = { set_nationality = SLW }
+	EQS_evening_squall_1048 = { set_nationality = SLW }
+	EQS_Nova_Glow = { set_nationality = SLW }
 	IF = {
 		limit = { 
 			has_country_flag = aurora_general
@@ -167,8 +167,8 @@ SOL_Celestia_Returned = {
 			has_country_flag = starlight_and_trixie_corrupted
 		}
 		SLW = { set_country_flag = starlight_and_trixie_corrupted }
-		event_target:EQS_Starlight_Glimmer_target = { set_nationality = SLW }
-		event_target:EQS_Trixie_Lulamoon_target = { set_nationality = SLW }
+		EQS_Starlight_Glimmer = { set_nationality = SLW }
+		EQS_Trixie_Lulamoon = { set_nationality = SLW }
 	}
 	SLW = {
 		add_ideas = eqs_slw_civil_war
@@ -182,7 +182,15 @@ SOL_Celestia_Returned = {
 				target = EQS type = annex_everything
 			}
 		}
-		load_oob = "SLW_civil_war"
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			load_oob = "SLW_civil_war_bba"
+		}
+		else = {
+			load_oob = "SLW_civil_war"
+		}
 		country_event = solarordo.25
 		set_variable = { equestria_conquest = 9 }
 		IF = {
@@ -216,9 +224,9 @@ SOL_end_of_civil_war_CEL = {
 	}
 	IF = {
 		limit = {
-			event_target:EQS_Sunbutt_target = { is_unit_leader = no }
+			EQS_Sunbutt = { is_unit_leader = no }
 		}
-		event_target:EQS_Sunbutt_target = {
+		EQS_Sunbutt = {
 			add_field_marshal_role = {
 				traits = { pony_race_trait pleasant_sun inspirational_leader }
 				skill = 2
@@ -316,18 +324,18 @@ SOL_end_of_civil_war_SLW = {
 	add_war_support = -0.065
 	custom_effect_tooltip = SLW_solar_empire_generals_tt
 	hidden_effect = {
-		event_target:EQS_Blueblood_target = { set_nationality = ROOT }
-		event_target:EQS_Aurora_Shinespark_target = { set_nationality = ROOT }
-		event_target:EQS_Sunset_Shimmer_target = { set_nationality = ROOT }
-		event_target:EQS_Luminous_Blade_target = { set_nationality = ROOT }
-		event_target:EQS_Scorched_Earth_target = { set_nationality = ROOT }
-		event_target:EQS_Sun_Marble_target = { set_nationality = ROOT }
-		event_target:EQS_Locust_Glow_target = { set_nationality = ROOT }
-		event_target:EQS_Quasar_Pulse_target = { set_nationality = ROOT }
 		EQS = {
 			EQS_Morning_Gale = { set_nationality = SLW }
 			EQS_wonderbolts_1048 = { set_nationality = SLW }
 			EQS_grimhoof_1048 = { set_nationality = SLW }
+			EQS_Blueblood = { set_nationality = SLW }
+			EQS_Aurora_Shinespark = { set_nationality = SLW }
+			EQS_Sunset_Shimmer_1048 = { set_nationality = SLW }
+			EQS_Luminous_Blade = { set_nationality = SLW }
+			EQS_Scorched_Earth = { set_nationality = SLW }
+			EQS_sun_marble_1048 = { set_nationality = SLW }
+			EQS_Locust_Glow = { set_nationality = SLW }
+			EQS_Quasar_Pulse = { set_nationality = SLW }
 		}	
 	}
 }

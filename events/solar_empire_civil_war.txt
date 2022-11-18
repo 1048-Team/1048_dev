@@ -10,20 +10,21 @@ country_event = { #Midwinter and the rest of the surviving archmages arrive in M
 	
 	option = { #I hope I have the wisdom to guide us through this war
 		name = solarwar.1.a
-		add_country_leader_role = {
-			character = event_target:EQS_Midwinter_Halo_target
-			promote_leader = yes
-			country_leader = {
-				expire = "1965.1.1"
-				desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
-				ideology = solarism
-				traits = {
-					reluctant_regent
+		EQS_Midwinter_Halo = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					expire = "1965.1.1"
+					desc = "POLITICS_1048_MIDWINTER_HALO_DESC"
+					ideology = solarism
+					traits = {
+						reluctant_regent
+					}
 				}
 			}
 		}
 		hidden_effect = {
-			event_target:EQS_Midwinter_Halo_target = {
+			EQS_Midwinter_Halo = {
 				promote_leader = yes
 				remove_trait = { trait = recently_promoted }
 			}
@@ -245,16 +246,17 @@ country_event = { #Nova's ceremony is elaborate and beatific, and Nova accepts t
 	option = { #I will serve the Empire with fire and devotion!
 		name = solarwar.12.a
 		retire_country_leader = yes
-		add_country_leader_role = {
-			character = event_target:EQS_Nova_Glow_target
-			promote_leader = yes
-			
-			country_leader = {
-				ideology = solarism
-				expire = "1965.1.1"
-				desc = "POLITICS_1048_NOVA_GLOW_SLW_DESC"
-				traits = {
-					prefectess
+		EQS_Nova_Glow = {
+			add_country_leader_role = {
+				promote_leader = yes
+				
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					desc = "POLITICS_1048_NOVA_GLOW_SLW_DESC"
+					traits = {
+						prefectess
+					}
 				}
 			}
 		}
@@ -404,7 +406,7 @@ country_event = { #As Midwinter enters a more private room with Nova, Nova decla
 	
 	option = { #Now to get rid of you...
 		name = solarwar.17.a
-		retire_character = event_target:EQS_Midwinter_Halo_target
+		retire_character = EQS_Midwinter_Halo
 	}
 }
 
@@ -711,7 +713,7 @@ country_event = { #Quasar is summoned by Nova to the throne room and Nova has a 
 	
 	option = { #It'd be wise to say yes
 		name = solarwar.35.a
-		event_target:EQS_Nova_Glow_target = {
+		EQS_Nova_Glow = {
 			add_advisor_role = {
 				advisor = {
 					slot = political_advisor
@@ -865,7 +867,7 @@ country_event = { #Nova assembles the Adoratio Primus and declares that as Sunse
 	
 	option = { #This better not be a mistake
 		name = solarwar.52.a
-		event_target:EQS_Quasar_Pulse_target = {
+		EQS_Quasar_Pulse = {
 			add_advisor_role = {
 				advisor = {
 					slot = political_advisor
@@ -955,7 +957,7 @@ country_event = { #Nova enters the palace dungeons to speak with Sunset, who has
 		custom_effect_tooltip = EQS_sunset_general_tt
 		custom_effect_tooltip = EQS_aurora_general_tt
 		hidden_effect = {
-			event_target:EQS_Sunset_Shimmer_target = { 
+			EQS_Sunset_Shimmer = { 
 				set_character_flag = SLW_sunset_restored
 				remove_advisor_role = { slot = political_advisor }
 				add_advisor_role = {
@@ -969,7 +971,7 @@ country_event = { #Nova enters the palace dungeons to speak with Sunset, who has
 					}
 				}
 			}
-			event_target:EQS_Aurora_Shinespark_target = { set_character_flag = SLW_aurora_released }
+			EQS_Aurora_Shinespark = { set_character_flag = SLW_aurora_released }
 		}
 	}
 }
@@ -983,7 +985,7 @@ country_event = { #A ceremony honoring Midwinter as the leader who kept them fro
 	
 	option = { #Your service is your reward!
 		name = solarwar.59.a
-		event_target:EQS_Midwinter_Halo_target = {
+		EQS_Midwinter_Halo = {
 			add_advisor_role = {
 				advisor = {
 					slot = political_advisor
@@ -1020,8 +1022,8 @@ country_event = { #Watch from a minor inquisitor as the last of the heretics are
 	
 	option = { #Where have we heard this before?
 		name = solarwar.61.a
-		event_target:EQS_Nova_Glow_target = { promote_leader = yes }
-		hidden_effect = { event_target:EQS_Nova_Glow_target = { remove_trait = { trait = recently_promoted } } }
+		EQS_Nova_Glow= { promote_leader = yes }
+		hidden_effect = { EQS_Nova_Glow = { remove_trait = { trait = recently_promoted } } }
 	}
 }
 
@@ -1952,8 +1954,18 @@ country_event = { #Starlight remains defiant against Nova but Nova has another p
 		set_country_flag = starlight_and_trixie_corrupted
 		custom_effect_tooltip = SLW_starlight_and_trixie_generals_tt
 		hidden_effect = {
-			event_target:EQS_Starlight_Glimmer_target = { set_nationality = SLW }
-			event_target:EQS_Trixie_Lulamoon_target = { set_nationality = SLW }
+			every_possible_country = {
+				limit = {
+					has_character = EQS_Starlight_Glimmer
+				}
+				EQS_Starlight_Glimmer = { set_nationality = SLW }
+			}
+			every_possible_country = {
+				limit = {
+					has_character = EQS_Trixie_Lulamoon
+				}
+				EQS_Trixie_Lulamoon = { set_nationality = SLW }
+			}
 		}
 	}
 }
