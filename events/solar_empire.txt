@@ -710,28 +710,25 @@ country_event = { #Purging some heretical commanders
 				limit = {
 					SOL_ordo_not_immune_to_purge = yes
 				}
-				save_event_target_as = SOL_purge_1
+				retire = yes
 			}
 			
 			random_character = {
 				limit = {
 					SOL_ordo_not_immune_to_purge = yes
 				}
-				save_event_target_as = SOL_purge_2
+				retire = yes
 			}
 			
 			random_character = {
 				limit = {
 					SOL_ordo_not_immune_to_purge = yes
 				}
-				save_event_target_as = SOL_purge_3
+				retire = yes
 			}
-		}
-		retire_character = event_target:SOL_purge_1
-		retire_character = event_target:SOL_purge_2
-		retire_character = event_target:SOL_purge_3
 		}
 	}
+}
 
 country_event = { #A new temple is consecrated in Sanctum Solar and production begins
 	id = solar.52
@@ -1067,7 +1064,7 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		ai_chance = {
 			factor = 60
 		}
-		event_target:EQS_Aurora_Shinespark_target = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
+		EQS_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
 			add_to_variable = {
 				sunset_zealotry = 10
@@ -1090,7 +1087,7 @@ country_event = { #Sunset and Aurora get help from Astrum, and have a quick figh
 		ai_chance = {
 			factor = 40
 		}
-		event_target:EQS_Aurora_Shinespark_target = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
+		EQS_Aurora_Shinespark = { add_timed_unit_leader_trait = { trait = wounded days = 150 } }
 		hidden_effect = {
 			add_to_variable = {
 				sunset_zealotry = -10
@@ -1293,16 +1290,17 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				retire_country_leader = yes
 				custom_effect_tooltip = sunset_arrested_tt
 				set_country_flag = sunset_arrested
-				add_country_leader_role = {
-					character = event_target:EQS_Sunset_Shimmer_target
-					promote_leader = yes
-					
-					country_leader = {
-						expire = "1965.1.1"
-						desc = "POLITICS_SUNSET_SHIMMER_DESC"
-						ideology = solarism
-						id = -1
-						traits = { high_mage_shimmer }
+				EQS_Sunset_Shimmer_1048 = {
+					add_country_leader_role = {
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1965.1.1"
+							desc = "POLITICS_SUNSET_SHIMMER_DESC"
+							ideology = solarism
+							id = -1
+							traits = { high_mage_shimmer }
+						}
 					}
 				}
 				mark_focus_tree_layout_dirty = yes
@@ -1332,15 +1330,16 @@ country_event = { #After being sealed away, discussion is held over who will be 
 				retire_country_leader = yes
 				custom_effect_tooltip = aurora_retires_tt
 				set_country_flag = aurora_removed
-				add_country_leader_role = {
-					character = event_target:EQS_Aurora_Shinespark_target
-					promote_leader = yes
-					country_leader = {
-						expire = "1965.1.1"
-						desc = "POLITICS_AURORA_SHINESPARK_DESC"
-						ideology = solarism
-						traits = {
-							protectress_of_the_empress
+				EQS_Aurora_Shinespark = {
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							expire = "1965.1.1"
+							desc = "POLITICS_AURORA_SHINESPARK_DESC"
+							ideology = solarism
+							traits = {
+								protectress_of_the_empress
+							}
 						}
 					}
 				}
@@ -1407,16 +1406,8 @@ country_event = { #Suits up for battle once more, getting Sunset, Aurora, and ot
 				name = EQS_empire_is_mad
 			}
 		}
-		IF = {
-			custom_effect_tooltip = daybreaker_returns_tt
-			limit = { has_country_leader = { ruling_only = yes name = "Daybreaker" } }
-			clr_country_flag = daybreaker_sick
-		}
-		ELSE_IF = {
-			limit = { has_country_leader = { ruling_only = yes name = "Nova Glow" } }
-			event_target:EQS_Nova_Glow_target = { promote_leader = yes }
-			event_target:EQS_Nova_Glow_target = { remove_trait = { trait = recently_promoted } }
-		}
+		custom_effect_tooltip = daybreaker_returns_tt
+		clr_country_flag = daybreaker_sick
 	}
 }
 
@@ -1713,8 +1704,8 @@ country_event = { #The current leader is informed that Scorched Earth has gone A
 					random_days = 7
 				}
 			}
-			event_target:EQS_Scorched_Earth_target = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
-			event_target:EQS_Luminous_Blade_target = { set_nationality = MTS }
+			EQS_Scorched_Earth = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
+			EQS_Luminous_Blade = { set_nationality = MTS }
 		}
 		custom_effect_tooltip = EQS_scorched_earth_departs_tt
 	}
@@ -1740,8 +1731,8 @@ country_event = { #Scorched Earth is alerted by some of his scouts that a Solar 
 					random_days = 7
 				}
 			}
-			event_target:EQS_Scorched_Earth_target = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
-			event_target:EQS_Luminous_Blade_target = { set_nationality = MTS }
+			EQS_Scorched_Earth = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
+			EQS_Luminous_Blade = { set_nationality = MTS }
 		}
 	}
 }
@@ -1943,10 +1934,10 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 			}
 			hidden_effect = {
 				remove_ideas = EQS_aurora_shinespark
-				event_target:EQS_Aurora_Shinespark_target = {
+				EQS_Aurora_Shinespark = {
 					remove_advisor_role = { slot = political_advisor }
 				}
-				event_target:EQS_Aurora_Shinespark_target = {
+				EQS_Aurora_Shinespark = {
 					add_advisor_role = {
 						advisor = {
 							slot = political_advisor
@@ -1985,10 +1976,10 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 		}
 		ELSE = {
 			hidden_effect = {
-				event_target:EQS_Aurora_Shinespark_target = {
+				EQS_Aurora_Shinespark = {
 					remove_advisor_role = { slot = political_advisor }
 				}
-				event_target:EQS_Aurora_Shinespark_target = {
+				EQS_Aurora_Shinespark = {
 					add_advisor_role = {
 						advisor = {
 							slot = political_advisor
@@ -2025,8 +2016,8 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 				}
 			}
 		}
-		event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
-		event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = high_mage } }
+		EQS_Aurora_Shinespark = { remove_trait = { trait = solaris_inquisitionis } }
+		EQS_Aurora_Shinespark = { add_trait = { trait = high_mage } }
 		add_ideas = aurora_shinespark
 	}
 }
@@ -2187,8 +2178,8 @@ country_event = { #Sunset is in another meeting with Blueblood and she finally h
 	
 	option = { #Now please stop staring at my rump
 		name = solar.218.a
-		event_target:EQS_Blueblood_target = { add_defense = 1 }
-		event_target:EQS_Blueblood_target = { remove_trait = { trait = politically_connected } }
+		EQS_Blueblood = { add_defense = 1 }
+		EQS_Blueblood = { remove_trait = { trait = politically_connected } }
 		set_country_flag = new_sunset_generals
 		custom_effect_tooltip = EQS_bluebloods_buddies_tt #New generals
 	}
@@ -2850,8 +2841,8 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 			add = shield_of_the_empire
 		}
 		clr_country_flag = sunset_arrested
-		event_target:EQS_Sunset_Shimmer_target = { remove_trait = { trait = high_mage } }
-		event_target:EQS_Sunset_Shimmer_target = { add_trait = { trait = princess_regent_general } }
+		EQS_Sunset_Shimmer = { remove_trait = { trait = high_mage } }
+		EQS_Sunset_Shimmer = { add_trait = { trait = princess_regent_general } }
 		every_country = {
 			limit = {
 				is_in_array = {
@@ -2913,9 +2904,11 @@ country_event = { #Sunset manages to convince the leaders that the Solar Empire 
 	option = { #That was honestly surprising. I feel like at least one were eyeing to suck my blood, though
 		name = solar.247.a
 		set_country_flag = thestrals_placated
-		event_target:EEE_Gushing_Pulse_target = { set_nationality = EQS }
-		event_target:EEE_Nocturne_Vision_target = { set_nationality = EQS }
-		event_target:EEE_Screechy_Gale_target = { set_nationality = EQS }
+		EEE = {
+			EEE_Gushing_Pulse = { set_nationality = EQS }
+			EEE_Nocturne_Vision = { set_nationality = EQS }
+			EEE_Screechy_Gale = { set_nationality = EQS }
+		}
 	}
 }
 
@@ -2929,7 +2922,7 @@ country_event = { #Sunset is shot down almost instantly and she nearly gets capt
 	option = { #I definitely think one of them would have sucked my blood if I didn't get out of there
 		name = solar.248.a
 		add_political_power = -50
-		event_target:EQS_Sunset_Shimmer_target = {
+		EQS_Sunset_Shimmer_1048 = {
 			add_timed_unit_leader_trait = {
 				trait = wounded
 				days = 45
@@ -3867,33 +3860,25 @@ country_event = { #Sunset surprises Aurora with telling her of her next mission,
 				release_puppet = EQC
 			}
 			EQC = {
-				event_target:EQS_Aurora_Shinespark_target = { 
-					set_nationality = PREV
+				EQS = {
+					EQS_Aurora_Shinespark = { 
+						set_nationality = PREV
+					}
 				}
-				add_country_leader_role = {
-					character = event_target:EQS_Aurora_Shinespark_target
-					promote_leader = yes
-					
-					country_leader = {
-						expire = "1965.1.1"
-						desc = "POLITICS_AURORA_SHINESPARK_DESC"
-						ideology = solarism
-						traits = {
-							protectress_of_the_empress
+				EQS_Aurora_Shinespark = {
+					add_country_leader_role = {
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1965.1.1"
+							desc = "POLITICS_AURORA_SHINESPARK_DESC"
+							ideology = solarism
+							traits = {
+								protectress_of_the_empress
+							}
 						}
 					}
 				}
-			#	create_country_leader = {
-			#	name = "Aurora Shinespark"
-			#	expire = "1965.1.1"
-			#	picture = "gfx/leaders/EQS/Aurora_Shinespark.tga"
-			#	desc = "POLITICS_AURORA_SHINESPARK_DESC"
-			#	ideology = solarism
-			#	female = yes
-			#	traits = {
-			#		protectress_of_the_empress
-			#		}
-			#	}
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -4369,10 +4354,10 @@ country_event = { #Aurora is presented with some of the training results of the 
 #		custom_effect_tooltip = aurora_does_it_herself_tt
 #		clr_country_flag = aurora_removed
 #		hidden_effect = {
-#			event_target:EQS_Aurora_Shinespark_target = { promote_leader = yes }
-#			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = recently_promoted } }
-#			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
-#			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = princess_regent_general } }
+#			EQS_Aurora_Shinespark = { promote_leader = yes }
+#			EQS_Aurora_Shinespark = { remove_trait = { trait = recently_promoted } }
+#			EQS_Aurora_Shinespark = { remove_trait = { trait = solaris_inquisitionis } }
+#			EQS_Aurora_Shinespark = { add_trait = { trait = princess_regent_general } }
 #		}
 #		add_war_support = 0.1
 #	}
@@ -4393,10 +4378,10 @@ country_event = { #Aurora speaks with a couple of her generals about the initial
 		#add_war_support = 0.03
 		add_war_support = 0.1
 		hidden_effect = {
-			event_target:EQS_Aurora_Shinespark_target = { promote_leader = yes }
-			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = recently_promoted } }
-			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
-			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = princess_regent_general } }
+			EQS_Aurora_Shinespark = { promote_leader = yes }
+			EQS_Aurora_Shinespark = { remove_trait = { trait = recently_promoted } }
+			EQS_Aurora_Shinespark = { remove_trait = { trait = solaris_inquisitionis } }
+			EQS_Aurora_Shinespark = { add_trait = { trait = princess_regent_general } }
 			add_named_threat = {
 				threat = 5
 				name = EQS_solaris_quorundam
@@ -4565,8 +4550,8 @@ country_event = { #Blueblood meets with a few of his generals and Aurora barges 
 			ideology = neutrality
 			popularity = -0.03
 		}
-		event_target:EQS_Fidelis_Flamma_target = { promote_leader = yes }
-		hidden_effect = { event_target:EQS_Fidelis_Flamma_target = { remove_trait = { trait = recently_promoted } } }
+		EQS_Fidelis_Flamma = { promote_leader = yes }
+		hidden_effect = { EQS_Fidelis_Flamma = { remove_trait = { trait = recently_promoted } } }
 		###Potentially remove EQS_power_to_the_old_guard or replace it again with EQS_salvation_in_death
 	}
 }
@@ -4760,7 +4745,7 @@ country_event = { #Aurora enters the temple in Sanctum Solar to hold a final pra
 	
 	option = { #Soon I will right the wrong inflicted upon us
 		name = solar.347.a
-		event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = anointed_of_the_empress } }
+		EQS_Aurora_Shinespark = { add_trait = { trait = anointed_of_the_empress } }
 	}
 }
 
@@ -4898,33 +4883,25 @@ country_event = { #Aurora meets with Novus after the war with Marelandia, and sh
 				release_puppet = EQC
 			}
 			EQC = {
-				event_target:EQS_Novus_Flux_target = {
-					set_nationality = PREV
+				EQS = {
+					EQS_Novus_Flux = {
+						set_nationality = PREV
+					}
 				}
-				add_country_leader_role = {
-					character = event_target:EQS_Novus_Flux_target
-					promote_leader = yes
-					
-					country_leader = {
-						ideology = solarism
-						expire = "1965.1.1"
-						#desc = "POLITICS_NOVUS_FLUX_DESC"
-						traits = {
-							novus_reformist
+				EQS_Novus_Flux = {
+					add_country_leader_role = {
+						promote_leader = yes
+						
+						country_leader = {
+							ideology = solarism
+							expire = "1965.1.1"
+							#desc = "POLITICS_NOVUS_FLUX_DESC"
+							traits = {
+								novus_reformist
+							}
 						}
 					}
 				}
-			#	create_country_leader = {
-			#	name = "Novus Flux"
-			#	expire = "1965.1.1"
-			#	picture = "gfx/leaders/EQS/Novus_Flux.tga"
-			#	#desc = "POLITICS_AURORA_SHINESPARK_DESC"
-			#	ideology = solarism
-			#	female = yes
-			#	traits = {
-			#		novus_reformist
-			#		}
-			#	}
 				drop_cosmetic_tag = yes
 				set_party_name = {
 					ideology = fascism
@@ -5179,7 +5156,7 @@ country_event = { #Nebula is taken before the heretic pyre, with Aurora watching
 		add_stability = 0.02
 		add_political_power = 30
 		hidden_effect = {
-			BLS = { retire_character = event_target:BLS_Nebula_Flare_target }
+			BLS = { retire_character = BLS_Nebula_Flare }
 		}
 	}
 }
@@ -5214,11 +5191,13 @@ country_event = { #Aurora goes into the dungeon one more time to break Nebula fu
 		name = solar.362.a
 		custom_effect_tooltip = BLS_nebula_general_tt
 		hidden_effect = {
-			event_target:BLS_Nebula_Flare_target = { set_nationality = ROOT }
-			event_target:BLS_Nebula_Flare_target = { 
-				remove_trait = { trait = former_cultist } 
-				remove_trait = { trait = mechanicus_deus }
-				add_trait = { trait = solaris_inquisitionis }
+			BLS = {
+				BLS_Nebula_Flare = { set_nationality = ROOT }
+				BLS_Nebula_Flare = { 
+					remove_trait = { trait = former_cultist } 
+					remove_trait = { trait = mechanicus_deus }
+					add_trait = { trait = solaris_inquisitionis }
+				}
 			}
 		}
 	}
@@ -5798,11 +5777,11 @@ country_event = { #Sunset meekly enters Celestia's chambers and awaits her deter
 		set_country_flag = sunset_redeemed
 		set_country_flag = aurora_redeemed
 		hidden_effect = {
-			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = protectress_of_the_empress_general } }
-			event_target:EQS_Aurora_Shinespark_target = { remove_trait = { trait = solaris_inquisitionis } }
-			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = missionary_of_harmony } }
-			event_target:EQS_Aurora_Shinespark_target = { add_trait = { trait = former_cultist } }
-			event_target:EQS_Aurora_Shinespark_target = { set_portraits = { army = { large = "gfx/leaders/EQS/Aurora_Reformed.tga" } } }
+			EQS_Aurora_Shinespark = { remove_trait = { trait = protectress_of_the_empress_general } }
+			EQS_Aurora_Shinespark = { remove_trait = { trait = solaris_inquisitionis } }
+			EQS_Aurora_Shinespark = { add_trait = { trait = missionary_of_harmony } }
+			EQS_Aurora_Shinespark = { add_trait = { trait = former_cultist } }
+			EQS_Aurora_Shinespark = { set_portraits = { army = { large = "gfx/leaders/EQS/Aurora_Reformed.tga" } } }
 		}
 		custom_effect_tooltip = aurora_returns
 	}
@@ -5918,11 +5897,11 @@ country_event = { #After seeing the first successful batch of reformed generals,
 		name = celestia.41.a
 		custom_effect_tooltip = novus_becomes_EQS_general_tt
 		hidden_effect = {
-			event_target:EQS_Novus_Flux_target = { remove_trait = { trait = evening_star } }
-			event_target:EQS_Novus_Flux_target = { add_trait = { trait = twilight_beauty } }
-			event_target:EQS_Novus_Flux_target = { remove_trait = { trait = solaris_inquisitionis } }
-			event_target:EQS_Novus_Flux_target = { add_trait = {trait = former_cultist } }
-			event_target:EQS_Novus_Flux_target = { set_portraits = { army = { large = "gfx/leaders/EQS/Novus_Harmonist.tga" } } }
+			EQS_Novus_Flux = { remove_trait = { trait = evening_star } }
+			EQS_Novus_Flux = { add_trait = { trait = twilight_beauty } }
+			EQS_Novus_Flux = { remove_trait = { trait = solaris_inquisitionis } }
+			EQS_Novus_Flux = { add_trait = {trait = former_cultist } }
+			EQS_Novus_Flux = { set_portraits = { army = { large = "gfx/leaders/EQS/Novus_Harmonist.tga" } } }
 		}
 		set_country_flag = redeemed_solarist_generals
 	}

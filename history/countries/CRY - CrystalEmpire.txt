@@ -3,14 +3,13 @@
 oob = "CRY_1048"
 
 set_research_slots = 3
+starting_train_buffer = 1
 
 set_technology = {
 	pony_race = 1
 	melee_weapons = 1
 	melee_weapons1 = 1
 	pre_gw_artillery = 1
-	early_fighter = 1
-	early_bomber = 1
 	infantry_weapons = 1
 	infantry_weapons1 = 1
 	interwar_antitank = 1
@@ -22,6 +21,48 @@ set_technology = {
 	basic_train = 1
 	tech_pegasi = 1
 	motorised_infantry = 1
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_technology = {
+		aa_lmg = 1
+		early_bombs = 1
+		aircraft_construction = 1
+		engines_1 = 1
+		iw_small_airframe = 1
+		iw_medium_airframe = 1
+	}
+
+	create_equipment_variant = {
+		name = "Gladiator"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_CRY_early_fighter_medium"
+	}
+	create_equipment_variant = {
+		name = "Wheatley"
+		type = medium_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_1_3x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_CRY_early_bomber_medium"
+	}
+	set_air_oob = "CRY_1048_air_bba"
+
+
+	else = {
+		set_technology = {
+			early_fighter = 1
+			early_bomber = 1
+		}
+		set_air_oob = "CRY_1048_air_legacy"
+	}
 }
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
 if = {
@@ -54,7 +95,6 @@ if = {
 	set_technology = {
 		basic_torpedo = 1
 		basic_battery = 1
-		basic_secondary_battery = 1
 		early_ship_hull_submarine = 1
 		early_ship_hull_light = 1
 		early_ship_hull_cruiser = 1
@@ -93,7 +133,7 @@ diplomatic_relation = {
 	country = CHN
 	relation = non_aggression_pact
 	active = yes
-	}
+}
 add_ideas = {
 	CRY_dying_heart
 	CRY_union_unrest
@@ -182,4 +222,6 @@ add_ideas = {
 
 set_rule = {
 	can_generate_female_aces = yes
+	can_generate_female_unit_leaders  = yes
+	can_generate_female_country_leaders = yes
 }

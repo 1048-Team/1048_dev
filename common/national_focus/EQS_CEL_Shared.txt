@@ -4023,11 +4023,26 @@ shared_focus = {
 	prerequisite = { focus = EQS_uncivilized_but_necessary }
 	
 	completion_reward = {
-		add_tech_bonus = {
-			name = modern_tank_bonus
-			bonus = 1
-			uses = 1
-			technology = main_battle_tank
+		if = {
+			limit = {
+				has_dlc = "No Step Back"
+			}
+			add_tech_bonus = {
+				name = modern_tank_bonus
+				bonus = 1
+				ahead_reduction = 0.75
+				uses = 1
+				technology = main_battle_tank_chassis
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = modern_tank_bonus
+				bonus = 1
+				ahead_reduction = 0.75
+				uses = 1
+				technology = main_battle_tank
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
@@ -4187,12 +4202,26 @@ shared_focus = {
 	prerequisite = { focus = EQS_survival_of_the_sturdiest }
 	
 	completion_reward = {
-		add_ideas = EQS_careful_bombing_systems
-		add_doctrine_cost_reduction = {
-			name = operation_integrity_bonus
-			cost_reduction = 0.5
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = EQS_careful_bombing_systems_BBA
+			add_tech_bonus = {
+				name = strat_bombing_bonus
+				bonus = 1.5
+				uses = 1
+				category = cat_air_bombs
+			}
+		}
+		else = {
+			add_ideas = EQS_careful_bombing_systems
+		}
+		add_tech_bonus = {
+			name = strategic_bomber_bonus
+			bonus = 1
 			uses = 1
-			category = cat_operational_integrity
+			category = cat_stratigic_bomber
 		}
 	}
 	ai_will_do = { factor = 18 }
@@ -4207,15 +4236,32 @@ shared_focus = {
 	prerequisite = { focus = EQS_design_redundant_bomber_systems }
 	
 	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_careful_bombing_systems
-			add_idea = EQS_careful_bombing_systems_2
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			swap_ideas = {
+				remove_idea = EQS_careful_bombing_systems_BBA
+				add_idea = EQS_careful_bombing_systems_2_BBA
+			}
+			add_tech_bonus = {
+				name = engine_bonus
+				bonus = 1.25
+				uses = 1
+				category = cat_air_engine
+			}
 		}
-		add_doctrine_cost_reduction = {
-			name = operation_integrity_bonus
-			cost_reduction = 0.5
+		else = {
+			swap_ideas = {
+				remove_idea = EQS_careful_bombing_systems
+				add_idea = EQS_careful_bombing_systems_2
+			}
+		}
+		add_tech_bonus = {
+			name = tactical_bomber_bonus
+			bonus = 1
 			uses = 1
-			category = cat_operational_integrity
+			category = tactical_bomber
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -4235,7 +4281,7 @@ shared_focus = {
 			name = operation_integrity_bonus
 			cost_reduction = 0.5
 			uses = 2
-			category = tactical_bomber
+			category = cat_operational_integrity
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -4273,18 +4319,39 @@ shared_focus = {
 	prerequisite = { focus = EQS_survival_of_the_strongest }
 	
 	completion_reward = {
-		add_ideas = EQS_enhanced_dive_bombers
-		add_tech_bonus = {
-			name = cas_bonus
-			bonus = 1
-			uses = 1
-			category = cas_bomber
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = EQS_enhanced_dive_bombers_BBA
+			add_tech_bonus = {
+				name = small_plane_bonus
+				bonus = 1
+				uses = 2
+				category = light_air
+			}
+			add_tech_bonus = {
+				name = engine_bonus
+				bonus = 1.25
+				uses = 1
+				ahead_reduction = 0.25
+				category = cat_air_engine
+			}
 		}
-		add_tech_bonus = {
-			name = fighter_bonus
-			bonus = 1
-			uses = 1
-			category = light_fighter
+		else = {
+			add_ideas = EQS_enhanced_dive_bombers
+			add_tech_bonus = {
+				name = cas_bonus
+				bonus = 1
+				uses = 1
+				category = cas_bomber
+			}
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 1
+				uses = 1
+				category = light_fighter
+			}
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -4300,9 +4367,20 @@ shared_focus = { #Have an I am Speed joke
 	prerequisite = { focus = EQS_matrix_powered_flight }
 	
 	completion_reward = {
-		swap_ideas = {
-			remove_idea = EQS_enhanced_dive_bombers
-			add_idea = EQS_enhanced_dive_bombers_2
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			swap_ideas = {
+				remove_idea = EQS_enhanced_dive_bombers_BBA
+				add_idea = EQS_enhanced_dive_bombers_2_BBA
+			}
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = EQS_enhanced_dive_bombers
+				add_idea = EQS_enhanced_dive_bombers_2
+			}
 		}
 		add_doctrine_cost_reduction = {
 			name = battlefield_support_bonus
@@ -4344,11 +4422,32 @@ shared_focus = {
 	prerequisite = { focus = EQS_reinvent_the_propeller }
 	
 	completion_reward = {
-		add_tech_bonus = {
-			name = heavy_fighter_bonus
-			bonus = 1
-			uses = 2
-			category = cat_heavy_fighter
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = heavy_fighter_bonus
+				bonus = 1
+				uses = 1
+				category = cat_heavy_fighter
+			}
+			add_tech_bonus = {
+				name = heavy_fighter_weapon_bonus
+				bonus = 1.33
+				uses = 1
+				ahead_reduction = 0.33
+				technology = aa_cannon_1
+				technology = aa_cannon_2
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = heavy_fighter_bonus
+				bonus = 1
+				uses = 2
+				category = cat_heavy_fighter
+			}
 		}
 	}
 	ai_will_do = { factor = 21 }
@@ -4387,13 +4486,28 @@ shared_focus = {
 	prerequisite = { focus = EQS_synergetic_support_roles }
 	
 	completion_reward = {
-		add_tech_bonus = {
-			name = jet_fighter_bonus
-			bonus = 1
-			ahead_reduction = 2
-			uses = 1
-			technology = jet_fighter1
-			technology = jet_fighter2
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = jet_fighter_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = modern_small_airframe
+				technology = modern_small_airframe_2
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = jet_fighter_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = jet_fighter1
+				technology = jet_fighter2
+			}
 		}
 	}
 	ai_will_do = { factor = 25 }
@@ -4410,13 +4524,28 @@ shared_focus = {
 	prerequisite = { focus = EQS_declassify_fluttershys_nuclear_research }
 	
 	completion_reward = {
-		add_tech_bonus = {
-			name = tac_jet_bomber_bonus
-			bonus = 1
-			ahead_reduction = 2
-			uses = 1
-			technology = jet_tactical_bomber1
-			technology = jet_tactical_bomber2
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = tac_jet_bomber_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = modern_medium_airframe
+				technology = modern_medium_airframe_2
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = tac_jet_bomber_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = jet_tactical_bomber1
+				technology = jet_tactical_bomber2
+			}
 		}
 	}
 	ai_will_do = { factor = 20 }
@@ -4433,13 +4562,29 @@ shared_focus = {
 	prerequisite = { focus = EQS_declassify_fluttershys_nuclear_research }
 	
 	completion_reward = {
-		add_tech_bonus = {
-			name = strat_jet_bomber_bonus
-			bonus = 1
-			ahead_reduction = 2
-			uses = 1
-			technology = jet_strategic_bomber1
-			technology = jet_strategic_bomber_a
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = strat_jet_bomber_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = modern_large_airframe
+				technology = modern_large_airframe_2
+				technology = super_large_airframe
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = strat_jet_bomber_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = jet_strategic_bomber1
+				technology = jet_strategic_bomber_a
+			}
 		}
 	}
 	ai_will_do = { factor = 19 }

@@ -7467,10 +7467,35 @@ shared_focus = {
 				instant_build = yes
 			}
 		}
-		add_equipment_to_stockpile = {
-			type = CAS_equipment
-			amount = 500
-			producer = 500
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			create_equipment_variant = {
+				name = "Meurom Mangler"
+				type = small_plane_cas_airframe_1
+				modules = {
+					fixed_main_weapon_slot = bomb_locks
+					fixed_auxiliary_weapon_slot_1 = bomb_locks
+					engine_type_slot = engine_2_1x
+					special_type_slot_1 = drop_tanks
+					special_type_slot_2 = empty
+				}
+				icon = "GFX_ENG_CAS1_medium"
+			}
+			add_equipment_to_stockpile = {
+				type = small_plane_cas_airframe
+				amount = 500
+				producer = EQS
+				variant = "Meurom Mangler"
+			}
+		}
+		ELSE = {
+			add_equipment_to_stockpile = {
+				type = small_plane_cas_airframe
+				amount = 500
+				producer = EQS
+			}
 		}
 	}
 	ai_will_do = { factor = 28 }

@@ -3382,16 +3382,24 @@ shared_focus = {
 	prerequisite = { focus = EQS_airforce_revitalization }
 	
 	completion_reward = {
-		add_equipment_to_stockpile = {
-			type = fighter_equipment
-			amount = 200
-			producer = EQS
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			###Insert fighters and different air bonuses
 		}
-		add_tech_bonus = {
-			name = fighter_2_bonus
-			bonus = 1
-			uses = 1
-			technology = fighter2
+		ELSE = {
+			add_equipment_to_stockpile = {
+				type = small_plane_airframe
+				amount = 200
+				producer = EQS
+			}
+			add_tech_bonus = {
+				name = fighter_2_bonus
+				bonus = 1
+				uses = 1
+				technology = fighter2
+			}
 		}
 		2 = {
 			add_building_construction = {
@@ -3421,6 +3429,17 @@ shared_focus = {
 			uses = 1
 			category = cat_strategic_destruction
 		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = strat_bomber_bonus
+				bonus = 1
+				uses = 1
+				category = cat_air_bombs
+			}
+		}		
 		add_tech_bonus = {
 			name = strat_bomber_bonus
 			bonus = 1
@@ -3447,6 +3466,17 @@ shared_focus = {
 			uses = 2
 			category = tactical_bomber
 		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = engine_bonus
+				bonus = 1
+				uses = 1
+				category = cat_air_engine
+			}
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -3461,7 +3491,15 @@ shared_focus = {
 	prerequisite = { focus = EQS_crows_to_buzzards }
 	
 	completion_reward = {
-		add_ideas = EQS_above_the_chaos
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = EQS_above_the_chaos_BBA
+		}
+		else = {
+			add_ideas = EQS_above_the_chaos
+		}
 		add_doctrine_cost_reduction = {
 			name = strat_destruction_bonus
 			cost_reduction = 0.5
@@ -3482,19 +3520,32 @@ shared_focus = {
 	prerequisite = { focus = EQS_soaring_above_chaos }
 	
 	completion_reward = {
-	add_tech_bonus = {
-			name = heavy_fighter_bonus
-			bonus = 1
-			uses = 1
-			category = cat_heavy_fighter
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = fighter_weapon_bonus
+				bonus = 1
+				uses = 2
+				category = cat_air_guns
+			}
 		}
-	add_tech_bonus = {
+		else = {
+			add_tech_bonus = {
+				name = heavy_fighter_bonus
+				bonus = 1
+				uses = 1
+				category = cat_heavy_fighter
+			}
+		}
+		add_tech_bonus = {
 			name = strat_bomber_bonus
 			bonus = 1
 			uses = 1
 			category = cat_strategic_bomber
 		}
-	add_doctrine_cost_reduction = {
+		add_doctrine_cost_reduction = {
 			name = strat_destruction_bonus
 			cost_reduction = 0.5
 			uses = 1
@@ -3514,13 +3565,29 @@ shared_focus = {
 	prerequisite = { focus = EQS_unified_command }
 	
 	completion_reward = {
-		add_tech_bonus = {
-			name = jet_strat_bonus
-			bonus = 1
-			ahead_reduction = 2
-			uses = 1
-			technology = jet_strategic_bomber1
-			technology = jet_strategic_bomber_a
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = jet_strat_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = modern_large_airframe
+				technology = modern_large_airframe_2
+				technology = super_large_airframe
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = jet_strat_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = jet_strategic_bomber1
+				technology = jet_strategic_bomber_a
+			}
 		}
 	}
 	ai_will_do = { factor = 17 }
@@ -3537,6 +3604,17 @@ shared_focus = {
 	mutually_exclusive = { focus = EQS_developing_new_frame }
 	
 	completion_reward = {
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = fighter_weapon_bonus
+				bonus = 1
+				uses = 1
+				category = cat_air_guns
+			}
+		}
 		add_tech_bonus = {
 			name = cas_bonus
 			bonus = 1
@@ -3563,7 +3641,15 @@ shared_focus = {
 	prerequisite = { focus = EQS_improving_models }
 	
 	completion_reward = {
-		add_ideas = EQS_blotting_out_the_sun
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = EQS_blotting_out_the_sun_BBA
+		}
+		else = {
+			add_ideas = EQS_blotting_out_the_sun
+		}
 	}
 	ai_will_do = { factor = 20 }
 }
@@ -3578,6 +3664,24 @@ shared_focus = {
 	prerequisite = { focus = EQS_swarming_skies }
 	
 	completion_reward = {
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = fighter_cas_bonus
+				bonus = 1
+				uses = 1
+				category = light_air
+			}
+			add_tech_bonus = {
+				name = engine_bonus
+				bonus = 2
+				uses = 1
+				ahead_reduction = 0.5
+				category = cat_air_engine
+			}
+		}
 		add_tech_bonus = {
 			name = fighter_cas_bonus
 			bonus = 1
@@ -3671,7 +3775,15 @@ shared_focus = {
 	prerequisite = { focus = EQS_punishing_sound_barrier }
 	
 	completion_reward = {
-		add_ideas = EQS_fanatical_pilots
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = EQS_fanatical_pilots_BBA
+		}
+		else = {
+			add_ideas = EQS_fanatical_pilots
+		}
 	}
 	ai_will_do = { factor = 15 }
 }
@@ -3687,7 +3799,15 @@ shared_focus = {
 	prerequisite = { focus = EQS_honor_in_sacrifice }
 	
 	completion_reward = {
-		add_ideas = EQS_screaming_death
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = EQS_screaming_death_BBA
+		}
+		else = {
+			add_ideas = EQS_screaming_death
+		}
 	}
 	ai_will_do = { factor = 15 }
 }

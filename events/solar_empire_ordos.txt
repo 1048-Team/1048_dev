@@ -52,29 +52,17 @@ country_event = { ###Quasar Pulse drags an accused "heretic" to the heretic pyre
 		add_political_power = 150
 		hidden_effect = {
 			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-				}
-				save_event_target_as = SOL_purge_1
+				retire = yes
 			}
 			
 			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-				}
-				save_event_target_as = SOL_purge_2
+				retire = yes
 			}
 			
 			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-				}
-				save_event_target_as = SOL_purge_3
+				retire = yes
 			}
 		}
-		retire_character = event_target:SOL_purge_1
-		retire_character = event_target:SOL_purge_2
-		retire_character = event_target:SOL_purge_3
 	}
 }
 
@@ -534,10 +522,18 @@ country_event = { #Ordo Ferox report for finishing their quota of planes
 	
 	option = { #Is it certain they are safe?
 		name = solarordo.18.a
-		add_equipment_to_stockpile = {
-			type = fighter_equipment
-			amount = 300
-			producer = EQS
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			###Add a fighter design here
+		}
+		ELSE = {
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_2
+				amount = 300
+				producer = EQS
+			}
 		}
 	}
 }

@@ -10,11 +10,6 @@ set_technology = {
 	melee_weapons1 = 1
 	pre_gw_artillery = 1
 	tech_pegasi = 1
-	early_fighter = 1
-	cv_early_fighter = 1
-	naval_bomber1 = 1
-	cv_naval_bomber1 = 1
-	early_bomber = 1
 	infantry_weapons = 1
 	infantry_weapons1 = 1
 	interwar_antitank = 1
@@ -28,6 +23,93 @@ set_technology = {
 	motorised_infantry = 1
 	interwar_antiair = 1
 	basic_train = 1
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_technology = {
+		aa_lmg = 1
+		engines_1 = 1
+		engines_2 = 1
+		early_bombs = 1
+		aircraft_construction = 1
+		iw_small_airframe = 1
+		iw_medium_airframe = 1
+		iw_large_airframe = 1
+	}
+
+	create_equipment_variant = {
+		name = "Bales Bulldog"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+	}
+	create_equipment_variant = {
+		name = "Hollow Shades Demon"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_ENG_light_plane_5_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Hollow Shades Fury" #also covers Gloster Gauntlet
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_ENG_light_plane_5_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Breezie Gordon" 
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_ENG_CAS1_medium"
+	}
+	create_equipment_variant = {
+		name = "Handley Page Hayford" 
+		type = medium_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_1_2x
+			special_type_slot_1 = lmg_defense_turret
+		}
+	}
+	create_equipment_variant = {
+		name = "Gelding Gladiator" 
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_4x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_ENG_early_fighter_medium"
+	}
+	set_air_oob = "NER_1048_air_bba"
+
+	else = {
+		set_technology = {
+			early_fighter = 1
+			cv_early_fighter = 1
+			cv_naval_bomber1 = 1
+			naval_bomber1 = 1
+			early_bomber = 1
+		}
+		set_air_oob = "NER_1048_air_legacy"
+	}
 }
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
 if = {
@@ -84,11 +166,9 @@ if = {
 		sonar = 1
 		smoke_generator = 1
 		basic_depth_charges = 1
-		basic_secondary_battery = 1
 		basic_cruiser_armor_scheme = 1
 		basic_heavy_armor_scheme = 1
 		mtg_transport = 1
-		improved_secondary_battery = 1
 		basic_fire_control_system = 1
 	}
 }
@@ -130,4 +210,6 @@ recruit_character = NER_Mild_Gust
 
 set_rule = {
 	can_generate_female_aces = yes
+	can_generate_female_unit_leaders  = yes
+	can_generate_female_country_leaders = yes
 }
