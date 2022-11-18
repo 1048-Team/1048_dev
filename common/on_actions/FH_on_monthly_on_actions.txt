@@ -1,0 +1,95 @@
+on_actions = {
+	on_monthly_EQS = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = equestria_returned }
+				}
+				add_to_variable = { SOL_imperial_authority_pool = modifier@SOL_imperial_authority }
+				set_variable = { SOL_imperial_authority_monthly = modifier@SOL_imperial_authority }
+				SOL_calculate_loyal_ordos = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_loyal_ordos_bonus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_loyal_ordos_bonus }
+				SOL_calculate_disloyal_ordos = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_disloyal_ordos_malus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_disloyal_ordos_malus }
+				SOL_ordos_number_bonus = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_number_of_ordos_bonus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_number_of_ordos_bonus }
+				clamp_variable = {
+					var = SOL_imperial_authority_pool
+					min = SOL_imperial_authority_min
+					max = SOL_imperial_authority_max
+				}
+				IF = {
+					limit = {
+						check_variable = {
+							var = SOL_imperial_authority_pool
+							value = 75
+							compare = greater_than_or_equals
+						}
+					}
+					SOL_high_authority_derived_stats = yes
+				}
+				IF = {
+					limit = {
+						check_variable = {
+							var = SOL_imperial_authority_pool
+							value = 40
+							compare = less_than_or_equals
+						}
+					}
+					SOL_low_authority_derived_stats = yes
+				}
+				#log = "on_monthly_EQS"
+			}
+		}
+	}
+	on_monthly_SLW = {
+		effect = {
+			if = {
+				limit = {
+					exists = yes
+					EQS_Nova_Glow = { is_country_leader = yes }
+				}
+				add_to_variable = { SOL_imperial_authority_pool = modifier@SOL_imperial_authority }
+				set_variable = { SOL_imperial_authority_monthly = modifier@SOL_imperial_authority }
+				SOL_calculate_loyal_ordos = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_loyal_ordos_bonus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_loyal_ordos_bonus }
+				SOL_calculate_disloyal_ordos = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_disloyal_ordos_malus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_disloyal_ordos_malus }
+				SOL_ordos_number_bonus = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_number_of_ordos_bonus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_number_of_ordos_bonus }
+				clamp_variable = {
+					var = SOL_imperial_authority_pool
+					min = SOL_imperial_authority_min
+					max = SOL_imperial_authority_max
+				}
+				IF = {
+					limit = {
+						check_variable = {
+							var = SOL_imperial_authority_pool
+							value = 75
+							compare = greater_than_or_equals
+						}
+					}
+					SOL_high_authority_derived_stats = yes
+				}
+				IF = {
+					limit = {
+						check_variable = {
+							var = SOL_imperial_authority_pool
+							value = 40
+							compare = less_than_or_equals
+						}
+					}
+					SOL_low_authority_derived_stats = yes
+				}
+				#log = "on_monthly_SLW"
+			}
+		}
+	}
+}

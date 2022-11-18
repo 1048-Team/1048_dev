@@ -6,7 +6,11 @@ SOL_ordo_special_effect = {
 				NOT = {
 					has_idea = EQS_great_ordo_work_funding
 				}
-				has_political_power > 99
+				check_variable = {
+					var = SOL_imperial_authority_pool
+					value = 10
+					compare = greater_than_or_equals
+				}
 			}
 		}
 		IF = {
@@ -30,9 +34,9 @@ SOL_ordo_special_effect = {
 			}
 			add_timed_idea = {
 				idea = EQS_great_ordo_work_funding
-				days = 365
+				days = 180
 			}
-			add_political_power = -100
+			add_to_variable = { SOL_imperial_authority_pool = -10 }
 			SOL_ordo_set_flag_special = yes
 		}
 		ELSE = {
@@ -44,7 +48,11 @@ SOL_ordo_normal_effect_1 = {
 	IF = {
 		limit = {
 			AND = {
-				has_political_power > 34
+				check_variable = {
+					var = SOL_imperial_authority_pool
+					value = 2
+					compare = greater_than_or_equals
+				}
 				has_manpower > 399
 				check_ordo_selection_1 = yes
 			}
@@ -55,7 +63,7 @@ SOL_ordo_normal_effect_1 = {
 			min = 0
 			max = 100
 		}
-		add_political_power = -35
+		add_to_variable = { SOL_imperial_authority_pool = -2 }
 		add_manpower = -400
 		SOL_ordo_set_flag_1 = yes
 	}
@@ -64,8 +72,12 @@ SOL_ordo_normal_effect_2 = {
 	IF = {
 		limit = {
 			AND = {
-				has_political_power > 24
-				has_army_experience > 4
+				check_variable = {
+					var = SOL_imperial_authority_pool
+					value = 3
+					compare = greater_than_or_equals
+				}
+				has_army_experience > 4.99
 				check_ordo_selection_2 = yes
 			}
 		}
@@ -75,7 +87,7 @@ SOL_ordo_normal_effect_2 = {
 			min = 0
 			max = 100
 		}
-		add_political_power = -25
+		add_to_variable = { SOL_imperial_authority_pool = -3 }
 		army_experience = -5
 		add_manpower = 1000
 		SOL_ordo_set_flag_2 = yes
@@ -85,7 +97,11 @@ SOL_ordo_normal_effect_3 = {
 	IF = {
 		limit = {
 			AND = {
-				has_political_power > 24
+				check_variable = {
+					var = SOL_imperial_authority_pool
+					value = 5
+					compare = greater_than_or_equals
+				}
 				check_ordo_selection_3 = yes
 			}
 		}
@@ -95,7 +111,7 @@ SOL_ordo_normal_effect_3 = {
 			min = 0
 			max = 100
 		}
-		add_political_power = -25
+		add_to_variable = { SOL_imperial_authority_pool = -5 }
 		SOL_ordo_production_effect = yes
 		SOL_ordo_set_flag_3 = yes
 	}
@@ -1224,7 +1240,7 @@ SOL_check_ordo_loyalty = {
 		add_to_temp_variable = { loyalty_divisor = 1 }
 	}
 	divide_temp_variable = { ordo_loyalty_average = loyalty_divisor }
-	set_variable = { loyalty_divisor_debug = loyalty_divisor }
+	#set_variable = { loyalty_divisor_debug = loyalty_divisor }
 	round_temp_variable = ordo_loyalty_average
 	set_variable = { SOL_ordo_average_loyalty = ordo_loyalty_average }
 	SOL_ordo_loyalty_bonus = yes
@@ -1391,7 +1407,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.4
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1400,7 +1416,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.5
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1409,7 +1425,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.6
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1418,7 +1434,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.7
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1427,7 +1443,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.8
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1436,7 +1452,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.9
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1451,7 +1467,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.10
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1460,7 +1476,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.11
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1469,7 +1485,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.12
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1478,7 +1494,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.13
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1487,7 +1503,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.14
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1496,7 +1512,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.15
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1505,7 +1521,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.16
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1514,7 +1530,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.17
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1523,7 +1539,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.18
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1532,7 +1548,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.19
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1541,7 +1557,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.20
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1550,7 +1566,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.21
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1559,7 +1575,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.22
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1569,7 +1585,7 @@ SOL_special_production_effect = {
 		###Spawn 4 Jaeger divisions or 2 building slots in Chrysalia and a civ and mil and 10% stability###
 		country_event = {
 			id = solarordo.23
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1578,7 +1594,7 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.24
-			days = 365
+			days = 180
 		}
 	}
 	ELSE_IF = {
@@ -1587,7 +1603,781 @@ SOL_special_production_effect = {
 		}
 		country_event = {
 			id = solarordo.30
-			days = 365
+			days = 180
+		}
+	}
+}
+
+#Yoinked from HIP_SIR
+SOL_imperial_authority_change = {
+	add_to_variable = {
+		SOL_imperial_authority_pool = SOL_authority_change_var #This is a temp variable
+	}
+	clamp_variable = {
+		var = SOL_imperial_authority_pool
+		min = SOL_imperial_authority_min
+		max = SOL_imperial_authority_max
+	}
+	if = {
+		limit = {
+			check_variable = {
+				SOL_authority_change_var < 0
+			}
+		}
+		custom_effect_tooltip =  EQS_authority_loss_tt
+	}
+	else = {
+		custom_effect_tooltip =  EQS_authority_gain_tt
+	}
+}
+SOL_calculate_loyal_ordos = {
+	set_temp_variable = { SOL_loyal_ordos = 0 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^1
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^2
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^3
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^4
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}		
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^5
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^6
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^7
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_lapidis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^8
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_doctrina_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^9
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_caellum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^10
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_munificus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^11
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_velocitas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^12
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_diligentia_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^13
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_confundas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^14
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_servus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^15
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_ferox_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^16
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_praeda_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^17
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_infernum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^18
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mercatura_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^19
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_litus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^20
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_salus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^21
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			OR = {
+				SOL_ordo_tenuis_visible = yes
+				SOL_ordo_tenuis_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CHN_visible = yes
+				SOL_ordo_tenuis_full_visible = yes
+			}
+			check_variable = {
+				var = global.ordo_loyalty_array^22
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^23
+				value = 75
+				compare = greater_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_loyal_ordos = 1 }
+	}
+	divide_temp_variable = { SOL_loyal_ordos = 100 }
+	multiply_temp_variable = { SOL_loyal_ordos = 2 }
+	set_variable = { SOL_loyal_ordos_bonus = SOL_loyal_ordos }
+}
+
+SOL_calculate_disloyal_ordos = {
+	set_temp_variable = { SOL_disloyal_ordos = 0 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^1
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^2
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^3
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^4
+				value = 30
+				compare = less_than_or_equals
+			}
+		}		
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^5
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^6
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^7
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_lapidis_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^8
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_doctrina_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^9
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_caellum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^10
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_munificus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^11
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_velocitas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^12
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_diligentia_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^13
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_confundas_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^14
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_servus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^15
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_ferox_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^16
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_praeda_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^17
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_infernum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^18
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mercatura_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^19
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_litus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^20
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_salus_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^21
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			OR = {
+				SOL_ordo_tenuis_visible = yes
+				SOL_ordo_tenuis_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CHN_visible = yes
+				SOL_ordo_tenuis_full_visible = yes
+			}
+			check_variable = {
+				var = global.ordo_loyalty_array^22
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
+			check_variable = {
+				var = global.ordo_loyalty_array^23
+				value = 30
+				compare = less_than_or_equals
+			}
+		}
+		add_to_temp_variable = { SOL_disloyal_ordos = 1 }
+	}
+	divide_temp_variable = { SOL_disloyal_ordos = 100 }
+	multiply_temp_variable = { SOL_disloyal_ordos = -1 }
+	multiply_temp_variable = { SOL_disloyal_ordos = 2 }
+	set_variable = { SOL_disloyal_ordos_malus = SOL_disloyal_ordos }
+}
+SOL_ordos_number_bonus = {
+	set_temp_variable = { SOL_ordo_count = 0 }
+	IF = {
+		limit = {
+			SOL_ordo_multi_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_silva_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mellis_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_maris_visible = yes
+		}		
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_apparatus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_meurom_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_solis_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_lapidis_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_doctrina_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_caellum_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_munificus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_velocitas_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_diligentia_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_confundas_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_servus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_ferox_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_praeda_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_infernum_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_mercatura_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_litus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_salus_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			OR = {
+				SOL_ordo_tenuis_visible = yes
+				SOL_ordo_tenuis_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CWR_visible = yes
+				SOL_ordo_tenuis_CRY_CHN_visible = yes
+				SOL_ordo_tenuis_full_visible = yes
+			}
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	IF = {
+		limit = {
+			SOL_ordo_serenum_visible = yes
+		}
+		add_to_temp_variable = { SOL_ordo_count = 1 }
+	}
+	set_variable = { SOL_number_of_ordos_bonus = SOL_ordo_count }
+	divide_variable = { SOL_number_of_ordos_bonus = 100 }
+}
+SOL_high_authority_derived_stats = {
+	set_temp_variable = { SOL_ordo_derived_authority_factor = SOL_imperial_authority_pool }
+	divide_temp_variable = { SOL_ordo_derived_authority_factor = 100 }
+	set_variable = { SOL_ordo_pp_gain = 0.1 }
+	set_variable = { SOL_ordo_war_support_factor = 0.05 }
+	set_variable = { SOL_ordo_stability_factor = 0.05 }
+	multiply_variable = { SOL_ordo_pp_gain = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_war_support_factor = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_stability_factor = SOL_ordo_derived_authority_factor }
+}
+SOL_low_authority_derived_stats = {
+	set_temp_variable = { SOL_ordo_derived_authority_factor = 100 }
+	set_temp_variable = { SOL_ordo_divisor = SOL_imperial_authority_pool }
+	add_to_temp_variable = { SOL_ordo_divisor = 1 }
+	divide_temp_variable = { SOL_ordo_derived_authority_factor = SOL_ordo_divisor }
+	set_variable = { SOL_ordo_pp_gain = -0.25 }
+	set_variable = { SOL_ordo_war_support_factor = -0.15 }
+	set_variable = { SOL_ordo_stability_factor = -0.15 }
+	multiply_variable = { SOL_ordo_pp_gain = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_war_support_factor = SOL_ordo_derived_authority_factor }
+	multiply_variable = { SOL_ordo_stability_factor = SOL_ordo_derived_authority_factor }
+}
+SOL_high_authority_bonus = {
+	set_temp_variable = { SOL_ordo_authority_bonus_factor = SOL_imperial_authority_pool }
+	divide_temp_variable = { SOL_ordo_authority_bonus_factor = 100 }
+	set_temp_variable = { SOL_ordo_loyalty_gain = 0.01 }
+	multiply_temp_variable = { SOL_ordo_loyalty_gain = SOL_ordo_authority_bonus_factor }
+	for_each_loop = {
+		array = global.ordo_loyalty_array
+		
+		set_temp_variable = { SOL_ordo_authority_check = i }
+		IF = {
+			limit = {
+				SOL_is_visible_ordo = yes
+			}
+			add_to_variable = { global.ordo_loyalty_array^i = SOL_ordo_loyalty_gain }
+			clamp_variable = {
+				var = global.ordo_loyalty_array^i
+				min = 0
+				max = 100
+			}
+			#log = "[?global.ordo_loyalty_array^i]"
+		}
+	}
+}
+SOL_low_authority_malus = {
+	set_temp_variable = { SOL_ordo_authority_malus_factor = 100 }
+	set_temp_variable = { SOL_ordo_authority_malus_divisor = SOL_imperial_authority_pool }
+	add_to_temp_variable = { SOL_ordo_authority_malus_divisor = 1 }
+	divide_temp_variable = { SOL_ordo_authority_malus_factor = SOL_ordo_authority_malus_divisor }
+	set_temp_variable = { SOL_ordo_loyalty_loss = -0.015 }
+	divide_temp_variable = { SOL_ordo_loyalty_loss = SOL_ordo_authority_malus_factor }
+	for_each_loop = {
+		array = global.ordo_loyalty_array
+		
+		set_temp_variable = { SOL_ordo_authority_check = i }
+		IF = {
+			limit = {
+				SOL_is_visible_ordo = yes
+			}
+			add_to_variable = { global.ordo_loyalty_array^i = SOL_ordo_loyalty_loss }
+			clamp_variable = {
+				var = global.ordo_loyalty_array^i
+				min = 0
+				max = 100
+			}
+			#log = "[?global.ordo_loyalty_array^i]"
 		}
 	}
 }

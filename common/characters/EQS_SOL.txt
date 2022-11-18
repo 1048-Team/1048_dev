@@ -501,11 +501,9 @@ characters = {
 		name = EQS_Quasar_Pulse_name
 		gender = female
 		portraits ={
-			civilian = {
-				#large = "gfx/leaders/EQS/Quasar_Pulse.tga"
-			}
 			army = {
-				#large = "gfx/leaders/EQS/Quasar_Pulse.tga"
+				large = "gfx/leaders/EQS/Quasar_Pulse.tga"
+				small = "GFX_idea_quasar_pulse"
 			}
 		}
 		corps_commander = {
@@ -514,7 +512,7 @@ characters = {
 			skill = 2
 			attack_skill = 4
 			defense_skill = 1
-			planning_skill = 2
+			planning_skill = 1
 			logistics_skill = 1
 			visible = {
 				if = {
@@ -899,18 +897,12 @@ characters = {
 				original_tag = EQS
 			}
 			visible = {
-				AND = {
-					has_country_flag = EQS_mercatura_advisors
-					NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
-				}
+				NOT = { has_country_leader = { ruling_only = yes name = "Princess Celestia" } }
 			}
 			available = {
-				AND = {
-					has_country_flag = EQS_mercatura_advisors
-					OR = {
-						has_government = fascism
-						has_government = neutrality
-					}
+				OR = {
+					has_government = fascism
+					has_government = neutrality
 				}
 			}
 			traits = { war_industrialists }
@@ -919,6 +911,7 @@ characters = {
 	
 	EQS_Gilded_Pouch = {
 		name = EQS_Gilded_Pouch_name
+		gender = female
 		portraits = {
 			
 		}
@@ -926,7 +919,10 @@ characters = {
 			slot = political_advisor
 			idea_token = gilded_pouch
 			allowed = {
-				original_tag = EQS
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
 			}
 			visible = {
 				has_country_flag = EQS_mercatura_advisors
@@ -935,6 +931,30 @@ characters = {
 				has_country_flag = EQS_mercatura_advisors
 			}
 			traits = { ruthless_capitalist }
+		}
+	}
+	
+	EQS_Platinum_Purse = {
+		name = EQS_Platinum_Purse_name
+		portraits = {
+		
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = platinum_purse
+			allowed = {
+				OR = { 
+					original_tag = EQS
+					original_tag = SLW
+				}
+			}
+			visible = {
+				has_country_flag = EQS_mercatura_advisors
+			}
+			available = {
+				has_country_flag = EQS_mercatura_advisors
+			}
+			traits = { captain_of_industry }
 		}
 	}
 	
@@ -963,6 +983,13 @@ characters = {
 				}
 			}
 			traits = { silent_workhorse }
+		}
+	}
+	
+	EQS_Dotted_Quill = {
+		name = EQS_Dotted_Quill_name
+		portraits = {
+		
 		}
 	}
 	
@@ -1422,7 +1449,7 @@ characters = {
 		
 		corps_commander = {
 			traits = { commando infantry_leader pony_race_trait }
-			skill = 3
+			skill = 4
 			attack_skill = 3
 			defense_skill = 2
 			planning_skill = 1
@@ -1433,7 +1460,10 @@ characters = {
 						original_tag = EQS
 					}
 				}
-				has_country_flag = harmonist_commanders_return
+				OR = {
+					has_country_flag = harmonist_commanders_return
+					has_country_flag = reduced_harmonist_commanders
+				}
 			}
 		}
 	}
@@ -1460,10 +1490,7 @@ characters = {
 						original_tag = EQS
 					}
 				}
-				OR = {
-					has_country_flag = harmonist_commanders_return
-					has_country_flag = reduced_harmonist_commanders
-				}
+				has_country_flag = harmonist_commanders_return
 			}
 		} 
 	}
@@ -1480,7 +1507,7 @@ characters = {
 		
 		corps_commander = {
 			traits = { organizer pony_race_trait }
-			skill = 4
+			skill = 5
 			attack_skill = 3
 			defense_skill = 4
 			planning_skill = 6
@@ -1497,7 +1524,7 @@ characters = {
 	}
 	
 	EQS_Sunbutt = {
-		name = EQS_Sunbutt_name
+		name = EQS_Sunbutt_restored_name
 		gender = female
 		portraits = {
 			civilian = {
@@ -1528,7 +1555,7 @@ characters = {
 			traits = { harsh_leader pony_race_trait solar_punk }
 			desc = POLITICS_DYX_DESC
 			skill = 1
-			attack_skill = 2
+			attack_skill = 1
 			defense_skill = 1
 			planning_skill = 1
 			logistics_skill = 1
@@ -1588,7 +1615,8 @@ characters = {
 			allowed = {
 				original_tag = EQS
 			}
-			visible = { 
+			visible = {
+				NOT = { has_government = communism }
 			}
 			traits = { armaments_organizer }
 		}
