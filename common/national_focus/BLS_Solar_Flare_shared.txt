@@ -117,6 +117,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_instruct_weak"
+		add_tech_bonus = {
+			name = racial_bonus
+			bonus = 1
+			uses = 1
+			category = race_tech
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -137,6 +143,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_whelps_mission"
 		###Solar Flare summons Nebula and threatens her to find where Blazing Sheath and the other ancient cultists are held, and then provide a location for it, so she can work her necromantic magic
+		set_country_flag = BLS_start_cultist_resurrection
 	}
 	
 	ai_will_do = { factor = 60 }
@@ -153,6 +160,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_first_task"
+		add_tech_bonus = {
+			name = construction_bonus
+			bonus = 1
+			uses = 1
+			category = construction_tech
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -172,7 +185,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_zealous_nerds"
-		###Event for Nebula being thrown to handling the angry soldiers
+		###Event for Nebula being thrown to handling the angry soldiers; command power and a bit of pp
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -189,6 +202,12 @@ shared_focus = {
 	prerequisite = {
 		focus = BLS_instruct_weak
 		focus = BLS_first_task
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = BLS_found_the_cultists_TT
+			has_country_flag = BLS_found_cultists_location
+		}
 	}
 	
 	completion_reward = {
@@ -214,6 +233,8 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_reface_land"
 		###Industry bonus here
+		add_stability = -0.02
+		add_political_power = 25
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -285,7 +306,1615 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_unearth_old_palace"
+		74 = {
+			add_extra_state_shared_building_slots = 2
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_sun_guidance
+	x = -3
+	y = 1
+	relative_position_id = BLS_mortals_dissent
+	
+	cost = 4
+	prerequisite = { focus = BLS_mortals_dissent }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_sun_guidance"
+		###Solar Flare grows tired of the slow progress and executes a general or two, to become the new high command of the military
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_salvage_magics
+	x = 2
+	y = 1
+	relative_position_id = BLS_mortals_dissent
+	
+	cost = 4
+	prerequisite = { focus = BLS_mortals_dissent }
+	prerequisite = { focus = BLS_fresh_blood }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_salvage_magics"
+		###Have it check which spirit was gotten from BLS opening
+	}
+	
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = BLS_proclaim_new_kingdom
+	x = 0
+	y = 1
+	relative_position_id = BLS_fresh_blood
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_fresh_blood
+		focus = BLS_last_chance
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_proclaim_new_kingdom"
+		###Event for Solar Flare announcing her return to the world, and that their time is limited
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_rebellious_masses
+	x = 0
+	y = 1
+	relative_position_id = BLS_last_chance
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_fresh_blood
+		focus = BLS_last_chance
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_rebellious_masses"
+		###Event for the few loyal to Solar Flare struggling to keep down another rebellion, as some of the universities secede
+		###This would remove cores and make the other states outside of Bales dimilitarized, will have to recore through converting the populace to following Solar Flare
+		###Temp
+		177 = {
+			remove_core_of = ROOT
+			set_demilitarized_zone = yes
+		}
+		182 = {
+			remove_core_of = ROOT
+			set_demilitarized_zone = yes
+		}
+		183 = {
+			remove_core_of = ROOT
+			set_demilitarized_zone = yes
+		}
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_last_guardian
+	x = -2
+	y = 1
+	relative_position_id = BLS_unearth_old_palace
+	
+	cost = 3
+	prerequisite = { focus = BLS_last_chance }
+	prerequisite = { focus = BLS_unearth_old_palace }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_last_guardian"
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_new_works_master
+	x = 3
+	y = 1
+	relative_position_id = BLS_unearth_old_palace
+	
+	cost = 4
+	prerequisite = { focus = BLS_unearth_old_palace }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_new_works_master"
+		###Event for Solar Flare seeing the works of Belt Loop and determining him worthy of mercy, although he's kept under watch
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+###Industry Tree###
+shared_focus = {
+	id = BLS_abolish_work_week
+	x = 3
+	y = 1
+	relative_position_id = BLS_new_works_master
+	
+	cost = 4
+	prerequisite = { focus = BLS_new_works_master }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_abolish_work_week"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_ungrateful_slaves
+	x = -2
+	y = 1
+	relative_position_id = BLS_abolish_work_week
+	
+	cost = 3
+	prerequisite = { focus = BLS_abolish_work_week }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_ungrateful_slaves"
+		###Event of some workers revolting and killing a couple of resurrected cultists, who Solar Flare raises back with disgust
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_no_more_workshops
+	x = 2
+	y = 1
+	relative_position_id = BLS_abolish_work_week
+	
+	cost = 4
+	prerequisite = { focus = BLS_abolish_work_week }
+	###Potentially require this to be unlocked after the commies are dealt with in the ungrateful_slaves path
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_no_more_workshops"
+		###Solar Flare goes through one of the new factories completely impressed at how industry has given so much to everypony, since basically she only had destitute slaves as her followers
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_excavate_ancient_city
+	x = 10
+	y = 1
+	relative_position_id = BLS_abolish_work_week
+	
+	cost = 5
+	prerequisite = { focus = BLS_abolish_work_week }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_excavate_ancient_city"
+		###Solar Flare beats down a building herself to excavate the first entrance to the ancient necropolis underneath Bales
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_unwilling_sacrifices
+	x = 0
+	y = 1
+	relative_position_id = BLS_ungrateful_slaves
+	
+	cost = 3
+	prerequisite = { focus = BLS_ungrateful_slaves }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_unwilling_sacrifices"
+		###Blazing Sheath forces militia to execute ponies across Bales, and Melting Point and others lead the same efforts elsewhere
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_only_worship_breaks
+	x = 2
+	y = 1
+	relative_position_id = BLS_ungrateful_slaves
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_ungrateful_slaves
+		focus = BLS_no_more_workshops
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_only_worship_breaks"
+		###Follow a worker as he goes through the drudgery of his mandatory worship breaks, which he enjoys a small dessert or coffee afterwards, and laments how Bunsen was better
+	}
+	
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = BLS_amazing_tools
+	x = 0
+	y = 1
+	relative_position_id = BLS_no_more_workshops
+	
+	cost = 4
+	prerequisite = { focus = BLS_no_more_workshops }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_amazing_tools"
+		add_tech_bonus = {
+			name = industry_bonus
+			uses = 1
+			bonus = 1
+			category = industry
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_goddess_quotas
+	x = 2
+	y = 1
+	relative_position_id = BLS_no_more_workshops
+	
+	cost = 4
+	prerequisite = { focus = BLS_no_more_workshops }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_goddess_quotas"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_establish_ley_line
+	x = 5
+	y = 1
+	relative_position_id = BLS_no_more_workshops
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_no_more_workshops
+		focus = BLS_excavate_ancient_city
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_establish_ley_line"
+		###Idea here
+		add_tech_bonus = {
+			name = excavation_bonus
+			bonus = 1
+			uses = 2
+			category = excavation_tech
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_digging_depths
+	x = 0
+	y = 1
+	relative_position_id = BLS_excavate_ancient_city
+	
+	cost = 3
+	prerequisite = { focus = BLS_excavate_ancient_city }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_digging_depths"
+		###The first few workers start digging into the ground and they hit an old magic trap and an old cultist shakes his head at their idiocy
+		add_tech_bonus = {
+			name = unicorn_bonus
+			uses = 1
+			bonus = 2
+			category = unicorn_tech
+		}
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_correct_organizers
+	x = -1
+	y = 1
+	relative_position_id = BLS_unwilling_sacrifices
+	
+	cost = 3
+	prerequisite = { focus = BLS_unwilling_sacrifices }
+	mutually_exclusive = { focus = BLS_hunt_organizers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_correct_organizers"
+		###Most leaders of the protest are arrested and begin to be tortured to submit
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_hunt_organizers
+	x = 1
+	y = 1
+	relative_position_id = BLS_unwilling_sacrifices
+	
+	cost = 3
+	prerequisite = { focus = BLS_unwilling_sacrifices }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_hunt_organizers"
+		###A small group of fresh cultists are tested by taking out one of the organizers' homes, as one of the cultists is a cousin or sibling to the organizer, and is forced to kill her on the spot
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_instruments_of_punishment
+	x = 0
+	y = 1
+	relative_position_id = BLS_amazing_tools
+	
+	cost = 5
+	prerequisite = { focus = BLS_amazing_tools }
+	prerequisite = { focus = BLS_goddess_quotas }
+	mutually_exclusive = { focus = BLS_instruments_of_desire }
+	available = {
+		has_country_flag = BLS_commies_defeated
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_instruments_of_punishment"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = BLS_instruments_of_desire
+	x = 0
+	y = 1
+	relative_position_id = BLS_goddess_quotas
+	
+	cost = 4
+	prerequisite = { focus = BLS_amazing_tools }
+	prerequisite = { focus = BLS_goddess_quotas }
+	mutually_exclusive = { focus = BLS_instruments_of_punishment }
+	available = {
+		has_country_flag = BLS_commies_defeated
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_instruments_of_desire"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_ground_level
+	x = 0
+	y = 1
+	relative_position_id = BLS_digging_depths
+	
+	cost = 5
+	prerequisite = { focus = BLS_digging_depths }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_ground_level"
+		###Solar Flare is the first to the ground level of the old necropolis, and she is most pleased to see that most of what she remembers is intact through magical preservation, and after some fretting by Nebula, she alleviates the other's fears through giving a small magic token for research
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_pardon_laborers
+	x = 0
+	y = 1
+	relative_position_id = BLS_correct_organizers
+	
+	cost = 3
+	prerequisite = {
+		focus = BLS_correct_organizers
+		focus = BLS_hunt_organizers
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_hunt_organizers"
+		###As a group of protesters are taken to be executed, Solar Flare appears before them all, releasing them, but having them watched when they don't think so, as she wishes to have them be more evangelists for her
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_string_up_layponies
+	x = 0
+	y = 1
+	relative_position_id = BLS_hunt_organizers
+	
+	cost = 3
+	prerequisite = {
+		focus = BLS_correct_organizers
+		focus = BLS_hunt_organizers
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_string_up_layponies"
+		###Solar Flare oversees the execution of some protesters, who beg for amnesty, but she gives none
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_melt_unneeded_luxuries
+	x = 0
+	y = 1
+	relative_position_id = BLS_instruments_of_punishment
+	
+	cost = 4
+	prerequisite = { focus = BLS_instruments_of_punishment }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_melt_unneeded_luxuries"
+		74 = {
+			add_resource = {
+				type = aluminium
+				amount = 8
+			}
+			add_resource = {
+				type = chromium
+				amount = 8
+			}
+			add_resource = {
+				type = tungsten
+				amount = 8
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_forges_for_future
+	x = 0
+	y = 1
+	relative_position_id = BLS_instruments_of_desire
+	
+	cost = 5
+	prerequisite = { focus = BLS_instruments_of_desire }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_forges_for_future"
+		74 = {
+			add_resource = {
+				type = steel
+				amount = 8
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+		177 = {
+			add_resource = {
+				type = steel
+				amount = 4
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_refine_extraction
+	x = 2
+	y = 1
+	relative_position_id = BLS_instruments_of_desire
+	
+	cost = 3
+	prerequisite = {
+		focus = BLS_instruments_of_desire
+		focus = BLS_establish_ley_line
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_refine_extraction"
+		74 = {
+			add_resource = {
+				type = steel
+				amount = 10
+			}
+		}
+		add_tech_bonus = {
+			name = excavation_bonus
+			bonus = 1
+			uses = 1
+			category = excavation_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_thorough_digging
+	x = -2
+	y = 1
+	relative_position_id = BLS_ground_level
+	
+	cost = 6
+	prerequisite = { focus = BLS_ground_level }
+	prerequisite = { focus = BLS_establish_ley_line }
+	mutually_exclusive = { focus = BLS_quick_digging }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_thorough_digging"
+		###A worker destroys a section of the necropolis after making an accident, and he is punished severely, with Solar Flare requiring they take their time, especially around her palace as she has memories there
+		add_tech_bonus = {
+			name = excavation_bonus
+			uses = 1
+			bonus = 0.5
+			category = excavation_tech
+			category = construction_tech
+		}
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_quick_digging
+	x = 2
+	y = 1
+	relative_position_id = BLS_ground_level
+	
+	cost = 4
+	prerequisite = { focus = BLS_ground_level }
+	mutually_exclusive = { focus = BLS_thorough_digging }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_quick_digging"
+		###Some workers prepare some explosives and express their concern to their supervisor about the dangerous conditions of the tunnel, but are pushed to clear it anyway, and as it collapses on them they plead for help before they are killed, despite having a chance of escape
+		add_tech_bonus = {
+			name = construction_bonus
+			uses = 1
+			bonus = 0.75
+			category = construction_tech
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_end_chaos
+	x = 1
+	y = 1
+	relative_position_id = BLS_pardon_laborers
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_pardon_laborers
+		focus = BLS_string_up_layponies
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_end_chaos"
+		###Nebula walks through the destruction that was wrought by the efforts of the protesters and Solar Flare
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_work_to_bone
+	x = -1
+	y = 1
+	relative_position_id = BLS_melt_unneeded_luxuries
+	
+	cost = 4
+	prerequisite = { focus = BLS_melt_unneeded_luxuries }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_work_to_bone"
+		###A worker for some minor work project collapses in a heap and her task masters begin to beat her until she begins again, which causes a riot among the workers, but it only leads to harsher toiling
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_slaves_for_fire
+	x = 1
+	y = 1
+	relative_position_id = BLS_melt_unneeded_luxuries
+	
+	cost = 4
+	prerequisite = {
+		focus = BLS_melt_unneeded_luxuries
+		focus = BLS_forges_for_future
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_slaves_for_fire"
+		###A stallion tries to flee Bales as things continue to degrade, and he is caught at the border by a couple of undead cultist soldiers, and subsequently tries to flee again, and is executed by them
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_ultimate_efficiency
+	x = 1
+	y = 1
+	relative_position_id = BLS_forges_for_future
+	
+	cost = 4
+	prerequisite = { focus = BLS_forges_for_future }
+	prerequisite = { focus = BLS_refine_extraction }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_ultimate_efficiency"
+		###Blazing Sheath visits one of the new mines set up for the population, to ensure that it is on target, as some of the living cultists have been falling behind in quotas
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_proper_protocol
+	x = 0
+	y = 1
+	relative_position_id = BLS_thorough_digging
+	
+	cost = 5
+	prerequisite = { focus = BLS_thorough_digging }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_proper_protocol"
+		###Melting Point personally leads efforts to reinforce some of the tunnels, although she doesn't understand everything, and as she punishes a worker, they break through a wall and reveal some old, advanced tech
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_rewards_for_labor
+	x = 2
+	y = 1
+	relative_position_id = BLS_thorough_digging
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_thorough_digging
+		focus = BLS_quick_digging
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_rewards_for_labor"
+		###Nebula explores herself, and she finds a hidden room in the old palace, and she determines whether she informs Solar Flare or plays with the advanced chariots herself
+	}
+	
+	ai_will_do = { factor = 42 }
+}
+
+shared_focus = {
+	id = BLS_ignore_warnings
+	x = 0
+	y = 1
+	relative_position_id = BLS_quick_digging
+	
+	cost = 3
+	prerequisite = { focus = BLS_quick_digging }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_ignore_warnings"
+		###Melting Point leads an excavation group since they're falling behind and as they get more hasty with clearing things the roof collapses, and she barely escapes but sees how they revealed some useful old tech regardless
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+###Military Tree###
+shared_focus = {
+	id = BLS_cleanse_army
+	x = -3
+	y = 1
+	relative_position_id = BLS_sun_guidance
+	
+	cost = 4
+	prerequisite = { focus = BLS_sun_guidance }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_cleanse_army"
+		###Event for purging militia as Solar Flare looks to find any loyal to her, or bend them to her will
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_perditious_legion
+	x = -1
+	y = 1
+	relative_position_id = BLS_cleanse_army
+	
+	cost = 4
+	prerequisite = { focus = BLS_cleanse_army }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_perditious_legion"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_more_examples
+	x = -3
+	y = 1
+	relative_position_id = BLS_cleanse_army
+	
+	cost = 3
+	prerequisite = { focus = BLS_cleanse_army }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_more_examples"
+		###Solar Flare fights through, singlehandedly, a full rebellion garrison near Bales, including tanks, and she is slightly less peeved afterwards
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_marvelous_destruction
+	x = -1
+	y = 1
+	relative_position_id = BLS_more_examples
+	
+	cost = 5
+	prerequisite = { 
+		focus = BLS_more_examples
+		focus = BLS_god_killers	
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_more_examples"
+		###Possibly event for Solar Flare being impressed about how artillery has enabled more death and destruction
+		add_tech_bonus = {
+			name = artillery_bonus
+			bonus = 1
+			uses = 2
+			category = artillery
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_dominate_fears
+	x = 1
+	y = 1
+	relative_position_id = BLS_more_examples
+	
+	cost = 4
+	prerequisite = { focus = BLS_more_examples }
+	prerequisite = { focus = BLS_perditious_legion }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_dominate_fears"
+		###Solar Flare bursts into a room of resisting militia and uses magic to have them destroy each other with their worst fears, and whoever survives she bends to her will
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_holy_death
+	x = 1
+	y = 1
+	relative_position_id = BLS_perditious_legion
+	
+	cost = 5
+	prerequisite = { focus = BLS_perditious_legion }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_holy_death"
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_new_ideas
+	x = 1
+	y = 1
+	relative_position_id = BLS_marvelous_destruction
+	
+	cost = 5
+	prerequisite = { focus = BLS_marvelous_destruction }
+	prerequisite = { focus = BLS_dominate_fears }
+	mutually_exclusive = { focus = BLS_valueless_minions }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_new_ideas"
+		###Purple Haze finds some theoretical tactical books that were being worked on by a professor, and she thinks they will work wonders for the new army, especially after she tests a few of the new tactics on some prisoners; give +1 planning
+		add_doctrine_cost_reduction = {
+			name = mass_assault_reduction
+			uses = 3
+			cost_reduction = 0.5
+			category = cat_mass_assault
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_valueless_minions
+	x = 1
+	y = 1
+	relative_position_id = BLS_dominate_fears
+	
+	cost = 5
+	prerequisite = { focus = BLS_dominate_fears }
+	prerequisite = { focus = BLS_holy_death }
+	mutually_exclusive = { focus = BLS_new_ideas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_valueless_minions"
+		###Blazing Sheath comes to a training session with new soldiers by some of the remaining military, and she oversees it before pushing some of them literally to death since she feels they are useless if they aren't the best of the best; give +1 logistics
+		add_doctrine_cost_reduction = {
+			name = mass_assault_reduction
+			uses = 3
+			cost_reduction = 0.5
+			category = cat_mass_assault
+		}
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = BLS_infiltrate_lines
+	x = 0
+	y = 1
+	relative_position_id = BLS_new_ideas
+	
+	cost = 5
+	prerequisite = { focus = BLS_new_ideas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_infiltrate_lines"
+		###Idea here
+		add_doctrine_cost_reduction = {
+			name = mass_assault_reduction
+			uses = 2
+			cost_reduction = 0.5
+			technology = large_front_operations
+			technology = deep_operations
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_break_them
+	x = 0
+	y = 1
+	relative_position_id = BLS_valueless_minions
+	
+	cost = 5
+	prerequisite = { focus = BLS_valueless_minions }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_break_them"
+		###Idea here
+		add_doctrine_cost_reduction = {
+			name = mass_assault_reduction
+			uses = 2
+			cost_reduction = 0.5
+			technology = peoples_army
+			technology = human_infantry_offensive
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_autonomous_legions
+	x = 0
+	y = 1
+	relative_position_id = BLS_infiltrate_lines
+	
+	cost = 5
+	prerequisite = { focus = BLS_infiltrate_lines }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_autonomous_legions"
+		###Modify idea
+		add_doctrine_cost_reduction = {
+			name = mass_assault_reduction
+			uses = 2
+			cost_reduction = 0.5
+			technology = operational_concentration
+			technology = vast_offensives
+		}
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_worthless_unless_dead
+	x = 0
+	y = 1
+	relative_position_id = BLS_break_them
+	
+	cost = 5
+	prerequisite = { focus = BLS_break_them }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_worthless_unless_dead"
+		###Modify idea
+		add_doctrine_cost_reduction = {
+			name = mass_assault_reduction
+			uses = 2
+			cost_reduction = 0.5
+			technology = large_front_offensive
+			technology = human_wave_offensive
+		}
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_nothing_without_goddess
+	x = 1
+	y = 1
+	relative_position_id = BLS_autonomous_legions
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_autonomous_legions
+		focus = BLS_worthless_unless_dead
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_nothing_without_goddess"
+		###Insert both potential ideas here
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = BLS_god_killers
+	x = -9
+	y = 1
+	relative_position_id = BLS_cleanse_army
+	
+	cost = 4
+	prerequisite = { focus = BLS_cleanse_army }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_god_killers"
+		air_experience = 50
+	}
+	
+	ai_will_do = { factor = 38 }
+}
+
+shared_focus = {
+	id = BLS_modernity_required
+	x = -1
+	y = 1
+	relative_position_id = BLS_god_killers
+	
+	cost = 3
+	prerequisite = { focus = BLS_god_killers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_modernity_required"
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = fighter_bonus
+				uses = 2
+				bonus = 1
+				category = light_air
+			}
+			add_tech_bonus = {
+				name = engine_bonus
+				uses = 1
+				bonus = 1
+				category = cat_air_engine
+			}
+		}
+		ELSE = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				uses = 2
+				bonus = 1
+				category = light_fighter
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_unique_weapon
+	x = 1
+	y = 1
+	relative_position_id = BLS_god_killers
+	
+	cost = 4
+	prerequisite = { focus = BLS_god_killers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_unique_weapon"
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = cas_bonus
+				uses = 1
+				bonus = 1
+				category = cat_air_guns
+			}
+			add_tech_bonus = {
+				name = bomber_bonus
+				uses = 1
+				ahead_reduction = 2
+				category = medium_air
+				category = heavy_air
+			}
+		}
+		ELSE = {
+			add_tech_bonus = {
+				name = cas_bonus
+				uses = 1
+				bonus = 1
+				category = CAS_bomber
+			}
+			add_tech_bonus = {
+				name = bomber_bonus
+				uses = 1
+				bonus = 1
+				category = tactical_bomber
+				category = cat_strategic_bomber
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_punishing_skies
+	x = 2
+	y = 1
+	relative_position_id = BLS_unique_weapon
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_unique_weapon
+		focus = BLS_marvelous_destruction
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_punishing_skies"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_scrape_minds
+	x = 1
+	y = 1
+	relative_position_id = BLS_modernity_required
+	
+	cost = 5
+	prerequisite = { focus = BLS_modernity_required }
+	prerequisite = { focus = BLS_unique_weapon }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_scrape_minds"
+		###Solar Flare uses magic to painfully extract any knowledge from captured air commanders and pilots for applying to her own airforce
+		add_doctrine_cost_reduction = {
+			name = air_bonus
+			uses = 3
+			cost_reduction = 0.5
+			category = air_doctrine
+		}
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_rule_skies
+	x = -2
+	y = 1
+	relative_position_id = BLS_scrape_minds
+	
+	cost = 5
+	prerequisite = { focus = BLS_scrape_minds }
+	mutually_exclusive = { focus = BLS_dominate_earth }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_rule_skies"
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = fighter_bonus
+				uses = 1
+				bonus = 1
+				category = light_air
+			}
+			add_tech_bonus = {
+				name = fighter_guns_bonus
+				uses = 1
+				bonus = 0.5
+				category = cat_air_guns
+			}
+		}
+		ELSE = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				uses = 1
+				bonus = 1
+				category = light_fighter
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_dominate_earth
+	x = 2
+	y = 1
+	relative_position_id = BLS_scrape_minds
+	
+	cost = 5
+	prerequisite = { focus = BLS_scrape_minds }
+	mutually_exclusive = { focus = BLS_rule_skies }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_dominate_earth"
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = cas_bonus
+				uses = 1
+				bonus = 1
+				ahead_reduction = 2
+				category = cat_air_bombs
+			}
+			add_tech_bonus = {
+				name = engine_bonus
+				uses = 1
+				bonus = 1
+				category = cat_air_engine
+			}
+		}
+		ELSE = {
+			add_tech_bonus = {
+				name = cas_bonus
+				uses = 2
+				bonus = 1
+				category = CAS_bomber
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = BLS_flying_graves
+	x = 0
+	y = 1
+	relative_position_id = BLS_rule_skies
+	
+	cost = 5
+	prerequisite = { focus = BLS_rule_skies }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_flying_graves"
+		set_rule = { can_use_kamikaze_pilots = yes }
+		###Idea here
+		###Possibly event of a plane crash give the idea to Blazing Sheath to push pilots to suicide attacks
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_carpeted_fury
+	x = 0
+	y = 1
+	relative_position_id = BLS_dominate_earth
+	
+	cost = 5
+	prerequisite = { focus = BLS_dominate_earth }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_carpeted_fury"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_not_pointless
+	x = 1
+	y = 1
+	relative_position_id = BLS_flying_graves
+	
+	cost = 4
+	prerequisite = {
+		focus = BLS_flying_graves
+		focus = BLS_carpeted_fury
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_not_pointless"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 48 }
+}
+
+shared_focus = {
+	id = BLS_screaming_eagles
+	x = -1
+	y = 1
+	relative_position_id = BLS_carpeted_fury
+	
+	cost = 4
+	prerequisite = {
+		focus = BLS_flying_graves
+		focus = BLS_carpeted_fury
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_screaming_eagles"
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 38 }
+}
+
+shared_focus = {
+	id = BLS_warriors_of_heaven
+	x = 1
+	y = 1
+	relative_position_id = BLS_not_pointless
+	
+	cost = 5
+	prerequisite = { focus = BLS_not_pointless }
+	prerequisite = { focus = BLS_screaming_eagles }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_warriors_of_heaven"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_worlds_shores
+	x = -15
+	y = 1
+	relative_position_id = BLS_cleanse_army
+	
+	cost = 3
+	prerequisite = { focus = BLS_cleanse_army }
+	available = {
+		any_state = {
+			is_owned_by = ROOT
+			is_coastal = yes
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_worlds_shores"
+		navy_experience = 50
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_cultist_sailors
+	x = -2
+	y = 1
+	relative_position_id = BLS_worlds_shores
+	
+	cost = 4
+	prerequisite = { focus = BLS_worlds_shores }
+	available = {
+		owns_state = 75
+		owns_state = 12
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_cultist_sailors"
+		###Ships here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = BLS_take_imperial_dockyards
+	x = 0
+	y = 1
+	relative_position_id = BLS_worlds_shores
+	
+	cost = 5
+	prerequisite = { focus = BLS_worlds_shores }
+	available = {
+		controls_state = 75
+		controls_state = 12
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_take_imperial_dockyards"
+		###Add dockyards###
+		###Perhaps have an event of charging the docks and retaking them
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_specialize_followers
+	x = 3
+	y = 1
+	relative_position_id = BLS_worlds_shores
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_worlds_shores
+		focus = BLS_god_killers
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_specialize_followers"
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_infidels_gift
+	x = -1
+	y = 1
+	relative_position_id = BLS_cultist_sailors
+	
+	cost = 4
+	prerequisite = { focus = BLS_cultist_sailors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_infidels_gift"
+		###Idea here
+		###3x50% generic naval doctrine reduction
+	}
+	
+	ai_will_do = { factor = 38 }
+}
+
+shared_focus = {
+	id = BLS_mosquito_destroyers
+	x = 1
+	y = 1
+	relative_position_id = BLS_cultist_sailors
+	
+	cost = 3
+	prerequisite = { focus = BLS_cultist_sailors }
+	prerequisite = { focus = BLS_take_imperial_dockyards }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_mosquito_destroyers"
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 43 }
+}
+
+shared_focus = {
+	id = BLS_ferrying_judgement
+	x = 1
+	y = 1
+	relative_position_id = BLS_take_imperial_dockyards
+	
+	cost = 4
+	prerequisite = { focus = BLS_take_imperial_dockyards }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_ferrying_judgement"
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_chosen_chosen
+	x = 0
+	y = 1
+	relative_position_id = BLS_specialize_followers
+	
+	cost = 5
+	prerequisite = { focus = BLS_specialize_followers }
+	prerequisite = {
+		focus = BLS_modernity_required
+		focus = BLS_take_imperial_dockyards
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_chosen_chosen"
+		###Idea here
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = BLS_hoof_extension
+	x = 1
+	y = 1
+	relative_position_id = BLS_infidels_gift
+	
+	cost = 5
+	prerequisite = { focus = BLS_infidels_gift }
+	prerequisite = { focus = BLS_mosquito_destroyers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_hoof_extension"
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = BLS_killer_infection
+	x = 1
+	y = 1
+	relative_position_id = BLS_mosquito_destroyers
+	
+	cost = 5
+	prerequisite = { focus = BLS_mosquito_destroyers }
+	prerequisite = { focus = BLS_ferrying_judgement }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_killer_infection"
+		###Tech bonus here
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = BLS_untouchable_armadas
+	x = 0
+	y = 1
+	relative_position_id = BLS_hoof_extension
+	
+	cost = 5
+	prerequisite = { focus = BLS_hoof_extension }
+	prerequisite = { focus = BLS_killer_infection }
+	mutually_exclusive = { focus = BLS_swarm_the_seas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_untouchable_armadas"
+		###Idea here
+		###1x50 generic doctrine reduction
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = BLS_swarm_the_seas
+	x = 0
+	y = 1
+	relative_position_id = BLS_killer_infection
+	
+	cost = 5
+	prerequisite = { focus = BLS_hoof_extension }
+	prerequisite = { focus = BLS_killer_infection }
+	mutually_exclusive = { focus = BLS_untouchable_armadas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_swarm_the_seas"
+		###Idea here
+		###1x50 generic doctrine reduction
+	}
+	
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = BLS_boiling_sea
+	x = 1
+	y = 1
+	relative_position_id = BLS_untouchable_armadas
+	
+	cost = 5
+	prerequisite = {
+		focus = BLS_untouchable_armadas
+		focus = BLS_swarm_the_seas
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_boiling_sea"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 45 }
 }
