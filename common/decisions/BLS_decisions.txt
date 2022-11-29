@@ -72,6 +72,51 @@ BLS_debug_path_decision_category = {
 			}
 		}
 	}
+	BLS_test_bop_promotion = {
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		complete_effect = {
+			complete_national_focus = BLS_leave_to_priestesses
+			IF = {
+				limit = {
+					power_balance_value = {
+						id = BLS_power_balance
+						value < -0.19
+					}
+				}
+				hidden_effect = {
+					IF = {
+						limit = {
+							BLS_Nebula_Flare = { has_ideology = solarism }
+						}
+						BLS_Nebula_Flare = {
+							remove_country_leader_role = { ideology = solarism }
+							add_country_leader_role = {
+								country_leader = {
+									ideology = stellarism
+									desc = "POLITICS_NEBULA_FLARE_DESC"
+									expire = "1965.1.1"
+									traits = { nerdy_high_priestess }
+								}
+							}
+						}
+					}
+				}
+				BLS_Nebula_Flare = { promote_character = yes }
+			}
+			IF = {
+				limit = {
+					power_balance_value = {
+						id = BLS_power_balance
+						value > 0.19
+					}
+				}
+				BLS_Blazing_Sheath = { promote_character = yes }
+			}
+		}
+	}
 	BLS_massive_increase_nebula = {
 		visible = {
 			tag = BLS
@@ -81,7 +126,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = -1
-				tooltip_side = BLS_Nebula_Flare_name
+				tooltip_side = BLS_nebula_flare_side
 			}
 		}
 	}
@@ -94,7 +139,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = -0.5
-				tooltip_side = BLS_Nebula_Flare_name
+				tooltip_side = BLS_nebula_flare_side
 			}
 		}
 	}
@@ -107,7 +152,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = -0.25
-				tooltip_side = BLS_Nebula_Flare_name
+				tooltip_side = BLS_nebula_flare_side
 			}
 		}
 	}
@@ -120,7 +165,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = -0.05
-				tooltip_side = BLS_Nebula_Flare_name
+				tooltip_side = BLS_nebula_flare_side
 			}
 		}
 	}
@@ -133,7 +178,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = 1
-				tooltip_side = BLS_Blazing_Sheath_name
+				tooltip_side = BLS_blazing_sheath_side
 			}
 		}
 	}
@@ -146,7 +191,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = 0.5
-				tooltip_side = BLS_Blazing_Sheath_name
+				tooltip_side = BLS_blazing_sheath_side
 			}
 		}
 	}
@@ -159,7 +204,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = 0.25
-				tooltip_side = BLS_Blazing_Sheath_name
+				tooltip_side = BLS_blazing_sheath_side
 			}
 		}
 	}
@@ -172,7 +217,7 @@ BLS_debug_path_decision_category = {
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = 0.05
-				tooltip_side = BLS_Blazing_Sheath_name #Need new tooltips
+				tooltip_side = BLS_blazing_sheath_side #Need new tooltips
 			}
 		}
 	}
