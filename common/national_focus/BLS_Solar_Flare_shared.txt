@@ -205,7 +205,7 @@ shared_focus = {
 	}
 	available = {
 		custom_trigger_tooltip = {
-			tooltip = BLS_found_the_cultists_TT
+			tooltip = BLS_found_the_cultists_tt
 			has_country_flag = BLS_found_cultists_location
 		}
 	}
@@ -272,6 +272,12 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_fresh_blood"
 		###Event for resurrecting Blazing Sheath and Solar Flare lambasting her, before declaring that Nebula will be her new high priestess, to Nebula's horror and Sheath's rage; she'd shoot Nebula a furious glower and Nebula would gulp nervously
+		set_power_balance = {
+			id = BLS_power_balance
+			set_default = yes
+			set_value = -0.1
+		}
+		set_country_flag = BLS_necron_cultists
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -290,6 +296,11 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_last_chance"
 		###Event for resurrecting Blazing Sheath in front of Nebula, and Solar Flare lambasting Sheath, but Sheath pleads her case and is granted one last chance, although Nebula is placed almost as high in the cult as her
+		set_power_balance = {
+			id = BLS_power_balance
+			set_default = yes
+		}
+		set_country_flag = BLS_necron_cultists
 	}
 	
 	ai_will_do = { factor = 60 }
@@ -557,6 +568,7 @@ shared_focus = {
 	cost = 4
 	prerequisite = { focus = BLS_influence_the_foalish }
 	prerequisite = { focus = BLS_the_twelve }
+	mutually_exclusive = { focus = BLS_promise_death }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_promise_salvation"
@@ -574,6 +586,7 @@ shared_focus = {
 	
 	cost = 4
 	prerequisite = { focus = BLS_influence_the_foalish }
+	mutually_exclusive = { focus = BLS_promise_salvation }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_promise_death"
@@ -1893,10 +1906,7 @@ shared_focus = {
 	prerequisite = { focus = BLS_executions_sake }
 	prerequisite = { focus = BLS_use_undead_guards }
 	available = {
-		OR = {
-			controls_state = 1
-			owns_state = 1
-		}
+		controls_state = 1
 	}
 	
 	completion_reward = {
@@ -1964,10 +1974,7 @@ shared_focus = {
 	prerequisite = { focus = BLS_shatter_dreams }
 	prerequisite = { focus = BLS_eternal_suffering }
 	available = {
-		OR = {
-			controls_state = 180
-			owns_state = 180
-		}
+		controls_state = 180
 	}
 	
 	completion_reward = {

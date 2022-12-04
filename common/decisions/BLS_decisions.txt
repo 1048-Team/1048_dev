@@ -369,3 +369,121 @@ BLS_balance_of_power_category = {
 		}
 	}
 }
+BLS_the_ancient_trail_category = {
+	BLS_investigate_ancient_journals = {
+		allowed = {
+			has_country_flag = BLS_start_cultist_resurrection
+		}
+		days_remove = 21
+		fire_only_once = yes
+		cost = 25
+		modifier = {
+			research_speed_factor = -0.15
+			political_power_factor = -0.05
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_investigate_ancient_journals"
+			custom_effect_tooltip = BLS_start_investigation_tt
+			hidden_effect = {
+				random_list = {
+					65 = {
+						add_to_variable = { BLS_blazing_investigation = 1 }
+					}
+					35 = { }
+				}
+			}
+			set_country_flag = BLS_blazing_more_investigation
+		}
+	}
+	BLS_research_mentions_of_her_family = {
+		allowed = {
+			has_country_flag = BLS_blazing_more_investigation
+		}
+		visible = {
+			has_country_flag = BLS_blazing_more_investigation
+			NOT = { has_country_flag = BLS_found_cultists_location }
+		}
+		days_remove = 10
+		fire_only_once = yes
+		cost = 30
+		modifier = {
+			political_power_gain = -0.3
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_research_mentions_of_her_family"
+			random_list = {
+				55 = {
+					add_to_variable = { BLS_blazing_investigation = 1 }
+					custom_effect_tooltip = BLS_investigation_continues_tt
+				}
+				45 = { custom_effect_tooltip = BLS_investigation_stalls_tt }
+			}
+		}
+	}
+	BLS_dig_through_the_librarys_hidden_room = {
+		allowed = {
+			has_country_flag = BLS_blazing_more_investigation
+		}
+		visible = {
+			has_country_flag = BLS_blazing_more_investigation
+			NOT = { has_country_flag = BLS_found_cultists_location }
+		}
+		days_remove = 7
+		fire_only_once = yes
+		cost = 30
+		modifier = {
+			political_power_gain = -0.5
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_dig_through_the_librarys_hidden_room"
+			random_list = {
+				85 = {
+					add_to_variable = { BLS_blazing_investigation = 1 }
+					custom_effect_tooltip = BLS_investigation_continues_tt
+				}
+				15 = { custom_effect_tooltip = BLS_investigation_stalls_tt }
+			}
+		}
+	}
+	BLS_query_solar_flare = {
+		allowed = {
+			has_country_flag = BLS_start_cultist_resurrection
+		}
+		visible = {
+			NOT = { has_country_flag = BLS_found_cultists_location }
+		}
+		days_remove = 30
+		fire_only_once = yes
+		cost = 50
+		modifier = {
+			political_power_factor = -0.25
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_query_solar_flare"
+			custom_effect_tooltip = BLS_investigation_continues_tt
+			add_to_variable = { BLS_blazing_investigation = 2 }
+		}
+	}
+	BLS_pinpoint_blazings_location = {
+		allowed = {
+			custom_trigger_tooltip = {
+				tooltip = BLS_found_enough_clues_tt
+				check_variable = { BLS_blazing_investigation > 2 }
+			}
+		}
+		visible = {
+			check_variable = { BLS_blazing_investigation > 2 }
+		}
+		fire_only_once = yes
+		days_remove = 10
+		cost = 10
+		modifier = {
+			research_speed_factor = -0.25
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_pinpoint_blazings_location"
+			custom_effect_tooltip = BLS_successful_investigation_tt
+			set_country_flag = BLS_found_cultists_location
+		}
+	}
+}
