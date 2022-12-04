@@ -1,4 +1,98 @@
 ###1048###
+EQS_SOL_debug_category = {
+	EQS_SOL_go_SLW = {
+		complete_effect = {
+			SOL_Celestia_Returned = yes
+			SLW = {
+				change_tag_from = ROOT
+			}
+		}
+	}
+	EQS_SOL_go_CEL = {
+		complete_effect = {
+			SOL_Celestia_Returned = yes
+		}
+	}
+	EQS_SOL_go_SUN = {
+		complete_effect = {
+			set_country_flag = sunset_arrested
+			IF = {
+				limit = {
+					EQS_Sunset_Shimmer_1048 = { has_country_leader_ideology = solarism }
+				}
+				EQS_Sunset_Shimmer_1048 = {
+					add_country_leader_role = {
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1965.1.1"
+							desc = "POLITICS_SUNSET_SHIMMER_DESC"
+							ideology = solarism
+							id = -1
+							traits = { high_mage_shimmer }
+						}
+					}
+				}
+			}
+			ELSE = {
+				EQS_Sunset_Shimmer_1048 = { promote_character = yes }
+			}
+			IF = {
+				limit = {
+					has_country_flag = daybreaker_reigns
+				}
+				clr_country_flag = daybreaker_reigns
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	EQS_SOL_go_AUR = {
+		complete_effect = {
+			set_country_flag = aurora_removed
+			IF = { 
+				limit  = { 
+					EQS_Aurora_Shinespark = { has_country_leader_ideology = solarism }
+				}
+				EQS_Aurora_Shinespark = {
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							expire = "1965.1.1"
+							desc = "POLITICS_AURORA_SHINESPARK_DESC"
+							ideology = solarism
+							traits = {
+								protectress_of_the_empress
+							}
+						}
+					}
+				}
+			}
+			ELSE = {
+				EQS_Aurora_Shinespark = { promote_character = yes }
+			}
+			IF = {
+				limit = {
+					has_country_flag = daybreaker_reigns
+				}
+				clr_country_flag = daybreaker_reigns
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	EQS_SOL_stay_DAY = {
+		complete_effect = {
+			IF = {
+				limit = { EQS_Daybreaker = { is_country_leader = no } }
+				EQS_Daybreaker = { promote_character = yes }
+				set_country_flag = daybreaker_reigns
+			}
+			ELSE = {
+				set_country_flag = daybreaker_reigns
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
 EQS_AUR_new_temple_construction_category = {
 	EQS_AUR_abandon_construction = {
 		available = {
@@ -442,18 +536,14 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
-		cost = 150
-		days_remove = 20
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_CLD"
-			#Going to need to replace the annex with a generic country event that gives the player one more chance to fight against EQS
-			annex_country = { target = CLD }
-			every_state = {
-				limit = {
-					is_core_of = CLD
-				}
-				add_core_of = ROOT
+			CLD = {
+				country_event = solar.224
 			}
 		}
 	}
@@ -476,17 +566,14 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
-		cost = 150
-		days_remove = 20
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_BLS"
-			annex_country = { target = BLS }
-			every_state = {
-				limit = {
-					is_core_of = BLS
-				}
-				add_core_of = ROOT
+			BLS = {
+				country_event = solar.224
 			}
 		}
 	}
@@ -509,17 +596,14 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
-		cost = 150
-		days_remove = 20
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_NER"
-			annex_country = { target = NER }
-			every_state = {
-				limit = {
-					is_core_of = NER
-				}
-				add_core_of = ROOT
+			NER = {
+				country_event = solar.224
 			}
 		}
 	}
@@ -542,17 +626,14 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
-		cost = 150
-		days_remove = 20
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_CER"
-			annex_country = { target = CER }
-			every_state = {
-				limit = {
-					is_core_of = CER
-				}
-				add_core_of = ROOT
+			CER = {
+				country_event = solar.224
 			}
 		}
 	}
@@ -568,7 +649,6 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 			}
 		}
 		visible = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_WHY"
 			WHY = {
 				is_subject_of = ROOT
 			}
@@ -576,16 +656,14 @@ EQS_SUN_annex_puppeted_rump_states_category = {
 				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
 		}
-		cost = 150
-		days_remove = 20
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
 		modifier = { political_power_gain = -0.25 }
 		remove_effect = {
-			annex_country = { target = WHY }
-			every_state = {
-				limit = {
-					is_core_of = WHY
-				}
-				add_core_of = ROOT
+			log = "[GetDateText]: [Root.GetName]: Decision remove SUN_annex_WHY"
+			WHY = {
+				country_event = solar.224
 			}
 		}
 	}

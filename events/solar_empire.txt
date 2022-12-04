@@ -760,28 +760,25 @@ country_event = { #Purging some heretical commanders
 		}
 		name = solar.51.a
 		add_stability = 0.01
-		hidden_effect = {
-			random_character = {
-				limit = {
+		random_character = {
+			limit = {
+				AND = {
 					SOL_ordo_not_immune_to_purge = yes
+					is_unit_leader = yes
 				}
-				retire = yes
 			}
-			
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-				}
-				retire = yes
-			}
-			
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-				}
-				retire = yes
-			}
+			retire = yes
 		}
+		
+		random_character = {
+			limit = {
+				AND = {
+					SOL_ordo_not_immune_to_purge = yes
+					is_unit_leader = yes
+				}
+			}
+			retire = yes
+		}	
 	}
 }
 
@@ -854,7 +851,7 @@ country_event = { #A heretic is planted in the crowds of communist protesters in
 	is_triggered_only = yes
 	
 	option = { #I will be ready.
-		name = solar.54.a
+		name = solar.55.a
 		hidden_effect = {
 			country_event = {
 				id = solar.57
@@ -1546,28 +1543,21 @@ country_event = { #After being sealed away, discussion is held over who will be 
 		name = solar.100.a
 		ai_chance = {
 			factor = 60
-			}
-			hidden_effect = {
-				retire_country_leader = yes
-				custom_effect_tooltip = sunset_arrested_tt
-				set_country_flag = sunset_arrested
-				EQS_Sunset_Shimmer_1048 = {
-					add_country_leader_role = {
-						promote_leader = yes
-						
-						country_leader = {
-							expire = "1965.1.1"
-							desc = "POLITICS_SUNSET_SHIMMER_DESC"
-							ideology = solarism
-							id = -1
-							traits = { high_mage_shimmer }
-						}
+		}
+		hidden_effect = {
+			retire_country_leader = yes
+			set_country_flag = sunset_arrested
+			EQS_Sunset_Shimmer_1048 = {
+				add_country_leader_role = {
+					promote_leader = yes
+					
+					country_leader = {
+						expire = "1965.1.1"
+						desc = "POLITICS_SUNSET_SHIMMER_DESC"
+						ideology = solarism
+						id = -1
+						traits = { high_mage_shimmer }
 					}
-				}
-				mark_focus_tree_layout_dirty = yes
-				add_named_threat = {
-					threat = -1
-					name = EQS_regent_chosen
 				}
 			}
 			mark_focus_tree_layout_dirty = yes
@@ -1596,21 +1586,19 @@ country_event = { #After being sealed away, discussion is held over who will be 
 		name = solar.100.b
 		ai_chance = {
 			factor = 40
-			}
-			hidden_effect = {
-				retire_country_leader = yes
-				custom_effect_tooltip = aurora_retires_tt
-				set_country_flag = aurora_removed
-				EQS_Aurora_Shinespark = {
-					add_country_leader_role = {
-						promote_leader = yes
-						country_leader = {
-							expire = "1965.1.1"
-							desc = "POLITICS_AURORA_SHINESPARK_DESC"
-							ideology = solarism
-							traits = {
-								protectress_of_the_empress
-							}
+		}
+		hidden_effect = {
+			retire_country_leader = yes
+			set_country_flag = aurora_removed
+			EQS_Aurora_Shinespark = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						desc = "POLITICS_AURORA_SHINESPARK_DESC"
+						ideology = solarism
+						traits = {
+							protectress_of_the_empress
 						}
 					}
 				}
@@ -2864,8 +2852,8 @@ country_event = { #Sunset meets with Aurora and then the two of them head into t
 }
 
 country_event = { #After much debate, Sunset grows tired of the bickering and makes an executive decision to appoint Aurora, since she knows her from the crisis; Aurora is surprised, but is thankful
-	id = solar.207 #New description: With Aurora promoted, Sunset and her beging to discuss some of the new things that will be taking place in the Solar Empire, and Aurora is hesitant of being the face of it, but she ultimately agrees
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.207 #New description: With Aurora promoted, Sunset and her beging to discuss some of the new things that will be taking place in the Solar Empire, and Aurora is hesitant of being the face of it, but she ultimately agrees"}
+	id = solar.207 #New description: With Aurora promoted, Sunset and her begin to discuss some of the new things that will be taking place in the Solar Empire, and Aurora is hesitant of being the face of it, but she ultimately agrees
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.207"}
 	title = solar.207.t
 	desc = solar.207.d
 	
@@ -2879,7 +2867,7 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 				has_idea = aurora_shinespark
 			}
 			hidden_effect = {
-				remove_ideas = EQS_aurora_shinespark
+				remove_ideas = aurora_shinespark
 				EQS_Aurora_Shinespark = {
 					remove_advisor_role = { slot = political_advisor }
 				}
@@ -2889,23 +2877,20 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 							slot = political_advisor
 							idea_token = aurora_shinespark
 							allowed = {
-								AND = {
-									original_tag = EQS
-									has_country_flag = aurora_promoted
-									has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
-								}
+								original_tag = EQS
 							}
 							visible = {
 								AND = {
 									is_EQS_SOL_1048 = yes
-									has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+									has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
 									has_country_flag = aurora_promoted
 								}
 							}
 							available = {
 								AND = {
 									is_EQS_SOL_1048 = yes
-									has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+									has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
+									has_country_flag = aurora_promoted
 								}
 							}
 							can_be_fired = no
@@ -2931,23 +2916,20 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 							slot = political_advisor
 							idea_token = aurora_shinespark
 							allowed = {
-								AND = {
-									original_tag = EQS
-									has_country_flag = aurora_promoted
-									has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
-								}
+								original_tag = EQS
 							}
 							visible = {
 								AND = {
 									is_EQS_SOL_1048 = yes
-									has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+									has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
 									has_country_flag = aurora_promoted
 								}
 							}
 							available = {
 								AND = {
 									is_EQS_SOL_1048 = yes
-									has_country_leader = { ruling_only = yes name = "Sunset Shimmer" }
+									has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
+									has_country_flag = aurora_promoted
 								}
 							}
 							can_be_fired = no
@@ -2970,7 +2952,7 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 
 country_event = { #After a lot of fighting, the archmages eventually come to agreement that the best qualified among them is Pulsar Sweep, since she has dealt with many heretics in her time; Sunset begrudgingly agrees
 	id = solar.208 #New description: After Pulsar Sweep's coronation, she begins to dictate some new things for the Adoratio to be taking care of, and Sunset is not impressed, and speaks with Sweep privately, although Sweep disagrees and continues the course
-	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.208 #New description: After Pulsar Sweep's coronation, she begins to dictate some new things for the Adoratio to be taking care of, and Sunset is not impressed, and speaks with Sweep privately, although Sweep disagrees and continues the course"}
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.208"}
 	title = solar.208.t
 	desc = solar.208.d
 	
@@ -3156,8 +3138,7 @@ country_event = { #Sunset meets with the emmissaries that she will be sending ou
 	}
 }
 
-###Cloudsdale###
-country_event = { #Sunset dispatches the emmissary to Cloudsdale and watches them take flight to leave and she sighs before heading to the throne room
+country_event = { #The chosen country gets an envoy or emissary from the Solar Empire to discuss how to integrate back into it
 	id = solar.220
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.220"}
 	title = solar.220.t
@@ -3165,18 +3146,57 @@ country_event = { #Sunset dispatches the emmissary to Cloudsdale and watches the
 	
 	is_triggered_only = yes
 	
-	option = { #Only Faust knows what will happen.
+	option = { #We see that she is less harsh; we accept
 		name = solar.220.a
-		CLD = {
+		ai_chance = {
+			factor = 25
+			modifier = { has_government = democratic factor = 0.2 }
+			modifier = { tag = CLD factor = 0 }
+			modifier = { tag = BLS factor = 0.5 }
+			modifier = { has_government = fascism factor = 0 }
+		}
+		EQS = {
 			country_event = {
 				id = solar.221
 				days = 1
+				random_days = 5
+			}
+		}
+	}
+	option = { #She can be reasonable enough; how about something else?
+		name = solar.220.b
+		ai_chance = {
+			factor = 50
+			modifier = { has_government = democratic factor = 0.5 }
+			modifier = { tag = CLD factor = 0.33 }
+			modifier = { tag = NER factor = 0.75 }
+			modifier = { has_government = fascism factor = 0.25 }
+			modifier = { has_government = neutrality factor = 1.25 }
+		}
+		EQS = {
+			country_event = {
+				id = solar.222
+				days = 1
+				random_days = 5
+			}
+		}
+	}
+	option = { #No! We will never join her!
+		name = solar.220.c
+		ai_chance = {
+			factor = 70
+		}
+		EQS = {
+			country_event = {
+				id = solar.223
+				days = 1
+				random_days = 5
 			}
 		}
 	}
 }
 
-country_event = { #The emmissary arrives and subsequently gives their information to the leader who is worried at the new state of the world
+country_event = { #The responding rump state agrees to be annexed, and it is celebrated
 	id = solar.221
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.221"}
 	title = solar.221.t
@@ -3184,39 +3204,48 @@ country_event = { #The emmissary arrives and subsequently gives their informatio
 	
 	is_triggered_only = yes
 	
-	option = { #Sunset is more willing to listen than Daybreaker. We will work with her
+	option = { #Perfect!
 		name = solar.221.a
-		ai_chance = { factor = 10 }
-		EQS = {
-			country_event = {
-				id = solar.222
-				days = 1
+		annex_country = { target = FROM }
+		IF = {
+			limit = { FROM = { tag = CLD } }
+			add_timed_idea = {
+				idea = EQS_independent_training_program
+				days = 210
 			}
 		}
-	}
-	option = { #If Sunset is willing to discuss things, then we can work out an arrangement
-		name = solar.221.b
-		ai_chance = { factor = 25 }
-		EQS = {
-			country_event = {
-				id = solar.223
-				days = 1
+		IF = {
+			limit = { FROM = { tag = CER } }
+			add_timed_idea = {
+				idea = EQS_incorporate_harmony_worship
+				days = 210
 			}
 		}
-	}
-	option = { #That's absurd! We will never surrender to a tyrant!
-		name = solar.221.c
-		ai_chance = { factor = 65 }
-		EQS = {
-			country_event = {
-				id = solar.224
-				days = 1
+		IF = {
+			limit = { FROM = { tag = WHY } }
+			add_timed_idea = {
+				idea = EQS_worst_ideas_implemented
+				days = 210
+			}
+		}
+		IF = {
+			limit = { FROM = { tag = NER } }
+			add_timed_idea = {
+				idea = EQS_guaranteed_living_wage
+				days = 210
+			}
+		}
+		IF = {
+			limit = { FROM = { tag = BLS } }
+			add_timed_idea = {
+				idea = EQS_fund_secular_experiments
+				days = 210
 			}
 		}
 	}
 }
 
-country_event = { #The emmissary returns with news of Cloudsdale's acceptance of her terms, and Sunset is overjoyed
+country_event = { #The responding rump state returns with a counter offer of less promised concessions, but in exchange for retaining autonomy as a puppet
 	id = solar.222
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.222"}
 	title = solar.222.t
@@ -3224,17 +3253,72 @@ country_event = { #The emmissary returns with news of Cloudsdale's acceptance of
 	
 	is_triggered_only = yes
 	
-	option = { #It is good that they saw reason. Prepare the governors
+	option = { #This is something we will have to accept for now
 		name = solar.222.a
-		annex_country = { target = CLD }
-		add_timed_idea = {
-			idea = EQS_independent_training_program
-			days = 210
+		ai_chance = { factor = 40 }
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = FROM
+				autonomy_state = autonomy_reichsprotectorate
+				freedom_level = 0.5
+			}
+		}
+		else = {
+			puppet = FROM
+		}
+		FROM = { set_cosmetic_tag = SOL_puppet }
+		IF = {
+			limit = { FROM = { tag = CLD } }
+			add_timed_idea = {
+				idea = EQS_independent_training_program
+				days = 150
+			}
+		}
+		IF = {
+			limit = { FROM = { tag = CER } }
+			add_timed_idea = {
+				idea = EQS_incorporate_harmony_worship
+				days = 150
+			}
+		}
+		IF = {
+			limit = { FROM = { tag = WHY } }
+			add_timed_idea = {
+				idea = EQS_worst_ideas_implemented
+				days = 150
+			}
+		}
+		IF = {
+			limit = { FROM = { tag = NER } }
+			add_timed_idea = {
+				idea = EQS_guaranteed_living_wage
+				days = 150
+			}
+		}
+		IF = {
+			limit = { FROM = { tag = BLS } }
+			add_timed_idea = {
+				idea = EQS_fund_secular_experiments
+				days = 150
+			}
+		}
+	}
+	option = { #No! They don't realize that this is the only way forward!
+		name = solar.222.b
+		ai_chance = { factor = 60 }
+		add_political_power = -25
+		add_war_support = 0.02
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
 		}
 	}
 }
 
-country_event = { #The emmissary returns nervous and states that they have a counter offer from Cloudsdale and Sunset is curious
+country_event = { #The responding rump effectively laughs down Sunset's demand and she prepares for war
 	id = solar.223
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.223"}
 	title = solar.223.t
@@ -3242,36 +3326,18 @@ country_event = { #The emmissary returns nervous and states that they have a cou
 	
 	is_triggered_only = yes
 	
-	option = { #I suppose it is better to have them back in some capacity than none at all
+	option = { #Then I don't have a choice, do I?
 		name = solar.223.a
-		ai_chance = { factor = 30 }
-		if = {
-			limit = {
-				has_dlc = "Together for Victory"
-			}
-			set_autonomy = {
-				target = CLD
-				autonomy_state = autonomy_reichsprotectorate
-				freedom_level = 0.5
-			}
-		}
-		else = {
-			puppet = CLD
-		}
-		add_timed_idea = {
-			idea = EQS_independent_training_program
-			days = 150
-		}
-	}
-	option = { #No, if they will not bow willingly, they will bow by force
-		name = solar.223.b
-		ai_chance = { factor = 70 }
 		add_political_power = -25
 		add_war_support = 0.02
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
 	}
 }
 
-country_event = { #The emmissary returns deflated and tells Sunset of Cloudsdale's refusal, and she is not surprised but still disappointed
+country_event = { #The puppet that the missive is sent to receives the demands from Sunset and debates if they will submit
 	id = solar.224
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.224"}
 	title = solar.224.t
@@ -3279,12 +3345,193 @@ country_event = { #The emmissary returns deflated and tells Sunset of Cloudsdale
 	
 	is_triggered_only = yes
 	
-	option = { #They have decided their fate, I suppose. Ready the soldiers for battle
+	option = { #Like we have any other choice
 		name = solar.224.a
-		add_political_power = -25
-		add_war_support = 0.02
+		ai_chance = { factor = 35 }
+		EQS = {
+			country_event = {
+				id = solar.225
+				days = 1
+				random_days = 5
+			}
+		}
+	}
+	option = { #We will fight to the end!
+		name = solar.224.b
+		ai_chance = { factor = 65 }
+		leave_faction = yes
+		drop_cosmetic_tag = yes
+		EQS = {
+			country_event = { 
+				id = solar.226
+				days = 1
+				random_days = 5
+			}
+			end_puppet = ROOT
+		}
 	}
 }
+
+country_event = { #Sunset receives the response from the puppet and is pleased that they saw reason
+	id = solar.225
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.225"}
+	title = solar.225.t
+	desc = solar.225.d
+	
+	is_triggered_only = yes
+	
+	option = { #They made the right choice; I didn't want to hurt them more
+		name = solar.225.a
+		annex_country = { target = FROM }
+	}
+}
+
+country_event = { #Sunset is saddened when she learns that the puppet state rejected her and is preparing for a defensive war
+	id = solar.226
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.226"}
+	title = solar.226.t
+	desc = solar.226.d
+	
+	is_triggered_only = yes
+	
+	option = { #Well, they wanted it
+		name = solar.226.a
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+###Cloudsdale###
+#country_event = { #Sunset dispatches the emmissary to Cloudsdale and watches them take flight to leave and she sighs before heading to the throne room
+#	id = solar.220
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.220"}
+#	title = solar.220.t
+#	desc = solar.220.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Only Faust knows what will happen.
+#		name = solar.220.a
+#		CLD = {
+#			country_event = {
+#				id = solar.221
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #The emmissary arrives and subsequently gives their information to the leader who is worried at the new state of the world
+#	id = solar.221
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.221"}
+#	title = solar.221.t
+#	desc = solar.221.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #Sunset is more willing to listen than Daybreaker. We will work with her
+#		name = solar.221.a
+#		ai_chance = { factor = 10 }
+#		EQS = {
+#			country_event = {
+#				id = solar.222
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #If Sunset is willing to discuss things, then we can work out an arrangement
+#		name = solar.221.b
+#		ai_chance = { factor = 25 }
+#		EQS = {
+#			country_event = {
+#				id = solar.223
+#				days = 1
+#			}
+#		}
+#	}
+#	option = { #That's absurd! We will never surrender to a tyrant!
+#		name = solar.221.c
+#		ai_chance = { factor = 65 }
+#		EQS = {
+#			country_event = {
+#				id = solar.224
+#				days = 1
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { #The emmissary returns with news of Cloudsdale's acceptance of her terms, and Sunset is overjoyed
+#	id = solar.222
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.222"}
+#	title = solar.222.t
+#	desc = solar.222.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #It is good that they saw reason. Prepare the governors
+#		name = solar.222.a
+#		annex_country = { target = CLD }
+#		add_timed_idea = {
+#			idea = EQS_independent_training_program
+#			days = 210
+#		}
+#	}
+#}
+#
+#country_event = { #The emmissary returns nervous and states that they have a counter offer from Cloudsdale and Sunset is curious
+#	id = solar.223
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.223"}
+#	title = solar.223.t
+#	desc = solar.223.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #I suppose it is better to have them back in some capacity than none at all
+#		name = solar.223.a
+#		ai_chance = { factor = 30 }
+#		if = {
+#			limit = {
+#				has_dlc = "Together for Victory"
+#			}
+#			set_autonomy = {
+#				target = CLD
+#				autonomy_state = autonomy_reichsprotectorate
+#				freedom_level = 0.5
+#			}
+#		}
+#		else = {
+#			puppet = CLD
+#		}
+#		add_timed_idea = {
+#			idea = EQS_independent_training_program
+#			days = 150
+#		}
+#	}
+#	option = { #No, if they will not bow willingly, they will bow by force
+#		name = solar.223.b
+#		ai_chance = { factor = 70 }
+#		add_political_power = -25
+#		add_war_support = 0.02
+#	}
+#}
+#
+#country_event = { #The emmissary returns deflated and tells Sunset of Cloudsdale's refusal, and she is not surprised but still disappointed
+#	id = solar.224
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.224"}
+#	title = solar.224.t
+#	desc = solar.224.d
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #They have decided their fate, I suppose. Ready the soldiers for battle
+#		name = solar.224.a
+#		add_political_power = -25
+#		add_war_support = 0.02
+#	}
+#}
 
 ###Princessdom###
 country_event = { #Sunset dispatches the emmissary to the Princessdom and makes sure they are prepared for the harmonistic ways of the country
@@ -3825,8 +4072,8 @@ country_event = { #Sunset looks at the chaos in the world and decides that it is
 			add = shield_of_the_empire
 		}
 		clr_country_flag = sunset_arrested
-		EQS_Sunset_Shimmer = { remove_trait = { trait = high_mage } }
-		EQS_Sunset_Shimmer = { add_trait = { trait = princess_regent_general } }
+		EQS_Sunset_Shimmer_1048 = { remove_trait = { trait = high_mage } }
+		EQS_Sunset_Shimmer_1048 = { add_trait = { trait = princess_regent_general } }
 		every_country = {
 			limit = {
 				is_in_array = {

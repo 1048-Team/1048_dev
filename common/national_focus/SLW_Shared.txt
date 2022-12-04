@@ -3106,6 +3106,10 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus SLW_cleanse_ranks"
 		country_event = solarwar.96
 		#Event for choosing how many generals will be killed, and then purging some for potential heresy, or at least for resisting Nova
+		swap_ideas = {
+			remove_idea = SLW_militarium_impunity_2
+			add_idea = SLW_militarium_impunity_3
+		}
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -3143,6 +3147,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SLW_keep_militarium_command"
 		add_ideas = SLW_traditional_structure
+		hidden_effect = { country_event = solarwar.98 }
 	}
 	ai_will_do = { factor = 35 }
 }
@@ -3163,6 +3168,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SLW_modernize_supply_system"
 		add_ideas = SLW_modern_supply_system
+		hidden_effect = { country_event = solarwar.98 }
 	}
 	ai_will_do = { factor = 55 }
 }
@@ -3183,6 +3189,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SLW_praetorian_leadership"
 		add_ideas = SLW_praetorian_primacy
+		hidden_effect = { country_event = solarwar.98 }
 	}
 	ai_will_do = { factor = 75 }
 }
@@ -3199,10 +3206,20 @@ shared_focus = {
 		focus = SLW_modernize_supply_system
 		focus = SLW_praetorian_leadership
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = SLW_no_militarium_disloyalty_tt
+			AND = {
+				NOT = { has_idea = SLW_militarium_impunity }
+				NOT = { has_idea = SLW_militarium_impunity_2 }
+				NOT = { has_idea = SLW_militarium_impunity_3 }
+				NOT = { has_idea = SLW_militarium_impunity_4 }
+			}
+		}
+	}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus SLW_loyalty_bred"
-		remove_ideas = SLW_militarium_impunity_4
 		IF = {
 			limit = { has_idea = EQS_heretical_commanders }
 			remove_ideas = EQS_heretical_commanders
