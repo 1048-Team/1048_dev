@@ -279,7 +279,6 @@ shared_focus = {
 		###Event for resurrecting Blazing Sheath and Solar Flare lambasting her, before declaring that Nebula will be her new high priestess, to Nebula's horror and Sheath's rage; she'd shoot Nebula a furious glower and Nebula would gulp nervously
 		set_power_balance = {
 			id = BLS_power_balance
-			set_default = yes
 			set_value = -0.1
 		}
 		set_country_flag = BLS_necron_cultists
@@ -428,6 +427,7 @@ shared_focus = {
 	cost = 3
 	prerequisite = { focus = BLS_last_chance }
 	prerequisite = { focus = BLS_unearth_old_palace }
+	###Requires resurrected cultists
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_last_guardian"
@@ -466,6 +466,8 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_open_the_tombs"
 		###Nebula is left with a number of rotted or skelotnized corpses of some of Solar Flare's followers, which she is instructed to bring back as Solar Flare did, as she promises to use some of her power to do it
 		###The mechanic will rely on magic power (new resource), political power, and state manpower; it will range between a small amount of population to raise one division, to large population amounts to raise at least half a dozen; they will have varying cooldowns; there will also be decisions to improve the template design; there will be an infantry and a light armor design that can be used
+		set_country_flag = BLS_resurrect_dead_cultists
+		custom_effect_tooltip = BLS_can_raise_dead_cultists_tt
 	}
 	
 	ai_will_do = { factor = 65 }
@@ -519,7 +521,9 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_leave_them_undead"
-		###Idea here
+		custom_effect_tooltip = BLS_can_raise_killed_cultists_tt
+		set_country_flag = BLS_resurrect_killed_cultists
+		add_ideas = BLS_rest_in_unpeace
 		###Potentially allow some trickleback in that spirit, too, and also have a decision mechanic to raise some of the dead back to life, although it's wasteful (would keep track of dead as a variable, and burn 30% of the bodies used to resurrect)
 	}
 	
@@ -539,7 +543,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_born_again"
-		###Idea here
+		add_ideas = BLS_reborn_in_fury
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -558,7 +562,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_direct_to_grave"
-		###Nebula watches on as Solar Flare pronounces the Directorate as comprised of infidels and traitors, and that they will be punished accordingly, and hast hem burnt at the stake
+		###Nebula watches on as Solar Flare pronounces the Directorate as comprised of infidels and traitors, and that they will be punished accordingly, and has them burnt at the stake
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -577,7 +581,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_promise_salvation"
-		###Idea here
+		add_ideas = BLS_saved_masses
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -595,7 +599,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_promise_death"
-		###Idea here
+		add_ideas = BLS_death_for_all
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -780,7 +784,21 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_find_reason_to_madness"
-		###Idea here
+		IF = {
+			limit = {
+				has_idea = BLS_zealotry_in_the_cult
+			}
+			add_ideas = BLS_reasoning_to_insanity
+		}
+		IF = {
+			limit = {
+				has_idea = BLS_improve_the_cult
+			}
+			swap_ideas = {
+				remove_idea = BLS_improve_the_cult
+				add_idea = BLS_reasoning_to_insanity_alt
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -870,7 +888,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_who_needs_education"
-		###Idea here
+		add_ideas = BLS_education_banned
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -906,7 +924,13 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_science_always_wins"
-		###Idea here
+		custom_effect_tooltip = BLS_nebula_will_take_over_tt
+		add_ideas = BLS_victory_of_science
+		add_power_balance_value = {
+			id = BLS_power_balance
+			value = -0.05
+			tooltip_side = BLS_nebula_flare_side
+		}
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -925,7 +949,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_primacy_of_mind"
-		###Idea here
+		add_ideas = BLS_mind_over_soul
+		add_power_balance_value = {
+			id = BLS_power_balance
+			value = -0.05
+			tooltip_side = BLS_nebula_flare_side
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -940,10 +969,16 @@ shared_focus = {
 	cost = 5
 	prerequisite = { focus = BLS_return_to_ponke }
 	prerequisite = { focus = BLS_who_needs_education }
+	mutually_exclusive = { focus = BLS_primacy_of_mind }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_primacy_of_soul"
-		###Idea here
+		add_ideas = BLS_soul_over_mind
+		add_power_balance_value = {
+			id = BLS_power_balance
+			value = 0.05
+			tooltip_side = BLS_blazing_sheath_side
+		}
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -961,7 +996,13 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_heresy_never_wins"
-		###Idea here
+		custom_effect_tooltip = BLS_blazing_will_take_over_tt
+		add_ideas = BLS_victory_of_faith
+		add_power_balance_value = {
+			id = BLS_power_balance
+			value = 0.05
+			tooltip_side = BLS_blazing_sheath_side
+		}
 	}
 	
 	ai_will_do = { factor = 60 }
@@ -1271,7 +1312,15 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_institute_fear_of_failure"
-		###Idea here
+		IF = {
+			limit = {
+				has_dlc = "La Resistance"
+			}
+			add_ideas = BLS_fear_to_fail_lar
+		}
+		ELSE = {
+			add_ideas = BLS_fear_to_fail
+		}
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -1324,7 +1373,7 @@ shared_focus = {
 	
 	completion_reward = { #Should speak about how weak unicorns have gotten since she was killed, and that they must be taught how to be strong again
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_show_true_magic"
-		###Idea here
+		add_ideas = BLS_true_magic
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -1399,6 +1448,7 @@ shared_focus = {
 	cost = 5
 	prerequisite = { focus = BLS_destroy_knowledge }
 	prerequisite = { focus = BLS_everywhere_at_once }
+	mutually_exclusive = { focus = BLS_favor_the_whelp }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_favor_the_trusted"
@@ -1460,7 +1510,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_specialists_needed"
-		###Idea here
+		add_ideas = BLS_specialists_tolerated
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -1479,7 +1529,8 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_they_will_die"
-		###Idea here
+		add_ideas = BLS_death_guaranteed
+		###Potentially be a special tech instead
 	}
 	
 	ai_will_do = { factor = 60 }
@@ -2023,7 +2074,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_might_of_goddesses"
-		###Idea here
+		add_ideas = BLS_strength_of_heaven
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -2043,7 +2094,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_suicidal_fervor"
-		###Idea here
+		add_ideas = BLS_insane_fervor
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -2065,7 +2116,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_flame_for_flame_goddess"
-		###Idea here
+		add_ideas = BLS_blood_for_the_goddess
 	}
 	
 	ai_will_do = { factor = 77 }
@@ -2185,7 +2236,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_abolish_work_week"
-		###Idea here
+		add_ideas = BLS_work_week_banned
 	}
 	
 	ai_will_do = { factor = 35 }
@@ -2237,7 +2288,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_excavate_ancient_city"
-		###Solar Flare beats down a building herself to excavate the first entrance to the ancient necropolis underneath Bales
+		###Solar Flare beats down a building herself to excavate the first entrance to the ancient necropolis underneath Bales; add spirit
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -2254,7 +2305,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_unwilling_sacrifices"
-		###Blazing Sheath forces militia to execute ponies across Bales, and Melting Point and others lead the same efforts elsewhere
+		###Blazing Sheath forces militia to execute ponies across Bales, and Melting Point and others lead the same efforts elsewhere, and reduce spirit
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -2313,7 +2364,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_goddess_quotas"
-		###Idea here
+		add_ideas = BLS_goddess_quotas_idea
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -2333,7 +2384,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_establish_ley_line"
-		###Idea here
+		add_ideas = BLS_ley_line_industries
 		add_tech_bonus = {
 			name = excavation_bonus
 			bonus = 1
@@ -2420,7 +2471,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_instruments_of_punishment"
-		###Idea here
+		add_ideas = BLS_punishing_instruments
 	}
 	
 	ai_will_do = { factor = 65 }
@@ -2442,7 +2493,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_instruments_of_desire"
-		###Idea here
+		add_ideas = BLS_layponies_desires
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -2625,7 +2676,7 @@ shared_focus = {
 		add_tech_bonus = {
 			name = excavation_bonus
 			uses = 1
-			bonus = 0.5
+			bonus = 0.75
 			category = excavation_tech
 			category = construction_tech
 		}
@@ -2648,10 +2699,11 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_quick_digging"
 		###Some workers prepare some explosives and express their concern to their supervisor about the dangerous conditions of the tunnel, but are pushed to clear it anyway, and as it collapses on them they plead for help before they are killed, despite having a chance of escape
 		add_tech_bonus = {
-			name = construction_bonus
+			name = excavation_bonus
 			uses = 1
-			bonus = 0.75
+			bonus = 0.5
 			category = construction_tech
+			category = excavation_tech
 		}
 	}
 	
@@ -2672,6 +2724,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_end_chaos"
+		###Either idea here
 		###Nebula walks through the destruction that was wrought by the efforts of the protesters and Solar Flare
 	}
 	
@@ -2709,6 +2762,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_slaves_for_fire"
+		###Or idea here
 		###A stallion tries to flee Bales as things continue to degrade, and he is caught at the border by a couple of undead cultist soldiers, and subsequently tries to flee again, and is executed by them
 	}
 	
@@ -2798,7 +2852,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_full_workforce"
-		###Idea here
+		add_ideas = BLS_worked_to_the_grave
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -2819,6 +2873,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_last_freeponies"
+		###Add research slot
 		###Nebula bursts into a lab and tells the scientists there that Solar Flare is coming, and how to behave, which is partly ignored, and she watches in horror as Solar Flare has them executed on the spot for insubordination; these scientists are some of the last free ponies outside of the cult, which is why she wants to protect them
 	}
 	
@@ -2836,7 +2891,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_full_flexibility"
-		###Idea here
+		swap_ideas = {
+			remove_idea = BLS_ley_line_industries
+			add_idea = BLS_ley_line_ascendent
+		}
 	}
 	
 	ai_will_do = { factor = 42 }
@@ -2933,7 +2991,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_factory_with_state"
-		###Idea here
+		add_ideas = BLS_kingdom_of_factories
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -2989,7 +3047,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_perditious_legion"
-		###Idea here
+		add_ideas = BLS_fighters_of_perdition
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -3139,7 +3197,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_infiltrate_lines"
-		###Idea here
+		add_ideas = BLS_steal_from_the_enemy
 		add_doctrine_cost_reduction = {
 			name = mass_assault_reduction
 			uses = 2
@@ -3163,7 +3221,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_break_them"
-		###Idea here
+		add_ideas = BLS_broken_recruits
 		add_doctrine_cost_reduction = {
 			name = mass_assault_reduction
 			uses = 2
@@ -3187,7 +3245,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_autonomous_legions"
-		###Modify idea
+		swap_ideas = {
+			remove_idea = BLS_steal_from_the_enemy
+			add_idea = BLS_living_from_land
+		}
 		add_doctrine_cost_reduction = {
 			name = mass_assault_reduction
 			uses = 2
@@ -3211,7 +3272,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_worthless_unless_dead"
-		###Modify idea
+		swap_ideas = {
+			remove_idea = BLS_broken_recruits
+			add_idea = BLS_useless_alive
+		}
 		add_doctrine_cost_reduction = {
 			name = mass_assault_reduction
 			uses = 2
@@ -3238,7 +3302,24 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_nothing_without_goddess"
-		###Insert both potential ideas here
+		IF = {
+			limit = {
+				has_idea = BLS_living_from_land
+			}
+			swap_ideas = {
+				remove_idea = BLS_living_from_land
+				add_idea = BLS_trickery_in_warfare
+			}
+		}
+		IF = {
+			limit = {
+				has_idea = BLS_useless_alive
+			}
+			swap_ideas = {
+				remove_idea = BLS_useless_alive
+				add_idea = BLS_brutality_in_warfare
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 60 }
@@ -3366,7 +3447,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_punishing_skies"
-		###Idea here
+		add_ideas = BLS_skies_of_death
 	}
 	
 	ai_will_do = { factor = 35 }
@@ -3493,8 +3574,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_flying_graves"
 		set_rule = { can_use_kamikaze_pilots = yes }
-		###Idea here
-		###Possibly event of a plane crash give the idea to Blazing Sheath to push pilots to suicide attacks
+		###Event of a plane crash give the idea to Blazing Sheath to push pilots to suicide attacks; only activated if Nebula and Blazing are both still leaders; will be idea if they've driven the other off
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -3511,7 +3591,15 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_carpeted_fury"
-		###Idea here
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_ideas = BLS_rolling_thunder_BBA
+		}
+		ELSE = {
+			add_ideas = BLS_rolling_thunder
+		}
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -3531,7 +3619,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_not_pointless"
-		###Idea here
+		add_ideas = BLS_an_actual_use
 	}
 	
 	ai_will_do = { factor = 48 }
@@ -3551,7 +3639,29 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_screaming_eagles"
-		###Tech bonus here
+		IF = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = jet_fighter_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = modern_small_airframe
+				technology = modern_small_airframe_2
+			}
+		}
+		ELSE = {
+			add_tech_bonus = {
+				name = jet_fighter_bonus
+				bonus = 1
+				ahead_reduction = 2
+				uses = 1
+				technology = jet_fighter1
+				technology = jet_fighter2
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 38 }
@@ -3569,7 +3679,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_warriors_of_heaven"
-		###Idea here
+		add_ideas = BLS_heavens_demons
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -3634,8 +3744,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_take_imperial_dockyards"
-		###Add dockyards###
-		###Perhaps have an event of charging the docks and retaking them
+		###Perhaps have an event of charging the docks and taking them
 	}
 	
 	ai_will_do = { factor = 35 }
@@ -3655,7 +3764,18 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_specialize_followers"
-		###Tech bonus here
+		add_tech_bonus = {
+			name = marine_bonus
+			bonus = 1
+			uses = 2
+			category = marine_tech
+		}
+		add_tech_bonus = {
+			name = paratrooper_bonus
+			bonus = 1
+			uses = 2
+			category = para_tech
+		}
 	}
 	
 	ai_will_do = { factor = 35 }
@@ -3672,8 +3792,13 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_infidels_gift"
-		###Idea here
-		###3x50% generic naval doctrine reduction
+		add_ideas = BLS_repurposing_infidel_fleets
+		add_doctrine_cost_reduction = {
+			name = naval_doctrine_reduction
+			uses = 3
+			cost_reduction = 0.5
+			category = naval_doctrine
+		}
 	}
 	
 	ai_will_do = { factor = 38 }
@@ -3691,7 +3816,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_mosquito_destroyers"
-		###Tech bonus here
+		add_tech_bonus = {
+			name = destroyer_bonus
+			uses = 2
+			bonus = 1
+			category = dd_tech
+		}
 	}
 	
 	ai_will_do = { factor = 43 }
@@ -3708,7 +3838,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_ferrying_judgement"
-		###Tech bonus here
+		add_tech_bonus = {
+			name = transport_bonus
+			uses = 2
+			bonus = 1
+			category = tp_tech
+		}
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -3729,8 +3864,19 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_chosen_chosen"
-		###Idea here
-		###Tech bonus here
+		add_ideas = BLS_elite_of_the_chosen
+		add_tech_bonus = {
+			name = marine_bonus
+			bonus = 1
+			uses = 1
+			category = marine_tech
+		}
+		add_tech_bonus = {
+			name = paratrooper_bonus
+			bonus = 1
+			uses = 1
+			category = para_tech
+		}
 	}
 	
 	ai_will_do = { factor = 35 }
@@ -3748,7 +3894,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_hoof_extension"
-		###Tech bonus here
+		add_tech_bonus = {
+			name = bb_bonus
+			uses = 2
+			bonus = 1
+			category = bb_tech
+		}
 	}
 	
 	ai_will_do = { factor = 55 }
@@ -3766,7 +3917,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_killer_infection"
-		###Tech bonus here
+		add_tech_bonus = {
+			name = cv_bonus
+			uses = 2
+			bonus = 1
+			category = cv_tech
+		}
 	}
 	
 	ai_will_do = { factor = 50 }
@@ -3785,8 +3941,13 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_untouchable_armadas"
-		###Idea here
-		###1x50 generic doctrine reduction
+		add_ideas = BLS_invincible_fleets
+		add_doctrine_cost_reduction = {
+			name = naval_doctrine_reduction
+			uses = 1
+			cost_reduction = 0.5
+			category = naval_doctrine
+		}
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -3805,8 +3966,13 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_swarm_the_seas"
-		###Idea here
-		###1x50 generic doctrine reduction
+		add_ideas = BLS_swarms_of_the_water
+		add_doctrine_cost_reduction = {
+			name = naval_doctrine_reduction
+			uses = 1
+			cost_reduction = 0.5
+			category = naval_doctrine
+		}
 	}
 	
 	ai_will_do = { factor = 65 }
@@ -3826,7 +3992,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_boiling_sea"
-		###Idea here
+		add_ideas = BLS_fleet_of_perdition
 	}
 	
 	ai_will_do = { factor = 45 }
