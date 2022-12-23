@@ -570,11 +570,14 @@ EQS_inquisitionis_occupation = { #Suppressionist SOL policy
 	icon = 14
 	sound_effect = "Martial_Law_Interface_Autonomous_Occupation_Unique_DEM"
 	
+	fallback_law = EQS_inquisitionis_occupation_improved
+	
 	visible = {
 		OR = {
 			original_tag = EQS
 			original_tag = SLW
 		}
+		NOT = { has_country_flag = EQS_AUR_improved_inquisitionis_occupation }
 		NOT = { EQS_Sunbutt = { is_country_leader = yes } }
 		NOT = {
 			original_tag = DED
@@ -592,6 +595,7 @@ EQS_inquisitionis_occupation = { #Suppressionist SOL policy
 		}
 		hidden_trigger = {
 			NOT = { EQS_Sunbutt = { is_country_leader = yes } }
+			NOT = { has_country_flag = EQS_AUR_improved_inquisitionis_occupation }
 		}
 		NOT = {
 			original_tag = DED
@@ -609,6 +613,97 @@ EQS_inquisitionis_occupation = { #Suppressionist SOL policy
 		resistance_garrison_penetration_chance = -0.1
 		resistance_decay 				= 0.25
 		resistance_growth				= -0.25
+	}
+	
+	ai_will_do = {
+		base = 750
+	}
+}
+
+EQS_inquisitionis_occupation_improved = { #Suppressionist SOL policy
+	icon = 14
+	sound_effect = "Martial_Law_Interface_Autonomous_Occupation_Unique_DEM"
+	
+	fallback_law = EQS_inquisitionis_occupation_final
+	
+	visible = {
+		original_tag = EQS
+		has_country_flag = EQS_AUR_improved_inquisitionis_occupation
+		NOT = { has_country_flag = EQS_AUR_final_inquisitionis_occupation }
+		NOT = {
+			original_tag = DED
+			hidden_trigger = { original_tag = EWI }
+		}
+	}
+	
+	available = {
+		original_tag = EQS
+		hidden_trigger = {
+			has_country_flag = EQS_AUR_improved_inquisitionis_occupation
+			NOT = { has_country_flag = EQS_AUR_final_inquisitionis_occupation }
+		}
+		NOT = {
+			original_tag = DED
+			hidden_trigger = { original_tag = EWI }
+		}
+	}
+	
+	state_modifier = { #Change in tooltips, too
+		resistance_target 				= -0.45
+		required_garrison_factor 		= -0.20	
+		resistance_damage_to_garrison 	= 0.10	
+		compliance_gain 				= -0.025
+		local_manpower  				= -0.30
+		local_factories					= 0.05
+		local_intel_to_enemies			= -0.25
+		resistance_garrison_penetration_chance = -0.15
+		resistance_decay 				= 0.25
+		resistance_growth				= -0.25
+	}
+	
+	ai_will_do = {
+		base = 750
+	}
+}
+
+EQS_inquisitionis_occupation_final = { #Suppressionist SOL policy
+	icon = 14
+	sound_effect = "Martial_Law_Interface_Autonomous_Occupation_Unique_DEM"
+	
+	fallback_law = EQS_inquisitionis_occupation_final
+	
+	visible = {
+		original_tag = EQS
+		has_country_flag = EQS_AUR_final_inquisitionis_occupation
+		NOT = {
+			original_tag = DED
+			hidden_trigger = { original_tag = EWI }
+		}
+	}
+	
+	available = {
+		original_tag = EQS
+		hidden_trigger = {
+			has_country_flag = EQS_AUR_final_inquisitionis_occupation
+		}
+		NOT = {
+			original_tag = DED
+			hidden_trigger = { original_tag = EWI }
+		}
+	}
+	
+	state_modifier = { #Change in tooltips, too
+		resistance_target 				= -0.50
+		required_garrison_factor 		= -0.10	
+		resistance_damage_to_garrison 	= 0.10	
+		compliance_gain 				= -0.025
+		local_manpower  				= -0.25
+		local_factories					= 0.05
+		local_intel_to_enemies			= -0.25
+		resistance_garrison_penetration_chance = -0.20
+		resistance_decay 				= 0.30
+		resistance_growth				= -0.30
+		enemy_operative_detection_chance_factor_over_occupied_tag = 0.05
 	}
 	
 	ai_will_do = {
