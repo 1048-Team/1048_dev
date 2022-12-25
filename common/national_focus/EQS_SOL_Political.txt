@@ -2146,73 +2146,13 @@ shared_focus = {
 			add_core_of = ROOT
 		}
 		set_province_name = { id = 782 name = renamed_new_canterlot }
+		mark_focus_tree_layout_dirty = yes
+		set_variable = { equestria_conquest = 1 }
 	}
 	ai_will_do = { factor = 60 }
 }
 
 ###Southeast Tree###
-shared_focus = {
-	id = EQS_retribution_is_just
-	x = 29
-	y = 12
-	
-	available = {
-		has_completed_focus = EQS_reborn_heartland
-	}
-	allow_branch = {
-		has_completed_focus = EQS_reborn_heartland
-	}
-	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	
-	select_effect = {
-		set_variable = { equestria_conquest = 1 }
-	}
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_retribution_is_just"
-		every_country = {
-			limit = {
-				is_in_array = {
-					array = global.southeast_countries
-					value = THIS
-				}
-			}
-		
-			EQS = {
-				create_wargoal = {
-					type = annex_everything
-					target = PREV
-				}
-			}
-		}
-	}
-	ai_will_do = { factor = 40 }
-}
 
 ###Left side###
 #shared_focus = {
@@ -2365,7 +2305,7 @@ shared_focus = {
 	
 	cost = 5
 	
-	prerequisite = { focus = EQS_retribution_is_just }
+	#prerequisite = { focus = EQS_retribution_is_just }
 	
 	
 	completion_reward = {
@@ -2457,7 +2397,7 @@ shared_focus = {
 	
 	cost = 4
 	
-	prerequisite = { focus = EQS_retribution_is_just }
+	#prerequisite = { focus = EQS_retribution_is_just }
 	
 	
 	completion_reward = {
@@ -2549,8 +2489,8 @@ shared_focus = {
 	
 	cost = 5
 	
-	prerequisite = { focus = EQS_remind_the_empire }
-	prerequisite = { focus = EQS_level_the_mountains }
+	#prerequisite = { focus = EQS_remind_the_empire }
+	#prerequisite = { focus = EQS_level_the_mountains }
 	
 	
 	completion_reward = {
@@ -2568,11 +2508,11 @@ shared_focus = {
 	
 	cost = 5
 	
-	prerequisite = { focus = EQS_born_from_ashes }
-	prerequisite = {
-		focus = EQS_clearing_carnage_of_communism
-		focus = EQS_empire_to_heel
-	}
+	#prerequisite = { focus = EQS_born_from_ashes }
+	#prerequisite = {
+	#	focus = EQS_clearing_carnage_of_communism
+	#	focus = EQS_empire_to_heel
+	#}
 	
 	
 	completion_reward = {
@@ -2617,44 +2557,6 @@ shared_focus = {
 }
 
 ###Stalliongrad assault###
-shared_focus = {
-	id = EQS_clearing_carnage_of_communism
-	x = -2
-	y = 1
-	relative_position_id = EQS_born_from_ashes
-	
-	bypass = {
-		NOT = {
-			country_exists = STG
-		}
-	}
-	
-	cost = 4
-	
-	prerequisite = { focus = EQS_born_from_ashes }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_clearing_carnage_of_communism"
-		create_wargoal = {
-			type = annex_everything
-			target = STG
-		}
-		create_wargoal = {
-			type = annex_everything
-			target = AWR
-		}
-		create_wargoal = {
-			type = annex_everything
-			target = CWR
-		}
-		create_wargoal = {
-			type = annex_everything
-			target = MWR
-		}
-	}
-	ai_will_do = { factor = 17 }
-}
 
 shared_focus = {
 	id = EQS_communism_is_an_affront
@@ -2670,7 +2572,7 @@ shared_focus = {
 	
 	cost = 5
 	
-	prerequisite = { focus = EQS_clearing_carnage_of_communism }
+	#prerequisite = { focus = EQS_clearing_carnage_of_communism }
 	
 	
 	completion_reward = {
@@ -2870,32 +2772,6 @@ shared_focus = {
 }
 
 ###Crystal Empire assault###
-shared_focus = {
-	id = EQS_empire_to_heel
-	x = 2
-	y = 1
-	relative_position_id = EQS_born_from_ashes
-	
-	bypass = {
-		NOT = {
-			country_exists = CRY
-		}
-	}
-	
-	cost = 4
-	
-	prerequisite = { focus = EQS_born_from_ashes }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_empire_to_heel"
-		create_wargoal = {
-			type = annex_everything
-			target = CRY
-		}
-	}
-	ai_will_do = { factor = 20 }
-}
 
 shared_focus = {
 	id = EQS_reunion
@@ -2909,12 +2785,9 @@ shared_focus = {
 		}
 	}
 	
-	bypass = {
-	}
-	
 	cost = 3
 	
-	prerequisite = { focus = EQS_empire_to_heel }
+	#prerequisite = { focus = EQS_empire_to_heel }
 	
 	
 	completion_reward = {
@@ -3628,6 +3501,252 @@ shared_focus = { #Speak of the corruption being too great, and that the city mus
 		}
 	}
 	ai_will_do = { factor = 50 }
+}
+
+###New Daybreaker War Tree###
+shared_focus = {
+	id = EQS_escalate_war
+	x = 29
+	y = 12
+	
+	allow_branch = {
+		OR = {
+			has_completed_focus = EQS_reborn_heartland
+			AND = {
+				is_debug = yes
+				has_country_flag = daybreaker_reigns
+			}
+		}
+	}
+	
+	cost = 2
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_escalate_war"
+		add_command_power = 25
+		add_war_support = 0.05
+	}
+	
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_retribution_is_just
+	x = -3
+	y = 1
+	relative_position_id = EQS_escalate_war
+	
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_escalate_war }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_retribution_is_just"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.southeast_countries
+					value = THIS
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_shatter_wills
+	x = -1
+	y = 1
+	relative_position_id = EQS_retribution_is_just
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = EQS_retribution_is_just }
+	mutually_exclusive = { focus = EQS_work_with_governors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_shatter_wills"
+		###Daybreaker appoints Quasar to use any means necessary to bring the Southeast to heel
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_work_with_governors
+	x = 1
+	y = 1
+	relative_position_id = EQS_retribution_is_just
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = EQS_retribution_is_just }
+	mutually_exclusive = { focus = EQS_shatter_wills }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_work_with_governors"
+		###Daybreaker appears to one of the Baltimare governors and effectively threatens them into following her
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_empire_to_heel
+	x = 0
+	y = 1
+	relative_position_id = EQS_escalate_war
+	
+	bypass = {
+		NOT = {
+			country_exists = CRY
+		}
+	}
+	
+	cost = 4
+	
+	prerequisite = { focus = EQS_escalate_war }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_empire_to_heel"
+		create_wargoal = {
+			type = annex_everything
+			target = CRY
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_clearing_carnage_of_communism
+	x = 3
+	y = 1
+	relative_position_id = EQS_escalate_war
+	
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			all_of_scopes = {
+				array = global.shield_of_steel
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 4
+	
+	prerequisite = { focus = EQS_escalate_war }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_clearing_carnage_of_communism"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
+			}
+			
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 40 }
 }
 
 ###Sunset Shimmer Tree###
