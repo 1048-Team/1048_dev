@@ -2456,105 +2456,6 @@ shared_focus = {
 #}
 
 ###Capstone###
-shared_focus = {
-	id = EQS_born_from_ashes
-	x = -1
-	y = 1
-	relative_position_id = EQS_remind_the_empire
-	
-	available = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
-				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
-				}
-			}
-		}
-	}
-	
-	cost = 5
-	
-	#prerequisite = { focus = EQS_remind_the_empire }
-	#prerequisite = { focus = EQS_level_the_mountains }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_born_from_ashes"
-		country_event = solar.105
-	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = {
-	id = EQS_rewards_of_riches
-	x = 0
-	y = 2
-	relative_position_id = EQS_born_from_ashes
-	
-	cost = 5
-	
-	#prerequisite = { focus = EQS_born_from_ashes }
-	#prerequisite = {
-	#	focus = EQS_clearing_carnage_of_communism
-	#	focus = EQS_empire_to_heel
-	#}
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_rewards_of_riches"
-		create_corps_commander = {
-		name = "Fidelis Flamma"
-		#portrait_path = "gfx/leaders/EQS/Fidelis.tga"
-		traits = { solaris_adoratio fire_pony pony_race_trait }
-		id = 5105
-		skill = 2
-		attack_skill = 3
-		defense_skill = 1
-		planning_skill = 1
-		logistics_skill = 2
-		female = yes
-		}
-		create_corps_commander = {
-		name = "Foresight Amour"
-		#portrait_path = "gfx/leaders/EQS/Foresight.tga"
-		traits = { solaris_militarium bleeding_heart_1048 pony_race_trait }
-		id = 5106
-		skill = 3
-		attack_skill = 2
-		defense_skill = 3
-		planning_skill = 2
-		logistics_skill = 3
-		}
-		create_corps_commander = {
-		name = "Steel Sickle"
-		#portrait_path = "gfx/leaders/EQS/Steel.tga"
-		traits = { solaris_inquisitionis loyal_earth pony_race_trait }
-		id = 5107
-		skill = 2
-		attack_skill = 1
-		defense_skill = 4
-		planning_skill = 2
-		logistics_skill = 1
-		female = yes
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
 
 ###Stalliongrad assault###
 
@@ -3093,38 +2994,6 @@ shared_focus = {
 	ai_will_do = { factor = 20 }
 }
 
-shared_focus = {
-	id = EQS_fix_the_great_mistake
-	x = 2
-	y = 1
-	relative_position_id = EQS_squash_the_insects
-	
-	available = {
-		NOT = {
-			country_exists = CHN
-			has_war = yes
-		}
-	}
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_squash_the_insects }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_fix_the_great_mistake"
-		set_province_name = { id = 748 name = renamed_chrysalia }
-		1216 = {
-			set_state_name = renamed_chrysalia_state
-		}
-		136 = {
-			set_state_name = renamed_chrysalia_plains_state
-		}
-		add_stability = 0.05
-		add_war_support = 0.05
-	}
-	ai_will_do = { factor = 20 }
-}
-
 ###Prep for Marelandia war###
 shared_focus = {
 	id = EQS_unending_waves
@@ -3144,14 +3013,801 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = EQS_an_invincible_armada
+	id = EQS_strike_from_the_sanctum
 	x = 0
 	y = 1
-	relative_position_id = EQS_make_them_work
+	relative_position_id = EQS_fix_the_great_mistake
 	
 	cost = 4
 	
-	prerequisite = { focus = EQS_make_them_work }
+	#prerequisite = { focus = EQS_fix_the_great_mistake }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_strike_from_the_sanctum"
+		add_ideas = EQS_strike_from_sanctum_solar
+	}
+	ai_will_do = { factor = 25 }
+}
+
+###Marelandia assault###
+shared_focus = {
+	id = EQS_straddling_the_sea
+	x = -2
+	y = 1
+	relative_position_id = EQS_reclaim_the_jewel
+	
+	available = {
+		any_state = {
+			is_core_of = EQC
+			is_coastal = yes
+			is_controlled_by = EQS ###Will need to figure out how to just have one province under control to start the event
+		}
+	}
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	cost = 3
+	
+	#prerequisite = { focus = EQS_reclaim_the_jewel }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_straddling_the_sea"
+		country_event = solar.115
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = EQS_purge_the_corrupted
+	x = 0
+	y = 1
+	relative_position_id = EQS_reclaim_the_jewel
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	cost = 3
+	
+	#prerequisite = { focus = EQS_reclaim_the_jewel }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_purge_the_corrupted"
+		add_ideas = EQS_righting_the_past
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+	id = EQS_silence_big_sister
+	x = 2
+	y = 1
+	relative_position_id = EQS_reclaim_the_jewel
+	
+	available = {
+		356 = {
+			is_owned_by = EQS
+		}
+	}
+	
+	bypass = {
+		NOT = {
+			country_exists = EQC
+		}
+	}
+	
+	cost = 3
+	
+	#prerequisite = { focus = EQS_reclaim_the_jewel }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_silence_big_sister"
+		country_event = solar.116
+	}
+	ai_will_do = { factor = 20 }
+}
+
+shared_focus = { #Speak of the corruption being too great, and that the city must be purged of all those of the Party, inner, outer, and cooperative proles
+	id = EQS_wipe_them_out
+	x = 0
+	y = 1
+	relative_position_id = EQS_purge_the_corrupted
+	
+	bypass = {
+	}
+	
+	cost = 6
+	
+	prerequisite = { focus = EQS_straddling_the_sea }
+	prerequisite = { focus = EQS_purge_the_corrupted }
+	prerequisite = { focus = EQS_silence_big_sister }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_wipe_them_out"
+		356 = {
+			add_manpower = -1000000
+			add_core_of = ROOT
+		}
+		675 = {
+			add_core_of = ROOT
+		}
+		676 = {
+			add_core_of = ROOT
+		}
+		360 = {
+			add_core_of = ROOT
+		}
+		361 = {
+			add_core_of = ROOT
+		}
+		365 = {
+			add_core_of = ROOT
+		}
+		364 = {
+			add_core_of = ROOT
+		}
+		363 = {
+			add_core_of = ROOT
+		}
+		362 = {
+			add_core_of = ROOT
+		}
+		359 = {
+			add_core_of = ROOT
+		}
+		355 = {
+			add_core_of = ROOT
+		}
+		354 = {
+			add_core_of = ROOT
+		}
+		357 = {
+			add_core_of = ROOT
+		}
+		358 = {
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+###New Daybreaker War Tree###
+shared_focus = {
+	id = EQS_escalate_war
+	x = 29
+	y = 13
+	
+	allow_branch = {
+		OR = {
+			has_completed_focus = EQS_reborn_heartland
+			AND = {
+				is_debug = yes
+				has_country_flag = daybreaker_reigns
+			}
+		}
+	}
+	
+	cost = 2
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_escalate_war"
+		add_command_power = 25
+		add_war_support = 0.05
+	}
+	
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_retribution_is_just
+	x = -6
+	y = 2
+	relative_position_id = EQS_escalate_war
+	
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_escalate_war }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_retribution_is_just"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.southeast_countries
+					value = THIS
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_shatter_wills
+	x = -1
+	y = 1
+	relative_position_id = EQS_retribution_is_just
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = EQS_retribution_is_just }
+	mutually_exclusive = { focus = EQS_work_with_governors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_shatter_wills"
+		###Daybreaker appoints Quasar to use any means necessary to bring the Southeast to heel
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_work_with_governors
+	x = 1
+	y = 1
+	relative_position_id = EQS_retribution_is_just
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 4
+	prerequisite = { focus = EQS_retribution_is_just }
+	mutually_exclusive = { focus = EQS_shatter_wills }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_work_with_governors"
+		###Daybreaker appears to one of the Baltimare governors and effectively threatens them into following her
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_implement_new_thoughts
+	x = -2
+	y = 1
+	relative_position_id = EQS_shatter_wills
+	
+	cost = 3
+	prerequisite = { focus = EQS_shatter_wills }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_implement_new_thoughts"
+		###A pony from Baltimare is dragged into the Ordo house for torture because of their references to the old regime
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_incinerate_jungle
+	x = 0
+	y = 1
+	relative_position_id = EQS_shatter_wills
+	
+	cost = 3
+	prerequisite = { focus = EQS_shatter_wills }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_incinerate_jungle"
+		###A thestral fighter flees from some ponies with flame throwing magic rifles as they are hunted down as creatures of darkness
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_watch_bats
+	x = 0
+	y = 1
+	relative_position_id = EQS_work_with_governors
+	
+	cost = 3
+	prerequisite = { focus = EQS_work_with_governors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_watch_bats"
+		###Follow a thestral or two as they are observed by Militarium members in every village there is, and how they can't even organize without observation
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = EQS_replace_gods
+	x = 2
+	y = 1
+	relative_position_id = EQS_work_with_governors
+	
+	cost = 3
+	prerequisite = { focus = EQS_work_with_governors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_replace_gods"
+		###Some ponies in Stableside are appalled and try to stop some inquisitors as they tear down both a statue of Lucky Star and also of some other COBSOC material
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_justice_for_secession
+	x = 1
+	y = 1
+	relative_position_id = EQS_incinerate_jungle
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_implement_new_thoughts
+		focus = EQS_replace_gods
+	}
+	prerequisite = {
+		focus = EQS_incinerate_jungle
+		focus = EQS_watch_bats
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_justice_for_secession"
+		###The last of the leaders of COBSOC, including Lucky Star, are hauled out for execution, with Lucky Star aghast that his beloved Daybreaker would kill him
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_empire_to_heel
+	x = 0
+	y = 1
+	relative_position_id = EQS_escalate_war
+	
+	bypass = {
+		NOT = {
+			country_exists = CRY
+		}
+	}
+	
+	cost = 4
+	
+	prerequisite = { focus = EQS_escalate_war }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_empire_to_heel"
+		create_wargoal = {
+			type = annex_everything
+			target = CRY
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_entice_disloyal_generals
+	x = 0
+	y = 1
+	relative_position_id = EQS_empire_to_heel
+	
+	available = { NOT = { country_exists = CRY } }
+	
+	cost = 4
+	prerequisite = { focus = EQS_empire_to_heel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_entice_disloyal_generals"
+		###Some different generals are given a choice of serving Daybreaker for some rewards or death, and some take her up, to the others' horror
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_remove_thorns
+	x = -1
+	y = 1
+	relative_position_id = EQS_entice_disloyal_generals
+	
+	cost = 3
+	prerequisite = { focus = EQS_entice_disloyal_generals }
+	mutually_exclusive = { focus = EQS_establish_transitional_government }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_remove_thorns"
+		###Some different members of Cadance's cabinet are dragged out for Daybreaker to judge for their complacency with the Crystal Empire's betrayal
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_establish_transitional_government
+	x = 1
+	y = 1
+	relative_position_id = EQS_entice_disloyal_generals
+	
+	cost = 3
+	prerequisite = { focus = EQS_entice_disloyal_generals }
+	mutually_exclusive = { focus = EQS_remove_thorns }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_establish_transitional_government"
+		###Some current rulers for the Empire are in the middle of working on some repair plans for the Empire when they are dragged out by the Inquistionis to be replaced by those loyal to Daybreaker
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_useful_as_dead
+	x = 0
+	y = 1
+	relative_position_id = EQS_remove_thorns
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_remove_thorns
+		focus = EQS_establish_transitional_government
+	}
+	mutually_exclusive = { focus = EQS_useful_as_prisoners }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_useful_as_dead"
+		###Cadance has one final conversation with Daybreaker, and believes that she failed Celestia, which Daybreaker denies as instead having Celestia realize her destiny before executing Cadance
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_useful_as_prisoners
+	x = 0
+	y = 1
+	relative_position_id = EQS_establish_transitional_government
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_remove_thorns
+		focus = EQS_establish_transitional_government
+	}
+	mutually_exclusive = { focus = EQS_useful_as_dead }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_useful_as_prisoners"
+		###Daybreaker has a small taunting session at Luna and Twilight in particular now that they are prisoners in Sanctum Solar, which causes her much glee
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_training_imperial_citizens
+	x = 1
+	y = 1
+	relative_position_id = EQS_useful_as_dead
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_useful_as_dead
+		focus = EQS_useful_as_prisoners
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_training_imperial_citizens"
+		set_province_name = { id = 489 name = renamed_crystal_city }
+		every_state = {
+			limit = {
+				is_core_of = CRY
+				is_owned_by = ROOT
+			}
+			add_compliance = 15
+		}
+		###Potentially do an event of some crystal ponies trying to resist some indoctrination by the Adoratio
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_clearing_carnage_of_communism
+	x = 6
+	y = 2
+	relative_position_id = EQS_escalate_war
+	
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			all_of_scopes = {
+				array = global.shield_of_steel
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 4
+	
+	prerequisite = { focus = EQS_escalate_war }
+	
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_clearing_carnage_of_communism"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
+			}
+			
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_shape_factories
+	x = -2
+	y = 1
+	relative_position_id = EQS_clearing_carnage_of_communism
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			all_of_scopes = {
+				array = global.shield_of_steel
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_clearing_carnage_of_communism }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_shape_factories"
+		###Follow a factory worker in their last few minutes as they literally collapse into a stroke or something else from overexertion through Daybreaker's demands
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_restore_old_names
+	x = 0
+	y = 1
+	relative_position_id = EQS_clearing_carnage_of_communism
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			all_of_scopes = {
+				array = global.shield_of_steel
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_clearing_carnage_of_communism }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_restore_old_names"
+		###Names here
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = STG
+					is_core_of = MWR
+					is_core_of = CWR
+					is_core_of = AWR
+				}
+				is_owned_by = ROOT
+			}
+			add_resistance = -5
+			add_compliance = 5
+		}
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_raid_old_armories
+	x = 2
+	y = 1
+	relative_position_id = EQS_clearing_carnage_of_communism
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			all_of_scopes = {
+				array = global.shield_of_steel
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_clearing_carnage_of_communism }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_raid_old_armories"
+		###Some Militarium soldiers prepare for a strike against STG resistance members and to take their things, with a quick battle ensuing that has high losses
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_wipe_out_revolution
+	x = 1
+	y = 1
+	relative_position_id = EQS_shape_factories
+	
+	cost = 4
+	prerequisite = { focus = EQS_shape_factories }
+	prerequisite = { focus = EQS_restore_old_names }
+	prerequisite = { focus = EQS_raid_old_armories }
+	mutually_exclusive = { focus = EQS_teach_correct_thoughts }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_wipe_out_revolution"
+		###A raid is conducted on the Supreme Soviet, which is still holed up with rebels, and in the end it is destroyed entirely, as more inquisitors go about destroying any evidence of communism
+	}
+	
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_teach_correct_thoughts
+	x = -1
+	y = 1
+	relative_position_id = EQS_raid_old_armories
+	
+	cost = 4
+	prerequisite = { focus = EQS_restore_old_names }
+	prerequisite = { focus = EQS_raid_old_armories }
+	prerequisite = { focus = EQS_shape_factories }
+	mutually_exclusive = { focus = EQS_wipe_out_revolution }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_teach_correct_thoughts"
+		###A young colt in class is reprimanded again as he keeps answering as he did before the Empire took over, which soon leads to more unrest in the schools as it continues to be taught instead of the "truth"
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_imperial_manufactory
+	x = 1
+	y = 1
+	relative_position_id = EQS_wipe_out_revolution
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_wipe_out_revolution
+		focus = EQS_teach_correct_thoughts
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_imperial_manufactory"
+		###Follow worker as they see how Stalliongrad has changed since it became more and more built up for war production like Manehattan
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_an_invincible_armada
+	x = 2
+	y = 1
+	relative_position_id = EQS_justice_for_secession
+	
+	cost = 4
+	
+	prerequisite = { focus = EQS_justice_for_secession }
+	prerequisite = { focus = EQS_training_imperial_citizens }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_an_invincible_armada"
@@ -3302,451 +3958,426 @@ shared_focus = {
 			}
 		}
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 40 }
 }
 
 shared_focus = {
-	id = EQS_strike_from_the_sanctum
+	id = EQS_born_from_ashes
 	x = 0
 	y = 1
-	relative_position_id = EQS_fix_the_great_mistake
+	relative_position_id = EQS_training_imperial_citizens
 	
-	cost = 4
-	
-	prerequisite = { focus = EQS_fix_the_great_mistake }
+	cost = 5
+	prerequisite = { focus = EQS_justice_for_secession }
+	prerequisite = { focus = EQS_training_imperial_citizens }
+	prerequisite = { focus = EQS_imperial_manufactory }
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_strike_from_the_sanctum"
-		add_ideas = EQS_strike_from_sanctum_solar
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_born_from_ashes"
+		country_event = solar.105
 	}
-	ai_will_do = { factor = 25 }
+	
+	ai_will_do = { factor = 80 }
 }
 
-###Marelandia assault###
 shared_focus = {
-	id = EQS_reclaim_the_jewel
-	x = 0
+	id = EQS_rewards_of_riches
+	x = -2
 	y = 1
-	relative_position_id = EQS_an_invincible_armada
+	relative_position_id = EQS_imperial_manufactory
+	
+	cost = 5
+	prerequisite = { focus = EQS_training_imperial_citizens }
+	prerequisite = { focus = EQS_imperial_manufactory }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_rewards_of_riches"
+		###Fix up for characters. Man this is old.
+		create_corps_commander = {
+		name = "Fidelis Flamma"
+		portrait_path = "gfx/leaders/EQS/Fidelis_Flamma.tga"
+		traits = { solaris_adoratio fire_pony pony_race_trait }
+		id = 5105
+		skill = 2
+		attack_skill = 3
+		defense_skill = 1
+		planning_skill = 1
+		logistics_skill = 2
+		female = yes
+		}
+		create_corps_commander = {
+		name = "Foresight Amour"
+		#portrait_path = "gfx/leaders/EQS/Foresight.tga"
+		traits = { solaris_militarium bleeding_heart_1048 pony_race_trait }
+		id = 5106
+		skill = 3
+		attack_skill = 2
+		defense_skill = 3
+		planning_skill = 2
+		logistics_skill = 3
+		}
+		create_corps_commander = {
+		name = "Steel Sickle"
+		#portrait_path = "gfx/leaders/EQS/Steel.tga"
+		traits = { solaris_inquisitionis loyal_earth pony_race_trait }
+		id = 5107
+		skill = 2
+		attack_skill = 1
+		defense_skill = 4
+		planning_skill = 2
+		logistics_skill = 1
+		female = yes
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_cauterize_threat
+	x = -3
+	y = 1
+	relative_position_id = EQS_born_from_ashes
 	
 	bypass = {
-		NOT = {
-			country_exists = EQC
+		custom_trigger_tooltip = {
+			tooltip = EQS_CHN_dead_tt
+			all_of_scopes = {
+				array = global.changeling_hegemony
+				NOT = { exists = yes }
+			}
 		}
 	}
 	
 	cost = 5
-	
-	prerequisite = { focus = EQS_unending_waves }
-	prerequisite = { focus = EQS_an_invincible_armada }
-	prerequisite = { focus = EQS_strike_from_the_sanctum }
-	
+	prerequisite = { focus = EQS_born_from_ashes }
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_reclaim_the_jewel"
-		create_wargoal = {
-			type = annex_everything
-			target = EQC
-		}
-	}
-	ai_will_do = { factor = 100 }
-}
-
-shared_focus = {
-	id = EQS_straddling_the_sea
-	x = -2
-	y = 1
-	relative_position_id = EQS_reclaim_the_jewel
-	
-	available = {
-		any_state = {
-			is_core_of = EQC
-			is_coastal = yes
-			is_controlled_by = EQS ###Will need to figure out how to just have one province under control to start the event
-		}
-	}
-	
-	bypass = {
-		NOT = {
-			country_exists = EQC
-		}
-	}
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_reclaim_the_jewel }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_straddling_the_sea"
-		country_event = solar.115
-	}
-	ai_will_do = { factor = 20 }
-}
-
-shared_focus = {
-	id = EQS_purge_the_corrupted
-	x = 0
-	y = 1
-	relative_position_id = EQS_reclaim_the_jewel
-	
-	bypass = {
-		NOT = {
-			country_exists = EQC
-		}
-	}
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_reclaim_the_jewel }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_purge_the_corrupted"
-		add_ideas = EQS_righting_the_past
-	}
-	ai_will_do = { factor = 20 }
-}
-
-shared_focus = {
-	id = EQS_silence_big_sister
-	x = 2
-	y = 1
-	relative_position_id = EQS_reclaim_the_jewel
-	
-	available = {
-		356 = {
-			is_owned_by = EQS
-		}
-	}
-	
-	bypass = {
-		NOT = {
-			country_exists = EQC
-		}
-	}
-	
-	cost = 3
-	
-	prerequisite = { focus = EQS_reclaim_the_jewel }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_silence_big_sister"
-		country_event = solar.116
-	}
-	ai_will_do = { factor = 20 }
-}
-
-shared_focus = { #Speak of the corruption being too great, and that the city must be purged of all those of the Party, inner, outer, and cooperative proles
-	id = EQS_wipe_them_out
-	x = 0
-	y = 1
-	relative_position_id = EQS_purge_the_corrupted
-	
-	bypass = {
-	}
-	
-	cost = 6
-	
-	prerequisite = { focus = EQS_straddling_the_sea }
-	prerequisite = { focus = EQS_purge_the_corrupted }
-	prerequisite = { focus = EQS_silence_big_sister }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_wipe_them_out"
-		356 = {
-			add_manpower = -1000000
-			add_core_of = ROOT
-		}
-		675 = {
-			add_core_of = ROOT
-		}
-		676 = {
-			add_core_of = ROOT
-		}
-		360 = {
-			add_core_of = ROOT
-		}
-		361 = {
-			add_core_of = ROOT
-		}
-		365 = {
-			add_core_of = ROOT
-		}
-		364 = {
-			add_core_of = ROOT
-		}
-		363 = {
-			add_core_of = ROOT
-		}
-		362 = {
-			add_core_of = ROOT
-		}
-		359 = {
-			add_core_of = ROOT
-		}
-		355 = {
-			add_core_of = ROOT
-		}
-		354 = {
-			add_core_of = ROOT
-		}
-		357 = {
-			add_core_of = ROOT
-		}
-		358 = {
-			add_core_of = ROOT
-		}
-	}
-	ai_will_do = { factor = 50 }
-}
-
-###New Daybreaker War Tree###
-shared_focus = {
-	id = EQS_escalate_war
-	x = 29
-	y = 12
-	
-	allow_branch = {
-		OR = {
-			has_completed_focus = EQS_reborn_heartland
-			AND = {
-				is_debug = yes
-				has_country_flag = daybreaker_reigns
-			}
-		}
-	}
-	
-	cost = 2
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_escalate_war"
-		add_command_power = 25
-		add_war_support = 0.05
-	}
-	
-	ai_will_do = { factor = 75 }
-}
-
-shared_focus = {
-	id = EQS_retribution_is_just
-	x = -3
-	y = 1
-	relative_position_id = EQS_escalate_war
-	
-	bypass = {
-		custom_trigger_tooltip = {
-			tooltip = EQS_BAL_dead_tt
-			OR = {
-				AND = {
-					NOT = {
-						has_global_flag = balsplosion
-						country_exists = BAL
-					}
-				}
-				AND = {
-					has_global_flag = balsplosion
-					NOT = {
-						country_exists = MTS
-						country_exists = EEE
-						country_exists = NID
-						country_exists = NEI
-						country_exists = CLI
-						country_exists = SPF
-						country_exists = STB
-						country_exists = NRP
-						country_exists = BAL
-					}
-				}
-			}
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_escalate_war }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_retribution_is_just"
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_cauterize_threat"
 		every_country = {
 			limit = {
 				is_in_array = {
-					array = global.southeast_countries
+					array = global.changeling_hegemony
 					value = THIS
 				}
 			}
 		
 			EQS = {
 				create_wargoal = {
-					type = annex_everything
 					target = PREV
+					type = annex_everything
 				}
 			}
 		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 10
+				name = EQS_bugs_gonna_die
+			}
+		}
 	}
-	ai_will_do = { factor = 45 }
+	
+	ai_will_do = { factor = 150 }
 }
 
 shared_focus = {
-	id = EQS_shatter_wills
-	x = -1
+	id = EQS_reintroduce_worship
+	x = -2
 	y = 1
-	relative_position_id = EQS_retribution_is_just
+	relative_position_id = EQS_cauterize_threat
 	
 	available = {
 		custom_trigger_tooltip = {
-			tooltip = EQS_BAL_dead_tt
-			OR = {
-				AND = {
-					NOT = {
-						has_global_flag = balsplosion
-						country_exists = BAL
-					}
-				}
-				AND = {
-					has_global_flag = balsplosion
-					NOT = {
-						country_exists = MTS
-						country_exists = EEE
-						country_exists = NID
-						country_exists = NEI
-						country_exists = CLI
-						country_exists = SPF
-						country_exists = STB
-						country_exists = NRP
-						country_exists = BAL
-					}
-				}
-			}
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_retribution_is_just }
-	mutually_exclusive = { focus = EQS_work_with_governors }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_shatter_wills"
-		###Daybreaker appoints Quasar to use any means necessary to bring the Southeast to heel
-	}
-	
-	ai_will_do = { factor = 60 }
-}
-
-shared_focus = {
-	id = EQS_work_with_governors
-	x = 1
-	y = 1
-	relative_position_id = EQS_retribution_is_just
-	
-	available = {
-		custom_trigger_tooltip = {
-			tooltip = EQS_BAL_dead_tt
-			OR = {
-				AND = {
-					NOT = {
-						has_global_flag = balsplosion
-						country_exists = BAL
-					}
-				}
-				AND = {
-					has_global_flag = balsplosion
-					NOT = {
-						country_exists = MTS
-						country_exists = EEE
-						country_exists = NID
-						country_exists = NEI
-						country_exists = CLI
-						country_exists = SPF
-						country_exists = STB
-						country_exists = NRP
-						country_exists = BAL
-					}
-				}
-			}
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_retribution_is_just }
-	mutually_exclusive = { focus = EQS_shatter_wills }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_work_with_governors"
-		###Daybreaker appears to one of the Baltimare governors and effectively threatens them into following her
-	}
-	
-	ai_will_do = { factor = 45 }
-}
-
-shared_focus = {
-	id = EQS_empire_to_heel
-	x = 0
-	y = 1
-	relative_position_id = EQS_escalate_war
-	
-	bypass = {
-		NOT = {
-			country_exists = CRY
-		}
-	}
-	
-	cost = 4
-	
-	prerequisite = { focus = EQS_escalate_war }
-	
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_empire_to_heel"
-		create_wargoal = {
-			type = annex_everything
-			target = CRY
-		}
-	}
-	ai_will_do = { factor = 40 }
-}
-
-shared_focus = {
-	id = EQS_clearing_carnage_of_communism
-	x = 3
-	y = 1
-	relative_position_id = EQS_escalate_war
-	
-	bypass = {
-		custom_trigger_tooltip = {
-			tooltip = EQS_STG_dead_tt
+			tooltip = EQS_CHN_dead_tt
 			all_of_scopes = {
-				array = global.shield_of_steel
+				array = global.changeling_hegemony
 				NOT = { exists = yes }
 			}
 		}
 	}
 	
 	cost = 4
-	
-	prerequisite = { focus = EQS_escalate_war }
-	
+	prerequisite = { focus = EQS_cauterize_threat }
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_clearing_carnage_of_communism"
-		every_country = {
-			limit = {
-				is_in_array = {
-					array = global.shield_of_steel
-					value = THIS
-				}
-			}
-			
-			EQS = {
-				create_wargoal = {
-					type = annex_everything
-					target = PREV
-				}
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reintroduce_worship"
+		###Follow a couple of ponies in the new territories being forced to go to worship services, and wishing they could be under Chrysalis again
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_new_frontier
+	x = 2
+	y = 1
+	relative_position_id = EQS_cauterize_threat
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_CHN_dead_tt
+			all_of_scopes = {
+				array = global.changeling_hegemony
+				NOT = { exists = yes }
 			}
 		}
 	}
-	ai_will_do = { factor = 40 }
+	
+	cost = 4
+	prerequisite = { focus = EQS_cauterize_threat }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_frontier"
+		###Some ponies start making their life in the new territories established by Daybreaker as part of the Empire and come into conflict with some changelings
+	}
+	
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_new_superiors
+	x = 0
+	y = 1
+	relative_position_id = EQS_reintroduce_worship
+	
+	cost = 5
+	prerequisite = { focus = EQS_reintroduce_worship }
+	prerequisite = { focus = EQS_new_frontier }
+	mutually_exclusive = { focus = EQS_expand_workforce }
+	mutually_exclusive = { focus = EQS_taste_medicine }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_superiors"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_expand_workforce
+	x = 2
+	y = 1
+	relative_position_id = EQS_reintroduce_worship
+	
+	cost = 5
+	prerequisite = { focus = EQS_reintroduce_worship }
+	prerequisite = { focus = EQS_new_frontier }
+	mutually_exclusive = { focus = EQS_new_superiors }
+	mutually_exclusive = { focus = EQS_taste_medicine }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_expand_workforce"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_taste_medicine
+	x = 0
+	y = 1
+	relative_position_id = EQS_new_frontier
+	
+	cost = 5
+	prerequisite = { focus = EQS_reintroduce_worship }
+	prerequisite = { focus = EQS_new_frontier }
+	mutually_exclusive = { focus = EQS_new_superiors }
+	mutually_exclusive = { focus = EQS_expand_workforce }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_taste_medicine"
+		###Idea here
+	}
+	
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_fix_the_great_mistake
+	x = 0
+	y = 1
+	relative_position_id = EQS_expand_workforce
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_new_superiors
+		focus = EQS_expand_workforce
+		focus = EQS_taste_medicine
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_fix_the_great_mistake"
+		set_province_name = { id = 748 name = renamed_chrysalia }
+		1216 = {
+			set_state_name = renamed_chrysalia_state
+		}
+		136 = {
+			set_state_name = renamed_chrysalia_plains_state
+		}
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+	ai_will_do = { factor = 90 }
+}
+
+shared_focus = {
+	id = EQS_reclaim_the_jewel
+	x = 3
+	y = 1
+	relative_position_id = EQS_born_from_ashes
+	
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_EQC_dead_tt
+			all_of_scopes = {
+				array = global.citizens_league
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = EQS_born_from_ashes }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reclaim_the_jewel"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.citizens_league
+					value = THIS
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		hidden_effect = {
+			add_named_threat = {
+				threat = 10
+				name = EQS_big_suster
+			}
+		}
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = EQS_tear_down_lies
+	x = -1
+	y = 1
+	relative_position_id = EQS_reclaim_the_jewel
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_EQC_dead_tt
+			all_of_scopes = {
+				array = global.citizens_league
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = EQS_reclaim_the_jewel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_tear_down_lies"
+		###Inquisitors begin to tear down any references to MARESOC and also go through and oppress the proles who still know about them
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_showpiece_to_masses
+	x = 1
+	y = 1
+	relative_position_id = EQS_reclaim_the_jewel
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_EQC_dead_tt
+			all_of_scopes = {
+				array = global.citizens_league
+				NOT = { exists = yes }
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = EQS_reclaim_the_jewel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_showpiece_to_masses"
+		###Daybreaker looks over the many proles assembled outside the destroyed Ministry plaza and makes a grand speech about them needing to obey lest they suffer the Party's fate
+	}
+	
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_innocent_from_corruption
+	x = 0
+	y = 1
+	relative_position_id = EQS_tear_down_lies
+	
+	cost = 4
+	prerequisite = { focus = EQS_tear_down_lies }
+	prerequisite = { focus = EQS_showpiece_to_masses }
+	mutually_exclusive = { focus = EQS_wipe_out_blight }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_innocent_from_corruption"
+		###Some uneducated proles see some Party members being led away for execution and nearly run afoul of an inquisitor or two, but are spared because they are seen as ignorant of MARESOC's treachery
+	}
+	
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = EQS_wipe_out_blight
+	x = 0
+	y = 1
+	relative_position_id = EQS_showpiece_to_masses
+	
+	cost = 4
+	prerequisite = { focus = EQS_tear_down_lies }
+	prerequisite = { focus = EQS_showpiece_to_masses }
+	mutually_exclusive = { focus = EQS_innocent_from_corruption }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_wipe_out_blight"
+		###Many proles are rounded up with Party members and attempt to fight back as they are led away for execution for being accomplices to MARESOC's evil
+	}
+	
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_empress_of_all
+	x = 3
+	y = 1
+	relative_position_id = EQS_fix_the_great_mistake
+	
+	cost = 5
+	prerequisite = { focus = EQS_fix_the_great_mistake }
+	prerequisite = {
+		focus = EQS_innocent_from_corruption
+		focus = EQS_wipe_out_blight
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_empress_of_all"
+		###Daybreaker oversees the final touches of a new statue to her in Sanctum Solar, and happily muses to herself how her ponies are now protected, and that Equestria will never fall again
+	}
+	
+	ai_will_do = { factor = 100 }
 }
 
 ###Sunset Shimmer Tree###
