@@ -1,0 +1,223 @@
+BLS_calculate_total_dead_cultists = {
+	###Check for how many states are currently controlled, and then add that number to a temp variable that is then made to be the divisor of the total number of dead ponies used
+	###If the divisor leads to an imperfect number, round down and then subtract from all controlled states; if it's rounded down, subtract one afterwards
+	for_each_scope_loop = {
+		array = global.BLS_cultist_site
+		IF = {
+			limit = {
+				is_controlled_by = BLS
+			}
+			add_to_temp_variable = { BLS_total_dead_cultist_pool_temp = THIS.BLS_dead_cultists }
+		}
+	}
+	set_variable = { BLS_total_dead_cultist_pool = BLS_total_dead_cultist_pool_temp }
+}
+BLS_create_single_cultist_division = {
+	for_each_scope_loop = {
+		array = global.BLS_cultist_site
+		IF = {
+			limit = {
+				is_controlled_by = BLS
+				NOT = { check_variable = { BLS_dead_cultists = 0 } }
+			}
+			add_to_temp_variable = { BLS_controlled_cultist_sites_temp = 1 }
+		}
+	}
+	set_temp_variable = { BLS_ponypower_consumed_per_site = 10000 }
+	divide_temp_variable = { BLS_ponypower_consumed_per_site = BLS_controlled_cultist_sites_temp }
+	round_temp_variable = BLS_ponypower_consumed_per_site
+	BLS_consume_state_ponypower_small = yes
+	IF = {
+		limit = { check_variable = { BLS_cultists_remainder_total > 0 } }
+		set_temp_variable = { BLS_ponypower_consumed_per_site = 0 }
+		BLS_consume_state_ponypower_small = yes
+	}
+	multiply_temp_variable = { BLS_ponypower_consumed_per_site = BLS_controlled_cultist_sites_temp }
+	IF = {
+		limit = { NOT = { check_variable = { BLS_ponypower_consumed_per_site = 0 } } }
+		subtract_from_temp_variable = { BLS_ponypower_consumed_per_site = 10000 } ###This is for getting any remainder back into the pool
+	}
+	subtract_from_variable = { BLS_total_dead_cultist_pool = BLS_ponypower_consumed_per_site }
+	IF = {
+		limit = { 
+			OR = {
+				check_variable = { BLS_ponypower_consumed_per_site > 0 }
+				check_variable = { BLS_ponypower_consumed_per_site < 0 }
+			}
+		}
+		add_to_variable = { 74.BLS_dead_cultists = BLS_ponypower_consumed_per_site }
+	}
+	BLS_calculate_total_dead_cultists = yes
+	###Create unit here###
+	###Figure out how to clamp and add the remainder back in to the state's pools
+}
+BLS_create_many_cultist_divisions = {
+	for_each_scope_loop = {
+		array = global.BLS_cultist_site
+		IF = {
+			limit = {
+				is_controlled_by = BLS
+				NOT = { check_variable = { BLS_dead_cultists = 0 } }
+			}
+			add_to_temp_variable = { BLS_controlled_cultist_sites_temp = 1 }
+		}
+	}
+	set_temp_variable = { BLS_ponypower_consumed_per_site = 24000 }
+	divide_temp_variable = { BLS_ponypower_consumed_per_site = BLS_controlled_cultist_sites_temp }
+	round_temp_variable = BLS_ponypower_consumed_per_site
+	BLS_consume_state_ponypower_large = yes
+	IF = {
+		limit = { check_variable = { BLS_cultists_remainder_total > 0 } }
+		set_temp_variable = { BLS_ponypower_consumed_per_site = 0 }
+		BLS_consume_state_ponypower_large = yes
+	}
+	multiply_temp_variable = { BLS_ponypower_consumed_per_site = BLS_controlled_cultist_sites_temp }
+	IF = {
+		limit = { NOT = { check_variable = { BLS_ponypower_consumed_per_site = 0 } } }
+		subtract_from_temp_variable = { BLS_ponypower_consumed_per_site = 24000 }
+	}
+	subtract_from_variable = { BLS_total_dead_cultist_pool = BLS_ponypower_consumed_per_site }
+	IF = {
+		limit = { 
+			OR = {
+				check_variable = { BLS_ponypower_consumed_per_site > 0 }
+				check_variable = { BLS_ponypower_consumed_per_site < 0 }
+			}
+		}
+		add_to_variable = { 74.BLS_dead_cultists = BLS_ponypower_consumed_per_site }
+	}
+	BLS_calculate_total_dead_cultists = yes
+	###Create unit here###
+}
+BLS_consume_state_ponypower_small = {
+	for_each_scope_loop = {
+		array = global.BLS_cultist_site
+		
+		IF = {
+			limit = {
+				is_controlled_by = BLS
+				set_temp_variable = { BLS_total_cultist_cost = BLS_ponypower_consumed_per_site }
+				add_to_temp_variable = { BLS_total_cultist_cost = BLS.BLS_cultists_remainder_total }
+				check_variable = { BLS_dead_cultists < BLS_total_cultist_cost }
+				check_variable = { BLS.BLS_total_dead_cultist_pool > 9999 }
+				check_variable = { BLS_dead_cultists > 0 }
+			}
+			set_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS_ponypower_consumed_per_site }
+			add_to_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS.BLS_cultists_remainder_total }
+			subtract_from_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS_dead_cultists }
+			set_variable = { BLS.BLS_cultists_remainder_total = BLS_remaining_cultists_needing_resurrection }
+			set_variable = { BLS_dead_cultists = 0 }
+		}
+		ELSE_IF = {
+			limit = {
+				is_controlled_by = BLS
+				set_temp_variable = { BLS_total_cultist_cost = BLS_ponypower_consumed_per_site }
+				add_to_temp_variable = { BLS_total_cultist_cost = BLS.BLS_cultists_remainder_total }
+				check_variable = { 
+					var = BLS_dead_cultists
+					value = BLS_total_cultist_cost
+					compare = greater_than_or_equals
+				}
+			}
+			set_temp_variable = { BLS_consumed_ponypower = BLS_ponypower_consumed_per_site }
+			add_to_temp_variable = { BLS_consumed_ponypower = BLS.BLS_cultists_remainder_total }
+			subtract_from_variable = { BLS_dead_cultists = BLS_consumed_ponypower }
+			IF = {
+				limit = { check_variable = { BLS.BLS_cultists_remainder_total > 0 } }
+				set_variable = { BLS.BLS_cultists_remainder_total = 0 }
+			}
+		}
+		###Needs to loop until the remainder is removed
+		###Calculates how much of a remainder there is of cultists to take from the next state, and then adds it to the remainder to make a larger number to subtract for next state
+		###Make sure that all population is calculated correctly
+	}
+}
+BLS_consume_state_ponypower_large = {
+	for_each_scope_loop = {
+		array = global.BLS_cultist_site
+		
+		IF = {
+			limit = {
+				is_controlled_by = BLS
+				set_temp_variable = { BLS_total_cultist_cost = BLS_ponypower_consumed_per_site }
+				add_to_temp_variable = { BLS_total_cultist_cost = BLS.BLS_cultists_remainder_total }
+				check_variable = { BLS_dead_cultists < BLS_total_cultist_cost }
+				check_variable = { BLS.BLS_total_dead_cultist_pool > 23999 }
+				check_variable = { BLS_dead_cultists > 0 }
+			}
+			set_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS_ponypower_consumed_per_site }
+			add_to_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS.BLS_cultists_remainder_total }
+			subtract_from_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS_dead_cultists }
+			set_variable = { BLS.BLS_cultists_remainder_total = BLS_remaining_cultists_needing_resurrection }
+			set_variable = { BLS_dead_cultists = 0 }
+		}
+		ELSE_IF = {
+			limit = {
+				is_controlled_by = BLS
+				set_temp_variable = { BLS_total_cultist_cost = BLS_ponypower_consumed_per_site }
+				add_to_temp_variable = { BLS_total_cultist_cost = BLS.BLS_cultists_remainder_total }
+				check_variable = { 
+					var = BLS_dead_cultists
+					value = BLS_total_cultist_cost
+					compare = greater_than_or_equals
+				}
+			}
+			set_temp_variable = { BLS_consumed_ponypower = BLS_ponypower_consumed_per_site }
+			add_to_temp_variable = { BLS_consumed_ponypower = BLS.BLS_cultists_remainder_total }
+			subtract_from_variable = { BLS_dead_cultists = BLS_consumed_ponypower }
+			IF = {
+				limit = { check_variable = { BLS.BLS_cultists_remainder_total > 0 } }
+				set_variable = { BLS.BLS_cultists_remainder_total = 0 }
+			}
+		}
+	}
+}
+BLS_drain_remaining_tombs = {
+	IF = {
+		limit = { 
+			check_variable = { BLS_total_dead_cultist_pool < 10000 }
+		}
+		add_manpower = BLS_total_dead_cultist_pool
+		for_each_scope_loop = {
+			array = global.BLS_cultist_site
+			IF = {
+				limit = {
+					is_controlled_by = BLS
+					check_variable = { BLS_dead_cultists > 0 }
+				}
+				set_variable = { BLS_dead_cultists = 0 }
+			}
+		}
+	}
+	BLS_calculate_total_dead_cultists = yes
+}
+BLS_calculate_casualty_pool = {
+	set_variable = { BLS_total_available_corpses = BLS.casualties }
+	subtract_from_variable = { BLS_total_available_corpses = BLS_current_used_corpses }
+}
+BLS_inefficient_casualty_resurrection = {
+	IF = {
+		limit = {
+			has_country_flag = BLS_better_resurrections
+		}
+		set_temp_variable = { BLS_needed_corpses = 100000 }
+	}
+	ELSE = { set_temp_variable = { BLS_needed_corpses = 166666 } }
+	subtract_from_temp_variable = { BLS_needed_corpses = 50000 }
+	add_manpower = 50000
+	add_to_variable = { BLS_current_used_corpses = BLS_needed_corpses }
+	BLS_calculate_casualty_pool = yes
+}
+BLS_efficient_casualty_resurrection = {
+	IF = {
+		limit = {
+			has_country_flag = BLS_better_resurrections
+		}
+		set_temp_variable = { BLS_needed_corpses = 62500 }
+	}
+	ELSE = { set_temp_variable = { BLS_needed_corpses = 90909 } }
+	subtract_from_temp_variable = { BLS_needed_corpses = 50000 }
+	add_manpower = 50000
+	add_to_variable = { BLS_current_used_corpses = BLS_needed_corpses }
+	BLS_calculate_casualty_pool = yes
+}
