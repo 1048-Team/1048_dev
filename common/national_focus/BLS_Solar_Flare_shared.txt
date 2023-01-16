@@ -401,15 +401,13 @@ shared_focus = {
 		###Event for the few loyal to Solar Flare struggling to keep down another rebellion, as some of the universities secede
 		###This would remove cores and make the other states outside of Bales dimilitarized, will have to recore through converting the populace to following Solar Flare
 		###Temp
-		177 = {
-			remove_core_of = ROOT
-			set_demilitarized_zone = yes
-		}
-		182 = {
-			remove_core_of = ROOT
-			set_demilitarized_zone = yes
-		}
-		183 = {
+		set_variable = { BLS_evangelistic_fervor_pool = 1 }
+		add_to_array = { global.BLS_rebellious_cores = 177 }
+		add_to_array = { global.BLS_rebellious_cores = 182 }
+		add_to_array = { global.BLS_rebellious_cores = 183 }
+		for_each_scope_loop = {
+			array = global.BLS_rebellious_cores
+			
 			remove_core_of = ROOT
 			set_demilitarized_zone = yes
 		}
@@ -467,6 +465,66 @@ shared_focus = {
 		###Nebula is left with a number of rotted or skelotnized corpses of some of Solar Flare's followers, which she is instructed to bring back as Solar Flare did, as she promises to use some of her power to do it
 		###The mechanic will rely on magic power (new resource), political power, and state manpower; it will range between a small amount of population to raise one division, to large population amounts to raise at least half a dozen; they will have varying cooldowns; there will also be decisions to improve the template design; there will be an infantry and a light armor design that can be used
 		set_country_flag = BLS_resurrect_dead_cultists
+		set_variable = { BLS_necromantic_power_pool = 150 }
+		BLS_total_dead_cultists = yes
+		hidden_effect = {
+			division_template = {
+				name = "Tomb Ravagers"
+				is_locked = yes
+				#template_counter = GFX_ded_cultists
+				#division_name_groups = BLS_ded_cultists_group
+				regiments = {
+					magical_infantry = { x = 0 y = 0 }
+					magical_infantry = { x = 0 y = 1 }
+					magical_infantry = { x = 0 y = 2 }
+					magical_infantry = { x = 0 y = 3 }
+					magical_infantry = { x = 1 y = 0 }
+					magical_infantry = { x = 1 y = 1 }
+					magical_infantry = { x = 1 y = 2 }
+					magical_infantry = { x = 1 y = 3 }
+					magical_infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+				}
+				support = {
+					unicorn_company = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+				}
+			}
+			division_template = {
+				name = "Tomb Despoilers"
+				is_locked = yes
+				priority = 0
+				#template_counter = GFX_ded_cultists
+				#division_name_groups = BLS_ded_cultists_group
+				regiments = {
+					magical_infantry = { x = 0 y = 0 }
+					magical_infantry = { x = 0 y = 1 }
+					magical_infantry = { x = 0 y = 2 }
+					magical_infantry = { x = 0 y = 3 }
+					magical_infantry = { x = 0 y = 4 }
+					magical_infantry = { x = 1 y = 0 }
+					magical_infantry = { x = 1 y = 1 }
+					magical_infantry = { x = 1 y = 2 }
+					magical_infantry = { x = 1 y = 3 }
+					magical_infantry = { x = 1 y = 4 }
+					magical_infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+					artillery_brigade = { x = 2 y = 2 }
+					artillery_brigade = { x = 2 y = 3 }
+					artillery_brigade = { x = 2 y = 4 }
+					magical_infantry = { x = 3 y = 0 }
+					magical_infantry = { x = 3 y = 1 }
+					magical_infantry = { x = 3 y = 2 }
+					magical_infantry = { x = 3 y = 3 }
+				}
+				support = {
+					unicorn_company = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+					recon = { x = 0 y = 2 }
+					logistics_company = { x = 0 y = 3 }
+				}
+			}
+		}	
 		custom_effect_tooltip = BLS_can_raise_dead_cultists_tt
 	}
 	
@@ -485,6 +543,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_the_twelve"
+		set_variable = { BLS_twelve_evangelists = 12 }
 		###Nebula comes into a dark room with Solar Flare, who has assembled eleven other ponies from Bales, who she has either intimidated, bribed, or simply convinced through charisma to follow her to spread her message of salvation through sacrifice to the populace; would give special decisions to conversions, at the cost of burning one special pony; alternatively, they become generals and advisors, because nopony is and advisor to start, save Nebula, Blazing, and Melting
 	}
 	

@@ -48,7 +48,31 @@ BLS_create_single_cultist_division = {
 		add_to_variable = { 74.BLS_dead_cultists = BLS_ponypower_consumed_per_site }
 	}
 	BLS_calculate_total_dead_cultists = yes
-	###Create unit here###
+	hidden_effect = {
+		add_equipment_to_stockpile = {
+			type = magical_equipment
+			amount = 930
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 45
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 36
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 10
+		}
+	}
+	random_state = {
+		limit = {
+			is_in_array = { global.BLS_cultist_site = THIS.ID }
+			is_controlled_by = BLS
+		}
+		create_unit = { division = "division_template = \"Tomb Ravagers\" start_experience_factor = 0.3" owner = ROOT }
+	}
 	###Figure out how to clamp and add the remainder back in to the state's pools
 }
 BLS_create_many_cultist_divisions = {
@@ -62,7 +86,7 @@ BLS_create_many_cultist_divisions = {
 			add_to_temp_variable = { BLS_controlled_cultist_sites_temp = 1 }
 		}
 	}
-	set_temp_variable = { BLS_ponypower_consumed_per_site = 24000 }
+	set_temp_variable = { BLS_ponypower_consumed_per_site = 18500 }
 	divide_temp_variable = { BLS_ponypower_consumed_per_site = BLS_controlled_cultist_sites_temp }
 	round_temp_variable = BLS_ponypower_consumed_per_site
 	BLS_consume_state_ponypower_large = yes
@@ -74,7 +98,7 @@ BLS_create_many_cultist_divisions = {
 	multiply_temp_variable = { BLS_ponypower_consumed_per_site = BLS_controlled_cultist_sites_temp }
 	IF = {
 		limit = { NOT = { check_variable = { BLS_ponypower_consumed_per_site = 0 } } }
-		subtract_from_temp_variable = { BLS_ponypower_consumed_per_site = 24000 }
+		subtract_from_temp_variable = { BLS_ponypower_consumed_per_site = 18500 }
 	}
 	subtract_from_variable = { BLS_total_dead_cultist_pool = BLS_ponypower_consumed_per_site }
 	IF = {
@@ -87,7 +111,35 @@ BLS_create_many_cultist_divisions = {
 		add_to_variable = { 74.BLS_dead_cultists = BLS_ponypower_consumed_per_site }
 	}
 	BLS_calculate_total_dead_cultists = yes
-	###Create unit here###
+	hidden_effect = {
+		add_equipment_to_stockpile = {
+			type = magical_equipment
+			amount = 1530
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 75
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 10
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 50
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 144
+		}
+	}
+	random_state = {
+		limit = {
+			is_in_array = { global.BLS_cultist_site = THIS.ID }
+			is_controlled_by = BLS
+		}
+		create_unit = { division = "division_template = \"Tomb Despoilers\" start_experience_factor = 0.3" owner = ROOT }
+	}
 }
 BLS_consume_state_ponypower_small = {
 	for_each_scope_loop = {
@@ -142,7 +194,7 @@ BLS_consume_state_ponypower_large = {
 				set_temp_variable = { BLS_total_cultist_cost = BLS_ponypower_consumed_per_site }
 				add_to_temp_variable = { BLS_total_cultist_cost = BLS.BLS_cultists_remainder_total }
 				check_variable = { BLS_dead_cultists < BLS_total_cultist_cost }
-				check_variable = { BLS.BLS_total_dead_cultist_pool > 23999 }
+				check_variable = { BLS.BLS_total_dead_cultist_pool > 18499 }
 				check_variable = { BLS_dead_cultists > 0 }
 			}
 			set_temp_variable = { BLS_remaining_cultists_needing_resurrection = BLS_ponypower_consumed_per_site }
@@ -220,4 +272,46 @@ BLS_efficient_casualty_resurrection = {
 	add_manpower = 50000
 	add_to_variable = { BLS_current_used_corpses = BLS_needed_corpses }
 	BLS_calculate_casualty_pool = yes
+}
+BLS_necromantic_power_change = {
+	add_to_variable = {
+		BLS_necromantic_power_pool = BLS_necromantic_power_change_var #This is a temp variable
+	}
+	clamp_variable = {
+		var = BLS_necromantic_power_pool
+		min = 0
+		max = BLS_necromantic_power_pool_max
+	}
+	if = {
+		limit = {
+			check_variable = {
+				BLS_necromantic_power_change_var < 0
+			}
+		}
+		custom_effect_tooltip =  BLS_necromantic_power_loss_tt
+	}
+	else = {
+		custom_effect_tooltip =  BLS_necromantic_power_gain_tt
+	}
+}
+BLS_evangelistic_fervor_change = {
+	add_to_variable = {
+		BLS_evangelistic_fervor_pool = BLS_evangelistic_fervor_change_var #This is a temp variable
+	}
+	clamp_variable = {
+		var = BLS_evangelistic_fervor_pool
+		min = 0
+		max = 10
+	}
+	if = {
+		limit = {
+			check_variable = {
+				BLS_evangelistic_fervor_change_var < 0
+			}
+		}
+		custom_effect_tooltip =  BLS_evangelistic_fervor_loss_tt
+	}
+	else = {
+		custom_effect_tooltip =  BLS_evangelistic_fervor_gain_tt
+	}
 }

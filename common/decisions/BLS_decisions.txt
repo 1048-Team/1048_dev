@@ -338,6 +338,67 @@ BLS_debug_cultist_resurrection_category = {
 			BLS_calculate_total_dead_cultists = yes
 		}
 	}
+	BLS_create_divisions = {
+		fire_only_once = yes
+		complete_effect = {
+			division_template = {
+				name = "Tomb Ravagers"
+				is_locked = yes
+				#template_counter = GFX_ded_cultists
+				#division_name_groups = BLS_ded_cultists_group
+				regiments = {
+					magical_infantry = { x = 0 y = 0 }
+					magical_infantry = { x = 0 y = 1 }
+					magical_infantry = { x = 0 y = 2 }
+					magical_infantry = { x = 0 y = 3 }
+					magical_infantry = { x = 1 y = 0 }
+					magical_infantry = { x = 1 y = 1 }
+					magical_infantry = { x = 1 y = 2 }
+					magical_infantry = { x = 1 y = 3 }
+					magical_infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+				}
+				support = {
+					unicorn_company = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+				}
+			}
+			division_template = {
+				name = "Tomb Despoilers"
+				is_locked = yes
+				priority = 2
+				#template_counter = GFX_ded_cultists
+				#division_name_groups = BLS_ded_cultists_group
+				regiments = {
+					magical_infantry = { x = 0 y = 0 }
+					magical_infantry = { x = 0 y = 1 }
+					magical_infantry = { x = 0 y = 2 }
+					magical_infantry = { x = 0 y = 3 }
+					magical_infantry = { x = 0 y = 4 }
+					magical_infantry = { x = 1 y = 0 }
+					magical_infantry = { x = 1 y = 1 }
+					magical_infantry = { x = 1 y = 2 }
+					magical_infantry = { x = 1 y = 3 }
+					magical_infantry = { x = 1 y = 4 }
+					magical_infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+					artillery_brigade = { x = 2 y = 2 }
+					artillery_brigade = { x = 2 y = 3 }
+					artillery_brigade = { x = 2 y = 4 }
+					magical_infantry = { x = 3 y = 0 }
+					magical_infantry = { x = 3 y = 1 }
+					magical_infantry = { x = 3 y = 2 }
+					magical_infantry = { x = 3 y = 3 }
+				}
+				support = {
+					unicorn_company = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+					recon = { x = 0 y = 2 }
+					logistics_company = { x = 0 y = 3 }
+				}
+			}
+		}
+	}
 	BLS_smol_cultist_test = {
 		complete_effect = {
 			BLS_create_single_cultist_division = yes
@@ -429,6 +490,164 @@ BLS_balance_of_power_category = {
 				value = 0.05
 				tooltip_side = BLS_blazing_sheath_side
 			}
+		}
+	}
+}
+BLS_the_dark_arts_category = { 
+	BLS_smol_cultist_resurrection = {
+		allowed = {
+			original_tag = BLS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BLS_has_more_than_10k_dead_tt
+				check_variable = { BLS_total_dead_cultist_pool > 9999 }
+			}
+		}
+		visible = {
+			has_country_flag = BLS_resurrect_dead_cultists
+		}
+		custom_cost_trigger = {
+			check_variable = { BLS_necromantic_power_pool > 75 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_75_np_tt
+		days_remove = 30
+		complete_effect = {
+			add_to_variable = { BLS_necromantic_power_pool = -75 }
+		}
+		remove_effect = {
+			BLS_create_single_cultist_division = yes
+		}
+	}
+	BLS_beeg_cultist_resurrection = {
+		allowed = {
+			original_tag = BLS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BLS_has_more_than_19k_dead_tt
+				check_variable = { BLS_total_dead_cultist_pool > 18499 }
+			}
+		}
+		visible = {
+			has_country_flag = BLS_resurrect_dead_cultists
+		}
+		custom_cost_trigger = {
+			check_variable = { BLS_necromantic_power_pool > 125 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_125_np_tt
+		days_remove = 50
+		complete_effect = {
+			add_to_variable = { BLS_necromantic_power_pool = -125 }
+		}
+		remove_effect = {
+			BLS_create_many_cultist_divisions = yes
+		}
+	}
+	BLS_drain_tombs = {
+		allowed = {
+			original_tag = BLS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BLS_has_less_than_10k_dead_tt
+				check_variable = { BLS_total_dead_cultist_pool < 10000 }
+				check_variable = { BLS_total_dead_cultist_pool > 0 }
+			}
+		}
+		visible = {
+			has_country_flag = BLS_resurrect_dead_cultists
+			check_variable = { BLS_total_dead_cultist_pool < 10000 }
+			check_variable = { BLS_total_dead_cultist_pool > 0 }
+		}
+		custom_cost_trigger = {
+			check_variable = { BLS_necromantic_power_pool > 30 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_30_np_tt
+		complete_effect = {
+			add_to_variable = { BLS_necromantic_power_pool = -30 }
+		}
+		days_remove = 30
+		remove_effect = {
+			BLS_drain_remaining_tombs = yes
+		}
+	}
+	BLS_add_efficient_resurrection = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			has_country_flag = BLS_resurrect_killed_cultists
+		}
+		cost = 300
+		days_remove = -1
+		modifier = {
+			BLS_necromantic_power = -0.5
+		}
+		complete_effect = {
+			set_country_flag = BLS_better_resurrections
+		}
+	}
+	BLS_add_inefficient_manpower_resurrection = {
+		allowed = {
+			original_tag = BLS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BLS_has_more_than_inefficient_needed_tt
+				OR = {
+					check_variable = { BLS_total_corpses_available > 166665 }
+					AND = {
+						has_country_flag = BLS_better_resurrections
+						check_variable = { BLS_total_corpses_available > 99999 }
+					}
+				}
+			}
+		}
+		visible = {
+			has_country_flag = BLS_resurrect_killed_cultists
+		}
+		custom_cost_trigger = {
+			check_variable = { BLS_necromantic_power_pool > 60 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_60_np_tt
+		days_remove = 45
+		complete_effect = {
+			add_to_variable = { BLS_necromantic_power_pool = -60 }
+		}
+		remove_effect = {
+			BLS_inefficient_casualty_resurrection = yes
+		}
+	}
+	BLS_add_efficient_manpower_resurrection = {
+		allowed = {
+			original_tag = BLS
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BLS_has_more_than_efficient_needed_tt
+				OR = {
+					check_variable = { BLS_total_corpses_available > 90908 }
+					AND = {
+						has_country_flag = BLS_better_resurrections
+						check_variable = { BLS_total_corpses_available > 62499 }
+					}
+				}
+			}
+		}
+		visible = {
+			has_country_flag = BLS_resurrect_killed_cultists
+		}
+		custom_cost_trigger = {
+			check_variable = { BLS_necromantic_power_pool > 110 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_110_np_tt
+		complete_effect = {
+			add_to_variable = { BLS_necromantic_power_pool = -110 }
+		}
+		days_remove = 100
+		remove_effect = {
+			BLS_efficient_casualty_resurrection = yes
 		}
 	}
 }
@@ -554,6 +773,116 @@ BLS_the_ancient_trail_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision BLS_pinpoint_blazings_location"
 			custom_effect_tooltip = BLS_successful_investigation_tt
 			set_country_flag = BLS_found_cultists_location
+		}
+	}
+}
+BLS_evangelizing_the_country_category = {
+	BLS_evangelize_state = {
+		allowed = { original_tag = BLS }
+		visible = { BLS_has_uncored_home_states = yes }
+		state_target = yes
+		on_map_mode = map_only
+		targets = { 177 182 183 }
+		icon = GFX_decision_icon_default
+		custom_cost_trigger = {
+			has_manpower > 999
+			check_variable = { BLS_evangelistic_fervor_pool > 0.99 }
+		}
+		custom_cost_text = BLS_evangelize_state_cost_MP_1000_EF_05_tt
+		complete_effect = {
+			hidden_effect = {
+				ROOT = {
+					add_manpower = -1000
+					set_temp_variable = { BLS_evangelistic_fervor_change_var = -1 }
+					BLS_evangelistic_fervor_change = yes
+				}
+			}
+			IF = {
+				limit = { ROOT = { has_country_flag = BLS_burning_one_of_twelve } }
+				ROOT = { clr_country_flag = BLS_burning_one_of_twelve }
+				set_temp_variable_to_random = {
+					var = BLS_evangelism_variable
+					min = 36
+					max = 51
+					integer = yes
+				}
+				add_to_variable = { FROM.BLS_evangelism_progress = BLS_evangelism_variable }
+				custom_effect_tooltip = BLS_big_evangelism_boost_tt
+			}
+			ELSE = {
+				set_temp_variable_to_random = {
+					var = BLS_evangelism_variable
+					min = 18
+					max = 26
+					integer = yes
+				}
+				add_to_variable = { FROM.BLS_evangelism_progress = BLS_evangelism_variable }
+				custom_effect_tooltip = BLS_normal_evangelism_boost_tt
+			}
+			IF = {
+				limit = {
+					check_variable = { BLS_evangelism_progress > 99 }
+				}
+				clear_variable = BLS_evangelism_progress
+				add_state_core = ROOT
+			}
+		}
+	}
+	BLS_host_prostletyzing_sermon = {
+		allowed = { original_tag = BLS }
+		visible = { BLS_has_uncored_home_states = yes }
+		cost = 25
+		modifier = {
+			political_power_gain = -0.25
+			BLS_evangelistic_fervor = 0.1
+		}
+		days_re_enable = 30
+		days_remove = 14
+	}
+	BLS_set_infidel_examples = {
+		allowed = { original_tag = BLS }
+		visible = { BLS_has_uncored_home_states = yes }
+		cost = 30
+		days_re_enable = 30
+		complete_effect = {
+			add_stability = -0.05
+			set_temp_variable = { BLS_evangelistic_fervor_change_var = 3 }
+			BLS_evangelistic_fervor_change = yes
+		}
+	}
+	BLS_burn_one_of_the_twelve = {
+		allowed = { original_tag = BLS }
+		available = {
+			NOT = { has_country_flag = BLS_burning_one_of_twelve }
+		}
+		visible = { BLS_has_uncored_home_states = yes }
+		custom_cost_trigger = {
+			check_variable = { BLS_twelve_evangelists > 0 }
+		}
+		custom_cost_text = BLS_twelve_evangelists_tt
+		complete_effect = { 
+			set_country_flag = BLS_burning_one_of_twelve
+			add_to_variable = { BLS_twelve_evangelists = -1 }
+		}
+	}
+	BLS_host_grand_revival = {
+		allowed = { original_tag = BLS }
+		available = { has_country_flag = BLS_burning_one_of_twelve }
+		visible = { BLS_has_uncored_home_states = yes }
+		complete_effect = {
+			set_temp_variable = { BLS_evangelistic_fervor_change_var = 7 }
+			BLS_evangelistic_fervor_change = yes
+		}
+	}
+	BLS_hunt_down_false_teachers = {
+		allowed = { original_tag = BLS }
+		available = { has_country_flag = BLS_burning_one_of_twelve }
+		visible = { BLS_has_uncored_home_states = yes }
+		days_remove = 20
+		modifier = {
+			stability_weekly = -0.001
+			political_power_gain = 0.05
+			BLS_evangelistic_fervor = 0.2
 		}
 	}
 }
