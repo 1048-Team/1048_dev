@@ -2,30 +2,100 @@
 
 add_namespace = bales
 add_namespace = bales_solar
+add_namespace = bales_excavation
 
-country_event = { #Solar Flare awakening from her resurrection and not being happy with the state of the world
+country_event = { #Nebula is not happy that she is sent by Bunsen to find an ancient site that could help with his research, and she believes it is a mistake
+	id = bales_excavation.1
+	title = bales_excavation.1.t
+	desc = bales_excavation.1.d
+	
+	is_triggered_only = yes
+	
+	option = { #This better not be a wild goose chase.
+		name = bales_excavation.1.a
+		hidden_effect = { country_event = bales_excavation.2 }
+	}
+	option = { #I've got a bad feeling about this. Let's turn back.
+		name = bales_excavation.1.b
+	}
+}
+
+country_event = { #Nebula and her team are in awe about the mausoleum that they've uncovered, and soon they find what Bunsen is looking for, although Nebula starts to feel uneasy about it
+	id = bales_excavation.2
+	title = bales_excavation.2.t
+	desc = bales_excavation.2.d
+	
+	is_triggered_only = yes
+	
+	option = { #Something's not right here. Let's forget we ever came here.
+		name = bales.excavation.2.a
+		custom_effect_tooltip = BLS_turn_back_before_its_too_late_tt
+	}
+	option = { #Well, time to find out what the fuss is about.
+		name = bales_excavation.2.b
+		custom_effect_tooltip = BLS_doomed_us_all_tt
+		hidden_effect = { country_event = { id = bales_excavation.3 days = 10 random_days = 4 } }
+	}
+}
+
+country_event = { #Bunsen is extatic to get the remains of an ancient alicorn to study for himself, and a couple of other researchers with him go through tests that backfire as it resurrects Solar Flare
+	id = bales_excavation.3
+	title = bales_excavation.3.t
+	desc = bales_excavation.3.d
+	
+	is_triggered_only = yes
+	
+	option = { #Dear Daybreaker, what happened in there?!
+		name = bales.excavation.3.a
+		custom_effect_tooltip = BLS_you_done_bucked_up_tt
+		hidden_effect = { country_event = bales_solar.1 }
+	}
+}
+
+country_event = { #Solar Flare is awakened by bursts of magic and she takes her rage out on the strange ponies who brought her back
 	id = bales_solar.1
 	title = bales_solar.1.t
 	desc = bales_solar.1.d
 	
 	is_triggered_only = yes
 	
-	option = { #Nebula is not comfortable with this
+	option = { #Who in the world?!
 		name = bales_solar.1.a
 		
-		set_cosmetic_tag = BLS_FLR
+		add_political_power = -100
+		add_stability = -0.1
+		hidden_effect = { load_focus_tree = BLS_solar_flare_tree }
+	}
+}
+
+country_event = { #Nebula sees what exactly happened to Bunsen and the others as she finally breaks through the door and sees Solar Flare exacting punishment on a wounded Bunsen, and faints by the end of it
+	id = bales_solar.2
+	title = bales_solar.2.t
+	desc = bales_solar.2.d
+	
+	is_triggered_only = yes
+	
+	option = { #Buck.
+		name = bales_solar.2.a
+		retire_character = BLS_Bunsen_Beaker
 		promote_character = BLS_Solar_Flare
 		set_country_flag = BLS_solar_flare_resurrected
+		set_party_name = {
+			ideology = fascism
+			name = BLS_necron_cultists
+			long_name = BLS_necron_cultists_long
+		}
 		set_politics = {
 			ruling_party = fascism
 			elections_allowed = no
 		}
-		set_party_name = {
-			ideology = fascism
-			name = "Solaris Perditionem"
-			long_name = "Solaris Perditionem"
+		hidden_effect = {
+			set_cosmetic_tag = BLS_FLR
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.16
+			}
 		}
-		load_focus_tree = BLS_solar_flare_tree
 	}
 }
 

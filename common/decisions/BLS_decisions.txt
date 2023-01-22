@@ -650,6 +650,21 @@ BLS_the_dark_arts_category = {
 			BLS_efficient_casualty_resurrection = yes
 		}
 	}
+	BLS_drive_to_fury = {
+		allowed = {
+			original_tag = BLS
+		}
+		available = {
+			check_variable = { BLS_necromantic_power > 25 }
+			has_political_power > 49
+		}
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 30
+		modifier = {
+			army_attack_factor = 0.2
+		}
+		days_re_enable = 90
+	}
 }
 BLS_the_ancient_trail_category = {
 	BLS_investigate_ancient_journals = {
@@ -782,7 +797,8 @@ BLS_evangelizing_the_country_category = {
 		visible = { BLS_has_uncored_home_states = yes }
 		state_target = yes
 		on_map_mode = map_only
-		targets = { 177 182 183 }
+		#targets = { 177 182 183 }
+		target_array = global.BLS_rebellious_cores
 		icon = GFX_decision_icon_default
 		custom_cost_trigger = {
 			has_manpower > 999
@@ -821,10 +837,18 @@ BLS_evangelizing_the_country_category = {
 			}
 			IF = {
 				limit = {
-					check_variable = { BLS_evangelism_progress > 99 }
+					check_variable = { FROM.BLS_evangelism_progress > 99 }
 				}
-				clear_variable = BLS_evangelism_progress
-				add_state_core = ROOT
+				FROM = {
+					clear_variable = BLS_evangelism_progress
+					add_core_of = ROOT
+					set_demilitarized_zone = no
+					log = "ID of state: [?THIS.ID] [?THIS.GetName]"
+					remove_from_array = {
+						array = global.BLS_rebellious_cores
+						value = THIS.id
+					}
+				}
 			}
 		}
 	}

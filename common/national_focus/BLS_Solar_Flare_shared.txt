@@ -7,7 +7,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_the_awakening"
-		country_event = bales_solar.1
+		country_event = bales_solar.2
 	}
 	
 	ai_will_do = {
@@ -402,14 +402,16 @@ shared_focus = {
 		###This would remove cores and make the other states outside of Bales dimilitarized, will have to recore through converting the populace to following Solar Flare
 		###Temp
 		set_variable = { BLS_evangelistic_fervor_pool = 1 }
-		add_to_array = { global.BLS_rebellious_cores = 177 }
-		add_to_array = { global.BLS_rebellious_cores = 182 }
-		add_to_array = { global.BLS_rebellious_cores = 183 }
+		add_to_array = { global.BLS_rebellious_cores = 177.id }
+		add_to_array = { global.BLS_rebellious_cores = 182.id }
+		add_to_array = { global.BLS_rebellious_cores = 183.id }
 		for_each_scope_loop = {
 			array = global.BLS_rebellious_cores
 			
-			remove_core_of = ROOT
-			set_demilitarized_zone = yes
+			THIS = {
+				remove_core_of = ROOT
+				set_demilitarized_zone = yes
+			}
 		}
 	}
 	
@@ -466,7 +468,7 @@ shared_focus = {
 		###The mechanic will rely on magic power (new resource), political power, and state manpower; it will range between a small amount of population to raise one division, to large population amounts to raise at least half a dozen; they will have varying cooldowns; there will also be decisions to improve the template design; there will be an infantry and a light armor design that can be used
 		set_country_flag = BLS_resurrect_dead_cultists
 		set_variable = { BLS_necromantic_power_pool = 150 }
-		BLS_total_dead_cultists = yes
+		BLS_calculate_total_dead_cultists = yes
 		hidden_effect = {
 			division_template = {
 				name = "Tomb Ravagers"
@@ -582,6 +584,7 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_leave_them_undead"
 		custom_effect_tooltip = BLS_can_raise_killed_cultists_tt
 		set_country_flag = BLS_resurrect_killed_cultists
+		BLS_calculate_casualty_pool = yes
 		add_ideas = BLS_rest_in_unpeace
 		###Potentially allow some trickleback in that spirit, too, and also have a decision mechanic to raise some of the dead back to life, although it's wasteful (would keep track of dead as a variable, and burn 30% of the bodies used to resurrect)
 	}
@@ -1190,6 +1193,21 @@ shared_focus = {
 	prerequisite = {
 		focus = BLS_modern_as_can_be
 		focus = BLS_faithful_as_can_be
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = BLS_nebula_or_blazing_complete_control_tt
+			OR = {
+				AND = {
+					has_completed_focus = BLS_modern_as_can_be
+					BLS_Nebula_Flare = { is_country_leader = yes }
+				}
+				AND = {
+					has_completed_focus = BLS_faithful_as_can_be
+					BLS_Blazing_Sheath = { is_country_leader = yes }
+				}
+			}
+		}
 	}
 	
 	completion_reward = {
