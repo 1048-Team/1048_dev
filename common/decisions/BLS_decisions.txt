@@ -451,13 +451,13 @@ BLS_conquer_world_category = {
 			}
 		}
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_the_end"
 			country_event = bales_solar.65
 		}
 	}
 }
 BLS_balance_of_power_category = {
 	BLS_show_up_blazing = {
-		priority = 120
 		allowed = {
 			original_tag = BLS
 		}
@@ -465,8 +465,10 @@ BLS_balance_of_power_category = {
 			tag = BLS
 			has_any_power_balance = yes
 		}
-		days_re_enable = 180
+		cost = 25
+		days_re_enable = 120
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_show_up_blazing"
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = -0.05
@@ -474,8 +476,7 @@ BLS_balance_of_power_category = {
 			}
 		}
 	}
-	BLS_raid_nebulas_lab = {
-		priority = 115
+	BLS_seek_support_of_cultists = {
 		allowed = {
 			original_tag = BLS
 		}
@@ -483,8 +484,73 @@ BLS_balance_of_power_category = {
 			tag = BLS
 			has_any_power_balance = yes
 		}
-		days_re_enable = 180
+		cost = 50
+		days_re_enable = 210
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_seek_support_of_cultists"
+			add_power_balance_value = {
+				id = BLS_power_balance
+				value = -0.075
+				tooltip_side = BLS_nebula_flare_side
+			}
+		}
+	}
+	BLS_educational_seminar = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		cost = 100
+		days_re_enable = 210
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_educational_seminar"
+			add_power_balance_value = {
+				id = BLS_power_balance
+				value = -0.1
+				tooltip_side = BLS_nebula_flare_side
+			}
+		}
+	}
+	BLS_show_off_advanced_tech = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_show_off_advanced_tech"
+			add_power_balance_value = {
+				id = BLS_power_balance
+				value = -0.05
+				tooltip_side = BLS_nebula_flare_side
+			}
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = magical_tech
+				ahead_reduction = 2
+			}
+		}
+	}
+	BLS_raid_nebulas_lab = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		cost = 25
+		days_re_enable = 120
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_raid_nebulas_lab"
 			add_power_balance_value = {
 				id = BLS_power_balance
 				value = 0.05
@@ -492,9 +558,72 @@ BLS_balance_of_power_category = {
 			}
 		}
 	}
+	BLS_convict_supporters_of_nebula = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		cost = 50
+		days_re_enable = 210
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_convict_supporters_of_nebula"
+			add_power_balance_value = {
+				id = BLS_power_balance
+				value = 0.075
+				tooltip_side = BLS_blazing_sheath_side
+			}
+		}
+	}
+	BLS_shore_up_the_loyal = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		cost = 100
+		days_re_enable = 210
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_shore_up_the_loyal"
+			add_power_balance_value = {
+				id = BLS_power_balance
+				value = 0.1
+				tooltip_side = BLS_blazing_sheath_side
+			}
+		}
+	}
+	BLS_demonstrate_advanced_magic = {
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			tag = BLS
+			has_any_power_balance = yes
+		}
+		cost = 75
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_demonstrate_advanced_magic"
+			add_power_balance_value = {
+				id = BLS_power_balance
+				value = 0.05
+				tooltip_side = BLS_blazing_sheath_side
+			}
+			add_tech_bonus = {
+				bonus = 2
+				uses = 1
+				category = race_tech
+			}
+		}
+	}
 }
-BLS_the_dark_arts_category = { 
+BLS_the_dark_arts_category = {
 	BLS_smol_cultist_resurrection = {
+		icon = generic_magic
 		allowed = {
 			original_tag = BLS
 		}
@@ -508,11 +637,13 @@ BLS_the_dark_arts_category = {
 			has_country_flag = BLS_resurrect_dead_cultists
 		}
 		custom_cost_trigger = {
-			check_variable = { BLS_necromantic_power_pool > 75 }
+			set_temp_variable = { BLS_display_variable_np = 75 }
+			check_variable = { BLS_necromantic_power_pool > 74.99 }
 		}
-		custom_cost_text = BLS_resurrect_cultists_75_np_tt
+		custom_cost_text = BLS_resurrect_cultists_np_tt
 		days_remove = 30
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_smol_cultist_resurrection"
 			add_to_variable = { BLS_necromantic_power_pool = -75 }
 		}
 		remove_effect = {
@@ -520,6 +651,7 @@ BLS_the_dark_arts_category = {
 		}
 	}
 	BLS_beeg_cultist_resurrection = {
+		icon = generic_magic
 		allowed = {
 			original_tag = BLS
 		}
@@ -533,11 +665,13 @@ BLS_the_dark_arts_category = {
 			has_country_flag = BLS_resurrect_dead_cultists
 		}
 		custom_cost_trigger = {
-			check_variable = { BLS_necromantic_power_pool > 125 }
+			set_temp_variable = { BLS_display_variable_np = 125 }
+			check_variable = { BLS_necromantic_power_pool > 124.99 }
 		}
-		custom_cost_text = BLS_resurrect_cultists_125_np_tt
+		custom_cost_text = BLS_resurrect_cultists_np_tt
 		days_remove = 50
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_beeg_cultist_resurrection"
 			add_to_variable = { BLS_necromantic_power_pool = -125 }
 		}
 		remove_effect = {
@@ -545,6 +679,7 @@ BLS_the_dark_arts_category = {
 		}
 	}
 	BLS_drain_tombs = {
+		icon = generic_magic
 		allowed = {
 			original_tag = BLS
 		}
@@ -561,10 +696,12 @@ BLS_the_dark_arts_category = {
 			check_variable = { BLS_total_dead_cultist_pool > 0 }
 		}
 		custom_cost_trigger = {
-			check_variable = { BLS_necromantic_power_pool > 30 }
+			set_temp_variable = { BLS_display_variable_np = 30 }
+			check_variable = { BLS_necromantic_power_pool > 29.99 }
 		}
-		custom_cost_text = BLS_resurrect_cultists_30_np_tt
+		custom_cost_text = BLS_resurrect_cultists_np_tt
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_drain_remaining_tombs"
 			add_to_variable = { BLS_necromantic_power_pool = -30 }
 		}
 		days_remove = 30
@@ -572,31 +709,19 @@ BLS_the_dark_arts_category = {
 			BLS_drain_remaining_tombs = yes
 		}
 	}
-	BLS_add_efficient_resurrection = {
-		allowed = {
-			original_tag = BLS
-		}
-		visible = {
-			has_country_flag = BLS_resurrect_killed_cultists
-		}
-		cost = 300
-		days_remove = -1
-		modifier = {
-			BLS_necromantic_power = -0.5
-		}
-		complete_effect = {
-			set_country_flag = BLS_better_resurrections
-		}
-	}
 	BLS_add_inefficient_manpower_resurrection = {
+		icon = generic_magic
 		allowed = {
 			original_tag = BLS
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = BLS_has_more_than_inefficient_needed_tt
+				tooltip = BLS_has_more_corpses_than_inefficient_needed_tt
 				OR = {
-					check_variable = { BLS_total_corpses_available > 166665 }
+					AND = {
+						check_variable = { BLS_total_corpses_available > 166665 }
+						NOT = { has_country_flag = BLS_better_resurrections }
+					}
 					AND = {
 						has_country_flag = BLS_better_resurrections
 						check_variable = { BLS_total_corpses_available > 99999 }
@@ -608,11 +733,13 @@ BLS_the_dark_arts_category = {
 			has_country_flag = BLS_resurrect_killed_cultists
 		}
 		custom_cost_trigger = {
-			check_variable = { BLS_necromantic_power_pool > 60 }
+			set_temp_variable = { BLS_display_variable_np = 60 }
+			check_variable = { BLS_necromantic_power_pool > 59.99 }
 		}
-		custom_cost_text = BLS_resurrect_cultists_60_np_tt
+		custom_cost_text = BLS_resurrect_cultists_np_tt
 		days_remove = 45
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_add_inefficient_manpower_resurrection"
 			add_to_variable = { BLS_necromantic_power_pool = -60 }
 		}
 		remove_effect = {
@@ -620,14 +747,18 @@ BLS_the_dark_arts_category = {
 		}
 	}
 	BLS_add_efficient_manpower_resurrection = {
+		icon = generic_magic
 		allowed = {
 			original_tag = BLS
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = BLS_has_more_than_efficient_needed_tt
+				tooltip = BLS_has_more_corpses_than_efficient_needed_tt
 				OR = {
-					check_variable = { BLS_total_corpses_available > 90908 }
+					AND = {
+						check_variable = { BLS_total_corpses_available > 90908 }
+						NOT = { has_country_flag = BLS_better_resurrections }
+					}
 					AND = {
 						has_country_flag = BLS_better_resurrections
 						check_variable = { BLS_total_corpses_available > 62499 }
@@ -639,10 +770,12 @@ BLS_the_dark_arts_category = {
 			has_country_flag = BLS_resurrect_killed_cultists
 		}
 		custom_cost_trigger = {
-			check_variable = { BLS_necromantic_power_pool > 110 }
+			set_temp_variable = { BLS_display_variable_np = 110 }
+			check_variable = { BLS_necromantic_power_pool > 109.99 }
 		}
-		custom_cost_text = BLS_resurrect_cultists_110_np_tt
+		custom_cost_text = BLS_resurrect_cultists_np_tt
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_add_efficient_manpower_resurrection"
 			add_to_variable = { BLS_necromantic_power_pool = -110 }
 		}
 		days_remove = 100
@@ -650,20 +783,246 @@ BLS_the_dark_arts_category = {
 			BLS_efficient_casualty_resurrection = yes
 		}
 	}
-	BLS_drive_to_fury = {
+	BLS_add_efficient_resurrection = {
+		icon = generic_magic
 		allowed = {
 			original_tag = BLS
 		}
-		available = {
-			check_variable = { BLS_necromantic_power > 25 }
-			has_political_power > 49
+		visible = {
+			has_country_flag = BLS_resurrect_killed_cultists
 		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 300 }
+			check_variable = { BLS_necromantic_power_pool > 299.99 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_np_tt
+		days_remove = -1
+		modifier = {
+			BLS_necromantic_power = -0.5
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_add_efficient_resurrection"
+			set_country_flag = BLS_better_resurrections
+			add_to_variable = { BLS_necromantic_power_pool = -300 }
+		}
+	}
+}
+BLS_boons_of_the_goddess_category = {
+	BLS_drive_to_fury = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 25 }
+			set_temp_variable = { BLS_display_variable_pp = 50 }
+			has_political_power > 49.99
+			check_variable = { BLS_necromantic_power_pool > 24.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
 		visible = { has_completed_focus = BLS_hell_on_equus }
 		days_remove = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_drive_to_fury"
+			hidden_effect = {
+				add_political_power = -50
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -25 }
+		}
 		modifier = {
-			army_attack_factor = 0.2
+			army_attack_factor = 0.3
+			army_defence_factor = -0.1
 		}
 		days_re_enable = 90
+	}
+	BLS_inspire_rabid_fervor = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 25 }
+			set_temp_variable = { BLS_display_variable_pp = 50 }
+			has_political_power > 49.99
+			check_variable = { BLS_necromantic_power_pool > 24.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_inspire_rabid_fervor"
+			hidden_effect = {
+				add_political_power = -50
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -25 }
+		}
+		modifier = {
+			breakthrough_factor = 0.50
+			experience_loss_factor = 0.15
+		}
+		days_re_enable = 90
+	}
+	BLS_brainwash_masses = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 25 }
+			set_temp_variable = { BLS_display_variable_pp = 100 }
+			has_political_power > 99.99
+			check_variable = { BLS_necromantic_power_pool > 24.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 28
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_brainwash_masses"
+			hidden_effect = {
+				add_political_power = -100
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -25 }
+		}
+		modifier = {
+			weekly_manpower = 25000
+			stability_weekly = -0.005
+			war_support_weekly = -0.005
+		}
+		days_re_enable = 365
+	}
+	BLS_life_and_death = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 75 }
+			set_temp_variable = { BLS_display_variable_pp = 150 }
+			has_political_power > 149.99
+			check_variable = { BLS_necromantic_power_pool > 74.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_life_and_death"
+			hidden_effect = {
+				add_political_power = -150
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -75 }
+		}
+		modifier = {
+			experience_loss_factor = -0.95
+			army_org_factor = -0.25
+			land_reinforce_rate = 0.1
+			army_morale_factor = 0.25
+		}
+		days_re_enable = 180
+	}
+	BLS_to_the_last = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 30 }
+			set_temp_variable = { BLS_display_variable_pp = 75 }
+			has_political_power > 74.99
+			check_variable = { BLS_necromantic_power_pool > 29.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 90
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_to_the_last"
+			hidden_effect = {
+				add_political_power = -75
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -30 }
+		}
+		modifier = {
+			surrender_limit = 0.5
+			pocket_penalty = -0.75
+			no_supply_grace = 240
+			out_of_supply_factor = -0.5
+			army_speed_factor = -0.15
+			army_attack_factor = -0.15
+		}
+		days_re_enable = 180
+	}
+	BLS_tireless_workers = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 50 }
+			set_temp_variable = { BLS_display_variable_pp = 50 }
+			has_political_power > 49.99
+			check_variable = { BLS_necromantic_power_pool > 49.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 75
+		days_re_enable = 75
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_tireless_workers"
+			hidden_effect = {
+				add_political_power = -50
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -50 } 
+		}
+		modifier = {
+			industrial_capacity_factory = 0.25
+			consumer_goods_factor = 0.15
+			production_speed_buildings_factor = 0.25
+			line_change_production_efficiency_factor = -0.15
+			production_lack_of_resource_penalty_factor = -1
+		}
+	}
+	BLS_control_servants_minds = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 100 }
+			set_temp_variable = { BLS_display_variable_pp = 25 }
+			has_political_power > 24.99
+			check_variable = { BLS_necromantic_power_pool > 99.99 }
+		}
+		custom_cost_text = BLS_decision_cost_pp_and_np_tt
+		visible = { has_completed_focus = BLS_hell_on_equus }
+		days_remove = 45
+		days_re_enable = 180
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_control_servants_minds"
+			hidden_effect = {
+				add_political_power = -25
+			}
+			add_to_variable = { BLS_necromantic_power_pool = -100 }
+		}
+		modifier = {
+			industrial_capacity_factory = -0.30
+			political_power_factor = -0.1
+		}
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = magical_equipment
+				amount = 25000
+				producer = BLS
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 1500
+				producer = BLS
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 1000
+				producer = BLS
+			}
+		}
 	}
 }
 BLS_the_ancient_trail_category = {
@@ -793,18 +1152,21 @@ BLS_the_ancient_trail_category = {
 }
 BLS_evangelizing_the_country_category = {
 	BLS_evangelize_state = {
+		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
 		visible = { BLS_has_uncored_home_states = yes }
 		state_target = yes
 		on_map_mode = map_only
 		#targets = { 177 182 183 }
 		target_array = global.BLS_rebellious_cores
-		icon = GFX_decision_icon_default
+		fixed_random_seed = no
 		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_mp = 1000 }
+			set_temp_variable = { BLS_display_variable_ef = 1 }
 			has_manpower > 999
 			check_variable = { BLS_evangelistic_fervor_pool > 0.99 }
 		}
-		custom_cost_text = BLS_evangelize_state_cost_MP_1000_EF_05_tt
+		custom_cost_text = BLS_evangelize_state_cost_mp_and_ef_tt
 		complete_effect = {
 			hidden_effect = {
 				ROOT = {
@@ -823,7 +1185,7 @@ BLS_evangelizing_the_country_category = {
 					integer = yes
 				}
 				add_to_variable = { FROM.BLS_evangelism_progress = BLS_evangelism_variable }
-				custom_effect_tooltip = BLS_big_evangelism_boost_tt
+				custom_effect_tooltip = BLS_evangelism_boost_tt
 			}
 			ELSE = {
 				set_temp_variable_to_random = {
@@ -833,7 +1195,7 @@ BLS_evangelizing_the_country_category = {
 					integer = yes
 				}
 				add_to_variable = { FROM.BLS_evangelism_progress = BLS_evangelism_variable }
-				custom_effect_tooltip = BLS_normal_evangelism_boost_tt
+				custom_effect_tooltip = BLS_evangelism_boost_tt
 			}
 			IF = {
 				limit = {
@@ -853,6 +1215,7 @@ BLS_evangelizing_the_country_category = {
 		}
 	}
 	BLS_host_prostletyzing_sermon = {
+		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
 		visible = { BLS_has_uncored_home_states = yes }
 		cost = 25
@@ -864,6 +1227,7 @@ BLS_evangelizing_the_country_category = {
 		days_remove = 14
 	}
 	BLS_set_infidel_examples = {
+		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
 		visible = { BLS_has_uncored_home_states = yes }
 		cost = 30
@@ -875,6 +1239,7 @@ BLS_evangelizing_the_country_category = {
 		}
 	}
 	BLS_burn_one_of_the_twelve = {
+		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
 		available = {
 			NOT = { has_country_flag = BLS_burning_one_of_twelve }
@@ -890,18 +1255,22 @@ BLS_evangelizing_the_country_category = {
 		}
 	}
 	BLS_host_grand_revival = {
+		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
 		available = { has_country_flag = BLS_burning_one_of_twelve }
 		visible = { BLS_has_uncored_home_states = yes }
+		cost = 40
 		complete_effect = {
 			set_temp_variable = { BLS_evangelistic_fervor_change_var = 7 }
 			BLS_evangelistic_fervor_change = yes
 		}
 	}
 	BLS_hunt_down_false_teachers = {
+		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
 		available = { has_country_flag = BLS_burning_one_of_twelve }
 		visible = { BLS_has_uncored_home_states = yes }
+		cost = 35
 		days_remove = 20
 		modifier = {
 			stability_weekly = -0.001
