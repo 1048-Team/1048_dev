@@ -1154,10 +1154,15 @@ BLS_evangelizing_the_country_category = {
 	BLS_evangelize_state = {
 		icon = GFX_decision_book
 		allowed = { original_tag = BLS }
-		visible = { BLS_has_uncored_home_states = yes }
+		visible = { 
+			FROM = {
+				is_owned_by = ROOT
+				is_demilitarized = yes
+				NOT = { is_core_of = ROOT }
+			}
+		}
 		state_target = yes
 		on_map_mode = map_only
-		#targets = { 177 182 183 }
 		target_array = global.BLS_rebellious_cores
 		fixed_random_seed = no
 		custom_cost_trigger = {
@@ -1177,25 +1182,19 @@ BLS_evangelizing_the_country_category = {
 			}
 			IF = {
 				limit = { ROOT = { has_country_flag = BLS_burning_one_of_twelve } }
+				BLS_the_randomizer = yes
 				ROOT = { clr_country_flag = BLS_burning_one_of_twelve }
-				set_temp_variable_to_random = {
-					var = BLS_evangelism_variable
-					min = 36
-					max = 51
-					integer = yes
-				}
+				set_temp_variable = { BLS_evangelism_variable = BLS_evangelism_variable_test }
 				add_to_variable = { FROM.BLS_evangelism_progress = BLS_evangelism_variable }
-				custom_effect_tooltip = BLS_evangelism_boost_tt
+				custom_effect_tooltip = BLS_evangelism_boost_beeg_tt
+				custom_effect_tooltip = BLS_evangelism_progress_tt
 			}
 			ELSE = {
-				set_temp_variable_to_random = {
-					var = BLS_evangelism_variable
-					min = 18
-					max = 26
-					integer = yes
-				}
+				BLS_the_randomizer = yes
+				set_temp_variable = { BLS_evangelism_variable = BLS_evangelism_variable_test }
 				add_to_variable = { FROM.BLS_evangelism_progress = BLS_evangelism_variable }
 				custom_effect_tooltip = BLS_evangelism_boost_tt
+				custom_effect_tooltip = BLS_evangelism_progress_tt
 			}
 			IF = {
 				limit = {

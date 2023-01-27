@@ -2139,6 +2139,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_sisterhood_of_moon"
 		###Melting Point is assigned as the high priestess of the northern cult to assist with Solar Flare's conquest and she is overwhelmed by it, to Solar Flare's mirth
+		BLS_spawn_lunar_sisterhood = yes
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -2220,6 +2221,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_sisterhood_of_sun"
 		###Purple Haze is eagerly put in charge of a southern cult, which she takes to excitedly, and with a bit of lightheartened/ditziness, which amuses Solar Flare
+		BLS_spawn_solar_sisterhood = yes
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -2472,7 +2474,9 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_establish_ley_line"
-		add_ideas = BLS_ley_line_industries
+		set_country_flag = BLS_ley_line_founded
+		custom_effect_tooltip = BLS_unlock_tt
+		show_ideas_tooltip = BLS_ley_line_resources
 		add_tech_bonus = {
 			name = excavation_bonus
 			bonus = 1
@@ -2870,6 +2874,20 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_ultimate_efficiency"
 		###Blazing Sheath visits one of the new mines set up for the population, to ensure that it is on target, as some of the living cultists have been falling behind in quotas
+		IF = {
+			limit = {
+				has_idea = BLS_ley_line_resources
+			}
+			set_country_flag = BLS_ley_line_improved
+			swap_ideas = {
+				remove_idea = BLS_ley_line_resources
+				add_idea = BLS_ley_line_resources_better
+			}
+		}
+		ELSE = {
+			custom_effect_tooltip = BLS_unlock_tt
+			show_ideas_tooltip = BLS_ley_line_resources_better
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -2979,10 +2997,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_full_flexibility"
-		swap_ideas = {
-			remove_idea = BLS_ley_line_industries
-			add_idea = BLS_ley_line_ascendent
-		}
+		add_ideas = BLS_fully_flexible_economy
 	}
 	
 	ai_will_do = { factor = 42 }
@@ -3783,7 +3798,7 @@ shared_focus = {
 	prerequisite = { focus = BLS_cleanse_army }
 	available = {
 		any_state = {
-			is_owned_by = ROOT
+			is_controlled_by = ROOT
 			is_coastal = yes
 		}
 	}
@@ -3805,8 +3820,8 @@ shared_focus = {
 	cost = 4
 	prerequisite = { focus = BLS_worlds_shores }
 	available = {
-		owns_state = 75
-		owns_state = 12
+		controls_state = 75
+		controls_state = 12
 	}
 	
 	completion_reward = {
@@ -3906,6 +3921,7 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_mosquito_destroyers"
 		add_tech_bonus = {
 			name = destroyer_bonus
+			ahead_reduction = 2.5
 			uses = 2
 			bonus = 1
 			category = dd_tech
