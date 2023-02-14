@@ -2143,7 +2143,21 @@ shared_focus = {
 				}
 				is_owned_by = ROOT
 			}
-			add_core_of = ROOT
+			IF = {
+				limit = {
+					ROOT = { has_country_flag = EQS_harsh_punishment }
+				}
+				add_resistance_target = -10
+			}
+			ELSE_IF = {
+				limit = { ROOT = { has_country_flag = EQS_flexible_punishment } }
+				add_resistance_target = -3.5
+				add_compliance = 7.5
+			}
+			ELSE = {
+				add_resistance = -5
+				add_compliance = 12.5
+			}
 		}
 		set_province_name = { id = 782 name = renamed_new_canterlot }
 		mark_focus_tree_layout_dirty = yes
@@ -4335,6 +4349,14 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_innocent_from_corruption"
 		###Some uneducated proles see some Party members being led away for execution and nearly run afoul of an inquisitor or two, but are spared because they are seen as ignorant of MARESOC's treachery
+		every_state = {
+			limit = {
+				is_core_of = EQC
+				is_owned_by = ROOT
+			}
+			add_compliance = 15
+			###Population here
+		}
 	}
 	
 	ai_will_do = { factor = 35 }
@@ -4354,6 +4376,15 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_wipe_out_blight"
 		###Many proles are rounded up with Party members and attempt to fight back as they are led away for execution for being accomplices to MARESOC's evil
+		every_state = {
+			limit = {
+				is_core_of = EQC
+				is_owned_by = ROOT
+			}
+			###Population here
+			add_compliance = 5
+			add_resistance_target = -15
+		}
 	}
 	
 	ai_will_do = { factor = 60 }
@@ -4377,7 +4408,7 @@ shared_focus = {
 		###Daybreaker oversees the final touches of a new statue to her in Sanctum Solar, and happily muses to herself how her ponies are now protected, and that Equestria will never fall again
 	}
 	
-	ai_will_do = { factor = 100 }
+	ai_will_do = { factor = 300 }
 }
 
 ###Sunset Shimmer Tree###
@@ -5703,7 +5734,7 @@ shared_focus = {
 
 shared_focus = {
 	id = EQS_press_to_submit
-	x = -2
+	x = -1
 	y = 1
 	relative_position_id = EQS_envoys_to_the_lost
 	
@@ -5715,13 +5746,22 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_press_to_submit"
 		###Send events to rump states
 		set_country_flag = EQS_aggressive_negotiations
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.solar_empire_rumps
+					value = THIS.id
+				}
+			}
+			country_event = solar.220
+		}
 	}
 	ai_will_do = { factor = 40 }
 }
 
 shared_focus = {
 	id = EQS_give_freedom
-	x = 2
+	x = 1
 	y = 1
 	relative_position_id = EQS_envoys_to_the_lost
 	
@@ -5733,6 +5773,15 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_give_freedom"
 		###Send events to rump states
 		set_country_flag = EQS_flexible_negotiations
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.solar_empire_rumps
+					value = THIS.id
+				}
+			}
+			country_event = solar.220
+		}
 	}
 	ai_will_do = { factor = 75 }
 }
@@ -5775,6 +5824,230 @@ shared_focus = {
 		#Idea here
 	}
 	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_reinforce_similarities
+	x = -2
+	y = 1
+	relative_position_id = EQS_takes_time
+	
+	cost = 4
+	prerequisite = { focus = EQS_takes_time }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reinforce_similarities"
+		###A propaganda campaign is run on the radio speaking of how Solarists are no different from the ponies of the rump states and that they should welcome their conquerors as friends
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_incentivize_worship
+	x = 0
+	y = 1
+	relative_position_id = EQS_takes_time
+	
+	cost = 4
+	prerequisite = { focus = EQS_takes_time }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_incentivize_worship"
+		###A priestess in one of the new regions of the Empire sees the sudden influx of ponies, although they all appear to be wanting to be paid, or fed, or something, that would incentivize them to come, to the priestess's annoyance
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_inquisitionis_oversight
+	x = 2
+	y = 1
+	relative_position_id = EQS_takes_time
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_takes_time
+		focus = EQS_press_integration
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitionis_oversight"
+		###A couple of ponies who have remained against the Solar Empire are suddenly aware of being hunted, which freaks them out before they try and flee since the Inquisitionis before then had been inactive or not there at all
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_foal_institutions
+	x = 0
+	y = 1
+	relative_position_id = EQS_press_integration
+	
+	cost = 4
+	prerequisite = { focus = EQS_press_integration }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_foal_institutions"
+		###A mother answers the door to a pony's house to have her colt taken from her for religious instruction, which she resists, and a father the next door over tries to intervene, which gets them both arrested by the inquisitor taking the foal
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_replace_old_systems
+	x = 2
+	y = 1
+	relative_position_id = EQS_press_integration
+	
+	cost = 4
+	prerequisite = { focus = EQS_press_integration }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_replace_old_systems"
+		###Some of the mid-level bureaucrats for CER are suddenly wrested from their work by the Inquisitionis to be interrogated, and also to be relieved of their duty while more loyal ponies come in to replace them
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_outreach_programs
+	x = 1
+	y = 1
+	relative_position_id = EQS_reinforce_similarities
+	
+	cost = 3
+	prerequisite = { focus = EQS_reinforce_similarities }
+	prerequisite = { focus = EQS_incentivize_worship }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_outreach_programs"
+		###A few ponies who have been left homeless by the war are assisted by a few Adoratio priestesses, although some of their help includes basically hurrying along the demise of other ponies suffering, too, as a twisted act of kindness
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_blessings_of_the_adoratio
+	x = 1
+	y = 1
+	relative_position_id = EQS_incentivize_worship
+	
+	cost = 3
+	prerequisite = { focus = EQS_incentivize_worship }
+	prerequisite = { focus = EQS_inquisitionis_oversight }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_blessings_of_the_adoratio"
+		every_state = {
+			limit = {
+				AND = {
+					OR = {
+						is_core_of = CLD
+						is_core_of = BLS
+						is_core_of = NER
+						is_core_of = CER
+						is_core_of = WHY
+					}
+					OR = {
+						is_owned_by = ROOT
+						owner = { is_subject_of = ROOT }
+					}
+				}
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		build_railway = {
+			level = 1
+			start_province = 11686
+			target_province = 179
+		}
+		add_compliance = 0.05
+		add_stability = 0.03
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = { #Have it describe how any losses of heretics used in the clearing of new land is of no consequence
+	id = EQS_inspiration_from_the_inquisitionis
+	x = 1
+	y = 1
+	relative_position_id = EQS_inquisitionis_oversight
+	
+	cost = 3
+	prerequisite = { focus = EQS_foal_institutions }
+	prerequisite = { focus = EQS_inquisitionis_oversight }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_inspiration_from_the_inquisitionis"
+		every_state = {
+			limit = {
+				AND = {
+					OR = {
+						is_core_of = CLD
+						is_core_of = BLS
+						is_core_of = NER
+						is_core_of = CER
+						is_core_of = WHY
+					}
+					OR = {
+						is_owned_by = ROOT
+						owner = { is_subject_of = ROOT }
+					}
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_manpower = -3500
+			###Add state modifier
+			add_compliance = 0.035
+			add_resistance = 0.075
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = { 
+	id = EQS_new_day_activities
+	x = 1
+	y = 1
+	relative_position_id = EQS_foal_institutions
+	
+	cost = 3
+	prerequisite = { focus = EQS_foal_institutions }
+	prerequisite = { focus = EQS_replace_old_systems }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_day_activities"
+		###Follow a low-level government worker as he tries to get through his day with all the new requirements for worship, the changes to what ponies can do, and how he sees the world growing more bleak every day
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_model_provinces
+	x = 1
+	y = 1
+	relative_position_id = EQS_blessings_of_the_adoratio
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_outreach_programs
+		focus = EQS_new_day_activities
+	}
+	prerequisite = {
+		focus = EQS_blessings_of_the_adoratio
+		focus = EQS_inspiration_from_the_inquisitionis
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_model_provinces"
+		#Idea here
+		mark_focus_tree_layout_dirty = yes
+	}
+	ai_will_do = { factor = 75 }
 }
 
 ###Bales for Sunset###
@@ -6304,120 +6577,1059 @@ shared_focus = {
 #	ai_will_do = { factor = 27 }
 #}
 
+###New Post-Rump Wars###
 shared_focus = {
-	id = EQS_blessings_of_the_adoratio
-	x = 1
-	y = 1
-	relative_position_id = EQS_correct_the_wayward_legions
+	id = EQS_march_toward_communism
+	x = 33
+	y = 13
 	
-	cost = 4
-	prerequisite = { focus = EQS_correct_the_wayward_legions }
-	prerequisite = { focus = EQS_subjugating_the_central_wilds }
-	prerequisite = { focus = EQS_restoring_the_crown_of_the_heartlands }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_blessings_of_the_adoratio"
-		every_state = {
-			limit = {
-				AND = {
-					OR = {
-						is_core_of = CLD
-						is_core_of = BLS
-						is_core_of = NER
-						is_core_of = CER
-						is_core_of = WHY
-					}
-					OR = {
-						is_owned_by = ROOT
-						owner = { is_subject_of = ROOT }
-					}
-				}
+	allow_branch = {
+		OR = {
+			AND = {
+				is_debug = yes
+				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
 			}
-			add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
-			}
+			has_completed_focus = EQS_model_provinces
 		}
 	}
-	ai_will_do = { factor = 25 }
-}
-
-shared_focus = { #Have it describe how any losses of heretics used in the clearing of new land is of no consequence
-	id = EQS_inspiration_from_the_inquisitionis
-	x = -1
-	y = 1
-	relative_position_id = EQS_subjugating_the_central_wilds
 	
-	cost = 3
-	prerequisite = { focus = EQS_correct_the_wayward_legions }
-	prerequisite = { focus = EQS_restoring_the_crown_of_the_heartlands }
-	prerequisite = { focus = EQS_subjugating_the_central_wilds }
+	cost = 5
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_inspiration_from_the_inquisitionis"
-		every_state = {
-			limit = {
-				AND = {
-					OR = {
-						is_core_of = CLD
-						is_core_of = BLS
-						is_core_of = NER
-						is_core_of = CER
-						is_core_of = WHY
-					}
-					OR = {
-						is_owned_by = ROOT
-						owner = { is_subject_of = ROOT }
-					}
-				}
-			}
-			add_extra_state_shared_building_slots = 1
-			add_manpower = -3500
-		}
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_march_toward_communism"
+		country_event = solar.245
 	}
-	ai_will_do = { factor = 20 }
+	ai_will_do = { factor = 100 }
 }
 
 ###Southeast for Sunset###
 shared_focus = { #Mention how if Sunset was given more control with the original war, she could have won it and that she will not repeat that mistake again
 	id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
-	x = 1
+	x = -6
 	y = 1
-	relative_position_id = EQS_blessings_of_the_adoratio
+	relative_position_id = EQS_march_toward_communism
 	
 	bypass = {
-		OR = {
-			AND = {
-				NOT = {
-					has_global_flag = balsplosion
-					country_exists = BAL
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
 				}
-			}
-			AND = {
-				has_global_flag = balsplosion
-				NOT = {
-					country_exists = MTS
-					country_exists = EEE
-					country_exists = NID
-					country_exists = NEI
-					country_exists = CLI
-					country_exists = SPF
-					country_exists = STB
-					country_exists = NRP
-					country_exists = BAL
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
 				}
 			}
 		}
 	}
 	
-	cost = 5
-	prerequisite = { focus = EQS_blessings_of_the_adoratio }
-	prerequisite = { focus = EQS_inspiration_from_the_inquisitionis }
+	cost = 3
+	prerequisite = { focus = EQS_march_toward_communism }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_the_gravest_of_errors_the_greatest_of_comebacks"
-		country_event = solar.245
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.southeast_countries
+					value = THIS
+				}
+			}
+		
+			EQS = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_scour_jungles
+	x = -1
+	y = 1
+	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_scour_jungles"
+		###Follow a few soldiers as they are effectively torn apart by guerilla units from both the thestrals and from renegade communists
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_stabilize_cities
+	x = 1
+	y = 1
+	relative_position_id = EQS_the_gravest_of_errors_the_greatest_of_comebacks
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			OR = {
+				AND = {
+					NOT = {
+						has_global_flag = balsplosion
+						country_exists = BAL
+					}
+				}
+				AND = {
+					has_global_flag = balsplosion
+					NOT = {
+						country_exists = MTS
+						country_exists = EEE
+						country_exists = NID
+						country_exists = NEI
+						country_exists = CLI
+						country_exists = SPF
+						country_exists = STB
+						country_exists = NRP
+						country_exists = BAL
+					}
+				}
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_stabilize_cities"
+		###Sunset has to pick out among the many uncooperative nobles some ponies to be governors, and she does her best to spin it as a fun vacation or something, since she sees most of them as useless until the Adoratio could come in to control it instead
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_standard_route
+	x = -1
+	y = 1
+	relative_position_id = EQS_scour_jungles
+	
+	cost = 4
+	prerequisite = { focus = EQS_scour_jungles }
+	prerequisite = { focus = EQS_stabilize_cities }
+	mutually_exclusive = { focus = EQS_sisterly_aid }
+	mutually_exclusive = { focus = EQS_the_unthinkable }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_standard_route"
+		###Fiery Dart learns of more rebellion and now that she has the cability to do so, she begins to burn through the jungle to destroy the thestral resistance
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_sisterly_aid
+	x = 1
+	y = 1
+	relative_position_id = EQS_scour_jungles
+	
+	cost = 4
+	prerequisite = { focus = EQS_scour_jungles }
+	prerequisite = { focus = EQS_stabilize_cities }
+	mutually_exclusive = { focus = EQS_standard_route }
+	mutually_exclusive = { focus = EQS_the_unthinkable }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_sisterly_aid"
+		###Fiery Dart learns of the thestral resistance increasing and she knows she doesn't have quite the amount of skill to deal with it, and calls in support from Quasar, who is happy to provide
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_the_unthinkable
+	x = 1
+	y = 1
+	relative_position_id = EQS_stabilize_cities
+	
+	cost = 4
+	prerequisite = { focus = EQS_scour_jungles }
+	prerequisite = { focus = EQS_stabilize_cities }
+	mutually_exclusive = { focus = EQS_standard_route }
+	mutually_exclusive = { focus = EQS_sisterly_aid }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_the_unthinkable"
+		###Fiery Dart learns of the thestral rebellion but also hears of another group that are fighting against them, and against her normal thoughts, seeks them out, because they can be the only way to properly kill a thestral
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = EQS_end_COBSOC
+	x = 1
+	y = 1
+	relative_position_id = EQS_standard_route
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_standard_route
+		focus = EQS_sisterly_aid
+		focus = EQS_the_unthinkable
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_end_COBSOC"
+		###Maybe event of Sunset leading a few reluctant executions of COBSOC leaders, and she is regretful that she has to still do more killing before peace can come
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = BAL
+					is_claimed_by = BAL
+				}
+				is_owned_by = ROOT
+			}
+			add_compliance = 5
+		}
+		add_stability = -0.03
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_settle_coastline
+	x = 1
+	y = 1
+	relative_position_id = EQS_sisterly_aid
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_standard_route
+		focus = EQS_sisterly_aid
+		focus = EQS_the_unthinkable
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_settle_coastline"
+		###Follow some settlers as they appropriate some land that either thestrals or communists used along the New Horseleans coast, which causes some tensions before some inquisitors break it up
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_allow_punishment
+	x = 1
+	y = 1
+	relative_position_id = EQS_end_COBSOC
+	
+	cost = 3
+	prerequisite = { focus = EQS_end_COBSOC }
+	prerequisite = { focus = EQS_settle_coastline }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_allow_punishment"
+		###Sunset meets with Quasar, who is a bit smug about how there is still resistance in the South-east, and Sunset reluctantly gives her the go-ahead to use the full impact of the Inquisitionis on the South-east to get it pacified, which Quasar smarmily tells her is a smart idea, and should have happened from the start if she wasn't soft, which barely keeps Sunset from breaking into tears
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_toppling_a_sinister_legacy
+	x = 0
+	y = 1
+	relative_position_id = EQS_march_toward_communism
+	
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			AND = {
+				NOT = { country_exists = STG }
+				NOT = { country_exists = MWR }
+				NOT = { country_exists = AWR }
+				NOT = { country_exists = CWR }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_march_toward_communism }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_toppling_a_sinister_legacy"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
+			}
+			
+			ROOT = {
+				create_wargoal = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_education_campaigns
+	x = -2
+	y = 1
+	relative_position_id = EQS_toppling_a_sinister_legacy
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			AND = {
+				NOT = { country_exists = STG }
+				NOT = { country_exists = MWR }
+				NOT = { country_exists = AWR }
+				NOT = { country_exists = CWR }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_education_campaigns"
+		###A teacher from the old regime awkwardly instructs some of her students on how the lies of Stalliongrad brainwashed them, while an inquisitor is watching over everything, and she slips up a couple of times, which makes the inquisitor give her visible warnings and only makes her more nervous
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_hear_their_needs
+	x = 0
+	y = 1
+	relative_position_id = EQS_toppling_a_sinister_legacy
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			AND = {
+				NOT = { country_exists = STG }
+				NOT = { country_exists = MWR }
+				NOT = { country_exists = AWR }
+				NOT = { country_exists = CWR }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_hear_their_needs"
+		###Either nothing or short event about a worker who had been working in horrible conditions, under communism, is finally heard and his manager punished by the Inquisitionis
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_toil_for_future
+	x = 2
+	y = 1
+	relative_position_id = EQS_toppling_a_sinister_legacy
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			AND = {
+				NOT = { country_exists = STG }
+				NOT = { country_exists = MWR }
+				NOT = { country_exists = AWR }
+				NOT = { country_exists = CWR }
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_toil_for_future"
+		###Presser gangs push ponies into construction for rebuilding the land, and use them to keep compliance abroad, as they are effectively labour camps that they are being sent to
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_integrate_military
+	x = 1
+	y = 1
+	relative_position_id = EQS_education_campaigns
+	
+	cost = 4
+	prerequisite = { focus = EQS_education_campaigns }
+	prerequisite = { focus = EQS_hear_their_needs }
+	prerequisite = { focus = EQS_toil_for_future }
+	mutually_exclusive = { focus = EQS_integrate_economy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_integrate_military"
+		###Tanks here
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = STG
+					is_core_of = AWR
+					is_core_of = CWR
+					is_core_of = MWR
+				}
+				is_owned_by = ROOT
+			}
+			add_compliance = 5
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_integrate_economy
+	x = 1
+	y = 1
+	relative_position_id = EQS_hear_their_needs
+	
+	cost = 4
+	prerequisite = { focus = EQS_education_campaigns }
+	prerequisite = { focus = EQS_hear_their_needs }
+	prerequisite = { focus = EQS_toil_for_future }
+	mutually_exclusive = { focus = EQS_integrate_military }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_integrate_economy"
+		153 = { add_resource = { type = steel amount = 20 } }
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = STG
+					is_core_of = AWR
+					is_core_of = CWR
+					is_core_of = MWR
+				}
+				is_owned_by = ROOT
+			}
+			add_compliance = 5
+		}
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_restore_old_palace
+	x = 1
+	y = 1
+	relative_position_id = EQS_integrate_military
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_integrate_economy
+		focus = EQS_integrate_military
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_restore_old_palace"
+		###Sunset leads an unveiling ceremony for the old palace that once housed the local aristocrat family, which has now become a governor's quarters for the Empire, and she speaks about how it will represent a golden age for the Severyana region, which angers some
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_addressing_CRY
+	x = 6
+	y = 1
+	relative_position_id = EQS_march_toward_communism
+	
+	cost = 3
+	prerequisite = { focus = EQS_march_toward_communism }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_addressing_CRY"
+		###A report about the Crystal Empire and how they have caused narrative issues through blocking merchants, raiding (helping) villages near their border, and otherwise causing problems in the Solar Empire; Sunset is presented with options to either attack, or because she knows both Cadance and Twilight, a chance to make peace, or even an alliance with them
+	}
+	ai_will_do = { factor = 45 }
+}
+
+###Peaceful Route###
+shared_focus = {
+	id = EQS_call_to_reason
+	x = 0
+	y = 1
+	relative_position_id = EQS_addressing_CRY
+	
+	allow_branch = { has_country_flag = EQS_talk_with_CRY }
+	
+	cost = 2
+	prerequisite = { focus = EQS_addressing_CRY }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_call_to_reason"
+		###Sunset writes a personal letter to the leader of the Crystal Empire requesting negotiations between the two countries, in a hope of peace, and she is nervous of their response
+		###Have a follow-up event for only if one of the princesses is in power, with Sunset reaching out to contact Twilight directly to explain why she wants to have the meeting, and being rejected by the Crystal Palace as she tries to lean on some of her reformed ways in the past
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_mingle_the_economies_again
+	x = -2
+	y = 1
+	relative_position_id = EQS_call_to_reason
+	
+	cost = 3
+	prerequisite = { focus = EQS_call_to_reason }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_mingle_the_economies_again"
+		country_event = solar.255
+		###Event for Sunset meeting with one of the economic leaders of the Crystal Empire and explaining how she could help benefit the Crystal Empire's economy after its teetering position
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_promise_reparations
+	x = 0
+	y = 1
+	relative_position_id = EQS_call_to_reason
+	
+	cost = 3
+	prerequisite = { focus = EQS_call_to_reason }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_promise_reparations"
+		###Sunset, against some of her advisors' advice while meeting with some of the government leaders of CRY, she promises to repair and fix up some of the ruined industry and the years of decay that was inflicted upon the Empire for the Solar Empire's part; she has yet to meet the princesses directly at this time
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_restart_student_exchanges
+	x = 2
+	y = 1
+	relative_position_id = EQS_call_to_reason
+	
+	cost = 3
+	prerequisite = { focus = EQS_call_to_reason }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_restart_student_exchanges"
+		###Sunset meets with some of the education leaders of the Crystal Empire to offer an exchange of magical knowledge if the countries restarted their friendship, which puts them on edge because of the small demonstration of offensive magic she demonstrates
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_new_ponies_alliance
+	x = 0
+	y = 1
+	relative_position_id = EQS_mingle_the_economies_again
+	
+	cost = 3
+	prerequisite = { focus = EQS_mingle_the_economies_again }
+	prerequisite = { focus = EQS_restart_student_exchanges }
+	mutually_exclusive = { focus = EQS_joint_welfare_programs }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_ponies_alliance"
+		###Sunset meets with Cadance and Luna to discuss how the two empires can work together to protect each other, which makes Luna uneasy since she does not like the idea of forming a defensive alliance with the Solar Empire, but Cadance does see the practicality of it, if nothing else
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_joint_welfare_programs
+	x = 0
+	y = 1
+	relative_position_id = EQS_restart_student_exchanges
+	
+	cost = 3
+	prerequisite = { focus = EQS_mingle_the_economies_again }
+	prerequisite = { focus = EQS_restart_student_exchanges }
+	mutually_exclusive = { focus = EQS_new_ponies_alliance }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_joint_welfare_programs"
+		###Sunset meets with Cadance and Flurry to talk about how the two empires can help their citizens by exchanging some of their resources, as well as providing aid to others when the time is needed, and Cadance is understandibly cautious about the proposal, but Flurry believes it will help ponies, and tries to overcome her mother's wariness
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_force_twilight_issue
+	x = 2
+	y = 1
+	relative_position_id = EQS_new_ponies_alliance
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_new_ponies_alliance
+		focus = EQS_joint_welfare_programs
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_force_twilight_issue"
+		###Sunset grows irritated as Twilight still avoids her, but she manages to either stumble across her or otherwise meet her at last, and the two have an emotional reconnection, which was what Twilight was trying to avoid, since they have gone on different paths, which has upset her
+	}
+	ai_will_do = { factor = 80 }
+}
+
+###Aggressive Route###
+shared_focus = {
+	id = EQS_placate_crystal_ponies
+	x = 0
+	y = 1
+	relative_position_id = EQS_addressing_CRY
+	
+	allow_branch = { NOT = { has_country_flag = EQS_talk_with_CRY } }
+	available = { NOT = { country_exists = CRY } }
+	
+	cost = 3
+	prerequisite = { focus = EQS_addressing_CRY }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_placate_crystal_ponies"
+		###Sunset attempts to hold a first speech in the smoldering Crystal City, but she is constantly heckled, jeered, and threatened as she attempts to get through her talk on unification, which leads her to finally leave and have the Militarium mop it up
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_frame_occupation_positively
+	x = -1
+	y = 1
+	relative_position_id = EQS_placate_crystal_ponies
+	
+	cost = 3
+	prerequisite = { focus = EQS_placate_crystal_ponies }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_frame_occupation_positively"
+		###Crystal ponies who are currently repairing the city see how the Inquisitionis is beginning to instal propaganda posters and other pieces of information that paint the occupation in a good light, and one tries to take it down, but is arrested because of standing up to them
+	}
+	ai_will_do = { factor = 55 }
+}
+
+shared_focus = {
+	id = EQS_spread_adoratio_north
+	x = 1
+	y = 1
+	relative_position_id = EQS_placate_crystal_ponies
+	
+	cost = 3
+	prerequisite = { focus = EQS_placate_crystal_ponies }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_spread_adoratio_north"
+		###Follow a few crystal ponies as they are made to go to a service in the new temple in the Crystal City to worship Daybreaker
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_what_celestia_wanted
+	x = 0
+	y = 1
+	relative_position_id = EQS_frame_occupation_positively
+	
+	cost = 4
+	prerequisite = { focus = EQS_frame_occupation_positively }
+	prerequisite = { focus = EQS_spread_adoratio_north }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_what_celestia_wanted"
+		###A radio ad plays about how the crystal ponies should remain accepting of the Solar Empire, out of duty to Celestia, who would have wanted, if she were there, for them to stay loyal to the new Harmony
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_speak_with_triarchy
+	x = 0
+	y = 1
+	relative_position_id = EQS_spread_adoratio_north
+	
+	cost = 4
+	prerequisite = { focus = EQS_frame_occupation_positively }
+	prerequisite = { focus = EQS_spread_adoratio_north }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_speak_with_triarchy"
+		###Sunset comes into a detaining room, where all three princesses outside of Flurry heart are currently being held, and she tries to reason with them to help keep the Crystal Empire stable, and Twilight is still in shock about Sunset, Luna is adamantly against her, but Cadance reluctantly agrees to keep suffering to a minium
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_first_productive_members
+	x = 1
+	y = 1
+	relative_position_id = EQS_what_celestia_wanted
+	
+	cost = 5
+	prerequisite = { focus = EQS_what_celestia_wanted }
+	prerequisite = { focus = EQS_speak_with_triarchy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_first_productive_members"
+		###Follow a worker as he finally starts to integrate with a new job that is from the Solar Empire, to keep the Crystal Empire stable, and while he isn't happy, he knows that he has no other choice and just wants to have a quiet life, which he will have becuase of his loyalty
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_scuttle_the_old_fleet_bless_the_new
+	x = 3
+	y = 1
+	relative_position_id = EQS_allow_punishment
+	
+	cost = 4
+	prerequisite = { focus = EQS_allow_punishment }
+	prerequisite = { focus = EQS_restore_old_palace }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_scuttle_the_old_fleet_bless_the_new"
+		custom_effect_tooltip = new_armada_tt
+		hidden_effect = {
+			create_equipment_variant = {
+				name = "Celestial Throne Class"
+				type = ship_hull_super_heavy_2
+				name_group = SOL_SHBB_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_battery_slot = ship_super_heavy_battery_2
+					fixed_ship_anti_air_slot = ship_anti_air_3
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = heavy_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					fixed_ship_armor_slot = ship_armor_shbb_2
+					front_1_custom_slot = ship_super_heavy_battery_2
+					front_2_custom_slot = ship_super_heavy_battery_2
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = ship_secondaries_2
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = ship_airplane_launcher_1
+					rear_2_custom_slot = ship_super_heavy_battery_2
+				}
+			}
+			create_equipment_variant = {
+				name = "Sanctifying Flame Class"
+				type = ship_hull_heavy_4
+				name_group = SOL_BB_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_battery_slot = ship_heavy_battery_4
+					fixed_ship_anti_air_slot = ship_anti_air_3
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = heavy_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					fixed_ship_armor_slot = ship_armor_bb_3
+					front_1_custom_slot = ship_heavy_battery_4
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = empty
+					mid_3_custom_slot = empty
+					rear_1_custom_slot = ship_airplane_launcher_1
+				}
+			}
+			create_equipment_variant = {
+				name = "Nest Class"
+				type = ship_hull_carrier_3
+				name_group = SOL_CV_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_deck_slot_1 = ship_deck_space
+					fixed_ship_deck_slot_2 = ship_deck_space
+					fixed_ship_anti_air_slot = ship_anti_air_3
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = carrier_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					mid_1_custom_slot = empty
+					mid_2_custom_slot = ship_deck_space
+					front_1_custom_slot = empty
+				}
+			}
+			create_equipment_variant = {
+				name = "Guardian Angel Class"
+				type = ship_hull_cruiser_4
+				name_group = SOL_CL_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_battery_slot = ship_light_medium_battery_3
+					fixed_ship_anti_air_slot = ship_anti_air_2
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = cruiser_ship_engine_4
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					fixed_ship_armor_slot = empty
+					front_1_custom_slot = empty
+					mid_1_custom_slot = ship_torpedo_2
+					mid_2_custom_slot = empty
+					rear_1_custom_slot = ship_light_medium_battery_2
+					rear_2_custom_slot = ship_airplane_launcher_1
+				}
+			}
+			create_equipment_variant = {
+				name = "Cherubim Class"
+				type = ship_hull_light_4
+				name_group = SOL_DD_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_battery_slot = ship_light_battery_3
+					fixed_ship_anti_air_slot = ship_anti_air_2
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_radar_1
+					fixed_ship_engine_slot = light_ship_engine_4
+					fixed_ship_torpedo_slot = ship_torpedo_2
+					mid_1_custom_slot = ship_torpedo_2
+					mid_2_custom_slot = empty
+					rear_1_custom_slot = ship_light_battery_3
+					front_1_custom_slot = ship_anti_air_2
+				}
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+				name = "HMS Cherubim"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_light_4
+				equipment_variant = "Cherubim Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_4
+				equipment_variant = "Guardian Angel Class"
+			}
+			create_ship = {
+				type = ship_hull_heavy_4
+				equipment_variant = "Sanctifying Flame Class"
+				name = "HMS Sanctifying Flame"
+			}
+			create_ship = {
+				type = ship_hull_carrier_3
+				equipment_variant = "Nest Class"
+				name = "HMS Nest"
+			}
+			create_ship = {
+				type = ship_hull_carrier_3
+				equipment_variant = "Nest Class"
+				name = "HMS Raging Swarm"
+			}
+			create_ship = {
+				type = ship_hull_carrier_3
+				equipment_variant = "Nest Class"
+				name = "HMS Pure Heat"
+			}
+			create_ship = {
+				type = ship_hull_super_heavy_2
+				equipment_variant = "Celestial Throne Class"
+				name = "HMS Celestial Throne"
+			}
+		}
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_in_the_empress_name_griffonia_shall_be_freed
+	x = 0
+	y = 2
+	relative_position_id = EQS_restore_old_palace
+	
+	bypass = {
+		OR = {
+			NOT = {
+				country_exists = EQC
+			}
+			EQC = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = EQS_allow_punishment }
+	prerequisite = { focus = EQS_restore_old_palace }
+	prerequisite = {
+		focus = EQS_force_twilight_issue
+		focus = EQS_first_productive_members
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_in_the_empress_name_griffonia_shall_be_freed"
+		###Event for Sunset declaring that all of Equus is positioned to topple the curse of Big Sister, and the Empress will guide them
+		country_event = solar.278
+	}
+	ai_will_do = { factor = 90 }
+}
+
+shared_focus = {
+	id = EQS_crystal_pony_ethic
+	x = -2
+	y = -1
+	relative_position_id = EQS_force_twilight_issue
+	
+	cost = 4
+	prerequisite = { focus = EQS_restore_old_palace }
+	prerequisite = { focus = EQS_force_twilight_issue }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_crystal_pony_ethic"
+		###Add resources
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_uncovered_advancements
+	x = -3
+	y = 1
+	relative_position_id = EQS_first_productive_members
+	
+	cost = 4
+	prerequisite = { focus = EQS_restore_old_palace }
+	prerequisite = { focus = EQS_first_productive_members }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_uncovered_advancements"
+		#Idea here
+	}
+	ai_will_do = { factor = 45 }
+}
+
+shared_focus = {
+	id = EQS_reclaim_whats_ours
+	x = -3
+	y = 1
+	relative_position_id = EQS_in_the_empress_name_griffonia_shall_be_freed
+	
+	bypass = {
+		all_of_scopes = {
+			array = global.changeling_hegemony
+			exists = no
+		}
+	}
+	
+	cost = 2
+	prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reclaim_whats_ours"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.changeling_hegemony
+					value = THIS
+				}
+				exists = yes
+			}
+			
+			EQS = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_free_griffonia
+	x = 3
+	y = 1
+	relative_position_id = EQS_in_the_empress_name_griffonia_shall_be_freed
+	
+	bypass = {
+		NOT = { country_exists = EQC }
+	}
+	
+	cost = 2
+	prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_free_griffonia"
+		create_wargoal = {
+			type = annex_everything
+			target = EQC
+		}
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -6583,7 +7795,7 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+	#prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_blessing_the_flora"
@@ -6673,7 +7885,7 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
+	#prerequisite = { focus = EQS_the_gravest_of_errors_the_greatest_of_comebacks }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_batty_matter"
@@ -6792,35 +8004,6 @@ shared_focus = {
 		###Event for Sunset determining that only through highlighting the good in the Empire and how they work together can she get an agreement with CRY
 	}
 	ai_will_do = { factor = 30 }
-}
-
-shared_focus = {
-	id = EQS_mingle_the_economies_again
-	x = -1
-	y = 1
-	relative_position_id = EQS_peace_for_our_time
-	
-	bypass = {
-		OR = {
-			CRY = {
-				is_in_faction_with = ROOT
-			}
-			NOT = {
-				country_exists = CRY
-			}
-			has_global_flag = invitation_rejected
-		}
-	}
-	
-	cost = 3
-	prerequisite = { focus = EQS_peace_for_our_time }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_mingle_the_economies_again"
-		country_event = solar.255
-		###Event for Sunset meeting with one of the economic leaders of the Crystal Empire and explaining how she could help benefit the Crystal Empire's economy after its teetering position
-	}
-	ai_will_do = { factor = 25 }
 }
 
 shared_focus = {
@@ -7019,12 +8202,12 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = {
-		focus = EQS_mingle_the_economies_again
-		focus = EQS_the_lesser_of_the_two_evils
-		focus = EQS_demonstrate_the_might_of_the_empress
-		focus = EQS_sanction_the_crystal_economy
-	}
+	#prerequisite = {
+	#	focus = EQS_mingle_the_economies_again
+	#	focus = EQS_the_lesser_of_the_two_evils
+	#	focus = EQS_demonstrate_the_might_of_the_empress
+	#	focus = EQS_sanction_the_crystal_economy
+	#}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_dealing_with_the_devil"
@@ -7325,74 +8508,6 @@ shared_focus = {
 }
 
 ###Stalliongrad for Sunset###
-shared_focus = {
-	id = EQS_toppling_a_sinister_legacy
-	x = 3
-	y = 2
-	relative_position_id = EQS_dealing_with_the_devil
-	
-	available = {
-		AND = {
-			OR = {
-				NOT = {
-					country_exists = CRY
-				}
-				CRY = {
-					OR = {
-						is_in_faction_with = ROOT
-						has_non_aggression_pact_with = ROOT
-					}
-				}
-			}
-			has_war = no
-		}
-	}
-	
-	bypass = {
-		NOT = {
-			country_exists = STG
-		}
-	}
-	
-	cost = 3
-	prerequisite = {
-		focus = EQS_a_nation_blinded_by_the_past
-		focus = EQS_carving_the_crystal_wall
-	}
-	
-	select_effect = {
-		IF = {
-			limit = { 
-				AND = {
-					check_variable = { equestria_conquest = 2 } 
-					NOT = { country_exists = CRY } 
-				}
-			}
-			set_variable = { equestria_conquest = 5 }
-		}
-	}
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_toppling_a_sinister_legacy"
-		every_country = {
-			limit = {
-				is_in_array = {
-					array = global.shield_of_steel
-					value = THIS
-				}
-			}
-			
-			ROOT = {
-				create_wargoal = {
-					target = PREV
-					type = annex_everything
-				}
-			}
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
-
 #shared_focus = {
 #	id = EQS_operation_melted_wastes
 #	x = -2
@@ -7480,7 +8595,7 @@ shared_focus = {
 	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
+	#prerequisite = { focus = EQS_toppling_a_sinister_legacy }
 	
 	select_effect = {
 		IF = {
@@ -7506,242 +8621,7 @@ shared_focus = {
 	ai_will_do = { factor = 25 }
 }
 
-shared_focus = {
-	id = EQS_scuttle_the_old_fleet_bless_the_new
-	x = 1
-	y = 1
-	relative_position_id = EQS_toppling_a_sinister_legacy
-	
-	available = {
-		AND = {
-			NOT = {
-				country_exists = STG
-			}
-			has_war = no
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_toppling_a_sinister_legacy }
-	
-	select_effect = {
-		IF = {
-			limit = { check_variable = { equestria_conquest = 5 } }
-			set_variable = { equestria_conquest = 6 }
-		}
-		ELSE_IF = {
-			limit = { check_variable = { equestria_conquest = 10 } } #Changelings conquered first
-			set_variable = { equestria_conquest = 11 }
-		}
-		ELSE = {
-			set_variable = { equestria_conquest = 4 }
-		}
-	}
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_scuttle_the_old_fleet_bless_the_new"
-		custom_effect_tooltip = new_armada_tt
-		hidden_effect = {
-			create_equipment_variant = {
-				name = "Celestial Throne Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 0
-				modules = {
-					fixed_ship_battery_slot = ship_super_heavy_battery_2
-					fixed_ship_anti_air_slot = ship_anti_air_3
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-					fixed_ship_radar_slot = ship_radar_1
-					fixed_ship_engine_slot = heavy_ship_engine_4
-					fixed_ship_secondaries_slot = ship_secondaries_2
-					fixed_ship_armor_slot = ship_armor_shbb_2
-					front_1_custom_slot = ship_super_heavy_battery_2
-					front_2_custom_slot = ship_super_heavy_battery_2
-					mid_1_custom_slot = empty
-					mid_2_custom_slot = ship_secondaries_2
-					mid_3_custom_slot = empty
-					rear_1_custom_slot = ship_airplane_launcher_1
-					rear_2_custom_slot = ship_super_heavy_battery_2
-				}
-			}
-			create_equipment_variant = {
-				name = "Sanctifying Flame Class"
-				type = ship_hull_heavy_4
-				name_group = SOL_BB_HISTORICAL
-				parent_version = 0
-				modules = {
-					fixed_ship_battery_slot = ship_heavy_battery_4
-					fixed_ship_anti_air_slot = ship_anti_air_3
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-					fixed_ship_radar_slot = ship_radar_1
-					fixed_ship_engine_slot = heavy_ship_engine_4
-					fixed_ship_secondaries_slot = ship_secondaries_2
-					fixed_ship_armor_slot = ship_armor_bb_3
-					front_1_custom_slot = ship_heavy_battery_4
-					mid_1_custom_slot = empty
-					mid_2_custom_slot = empty
-					mid_3_custom_slot = empty
-					rear_1_custom_slot = ship_airplane_launcher_1
-				}
-			}
-			create_equipment_variant = {
-				name = "Nest Class"
-				type = ship_hull_carrier_3
-				name_group = SOL_CV_HISTORICAL
-				parent_version = 0
-				modules = {
-					fixed_ship_deck_slot_1 = ship_deck_space
-					fixed_ship_deck_slot_2 = ship_deck_space
-					fixed_ship_anti_air_slot = ship_anti_air_3
-					fixed_ship_radar_slot = ship_radar_1
-					fixed_ship_engine_slot = carrier_ship_engine_4
-					fixed_ship_secondaries_slot = ship_secondaries_2
-					mid_1_custom_slot = empty
-					mid_2_custom_slot = ship_deck_space
-					front_1_custom_slot = empty
-				}
-			}
-			create_equipment_variant = {
-				name = "Guardian Angel Class"
-				type = ship_hull_cruiser_4
-				name_group = SOL_CL_HISTORICAL
-				parent_version = 0
-				modules = {
-					fixed_ship_battery_slot = ship_light_medium_battery_3
-					fixed_ship_anti_air_slot = ship_anti_air_2
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-					fixed_ship_radar_slot = ship_radar_1
-					fixed_ship_engine_slot = cruiser_ship_engine_4
-					fixed_ship_secondaries_slot = ship_secondaries_2
-					fixed_ship_armor_slot = empty
-					front_1_custom_slot = empty
-					mid_1_custom_slot = ship_torpedo_2
-					mid_2_custom_slot = empty
-					rear_1_custom_slot = ship_light_medium_battery_2
-					rear_2_custom_slot = ship_airplane_launcher_1
-				}
-			}
-			create_equipment_variant = {
-				name = "Cherubim Class"
-				type = ship_hull_light_4
-				name_group = SOL_DD_HISTORICAL
-				parent_version = 0
-				modules = {
-					fixed_ship_battery_slot = ship_light_battery_3
-					fixed_ship_anti_air_slot = ship_anti_air_2
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-					fixed_ship_radar_slot = ship_radar_1
-					fixed_ship_engine_slot = light_ship_engine_4
-					fixed_ship_torpedo_slot = ship_torpedo_2
-					mid_1_custom_slot = ship_torpedo_2
-					mid_2_custom_slot = empty
-					rear_1_custom_slot = ship_light_battery_3
-					front_1_custom_slot = ship_anti_air_2
-				}
-			}
-			create_ship = {
-				type = ship_hull_light_4
-				equipment_variant = "Cherubim Class"
-				name = "HMS Cherubim"
-			}
-			create_ship = {
-				type = ship_hull_light_4
-				equipment_variant = "Cherubim Class"
-			}
-			create_ship = {
-				type = ship_hull_light_4
-				equipment_variant = "Cherubim Class"
-			}
-			create_ship = {
-				type = ship_hull_light_4
-				equipment_variant = "Cherubim Class"
-			}
-			create_ship = {
-				type = ship_hull_light_4
-				equipment_variant = "Cherubim Class"
-			}
-			create_ship = {
-				type = ship_hull_cruiser_4
-				equipment_variant = "Guardian Angel Class"
-			}
-			create_ship = {
-				type = ship_hull_cruiser_4
-				equipment_variant = "Guardian Angel Class"
-			}
-			create_ship = {
-				type = ship_hull_cruiser_4
-				equipment_variant = "Guardian Angel Class"
-			}
-			create_ship = {
-				type = ship_hull_cruiser_4
-				equipment_variant = "Guardian Angel Class"
-			}
-			create_ship = {
-				type = ship_hull_cruiser_4
-				equipment_variant = "Guardian Angel Class"
-			}
-			create_ship = {
-				type = ship_hull_heavy_4
-				equipment_variant = "Sanctifying Flame Class"
-				name = "HMS Sanctifying Flame"
-			}
-			create_ship = {
-				type = ship_hull_carrier_3
-				equipment_variant = "Nest Class"
-				name = "HMS Nest"
-			}
-			create_ship = {
-				type = ship_hull_carrier_3
-				equipment_variant = "Nest Class"
-				name = "HMS Raging Swarm"
-			}
-			create_ship = {
-				type = ship_hull_carrier_3
-				equipment_variant = "Nest Class"
-				name = "HMS Pure Heat"
-			}
-			create_ship = {
-				type = ship_hull_super_heavy_2
-				equipment_variant = "Celestial Throne Class"
-				name = "HMS Celestial Throne"
-			}
-		}
-	}
-	ai_will_do = { factor = 27 }
-}
-
 ###Marelandia for Sunset###
-shared_focus = {
-	id = EQS_in_the_empress_name_griffonia_shall_be_freed
-	x = 0
-	y = 4
-	relative_position_id = EQS_dealing_with_the_devil
-	
-	bypass = {
-		OR = {
-			NOT = {
-				country_exists = EQC
-			}
-			EQC = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	
-	cost = 4
-	prerequisite = { focus = EQS_from_guns_to_plowshares }
-	prerequisite = { focus = EQS_repurpose_the_love_factories }
-	prerequisite = { focus = EQS_a_monument_to_the_love_of_the_empress }
-	prerequisite = { focus = EQS_scuttle_the_old_fleet_bless_the_new }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_in_the_empress_name_griffonia_shall_be_freed"
-		###Event for Sunset declaring that all of Equus is positioned to topple the curse of Big Sister, and the Empress will guide them
-		country_event = solar.278
-	}
-	ai_will_do = { factor = 50 }
-}
-
 shared_focus = {
 	id = EQS_on_the_shores_of_a_foreign_continent
 	x = -2
@@ -7766,7 +8646,7 @@ shared_focus = {
 	}
 	
 	cost = 2
-	prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
+	#prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_on_the_shores_of_a_foreign_continent"
@@ -7800,7 +8680,7 @@ shared_focus = {
 	}
 	
 	cost = 3
-	prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
+	#prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_unearth_the_horrors_of_MARESOC"
@@ -7831,7 +8711,7 @@ shared_focus = {
 	}
 	
 	cost = 4
-	prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
+	#prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_appoint_a_new_high_mage_of_griffonia"
