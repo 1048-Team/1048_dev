@@ -2,7 +2,7 @@
 ###Starting Portion###
 shared_focus = {
 	id = EQS_flames_never_snuffed
-	x = 19
+	x = 20
 	y = 0
 	
 	available = {
@@ -4414,7 +4414,7 @@ shared_focus = {
 ###Sunset Shimmer Tree###
 shared_focus = {
 	id = EQS_setting_of_the_sun
-	x = 19
+	x = 20
 	y = 0
 	
 	available = {
@@ -8928,7 +8928,7 @@ shared_focus = {
 ###Aurora Shinespark Tree###
 shared_focus = {
 	id = EQS_spark_shining_in_darkness
-	x = 19
+	x = 20
 	y = 0
 	
 	available = {
@@ -8949,23 +8949,41 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_spark_shining_in_darkness"
 		country_event = solar.301
 	}
-	ai_will_do = { factor = 50 }
+	ai_will_do = { factor = 300 }
 }
 
 shared_focus = {
 	id = EQS_project_a_firm_hoof
-	x = 0
+	x = -2
 	y = 1
 	relative_position_id = EQS_spark_shining_in_darkness
 	
 	cost = 2
 	prerequisite = { focus = EQS_spark_shining_in_darkness }
+	mutually_exclusive = { focus = EQS_listen_to_elders }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_project_a_firm_hoof"
 		country_event = solar.302
 	}
-	ai_will_do = { factor = 35 }
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_listen_to_elders
+	x = 2
+	y = 1
+	relative_position_id = EQS_spark_shining_in_darkness
+	
+	cost = 2
+	prerequisite = { focus = EQS_spark_shining_in_darkness }
+	mutually_exclusive = { focus = EQS_project_a_firm_hoof }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_listen_to_elders"
+		###Aurora bursts into Sunset's chambers and is looking for some level of support for some of her duties as regent, which can be rather simple for a bit of comedy, and Sunset gives her the advice she needs, and offers it again for the future
+	}
+	ai_will_do = { factor = 45 }
 }
 
 shared_focus = {
@@ -8975,35 +8993,57 @@ shared_focus = {
 	relative_position_id = EQS_project_a_firm_hoof
 	
 	cost = 3
-	prerequisite = { focus = EQS_project_a_firm_hoof }
+	prerequisite = { 
+		focus = EQS_project_a_firm_hoof
+		focus = EQS_listen_to_elders
+	}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_battering_the_remaining_separation"
 		country_event = solar.303
 	}
-	ai_will_do = { factor = 35 }
+	ai_will_do = { factor = 55 }
 }
 
 shared_focus = {
-	id = EQS_a_promotion_years_in_the_making
+	id = EQS_placate_idiots
 	x = 0
-	y = 2
-	relative_position_id = EQS_battering_the_remaining_separation
+	y = 1
+	relative_position_id = EQS_listen_to_elders
 	
-	cost = 4
-	prerequisite = { focus = EQS_battering_the_remaining_separation }
+	cost = 3
+	prerequisite = {
+		focus = EQS_project_a_firm_hoof
+		focus = EQS_listen_to_elders
+	}
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_promotion_years_in_the_making"
-		country_event = solar.304
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_placate_idiots"
+		###Aurora is inundated by various worries from the nobility, and eventually gets rather blunt with them when they keep believing that she'll lead to the collapse of the Empire; can be through force of intimidation
 	}
-	ai_will_do = { factor = 30 }
+	ai_will_do = { factor = 55 }
 }
+
+#shared_focus = {
+#	id = EQS_a_promotion_years_in_the_making
+#	x = 0
+#	y = 2
+#	relative_position_id = EQS_battering_the_remaining_separation
+#	
+#	cost = 4
+#	prerequisite = { focus = EQS_battering_the_remaining_separation }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_promotion_years_in_the_making"
+#		country_event = solar.304
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 ###Restructured Centralized Authority###
 shared_focus = {
 	id = EQS_reassess_the_current_balance_of_powers
-	x = -2
+	x = -1
 	y = 1
 	relative_position_id = EQS_battering_the_remaining_separation
 	
@@ -9023,10 +9063,10 @@ shared_focus = {
 	id = EQS_slashing_the_bureaucratic_nonsense
 	x = -3
 	y = 1
-	relative_position_id = EQS_reassess_the_current_balance_of_powers
+	relative_position_id = EQS_battering_the_remaining_separation
 	
 	cost = 4
-	prerequisite = { focus = EQS_reassess_the_current_balance_of_powers }
+	prerequisite = { focus = EQS_battering_the_remaining_separation }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_slashing_the_bureaucratic_nonsense"
@@ -9042,7 +9082,7 @@ shared_focus = {
 	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
 	
 	cost = 3
-	prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_make_the_fat_work_for_their_position"
@@ -9059,7 +9099,7 @@ shared_focus = {
 	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
 	
 	cost = 4
-	prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_institute_a_proper_imperial_tithe"
@@ -9076,7 +9116,7 @@ shared_focus = { #Mention that the new quota system was effective, but it needs 
 	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
 	
 	cost = 3
-	prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_more_faithful_quotas"
@@ -9095,7 +9135,7 @@ shared_focus = {
 	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
 	
 	cost = 5
-	prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitorial_inspection_teams"
@@ -9112,7 +9152,7 @@ shared_focus = {
 	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
 	
 	cost = 3
-	prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_construct_new_tax_houses"
@@ -9235,14 +9275,14 @@ shared_focus = { #Mention how the Administratum has worked with the Militarium t
 ###Status Quo Decentralization###
 shared_focus = {
 	id = EQS_keep_the_status_quo
-	x = 2
+	x = 1
 	y = 1
-	relative_position_id = EQS_battering_the_remaining_separation
+	relative_position_id = EQS_placate_idiots
 	
 	mutually_exclusive = { focus = EQS_reassess_the_current_balance_of_powers }
 	
 	cost = 4
-	prerequisite = { focus = EQS_battering_the_remaining_separation }
+	prerequisite = { focus = EQS_placate_idiots }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_keep_the_status_quo"
@@ -9255,10 +9295,10 @@ shared_focus = {
 	id = EQS_inquisitorial_oversight
 	x = 3
 	y = 1
-	relative_position_id = EQS_keep_the_status_quo
+	relative_position_id = EQS_placate_idiots
 	
 	cost = 3
-	prerequisite = { focus = EQS_keep_the_status_quo }
+	prerequisite = { focus = EQS_placate_idiots }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitorial_oversight"
@@ -9270,7 +9310,7 @@ shared_focus = {
 
 shared_focus = {
 	id = EQS_enshrine_the_red_tape
-	x = -4
+	x = 0
 	y = 1
 	relative_position_id = EQS_inquisitorial_oversight
 	
@@ -9286,13 +9326,29 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = EQS_entertain_nobles
+	x = 2
+	y = 1
+	relative_position_id = EQS_enshrine_the_red_tape
+	
+	cost = 4
+	prerequisite = { focus = EQS_enshrine_the_red_tape }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_entertain_nobles"
+		###Aurora reluctantly goes to a party with the aristocracy and has a running commentary in her head about how they are filled with useless ponies or even outright evil or sinful ponies, but she has to stay in their good graces to maintain stability
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
 	id = EQS_create_the_solaris_praefectorious
 	x = -2
 	y = 1
 	relative_position_id = EQS_inquisitorial_oversight
 	
 	cost = 4
-	prerequisite = { focus = EQS_inquisitorial_oversight }
+	#prerequisite = { focus = EQS_inquisitorial_oversight }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_create_the_solaris_praefectorious"
@@ -9309,7 +9365,7 @@ shared_focus = {
 	relative_position_id = EQS_inquisitorial_oversight
 	
 	cost = 4
-	prerequisite = { focus = EQS_inquisitorial_oversight }
+	#prerequisite = { focus = EQS_inquisitorial_oversight }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_fulminate_the_fires_of_perdition"
@@ -9326,7 +9382,7 @@ shared_focus = {
 	relative_position_id = EQS_inquisitorial_oversight
 	
 	cost = 3
-	prerequisite = { focus = EQS_inquisitorial_oversight }
+	#prerequisite = { focus = EQS_inquisitorial_oversight }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_without_sacrifice_there_is_no_forgiveness"
@@ -9343,7 +9399,7 @@ shared_focus = {
 	relative_position_id = EQS_inquisitorial_oversight
 	
 	cost = 3
-	prerequisite = { focus = EQS_inquisitorial_oversight }
+	#prerequisite = { focus = EQS_inquisitorial_oversight }
 	
 	completion_reward = { 
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_reinforce_the_social_strata"
