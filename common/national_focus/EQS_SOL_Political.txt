@@ -7612,6 +7612,115 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = EQS_punishment_for_her_crimes
+	x = -1
+	y = 1
+	relative_position_id = EQS_reclaim_whats_ours
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_CHN_dead_tt
+			all_of_scopes = {
+				array = global.changeling_hegemony
+				exists = no
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_reclaim_whats_ours }
+	mutually_exclusive = { focus = EQS_exile_forever }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_punishment_for_her_crimes"
+		###Sunset has a last chat with Chrysalis, who is going to be executed for her crimes against the Empire, and Sunset expresses her sadness that she has to do it, because the ponies are demanding blood, and she'd rather find a way to reform Chrysalis; Chrysalis refuses to cooperate, and only insults Sunset or mocks her for being Daybreaker's lap dog
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_exile_forever
+	x = 1
+	y = 1
+	relative_position_id = EQS_reclaim_whats_ours
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_CHN_dead_tt
+			all_of_scopes = {
+				array = global.changeling_hegemony
+				exists = no
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_reclaim_whats_ours }
+	mutually_exclusive = { focus = EQS_punishment_for_her_crimes }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_exile_forever"
+		###Chrysalis is shocked when she is allowed to be free, becuase Sunset explains how she has no joy in executing Chrysalis, but she wants to make sure they are safe forever; she would cut off part of Chrysalis's horn, which prevents her from using magic, and she is let go into the changeling countryside with a gun or two; can show up in a Yak state if they still exist
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_reward_openminded
+	x = 0
+	y = 1
+	relative_position_id = EQS_punishment_for_her_crimes
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_punishment_for_her_crimes
+		focus = EQS_exile_forever
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reward_openminded"
+		###Follow some changeling workers as they decide to give in, against their boss's wishes, to help rebuild Changelingia, since there is no point fighting any more, and they are given proper food and housing in return
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_justice_upheld
+	x = 0
+	y = 1
+	relative_position_id = EQS_exile_forever
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_punishment_for_her_crimes
+		focus = EQS_exile_forever
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_justice_upheld"
+		###Some changelings are dragged before a military tribunal, and they believe that they will be executed for fighting against the Solar Empire, and the judge starts reading their supposed crimes, but pronounces them innocent of all charges, as they were simply grunts, and not those who facilitated the war against the Empire
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_concession_to_most_helpful
+	x = 1
+	y = 1
+	relative_position_id = EQS_reward_openminded
+	
+	cost = 4
+	prerequisite = { focus = EQS_reward_openminded }
+	prerequisite = { focus = EQS_justice_upheld }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_concession_to_most_helpful"
+		###A changeling queen is surprised by a generous gift that her hive received from Sunset for helping rebuild the nation, and decides to work closer with them
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
 	id = EQS_free_griffonia
 	x = 3
 	y = 1
@@ -7632,6 +7741,132 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_erase_maresocs_existence
+	x = -2
+	y = 1
+	relative_position_id = EQS_free_griffonia
+	
+	available = {
+		NOT = { country_exists = EQC }
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_free_griffonia }
+	mutually_exclusive = { focus = EQS_re-establish_order }
+	mutually_exclusive = { focus = EQS_new_theocracy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_erase_maresocs_existence"
+		###Some proles fight back as Solaris Militarium members start to level some of the city of Sunset, which has already been damaged heavily by the fighting, but it is intended to be torn down to remove all traces of MARESOC, and to leave room for Daybreaker to be worshiped
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_re-establish_order
+	x = 0
+	y = 1
+	relative_position_id = EQS_free_griffonia
+	
+	available = {
+		NOT = { country_exists = EQC }
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_free_griffonia }
+	mutually_exclusive = { focus = EQS_erase_maresocs_existence }
+	mutually_exclusive = { focus = EQS_new_theocracy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_re-establish_order"
+		###A new governor is sent over from Sanctum Solar, and is greeted by protests and riots, and he is not impressed and orders his soldiers to establish order, through firing into them until they stop
+	}
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = EQS_new_theocracy
+	x = 2
+	y = 1
+	relative_position_id = EQS_free_griffonia
+	
+	available = {
+		NOT = { country_exists = EQC }
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_free_griffonia }
+	mutually_exclusive = { focus = EQS_erase_maresocs_existence }
+	mutually_exclusive = { focus = EQS_re-establish_order }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_theocracy"
+		###Follow a new priestess in the Adoratio that soon goes into her new sermon, which she is excited for because of so many new converts, although there are some that are forced to be there
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_appoint_a_new_high_mage_of_griffonia
+	x = 1
+	y = 1
+	relative_position_id = EQS_erase_maresocs_existence
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_erase_maresocs_existence
+		focus = EQS_re-establish_order
+		focus = EQS_new_theocracy
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_appoint_a_new_high_mage_of_griffonia"
+		country_event = solar.275
+		###Sunset meets with Stellar Breeze and congratulates her on being such a good assistant and that she will be the new high mage of Griffonia, and Stellar faints from the surprise, to Sunset's amusement
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_appoint_aurora_as_regent_of_militum_mareland
+	x = 1
+	y = 1
+	relative_position_id = EQS_re-establish_order
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_erase_maresocs_existence
+		focus = EQS_re-establish_order
+		focus = EQS_new_theocracy
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_appoint_aurora_as_regent_of_militum_mareland"
+		country_event = solar.276
+		###Event for Sunset meeting with Aurora and having a heart-to-heart about her help, and rewarding her with regency of New Mareland, to Aurora's surprise and emotional response.
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = EQS_accomplishing_impossible
+	x = 3
+	y = 1
+	relative_position_id = EQS_concession_to_most_helpful
+	
+	cost = 5
+	prerequisite = { focus = EQS_concession_to_most_helpful }
+	prerequisite = { focus = EQS_appoint_a_new_high_mage_of_griffonia }
+	prerequisite = { focus = EQS_appoint_aurora_as_regent_of_militum_mareland }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_accomplishing_impossible"
+		###Sunset walks in when it is quiet and nearing night, and she speaks with the now mostly emaciated body that she has accomplished what Daybreaker had always intended; she has protected the Empire and Harmony, and not through the same force that Daybreaker would; she ends with saying it was worth the work and that she has outgrown Daybreaker, and leaves as Daybreaker has a tear trickle down her muzzle
+	}
+	ai_will_do = { factor = 1000 }
 }
 
 #shared_focus = {
@@ -8688,56 +8923,6 @@ shared_focus = {
 		###Event for soldiers fighting through Sunset and then finding the worst of MARESOC's perversions in the ministries before they are destroyed
 	}
 	ai_will_do = { factor = 30 }
-}
-
-shared_focus = {
-	id = EQS_appoint_a_new_high_mage_of_griffonia
-	x = 2
-	y = 1
-	relative_position_id = EQS_in_the_empress_name_griffonia_shall_be_freed
-	
-	available = {
-		AND = {
-			OR = {
-				NOT = {
-					country_exists = EQC
-				}
-				EQC = {
-					is_subject_of = ROOT
-				}
-			}
-			has_war = no
-		}	
-	}
-	
-	cost = 4
-	#prerequisite = { focus = EQS_in_the_empress_name_griffonia_shall_be_freed }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_appoint_a_new_high_mage_of_griffonia"
-		country_event = solar.275
-		###Sunset meets with Stellar Breeze and congratulates her on being such a good assistant and that she will be the new high mage of Griffonia, and Stellar faints from the surprise, to Sunset's amusement
-	}
-	ai_will_do = { factor = 35 }
-}
-
-shared_focus = {
-	id = EQS_appoint_aurora_as_regent_of_militum_mareland
-	x = 0
-	y = 1
-	relative_position_id = EQS_unearth_the_horrors_of_MARESOC
-	
-	cost = 5
-	prerequisite = { focus = EQS_on_the_shores_of_a_foreign_continent }
-	prerequisite = { focus = EQS_unearth_the_horrors_of_MARESOC }
-	prerequisite = { focus = EQS_appoint_a_new_high_mage_of_griffonia }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_appoint_aurora_as_regent_of_militum_mareland"
-		country_event = solar.276
-		###Event for Sunset meeting with Aurora and having a heart-to-heart about her help, and rewarding her with regency of New Mareland, to Aurora's surprise and emotional response.
-	}
-	ai_will_do = { factor = 50 }
 }
 
 ###Aurora Shinespark Tree###
