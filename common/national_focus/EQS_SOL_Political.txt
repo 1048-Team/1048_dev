@@ -7104,7 +7104,10 @@ shared_focus = {
 	y = 1
 	relative_position_id = EQS_addressing_CRY
 	
-	allow_branch = { has_country_flag = EQS_talk_with_CRY }
+	allow_branch = {
+		has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
+		has_country_flag = EQS_talk_with_CRY 
+	}
 	
 	cost = 2
 	prerequisite = { focus = EQS_addressing_CRY }
@@ -7228,7 +7231,10 @@ shared_focus = {
 	y = 1
 	relative_position_id = EQS_addressing_CRY
 	
-	allow_branch = { NOT = { has_country_flag = EQS_talk_with_CRY } }
+	allow_branch = {
+		has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
+		NOT = { has_country_flag = EQS_talk_with_CRY }
+	}
 	available = { NOT = { country_exists = CRY } }
 	
 	cost = 3
@@ -9908,7 +9914,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_imperial_cult"
-		###Aurora starts to notice that a few ponies in Sanctum Solar are beginning to pray to her, as one is brought in on heresy charges and pleads she was doing what she needed to honour the regent, and Auror ais somewhat uncomfortable before she determines it's a worthwhile thing to encourage and get ponies to go to their deaths to save the Empire
+		###Aurora starts to notice that a few ponies in Sanctum Solar are beginning to pray to her, as one is brought in on heresy charges and pleads she was doing what she needed to honour the regent, and Aurora is somewhat uncomfortable before she determines it's a worthwhile thing to encourage and get ponies to go to their deaths to save the Empire
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -10165,7 +10171,7 @@ shared_focus = {
 		AND = {
 			NOT = {
 				country_exists = CLD
-				country_exists = CER
+				country_exists = NER
 			}
 		}
 	}
@@ -10177,7 +10183,7 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_lesson_in_humility"
 		if = {
 			limit = {
-				country_exists = CER
+				country_exists = NER
 			}
 			create_wargoal = {
 				type = annex_everything
@@ -10345,7 +10351,7 @@ shared_focus = {
 	
 	bypass = {
 		NOT = {
-			country_exists = NER
+			country_exists = CER
 		}
 	}
 	
@@ -10356,7 +10362,7 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_lesson_in_submission"
 		create_wargoal = {
 			type = annex_everything
-			target = NER
+			target = CER
 		}
 	}
 	ai_will_do = { factor = 40 }
@@ -10626,60 +10632,354 @@ shared_focus = {
 #	ai_will_do = { factor = 28 }
 #}
 
-###Daybreaker Temple###
 shared_focus = {
-	id = EQS_completing_the_empresss_desire
+	id = EQS_restructure_land
 	x = 2
-	y = 2
-	relative_position_id = EQS_no_mercy_for_the_wicked
+	y = 1
+	relative_position_id = EQS_a_lesson_in_humility
+	
+	available = {
+		NOT = {
+			country_exists = CER
+			country_exists = NER
+			country_exists = CLD
+		}
+	}
 	
 	cost = 5
-	prerequisite = { focus = EQS_archmage_of_all_the_west }
-	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
-	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
+	prerequisite = { focus = EQS_a_lesson_in_humility }
+	prerequisite = { focus = EQS_a_lesson_in_submission }
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_completing_the_empresss_desire"
-		country_event = solar.333
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_restructure_land"
+		###A family from Cloudsdale is taken by the Militarium to be put onto a train to the north, and they try to escape but are chased by inquisitors who take them back
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 50 }
 }
 
 shared_focus = {
-	id = EQS_reclaim_for_the_empress
-	x = 0
-	y = 1
-	relative_position_id = EQS_farming_the_breadbasket_of_equus
+	id = EQS_utilize_dregs
+	x = -1
+	y = 2
+	relative_position_id = EQS_a_lesson_in_humility
 	
-	cost = 7
-	prerequisite = { focus = EQS_archmage_of_all_the_west }
-	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
-	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
+	available = {
+		NOT = { country_exists = NER }
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_a_lesson_in_humility }
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_reclaim_for_the_empress"
-		country_event = solar.358
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_utilize_dregs"
+		###Either a production report of how NER has been turned into an extension of Meurom, or Iron Tail going up to one of the new mines and correcting some of the slacking workers there
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_showcase_superiority
+	x = 0
+	y = 2
+	relative_position_id = EQS_a_lesson_in_submission
+	
+	available = {
+		NOT = { country_exists = CER }
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_a_lesson_in_submission }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_showcase_superiority"
+		###Aurora and Bitter Harvest host an execution of different CER leaders, including Regal and Diamond Tiara, and Aurora speaks about how they believed themselves better than Daybreaker, and now their arrogance will be met with its proper punishment
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_trials_of_the_traitors
+	x = 2
+	y = 1
+	relative_position_id = EQS_a_lesson_in_submission
+	
+	available = {
+		NOT = {
+			country_exists = CER
+			country_exists = BLS
+			country_exists = WHY
+		}
+	}
+	
+	cost = 5
+	prerequisite = { focus = EQS_a_lesson_in_submission }
+	prerequisite = { focus = EQS_a_lesson_in_conformity }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_trials_of_the_traitors"
+		###Three event chain of the trial of Bunsen/Stratus, Solar Strike/Horizon Sunrise, and Silver Spoon
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_force_young
+	x = 1
+	y = 2
+	relative_position_id = EQS_a_lesson_in_conformity
+	
+	available = {
+		NOT = { country_exists = BLS }
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_a_lesson_in_conformity }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_force_young"
+		###Dried Scroll is inspecting the results of a raid on some schools in Bales and speaks to the captured foals about how they will learn to love the Empress as much as the rest do
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_advantageous_ally
+	x = 1
+	y = 1
+	relative_position_id = EQS_utilize_dregs
+	
+	cost = 4
+	prerequisite = { focus = EQS_utilize_dregs }
+	prerequisite = { focus = EQS_restructure_land }
+	prerequisite = { focus = EQS_showcase_superiority }
+	mutually_exclusive = { focus = EQS_dont_play_favorites }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_advantageous_ally"
+		country_event = solar.328
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = { #Talk about appointing a pegasus to get a bit more compliance out of Cloudsdale
+	id = EQS_dont_play_favorites
+	x = 0
+	y = 2
+	relative_position_id = EQS_restructure_land
+	
+	cost = 4
+	prerequisite = { focus = EQS_utilize_dregs }
+	prerequisite = { focus = EQS_restructure_land }
+	prerequisite = { focus = EQS_showcase_superiority }
+	mutually_exclusive = { focus = EQS_advantageous_ally }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_dont_play_favorites"
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CLD
+					is_core_of = NER
+					is_core_of = CER
+				}
+				is_owned_by = ROOT
+			}
+			add_compliance = 5
+			add_resistance = -10
+		}
 	}
 	ai_will_do = { factor = 40 }
 }
 
 shared_focus = {
-	id = EQS_the_last_heretic
-	x = -2
+	id = EQS_correct_heresy
+	x = 0
 	y = 2
-	relative_position_id = EQS_archmage_of_all_the_west
+	relative_position_id = EQS_trials_of_the_traitors
+	
+	cost = 4
+	prerequisite = { focus = EQS_trials_of_the_traitors }
+	prerequisite = { focus = EQS_force_young }
+	prerequisite = { focus = EQS_showcase_superiority }
+	mutually_exclusive = { focus = EQS_purge_heresy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_correct_heresy"
+		add_stability = -0.05
+		set_temp_variable = { SOL_authority_change_var = -25 }
+		SOL_imperial_authority_change = yes
+		#Show Horizon Sunrise trait, or do event instead of Horizon being released from prison after Aurora threatens her with a couple of inquisitors to recant of her heresy, and if she falls again that she will be executed by fire
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_purge_heresy
+	x = -1
+	y = 1
+	relative_position_id = EQS_force_young
+	
+	cost = 4
+	prerequisite = { focus = EQS_trials_of_the_traitors }
+	prerequisite = { focus = EQS_force_young }
+	prerequisite = { focus = EQS_showcase_superiority }
+	mutually_exclusive = { focus = EQS_correct_heresy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_purge_heresy"
+		###Horizon attempts to escape as she is brought out for execution, and does manage to flee for a short while before being retaken, with Quasar at the helm, who is very happy to be personally in charge of her death
+	}
+	ai_will_do = { factor = 120 }
+}
+
+###Daybreaker Temple###
+shared_focus = {
+	id = EQS_completing_the_empresss_desire
+	x = -1
+	y = 2
+	relative_position_id = EQS_utilize_dregs
 	
 	cost = 5
-	prerequisite = { focus = EQS_archmage_of_all_the_west }
-	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
-	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
+	prerequisite = { focus = EQS_utilize_dregs }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_completing_the_empresss_desire"
+		country_event = solar.333
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_lessons_from_occupation
+	x = 0
+	y = 1
+	relative_position_id = EQS_dont_play_favorites
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_advantageous_ally
+		focus = EQS_dont_play_favorites
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_purge_heresy"
+		###Some remaining resistance members plan to do another attack similar to one that was successful in the last few months, and when they get ready for their attack, they are stopped because of the Inquisitionis having learned from the last time and prepared, with help from the Speculatores
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_imperial_worship_camps
+	x = 0
+	y = 1
+	relative_position_id = EQS_correct_heresy
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_correct_heresy
+		focus = EQS_purge_heresy
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_imperial_worship_camps"
+		###A commandant of one of the new labor camps prepares to punish some laborers after they failed to meet a quota, all the while there is propaganda that it is for their benefit as worshipers of Daybreaker or the like, as it purifies them for her
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_the_last_heretic
+	x = 1
+	y = 2
+	relative_position_id = EQS_force_young
+	
+	available = {
+		74 = { is_owned_by = ROOT }
+	}
+	
+	cost = 5
+	prerequisite = { focus = EQS_force_young }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_the_last_heretic"
 		country_event = solar.359
 	}
-	ai_will_do = { factor = 30 }
+	ai_will_do = { factor = 40 }
 }
+
+shared_focus = {
+	id = EQS_perfected_integrations
+	x = 2
+	y = 1
+	relative_position_id = EQS_lessons_from_occupation
+	
+	cost = 5
+	prerequisite = { focus = EQS_lessons_from_occupation }
+	prerequisite = { focus = EQS_imperial_worship_camps }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_perfected_integrations"
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = NER
+					is_core_of = CER
+					is_core_of = BLS
+					is_core_of = CLD
+					is_core_of = WHY
+				}
+				is_owned_by = ROOT 
+			}
+			add_compliance = 10
+		}
+		#Idea here
+		mark_focus_tree_layout_dirty = yes
+	}
+	ai_will_do = { factor = 160 }
+}
+
+###Post-Rump War with STG or BAL###
+shared_focus = {
+	id = EQS_step_of_faith
+	x = 33
+	y = 13
+	
+	allow_branch = {
+		OR = {
+			AND = {
+				is_debug = yes
+				has_country_leader = { ruling_only = yes character = EQS_Aurora_Shinespark }
+			}
+			has_completed_focus = EQS_perfected_integrations
+		}
+	}
+	
+	cost = 2
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_step_of_faith"
+		###Aurora unveils her next plans for the Empire, which involves a quick war with both BAL and STG to prove their strength in the times ahead, and put fear into their enemies, and she ignores most claiming that it is insanity to fight while still so small and weak, but she is convinced they will win
+	}
+	ai_will_do = { factor = 320 }
+}
+
+#shared_focus = {
+#	id = EQS_reclaim_for_the_empress
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_farming_the_breadbasket_of_equus
+#	
+#	cost = 7
+#	prerequisite = { focus = EQS_archmage_of_all_the_west }
+#	prerequisite = { focus = EQS_farming_the_breadbasket_of_equus }
+#	prerequisite = { focus = EQS_no_mercy_for_the_wicked }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_reclaim_for_the_empress"
+#		country_event = solar.358
+#	}
+#	ai_will_do = { factor = 40 }
+#}
 
 #shared_focus = {
 #	id = EQS_no_project_is_too_ambitious
