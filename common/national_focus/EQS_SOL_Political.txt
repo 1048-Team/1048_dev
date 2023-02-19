@@ -9041,6 +9041,7 @@ shared_focus = {
 #}
 
 ###Restructured Centralized Authority###
+###Centralized Power for Aurora###
 shared_focus = {
 	id = EQS_reassess_the_current_balance_of_powers
 	x = -1
@@ -9076,39 +9077,474 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = EQS_make_the_fat_work_for_their_position
-	x = -4
+	id = EQS_streamline_laws
+	x = 0
 	y = 1
 	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
 	
 	cost = 3
-	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	prerequisite = { focus = EQS_reassess_the_current_balance_of_powers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_streamline_laws"
+		###A few ponies are brought before a judge in Fillydelphia with some middle-tier crimes, and after a short trial, are declared heretics, even though a little while ago it would have just been jail, which these criminals protest before it's explained how the new laws are made to simplify everything
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_make_the_fat_work_for_their_position
+	x = 0
+	y = 1
+	relative_position_id = EQS_streamline_laws
+	
+	cost = 3
+	prerequisite = { focus = EQS_streamline_laws }
+	mutually_exclusive = { focus = EQS_institute_a_proper_imperial_tithe }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_make_the_fat_work_for_their_position"
 		country_event = solar.307
 		###Country event for Aurora hearing moaning and whining from the nobles she left about how they have to actually help administer instead of suplicate Daybreaker, and she executes one or two for their continued whining as an insult to the Empress
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_restructure_hierarchies
+	x = -2
+	y = 1
+	relative_position_id = EQS_streamline_laws
+	
+	cost = 5
+	prerequisite = { focus = EQS_streamline_laws }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_restructure_hierarchies"
+		###Aurora meets with a few of the different governors to show the new administrative divisions of the Empire, and mostly ignores their complaints about how the Inquisitionis and Adoratio have been complete control over them, to the point that they have no real power left, as that is how she intended it
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_remove_political_generals
+	x = 0
+	y = 1
+	relative_position_id = EQS_restructure_hierarchies
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_restructure_hierarchies
+		focus = EQS_make_the_fat_work_for_their_position
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_remove_political_generals"
+		###A few of the older generals of the Empire, including Grimhoof and a few others, are hunted down because of their old affiliations with the Equestrian elite and how they've mostly prevented the Empire from reclaiming its spot as the primary country on Equus
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_elevate_regent_powers
+	x = 0
+	y = 1
+	relative_position_id = EQS_make_the_fat_work_for_their_position
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_restructure_hierarchies
+		focus = EQS_make_the_fat_work_for_their_position
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_elevate_regent_powers"
+		#Idea here
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_unquestioned_authority
+	x = 1
+	y = 1
+	relative_position_id = EQS_remove_political_generals
+	
+	cost = 5
+	prerequisite = { focus = EQS_remove_political_generals }
+	prerequisite = { focus = EQS_elevate_regent_powers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_unquestioned_authority"
+		###Aurora pours over a couple of reports, and then makes a final, authoritative declaration on each, and although the ponies who brought the reports are disappointed at her one-sided decision, they leave, and she spends a moment talking to Daybreaker about how she knows the Empress would be proud of her getting the work done to rebuild the Empire
+	}
+	ai_will_do = { factor = 160 }
+}
+
+
+###Current power balance###
+shared_focus = {
+	id = EQS_keep_the_status_quo
+	x = 1
+	y = 1
+	relative_position_id = EQS_placate_idiots
+	
+	mutually_exclusive = { focus = EQS_reassess_the_current_balance_of_powers }
+	
+	cost = 4
+	prerequisite = { focus = EQS_placate_idiots }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_keep_the_status_quo"
+		country_event = solar.306
+	}
+	ai_will_do = { factor = 30 }
+}
+
+shared_focus = {
+	id = EQS_inquisitorial_oversight
+	x = 3
+	y = 1
+	relative_position_id = EQS_placate_idiots
+	
+	cost = 3
+	prerequisite = { focus = EQS_placate_idiots }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitorial_oversight"
+		country_event = solar.316
+		###Insert national focus here, possibly event with Inquisitors being bored as they deal with internal politics, and suggesting new ways to find and kill heretics
+	}
+	ai_will_do = { factor = 35 }
+}
+
+shared_focus = {
+	id = EQS_enshrine_the_red_tape
+	x = 0
+	y = 1
+	relative_position_id = EQS_inquisitorial_oversight
+	
+	cost = 5
+	prerequisite = { focus = EQS_keep_the_status_quo }
+	prerequisite = { focus = EQS_inquisitorial_oversight }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_enshrine_the_red_tape"
+		country_event = solar.317
+		###Event for Aurora waiting in a bored manner as a member of the government prattles off a bunch of items on a list, and she groans that she agreed to keep the most of the bloat of the nation to keep stability
+	}
+	ai_will_do = { factor = 34 }
+}
+
+shared_focus = {
+	id = EQS_entertain_nobles
+	x = 2
+	y = 1
+	relative_position_id = EQS_enshrine_the_red_tape
+	
+	cost = 4
+	prerequisite = { focus = EQS_enshrine_the_red_tape }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_entertain_nobles"
+		###Aurora reluctantly goes to a party with the aristocracy and has a running commentary in her head about how they are filled with useless ponies or even outright evil or sinful ponies, but she has to stay in their good graces to maintain stability
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_retain_decentralization
+	x = 0
+	y = 1
+	relative_position_id = EQS_enshrine_the_red_tape
+	
+	cost = 4
+	prerequisite = { focus = EQS_enshrine_the_red_tape }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_retain_decentralization"
+		#Idea here
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_patronize_governors
+	x = 0
+	y = 1
+	relative_position_id = EQS_retain_decentralization
+	
+	cost = 5
+	prerequisite = { focus = EQS_retain_decentralization }
+	prerequisite = { focus = EQS_entertain_nobles }
+	mutually_exclusive = { focus = EQS_inquisitorial_inspection_teams }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_patronize_governors"
+		###Aurora agrees to listen to a governor's complaint about something the Inquisitionis did in their administrative region, and after mocking him in her mind for a while, agrees to do something while determining she never will
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_ignore_nepotism
+	x = 0
+	y = 1
+	relative_position_id = EQS_entertain_nobles
+	
+	cost = 4
+	prerequisite = { focus = EQS_retain_decentralization }
+	prerequisite = { focus = EQS_entertain_nobles }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_ignore_nepotism"
+		###A new general who recently caused a stir in Sanctum Solar either for some scandal or for causing a massive problem is interrogated by Quasar before she is stopped by another member of the Militarium, stating that they are to be set free, and Quasar is furious that she has been stopped, but has to relent because of recent exemptions given to the nobility
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_wise_regent
+	x = 1
+	y = 1
+	relative_position_id = EQS_patronize_governors
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_patronize_governors
+		focus = EQS_ignore_nepotism
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_wise_regent"
+		###As Aurora is pouring over some different possible plans for Sanctum Solar, she is provided advice again and again from the rest of her diet that was meeting with her, and she bemoans having to listen to them
+	}
+	ai_will_do = { factor = 60 }
+}
+
+###Adoratio Focus###
+shared_focus = {
+	id = EQS_adoratio_emphasis
+	x = 0
+	y = 1
+	relative_position_id = EQS_reassess_the_current_balance_of_powers
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_reassess_the_current_balance_of_powers
+		focus = EQS_keep_the_status_quo
+	}
+	mutually_exclusive = { focus = EQS_inquisitionis_emphasis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_adoratio_emphasis"
+		#Idea here
+	}
+	ai_will_do = { factor = 40 }
 }
 
 shared_focus = {
 	id = EQS_institute_a_proper_imperial_tithe
-	x = -2
+	x = 0
 	y = 1
-	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
+	relative_position_id = EQS_adoratio_emphasis
 	
 	cost = 4
-	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
+	prerequisite = { focus = EQS_adoratio_emphasis }
+	mutually_exclusive = { focus = EQS_make_the_fat_work_for_their_position }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_institute_a_proper_imperial_tithe"
 		country_event = solar.308
 		###Country event for Aurora holding the first sermon after Daybreaker's sealing in the Celestial Throne, and also the first major mandotory tithe to feed the Empire's coffers
 	}
-	ai_will_do = { factor = 35 }
+	ai_will_do = { factor = 70 }
 }
 
+shared_focus = {
+	id = EQS_annual_mourning
+	x = 2
+	y = 1
+	relative_position_id = EQS_adoratio_emphasis
+	
+	cost = 3
+	prerequisite = { focus = EQS_adoratio_emphasis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_annual_mourning"
+		###Follow a few priestesses as they prepare for the instituted holiday to mourn Daybreaker's sealing on the Celestial throne, and have a couple be less sure about it, but not want to anger the Goddess by not doing as she instructed Aurora
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_new_temple_taxes
+	x = 0
+	y = 1
+	relative_position_id = EQS_institute_a_proper_imperial_tithe
+	
+	cost = 5
+	prerequisite = { 
+		focus = EQS_institute_a_proper_imperial_tithe
+		focus = EQS_annual_mourning
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_temple_taxes"
+		###Some more ponies are extracted by glorified priestess thug gangs, somewhat like mafia protection rackets, and the pony targeted has next to nothing to give, and instead is made to serve as effectively a slave to pay off their tithe debt, which is ever increasing
+		###Should have -1% CS, +2% construction, -3% ST if EQS_institute_a_proper_imperial_tithe isn't taken
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_habilitate_less_fortunate
+	x = 0
+	y = 1
+	relative_position_id = EQS_annual_mourning
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_institute_a_proper_imperial_tithe
+		focus = EQS_annual_mourning
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_habilitate_less_fortunate"
+		###Some criminals, mostly younger ponies who are street orphans, are rounded up by the Inquisitionis and promised to be actually be useful for once in their lives, and are taken to one of the nearest prisons, where they are put to work creating basic gear for the Militarium
+	}
+	ai_will_do = { factor = 75 }
+}
+
+shared_focus = {
+	id = EQS_incentivize_everypony
+	x = 1
+	y = 1
+	relative_position_id = EQS_new_temple_taxes
+	
+	cost = 5
+	prerequisite = { focus = EQS_new_temple_taxes }
+	prerequisite = { focus = EQS_habilitate_less_fortunate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_incentivize_everypony"
+		###A few ponies are taken out in the middle of the afternoon and given one chance to start worshipping Daybreaker as otherwise they are turned into a public example of what happens to those who aren't truly repentant of their sins and love Daybreaker
+	}
+	ai_will_do = { factor = 80 }
+}
+
+###Inquisitionis Focus###
+shared_focus = {
+	id = EQS_inquisitionis_emphasis
+	x = -2
+	y = 1
+	relative_position_id = EQS_inquisitorial_oversight
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_reassess_the_current_balance_of_powers
+		focus = EQS_keep_the_status_quo
+	}
+	mutually_exclusive = { focus = EQS_adoratio_emphasis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitionis_emphasis"
+		#Idea here
+	}
+	ai_will_do = { factor = 120 }
+}
+
+shared_focus = {
+	id = EQS_terrorize_heretic_pools
+	x = -2
+	y = 1
+	relative_position_id = EQS_inquisitionis_emphasis
+	
+	cost = 3
+	prerequisite = { focus = EQS_inquisitionis_emphasis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_terrorize_heretic_pools"
+		###Follow a worker as he sees the Inquisitionis come into his manager's office and then eventually replace him, as new leaders, members of the Inquisitionis are made factory overseers, and already start to quell any potential heresy
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_routine_burnings
+	x = 0
+	y = 1
+	relative_position_id = EQS_inquisitionis_emphasis
+	
+	cost = 4
+	prerequisite = { focus = EQS_inquisitionis_emphasis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_routine_burnings"
+		###A pony goes into a confessional box in a temple and starts to confess to who they believe is a priestess about some temptations or sins that they have been struggling with, and are soon dragged out as it's revealed it's an inquisitor instead, and are taken to be burned as a heretic
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_none_are_innocent
+	x = 0
+	y = 1
+	relative_position_id = EQS_terrorize_heretic_pools
+	
+	cost = 4
+	prerequisite = { focus = EQS_terrorize_heretic_pools }
+	prerequisite = { focus = EQS_routine_burnings }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_none_are_innocent"
+		#Idea here
+		###Potentially have event of a couple of inquisitors going to somepony's home on a whim to see if they are loyal or not, and tear about the house to make sure; ultimately they are deemed loyal, and the house is left in its destroyed state
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_inquisitorial_inspection_teams
+	x = 0
+	y = 1
+	relative_position_id = EQS_routine_burnings
+	
+	cost = 5
+	prerequisite = { focus = EQS_terrorize_heretic_pools }
+	prerequisite = { focus = EQS_routine_burnings }
+	mutually_exclusive = { focus = EQS_patronize_governors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitorial_inspection_teams"
+		country_event = solar.309
+		###Event for an inspection team finding something unsatisfactory in a factory, and punishing the workers and managers accordingly
+		###Will have to change spirit
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_security_above_all
+	x = 1
+	y = 1
+	relative_position_id = EQS_none_are_innocent
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_none_are_innocent
+		focus = EQS_inquisitorial_inspection_teams
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_security_above_all"
+		###Astrum follows a couple of suspected ponies who are working with the Harmonic resistance, and is able to easily follow them because of the many new laws that track them, and ultimately does find their involvement, along with a small fight because of it
+	}
+	ai_will_do = { factor = 75 }
+}
+
+###OLD###
 shared_focus = { #Mention that the new quota system was effective, but it needs to be more, and that they will implement even harsher quotas to ensure a functioning economy
 	id = EQS_more_faithful_quotas
 	x = 0
@@ -9126,23 +9562,6 @@ shared_focus = { #Mention that the new quota system was effective, but it needs 
 		}
 	}
 	ai_will_do = { factor = 23 }
-}
-
-shared_focus = {
-	id = EQS_inquisitorial_inspection_teams
-	x = 2
-	y = 1
-	relative_position_id = EQS_slashing_the_bureaucratic_nonsense
-	
-	cost = 5
-	#prerequisite = { focus = EQS_slashing_the_bureaucratic_nonsense }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitorial_inspection_teams"
-		country_event = solar.309
-		###Event for an inspection team finding something unsatisfactory in a factory, and punishing the workers and managers accordingly
-	}
-	ai_will_do = { factor = 27 }
 }
 
 shared_focus = {
@@ -9169,8 +9588,8 @@ shared_focus = {
 	relative_position_id = EQS_make_the_fat_work_for_their_position
 	
 	cost = 4
-	prerequisite = { focus = EQS_make_the_fat_work_for_their_position }
-	prerequisite = { focus = EQS_institute_a_proper_imperial_tithe }
+	#prerequisite = { focus = EQS_make_the_fat_work_for_their_position }
+	#prerequisite = { focus = EQS_institute_a_proper_imperial_tithe }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_with_faithfulness_comes_victory"
@@ -9273,74 +9692,6 @@ shared_focus = { #Mention how the Administratum has worked with the Militarium t
 }
 
 ###Status Quo Decentralization###
-shared_focus = {
-	id = EQS_keep_the_status_quo
-	x = 1
-	y = 1
-	relative_position_id = EQS_placate_idiots
-	
-	mutually_exclusive = { focus = EQS_reassess_the_current_balance_of_powers }
-	
-	cost = 4
-	prerequisite = { focus = EQS_placate_idiots }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_keep_the_status_quo"
-		country_event = solar.306
-	}
-	ai_will_do = { factor = 30 }
-}
-
-shared_focus = {
-	id = EQS_inquisitorial_oversight
-	x = 3
-	y = 1
-	relative_position_id = EQS_placate_idiots
-	
-	cost = 3
-	prerequisite = { focus = EQS_placate_idiots }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_inquisitorial_oversight"
-		country_event = solar.316
-		###Insert national focus here, possibly event with Inquisitors being bored as they deal with internal politics, and suggesting new ways to find and kill heretics
-	}
-	ai_will_do = { factor = 35 }
-}
-
-shared_focus = {
-	id = EQS_enshrine_the_red_tape
-	x = 0
-	y = 1
-	relative_position_id = EQS_inquisitorial_oversight
-	
-	cost = 5
-	prerequisite = { focus = EQS_inquisitorial_oversight }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_enshrine_the_red_tape"
-		country_event = solar.317
-		###Event for Aurora waiting in a bored manner as a member of the government prattles off a bunch of items on a list, and she groans that she agreed to keep the most of the bloat of the nation to keep stability
-	}
-	ai_will_do = { factor = 34 }
-}
-
-shared_focus = {
-	id = EQS_entertain_nobles
-	x = 2
-	y = 1
-	relative_position_id = EQS_enshrine_the_red_tape
-	
-	cost = 4
-	prerequisite = { focus = EQS_enshrine_the_red_tape }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_entertain_nobles"
-		###Aurora reluctantly goes to a party with the aristocracy and has a running commentary in her head about how they are filled with useless ponies or even outright evil or sinful ponies, but she has to stay in their good graces to maintain stability
-	}
-	ai_will_do = { factor = 50 }
-}
-
 shared_focus = {
 	id = EQS_create_the_solaris_praefectorious
 	x = -2
@@ -9544,30 +9895,266 @@ shared_focus = {
 #}
 
 shared_focus = {
-	id = EQS_solaris_quorundam
-	x = 3
+	id = EQS_new_imperial_cult
+	x = 2
 	y = 1
-	relative_position_id = EQS_formulate_new_battle_plans
+	relative_position_id = EQS_unquestioned_authority
+	
+	cost = 4
+	prerequisite = { focus = EQS_unquestioned_authority }
+	prerequisite = { focus = EQS_incentivize_everypony }
+	mutually_exclusive = { focus = EQS_harmonize_sides }
+	mutually_exclusive = { focus = EQS_tradition_of_fear }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_imperial_cult"
+		###Aurora starts to notice that a few ponies in Sanctum Solar are beginning to pray to her, as one is brought in on heresy charges and pleads she was doing what she needed to honour the regent, and Auror ais somewhat uncomfortable before she determines it's a worthwhile thing to encourage and get ponies to go to their deaths to save the Empire
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_harmonize_sides
+	x = -2
+	y = 1
+	relative_position_id = EQS_security_above_all
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_incentivize_everypony
+		focus = EQS_security_above_all
+	}
+	mutually_exclusive = { focus = EQS_new_imperial_cult }
+	mutually_exclusive = { focus = EQS_tradition_of_fear }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_harmonize_sides"
+		###A long, tense discussion between Sunset and Quasar takes place, pushed on by Aurora, to get the last of the infighting between the two branches to stop, which at points devolves into bickering or Quasar fighting Sunset
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_tradition_of_fear
+	x = 2
+	y = 1
+	relative_position_id = EQS_security_above_all
+	
+	cost = 4
+	prerequisite = { focus = EQS_security_above_all }
+	prerequisite = { focus = EQS_wise_regent }
+	mutually_exclusive = { focus = EQS_new_imperial_cult }
+	mutually_exclusive = { focus = EQS_harmonize_sides }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_tradition_of_fear"
+		###Follow a mayoral candidate as they try to get themselves elected on the concept of being the most loyal and Daybreaker-loving pony around, while lambasting their opponents as heretics, as this is one of the only ways somepony can be ensured they will actually survive politics with the Inquistionis in so much power
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_integrate_third_cult
+	x = 2
+	y = 1
+	relative_position_id = EQS_new_imperial_cult
 	
 	cost = 5
-	prerequisite = { 
-		focus = EQS_no_change_shall_hide_from_the_regent 
-		focus = EQS_maintain_the_current_power_structure
+	prerequisite = {
+		focus = EQS_new_imperial_cult
+		focus = EQS_harmonize_sides
+		focus = EQS_tradition_of_fear
 	}
-	prerequisite = { 
-		focus = EQS_formulate_new_battle_plans 
-		focus = EQS_ensure_the_governors_loyalties
+	mutually_exclusive = { focus = EQS_keep_speculatores_separate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_integrate_third_cult"
+		###Aurora gets Astrum to take her to Absconditus, which is unusual but Astrum has little choice but to agree, since Aurora is being secretive to the point even she has no clue what is going on, and Aurora gives Absconditus an ultimatum to begin to cooperate with the rest of the cult more or be shut down, which he holds his ground for a bit on before relenting
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_keep_speculatores_separate
+	x = 2
+	y = 1
+	relative_position_id = EQS_harmonize_sides
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_new_imperial_cult
+		focus = EQS_harmonize_sides
+		focus = EQS_tradition_of_fear
+	}
+	mutually_exclusive = { focus = EQS_integrate_third_cult }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_keep_speculatores_separate"
+		###Absconditus meets with Aurora unexpectedly and mentions that he knows that she is wishing to combine the cults further together, and he effectively blackmails her to leave the Speculatores alone, since he has dirt about her doubts that she had or still has about Daybreaker, and that she would be best to leave them alone; she is not happy but does not wish to be tried for heresy, and agrees
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_plucked_from_best
+	x = -2
+	y = 1
+	relative_position_id = EQS_integrate_third_cult
+	
+	cost = 3
+	prerequisite = { focus = EQS_integrate_third_cult }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_plucked_from_best"
+		###Nova spars with Astrum, who is currently in Ordo Multi to recruit one or two new ponies for the Speculatores, and Nova is partly doing it because she dislikes how they are so secretive, and almost wins before Astrum pulls a quick maneuver to pin her to the ground, and states she isn't good enough to enter; it only makes Nova angrier
+	}
+	ai_will_do = { factor = 65 }
+}
+
+shared_focus = {
+	id = EQS_new_spy_home
+	x = 0
+	y = 1
+	relative_position_id = EQS_integrate_third_cult
+	
+	cost = 3
+	prerequisite = { focus = EQS_integrate_third_cult }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_new_spy_home"
+		###A speculatore acting as a priestess is in the middle of giving a rather poor sermon when she notices one of her contacts in the background motioning to her and she comes up with an excuse to cut it short, before it breaks out into a slightly comedic spy fight between her and a Stalliongrad spy
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_learn_from_bugs
+	x = 2
+	y = 1
+	relative_position_id = EQS_integrate_third_cult
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_integrate_third_cult
+		focus = EQS_keep_speculatores_separate
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_learn_from_bugs"
+		#Ideas or tech bonus here
+		###Maybe an event of Astrum or some other speculatores studying some changeling techniques that have been observed by the organization, although doing it poorly since it's pony magic vs changeling magic
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_expand_speculatores
+	x = 0
+	y = 1
+	relative_position_id = EQS_keep_speculatores_separate
+	
+	cost = 3
+	prerequisite = { focus = EQS_keep_speculatores_separate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_expand_speculatores"
+		###Absconditus receives some objections from Aurora, who almost has him arrested or captured by inquisitors for using so much money to expand the speculatores, but he gets her to back down again by threatening her with blackmail of her doubts, perceived or real
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_recruitment_autonomy
+	x = 2
+	y = 1
+	relative_position_id = EQS_keep_speculatores_separate
+	
+	cost = 3
+	prerequisite = { focus = EQS_keep_speculatores_separate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_recruitment_autonomy"
+		###A younger mother meets with supposedly a couple of medical students who are wanting to check on her son's magical abilities for an exam they are taking, and one of them distracts her with some questions so the other can take the young colt, and by the time she realizes what happened they are both gone, as they were speculatores taking another foal to be a new speculatore in the future
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_omnipresent_regency
+	x = 1
+	y = 1
+	relative_position_id = EQS_plucked_from_best
+	
+	cost = 4
+	prerequisite = { focus = EQS_plucked_from_best }
+	prerequisite = { focus = EQS_new_spy_home }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_omnipresent_regency"
+		###Using some speculatores' information, and pretending that she knows this herself, Aurora drags a couple of higher priestesses or veteran mages into the throne room on charges of heresy, and ends up knowing enough about their lives to give the impression of omniscience, which thoroughly frightens them into telling the truth
+	}
+	
+	ai_will_do = { factor = 120 }
+}
+
+shared_focus = {
+	id = EQS_expand_speculatores_budget
+	x = 0
+	y = 1
+	relative_position_id = EQS_learn_from_bugs
+	
+	cost = 5
+	prerequisite = { focus = EQS_learn_from_bugs }
+	prerequisite = {
+		focus = EQS_new_spy_home
+		focus = EQS_expand_speculatores
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_expand_speculatores_budget"
+		#Effect here
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = EQS_all_seeing_eye
+	x = 1
+	y = 1
+	relative_position_id = EQS_expand_speculatores
+	
+	cost = 4
+	prerequisite = { focus = EQS_expand_speculatores }
+	prerequisite = { focus = EQS_recruitment_autonomy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_all_seeing_eye"
+		###A couple of priestesses on some small leave time are in the middle of raucous partying when Astrum interrupts them and warns them to watch their steps, considering she now has enough evidence to twist to make it seem like they're heretics, and she gets them to work for her, on a specific bit of intel that she needs, and she enjoys seeing them squirm from her blackmail
+	}
+	ai_will_do = { factor = 120 }
+}
+
+shared_focus = {
+	id = EQS_solaris_quorundam
+	x = 0
+	y = 1
+	relative_position_id = EQS_expand_speculatores_budget
+	
+	cost = 2
+	prerequisite = { focus = EQS_expand_speculatores_budget }
+	prerequisite = {
+		focus = EQS_omnipresent_regency
+		focus = EQS_all_seeing_eye
 	}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_solaris_quorundam"
 		country_event = solar.326
 	}
-	ai_will_do = { factor = 70 }
+	ai_will_do = { factor = 160 }
 }
 
-###Rump state war###
-###Left Side###
+###Rump state wars###
 shared_focus = {
 	id = EQS_a_lesson_in_humility
 	x = -4
@@ -9578,19 +10165,19 @@ shared_focus = {
 		AND = {
 			NOT = {
 				country_exists = CLD
-				country_exists = NER
+				country_exists = CER
 			}
 		}
 	}
 	
-	cost = 4
+	cost = 2
 	prerequisite = { focus = EQS_solaris_quorundam }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_lesson_in_humility"
 		if = {
 			limit = {
-				country_exists = NER
+				country_exists = CER
 			}
 			create_wargoal = {
 				type = annex_everything
@@ -9607,7 +10194,7 @@ shared_focus = {
 			}
 		}
 	}
-	ai_will_do = { factor = 25 }
+	ai_will_do = { factor = 40 }
 }
 
 #shared_focus = {
@@ -9638,57 +10225,57 @@ shared_focus = {
 #	ai_will_do = { factor = 25 }
 #}
 
-shared_focus = {
-	id = EQS_institute_the_cloudsdale_chapter
-	x = -1
-	y = 1
-	relative_position_id = EQS_a_lesson_in_humility
-	
-	available = {
-		1218 = { is_owned_by = ROOT }
-		NOT = { country_exists = CLD }
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_a_lesson_in_humility }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_institute_the_cloudsdale_chapter"
-		1218 = { add_manpower = -150000 }
-		add_war_support = 0.05
-	}
-	ai_will_do = { factor = 28 }
-}
-
-shared_focus = {
-	id = EQS_collapsing_the_communes
-	x = 1
-	y = 1
-	relative_position_id = EQS_a_lesson_in_humility
-	
-	available = {
-		170 = { is_owned_by = ROOT }
-		NOT = { country_exists = NER }
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_a_lesson_in_humility }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_collapsing_the_communes"
-		every_state = {
-			limit = {
-				AND = {
-					is_core_of = NER
-					is_owned_by = ROOT
-				}
-			}
-			add_manpower = -10000
-		}
-		add_stability = 0.05
-	}
-	ai_will_do = { factor = 20 }
-}
+#shared_focus = {
+#	id = EQS_institute_the_cloudsdale_chapter
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_humility
+#	
+#	available = {
+#		1218 = { is_owned_by = ROOT }
+#		NOT = { country_exists = CLD }
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_a_lesson_in_humility }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_institute_the_cloudsdale_chapter"
+#		1218 = { add_manpower = -150000 }
+#		add_war_support = 0.05
+#	}
+#	ai_will_do = { factor = 28 }
+#}
+#
+#shared_focus = {
+#	id = EQS_collapsing_the_communes
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_humility
+#	
+#	available = {
+#		170 = { is_owned_by = ROOT }
+#		NOT = { country_exists = NER }
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_a_lesson_in_humility }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_collapsing_the_communes"
+#		every_state = {
+#			limit = {
+#				AND = {
+#					is_core_of = NER
+#					is_owned_by = ROOT
+#				}
+#			}
+#			add_manpower = -10000
+#		}
+#		add_stability = 0.05
+#	}
+#	ai_will_do = { factor = 20 }
+#}
 
 #shared_focus = { #Be sarcastic and claim that he communists wanted such better working conditions, so they'll get it; once they die
 #	id = EQS_enforce_ethical_working_conditions
@@ -9721,36 +10308,35 @@ shared_focus = {
 #	ai_will_do = { factor = 22 }
 #}
 
-shared_focus = {
-	id = EQS_archmage_of_all_the_west
-	x = 1
-	y = 1
-	relative_position_id = EQS_institute_the_cloudsdale_chapter
-	
-	cost = 5
-	prerequisite = { focus = EQS_institute_the_cloudsdale_chapter }
-	prerequisite = { focus = EQS_collapsing_the_communes }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_archmage_of_all_the_west"
-		every_state = {
-			limit = {
-				AND = {
-					is_owned_by = ROOT
-					OR = {
-						is_core_of = NER
-						is_core_of = CLD
-					}
-				}
-			}
-			add_core_of = ROOT
-		}
-		country_event = solar.328
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_archmage_of_all_the_west
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_institute_the_cloudsdale_chapter
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_institute_the_cloudsdale_chapter }
+#	prerequisite = { focus = EQS_collapsing_the_communes }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_archmage_of_all_the_west"
+#		every_state = {
+#			limit = {
+#				AND = {
+#					is_owned_by = ROOT
+#					OR = {
+#						is_core_of = NER
+#						is_core_of = CLD
+#					}
+#				}
+#			}
+#			add_core_of = ROOT
+#		}
+#		country_event = solar.328
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
-###Middle Side###
 shared_focus = {
 	id = EQS_a_lesson_in_submission
 	x = 0
@@ -9759,54 +10345,54 @@ shared_focus = {
 	
 	bypass = {
 		NOT = {
-			country_exists = CER
+			country_exists = NER
 		}
 	}
 	
-	cost = 4
+	cost = 2
 	prerequisite = { focus = EQS_solaris_quorundam }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_a_lesson_in_submission"
 		create_wargoal = {
 			type = annex_everything
-			target = CER
+			target = NER
 		}
 	}
-	ai_will_do = { factor = 30 }
+	ai_will_do = { factor = 40 }
 }
 
-shared_focus = {
-	id = EQS_there_is_no_empress_but_daybreaker
-	x = 0
-	y = 1
-	relative_position_id = EQS_a_lesson_in_submission
-	
-	available = {
-		122 = { is_owned_by = ROOT }
-		NOT = { country_exists = CER }
-	}
-	
-	bypass = {
-		AND = {
-			NOT = {
-				country_exists = CER
-			}
-			122 = {
-				NOT = { is_owned_by = ROOT }
-			}
-		}
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_a_lesson_in_submission }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_there_is_no_empress_but_daybreaker"
-		country_event = solar.329
-	}
-	ai_will_do = { factor = 30 }
-}
+#shared_focus = {
+#	id = EQS_there_is_no_empress_but_daybreaker
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_submission
+#	
+#	available = {
+#		122 = { is_owned_by = ROOT }
+#		NOT = { country_exists = CER }
+#	}
+#	
+#	bypass = {
+#		AND = {
+#			NOT = {
+#				country_exists = CER
+#			}
+#			122 = {
+#				NOT = { is_owned_by = ROOT }
+#			}
+#		}
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_a_lesson_in_submission }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_there_is_no_empress_but_daybreaker"
+#		country_event = solar.329
+#	}
+#	ai_will_do = { factor = 30 }
+#}
 
 #shared_focus = {
 #	id = EQS_feeding_the_fallow_fields
@@ -9836,31 +10422,30 @@ shared_focus = {
 #	ai_will_do = { factor = 35 }
 #}
 
-shared_focus = {
-	id = EQS_farming_the_breadbasket_of_equus
-	x = 0
-	y = 1
-	relative_position_id = EQS_there_is_no_empress_but_daybreaker
-	
-	cost = 5
-	prerequisite = { focus = EQS_there_is_no_empress_but_daybreaker }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_farming_the_breadbasket_of_equus"
-		every_state = {
-			limit = {
-				AND = {
-					is_owned_by = ROOT
-					is_core_of = CER
-				}
-			}
-			add_core_of = ROOT
-		}
-	}
-	ai_will_do = { factor = 25 }
-}
+#shared_focus = {
+#	id = EQS_farming_the_breadbasket_of_equus
+#	x = 0
+#	y = 1
+#	relative_position_id = EQS_there_is_no_empress_but_daybreaker
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_there_is_no_empress_but_daybreaker }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_farming_the_breadbasket_of_equus"
+#		every_state = {
+#			limit = {
+#				AND = {
+#					is_owned_by = ROOT
+#					is_core_of = CER
+#				}
+#			}
+#			add_core_of = ROOT
+#		}
+#	}
+#	ai_will_do = { factor = 25 }
+#}
 
-###Right Side###
 shared_focus = {
 	id = EQS_a_lesson_in_conformity
 	x = 4
@@ -9876,7 +10461,7 @@ shared_focus = {
 		}
 	}
 	
-	cost = 4
+	cost = 2
 	prerequisite =  { focus = EQS_solaris_quorundam }
 	
 	completion_reward = {
@@ -9900,7 +10485,7 @@ shared_focus = {
 			}
 		}
 	}
-	ai_will_do = { factor = 27 }
+	ai_will_do = { factor = 40 }
 }
 
 #shared_focus = {
@@ -9931,61 +10516,61 @@ shared_focus = {
 #	ai_will_do = { factor = 27 }
 #}
 
-shared_focus = {
-	id = EQS_remove_the_military_from_power
-	x = -1
-	y = 1
-	relative_position_id = EQS_a_lesson_in_conformity
-	
-	available = {
-		70 = { is_owned_by = ROOT }
-		NOT = { country_exists = WHY }
-	}
-	
-	bypass = {
-		AND = {
-			70 = { NOT = { is_owned_by = ROOT } }
-			NOT = { country_exists = WHY }
-		}
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_a_lesson_in_conformity }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_remove_the_military_from_power"
-		country_event = solar.331
-	}
-	ai_will_do = { factor = 23 }
-}
-
-shared_focus = { ###Takes out the two larger universities, namely Sol Victoria and Solar Beauty
-	id = EQS_faith_triumphs_over_atheism
-	x = 1
-	y = 1
-	relative_position_id = EQS_a_lesson_in_conformity
-	
-	available = {
-		74 = { is_owned_by = ROOT }
-		NOT = { country_exists = BLS }
-	}
-	
-	bypass = {
-		AND = {
-			74 = { NOT = { is_owned_by = ROOT } }
-			NOT = { country_exists = BLS }
-		}
-	}
-	
-	cost = 5
-	prerequisite = { focus = EQS_a_lesson_in_conformity }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_faith_triumphs_over_atheism"
-		add_ideas = EQS_theistic_science
-	}
-	ai_will_do = { factor = 35 }
-}
+#shared_focus = {
+#	id = EQS_remove_the_military_from_power
+#	x = -1
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_conformity
+#	
+#	available = {
+#		70 = { is_owned_by = ROOT }
+#		NOT = { country_exists = WHY }
+#	}
+#	
+#	bypass = {
+#		AND = {
+#			70 = { NOT = { is_owned_by = ROOT } }
+#			NOT = { country_exists = WHY }
+#		}
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_a_lesson_in_conformity }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_remove_the_military_from_power"
+#		country_event = solar.331
+#	}
+#	ai_will_do = { factor = 23 }
+#}
+#
+#shared_focus = { ###Takes out the two larger universities, namely Sol Victoria and Solar Beauty
+#	id = EQS_faith_triumphs_over_atheism
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_a_lesson_in_conformity
+#	
+#	available = {
+#		74 = { is_owned_by = ROOT }
+#		NOT = { country_exists = BLS }
+#	}
+#	
+#	bypass = {
+#		AND = {
+#			74 = { NOT = { is_owned_by = ROOT } }
+#			NOT = { country_exists = BLS }
+#		}
+#	}
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_a_lesson_in_conformity }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_faith_triumphs_over_atheism"
+#		add_ideas = EQS_theistic_science
+#	}
+#	ai_will_do = { factor = 35 }
+#}
 
 #shared_focus = {
 #	id = EQS_enlighten_the_securlarists
@@ -10005,41 +10590,41 @@ shared_focus = { ###Takes out the two larger universities, namely Sol Victoria a
 #	ai_will_do = { factor = 40 }
 #}
 
-shared_focus = {
-	id = EQS_no_mercy_for_the_wicked
-	x = 1
-	y = 1
-	relative_position_id = EQS_remove_the_military_from_power
-	
-	cost = 5
-	prerequisite = { focus = EQS_remove_the_military_from_power }
-	prerequisite = { focus = EQS_faith_triumphs_over_atheism }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_no_mercy_for_the_wicked"
-		every_state = {
-			limit = {
-				AND = {
-					is_core_of = BLS
-					is_owned_by = ROOT
-				}
-			}
-			add_manpower = -37500
-			add_core_of = ROOT
-		}
-		every_state = {
-			limit = {
-				AND = {
-					is_core_of = WHY
-					is_owned_by = ROOT
-				}
-			}
-			add_manpower = -25000
-			add_core_of = ROOT
-		}
-	}
-	ai_will_do = { factor = 28 }
-}
+#shared_focus = {
+#	id = EQS_no_mercy_for_the_wicked
+#	x = 1
+#	y = 1
+#	relative_position_id = EQS_remove_the_military_from_power
+#	
+#	cost = 5
+#	prerequisite = { focus = EQS_remove_the_military_from_power }
+#	prerequisite = { focus = EQS_faith_triumphs_over_atheism }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus EQS_no_mercy_for_the_wicked"
+#		every_state = {
+#			limit = {
+#				AND = {
+#					is_core_of = BLS
+#					is_owned_by = ROOT
+#				}
+#			}
+#			add_manpower = -37500
+#			add_core_of = ROOT
+#		}
+#		every_state = {
+#			limit = {
+#				AND = {
+#					is_core_of = WHY
+#					is_owned_by = ROOT
+#				}
+#			}
+#			add_manpower = -25000
+#			add_core_of = ROOT
+#		}
+#	}
+#	ai_will_do = { factor = 28 }
+#}
 
 ###Daybreaker Temple###
 shared_focus = {
