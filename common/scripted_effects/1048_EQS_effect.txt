@@ -222,7 +222,7 @@ SOL_end_of_civil_war_CEL = {
 		EQS_Sunbutt = {
 			add_field_marshal_role = {
 				traits = { pony_race_trait pleasant_sun inspirational_leader }
-				skill = 2
+				skill = 3
 				attack_skill = 3
 				defense_skill = 3
 				planning_skill = 2
@@ -268,8 +268,14 @@ SOL_end_of_civil_war_CEL = {
 	add_stability = -0.05
 	add_war_support = -0.15
 	set_country_flag = end_of_equestria_civil_war
-	set_country_flag = rescued_harmonic_advisors
-	clr_country_flag = starlight_and_trixie_corrupted
+	IF = {
+		limit = { NOT = { has_country_flag = rescued_harmonic_advisors } }
+		set_country_flag = rescued_harmonic_advisors
+	}
+	IF = {
+		limit = { has_country_flag = starlight_and_trixie_corrupted }
+		clr_country_flag = starlight_and_trixie_corrupted
+	}
 	EQS_Sunbutt = { set_character_name = EQS_Sunbutt_name }
 	mark_focus_tree_layout_dirty = yes
 }
