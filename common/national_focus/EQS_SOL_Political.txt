@@ -4007,40 +4007,35 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_rewards_of_riches"
 		###Fix up for characters. Man this is old.
-		create_corps_commander = {
-		name = "Fidelis Flamma"
-		portrait_path = "gfx/leaders/EQS/Fidelis_Flamma.tga"
-		traits = { solaris_adoratio fire_pony pony_race_trait }
-		id = 5105
-		skill = 2
-		attack_skill = 3
-		defense_skill = 1
-		planning_skill = 1
-		logistics_skill = 2
-		female = yes
+		EQS_Fidelis_Flamma = {
+			add_corps_commander_role = {
+				traits = { solaris_adoratio fire_pony pony_race_trait }
+				skill = 2
+				attack_skill = 3
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 2
+			}
 		}
-		create_corps_commander = {
-		name = "Foresight Amour"
-		#portrait_path = "gfx/leaders/EQS/Foresight.tga"
-		traits = { solaris_militarium bleeding_heart_1048 pony_race_trait }
-		id = 5106
-		skill = 3
-		attack_skill = 2
-		defense_skill = 3
-		planning_skill = 2
-		logistics_skill = 3
+		EQS_Golden_Dawn = {
+			add_corps_commander_role = {
+				traits = { pony_race_trait solaris_militarium panzer_leader }
+				skill = 2
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 1
+			}
 		}
-		create_corps_commander = {
-		name = "Steel Sickle"
-		#portrait_path = "gfx/leaders/EQS/Steel.tga"
-		traits = { solaris_inquisitionis loyal_earth pony_race_trait }
-		id = 5107
-		skill = 2
-		attack_skill = 1
-		defense_skill = 4
-		planning_skill = 2
-		logistics_skill = 1
-		female = yes
+		EQS_Steel_Sickle = {
+			add_corps_commander_role = {
+				traits = { solaris_inquisitionis loyal_earth pony_race_trait }
+				skill = 2
+				attack_skill = 1
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 1
+			}
 		}
 	}
 	ai_will_do = { factor = 40 }
@@ -10941,7 +10936,7 @@ shared_focus = {
 ###Post-Rump War with STG or BAL###
 shared_focus = {
 	id = EQS_step_of_faith
-	x = 33
+	x = 38
 	y = 13
 	
 	allow_branch = {
@@ -10959,6 +10954,668 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_step_of_faith"
 		###Aurora unveils her next plans for the Empire, which involves a quick war with both BAL and STG to prove their strength in the times ahead, and put fear into their enemies, and she ignores most claiming that it is insanity to fight while still so small and weak, but she is convinced they will win
+		###Will get a decision later to get a wargoal on the other nation series not chosen, but there will be no bonus, and it will give a small event of the nation finding out about the intended attack (mostly as a player warning)
+	}
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = EQS_manehattan_slight
+	x = -3
+	y = 1
+	relative_position_id = EQS_step_of_faith
+	
+	cost = 2
+	prerequisite = { focus = EQS_step_of_faith }
+	mutually_exclusive = { focus = EQS_traitorous_south }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_manehattan_slight"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.shield_of_steel
+					value = THIS
+				}
+				exists = yes
+			}
+			
+			ROOT = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		###A temp bonus against STG here
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = EQS_traitorous_south
+	x = 3
+	y = 1
+	relative_position_id = EQS_step_of_faith
+	
+	cost = 2
+	prerequisite = { focus = EQS_step_of_faith }
+	mutually_exclusive = { focus = EQS_manehattan_slight }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_traitorous_south"
+		every_country = {
+			limit = {
+				is_in_array = {
+					array = global.southeast_countries
+					value = THIS
+				}
+				exists = yes
+			}
+			
+			ROOT = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+		###Temp bonus againt BAL countries
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = EQS_revenge_for_betrayal
+	x = -2
+	y = 1
+	relative_position_id = EQS_manehattan_slight
+	
+	bypass = {
+		NOT = { country_exists = CRY }
+	}
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_manehattan_slight
+		focus = EQS_traitorous_south
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_revenge_for_betrayal"
+		create_wargoal = {
+			type = annex_everything
+			target = CRY
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_torch_slums
+	x = 0
+	y = 1
+	relative_position_id = EQS_manehattan_slight
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_STG_dead_tt
+			all_of_scopes = {
+				array = global.shield_of_steel
+				exists = no
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_manehattan_slight
+		focus = EQS_traitorous_south
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_torch_slums"
+		###Some homeless ponies from the policies of Sinister see a few, seemingly innocent mares waltz into one of the worst of slums of the city, and they decide that they could accost or do even worse to them, and start to harass them before they find out, through force, they're inquisitors, and they set the entire slum on fire to clean it out for later use
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_flatten_jungles
+	x = 0
+	y = 1
+	relative_position_id = EQS_traitorous_south
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQS_BAL_dead_tt
+			all_of_scopes = {
+				array = global.southeast_countries
+				exists = no
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_manehattan_slight
+		focus = EQS_traitorous_south
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_flatten_jungles"
+		###A few thestrals dart through the jungle to meet up with some ponies from Baltimare to organize an ambush for some patrolling Solarists, and as they prepare to spring the trap, they are instead caught in a blast from some artillery strikes, which start to level the jungles around them to clear any rebels in the area
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_torch_bugs
+	x = 2
+	y = 1
+	relative_position_id = EQS_traitorous_south
+	
+	available = {
+		has_war = no
+	}
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_manehattan_slight
+		focus = EQS_traitorous_south
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_torch_bugs"
+		create_wargoal = {
+			every_country = {
+				limit = {
+					is_in_array = {
+						array = global.changeling_hegemony
+						value = THIS
+					}
+					exists = yes
+				}
+				
+				ROOT = {
+					create_wargoal = {
+						type = annex_everything
+						target = PREV
+					}
+				}
+			}
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+###Center###
+shared_focus = {
+	id = EQS_remind_of_masters
+	x = 0
+	y = 1
+	relative_position_id = EQS_torch_slums
+	
+	cost = 3
+	prerequisite = { focus = EQS_torch_slums }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_remind_of_masters"
+		###A couple of Stalliongrad workers are brought by inquisitors to some work camp or a prison factory facility, which they eventually recognize as something they helped build, in a lie that it would let them be free afterward, and the inquisitor quips that they aren't wrong, as the work will set them free; in death
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = EQS_empower_inquisitionis
+	x = 3
+	y = 1
+	relative_position_id = EQS_torch_slums
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_torch_slums
+		focus = EQS_flatten_jungles
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_empower_inquisitionis"
+		###An officer in the Militarium is in the middle of drilling some of his garrison when an inquisitor and a small number of her militia arrive and she starts ordering them around like she owns the place, and she puts him down a peg or two after revealing how the Inquisitionis has been given more control over the occupation of territory, since the Militarium kept bungling it up
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_matters_of_obedience
+	x = 0
+	y = 1
+	relative_position_id = EQS_flatten_jungles
+	
+	cost = 3
+	prerequisite = { focus = EQS_flatten_jungles }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_matters_of_obedience"
+		###Headwind goes out into Stableside with a large procession of recently captured prisoners, while managing to avoid being scored by any fruit or other items being thrown at her by some crowds that were forced to assemble, and she gives a short speech about how they will see what happens if they keep up with their resistance as she sets the prisoners on fire
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_improve_tank_projects
+	x = 0
+	y = 1
+	relative_position_id = EQS_remind_of_masters
+	
+	cost = 3
+	prerequisite = { focus = EQS_remind_of_masters }
+	mutually_exclusive = { focus = EQS_preserve_industrial_knowledge }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_improve_tank_projects"
+		add_tech_bonus = {
+			name = armor_bonus
+			uses = 1
+			bonus = 1.5
+			category = armor
+		}
+		#Idea here
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_preserve_industrial_knowledge
+	x = -1
+	y = 1
+	relative_position_id = EQS_empower_inquisitionis
+	
+	cost = 3
+	prerequisite = { focus = EQS_empower_inquisitionis }
+	mutually_exclusive = { focus = EQS_improve_tank_projects }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_preserve_industrial_knowledge"
+		#Idea here
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = EQS_third_option
+	x = 1
+	y = 1
+	relative_position_id = EQS_empower_inquisitionis
+	
+	cost = 3
+	prerequisite = { focus = EQS_empower_inquisitionis }
+	mutually_exclusive = { focus = EQS_brothers_and_sisters_in_the_empress }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_third_option"
+		###Fiery Dart is captured intentionally by the Custodiens and she argues with Nocturne to work with them to keep peace in the South-east, and promises to help with the Ezmetzli and Gushing Pulse, which barely gets Nocturne to agree; Fiery feels completely soiled from having to speak with a thestral
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_brothers_and_sisters_in_the_empress
+	x = 0
+	y = 1
+	relative_position_id = EQS_matters_of_obedience
+	
+	cost = 3
+	prerequisite = { focus = EQS_matters_of_obedience }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_brothers_and_sisters_in_the_empress"
+		add_ideas = EQS_family_in_the_empress
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_wipe_out_severyana
+	x = 1
+	y = 1
+	relative_position_id = EQS_improve_tank_projects
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_improve_tank_projects
+		focus = EQS_preserve_industrial_knowledge
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_wipe_out_severyana"
+		###A number of ponies from the remaining libraries and schools are dragged out into the street to be executed, as they would teach about Markism, but also the previous history of Severyana; it is planned for every single pony who knew still about Severyana to be killed, and all art of it destroyed to wipe out any mention of Stalliongrad
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_punishment_for_grand_rebellion
+	x = 1
+	y = 1
+	relative_position_id = EQS_third_option
+	
+	cost = 5
+	prerequisite = {
+		focus = EQS_third_option
+		focus = EQS_brothers_and_sisters_in_the_empress
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_punishment_for_grand_rebellion"
+		###Inquisitors march through Stableside to find the last holdouts of communism in the city, and in the end also find Lucky Star, who begs to be left alone as he just wants to worship Daybreaker like other normal ponies, but they recognize him as the one who's still been sending letters to Daybreaker and execute him
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_imperial_coastline
+	x = 2
+	y = 1
+	relative_position_id = EQS_wipe_out_severyana
+	
+	cost = 5
+	prerequisite = { focus = EQS_wipe_out_severyana }
+	prerequisite = { focus = EQS_punishment_for_grand_rebellion }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_imperial_coastline"
+		###Aurora begins a speech in Altigrad about how the Empire stands on the brink of true greatness, as they have proven to the changelings and the Crystal Empire that they will not be stopped, and will enact revenge for their betrayal and defeat, although she is still secretely nervous of what will go on
+	}
+	ai_will_do = { factor = 160 }
+}
+
+###CRY focuses###
+shared_focus = {
+	id = EQS_retain_limited_freedom
+	x = 2
+	y = 1
+	relative_position_id = EQS_revenge_for_betrayal
+	
+	cost = 3
+	prerequisite = { focus = EQS_revenge_for_betrayal }
+	mutually_exclusive = { focus = EQS_forcefully_integrate_monarchy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_retain_limited_freedom"
+		###Quick event overviewing athe damages already done by resistance members, and then stating that the new puppet government should be able to handle things fine; if they don't they're dead
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_forcefully_integrate_monarchy
+	x = 0
+	y = 1
+	relative_position_id = EQS_revenge_for_betrayal
+	
+	cost = 3
+	prerequisite = { focus = EQS_revenge_for_betrayal }
+	mutually_exclusive = { focus = EQS_retain_limited_freedom }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_forcefully_integrate_monarchy"
+		###Quick event speaking about how after that day, the Crystal Empire as an entity will no longer exist with the regalia of Cadance and Flurry destroyed; describe resistance they put up, although they were outmatched since they were captured anyway
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_remind_of_place
+	x = 0
+	y = 1
+	relative_position_id = EQS_retain_limited_freedom
+	
+	cost = 3
+	prerequisite = { focus = EQS_retain_limited_freedom }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_remind_of_place"
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CRY
+					is_claimed_by = CRY
+				}
+				is_owned_by = ROOT
+			}
+			add_compliance = 10
+			add_resistance = -5
+		}
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_repatriate_imperial_citizens
+	x = 0
+	y = 1
+	relative_position_id = EQS_forcefully_integrate_monarchy
+	
+	cost = 3
+	prerequisite = { focus = EQS_forcefully_integrate_monarchy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_repatriate_imperial_citizens"
+		###Some Imperial refugees are found by the Adoratio and are pushed back toward the Empire, and they try to protest and resist, but are eventually forced by an inquisitor to do so, lest they be burned at the stake for heresy, since obviously every Imperial citizen loves the Empress
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_thestral_problem
+	x = 0
+	y = 1
+	relative_position_id = EQS_remind_of_place
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_remind_of_place
+		focus = EQS_repatriate_imperial_citizens
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_thestral_problem"
+		###Some thestrals, possibly Bipen or Moonatik, are hunted by some inquisitors as they attempt to flee the Crystal Empire, since they know they are no longer safe there like they were before, and it ends with them hearing cries of other thestrals being hunted, although they are never found
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_betrayers_punishment
+	x = 0
+	y = 1
+	relative_position_id = EQS_repatriate_imperial_citizens
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_remind_of_place
+		focus = EQS_repatriate_imperial_citizens
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_betrayers_punishment"
+		###Quick event of summarizing how uncooperative the princesses have been, and how they are still seen as a symbol of freedom to the populace of the Empire, and then the choice is given for execution or imprisonment, with their benefits and drawbacks for each
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_establish_meuroms_dominance
+	x = 1
+	y = 1
+	relative_position_id = EQS_thestral_problem
+	
+	cost = 5
+	prerequisite = { focus = EQS_thestral_problem }
+	prerequisite = { focus = EQS_betrayers_punishment }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_establish_meuroms_dominance"
+		###Iron Tail is summoned by Aurora to Sanctum Solar, and she is nervous about what the meeting is about, but Aurora soon puts her at ease by stating how effective Meurom has been with the tasks already given it, so she is now in charge of it all, and Iron Tail is thankful, and also excited to use more slaves for the mines
+	}
+	ai_will_do = { factor = 160 }
+}
+
+###Changeling focuses###
+shared_focus = {
+	id = EQS_speak_their_language
+	x = 0
+	y = 1
+	relative_position_id = EQS_torch_bugs
+	
+	cost = 3
+	prerequisite = { focus = EQS_torch_bugs }
+	mutually_exclusive = { focus = EQS_tame_insects }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_speak_their_language"
+		###Quick event of speaking how the changelings are in general a martial society and respect military tradition, and that using a more structured, orderly occupation should lead to them making amends with us faster; aslo Blueblood has some ideas that he thinks could help and probably not tick them off in the process, to show how great a military he commands
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_tame_insects
+	x = 2
+	y = 1
+	relative_position_id = EQS_torch_bugs
+	
+	cost = 3
+	prerequisite = { focus = EQS_speak_their_language }
+	mutually_exclusive = { focus = EQS_speak_their_language }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_tame_insects"
+		###Quick event speaking of how the changelings are unruly, but the Militarium is not fit to solve the problem, as Blueblood is an idiot, and that Quasar Pulse already has plans, and big ones at that, and she will take care of it herself
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_emotion_rationing
+	x = 0
+	y = 1
+	relative_position_id = EQS_speak_their_language
+	
+	cost = 3
+	prerequisite = { focus = EQS_speak_their_language }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_emotion_rationing"
+		###A couple of changelings meet in a line outside one of the love factories, and are clearly starving for any food as they see other changelings suffering around them, and they are given a small pittance by their Militarium guards so they can continue to survive, which they are thankful for as they become more dependent on the Empire to live
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_spies_within_spies
+	x = 0
+	y = 1
+	relative_position_id = EQS_tame_insects
+	
+	cost = 3
+	prerequisite = { focus = EQS_tame_insects }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_spies_within_spies"
+		###A changeling is brought out of an emotion-induced coma (with sadness or fear; the changeling also has horrible nightmares while in it) and then threatened with it again if they don't agree to be an informant for the Inquisitionis, and the changeling is almost completely overwhelmed by the emotions still left in them, and weakly agrees
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = EQS_establish_new_pony_communities
+	x = 0
+	y = 1
+	relative_position_id = EQS_emotion_rationing
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_emotion_rationing
+		focus = EQS_spies_within_spies
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_establish_new_pony_communities"
+		#Add new states to array of coreable states, give them all +10% compliance
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_eradicate_hive_structure
+	x = 0
+	y = 1
+	relative_position_id = EQS_spies_within_spies
+	
+	cost = 4
+	prerequisite = {
+		focus = EQS_emotion_rationing
+		focus = EQS_spies_within_spies
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_eradicate_hive_structure"
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = NCA
+					is_core_of = CCA
+					is_core_of = SCS
+					is_core_of = CHN
+					is_core_of = OLE
+				}
+				is_owned_by = ROOT
+			}
+			add_compliance = 10
+		}
+		###Potentially an event of some of the hives of Vesalipolis being torn down and inquisitors persecuting any changelings who still think in a swarmish mentality
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_fitting_oppressor_task
+	x = 1
+	y = 1
+	relative_position_id = EQS_establish_new_pony_communities
+	
+	cost = 5
+	prerequisite = { focus = EQS_establish_new_pony_communities }
+	prerequisite = { focus = EQS_eradicate_hive_structure }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_fitting_oppressor_task"
+		###Chrysalis is brought forward by the Inquisitionis and interrogated and tortured, and eventually is given one chance to survive, and also for the entire changeling race to survive, which is to lead them all into effective slavery, so they can toil for the Empire as pennance for destroying it; she will be broken enough to agree or it ends with her being tortured more until she does agree
+	}
+	ai_will_do = { factor = 160 }
+}
+
+###Marelandia###
+shared_focus = {
+	id = EQS_annihilate_first_mistake
+	x = 0
+	y = 1
+	relative_position_id = EQS_imperial_coastline
+	
+	cost = 2
+	prerequisite = { focus = EQS_establish_meuroms_dominance }
+	prerequisite = { focus = EQS_imperial_coastline }
+	prerequisite = { focus = EQS_fitting_oppressor_task }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_annihilate_first_mistake"
+		###Aurora meets with Novus at the docks of Manehattan, with Novus appearing worried about Aurora wishing to be part of the invasion of Marelandia, and also that she may be growing too obsessed with seeing the Empress protected, and Aurora brushes it off, promising that it will be the end of any threat, forever, as the Empress is on her side; Novus isn't convinced
+		###Aurora could be overcompensating for her worry of looking untrusting of the Empress or Daybreaker's deity
 	}
 	ai_will_do = { factor = 320 }
 }
@@ -11146,22 +11803,6 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 22 }
-}
-
-shared_focus = {
-	id = EQS_brothers_and_sisters_in_the_empress
-	x = 0
-	y = 1
-	relative_position_id = EQS_reclaim_for_the_empress
-	
-	cost = 4
-	prerequisite = { focus = EQS_reclaim_for_the_empress }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus EQS_brothers_and_sisters_in_the_empress"
-		add_ideas = EQS_family_in_the_empress
-	}
-	ai_will_do = { factor = 30 }
 }
 
 shared_focus = {
