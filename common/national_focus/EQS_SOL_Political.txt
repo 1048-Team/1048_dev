@@ -11336,7 +11336,7 @@ shared_focus = {
 ###CRY focuses###
 shared_focus = {
 	id = EQS_retain_limited_freedom
-	x = 2
+	x = -2
 	y = 1
 	relative_position_id = EQS_revenge_for_betrayal
 	
@@ -11490,7 +11490,7 @@ shared_focus = {
 	relative_position_id = EQS_torch_bugs
 	
 	cost = 3
-	prerequisite = { focus = EQS_speak_their_language }
+	prerequisite = { focus = EQS_torch_bugs }
 	mutually_exclusive = { focus = EQS_speak_their_language }
 	
 	completion_reward = {
@@ -11616,6 +11616,181 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_annihilate_first_mistake"
 		###Aurora meets with Novus at the docks of Manehattan, with Novus appearing worried about Aurora wishing to be part of the invasion of Marelandia, and also that she may be growing too obsessed with seeing the Empress protected, and Aurora brushes it off, promising that it will be the end of any threat, forever, as the Empress is on her side; Novus isn't convinced
 		###Aurora could be overcompensating for her worry of looking untrusting of the Empress or Daybreaker's deity
+	}
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = EQS_reality_of_heresy
+	x = -2
+	y = 1
+	relative_position_id = EQS_annihilate_first_mistake
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQC_dead_tt
+			all_of_scopes = {
+				array = global.citizens_league
+				exists = no
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_annihilate_first_mistake }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reality_of_heresy"
+		###One or two Inner Party members are interrogated by the Inquisitionis, and they both realize that they are going to be killed just for basically existing, and try to find a way to get out of it, which there is no way possible
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_dedicate_new_capital
+	x = 2
+	y = 1
+	relative_position_id = EQS_annihilate_first_mistake
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = EQC_dead_tt
+			all_of_scopes = {
+				array = global.citizens_league
+				exists = no
+			}
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = EQS_annihilate_first_mistake }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reality_of_heresy"
+		###A dedication ceremony is held in New Manehattan, which is less damaged than Sunset, to declare it the new capital of the region, and also how it is the holy site of Ordo Multiplex, which is the sister Ordo of Multi
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_maresoc_example
+	x = -1
+	y = 1
+	relative_position_id = EQS_reality_of_heresy
+	
+	cost = 3
+	prerequisite = { focus = EQS_reality_of_heresy }
+	mutually_exclusive = { focus = EQS_destroy_partys_past }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_maresoc_example"
+		###Priestesses are sent out into Marelandia to show how MARESOC was twisting the truths of Daybreaker to point to themselves instead of to her, and that all who repent of it will be allowed to live in the new order
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_destroy_partys_past
+	x = 1
+	y = 1
+	relative_position_id = EQS_reality_of_heresy
+	
+	cost = 3
+	prerequisite = { focus = EQS_reality_of_heresy }
+	mutually_exclusive = { focus = EQS_maresoc_example }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_destroy_partys_past"
+		###Ponies who still are working in the Ministry of Truth are suddenly arrested and forced to destroy any and all history that is still left from the Party, and they do their best to try and preserve it before the entire building is set alight to ensure its destruction
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_everypony_is_guilty
+	x = -1
+	y = 1
+	relative_position_id = EQS_dedicate_new_capital
+	
+	cost = 3
+	prerequisite = { focus = EQS_dedicate_new_capital }
+	mutually_exclusive = { focus = EQS_undo_brainwashing }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_everypony_is_guilty"
+		###Follow a couple of Inner Party members as they are brought before a group of inquisitors, who briefly interrogate them before they declare all are guilty of heresy and threatening the Empress, and that they will be put to death as a message to any who oppose the Empress
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_undo_brainwashing
+	x = 1
+	y = 1
+	relative_position_id = EQS_dedicate_new_capital
+	
+	cost = 3
+	prerequisite = { focus = EQS_dedicate_new_capital }
+	mutually_exclusive = { focus = EQS_everypony_is_guilty }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_undo_brainwashing"
+		###An Inner Party member wakes up in the middle of Room 101, immediately recognizing it for what it is, and panicking as they know what will follow, and a couple of inquisitors come in to taunt the member a bit before offering a way out by swearing undying loyalty to Daybreaker, and when they reveal his greatest fear, ready to torment him, he agrees and begins to love Daybreaker then and there
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = EQS_reintroduce_religion
+	x = 0
+	y = 1
+	relative_position_id = EQS_destroy_partys_past
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_maresoc_example
+		focus = EQS_destroy_partys_past
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_reintroduce_religion"
+		###Sunset first arrives in Marelandia and balks at some of the humid weather, and then moves to dedicating the newest temple in the city of Sunset, and how it will be used to improve everypony's life, although she inwardly doubts much will be improved
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_establish_ordo_marelandia
+	x = 0
+	y = 1
+	relative_position_id = EQS_everypony_is_guilty
+	
+	cost = 3
+	prerequisite = {
+		focus = EQS_everypony_is_guilty
+		focus = EQS_undo_brainwashing
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_establish_ordo_marelandia"
+		###Aurora meets with Novus, who is a bit confused why she has been summoned, since she has remained dutious in her efforts in Multi, and Aurora states that she has been a help to everypony, and that she should be rewarded in kind, and made in charge of the greater Marelandia Ordo as a full archmage, which surprises Novus to no end and she almost refuses
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = EQS_ponykind_in_harmony
+	x = 1
+	y = 1
+	relative_position_id = EQS_reintroduce_religion
+	
+	cost = 2
+	prerequisite = { focus = EQS_reintroduce_religion }
+	prerequisite = { focus = EQS_establish_ordo_marelandia }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus EQS_ponykind_in_harmony"
+		###Aurora overlooks the courtyard of the Imperial Palace and then stares out into the sunset over the rim of the city, and she muses how she has done something that nopony before her has ever done, and proven to herself and to others her loyalty, and her abilities, and she believes to have completed Daybreaker's true mission of uniting all ponies under her to worship and be protected, and that the Empire will live for a millennium longer
 	}
 	ai_will_do = { factor = 320 }
 }
