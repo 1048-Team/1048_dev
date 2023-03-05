@@ -3305,7 +3305,7 @@ country_event = {
 			name = magic_bonus
 			uses = 2
 			bonus = 1
-			category = magical_equipment
+			category = magical_tech
 		}
 	}
 }
@@ -3426,7 +3426,11 @@ country_event = {
 	option = { #End of the line, Bluey
 		name = solar.281.a
 		hidden_effect = {
-			EQS_Quasar_Pulse = { set_character_flag = EQS_quasar_promoted }
+			EQS_Quasar_Pulse = { 
+				set_character_flag = EQS_quasar_promoted
+				promote_leader = yes
+			}
+			EQS_Quasar_Pulse = { remove_trait = { trait = recently_promoted } }
 		}
 		retire_character = EQS_Blueblood
 	}
@@ -3465,12 +3469,28 @@ country_event = { #The chosen country gets an envoy or emissary from the Solar E
 	id = solar.220
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.220"}
 	title = solar.220.t
-	desc = solar.220.d
+	desc = {
+		text = solar.220.d_a
+		trigger = {
+			EQS = {
+				has_country_flag = EQS_aggressive_negotiations
+			}
+		}
+	}
+	desc = {
+		text = solar.220.d_b
+		trigger = {
+			EQS = {
+				has_country_flag = EQS_flexible_negotiations
+			}
+		}
+	}
 	
 	is_triggered_only = yes
 	
 	option = { #We see that she is less harsh; we accept
 		name = solar.220.a
+		trigger = { EQS = { has_country_flag = EQS_aggressive_negotiations } }
 		ai_chance = {
 			factor = 25
 			modifier = { has_government = democratic factor = 0.2 }
@@ -3488,6 +3508,7 @@ country_event = { #The chosen country gets an envoy or emissary from the Solar E
 	}
 	option = { #She can be reasonable enough; how about something else?
 		name = solar.220.b
+		trigger = { EQS = { has_country_flag = EQS_flexible_negotiations } }
 		ai_chance = {
 			factor = 50
 			modifier = { has_government = democratic factor = 0.5 }
@@ -3629,16 +3650,16 @@ country_event = { #The responding rump state returns with a counter offer of les
 			}
 		}
 	}
-	option = { #No! They don't realize that this is the only way forward!
-		name = solar.222.b
-		ai_chance = { factor = 60 }
-		add_political_power = -25
-		add_war_support = 0.02
-		create_wargoal = {
-			target = FROM
-			type = annex_everything
-		}
-	}
+	#option = { #No! They don't realize that this is the only way forward!
+	#	name = solar.222.b
+	#	ai_chance = { factor = 60 }
+	#	add_political_power = -25
+	#	add_war_support = 0.02
+	#	create_wargoal = {
+	#		target = FROM
+	#		type = annex_everything
+	#	}
+	#}
 }
 
 country_event = { #The responding rump effectively laughs down Sunset's demand and she prepares for war
@@ -3653,9 +3674,19 @@ country_event = { #The responding rump effectively laughs down Sunset's demand a
 		name = solar.223.a
 		add_political_power = -25
 		add_war_support = 0.02
-		create_wargoal = {
-			target = FROM
-			type = annex_everything
+		IF = {
+			limit = { has_country_flag = EQS_aggressive_negotiations }
+			create_wargoal = {
+				target = FROM
+				type = annex_everything
+			}
+		}
+		ELSE_IF = {
+			limit = { has_country_flag = EQS_flexible_negotiations }
+			create_wargoal = {
+				target = FROM
+				type = puppet_wargoal_focus
+			}
 		}
 	}
 }
@@ -3706,6 +3737,12 @@ country_event = { #Sunset receives the response from the puppet and is pleased t
 	option = { #They made the right choice; I didn't want to hurt them more
 		name = solar.225.a
 		annex_country = { target = FROM }
+		every_state = {
+			limit = {
+				is_core_of = FROM
+			}
+			set_compliance = 30
+		}
 	}
 }
 

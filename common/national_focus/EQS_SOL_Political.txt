@@ -2557,7 +2557,7 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = EQS_aurora_high_mage_tt
-			has_country_flag = EQS_aurora_high_mage
+			has_idea = aurora_shinespark
 		}
 	}
 	prerequisite = { focus = EQS_down_to_business }
@@ -2618,7 +2618,7 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = EQS_pulsar_high_mage_tt
-			has_country_flag = EQS_pulsar_high_mage
+			has_idea = pulsar_sweep
 		}
 	}
 	prerequisite = { focus = EQS_down_to_business }
@@ -3115,7 +3115,6 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_press_to_submit"
-		###Send events to rump states
 		set_country_flag = EQS_aggressive_negotiations
 		every_country = {
 			limit = {
@@ -3142,7 +3141,6 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_give_freedom"
-		###Send events to rump states
 		set_country_flag = EQS_flexible_negotiations
 		every_country = {
 			limit = {
@@ -3172,7 +3170,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_takes_time"
-		#Idea here
+		add_ideas = EQS_calm_approach
 	}
 	ai_will_do = { factor = 65 }
 }
@@ -3192,7 +3190,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_press_integration"
-		#Idea here
+		add_ideas = EQS_forceful_approach
 	}
 	ai_will_do = { factor = 50 }
 }
@@ -3415,7 +3413,14 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_model_provinces"
-		#Idea here
+		IF = {
+			limit = { has_country_flag = EQS_aggressive_negotiations }
+			add_ideas = EQS_model_solarists
+		}
+		ELSE_IF = {
+			limit = { has_country_flag = EQS_flexible_negotiations }
+			add_ideas = EQS_model_harmonists
+		}
 		mark_focus_tree_layout_dirty = yes
 	}
 	ai_will_do = { factor = 160 }
