@@ -1,6 +1,7 @@
 ###Fractured Harmony News Events###
 
 add_namespace = solarempirenews
+add_namespace = fhgriffonianews
 
 news_event = { #Daybreaker returns from crisis
 	id = solarempirenews.1
@@ -9,13 +10,13 @@ news_event = { #Daybreaker returns from crisis
 	desc = solarempirenews.1.d
 	picture = GFX_news_daybreaker #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			EQS_Daybreaker = { is_country_leader = yes }
 			has_country_flag = daybreaker_reigns
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.1.a
@@ -77,7 +78,6 @@ news_event = { #Crowning of regent
 	desc = solarempirenews.2.d
 	picture = GFX_news_forever_sun #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			OR = {
@@ -86,6 +86,7 @@ news_event = { #Crowning of regent
 			}
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.2.a
@@ -129,12 +130,12 @@ news_event = { #Celestia returns
 	desc = solarempirenews.3.d
 	picture = GFX_news_event_canterlot_celestia #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			EQS_Sunbutt = { is_country_leader = yes }
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.3.a
@@ -176,12 +177,12 @@ news_event = { #Dyx is a motherbucking general
 	desc = solarempirenews.4.d
 	picture = GFX_news_forever_sun #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			has_country_flag = dyx_is_being_dyx
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.4.a
@@ -197,5 +198,49 @@ news_event = { #Dyx is a motherbucking general
 				tag = EQS
 			}
 		}
+	}
+}
+
+news_event = { #Griffonia war with EQC
+	id = fhgriffonianews.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.1"}
+	title = fhgriffonianews.1.t
+	desc = fhgriffonianews.1.d
+	
+	major = yes
+	trigger = {
+		GRI = {
+			has_war_with = EQC
+		}
+	}
+	fire_only_once = yes
+	
+	option = { #Two evils fighting it out
+		name = fhgriffonianews.1.a
+	}
+}
+
+news_event = { #Griffonia war 2, now with RCT
+	id = fhgriffonianews.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.2"}
+	title = fhgriffonianews.2.t
+	desc = fhgriffonianews.2.d
+	
+	major = yes
+	trigger = {
+		GRI = {
+			has_war_with = EQC
+		}
+		RCT = {
+			has_war_with = EQC
+		}
+		RCT = {
+			has_war_with = GRI
+		}
+	}
+	fire_only_once = yes
+	
+	option = { #A whole continental war!
+		name = fhgriffonianews.2.a
 	}
 }
