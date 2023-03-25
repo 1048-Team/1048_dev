@@ -138,7 +138,7 @@ shared_focus = {
 	id = CRY_industrial_crisis
 	cost = 5
 	x = 15
-	y = 5
+	y = 10
 
 	allow_branch = {
 		has_country_flag = CRY_convent_convened
@@ -367,7 +367,7 @@ shared_focus = {
 	id = CRY_problematic_economy
 	cost = 5
 	x = 25
-	y = 5
+	y = 10
 
 	allow_branch = {
 		has_country_flag = CRY_convent_convened
@@ -589,12 +589,13 @@ shared_focus = {
 	}
 }
 
+###Military###
 shared_focus = {
 	id = CRY_review_armed_forces
-	x = 15
+	x = 18
 	y = 0
 
-	cost = 5
+	cost = 10
 	allow_branch = {
 		has_country_flag = CRY_convent_convened
 	}
@@ -604,19 +605,177 @@ shared_focus = {
 		army_experience = 50
 	}
 	ai_will_do = {
-		factor = 45
+		factor = 80
 	}
 }
 
 shared_focus = {
-	id = CRY_tried_and_true
-	x = -3
+	id = CRY_planning_for_plannings_sake
+	x = -2
 	y = 1
 	relative_position_id = CRY_review_armed_forces
-
+	
 	cost = 5
 	prerequisite = {
 		focus = CRY_review_armed_forces
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_planning_for_plannings_sake"
+		
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = CRY_bullets_without_guns
+	x = 2
+	y = 1
+	relative_position_id = CRY_review_armed_forces
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_review_armed_forces
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_bullets_without_guns"
+		
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = CRY_more_guns
+	x = -3
+	y = 1
+	relative_position_id = CRY_planning_for_plannings_sake
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_planning_for_plannings_sake
+	}
+	mutually_exclusive = { focus = CRY_bigger_guns }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_more_guns"
+		
+	}
+	ai_will_do = { factor = 120 }
+}
+
+shared_focus = {
+	id = CRY_bigger_guns
+	x = -1
+	y = 1
+	relative_position_id = CRY_planning_for_plannings_sake
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_planning_for_plannings_sake
+	}
+	mutually_exclusive = { focus = CRY_more_guns }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_bigger_guns"
+		
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = CRY_expand_medical_corps
+	x = 1
+	y = 1
+	relative_position_id = CRY_planning_for_plannings_sake
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_planning_for_plannings_sake
+	}
+	mutually_exclusive = { focus = CRY_nationalise_ham_radios }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_expand_medical_corps"
+		
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_nationalise_ham_radios
+	x = -1
+	y = 1
+	relative_position_id = CRY_bullets_without_guns
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_bullets_without_guns
+	}
+	mutually_exclusive = { focus = CRY_expand_medical_corps }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_nationalise_ham_radios"
+		
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = CRY_matrix_powered_engines
+	x = 1
+	y = 1
+	relative_position_id = CRY_bullets_without_guns
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_bullets_without_guns
+	}
+	mutually_exclusive = { focus = CRY_night_guard_trainers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_matrix_powered_engines"
+		
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = CRY_night_guard_trainers
+	x = 3
+	y = 1
+	relative_position_id = CRY_bullets_without_guns
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_bullets_without_guns
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_night_guard_trainers"
+		
+	}
+	ai_will_do = { factor = 90 }
+}
+
+shared_focus = {
+	id = CRY_tried_and_true
+	x = 0
+	y = 1
+	relative_position_id = CRY_more_guns
+
+	cost = 5
+	prerequisite = {
+		focus = CRY_more_guns
+		focus = CRY_bigger_guns
+	}
+	prerequisite = {
+		focus = CRY_expand_medical_corps
+		focus = CRY_nationalise_ham_radios
+	}
+	prerequisite = {
+		focus = CRY_matrix_powered_engines
+		focus = CRY_night_guard_trainers
 	}
 	mutually_exclusive = { focus = CRY_blanket_of_shells }
 	mutually_exclusive = { focus = CRY_copying_STG_CHN }
@@ -633,13 +792,22 @@ shared_focus = {
 
 shared_focus = {
 	id = CRY_blanket_of_shells
-	x = -1
+	x = 2
 	y = 1
-	relative_position_id = CRY_review_armed_forces
+	relative_position_id = CRY_more_guns
 
 	cost = 5
 	prerequisite = {
-		focus = CRY_review_armed_forces
+		focus = CRY_more_guns
+		focus = CRY_bigger_guns
+	}
+	prerequisite = {
+		focus = CRY_expand_medical_corps
+		focus = CRY_nationalise_ham_radios
+	}
+	prerequisite = {
+		focus = CRY_matrix_powered_engines
+		focus = CRY_night_guard_trainers
 	}
 	mutually_exclusive = { focus = CRY_tried_and_true }
 	mutually_exclusive = { focus = CRY_copying_STG_CHN }
@@ -656,13 +824,22 @@ shared_focus = {
 
 shared_focus = {
 	id = CRY_copying_STG_CHN
-	x = 1
+	x = 0
 	y = 1
-	relative_position_id = CRY_review_armed_forces
+	relative_position_id = CRY_matrix_powered_engines
 
 	cost = 5
 	prerequisite = {
-		focus = CRY_review_armed_forces
+		focus = CRY_more_guns
+		focus = CRY_bigger_guns
+	}
+	prerequisite = {
+		focus = CRY_expand_medical_corps
+		focus = CRY_nationalise_ham_radios
+	}
+	prerequisite = {
+		focus = CRY_matrix_powered_engines
+		focus = CRY_night_guard_trainers
 	}
 	mutually_exclusive = { focus = CRY_blanket_of_shells }
 	mutually_exclusive = { focus = CRY_tried_and_true }
@@ -679,13 +856,22 @@ shared_focus = {
 
 shared_focus = {
 	id = CRY_utilise_population
-	x = 3
+	x = 2
 	y = 1
-	relative_position_id = CRY_review_armed_forces
+	relative_position_id = CRY_matrix_powered_engines
 
 	cost = 5
 	prerequisite = {
-		focus = CRY_review_armed_forces
+		focus = CRY_more_guns
+		focus = CRY_bigger_guns
+	}
+	prerequisite = {
+		focus = CRY_expand_medical_corps
+		focus = CRY_nationalise_ham_radios
+	}
+	prerequisite = {
+		focus = CRY_matrix_powered_engines
+		focus = CRY_night_guard_trainers
 	}
 	mutually_exclusive = { focus = CRY_blanket_of_shells }
 	mutually_exclusive = { focus = CRY_copying_STG_CHN }
@@ -697,6 +883,387 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 35
+	}
+}
+
+shared_focus = {
+	id = CRY_demands_of_war
+	x = 1
+	y = 1
+	relative_position_id = CRY_tried_and_true
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_tried_and_true
+		focus = CRY_blanket_of_shells
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_demands_of_war"
+		
+	}
+	ai_will_do = { factor = 100 }
+}
+
+shared_focus = {
+	id = CRY_increase_training_efforts
+	x = 0
+	y = 1
+	relative_position_id = CRY_demands_of_war
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_demands_of_war
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_increase_training_efforts"
+		
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_back_to_drawing_board
+	x = 0
+	y = 1
+	relative_position_id = CRY_increase_training_efforts
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_increase_training_efforts
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_back_to_drawing_board"
+		
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_new_army_new_products
+	x = 1
+	y = 1
+	relative_position_id = CRY_copying_STG_CHN
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_copying_STG_CHN
+		focus = CRY_utilise_population
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_new_army_new_products"
+		
+	}
+	ai_will_do = { factor = 120 }
+}
+
+shared_focus = {
+	id = CRY_practice_makes_perfect
+	x = 0
+	y = 1
+	relative_position_id = CRY_new_army_new_products
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_new_army_new_products
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_practice_makes_perfect"
+		
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_bring_new_guys
+	x = 0
+	y = 1
+	relative_position_id = CRY_practice_makes_perfect
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_practice_makes_perfect
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_bring_new_guys"
+		
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_feldspar_war_games
+	x = -4
+	y = 1
+	relative_position_id = CRY_bring_new_guys
+	
+	cost = 10
+	prerequisite = {
+		focus = CRY_back_to_drawing_board
+		focus = CRY_bring_new_guys
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_feldspar_war_games"
+		
+	}
+	ai_will_do = { factor = 160 }
+}
+
+###Air Force###
+shared_focus = {
+	id = CRY_crystal_air_force
+	x = 30
+	y = 0
+	
+	cost = 10
+	allow_branch = {
+		has_country_flag = CRY_convent_convened
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName] Focus CRY_crystal_air_force"
+		air_experience = 50
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_found_CAF_quebuck
+	x = 0
+	y = 1
+	relative_position_id = CRY_crystal_air_force
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_crystal_air_force
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_found_CAF_quebuck"
+		
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = CRY_prioritize_proactive_destruction
+	x = -1
+	y = 1
+	relative_position_id = CRY_found_CAF_quebuck
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_found_CAF_quebuck
+	}
+	mutually_exclusive = { focus = CRY_prioritize_air_supremacy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_prioritize_proactive_destruction"
+		
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = CRY_prioritize_air_supremacy
+	x = 1
+	y = 1
+	relative_position_id = CRY_found_CAF_quebuck
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_found_CAF_quebuck
+	}
+	mutually_exclusive = { focus = CRY_prioritize_proactive_destruction }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_prioritize_air_supremacy"
+		
+	}
+	ai_will_do = { factor = 120 }
+}
+
+shared_focus = {
+	id = CRY_hit_homefront
+	x = 0
+	y = 1
+	relative_position_id = CRY_prioritize_proactive_destruction
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_prioritize_proactive_destruction
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_hit_homefront"
+		
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = CRY_support_troops
+	x = 0
+	y = 1
+	relative_position_id = CRY_hit_homefront
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_hit_homefront
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_support_troops"
+		
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = CRY_total_destruction
+	x = 0
+	y = 1
+	relative_position_id = CRY_support_troops
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_support_troops
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_total_destruction"
+		
+	}
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
+	id = CRY_tear_apart_planes
+	x = 0
+	y = 1
+	relative_position_id = CRY_prioritize_air_supremacy
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_prioritize_air_supremacy
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_tear_apart_planes"
+		
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = CRY_protect_home
+	x = 0
+	y = 1
+	relative_position_id = CRY_tear_apart_planes
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_tear_apart_planes
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_protect_home"
+		
+	}
+	ai_will_do = { factor = 60 }
+}
+
+shared_focus = {
+	id = CRY_eye_for_eye
+	x = 0
+	y = 1
+	relative_position_id = CRY_protect_home
+	
+	cost = 5
+	prerequisite = {
+		focus = CRY_protect_home
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_eye_for_eye"
+		
+	}
+	ai_will_do = { factor = 70 }
+}
+
+shared_focus = {
+	id = CRY_air_victory
+	x = 1
+	y = 1
+	relative_position_id = CRY_total_destruction
+	
+	cost = 10
+	prerequisite = {
+		focus = CRY_total_destruction
+		focus = CRY_eye_for_eye
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_air_victory"
+		
+	}
+	ai_will_do = { factor = 70 }
+}
+
+###Navy###
+shared_focus = {
+	id = CRY_the_water_problem
+	x = 40
+	y = 0
+	
+	cost = 10
+	allow_branch = {
+		has_country_flag = CRY_convent_convened
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_the_water_problem"
+		###Maybe unlock chief of navies?
+		navy_experience = 50
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = CRY_touch_water #IE touch grass
+	x = 0
+	y = 1
+	relative_position_id = CRY_the_water_problem
+	
+	cost = 5
+	prerequisite = { focus = CRY_the_water_problem }
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_controlled_by = ROOT
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CRY_touch_water"
+		random_state = {
+			limit = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 3
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 3
+		}
 	}
 }
 
