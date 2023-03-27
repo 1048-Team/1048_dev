@@ -116,11 +116,28 @@ characters = {
 		advisor = {
 			slot = political_advisor
 			idea_token = belt_loop
+			cost = 175
 			allowed = {
 				original_tag = BLS
 			}
-			available = { NOT = { has_country_flag = BLS_directorate_toppled } }
-			visible = { NOT = { has_country_flag = BLS_directorate_toppled } }
+			available = {
+				hidden_trigger = {
+					OR = {
+						BLS_Solar_Flare = { is_country_leader = no }
+						AND = {
+							BLS_Nebula_Flare = { is_country_leader = yes }
+							NOT = { has_government = fascism }
+						}
+						has_country_flag = BLS_belt_loop_restored
+					}
+				}
+			}
+			visible = {
+				OR = {
+					NOT = { has_government = fascism }
+					has_country_flag = BLS_belt_loop_restored
+				}
+			}
 			
 			traits = { captain_of_industry }
 			research_bonus = { industry = 0.1 }
@@ -163,9 +180,6 @@ characters = {
 		gender = female
 		
 		portraits = {
-			civilian = {
-				large = "gfx/leaders/BLS/Solar_Flare.tga"
-			}
 			army = {
 				large = "gfx/leaders/BLS/Solar_Flare.tga"
 				small = "GFX_idea_BLS_solar_flare"
@@ -576,7 +590,9 @@ characters = {
 		gender = female
 		
 		portraits = {
-		
+			civilian = {
+				small = "GFX_idea_BLS_positron"
+			}
 		}
 		
 		advisor = {
@@ -745,12 +761,6 @@ characters = {
 			idea_token = note_jotter
 			allowed = {
 				original_tag = BLS
-			}
-			available = {
-				NOT = { has_country_flag = BLS_directorate_toppled }
-			}
-			visible = {
-				NOT = { has_country_flag = BLS_directorate_toppled }
 			}
 			
 			traits = { silent_workhorse }
