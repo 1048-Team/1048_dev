@@ -487,6 +487,153 @@ country_event = { #A couple of scientists who are loyal to Solar Flare flee thei
 	}
 }
 
+country_event = { #Nebula watches Solar Flare, who has dragged the rest of the Directorate out, as far as she can see, to the sinkhole where the ancient Bales necropolis is, and has them executed by fire for their corruption of the ponies against alicorns
+	id = bales_solar.22
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.22"}
+	title = bales_solar.22.t
+	desc = bales_solar.22.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will languish forever in Tartarus!
+		name = bales_solar.22
+		add_stability = 0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.035
+		}
+	}
+}
+
+country_event = { #Blazing comes to the throne room of Solar Flare, along with a few of the other cultists, and she is a bit confused at first until Solar Flare reveals that she is promoting them to the rare rank of apostle to have them spread her word through fire
+	id = bales_solar.23
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.23"}
+	title = bales_solar.23.t
+	desc = bales_solar.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #Let them feel my salvation!
+		name = bales_solar.23.a
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.1
+		}
+		add_political_power = 75
+	}
+}
+
+country_event = { #Some rebels manage to ambush a couple of cultists as they believe they have the advantage to weaken Solar Flare just a bit, but as they finish the job, the cultists are raised back to life as undead, and continue to attack the rebels instead
+	id = bales_solar.24
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.24"}
+	title = bales_solar.24.t
+	desc = bales_solar.24.d
+	
+	is_triggered_only = yes
+	
+	option = { #There is no death in the Goddess!
+		name = bales_solar.24.a
+		add_ideas = BLS_life_and_death
+	}
+}
+
+country_event = { #A few students grow bored out of their minds as they start their first classes in the new temple schools, which used to be universities before they were repurposed and they try to goof off but are blocked or reprimanded
+	id = bales_solar.25
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.25"}
+	title = bales_solar.25.t
+	desc = bales_solar.25.d
+	
+	is_triggered_only = yes
+	
+	option = { #This is so cruel!
+		name = bales_solar.25.a
+		every_state = {
+			limit = {
+				is_core_of = ROOT
+				is_owned_by = ROOT
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+country_event = { #One of the workers of a factory is called forward, without any chance to resist because of latent magics controlling him, to execute one of the weakest performing ponies in the factory floor, and he observes in horror as he can do nothing to stop it
+	id = bales_solar.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.26"}
+	title = bales_solar.26.t
+	desc = bales_solar.26.d
+	
+	is_triggered_only = yes
+	
+	option = { #What have I done?!
+		name = bales_solar.26.a
+		add_ideas = BLS_enslaved_minds
+	}
+}
+
+country_event = { #Solar Flare calls in Nebula and Blazing about how they will be left to control Mors Viva so she can focus entirely on preparing for the final war against all infidels
+	id = bales_solar.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.27"}
+	title = bales_solar.27.t
+	desc = bales_solar.27.d
+	
+	is_triggered_only = yes
+	
+	option = { #They shall accomplish the impossible
+		name = bales_solar.27.a
+		IF = {
+			limit = {
+				power_balance_value = {
+					id = BLS_power_balance
+					value < -0.19
+				}
+			}
+			hidden_effect = {
+				IF = {
+					limit = {
+						BLS_Nebula_Flare = { has_ideology = solarism }
+					}
+					BLS_Nebula_Flare = {
+						remove_country_leader_role = { ideology = solarism }
+						add_country_leader_role = {
+							country_leader = {
+								ideology = stellarism
+								desc = "POLITICS_NEBULA_FLARE_DESC"
+								expire = "1965.1.1"
+								traits = { nerdy_high_priestess }
+							}
+						}
+					}
+				}
+			}
+			BLS_Nebula_Flare = { promote_character = yes }
+		}
+		IF = {
+			limit = {
+				power_balance_value = {
+					id = BLS_power_balance
+					value > 0.19
+				}
+			}
+			BLS_Blazing_Sheath = { promote_character = yes }
+		}
+	}
+}
+
+country_event = { #Solar Flare oversees the country and sees that she is the only one who can properly control the country, and while she would rather focus on the war, she decides to lead as she believes she should
+	id = bales_solar.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.28"}
+	title = bales_solar.28.t
+	desc = bales_solar.28.d
+	
+	is_triggered_only = yes
+	
+	option = { #Idiots everywhere!
+		name = bales_solar.28.a
+		swap_ruler_traits = { remove = the_end_of_all_things_pol_weaker add = the_end_of_all_things_pol }
+	}
+}
+
 country_event = { #Solar Flare executes the last few remaining resistance members as she prepares to enact the punishment of the world, and promises to her followers that they will be with her in the afterlife
 	id = bales_solar.65
 	immediate = {log = "[GetDateText]: [Root.GetName]: event bales_solar.65"}
