@@ -553,6 +553,7 @@ country_event = { #Daybreaker brings Starlight and Trixie to perform the rites o
 	option = { #Rise my new generals
 		name = solar.40.a
 		set_country_flag = starlight_and_trixie_corrupted
+		custom_effect_tooltip = starlight_and_trixie_uncorrupted_tt
 	}
 }
 
@@ -1649,6 +1650,7 @@ country_event = { #Daybreaker purges the rest of the capitalist influence in the
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.102 #Daybreaker barges into a meeting of the Adoratio Primus that she summoned, and orders them all to double their efforts, since they obviously slackened while she was gone"}
 	title = solar.102.t
 	desc = solar.102.d
+	picture = GFX_event_angy_daybreaker
 	
 	is_triggered_only = yes
 	
@@ -1808,6 +1810,7 @@ country_event = { #Daybreaker assembles her diet and after they settle in, berat
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.130"}
 	title = solar.130.t
 	desc = solar.130.d
+	picture = GFX_event_angy_daybreaker
 	
 	is_triggered_only = yes
 	
@@ -1882,6 +1885,7 @@ country_event = { #In the training halls of the Imperial Palace a couple of inqu
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.135 #Have them gossip a bit about how hard she's going, too, and how she almost died more than once there"}
 	title = solar.135.t
 	desc = solar.135.d
+	picture = GFX_event_angy_daybreaker
 	
 	is_triggered_only = yes
 	
@@ -2080,6 +2084,7 @@ country_event = { #A report arrives talking about a recent clash between some Ad
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.139"}
 	title = solar.139.t
 	desc = solar.139.d
+	picture = GFX_event_solarempire
 	
 	is_triggered_only = yes
 	
@@ -2165,6 +2170,7 @@ country_event = { #A report arrives discussing that the prisons are overflowing 
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.140"}
 	title = solar.140.t
 	desc = solar.140.d
+	picture = GFX_event_solarempire
 	
 	is_triggered_only = yes
 	
@@ -2216,6 +2222,7 @@ country_event = { #A report is given of how there is a lot of damage to the vari
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.141"}
 	title = solar.141.t
 	desc = solar.141.d
+	picture = GFX_event_solarempire
 	
 	is_triggered_only = yes
 	
@@ -2287,6 +2294,7 @@ country_event = { #A report of ponies that had fled the Solar Empire originally 
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.142"}
 	title = solar.142.t
 	desc = solar.142.d
+	picture = GFX_event_solarempire
 	
 	is_triggered_only = yes
 	
@@ -2332,6 +2340,7 @@ country_event = { #A report arrives of draft dodging and also the rogue legion f
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.143"}
 	title = solar.143.t
 	desc = solar.143.d
+	picture = GFX_event_solarempire
 	
 	is_triggered_only = yes
 	
@@ -2438,6 +2447,7 @@ country_event = { #Daybreaker is furious at her former state and she brings in h
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.111"}
 	title = solar.111.t
 	desc = solar.111.d
+	picture = GFX_event_angy_daybreaker
 	
 	is_triggered_only = yes
 	
@@ -2657,6 +2667,7 @@ country_event = { #Some changelings are holding down a bunker as a frontline sta
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.144"}
 	title = solar.144.t
 	desc = solar.144.d
+	picture = GFX_event_angy_daybreaker
 	
 	is_triggered_only = yes
 	
@@ -4894,7 +4905,7 @@ country_event = { #Aurora panics and believes she can't do the job of regent unt
 }
 
 country_event = { #Aurora and Sunset manage to get an idea of what to have her say to the populace, and she practices before she goes on the balcony over the square
-	id = solar.302
+	id = solar.302 #Aurora is still in the middle of having a small panic attack about her becoming the new regent, and she believes that nopony will follow her because of her age and relative lack of experience, so she determines that she needs to act swiftly and decisively on some issues to prove her worth
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.302"}
 	title = solar.302.t
 	desc = solar.302.d
@@ -4903,8 +4914,8 @@ country_event = { #Aurora and Sunset manage to get an idea of what to have her s
 	
 	option = { #Here me today, faithful ponies of the Empress!
 		name = solar.302.a
-		add_stability = 0.03
-		add_war_support = 0.03
+		add_stability = 0.05
+		add_political_power = 50
 		custom_effect_tooltip = aurora_reduce_modifier_2_tt
 		add_to_variable = { stability_change = 0.15 }
 		add_to_variable = { army_speed_change = 0.1 }
@@ -4942,8 +4953,64 @@ country_event = { #Novus gets a mysterious summon to Sanctum Solar, and she is n
 	
 	option = { #Congratulations, my friend
 		name = solar.304.a
-		set_country_flag = novus_advisor
-		add_political_power = 50
+		EQS_Novus_Flux = {
+			remove_advisor_role = { slot = high_command }
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = novus_flux
+					
+					traits = { imperial_conscience }
+					
+					ai_will_do = {
+						factor = 1
+					}
+				}
+			}
+		}
+	}
+	option = { #Actually, I could be useful elsewhere
+		name = solar.304.b
+		if = {
+			limit = {
+				has_idea = novus_flux
+			}
+			EQS_Novus_Flux = {
+				remove_advisor_role = { slot = high_command }
+				add_advisor_role = {
+					activate = yes
+					advisor = {
+						slot = high_command
+						idea_token = novus_flux
+						cost = 200
+						ledger = army
+						traits = { army_regrouping_3 }
+
+						ai_will_do = {
+							factor = 1
+						}
+					}
+				}
+			}
+		}
+		else = {
+			EQS_Novus_Flux = {
+				remove_advisor_role = { slot = high_command }
+				add_advisor_role = {
+					advisor = {
+						slot = high_command
+						idea_token = novus_flux
+						cost = 200
+						ledger = army
+						traits = { army_regrouping_3 }
+
+						ai_will_do = {
+							factor = 1
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
