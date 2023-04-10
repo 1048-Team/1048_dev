@@ -31,7 +31,7 @@ characters = {
 			expire = "1965.1.1"
 			ideology = technocracy
 			desc = ""
-			traits = { }
+			traits = { vice_director_pol }
 		}
 		
 		advisor = {
@@ -41,11 +41,13 @@ characters = {
 				original_tag = BLS
 			}
 			available = {
+				NOT = { has_country_flag = BLS_directorate_toppled }
 				hidden_trigger = {
 					BLS_Stratus_Stream = { is_country_leader = no }
 				}
 			}
 			visible = {
+				NOT = { has_country_flag = BLS_directorate_toppled }
 				hidden_trigger = {
 					BLS_Stratus_Stream = { is_country_leader = no }
 				}
@@ -61,7 +63,6 @@ characters = {
 		
 		portraits = {
 			civilian = {
-				large = "gfx/leaders/BLS/Nebula_Flare.tga"
 				small = "GFX_idea_BLS_nebula_flare"
 			}
 			army = {
@@ -75,6 +76,12 @@ characters = {
 			allowed = {
 				original_tag = BLS
 			}
+			available = {
+				hidden_trigger = { BLS_Nebula_Flare = { is_country_leader = no } }
+			}
+			visible = {
+				hidden_trigger = { BLS_Nebula_Flare = { is_country_leader = no } }
+			}
 			
 			traits = { dimensional_theorist }
 			
@@ -84,10 +91,10 @@ characters = {
 		corps_commander = {
 			traits = { pony_race_trait victory_through_planning mechanicus_deus former_cultist }
 			skill = 4
-			attack_skill = 2
-			defense_skill = 2
+			attack_skill = 3
+			defense_skill = 3
 			planning_skill = 5
-			logistics_skill = 1
+			logistics_skill = 2
 		}
 			
 		country_leader = {
@@ -96,6 +103,44 @@ characters = {
 			ideology = solarism
 			traits = {
 			}
+		}
+	}
+	
+	BLS_Belt_Loop = {
+		name = BLS_Belt_Loop_name
+		
+		portraits = {
+		
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = belt_loop
+			cost = 175
+			allowed = {
+				original_tag = BLS
+			}
+			available = {
+				hidden_trigger = {
+					OR = {
+						BLS_Solar_Flare = { is_country_leader = no }
+						AND = {
+							BLS_Nebula_Flare = { is_country_leader = yes }
+							NOT = { has_government = fascism }
+						}
+						has_country_flag = BLS_belt_loop_restored
+					}
+				}
+			}
+			visible = {
+				OR = {
+					NOT = { has_government = fascism }
+					has_country_flag = BLS_belt_loop_restored
+				}
+			}
+			
+			traits = { captain_of_industry }
+			research_bonus = { industry = 0.1 }
 		}
 	}
 	
@@ -135,9 +180,6 @@ characters = {
 		gender = female
 		
 		portraits = {
-			civilian = {
-				large = "gfx/leaders/BLS/Solar_Flare.tga"
-			}
 			army = {
 				large = "gfx/leaders/BLS/Solar_Flare.tga"
 				small = "GFX_idea_BLS_solar_flare"
@@ -156,7 +198,7 @@ characters = {
 					limit = {
 						original_tag = BLS
 					}
-					has_country_flag = solar_flare_resurrected
+					has_country_flag = BLS_solar_flare_assumes_control
 				}
 			}
 		}
@@ -166,7 +208,7 @@ characters = {
 			desc = "POLITICS_SOLAR_FLARE_DESC"
 			ideology = stellarism
 			traits = {
-				the_end_of_all_things_pol
+				the_end_of_all_things_pol_weaker
 			}
 		}
 	}
@@ -187,10 +229,12 @@ characters = {
 			idea_token = purple_haze
 			allowed = {
 				original_tag = BLS
-				has_country_flag = solar_flare_resurrected
+			}
+			available = {
+				has_country_flag = BLS_necron_cultists
 			}
 			visible = {
-				has_country_flag = necron_cultists
+				has_country_flag = BLS_necron_cultists
 			}
 			
 			traits = { herald_of_fire }
@@ -202,7 +246,7 @@ characters = {
 			traits = { pony_race_trait ancient_cultist flame_master }
 			skill = 3
 			attack_skill = 4
-			defense_skill = 1
+			defense_skill = 3
 			planning_skill = 2
 			logistics_skill = 1
 			visible = {
@@ -210,7 +254,7 @@ characters = {
 					limit = {
 						original_tag = BLS
 					}
-					has_country_flag = necron_cultists
+					has_country_flag = BLS_necron_cultists
 				}
 			}
 		}
@@ -221,6 +265,19 @@ characters = {
 		gender = female
 		
 		portraits = {
+			army = {
+				large = "gfx/leaders/BLS/Blazing_Sheath.tga"
+				small = "GFX_idea_BLS_blazing_sheath"
+			}
+		}
+		
+		country_leader = {
+			expire = "1965.1.1"
+			desc = "POLITICS_BLAZING_SHEATH_DESC"
+			ideology = stellarism
+			traits = {
+				warrior_high_priestess
+			}
 		}
 		
 		advisor = {
@@ -228,10 +285,14 @@ characters = {
 			idea_token = blazing_sheath
 			allowed = {
 				original_tag = BLS
-				has_country_flag = necron_cultists
+			}
+			allowed = {
+				has_country_flag = BLS_necron_cultists
+				hidden_trigger = { BLS_Blazing_Sheath = { is_country_leader = no } }
 			}
 			visible = {
-				has_country_flag = necron_cultists
+				has_country_flag = BLS_necron_cultists
+				hidden_trigger = { BLS_Blazing_Sheath = { is_country_leader = no } }
 			}
 			
 			traits = { herald_of_doom }
@@ -241,18 +302,65 @@ characters = {
 		
 		field_marshal = {
 			traits = { pony_race_trait ancient_cultist prophetess_of_death timeless_fury }
-			desc = POLITICS_BLAZING_SHEATH_DESC
+			desc = "POLITICS_BLAZING_SHEATH_DESC"
 			skill = 3
-			attack_skill = 3
-			defense_skill = 2
-			planning_skill = 3
+			attack_skill = 4
+			defense_skill = 1
+			planning_skill = 4
 			logistics_skill = 1
 			visible = {
 				if = {
 					limit = {
 						original_tag = BLS
 					}
-					has_country_flag = necron_cultists
+					has_country_flag = BLS_necron_cultists
+				}
+			}
+		}
+	}
+	
+	BLS_Melting_Point = {
+		name = BLS_Melting_Point_name
+		gender = female
+		
+		portraits = {
+			army = {
+				large = "gfx/leaders/BLS/Melting_Point.tga"
+				small = "GFX_idea_BLS_melting_point"
+			}
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = melting_point
+			allowed = {
+				original_tag = BLS
+			}
+			available = {
+				has_country_flag = BLS_necron_cultists
+			}
+			visible = {
+				has_country_flag = BLS_necron_cultists
+			}
+			
+			traits = { steadfast_disciple_advisor }
+		
+			ai_will_do = { factor = 1 }
+		}
+		
+		corps_commander = {
+			traits = { pony_race_trait ancient_cultist steadfast_disciple }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 3
+			logistics_skill = 2
+			visible = {
+				if = {
+					limit = {
+						original_tag = BLS
+					}
+					has_country_flag = BLS_necron_cultists
 				}
 			}
 		}
@@ -271,10 +379,12 @@ characters = {
 			removal_cost = -1
 			allowed = {
 				original_tag = BLS
-				has_country_flag = dawn_of_luster
+			}
+			available = {
+				has_country_flag = BLS_dawn_of_luster
 			}
 			visible = {
-				has_country_flag = dawn_of_luster
+				has_country_flag = BLS_dawn_of_luster
 			}
 			
 			traits = { student_of_destiny }
@@ -315,6 +425,7 @@ characters = {
 			}
 			visible = {
 				has_country_flag = BLS_interdimensional_travel
+				NOT = { BLS_Adagio_Dazzle = { is_country_leader = yes } }
 			}
 			traits = { ancient_schemer_advisor }
 		}
@@ -383,10 +494,10 @@ characters = {
 		gender = female
 		
 		portraits = {
-			#civilian = {
-			#	large = "gfx/leaders/BLS/Sci_Twi"
-			#	small = "GFX_idea_BLS_sci_twi"
-			#}
+			civilian = {
+				large = "gfx/leaders/BLS/Sci_Twi_panik.tga"
+				small = "GFX_idea_BLS_sci_twi_panik"
+			}
 		}
 		
 		country_leader = {
@@ -408,8 +519,483 @@ characters = {
 			}
 			visible = {
 				has_country_flag = BLS_interdimensional_travel
+				NOT = { BLS_Sci_Twi = { is_country_leader = yes } }
 			}
 			traits = { otherworldly_scientist_advisor }
+		}
+	}
+	
+	BLS_First_Draft = {
+		name = BLS_First_Draft_name
+		
+		portraits = {
+		
+		}
+		
+		advisor = {
+			slot = theorist
+			idea_token = first_draft
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { military_theorist }
+		}
+	}
+	
+	BLS_Cirrus = {
+		name = BLS_Cirrus_name
+		gender = female
+		
+		portraits = {
+		
+		}
+		
+		advisor = {
+			slot = theorist
+			idea_token = cirrus
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { air_warfare_theorist }
+		}
+	}
+	
+	BLS_Tidal_Wave = {
+		name = BLS_Tidal_Wave_name
+		gender = female
+		
+		portraits = {
+		
+		}
+		
+		###Naval theorist; add during naval tree
+	}
+	
+	BLS_Scalding_Steam = {
+		name = BLS_Scalding_Steam_name
+		
+		portraits = {
+		
+		}
+		
+		###Solar Flare naval theorist
+	}
+	
+	BLS_Positron = {
+		name = BLS_Positron_name
+		gender = female
+		
+		portraits = {
+			civilian = {
+				small = "GFX_idea_BLS_positron"
+			}
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = positron
+			cost = 175
+			allowed = {
+				original_tag = BLS
+			}
+			available = {
+				NOT = { has_country_flag = BLS_directorate_toppled }
+			}
+			visible = {
+				NOT = { has_country_flag = BLS_directorate_toppled }
+			}
+			
+			traits = { war_industrialist }
+			modifier = { research_speed_factor = 0.05 }
+		}
+	}
+	
+	BLS_Bright_Vector = {
+		name = BLS_Bright_Vector_name
+		
+		portraits = {
+		
+		}
+		
+		advisor = {
+			slot = army_chief
+			idea_token = bright_vector
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			###Could be restored in Solar Flare's path
+			
+			traits = { army_chief_organizational_2 }
+		}
+		
+		field_marshal = {
+			traits = { pony_race_trait marshal_of_science expert_delegator }
+			skill = 4
+			attack_skill = 2
+			defense_skill = 4
+			planning_skill = 5
+			logistics_skill = 2
+		}
+	}
+	
+	BLS_Blackboard = {
+		name = BLS_Blackboard_name
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = army_chief
+			idea_token = blackboard
+			cost = 200
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { army_chief_reform_3 }
+		}
+	}
+	
+	BLS_Turbulence = {
+		name = BLS_Turbulence_name
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = navy_chief
+			idea_token = turbulence
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { navy_chief_reform_2 }
+		}
+	}
+	
+	BLS_Tail_Wing = {
+		name = BLS_Tail_Wing_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = air_chief
+			idea_token = tail_wing
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { air_chief_reform_2 }
+		}
+	}
+	
+	BLS_Night_Caller = {
+		name = BLS_Night_Caller_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = air_chief
+			idea_token = night_caller
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = {
+				air_chief_all_weather_2
+			}
+		}
+	}
+	
+	BLS_Trench_Run = {
+		name = BLS_Trench_Run_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = trench_run
+			ledger = army
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = {
+				army_infantry_2
+			}
+		}
+		corps_commander = {
+			traits = { pony_race_trait infantry_leader }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 4
+			planning_skill = 2
+			logistics_skill = 3
+		}
+	}
+	
+	BLS_Note_Jotter = {
+		name = BLS_Note_Jotter_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = note_jotter
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { silent_workhorse }
+		}
+	}
+	
+	BLS_Valkyrie = {
+		name = BLS_Valkyrie_name
+		gender = female
+		
+		portraits = {
+			army = {
+				large = "gfx/leaders/BLS/Valkyrie.tga"
+			}
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = valkyrie
+			ledger = air
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { air_air_combat_training_2 }
+		}
+		corps_commander = {
+			traits = { pony_race_trait air_force_commander reckless }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+		}
+	}
+	
+	BLS_Soaring_Skies = {
+		name = BLS_Soaring_Skies_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = soaring_skies
+			ledger = air
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { air_air_combat_training_2 }
+		}
+		corps_commander = {
+			traits = { pony_race_trait air_force_commander reckless }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+		}
+	}
+	
+	BLS_Steel_Facet = {
+		name = BLS_Steel_Facet_name
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = steel_facet
+			ledger = army
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { army_armored_2 }
+		}
+		corps_commander = {
+			traits = { pony_race_trait armor_officer career_officer }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+	
+	BLS_Fine_Cursive = {
+		name = BLS_Fine_Cursive_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = fine_cursive
+			ledger = army
+			cost = 200
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { army_logistics_3 }
+		}
+		field_marshal = {
+			traits = { pony_race_trait mechanicus_deus inflexible_strategist precise_orator }
+			skill = 3
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 3
+		}
+	}
+	
+	BLS_Meltdown = {
+		name = BLS_Meltdown_name
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = meltdown
+			ledger = army
+			cost = 50
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { army_artillery_1 }
+		}
+	}
+	
+	BLS_Marathon = {
+		name = BLS_Marathon_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = marathon
+			ledger = army
+			cost = 50
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { alt_army_chief_maneuver_1 }
+		}
+		corps_commander = {
+			traits = { pony_race_trait mechanicus_deus reckless nerdy_jock }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+	
+	BLS_Sunbeam = {
+		name = BLS_Sunbeam_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = sunbeam
+			ledger = air
+			cost = 50
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { air_air_superiority_1 }
+		}
+	}
+	
+	BLS_Briny_Splash = {
+		name = BLS_Briny_Splash_name
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = high_command
+			idea_token = briny_splash
+			ledger = navy
+			cost = 100
+			allowed = {
+				original_tag = BLS
+			}
+			
+			traits = { navy_carrier_2 }
+		}
+	}
+	
+	BLS_Lemon_Juice = {
+		name = BLS_Lemon_Juice_name
+		gender = female
+		
+		portraits = {
+		}
+		
+		advisor = {
+			slot = political_advisor
+			idea_token = absconditus_lumen
+			allowed = {
+				original_tag = BLS
+				has_dlc = "La Resistance"
+			}
+			visible = {
+				can_create_intelligence_agency = yes
+			}
+			available = {
+				has_intelligence_agency = yes
+			}
+			traits = { head_of_intelligence }
+			
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					has_intelligence_agency = no
+					factor = 0
+				}
+			}
 		}
 	}
 }

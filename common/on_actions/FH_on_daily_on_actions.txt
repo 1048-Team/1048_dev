@@ -51,4 +51,32 @@ on_actions = {
 			}
 		}
 	}
+	on_daily_BLS = {
+		effect = {
+			if = {
+				limit = {
+					exists = yes
+					BLS_has_uncored_home_states = yes
+				}
+				add_to_variable = { BLS_evangelistic_fervor_pool = modifier@BLS_evangelistic_fervor }
+				clamp_variable = {
+					var = BLS_evangelistic_fervor_pool
+					min = 0
+					max = 10
+				}
+			}
+			if = {
+				limit = {
+					exists = yes
+					has_country_flag = BLS_resurrect_dead_cultists
+				}
+				add_to_variable = { BLS_necromantic_power_pool = modifier@BLS_necromantic_power }
+				clamp_variable = {
+					var = BLS_necromantic_power_pool
+					min = 0
+					max = BLS_necromantic_power_pool_max
+				}
+			}
+		}
+	}
 }
