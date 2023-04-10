@@ -1,0 +1,208 @@
+
+BLS_power_balance = {
+	initial_value = 0.1
+	left_side = BLS_nebula_flare_side
+	right_side = BLS_blazing_sheath_side
+	decision_category = BLS_balance_of_power_category
+	
+	###Balanced influence
+	range = {
+		id = BLS_neutral_influence
+		min = -0.05
+		max = 0.05
+		modifier = {
+			stability_factor = 0.05
+			political_power_factor = 0.05
+		}
+		on_activate = {
+			log = "BLS_neutral_influence"
+		}
+	}
+	
+	###Nebula Flare
+	side = {
+		id = BLS_nebula_flare_side
+		#icon = GFX_BLS_nebula_flare_side
+		
+		range = {
+			id = BLS_slight_nebula_influence
+			min = -0.2
+			max = -0.05
+			modifier = {
+				stability_factor = 0.025
+				research_speed_factor = 0.03
+			}
+			on_activate = {
+				log = "BLS_slight_nebula_influence"
+			}
+		}
+		
+		range = {
+			id = BLS_moderate_nebula_influence
+			min = -0.5
+			max = -0.2
+			modifier = {
+				stability_factor = -0.025
+				research_speed_factor = 0.075
+				political_power_factor = -0.02
+			}
+			on_activate = {
+				log = "BLS_moderate_nebula_influence"
+				IF = {
+					limit = {
+						NOT = { has_country_flag = BLS_blazing_usurps }
+						has_completed_focus = BLS_leave_to_priestesses
+					}
+					IF = {
+						limit = {
+							BLS_Nebula_Flare = { has_ideology = solarism }
+						}
+						BLS_Nebula_Flare = {
+							remove_country_leader_role = { ideology = solarism }
+						}
+						BLS_Nebula_Flare = {
+							add_country_leader_role = {
+								promote_leader = yes
+								country_leader = {
+									ideology = stellarism
+									desc = "POLITICS_NEBULA_FLARE_DESC"
+									expire = "1965.1.1"
+									traits = { nerdy_high_priestess }
+								}
+							}
+						}
+					}
+					ELSE = {
+						BLS_Nebula_Flare = { promote_character = yes }
+					}
+				}
+			}
+		}
+		
+		range = {
+			id = BLS_heavy_nebula_influence
+			min = -0.85
+			max = -0.5
+			modifier = {
+				stability_factor = -0.075
+				research_speed_factor = 0.15
+				political_power_factor = -0.05
+				production_speed_buildings_factor = 0.05
+				BLS_necromantic_power = 0.25
+			}
+			on_activate = {
+				log = "BLS_heavy_nebula_influence"
+			}
+		}
+		
+		range = {
+			id = BLS_total_nebula_influence
+			min = -1
+			max = -0.85
+			modifier = {
+				stability_factor = -0.125
+				research_speed_factor = 0.25
+				political_power_factor = -0.1
+				production_speed_buildings_factor = 0.1
+				experience_gain_army_factor = 0.03
+				experience_gain_navy_factor = 0.03
+				experience_gain_air_factor = 0.03
+				BLS_necromantic_power = 0.5
+			}
+			on_activate = {
+				log = "BLS_total_nebula_influence"
+				IF = {
+					limit = { has_country_flag = BLS_nebula_usurps }
+					custom_effect_tooltip = BLS_permanent_nebula_tt
+					hidden_effect = {
+						#country_event = bales_solar.38
+					}
+				}
+			}
+		}
+	}
+	
+	###Blazing Sheath
+	side = {
+		id = BLS_blazing_sheath_side
+		#icon = GFX_BLS_blazing_sheath_side
+		
+		range = {
+			id = BLS_slight_blazing_influence
+			min = 0.05
+			max = 0.2
+			modifier = {
+				stability_factor = 0.075
+				war_support_factor = 0.03
+			}
+			on_activate = {
+				log = "BLS_slight_blazing_influence"
+			}
+		}
+		
+		range = {
+			id = BLS_moderate_blazing_influence
+			min = 0.2
+			max = 0.5
+			modifier = {
+				stability_factor = 0.1
+				war_support_factor = 0.075
+				political_power_factor = -0.02
+			}
+			on_activate = {
+				log = "BLS_moderate_blazing_influence"
+				IF = {
+					limit = {
+						NOT = { has_country_flag = BLS_nebula_usurps }
+						has_completed_focus = BLS_leave_to_priestesses
+					}
+					BLS_Blazing_Sheath = { promote_character = yes }
+				}
+			}
+		}
+		
+		range = {
+			id = BLS_heavy_blazing_influence
+			min = 0.5
+			max = 0.85
+			modifier = {
+				stability_factor = 0.1
+				war_support_factor = 0.125
+				political_power_factor = -0.05
+				research_speed_factor = -0.05
+				army_speed_factor = 0.05
+				BLS_necromantic_power = 0.5
+			}
+			on_activate = {
+				log = "BLS_heavy_blazing_influence"
+			}
+		}
+		
+		range = {
+			id = BLS_total_blazing_influence
+			min = 0.85
+			max = 1
+			modifier = {
+				stability_factor = 0.1
+				war_support_factor = 0.15
+				political_power_factor = -0.1
+				research_speed_factor = -0.1
+				political_advisor_cost_factor = 0.1
+				army_speed_factor = 0.05
+				conscription = 0.002
+				war_stability_factor = 0.2
+				BLS_necromantic_power = 1
+			}
+			on_activate = {
+				log = "BLS_total_blazing_influence"
+				IF = {
+					limit = { has_country_flag = BLS_blazing_usurps }
+					custom_effect_tooltip = BLS_permanent_blazing_tt
+					hidden_effect = {
+						#country_event = bales_solar.39
+					}
+				}
+			}
+		}
+	}
+}
