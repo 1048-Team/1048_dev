@@ -1,6 +1,8 @@
 ###Fractured Harmony News Events###
 
 add_namespace = solarempirenews
+add_namespace = fhgriffonianews
+add_namespace = fhzebricanews
 
 news_event = { #Daybreaker returns from crisis
 	id = solarempirenews.1
@@ -9,13 +11,13 @@ news_event = { #Daybreaker returns from crisis
 	desc = solarempirenews.1.d
 	picture = GFX_news_daybreaker #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			EQS_Daybreaker = { is_country_leader = yes }
 			has_country_flag = daybreaker_reigns
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.1.a
@@ -77,7 +79,6 @@ news_event = { #Crowning of regent
 	desc = solarempirenews.2.d
 	picture = GFX_news_forever_sun #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			OR = {
@@ -86,6 +87,7 @@ news_event = { #Crowning of regent
 			}
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.2.a
@@ -129,12 +131,12 @@ news_event = { #Celestia returns
 	desc = solarempirenews.3.d
 	picture = GFX_news_event_canterlot_celestia #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			EQS_Sunbutt = { is_country_leader = yes }
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.3.a
@@ -176,12 +178,12 @@ news_event = { #Dyx is a motherbucking general
 	desc = solarempirenews.4.d
 	picture = GFX_news_forever_sun #Temp
 	major = yes
-	is_triggered_only = yes
 	trigger = {
 		EQS = {
 			has_country_flag = dyx_is_being_dyx
 		}
 	}
+	fire_only_once = yes
 
 	option = {
 		name = solarempirenews.4.a
@@ -197,5 +199,98 @@ news_event = { #Dyx is a motherbucking general
 				tag = EQS
 			}
 		}
+	}
+}
+
+news_event = { #Griffonia war with EQC
+	id = fhgriffonianews.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.1"}
+	title = fhgriffonianews.1.t
+	desc = fhgriffonianews.1.d
+	
+	major = yes
+	trigger = {
+		GRI = {
+			has_war_with = EQC
+		}
+	}
+	fire_only_once = yes
+	
+	option = { #Two evils fighting it out
+		name = fhgriffonianews.1.a
+	}
+}
+
+news_event = { #Griffonia war 2, now with RCT
+	id = fhgriffonianews.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.2"}
+	title = fhgriffonianews.2.t
+	desc = fhgriffonianews.2.d
+	
+	major = yes
+	trigger = {
+		GRI = {
+			has_war_with = EQC
+		}
+		RCT = {
+			has_war_with = EQC
+		}
+		RCT = {
+			has_war_with = GRI
+		}
+	}
+	fire_only_once = yes
+	
+	option = { #A whole continental war!
+		name = fhgriffonianews.2.a
+	}
+}
+
+news_event = { #BRF uniting the League of Non-Aligned Nations
+	id = fhgriffonianews.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.3"}
+	title = fhgriffonianews.3.t
+	desc = fhgriffonianews.3.d
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #They still stand no chance
+		name = fhgriffonianews.3.a
+	}
+}
+
+news_event = { #The three-way war between EQC, GRI, and RCT vs BRF and its faction
+	id = fhgriffonianews.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.4"}
+	title = fhgriffonianews.4.t
+	desc = fhgriffonianews.4.d
+	
+	major = yes
+	trigger = {
+		BRF = {
+			has_war_with = GRI
+			has_war_with = EQC
+			has_war_with = RCT
+		}
+	}
+	fire_only_once = yes
+	
+	option = { #And the light of Harmony dies in Griffonia
+		name = fhgriffonianews.4.a
+	}
+}
+
+news_event = { #HPS ends HIP war
+	id = fhzebricanews.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhzebricanews.1"}
+	title = fhzebricanews.1.t
+	desc = fhzebricanews.1.d
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #MARESOC's evils are spreading further
+		name = fhzebricanews.1.a
 	}
 }

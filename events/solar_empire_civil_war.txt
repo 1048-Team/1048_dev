@@ -186,11 +186,11 @@ country_event = { #Reports of communist agitation and destruction while the civi
 		random_state = {
 			limit = {
 				is_fully_controlled_by = ROOT
-				num_of_military_factories > 0
+				arms_factory > 0
 			}
 			damage_building = {
 				type = arms_factory
-				level = 0.5
+				damage = 0.5
 			}
 		}
 	}
@@ -742,24 +742,20 @@ country_event = { #From a distance, some Adoratio priestesses observe a fight ha
 	
 	option = { #What could have happened there?
 		name = solarwar.34.a
-		hidden_effect = {
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_army_leader = yes
-				}
-				save_event_target_as = SOL_purge_1
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_army_leader = yes
 			}
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_army_leader = yes
-				}
-				save_event_target_as = SOL_purge_2
-			}
+			retire = yes
 		}
-		retire_character = event_target:SOL_purge_1
-		retire_character = event_target:SOL_purge_2
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_army_leader = yes
+			}
+			retire = yes
+		}
 		add_political_power = 75
 		add_war_support = 0.07
 	}
@@ -1858,24 +1854,20 @@ country_event = { #Various generals are put on trial for sedition, and evidence 
 				factor = 1.25
 			}
 		}
-		hidden_effect = {
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_army_leader = yes
-				}
-				save_event_target_as = SOL_purge_1
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_army_leader = yes
 			}
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_army_leader = yes
-				}
-				save_event_target_as = SOL_purge_2
-			}
+			retire = yes
 		}
-		retire_character = event_target:SOL_purge_1
-		retire_character = event_target:SOL_purge_2
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_army_leader = yes
+			}
+			retire = yes
+		}
 		add_to_variable = { SLW_trial_tracker = 2 }
 	}
 	option = { #Show them mercy
@@ -1924,6 +1916,10 @@ country_event = { #Wraps up the trials, with Nova satisfied that things have bee
 	
 	option = { #We can move on to other things
 		add_political_power = 25
+		swap_ideas = {
+			remove_idea = SLW_militarium_impunity_3
+			add_idea = SLW_militarium_impunity_4
+		}
 		IF = {
 			limit = {
 				check_variable = { SLW_trial_tracker < 2 }
@@ -1949,24 +1945,21 @@ country_event = { #Nova is surprised when there is an uprising in the nation fro
 	
 	option = { #There were traitors after all
 		###Remove Blueblood and generals, add back in last idea
-		hidden_effect = {
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_army_leader = yes
-				}
-				save_event_target_as = SOL_purge_1
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_army_leader = yes
 			}
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_army_leader = yes
-				}
-				save_event_target_as = SOL_purge_2
-			}
+			retire = yes
 		}
-		retire_character = event_target:SOL_purge_1
-		retire_character = event_target:SOL_purge_2
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_army_leader = yes
+			}
+			retire = yes
+		}
+		remove_ideas = SLW_militarium_impunity_4
 		retire_character = EQS_Blueblood
 	}
 }
@@ -1980,17 +1973,15 @@ country_event = { #A trial goes on for some of the heads of the Imperial Admiral
 	is_triggered_only = yes
 	
 	option = { #Who needs admirals, anyway?
+		name = solarwar.100.a
 		###Remove admiral, apply reduced spirit
-		hidden_effect = {
-			random_character = {
-				limit = {
-					SOL_ordo_not_immune_to_purge = yes
-					is_navy_leader = yes
-				}
-				save_event_target_as = SOL_purge_1
+		random_character = {
+			limit = {
+				SOL_ordo_not_immune_to_purge = yes
+				is_navy_leader = yes
 			}
+			retire = yes
 		}
-		retire_character = event_target:SOL_purge_1
 		swap_ideas = {
 			remove_idea = SLW_naval_deserters
 			add_idea = SLW_naval_deserters_2
@@ -2007,6 +1998,7 @@ country_event = { #Nova watches a demonstration of some new capital ship weapons
 	is_triggered_only = yes
 	
 	option = { #What are a few blocks in the name of progress?
+		name = solarwar.101.a
 		add_ideas = SLW_biggest_stick
 	}
 }

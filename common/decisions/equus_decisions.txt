@@ -4,7 +4,6 @@ form_equestria_category = {
 			is_subject = no
 			owns_state = 3
 		}
-		visible = { owns_state = 3 }
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision form_equestria"
@@ -30,10 +29,6 @@ form_equestria_category = {
 			has_cosmetic_tag = EQS_NEW
 			owns_state = 3
 		}
-		visible = { 
-			owns_state = 3 
-			NOT = { has_global_flag = canterlot_has_been_renamed }
-		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision rename_sanctum_solar"
@@ -45,14 +40,7 @@ form_equestria_category = {
 		available = {
 			is_subject = no
 			owns_state = 74
-			owns_state = 692
-			owns_state = 122
-			owns_state = 70
-			owns_state = 170
-		}
-		visible = {
-			owns_state = 74
-			owns_state = 692
+			owns_state = 1218
 			owns_state = 122
 			owns_state = 70
 			owns_state = 170
@@ -79,13 +67,7 @@ form_equestria_category = {
 	}
 	reintigrating_the_southeast = {
 		available = {
-			owns_state = 688
-			NOT = {
-				has_country_flag = SEE
-			}
-		}
-		visible = {
-			owns_state = 688
+			owns_state = 1214
 			NOT = {
 				has_country_flag = SEE
 			}
@@ -112,9 +94,6 @@ form_equestria_category = {
 				country_exists = AWR
 			}
 		}
-		visible = {
-			owns_state = 153
-		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision reclaim_severyana"
@@ -137,9 +116,6 @@ form_equestria_category = {
 				NOT = { country_exists = SCS }
 			}
 		}
-		visible = {
-			controls_state = 21
-		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision southern_glory"
@@ -158,9 +134,6 @@ form_equestria_category = {
 				CCA = { has_capitulated = yes }
 				NOT = { country_exists = CCA }
 			}
-		}
-		visible = { 
-			controls_state = 66
 		}
 		fire_only_once = yes
 		complete_effect = {
@@ -181,9 +154,6 @@ form_equestria_category = {
 				NOT = { country_exists = NCA }
 			}
 		}
-		visible = {
-			controls_state = 14
-		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision reclaim_the_west_coast"
@@ -197,10 +167,7 @@ form_equestria_category = {
 	}
 	equestria_restored = {
 		available = {
-			controls_state = 690
-		}
-		visible = {
-			controls_state = 690
+			controls_state = 1216
 		}
 		fire_only_once = yes
 		complete_effect = {
@@ -222,16 +189,21 @@ form_yakyakistan_category = {
 		available = {
 			owns_state = 11
 			has_war = no
-			OR = {
-				original_tag = YAH
-				AND = {
-					original_tag = SMH
-					owns_state = 274
+			custom_trigger_tooltip = {
+				tooltip = YAK_dead_rival_warlord_tt
+				OR = {
+					AND = {
+						original_tag = YAH
+						owns_state = 11
+						NOT = { country_exists = SMH }
+					}
+					AND = {
+						original_tag = SMH
+						owns_state = 274
+						NOT = { country_exists = YAH }
+					}
 				}
 			}
-		}
-		visible = {
-			controls_state = 11
 		}
 		fire_only_once = yes
 		complete_effect = {
@@ -260,15 +232,6 @@ form_yakyakistan_category = {
 			owns_state = 342
 			has_war = no
 		}
-		visible = {
-			controls_state = 335
-			controls_state = 336
-			controls_state = 337
-			controls_state = 281
-			controls_state = 278
-			controls_state = 277
-			controls_state = 342
-		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision integrate_old_territory"
@@ -287,9 +250,6 @@ form_PLB_category = {
 		available = {
 			owns_state = 290
 			has_war = no
-		}
-		visible = {
-			controls_state = 290
 		}
 		fire_only_once = yes
 		complete_effect = {
@@ -311,15 +271,12 @@ form_PLB_category = {
 form_nova_griffonia_cetegory = {
 	a_new_nova_griffonia = {
 		available = {
-			owns_state = 691
+			owns_state = 1217
 			owns_state = 281
 			owns_state = 243
 			has_war = no
 		}
 		visible = {
-			controls_state = 691
-			controls_state = 281
-			controls_state = 243
 			AND = {
 				NOT = { original_tag = GRF }
 				NOT = { has_cosmetic_tag = GRF_EMP }
@@ -330,9 +287,12 @@ form_nova_griffonia_cetegory = {
 			log = "[GetDateText]: [Root.GetName]: Decision a_new_nova_griffonia"
 			every_state = {
 				limit = {
-					is_in_array = {
-						array = global.GRF_territory
-						value = THIS.id
+					OR = {
+						is_in_array = {
+							array = global.GRF_territory
+							value = THIS.id
+						}
+						state = 1217
 					}
 				}
 				add_core_of = ROOT
@@ -340,10 +300,10 @@ form_nova_griffonia_cetegory = {
 			IF = {
 				limit = {
 					NOT = {
-						691 = { is_capital = yes }
+						1217 = { is_capital = yes }
 					}
 				}
-				set_capital = { state = 691 }
+				set_capital = { state = 1217 }
 			}
 			IF = {
 				limit = {
@@ -358,7 +318,7 @@ form_western_griffonian_empire_category = {
 	rebirth_of_the_western_empire = {
 		available = {
 			has_war = no
-			owns_state = 691
+			owns_state = 1217
 			owns_state = 243
 			owns_state = 281
 			owns_state = 289
@@ -366,17 +326,17 @@ form_western_griffonian_empire_category = {
 			owns_state = 274
 			owns_state = 325
 		}
-		visible = {
-			controls_state = 691
-		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
 			every_state = {
 				limit = {
-					is_in_array = {
-						array = global.WGE_territory
-						value = THIS.id
+					OR = {
+						is_in_array = {
+							array = global.WGE_territory
+							value = THIS.id
+						}
+						state = 1217
 					}
 				}
 				add_core_of = ROOT
@@ -392,10 +352,10 @@ form_western_griffonian_empire_category = {
 			IF = {
 				limit = {
 					NOT = {
-						691 = { is_capital = yes }
+						1217 = { is_capital = yes }
 					}
 				}
-				set_capital = { state = 691 }
+				set_capital = { state = 1217 }
 			}
 		}
 	}
