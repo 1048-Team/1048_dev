@@ -1,0 +1,206 @@
+assign_unit_leader_solarist_trait = {
+	log = "[GetDateText]: Character: [This.GetName] creator [?creator.GetTag] assign_unit_leader_solarist_trait - FH on Actions"
+	if = {
+		limit = { is_female = yes }
+		log = "[GetDateText]: Character: [This.GetName] is_female = yes - assign_unit_leader_solarist_trait - FH on Actions"
+	}
+	else = {
+		log = "[GetDateText]: Character: [This.GetName] is_female = no - assign_unit_leader_solarist_trait - FH on Actions"
+	}
+	if = {
+		limit = {
+			is_female = yes
+			var:creator = {
+				is_solarist_country = yes
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
+			}
+		}
+		random_list = {
+			33 = { add_trait = { trait = solaris_adoratio } }
+			33 = { add_trait = { trait = solaris_inquisitionis } }
+			33 = { add_trait = { trait = solaris_militarium } }
+		}
+	}
+	else_if = {
+		limit = {
+			is_female = yes
+			var:creator = {
+				is_solarist_country = yes
+				original_tag = MTS
+			}
+		}
+		random_list = {
+			20 = { add_trait = { trait = solaris_militarium } }
+			20 = { add_trait = { trait = solaris_adoratio } }
+			60 = { }
+		}
+	}
+	else_if = {
+		limit = {
+			is_female = yes
+			var:creator = {
+				is_solarist_country = yes
+				original_tag = WHY
+			}
+		}
+		random_list = {
+			25 = { add_trait = { trait = solaris_militarium } }
+			15 = { add_trait = { trait = solaris_adoratio } }
+			5 = { add_trait = { trait = solaris_inquisitionis } }
+			55 = { }
+		}
+	}
+	else_if = {
+		limit = {
+			var:creator = {
+				is_solarist_country = yes
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
+			}
+		}
+		random_list = {
+			15 = { add_trait = { trait = solaris_adoratio } }
+			15 = { add_trait = { trait = solaris_inquisitionis } }
+			70 = { add_trait = { trait = solaris_militarium } }
+		}
+	}
+	else_if = {
+		limit = {
+			var:creator = {
+				is_solarist_country = yes
+				original_tag = MTS
+			}
+		}
+		random_list = {
+			30 = { add_trait = { trait = solaris_militarium } }
+			70 = { }
+		}
+	}
+	else_if = {
+		limit = {
+			var:creator = {
+				is_solarist_country = yes
+				original_tag = WHY
+			}
+		}
+		random_list = {
+			35 = { add_trait = { trait = solaris_militarium } }
+			5 = { add_trait = { trait = solaris_inquisitionis } }
+			60 { }
+		}
+	}
+}
+assign_unit_leader_technocrat_trait = {
+	log = "[GetDateText]: Character: [This.GetName] creator [?creator.GetTag] assign_unit_leader_technocrat_trait - FH on Actions"
+	if = {
+		limit = { is_female = yes }
+		log = "[GetDateText]: Character: [This.GetName] is_female = yes - assign_unit_leader_technocrat_trait - FH on Actions"
+	}
+	else = {
+		log = "[GetDateText]: Character: [This.GetName] is_female = no - assign_unit_leader_technocrat_trait - FH on Actions"
+	}
+	if = {
+		limit = {
+			var:creator = {
+				original_tag = BLS
+				is_mors_viva = no
+			}
+		}
+		random_list = {
+			40 = { add_trait = { trait = mechanicus_deus } set_temp_variable = { assigned_trait = 1 } }
+			60 = { }
+		}
+	}
+	if = {
+		limit = {
+			var:creator = {
+				is_mors_viva = yes
+			}
+			NOT = { check_variable = { assigned_trait = 1 } }
+		}
+		random_list = {
+			15 = { add_trait = { trait = ancient_cultist } }
+			85 = { }
+		}
+	}
+}
+assign_unit_leader_thestral_trait = {
+	log = "[GetDateText]: Character: [This.GetName] creator [?creator.GetTag] assign_unit_leader_thestral_trait - FH on Actions"
+	if = {
+		limit = { is_female = yes }
+		log = "[GetDateText]: Character: [This.GetName] is_female = yes - assign_unit_leader_thestral_trait - FH on Actions"
+	}
+	else = {
+		log = "[GetDateText]: Character: [This.GetName] is_female = no - assign_unit_leader_thestral_trait - FH on Actions"
+	}
+	if = {
+		limit = {
+			var:creator = {
+				original_tag = EEE
+			}
+		}
+		random_list = {
+			10 = { add_trait = { trait = night_guard } set_temp_variable = { assigned_trait = 1 } }
+			90 = { }
+		}
+	}
+	if = {
+		limit = {
+			var:creator = {
+				original_tag = EEE
+				NOT = { check_variable = { assigned_trait = 1 } }
+			}
+		}
+		random_list = {
+			25 = { add_trait = { trait = custodiens_nocte } set_temp_variable = { assigned_trait = 1 } }
+			75 = { }
+		}
+	}
+	if = {
+		limit = {
+			var:creator = {
+				original_tag = EEE
+				NOT = { check_variable = { assigned_trait = 1 } }
+			}
+		}
+		random_list = {
+			20 = { add_trait = { trait = ezmetzli_general } }
+			80 = { }
+		}
+	}
+}
+assign_FH_general_flavour_traits = {
+	if = {
+		limit = {
+			owner = {
+				OR = {
+					is_EQS_SOL_1048 = yes
+					original_tag = MTS
+					original_tag = WHY
+				}
+			}
+		}
+		assign_unit_leader_solarist_trait = yes
+	}
+	else_if = {
+		limit = {
+			owner = {
+				original_tag = BLS
+			}
+		}
+		assign_unit_leader_technocrat_trait = yes
+	}
+	else_if = {
+		limit = {
+			owner = {
+				original_tag = EEE
+			}
+		}
+		assign_unit_leader_thestral_trait = yes
+	}
+}
