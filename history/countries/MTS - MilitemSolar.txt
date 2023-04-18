@@ -15,6 +15,7 @@ set_technology = {
 	gw_artillery = 1
 	tech_support = 1
 	motorised_infantry = 1
+	interwar_antiair = 1
 	basic_train = 1
 }
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
@@ -80,8 +81,12 @@ if = {
 		not = { has_dlc = "Man the Guns" }
 	}
 	set_technology = {
+		early_destroyer = 1
+		basic_destroyer = 1
+		early_light_cruiser = 1
+		basic_light_cruiser = 1
+		early_heavy_cruiser = 1
 		early_submarine = 1
-		basic_submarine = 1
 		transport = 1
 	}
 }
@@ -90,12 +95,20 @@ if = {
 		has_dlc = "Man the Guns"
 	}
 	set_technology = {
-		early_ship_hull_light = 1
 		basic_depth_charges = 1
 		basic_torpedo = 1
-		early_ship_hull_submarine = 1
 		basic_battery = 1
 		basic_naval_mines = 1
+		mtg_transport = 1
+		early_ship_hull_light = 1
+		basic_ship_hull_light = 1
+		early_ship_hull_submarine = 1
+		early_ship_hull_cruiser = 1
+		basic_ship_hull_cruiser = 1
+		basic_battery = 1
+		basic_light_battery = 1
+		basic_medium_battery = 1
+		basic_cruiser_armor_scheme = 1
 		mtg_transport = 1
 	}
 }
@@ -137,6 +150,29 @@ recruit_character = MTS_Broken_Shield
 recruit_character = MTS_Various_Cells
 recruit_character = MTS_Warm_Night
 recruit_character = MTS_sunnyflare
+recruit_character = MTS_Crona_Shine
+recruit_character = MTS_Underbrush
+recruit_character = MTS_Aevum_Lux
+recruit_character = MTS_Baricenter
+recruit_character = MTS_Castellum_Ferrum
+recruit_character = MTS_Misty_Night
+recruit_character = MTS_Storm_Surge
+recruit_character = MTS_Hardtack
+recruit_character = MTS_Rustic_Glade
+recruit_character = MTS_Long_Sprint
+recruit_character = MTS_Evening_Tempest
+recruit_character = MTS_Soft_Wake
+recruit_character = MTS_Wide_Beam
+recruit_character = MTS_Skyline
+recruit_character = MTS_Radiant_Bliss
+recruit_character = MTS_Smoke_Cinder
+recruit_character = MTS_Calcate
+recruit_character = MTS_Serene_Shore
+recruit_character = MTS_Pinpoint
+recruit_character = MTS_Sky_Strafe
+recruit_character = MTS_Greyscale
+recruit_character = MTS_Cerulean
+recruit_character = MTS_Charred_Streak
 
 if = {
 	limit = {
@@ -158,6 +194,66 @@ if = {
 			tank_nsb_engine_upgrade = 2
 		}
 		icon = "gfx/interface/equipmentdesigner/tanks/designer/ENG/ENG_light_BAB_camo.dds"
+	}
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	### Variants ###
+	# Submarines #
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Purity Class"
+		type = ship_hull_light_1
+		name_group = SOL_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_2
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_2
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_depth_charge_1
+		}
+	}
+	# Light Cruisers #
+	create_equipment_variant = {
+		name = "Chastity Class"
+		type = ship_hull_cruiser_1
+		name_group = SOL_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_2
+			fixed_ship_armor_slot = ship_armor_cruiser_1
+			mid_1_custom_slot = ship_torpedo_1
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_light_medium_battery_1
+		}
+	}
+	# Heavy Cruisers #
+	create_equipment_variant = {
+		name = "Holy Class"
+		type = ship_hull_cruiser_1
+		name_group = SOL_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = ship_armor_cruiser_1
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			mid_1_custom_slot = ship_airplane_launcher_1
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_medium_battery_2
+		}
 	}
 }
 
