@@ -938,15 +938,6 @@ country_event = { #Dotted Quill wakes up in a start as he hears Daybreaker angri
 				advisor = {
 					slot = political_advisor
 					idea_token = dotted_quill
-					allowed = {
-						original_tag = EQS
-					}
-					visible = {
-						NOT = { EQS_Sunbutt = { is_country_leader = yes } }
-					}
-					available = {
-						is_EQS_SOL_1048 = yes
-					}
 					traits = { chief_scribe }
 				}
 			}
@@ -2892,22 +2883,6 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 							advisor = {
 								slot = political_advisor
 								idea_token = aurora_shinespark
-								allowed = {
-									original_tag = EQS
-								}
-								visible = {
-									AND = {
-										is_EQS_SOL_1048 = yes
-										has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
-										has_country_flag = aurora_promoted
-									}
-								}
-								available = {
-									AND = {
-										is_EQS_SOL_1048 = yes
-										has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
-									}
-								}
 								can_be_fired = no
 
 								traits = { high_mage_shinespark }
@@ -2930,23 +2905,6 @@ country_event = { #After much debate, Sunset grows tired of the bickering and ma
 							advisor = {
 								slot = political_advisor
 								idea_token = aurora_shinespark
-								allowed = {
-									original_tag = EQS
-								}
-								visible = {
-									AND = {
-										is_EQS_SOL_1048 = yes
-										has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
-										has_country_flag = aurora_promoted
-									}
-								}
-								available = {
-									AND = {
-										is_EQS_SOL_1048 = yes
-										has_country_leader = { ruling_only = yes character = EQS_Sunset_Shimmer_1048 }
-										has_country_flag = aurora_promoted
-									}
-								}
 								can_be_fired = no
 
 								traits = { high_mage_shinespark }
@@ -4691,7 +4649,11 @@ country_event = {
 				is_owned_by = ROOT
 			}
 			add_compliance = 5
-			compliance_growth = 0.05
+			add_state_modifier = {
+				modifier = {
+					compliance_gain = 0.05
+				}
+			}
 		}
 	}
 }
@@ -4713,9 +4675,13 @@ country_event = {
 			}
 			add_resistance = 10
 			add_compliance = 10
-			resistance_target = -5
-			resistance_growth = -0.1
-			resistance_decay = 0.1
+			add_state_modifier = {
+				modifier = {
+					resistance_target = -5
+					resistance_growth = -0.1
+					resistance_decay = 0.1
+				}
+			}
 		}
 	}
 }
@@ -4791,7 +4757,11 @@ country_event = {
 				is_core_of = CHN
 				is_owned_by = ROOT
 			}
-			local_non_core_manpower = 0.05
+			add_state_modifier = {
+				modifier = {
+					local_non_core_manpower = 0.05
+				}
+			}
 		}
 		every_state = {
 			limit = {
