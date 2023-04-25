@@ -1,3 +1,6 @@
+###Militem Solar###
+
+###Opening Tree###
 shared_focus = {
 	id = MTS_siege_new_horseleans
 	x = 8
@@ -7,7 +10,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_siege_new_horseleans"
-		army_xp = 10
+		army_experience = 10
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -299,5 +302,875 @@ shared_focus = {
 		focus = MTS_first_step
 	}
 	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_theological_debates"
+	}
+	
 	ai_will_do = { factor = 320 }
+}
+
+###Military Trees###
+###Army###
+shared_focus = {
+	id = MTS_practical_matters
+	x = 20
+	y = 0
+	
+	cost = 2
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = MTS_stabilize_new_horseleans_tt
+			has_completed_focus = MTS_theological_debates
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_practical_matters"
+		army_experience = 30
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_share_imperial_blueprints
+	x = -3
+	y = 1
+	relative_position_id = MTS_practical_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_share_imperial_blueprints"
+		add_tech_bonus = {
+			name = infantry_weapons_bonus
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_embrace_chaos
+	x = -1
+	y = 1
+	relative_position_id = MTS_practical_matters
+	
+	cost = 4
+	prerequisite = { focus = MTS_practical_matters }
+	mutually_exclusive = { focus = MTS_order_ranks }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_embrace_chaos"
+		swap_ideas = {
+			remove_idea = MTS_corrupted_conscripts
+			add_idea = MTS_cleansing_militias
+		}
+		add_ideas = MTS_autonomous_legions
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_order_ranks
+	x = 1
+	y = 1
+	relative_position_id = MTS_practical_matters
+	
+	cost = 4
+	prerequisite = { focus = MTS_practical_matters }
+	mutually_exclusive = { focus = MTS_embrace_chaos }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_order_ranks"
+		swap_ideas = {
+			remove_idea = MTS_corrupted_conscripts
+			add_idea = MTS_cleansing_militias
+		}
+		add_ideas = MTS_ordered_legions
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_supply_concerns
+	x = 3
+	y = 1
+	relative_position_id = MTS_practical_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_supply_concerns"
+		add_tech_bonus = {
+			name = support_bonus
+			uses = 2
+			bonus = 1
+			category = support_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_long_arms
+	x = -1
+	y = 1
+	relative_position_id = MTS_share_imperial_blueprints
+	
+	cost = 3
+	prerequisite = { focus = MTS_share_imperial_blueprints }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_long_arms"
+		add_tech_bonus = {
+			name = artillery_bonus
+			bonus = 1
+			uses = 2
+			category = artillery
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_solarist_militias
+	x = -1
+	y = 1
+	relative_position_id = MTS_embrace_chaos
+	
+	cost = 4
+	prerequisite = { focus = MTS_embrace_chaos }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_solarist_militias"
+		remove_ideas = MTS_cleansing_militias
+		swap_ideas = {
+			remove_idea = MTS_autonomous_legions
+			add_idea = MTS_imperial_pony_wave
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_advocate_curriculum
+	x = 1
+	y = 1
+	relative_position_id = MTS_embrace_chaos
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_embrace_chaos
+		focus = MTS_order_ranks
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_advocate_curriculum"
+		###Country event of either a pony being dragged to schools and not wanting to learn, or an event summarizing a learning event of some of the communists in their war schooling that goes awry, such as an artillery training course
+		decrease_illiteracy = yes
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_please_empress
+	x = 1
+	y = 1
+	relative_position_id = MTS_order_ranks
+	
+	cost = 4
+	prerequisite = { focus = MTS_order_ranks }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_please_empress"
+		remove_ideas = MTS_cleansing_militias
+		swap_ideas = {
+			remove_idea = MTS_ordered_legions
+			add_idea = MTS_peak_militarium_training
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_maintaining_connections
+	x = 1
+	y = 1
+	relative_position_id = MTS_supply_concerns
+	
+	cost = 3
+	prerequisite = { focus = MTS_supply_concerns }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_maintaining_connections"
+		add_tech_bonus = {
+			name = truck_bonus
+			uses = 2
+			bonus = 1
+			category = motorized_equipment
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_resurrecting_war_forge
+	x = 0
+	y = 1
+	relative_position_id = MTS_long_arms
+	
+	cost = 3
+	prerequisite = { focus = MTS_long_arms }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_resurrecting_war_forge"
+		add_tech_bonus = {
+			name = armored_bonus
+			uses = 1
+			bonus = 1
+			category = armor
+		}
+		add_tech_bonus = {
+			name = light_armored_bonus
+			uses = 1
+			bonus = 1
+			category = cat_light_armor
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_new_horseleans_war_school
+	x = 0
+	y = 1
+	relative_position_id = MTS_advocate_curriculum
+	
+	cost = 5
+	prerequisite = { focus = MTS_advocate_curriculum }
+	prerequisite = {
+		focus = MTS_solarist_militias
+		focus = MTS_please_empress
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_new_horseleans_war_school"
+		add_research_slot = 1
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_peering_into_fog
+	x = 0
+	y = 1
+	relative_position_id = MTS_maintaining_connections
+	
+	cost = 3
+	prerequisite = { focus = MTS_maintaining_connections }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_peering_into_fog"
+		add_tech_bonus = {
+			name = electronics_bonus
+			uses = 2
+			bonus = 1
+			category = electronics
+		}
+		28 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_imperial_combined_arms
+	x = 1
+	y = 1
+	relative_position_id = MTS_resurrecting_war_forge
+	
+	cost = 3
+	prerequisite = { focus = MTS_resurrecting_war_forge }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_imperial_combined_arms"
+		add_ideas = MTS_flesh_and_machine
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_retrain_militia_captains
+	x = -1
+	y = 1
+	relative_position_id = MTS_new_horseleans_war_school
+	
+	cost = 4
+	prerequisite = { focus = MTS_new_horseleans_war_school }
+	mutually_exclusive = { focus = MTS_learn_from_experience }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_retrain_militia_captains"
+		###Event of Saber Rattle snootily commissioning some of the communal militia captains that went through the training program, and being disgusted at how ratty they still are and haven't cleaned up despite wearing the uniform
+		swap_ideas = {
+			remove_idea = MTS_ill_adapted_heat_tolerance
+			add_idea = MTS_adapting_to_jungle
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_learn_from_experience
+	x = 1
+	y = 1
+	relative_position_id = MTS_new_horseleans_war_school
+	
+	cost = 4
+	prerequisite = { focus = MTS_new_horseleans_war_school }
+	mutually_exclusive = { focus = MTS_retrain_militia_captains }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_learn_from_experience"
+		###Event of Pinpoint leading a few military tests on different communists and using it as showcase examples for the generals of the country to learn from regarding how to effectively utilize their ammunition even in low supply situations
+		every_army_leader = {
+			add_logistics = 2
+		}
+		add_ideas = MTS_like_thestrals
+		swap_ideas = {
+			remove_idea = MTS_ill_adapted_heat_tolerance
+			add_idea = MTS_adapting_to_jungle
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_long_haul
+	x = -1
+	y = 1
+	relative_position_id = MTS_peering_into_fog
+	
+	cost = 3
+	prerequisite = { focus = MTS_peering_into_fog }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_long_haul"
+		add_ideas = MTS_rooted_defense
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_magic_touch
+	x = 1
+	y = 1
+	relative_position_id = MTS_imperial_combined_arms
+	
+	cost = 4
+	prerequisite = { focus = MTS_imperial_combined_arms }
+	prerequisite = {
+		focus = MTS_retrain_militia_captains
+		focus = MTS_learn_from_experience
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_magic_touch"
+		add_tech_bonus = {
+			name = race_bonus
+			uses = 2
+			bonus = 1
+			category = race_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_peerless_among_elites
+	x = 1
+	y = 1
+	relative_position_id = MTS_retrain_militia_captains
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_retrain_militia_captains
+		focus = MTS_learn_from_experience
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_peerless_among_elites"
+		add_tech_bonus = {
+			name = special_forces_bonus
+			uses = 3
+			bonus = 1
+			category = cat_special_forces_generic
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_applied_tactics
+	x = 1
+	y = 1
+	relative_position_id = MTS_learn_from_experience
+	
+	cost = 4
+	prerequisite = { focus = MTS_long_haul }
+	prerequisite = {
+		focus = MTS_retrain_militia_captains
+		focus = MTS_learn_from_experience
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_applied_tactics"
+		add_doctrine_cost_reduction = {
+			name = land_doctrine_bonus
+			uses = 3
+			cost_reduction = 0.5
+			category = land_doctrine
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_empress_hoofsteps
+	x = 0
+	y = 1
+	relative_position_id = MTS_peerless_among_elites
+	
+	cost = 5
+	prerequisite = { focus = MTS_magic_touch }
+	prerequisite = { focus = MTS_peerless_among_elites }
+	prerequisite = { focus = MTS_applied_tactics }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_empress_hoofsteps"
+		swap_ideas = {
+			remove_idea = MTS_adapting_to_jungle
+			add_idea = MTS_fiery_steps
+		}
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+###Navy###
+shared_focus = {
+	id = MTS_less_practical_matters
+	x = 30
+	y = 0
+	
+	cost = 2
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = MTS_stabilize_new_horseleans_tt
+			has_completed_focus = MTS_theological_debates
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_less_practical_matters"
+		navy_experience = 30
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_model_warships
+	x = -3
+	y = 1
+	relative_position_id = MTS_less_practical_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_less_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_model_warships"
+		add_tech_bonus = {
+			name = destroyer_bonus
+			uses = 2
+			bonus = 1
+			category = dd_tech
+		}
+		add_tech_bonus = {
+			name = cruiser_bonus
+			uses = 1
+			bonus = 1
+			category = cl_tech
+			category = ca_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_harsh_realities
+	x = 0
+	y = 1
+	relative_position_id = MTS_less_practical_matters
+	
+	cost = 4
+	prerequisite = { focus = MTS_less_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_harsh_realities"
+		###Evening Tempest has her first day on shore leave after coming to Militem Solar and goes in intricate detail of how they won't be able to stand up currently to BAL if pressed
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_seize_civilian_shipyards
+	x = 3
+	y = 1
+	relative_position_id = MTS_less_practical_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_less_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_seize_civilian_shipyards"
+		###Event of some fishers coming back for the day to chaos as soldiers seize harbors and shipyards and ships to turn into destroyers or patrol boats to use as fodder without recompense
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_unstandard_doctrines
+	x = -1
+	y = 1
+	relative_position_id = MTS_model_warships
+	
+	cost = 3
+	prerequisite = { focus = MTS_model_warships }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_unstandard_doctrines"
+		add_doctrine_cost_reduction = {
+			name = naval_bonus
+			uses = 3
+			cost_reduction = 0.5
+			category = naval_doctrine
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_swarms_of_gnats
+	x = -1
+	y = 1
+	relative_position_id = MTS_harsh_realities
+	
+	cost = 4
+	prerequisite = { focus = MTS_harsh_realities }
+	mutually_exclusive = { focus = MTS_swat_mosquitos }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_swarms_of_gnats"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_swat_mosquitos
+	x = 1
+	y = 1
+	relative_position_id = MTS_harsh_realities
+	
+	cost = 4
+	prerequisite = { focus = MTS_harsh_realities }
+	mutually_exclusive = { focus = MTS_swarms_of_gnats }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_swat_mosquitos"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_sacrifice_complexity
+	x = 1
+	y = 1
+	relative_position_id = MTS_seize_civilian_shipyards
+	
+	cost = 3
+	prerequisite = { focus = MTS_seize_civilian_shipyards }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_sacrifice_complexity"
+		###Event of the first ships being laid to new standards, inspected by Evening Tempest, who while being told about how great it is, punches a hole through the hull without trying and they state they will redouble their efforts to make it proper
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_matching_neighbors
+	x = 1
+	y = 1
+	relative_position_id = MTS_unstandard_doctrines
+	
+	cost = 3
+	prerequisite = { focus = MTS_unstandard_doctrines }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_matching_neighbors"
+		add_tech_bonus = {
+			name = cruiser_bonus
+			uses = 1
+			bonus = 1
+			category = cl_tech
+			category = ca_tech
+		}
+		add_tech_bonus = {
+			name = submarine_bonus
+			uses = 2
+			bonus = 1
+			category = ss_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_ambush_on_seas
+	x = 0
+	y = 1
+	relative_position_id = MTS_swarms_of_gnats
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_swarms_of_gnats
+		focus = MTS_swat_mosquitos
+	}
+	mutually_exclusive = { focus = MTS_crush_head_on }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_ambush_on_seas"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_crush_head_on
+	x = 0
+	y = 1
+	relative_position_id = MTS_swat_mosquitos
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_swarms_of_gnats
+		focus = MTS_swat_mosquitos
+	}
+	mutually_exclusive = { focus = MTS_ambush_on_seas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_crush_head_on"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_covering_tracks
+	x = -1
+	y = 1
+	relative_position_id = MTS_sacrifice_complexity
+	
+	cost = 3
+	prerequisite = { focus = MTS_sacrifice_complexity }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_covering_tracks"
+		#Bonuses here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_solarist_dreams
+	x = 1
+	y = 1
+	relative_position_id = MTS_matching_neighbors
+	
+	cost = 3
+	prerequisite = { focus = MTS_matching_neighbors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_solarist_dreams"
+		add_tech_bonus = {
+			name = battleship_bonus
+			uses = 1
+			bonus = 1
+			category = bb_tech
+		}
+		add_tech_bonus = {
+			name = carrier_bonus
+			uses = 1
+			bonus = 1
+			category = cv_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_evening_tutelage
+	x = 1
+	y = 1
+	relative_position_id = MTS_ambush_on_seas
+	
+	cost = 5
+	prerequisite = {
+		focus = MTS_ambush_on_seas
+		focus = MTS_crush_head_on
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_evening_tutelage"
+		###Evening Tempest in the middle of a training exercise with some of the sailors of the captured civilian ships, and she has to carefully explain some of the most basic naval warfare tactics as they don't understand, aside from one brilliant one who she quickly favors
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_integrated_camouflage
+	x = -1
+	y = 1
+	relative_position_id = MTS_covering_tracks
+	
+	cost = 3
+	prerequisite = { focus = MTS_covering_tracks }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_integrated_camouflage"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_newest_chapter
+	x = 1
+	y = 1
+	relative_position_id = MTS_solarist_dreams
+	
+	cost = 4
+	prerequisite = { focus = MTS_solarist_dreams }
+	prerequisite = { focus = MTS_evening_tutelage }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_newest_chapter"
+		###Bonus here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_reach_marelandia
+	x = -1
+	y = 1
+	relative_position_id = MTS_integrated_camouflage
+	
+	cost = 4
+	prerequisite = { focus = MTS_integrated_camouflage }
+	prerequisite = { focus = MTS_evening_tutelage }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_reach_marelandia"
+		###Bonus here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_jewel_of_celestial_sea
+	x = 1
+	y = 1
+	relative_position_id = MTS_newest_chapter
+	
+	cost = 5
+	prerequisite = { focus = MTS_newest_chapter }
+	prerequisite = { focus = MTS_reach_marelandia }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_jewel_of_celestial_sea"
+		###Maybe event of Evening Tempest enjoying a fine evening on her new flagship and enjoying the firepower too much
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+###Air###
+shared_focus = {
+	id = MTS_least_practical_matters
+	x = 40
+	y = 0
+	
+	cost = 2
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = MTS_stabilize_new_horseleans_tt
+			has_completed_focus = MTS_theological_debates
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_least_practical_matters"
+		air_experience = 30
+	}
+	
+	ai_will_do = { factor = 80 }
 }
