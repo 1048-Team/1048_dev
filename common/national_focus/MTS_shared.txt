@@ -304,6 +304,29 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_theological_debates"
+		set_country_flag = MTS_scorched_earth_triumphant
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+###Scorched Earth###
+shared_focus = {
+	id = MTS_keeping_simple
+	x = 0
+	y = 1
+	relative_position_id = MTS_theological_debates
+	
+	cost = 2
+	prerequisite = { focus = MTS_theological_debates }
+	allow_branch = {
+		has_country_flag = MTS_scorched_earth_triumphant
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_keeping_simple"
+		###Event of Scorched Earth and Luminous Blade meeting for the next steps in conquering the South-East, with Luminous suggesting something that gives him a bit of interest/pride in her
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -849,6 +872,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_harsh_realities"
 		###Evening Tempest has her first day on shore leave after coming to Militem Solar and goes in intricate detail of how they won't be able to stand up currently to BAL if pressed
+		country_event = militem.30
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -866,6 +890,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_seize_civilian_shipyards"
 		###Event of some fishers coming back for the day to chaos as soldiers seize harbors and shipyards and ships to turn into destroyers or patrol boats to use as fodder without recompense
+		country_event = militem.31
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -905,7 +930,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_swarms_of_gnats"
-		#Idea here
+		add_ideas = MTS_high_impact_torpedoes
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -923,7 +948,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_swat_mosquitos"
-		#Idea here
+		add_ideas = MTS_destroyer_destroyers
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -941,6 +966,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_sacrifice_complexity"
 		###Event of the first ships being laid to new standards, inspected by Evening Tempest, who while being told about how great it is, punches a hole through the hull without trying and they state they will redouble their efforts to make it proper
+		country_event = militem.32
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -990,7 +1016,18 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_ambush_on_seas"
-		#Idea here
+		if = {
+			limit = {
+				has_idea = MTS_high_impact_torpedoes
+			}
+			swap_ideas = {
+				remove_idea = MTS_high_impact_torpedoes
+				add_idea = MTS_light_ship_dominance
+			}
+		}
+		else = {
+			add_ideas = MTS_unseen_strikes
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -1011,7 +1048,18 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_crush_head_on"
-		#Idea here
+		if = {
+			limit = {
+				has_idea = MTS_destroyer_destroyers
+			}
+			swap_ideas = {
+				remove_idea = MTS_destroyer_destroyers
+				add_idea = MTS_cruiser_dominance
+			}
+		}
+		else = {
+			add_ideas = MTS_pocket_battleships
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1028,7 +1076,32 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_covering_tracks"
-		#Bonuses here
+		if = {
+			limit = {
+				has_dlc = "Man the Guns"
+			}
+			add_tech_bonus = {
+				name = smoke_screen_bonus
+				uses = 1
+				bonus = 1
+				technology = smoke_generator
+			}
+			add_tech_bonus = {
+				name = snorkel_bonus
+				uses = 1
+				bonus = 1
+				technology = basic_submarine_snorkel
+				technology = improved_submarine_snorkel
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = submarine_bonus
+				uses = 2
+				bonus = 1
+				category = ss_tech
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1077,6 +1150,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_evening_tutelage"
 		###Evening Tempest in the middle of a training exercise with some of the sailors of the captured civilian ships, and she has to carefully explain some of the most basic naval warfare tactics as they don't understand, aside from one brilliant one who she quickly favors
+		country_event = militem.33
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -1093,7 +1167,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_integrated_camouflage"
-		#Idea here
+		add_ideas = MTS_cloaking_spells
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1111,7 +1185,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_newest_chapter"
-		###Bonus here
+		add_tech_bonus = {
+			name = marine_bonus
+			uses = 2
+			bonus = 1
+			category = marine_tech
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1129,7 +1208,12 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_reach_marelandia"
-		###Bonus here
+		add_tech_bonus = {
+			name = transport_bonus
+			uses = 2
+			bonus = 1
+			category = tp_tech
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1148,6 +1232,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_jewel_of_celestial_sea"
 		###Maybe event of Evening Tempest enjoying a fine evening on her new flagship and enjoying the firepower too much
+		add_ideas = MTS_celestial_jewel
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -1173,4 +1258,970 @@ shared_focus = {
 	}
 	
 	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_protecting_skies
+	x = -3
+	y = 1
+	relative_position_id = MTS_least_practical_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_least_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_protecting_skies"
+		add_tech_bonus = {
+			name = fighter_bonus
+			bonus = 1
+			uses = 2
+			category = light_fighter
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_unfortunate_truth
+	x = 0
+	y = 1
+	relative_position_id = MTS_least_practical_matters
+	
+	cost = 4
+	prerequisite = { focus = MTS_least_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_unfortunate_truth"
+		###Event of some fighters tied with Scorched Earth crashing into the only airfield in NH after poor weather and it being stated that they have no air cover at all now
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_compromise_punishment
+	x = 3
+	y = 1
+	relative_position_id = MTS_least_practical_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_least_practical_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_compromise_punishment"
+		add_tech_bonus = {
+			name = tac_bonus
+			bonus = 1
+			uses = 2
+			category = tactical_bomber
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_smarter_than_communists
+	x = -1
+	y = 1
+	relative_position_id = MTS_protecting_skies
+	
+	cost = 3
+	prerequisite = { focus = MTS_protecting_skies }
+	mutually_exclusive = { focus = MTS_drowning_air }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_smarter_than_communists"
+		add_ideas = MTS_outwit_bogies
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_drowning_air
+	x = 1
+	y = 1
+	relative_position_id = MTS_protecting_skies
+	
+	cost = 3
+	prerequisite = { focus = MTS_protecting_skies }
+	mutually_exclusive = { focus = MTS_smarter_than_communists }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_drowning_air"
+		add_tech_bonus = {
+			name = fighter_bonus
+			bonus = 1
+			uses = 1
+			category = light_fighter
+		}
+		add_tech_bonus = {
+			name = cas_bonus
+			bonus = 1
+			uses = 1
+			category = cas_bomber
+		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = guns_bonus
+				bonus = 1
+				uses = 1
+				category = cat_air_guns
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_recycling_whatever
+	x = 0
+	y = 1
+	relative_position_id = MTS_unfortunate_truth
+	
+	cost = 4
+	prerequisite = { focus = MTS_unfortunate_truth }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_recycling_whatever"
+		###Event of tests with new fighters with the lower quality materials and the test going well enough, despite multiple aspects failing
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_beasts_of_war
+	x = -1
+	y = 1
+	relative_position_id = MTS_compromise_punishment
+	
+	cost = 3
+	prerequisite = { focus = MTS_compromise_punishment }
+	mutually_exclusive = { focus = MTS_immortal_fliers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_beasts_of_war"
+		add_tech_bonus = {
+			name = strat_bomber_bonus
+			bonus = 1
+			uses = 2
+			category = cat_strategic_bomber
+		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = bombs_bonus
+				bonus = 1
+				uses = 1
+				category = cat_air_bombs
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_immortal_fliers
+	x = 1
+	y = 1
+	relative_position_id = MTS_compromise_punishment
+	
+	cost = 3
+	prerequisite = { focus = MTS_compromise_punishment }
+	mutually_exclusive = { focus = MTS_beasts_of_war }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_immortal_fliers"
+		add_ideas = MTS_reinforced_plating
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_bathing_fire
+	x = 1
+	y = 1
+	relative_position_id = MTS_smarter_than_communists
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_smarter_than_communists
+		focus = MTS_drowning_air
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_bathing_fire"
+		###Event of testing napalm dive bombing with communist test targets in some of the villages
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_prep_airfields
+	x = -1
+	y = 1
+	relative_position_id = MTS_recycling_whatever
+	
+	cost = 4
+	prerequisite = { focus = MTS_recycling_whatever }
+	prerequisite = {
+		focus = MTS_smarter_than_communists
+		focus = MTS_drowning_air
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_prep_airfields"
+		28 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_doctrine_cost_reduction = {
+			name = air_doctrine_bonus
+			cost_reduction = 0.5
+			uses = 1
+			category = air_doctrine
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_answer_with_lead
+	x = 1
+	y = 1
+	relative_position_id = MTS_recycling_whatever
+	
+	cost = 4
+	prerequisite = { focus = MTS_recycling_whatever }
+	prerequisite = {
+		focus = MTS_beasts_of_war
+		focus = MTS_immortal_fliers
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_answer_with_lead"
+		28 = {
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+				instant_build = yes
+			}
+		}
+		add_doctrine_cost_reduction = {
+			name = air_doctrine_bonus
+			cost_reduction = 0.5
+			uses = 1
+			category = air_doctrine
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_holy_napalm
+	x = 1
+	y = 1
+	relative_position_id = MTS_beasts_of_war
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_beasts_of_war
+		focus = MTS_immortal_fliers
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_holy_napalm"
+		###Event of new napalm bombs being tested on how effectively they can immolate forests and jungles in the South-East and testing it on some thestral villages
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_future_to_realize
+	x = 1
+	y = 1
+	relative_position_id = MTS_bathing_fire
+	
+	cost = 4
+	prerequisite = { focus = MTS_bathing_fire }
+	prerequisite = { focus = MTS_prep_airfields }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_future_to_realize"
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = jet_fighter_bonus
+				uses = 2
+				bonus = 1
+				ahead_reduction = 1
+				technology = modern_small_airframe
+				technology = modern_small_airframe_2
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = jet_fighter_bonus
+				uses = 2
+				bonus = 1
+				ahead_reduction = 1
+				technology = jet_fighter1
+				technology = jet_fighter2
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_light_of_empress
+	x = 1
+	y = 1
+	relative_position_id = MTS_prep_airfields
+	
+	cost = 4
+	prerequisite = { focus = MTS_prep_airfields }
+	prerequisite = { focus = MTS_answer_with_lead }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_light_of_empress"
+		add_tech_bonus = {
+			name = nuke_bonus
+			uses = 2
+			bonus = 1.5
+			ahead_reduction = 0.5
+			category = nuclear
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_cross_continent_destruction
+	x = -1
+	y = 1
+	relative_position_id = MTS_holy_napalm
+	
+	cost = 4
+	prerequisite = { focus = MTS_answer_with_lead }
+	prerequisite = { focus = MTS_holy_napalm }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_cross_continent_destruction"
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			add_tech_bonus = {
+				name = jet_bomber_bonus
+				uses = 2
+				bonus = 1
+				ahead_reduction = 1
+				technology = modern_large_airframe
+				technology = modern_large_airframe_2
+			}
+		}
+		else = {
+			add_tech_bonus = {
+				name = jet_bomber_bonus
+				uses = 2
+				bonus = 1
+				ahead_reduction = 1
+				technology = jet_strategic_bomber1
+				technology = jet_strategic_bomber2
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_few_but_proud
+	x = 0
+	y = 1
+	relative_position_id = MTS_light_of_empress
+	
+	cost = 5
+	prerequisite = {
+		focus = MTS_future_to_realize
+		focus = MTS_light_of_empress
+		focus = MTS_cross_continent_destruction
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_few_but_proud"
+		add_ideas = MTS_southern_phoenix
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+###Industry Tree###
+shared_focus = {
+	id = MTS_necessary_matters
+	x = -8
+	y = 0
+	
+	cost = 2
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = MTS_stabilize_new_horseleans_tt
+			has_completed_focus = MTS_theological_debates
+		}
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_necessary_matters"
+		add_political_power = 50
+		add_stability = 0.05
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_utilize_uncleansed
+	x = -3
+	y = 1
+	relative_position_id = MTS_necessary_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_necessary_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_utilize_uncleansed"
+		one_random_arms_factory = yes
+		one_random_arms_factory = yes
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_sanction_holy_mining
+	x = -1
+	y = 1
+	relative_position_id = MTS_necessary_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_necessary_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_sanction_holy_mining"
+		84 = {
+			add_resource = {
+				type = aluminium
+				amount = 8
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_feed_war_forges
+	x = 1
+	y = 1
+	relative_position_id = MTS_necessary_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_necessary_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_feed_war_forges"
+		28 = {
+			add_resource = {
+				type = steel
+				amount = 8
+			}
+			add_resource = {
+				type = tungsten
+				amount = 4
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_immediate_demands
+	x = 3
+	y = 1
+	relative_position_id = MTS_necessary_matters
+	
+	cost = 3
+	prerequisite = { focus = MTS_necessary_matters }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_immediate_demands"
+		###Possibly event of breadlines in NH and a solution of even less appealing food to feed them and to keep with the ascetic concept
+		decrease_poverty = yes
+		add_political_power = -100
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_baseline_services
+	x = -1
+	y = 1
+	relative_position_id = MTS_utilize_uncleansed
+	
+	cost = 3
+	prerequisite = { focus = MTS_utilize_uncleansed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_baseline_services"
+		add_tech_bonus = {
+			name = construction_bonus
+			uses = 2
+			bonus = 1
+			category = construction_tech
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_cauterizing_wounds
+	x = 1
+	y = 1
+	relative_position_id = MTS_utilize_uncleansed
+	
+	cost = 3
+	prerequisite = { focus = MTS_utilize_uncleansed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_cauterizing_wounds"
+		###Maybe event of them burning down sacred jungles to the thestrals, or seizing lands from the ponies they see as living in excess
+		every_state = {
+			limit = {
+				is_owned_by = ROOT
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		27 = {
+			improve_state_category = yes
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_expand_plantations
+	x = 1
+	y = 1
+	relative_position_id = MTS_sanction_holy_mining
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_sanction_holy_mining
+		focus = MTS_feed_war_forges
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_expand_plantations"
+		#Possibly event of some thestrals being put to work in new rubber plantations and being treated incredibly harshly
+		27 = {
+			add_resource = {
+				type = rubber
+				amount = 24
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_required_luxuries
+	x = -1
+	y = 1
+	relative_position_id = MTS_immediate_demands
+	
+	cost = 3
+	prerequisite = { focus = MTS_immediate_demands }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_required_luxuries"
+		add_tech_bonus = {
+			name = excavation_bonus
+			uses = 2
+			bonus = 1
+			category = excavation_tech
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_mechanic_machines
+	x = 1
+	y = 1
+	relative_position_id = MTS_immediate_demands
+	
+	cost = 3
+	prerequisite = { focus = MTS_immediate_demands }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_mechanic_machines"
+		add_tech_bonus = {
+			name = industry_bonus
+			uses = 2
+			bonus = 1
+			category = industry
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_redefining_expectations
+	x = 1
+	y = 1
+	relative_position_id = MTS_baseline_services
+	
+	cost = 4
+	prerequisite = { focus = MTS_baseline_services }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_redefining_expectations"
+		#Replace spirit, potentially be an event of fudging with output numbers or shutting down anything that could be seen as a luxury
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_wandering_tutors
+	x = 0
+	y = 1
+	relative_position_id = MTS_expand_plantations
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_baseline_services
+		focus = MTS_mechanic_machines
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_wandering_tutors"
+		###Event of a wandering priestess coming into a town and beginning to educate the populace, with harsh measures for those who fail
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_answering_needy
+	x = -1
+	y = 1
+	relative_position_id = MTS_mechanic_machines
+	
+	cost = 4
+	prerequisite = { focus = MTS_mechanic_machines }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_answering_needy"
+		28 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_specialize_in_war
+	x = -1
+	y = 1
+	relative_position_id = MTS_redefining_expectations
+	
+	cost = 5
+	prerequisite = { focus = MTS_redefining_expectations }
+	mutually_exclusive = { focus = MTS_generalize_in_war }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_specialize_in_war"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_generalize_in_war
+	x = 1
+	y = 1
+	relative_position_id = MTS_redefining_expectations
+	
+	cost = 5
+	prerequisite = { focus = MTS_redefining_expectations }
+	mutually_exclusive = { focus = MTS_specialize_in_war }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_specialize_in_war"
+		#Add idea
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_fund_church_schools
+	x = 0
+	y = 1
+	relative_position_id = MTS_wandering_tutors
+	
+	cost = 5
+	prerequisite = { focus = MTS_wandering_tutors }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_fund_church_schools"
+		decrease_illiteracy = yes
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_work_out_poverty
+	x = -1
+	y = 1
+	relative_position_id = MTS_answering_needy
+	
+	cost = 5
+	prerequisite = { focus = MTS_answering_needy }
+	mutually_exclusive = { focus = MTS_worthile_riches }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_work_out_poverty"
+		###Event of hundres if not thousands of ponies being toiled for pittance as a way for them to work off their debts, which they never will be able to
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_worthile_riches
+	x = 1
+	y = 1
+	relative_position_id = MTS_answering_needy
+	
+	cost = 5
+	prerequisite = { focus = MTS_answering_needy }
+	mutually_exclusive = { focus = MTS_work_out_poverty }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_worthile_riches"
+		###Event of a member of the Militem Solar being punished for profiting too much off the new resources found in the nation
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_like_any_other
+	x = 1
+	y = 1
+	relative_position_id = MTS_specialize_in_war
+	
+	cost = 5
+	prerequisite = {
+		focus = MTS_specialize_in_war
+		focus = MTS_generalize_in_war
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_like_any_other"
+		increase_society_development = yes
+		add_stability = 0.05
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_no_more_optional_tithes
+	x = -1
+	y = 1
+	relative_position_id = MTS_fund_church_schools
+	
+	cost = 4
+	prerequisite = { focus = MTS_fund_church_schools }
+	prerequisite = {
+		focus = MTS_specialize_in_war
+		focus = MTS_generalize_in_war
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_no_more_optional_tithes"
+		###Soldiers shake down some of the poorest of the nation because they must help fund the war effort and use their tithes as salvation for their souls
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_sweat_for_empress
+	x = 1
+	y = 1
+	relative_position_id = MTS_fund_church_schools
+	
+	cost = 4
+	prerequisite = { focus = MTS_fund_church_schools }
+	prerequisite = {
+		focus = MTS_work_out_poverty
+		focus = MTS_worthile_riches
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_sweat_for_empress"
+		###Potentially event of laborers working in horrible conditions in refineries for steel
+		28 = {
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+		}
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1
+			uses = 2
+			category = industry
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_thankful_for_sustenance
+	x = -1
+	y = 1
+	relative_position_id = MTS_worthile_riches
+	
+	cost = 5
+	prerequisite = {
+		focus = MTS_work_out_poverty
+		focus = MTS_worthile_riches
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_thankful_for_sustenance"
+		###Event of beggars being forcefully "corrected" in their complaints about their poverty, with some priestesses ensuring they are thankful to be alive and for the church breadlines
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_punch_above
+	x = 1
+	y = 1
+	relative_position_id = MTS_like_any_other
+	
+	cost = 5
+	prerequisite = { focus = MTS_like_any_other }
+	prerequisite = { focus = MTS_no_more_optional_tithes }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_punch_above"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_theology_for_masses
+	x = 0
+	y = 2
+	relative_position_id = MTS_fund_church_schools
+	
+	cost = 5
+	prerequisite = { focus = MTS_fund_church_schools }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_theology_for_masses"
+		###Maybe event of some ponies being indoctrinated in Militem Solar's ideology, with harsh examples of what it would be
+		increase_science_base = yes
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_tepid_health
+	x = 1
+	y = 1
+	relative_position_id = MTS_sweat_for_empress
+	
+	cost = 5
+	prerequisite = { focus = MTS_sweat_for_empress }
+	prerequisite = { focus = MTS_thankful_for_sustenance }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_tepid_health"
+		#Maybe event of some priestesses providing minimal healthcare for sick citizens at churches, with their own way of keeping them alive to feel more suffering
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_forge_of_empires
+	x = 0
+	y = 1
+	relative_position_id = MTS_theology_for_masses
+	
+	cost = 6
+	prerequisite = { focus = MTS_punch_above }
+	prerequisite = { focus = MTS_tepid_health }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_forge_of_empires"
+		add_ideas = MTS_country_of_smiths
+	}
+	
+	ai_will_do = { factor = 160 }
 }

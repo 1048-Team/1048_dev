@@ -3,3 +3,109 @@ add_namespace = militem.romanceowo
 add_namespace = militem.scorched
 add_namespace = militem.warm
 add_namespace = militem.pinpoint
+
+country_event = { #After arriving in New Horseleans, Evening Tempest gives a report of the shape of the ships she was able to take and how they will not at this time be able to stand up to BAL, and asks what the engagement philosophy should be
+	id = militem.30
+	title = militem.30.t
+	desc = militem.30.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event miltem.30"}
+	
+	is_triggered_only = yes
+	
+	option = { #We must fighter harder than ever
+		name = militem.30.a
+		ai_chance = {
+			factor = 40
+		}
+		add_ideas = MTS_naval_streamlining
+	}
+	option = { #We will have to outmaneuver them
+		name = militem.30.b
+		ai_chance = {
+			factor = 80
+		}
+		add_ideas = MTS_naval_streamlining_positioning
+	}
+}
+
+country_event = { #Dockhands are surprised when soldier begin to march onto the main docks of New Horseleans and seizing everything, and there is a small struggle to keep their own things before they are arrested or shot
+	id = militem.31
+	title = militem.31.t
+	desc = militem.31.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event miltem.31"}
+	
+	is_triggered_only = yes
+	
+	option = { #This is now the Empress's!
+		name = militem.31.a
+		28 = {
+			add_state_extra_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				instant_build = yes
+				province = 963
+			}
+		}
+	}
+}
+
+country_event = { #Evening Tempest comes to inspect some of the new ships that have been laid since they have taken over the civilian dockyards and the forepony on duty assures her that everything is to the utmost quality, and she inspects one and is suspicious of its armor, testing it and punching a hole through it, which she okays anyway since they need all the ships they can get, despite her clear irritation
+	id = militem.32
+	title = militem.32.t
+	desc = militem.32.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event miltem.32"}
+	
+	is_triggered_only = yes
+	
+	option = { #It passes well enough
+		name = miltem.32.a
+		add_ideas = MTS_simplified_navy
+	}
+}
+
+country_event = { #Evening Tempest goes on a military exercise with some of the last of her students for the first batch of graduates for the new naval academy, and the potential admiral in charge mangles the final massively, but another takes charge to complete is safely
+	id = militem.33
+	title = militem.33.t
+	desc = militem.33.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event miltem.33"}
+	
+	is_triggered_only = yes
+	
+	option = { #At least somepony was paying attention
+		name = militem.33.a
+		if = {
+			limit = {
+				has_idea = MTS_naval_streamlining
+			}
+			swap_ideas = {
+				remove_idea = MTS_naval_streamlining
+				add_idea = MTS_southern_naval_academy
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = MTS_naval_streamlining_positioning
+			}
+			swap_ideas = {
+				remove_idea = MTS_naval_streamlining_positioning
+				add_idea = MTS_southern_naval_academy_positioning
+			}
+		}
+		MTS_Clean_Heading = {
+			add_naval_commander_role = {
+				traits = { pony_race_trait green_water_expert }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 3
+			}
+		}
+	}
+}
