@@ -4,6 +4,233 @@ add_namespace = militem.scorched
 add_namespace = militem.warm
 add_namespace = militem.pinpoint
 
+country_event = { #After being repelled by some of the forces of BAL, it is determined to turn around and take NH so that there is still a base of operations for the region
+	id = militem.1
+	title = militem.1.t
+	desc = militem.1.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.1"}
+	
+	is_triggered_only = yes
+	
+	option = { #We shall march on their stronghold!
+		name = militem.1.a
+		army_experience = 10
+	}
+}
+
+country_event = { #Luminous Blade leads a charge through some of NH's streets after clearing out a sniper nest, as the fighting has been slow to clear out the country
+	id = militem.2
+	title = militem.2.t
+	desc = militem.2.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.2"}
+	
+	is_triggered_only = yes
+	
+	option = { #Her help was greatly needed!
+		name = militem.2.a
+		add_state_core = 28
+	}
+}
+
+country_event = { #Scorched Earth takes charge now that NH has been captured and to show that he will do whatever is needed for stability, executes some of the fighters who resisted when they attacked NH
+	id = militem.3
+	title = militem.3.t
+	desc = militem.3.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.3"}
+	
+	is_triggered_only = yes
+	
+	option = { #The executions will continue until morale improves!
+		name = militem.3.a
+		add_stability = 0.05
+		add_manpower = -2500
+	}
+}
+
+country_event = { #Warm Night meets with Scorched Earth to have only a few examples through executing some of COBSOC's remaining leaders and speaking of what will happen if they resist further
+	id = militem.4
+	title = militem.4.t
+	desc = militem.4.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.4"}
+	
+	is_triggered_only = yes
+	
+	option = { #It would be a waste of ponypower anyway
+		name = militem.4.a
+		add_political_power = 25
+		every_state = {
+			limit = {
+				is_owned_by = ROOT
+			}
+			add_compliance = 2
+		}
+	}
+}
+
+country_event = { #Scorched Earth and Luminous Blade meet in his tent, as it is still early in erecting the external basecamp, and oversee the state of the country and begin their first plans for wiping out heresy within
+	id = militem.5
+	title = militem.5.t
+	desc = militem.5.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.5"}
+	
+	is_triggered_only = yes
+	
+	option = { #This will be more difficult than imagined
+		name = militem.5.a
+		add_war_support = 0.02
+		add_command_power = 25
+	}
+}
+
+country_event = { #Serene Shore and some of the priestesses with her, including Warm Night, preach to the citizens of NH about how they have been spoiled by luxuries and must shed themselves of them to be truly free, which confuses all the citizens since they are dirt poor
+	id = militem.6
+	title = militem.6.t
+	desc = militem.6.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.6"}
+	
+	is_triggered_only = yes
+	
+	option = { #What the buck are they talking about?
+		name = militem.6.a
+		add_stability = 0.03
+	}
+}
+
+country_event = { #Pinpoint first meets with Scorched Earth, and already obsesses with how much heresy she sees, and that she must fix it, which he gives her relative carte blanche on, and she pledges loyalty of all her inquisitors (for the moment)
+	id = militem.7
+	title = militem.7.t
+	desc = militem.7.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.7"}
+	
+	is_triggered_only = yes
+	
+	option = { #We shall fix it immediately!
+		name = militem.7.a
+		add_political_power = 25
+		random_state = {
+			limit = {
+				is_owned_by = ROOT
+				NOT = { is_core_of = ROOT }
+			}
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = { #From the perspective of one of the thestral warbands that helps protect Mango Province, inquisitors and some of the Militem Solar forces descend upon them to wipe them out, and burn some of the city to cleanse it
+	id = militem.8
+	title = militem.8.t
+	desc = militem.8.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.8"}
+	
+	is_triggered_only = yes
+	
+	option = { #Burn the bats!
+		name = militem.8.a
+		84 = {
+			add_resistance = -10
+			damage_building = {
+				type = industrial_complex
+				damage = 1
+			}
+		}
+	}
+}
+
+country_event = { #Recap of an inquisitor operation with some Militem support of almost being wiped out by thestral and communist guerillas, and overview the losses and damage on both sides, since part of the jungle was burned to the ground
+	id = militem.9
+	title = militem.9.t
+	desc = militem.9.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.9"}
+	
+	is_triggered_only = yes
+	
+	option = { #Nothing was lost of value
+		name = militem.9.a
+		27 = {
+			add_resistance = -10
+			save_current_manpower = yes
+			add_manpower = -5000
+			restore_previous_manpower = yes
+		}
+	}
+}
+
+country_event = { #As Scorched Earth prepares to lay down execution orders for the middle ranks of the commissars of NH and forced conscription, Warm Night interrupts and demands that they should be given amnesty and new positions, since she has convinced them to recant, and he can either accept or reject her
+	id = militem.10
+	title = militem.10.t
+	desc = militem.10.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.10"}
+	
+	is_triggered_only = yes
+	
+	option = { #No! They have sinned against the Empress!
+		ai_chance = { factor = 50 }
+		name = militem.10.a
+		add_ideas = extensive_conscription
+		add_war_support = 0.05
+	}
+	option = { #They would be useful bodies
+		ai_chance = { factor = 20 }
+		name = militem.10.b
+		add_ideas = limited_conscription
+		add_stability = -0.03
+		add_manpower = 1250
+	}
+}
+
+country_event = { #Two proposals are presented to the player, speaking of how they can most utilize their limited loyal forces by either following Scorched Earth's plan of pressing into service more ponies, or Warm Night's influence in civil society to bring about a few more amenities to the common pony through labor on a new factory
+	id = militem.11
+	title = militem.11.t
+	desc = militem.11.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.11"}
+	
+	is_triggered_only = yes
+	
+	option = { #Warm Night's will be more beneficial in the long-term
+		ai_chance = { factor = 15 }
+		name = militem.11.a
+		one_random_industrial_complex = yes
+	}
+	option = { #We need more bodies. Follow Scorched Earth's plan
+		ai_chance = { factor = 40 }
+		name = militem.11.b
+		###Spawn two conscripts here
+		28 = {
+			create_unit = { division = "name = \"Heretic Conscripts\" division_template = \"Conscripts\" start_experience_factor = 0.1 start_equipment_factor = 0.5" owner = ROOT prioritize_location = 963 }
+			create_unit = { division = "name = \"Heretic Conscripts\" division_template = \"Conscripts\" start_experience_factor = 0.1 start_equipment_factor = 0.5" owner = ROOT prioritize_location = 963 }
+		}
+	}
+}
+
+country_event = { #A drive for ponies to begin to recant of their materialism is undertaken by some of the most loyal of Scorched Earth's Adoratio followers, and ponies are lined up, against their will to an extent to give up some of their basic trinkets as a starting point
+	id = militem.12
+	title = militem.12.t
+	desc = militem.12.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.12"}
+	
+	is_triggered_only = yes
+	
+	option = { #You will thank us all one day!
+		name = militem.12.a
+		add_ideas = MTS_stepping_stones #This will be replaced by an improved spirit from the next tree of any path (just replace it)
+	}
+}
+
+country_event = { #Warm Night convinces Serene Shore that they must work to improve the lives of ponies more, and she and some other priestesses perform a healing mission on some of the injured civilians from NH's capture
+	id = militem.13
+	title = militem.13.t
+	desc = militem.13.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.13"}
+	
+	is_triggered_only = yes
+	
+	option = { #Your thanks aren't needed!
+		name = militem.13.a
+		add_ideas = MTS_bridging_gaps #Same as above
+	}
+}
+
 country_event = { #After their disagreements with how to establish the first parts of the Militem in New Horseleans, Warm Night finally confronts Scorched about how he is going to lead to the destruction of everypony and he has to listen to her about helping them, which can go her way or not
 	id = militem.14
 	title = militem.14.t
@@ -44,7 +271,7 @@ country_event = { #After arriving in New Horseleans, Evening Tempest gives a rep
 	
 	is_triggered_only = yes
 	
-	option = { #We must fighter harder than ever
+	option = { #We must fight harder than ever
 		name = militem.30.a
 		ai_chance = {
 			factor = 40
