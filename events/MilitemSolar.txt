@@ -521,13 +521,54 @@ country_event = { #As some ponies come to the soup lines of the Adoratio they be
 }
 
 #Scorched Earth#
+country_event = { #Scorched Earth meets with his assembled armies outside of NH and he, with Luminous Blade, have a final speech speaking of how the communists are an insult to the Empress, and that the luxury that they live in is an abomination that must be wiped out
+	id = militem.scorched.24
+	title = militem.scorched.24.t
+	desc = militem.scorched.24.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.24"}
+	
+	is_triggered_only = yes
+	
+	option = { #They will fall before our faith!
+		name = militem.24.a
+		every_country = {
+			limit = {
+				is_in_array = { global.southeast_countries = THIS }
+			}
+			ROOT = {
+				if = {
+					limit = {
+						PREV = { 
+							NOT = { tag = MTS }
+							exists = yes
+						}
+					}
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+}
+
 country_event = { #Some of Scorched Earth's soldiers take the last few holdouts of resistance in New Baltimare around the palace of Cobalt Hoof and after it is disposed of, Scorched sees how it will make the perfect new capital, and agrees to move his station there after pressure from Luminous Blade
 	id = militem.scorched.25
 	title = militem.scorched.25.t
 	desc = militem.scorched.25.d
 	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.25"}
 	
-	is_triggered_only = yes
+	trigger = {
+		tag = MTS
+		all_of_scopes = {
+			array = global.southeast_countries
+			OR = {
+				original_tag = MTS
+				exists = no
+			}
+		}
+	}
 	
 	option = { #This should do wonders
 		name = militem.scorched.25.a
@@ -536,5 +577,6 @@ country_event = { #Some of Scorched Earth's soldiers take the last few holdouts 
 		add_political_power = 20
 		set_country_flag = MTS_conquered_southeast
 		mark_focus_tree_layout_dirty = yes
+		unlock_national_focus = MTS_southeastern_triumph
 	}
 }
