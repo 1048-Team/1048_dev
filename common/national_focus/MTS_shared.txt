@@ -345,6 +345,7 @@ shared_focus = {
 }
 
 ###Scorched Earth###
+###Pre-War###
 shared_focus = {
 	id = MTS_keeping_simple
 	x = 0
@@ -355,6 +356,7 @@ shared_focus = {
 	prerequisite = { focus = MTS_theological_debates }
 	allow_branch = {
 		has_country_flag = MTS_scorched_earth_triumphant
+		NOT = { has_country_flag = MTS_conquered_southeast }
 	}
 	
 	completion_reward = {
@@ -783,7 +785,7 @@ shared_focus = {
 	ai_will_do = { factor = 320 }
 }
 
-###Scorched Post-War###
+###Post-War###
 shared_focus = {
 	id = MTS_southeastern_triumph
 	x = 8
@@ -791,6 +793,7 @@ shared_focus = {
 	
 	cost = 1
 	allow_branch = {
+		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 		has_country_flag = MTS_conquered_southeast
 	}
 	
@@ -800,6 +803,186 @@ shared_focus = {
 	}
 	
 	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = MTS_warriors_commitment
+	x = -8
+	y = 1
+	relative_position_id = MTS_southeastern_triumph
+	
+	cost = 3
+	prerequisite = { focus = MTS_southeastern_triumph }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_warriors_commitment"
+		#Idea here
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_organized_expectations
+	x = -1
+	y = 1
+	y = 1
+	relative_position_id = MTS_warriors_commitment
+	
+	cost = 4
+	prerequisite = { focus = MTS_warriors_commitment }
+	mutually_exclusive = { focus = MTS_harsher_expectations }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_organized_expectations"
+		###New guidelines are put in place to keep the militia as organized as possible, with rather strict punishments if broken
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_harsher_expectations
+	x = 1
+	y = 1
+	relative_position_id = MTS_warriors_commitment
+	
+	cost = 4
+	prerequisite = { focus = MTS_warriors_commitment }
+	mutually_exclusive = { focus = MTS_organized_expectations }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_harsher_expectations"
+		###Some soldiers who are on break are ordered by their CO to practice some new tenet of aceticism, to their own detriment and they refuse, which lands them in further hot water
+	}
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_march_on_nothing
+	x = -1
+	y = 1
+	relative_position_id = MTS_organized_expectations
+	
+	cost = 3
+	prerequisite = { focus = MTS_organized_expectations }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_march_on_nothing"
+		#Idea here
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_lessons_of_jungle
+	x = 1
+	y = 1
+	relative_position_id = MTS_organized_expectations
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_organized_expectations
+		focus = MTS_harsher_expectations
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_lessons_of_jungle"
+		#Research bonus here
+		add_doctrine_cost_reduction = {
+			name = land_doctrine_bonus
+			uses = 1
+			cost_reduction = 0.5
+			category = land_doctrine
+		}
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_luxurious_pain
+	x = 1
+	y = 1
+	relative_position_id = MTS_harsher_expectations
+	
+	cost = 3
+	prerequisite = { focus = MTS_harsher_expectations }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_luxurious_pain"
+		###Ponies' pain tolerances are forced to improve as a group of new recruits is put through trials by literal fire, to teach them to purify everything that they hold dear in order to sacrifice for Daybreaker
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_discipline_succeeds
+	x = 0
+	y = 1
+	relative_position_id = MTS_march_on_nothing
+	
+	cost = 3
+	prerequisite = { focus = MTS_march_on_nothing }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_discipline_succeeds"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_theatre_of_learning
+	x = 0
+	y = 1
+	relative_position_id = MTS_lessons_of_jungle
+	
+	cost = 4
+	prerequisite = { focus = MTS_lessons_of_jungle }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_theatre_of_learning"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_zealotry_will_win
+	x = 0
+	y = 1
+	relative_position_id = MTS_luxurious_pain
+	
+	cost = 3
+	prerequisite = { focus = MTS_luxurious_pain }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_zealotry_will_win"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_empress_unachieved
+	x = 0
+	y = 1
+	relative_position_id = MTS_theatre_of_learning
+	
+	cost = 5
+	prerequisite = { focus = MTS_theatre_of_learning }
+	prerequisite = {
+		focus = MTS_discipline_succeeds
+		focus = MTS_zealotry_will_win
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_empress_unachieved"
+		add_trait = { character = EQS_Scorched_Earth ideology = solarism trait = supreme_general }
+	}
+	
+	ai_will_do = { factor = 160 }
 }
 
 shared_focus = {
@@ -834,6 +1017,180 @@ shared_focus = {
 	}
 	
 	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_claiming_new_home
+	x = 8
+	y = 1
+	relative_position_id = MTS_southeastern_triumph
+	
+	cost = 3
+	prerequisite = { focus = MTS_southeastern_triumph }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_claiming_new_home"
+		###Soldiers of Scorched Earth work through some of the different wards to wipe out some remaining resistance in the Baltimare outskirts
+	}
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_determining_finest
+	x = -1
+	y = 1
+	relative_position_id = MTS_claiming_new_home
+	
+	cost = 3
+	prerequisite = { focus = MTS_claiming_new_home }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_determining_finest"
+		###A couple of prisoners are herded into an examination room to see how fit they would be for forced labor, and their spirits are broken during it
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_dying_breaths
+	x = -2
+	y = 1
+	relative_position_id = MTS_determining_finest
+	
+	cost = 3
+	prerequisite = { focus = MTS_determining_finest }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_dying_breaths"
+		###One of the officers of the Militem gives harsh punishment for some workers who are not completing their tasks on time, although they are close to death because of constant labor
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_discard_waste
+	x = 0
+	y = 1
+	relative_position_id = MTS_determining_finest
+	
+	cost = 3
+	prerequisite = { focus = MTS_determining_finest }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_discard_waste"
+		###Some of the ponies determined not worthy of labor are brought into firing ranges, and one of the prisoners pleads for forgiveness
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_wide_applications
+	x = 1
+	y = 1
+	relative_position_id = MTS_dying_breaths
+	
+	cost = 3
+	prerequisite = { focus = MTS_dying_breaths }
+	prerequisite = { focus = MTS_discard_waste }
+	mutually_exclusive = { focus = MTS_holy_justice }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_wide_applications"
+		###Short event of speaking of how the principles used in the occupation being effective, and revisions will be implemented to be even more impactful in the future
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_begin_purification
+	x = 1
+	y = 1
+	relative_position_id = MTS_claiming_new_home
+	
+	cost = 3
+	prerequisite = { focus = MTS_claiming_new_home }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_begin_purification"
+		###Artillery barrages begin to burn through the jungle to wipe out thestrals as quickly as possible, which faces immediate resistance from the thestrals
+	}
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_flatten_cities
+	x = 0
+	y = 1
+	relative_position_id = MTS_begin_purification
+	
+	cost = 3
+	prerequisite = { focus = MTS_begin_purification }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_flatten_cities"
+		###One of the main thestral cities is targeted by systematic bombing campaigns from Scorched's forces, which soon burns it to the ground
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_burn_jungles
+	x = 2
+	y = 1
+	relative_position_id = MTS_begin_purification
+	
+	cost = 3
+	prerequisite = { focus = MTS_begin_purification }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_burn_jungles"
+		###Even more bombing campaigns to destroy the jungle and thestral villages begin, which almost completely immolates the entire jungle peninsula
+	}
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_holy_justice
+	x = 1
+	y = 1
+	relative_position_id = MTS_flatten_cities
+	
+	cost = 3
+	prerequisite = { focus = MTS_flatten_cities }
+	prerequisite = { focus = MTS_burn_jungles }
+	mutually_exclusive = { focus = MTS_wide_applications }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_holy_justice"
+		###New guidelines for using fire weapons to effectively take down resistance and enemy soldiers in the future, and how it can lay waste to entire battlefields
+	}
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_solar_south_east
+	x = 2
+	y = 1
+	relative_position_id = MTS_wide_applications
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_wide_applications
+		focus = MTS_holy_justice
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_solar_south_east"
+		every_state = {
+			limit = {
+				NOT = { is_core_of = ROOT }
+				is_claimed_by = BAL
+				is_owned_by = ROOT
+			}
+			add_core_of = ROOT
+		}
+	}
+	ai_will_do = { factor = 320 }
 }
 
 ###Warm Night###
