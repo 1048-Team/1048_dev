@@ -1270,7 +1270,7 @@ shared_focus = {
 
 shared_focus = {
 	id = MTS_to_be_holier
-	x = 4
+	x = 6
 	y = 1
 	relative_position_id = MTS_legitimize_militem
 	
@@ -1287,8 +1287,159 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = MTS_loss_is_gain
+	x = 0
+	y = 1
+	relative_position_id = MTS_to_be_saved
+	
+	cost = 3
+	prerequisite = { focus = MTS_to_be_saved }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_loss_is_gain"
+		###Ponies have more of their possessions taken, but at the same time, are informed how they are gaining everything for their time in the afterlife by the sacrifices, which they don't believe
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_simple_means_easy
+	x = 2
+	y = 1
+	relative_position_id = MTS_to_be_saved
+	
+	cost = 3
+	prerequisite = { focus = MTS_to_be_saved }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_simple_means_easy"
+		add_stability = 0.05
+		add_political_power = 50
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_sanctification_mission
+	x = 1
+	y = 1
+	relative_position_id = MTS_loss_is_gain
+	
+	cost = 3
+	prerequisite = { focus = MTS_loss_is_gain }
+	prerequisite = { focus = MTS_simple_means_easy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_sanctification_mission"
+		swap_ideas = {
+			remove_idea = MTS_unsanctioned_ordo
+			add_idea = MTS_a_legal_ordo
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_singular_focus
+	x = -2
+	y = 1
+	relative_position_id = MTS_to_be_holier
+	
+	cost = 3
+	prerequisite = { focus = MTS_to_be_holier }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_singular_focus"
+		add_ideas = MTS_eyes_on_the_prize
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_suffering_life_and_next
+	x = 0
+	y = 1
+	relative_position_id = MTS_to_be_holier
+	
+	cost = 3
+	prerequisite = { focus = MTS_to_be_holier }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_loss_is_gain"
+		###Follow a pony who is currently going through a fast and has never done so before, and grows more and more tempted to break it, despite how the priestess he was seeing for help pushes him not to
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_punishment_mission
+	x = 1
+	y = 1
+	relative_position_id = MTS_singular_focus
+	
+	cost = 3
+	prerequisite = { focus = MTS_singular_focus }
+	prerequisite = { focus = MTS_suffering_life_and_next }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_punishment_mission"
+		swap_ideas = {
+			remove_idea = MTS_unsanctioned_ordo
+			add_idea = MTS_punish_luxuries
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_minimalist_transcendence
+	x = 1
+	y = 1
+	relative_position_id = MTS_sanctification_mission
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_sanctification_mission
+		focus = MTS_punishment_mission
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_minimalist_transcendence"
+		###A priestess, along with a few other of her fellow priestesses in her church, feel like in their hunger and devotion to asceticism and denial, have become like Daybreaker, and feel like they have unlocked the mysteries of ponykind
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_minimalist_fury
+	x = -1
+	y = 1
+	relative_position_id = MTS_punishment_mission
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_sanctification_mission
+		focus = MTS_punishment_mission
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_minimalist_fury"
+		###A group of inquisitors, driven by anger and by their hunger and wounds that they've inflicted on themselves, lead a small army to wipe out a heretic city with some new magic spells
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
 	id = MTS_claiming_new_home
-	x = 8
+	x = 13
 	y = 1
 	relative_position_id = MTS_southeastern_triumph
 	
@@ -1458,6 +1609,540 @@ shared_focus = {
 		}
 	}
 	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = MTS_pure_peninsula
+	x = 1
+	y = 1
+	relative_position_id = MTS_minimalist_transcendence
+	
+	cost = 5
+	prerequisite = { focus = MTS_minimalist_transcendence }
+	prerequisite = { focus = MTS_minimalist_fury }
+	prerequisite = { focus = MTS_solar_south_east }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_pure_peninsula"
+		#Add idea
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_return_journey
+	x = 5
+	y = 1
+	relative_position_id = MTS_pure_government
+	
+	cost = 5
+	prerequisite = { focus = MTS_pure_government }
+	prerequisite = { focus = MTS_pure_peninsula }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_return_journey"
+		###Scorched Earth prepares for a journey back to the Solar Empire, with Luminous Blade, to petition to return to the Empire and present the South-East as payment and sacrifice for his sins; maybe have it be at the border, where he already sees forces from Ion Trail patrolling for him
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+###Daybreaker Puppet###
+shared_focus = {
+	id = MTS_southeast_mandate
+	x = 0
+	y = 1
+	relative_position_id = MTS_return_journey
+	
+	cost = 1
+	prerequisite = { focus = MTS_return_journey }
+	allow_branch = {
+		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+		has_country_flag = MTS_EQS_accepted 
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeast_mandate"
+		###Scorched Earth returns in a bit of a daze because of his forgiveness on Daybreaker's part, and sets about keeping the South-East in line
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = MTS_desire_crisis
+	x = -2
+	y = 1
+	relative_position_id = MTS_southeast_mandate
+	
+	cost = 2
+	prerequisite = { focus = MTS_southeast_mandate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_desire_crisis"
+		###Parts of the Militem's economy starts to falter when there is no more war to drive it, which leads to increased suffering to the point that he acknowledges that it was a mistake, but is unsure how to proceed
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_faith_crisis
+	x = 0
+	y = 1
+	relative_position_id = MTS_southeast_mandate
+	
+	cost = 2
+	prerequisite = { focus = MTS_southeast_mandate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_faith_crisis"
+		###As they lose more and more of their few necessities because of asceticism, ponies begin to riot in front of the government building in NB, which leads to SE evacuating out of it
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_body_crisis
+	x = 2
+	y = 1
+	relative_position_id = MTS_southeast_mandate
+	
+	cost = 2
+	prerequisite = { focus = MTS_southeast_mandate }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_body_crisis"
+		###Follow a priestess who is working in a hospital, as she relates how some of the citizens are suffering because of malnutrition due to low quality food to keep them alive
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_loosen_straps
+	x = -1
+	y = 1
+	relative_position_id = MTS_desire_crisis
+	
+	cost = 3
+	prerequisite = { focus = MTS_desire_crisis }
+	prerequisite = { focus = MTS_faith_crisis }
+	prerequisite = { focus = MTS_body_crisis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_loosen_straps"
+		###SE and LB, along with WN, work at establishing a beginning economic plan to repair the damage that had been wrought, which makes SE uncomforatble
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_complete_demobilization
+	x = -1
+	y = 1
+	relative_position_id = MTS_loosen_straps
+	
+	cost = 3
+	prerequisite = { focus = MTS_loosen_straps }
+	mutually_exclusive = { focus = MTS_retain_preparedness }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_complete_demobilization"
+		add_ideas = civilian_economy #Will have to later make flag for this and other focus and have it checked in _economic.txt
+		#Swap ideas
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_retain_preparedness
+	x = 1
+	y = 1
+	relative_position_id = MTS_loosen_straps
+	
+	cost = 3
+	prerequisite = { focus = MTS_loosen_straps }
+	mutually_exclusive = { focus = MTS_complete_demobilization }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_retain_preparedness"
+		add_ideas = partial_economic_mobilisation
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_limit_excesses
+	x = 0
+	y = 1
+	relative_position_id = MTS_complete_demobilization
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_complete_demobilization
+		focus = MTS_retain_preparedness
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_limit_excesses"
+		###Some of the ponies who have been brow-beaten by the government to not want even basics are surprised when they can enter simple shops for some entertainment items, especially as they are noticed by an inquisitor
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_civilize_interior
+	x = 0
+	y = 1
+	relative_position_id = MTS_retain_preparedness
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_complete_demobilization
+		focus = MTS_retain_preparedness
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_civilize_interior"
+		###Ponies who are without work are given paying jobs to work the interior, although they aren't happy because of the humidity
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_moderate_economy
+	x = 1
+	y = 1
+	relative_position_id = MTS_limit_excesses
+	
+	cost = 4
+	prerequisite = { focus = MTS_limit_excesses }
+	prerequisite = { focus = MTS_civilize_interior }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_moderate_economy"
+		#Buildings and slots here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_imperfect_union
+	x = 0
+	y = 1
+	relative_position_id = MTS_faith_crisis
+	
+	cost = 3
+	prerequisite = { focus = MTS_desire_crisis }
+	prerequisite = { focus = MTS_faith_crisis }
+	prerequisite = { focus = MTS_body_crisis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_imperfect_union"
+		###Luminous Blade enters Scorched Earth's office as she grows concerned about the work he has taken on and tries to speak with him about not overworking himself, and he feels that she is insulting him, and they both get into an argument over it
+	}
+	
+	ai_will_do = {
+		base = 0
+		modifier = {
+			has_country_flag = MTS_romance_subplot_owo
+			add = 160
+		}
+	}
+}
+
+shared_focus = {
+	id = MTS_seeking_sanctification
+	x = 0
+	y = 1
+	relative_position_id = MTS_imperfect_union
+	
+	cost = 3
+	prerequisite = { focus = MTS_imperfect_union }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_seeking_sanctification"
+		###Scorched Earth stands outside Luminous Blade's quarters, stressing over finally talking with her again, as he knows that he blew up on her without reason, and when he finally does, he is overly awkward about it, but she accepts it coyly, and perhaps give him a nuzzle
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_better_and_worse
+	x = 0
+	y = 1
+	relative_position_id = MTS_seeking_sanctification
+	
+	cost = 3
+	prerequisite = { focus = MTS_seeking_sanctification }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_better_and_worse"
+		###Both return to a small date, the first after their argument, and they are a bit uncomfortable with the tension that has yet to fully disappear, but Luminous starts by recommitting herself to him, and he does as well to her
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_ultimate_secret
+	x = -1
+	y = 1
+	relative_position_id = MTS_better_and_worse
+	
+	cost = 3
+	prerequisite = { focus = MTS_better_and_worse }
+	mutually_exclusive = { focus = MTS_ultimate_truth }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_ultimate_secret"
+		###After being confronted by Warm Night, who just wants to know if they are both okay, they decide to keep their relationship hidden, despite almost being discovered by Warm Night
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_ultimate_truth
+	x = 1
+	y = 1
+	relative_position_id = MTS_better_and_worse
+	
+	cost = 3
+	prerequisite = { focus = MTS_better_and_worse }
+	mutually_exclusive = { focus = MTS_ultimate_secret }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_ultimate_truth"
+		###When Warm Night finds both of them in the middle of an embrace, they don't try and deny that they are seeing each other, which only makes Warm Night amused as she wishes them both the best, and also offers her marriage services
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_reopen_SECDC
+	x = 1
+	y = 1
+	relative_position_id = MTS_body_crisis
+	
+	cost = 3
+	prerequisite = { focus = MTS_desire_crisis }
+	prerequisite = { focus = MTS_faith_crisis }
+	prerequisite = { focus = MTS_body_crisis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_reopen_SECDC"
+		add_ideas = MTS_southern_center_for_disease_control
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_establish_reasonable_quotas
+	x = -1
+	y = 1
+	relative_position_id = MTS_reopen_SECDC
+	
+	cost = 3
+	prerequisite = { focus = MTS_reopen_SECDC }
+	mutually_exclusive = { focus = MTS_to_minimum_capacity }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_establish_reasonable_quotas"
+		add_ideas = extensive_conscription
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_to_minimum_capacity
+	x = 1
+	y = 1
+	relative_position_id = MTS_reopen_SECDC
+	
+	cost = 3
+	prerequisite = { focus = MTS_reopen_SECDC }
+	mutually_exclusive = { focus = MTS_establish_reasonable_quotas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_to_minimum_capacity"
+		add_ideas = limited_conscription #Both should be locked, too
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_form_southern_guard
+	x = 0
+	y = 1
+	relative_position_id = MTS_establish_reasonable_quotas
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_establish_reasonable_quotas
+		focus = MTS_to_minimum_capacity
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_form_southern_guard"
+		###Scorched Earth pushes at some of the top soldiers from the South-East war to make them even better, and feels that even his best are too low quality for what he wants to present Daybreaker if she visits
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_peninsulas_flagship
+	x = 0
+	y = 1
+	relative_position_id = MTS_to_minimum_capacity
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_establish_reasonable_quotas
+		focus = MTS_to_minimum_capacity
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_peninsulas_flagship"
+		###Evening Tempest tests out the new flagship battleship that was built in the South-East and is rather proud of the accomplishment, as it means they have more firepower to help the Empire
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_oiled_machine
+	x = 1
+	y = 1
+	relative_position_id = MTS_form_southern_guard
+	
+	cost = 4
+	prerequisite = { focus = MTS_form_southern_guard }
+	prerequisite = { focus = MTS_peninsulas_flagship }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_oiled_machine"
+		swap_ideas = {
+			remove_idea = MTS_southern_center_for_disease_control
+			add_idea = MTS_clean_health
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_overwhelming_production
+	x = 1
+	y = 1
+	relative_position_id = MTS_moderate_economy
+	
+	cost = 4
+	prerequisite = { focus = MTS_moderate_economy }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_overwhelming_production"
+		add_ideas = MTS_return_to_luxury
+		1214 = {
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+		}
+		16 = {
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_mine_mountains
+	x = 3
+	y = 1
+	relative_position_id = MTS_moderate_economy
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_moderate_economy
+		focus = MTS_oiled_machine
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_mine_mountains"
+		37 = {
+			add_resource = {
+				type = crystals
+				amount = 24
+			}
+		}
+		30 = {
+			add_resource = {
+				type = crystals
+				amount = 16
+			}
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_masters_of_jungle
+	x = -1
+	y = 1
+	relative_position_id = MTS_oiled_machine
+	
+	cost = 4
+	prerequisite = { focus = MTS_oiled_machine }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_masters_of_jungle"
+		add_ideas = MTS_jungle_masters
+		#Units here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_normalcy_returned
+	x = 0
+	y = 1
+	relative_position_id = MTS_mine_mountains
+	
+	cost = 5
+	prerequisite = { focus = MTS_overwhelming_production }
+	prerequisite = { focus = MTS_mine_mountains }
+	prerequisite = { focus = MTS_masters_of_jungle }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_normalcy_returned"
+		###Scorched Earth looks out his window as he signs the final bits of administrative work that is required to hand the reins over to one of the Empire's governors, and when Luminous Blade comes in to speak with him, he states that they will both come back to the Empire different ponies, and as better friends; they leave together, pleased at their work
+	}
+	
+	ai_will_do = { factor = 640 }
 }
 
 ###Warm Night###
@@ -1913,7 +2598,7 @@ shared_focus = {
 ###Army###
 shared_focus = {
 	id = MTS_practical_matters
-	x = 20
+	x = 30
 	y = 0
 	
 	cost = 2
@@ -2389,7 +3074,7 @@ shared_focus = {
 ###Navy###
 shared_focus = {
 	id = MTS_less_practical_matters
-	x = 30
+	x = 40
 	y = 0
 	
 	cost = 2
@@ -2818,7 +3503,7 @@ shared_focus = {
 ###Air###
 shared_focus = {
 	id = MTS_least_practical_matters
-	x = 40
+	x = 50
 	y = 0
 	
 	cost = 2
