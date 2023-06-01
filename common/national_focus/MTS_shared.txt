@@ -2413,6 +2413,75 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = MTS_war_of_soul
+	x = -1
+	y = 1
+	relative_position_id = MTS_purity_of_mind
+	
+	cost = 3
+	prerequisite = { focus = MTS_purity_of_mind }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_war_of_soul"
+		###Scorched Earth frets over what exactly he should do with the Solarists in the Empire when it is defeated, as he doesn't want to kill faithful, but must punish something, and comes to his own conclusions what would be best
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_iron_sharpens_iron
+	x = 1
+	y = 1
+	relative_position_id = MTS_purity_of_mind
+	
+	cost = 3
+	prerequisite = { focus = MTS_purity_of_mind }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_iron_sharpens_iron"
+		###Luminous Blade and Scorched Earth both train in some different combat techniques if they get into combat with Solarists, with banter if they're romanced
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_one_unit
+	x = 1
+	y = 1
+	relative_position_id = MTS_war_of_soul
+	
+	cost = 3
+	prerequisite = { focus = MTS_war_of_soul }
+	prerequisite = { focus = MTS_iron_sharpens_iron }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_one_unit"
+		###Luminous Blade enters as Scorched is working on some planning with other generals, and she helps complete some of his thoughts before he finishes them himself, which earns some admiration from him as a testament to how well they work together
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_united_in_devotion
+	x = 0
+	y = 2
+	relative_position_id = MTS_one_unit
+	
+	cost = 4
+	prerequisite = { focus = MTS_one_unit }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_united_in_devotion"
+		###As he feels that there is not enough competency in his military, Scorched Earth decides that Luminous Blade is worthy of becoming his co-equal field marshal, and holds a promotion ceremony for her
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
 	id = MTS_purity_of_body
 	x = 6
 	y = 1
@@ -2427,6 +2496,441 @@ shared_focus = {
 	}
 	
 	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_sacrifice_basics
+	x = -2
+	y = 1
+	relative_position_id = MTS_purity_of_body
+	
+	cost = 3
+	prerequisite = { focus = MTS_purity_of_body }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_sacrifice_basics"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_meals_are_hedonistic
+	x = 2
+	y = 1
+	relative_position_id = MTS_purity_of_body
+	
+	cost = 3
+	prerequisite = { focus = MTS_purity_of_body }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_purity_of_body"
+		###As a pony heads back to his home after a long day of work, he is grabbed by soldiers to again begin his next shift, which he is too weak to resist
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_no_production_missed
+	x = 0
+	y = 1
+	relative_position_id = MTS_sacrifice_basics
+	
+	cost = 3
+	prerequisite = { focus = MTS_sacrifice_basics }
+	mutually_exclusive = { focus = MTS_eliminate_living_standards }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_no_production_missed"
+		#Idea here or event of ponies toiling endlessly in the factories, which are enforced by soldiers
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_eliminate_living_standards
+	x = 0
+	y = 1
+	relative_position_id = MTS_meals_are_hedonistic
+	
+	cost = 3
+	prerequisite = { focus = MTS_meals_are_hedonistic }
+	mutually_exclusive = { focus = MTS_no_production_missed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_eliminate_living_standards"
+		#Idea here
+		increase_poverty = yes
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_life_taxes
+	x = 0
+	y = 1
+	relative_position_id = MTS_no_production_missed
+	
+	cost = 3
+	prerequisite = { focus = MTS_no_production_missed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_life_taxes"
+		three_random_arms_factories = yes
+		add_stability = -0.05
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_shared_abodes
+	x = 2
+	y = 1
+	relative_position_id = MTS_no_production_missed
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_no_production_missed
+		focus = MTS_eliminate_living_standards
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_shared_abodes"
+		every_state = {
+			limit = {
+				is_owned_by = ROOT
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		add_stability = -0.075
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_nothing_but_empresss
+	x = 0
+	y = 1
+	relative_position_id = MTS_eliminate_living_standards
+	
+	cost = 3
+	prerequisite = { focus = MTS_eliminate_living_standards }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_nothing_but_emptiness"
+		###Follow some citizens as they are carted around from one factory to the next to work on some specialized weapons they know how to make, and as they slowly starve because they are prevented from doing anything that isn't productive
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_way_of_squire
+	x = -2
+	y = 1
+	relative_position_id = MTS_life_taxes
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_life_taxes
+		focus = MTS_nothing_but_empresss
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_way_of_squire"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_live_to_die
+	x = 1
+	y = 1
+	relative_position_id = MTS_salvation_to_thestrals
+	
+	cost = 4
+	prerequisite = { focus = MTS_salvation_to_thestrals }
+	prerequisite = { focus = MTS_united_in_devotion }
+	mutually_exclusive = { focus = MTS_cost_of_luxury }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_live_to_die"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_cost_of_luxury
+	x = -1
+	y = 1
+	relative_position_id = MTS_way_of_squire
+	
+	cost = 4
+	prerequisite = { focus = MTS_united_in_devotion }
+	prerequisite = { focus = MTS_way_of_squire }
+	mutually_exclusive = { focus = MTS_live_to_die }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_cost_of_luxury"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_rescue_empress
+	x = 1
+	y = 1
+	relative_position_id = MTS_live_to_die
+	
+	cost = 5
+	prerequisite = {
+		focus = MTS_live_to_die
+		focus = MTS_cost_of_luxury
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_rescue_empress"
+		###Scorched Earth nervously prepares his last few minutes before he goes out to lead his forces, with Luminous Blade pledging that she will support him and make sure that the Empress's strength goes with him, and they either nuzzle or not, depending on if romanced
+		#Create event target for whoever owns the core stats of EQS to get a wargoal on them
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = MTS_empire_freed
+	x = 0
+	y = 1
+	relative_position_id = MTS_rescue_empress
+	
+	cost = 3
+	prerequisite = { focus = MTS_rescue_empress }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_empire_freed"
+		###Sanctum Solar has a massive celebration held in it for the supposed liberation it had from the corrupt Solarists
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = MTS_preaching_new_gospel
+	x = -2
+	y = 1
+	relative_position_id = MTS_empire_freed
+	
+	cost = 3
+	prerequisite = { focus = MTS_empire_freed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_preaching_new_gospel"
+		###Warm Night steps into the Cathedral of the Sun and nervously sees how many ponies have been gathered before her, and she worriedly preaches the tenets of Militem Solar, which causes soem stirs
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_restoring_order
+	x = 0
+	y = 1
+	relative_position_id = MTS_restoring_order
+	
+	cost = 3
+	prerequisite = { focus = MTS_empire_freed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_restoring_order"
+		###In a military tribunal, Scorched Earth presides while Luminous also watches over him as well, although she is uncomfortable as he starts to pronounce judgement on the archmages for heresy and hedonism
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_breaking_nobles_backs
+	x = 2
+	y = 1
+	relative_position_id = MTS_empire_freed
+	
+	cost = 3
+	prerequisite = { focus = MTS_empire_freed }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_breaking_nobles_backs"
+		###Many soldiers start to storm the different areas of the palace and other sections of SS and taking away much fo the wealth of the noble families and arresting many others
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_appointing_new_clergy
+	x = -2
+	y = 1
+	relative_position_id = MTS_preaching_new_gospel
+	
+	cost = 3
+	prerequisite = { focus = MTS_preaching_new_gospel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_appointing_new_clergy"
+		###In a new ceremony in SS, Scorched Earth hosts a speech about how the Adoratio has become corrupt, but he is appointing a new, holy pony who will be his new high mage to destroy hedonism unlike Sunset Shimmer
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_threat_quarantined
+	x = 0
+	y = 1
+	relative_position_id = MTS_preaching_new_gospel
+	
+	cost = 3
+	prerequisite = { focus = MTS_preaching_new_gospel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_threat_quarantined"
+		###Scorched Earth heads to one of the most magically muted areas of the palace, where Quasar is held in isolation, with magical suppression ring on her horn, and he and she have a long discussion and vitriolic argument about him letting her live if she swears fealty to ideals of Militem Solar
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_bitter_honesty
+	x = 0
+	y = 1
+	relative_position_id = MTS_restoring_order
+	
+	cost = 3
+	prerequisite = { focus = MTS_restoring_order }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_bitter_honesty"
+		###Daybreaker or Aurora, held captive by Scorched Earth now, is interrogated by him on why he was rejected, and the leader, after a bit of heavy pressing, speaks of how he was too extreme and he will ruin the country, which he refuses to believe and claims even they are corrupted
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_purifying_sanctum
+	x = 0
+	y = 1
+	relative_position_id = MTS_breaking_nobles_backs
+	
+	cost = 3
+	prerequisite = { focus = MTS_breaking_nobles_backs }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_purifying_sanctum"
+		###Groups of soldiers, as well as some of the convinced Adoratio and Inquisitionis, begin to start torching parts of the "corrupted" sections of Sanctum Solar, which Scorched Earth encourages as he proclaims he will destroy all of the luxury that corrupted the nation
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_cleansing_cities
+	x = 2
+	y = 1
+	relative_position_id = MTS_breaking_nobles_backs
+	
+	cost = 3
+	prerequisite = { focus = MTS_breaking_nobles_backs }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_cleansing_cities"
+		###A group of nobles and rich ponies in SS are brought before the palace, and Scorched Earth speaks about how they poisoned the Empire and that he will cleanse the nation of all the taint and hedonism
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_integration_perfected
+	x = 1
+	y = 1
+	relative_position_id = MTS_appointing_new_clergy
+	
+	cost = 3
+	prerequisite = { focus = MTS_appointing_new_clergy }
+	prerequisite = { focus = MTS_threat_quarantined }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_integration_perfected"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_new_dynasty
+	x = 0
+	y = 1
+	relative_position_id = MTS_bitter_honesty
+	
+	cost = 3
+	prerequisite = { focus = MTS_bitter_honesty }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_new_dynasty"
+		###Luminous Blade walks into Scorched Earth in the throne room of the palace, and she is startled by him as he grabs her to say that he must destroy the corruption that plagued the nation, which was fed by the hedonism and lack of faith of everypony there, starting with a new imperial dynasty, which he wants to make with her; she will accept or reject based on being romanced or not
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_occupation_perfected
+	x = 1
+	y = 1
+	relative_position_id = MTS_purifying_sanctum
+	
+	cost = 3
+	prerequisite = { focus = MTS_occupation_perfected }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_occupation_perfected"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_torch_continent
+	x = 0
+	y = 1
+	relative_position_id = MTS_new_dynasty
+	
+	cost = 5
+	prerequisite = { focus = MTS_integration_perfected }
+	prerequisite = { focus = MTS_occupation_perfected }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_torch_continent"
+		###As the new head of the Solar Empire, Scorched Earth broadcasts to the airwaves that he will see the entire continent brought under the Empress's heel, and that all corruption, hedonism, and heresy will be destroyed, so that the light of the Empress can shine into every corner of Equus, and that peace will be achieved
+	}
+	
+	ai_will_do = { factor = 320 }
 }
 
 ###Warm Night###
