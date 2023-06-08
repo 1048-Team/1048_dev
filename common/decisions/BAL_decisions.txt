@@ -312,6 +312,65 @@ BAL_debug_decisions_category = {
 			MTS = { change_tag_from = ROOT }
 		}
 	}
+	MTS_promote_Warm_Night = {
+		available = {
+			tag = MTS
+			NOT = { has_country_leader = { character = MTS_Warm_Night ruling_only = yes } }
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = MTS_scorched_earth_triumphant }
+				clr_country_flag = MTS_scorched_earth_triumphant
+			}
+			set_country_flag = MTS_warm_night_triumphant
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = { NOT = { can_be_country_leader = MTS_Warm_Night } }
+				MTS_Warm_Night = {
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							ideology = solarism
+							expire = "1965.1.1"
+							traits = { 
+								sympathetic_priestess
+							}
+						}
+					}
+				}
+			}
+			else = {
+				promote_character = MTS_Warm_Night
+			}
+		}
+	}
+	MTS_promote_Scorched_Earth = {
+		available = {
+			tag = MTS
+			NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } }
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = MTS_warm_night_triumphant }
+				clr_country_flag = MTS_warm_night_triumphant
+			}
+			set_country_flag = MTS_scorched_earth_triumphant
+			mark_focus_tree_layout_dirty = yes
+			promote_character = EQS_Scorched_Earth
+			if = {
+				limit = {
+					has_government = communism
+				}
+				set_ruling_party = fascism
+			}
+		}
+	}
 	MTS_simulate_post_war = {
 		available = {
 			tag = MTS
