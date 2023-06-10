@@ -1,0 +1,64 @@
+###EaW did it wonky, as adding popularity is too clunky. Should be set as set_popularities using the variables that are set in the first scripted effect
+###Someone should really go over this in EaW again. It could be more efficient
+###Works the same as in EaW. Use first effect before puppeting in the puppet's scope, use the second after puppeting - T4E
+get_current_government_type_FH = {
+	clr_country_flag = was_neutral
+	clr_country_flag = was_communist
+	clr_country_flag = was_democratic
+	clr_country_flag = was_fascist
+	set_variable = { var = last_neutrality_pop value = party_popularity@neutrality }
+	set_variable = { var = last_communism_pop value = party_popularity@communism }
+	set_variable = { var = last_democratic_pop value = party_popularity@democratic }
+	set_variable = { var = last_fascism_pop value = party_popularity@fascism }
+	multiply_variable = { last_neutrality_pop = 100 }
+	multiply_variable = { last_communism_pop = 100 }
+	multiply_variable = { last_democratic_pop = 100 }
+	multiply_variable = { last_fascism_pop = 100 }
+	if = {
+		limit = { has_government = neutrality }
+		set_country_flag = was_neutral
+	}
+	else_if = {
+		limit = { has_government = communism }
+		set_country_flag = was_communist
+	}
+	else_if = {
+		limit = { has_government = democratic }
+		set_country_flag = was_democratic
+	}
+	else_if = {
+		limit = { has_government = fascism }
+		set_country_flag = was_fascist
+	}
+}
+
+restore_previous_government_type_FH = {
+	hidden_effect = {
+		set_popularities = {
+			democratic = last_democratic_pop
+			communism = last_communism_pop
+			fascism = last_fascism_pop
+			neutrality = last_neutrality_pop
+		}
+		clear_variable = last_neutrality_pop
+		clear_variable = last_communism_pop
+		clear_variable = last_democratic_pop
+		clear_variable = last_fascism_pop
+		if = {
+			limit = { has_country_flag = was_neutral }
+			set_politics = { ruling_party = neutrality }
+		}
+		else_if = {
+			limit = { has_country_flag = was_communist }
+			set_politics = { ruling_party = communism }
+		}
+		else_if = {
+			limit = { has_country_flag = was_democratic }
+			set_politics = { ruling_party = democratic }
+		}
+		else_if = {
+			limit = { has_country_flag = was_fascist }
+			set_politics = { ruling_party = fascism }
+		}
+	}
+}
