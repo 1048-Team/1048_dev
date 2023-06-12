@@ -5685,6 +5685,7 @@ shared_focus = {
 	allow_branch = {
 		has_country_flag = MTS_EQS_accepted
 		has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+		EQS = { NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } } }
 	}
 	
 	completion_reward = {
@@ -5769,7 +5770,6 @@ shared_focus = {
 	id = MTS_final_surge
 	x = 0
 	y = 2
-	y = 1
 	relative_position_id = MTS_ordo_crossroads
 	
 	cost = 3
@@ -6119,9 +6119,9 @@ shared_focus = {
 
 shared_focus = {
 	id = MTS_transitional_chairponies
-	x = 0
+	x = -1
 	y = 1
-	relative_position_id = MTS_religious_liberty
+	relative_position_id = MTS_guidance_on_missions
 	
 	cost = 3
 	prerequisite = { focus = MTS_religious_liberty }
@@ -6233,6 +6233,27 @@ shared_focus = {
 	ai_will_do = { factor = 320 }
 }
 
+###EQS conquered###
+shared_focus = {
+	id = MTS_critical_mistakes
+	x = 6
+	y = 10
+	
+	cost = 1
+	allow_branch = {
+		has_country_flag = MTS_EQS_rejected
+		owns_state = 3
+		has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_critical_mistakes"
+		###As the last of the resistance in Sanctum Solar is taken, Warm Night moves to establish at least a bit of trust by holding a speech from the palace that she will not oppress them like they expect, but they will be educated on their misdeeds and misguidance, and that they will live far better than before
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
 ###Celestia Puppet###
 shared_focus = {
 	id = MTS_acceptance_of_false_goddess
@@ -6251,6 +6272,501 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_acceptance_of_false_goddess"
 		###Warm Night is invited to Canterlot, and she goes on a train, and feels nervous because she is certain she will be facing some kind of punishment, but she felt compelled to go, and she is actually welcomed by Celestia, although is told she'll be studying a while there, under Celestia's guidance
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+	id = MTS_entreating_reason
+	x = -2
+	y = 1
+	relative_position_id = MTS_acceptance_of_false_goddess
+	
+	cost = 2
+	prerequisite = { focus = MTS_acceptance_of_false_goddess }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_entreating_reason"
+		###Celestia spends time with Warm Night, showing how some of her ideas were actually very similar to what Celestia implemented in times past, and that she isn't much different from a harmonist pony in the end, which causes Warm Night to think
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_reciprocating_care
+	x = 2
+	y = 1
+	relative_position_id = MTS_acceptance_of_false_goddess
+	
+	cost = 2
+	prerequisite = { focus = MTS_acceptance_of_false_goddess }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_reciprocating_care"
+		###After attending a meeting that Celestia has with some of the leaders of a community, Warm Night is chatted with about how she sees the harmonist world after that, which gets her honest opinion of how similar she and Celestia's policies are
+		###After both of these, she will get a short event about how she recants of her solarist leaning to help reconcile the South-East
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_radical_reforms
+	x = -2
+	y = 1
+	relative_position_id = MTS_entreating_reason
+	
+	cost = 3
+	prerequisite = { focus = MTS_entreating_reason }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_radical_reforms"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_new_gospel
+	x = 2
+	y = 1
+	relative_position_id = MTS_entreating_reason
+	
+	cost = 3
+	prerequisite = { focus = MTS_entreating_reason }
+	prerequisite = { focus = MTS_reciprocating_care }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_new_gospel"
+		###After returning to the South-East, Warm Night is confronted by both Luminous and Scorched about her visit and she tries to assuage them that she is still committed but that she has been enlightened, but is not a heretic
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_end_forced_service
+	x = 2
+	y = 1
+	relative_position_id = MTS_reciprocating_care
+	
+	cost = 3
+	prerequisite = { focus = MTS_reciprocating_care }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_end_forced_service"
+		add_stability = 0.03
+		add_war_support = 0.02
+		add_manpower = -75000
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_encourage_capitalists
+	x = -1
+	y = 1
+	relative_position_id = MTS_radical_reforms
+	
+	cost = 3
+	prerequisite = { focus = MTS_radical_reforms }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_radical_reforms"
+		###Event of a cheesy advertisement for the economic opportunity for ponies to make a living in the South-East, which is mostly filled with false information or awkward statements from thestrals about how great it is, or the like
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_relinquish_control
+	x = 1
+	y = 1
+	relative_position_id = MTS_radical_reforms
+	
+	cost = 3
+	prerequisite = { focus = MTS_radical_reforms }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_relinquish_control"
+		###Warm Night enters her office when she sees that there is a pony at her desk pouring over different account books, which is causing them much stress because of the horrible economic balances, and she is barely able to agree to his demands of continuing to scry through things to keep the South-East afloat
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_minimal_disruption
+	x = -1
+	y = 1
+	relative_position_id = MTS_new_gospel
+	
+	cost = 3
+	prerequisite = { focus = MTS_new_gospel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_minimal_disruption"
+		###Warm Night drags Scorched Earth along to one of the new harmonist settlements, and she shows how they are still following some of the minimalist tenets of Militem Solar, but are doing it to benefit everypony, which SE begrudgingly admits is worthwhile
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_redirected_fervor
+	x = 1
+	y = 1
+	relative_position_id = MTS_new_gospel
+	
+	cost = 3
+	prerequisite = { focus = MTS_new_gospel }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_suns_disapproval"
+		###Warm Night takes Luminous Blade through the Ordo that she and Scorced Earth once worked in, and she shows how ponies are still working together, and even protecting each other from some of the threats from the jungles and the like, just like Luminous swore to the ponies, which makes Luminous ponder her purpose
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_mass_honorable_discharge
+	x = -1
+	y = 1
+	relative_position_id = MTS_end_forced_service
+	
+	cost = 3
+	prerequisite = { focus = MTS_end_forced_service }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_mass_honorable_discharge"
+		###Follow a soldier as their last day on the job as a warrior for the Militem Solar, and he has a few emotional moments with his squadmates before they are sent back to their homes and cities
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_innovate_protection
+	x = 1
+	y = 1
+	relative_position_id = MTS_end_forced_service
+	
+	cost = 3
+	prerequisite = { focus = MTS_end_forced_service }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_innovate_protection"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_royal_tour
+	x = 1
+	y = 1
+	relative_position_id = MTS_encourage_capitalists
+	
+	cost = 3
+	prerequisite = { focus = MTS_encourage_capitalists }
+	prerequisite = { focus = MTS_relinquish_control }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_royal_tour"
+		###A dinner between Warm Night, a couple of other Solarists, and Celestia is held in acknowledgement of Celestia's visit to the South-East to show that things are progressing well, and Celestia spends a short time discussing with Warm Night her improvement on a personal level to motivate her
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_full_pardons
+	x = 0
+	y = 1
+	relative_position_id = MTS_minimal_disruption
+	
+	cost = 3
+	prerequisite = { focus = MTS_minimal_disruption }
+	prerequisite = { focus = MTS_redirected_fervor }
+	mutually_exclusive = { focus = MTS_early_retirements }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_full_pardons"
+		###Warm Night brings both SE and LB before her in a tribunal, which has them both concerned about their future, but she soon informs them that they are being fully pardoned, since she convinced Celestia to see the merit of their skills to continue on
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_early_retirements
+	x = 0
+	y = 1
+	relative_position_id = MTS_redirected_fervor
+	
+	cost = 3
+	prerequisite = { focus = MTS_minimal_disruption }
+	prerequisite = { focus = MTS_redirected_fervor }
+	mutually_exclusive = { focus = MTS_full_pardons }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_suns_disapproval"
+		###After bringing them forward in a tribunal, Warm Night admits that she was only able to partly stave off Celestia's requirements for justice and that both SE and LB must retire from all forms of service, but they will be allowed to live freely otherwise
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_royal_inspection
+	x = 1
+	y = 1
+	relative_position_id = MTS_mass_honorable_discharge
+	
+	cost = 3
+	prerequisite = { focus = MTS_mass_honorable_discharge }
+	prerequisite = { focus = MTS_innovate_protection }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_royal_inspection"
+		###A nervous Warm Night waits for Celestia to see how their army has become more specialized and demobilized, and since Celestia is still silent on her opinion of it, that she might not have accomplished what was desired, but Celestia soon reassures her that she is on the right course
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_unhindered_exploitation
+	x = -1
+	y = 1
+	relative_position_id = MTS_royal_tour
+	
+	cost = 3
+	prerequisite = { focus = MTS_royal_tour }
+	mutually_exclusive = { focus = MTS_union_backbone }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_unhindered_exploitation"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_union_backbone
+	x = 1
+	y = 1
+	relative_position_id = MTS_royal_tour
+	
+	cost = 3
+	prerequisite = { focus = MTS_royal_tour }
+	mutually_exclusive = { focus = MTS_unhindered_exploitation }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_union_backbone"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_wayward_wanderers
+	x = 1
+	y = 1
+	relative_position_id = MTS_full_pardons
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_full_pardons
+		focus = MTS_early_retirements
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_wayward_wanderers"
+		###Warm Night holds one final meeting with LB and SE because she worries because they are still at risk of facing some kind of prosecution, and she urges them to turn to harmony and to fallow what ponies were always meant to do, and it finally convinces them
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_warriors_of_peace
+	x = -1
+	y = 1
+	relative_position_id = MTS_royal_inspection
+	
+	cost = 3
+	prerequisite = { focus = MTS_royal_inspection }
+	mutually_exclusive = { focus = MTS_all_opportunities }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_warriors_of_peace"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_all_opportunities
+	x = 1
+	y = 1
+	relative_position_id = MTS_royal_inspection
+	
+	cost = 3
+	prerequisite = { focus = MTS_royal_inspection }
+	mutually_exclusive = { focus = MTS_warriors_of_peace }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_all_opportunities"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_southeastern_economic_zone
+	x = 1
+	y = 1
+	relative_position_id = MTS_unhindered_exploitation
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_unhindered_exploitation
+		focus = MTS_union_backbone
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeastern_economic_zone"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_war_of_competition
+	x = 1
+	y = 1
+	relative_position_id = MTS_union_backbone
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_unhindered_exploitation
+		focus = MTS_union_backbone
+	}
+	mutually_exclusive = { focus = MTS_war_of_minds }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_war_of_competition"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_war_of_minds
+	x = -1
+	y = 1
+	relative_position_id = MTS_warriors_of_peace
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_warriors_of_peace
+		focus = MTS_all_opportunities
+	}
+	mutually_exclusive = { focus = MTS_war_of_competition }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_war_of_minds"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_harmonic_evangelists
+	x = 1
+	y = 1
+	relative_position_id = MTS_warriors_of_peace
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_warriors_of_peace
+		focus = MTS_all_opportunities
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_harmonic_evangelists"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_helping_themselves
+	x = 0
+	y = 1
+	relative_position_id = MTS_southeastern_economic_zone
+	
+	cost = 4
+	prerequisite = { focus = MTS_southeastern_economic_zone }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_helping_themselves"
+		###Warm Night works with Fat Stacks to see how the economic outlook has improved in the South-East since he's helped, and she feels slightly emotional that her vision of a prosperous South-East is coming to fruition and that ponies can live in peace
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_liberated_army
+	x = 0
+	y = 1
+	relative_position_id = MTS_harmonic_evangelists
+	
+	cost = 4
+	prerequisite = { focus = MTS_harmonic_evangelists }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_liberated_army"
+		###Warm Night sees a report about how the military helped the ponies who suffered in the wake of a hurricane on one of the islands and the nation has united behind ideals of helping each other
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_embrace_of_sun
+	x = 2
+	y = 2
+	relative_position_id = MTS_war_of_competition
+	
+	cost = 5
+	prerequisite = { focus = MTS_helping_themselves }
+	prerequisite = { focus = MTS_liberated_army }
+	prerequisite = {
+		focus = MTS_war_of_competition
+		focus = MTS_war_of_minds
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_embrace_of_sun"
+		###After the annexation of the South-East, Warm Night meets with both Scorched Earth and Luminous at a new restaurant in New Horseleans, and they chat together, as friends, about how they have integrated into the new Equestria, and that in the end, the South-East did better than any could have hoped
 	}
 	
 	ai_will_do = { factor = 320 }
