@@ -128,7 +128,11 @@ BAL_debug_decisions_category = {
 		}
 		fire_only_once = yes
 		complete_effect = {
-			EQS = {
+			random_country = {
+				limit = {
+					has_character = EQS_Scorched_Earth
+					has_character = EQS_Luminous_Blade
+				}
 				EQS_Scorched_Earth = { set_nationality = MTS promote_leader = yes remove_trait = { trait = recently_promoted } }
 				EQS_Luminous_Blade = { set_nationality = MTS }
 			}
@@ -139,8 +143,21 @@ BAL_debug_decisions_category = {
 				add_state_core = 84
 				add_state_core = 28
 				add_state_core = 27
+				load_oob = "MTS_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "MTS_1048_naval"
+				}
+				else = {
+					load_oob = "MTS_1048_naval_legacy"
+				}
 			}
-			MTS = {
+			random_country = {
+				limit = {
+					has_character = EQS_Scorched_Earth
+				}
 				EQS_Scorched_Earth = {
 					add_country_leader_role = {
 						promote_leader = yes
@@ -150,7 +167,7 @@ BAL_debug_decisions_category = {
 							ideology = solarism
 							desc = POLITICS_SCORCHED_EARTH_1048_DESC
 							traits = {
-								
+								warrior_ascetic
 							}
 						}
 					}
@@ -162,6 +179,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = EEE }
 			is_southeast_country = yes
+			country_exists = EEE
 		}
 		complete_effect = {
 			EEE = { change_tag_from = ROOT }
@@ -170,8 +188,9 @@ BAL_debug_decisions_category = {
 	EEE_promote_Gushing = {
 		available = {
 			tag = EEE
-			NOT = { has_country_leader = EEE_Gushing_Pulse }
+			NOT = { has_country_leader = { character = EEE_Gushing_Pulse ruling_only = yes } }
 		}
+		visible = { tag = EEE }
 		complete_effect = {
 			IF = {
 				limit = {
@@ -188,8 +207,9 @@ BAL_debug_decisions_category = {
 	EEE_promote_Nocturne = {
 		available = {
 			tag = EEE
-			NOT = { has_country_leader = EEE_Nocturne_Vision }
+			NOT = { has_country_leader = { character = EEE_Nocturne_Vision ruling_only = yes } }
 		}
+		visible = { tag = EEE }
 		complete_effect = {
 			IF = {
 				limit = {
@@ -206,8 +226,9 @@ BAL_debug_decisions_category = {
 	EEE_promote_Moonlight_and_Waning = {
 		available = {
 			tag = EEE
-			NOT = { has_country_leader = EEE_Moonlight_and_Waning }
+			NOT = { has_country_leader = { character = EEE_Moonlight_and_Waning ruling_only = yes } }
 		}
+		visible = { tag = EEE }
 		complete_effect = {
 			IF = {
 				limit = {
@@ -225,6 +246,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = BAL }
 			is_southeast_country = yes
+			country_exists = BAL
 		}
 		complete_effect = {
 			BAL = { change_tag_from = ROOT }
@@ -234,6 +256,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = NRP }
 			is_southeast_country = yes
+			country_exists = NRP
 		}
 		complete_effect = {
 			NRP = { change_tag_from = ROOT }
@@ -243,6 +266,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = NID }
 			is_southeast_country = yes
+			country_exists = NID
 		}
 		complete_effect = {
 			NID = { change_tag_from = ROOT }
@@ -252,6 +276,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = STB }
 			is_southeast_country = yes
+			country_exists = STB
 		}
 		complete_effect = {
 			STB = { change_tag_from = ROOT }
@@ -261,6 +286,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = CLI }
 			is_southeast_country = yes
+			country_exists = CLI
 		}
 		complete_effect = {
 			CLI = { change_tag_from = ROOT }
@@ -270,6 +296,7 @@ BAL_debug_decisions_category = {
 		available = {
 			NOT = { tag = SPF }
 			is_southeast_country = yes
+			country_exists = SPF
 		}
 		complete_effect = {
 			SPF = { change_tag_from = ROOT }
@@ -277,18 +304,250 @@ BAL_debug_decisions_category = {
 	}
 	BAL_switch_to_MTS = {
 		available = {
-			country_exists = MTS
 			NOT = { tag = MTS }
 			is_southeast_country = yes
+			country_exists = MTS
 		}
 		complete_effect = {
 			MTS = { change_tag_from = ROOT }
+		}
+	}
+	MTS_promote_Warm_Night = {
+		available = {
+			tag = MTS
+			NOT = { has_country_leader = { character = MTS_Warm_Night ruling_only = yes } }
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = MTS_scorched_earth_triumphant }
+				clr_country_flag = MTS_scorched_earth_triumphant
+			}
+			set_country_flag = MTS_warm_night_triumphant
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = { NOT = { has_government = communism } }
+				set_politics = {
+					ruling_party = communism
+					elections_allowed = no
+				}
+			}
+			if = {
+				limit = { NOT = { can_be_country_leader = MTS_Warm_Night } }
+				MTS_Warm_Night = {
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							ideology = religious_socialism
+							expire = "1965.1.1"
+							traits = { 
+								sympathetic_priestess
+							}
+						}
+					}
+				}
+			}
+			else = {
+				promote_character = MTS_Warm_Night
+			}
+		}
+	}
+	MTS_promote_Scorched_Earth = {
+		available = {
+			tag = MTS
+			NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } }
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = MTS_warm_night_triumphant }
+				clr_country_flag = MTS_warm_night_triumphant
+			}
+			set_country_flag = MTS_scorched_earth_triumphant
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = { NOT = { has_government = fascism } }
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+			}
+		}
+	}
+	MTS_simulate_post_war = {
+		available = {
+			tag = MTS
+			NOT = { has_country_flag = MTS_conquered_southeast }
+		}
+		visible = {
+			tag = MTS
+		}
+		fire_only_once = yes
+		complete_effect = {
+			set_country_flag = MTS_conquered_southeast
+			set_cosmetic_tag = MTS_SOL_puppet
+			mark_focus_tree_layout_dirty = yes
+			every_country = {
+				limit = {
+					is_in_array = { array = global.southeast_countries value = THIS }
+					exists = yes
+					NOT = { tag = ROOT }
+				}
+				MTS = {
+					annex_country = {
+						target = PREV
+					}
+				}
+			}
+		}
+	}
+	MTS_simulate_EQS_SOL_acceptance = {
+		available = {
+			tag = MTS
+			OR = {
+				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			}
+			EQS = { NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } } }
+			has_country_flag = MTS_conquered_southeast
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			set_country_flag = MTS_EQS_accepted
+			get_current_government_type_FH = yes
+			EQS = {
+				if = {
+					limit = {
+						has_dlc = "Together for Victory"
+					}
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_satellite
+						freedom_level = 0.33
+					}
+				}
+				else = {
+					puppet = ROOT
+				}
+			}
+			restore_previous_government_type_FH = yes
+		}
+	}
+	MTS_simulate_EQS_acceptance = {
+		available = {
+			tag = MTS
+			OR = {
+				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			}
+			EQS = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+			has_country_flag = MTS_conquered_southeast
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			set_country_flag = MTS_EQS_accepted
+			get_current_government_type_FH = yes
+			EQS = {
+				if = {
+					limit = {
+						has_dlc = "Together for Victory"
+					}
+					set_autonomy = {
+						target = ROOT
+						autonomy_state = autonomy_dominion
+						freedom_level = 0.33
+					}
+				}
+				else = {
+					puppet = ROOT
+				}
+			}
+			restore_previous_government_type_FH = yes
+		}
+	}
+	MTS_simulate_EQS_SOL_rejection = {
+		available = {
+			tag = MTS
+			OR = {
+				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			}
+			has_country_flag = MTS_conquered_southeast
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			set_country_flag = MTS_EQS_rejected
+		}
+	}
+	MTS_EQS_go_SUN = {
+		available = {
+			tag = MTS
+			OR = {
+				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			}
+			has_country_flag = MTS_conquered_southeast
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			EQS = {
+				activate_decision = EQS_SOL_go_SUN
+			}
+		}
+	}
+	MTS_EQS_go_DAY = {
+		available = {
+			tag = MTS
+			OR = {
+				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			}
+			has_country_flag = MTS_conquered_southeast
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			EQS = {
+				activate_decision = EQS_SOL_stay_DAY
+			}
+		}
+	}
+	MTS_EQS_go_CEL = {
+		available = {
+			tag = MTS
+			OR = {
+				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			}
+			has_country_flag = MTS_conquered_southeast
+		}
+		visible = {
+			tag = MTS
+		}
+		complete_effect = {
+			EQS = {
+				activate_decision = EQS_SOL_go_CEL
+			}
 		}
 	}
 	BAL_switch_to_NEI = {
 		available = {
 			NOT = { tag = NEI }
 			is_southeast_country = yes
+			country_exists = NEI
 		}
 		complete_effect = {
 			NEI = { change_tag_from = ROOT }
