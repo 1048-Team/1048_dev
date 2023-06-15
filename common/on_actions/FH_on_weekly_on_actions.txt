@@ -1,0 +1,52 @@
+on_actions = {
+	on_weekly_EQS = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = { EQS_Aurora_Shinespark = { is_country_leader = yes } }
+					NOT = { has_country_flag = EQS_variant_empire_map_over }
+					OR = {
+						all_of_scopes = {
+							array = global.shield_of_steel
+							country_exists = no
+						}
+						all_of_scopes = {
+							array = global.southeast_countries
+							country_exists = no
+						}
+					}
+				}
+				IF = {
+					limit = {
+						all_of_scopes = {
+							array = global.shield_of_steel
+							country_exists = no
+						}
+						any_of_scopes = {
+							array = global.southeast_countries
+							country_exists = yes
+						}
+					}
+					set_variable = { equestria_conquest = 2 }
+				}
+				ELSE_IF = {
+					limit = {
+						all_of_scopes = {
+							array = global.southeast_countries
+							country_exists = no
+						}
+						any_of_scopes = {
+							array = global.shield_of_steel
+							country_exists = yes
+						}
+					}
+					set_variable = { equestria_conquest = 3 }
+				}
+				ELSE = {
+					set_variable = { equestria_conquest = 4 }
+					ROOT = { set_country_flag = EQS_variant_empire_map_over }
+				}
+			}
+		}
+	}
+}
