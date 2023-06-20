@@ -6616,7 +6616,7 @@ shared_focus = {
 	relative_position_id = MTS_suns_disapproval
 	
 	cost = 3
-	prerequisite = { focus = MTS_independent_actor }
+	prerequisite = { focus = MTS_suns_disapproval }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_independent_actor"
@@ -6696,6 +6696,182 @@ shared_focus = {
 	}
 	
 	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_aiding_our_own
+	x = -1
+	y = 1
+	relative_position_id = MTS_addressing_elephants
+	
+	cost = 3
+	prerequisite = { focus = MTS_addressing_elephants }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_aiding_our_own"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_controlling_borders
+	x = 1
+	y = 1
+	relative_position_id = MTS_addressing_elephants
+	
+	cost = 3
+	prerequisite = { focus = MTS_addressing_elephants }
+	prerequisite = { focus = MTS_withdraw_from_world_stage }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_controlling_borders"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_jobs_for_jobless
+	x = 1
+	y = 1
+	relative_position_id = MTS_aiding_our_own
+	
+	cost = 3
+	prerequisite = { focus = MTS_aiding_our_own }
+	prerequisite = { focus = MTS_controlling_borders }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_jobs_for_jobless"
+		###An unemployed pony who is actually happy with their life living off some social welfare is forced to start work on a construction team by some of the Militarium there and she bemoans how she has to work for a living again
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_bonds_of_isolated
+	x = -1
+	y = 2
+	relative_position_id = MTS_aiding_our_own
+	
+	available = {
+		SCS = {
+			NOT = { has_government = fascism }
+			is_subject = no
+			is_in_faction = no
+		}
+	}
+	
+	cost = 3
+	prerequisite = { focus = MTS_aiding_our_own }
+	mutually_exclusive = { focus = MTS_path_of_purity }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_bonds_of_isolated"
+		###After reports of the Changeling Hegemony collapsing and SCS remaining free, Warm Night weighs her options of offering to form an alliance or not, although she is finally convinced that it is for the better
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_path_of_purity
+	x = 1
+	y = 2
+	relative_position_id = MTS_controlling_borders
+	
+	cost = 3
+	prerequisite = { focus = MTS_controlling_borders }
+	mutually_exclusive = { focus = MTS_bonds_of_isolated }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_path_of_purity"
+		###Short event of a radio broadcast about how some ponies were wanting the nation to align with some other power on the continent, and then going on about how it's a unique country that must remain pure of any ideological corruption, and that they will be staying the course alone
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_shared_missions
+	x = 0
+	y = 1
+	relative_position_id = MTS_bonds_of_isolated
+	
+	available = {
+		SCS = { is_in_faction_with = ROOT }
+	}
+	
+	cost = 3
+	prerequisite = { focus = MTS_bonds_of_isolated }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_shared_missions"
+		###Maybe event of a combined training exercise with south-eastern and southern forces, and the camaraderie that it builds to give them the will to fight against the larger countries around them; bypass focus if they reject
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_privacy_for_everypony
+	x = 0
+	y = 2
+	relative_position_id = MTS_jobs_for_jobless
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_bonds_of_isolated
+		focus = MTS_path_of_purity
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_privacy_for_everypony"
+		###Follow a new, South-Eastern speculatore as she runs an op to recapture some intelligence that was stolen and in the end has to take down a Solarist speculatore who was trying to flee the country
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_southeast_homeguard
+	x = 0
+	y = 1
+	relative_position_id = MTS_path_of_purity
+	
+	cost = 3
+	prerequisite = { focus = MTS_path_of_purity }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeast_homeguard"
+		###Possibly event of some training exercise with the new elite guards of the South-East getting into a scrap with one of the last remaining mythical creatures in Equestria such as a bugbear or the like and coming out on top
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_salvation_outside_the_empress
+	x = 0
+	y = 1
+	relative_position_id = MTS_privacy_for_everypony
+	
+	cost = 4
+	prerequisite = { focus = MTS_privacy_for_everypony }
+	prerequisite = {
+		focus = MTS_shared_missions
+		focus = MTS_southeast_homeguard
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_exempting_brokenhearted"
+		###After wrapping up another series of meetings with her council, Warm Night spends a bit of time in prayer and thought about how she's led ponies into a new hope outside of the Empress, which worries what might happen to her if she ever is taken back to the Empire, but she concludes for the time being that the South-East is her mission, and she will nurture it
+	}
+	
+	ai_will_do = { factor = 160 }
 }
 
 ###EQS conquered###
