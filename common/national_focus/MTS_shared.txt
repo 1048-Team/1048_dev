@@ -9,6 +9,7 @@ shared_focus = {
 	cost = 1
 	allow_branch = {
 		NOT = { has_country_flag = MTS_conquered_southeast }
+		NOT = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
 	}
 	
 	completion_reward = {
@@ -3701,6 +3702,7 @@ shared_focus = {
 	cost = 2
 	allow_branch = {
 		owns_state = 3
+		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 	}
 	available = {
 		owns_state = 3
@@ -3710,6 +3712,7 @@ shared_focus = {
 				NOT = { country_exists = EQS }
 				NOT = { country_exists = SLW }
 			}
+			has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 		}
 	}
 	prerequisite = { focus = MTS_renounce_sun_overlordship }
@@ -6611,7 +6614,7 @@ shared_focus = {
 
 shared_focus = {
 	id = MTS_independent_actor
-	x = 7
+	x = 5
 	y = 1
 	relative_position_id = MTS_suns_disapproval
 	
@@ -6663,7 +6666,7 @@ shared_focus = {
 
 shared_focus = {
 	id = MTS_withdraw_from_world_stage
-	x = 2
+	x = 3
 	y = 1
 	relative_position_id = MTS_independent_actor
 	
@@ -6867,18 +6870,206 @@ shared_focus = {
 	}
 	
 	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus MTS_exempting_brokenhearted"
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_salvation_outside_the_empress"
 		###After wrapping up another series of meetings with her council, Warm Night spends a bit of time in prayer and thought about how she's led ponies into a new hope outside of the Empress, which worries what might happen to her if she ever is taken back to the Empire, but she concludes for the time being that the South-East is her mission, and she will nurture it
 	}
 	
 	ai_will_do = { factor = 160 }
 }
 
+shared_focus = {
+	id = MTS_lesser_equals
+	x = 2
+	y = 1
+	relative_position_id = MTS_withdraw_from_world_stage
+	
+	cost = 3
+	prerequisite = { focus = MTS_withdraw_from_world_stage }
+	prerequisite = { focus = MTS_exempting_brokenhearted }
+	mutually_exclusive = { focus = MTS_rescinding_hatred }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_lesser_equals"
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = communism
+			popularity = -0.075
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_rescinding_hatred
+	x = 1
+	y = 1
+	relative_position_id = MTS_exempting_brokenhearted
+	
+	cost = 3
+	prerequisite = { focus = MTS_exempting_brokenhearted }
+	mutually_exclusive = { focus = MTS_lesser_equals }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_rescinding_hatred"
+		add_stability = -0.1
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = communism
+			popularity = 0.03
+		}
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_token_labor_force
+	x = 0
+	y = 1
+	relative_position_id = MTS_lesser_equals
+	
+	cost = 3
+	prerequisite = { focus = MTS_lesser_equals }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_token_labor_force"
+		###A thestral is called in by her manager about her performance in an office job or the like and is fired for little reason other than they found another thestral who will work for even less, which makes her even more resentful at them and the thestral that replaced her
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_logical_endless_workday
+	x = 0
+	y = 1
+	relative_position_id = MTS_rescinding_hatred
+	
+	cost = 3
+	prerequisite = { focus = MTS_rescinding_hatred }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_logical_endless_workday"
+		###A thestrals manager has her first evening on the job as she meets with her employers to talk about the plans for thestral workforce expansion, which she is pleased about as ponies seem to finally be accepting her and others, as it is clear that thestrals help improve productivity at night
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_lunar_solar_cycle
+	x = 2
+	y = 1
+	relative_position_id = MTS_rescinding_hatred
+	
+	cost = 3
+	prerequisite = { focus = MTS_rescinding_hatred }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_lunar_solar_cycle"
+		###Warm Night attends one of the thestral holidays that they hold at night, and as she meets with a couple of thestral community leaders she is in awe at some of the decorations they set up; would effectively be like a New Year or similar celebration
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_good_pencil_pushers
+	x = 0
+	y = 1
+	relative_position_id = MTS_token_labor_force
+	
+	cost = 3
+	prerequisite = { focus = MTS_token_labor_force }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_good_pencil_pushers"
+		###Maybe event of some thestral clerks being pressed into emergency militia forces, which goes poorly for them
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_solarist_thestrals
+	x = -1
+	y = 1
+	relative_position_id = MTS_good_pencil_pushers
+	
+	cost = 4
+	prerequisite = { focus = MTS_good_pencil_pushers }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_solarist_thestrals"
+		###Some thestral parents are appalled when their children return from their schools decrying some of their culture as thestrals, which signifies some of the harsh chastising that they received for their heritage from the schools they are required to go to
+		###+0.02 communism, -5% land night attack, +5% org
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_nocturnal_strike_teams
+	x = 0
+	y = 1
+	relative_position_id = MTS_logical_endless_workday
+	
+	cost = 3
+	prerequisite = { focus = MTS_logical_endless_workday }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_nocturnal_strike_teams"
+		###Thestrals, in a new experimental strike team, show some of their night tactics and skills against one of the better groups in Militem Solar and handily defeats them, which earns them a new spot in the military
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_great_migration
+	x = 1
+	y = 1
+	relative_position_id = MTS_good_pencil_pushers
+	
+	cost = 4
+	prerequisite = {
+		focus = MTS_good_pencil_pushers
+		focus = MTS_nocturnal_strike_teams
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_great_migration"
+		###Dual loc event which will detail either the amount of thestrals that have been forced to work in the cities to keep the expansion growing and the problems already caused, or thestrals flocking to the cities for economic opportunity and how it's caused tensions but they are already bearing fruit for employers
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_faith_perfected_socialism
+	x = 0
+	y = 6
+	relative_position_id = MTS_southeastern_paradise
+	
+	cost = 5
+	prerequisite = { focus = MTS_on_home_turf }
+	prerequisite = { focus = MTS_salvation_outside_the_empress }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_faith_perfected_socialism"
+		###Warm Night walks through, under cover, the streets of New Baltimare and sees how life has been improved for so many, and how they all still remain faithful to Daybreaker, despite the troubles they had experienced for so long, and she is proud of the accomplishment that so many have earned, and that they will be a shining beacon of peace and prosperity and the benefits of Solarism to everypony
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
 ###EQS conquered###
 shared_focus = {
 	id = MTS_critical_mistakes
-	x = 6
-	y = 10
+	x = -4
+	y = 7
 	
 	cost = 1
 	allow_branch = {
@@ -6890,6 +7081,272 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_critical_mistakes"
 		###As the last of the resistance in Sanctum Solar is taken, Warm Night moves to establish at least a bit of trust by holding a speech from the palace that she will not oppress them like they expect, but they will be educated on their misdeeds and misguidance, and that they will live far better than before
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_addressing_sore_horn
+	x = -2
+	y = 1
+	relative_position_id = MTS_critical_mistakes
+	
+	cost = 3
+	prerequisite = { focus = MTS_critical_mistakes }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_addressing_sore_horn"
+		###Follow one of the injured soldiers from SOL in the war between them and MTS and how he is given charity more than he deserves since he ended up killing a couple of priestesses before the war as over, but he is told that all are forgiven and will be helped, which pricks his heart
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_differences_of_theology
+	x = 0
+	y = 1
+	relative_position_id = MTS_critical_mistakes
+	
+	cost = 3
+	prerequisite = { focus = MTS_critical_mistakes }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_differences_of_theology"
+		###Warm Night marches into one of the churches that are still used by the mainline Adoratio, and she sits in on some of their worries and statements about faith and Daybreaker and then she lambasts them, since she reveals who she is, and tries to convict them that they are betraying what it means to be a priestess, with only marginal success
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_mending_broken_links
+	x = 2
+	y = 1
+	relative_position_id = MTS_critical_mistakes
+	
+	cost = 3
+	prerequisite = { focus = MTS_critical_mistakes }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_mending_broken_links"
+		###Scorched Earth arrives at the headquarters of the Militarium, where Blueblood has holed up, and he has an effective shouting match with Blueblood, and does eventually get other soldiers to let him in, so he can arrest Blueblood himself for holding back the Militarium and the Empire
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_stamping_out_economic_radicalism
+	x = -1
+	y = 1
+	relative_position_id = MTS_addressing_sore_horn
+	
+	cost = 3
+	prerequisite = { focus = MTS_addressing_sore_horn }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_stamping_out_economic_radicalism"
+		###A report is presented of how the newest, expensive programs are being applied to the poorest and most devestated by the war to keep them from growing resentful or radicalized, and it reports how it's going well, even if not everypony agrees with it, even in Warm Night's cabinet
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_dissolve_inquisitionis
+	x = -1
+	y = 1
+	relative_position_id = MTS_differences_of_theology
+	
+	cost = 3
+	prerequisite = { focus = MTS_differences_of_theology }
+	mutually_exclusive = { focus = MTS_appoint_new_lady_inquisitor }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_dissolve_inquisitionis"
+		###Presenation of a new law, penned by Warm Night herself, declaring how the Inquisitionis was corrupting the Empire and trying to keep power for itself, and that she is disbanding it; effectively immediately, inquisitors would become priestesses, or be arrested, so the Empire may be a better place
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_appoint_new_lady_inquisitor
+	x = 1
+	y = 1
+	relative_position_id = MTS_differences_of_theology
+	
+	cost = 3
+	prerequisite = { focus = MTS_differences_of_theology }
+	mutually_exclusive = { focus = MTS_dissolve_inquisitionis }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_appoint_new_lady_inquisitor"
+		###Warm Night brings forth Quasar Pulse, who is heavily guarded and also has an inhibitor ring, in to declare that she is no longer Lady Inquisitor, and that she will see who will replace her before she is executed for crimes against the Empire and ponies, which only gets Quasar Pulse to hate her more; the new pony is another MTS priestess
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_honoring_service
+	x = 1
+	y = 1
+	relative_position_id = MTS_mending_broken_links
+	
+	cost = 3
+	prerequisite = { focus = MTS_mending_broken_links }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_honoring_service"
+		###Scorched Earth awkwardly meets with some of his peers from before, who are distrustful of him, and he works at convincing them, despite being arrested at the moment, that they can be released if they promise to hold to higher ideals than what has been done in the Empire so far, which only gets a few to agree
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_infrastructure_for_success
+	x = 1
+	y = 1
+	relative_position_id = MTS_stamping_out_economic_radicalism
+	
+	cost = 3
+	prerequisite = { focus = MTS_stamping_out_economic_radicalism }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_infrastructure_for_success"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_maintain_ordo_integrity
+	x = 0
+	y = 1
+	relative_position_id = MTS_dissolve_inquisitionis
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_dissolve_inquisitionis
+		focus = MTS_appoint_new_lady_inquisitor
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_maintain_ordo_integrity"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+	id = MTS_joy_in_service
+	x = 0
+	y = 1
+	relative_position_id = MTS_appoint_new_lady_inquisitor
+	
+	cost = 3
+	prerequisite = {
+		focus = MTS_dissolve_inquisitionis
+		focus = MTS_appoint_new_lady_inquisitor
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_joy_in_service"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_new_production_quotas
+	x = -1
+	y = 1
+	relative_position_id = MTS_honoring_service
+	
+	cost = 3
+	prerequisite = { focus = MTS_honoring_service }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_new_production_quotas"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_funding_needed_supports
+	x = 1
+	y = 1
+	relative_position_id = MTS_infrastructure_for_success
+	
+	cost = 3
+	prerequisite = { focus = MTS_infrastructure_for_success }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_funding_needed_supports"
+		#Effect here
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+	id = MTS_holiest_city
+	x = 1
+	y = 1
+	relative_position_id = MTS_maintain_ordo_integrity
+	
+	cost = 3
+	prerequisite = { focus = MTS_maintain_ordo_integrity }
+	prerequisite = { focus = MTS_joy_in_service }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_holiest_city"
+		###A new holiday is held for when Sanctum Solar was freed from the tyranny of the old Inquisitionis as well as Daybreaker/the Regent being liberated from them, and it is even more religious than most other ceremonies that have been held by Warm Night, who comments on it as such
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_united_general_staff
+	x = -1
+	y = 1
+	relative_position_id = MTS_new_production_quotas
+	
+	cost = 3
+	prerequisite = { focus = MTS_new_production_quotas }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_united_general_staff"
+		###Warm Night has a long, tiring, and frustrating negotiation with Blueblood to convince him to continue working for the Empire and also to stop souring other ponies' opinions of her, too, and he is overly flirty with her, to annoy her, mostly, but after some dealing, he does agree, although it means he is digging his hooves into more of the Militarium than before
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_monarch_with_limits
+	x = 0
+	y = 1
+	relative_position_id = MTS_holiest_city
+	
+	cost = 5
+	prerequisite = { focus = MTS_funding_needed_supports }
+	prerequisite = { focus = MTS_holiest_city }
+	prerequisite = { focus = MTS_united_general_staff }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_monarch_with_limits"
+		###Warm Night meets with an imprisoned Daybreaker or regent, to tell them that they are free to lead the Empire again, as she never wanted to do so, but she warns how the Empire has changed, and that she has brought the Adoratio to a place where they will defend better ideals than what Daybreaker had for them, which almost leads to Daybreaker/the Regent to reject her, although they agree in the end because of her boldness
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7411,6 +7868,171 @@ shared_focus = {
 	}
 	
 	ai_will_do = { factor = 320 }
+}
+
+###Pinpoint###
+###Mid-War###
+shared_focus = {
+	id = MTS_popping_balloon
+	x = 8
+	y = 0
+	
+	allow_branch = {
+		has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+	}
+	
+	cost = 0.714
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_embrace_of_sun"
+		###A soldier hears on the radio an announcement during the middle of communication with his CO, which is from Pinpoint, speaking about how she had stopped a plot by Scorched Earth to lead everypony into heresy and kill the Empress herself, and that she is taking over Militem Solar herself to keep it pure
+	}
+	
+	ai_will_do = { factor = 640 }
+}
+
+shared_focus = {
+	id = MTS_stable_soldiers
+	x = -2
+	y = 1
+	relative_position_id = MTS_popping_balloon
+	
+	cost = 1.429
+	prerequisite = { focus = MTS_popping_balloon }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_stable_soldiers"
+		###Pinpoint goes through an inspection of some of the soldiers that have been held in New Horseleans and she goes through effectively some scrying to see who is considered pure of mind or not, and uses some of her gravity magic to kill "worst offenders" on the spot
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_proto_lover
+	x = 0
+	y = 1
+	relative_position_id = MTS_popping_balloon
+	
+	cost = 1.429
+	prerequisite = { focus = MTS_popping_balloon }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_proto_lover"
+		###Pinpoint meets with one of her other confidants, who is just as unstable as she is, and tries to see if there's anything they can pin on Luminous Blade, who seems to be nothing but virtuous, until it's determined that she was breaking her oath by feeling for Scorched, which Pinpoint uses for a heretic conviction
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_clean_executions
+	x = 2
+	y = 1
+	relative_position_id = MTS_popping_balloon
+	
+	cost = 1.429
+	prerequisite = { focus = MTS_popping_balloon }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_clean_executions"
+		###Saber Rattle rapidly packs some of his clothes and bags as he carefully checks his room before trying to leave it, hoping to find a clean way to escape from Militem Solar, since he knows that Pinpoint will be coming after him, since he supported Scorched Earth, and as he is just about to escape, he is held down by Pinpoint and arrested to be executed
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_use_their_own_bait
+	x = 1
+	y = 1
+	relative_position_id = MTS_stable_soldiers
+	
+	cost = 2.858
+	prerequisite = { focus = MTS_stable_soldiers }
+	prerequisite = { focus = MTS_proto_lover }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_use_their_own_bait"
+		###A thestral on a rescue mission manages to slip into a prison camp of MTS and narrowly avoids capture by some of the guards, and eventually finds the target that they were searching for, who is hesistant to escape, but is basically forced to, and when they get away, it's revealed that they are marked with magic to be tracked, as well as carrying a bomb, which detonates in the face of the other thestral and his group
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_harsh_punishments
+	x = 1
+	y = 1
+	relative_position_id = MTS_proto_lover
+	
+	cost = 2.858
+	prerequisite = { focus = MTS_clean_executions }
+	prerequisite = { focus = MTS_proto_lover }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_harsh_punishments"
+		###A number of prisoners as they are taken to a work camp are treated like dirt by the Militem soldiers, led by an inquisitor, which breaks their spirit long before they are brought to the camp
+	}
+	
+	ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+	id = MTS_victory_to_those_who_want_it
+	x = 1
+	y = 1
+	relative_position_id = MTS_use_their_own_bait
+	
+	cost = 4.286
+	prerequisite = { focus = MTS_use_their_own_bait }
+	prerequisite = { focus = MTS_harsh_punishments }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_victory_to_those_who_want_it"
+		#Idea here
+	}
+	
+	ai_will_do = { factor = 160 }
+}
+
+###Post-War###
+shared_focus = {
+	id = MTS_forgone_conclusion
+	x = 0
+	y = 2
+	relative_position_id = MTS_victory_to_those_who_want_it
+	
+	cost = 0.714
+	allow_branch = { has_country_flag = MTS_conquered_southeast }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_forgone_conclusion"
+		###Although there is still fighting outside in New Baltimare, Pinpoint knows that it is only a matter of time, and she has already secured a section of the governmental quarters for herself, which she starts to obsessively clean of anything heretical, and also prepare for her experiments
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+###EQS conquered###
+shared_focus = {
+	id = MTS_greatest_heretics
+	x = -4
+	y = 7
+	
+	allow_branch = {
+		owns_state = 3
+		has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+	}
+	
+	cost = 1
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_greatest_heretics"
+		###An inquisitor receives her orders from Pinpoint after the Militem has captured Sanctum Solar to begin to cleanse it of the heresy and filth that infests it, and although hesitant, follows the orders, which leave entire sections of the city nothing but rubble and cinders
+	}
+	
+	ai_will_do = { factor = 160 }
 }
 
 ###Military Trees###
