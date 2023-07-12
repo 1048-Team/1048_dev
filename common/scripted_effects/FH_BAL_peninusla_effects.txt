@@ -19,3 +19,41 @@ MTS_add_new_heretic_prisoners = {
 		custom_effect_tooltip = MTS_prisoner_gain_tt
 	}
 }
+MTS_add_state_prosperity = {
+	###The static variable MUST be scoped FIRST into THIS, which is the state that is currently running the effect.
+	add_to_variable = {
+		THIS.MTS_state_prosperity = MTS_state_prosperity_added #This is a temp variable
+	}
+	clamp_variable = {
+		var = MTS_state_prosperity
+		min = 0
+		max = 100
+	}
+	if = {
+		limit = {
+			check_variable = {
+				MTS_state_prosperity_added < 0
+			}
+		}
+		custom_effect_tooltip = MTS_prosperity_loss_tt
+	}
+	else = {
+		custom_effect_tooltip = MTS_prosperity_gain_tt
+	}
+}
+MTS_calculate_state_prosperity = {
+	###Calculate the total bonus to a state based on prosperity; all final values are multiples of five; at 100%, should be 10% local manpower, 10% local resources, 5% building speed
+	set_temp_variable = { MTS_local_manpower = 0.001 }
+	set_temp_variable = { MTS_local_resources = 0.001 }
+	set_temp_variable = { MTS_local_building_speed = 0.0005 }
+	multiply_temp_variable = { MTS_local_manpower = THIS.MTS_state_prosperity }
+	multiply_temp_variable = { MTS_local_resources = THIS.MTS_state_prosperity }
+	multiply_temp_variable = { MTS_local_building_speed = THIS.MTS_state_prosperity }
+	divide_temp_variable = { MTS_local_building_speed = 10 }
+	set_variable = { THIS.MTS_prosperity_local_manpower = MTS_local_manpower }
+	set_variable = { THIS.MTS_prosperity_local_resources = MTS_local_resources }
+	set_variable = { THIS.MTS_prosperity_construction_speed_factor = MTS_local_building_speed }
+}
+MTS_calculate_state_prosperity_cost = {
+	###Should average out all states' prosperity, with 10% consumer goods and -5% pp for 100% prosperity across the board
+}

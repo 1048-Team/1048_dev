@@ -96,6 +96,7 @@ on_actions = {
 		effect = {
 			if = {
 				limit = {
+					exists = yes
 					country_exists = SMH
 					NOT = { has_global_flag = YAH_recent_warlord_fight }
 				}
@@ -126,6 +127,25 @@ on_actions = {
 					has_country_flag = BLS_resurrect_killed_cultists
 				}
 				BLS_calculate_casualty_pool = yes
+			}
+		}
+	}
+	on_monthly_MTS = {
+		effect = {
+			if = {
+				limit = {
+					exists = yes
+					has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+					has_country_flag = MTS_unlock_prosperity
+				}
+				every_state = {
+					limit = {
+						is_owned_by = MTS
+					}
+					#set_temp_variable = { MTS_state_prosperity_added = 0.1 } #Consider it to be a bit like EU4
+					#MTS_add_state_prosperity = yes
+					MTS_calculate_state_prosperity = yes
+				}
 			}
 		}
 	}
