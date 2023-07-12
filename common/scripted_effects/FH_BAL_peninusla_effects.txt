@@ -56,4 +56,18 @@ MTS_calculate_state_prosperity = {
 }
 MTS_calculate_state_prosperity_cost = {
 	###Should average out all states' prosperity, with 10% consumer goods and -5% pp for 100% prosperity across the board
+	for_each_scope_loop = {
+		array = ROOT.owned_states
+		add_to_temp_variable = { ROOT.MTS_total_prosperity = THIS.MTS_state_prosperity }
+		add_to_temp_variable = { ROOT.MTS_total_owned_states = 1 }
+	}
+	divide_temp_variable = { MTS_total_prosperity = MTS_total_owned_states }
+	set_temp_variable = { MTS_total_consumer_cost = 0.001 }
+	set_temp_variable = { MTS_total_political_cost = 0.005 }
+	multiply_temp_variable = { MTS_total_consumer_cost = MTS_total_prosperity }
+	multiply_temp_variable = { MTS_total_political_cost = MTS_total_prosperity }
+	multiply_temp_variable = { MTS_total_political_cost = -1 }
+	divide_temp_variable = { MTS_total_political_cost = 10 }
+	set_variable = { MTS_consumer_goods_cost = MTS_total_consumer_cost }
+	set_variable = { MTS_political_power_cost = MTS_total_political_cost }
 }
