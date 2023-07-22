@@ -323,6 +323,66 @@ country_event = { #NVC or VRG wars CHN for core states
 	}
 }
 
+country_event = { #Whinnyapolis leaves the sphere of influence of the Solar Empire
+	id = equestria_activity.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.11"}
+	title = equestria_activity.11.t
+	#desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
+	desc = equestria_activity.11.d
+	
+	trigger = {
+		tag = EQS
+		date > 1050.1.1
+		date < 1051.1.1
+	}
+	
+	fire_only_once = yes
+		
+	mean_time_to_happen = {
+		days = 180
+	}
+	
+	option = { #removes puppet from WHY
+		name = equestria_activity.11.a
+		EQS = {
+			end_puppet = WHY
+			remove_from_faction = WHY
+			set_variable = { equestria_conquest = 0 }
+		}
+		hidden_effect = {
+			WHY = {
+				drop_cosmetic_tag = yes
+				country_event = {
+					id = equestria_activity.12
+					days = 270
+					random_days = 100
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Opaline coups WHY to become leader
+	id = equestria_activity.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.12"}
+	hidden = yes
+	is_triggered_only = yes
+	
+	option = { #She be leading, bb
+		WHY_Opaline_Arcana = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					traits = { unchecked_ambition }
+				}
+			}
+		}
+		news_event = fhequusnews.1
+	}
+}
+
 country_event = { #GRI annexes BOI
 	id = griffonia_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.1"}
