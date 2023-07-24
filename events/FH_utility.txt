@@ -114,7 +114,7 @@ country_event = { #MWR leaves STG
 		}
 		add_popularity = {
 			ideology = fascism
-			popularity = 0.25
+			popularity = 0.33
 		}
 		random_list = {
 			35 = {
@@ -323,52 +323,81 @@ country_event = { #NVC or VRG wars CHN for core states
 	}
 }
 
-country_event = { #Whinnyapolis leaves the sphere of influence of the Solar Empire
+country_event = { #WHY gets the option ot stay or leave SOL
 	id = equestria_activity.11
-	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.11"}
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.11"}
 	title = equestria_activity.11.t
-	#desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
 	desc = equestria_activity.11.d
 	
 	trigger = {
-		tag = EQS
+		tag = WHY
 		date > 1050.1.1
 		date < 1051.1.1
 	}
 	
 	fire_only_once = yes
-		
+	
 	mean_time_to_happen = {
 		days = 180
 	}
 	
-	option = { #removes puppet from WHY
+	option = { #We are a natural part of the Empire
 		name = equestria_activity.11.a
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
+		hidden_effect = {
+			country_event = {
+				id = equestria_activity.13
+				days = 270
+				random_days = 100
+			}
+		}
+	}
+	option = { #They can no longer protect us
+		name = equestria_activity.11.b
 		EQS = {
 			end_puppet = WHY
 			remove_from_faction = WHY
 			set_variable = { equestria_conquest = 0 }
+			country_event = equestria_activity.12
 		}
 		hidden_effect = {
-			WHY = {
-				drop_cosmetic_tag = yes
-				country_event = {
-					id = equestria_activity.12
-					days = 270
-					random_days = 100
-				}
+			drop_cosmetic_tag = yes
+			country_event = {
+				id = equestria_activity.13
+				days = 270
+				random_days = 100
 			}
 		}
 	}
 }
 
-country_event = { #Opaline coups WHY to become leader
+country_event = { #Whinnyapolis leaves the sphere of influence of the Solar Empire
 	id = equestria_activity.12
 	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.12"}
-	hidden = yes
+	title = equestria_activity.12.t
+	#desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
+	desc = equestria_activity.12.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will pay for their insolence!
+		name = equestria_activity.12.a
+		add_political_power = -50
+	}
+}
+
+country_event = { #Opaline tries to coup WHY to become leader
+	id = equestria_activity.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.13"}
+	title = equestria_activity.13.t
+	desc = equestria_activity.13.d
 	is_triggered_only = yes
 	
 	option = { #She be leading, bb
+		name = equestria_activity.13.a
+		set_cosmetic_tag = WHY_G5
 		WHY_Opaline_Arcana = {
 			add_country_leader_role = {
 				promote_leader = yes
@@ -379,7 +408,182 @@ country_event = { #Opaline coups WHY to become leader
 				}
 			}
 		}
+		retire_character = WHY_Solar_Strike
+		if = {
+			limit = {
+				is_subject_of = EQS
+			}
+			EQS = {
+				end_puppet = WHY
+				remove_from_faction = WHY
+				set_variable = { equestria_conquest = 0 }
+			}
+			drop_cosmetic_tag = yes
+		}
 		news_event = fhequusnews.1
+		hidden_effect = {
+			country_event = {
+				id = equestria_activity.14
+				days = 75
+				random_days = 75
+			}
+		}
+	}
+	option = { #She do be failing, tho
+		name = equestria_activity.13.b
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
+		retire_character = WHY_Opaline_Arcana
+		news_event = fhequusnews.2
+		hidden_effect = {
+			country_event = {
+				id = equestria_activity.14
+				days = 100
+				random_days = 100
+			}
+		}
+	}
+}
+
+country_event = { #WHY wars NER
+	id = equestria_activity.14
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.14"}
+	hidden = yes
+	is_triggered_only = yes
+	
+	option = {
+		declare_war_on = {
+			target = NER
+			type = annex_everything
+		}
+		every_state = {
+			limit = {
+				is_core_of = NER
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #Why wars BLS
+	id = equestria_activity.15
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.15"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		NOT = { country_exists = NER }
+		country_exists = BLS
+		date > 1052.1.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = BLS
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #Why wars CLD
+	id = equestria_activity.16
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.16"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		date > 1053.7.7
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = CLD
+			type = annex_everything
+		}
+		every_state = {
+			limit = {
+				is_core_of = BLS
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #Why wars CER
+	id = equestria_activity.17
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.17"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		date > 1053.10.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = CER
+			type = annex_everything
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CLD
+					is_core_of = CER
+				}
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #Why wars SOL/SLW
+	id = equestria_activity.18
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.18"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		date > 1055.1.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = {
+				country_exists = EQS
+			}
+			declare_war_on = {
+				target = EQS
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				country_exists = SLW
+			}
+			declare_war_on = {
+				target = SLW
+				type = annex_everything
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = WHY
+		}
 	}
 }
 

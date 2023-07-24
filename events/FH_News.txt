@@ -208,7 +208,7 @@ news_event = { #Opaline coups WHY
 	immediate = {log = "[GetDateText]: [Root.GetName]: event fhequusnews.1"}
 	title = fhequusnews.1.t
 	desc = fhequusnews.1.d
-	picture = GFX_news_forever_sun #Temp
+	picture = GFX_news_solar_propaganda
 	major = yes
 	is_triggered_only = yes
 	
@@ -242,6 +242,54 @@ news_event = { #Opaline coups WHY
 	
 	option = {
 		name = fhequusnews.1.e
+		trigger = {
+			AND = {
+				NOT = { tag = EQS }
+				NOT = { tag = SLW }
+			}
+		}
+	}
+}
+
+news_event = { #Opaline fails her coup of WHY
+	id = fhequusnews.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhequusnews.2"}
+	title = fhequusnews.2.t
+	desc = fhequusnews.2.d
+	picture = GFX_news_solar_propaganda
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = fhequusnews.2.a
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.2.b
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Daybreaker ruling_only = yes }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.2.c
+		trigger = {
+			OR = {
+				tag = EQS
+				tag = SLW
+			}
+			NOT = { has_country_leader = { character = EQS_Daybreaker ruling_only = yes } }
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.2.e
 		trigger = {
 			AND = {
 				NOT = { tag = EQS }
