@@ -587,6 +587,289 @@ country_event = { #Why wars SOL/SLW
 	}
 }
 
+country_event = { #CER forms alliance with CLD
+	id = equestria_activity.19
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.19"}
+	hidden = yes
+	
+	trigger = {
+		tag = CER
+		date > 1051.4.17
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		create_faction = CER_dem_faction
+		add_to_faction = CLD
+		news_event = fhequusnews.3
+	}
+}
+
+country_event = { #CER reaches out to NER to join
+	id = equestria_activity.20
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.20"}
+	hidden = yes
+	
+	trigger = {
+		tag = CER
+		date > 1052.1.1
+		country_exists = NER
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		NER = {
+			country_event = equestria_activity.21
+		}
+	}
+}
+
+country_event = { #NER gets to choose if they join CER's faction or not
+	id = equestria_activity.21
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.21"}
+	title = equestria_activity.21.t
+	desc = equestria_activity.21.d
+	
+	is_triggered_only = yes
+	
+	option = { #We will restore what Equestria once was, together!
+		name = equestria_activity.21.a
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes add = 10 }
+		}
+		CER = { add_to_faction = NER }
+	}
+	option = { #We can't make a deal with them!
+		name = equestria_activity.21.b
+		ai_chance = {
+			modifier = { has_war_with = WHY factor = 0 }
+		}
+		CER = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = NER
+			}
+		}
+	}
+}
+
+country_event = { #CER sends an invitation to BLS
+	id = equestria_activity.22
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.22"}
+	hidden = yes
+	
+	trigger = {
+		tag = CER
+		country_exists = BLS
+		date > 1052.3.1
+	}
+	
+	option = {
+		BLS = {
+			country_event = equestria_activity.23
+		}
+	}
+}
+
+country_event = { #BLS is allowed to choose if they join CER's faction or not
+	id = equestria_activity.23
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.23"}
+	title = equestria_activity.23.t
+	desc = equestria_activity.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #So long as we are allowed to continue our science projects!
+		name = equestria_activity.23.a
+		ai_chance = {
+			modifier = { is_historical_focus_on = WHY add = 10 }
+		}
+		trigger = {
+			NOT = { has_country_flag = BLS_solar_flare_resurrected }
+		}
+		CER = { add_to_faction = BLS }
+	}
+	option = { #We have done fine on our own!
+		name = equestria_activity.23.b
+		trigger = {
+			NOT = { has_country_flag = BLS_solar_flare_resurrected }
+		}
+		ai_chance = {
+			modifier = { has_war_with = WHY factor = 0 }
+		}
+		CER = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BLS
+			}
+		}
+	}
+	option = { #They think that they are my equals?!
+		name = equestria_activity.23.c
+		trigger = { has_country_flag = BLS_solar_flare_resurrected }
+		CER = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BLS
+			}
+		}
+	}
+}
+
+country_event = { #CER prepares to finish off WHY
+	id = equestria_activity.24
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.24"}
+	title = equestria_activity.24.t
+	desc = equestria_activity.24.d
+	
+	trigger = {
+		tag = CER
+		date > 1054.1.1
+		CLD = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+		CER = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+		NER = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+		BLS = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+	
+	option = { #We must stabilize before we can focus on the true enemy
+		name = equestria_activity.24.a
+		create_wargoal = {
+			target = WHY
+			type = puppet_wargoal_focus
+		}
+	}
+}
+
+country_event = { #CER creates a united heartlands
+	id = equestria_activity.25
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.25"}
+	title = equestria_activity.25.t
+	desc = equestria_activity.25.d
+	
+	trigger = {
+		tag = CER
+		WHY = { is_subject_of = ROOT }
+		exists = yes
+	}
+	
+	option = { #We must integrate to fight the Solarists!
+		name = equestria_activity.25.a
+		set_cosmetic_tag = CER_equestrian_heart
+		annex_country = {
+			target = CLD
+			transfer_troops = yes
+		}
+		if = {
+			limit = {
+				country_exists = NER
+			}
+			annex_country = {
+				target = NER
+				transfer_troops = yes
+			}
+		}
+		if = {
+			limit = {
+				country_exists = BLS
+			}
+			annex_country = {
+				target = BLS
+				transfer_troops = yes
+			}
+		}
+		if = {
+			limit = {
+				country_exists = WHY
+			}
+			annex_country = {
+				target = WHY
+				transfer_troops = yes
+			}
+		}
+		if = {
+			limit = {
+				country_exists = EQS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = EQS
+			}
+		}
+		if = {
+			limit = {
+				country_exists = SLW
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SLW
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = BLS
+					is_core_of = WHY
+					is_core_of = NER
+					is_core_of = CLD
+				}
+			}
+			add_core_of = ROOT
+		}
+		news_event = fhequusnews.4
+	}
+}
+
+country_event = { #CER unites the heartlands completely with EQS's conquest
+	id = equestria_activity.26
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.26"}
+	title = equestria_activity.26.t
+	desc = equestria_activity.26.d
+	
+	trigger = {
+		tag = CER
+		NOT = { country_exists = SLW }
+		NOT = { country_exists = EQS }
+	}
+	
+	option = { #We have achieved peace!
+		name = equestria_activity.26
+		set_cosmetic_tag = EQS_NEW
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = ROOT
+		}
+		set_capital = { state = 3 }
+		set_province_name = { id = 179 name = renamed_canterlot }
+		hidden_effect = {
+			news_event = fhequusnews.5
+		}
+	}
+}	
+
 country_event = { #GRI annexes BOI
 	id = griffonia_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.1"}
