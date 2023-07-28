@@ -376,7 +376,7 @@ news_event = { #CER forms the federation
 
 news_event = { #CER claims the Equestrian throne
 	id = fhequusnews.5
-	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.4"}
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.5"}
 	title = fhequusnews.5.t
 	desc = fhequusnews.5.d
 	#picture = GFX_united_ponies
@@ -393,6 +393,69 @@ news_event = { #CER claims the Equestrian throne
 		name = fhequusnews.5.b
 		trigger = {
 			NOT = { tag = CER }
+		}
+	}
+}
+
+news_event = { #YAK is reformed, dynamically based on either SMH or YAH winning
+	id = fhequusnews.6
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.6"}
+	title = fhequusnews.6.t
+	desc = fhequusnews.6.d
+	picture = GFX_news_yakistown
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #Yahks SMASH smushy Yaks!
+		name = fhequusnews.6.a
+		trigger = {
+			original_tag = YAH
+		}
+	}
+	option = { #Yaks SMUSH smelly Yahks!
+		name = fhequusnews.6.b
+		trigger = {
+			original_tag = SMH
+		}
+	}
+	option = { #Now maybe they can calm down again.
+		name = fhequusnews.6.c
+		trigger = {
+			NOT = { original_tag = YAH }
+			NOT = { original_tag = SMH }
+		}
+	}
+}
+
+news_event = { #The Western Griffonian Empire is reformed
+	id = fhequusnews.7
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.7"}
+	title = fhequusnews.7.t
+	desc = fhequusnews.7.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #I'm rich!
+		name = fhequusnews.7.a
+		trigger = {
+			tag = VRG
+		}
+	}
+	option = { #The North reigns triumphant!
+		name = fhequusnews.7.b
+		trigger = {
+			OR = {
+				tag = NVC
+				tag = GRF
+			}
+		}
+	}
+	option = { #Like a phoenix from its ashes...
+		name = fhequusnews.7.c
+		trigger = {
+			NOT = { tag = VRG }
+			NOT = { tag = GRF }
+			NOT = { tag = NVC }
 		}
 	}
 }

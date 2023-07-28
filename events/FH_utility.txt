@@ -603,6 +603,18 @@ country_event = { #CER forms alliance with CLD
 		create_faction = CER_dem_faction
 		add_to_faction = CLD
 		news_event = fhequusnews.3
+		hidden_effect = {
+			remove_opinion_modifier = {
+				target = CLD
+				modifier = CER_CLD_unrecognized_successor
+			}
+			CLD = {
+				remove_opinion_modifier = {
+					target = CER
+					modifier = CER_CLD_unrecognized_successor
+				}
+			}
+		}
 	}
 }
 
@@ -666,6 +678,8 @@ country_event = { #CER sends an invitation to BLS
 		date > 1052.3.1
 	}
 	
+	fire_only_once = yes
+	
 	option = {
 		BLS = {
 			country_event = equestria_activity.23
@@ -684,7 +698,7 @@ country_event = { #BLS is allowed to choose if they join CER's faction or not
 	option = { #So long as we are allowed to continue our science projects!
 		name = equestria_activity.23.a
 		ai_chance = {
-			modifier = { is_historical_focus_on = WHY add = 10 }
+			modifier = { is_historical_focus_on = yes add = 10 }
 		}
 		trigger = {
 			NOT = { has_country_flag = BLS_solar_flare_resurrected }
@@ -753,6 +767,8 @@ country_event = { #CER prepares to finish off WHY
 		}
 	}
 	
+	fire_only_once = yes
+	
 	option = { #We must stabilize before we can focus on the true enemy
 		name = equestria_activity.24.a
 		create_wargoal = {
@@ -773,6 +789,8 @@ country_event = { #CER creates a united heartlands
 		WHY = { is_subject_of = ROOT }
 		exists = yes
 	}
+	
+	fire_only_once = yes
 	
 	option = { #We must integrate to fight the Solarists!
 		name = equestria_activity.25.a
@@ -853,6 +871,8 @@ country_event = { #CER unites the heartlands completely with EQS's conquest
 		NOT = { country_exists = EQS }
 	}
 	
+	fire_only_once = yes
+	
 	option = { #We have achieved peace!
 		name = equestria_activity.26
 		set_cosmetic_tag = EQS_NEW
@@ -868,7 +888,75 @@ country_event = { #CER unites the heartlands completely with EQS's conquest
 			news_event = fhequusnews.5
 		}
 	}
-}	
+}
+
+country_event = { #AWR is couped by unhappy peasants
+	id = equestria_activity.27
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.27"}
+	hidden = yes
+	
+	trigger = {
+		tag = AWR
+		date > 1050.6.20
+	}
+	mean_time_to_happen = { days = 90 }
+	fire_only_once = yes
+	
+	option = {
+		STG = { end_puppet = AWR }
+		set_cosmetic_tag = AWR_free
+		country_event = {
+			id = equestria_activity.28
+			days = 30
+			random_days = 250
+		}
+	}
+}
+
+country_event = { #AWR is couped again by unhappy soldiers or sailors
+	id = equestria_activity.28
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.28"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		set_cosmetic_tag = AWR_doubleplusfree
+		STG = {
+			random_list = {
+				65 = {
+					country_event = {
+						id = equestria_activity.29
+						days = 200
+						random_days = 300
+					}
+				}
+				35 = { }
+			}
+		}
+	}
+}
+
+country_event = { #STG is fed up with AWR's crap and conquers them
+	id = equestria_activity.29
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.29"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		create_wargoal = {
+			type = annex_everything
+			target = AWR
+		}
+		every_state = {
+			limit = {
+				is_core_of = AWR
+			}
+			add_core_of = STG
+		}
+	}
+}
 
 country_event = { #GRI annexes BOI
 	id = griffonia_activity.1
