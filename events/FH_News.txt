@@ -460,6 +460,87 @@ news_event = { #The Western Griffonian Empire is reformed
 	}
 }
 
+news_event = { #Changelingia has reformed its government and the hardliners have been put into power, already ousting some of the softer politicians
+	id = fhequusnews.8
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.8"}
+	title = fhequusnews.8.t
+	desc = fhequusnews.8.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We shall reclaim our glory!
+		name = fhequusnews.8.a
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #This is not good
+		name = fhequusnews.8.b
+		trigger = {
+			OR = {
+				tag = SCS
+				tag = CCA
+				tag = NCA
+				tag = OLE
+			}
+		}
+	}
+	option = { #Their revanchism will not stop us!
+		name = fhequusnews.8.c
+		trigger = {
+			tag = SLE
+		}
+	}
+	option = { #The giant is waking
+		name = fhequusnews.8.e
+		trigger = {
+			NOT = { tag = CHN }
+			NOT = { tag = SCS }
+			NOT = { tag = CCA }
+			NOT = { tag = NCA }
+			NOT = { tag = OLE }
+			NOT = { tag = SLE }
+		}
+	}
+}
+
+news_event = { #The Alliance of the Free is formed and promises to put an end to the hardliners' rhetoric
+	id = fhequusnews.9
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.9"}
+	title = fhequusnews.9.t
+	desc = fhequusnews.9.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #Chrysalis will not ruin our way of life again!
+		name = fhequusnews.9.a
+		trigger = {
+			OR = {
+				tag = CCA
+				in_faction_with = CCA
+			}
+		}
+	}
+	option = { #His blustering will not stop us!
+		name = fhequusnews.9.b
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #Seems the changelings aren't so united after all
+		name = fhequusnews.9.c
+		trigger = {
+			NOT = { 
+				OR = {
+					tag = CCA
+					in_faction_with = CCA
+				}
+			}
+			NOT = { tag = CHN }
+		}
+	}
+}
+
 news_event = { #Griffonia war with EQC
 	id = fhgriffonianews.1
 	immediate = {log = "[GetDateText]: [Root.GetName]: event fhgriffonianews.1"}
