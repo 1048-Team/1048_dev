@@ -1,5 +1,17 @@
 on_actions = {
 
+	on_declare_war = {
+		effect = {
+			if = { #CHN war news events
+				limit = {
+					tag = BUG
+					FROM = { tag = SLE }
+				}
+				news_event = changelingianews.5
+			}
+		}
+	}
+	
 	on_unit_leader_promote_from_ranks_veteran = { #Unit leader scope, FROM is unit
 		effect = {
 			log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_unit_leader_promote_from_ranks_veteran"
@@ -33,6 +45,14 @@ on_actions = {
 					NOT = { has_dynamic_modifier = { modifier = MTS_state_prosperity_modifier } }
 				}
 				add_dynamic_modifier = { modifier = MTS_state_prosperity_modifier }
+			}
+			#Should later do news events for SLE wars with CHN
+			if = { #CHN end war news
+				limit = {
+					tag = BUG
+					FROM = { tag = SLE }
+				}
+				news_event = changelingianews.6
 			}
 		}
 	}

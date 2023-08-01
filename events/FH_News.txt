@@ -1,6 +1,7 @@
 ###Fractured Harmony News Events###
 
 add_namespace = solarempirenews
+add_namespace = changelingianews
 add_namespace = fhequusnews
 add_namespace = fhgriffonianews
 add_namespace = fhzebricanews
@@ -199,6 +200,234 @@ news_event = { #Dyx is a motherbucking general
 			NOT = {
 				tag = EQS
 			}
+		}
+	}
+}
+
+news_event = { #Changelingia has reformed its government and the hardliners have been put into power, already ousting some of the softer politicians
+	id = changelingianews.1
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.1"}
+	title = changelingianews.1.t
+	desc = changelingianews.1.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We shall reclaim our glory!
+		name = changelingianews.1.a
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #This is not good
+		name = changelingianews.1.b
+		trigger = {
+			OR = {
+				tag = SCS
+				tag = CCA
+				tag = NCA
+				tag = OLE
+			}
+		}
+	}
+	option = { #Their revanchism will not stop us!
+		name = changelingianews.1.c
+		trigger = {
+			tag = SLE
+		}
+	}
+	option = { #The giant is waking
+		name = changelingianews.8.e
+		trigger = {
+			NOT = { tag = CHN }
+			NOT = { tag = SCS }
+			NOT = { tag = CCA }
+			NOT = { tag = NCA }
+			NOT = { tag = OLE }
+			NOT = { tag = SLE }
+		}
+	}
+}
+
+news_event = { #The Alliance of the Free is formed and promises to put an end to the hardliners' rhetoric
+	id = changelingianews.2
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.2"}
+	title = changelingianews.2.t
+	desc = changelingianews.2.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #Chrysalis will not ruin our way of life again!
+		name = changelingianews.2.a
+		trigger = {
+			OR = {
+				tag = CCA
+				is_in_faction_with = CCA
+			}
+		}
+	}
+	option = { #His blustering will not stop us!
+		name = changelingianews.2.b
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #Seems the changelings aren't so united after all
+		name = changelingianews.2.c
+		trigger = {
+			NOT = { 
+				OR = {
+					tag = CCA
+					is_in_faction_with = CCA
+				}
+			}
+			NOT = { tag = CHN }
+		}
+	}
+}
+
+news_event = { #Marsilio hosts a teleconference from the main hive in Vesalipolis to claim that the hardliners have been defeated and that the changelings will go on a mission of reconciliation and peace
+	id = changelingianews.3
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.3"}
+	title = changelingianews.3.t
+	desc = changelingianews.3.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #They are only making themselves weaker!
+		name = changelingianews.3.a
+		trigger = {
+			tag = SLE
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	option = { #We shall reach new heights!
+		name = changelingianews.3.b
+		trigger = {
+			tag = BUG
+		}
+	}
+	option = { #They can never right their past
+		name = changelingianews.3.c
+		trigger = {
+			NOT = { tag = BUG }
+		}
+	}
+}
+
+news_event = { #A combined conference between Celestia and Chrysalis promises to put aside the two countries' differences to form a new union and peace between the two superpowers
+	id = changelingianews.4
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.4"}
+	title = changelingianews.4.t
+	desc = changelingianews.4.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #To a new era of peace!
+		name = changelingianews.4.a
+		trigger = {
+			tag = EQS
+		}
+	}
+	option = { #Let bygones be bygones
+		name = changelingianews.4.b
+		trigger = {
+			tag = BUG
+		}
+	}
+	option = { #Wait, that just happened?!
+		name = changelingianews.4.c
+		trigger = {
+			NOT = { tag = BUG }
+			NOT = { tag = EQS }
+		}
+	}
+}
+
+news_event = { #News event of BUG going to war with SLE, with either the reformists saying they did not want to and wanted peace, or the hardliners promising the final end to Equestria
+	id = changelingianews.5
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.5"}
+	title = changelingianews.5.t
+	desc = {
+		trigger = {
+			tag = CHN
+		}
+		text = changelingianews.5.da
+	}
+	desc = {
+		trigger = {
+			tag = CCA
+		}
+		text = changelingianews.5.db
+	}
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We shall hold against the vermin!
+		name = changelingianews.5.a
+		trigger = {
+			tag = SLE
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	option = { #This is Harmony's trial
+		name = changelingianews.5.b
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	option = { #The Swarm will consume them!
+		name = changelingianews.5.c
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #We weren't given a choice!
+		name = changelingianews.5.d
+		trigger = {
+			tag = CCA
+		}
+	}
+	option = { #The Second Great War was supposed to be different
+		name = changelingianews.5.e
+		trigger = {
+			NOT = { tag = SLE }
+			NOT = { tag = BUG }
+		}
+	}
+}
+
+news_event = { #News event of BUG ending the war with SLE, and proclaiming either complete victory and destruction of Equestria, or establishing a friendly government to work with and guide
+	id = changelingianews.6
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.6"}
+	title = changelingianews.6.t
+	desc = {
+		trigger = { tag = CHN }
+		text = changelingianews.6.da
+	}
+	desc = {
+		trigger = { tag = CCA }
+		text = changelingianews.6.db
+	}
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We have achieved peace in our time!
+		name = changelingianews.6.a
+		trigger = {
+			tag = CCA
+		}
+	}
+	option = { #Our revenge is complete!
+		name = changelingianews.6.b
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #The last gasp of Equestria has been smothered
+		name = changelingianews.6.c
+		trigger = {
+			NOT = { tag = BUG }
 		}
 	}
 }
@@ -456,87 +685,6 @@ news_event = { #The Western Griffonian Empire is reformed
 			NOT = { tag = VRG }
 			NOT = { tag = GRF }
 			NOT = { tag = NVC }
-		}
-	}
-}
-
-news_event = { #Changelingia has reformed its government and the hardliners have been put into power, already ousting some of the softer politicians
-	id = fhequusnews.8
-	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.8"}
-	title = fhequusnews.8.t
-	desc = fhequusnews.8.d
-	major = yes
-	is_triggered_only = yes
-	
-	option = { #We shall reclaim our glory!
-		name = fhequusnews.8.a
-		trigger = {
-			tag = CHN
-		}
-	}
-	option = { #This is not good
-		name = fhequusnews.8.b
-		trigger = {
-			OR = {
-				tag = SCS
-				tag = CCA
-				tag = NCA
-				tag = OLE
-			}
-		}
-	}
-	option = { #Their revanchism will not stop us!
-		name = fhequusnews.8.c
-		trigger = {
-			tag = SLE
-		}
-	}
-	option = { #The giant is waking
-		name = fhequusnews.8.e
-		trigger = {
-			NOT = { tag = CHN }
-			NOT = { tag = SCS }
-			NOT = { tag = CCA }
-			NOT = { tag = NCA }
-			NOT = { tag = OLE }
-			NOT = { tag = SLE }
-		}
-	}
-}
-
-news_event = { #The Alliance of the Free is formed and promises to put an end to the hardliners' rhetoric
-	id = fhequusnews.9
-	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.9"}
-	title = fhequusnews.9.t
-	desc = fhequusnews.9.d
-	major = yes
-	is_triggered_only = yes
-	
-	option = { #Chrysalis will not ruin our way of life again!
-		name = fhequusnews.9.a
-		trigger = {
-			OR = {
-				tag = CCA
-				in_faction_with = CCA
-			}
-		}
-	}
-	option = { #His blustering will not stop us!
-		name = fhequusnews.9.b
-		trigger = {
-			tag = CHN
-		}
-	}
-	option = { #Seems the changelings aren't so united after all
-		name = fhequusnews.9.c
-		trigger = {
-			NOT = { 
-				OR = {
-					tag = CCA
-					in_faction_with = CCA
-				}
-			}
-			NOT = { tag = CHN }
 		}
 	}
 }
