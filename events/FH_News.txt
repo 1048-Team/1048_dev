@@ -285,7 +285,7 @@ news_event = { #The Alliance of the Free is formed and promises to put an end to
 	}
 }
 
-news_event = { #Marsilio hosts a teleconference from the main hive in Vesalipolis to claim that the hardliners have been defeated and that the changelings will go on a mission of reconciliation and peace
+news_event = { #War breaks out between the Alliance of the Free and Changelingia
 	id = changelingianews.3
 	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.3"}
 	title = changelingianews.3.t
@@ -293,28 +293,36 @@ news_event = { #Marsilio hosts a teleconference from the main hive in Vesalipoli
 	major = yes
 	is_triggered_only = yes
 	
-	option = { #They are only making themselves weaker!
+	option = { #We must topple the radicals in government
 		name = changelingianews.3.a
 		trigger = {
-			tag = SLE
-			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+			OR = {
+				tag = CCA
+				is_in_faction_with = CCA
+			}
 		}
 	}
-	option = { #We shall reach new heights!
+	option = { #We shall defend the Queen with our lives!
 		name = changelingianews.3.b
 		trigger = {
-			tag = BUG
+			tag = CHN
 		}
 	}
-	option = { #They can never right their past
+	option = { #Somecreature call the exterminator, please.
 		name = changelingianews.3.c
 		trigger = {
-			NOT = { tag = BUG }
+			NOT = { 
+				OR = {
+					tag = CCA
+					is_in_faction_with = CCA
+				}
+			}
+			NOT = { tag = CHN }
 		}
 	}
 }
 
-news_event = { #A combined conference between Celestia and Chrysalis promises to put aside the two countries' differences to form a new union and peace between the two superpowers
+news_event = { #Marsilio hosts a teleconference from the main hive in Vesalipolis to claim that the hardliners have been defeated and that the changelings will go on a mission of reconciliation and peace
 	id = changelingianews.4
 	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.4"}
 	title = changelingianews.4.t
@@ -322,20 +330,49 @@ news_event = { #A combined conference between Celestia and Chrysalis promises to
 	major = yes
 	is_triggered_only = yes
 	
-	option = { #To a new era of peace!
+	option = { #They are only making themselves weaker!
 		name = changelingianews.4.a
 		trigger = {
-			tag = EQS
+			tag = SLE
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
 		}
 	}
-	option = { #Let bygones be bygones
+	option = { #We shall reach new heights!
 		name = changelingianews.4.b
 		trigger = {
 			tag = BUG
 		}
 	}
-	option = { #Wait, that just happened?!
+	option = { #They can never right their past
 		name = changelingianews.4.c
+		trigger = {
+			NOT = { tag = BUG }
+		}
+	}
+}
+
+news_event = { #A combined conference between Celestia and Chrysalis promises to put aside the two countries' differences to form a new union and peace between the two superpowers
+	id = changelingianews.5
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.5"}
+	title = changelingianews.5.t
+	desc = changelingianews.5.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #To a new era of peace!
+		name = changelingianews.5.a
+		trigger = {
+			tag = EQS
+		}
+	}
+	option = { #Let bygones be bygones
+		name = changelingianews.5.b
+		trigger = {
+			tag = BUG
+		}
+	}
+	option = { #Wait, that just happened?!
+		name = changelingianews.5.c
 		trigger = {
 			NOT = { tag = BUG }
 			NOT = { tag = EQS }
@@ -344,52 +381,52 @@ news_event = { #A combined conference between Celestia and Chrysalis promises to
 }
 
 news_event = { #News event of BUG going to war with SLE, with either the reformists saying they did not want to and wanted peace, or the hardliners promising the final end to Equestria
-	id = changelingianews.5
-	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.5"}
-	title = changelingianews.5.t
+	id = changelingianews.6
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.6"}
+	title = changelingianews.6.t
 	desc = {
 		trigger = {
 			tag = CHN
 		}
-		text = changelingianews.5.da
+		text = changelingianews.6.da
 	}
 	desc = {
 		trigger = {
 			tag = CCA
 		}
-		text = changelingianews.5.db
+		text = changelingianews.6.db
 	}
 	major = yes
 	is_triggered_only = yes
 	
 	option = { #We shall hold against the vermin!
-		name = changelingianews.5.a
+		name = changelingianews.6.a
 		trigger = {
 			tag = SLE
 			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
 		}
 	}
 	option = { #This is Harmony's trial
-		name = changelingianews.5.b
+		name = changelingianews.6.b
 		trigger = {
 			tag = EQS
 			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
 		}
 	}
 	option = { #The Swarm will consume them!
-		name = changelingianews.5.c
+		name = changelingianews.6.c
 		trigger = {
 			tag = CHN
 		}
 	}
 	option = { #We weren't given a choice!
-		name = changelingianews.5.d
+		name = changelingianews.6.d
 		trigger = {
 			tag = CCA
 		}
 	}
 	option = { #The Second Great War was supposed to be different
-		name = changelingianews.5.e
+		name = changelingianews.6.e
 		trigger = {
 			NOT = { tag = SLE }
 			NOT = { tag = BUG }
@@ -398,34 +435,34 @@ news_event = { #News event of BUG going to war with SLE, with either the reformi
 }
 
 news_event = { #News event of BUG ending the war with SLE, and proclaiming either complete victory and destruction of Equestria, or establishing a friendly government to work with and guide
-	id = changelingianews.6
-	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.6"}
-	title = changelingianews.6.t
+	id = changelingianews.7
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.7"}
+	title = changelingianews.7.t
 	desc = {
 		trigger = { tag = CHN }
-		text = changelingianews.6.da
+		text = changelingianews.7.da
 	}
 	desc = {
 		trigger = { tag = CCA }
-		text = changelingianews.6.db
+		text = changelingianews.7.db
 	}
 	major = yes
 	is_triggered_only = yes
 	
 	option = { #We have achieved peace in our time!
-		name = changelingianews.6.a
+		name = changelingianews.7.a
 		trigger = {
 			tag = CCA
 		}
 	}
 	option = { #Our revenge is complete!
-		name = changelingianews.6.b
+		name = changelingianews.7.b
 		trigger = {
 			tag = CHN
 		}
 	}
 	option = { #The last gasp of Equestria has been smothered
-		name = changelingianews.6.c
+		name = changelingianews.7.c
 		trigger = {
 			NOT = { tag = BUG }
 		}

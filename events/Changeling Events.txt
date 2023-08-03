@@ -237,7 +237,7 @@ country_event = { #Partisans and communists take over NCA and oust the administr
 			NCA = {
 				add_popularity = {
 					ideology = communism
-					popularity = 30
+					popularity = 0.35
 				}
 				set_politics = {
 					ruling_party = communism
@@ -247,7 +247,7 @@ country_event = { #Partisans and communists take over NCA and oust the administr
 				leave_faction = yes
 			}
 		}
-		end_puppet = CCA
+		end_puppet = NCA
 	}
 }
 
@@ -328,15 +328,16 @@ country_event = { #Marsilio flees to CCA and sets himself up as the leader of a 
 	option = {
 		name = changeling_activity.33
 		hidden_effect = {
+			CHN_Marsilio = { set_nationality = CCA }
 			CCA = {
 				set_politics = {
 					ruling_party = neutrality
 					elections_allowed = no
 				}
-				CHN = {
-					CHN_Marsilio = { set_nationality = ROOT }
+				promote_character = {
+					character = CHN_Marsilio
+					ideology = centrism
 				}
-				promote_character = CHN_Marsilio
 				drop_cosmetic_tag = yes
 				leave_faction = yes
 				country_event = {
@@ -425,6 +426,7 @@ country_event = { #The hardliners get the army into shape and prepare for war wi
 	is_triggered_only = yes
 	
 	option = {
+		name = changeling_activity.37.a
 		remove_ideas = {
 			CHN_idea_mod
 		}
@@ -455,10 +457,15 @@ country_event = { #CCA forms CHN after conquering it
 	option = {
 		every_state = {
 			limit = {
-				NOT = { is_owned_by = ROOT }
+				NOT = { is_owned_by = CCA }
 				is_core_of = CHN
 			}
 			transfer_state_to = ROOT
+		}
+		every_state = {
+			limit = {
+				is_core_of = CHN
+			}
 			add_core_of = ROOT
 		}
 		country_event = {
@@ -466,7 +473,7 @@ country_event = { #CCA forms CHN after conquering it
 			days = 120
 			random_days = 10
 		}
-		news_event = changelingianews.3
+		news_event = changelingianews.4
 		hidden_effect = {
 			CHN = {
 				CHN_Chrysalis_FH = { set_nationality = CCA }
@@ -539,7 +546,11 @@ country_event = { #CCA annexes NCA and integrates it and annexes SCS, but doesn'
 			}
 			add_compliance = 20
 		}
-		promote_character = CHN_Chrysalis_FH
+		set_cosmetic_tag = VIC_CHN
+		promote_character = {
+			character = CHN_Chrysalis_FH
+			ideology = centrism
+		}
 	}
 }
 
@@ -684,17 +695,42 @@ country_event = { #Either the territory is signed over or war is prepared for
 				}
 			}
 			transfer_state_to = SLE
-			add_core_of = SLE
 		}
 		every_state = {
 			limit = {
 				is_core_of = CCA
 				NOT = { is_core_of = CHN }
+				NOT = { is_core_of = OLE }
 			}
 			transfer_state_to = SLE
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = NCA
+					is_core_of = SCS
+					AND = {
+						is_core_of = CCA
+						NOT = { is_core_of = CHN }
+						NOT = { is_core_of = OLE }
+					}
+				}
+			}
 			add_core_of = SLE
 		}
-		news_event = changelingianews.4
+		if = {
+			limit = {
+				CRY = { is_in_faction_with = SLE }
+			}
+			1220 = { transfer_state_to = CRY }
+		}
+		else = {
+			1220 = {
+				add_core_of = SLE
+				transfer_state_to = SLE
+			}
+		}
+		news_event = changelingianews.5
 	}
 }
 
