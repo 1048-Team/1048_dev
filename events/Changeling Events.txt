@@ -1,4 +1,5 @@
 add_namespace = CHN
+add_namespace = changeling_activity
 
 country_event = {
 	id = CHN.1
@@ -222,3 +223,590 @@ option = {
 
 }
 
+country_event = { #Partisans and communists take over NCA and oust the administration of Ocellus, who flees to CHN
+	id = changeling_activity.30
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.30"}
+	title = changeling_activity.30.t
+	desc = changeling_activity.30.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = changeling_activity.30.a
+		hidden_effect = {
+			NCA = {
+				add_popularity = {
+					ideology = communism
+					popularity = 0.35
+				}
+				set_politics = {
+					ruling_party = communism
+					elections_allowed = no
+				}
+				drop_cosmetic_tag = yes
+				leave_faction = yes
+			}
+		}
+		end_puppet = NCA
+	}
+}
+
+country_event = { #SCS breaks into its own nation
+	id = changeling_activity.31
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.31"}
+	title = changeling_activity.31.t
+	desc = changeling_activity.31.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = changeling_activity.31
+		hidden_effect = {
+			SCS = {
+				drop_cosmetic_tag = yes
+				leave_faction = yes
+			}
+		}
+		end_puppet = SCS
+	}
+}
+
+country_event = { #CHN is made into a hardliner state, with a results of a heated election and the queen swearing in a new cabinet
+	id = changeling_activity.32
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.32"}
+	title = changeling_activity.32.t
+	desc = changeling_activity.32.d
+	
+	trigger = {
+		tag = CHN
+		date > 1050.7.15
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = changeling_activity.32
+		news_event = changelingianews.1
+		remove_ideas = CHN_idea_mil
+		hidden_effect = {
+			country_event = {
+				id = changeling_activity.30
+				days = 180
+				random_days = 15
+			}
+			country_event = {
+				id = changeling_activity.33
+				days = 210
+				random_days = 30
+			}
+			country_event = {
+				id = changeling_activity.31
+				days = 210
+				random_days = 45
+			}
+			country_event = {
+				id = changeling_activity.34
+				days = 250
+				random_days = 10
+			}
+			country_event = {
+				id = changeling_activity.37
+				days = 365
+				random_days = 30
+			}
+		}
+	}
+}
+
+country_event = { #Marsilio flees to CCA and sets himself up as the leader of a reformist faction to fight the hardliners
+	id = changeling_activity.33
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.33"}
+	title = changeling_activity.33.t
+	desc = changeling_activity.33.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = changeling_activity.33
+		hidden_effect = {
+			CHN_Marsilio = { set_nationality = CCA }
+			CCA = {
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+				promote_character = {
+					character = CHN_Marsilio
+					ideology = centrism
+				}
+				drop_cosmetic_tag = yes
+				leave_faction = yes
+				country_event = {
+					id = changeling_activity.35
+					days = 120
+					random_days = 30
+				}
+			}
+		}
+		remove_ideas = CHN_idea_ref
+		end_puppet = CCA
+	}
+}
+
+country_event = { #OLE's governor gets overthrown by republicans who have been building support for some time
+	id = changeling_activity.34
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.34"}
+	title = changeling_activity.34.t
+	desc = changeling_activity.34.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = changeling_activity.34
+		hidden_effect = {
+			OLE = {
+				add_popularity = {
+					ideology = democratic
+					popularity = 40
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+				}
+				drop_cosmetic_tag = yes
+				leave_faction = yes
+			}
+		}
+		end_puppet = OLE
+	}
+}
+
+country_event = { #Marsilio works with the free colonies to form an anti-hardliner alliance, with the directive to soon attack before the hardliners are strong enough to stop them
+	id = changeling_activity.35
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.35"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		create_faction = CCA_free_alliance
+		add_to_faction = SCS
+		add_to_faction = NCA
+		add_to_faction = OLE
+		country_event = {
+			id = changeling_activity.36
+			days = 90
+			random_days = 30
+		}
+		news_event = changelingianews.2
+	}
+}
+
+country_event = { #The Alliance of the Free declares war on the changelings before they grow too strong
+	id = changeling_activity.36
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.36"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		create_wargoal = {
+			target = CHN
+			type = annex_everything
+		}
+		set_country_flag = CCA_war_with_CHN
+	}
+}
+
+country_event = { #The hardliners get the army into shape and prepare for war with the rest of Equus
+	id = changeling_activity.37
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.37"}
+	title = changeling_activity.37.t
+	desc = changeling_activity.37.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = changeling_activity.37.a
+		remove_ideas = {
+			CHN_idea_mod
+		}
+		swap_ideas = {
+			remove_idea = CHN_idea_memory_44
+			add_idea = CHN_idea_memory_44_better
+		}
+		country_lock_all_division_template = no
+		set_country_flag = CHN_hardliners_prepare_for_war
+		hidden_effect = {
+			CHN_Chrysalis_FH = {
+				set_portraits = {
+					civilian = { large = "gfx/leaders/CHN/Chrysalis_Hardline.tga" }
+				}
+				remove_trait = { ideology = changeling_ideology trait = the_sick_bug }
+			}
+		}
+	}
+}
+
+country_event = { #CCA forms CHN after conquering it
+	id = changeling_activity.38
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.38"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		every_state = {
+			limit = {
+				NOT = { is_owned_by = CCA }
+				is_core_of = CHN
+			}
+			transfer_state_to = ROOT
+		}
+		every_state = {
+			limit = {
+				is_core_of = CHN
+			}
+			add_core_of = ROOT
+		}
+		country_event = {
+			id = changeling_activity.39
+			days = 120
+			random_days = 10
+		}
+		news_event = changelingianews.4
+		set_cosmetic_tag = VIC_CHN
+		set_country_flag = CCA_CHN_dead
+		set_capital = { state = 251 }
+		hidden_effect = {
+			CHN = {
+				CHN_Chrysalis_FH = { set_nationality = CCA }
+			}
+			CHN_Chrysalis_FH = {
+				add_country_leader_role = {
+					country_leader = {
+						ideology = centrism
+						expire = 1965.1.1
+					}
+				}
+				set_portraits = {
+					civilian = { large = "gfx/leaders/CHN/Chrysalis_Reformist.tga" }
+				}
+			}
+		}
+	}
+}
+
+country_event = { #CCA annexes OLE and integrates it into BUG
+	id = changeling_activity.39
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.39"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		annex_country = {
+			target = OLE
+			transfer_troops = yes
+		}
+		every_state = {
+			limit = {
+				is_core_of = OLE
+			}
+			add_core_of = ROOT
+		}
+		country_event = {
+			id = changeling_activity.40
+			days = 150
+			random_days = 20
+		}
+	}
+}
+
+country_event = { #CCA annexes NCA and integrates it and annexes SCS, but doesn't integrate it
+	id = changeling_activity.40
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.40"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		annex_country = {
+			target = NCA
+			transfer_troops = yes
+		}
+		annex_country = {
+			target = SCS
+		}
+		every_state = {
+			limit = {
+				is_core_of = NCA
+			}
+			add_core_of = ROOT
+		}
+		every_state = {
+			limit = {
+				is_core_of = SCS
+			}
+			add_compliance = 20
+		}
+		promote_character = {
+			character = CHN_Chrysalis_FH
+			ideology = centrism
+		}
+	}
+}
+
+country_event = { #CCA prepares to go to war with SLE if anypony other than Celestia is on the throne
+	id = changeling_activity.41
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.41"}
+	title = changeling_activity.41.t
+	desc = changeling_activity.41.d
+	
+	trigger = {
+		tag = BUG
+		date > 1057.3.1
+		NOT = { country_exists = CHN }
+		SLE = {
+			exists = yes
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We have no choice but to intervene
+		name = changeling_activity.41.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = SLE
+		}
+	}
+}
+
+country_event = { #CCA offers Celestia an alliance so long as she stops her war of reconquest
+	id = changeling_activity.42
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.42"}
+	title = changeling_activity.42.t
+	desc = changeling_activity.42.d
+	
+	trigger = {
+		tag = BUG
+		date > 1057.3.1
+		NOT = { country_exists = CHN }
+		SLE = {
+			exists = yes
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We must cement the new balance of power
+		name = changeling_activity.42.a
+		SLE = {
+			country_event = {
+				id = changeling_activity.43
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Equestria receives the offer of giving over (simplifying the entire thing) all pony-majority lands (NCA, CCA, and SCS) in exchange for an alliance that will benefit both and cement an eternal friendship
+	id = changeling_activity.43
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.43"}
+	title = changeling_activity.43.t
+	desc = changeling_activity.43.d
+	
+	is_triggered_only = yes
+	
+	option = { #I cannot risk a greater war
+		name = changeling_activity.43.a
+		ai_chance = {
+			factor = 80
+		}
+		BUG = {
+			country_event = {
+				id = changeling_activity.44
+				days = 2
+			}
+		}
+	}
+	option = { #All of Equestria must be reunited
+		name = changeling_activity.43.b
+		ai_chance = {
+			factor = 20
+		}
+		BUG = {
+			country_event = {
+				id = changeling_activity.44
+				days = 2
+			}
+		}
+		set_country_flag = SLE_chose_war
+	}
+}
+
+country_event = { #Either the territory is signed over or war is prepared for
+	id = changeling_activity.44
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.44"}
+	title = {
+		trigger = {
+			SLE = { has_country_flag = SLE_chose_war }
+		}
+		text = changeling_activity.44.tb
+	}
+	title = {
+		text = changeling_activity.44.ta
+	}
+	desc = {
+		trigger = {
+			SLE = { has_country_flag = SLE_chose_war }
+		}
+		text = changeling_activity.44.db
+	}
+	desc = {
+		text = changeling_activity.44.da
+	}
+	
+	is_triggered_only = yes
+	
+	option = { #Then we shall fight
+		name = changeling_activity.44.a
+		trigger = {
+			SLE = { has_country_flag = SLE_chose_war }
+		}
+		SLE = { clr_country_flag = SLE_chose_war }
+		create_wargoal = {
+			target = SLE
+			type = puppet_wargoal_focus
+		}
+	}
+	option = { #A wise choice
+		name = changeling_activity.44.b
+		trigger = {
+			SLE = { NOT = { has_country_flag = SLE_chose_war } }
+		}
+		SLE = { set_country_flag = SLE_chose_peace }
+		add_to_faction = SLE
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = SCS
+					is_core_of = NCA
+				}
+			}
+			transfer_state_to = SLE
+		}
+		every_state = {
+			limit = {
+				is_core_of = CCA
+				NOT = { is_core_of = CHN }
+				NOT = { is_core_of = OLE }
+			}
+			transfer_state_to = SLE
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = NCA
+					is_core_of = SCS
+					AND = {
+						is_core_of = CCA
+						NOT = { is_core_of = CHN }
+						NOT = { is_core_of = OLE }
+					}
+				}
+			}
+			add_core_of = SLE
+		}
+		if = {
+			limit = {
+				CRY = { is_in_faction_with = SLE }
+			}
+			1220 = { transfer_state_to = CRY }
+		}
+		else = {
+			1220 = {
+				add_core_of = SLE
+				transfer_state_to = SLE
+			}
+		}
+		news_event = changelingianews.5
+	}
+}
+
+country_event = { #CHN eradicates the resistance from the reformitsts and then prepares for war with SLE in the next few years
+	id = changeling_activity.45
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.45"}
+	title = changeling_activity.45.t
+	desc = changeling_activity.45.d
+	
+	is_triggered_only = yes
+	
+	option = { #Now to turn our attention to the true target
+		name = changeling_activity.45.a
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = OLE
+					is_core_of = NCA
+				}
+			}
+			add_core_of = ROOT
+		}
+		set_country_flag = CHN_CCA_dead
+		hidden_effect = {
+			country_event = {
+				id = changeling_activity.46
+				days = 365
+			}
+		}
+	}
+}
+
+country_event = { #CHN finally pacifies the colony territories to the south and has now a large base of population to draw from
+	id = changeling_activity.46
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.46"}
+	title = changeling_activity.46.t
+	desc = changeling_activity.46.d
+	
+	is_triggered_only = yes
+	
+	option = { #Now to turn our attention to the true target
+		name = changeling_activity.46.a
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CCA
+					is_core_of = SCS
+				}
+			}
+			add_core_of = ROOT
+		}
+	}
+}
+
+country_event = { #CHN prepares to go with SLE
+	id = changeling_activity.47
+	immediate = {log = "[GetDateText]: [Root.GetName] event changeling_activity.47"}
+	title = changeling_activity.47.t
+	desc = changeling_activity.47.d
+	
+	trigger = {
+		tag = CHN
+		date > 1057.3.1
+		NOT = { country_exists = CCA }
+		country_exists = SLE
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We shall drown them in blood!
+		name = changeling_activity.47.a
+		create_wargoal = {
+			target = SLE
+			type = annex_everything
+		}
+	}
+}

@@ -202,6 +202,14 @@ BAL_debug_decisions_category = {
 				}
 			}
 			promote_character = EEE_Gushing_Pulse
+			set_country_flag = EEE_ezmetzli_coup
+			set_portraits = {
+				character = EEE_Gushing_Pulse
+				army = {
+					large = "gfx/leaders/EEE/Gushing_Pulse.tga"
+					small = "GFX_idea_EEE_gushing_pulse"
+				}
+			}
 		}
 	}
 	EEE_promote_Nocturne = {
@@ -354,6 +362,50 @@ BAL_debug_decisions_category = {
 			}
 		}
 	}
+	MTS_promote_Pinpoint = {
+		available = {
+			tag = MTS
+			NOT = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+		}
+		visible = { tag = MTS }
+		complete_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_country_flag = MTS_warm_night_triumphant
+						has_country_flag = MTS_scorched_earth_triumphant
+					}
+				}
+				clr_country_flag = MTS_warm_night_triumphant
+				clr_country_flag = MTS_scorched_earth_triumphant
+			}
+			if = {
+				limit = {
+					NOT = { has_government = fascism }
+				}
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+			}
+			if = {
+				limit = { NOT = { can_be_country_leader = MTS_Pinpoint } }
+				MTS_Pinpoint = {
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							ideology = solarism
+							expire = "1965.1.1"
+							traits = {
+								experimental_inquisitor
+							}
+						}
+					}
+				}
+			}
+			else = { promote_character = MTS_Pinpoint }
+		}
+	}
 	MTS_promote_Scorched_Earth = {
 		available = {
 			tag = MTS
@@ -375,6 +427,10 @@ BAL_debug_decisions_category = {
 					ruling_party = fascism
 					elections_allowed = no
 				}
+			}
+			if = {
+				limit = { NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } } }
+				promote_character = EQS_Scorched_Earth
 			}
 		}
 	}
@@ -437,6 +493,7 @@ BAL_debug_decisions_category = {
 				}
 			}
 			restore_previous_government_type_FH = yes
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	MTS_simulate_EQS_acceptance = {
@@ -471,6 +528,7 @@ BAL_debug_decisions_category = {
 				}
 			}
 			restore_previous_government_type_FH = yes
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	MTS_simulate_EQS_SOL_rejection = {
@@ -487,6 +545,7 @@ BAL_debug_decisions_category = {
 		}
 		complete_effect = {
 			set_country_flag = MTS_EQS_rejected
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	MTS_EQS_go_SUN = {

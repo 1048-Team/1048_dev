@@ -1,6 +1,8 @@
 ###Fractured Harmony News Events###
 
 add_namespace = solarempirenews
+add_namespace = changelingianews
+add_namespace = fhequusnews
 add_namespace = fhgriffonianews
 add_namespace = fhzebricanews
 
@@ -198,6 +200,541 @@ news_event = { #Dyx is a motherbucking general
 			NOT = {
 				tag = EQS
 			}
+		}
+	}
+}
+
+news_event = { #Changelingia has reformed its government and the hardliners have been put into power, already ousting some of the softer politicians
+	id = changelingianews.1
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.1"}
+	picture = GFX_news_changeling_elections
+	title = changelingianews.1.t
+	desc = changelingianews.1.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We shall reclaim our glory!
+		name = changelingianews.1.a
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #This is not good
+		name = changelingianews.1.b
+		trigger = {
+			OR = {
+				tag = SCS
+				tag = CCA
+				tag = NCA
+				tag = OLE
+			}
+		}
+	}
+	option = { #Their revanchism will not stop us!
+		name = changelingianews.1.c
+		trigger = {
+			tag = SLE
+		}
+	}
+	option = { #The giant is waking
+		name = changelingianews.8.e
+		trigger = {
+			NOT = { tag = CHN }
+			NOT = { tag = SCS }
+			NOT = { tag = CCA }
+			NOT = { tag = NCA }
+			NOT = { tag = OLE }
+			NOT = { tag = SLE }
+		}
+	}
+}
+
+news_event = { #The Alliance of the Free is formed and promises to put an end to the hardliners' rhetoric
+	id = changelingianews.2
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.2"}
+	picture = GFX_news_changeling_alliance
+	title = changelingianews.2.t
+	desc = changelingianews.2.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #Chrysalis will not ruin our way of life again!
+		name = changelingianews.2.a
+		trigger = {
+			OR = {
+				tag = CCA
+				is_in_faction_with = CCA
+			}
+		}
+	}
+	option = { #His blustering will not stop us!
+		name = changelingianews.2.b
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #Seems the changelings aren't so united after all
+		name = changelingianews.2.c
+		trigger = {
+			NOT = { 
+				OR = {
+					tag = CCA
+					is_in_faction_with = CCA
+				}
+			}
+			NOT = { tag = CHN }
+		}
+	}
+}
+
+news_event = { #War breaks out between the Alliance of the Free and Changelingia
+	id = changelingianews.3
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.3"}
+	picture = GFX_news_event_the_war
+	title = changelingianews.3.t
+	desc = changelingianews.3.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We must topple the radicals in government
+		name = changelingianews.3.a
+		trigger = {
+			OR = {
+				tag = CCA
+				is_in_faction_with = CCA
+			}
+		}
+	}
+	option = { #We shall defend the Queen with our lives!
+		name = changelingianews.3.b
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #Somecreature call the exterminator, please.
+		name = changelingianews.3.c
+		trigger = {
+			NOT = { 
+				OR = {
+					tag = CCA
+					is_in_faction_with = CCA
+				}
+			}
+			NOT = { tag = CHN }
+		}
+	}
+}
+
+news_event = { #Marsilio hosts a teleconference from the main hive in Vesalipolis to claim that the hardliners have been defeated and that the changelings will go on a mission of reconciliation and peace
+	id = changelingianews.4
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.4"}
+	picture = GFX_news_changeling_alliance
+	title = changelingianews.4.t
+	desc = changelingianews.4.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #They are only making themselves weaker!
+		name = changelingianews.4.a
+		trigger = {
+			tag = SLE
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	option = { #We shall reach new heights!
+		name = changelingianews.4.b
+		trigger = {
+			tag = BUG
+		}
+	}
+	option = { #They can never right their past
+		name = changelingianews.4.c
+		trigger = {
+			NOT = { tag = BUG }
+			NOT = { tag = SLE }
+		}
+	}
+}
+
+news_event = { #A combined conference between Celestia and Chrysalis promises to put aside the two countries' differences to form a new union and peace between the two superpowers
+	id = changelingianews.5
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.5"}
+	picture = GFX_news_chrysalis_celestia_besties
+	title = changelingianews.5.t
+	desc = changelingianews.5.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #To a new era of peace!
+		name = changelingianews.5.a
+		trigger = {
+			tag = EQS
+		}
+	}
+	option = { #Let bygones be bygones
+		name = changelingianews.5.b
+		trigger = {
+			tag = BUG
+		}
+	}
+	option = { #Wait, that just happened?!
+		name = changelingianews.5.c
+		trigger = {
+			NOT = { tag = BUG }
+			NOT = { tag = EQS }
+		}
+	}
+}
+
+news_event = { #News event of BUG going to war with SLE, with either the reformists saying they did not want to and wanted peace, or the hardliners promising the final end to Equestria
+	id = changelingianews.6
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.6"}
+	picture = GFX_news_event_the_war
+	title = changelingianews.6.t
+	desc = {
+		trigger = { 
+			CHN = { has_country_flag = CHN_CCA_dead }
+		}
+		text = changelingianews.6.da
+	}
+	desc = {
+		trigger = { 
+			CCA = { has_country_flag = CCA_CHN_dead }
+		}
+		text = changelingianews.6.db
+	}
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We shall hold against the vermin!
+		name = changelingianews.6.a
+		trigger = {
+			tag = SLE
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	option = { #This is Harmony's trial
+		name = changelingianews.6.b
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	option = { #The Swarm will consume them!
+		name = changelingianews.6.c
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #We weren't given a choice!
+		name = changelingianews.6.d
+		trigger = {
+			tag = CCA
+		}
+	}
+	option = { #The Second Great War was supposed to be different
+		name = changelingianews.6.e
+		trigger = {
+			NOT = { tag = SLE }
+			NOT = { tag = BUG }
+		}
+	}
+}
+
+news_event = { #News event of BUG ending the war with SLE, and proclaiming either complete victory and destruction of Equestria, or establishing a friendly government to work with and guide
+	id = changelingianews.7
+	immediate = {log = "[GetDateText]: [Root.GetName] event changelingianews.7"}
+	picture = GFX_news_event_canterlot_celestia
+	title = changelingianews.7.t
+	desc = {
+		trigger = { 
+			CHN = { has_country_flag = CHN_CCA_dead }
+		}
+		text = changelingianews.7.da
+	}
+	desc = {
+		trigger = { 
+			CCA = { has_country_flag = CCA_CHN_dead }
+		}
+		text = changelingianews.7.db
+	}
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We have achieved peace in our time!
+		name = changelingianews.7.a
+		trigger = {
+			tag = CCA
+		}
+	}
+	option = { #Our revenge is complete!
+		name = changelingianews.7.b
+		trigger = {
+			tag = CHN
+		}
+	}
+	option = { #The last gasp of Equestria has been smothered
+		name = changelingianews.7.c
+		trigger = {
+			NOT = { tag = BUG }
+		}
+	}
+}
+
+news_event = { #Opaline coups WHY
+	id = fhequusnews.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhequusnews.1"}
+	title = fhequusnews.1.t
+	desc = fhequusnews.1.d
+	picture = GFX_news_solar_propaganda
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = fhequusnews.1.a
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.1.b
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Daybreaker ruling_only = yes }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.1.c
+		trigger = {
+			OR = {
+				tag = EQS
+				tag = SLW
+			}
+			NOT = { has_country_leader = { character = EQS_Daybreaker ruling_only = yes } }
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.1.e
+		trigger = {
+			AND = {
+				NOT = { tag = EQS }
+				NOT = { tag = SLW }
+			}
+		}
+	}
+}
+
+news_event = { #Opaline fails her coup of WHY
+	id = fhequusnews.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event fhequusnews.2"}
+	title = fhequusnews.2.t
+	desc = fhequusnews.2.d
+	picture = GFX_news_solar_propaganda
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = fhequusnews.2.a
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.2.b
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Daybreaker ruling_only = yes }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.2.c
+		trigger = {
+			OR = {
+				tag = EQS
+				tag = SLW
+			}
+			NOT = { has_country_leader = { character = EQS_Daybreaker ruling_only = yes } }
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+		}
+	}
+	
+	option = {
+		name = fhequusnews.2.e
+		trigger = {
+			AND = {
+				NOT = { tag = EQS }
+				NOT = { tag = SLW }
+			}
+		}
+	}
+}
+
+news_event = { #CER creates their faction with CLD
+	id = fhequusnews.3
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.3"}
+	title = fhequusnews.3.t
+	desc = fhequusnews.3.d
+	#picture = GFX_united_ponies
+	major = yes
+	is_triggered_only = yes
+	
+	
+	option = { #Do they not trust me?
+		name = fhequusnews.3.a
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	option = { #Their numbers will not save them!
+		name = fhequusnews.3.b
+		trigger = {
+			OR = {
+				tag = EQS
+				tag = SLW
+			}
+		}
+	}
+	option = { #Alliances are easily broken
+		name = fhequusnews.3.c
+		trigger = {
+			NOT = { tag = EQS }
+		}
+	}
+}
+
+news_event = { #CER forms the federation
+	 id = fhequusnews.4
+	 immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.4"}
+	 title = fhequusnews.4.t
+	 desc = fhequusnews.4.d
+	 #picture = GFX_united_ponies
+	 major = yes
+	 is_triggered_only = yes
+	 
+	 option = { #Their puny forces will not stop me!
+		name = fhequusnews.4.a
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Daybreaker ruling_only = yes }
+		}
+	}
+	option = { #Must we fight?
+		name = fhequusnews.4.b
+		trigger = {
+			tag = EQS
+			has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+		}
+	}
+	option = { #We will not fall easily!
+		name = fhequusnews.4.c
+		trigger = {
+			OR = {
+				tag = EQS
+				tag = SLW
+			}
+		}
+	}
+	option = { #Two giants coming out to play
+		name = fhequusnews.4.e
+		trigger = {
+			NOT = { tag = EQS }
+			NOT = { tag = SLW }
+		}
+	}
+}
+
+news_event = { #CER claims the Equestrian throne
+	id = fhequusnews.5
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.5"}
+	title = fhequusnews.5.t
+	desc = fhequusnews.5.d
+	#picture = GFX_united_ponies
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #We've won! Equestria has been reborn!
+		name = fhequusnews.5.a
+		trigger = {
+			tag = CER
+		}
+	}
+	option = { #Will they repeat past mistakes?
+		name = fhequusnews.5.b
+		trigger = {
+			NOT = { tag = CER }
+		}
+	}
+}
+
+news_event = { #YAK is reformed, dynamically based on either SMH or YAH winning
+	id = fhequusnews.6
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.6"}
+	title = fhequusnews.6.t
+	desc = fhequusnews.6.d
+	picture = GFX_news_yakistown
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #Yahks SMASH smushy Yaks!
+		name = fhequusnews.6.a
+		trigger = {
+			original_tag = YAH
+		}
+	}
+	option = { #Yaks SMUSH smelly Yahks!
+		name = fhequusnews.6.b
+		trigger = {
+			original_tag = SMH
+		}
+	}
+	option = { #Now maybe they can calm down again.
+		name = fhequusnews.6.c
+		trigger = {
+			NOT = { original_tag = YAH }
+			NOT = { original_tag = SMH }
+		}
+	}
+}
+
+news_event = { #The Western Griffonian Empire is reformed
+	id = fhequusnews.7
+	immediate = {log = "[GetDateText]: [Root.GetName] event fhequusnews.7"}
+	picture = GFX_news_griffenheim
+	title = fhequusnews.7.t
+	desc = fhequusnews.7.d
+	major = yes
+	is_triggered_only = yes
+	
+	option = { #I'm rich!
+		name = fhequusnews.7.a
+		trigger = {
+			tag = VRG
+		}
+	}
+	option = { #The North reigns triumphant!
+		name = fhequusnews.7.b
+		trigger = {
+			OR = {
+				tag = NVC
+				tag = GRF
+			}
+		}
+	}
+	option = { #Like a phoenix from its ashes...
+		name = fhequusnews.7.c
+		trigger = {
+			NOT = { tag = VRG }
+			NOT = { tag = GRF }
+			NOT = { tag = NVC }
 		}
 	}
 }

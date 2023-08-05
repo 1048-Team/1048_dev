@@ -27,7 +27,7 @@ country_event = { #SMH or YAH wars with the other
 			45 = {
 				YAH = {
 					declare_war_on = {
-						target = YAH
+						target = SMH
 						type = annex_everything
 					}
 					country_event = {
@@ -114,7 +114,7 @@ country_event = { #MWR leaves STG
 		}
 		add_popularity = {
 			ideology = fascism
-			popularity = 0.25
+			popularity = 0.33
 		}
 		random_list = {
 			35 = {
@@ -319,6 +319,643 @@ country_event = { #NVC or VRG wars CHN for core states
 		declare_war_on = {
 			target = var:GRF_core_state_owner
 			type = take_core_state
+		}
+	}
+}
+
+country_event = { #WHY gets the option ot stay or leave SOL
+	id = equestria_activity.11
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.11"}
+	title = equestria_activity.11.t
+	desc = equestria_activity.11.d
+	
+	trigger = {
+		tag = WHY
+		date > 1050.1.1
+		date < 1051.1.1
+	}
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 180
+	}
+	
+	option = { #We are a natural part of the Empire
+		name = equestria_activity.11.a
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
+		hidden_effect = {
+			country_event = {
+				id = equestria_activity.13
+				days = 270
+				random_days = 100
+			}
+		}
+	}
+	option = { #They can no longer protect us
+		name = equestria_activity.11.b
+		EQS = {
+			end_puppet = WHY
+			remove_from_faction = WHY
+			set_variable = { equestria_conquest = 0 }
+			country_event = equestria_activity.12
+		}
+		hidden_effect = {
+			drop_cosmetic_tag = yes
+			country_event = {
+				id = equestria_activity.13
+				days = 270
+				random_days = 100
+			}
+		}
+	}
+}
+
+country_event = { #Whinnyapolis leaves the sphere of influence of the Solar Empire
+	id = equestria_activity.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.12"}
+	title = equestria_activity.12.t
+	#desc = "With our slipping grip on Whinnyapolis, Solar Strike has formally withdrawn from the Imperium of the Sun. Citing that the Empress is unable to protect them or provide in case of emergency, he has centralized his power even more and now rules Whinnyapolis with no recognition of the Empire."
+	desc = equestria_activity.12.d
+	
+	is_triggered_only = yes
+	
+	option = { #They will pay for their insolence!
+		name = equestria_activity.12.a
+		add_political_power = -50
+	}
+}
+
+country_event = { #Opaline tries to coup WHY to become leader
+	id = equestria_activity.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.13"}
+	title = equestria_activity.13.t
+	desc = equestria_activity.13.d
+	is_triggered_only = yes
+	
+	option = { #She be leading, bb
+		name = equestria_activity.13.a
+		set_cosmetic_tag = WHY_G5
+		WHY_Opaline_Arcana = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					traits = { unchecked_ambition }
+				}
+			}
+		}
+		retire_character = WHY_Solar_Strike
+		if = {
+			limit = {
+				is_subject_of = EQS
+			}
+			EQS = {
+				end_puppet = WHY
+				remove_from_faction = WHY
+				set_variable = { equestria_conquest = 0 }
+			}
+			drop_cosmetic_tag = yes
+		}
+		news_event = fhequusnews.1
+		hidden_effect = {
+			country_event = {
+				id = equestria_activity.14
+				days = 75
+				random_days = 75
+			}
+		}
+	}
+	option = { #She do be failing, tho
+		name = equestria_activity.13.b
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes factor = 0 }
+		}
+		retire_character = WHY_Opaline_Arcana
+		news_event = fhequusnews.2
+		hidden_effect = {
+			country_event = {
+				id = equestria_activity.14
+				days = 100
+				random_days = 100
+			}
+		}
+	}
+}
+
+country_event = { #WHY wars NER
+	id = equestria_activity.14
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.14"}
+	hidden = yes
+	is_triggered_only = yes
+	
+	option = {
+		declare_war_on = {
+			target = NER
+			type = annex_everything
+		}
+		every_state = {
+			limit = {
+				is_core_of = NER
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #Why wars BLS
+	id = equestria_activity.15
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.15"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		NOT = { country_exists = NER }
+		country_exists = BLS
+		date > 1052.1.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = BLS
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #Why wars CLD
+	id = equestria_activity.16
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.16"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		date > 1053.7.7
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = CLD
+			type = annex_everything
+		}
+		every_state = {
+			limit = {
+				is_core_of = BLS
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #Why wars CER
+	id = equestria_activity.17
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.17"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		date > 1053.10.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = CER
+			type = annex_everything
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = CLD
+					is_core_of = CER
+				}
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #Why wars SOL/SLW
+	id = equestria_activity.18
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.18"}
+	hidden = yes
+	
+	trigger = {
+		tag = WHY
+		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		date > 1055.1.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = {
+				country_exists = EQS
+			}
+			declare_war_on = {
+				target = EQS
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				country_exists = SLW
+			}
+			declare_war_on = {
+				target = SLW
+				type = annex_everything
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = WHY
+		}
+	}
+}
+
+country_event = { #CER forms alliance with CLD
+	id = equestria_activity.19
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.19"}
+	hidden = yes
+	
+	trigger = {
+		tag = CER
+		date > 1051.4.17
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		create_faction = CER_dem_faction
+		add_to_faction = CLD
+		news_event = fhequusnews.3
+		hidden_effect = {
+			remove_opinion_modifier = {
+				target = CLD
+				modifier = CER_CLD_unrecognized_successor
+			}
+			CLD = {
+				remove_opinion_modifier = {
+					target = CER
+					modifier = CER_CLD_unrecognized_successor
+				}
+			}
+		}
+	}
+}
+
+country_event = { #CER reaches out to NER to join
+	id = equestria_activity.20
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.20"}
+	hidden = yes
+	
+	trigger = {
+		tag = CER
+		date > 1052.1.1
+		country_exists = NER
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		NER = {
+			country_event = equestria_activity.21
+		}
+	}
+}
+
+country_event = { #NER gets to choose if they join CER's faction or not
+	id = equestria_activity.21
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.21"}
+	title = equestria_activity.21.t
+	desc = equestria_activity.21.d
+	
+	is_triggered_only = yes
+	
+	option = { #We will restore what Equestria once was, together!
+		name = equestria_activity.21.a
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes add = 10 }
+		}
+		CER = { add_to_faction = NER }
+	}
+	option = { #We can't make a deal with them!
+		name = equestria_activity.21.b
+		ai_chance = {
+			modifier = { has_war_with = WHY factor = 0 }
+		}
+		CER = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = NER
+			}
+		}
+	}
+}
+
+country_event = { #CER sends an invitation to BLS
+	id = equestria_activity.22
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.22"}
+	hidden = yes
+	
+	trigger = {
+		tag = CER
+		country_exists = BLS
+		date > 1052.3.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		BLS = {
+			country_event = equestria_activity.23
+		}
+	}
+}
+
+country_event = { #BLS is allowed to choose if they join CER's faction or not
+	id = equestria_activity.23
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.23"}
+	title = equestria_activity.23.t
+	desc = equestria_activity.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #So long as we are allowed to continue our science projects!
+		name = equestria_activity.23.a
+		ai_chance = {
+			modifier = { is_historical_focus_on = yes add = 10 }
+		}
+		trigger = {
+			NOT = { has_country_flag = BLS_solar_flare_resurrected }
+		}
+		CER = { add_to_faction = BLS }
+	}
+	option = { #We have done fine on our own!
+		name = equestria_activity.23.b
+		trigger = {
+			NOT = { has_country_flag = BLS_solar_flare_resurrected }
+		}
+		ai_chance = {
+			modifier = { has_war_with = WHY factor = 0 }
+		}
+		CER = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BLS
+			}
+		}
+	}
+	option = { #They think that they are my equals?!
+		name = equestria_activity.23.c
+		trigger = { has_country_flag = BLS_solar_flare_resurrected }
+		CER = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BLS
+			}
+		}
+	}
+}
+
+country_event = { #CER prepares to finish off WHY
+	id = equestria_activity.24
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.24"}
+	title = equestria_activity.24.t
+	desc = equestria_activity.24.d
+	
+	trigger = {
+		tag = CER
+		date > 1054.1.1
+		CLD = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+		CER = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+		NER = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+		BLS = {
+			OR = {
+				exists = no
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We must stabilize before we can focus on the true enemy
+		name = equestria_activity.24.a
+		create_wargoal = {
+			target = WHY
+			type = puppet_wargoal_focus
+		}
+	}
+}
+
+country_event = { #CER creates a united heartlands
+	id = equestria_activity.25
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.25"}
+	title = equestria_activity.25.t
+	desc = equestria_activity.25.d
+	
+	trigger = {
+		tag = CER
+		WHY = { is_subject_of = ROOT }
+		exists = yes
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We must integrate to fight the Solarists!
+		name = equestria_activity.25.a
+		set_cosmetic_tag = CER_equestrian_heart
+		annex_country = {
+			target = CLD
+			transfer_troops = yes
+		}
+		if = {
+			limit = {
+				country_exists = NER
+			}
+			annex_country = {
+				target = NER
+				transfer_troops = yes
+			}
+		}
+		if = {
+			limit = {
+				country_exists = BLS
+			}
+			annex_country = {
+				target = BLS
+				transfer_troops = yes
+			}
+		}
+		if = {
+			limit = {
+				country_exists = WHY
+			}
+			annex_country = {
+				target = WHY
+				transfer_troops = yes
+			}
+		}
+		if = {
+			limit = {
+				country_exists = EQS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = EQS
+			}
+		}
+		if = {
+			limit = {
+				country_exists = SLW
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SLW
+			}
+		}
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = BLS
+					is_core_of = WHY
+					is_core_of = NER
+					is_core_of = CLD
+				}
+			}
+			add_core_of = ROOT
+		}
+		news_event = fhequusnews.4
+	}
+}
+
+country_event = { #CER unites the heartlands completely with EQS's conquest
+	id = equestria_activity.26
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.26"}
+	title = equestria_activity.26.t
+	desc = equestria_activity.26.d
+	
+	trigger = {
+		tag = CER
+		NOT = { country_exists = SLW }
+		NOT = { country_exists = EQS }
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We have achieved peace!
+		name = equestria_activity.26
+		set_cosmetic_tag = EQS_NEW
+		every_state = {
+			limit = {
+				is_core_of = EQS
+			}
+			add_core_of = ROOT
+		}
+		set_capital = { state = 3 }
+		set_province_name = { id = 179 name = renamed_canterlot }
+		hidden_effect = {
+			news_event = fhequusnews.5
+		}
+	}
+}
+
+country_event = { #AWR is couped by unhappy peasants
+	id = equestria_activity.27
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.27"}
+	hidden = yes
+	
+	trigger = {
+		tag = AWR
+		date > 1050.6.20
+	}
+	mean_time_to_happen = { days = 90 }
+	fire_only_once = yes
+	
+	option = {
+		STG = { end_puppet = AWR }
+		set_cosmetic_tag = AWR_free
+		country_event = {
+			id = equestria_activity.28
+			days = 30
+			random_days = 250
+		}
+		retire_character = AWR_Dumb_Luck
+	}
+}
+
+country_event = { #AWR is couped again by unhappy soldiers or sailors
+	id = equestria_activity.28
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.28"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		set_cosmetic_tag = AWR_doubleplusfree
+		STG = {
+			random_list = {
+				65 = {
+					country_event = {
+						id = equestria_activity.29
+						days = 200
+						random_days = 300
+					}
+				}
+				35 = { }
+			}
+		}
+		retire_character = AWR_Sheer_Skill
+	}
+}
+
+country_event = { #STG is fed up with AWR's crap and conquers them
+	id = equestria_activity.29
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.29"}
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		create_wargoal = {
+			type = annex_everything
+			target = AWR
+		}
+		every_state = {
+			limit = {
+				is_core_of = AWR
+			}
+			add_core_of = STG
 		}
 	}
 }

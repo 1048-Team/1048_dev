@@ -208,6 +208,7 @@ form_yakyakistan_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision claim_the_throne"
+			set_country_flag = reformed_YAK
 			every_state = {
 				limit = {
 					is_in_array = {
@@ -219,6 +220,12 @@ form_yakyakistan_category = {
 			}
 			set_capital = { state = 11 }
 			set_cosmetic_tag = YAK_reborn
+			hidden_effect = {
+				news_event = {
+					id = fhequusnews.6
+					days = 1
+				}
+			}
 		}
 	}
 	integrate_old_territory = {
@@ -315,6 +322,48 @@ form_nova_griffonia_cetegory = {
 	}
 }
 form_western_griffonian_empire_category = {
+	assert_imperial_de_jure_authority = {
+		available = {
+			owns_state = 1217
+			owns_state = 281
+			owns_state = 243
+			has_war = no
+		}
+		visible = {
+			original_tag = GRF
+			NOT = { has_country_flag = reformed_western_griffon_empire }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision a_new_nova_griffonia"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = {
+							array = global.GRF_territory
+							value = THIS.id
+						}
+						state = 1217
+					}
+				}
+				add_core_of = ROOT
+			}
+			IF = {
+				limit = {
+					NOT = {
+						1217 = { is_capital = yes }
+					}
+				}
+				set_capital = { state = 1217 }
+			}
+			IF = {
+				limit = {
+					NOT = { original_tag = GRF }
+				}
+				set_cosmetic_tag = GRF_NEW
+			}
+		}
+	}
 	rebirth_of_the_western_empire = {
 		available = {
 			has_war = no
@@ -329,6 +378,7 @@ form_western_griffonian_empire_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
+			set_country_flag = reformed_western_griffon_empire
 			every_state = {
 				limit = {
 					OR = {
@@ -356,6 +406,12 @@ form_western_griffonian_empire_category = {
 					}
 				}
 				set_capital = { state = 1217 }
+			}
+			hidden_effect = {
+				news_event = {
+					id = fhequusnews.7
+					days = 1
+				}
 			}
 		}
 	}
