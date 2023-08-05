@@ -1,5 +1,7 @@
 capital = 14
 
+oob = "NCA_1048"
+
 set_research_slots = 3
 
 set_cosmetic_tag = NCA_CHN
@@ -18,12 +20,16 @@ set_technology = {
 	melee_weapons = 1
 	melee_weapons1 = 1
 	pre_gw_artillery = 1
-	gwtank = 1
 	infantry_weapons = 1
 	infantry_weapons1 = 1
 	interwar_antitank = 1
 	gw_artillery = 1
+	motorised_infantry = 1
+	marines = 1
+	paratroopers = 1
+	tech_recon = 1
 	tech_support = 1
+	tech_engineers = 1
 	basic_train = 1
 }
 if = {
@@ -248,6 +254,44 @@ if = {
 		basic_fire_control_system = 1
 	}
 }
+
+actually_fix_weapon_techs = yes 
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+	}
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+		basic_light_tank_chassis = 1
+	}
+}
+
+	create_equipment_variant = {
+		name = "Panzer I VMG"
+		type = light_tank_chassis_1
+		parent_version = 3
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		#icon = "gfx/interface/technologies/EQS_breezie_n.dds"
+		upgrades = {
+			tank_nsb_engine_upgrade = 4
+			tank_nsb_armor_upgrade = 3
+		}
+	}
 
 generic_DD_template = yes
 generic_CL_template = yes
