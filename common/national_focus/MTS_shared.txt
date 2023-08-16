@@ -1765,8 +1765,6 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_complete_demobilization"
 		add_ideas = civilian_economy #Will have to later make flag for this and other focus and have it checked in _economic.txt
-		set_country_flag = MTS_civilian_locked
-		#Swap ideas
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1785,7 +1783,6 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_retain_preparedness"
 		add_ideas = partial_economic_mobilisation
-		set_country_flag = MTS_partial_mob_locked
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -1844,6 +1841,22 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_moderate_economy"
 		#Buildings and slots here
+		every_state = {
+			limit = {
+				OR = {
+					state = 1214
+					state = 16
+					state = 15
+					state = 28
+				}
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -1976,7 +1989,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_establish_reasonable_quotas"
 		add_ideas = extensive_conscription
-		#Idea here
+		add_ideas = MTS_logical_requirements
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -1995,7 +2008,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_to_minimum_capacity"
 		add_ideas = limited_conscription #Both should be locked, too
-		#Idea here
+		add_ideas = MTS_minimum_requirements
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -2016,6 +2029,42 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_form_southern_guard"
 		###Scorched Earth pushes at some of the top soldiers from the South-East war to make them even better, and feels that even his best are too low quality for what he wants to present Daybreaker if she visits
+		custom_effect_tooltip = MTS_elite_poners_tt
+		hidden_effect = {
+			division_template = {
+				name = "Ordo Vanguards"
+				is_locked = yes
+				division_names_group = EQS_INF_01
+				priority = 2
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+					artillery_brigade = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+					motorized = { x = 3 y = 0 }
+					motorized = { x = 3 y = 1 }
+					motorized = { x = 3 y = 2 }
+					motorized = { x = 3 y = 3 }
+				}
+				support = {
+					anti_air = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+					recon = { x = 0 y = 2 }
+				}
+			}
+			16 = {
+				create_unit = { division = "name = \"Legio I - Solaris\" division_template = \"Ordo Vanguards\" start_experience_factor = 1 start_equipment_factor = 1" owner = ROOT prioritize_location = 8622 }
+				create_unit = { division = "name = \"Legio II - Deus\" division_template = \"Ordo Vanguards\" start_experience_factor = 0.75 start_equipment_factor = 1" owner = ROOT prioritize_location = 8622 }
+				create_unit = { division = "name = \"Legio III - Honoria\" division_template = \"Ordo Vanguards\" start_experience_factor = 0.75 start_equipment_factor = 1" owner = ROOT prioritize_location = 8622 }
+				create_unit = { division = "name = \"Legio X - Sanctus\" division_template = \"Ordo Vanguards\" start_experience_factor = 0.75 start_equipment_factor = 1" owner = ROOT prioritize_location = 8622 }
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -2134,7 +2183,10 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_masters_of_jungle"
 		add_ideas = MTS_jungle_masters
-		#Units here
+		90 = {
+			create_unit = { division = "name = \"Legio XI - Aqua\" division_template = \"Ordo Vanguards\" start_experience_factor = 0.3 start_equipment_factor = 1" owner = ROOT prioritize_location = 11499 }
+			create_unit = { division = "name = \"Legio XII - Terra\" division_template = \"Ordo Vanguards\" start_experience_factor = 0.3 start_equipment_factor = 1" owner = ROOT prioritize_location = 11499 }
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -2241,11 +2293,11 @@ shared_focus = {
 	prerequisite = { focus = MTS_rejections_sting }
 	prerequisite = { focus = MTS_stunning_defeat }
 	prerequisite = { focus = MTS_empty_faith }
-	#available = { NOT = MTS_suns_soliloquy }
+	available = { NOT = { has_idea = MTS_suns_soliloquy } }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_new_revelation"
-		###Either Scorched Earth finally spending enough time in contemplation that he finally concludes that the Empire has fallen to corruption, or Luminous Blade checking on him because she is worried for his sanity and health, since they are in a relationship
+		###Either Scorched Earth finally spending enough time in contemplation that he finally concludes that the Empire has fallen to corruption, or Luminous Blade checks on him because she is worried for his sanity and health, since they are in a relationship
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -2406,7 +2458,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_salvation_to_thestrals"
-		###Follow a couple of thestrals are they are taken from their prisons, as some of the last of their kind on Equestria, to be used as suiciders in the upcoming war
+		###Follow a couple of thestrals are they are taken from their prisons, as some of the last of their kind in Equestria, to be used as suiciders in the upcoming war
 	}
 	
 	ai_will_do = { factor = 80 }
