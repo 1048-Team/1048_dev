@@ -7574,8 +7574,39 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_maintain_ordo_integrity"
-		#Effect here
+		custom_effect_tooltip = MTS_bribe_archmages_tt
 		set_country_flag = MTS_commie_ordos_tt
+		hidden_effect = {
+			add_ideas = {
+				EQS_imperial_authority_spirit
+				EQS_average_authority
+			}
+			add_dynamic_modifier = { modifier = EQS_imperial_authority_effects }
+			set_variable = { ordo_selection = 0 }
+			set_variable = { equestria_conquest = 2 }
+			set_variable = { SOL_imperial_authority_base = 0.15 }
+			set_variable = { SOL_imperial_authority_max = 100 }
+			set_variable = { SOL_imperial_authority_min = 0 }
+			if = {
+				limit = {
+					EQS = { has_country_leader = { character = EQS_Sunbutt is_ruling_only = yes } }
+				}
+				set_variable = { SOL_loyal_ordos = SLW.SOL_loyal_ordos }
+				set_variable = { SOL_disloyal_ordos = SLW.SOL_disloyal_ordos }
+				set_variable = { SOL_imperial_authority_pool = SLW.SOL_imperial_authority_pool }
+			}
+			else = {
+				set_variable = { SOL_loyal_ordos = EQS.SOL_loyal_ordos }
+				set_variable = { SOL_disloyal_ordos = EQS.SOL_disloyal_ordos }
+				set_variable = { SOL_imperial_authority_pool = EQS.SOL_imperial_authority_pool }
+			}
+			for_each_loop = {
+				array = global.ordo_loyalty_array
+				index = i
+				add_to_variable = { global.ordo_loyalty_array^i = 5 }
+			}
+			country_event = solarordo.25
+		}
 	}
 	
 	ai_will_do = { factor = 160 }
