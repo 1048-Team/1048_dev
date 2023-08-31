@@ -798,7 +798,10 @@ shared_focus = {
 		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 		has_country_flag = MTS_conquered_southeast
 		OR = {
-			country_exists = SLW
+			SLW = {
+				exists = yes
+				has_completed_focus = SLW_everypony_to_daybreaker
+			}
 			EQS = {
 				OR = {
 					has_country_leader = { character = EQS_Daybreaker ruling_only = yes }
@@ -3011,7 +3014,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_integration_perfected"
-		#Idea here
+		add_ideas = MTS_new_imperials
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -3046,7 +3049,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_occupation_perfected"
-		#Idea here
+		add_ideas = MTS_elite_occupiers
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -3081,10 +3084,15 @@ shared_focus = {
 	allow_branch = {
 		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 		has_country_flag = MTS_conquered_southeast
-		EQS = {
-			OR = {
-				has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
-				has_country_leader = { character = EQS_Sunset_Shimmer_1048 ruling_only = yes }
+		OR = {
+			SLW = {
+				has_completed_focus = SLW_continue_fight
+			}
+			EQS = { #Should be Nova God-Empress path as well
+				OR = {
+					has_country_leader = { character = EQS_Sunbutt ruling_only = yes }
+					has_country_leader = { character = EQS_Sunset_Shimmer_1048 ruling_only = yes }
+				}
 			}
 		}
 	}
@@ -3284,7 +3292,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_defender_of_solarism"
-		#Effect here
+		add_trait = { character = EQS_Scorched_Earth ideology = solarism trait = solarisms_defender }
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -3434,7 +3442,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_emplacements_of_fire"
-		#Idea here
+		swap_ideas = {
+			remove_idea = MTS_fortress_churches
+			add_idea = MTS_storms_of_lead
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -3576,7 +3587,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_supportive_priestesshood"
-		#Idea here
+		add_ideas = MTS_supportive_role
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -3594,7 +3605,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_militant_priestesshood"
-		#Idea here
+		add_ideas = MTS_military_role
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -3737,7 +3748,18 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_utilize_prisoners"
-		#Slots here
+		15 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		16 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		1214 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		28 = {
+			add_extra_state_shared_building_slots = 1
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -3774,7 +3796,17 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_slimmed_populations"
-		#Effect here
+		every_state = {
+			limit = {
+				OR = {
+					is_claimed_by = BAL
+					is_core_of = BAL
+				}
+				is_owned_by = ROOT
+			}
+			add_core_of = ROOT
+			add_manpower = -25000
+		}
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -3827,6 +3859,7 @@ shared_focus = {
 	allow_branch = {
 		owns_state = 3
 		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+		has_completed_focus = MTS_last_torch
 	}
 	available = {
 		owns_state = 3
@@ -4098,7 +4131,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_theology_of_nothing"
-		#Idea here
+		add_ideas = MTS_teachings_of_nothing
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -4154,7 +4187,13 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_only_empress"
-		#Idea here
+		if = {
+			limit = { has_dlc = "La Resistance" }
+			add_ideas = MTS_solely_empress_lar
+		}
+		else = {
+			add_ideas = MTS_solely_empress
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -4175,7 +4214,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_faithful_to_end"
-		#Idea here
+		add_ideas = MTS_faithful_to_death
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -4216,7 +4255,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_zealous_to_last"
-		#Idea here
+		add_ideas = MTS_zealous_to_death
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -4238,7 +4277,7 @@ shared_focus = {
 		###After his proclamation, Scorched retires to his quarters, where he plans for the all-out destruction of any enemy of the Solar Empire and any that seek to soil their citizens with wealth and opulence; and he wishes that Luminous would have seen it his way, but he knows it's a lonesome road, and that the Empire will succeed under him anyway
 	}
 	
-	ai_will_do = { factor = 320 }
+	ai_will_do = { factor = 640 }
 }
 
 ###Warm Night###
@@ -7330,7 +7369,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_solarist_thestrals"
 		###Some thestral parents are appalled when their children return from their schools decrying some of their culture as thestrals, which signifies some of the harsh chastising that they received for their heritage from the schools they are required to go to
-		###+0.02 communism, -5% land night attack, +5% org
+		###+0.02 communism, +5% land night attack, -5% org
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7860,7 +7899,74 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_radical_reforms"
-		#Effect here
+		random_state = {
+			limit = {
+				is_owned_by = ROOT
+				arms_factory > 2
+			}
+			remove_building = {
+				type = arms_factory
+				level = 3
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+		}
+		random_state = {
+			limit = {
+				is_owned_by = ROOT
+				arms_factory > 1
+			}
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			limit = {
+				is_owned_by = ROOT
+				arms_factory > 1
+			}
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			limit = {
+				is_owned_by = ROOT
+				arms_factory > 0
+			}
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = ROOT
+				is_owned_by = ROOT
+			}
+			set_temp_variable = { MTS_state_prosperity_added = -5 }
+			MTS_add_state_prosperity = yes
+		}
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7999,7 +8105,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_innovate_protection"
-		#Idea here
+		add_ideas = MTS_innovative_defensive_designs
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8091,7 +8197,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_unhindered_exploitation"
-		#Idea here
+		add_ideas = MTS_unstoppable_exploitation
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8109,7 +8215,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_union_backbone"
-		#Idea here
+		add_ideas = MTS_union_grip
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8147,7 +8253,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_warriors_of_peace"
-		#Idea here
+		add_ideas = MTS_warriors_of_peace
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8165,7 +8271,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_all_opportunities"
-		#Idea here
+		add_ideas = MTS_everypony_volunteer
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8185,7 +8291,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeastern_economic_zone"
-		#Idea here
+		add_ideas = MTS_seez
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8206,7 +8312,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_war_of_competition"
-		#Idea here
+		add_ideas = MTS_competition_war
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8227,7 +8333,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_war_of_minds"
-		#Idea here
+		add_ideas = MTS_mind_war
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8247,7 +8353,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_harmonic_evangelists"
-		#Idea here
+		add_ideas = MTS_volunteers_of_harmony
 	}
 	
 	ai_will_do = { factor = 80 }
