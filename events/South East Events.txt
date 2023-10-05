@@ -37,19 +37,35 @@ country_event = {
 	}	
 }
 
-country_event = { #The Mingsplosion begins...
+country_event = { #Cobalt Hoof kicks the bucket, potentially ala Stalin in Death of Stalin
 	id = southeast.4
 	title = southeast.4.t
 	desc = southeast.4.d
 	is_triggered_only = yes
 	
-	option = { ###We'll get them back soon enough.
+	option = { #That can't bode well...
 		name = southeast.4.a
+		retire_character = BAL_cobalt_hoof
 		set_cosmetic_tag = BAL_new_red_front
-		#news_event = southeast_news.1 #Cobalt is dead! Nations secede!
-		STB = {
-			set_cosmetic_tag = STB_stable_republic
+		hidden_effect = {
+			country_event = {
+				id = southeast.5
+				days = 7
+				random_days = 7
+			}
 		}
+	}
+}
+
+country_event = { #The Mingsplosion begins...
+	id = southeast.5
+	title = southeast.5.t
+	desc = southeast.5.d
+	is_triggered_only = yes
+	
+	option = { ###We'll get them back soon enough.
+		name = southeast.5.a
+		#news_event = southeast_news.1 #Cobalt is dead! Nations secede!
 		SPF = {
 			transfer_state = 4
 			transfer_state = 1212
@@ -63,6 +79,7 @@ country_event = { #The Mingsplosion begins...
 			add_state_core = 1195
 			add_state_core = 1193
 			add_state_core = 1194
+			load_oob = "SPF_1048"
 		}
 		CLI = {
 			transfer_state = 6
@@ -76,24 +93,32 @@ country_event = { #The Mingsplosion begins...
 			add_state_core = 8
 			add_state_core = 9
 			add_state_core = 10
+			load_oob = "CLI_1048"
 		}
 		country_event = {
-			id = southeast.5
-			days = 10
+			id = southeast.6
+			days = 7
 			random_days = 5
 		}
 	}
 }
 
 country_event = { #Mingsplosion continues, with Lucky flipping the bird
-	id = southeast.5
-	title = southeast.5.t
-	desc = southeast.5.d
+	id = southeast.6
+	title = southeast.6.t
+	desc = southeast.6.d
 	is_triggered_only = yes
 	
 	option = { ###Maybe things are getting a bit hot...
-		name = southeast.5.a
+		name = southeast.6.a
+		delete_unit_template_and_units = {
+			division_template = "Stableside Worker Protectors"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Stableside Lucky Guard"
+		}
 		STB = {
+			set_cosmetic_tag = STB_stable_republic
 			transfer_state = 34
 			transfer_state = 15
 			transfer_state = 50
@@ -128,23 +153,30 @@ country_event = { #Mingsplosion continues, with Lucky flipping the bird
 			add_state_core = 353
 			add_state_core = 25
 			add_state_core = 79
+			load_oob = "STB_1048"
 		}
 		country_event = {
-			id = southeast.6
-			days = 20
-			random_days = 10
+			id = southeast.7
+			days = 15
+			random_days = 7
 		}
 	}
 }
 
 country_event = { #Bats do be EEEing, tho
-	id = southeast.6
-	title = southeast.6.t
-	desc = southeast.6.d
+	id = southeast.7
+	title = southeast.7.t
+	desc = southeast.7.d
 	is_triggered_only = yes
 	
 	option = { ###We helped them! They repay us like this?!
-		name = southeast.6.a
+		name = southeast.7.a
+		delete_unit_template_and_units = {
+			division_template = "Red Glory Jungle Guard"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Red Glory COBSOC Militia"
+		}
 		EEE = {
 			transfer_state = 31
 			transfer_state = 350
@@ -171,9 +203,10 @@ country_event = { #Bats do be EEEing, tho
 			add_state_core = 352
 			add_state_core = 24
 			add_state_core = 83
+			load_oob = "NEI_1048"
 		}
 		country_event = {
-			id = southeast.7
+			id = southeast.8
 			days = 7
 			random_days = 3
 		}
@@ -211,13 +244,13 @@ country_event = { #Bats do be EEEing, tho
 }
 
 country_event = { ###Mingsplosion completes with greedy bugs and crazy ultranats
-	id = southeast.7
-	title = southeast.7.t
-	desc = southeast.7.d
+	id = southeast.8
+	title = southeast.8.t
+	desc = southeast.8.d
 	is_triggered_only = yes
 	
 	option = { ###Please be the end...
-		name = southeast.7.a
+		name = southeast.8.a
 		#news_event = southeast_new.2 #The South-East implodes!
 		STB = {
 			drop_cosmetic_tag = yes
@@ -257,7 +290,9 @@ country_event = { ###Mingsplosion completes with greedy bugs and crazy ultranats
 			add_state_core = 353
 			add_state_core = 25
 			add_state_core = 79
+			load_oob = "NRP_1048"
 		}
+		country_lock_all_division_template = no
 	}
 }
 
