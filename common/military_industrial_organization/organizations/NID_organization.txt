@@ -1,0 +1,512 @@
+#####################
+
+###  ##  #  # # #  ## 
+ #  #  # ## # # # #   
+ #  #### # ## ##   #  
+ #  #  # #  # # #   # 
+ #  #  # #  # # # ## 
+
+ #################### 
+
+
+#####################
+
+ ## #  # ### ###   ## 
+#   #  #  #  #  # #   
+ #  ####  #  ###   #  
+  # #  #  #  #      # 
+##  #  # ### #    ##  
+ 
+#####################
+
+
+
+###########################
+
+###  #    ##  #  # ###  ## 
+#  # #   #  # ## # #   #   
+###  #   #### # ## ##   #  
+#    #   #  # #  # #     # 
+#    ### #  # #  # ### ##  
+
+###########################
+
+
+
+################################### 
+
+#   #  ##  ### ### ###  ### ### #   
+## ## #  #  #  #   #  #  #  #   #   
+# # # ####  #  ##  ###   #  ##  #   
+#   # #  #  #  #   #  #  #  #   #   
+#   # #  #  #  ### #  # ### ### ### 
+
+
+###################################
+
+nidhogg_organization = {
+    name =  nidhogg_arms_manufacturing
+    icon = GFX_idea_nidhogg_mio_icon
+    allowed = {
+        has_dlc = "Arms Against Tyranny"
+        OR = {
+            tag = NID
+        }
+    }
+    visible = {
+        OR = {
+            owner = {
+                tag = NID
+            }
+        }
+    }
+    available = {
+       	always = yes
+    }
+	research_bonus = 0.05
+	task_capacity = 3
+	tree_header_text = {
+		text = mio_header_low_cost
+		x = 1
+	}
+	tree_header_text = {
+		text = mio_header_general
+		x = 4
+	}
+	tree_header_text = {
+		text = mio_header_high_quality
+		x = 7
+	}
+    equipment_type = {
+       	infantry_equipment
+		support_equipment
+		magical_equipment
+    }
+	research_categories = {
+		infantry_weapons
+		support_tech
+	}
+    initial_trait = {
+        name = NID_highpower_rifles
+		limit_to_equipment_type = { infantry_equipment }
+        equipment_bonus = {
+			defense = -0.10
+			reliability_factor = -0.05
+			ap_attack = 0.10
+        }
+		production_bonus = {
+			production_cost_factor = 0.10
+		}
+    }
+	trait = {
+		token = NID_simplified_design
+		name = NID_simplified_design
+		icon = GFX_generic_mio_department_icon_infantry_line_efficiency
+		
+		position = { x = 1 y = 0 }
+		mutually_exclusive = { NID_bespoke_design }
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			reliability_factor = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.03
+		}
+	}
+	trait = {
+		token = NID_bespoke_design
+		name = NID_bespoke_design
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		
+		position = { x = 7 y = 0 }
+		mutually_exclusive = { NID_simplified_design }
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			soft_attack = 0.04
+			breakthrough = 0.02
+		}
+	}
+	trait = {
+		token = NID_interchangable_barrels
+		name = NID_interchangable_barrels
+		icon = GFX_generic_mio_department_icon_infantry_quality
+		
+		position = { x = 3 y = 1 }
+		any_parent = {
+			NID_bespoke_design
+			NID_simplified_design
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			defense = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+			production_conversion_speed_factor = 0.05
+		}
+	}
+	trait = {
+		token = NID_hybrid_grain_load
+		name = NID_hybrid_grain_load
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		
+		position = { x = 5 y = 1 }
+		any_parent = {
+			NID_bespoke_design
+			NID_simplified_design
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			hard_attack = 0.08
+		}
+	}
+	trait = {
+		token = NID_stamp_metal_parts
+		name = NID_stamp_metal_parts
+		icon = GFX_generic_mio_trait_icon_resources
+		
+		position = { x = 2 y = 1 }
+		any_parent = {
+			NID_simplified_design
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			reliability_factor = -0.01
+		}
+		production_bonus = {
+			production_cost_factor = -0.06
+		}
+	}
+	trait = {
+		token = NID_low_cost_magazines
+		name = NID_low_cost_magazines
+		icon = GFX_generic_mio_trait_icon_efficiency_cap
+		
+		position = { x = 0 y = 1 }
+		any_parent = {
+			NID_simplified_design
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			defense = 0.03
+		}
+		production_bonus = {
+			production_cost_factor = -0.03
+		}
+	}
+	trait = {
+		token = NID_delayed_recoil_mech
+		name = NID_delayed_recoil_mech
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		
+		position = { x = 6 y = 1 }
+		any_parent = {
+			NID_bespoke_design
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			soft_attack = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+	trait = {
+		token = NID_collapsable_stock
+		name = NID_collapsable_stock
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		
+		position = { x = 8 y = 1 }
+		any_parent = {
+			NID_bespoke_design
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			maximum_speed = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+	trait = {
+		token = NID_standardized_claw_trigger
+		name = NID_standardized_claw_trigger
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		
+		position = { x = 3 y = 2 }
+		any_parent = {
+			NID_interchangable_barrels
+			NID_hybrid_grain_load
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		on_complete = {
+			hidden_effect = {
+				NID = { add_ideas = NID_claw_trigger_guns }
+			}
+		}
+		
+		equipment_bonus = {
+			reliability_factor = 0.02
+			soft_attack = 0.02
+			suppression_factor = 0.05
+		}
+		organization_modifier = {
+			conscription_factor = -0.05
+		}
+	}
+	trait = {
+		token = NID_nutriyum_rations
+		name = NID_nutriyum_rations
+		icon = GFX_generic_mio_department_icon_support_materials
+		
+		position = { x = 5 y = 2 }
+		any_parent = {
+			NID_interchangable_barrels
+			NID_hybrid_grain_load
+		}
+		limit_to_equipment_type = { support_equipment }
+		
+		equipment_bonus = {
+			reliability_factor = -0.02
+		}
+		production_bonus = {
+			production_cost_factor = -0.08
+		}
+	}
+	trait = {
+		token = NID_state_industry_entanglement
+		name = NID_state_industry_entanglement
+		icon = GFX_generic_mio_department_icon_tank_general_production
+		
+		position = { x = 4 y = 2 }
+		any_parent = {
+			NID_interchangable_barrels
+			NID_hybrid_grain_load
+		}
+		special_trait_background = yes
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.03
+			military_industrial_organization_task_capacity = 2
+			military_industrial_organization_size_up_requirement = -0.15
+		}
+	}
+	trait = {
+		token = NID_consumer_grade_equipment
+		name = NID_consumer_grade_equipment
+		icon = GFX_generic_mio_department_icon_support_production
+		
+		position = { x = 1 y = 2 }
+		any_parent = {
+			NID_low_cost_magazines
+			NID_stamp_metal_parts
+		}
+		limit_to_equipment_type = { support_equipment }
+		
+		equipment_bonus = {
+			reliability_factor = -0.05
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.20
+			production_resource_penalty_factor = -0.10
+			production_efficiency_cap_factor = 0.10
+		}
+	}
+	trait = {
+		token = NID_automated_ammunition_production
+		name = NID_automated_ammunition_production
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		
+		position = { x = 0 y = 3 }
+		any_parent = {
+			NID_consumer_grade_equipment
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			defense = 0.05
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+	trait = {
+		token = NID_autark_production_lines
+		name = NID_autark_production_lines
+		icon = GFX_generic_mio_trait_icon_efficiency_cap
+		
+		position = { x = 2 y = 3 }
+		any_parent = {
+			NID_consumer_grade_equipment
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			reliability_factor = 0.02
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.10
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+	trait = {
+		token = NID_allweather_rifle
+		name = NID_allweather_rifle
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		
+		position = { x = 1 y = 4 }
+		all_parents = {
+			NID_autark_production_lines
+			NID_automated_ammunition_production
+		}
+		special_trait_background = yes
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			reliability_factor = 0.05
+			supply_consumption_factor = -0.10
+		}
+		production_bonus = {
+			production_cost_factor = -0.05
+			production_capacity_factor = 0.05
+		}
+	}
+	trait = {
+		token = NID_multi_ammo_loadouts
+		name = NID_multi_ammo_loadouts
+		icon = GFX_generic_mio_trait_icon_air_ground_attack
+		
+		position = { x = 7 y = 2 }
+		any_parent = {
+			NID_delayed_recoil_mech
+			NID_collapsable_stock
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			hard_attack = 0.05
+			breakthrough = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+	trait = {
+		token = NID_waterproof_support_equipment
+		name = NID_waterproof_support_equipment
+		icon = GFX_generic_mio_department_icon_support_production
+		
+		position = { x = 6 y = 3 }
+		any_parent = {
+			NID_multi_ammo_loadouts
+		}
+		limit_to_equipment_type = { support_equipment }
+		
+		equipment_bonus = {
+			reliability_factor = 0.08
+		}
+		production_bonus = {
+			production_cost_factor = 0.08
+		}
+	}
+	trait = {
+		token = NID_caseless_ammunition
+		name = NID_caseless_ammunition
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		
+		position = { x = 8 y = 3 }
+		any_parent = {
+			NID_multi_ammo_loadouts
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			reliability_factor = -0.01
+			soft_attack = 0.04
+			hard_attack = 0.04
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+	trait = {
+		token = NID_mki_carapace_armor
+		name = NID_mki_carapace_armor
+		icon = GFX_generic_mio_department_icon_tank_general_armor
+		
+		position = { x = 7 y = 4 }
+		all_parents = {
+			NID_caseless_ammunition
+			NID_waterproof_support_equipment
+		}
+		limit_to_equipment_type = { infantry_equipment magical_equipment}
+		
+		equipment_bonus = {
+			hardness = 50
+		}
+		production_bonus = {
+			production_cost_factor = 0.25
+		}
+	}
+	
+}
+
+NYC_arcanotech_organization = {
+    name =  nyc_arcanotech
+    icon = GFX_idea_NYC_arcanotech_mio_icon
+    allowed = {
+        has_dlc = "Arms Against Tyranny"
+        OR = {
+            tag = NID
+        }
+    }
+    visible = {
+        OR = {
+            owner = {
+                tag = NID
+            }
+        }
+    }
+    available = {
+       	always = yes
+    }
+	task_capacity = 1
+	tree_header_text = {
+		text = mio_header_low_cost
+		x = 1
+	}
+	tree_header_text = {
+		text = mio_header_general
+		x = 4
+	}
+	tree_header_text = {
+		text = mio_header_high_quality
+		x = 7
+	}
+    equipment_type = {
+		magical_equipment
+    }
+	research_categories = {
+		magical_equipment
+	}
+    initial_trait = {
+        name = NID_prototype_sparkgun
+		limit_to_equipment_type = { magical_equipment }
+        equipment_bonus = {
+			soft_attack = 0.10
+			hard_attack = 0.10
+			reliability_factor = -0.05
+        }
+		production_bonus = {
+			production_cost_factor = 0.25
+		}
+    }
+
+}
