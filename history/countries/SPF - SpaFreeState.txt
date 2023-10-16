@@ -62,7 +62,9 @@ if = {
 	}
 	set_technology = {
 		early_submarine = 1
-		basic_submarine = 1
+		early_destroyer = 1
+		early_light_cruiser = 1
+		early_heavy_cruiser = 1
 		transport = 1
 	}
 }
@@ -72,6 +74,7 @@ if = {
 	}
 	set_technology = {
 		early_ship_hull_light = 1
+		early_ship_hull_cruiser = 1
 		basic_depth_charges = 1
 		basic_torpedo = 1
 		early_ship_hull_submarine = 1
@@ -102,10 +105,8 @@ add_ideas = {
 	better_science_base
 	lack_of_scientists2
 	poverty2
-	#eqs_civil_war
-	#disrupted_communications
-	#BAL_economic_chaos
-	#BAL_military_disarray
+	extensive_conscription
+	outlaw_economy
 }
 
 set_stability = 0.40
@@ -121,4 +122,64 @@ set_rule = {
 	can_generate_female_aces = yes
 	can_generate_female_unit_leaders  = yes
 	can_generate_female_country_leaders = yes
+}
+
+if = {
+	limit = {
+		has_dlc = "Man the Guns"
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Corsair Class"
+		type = ship_hull_light_1
+		name_group = BAL_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = empty
+			mid_1_custom_slot = ship_anti_air_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Light Cruisers #
+	create_equipment_variant = {
+		name = "Privateer Class"
+		type = ship_hull_cruiser_1
+		name_group = BAL_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = empty
+			mid_1_custom_slot = ship_light_medium_battery_1
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Heavy Cruisers #
+	create_equipment_variant = {
+		name = "Golden Chest Class"
+		type = ship_hull_cruiser_1
+		name_group = BAL_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			fixed_ship_armor_slot = ship_armor_cruiser_1
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = ship_medium_battery_1
+		}
+	}
 }
