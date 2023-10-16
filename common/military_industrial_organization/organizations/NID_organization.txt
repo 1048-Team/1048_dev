@@ -479,16 +479,8 @@ NYC_arcanotech_organization = {
     }
 	task_capacity = 1
 	tree_header_text = {
-		text = mio_header_low_cost
-		x = 1
-	}
-	tree_header_text = {
-		text = mio_header_general
+		text = mio_header_Sparktech
 		x = 4
-	}
-	tree_header_text = {
-		text = mio_header_high_quality
-		x = 7
 	}
     equipment_type = {
 		magical_equipment
@@ -511,9 +503,9 @@ NYC_arcanotech_organization = {
 	trait = {
 		token = NID_sparks_instead_spellfire
 		name = NID_sparks_instead_spellfire
-		icon = GFX_generic_mio_department_icon_tank_general_armor
+		icon = GFX_generic_mio_department_icon_infantry_quality
 		
-		position = { x = 5 y = 0 }
+		position = { x = 4 y = 0 }
 
 		limit_to_equipment_type = { magical_equipment }
 		
@@ -521,5 +513,119 @@ NYC_arcanotech_organization = {
 			reliability_factor = 0.05
 		}
 	}
+	trait = {
+		token = NID_discharging_motes
+		name = NID_discharging_motes
+		icon = GFX_idea_magic_bullets_mio_icon
+		
+		position = { x = 4 y = 1 }
+		any_parent = {
+			NID_sparks_instead_spellfire
+		}
+
+		limit_to_equipment_type = { magical_equipment }
+		
+		equipment_bonus = {
+			soft_attack = 0.04
+		}
+	}
+	trait = {
+		token = NID_unstable_ammunition
+		name = NID_unstable_ammunition
+		icon = GFX_idea_magical_attack_mio_icon
+		
+		position = { x = 3 y = 2 }
+		any_parent = {
+			NID_discharging_motes
+		}
+		mutually_exclusive = {
+			NID_stabilized_ammunition
+		}
+
+		limit_to_equipment_type = { magical_equipment }
+		
+		equipment_bonus = {
+			hard_attack = 0.10
+			ap_attack = 0.10
+			reliability_factor = -0.02
+		}
+	}
+	trait = {
+		token = NID_stabilized_ammunition
+		name = NID_stabilized_ammunition
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		
+		position = { x = 5 y = 2 }
+		any_parent = {
+			NID_discharging_motes
+		}
+		mutually_exclusive = {
+			NID_unstable_ammunition
+		}
+
+		limit_to_equipment_type = { magical_equipment }
+		
+		equipment_bonus = {
+			reliability_factor = 0.05
+		}
+		production_bonus = {
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+	trait = {
+		token = NID_balefire_rounds
+		name = NID_balefire_rounds
+		icon = GFX_idea_balefire_rounds_mio_icon
+		
+		position = { x = 2 y = 3 }
+		any_parent = {
+			NID_unstable_ammunition
+			NID_stabilized_ammunition
+		}
+
+		limit_to_equipment_type = { magical_equipment }
+		
+		equipment_bonus = {
+			soft_attack = 0.08
+		}
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+	}
+	trait = {
+		token = NID_flashpoint_capacitors
+		name = NID_flashpoint_capacitors
+		icon = GFX_idea_big_explosion_mio_icon
+		
+		position = { x = 6 y = 3 }
+		any_parent = {
+			NID_unstable_ammunition
+			NID_stabilized_ammunition
+		}
+
+		limit_to_equipment_type = { magical_equipment }
+		
+		equipment_bonus = {
+			breakthrough = 0.06
+		}
+	}
+	trait = {
+		token = NID_cyclic_spell_cartriges
+		name = NID_cyclic_spell_cartriges
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		
+		position = { x = 4 y = 3 }
+		any_parent = {
+			NID_unstable_ammunition
+			NID_stabilized_ammunition
+		}
+
+		limit_to_equipment_type = { magical_equipment }
+		
+		equipment_bonus = {
+			reliability_factor = 0.05
+		}
+	}
+
 
 }
