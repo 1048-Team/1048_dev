@@ -245,7 +245,11 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_prt_crackdowns"
-
+		swap_ideas = {
+			remove_idea = NID_merc_prt_tensions
+			add_idea = NID_merc_prt_tensions2
+		}
+		country_event = gesellschaft.9
 	}
 }
 
@@ -270,7 +274,18 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_turn_blind_eye"
-
+		custom_effect_tooltip = NID_gain_2_domestic_investment_tt
+		country_event = gesellschaft.10
+		hidden_effect = {
+			add_to_variable = {
+				var = gain_quaterly
+				value = 2
+			}
+			add_to_variable = {
+				var = gain_total
+				value = 2
+			}
+		}
 	}
 }
 
@@ -286,12 +301,28 @@ shared_focus = {
 		focus = NID_prt_crackdowns
 		focus = NID_turn_blind_eye
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_20_mil_tt
+		}
+		check_variable = {
+			var = bank_million
+			value > 20.0
+		}
+	}
 	ai_will_do = {
 		factor = 1000
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_establish_sovereign_development_fund"
-
+		custom_effect_tooltip = NID_pay_20_mil_tt
+		custom_effect_tooltip = NID_unlock_decisions_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 20
+			}
+		}
 	}
 }
 
@@ -311,7 +342,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_mandatory_work_unemployed"
-
+		swap_ideas = {
+			remove_idea = poverty4
+			add_idea = poverty5
+		}
+		add_stability = -0.04
+		add_political_power = -100
 	}
 }
 
@@ -330,6 +366,8 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_modernize_the_handelsflotte"
+
+		activate_mission = NID_finish_fleet
 	}
 }
 
@@ -342,6 +380,9 @@ shared_focus = {
 	y = 2
 	prerequisite = {
 		focus = NID_modernize_the_handelsflotte
+	}
+	bypass = {
+		has_country_flag = NID_fleet_launched_flag
 	}
 	ai_will_do = {
 		factor = 100
@@ -361,6 +402,9 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_modernize_the_handelsflotte
 	}
+	bypass = {
+		has_country_flag = NID_fleet_launched_flag
+	}
 	ai_will_do = {
 		factor = 100
 	}
@@ -378,6 +422,9 @@ shared_focus = {
 	y = 2
 	prerequisite = {
 		focus = NID_modernize_the_handelsflotte
+	}
+	bypass = {
+		has_country_flag = NID_fleet_launched_flag
 	}
 	ai_will_do = {
 		factor = 100
@@ -433,6 +480,9 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_olenian_oil
 		focus = NID_increase_research_funds
+	}
+	available = {
+		has_country_flag = NID_fleet_launched_flag
 	}
 	ai_will_do = {
 		factor = 100
