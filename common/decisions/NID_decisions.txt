@@ -98,9 +98,217 @@ NID_debug_decisions_category = {
 				puppet = EEE
 				puppet = NRP
 				puppet = STB
+				set_cosmetic_tag = NID_hansestaat_cosm
 			}
 		}
 			
 	}
 	
+}
+
+NID_banking_decisions_category = {
+	NID_quaterly_income = {
+		icon = GFX_decision_unknown
+		### Never "complete" success
+		activation  = {
+			tag = NID
+			NOT = {has_country_flag = NID_no_money_collection}
+		}
+		available = {
+			always = no
+		}
+		priority = 10
+		allowed = {
+			tag = NID
+		}
+		days_mission_timeout = 90
+		fire_only_once = no
+		is_good = yes
+		###Add points to actual number
+		timeout_effect = {
+			custom_effect_tooltip = NID_quaterly_money_gain_tt
+				
+				###Add points of quaterly net
+				
+				add_to_variable = {
+					var = bank_million
+					value = gain_quaterly
+				}
+				add_to_variable = {
+					var = bank_million
+					value = gain_assets
+				}
+				add_to_variable = {
+					var = bank_million
+					value = gain_trade_deals
+				}
+		}
+		days_re_enable = 0
+		days_remove = 1
+	}
+	NID_social_security_payments = {
+		
+		visible = {
+			has_stability < 0.9
+		}
+		custom_cost_trigger = {
+			check_variable = { bank_million > 2 }
+		}
+		custom_cost_text = NID_bank_cost_2_mil_tt
+		available = {
+			has_stability < 0.9
+		}
+		
+		fire_only_once = no
+		days_re_enable = 50
+		complete_effect = {
+			add_stability = 0.02
+			hidden_effect = {
+				subtract_from_variable = {
+					var = bank_million
+					value = 2
+				}
+			}
+		}
+			
+	}
+
+}
+
+NID_trade_decisions_category = {
+	NID_Coltuba_deal = {
+		
+		visible = {
+			has_resources_rights = {
+				state = 741
+			}
+		}
+		available = {
+			has_country_flag = NID_allow_cancel_deal
+		}
+		is_good = no
+		ai_will_do = {
+			base = 0
+		}
+		
+		fire_only_once = yes
+		complete_effect = {
+			remove_resource_rights = 741
+			IF = {
+				limit = {
+					has_resources_rights = {
+						state = 762
+					}
+				}
+				remove_resource_rights = 762
+			}
+			ABY = { remove_ideas = ABY_buggy_trade }
+			custom_effect_tooltip = NID_gain_2_trade_deal_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = gain_trade_deals
+					value = 2
+				}
+				add_to_variable = {
+					var = gain_total
+					value = 2
+				}
+			}
+		}
+	}
+	NID_Granhalvoen_deal = {
+		
+		visible = {
+			has_resources_rights = {
+				state = 189
+			}
+		}
+		available = {
+			has_country_flag = NID_allow_cancel_deal
+		}
+		
+		fire_only_once = yes
+		ai_will_do = {
+			base = 0
+		}
+		complete_effect = {
+			remove_resource_rights = 189
+			OLE = { remove_ideas = NID_granhalvoen_resource_deal }
+			custom_effect_tooltip = NID_gain_2_trade_deal_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = gain_trade_deals
+					value = 2
+				}
+				add_to_variable = {
+					var = gain_total
+					value = 2
+				}
+			}
+		}
+			
+	}
+}
+
+NID_international_affairs_decisions_category = {
+	NID_cancel_international_recruitment = {
+		
+		visible = {
+			has_idea = NID_international_recruitment_idea
+		}
+		available = {
+			always = yes
+		}
+		
+		fire_only_once = no
+		ai_will_do = {
+			base = 0
+		}
+		days_re_enable = 92
+		complete_effect = {
+			remove_ideas = NID_international_recruitment_idea
+			custom_effect_tooltip = NID_gain_1_foreign_investment_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = gain_assets
+					value = 1
+				}
+				add_to_variable = {
+					var = gain_total
+					value = 1
+				}
+			}
+		}
+	}
+	NID_reenable_international_recruitment = {
+		
+		visible = {
+			NOT = {has_idea = NID_international_recruitment_idea}
+			#has_completed_focus = NID_international_recruitment
+		}
+		available = {
+			always = yes
+		}
+		
+		fire_only_once = no
+		ai_will_do = {
+			base = 10
+		}
+		days_re_enable = 92
+		complete_effect = {
+			add_ideas = NID_international_recruitment_idea
+			custom_effect_tooltip = NID_loose_1_foreign_investment_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					var = gain_assets
+					value = 1
+				}
+				subtract_from_variable = {
+					var = gain_total
+					value = 1
+				}
+			}
+		}
+	}
+
 }
