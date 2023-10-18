@@ -9,6 +9,9 @@ country_event = {
 	picture = GFX_event_solarempire 
 	
 	is_triggered_only = yes
+	immediate = {
+		NID_spawn_handelsflotte_subs = yes
+	}
 	
 	option = { 
 		name = gesellschaft.1.a
@@ -208,5 +211,399 @@ country_event = {
 	option = { 
 		name = gesellschaft.10.a
 		add_political_power = 10
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.04
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.11
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.1"}
+	title = gesellschaft.11.t
+	desc = gesellschaft.11.d
+	picture = GFX_event_solarempire 
+	
+	trigger = {
+		has_active_mission = NID_finish_fleet
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		days = 111
+	}
+	option = { 
+		name = gesellschaft.11.a
+		NID_improve_PRT = yes
+		add_days_mission_timeout = {
+			mission = NID_finish_fleet
+			days = 80
+		}
+	}
+	option = { 
+		name = gesellschaft.11.b
+		NID_improve_PRT = yes
+		custom_effect_tooltip = NID_bank_cost_3_mil_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 3
+			}
+		}
+	}
+	option = { 
+		name = gesellschaft.11.c
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.04
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.12
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.12"}
+	title = gesellschaft.12.t
+	desc = gesellschaft.12.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	hidden = yes
+	immediate = {
+		if = { 
+			limit = { has_dlc = "Man the Guns" }
+			create_equipment_variant = {
+				name = "Profit Class"
+				type = ship_hull_light_3
+				name_group = CHN_DD_HISTORICAL
+				parent_version = 0
+				allow_without_tech = yes
+				modules = {
+					fixed_ship_battery_slot = ship_light_battery_2
+					fixed_ship_anti_air_slot = ship_anti_air_2
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_sonar_2
+					fixed_ship_engine_slot = light_ship_engine_2
+					fixed_ship_torpedo_slot = ship_torpedo_2
+					front_1_custom_slot = ship_anti_air_2
+					mid_1_custom_slot = ship_depth_charge_3
+					rear_1_custom_slot = ship_mine_sweeper_1
+				}
+			}
+			create_equipment_variant = {
+				name = "Commerce Class"
+				type = ship_hull_cruiser_3
+				name_group = CHN_CL_HISTORICAL
+				parent_version = 0
+				allow_without_tech = yes
+				modules = {
+					fixed_ship_battery_slot = ship_medium_battery_2
+					fixed_ship_anti_air_slot = ship_anti_air_2
+					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
+					fixed_ship_radar_slot = ship_sonar_2
+					fixed_ship_engine_slot = light_ship_engine_3
+					fixed_ship_secondaries_slot = ship_secondaries_2
+					fixed_ship_armor_slot = ship_armor_cruiser_4
+					front_1_custom_slot = ship_medium_battery_2
+					mid_1_custom_slot = ship_airplane_launcher_2
+					mid_2_custom_slot = ship_secondaries_2
+					rear_1_custom_slot = ship_medium_battery_2
+					rear_2_custom_slot = empty
+				}
+			}
+		}
+		NID_spawn_handelsflotte_subs = yes
+		NID_spawn_handelsflotte_cruisers = yes
+		NID_spawn_handelsflotte_destroyers = yes
+	}
+	
+	option = { 
+		name = gesellschaft.12.a
+	}
+}
+
+country_event = {
+	id = gesellschaft.13
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.13"}
+	title = gesellschaft.13.t
+	desc = gesellschaft.13.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	fire_only_once = no
+	option = { 
+		name = gesellschaft.13.x
+		trigger = {
+			tag = CHN
+		}
+		ai_chance = {
+			base = 100
+		}
+		add_timed_idea = {
+			idea = NID_naval_treaty_CHN_idea
+			days = 150
+		}
+		NID = { country_event = gesellschaft.17 }
+	}
+	option = { 
+		name = gesellschaft.13.a
+		ai_chance = {
+			base = 50
+		}
+		add_timed_idea = {
+			idea = NID_naval_treaty_smol_idea
+			days = 150
+		}
+		NID = { country_event = gesellschaft.14 }
+	}
+	option = { 
+		name = gesellschaft.13.b
+		ai_chance = {
+			base = 20
+		}
+		add_timed_idea = {
+			idea = NID_naval_treaty_big_idea
+			days = 150
+		}
+		NID = { country_event = gesellschaft.15 }
+	}
+	option = { 
+		name = gesellschaft.13.c
+		ai_chance = {
+			base = 30
+		}
+		NID = { country_event = gesellschaft.16 }
+	}
+}
+
+country_event = {
+	id = gesellschaft.14
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.14"}
+	title = gesellschaft.14.t
+	desc = gesellschaft.14.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	fire_only_once = no
+	
+	option = { 
+		name = gesellschaft.14.a
+		custom_effect_tooltip = NID_bank_cost_2_mil_tt
+		custom_effect_tooltip = NID_gain_dockyard_1_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = free_foreign_dockyards
+				value = 1
+			}
+			subtract_from_variable = {
+				var = bank_million
+				value = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.15
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.15"}
+	title = gesellschaft.15.t
+	desc = gesellschaft.15.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	fire_only_once = no
+	
+	option = { 
+		name = gesellschaft.15.a
+		custom_effect_tooltip = NID_bank_cost_4_mil_tt
+		custom_effect_tooltip = NID_gain_dockyard_2_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = free_foreign_dockyards
+				value = 2
+			}
+			subtract_from_variable = {
+				var = bank_million
+				value = 4
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.16
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.16"}
+	title = gesellschaft.16.t
+	desc = gesellschaft.16.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = gesellschaft.16.a
+		
+	}
+}
+
+country_event = {
+	id = gesellschaft.17
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.17"}
+	title = gesellschaft.17.t
+	desc = gesellschaft.17.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = gesellschaft.17.a
+		custom_effect_tooltip = NID_bank_cost_6_mil_tt
+		custom_effect_tooltip = NID_gain_dockyard_5_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = free_foreign_dockyards
+				value = 5
+			}
+			subtract_from_variable = {
+				var = bank_million
+				value = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.18"}
+	title = gesellschaft.18.t
+	desc = gesellschaft.18.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = gesellschaft.18.a
+		ai_chance = {
+			base = 50
+		}
+		add_timed_idea = {
+			idea = NID_naval_treaty_TRD_idea
+			days = 150
+		}
+		NID = { country_event = gesellschaft.19 }
+	}
+	option = { 
+		name = gesellschaft.18.b
+		ai_chance = {
+			base = 30
+		}
+		add_timed_idea = {
+			idea = NID_naval_treaty_TRD_idea
+			days = 365
+		}
+		NID = { country_event = gesellschaft.20 }
+	}
+	option = { 
+		name = gesellschaft.18.c
+		ai_chance = {
+			base = 20
+		}
+		add_timed_idea = {
+			idea = NID_naval_treaty_TRD_idea
+			days = 700
+		}
+		NID = { country_event = gesellschaft.21 }
+	}
+	option = { 
+		name = gesellschaft.18.x
+		ai_chance = {
+			base = 0
+		}
+		
+	}
+}
+
+country_event = {
+	id = gesellschaft.19
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.19"}
+	title = gesellschaft.19.t
+	desc = gesellschaft.19.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = gesellschaft.19.a
+		custom_effect_tooltip = NID_pay_9_mil_tt
+		custom_effect_tooltip = NID_gain_smol_fleet_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = flotte_destroyers
+				value = 3
+			}
+			subtract_from_variable = {
+				var = bank_million
+				value = 9
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.20"}
+	title = gesellschaft.20.t
+	desc = gesellschaft.20.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = gesellschaft.20.a
+		custom_effect_tooltip = NID_pay_15_mil_tt
+		custom_effect_tooltip = NID_gain_medi_fleet_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = flotte_destroyers
+				value = 3
+			}
+			add_to_variable = {
+				var = flotte_cruisers
+				value = 1
+			}
+			subtract_from_variable = {
+				var = bank_million
+				value = 15
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gesellschaft.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.21"}
+	title = gesellschaft.21.t
+	desc = gesellschaft.21.d
+	picture = GFX_event_solarempire 
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = gesellschaft.21.a
+		custom_effect_tooltip = NID_pay_24_mil_tt
+		custom_effect_tooltip = NID_gain_biig_fleet_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = flotte_destroyers
+				value = 5
+			}
+			add_to_variable = {
+				var = flotte_cruisers
+				value = 2
+			}
+			subtract_from_variable = {
+				var = bank_million
+				value = 24
+			}
+		}
 	}
 }

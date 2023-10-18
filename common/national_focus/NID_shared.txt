@@ -11,6 +11,15 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_profit_calling"
 		country_event = gesellschaft.1
+		IF = {
+			limit = {
+				is_ai = yes
+			}
+			add_to_variable = {
+				var = gain_assets
+				value = 22
+			}
+		}
 	}
 }  
 
@@ -245,10 +254,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_prt_crackdowns"
-		swap_ideas = {
-			remove_idea = NID_merc_prt_tensions
-			add_idea = NID_merc_prt_tensions2
-		}
+		NID_improve_PRT = yes
 		country_event = gesellschaft.9
 	}
 }
@@ -366,7 +372,9 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_modernize_the_handelsflotte"
-
+		one_random_dockyard = yes
+		add_ideas = NID_fleet_building_idea
+		custom_effect_tooltip = NID_unlock_decisions_tt
 		activate_mission = NID_finish_fleet
 	}
 }
@@ -389,6 +397,11 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_north_zebrican_cooperation"
+		custom_effect_tooltip = NID_renting_dockyards_tt
+		CTH = { country_event = gesellschaft.13 }
+		BAT = { country_event = gesellschaft.13 }
+		ABY = { country_event = gesellschaft.13 }
+		EMR = { country_event = gesellschaft.13 }
 	}
 }
 
@@ -410,6 +423,11 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_hegemony_shipyards"
+		custom_effect_tooltip = NID_renting_dockyards_tt
+		CHN = { country_event = gesellschaft.13 }
+		OLE = { country_event = gesellschaft.13 }
+		NCA = { country_event = gesellschaft.13 }
+		CCA = { country_event = gesellschaft.13 }
 	}
 }
 
@@ -423,6 +441,15 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_modernize_the_handelsflotte
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_9_mil_tt
+		}
+		check_variable = {
+			var = bank_million
+			value > 9
+		}
+	}
 	bypass = {
 		has_country_flag = NID_fleet_launched_flag
 	}
@@ -431,6 +458,8 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_approach_neu_griffenheim"
+		custom_effect_tooltip = NID_buy_ships_tt
+		TRD = { country_event = gesellschaft.18 }
 	}
 }
 
@@ -489,5 +518,9 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_modern_navy_achieved"
+		swap_ideas = {
+			remove_idea = NID_fleet_building_idea
+			add_idea = NID_naval_expertise_idea
+		}
 	}
 }
