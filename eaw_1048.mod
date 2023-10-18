@@ -10,5 +10,5 @@ dependencies={
 }
 #replace_path = "events"
 
-supported_version="1.12.*"
+supported_version="1.13.*"
 path="mod/1048_dev/"

@@ -112,6 +112,122 @@ EQS_SOL_debug_category = {
 		}
 	}
 }
+EQS_SOL_launching_HMS_daybreak_category = {
+	EQS_SOL_the_launch = {
+		activation = {
+			hidden_trigger = {
+				OR = {
+					NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+					has_country_flag = EQS_CEL_utilizing_HMS_daybreak
+				}
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_fully_armed_and_operational_tt
+				has_country_flag = EQS_SOL_upgraded_as_can_be
+			}
+		}
+		selectable_mission = yes
+		days_mission_timeout = 480
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_fully_completed"
+			custom_effect_tooltip = EQS_SOL_launch_immediately_tt
+			hidden_effect = {
+				###Create ship as a specific effect, looking at how far along the ship is, and creating a design from there. Will probably be a long scripted effect. For now, just create a default design
+				if = {
+					limit = { check_variable = { EQS_SOL_secondaries_upgraded = 1 } }
+					create_equipment_variant = {
+						name = "Daybreak Class"
+						type = ship_hull_super_heavy_1
+						name_group = SOL_SHBB_HISTORICAL
+						modules = {
+							fixed_ship_battery_slot = ship_super_heavy_battery_1
+							fixed_ship_anti_air_slot = ship_anti_air_2
+							fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+							fixed_ship_radar_slot = empty
+							fixed_ship_engine_slot = heavy_ship_engine_2
+							fixed_ship_secondaries_slot = ship_secondaries_2
+							fixed_ship_armor_slot = ship_armor_shbb
+							front_1_custom_slot = empty
+							front_2_custom_slot = ship_super_heavy_battery_1
+							mid_1_custom_slot = empty
+							mid_2_custom_slot = ship_secondaries_2
+							mid_3_custom_slot = empty
+							rear_1_custom_slot = empty
+							rear_2_custom_slot = empty
+						}
+					}
+					create_ship = {
+						type = ship_hull_super_heavy_1
+						equipment_variant = "Daybreak Class"
+						creator = ROOT
+						name = "HMS Daybreak"
+					}
+				}
+				else = {
+					create_equipment_variant = {
+						name = "Daybreak Class"
+						type = ship_hull_super_heavy_1
+						name_group = SOL_SHBB_HISTORICAL
+						modules = {
+							fixed_ship_battery_slot = ship_super_heavy_battery_1
+							fixed_ship_anti_air_slot = ship_anti_air_2
+							fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+							fixed_ship_radar_slot = empty
+							fixed_ship_engine_slot = heavy_ship_engine_2
+							fixed_ship_secondaries_slot = ship_secondaries_1
+							fixed_ship_armor_slot = ship_armor_shbb
+							front_1_custom_slot = empty
+							front_2_custom_slot = ship_super_heavy_battery_1
+							mid_1_custom_slot = empty
+							mid_2_custom_slot = ship_secondaries_1
+							mid_3_custom_slot = empty
+							rear_1_custom_slot = empty
+							rear_2_custom_slot = empty
+						}
+					}
+					create_ship = {
+						type = ship_hull_super_heavy_1
+						equipment_variant = "Daybreak Class"
+						creator = ROOT
+						name = "HMS Daybreak"
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_ran_out_of_time"
+			custom_effect_tooltip = EQS_SOL_launch_required_tt
+			hidden_effect = {
+				###Same as above
+			}
+		}
+	}
+	EQS_SOL_recaliber_secondary_weapons = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_new_upgrades_tt
+				###Scripted trigger here to check for secondaries that can be upgraded
+			}
+		}
+		custom_cost_trigger = {
+			naval_xp > 9
+		}
+		custom_cost_text = EQS_SOL_custom_cost_text_tt
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_recaliber_secondary_weapons"
+			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
+			add_to_variable = {
+				EQS_SOL_secondaries_upgraded = 1
+			}
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 120
+			}
+		}
+	}
+}
 EQS_AUR_new_temple_construction_category = {
 	EQS_AUR_abandon_construction = {
 		available = {
