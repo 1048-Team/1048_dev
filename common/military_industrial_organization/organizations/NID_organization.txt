@@ -626,6 +626,349 @@ NYC_arcanotech_organization = {
 			reliability_factor = 0.05
 		}
 	}
+}
+
+aurelia_conglomerate_organization = {
+    name =  aurelia_comglomerate
+    icon = GFX_idea_aurelia_conglomerate_mio_icon
+    allowed = {
+        has_dlc = "Arms Against Tyranny"
+        OR = {
+            tag = NID
+        }
+    }
+    visible = {
+        OR = {
+            owner = {
+                tag = NID
+            }
+        }
+    }
+    available = {
+       	always = yes
+    }
+	task_capacity = 2
+	tree_header_text = {
+		text = mio_header_firepower
+		x = 4
+	}
+	tree_header_text = {
+		text = mio_header_production
+		x = 1
+	}
+	tree_header_text = {
+		text = mio_header_armor
+		x = 7
+	}
+    equipment_type = {
+		motorized_equipment
+		mechanized_equipment
+		armored_car_equipment
+		motorized_rocket_equipment
+    }
+	research_categories = {
+		motorized_equipment
+		mechanized_equipment
+		armored_car_equipment
+		motorized_rocket_equipment
+	}
+    initial_trait = {
+        name = NID_mio_civillian_interests
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.15
+			military_industrial_organization_design_team_assign_cost = 0.15
+			military_industrial_organization_design_team_change_cost = 0.15
+		}
+    }
+	trait = {
+		token = NID_mio_outsourced_contractors
+		name = NID_mio_outsourced_contractors
+		icon = GFX_generic_mio_department_icon_motorized_production
+		
+		position = { x=0 y=0 }
+		
+		mutually_exclusive = { NID_mio_inhourse_inspections }
+
+		limit_to_equipment_type = { motorized_equipment motorized_rocket_equipment armored_car_equipment}
+
+		equipment_bonus = {
+			reliability = -0.04
+			build_cost_ic = -0.06
+		}
+	}
+
+	trait = {
+		token = NID_mio_inhourse_inspections
+		name = NID_mio_inhourse_inspections
+		icon = GFX_generic_mio_trait_icon_reliability
+		
+		position = { x=2 y=0 }
+		relative_position_id = NID_mio_outsourced_contractors
+		
+		mutually_exclusive = { NID_mio_outsourced_contractors }
+
+		limit_to_equipment_type = { motorized_equipment motorized_rocket_equipment armored_car_equipment}
+
+		equipment_bonus = {
+			reliability = 0.04
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = -0.06
+		}
+	}
+
+	trait = {
+		token = NID_mio_civillian_expertise
+		name = NID_mio_civillian_expertise
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		
+		position = { x=1 y=2 }
+		relative_position_id = NID_mio_outsourced_contractors
+		
+		any_parent = { NID_mio_outsourced_contractors NID_mio_inhourse_inspections }
+
+		limit_to_equipment_type = { motorized_equipment motorized_rocket_equipment }
+		
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_task_capacity = 2
+			military_industrial_organization_size_up_requirement = -0.15
+		}
+	}
+
+	trait = {
+		token = NID_mio_standardized_engines
+		name = NID_mio_standardized_engines
+		icon = GFX_idea_engine_mio_icon
+		
+		position = { x=1 y=3 }
+		relative_position_id = NID_mio_outsourced_contractors
+		
+		any_parent = { NID_mio_civillian_expertise }
+		
+		production_bonus = {
+			production_cost_factor = -0.04
+		}
+		equipment_bonus = {
+			reliability = 0.02
+			maximum_speed = -0.04
+		}
+	}
+
+	trait = {
+		token = NID_mio_interchangable_components
+		name = NID_mio_interchangable_components
+		icon = GFX_generic_mio_trait_icon_resources
+		
+		position = { x=0 y=4 }
+		relative_position_id = NID_mio_outsourced_contractors
+		
+		any_parent = { NID_mio_civillian_expertise }
+		
+		production_bonus = {
+			production_cost_factor = 0.02
+			production_efficiency_cap_factor = 0.05
+		}
+		equipment_bonus = {
+			reliability_factor = 0.04
+		}
+	}
+
+	trait = {
+		token = NID_mio_included_backup_wheels
+		name = NID_mio_included_backup_wheels
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		
+		position = { x=2 y=4 }
+		relative_position_id = NID_mio_outsourced_contractors
+		
+		any_parent = { NID_mio_civillian_expertise }
+		
+		production_bonus = {
+			production_resource_need_factor = 0.05
+		}
+		equipment_bonus = {
+			supply_consumption_factor = -0.10
+			reliability_factor = 0.02
+		}
+	}
+	
 
 
+
+	trait = {
+		token = generic_mio_trait_medium_machinegun_mounts
+		name = generic_mio_trait_medium_machinegun_mounts
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		
+		position = { x=2 y=0 }
+		relative_position_id = NID_mio_inhourse_inspections
+
+		equipment_bonus = {
+			breakthrough = 0.03
+		}
+	}
+
+	trait = {
+		token = NID_mio_efficient_intakes
+		name = NID_mio_efficient_intakes
+		icon = GFX_idea_fuel_mio_icon
+		
+		position = { x=0 y=2 }
+		relative_position_id = generic_mio_trait_medium_machinegun_mounts
+
+		all_parents = { generic_mio_trait_medium_machinegun_mounts }
+
+		equipment_bonus = {
+			fuel_consumption_factor = -0.10
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_advanced_artillery_racks
+		name = generic_mio_trait_advanced_artillery_racks
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		
+		position = { x=-1 y=2 }
+		relative_position_id = NID_mio_efficient_intakes
+		
+		all_parents = { NID_mio_efficient_intakes }
+		
+		mutually_exclusive = { generic_mio_trait_heavy_machinegun_mount generic_mio_trait_mounted_light_anti_tank_gun }
+		
+		limit_to_equipment_type = { motorized_rocket_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			build_cost_ic = 0.06
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_heavy_machinegun_mount
+		name = generic_mio_trait_heavy_machinegun_mount
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		
+		position = { x=2 y=0 }
+		relative_position_id = generic_mio_trait_advanced_artillery_racks
+		
+		all_parents = { NID_mio_efficient_intakes }
+		
+		mutually_exclusive = { generic_mio_trait_advanced_artillery_racks generic_mio_trait_mounted_light_anti_tank_gun }
+		
+		limit_to_equipment_type = { mechanized_equipment motorized_equipment armored_car_equipment}
+		
+		equipment_bonus = {
+			breakthrough = 0.04
+			build_cost_ic = 0.01
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_mounted_light_anti_tank_gun #elephant gun
+		name = generic_mio_trait_mounted_light_anti_tank_gun
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		
+		position = { x=1 y=0 }
+		relative_position_id = generic_mio_trait_heavy_machinegun_mount
+		
+		mutually_exclusive = { generic_mio_trait_advanced_artillery_racks generic_mio_trait_heavy_machinegun_mount }
+		
+		all_parents = { generic_mio_trait_bulletproof_panels }
+		
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment}
+
+		equipment_bonus = {
+			ap_attack = 0.1
+			hard_attack = 0.02
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_open_chassi
+		name = generic_mio_trait_open_chassi
+		icon = GFX_generic_mio_department_icon_mechanized_production
+		
+		position = { x=2 y=0 }
+		relative_position_id = generic_mio_trait_medium_machinegun_mounts
+		
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment}
+		
+		mutually_exclusive = { generic_mio_trait_closed_chassi }
+
+		equipment_bonus = {
+			defense = -0.02
+			build_cost_ic = -0.03
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_closed_chassi
+		name = generic_mio_trait_closed_chassi
+		icon = GFX_generic_mio_department_icon_mechanized_hull
+		
+		position = { x=2 y=0 }
+		relative_position_id = generic_mio_trait_open_chassi
+		
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment}
+		
+		mutually_exclusive = { generic_mio_trait_open_chassi }
+
+		equipment_bonus = {
+			armor_value = 0.05
+		}
+	}
+
+
+	trait = {
+		token = generic_mio_trait_bulletproof_panels
+		name = generic_mio_trait_bulletproof_panels
+		icon = GFX_generic_mio_trait_icon_hardness
+		
+		position = { x=-1 y=2 }
+		relative_position_id = generic_mio_trait_closed_chassi
+		
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment}
+		
+		any_parent = { generic_mio_trait_closed_chassi generic_mio_trait_open_chassi }
+
+		equipment_bonus = {
+			hardness = 0.05
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_light_flame_projectors
+		name = generic_mio_trait_light_flame_projectors
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		
+		position = { x=0 y=2 }
+		relative_position_id = generic_mio_trait_bulletproof_panels
+		
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment}
+		
+		all_parents = { generic_mio_trait_bulletproof_panels }
+
+		equipment_bonus = {
+			breakthrough = 0.035
+		}
+	}
+
+	trait = {
+		token = generic_mio_trait_land_mine_racks
+		name = generic_mio_trait_land_mine_racks
+		icon = GFX_generic_mio_department_icon_mechanized_hull
+		
+		position = { x=1 y=0 }
+		relative_position_id = generic_mio_trait_light_flame_projectors
+		
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment}
+		
+		all_parents = { generic_mio_trait_bulletproof_panels }
+
+		equipment_bonus = {
+			defense = 0.06
+			maximum_speed = -0.02
+		}
+	}
 }
