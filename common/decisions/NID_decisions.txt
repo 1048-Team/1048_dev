@@ -403,6 +403,73 @@ NID_banking_decisions_category = {
 			}
 		}
 	}
+	NID_big_war_factory = {
+		
+		visible = {
+			has_completed_focus = NID_machine_of_war
+		}
+		custom_cost_trigger = {
+			check_variable = { bank_million > 8 }
+		}
+		custom_cost_text = NID_bank_cost_8_mil_tt
+		available = {
+			has_political_power > 9
+		}
+		
+		fire_only_once = no
+		ai_will_do = {
+			base = 100
+		}
+		days_remove = 80
+		days_re_enable = 200
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		complete_effect = {
+			add_political_power = -10
+			hidden_effect = {
+				subtract_from_variable = {
+					var = bank_million
+					value = 8
+				}
+			}
+		}
+		remove_effect = {
+			one_random_arms_factory = yes
+		}
+	}
+	NID_infrastructure_funding = {
+		
+		visible = {
+			has_completed_focus = NID_foreign_industrial_grants
+		}
+		custom_cost_trigger = {
+			check_variable = { bank_million > 2 }
+		}
+		custom_cost_text = NID_bank_cost_2_mil_tt
+		available = {
+			has_political_power > 9
+		}
+		
+		fire_only_once = no
+		ai_will_do = {
+			base = 100
+		}
+		days_remove = 50
+		days_re_enable = 100
+		complete_effect = {
+			add_political_power = -10
+			hidden_effect = {
+				subtract_from_variable = {
+					var = bank_million
+					value = 2
+				}
+			}
+		}
+		remove_effect = {
+			one_random_infrastructure = yes
+		}
+	}
 
 }
 
@@ -537,6 +604,50 @@ NID_international_affairs_decisions_category = {
 				subtract_from_variable = {
 					var = gain_total
 					value = 1
+				}
+			}
+		}
+	}
+	NID_sell_guns_1_dec = {
+		
+		visible = {
+			has_completed_focus = NID_machine_of_war
+		}
+		cost = 10
+		available = {
+			has_political_power > 9
+			has_equipment = {
+				infantry_equipment > 4999
+			}
+		}
+		
+		fire_only_once = no
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 100
+				has_equipment = {
+					infantry_equipment > 14999
+				}
+			}
+		}
+		days_remove = 30
+		days_re_enable = 60
+		modifier = {
+			production_factory_efficiency_gain_factor = -0.10
+		}
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5000
+			}
+		}
+		remove_effect = {
+			custom_effect_tooltip = NID_bank_gain_3_mil_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = bank_million
+					value = 3
 				}
 			}
 		}
