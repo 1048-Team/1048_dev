@@ -570,6 +570,9 @@ shared_focus = {
 	mutually_exclusive = {
 		focus = NID_industry_solves_all
 	}
+	available = {
+		has_completed_focus = NID_beg_vesalipolis_for_aid
+	}
 	ai_will_do = {
 		factor = 100
 	}
@@ -603,6 +606,9 @@ shared_focus = {
 
 	mutually_exclusive = {
 		focus = NID_full_militarization
+	}
+	available = {
+		has_completed_focus = NID_beg_vesalipolis_for_aid
 	}
 	ai_will_do = {
 		factor = 100
@@ -1091,6 +1097,15 @@ shared_focus = {
 	x = 3
 	y = 4
 
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_7p5_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 7.50
+			}
+		}
+	}
 	prerequisite = {
 		focus = NID_found_flussburg
 	}
@@ -1099,7 +1114,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_credits_in_every_pocket"
-		
+		NID_improve_rebellion = yes
 	}
 }
 
@@ -1146,7 +1161,46 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_military_industrial_symbiosis"
-		
+		IF = {
+			limit = {
+				has_idea = low_economic_mobilisation
+			}
+			swap_ideas = {
+				remove_idea = low_economic_mobilisation
+				add_idea = fluid_wartime_economy
+			}
+			custom_effect_tooltip = NID_loose_2_domestic_investment_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					var = gain_quaterly
+					value = 2
+				}
+				subtract_from_variable = {
+					var = gain_total
+					value = 2
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = partial_economic_mobilisation
+			}
+			swap_ideas = {
+				remove_idea = partial_economic_mobilisation
+				add_idea = fluid_wartime_economy
+			}
+			custom_effect_tooltip = NID_gain_2_domestic_investment_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = gain_quaterly
+					value = 2
+				}
+				add_to_variable = {
+					var = gain_total
+					value = 2
+				}
+			}
+		}
 	}
 }
 
@@ -1160,9 +1214,13 @@ shared_focus = {
 	ai_will_do = {
 		factor = 100
 	}
+	available = {
+		has_completed_focus = NID_beg_vesalipolis_for_aid
+	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_hold_our_ground"
-		
+		add_ideas = NID_complete_defense_idea
+		custom_effect_tooltip = NID_cancel_on_stableside_tt
 	}
 }
 
@@ -1182,7 +1240,31 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_call_to_changeling_veterans"
-		
+		CHN = { country_event = gesellschaft.29 }
+		division_template = {
+			name = "Changeling Volunteers"
+			is_locked = no
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+		}
+		division_template = {
+			name = "Changeling Veterans"
+			is_locked = no
+				regiments = {
+					jager = { x = 0 y = 0 }
+					jager = { x = 0 y = 1 }
+					jager = { x = 0 y = 3 }
+					jager = { x = 1 y = 0 }
+					jager = { x = 1 y = 1 }
+				}
+				support = {
+					infiltrator_company = { x = 0 y = 0 }
+				}
+		}
 	}
 }
 
@@ -1202,7 +1284,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_call_the_prt_to_order"
-		
+		swap_ideas = {
+			remove_idea = NID_panicked_army_1_idea
+			add_idea = NID_panicked_army_2_idea
+		}
 	}
 }
 
@@ -1222,7 +1307,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_purchase_foreign_arms"
-		
+		custom_effect_tooltip = NID_unlock_decisions_tt
 	}
 }
 
@@ -1242,7 +1327,39 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_national_armed_forces"
-		
+		division_template = {
+			name = "Jungle Militias"
+			is_locked = no
+				regiments = {
+					irregular_infantry = { x = 0 y = 0 }
+					irregular_infantry = { x = 0 y = 1 }
+					irregular_infantry = { x = 0 y = 3 }
+					irregular_infantry = { x = 1 y = 0 }
+					irregular_infantry = { x = 1 y = 1 }
+				}
+		}
+		351 = {
+			create_unit = {
+				division = "name = \"Portland Pony Rifles\" division_template = \"Jungle Militias\" start_experience_factor = 0.10 start_equipment_factor = 0.8"
+				owner = ROOT
+			}
+			create_unit = {
+				division = "name = \"Azure Freerifles\" division_template = \"Jungle Militias\" start_experience_factor = 0.10 start_equipment_factor = 0.8"
+				owner = ROOT
+			}
+		}
+		1213 = {
+			create_unit = {
+				division = "name = \"Acama Volunteer Corps\" division_template = \"Jungle Militias\" start_experience_factor = 0.10 start_equipment_factor = 0.8"
+				owner = ROOT
+			}
+		}
+		52 = {
+			create_unit = {
+				division = "name = \"Rangers of the Green\" division_template = \"Jungle Militias\" start_experience_factor = 0.10 start_equipment_factor = 0.8"
+				owner = ROOT
+			}
+		}
 	}
 }
 
@@ -1262,7 +1379,10 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_introduce_conscription"
-		
+		swap_ideas = {
+			remove_idea = volunteer_only
+			add_idea = limited_conscription
+		}
 	}
 }
 
@@ -1288,7 +1408,37 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_prepared_to_face_foe"
-		
+		remove_ideas = NID_panicked_army_2_idea
+		IF = {
+			limit = {
+				has_idea = NID_merc_prt_tensions
+			}
+			custom_effect_tooltip = NID_costs_more_not_mercs_tt
+			swap_ideas = {
+				remove_idea = NID_merc_prt_tensions
+				add_idea = NID_merc_prt_tensions4
+			}
+			add_political_power = -200
+			add_stability = -0.06
+		}
+		else_if = {
+			limit = {
+				has_idea = NID_merc_prt_tensions2
+			}
+			custom_effect_tooltip = NID_costs_more_not_mercs_tt
+			swap_ideas = {
+				remove_idea = NID_merc_prt_tensions2
+				add_idea = NID_merc_prt_tensions4
+			}
+			add_political_power = -100
+			add_stability = -0.03
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = NID_merc_prt_tensions3
+				add_idea = NID_merc_prt_tensions4
+			}
+		}
 	}
 }
 
@@ -1305,7 +1455,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_beg_vesalipolis_for_aid"
-		
+		CHN = { country_event = gesellschaft.32 }
 	}
 }
 
@@ -1320,12 +1470,43 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_beg_vesalipolis_for_aid
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_hire_silver_claws"
-		
+		custom_effect_tooltip = NID_pay_5_mil_tt
+		custom_effect_tooltip = NID_spawn_eingriffstruppe_tt
+		division_template = {
+			name = "Schnelle Eingriffstruppe"
+			is_locked = no
+				regiments = {
+					motorized = { x = 0 y = 0 }
+					motorized = { x = 0 y = 1 }
+					motorized = { x = 0 y = 3 }
+					motorized = { x = 1 y = 0 }
+					motorized = { x = 1 y = 1 }
+				}
+				support = {
+					mot_recon = { x = 0 y = 0 }
+					artillery_brigade = { x = 0 y = 1 }
+				}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Portland Pony Rifles\" division_template = \"Jungle Militias\" start_experience_factor = 0.10 start_equipment_factor = 0.8"
+				owner = ROOT
+			}
+			create_unit = {
+				division = "name = \"Azure Freerifles\" division_template = \"Jungle Militias\" start_experience_factor = 0.10 start_equipment_factor = 0.8"
+				owner = ROOT
+			}
+		}
 	}
 }
 
@@ -1345,7 +1526,26 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_fortify_new_yukka"
-		
+		capital_scope = {
+			add_building_construction = {
+				type = bunker
+				level = 4
+				province = 177
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 4
+				province = 177
+			}
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+			}
+			add_building_construction = {
+				type = radar_station
+				level = 1
+			}
+		}
 	}
 }
 
@@ -1365,11 +1565,11 @@ shared_focus = {
 		focus = NID_fortify_new_yukka
 	}
 	ai_will_do = {
-		factor = 100
+		factor = 80
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_warplan_emerald"
-		
+		add_ideas = NID_continental_strategy_idea
 	}
 }
 
@@ -1393,7 +1593,7 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_warplan_saphire"
-		
+		add_ideas = NID_maritime_strategy_idea
 	}
 }
 
@@ -1413,7 +1613,37 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_verdant_line_defenses"
-		
+		custom_effect_tooltip = NID_fortify_verdantia_tt
+		351 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
+		1213 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
+		52 = {
+			add_building_construction = {
+				type = bunker
+				level = 1
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
 	}
 }
 
@@ -1433,7 +1663,27 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_frontfacing_infrastructure"
-		
+		1213 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+			}
+		}
+		52 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+			}
+			add_building_construction = {
+				type = supply_node
+				level = 1
+				province = 9964
+			}
+		}
+		build_railway = {
+			path = { 9964 989 4116 4150 11923 7132 9960 }
+			level = 1
+		}
 	}
 }
 
@@ -1448,12 +1698,79 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_warplan_saphire
 	}
+	bypass = {
+		SPF = { exists = no }
+		CLI = { exists = no }
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_6_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 6
+			}
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_pay_off_collaborators"
-		
+		IF = {
+			limit = {
+				SPF = { exists = yes }
+				CLI = { exists = yes }
+			}
+			custom_effect_tooltip = NID_pay_6_mil_tt
+			add_collaboration = {
+				target = SPF
+				value = 0.25
+			}
+			add_collaboration = {
+				target = CLI
+				value = 0.25
+			}
+			hidden_effect = {
+				subtract_from_variable = {
+					var = bank_million
+					value = 6
+				}
+			}
+		} 
+		else_if = {
+			limit = { 
+				SPF = { exists = no }
+				CLI = { exists = yes }
+			}
+			custom_effect_tooltip = NID_pay_3_mil_tt
+			add_collaboration = {
+				target = CLI
+				value = 0.25
+			}
+			hidden_effect = {
+				subtract_from_variable = {
+					var = bank_million
+					value = 3
+				}
+			}
+		}
+		else_if = {
+			limit = { 
+				SPF = { exists = yes }
+				CLI = { exists = no }
+			}
+			custom_effect_tooltip = NID_pay_3_mil_tt
+			add_collaboration = {
+				target = SPF
+				value = 0.25
+			}
+			hidden_effect = {
+				subtract_from_variable = {
+					var = bank_million
+					value = 3
+				}
+			}
+		}
 	}
 }
 
@@ -1473,7 +1790,46 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_found_the_nyc_marine_corps"
-		
+		IF = {
+			limit = {
+				NOT = { has_tech = marines }
+			}
+			set_technology = {
+				marines = 1
+			}
+		}
+		ELSE = {
+			add_tech_bonus = {
+				name = marine_tech
+				bonus = 0.3
+				uses = 2
+				category = marine_tech
+			}
+		}
+		division_template = {
+			name = "Süd-Ost Marineinfanterie"
+			is_locked = no
+				regiments = {
+					marine_commando = { x = 0 y = 0 }
+					marine_commando = { x = 0 y = 1 }
+					marine_commando = { x = 1 y = 0 }
+					marine_commando = { x = 1 y = 1 }
+					marine_commando = { x = 0 y = 2 }
+					marine_commando = { x = 0 y = 3 }
+					marine_commando = { x = 1 y = 2 }
+					marine_commando = { x = 1 y = 3 }
+				}
+				support = {
+					artillery_brigade = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+				}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"NYC Marineinfanterie Division\" division_template = \"Süd-Ost Marineinfanterie\" start_experience_factor = 0.5 start_equipment_factor = 0.95"
+				owner = ROOT
+			}
+		}
 	}
 }
 
@@ -1520,7 +1876,16 @@ shared_focus = {
 	will_lead_to_war_with = NRP
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_into_the_continent"
-		
+		every_state = {
+			limit = {
+				is_core_of = NRP
+			}
+			add_claim_by = NID
+		}
+		create_wargoal = {
+			target = NRP
+			type = annex_everything
+		}
 	}
 }
 
@@ -1541,7 +1906,16 @@ shared_focus = {
 	will_lead_to_war_with = CLI
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_support_own_dragonlord"
-		
+		every_state = {
+			limit = {
+				is_core_of = CLI
+			}
+			add_claim_by = NID
+		}
+		create_wargoal = {
+			target = CLI
+			type = annex_everything
+		}
 	}
 }
 
@@ -1562,7 +1936,16 @@ shared_focus = {
 	will_lead_to_war_with = SPF
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_end_of_libertalia"
-		
+		every_state = {
+			limit = {
+				is_core_of = SPF
+			}
+			add_claim_by = NID
+		}
+		create_wargoal = {
+			target = SPF
+			type = annex_everything
+		}
 	}
 }
 
@@ -1575,7 +1958,12 @@ shared_focus = {
 	y = 5
 
 	available = {
-		controls_state = 79
+		OR = {
+			controls_state = 79
+			any_subject_country = {
+				controls_state = 79
+			}
+		}
 	}
 	prerequisite = {
 		focus = NID_into_the_continent
@@ -1585,7 +1973,26 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_yolkachimalli_relocation"
-		
+		79 = {
+			remove_building = {
+				type = industrial_complex
+				level = 2
+			}
+			add_manpower = -200000
+		}
+		351 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		capital_scope = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+			}
+			add_manpower = 200000
+		}
 	}
 }
 
@@ -1611,7 +2018,17 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_give_prt_temp_autonomy"
-		
+		every_owned_state = {
+			limit = {
+				is_core_of = NRP
+			}
+			transfer_state_to = NRP
+		}
+		NRP = {
+			set_cosmetic_tag = NRP_occupation_zone_cosm
+			set_capital = { state = 32 }
+		}
+		puppet = NRP
 	}
 }
 
@@ -1626,12 +2043,20 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_into_the_continent
 	}
+	bypass = {
+		OR = {
+			owns_state = 1214
+			any_subject_country = {
+				owns_state = 1214
+			}
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_tribal_interpreters"
-		
+		add_ideas = NID_interpreters_idea
 	}
 }
 
@@ -1655,7 +2080,13 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_break_the_peasants"
-		
+		every_owned_state = {
+			limit = {
+				is_core_of = CLI
+			}
+			add_compliance = 25
+			add_resistance = -10
+		}
 	}
 }
 
@@ -1708,7 +2139,17 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_profitable_islands"
-		
+		custom_effect_tooltip = NID_gain_3_domestic_investment_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = gain_quaterly
+				value = 3
+			}
+			add_to_variable = {
+				var = gain_total
+				value = 3
+			}
+		}
 	}
 }
 
@@ -1734,7 +2175,16 @@ shared_focus = {
 	will_lead_to_war_with = STB
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_topple_the_arch_kingdom"
-		
+		every_state = {
+			limit = {
+				is_core_of = STB
+			}
+			add_claim_by = NID
+		}
+		create_wargoal = {
+			target = STB
+			type = annex_everything
+		}
 	}
 }
 
@@ -1748,6 +2198,13 @@ shared_focus = {
 
 	available = {
 		has_war_with = STB
+		custom_trigger_tooltip = {
+			tooltip = NID_has_4_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 4
+			}
+		}
 	}
 	bypass = {
 		STB = { exists = no }
@@ -1755,12 +2212,20 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_topple_the_arch_kingdom
 	}
+	cancel_if_invalid = yes
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_bribe_officers"
-		
+		add_ideas = NID_inside_spies_idea
+		custom_effect_tooltip = NID_pay_4_mil_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 4
+			}
+		}
 	}
 }
 
@@ -1784,7 +2249,18 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_establish_stableside_administration"
-		
+		#event where changelings explore the palace of the Arch-king
+		every_owned_state = {
+			limit = {
+				is_core_of = STB
+			}
+			transfer_state_to = STB
+		}
+		STB = {
+			set_cosmetic_tag = STB_occupation_zone_cosm
+			set_capital = { state = 15 }
+		}
+		puppet = STB
 		IF = {
 			limit = {
 				NOT = { has_completed_focus = NID_warplan_saphire }
@@ -1862,7 +2338,37 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_split_caballan_unity"
-		
+		#event for angry caballans
+		1193 = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_manpower = -1200000
+		}
+		add_offsite_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_offsite_building = {
+			type = arms_factory
+			level = 1
+		}
+		capital_scope = {
+			add_manpower = 1000000
+		}
+		1213 = {
+			add_manpower = 200000
+			add_victory_points = {
+				province = 6555
+				value = 2
+			}
+			set_state_name = "Neu-Caballo"
+		}
 		remove_ideas = NID_piracy_blues_2_idea
 	}
 }
