@@ -112,6 +112,90 @@ EQS_SOL_debug_category = {
 		}
 	}
 }
+EQS_SOL_launching_HMS_daybreak_category = {
+	EQS_SOL_the_launch = {
+		activation = {
+			hidden_trigger = {
+				OR = {
+					NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+					has_country_flag = EQS_CEL_utilizing_HMS_daybreak
+				}
+			}
+		}
+		available = {
+			OR = {
+				is_debug = yes
+				custom_trigger_tooltip = {
+					tooltip = EQS_SOL_fully_armed_and_operational_tt
+					has_country_flag = EQS_SOL_upgraded_as_can_be
+				}
+			}
+		}
+		selectable_mission = yes
+		priority = 10
+		days_mission_timeout = 480
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_fully_completed"
+			custom_effect_tooltip = EQS_SOL_launch_immediately_tt
+			hidden_effect = {
+				###Create ship as a specific effect, looking at how far along the ship is, and creating a design from there. Will probably be a long scripted effect. For now, just create a default design
+				EQS_create_daybreak = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_ran_out_of_time"
+			custom_effect_tooltip = EQS_SOL_launch_required_tt
+			hidden_effect = {
+				###Same as above
+			}
+		}
+	}
+	EQS_SOL_recaliber_secondary_weapons = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_new_upgrades_tt
+				###Scripted trigger here to check for secondaries that can be upgraded
+			}
+		}
+		custom_cost_trigger = {
+			naval_xp > 9
+		}
+		custom_cost_text = EQS_SOL_custom_cost_text_tt
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_recaliber_secondary_weapons"
+			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
+			add_to_variable = {
+				EQS_SOL_secondaries_upgraded = 1
+			}
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 120
+			}
+		}
+	}
+	EQS_SOL_retrofit_aa_weapons = {
+		available = {
+			custom_trigger_tooltip  {
+				tooltip = EQS_SOL_new_upgrades_tt
+			}
+		}
+		custom_cost_trigger = {
+			naval_xp > 9
+		}
+		custom_cost_text = EQS_SOL_custom_cost_text_tt
+		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
+			add_to_variable = {
+				EQS_SOL_aa_upgraded = 1
+			}
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 90
+			}
+		}
+	}
+}
 EQS_AUR_new_temple_construction_category = {
 	EQS_AUR_abandon_construction = {
 		available = {
