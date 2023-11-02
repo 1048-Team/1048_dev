@@ -85,13 +85,11 @@ SOL_sanctum_infernal_corps = {
 		mutually_exclusive = { SOL_simplified_alloys }
 		
 		equipment_bonus = {
-			armor_value = 0.03
-			defense = 0.01
+			armor_value = 0.05
+			defense = 0.03
+			reliability = -0.05
 		}
 		
-		production_bonus = {
-			production_cost_factor = 0.03
-		}
 	}
 	
 	trait = {
@@ -458,15 +456,305 @@ EQS_SOL_apparatus_mechanicus_organization = {
 		}
 	}
 	
+	tree_header_text = {
+		text = mio_header_production
+		x = 1
+	}
+	
+	tree_header_text = {
+		text = EQS_mio_header_armor_and_systems
+		x = 5
+	}
+	
+	tree_header_text = {
+		text = mio_header_weapons
+		x = 9
+	}
+	
 	initial_trait = {
 		equipment_bonus = {
 			hg_armor_piercing = 0.05
 			hg_attack = 0.05
 		}
-		military_industrial_organization_research_bonus = 0.05
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_prefabricated_compartments
+		name = SOL_prefabricated_compartments
+		
+		position = { x = 1 y = 0 }
+		
+		production_bonus = {
+			production_capacity_factor = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_unimportant_material_replacements
+		name = SOL_unimportant_material_replacements
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_prefabricated_compartments
+		
+		any_parent = { SOL_prefabricated_compartments }
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+			production_capacity_factor = 0.02
+		}
+	}
+	
+	trait = {
+		token = SOL_miniaturized_weld_points
+		name = SOL_miniaturized_weld_points
+		
+		position = { x = -1 y = 1 }
+		relative_position_id = SOL_unimportant_material_replacements
+		
+		mutually_exclusive = { SOL_coordinated_material_providers }
+		any_parent = { SOL_unimportant_material_replacements }
+		
+		equipment_bonus = {
+			reliability = 0.02
+		}
+		production_bonus = {
+			production_capacity_factor = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_coordinated_material_providers
+		name = SOL_coordinated_material_providers
+		
+		position = { x = 1 y = 1 }
+		relative_position_id = SOL_unimportant_material_replacements
+		
+		mutually_exclusive = { SOL_miniaturized_weld_points }
+		any_parent = { SOL_unimportant_material_replacements }
+		
+		production_bonus = {
+			production_resource_penalty_factor = -0.1
+		}
+	}
+
+	trait = {
+		token = SOL_pressurized_fuel_tanks
+		name = SOL_pressurized_fuel_tanks
+		
+		position = { x = 2 y = 1 }
+		relative_position_id = SOL_prefabricated_compartments
+		
+		any_parent = { SOL_prefabricated_compartments SOL_titanium_reinforcement_joints }
+		equipment_bonus = {
+			naval_range = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_crystal_energized_fuel_injectors
+		name = SOL_crystal_energized_fuel_injectors
+		
+		position = { x = 0 y = 2 }
+		relative_position_id = SOL_pressurized_fuel_tanks
+		
+		any_parent = { SOL_pressurized_fuel_tanks }
+		equipment_bonus = {
+			maximum_speed = 0.1
+			fuel_consumption = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_titanium_reinforcement_joints
+		name = SOL_titanium_reinforcement_joints
+		
+		position = { x = 5 y = 0 }
+		
+		equipment_bonus = {
+			max_strength = 0.05
+		}
+		
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+	
+	trait = {
+		token = SOL_internally_sloped_armor
+		name = SOL_internally_sloped_armor
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_titanium_reinforcement_joints
+		
+		any_parent = { SOL_titanium_reinforcement_joints }
+		equipment_bonus = {
+			armor_value = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+	
+	trait = {
+		token = SOL_non_toxic_fire_retardants
+		name = SOL_non_toxic_fire_retardants
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_internally_sloped_armor
+		
+		any_parent = { SOL_internally_sloped_armor }
+		equipment_bonus = {
+			reliability = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_magic_bonded_armor_plates
+		name = SOL_magic_bonded_armor_plates
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_non_toxic_fire_retardants
+		
+		mutually_exclusive = { SOL_broadside_mechanisms }
+		any_parent = { SOL_non_toxic_fire_retardants }
+		
+		equipment_bonus = {
+			armor_value = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+	
+	trait = {
+		token = SOL_scout_helicopters
+		name = SOL_scout_helicopters
+		
+		position = { x = 2 y = 1 }
+		relative_position_id = SOL_titanium_reinforcement_joints
+		
+		any_parent = { SOL_titanium_reinforcement_joints SOL_central_linked_aa_batteries }
+		equipment_bonus = {
+			surface_detection = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_first_gen_spotting_drones
+		name = SOL_first_gen_spotting_drones
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_scout_helicopters
+		
+		any_parent = { SOL_scout_helicopters }
+		equipment_bonus = {
+			surface_detection = 0.05
+			sub_detection = 0.03
+		}
+	}
+	
+	trait = {
+		token = SOL_central_linked_aa_batteries
+		name = SOL_central_linked_aa_batteries
+		
+		position = { x = 9 y = 0 }
+		
+		equipment_bonus = {
+			anti_air_attack = 0.1
+		}
+	}
+	
+	trait = {
+		token = SOL_dual_matrix_tracking
+		name = SOL_dual_matrix_tracking
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_central_linked_aa_batteries
+		
+		any_parent = { SOL_central_linked_aa_batteries }
+		equipment_bonus = {
+			lg_attack = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_fully_automatic_cannon_feed
+		name = SOL_fully_automatic_cannon_feed
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_dual_matrix_tracking
+		
+		any_parent = { SOL_dual_matrix_tracking }
+		equipment_bonus = {
+			lg_armor_piercing = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_broadside_mechanisms
+		name = SOL_broadside_mechanisms
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_fully_automatic_cannon_feed
+		
+		mutually_exclusive = { SOL_magic_bonded_armor_plates }
+		any_parent = { SOL_fully_automatic_cannon_feed }
+		
+		equipment_bonus = {
+			hg_attack = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+	
+	trait = {
+		token = SOL_all_or_nothing_matrix_scheme
+		name = SOL_all_or_nothing_matrix_scheme
+		
+		position = { x = 1 y = 1 }
+		relative_position_id = SOL_crystal_energized_fuel_injectors
+		
+		mutually_exclusive = { SOL_magic_spun_propellants SOL_crystal_tipped_shells }
+		all_parents = { SOL_crystal_energized_fuel_injectors SOL_magic_bonded_armor_plates }
+		equipment_bonus = {
+			max_strength = 0.03
+			armor_value = 0.05
+		}
+	}
+	
+	trait = {
+		token = SOL_magic_spun_propellants
+		name = SOL_magic_spun_propellants
+		
+		position = { x = 2 y = 1 }
+		relative_position_id = SOL_magic_bonded_armor_plates
+		
+		mutually_exclusive = { SOL_all_or_nothing_matrix_scheme SOL_crystal_tipped_shells }
+		any_parent = { SOL_magic_bonded_armor_plates SOL_broadside_mechanisms }
+		equipment_bonus = {
+			hg_attack = 0.03
+			hg_armor_piercing = 0.03
+		}
+	}
+	
+	trait = {
+		token = SOL_crystal_tipped_shells
+		name = SOL_crystal_tipped_shells
+		
+		position = { x = 0 y = 1 }
+		relative_position_id = SOL_broadside_mechanisms
+		
+		mutually_exclusive = { SOL_magic_spun_propellants SOL_all_or_nothing_matrix_scheme }
+		any_parent = { SOL_broadside_mechanisms }
+		equipment_bonus = {
+			#shore_bombardment = 0.05 #Y no work?
+			hg_armor_piercing = 0.05
+		}
 	}
 }
-
 EQS_seaward_organization = {
 	name = seaward
 	include = generic_task_force_ship_organization
@@ -633,7 +921,25 @@ EQS_ichthys_docyard_organization = {
 ##        ##       ##     ## ##   ### ##       ##    ## 
 ##        ######## ##     ## ##    ## ########  ######  
 
+EQS_SOL_crimson_glare_manufactorum_organization = {
+	name = EQS_SOL_crimson_glare_manufactorum
+	equipment_type = { mio_cat_eq_all_fighter mio_cat_all_cas }
+	research_categories = { mio_cat_all_light_fighter_and_modules mio_cat_all_medium_fighter_and_modules }
 
+	allowed = {
+		tag = EQS
+		has_dlc = "Arms Against Tyranny"
+	}
+	
+	initial_trait = {
+		equipment_bonus = {
+			air_defence = 0.03
+		}
+	}
+
+	#+10% ground attack, +2% air attack, +5% production cost or -5% reliability
+	
+}
 EQS_wonderbolt_concern_organization = {
 	name = wonderbolt_concern
 	include = generic_high_agility_fighter_aircraft_organization
