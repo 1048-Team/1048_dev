@@ -123,34 +123,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 		}
 		available = {
-			OR = {
-				is_debug = yes
-				custom_trigger_tooltip = {
-					tooltip = EQS_SOL_fully_armed_and_operational_tt
-					has_country_flag = EQS_SOL_upgraded_as_can_be
-				}
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_fully_armed_and_operational_tt
+				EQS_SOL_upgraded_as_can_be = yes
 			}
 		}
 		selectable_mission = yes
 		priority = 10
 		days_mission_timeout = 480
 		fire_only_once = yes
-		#This will need a non-MTG, too
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_fully_completed"
 			custom_effect_tooltip = EQS_SOL_launch_immediately_tt
 			hidden_effect = {
 				###Create ship as a specific effect, looking at how far along the ship is, and creating a design from there. Will probably be a long scripted effect. For now, just create a default design
 				EQS_create_daybreak = yes
-				create_ship = {
-					type = ship_hull_super_heavy_2
-					equipment_variant = "Daybreak Class"
-					creator = ROOT
-					name = "HMS Daybreak"
-				}
 				if = {
-					limit = { date > 1055.1.1 }
+					limit = { has_country_flag = EQS_SOL_daybreak_construct_fleet }
 					#Make small escort fleet: a heavy cruiser, three light cruisers, eight destroyers
+					EQS_create_daybreak_fleet = yes
 				}
 			}
 		}
@@ -160,15 +151,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			hidden_effect = {
 				###Same as above
 				EQS_create_daybreak = yes
-				create_ship = {
-					type = ship_hull_super_heavy_2
-					equipment_variant = "Daybreak Class"
-					creator = ROOT
-					name = "HMS Daybreak"
-				}
 				if = {
-					limit = { date > 1055.1.1 }
-					#Make small escort fleet: a heavy cruiser, three light cruisers, eight destroyers
+					limit = { has_country_flag = EQS_SOL_daybreak_construct_fleet }
+					EQS_create_daybreak_fleet = yes
 				}
 			}
 		}
@@ -184,19 +169,24 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			check_variable = { EQS_SOL_secondaries_upgraded < 5 }
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 9
+			has_navy_experience > 10
 		}
-		custom_cost_text = EQS_SOL_custom_cost_text_tt
+		custom_cost_text = EQS_SOL_custom_cost_10_text_tt
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_recaliber_secondary_weapons"
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
-			add_to_variable = {
-				EQS_SOL_secondaries_upgraded = 1
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = {
+					EQS_SOL_secondaries_upgraded = 1
+				}
 			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 120
+				days = 90
 			}
+			hidden_effect = { navy_experience = -10 }
 		}
 	}
 	EQS_SOL_retrofit_aa_weapons = {
@@ -209,18 +199,23 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			check_variable = { EQS_SOL_aa_upgraded < 4 }
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 9
+			has_navy_experience > 5
 		}
-		custom_cost_text = EQS_SOL_custom_cost_text_tt
+		custom_cost_text = EQS_SOL_custom_cost_5_text_tt
 		complete_effect = {
-			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
-			add_to_variable = {
-				EQS_SOL_aa_upgraded = 1
+			custom_effect_tooltip = EQS_SOL_upgrade_them_defenses_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = {
+					EQS_SOL_aa_upgraded = 1
+				}
 			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 90
+				days = 60
 			}
+			hidden_effect = { navy_experience = -5 }
 		}
 	}
 	EQS_SOL_replace_main_battery = {
@@ -232,10 +227,24 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		visible = {
 			check_variable = { EQS_SOL_primaries_upgraded < 1 }
 		}
+		custom_cost_trigger = {
+			has_navy_experience > 15
+		}
+		custom_cost_text = EQS_SOL_custom_cost_15_text_tt
 		complete_effect = {
-			add_to_variable = {
-				EQS_SOL_primaries_upgraded = 1
+			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = {
+					EQS_SOL_primaries_upgraded = 1
+				}
 			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 210
+			}
+			hidden_effect = { navy_experience = -15 }
 		}
 	}
 	EQS_SOL_improve_secondary_battery = {
@@ -247,8 +256,22 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		visible = {
 			check_variable = { EQS_SOL_secondary_cannons_upgraded < 2 }
 		}
+		custom_cost_trigger = {
+			has_navy_experience > 25
+		}
+		custom_cost_text = EQS_SOL_custom_cost_25_text_tt
 		complete_effect = {
-			add_to_variable = { EQS_SOL_secondary_cannons_upgraded = 1 }
+			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = { EQS_SOL_secondary_cannons_upgraded = 1 }
+			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 150
+			}
+			hidden_effect = { navy_experience = -25 }
 		}
 	}
 	EQS_SOL_recast_armor_plates = {
@@ -258,8 +281,22 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 		}
 		visible = { check_variable = { EQS_SOL_armor_upgraded < 1 } }
+		custom_cost_trigger = {
+			has_navy_experience > 20
+		}
+		custom_cost_text = EQS_SOL_custom_cost_20_text_tt
 		complete_effect = {
-			add_to_variable = { EQS_SOL_armor_upgraded = 1 }
+			custom_effect_tooltip = EQS_SOL_upgrade_them_defenses_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = { EQS_SOL_armor_upgraded = 1 }
+			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 210
+			}
+			hidden_effect = { navy_experience = -20 }
 		}
 	}
 	EQS_SOL_upgrade_fire_control_system = {
@@ -269,8 +306,22 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 		}
 		visible = { check_variable = { EQS_SOL_rangefinding_upgraded < 6 } }
+		custom_cost_trigger = {
+			has_navy_experience > 3
+		}
+		custom_cost_text = EQS_SOL_custom_cost_3_text_tt
 		complete_effect = {
-			add_to_variable = { EQS_SOL_rangefinding_upgraded = 1 }
+			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = { EQS_SOL_rangefinding_upgraded = 1 }
+			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 20
+			}
+			hidden_effect = { navy_experience = -3 }
 		}
 	}
 	EQS_SOL_expand_radar_capabilities = {
@@ -280,8 +331,22 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 		}
 		visible = { check_variable = { EQS_SOL_radar_upgraded < 6 } }
+		custom_cost_trigger = {
+			has_navy_experience > 3
+		}
+		custom_cost_text = EQS_SOL_custom_cost_3_text_tt
 		complete_effect = {
-			add_to_variable = { EQS_SOL_radar_upgraded = 1 }
+			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = { EQS_SOL_radar_upgraded = 1 }
+			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 15
+			}
+			hidden_effect = { navy_experience = -3 }
 		}
 	}
 	EQS_SOL_install_new_scout_planes = {
@@ -291,8 +356,22 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 		}
 		visible = { check_variable = { EQS_SOL_recon_upgraded < 6 } }
+		custom_cost_trigger = {
+			has_navy_experience > 5
+		}
+		custom_cost_text = EQS_SOL_custom_cost_5_text_tt
 		complete_effect = {
-			add_to_variable = { EQS_SOL_recon_upgraded = 1 }
+			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = { EQS_SOL_recon_upgraded = 1 }
+			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 30
+			}
+			hidden_effect = { navy_experience = -5 }
 		}
 	}
 	EQS_SOL_strip_old_engines = {
@@ -302,8 +381,42 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 		}
 		visible = { check_variable = { EQS_SOL_engine_upgraded < 4 } }
+		custom_cost_trigger = {
+			has_navy_experience > 15
+		}
+		custom_cost_text = EQS_SOL_custom_cost_15_text_tt
 		complete_effect = {
-			add_to_variable = { EQS_SOL_engine_upgraded = 1 }
+			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				add_to_variable = { EQS_SOL_engine_upgraded = 1 }
+			}
+			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 180
+			}
+			hidden_effect = { navy_experience = -15 }
+		}
+	}
+	EQS_SOL_construct_escort_fleet = {
+		available = {
+			date > 1054.1.1
+			dockyard > 10
+		}
+		visible = {
+			date > 1054.1.1
+		}
+		custom_cost_trigger = {
+			has_navy_experience > 35
+		}
+		custom_cost_text = EQS_SOL_custom_cost_35_text_tt
+		days_remove = 365
+		modifier = { dockyard_donations = -10 }
+		fire_only_once = yes
+		complete_effect = { hidden_effect = { navy_experience = -35 } }
+		remove_effect = {
+			set_country_flag = EQS_SOL_daybreak_construct_fleet
 		}
 	}
 }
