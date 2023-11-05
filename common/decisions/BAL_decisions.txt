@@ -2,24 +2,26 @@
 BAL_debug_decisions_category = {
 	BAL_explode_southeast = {
 		available = {
-			NOT = { has_global_flag = balsplosion }
-		}
-		visible = {
+			is_debug = yes
 			NOT = { has_global_flag = balsplosion }
 		}
 		fire_only_once = yes
 		complete_effect = {
-			set_cosmetic_tag = BAL_new_red_front
+			#BAL = {set_cosmetic_tag = BAL_new_red_front} #Depending on how Rose wants BAL to go with the changed direction of the region
 			set_global_flag = balsplosion
 			SPF = {
 				transfer_state = 4
 				transfer_state = 1212
 				transfer_state = 328
 				transfer_state = 1195
+				transfer_state = 1194
+				transfer_state = 1193
 				add_state_core = 4
 				add_state_core = 328
 				add_state_core = 1212
 				add_state_core = 1195
+				add_state_core = 1193
+				add_state_core = 1194
 			}
 			CLI = {
 				transfer_state = 6
@@ -49,16 +51,11 @@ BAL_debug_decisions_category = {
 			NID = {
 				transfer_state = 351
 				transfer_state = 1213
-				transfer_state = 221
-				transfer_state = 33
-				transfer_state = 1194
-				transfer_state = 1193
-				add_state_core = 221
+				transfer_state = 52
 				add_state_core = 1213
 				add_state_core = 351
-				add_state_core = 33
-				add_state_core = 1193
-				add_state_core = 1194
+				add_state_core = 52
+				country_event = gesellschaft.25
 			}
 			EEE = {
 				transfer_state = 31
@@ -95,8 +92,8 @@ BAL_debug_decisions_category = {
 				transfer_state = 353
 				transfer_state = 25
 				transfer_state = 79
-				transfer_state = 52
-				add_state_core = 52
+				transfer_state = 33
+				add_state_core = 33
 				add_state_core = 36
 				add_state_core = 32
 				add_state_core = 86
@@ -341,6 +338,15 @@ BAL_debug_decisions_category = {
 					ruling_party = communism
 					elections_allowed = no
 				}
+				if = {
+					limit = {
+						communism < 0.5
+					}
+					add_popularity = {
+						ideology = communism
+						popularity = 0.5
+					}
+				}
 			}
 			if = {
 				limit = { NOT = { can_be_country_leader = MTS_Warm_Night } }
@@ -359,6 +365,57 @@ BAL_debug_decisions_category = {
 			}
 			else = {
 				promote_character = MTS_Warm_Night
+			}
+		}
+	}
+	MTS_add_arrays = {
+		available = {
+			tag = MTS
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			has_global_flag = balsplosion
+		}
+		visible = {
+			tag = MTS
+		}
+		fire_only_once = yes
+		complete_effect = {
+			set_country_flag = MTS_unlock_prosperity
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = BAL
+						is_core_of = MTS
+					}
+				}
+				add_to_array = { MTS.north_states = THIS.id }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = EEE
+						is_core_of = NEI
+					}
+				}
+				add_to_array = { MTS.central_states = THIS.id }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = NRP
+						is_core_of = NID
+						is_core_of = STB
+					}
+				}
+				add_to_array = { MTS.southern_states = THIS.id }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = SPF
+						is_core_of = CLI
+					}
+				}
+				add_to_array = { MTS.island_states = THIS.id }
 			}
 		}
 	}
@@ -409,7 +466,6 @@ BAL_debug_decisions_category = {
 	MTS_promote_Scorched_Earth = {
 		available = {
 			tag = MTS
-			NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } }
 		}
 		visible = {
 			tag = MTS
@@ -458,6 +514,15 @@ BAL_debug_decisions_category = {
 						target = PREV
 					}
 				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_claimed_by = BAL
+						is_core_of = BAL
+					}
+				}
+				add_core_of = ROOT
 			}
 		}
 	}
@@ -591,7 +656,6 @@ BAL_debug_decisions_category = {
 				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
-			has_country_flag = MTS_conquered_southeast
 		}
 		visible = {
 			tag = MTS

@@ -468,6 +468,10 @@ MTS_investing_in_ourselves_category = {
 			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			is_debug = yes
 		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			is_debug = yes
+		}
 		complete_effect = {
 			random_state = {
 				limit = {
@@ -483,6 +487,10 @@ MTS_investing_in_ourselves_category = {
 			tag = MTS
 		}
 		available = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			is_debug = yes
+		}
+		visible = {
 			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			is_debug = yes
 		}
@@ -504,6 +512,10 @@ MTS_investing_in_ourselves_category = {
 			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			is_debug = yes
 		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			is_debug = yes
+		}
 		complete_effect = {
 			every_state = {
 				limit = {
@@ -518,18 +530,26 @@ MTS_investing_in_ourselves_category = {
 		allowed = {
 			tag = MTS
 		}
+		available = {
+			all_of_scopes = {
+				array = MTS.north_states
+				tooltip = MTS_owns_north_states
+				is_owned_by = ROOT
+			}
+		}
 		visible = {
 			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
-			has_country_flag = MTS_unlock_prosperity
+			all_of_scopes = {
+				array = MTS.north_states
+				is_owned_by = ROOT
+			}
 		}
 		cost = 25
 		days_remove = 35
 		days_re_enable = 120
 		highlight_states = {
 			highlight_state_targets = {
-				state = 27
 				state = 28
-				state = 84
 			}
 		}
 		modifier = {
@@ -538,16 +558,137 @@ MTS_investing_in_ourselves_category = {
 			production_speed_buildings_factor = -0.05
 		}
 		remove_effect = {
-			27 = {
-				set_temp_variable = { MTS_state_prosperity_added = 5 }
+			every_state = {
+				limit = {
+					is_in_array = { MTS.north_states = THIS.id }
+				}
+				set_temp_variable = { MTS_state_prosperity_added = 3 }
 				MTS_add_state_prosperity = yes
 			}
-			28 = {
-				set_temp_variable = { MTS_state_prosperity_added = 5 }
+			MTS_calculate_state_prosperity = yes
+		}
+	}
+	MTS_public_works_central = {
+		allowed = {
+			tag = MTS
+		}
+		available = {
+			all_of_scopes = {
+				array = MTS.central_states
+				tooltip = MTS_owns_central_states
+				is_owned_by = ROOT
+			}
+		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			all_of_scopes = {
+				array = MTS.central_states
+				is_owned_by = ROOT
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 120
+		highlight_states = {
+			highlight_state_targets = {
+				state = 16
+			}
+		}
+		modifier = {
+			weekly_manpower = -100
+			political_power_factor = -0.05
+			production_speed_buildings_factor = -0.05
+		}
+		remove_effect = {
+			every_state = {
+				limit = {
+					is_in_array = { MTS.central_states = THIS.id }
+				}
+				set_temp_variable = { MTS_state_prosperity_added = 3 }
 				MTS_add_state_prosperity = yes
 			}
-			84 = {
-				set_temp_variable = { MTS_state_prosperity_added = 5 }
+			MTS_calculate_state_prosperity = yes
+		}
+	}
+	MTS_public_works_south = {
+		allowed = {
+			tag = MTS
+		}
+		available = {
+			all_of_scopes = {
+				array = MTS.southern_states
+				tooltip = MTS_owns_southern_states
+				is_owned_by = ROOT
+			}
+		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			all_of_scopes = {
+				array = MTS.southern_states
+				is_owned_by = ROOT
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 120
+		highlight_states = {
+			highlight_state_targets = {
+				state = 15
+			}
+		}
+		modifier = {
+			weekly_manpower = -100
+			political_power_factor = -0.05
+			production_speed_buildings_factor = -0.05
+		}
+		remove_effect = {
+			every_state = {
+				limit = {
+					is_in_array = { MTS.southern_states = THIS.id }
+				}
+				set_temp_variable = { MTS_state_prosperity_added = 3 }
+				MTS_add_state_prosperity = yes
+			}
+			MTS_calculate_state_prosperity = yes
+		}
+	}
+	MTS_public_works_islands = {
+		allowed = {
+			tag = MTS
+		}
+		available = {
+			all_of_scopes = {
+				array = MTS.island_states
+				tooltip = MTS_owns_island_states
+				is_owned_by = ROOT
+			}
+		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			all_of_scopes = {
+				array = MTS.island_states
+				is_owned_by = ROOT
+			}
+		}
+		cost = 25
+		days_remove = 35
+		days_re_enable = 120
+		highlight_states = {
+			highlight_state_targets = {
+				state = 4
+			}
+		}
+		modifier = {
+			weekly_manpower = -100
+			political_power_factor = -0.05
+			production_speed_buildings_factor = -0.05
+		}
+		remove_effect = {
+			every_state = {
+				limit = {
+					is_in_array = { MTS.island_states = THIS.id }
+				}
+				set_temp_variable = { MTS_state_prosperity_added = 3 }
 				MTS_add_state_prosperity = yes
 			}
 			MTS_calculate_state_prosperity = yes
@@ -579,7 +720,7 @@ MTS_investing_in_ourselves_category = {
 			add_war_support = 0.03
 			add_political_power = 25
 			1214 = {
-				set_temp_variable = { MTS_state_prosperity_added = 3 }
+				set_temp_variable = { MTS_state_prosperity_added = 5 }
 				MTS_add_state_prosperity = yes
 			}
 			MTS_calculate_state_prosperity = yes
@@ -706,7 +847,7 @@ MTS_investing_in_ourselves_category = {
 		}
 		remove_effect = {
 			15 = {
-				set_temp_variable = { MTS_state_prosperity_added = 8 }
+				set_temp_variable = { MTS_state_prosperity_added = 7.50 }
 				add_resource = {
 					type = steel
 					amount = 12
@@ -891,7 +1032,7 @@ MTS_investing_in_ourselves_category = {
 				MTS_add_state_prosperity = yes
 			}
 			MTS_calculate_state_prosperity = yes
-			###Idea here
+			add_ideas = MTS_supplies_across_peninsula
 		}
 	}
 	MTS_healthy_living = {
@@ -957,7 +1098,6 @@ MTS_investing_in_ourselves_category = {
 					free_building_slots = {
 						building = arms_factory
 						size < 2
-						include_locked = yes
 					}
 				}
 				add_extra_state_shared_building_slots = 2
@@ -969,7 +1109,6 @@ MTS_investing_in_ourselves_category = {
 					free_building_slots = {
 						building = arms_factory
 						size < 2
-						include_locked = yes
 					}
 				}
 				add_extra_state_shared_building_slots = 2
@@ -981,7 +1120,6 @@ MTS_investing_in_ourselves_category = {
 					free_building_slots = {
 						building = arms_factory
 						size < 2
-						include_locked = yes
 					}
 				}
 				add_extra_state_shared_building_slots = 2
@@ -993,7 +1131,6 @@ MTS_investing_in_ourselves_category = {
 					free_building_slots = {
 						building = arms_factory
 						size < 2
-						include_locked = yes
 					}
 				}
 				add_extra_state_shared_building_slots = 2
@@ -1005,7 +1142,6 @@ MTS_investing_in_ourselves_category = {
 					free_building_slots = {
 						building = arms_factory
 						size < 2
-						include_locked = yes
 					}
 				}
 				add_extra_state_shared_building_slots = 2
@@ -1069,15 +1205,6 @@ MTS_investing_in_ourselves_category = {
 		cost = 50
 		days_remove = 75
 		days_re_enable = 120
-		highlight_states = {
-			highlight_states_trigger = {
-				is_owned_by = ROOT
-				NOT = { has_state_flag = MTS_fortified_border_state }
-				any_neighbor_state = { 
-					NOT = { is_owned_by = ROOT }
-				}
-			}
-		}
 		modifier = {
 			weekly_manpower = -150
 			production_speed_bunker_factor = -0.25
@@ -1133,12 +1260,6 @@ MTS_investing_in_ourselves_category = {
 		}
 		cost = 150
 		days_remove = 365
-		highlight_states = {
-			highlight_states_trigger = {
-				is_owned_by = ROOT
-				has_state_flag = MTS_fortified_border_state
-			}
-		}
 		complete_effect = {
 			add_war_support = -0.1
 		}
@@ -1179,15 +1300,6 @@ MTS_investing_in_ourselves_category = {
 		cost = 100
 		days_remove = 150
 		days_re_enable = 200
-		highlight_states = {
-			highlight_states_trigger = {
-				is_owned_by = ROOT
-				free_building_slots = {
-					building = arms_factory
-					size > 1
-				}
-			}
-		}
 		modifier = {
 			production_speed_arms_factory_factor = -0.1
 			consumer_goods_factor = 0.05
@@ -1223,17 +1335,6 @@ MTS_investing_in_ourselves_category = {
 		cost = 75
 		days_remove = 125
 		days_re_enable = 75
-		highlight_states = {
-			highlight_states_trigger = {
-				is_owned_by = ROOT
-				OR = {
-					has_state_category = large_city
-					has_state_category = metropolis
-					has_state_category = megalopolis
-				}
-				NOT = { check_variable = { MTS_suburbs_expanded > 1 } }
-			}
-		}
 		modifier = {
 			production_speed_buildings_factor = -0.1
 			consumer_goods_factor = 0.03
