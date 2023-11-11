@@ -2429,8 +2429,293 @@ shared_focus = {
 	ai_will_do = {
 		factor = 100
 	}
+	will_lead_to_war_with = BAL
+	will_lead_to_war_with = NEI
+	will_lead_to_war_with = EEE
+	will_lead_to_war_with = MTS
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_war_plan_amber"
+		IF = {
+			limit = {
+				BAL = { exists = yes }
+				NOT = { has_war_with = BAL }
+			}
+			declare_war_on = {
+				target = BAL
+				type = annex_everything
+			}
+		}
+		IF = {
+			limit = {
+				NEI = { exists = yes }
+				NOT = { has_war_with = NEI }
+			}
+			declare_war_on = {
+				target = NEI
+				type = annex_everything
+			}
+		}
+		IF = {
+			limit = {
+				EEE = { exists = yes }
+				NOT = { has_war_with = EEE }
+			}
+			declare_war_on = {
+				target = EEE
+				type = annex_everything
+			}
+		}
+		IF = {
+			limit = {
+				MTS = { exists = yes }
+				NOT = { has_war_with = MTS }
+			}
+			declare_war_on = {
+				target = MTS
+				type = annex_everything
+			}
+		}
+		add_timed_idea = {
+			idea = NID_breaking_east_idea
+			days = 60
+		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = EEE
+						is_core_of = NEI
+						is_core_of = BAL
+						is_core_of = MTS
+					}
+				}
+				add_claim_by = NID
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_moonrise_accords
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = -3
+	y = 9
+
+	available = {
+		controls_state = 30
+		EEE = { exists = no }
+	}
+	prerequisite = {
+		focus = NID_war_plan_amber
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_moonrise_accords"
+		every_state = {
+			limit = {
+				is_core_of = EEE
+			}
+			add_compliance = 30
+		}
+		country_event = gesellschaft.34
+		add_manpower = 5000
+	}
+}
+
+shared_focus = {
+	id = NID_advancing_railroads
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = -1
+	y = 9
+
+	prerequisite = {
+		focus = NID_war_plan_amber
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_advancing_railroads"
+		add_timed_idea = {
+			idea = NID_military_railroads_idea
+			days = 400
+		}
+		IF = {
+			limit = {
+				is_ai = yes
+			}
+			build_railway = {
+				start_province = 9964
+				target_province = 11264
+				level = 1
+			}
+			build_railway = {
+				start_province = 9572
+				target_province = 569
+				level = 1
+			}
+			build_railway = {
+				start_province = 11858
+				target_province = 12098
+				level = 1
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_blockade_the_opposition
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = 1
+	y = 9
+
+	prerequisite = {
+		focus = NID_war_plan_amber
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_blockade_the_opposition"
+		every_enemy_country = {
+			limit = {
+				any_owned_state = {
+					is_coastal = yes
+				}
+			}
+			add_ideas = NID_naval_blockade_idea
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_final_push
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = 3
+	y = 9
+
+	available = {
+		NOT = { has_idea = NID_breaking_east_idea }
+		OR = {
+			controls_state = 84
+			controls_state = 31
+		}
+		has_war = yes
+	}
+	prerequisite = {
+		focus = NID_war_plan_amber
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_final_push"
+		add_ideas = NID_march_to_victory_idea
+	}
+}
+
+shared_focus = {
+	id = NID_quench_fires
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = 0
+	y = 10
+
+	available = {
+		has_war = no
+		owns_state = 1214
+		owns_state = 28
+		owns_state = 16
+		owns_state = 30
+	}
+	prerequisite = {
+		focus = NID_moonrise_accords
+		focus = NID_blockade_the_opposition
+		focus = NID_blockade_the_opposition
+		focus = NID_final_push
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_quench_fires"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_trials_and_deals
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = -1
+	y = 11
+
+	prerequisite = {
+		focus = NID_quench_fires
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_trials_and_deals"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_reorganize_southeast
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = 1
+	y = 11
+	
+	available = {
+		has_completed_focus = NID_moonrise_accords
+	}
+	prerequisite = {
+		focus = NID_quench_fires
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_reorganize_southeast"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_our_own_hegemony
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_beg_vesalipolis_for_aid
+	x = 0
+	y = 12
+
+	prerequisite = {
+		focus = NID_reorganize_southeast
+	}
+	prerequisite = {
+		focus = NID_trials_and_deals
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_our_own_hegemony"
 		
 	}
 }
