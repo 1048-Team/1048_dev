@@ -1208,7 +1208,7 @@ shared_focus = {
 	id = NID_hold_our_ground
 	icon = GFX_BAL_please_help
 	cost = 4.42
-	x = 32
+	x = 33
 	y = 1
 
 	ai_will_do = {
@@ -1394,9 +1394,6 @@ shared_focus = {
 	x = 0
 	y = 3
 
-	available = {
-		has_idea = NID_merc_prt_tensions4
-	}
 	prerequisite = {
 		focus = NID_national_armed_forces
 	}
@@ -2027,6 +2024,9 @@ shared_focus = {
 		NRP = {
 			set_cosmetic_tag = NRP_occupation_zone_cosm
 			set_capital = { state = 32 }
+			country_lock_all_division_template = yes
+			set_country_flag = manpower_laws_blocked
+			add_ideas = disarmed_nation
 		}
 		puppet = NRP
 	}
@@ -2164,6 +2164,7 @@ shared_focus = {
 	available = {
 		OR = {
 			is_neighbor_of = STB
+			NRP = { is_neighbor_of = STB }
 			STB = { exists = no }
 		}
 	}
@@ -2267,6 +2268,9 @@ shared_focus = {
 		STB = {
 			set_cosmetic_tag = STB_occupation_zone_cosm
 			set_capital = { state = 15 }
+			country_lock_all_division_template = yes
+			set_country_flag = manpower_laws_blocked
+			add_ideas = disarmed_nation
 		}
 		puppet = STB
 		IF = {
@@ -2817,6 +2821,9 @@ shared_focus = {
 					}
 					add_core_of = NEI
 				}
+				country_lock_all_division_template = yes
+				set_country_flag = manpower_laws_blocked
+				add_ideas = disarmed_nation
 			}
 			every_state = {
 				limit = {
@@ -2832,6 +2839,9 @@ shared_focus = {
 					}
 					add_core_of = EEE
 				}
+				country_lock_all_division_template = yes
+				set_country_flag = manpower_laws_blocked
+				add_ideas = disarmed_nation
 			}
 			every_state = {
 				limit = {
@@ -2893,9 +2903,1752 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_our_own_hegemony"
+		country_event = gesellschaft.39
+		swap_ideas = {
+			remove_idea = NID_continental_port2
+			add_idea = NID_continental_port3
+		}
+	}
+}
+
+###Post-Unification###
+
+shared_focus = {
+	id = NID_kerntruppen_concept
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 0
+	y = 1
+
+	allow_branch = {
+		always = yes
+		#has_completed_focus = NID_our_own_hegemony
+	}
+	prerequisite = {
+		focus = NID_prepared_to_face_foe
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_kerntruppen_concept"
 		
 	}
 }
+
+shared_focus = {
+	id = NID_nyc_military_academy
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -4
+	y = 2
+
+	prerequisite = {
+		focus = NID_kerntruppen_concept
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_nyc_military_academy"
+		add_research_slot = 1
+	}
+}
+
+shared_focus = {
+	id = NID_mobile_infantry
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 0
+	y = 2
+
+	prerequisite = {
+		focus = NID_kerntruppen_concept
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_mobile_infantry"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_armored_schwerpunkt
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 4
+	y = 2
+
+	prerequisite = {
+		focus = NID_kerntruppen_concept
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_armored_schwerpunkt"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_iterate_jaeger_program
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -5
+	y = 3
+
+	prerequisite = {
+		focus = NID_nyc_military_academy
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_iterate_jaeger_program"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_self_sufficient_divisions
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -3
+	y = 3
+
+	prerequisite = {
+		focus = NID_nyc_military_academy
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_self_sufficient_divisions"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_new_aurelia_autoworks
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 0
+	y = 3
+
+	prerequisite = {
+		focus = NID_mobile_infantry
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_new_aurelia_autoworks"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_explosive_reactive_armor
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 3
+	y = 3
+
+	prerequisite = {
+		focus = NID_armored_schwerpunkt
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_explosive_reactive_armor"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_carry_engine_expertise
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 5
+	y = 3
+
+	prerequisite = {
+		focus = NID_armored_schwerpunkt
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_carry_engine_expertise"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_supportive_fire_assets
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -4
+	y = 4
+
+	prerequisite = {
+		focus = NID_iterate_jaeger_program
+		focus = NID_self_sufficient_divisions
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_supportive_fire_assets"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_armored_artillery
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -2
+	y = 4
+
+	prerequisite = {
+		focus = NID_new_aurelia_autoworks
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_armored_artillery"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_apc_of_future
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 0
+	y = 4
+
+	prerequisite = {
+		focus = NID_new_aurelia_autoworks
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_apc_of_future"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_coordinated_motorized_advance
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 2
+	y = 4
+
+	prerequisite = {
+		focus = NID_new_aurelia_autoworks
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_coordinated_motorized_advance"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_little_jungle_terrors
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 4
+	y = 4
+
+	prerequisite = {
+		focus = NID_explosive_reactive_armor
+		focus = NID_carry_engine_expertise
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_little_jungle_terrors"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_storm_of_rockets
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -3
+	y = 5
+
+	prerequisite = {
+		focus = NID_supportive_fire_assets
+	}
+	prerequisite = {
+		focus = NID_armored_artillery
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_storm_of_rockets"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_arcane_stormtroopers
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = -1
+	y = 5
+
+	prerequisite = {
+		focus = NID_apc_of_future
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_arcane_stormtroopers"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_sustainable_advances
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 1
+	y = 5
+
+	prerequisite = {
+		focus = NID_apc_of_future
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_sustainable_advances"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_donnerschlag_tactics
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 3
+	y = 5
+
+	prerequisite = {
+		focus = NID_coordinated_motorized_advance
+	}
+	prerequisite = {
+		focus = NID_little_jungle_terrors
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_donnerschlag_tactics"
+		
+	}
+}
+
+shared_focus = {
+	id = NID_elite_selection
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	relative_position_id = NID_prepared_to_face_foe
+	x = 0
+	y = 6
+
+	prerequisite = {
+		focus = NID_storm_of_rockets
+		focus = NID_donnerschlag_tactics
+	}
+	prerequisite = {
+		focus = NID_arcane_stormtroopers
+		focus = NID_sustainable_advances
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_elite_selection"
+		
+	}
+}
+
+#Airforce Tree
+shared_focus = {
+	id = NID_invest_in_aviation
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 44
+	y = 3
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_invest_in_aviation"
+		remove_ideas = NID_no_aviation_industry_idea
+	}
+}  
+
+shared_focus = {
+	id = NID_copy_greifvogel
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -2
+	y = 1
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_invest_in_aviation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_copy_greifvogel"
+		
+	}
+}  
+
+shared_focus = {
+	id = NID_buy_vespidae_licenses
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 1
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_invest_in_aviation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_buy_vespidae_licenses"
+		
+	}
+}  
+
+shared_focus = {
+	id = NID_operation_nightlight
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 2
+	y = 1
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_invest_in_aviation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_operation_nightlight"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_aerial_wargames
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -1
+	y = 2
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_invest_in_aviation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_aerial_wargames"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_hire_speers_reformers
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 1
+	y = 2
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_invest_in_aviation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hire_speers_reformers"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_race_for_next_gen_fighter
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 3
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_copy_greifvogel
+		focus = NID_buy_vespidae_licenses
+		focus = NID_operation_nightlight
+		focus = NID_aerial_wargames
+		focus = NID_hire_speers_reformers
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_race_for_next_gen_fighter"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_invest_early_warning_systems
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -2
+	y = 4
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_race_for_next_gen_fighter
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_invest_early_warning_systems"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_jet_engine_research
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 4
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_race_for_next_gen_fighter
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_jet_engine_research"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_unequaled_speed
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 2
+	y = 4
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_race_for_next_gen_fighter
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_unequaled_speed"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_doctrinal_flexibility
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -3
+	y = 5
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_jet_engine_research
+		focus = NID_invest_early_warning_systems
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_doctrinal_flexibility"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_fund_mayflys_expansion
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -1
+	y = 5
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_jet_engine_research
+		focus = NID_invest_early_warning_systems
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_fund_mayflys_expansion"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_devils_in_wind
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 1
+	y = 5
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_jet_engine_research
+		focus = NID_unequaled_speed
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_devils_in_wind"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_solarist_book_pages
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 3
+	y = 5
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_jet_engine_research
+		focus = NID_unequaled_speed
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_solarist_book_pages"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_rotary_aviation_advances
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -2
+	y = 6
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_doctrinal_flexibility
+		focus = NID_fund_mayflys_expansion
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_rotary_aviation_advances"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_steel_dragons
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 2
+	y = 6
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_devils_in_wind
+		focus = NID_solarist_book_pages
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_steel_dragons"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_leapfrogging_aeronautical_engineering
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 7
+	relative_position_id = NID_invest_in_aviation
+
+	prerequisite = {
+		focus = NID_rotary_aviation_advances
+		focus = NID_steel_dragons
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_leapfrogging_aeronautical_engineering"
+		
+	}
+} 
+
+#Naval Tree
+
+shared_focus = {
+	id = NID_aim_for_practicality
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 52
+	y = 5
+
+	mutually_exclusive = {
+		focus = NID_aim_for_power_projection
+	}
+
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_aim_for_practicality"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_aim_for_power_projection
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 6
+	y = 0
+	relative_position_id = NID_aim_for_practicality
+
+	mutually_exclusive = {
+		focus = NID_aim_for_practicality
+	}
+
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_aim_for_power_projection"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_ocen_is_our_dominion
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 1
+	y = 1
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_aim_for_practicality
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_ocen_is_our_dominion"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_expand_marine_corps
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 3
+	y = 1
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_aim_for_practicality
+		focus = NID_aim_for_power_projection
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_expand_marine_corps"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_the_end_of_battleships
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 5
+	y = 1
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_aim_for_power_projection
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_the_end_of_battleships"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_screens_for_convoys
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 2
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_ocen_is_our_dominion
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_screens_for_convoys"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_amphibious_apcs
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 2
+	y = 2
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_ocen_is_our_dominion
+		focus = NID_the_end_of_battleships
+	}
+	prerequisite = {
+		focus = NID_expand_marine_corps
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_amphibious_apcs"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_floating_tank_battalions
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 4
+	y = 2
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_ocen_is_our_dominion
+		focus = NID_the_end_of_battleships
+	}
+	prerequisite = {
+		focus = NID_expand_marine_corps
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_floating_tank_battalions"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_mobile_airbases
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 6
+	y = 2
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_the_end_of_battleships
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_mobile_airbases"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_light_batteries
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 1
+	y = 3
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_screens_for_convoys
+		focus = NID_mobile_airbases
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_light_batteries"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_combined_wargames
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 3
+	y = 3
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_amphibious_apcs
+		focus = NID_floating_tank_battalions
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_combined_wargames"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_safety_engineering
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 5
+	y = 3
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_screens_for_convoys
+		focus = NID_mobile_airbases
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_safety_engineering"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_blanket_the_sea
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 4
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_light_batteries
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_blanket_the_sea"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_theory_of_victory
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 2
+	y = 4
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_light_batteries
+		focus = NID_combined_wargames
+		focus = NID_safety_engineering
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_theory_of_victory"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_mines_mines_mines
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 4
+	y = 4
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_light_batteries
+		focus = NID_combined_wargames
+		focus = NID_safety_engineering
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_mines_mines_mines"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_carrier_strike_groups
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 6
+	y = 4
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_safety_engineering
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_carrier_strike_groups"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_two_sides_of_coin
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = -1
+	y = 5
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_blanket_the_sea
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_two_sides_of_coin"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_destroyers_for_protection
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 1
+	y = 5
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_blanket_the_sea
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_destroyers_for_protection"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_iron_hoof_of_commerce
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 3
+	y = 5
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_theory_of_victory
+		focus = NID_mines_mines_mines
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_iron_hoof_of_commerce"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_naval_missile_carriers
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 5
+	y = 5
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_carrier_strike_groups
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_naval_missile_carriers"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_modern_rangefinders
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 7
+	y = 5
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_carrier_strike_groups
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_modern_rangefinders"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_unified_production_designs
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 0
+	y = 6
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_two_sides_of_coin
+		focus = NID_destroyers_for_protection
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_unified_production_designs"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_nuclear_engines
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 3
+	y = 6
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_iron_hoof_of_commerce
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_nuclear_engines"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_supercarriers
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 6
+	y = 6
+	relative_position_id = NID_aim_for_practicality
+
+	prerequisite = {
+		focus = NID_naval_missile_carriers
+		focus = NID_modern_rangefinders
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_supercarriers"
+		
+	}
+} 
+
+#Colonial Tree
+shared_focus = {
+	id = NID_begin_colonial_rearmament
+	icon = GFX_BAL_please_help
+	cost = 4.42
+	x = 65
+	y = 3
+
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_begin_colonial_rearmament"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_stallingen_seaborne
+	icon = GFX_BAL_please_help
+	cost = 1.52
+	x = -3
+	y = 1
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_begin_colonial_rearmament
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_stallingen_seaborne"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_mondstadt_nightraiders
+	icon = GFX_BAL_please_help
+	cost = 1.52
+	x = -1
+	y = 1
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_begin_colonial_rearmament
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_mondstadt_nightraiders"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_sonnenburg_jungle_fighters
+	icon = GFX_BAL_please_help
+	cost = 1.52
+	x = 1
+	y = 1
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_begin_colonial_rearmament
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_sonnenburg_jungle_fighters"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_neu_baltimare_vanguard
+	icon = GFX_BAL_please_help
+	cost = 1.52
+	x = 3
+	y = 1
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_begin_colonial_rearmament
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_neu_baltimare_vanguard"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_luna_ocean_wall
+	icon = GFX_BAL_please_help
+	cost = 2.9
+	x = -3
+	y = 2
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_stallingen_seaborne
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_luna_ocean_wall"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_mango_airbases
+	icon = GFX_BAL_please_help
+	cost = 2.9
+	x = -1
+	y = 2
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_mondstadt_nightraiders
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_mango_airbases"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_first_pony_jaegers
+	icon = GFX_BAL_please_help
+	cost = 2.9
+	x = 1
+	y = 2
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_sonnenburg_jungle_fighters
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_first_pony_jaegers"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_restore_baltimare_arsenal
+	icon = GFX_BAL_please_help
+	cost = 2.9
+	x = 3
+	y = 2
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_neu_baltimare_vanguard
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_restore_baltimare_arsenal"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_rewrite_hansa_arms_treaty
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = 0
+	y = 3
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_luna_ocean_wall
+	}
+	prerequisite = {
+		focus = NID_mango_airbases
+	}
+	prerequisite = {
+		focus = NID_first_pony_jaegers
+	}
+	prerequisite = {
+		focus = NID_restore_baltimare_arsenal
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_rewrite_hansa_arms_treaty"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_hanseatic_research_cooperation
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = -2
+	y = 4
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_rewrite_hansa_arms_treaty
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hanseatic_research_cooperation"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_siphon_recruits
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = 2
+	y = 4
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_rewrite_hansa_arms_treaty
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_siphon_recruits"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_joint_training_maneuvers
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = -3
+	y = 5
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_hanseatic_research_cooperation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_joint_training_maneuvers"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_more_minds_think_better
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = -1
+	y = 5
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_hanseatic_research_cooperation
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_more_minds_think_better"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_fortify_hayseed_macintosh_line
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = 1
+	y = 5
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_siphon_recruits
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_fortify_hayseed_macintosh_line"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_arterial_military_railroads
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = 3
+	y = 5
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_siphon_recruits
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_arterial_military_railroads"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_cross_hansa_officer_training
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = -2
+	y = 6
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_joint_training_maneuvers
+		focus = NID_more_minds_think_better
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_cross_hansa_officer_training"
+		#Unique Academy-Spirit for officer corps
+	}
+} 
+
+shared_focus = {
+	id = NID_implement_the_pan_hanseatic_corps
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = 2
+	y = 6
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_fortify_hayseed_macintosh_line
+		focus = NID_arterial_military_railroads
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_implement_the_pan_hanseatic_corps"
+		#Unique Spirit of the Army for officer corps
+	}
+} 
+
+shared_focus = {
+	id = NID_franchise_prt_to_hansa
+	icon = GFX_BAL_please_help
+	cost = 4.52
+	x = 0
+	y = 7
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_cross_hansa_officer_training
+		focus = NID_implement_the_pan_hanseatic_corps
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_franchise_prt_to_hansa"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_canterlot_jannissaries
+	icon = GFX_BAL_please_help
+	cost = 2.89
+	x = -4
+	y = 8
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_franchise_prt_to_hansa
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_canterlot_jannissaries"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_cloudsdale_sky_legion
+	icon = GFX_BAL_please_help
+	cost = 2.89
+	x = -2
+	y = 8
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_franchise_prt_to_hansa
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_cloudsdale_sky_legion"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_bales_arcane_guard
+	icon = GFX_BAL_please_help
+	cost = 2.89
+	x = 0
+	y = 8
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_franchise_prt_to_hansa
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_bales_arcane_guard"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_chem_corps_detrot
+	icon = GFX_BAL_please_help
+	cost = 2.89
+	x = 2
+	y = 8
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_franchise_prt_to_hansa
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_chem_corps_detrot"
+		
+	}
+} 
+
+shared_focus = {
+	id = NID_scions_of_marechester
+	icon = GFX_BAL_please_help
+	cost = 2.89
+	x = 4
+	y = 8
+	relative_position_id = NID_begin_colonial_rearmament
+
+	prerequisite = {
+		focus = NID_franchise_prt_to_hansa
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_scions_of_marechester"
+		
+	}
+} 
+
+
 
 
 
