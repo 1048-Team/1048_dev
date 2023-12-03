@@ -294,6 +294,54 @@ on_actions = {
 			182 = { set_variable = { BLS_dead_cultists = 20000 } }
 			344 = { set_variable = { BLS_dead_cultists = 35000 } }
 			
+			###Everycreature hates MARESOC, lool###
+			EQC = {
+				every_other_country = {
+					limit = {
+						NOT = {
+							OR = {
+								has_country_flag = is_maresoc
+								has_country_flag = is_maresoc_aligned
+							}
+						}
+					}
+					add_opinion_modifier = {
+						modifier = EQC_hates_maresoc
+						target = EQC
+					}
+					add_opinion_modifier = {
+						modifier = EQC_hates_maresoc
+						target = MIT
+					}
+					add_opinion_modifier = {
+						modifier = EQC_hates_maresoc
+						target = SIC
+					}
+					add_opinion_modifier = {
+						modifier = EQC_hates_maresoc
+						target = HPS
+					}
+					send_embargo = EQC
+					send_embargo = HPS
+					send_embargo = SIC
+					send_embargo = MIT
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						OR = {
+							has_country_flag = is_maresoc
+							has_country_flag = is_maresoc_aligned
+						}
+					}
+				}
+				EQC = { send_embargo = PREV }
+				HPS = { send_embargo = PREV }
+				SIC = { send_embargo = PREV }
+				MIT = { send_embargo = PREV }
+			}
+			
 			###Operative Setup; Yoinked from EaW###
 			#if = {
 			#	limit = {
