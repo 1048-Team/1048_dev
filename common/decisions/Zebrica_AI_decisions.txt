@@ -1,0 +1,73 @@
+Illuminate_AI_category = {
+	ILU_finish_ZIT = {
+		allowed = {
+			original_tag = ILU
+		}
+		available = {
+			date > 1048.3.1
+		}
+		days_remove = 10
+		remove_effect = {
+			create_wargoal = {
+				target = ZIT
+				type = annex_everything
+			}
+		} 
+	}
+	ILU_integrate_ZIT = {
+		allowed = {
+			original_tag = ILU
+		}
+		available = {
+			owns_state = 899
+		}
+		days_remove = 10
+		remove_effect = {
+			add_state_core = 899
+			add_state_core = 898
+			add_state_core = 1041
+			add_state_core = 905
+			every_state = {
+				limit = {
+					is_core_of = ZIT
+				}
+				remove_core_of = ZIT
+			}
+		} 
+	}
+	ILU_avenge_the_humiliation = {
+		allowed = {
+			original_tag = ILU
+		}
+		available = {
+			owns_state = 899
+			date > 1048.10.1
+		}
+		days_remove = 10
+		remove_effect = {
+			if = {
+				limit = { AZI = { exists = yes } }
+				create_wargoal = {
+					target = AZI
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = { ZAJ = { exists = yes } }
+				create_wargoal = {
+					target = ZAJ
+					type = annex_everything
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = AZI
+						is_core_of = ZAJ
+					}
+				}
+				add_claim_by = ILU
+			}
+		} 
+	}
+}
