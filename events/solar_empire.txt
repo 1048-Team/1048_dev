@@ -20,12 +20,10 @@ country_event = {
 		name = solar.1.a
 		
 		hidden_effect = {
-			EQS = {
-				country_event = {
+			country_event = {
 					id = solar.2
 					days = 20
-					random = 120
-					}
+					random_days = 5
 				}
 			}
 		}
@@ -45,12 +43,10 @@ country_event = {
 		name = solar.2.a
 		
 		hidden_effect = {
-			EQS = {
-				country_event = {
-					id = solar.3
-					days = 5
-					random = 48
-				}
+			country_event = {
+				id = solar.3
+				days = 5
+				random_days = 2
 			}
 		}
 	}
@@ -70,12 +66,15 @@ country_event = {
 		name = solar.3.a
 		
 		hidden_effect = {
-			EQS = {
-				country_event = {
-					id = solar.4
-					days = 21
-					random = 144
-				}
+			country_event = {
+				id = solar.4
+				days = 21
+				random_days = 6
+			}
+			country_event = {
+				id = solar.60
+				days = 120
+				random_days = 5
 			}
 		}
 	}
@@ -95,12 +94,10 @@ country_event = {
 		name = solar.4.a
 		
 		hidden_effect = {
-			EQS = {
-				country_event = {
-					id = solar.5
-					days = 14
-					random = 288
-				}
+			country_event = {
+				id = solar.5
+				days = 14
+				random_days = 12
 			}
 		}
 	}
@@ -120,12 +117,10 @@ country_event = {
 		name = solar.5.a
 		
 		hidden_effect = {
-			EQS = {
-				country_event = {
-					id = solar.6
-					days = 28
-					random = 288
-				}
+			country_event = {
+				id = solar.6
+				days = 28
+				random_days = 12
 			}
 		}
 	}
@@ -145,12 +140,10 @@ country_event = {
 		name = solar.6.a
 		
 		hidden_effect = {
-			EQS = {
-				country_event = {
-					id = solar.7
-					days = 3
-					random = 48
-				}
+			country_event = {
+				id = solar.7
+				days = 3
+				random_days = 2
 			}
 		}
 	}
@@ -744,8 +737,8 @@ country_event = { #The Inquisitionis manages to get details of the remaining cel
 	}
 }
 		
-###Military events and industry events###
-###Will go from 51-60###
+###Military events, industry events, and other random stuff###
+###Goes up to 79###
 country_event = { #Purging some heretical commanders
 	id = solar.51
 	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.51"}
@@ -941,6 +934,56 @@ country_event = { #Dotted Quill wakes up in a start as he hears Daybreaker angri
 					traits = { chief_scribe }
 				}
 			}
+		}
+	}
+}
+
+country_event = { #Coloratura's radio show breaks into the Solar Empire's airwaves to speak of the burning of Trotsville that happened under Daybreaker because they harbored literally one pony who possibly could have been a heretic
+	id = solar.60
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.60"}
+	title = solar.60.t
+	desc = solar.60.d
+	
+	is_triggered_only = yes
+	
+	option = { #Knock this station offline at once!
+		name = solar.60.a
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.03
+		}
+	}
+}
+
+country_event = { #Somepony comes into their workplace, or is walking to their place of work, as they are humming Equestia: the Land I Love, and an inquisitor apprehends them for harmonist sympathies, due to the song
+	id = solar.61
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.61"}
+	title = solar.61.t
+	desc = solar.61.d
+	
+	is_triggered_only = yes
+	
+	option = { #No singing allowed!
+		name = solar.61.a
+		add_stability = -0.02
+		add_manpower = -1
+	}
+}
+
+country_event = { #Another broadcast from Coloratura manages to break through into the Solar Empire's airwaves and she repeats some of the speeches that Celestia first gave to ponies at the start of the Great War, promising to uphold harmony, which Coloratura uses to point out how Daybreaker corrupted Equestria
+	id = solar.62
+	immediate = {log = "[GetDateText]: [Root.GetName]: event solar.62"}
+	title = solar.62.t
+	desc = solar.62.d
+	
+	is_triggered_only = yes
+	
+	option = { #These are nothing but lies!
+		name = solar.62.a
+		add_stability = -0.03
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.02
 		}
 	}
 }
