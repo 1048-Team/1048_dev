@@ -583,7 +583,186 @@ country_event = { #Some of Scorched Earth's soldiers take the last few holdouts 
 	}
 }
 
-###Pinpoint Research###
+###Pinpoint Events###
+country_event = { #Pinpoint first approaches about getting heretics to experiment on, as an offer to hopefully new ways to take out the enemy quicker
+	id = militem.pinpoint.1
+	title = militem.pinpoint.1.t
+	desc = militem.pinpoint.1.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.1"}
+	
+	trigger = {
+		tag = MTS
+		has_country_leader = { ruling_only = yes character = EQS_Scorched_Earth }
+		any_of_scopes = {
+			array = global.southeast_countries
+			NOT = { tag = MTS }
+			has_war_with = PREV
+		}
+	}
+	
+	mean_time_to_happen = { days = 60 }
+	fire_only_once = yes
+	
+	option = { #We could use the additional benefits...
+		name = militem.pinpoint.1.a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+		add_ideas = MTS_heretic_research
+		custom_effect_tooltip = MTS_trust_her_bro_tt
+		hidden_effect = {
+			country_event = {
+				id = militem.pinpoint.2
+				days = 30
+				random_days = 60
+			}
+			add_ideas = MTS_punching_some_heretics
+		}
+	}
+	option = { #The Militarium has no need of an inquisitor's esotericism!
+		name = militem.pinpoint.1.b
+		ai_chance = {
+			factor = 60
+		}
+		add_political_power = 25
+	}
+}
+
+country_event = { #Pinpoint leads Scorched through some of her results from captured heretics and prisoners of war, which are mostly methods of extreme suffering before death, which she shows casually; it is enough to disturb Scorched
+	id = militem.pinpoint.2
+	title = militem.pinpoint.2.t
+	desc = militem.pinpoint.2.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.2"}
+	
+	is_triggered_only = yes
+	
+	option = { #If this gets us our victory, then continue.
+		name = militem.pinpoint.2.a
+		ai_chance = {
+			factor = 65
+		}
+		add_war_support = 0.05
+		add_command_power = 20
+		hidden_effect = {
+			country_event = {
+				id = militem.pinpoint.3
+				days = 20
+				random_days = 20
+			}
+		}
+	}
+	option = { #This is going too far! Shut it down at once!
+		name = militem.pinpoint.2.b
+		ai_chance = {
+			factor = 35
+		}
+		add_political_power = 25
+		add_war_support = -0.05
+		remove_ideas = MTS_heretic_research
+		hidden_effect = {
+			remove_ideas = MTS_punching_some_heretics
+		}
+	}
+}
+
+country_event = { #Scorched is brought by Luminous and another aide to an explosion site, where it's revealed that it was a test by Pinpoint (she was supposedly doing something that day) and was using loyal members of Militem Solar (who she believes are heretics), which makes Scorched feel like an idiot to have believed she didn't have ulterior motives
+	id = militem.pinpoint.3
+	title = militem.pinpoint.3.t
+	desc = militem.pinpoint.3.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.3"}
+	
+	is_triggered_only = yes
+	
+	option = { #We were all idiots! We must stop her before she goes too far!
+		name = militem.pinpoint.3.a
+		country_event = {
+			id = militem.pinpoint.4
+			days = 3
+		}
+	}
+}
+
+country_event = { #Scorched leads a large squad of soldiers to arrest or execute Pinpoint if she fights, but she works to convince the soldiers that he is the one at fault (she also has a few volunteer soldiers with her), as he wishes to lead them into their own crusade against the Empress, not because of opulence, but because he desires to be seen as a god himself; this can work on a few, with options on if it succeeds or not
+	id = militem.pinpoint.4
+	title = militem.pinpoint.4.t
+	desc = militem.pinpoint.4.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.4"}
+	
+	is_triggered_only = yes
+	
+	option = { #Scorched is wounded by a soldier who betrays him.
+		name = militem.pinpoint.4.a
+		ai_chance = {
+			factor = 75
+		}
+		country_event = militem.pinpoint.5
+	}
+	option = { #Pinpoint's words are not effective enough and she is overwhelmed.
+		name = militem.pinpoint.4.b
+		ai_chance = {
+			factor = 25
+		}
+		country_event = militem.pinpoint.6
+	}
+}
+
+country_event = { #As Scorched is bleeding out from a shot from a traitor soldier, Pinpoint goes to him and mocks him for thinking that he could go against the Inquisitionis or the Empress; she will see that the Souht-East is pacified, and then create a perfect, heretic-free utopia
+	id = militem.pinpoint.5
+	title = militem.pinpoint.5.t
+	desc = militem.pinpoint.5.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.5"}
+	
+	is_triggered_only = yes
+	
+	option = { #Never trust an inquisitor...
+		name = militem.pinpoint.5.a
+		clr_country_flag = MTS_scorched_earth_triumphant
+		MTS_Pinpoint = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = solarism
+					expire = "1965.1.1"
+					desc = "POLITICS_PINPOINT_DESC"
+					traits = {
+						experimental_inquisitor
+					}
+				}
+			}
+		}
+		retire_character = EQS_Scorched_Earth
+		add_stability = -0.03
+		hidden_effect = {
+			news_event = southeastnews.15
+		}
+	}
+}
+
+country_event = { #Pinpoint has one final showdown, before she is shot by a soldier that gets a flank on her; as she is bleeding out, Scorched goes to deride her for daring to stand against the Empress's will and mission; he makes sure to end her quickly with a shot from his pistol, stating that he wishes her a burning torment in Tartarus
+	id = militem.pinpoint.6
+	title = militem.pinpoint.6.t
+	desc = militem.pinpoint.6.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.6"}
+	
+	is_triggered_only = yes
+	
+	option = { #Never trust an inquisitor.
+		name = militem.pinpoint.6.a
+		retire_character = MTS_Pinpoint
+		remove_ideas = MTS_heretic_research
+		hidden_effect = {
+			remove_ideas = MTS_punching_some_heretics
+			news_event = southeastnews.16
+		}
+		add_stability = 0.03
+	}
+}
+
+###Research###
 country_event = {
 	id = militem.pinpoint.900
 	title = militem.pinpoint.900.t
@@ -595,6 +774,7 @@ country_event = {
 	option = {
 		name = militem.pinpoint.900.a
 		#Idea/tech here
+		set_technology = { MTS_project_sunrise_tech = 1 }
 	}
 }
 
@@ -609,6 +789,7 @@ country_event = {
 	option = {
 		name = militem.pinpoint.901.a
 		#Idea/tech here
+		set_technology = { MTS_project_kinesis_tech = 1 }
 	}
 }
 
@@ -623,6 +804,7 @@ country_event = {
 	option = {
 		name = militem.pinpoint.902.a
 		#Idea/tech here
+		set_technology = { MTS_project_guardian_tech = 1 }
 	}
 }
 
@@ -637,6 +819,7 @@ country_event = {
 	option = {
 		name = militem.pinpoint.903.a
 		#Idea/tech here
+		set_technology = { MTS_project_aero_tech = 1 }
 	}
 }
 
@@ -651,6 +834,7 @@ country_event = {
 	option = {
 		name = militem.pinpoint.904.a
 		#Idea/tech here
+		set_technology = { MTS_project_mage_tech = 1 }
 	}
 }
 
