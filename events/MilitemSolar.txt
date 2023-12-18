@@ -762,6 +762,74 @@ country_event = { #Pinpoint has one final showdown, before she is shot by a sold
 	}
 }
 
+country_event = { #One of the generals that claimed to be loyal to Pinpoint rather than stuck with the words of Scorched Earth is dragged out in the middle of the night by Pinpoint, who is on a slightly nervous break, believing that he is moments away from betraying her, and that she will ensure that his position is loyal, without him
+	id = militem.pinpoint.10
+	title = militem.pinpoint.10.t
+	desc = militem.pinpoint.10.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.10"}
+	
+	is_triggered_only = yes
+	
+	option = { #I knew I should have sworn to uphold Scorched's plans!
+		name = militem.pinpoint.10.a
+		custom_effect_tooltip = MTS_convex_stats_tt
+		custom_effect_tooltip = MTS_steaming_broil_stats_tt
+		set_country_flag = MTS_pinpoints_crew
+	}
+}
+
+country_event = { #Pinpoint discusses some of the problems with the land she now has, and her distrust of most of the administrators that are left, and how they will probably be all heretics, and Emerald and Light, her closest confidants, propose some solutions, and how they could assist her; they are just as erratic as her, which makes her believe she has found to excellent replacements
+	id = militem.pinpoint.11
+	title = militem.pinpoint.11.t
+	desc = militem.pinpoint.11.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.11"}
+	
+	is_triggered_only = yes
+	
+	option = { #At least a couple see things as clearly as I do.
+		name = militem.pinpoint.11.a
+		add_advisor_role = {
+			character = MTS_Emerald_Days
+			advisor = {
+				slot = political_advisor
+				idea_token = emerald_days
+				traits = { fetishist_mage }
+			}
+		}
+		add_advisor_role = {
+			character = MTS_Light_Jolt
+			advisor = {
+				slot = political_advisor
+				idea_token = light_jolt
+				traits = { electric_personality }
+			}
+		}
+	}
+}
+
+country_event = { #Pinpoint meets with both Emerald Days and Light Jolt, and agrees to split the administration of the realm, so they can concentrate their eradication of heresy
+	id = militem.pinpoint.15
+	title = militem.pinpoint.15.t
+	desc = militem.pinpoint.15.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.15"}
+	
+	is_triggered_only = yes
+	
+	option = { #This is a temporary measure.
+		name = militem.pinpoint.15.a
+		set_cosmetic_tag = MTS_inquisitor_heaven
+		set_capital = { state = 1214 }
+		MTS_spawn_inquisitor_puppets = yes
+		every_state = {
+			limit = {
+				is_owned_by = ROOT
+				NOT = { is_core_of = ROOT }
+			}
+			add_core_of = ROOT
+		}
+	}
+}
+
 ###Research###
 country_event = {
 	id = militem.pinpoint.900
