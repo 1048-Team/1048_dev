@@ -830,6 +830,127 @@ country_event = { #Pinpoint meets with both Emerald Days and Light Jolt, and agr
 	}
 }
 
+country_event = { #Pinpoint meets again with her two closest inquisitors to demand that they bring their Ordos back into the larger Ordo Meridian, since heresy has been effectively quashed, which devolves into a clash of egos as all three believe they have the best way forward
+	id = militem.pinpoint.25
+	title = militem.pinpoint.25.t
+	desc = militem.pinpoint.25.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.25"}
+	
+	is_triggered_only = yes
+	
+	option = { #You will return to the fold, and that is final!
+		name = militem.25.a
+		custom_effect_tooltip = MTS_manifest_that_destiny_tt
+		hidden_effect = {
+			OCS = { country_event = militem.pinpoint.26 }
+			OAC = { country_event = militem.pinpoint.26 }
+		}
+	}
+	option = { #Then perhaps we shall agree to an alternative.
+		name = militem.25.b
+		custom_effect_tooltip = MTS_buddies_until_the_end_tt
+		hidden_effect = {
+			OCS = { country_event = militem.pinpoint.28 }
+			OAC = { country_event = militem.pinpoint.28 }
+		}
+	}
+}
+
+country_event = { #A missive is sent to both Ordos by Pinpoint to demand that with the heresies dealt with and the ponies of the Souht-East more loyal because of it, it is time to reintegrate
+	id = militem.pinpoint.26
+	title = militem.pinpoint.26.t
+	desc = militem.pinpoint.26.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.26"}
+	
+	is_triggered_only = yes
+	
+	option = { #Let us become whole again.
+		name = militem.pinpoint.26.a
+		FROM = {
+			annex_country = {
+				target = ROOT
+				transfer_troops = yes
+			}
+			every_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_core_of = FROM
+			}
+		}
+	}
+	option = { #No! We have not fought off heresy for nothing!
+		name = militem.pinpoint.26.b
+		FROM = { 
+			country_event = { id = militem.pinpoint.27 days = 3 }
+			end_puppet = ROOT
+		}
+		leave_faction = yes
+	}
+}
+
+country_event = { #Since one of the Ordos refused to be annexed, Pinpoint declares the pony leading as as heretic and that they will be destroyed by the Empress's hoof
+	id = militem.pinpoint.27
+	title = militem.pinpoint.27.t
+	desc = militem.pinpoint.27.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.27"}
+	
+	is_triggered_only = yes
+	
+	option = { #They will burn in Tartarus!
+		name = militem.pinpoint.27.a
+		declare_war_on = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #Instead of being demanded to integrate, the Ordos are given the opportunity to continue on, under Pinpoint and Ordo Meridian, so that they can continue autonomously, but still serve the Empress
+	id = militem.pinpoint.28
+	title = militem.pinpoint.28.t
+	desc = militem.pinpoint.28.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.28"}
+	
+	is_triggered_only = yes
+	
+	option = { #We shall fight against heresy, together!
+		name = militem.pinpoint.28.a
+		FROM = {
+			set_autonomy = {
+				target = ROOT
+				autonomy_state = autonomy_satellite
+			}
+			set_country_flag = MTS_united_inquisitors
+		}
+	}
+	option = { #We must be free to fight heresy properly!
+		name = militem.pinpoint.28.b
+		ai_chance = { factor = 0 }
+		FROM = { 
+			country_event = { id = militem.pinpoint.27 days = 3 }
+			end_puppet = ROOT
+		}
+		leave_faction = yes
+	}
+}	
+
+#country_event = { #If both agree to be annexed, Pinpoint will have an integration talk with her two subordinates, where they effectively bond a bit more over the complete destruction that they caused upon the heretics; if both ask for continued autonomy
+#	id = militem.pinpoint.41
+#	title = militem.pinpoint.26.t
+#	desc = "It worked?"
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.26"
+#		clear_variable = global.MTS_proposition_accepted
+#	}
+#	
+#	is_triggered_only = yes
+#	
+#	option = {
+#		name = militem.pinpoint.26.a
+#	}
+#}
+
 ###Research###
 country_event = {
 	id = militem.pinpoint.900

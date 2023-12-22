@@ -1,14 +1,92 @@
+political_actions = {
+	MTS_wipe_the_floor_clean = {
+		allowed = { tag = MTS }
+		visible = {
+			has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+			any_owned_state = {
+				OR = {
+					is_core_of = OAC
+					is_core_of = OCS
+				}
+				NOT = { is_core_of = MTS }
+			}
+			OAC = {
+				OR = {
+					is_subject_of = MTS
+					exists = no
+				}
+			}
+			OCS = {
+				OR = {
+					is_subject_of = MTS
+					exists = no
+				}
+			}
+		}
+		cost = 100
+		fire_only_once = yes
+		days_remove = 180
+		complete_effect = {
+			add_stability = -0.1
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = OAC
+						is_core_of = OCS
+					}
+					NOT = { is_core_of = MTS }
+					is_owned_by = MTS
+				}
+				add_compliance = 10
+				save_current_manpower = yes
+				add_manpower = -7500
+				restore_previous_manpower = yes
+			}
+		}
+		remove_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = OAC
+						is_core_of = OCS
+					}
+					NOT = { is_core_of = MTS }
+					is_owned_by = MTS
+				}
+				add_core_of = MTS
+			}
+		}
+	}
+}
 MTS_heretic_test_subjects_category = {
 	MTS_internal_raid = {
 		allowed = {
-			tag = MTS
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
 		}
 		available = {
 			NOT = { has_country_flag = MTS_preparing_heretic_raid }
 		}
 		visible = {
-			has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
-			has_country_flag = MTS_burn_heretics
+			OR = {
+				AND = {
+					has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+					has_country_flag = MTS_burn_heretics
+				}
+				AND = {
+					OR = {
+						tag = OAC
+						tag = OCS
+					}
+					OVERLORD = {
+						has_country_flag = MTS_burn_heretics
+						has_country_flag = MTS_united_inquisitors
+					}
+				}
+			}
 			FROM = {
 				is_owned_by = ROOT
 			}
@@ -50,22 +128,48 @@ MTS_heretic_test_subjects_category = {
 	}
 	MTS_border_raid = {
 		allowed = {
-			tag = MTS
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
 		}
 		available = {
 			NOT = { has_country_flag = MTS_preparing_heretic_raid }
 		}
 		visible = {
-			has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
-			has_country_flag = MTS_burn_heretics
+			OR = {
+				AND = {
+					has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+					has_country_flag = MTS_burn_heretics
+				}
+				AND = {
+					OR = {
+						tag = OAC
+						tag = OCS
+					}
+					OVERLORD = {
+						has_country_flag = MTS_burn_heretics
+						has_country_flag = MTS_united_inquisitors
+					}
+				}
+			}
 			NOT = { has_country_flag = MTS_preparing_heretic_raid }
 			NOT = { has_country_flag = MTS_recently_raided }
 			FROM = {
 				any_neighbor_state = {
-					is_owned_by = MTS
-					OWNER = { NOT = { has_war_with = MTS } }
+					OR = {
+						is_owned_by = ROOT
+						OWNER = { is_in_faction_with = ROOT }
+					}
+					OWNER = { 
+						NOT = { has_war_with = ROOT }
+					}
 				}
-				NOT = { is_owned_by = MTS }
+				NOT = { is_owned_by = ROOT }
+				OWNER = {
+					NOT = { is_in_faction_with = ROOT }
+				}
 			}
 		}
 		custom_cost_trigger = {
@@ -126,47 +230,168 @@ MTS_heretic_test_subjects_category = {
 	}
 	MTS_delve_into_pony_secrets = {
 		allowed = {
-			tag = MTS
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
 		}
 		available = {
-			has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+			OR = {
+				has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+				OVERLORD = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+			}
 		}
 		visible = {
-			has_country_flag = MTS_burn_heretics
+			OR = {
+				has_country_flag = MTS_burn_heretics
+				AND = {
+					OR = {
+						tag = OAC
+						tag = OCS
+					}
+					OVERLORD = {
+						has_country_flag = MTS_burn_heretics
+						has_country_flag = MTS_united_inquisitors
+					}
+				}
+			}
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 750 }
-			check_variable = { MTS_heretic_prisoners > 749 }
+			check_variable = { global.MTS_heretic_prisoners > 749 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 50
 		days_re_enable = 150
 		complete_effect = {
+			set_variable = { MTS_shared_decision_1 = 1 }
+			if = {
+				limit = { 
+					NOT = { tag = OAC }
+					OAC = { check_variable = { MTS_shared_decision_1 = 0 } }
+				}
+				OAC = { 
+					activate_decision = MTS_delve_into_pony_secrets
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 750 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = OCS } 
+					OCS = { check_variable = { MTS_shared_decision_1 = 0 } }
+				}
+				OCS = { 
+					activate_decision = MTS_delve_into_pony_secrets
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 750 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = MTS } 
+					MTS = { check_variable = { MTS_shared_decision_1 = 0 } }
+				}
+				MTS = { 
+					activate_decision = MTS_delve_into_pony_secrets
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 750 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
 			set_temp_variable = { MTS_heretic_prisoners_added = -750 }
 			MTS_add_new_heretic_prisoners = yes
 		}
 		modifier = {
 			research_speed_factor = 0.1
 		}
+		remove_effect = {
+			clear_variable = MTS_shared_decision_1
+		}
 	}
 	MTS_test_physical_limits = {
 		allowed = {
-			tag = MTS
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
 		}
 		available = {
-			has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+			OR = {
+				has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+				OVERLORD = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+			}
 		}
 		visible = {
-			has_country_flag = MTS_burn_heretics
+			OR = {
+				has_country_flag = MTS_burn_heretics
+				AND = {
+					OR = {
+						tag = OAC
+						tag = OCS
+					}
+					OVERLORD = {
+						has_country_flag = MTS_burn_heretics
+						has_country_flag = MTS_united_inquisitors
+					}
+				}
+			}
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 1000 }
-			check_variable = { MTS_heretic_prisoners > 999 }
+			check_variable = { global.MTS_heretic_prisoners > 999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 80
 		days_re_enable = 240
 		complete_effect = {
+			set_variable = { MTS_shared_decision_2 = 1 }
+			if = {
+				limit = { 
+					NOT = { tag = OAC }
+					OAC = { check_variable = { MTS_shared_decision_2 = 0 } }
+				}
+				OAC = { 
+					activate_decision = MTS_test_physical_limits
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1000 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = OCS } 
+					OCS = { check_variable = { MTS_shared_decision_2 = 0 } }
+				}
+				OCS = { 
+					activate_decision = MTS_test_physical_limits
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1000 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = MTS } 
+					MTS = { check_variable = { MTS_shared_decision_2 = 0 } }
+				}
+				MTS = { 
+					activate_decision = MTS_test_physical_limits
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1000 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
 			set_temp_variable = { MTS_heretic_prisoners_added = -1000 }
 			MTS_add_new_heretic_prisoners = yes
 		}
@@ -174,25 +399,170 @@ MTS_heretic_test_subjects_category = {
 			production_speed_buildings_factor = 0.15
 			political_power_factor = -0.1
 		}
+		remove_effect = {
+			clear_variable = MTS_shared_decision_2
+		}
+	}
+	MTS_experiment_on_nerve_suppressants = {
+		allowed = {
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
+		}
+		available = {
+			OR = {
+				has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+				OVERLORD = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+			}
+		}
+		visible = {
+			OR = {
+				has_country_flag = MTS_burn_heretics
+				OVERLORD = {
+					has_country_flag = MTS_burn_heretics
+					has_country_flag = MTS_united_inquisitors
+				}
+			}
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { MTS_display_variable_hp = 1250 }
+			check_variable = { global.MTS_heretic_prisoners > 1249 }
+		}
+		custom_cost_text = MTS_decision_cost_HP_tt
+		days_remove = 100
+		days_re_enable = 180
+		complete_effect = {
+		set_variable = { MTS_shared_decision_3 = 1 }
+			if = {
+				limit = { 
+					NOT = { tag = OAC }
+					OAC = { check_variable = { MTS_shared_decision_3 = 0 } }
+				}
+				OAC = { 
+					activate_decision = MTS_experiment_on_nerve_suppressants
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1250 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = OCS } 
+					OCS = { check_variable = { MTS_shared_decision_3 = 0 } }
+				}
+				OCS = { 
+					activate_decision = MTS_experiment_on_nerve_suppressants
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1250 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = MTS } 
+					MTS = { check_variable = { MTS_shared_decision_3 = 0 } }
+				}
+				MTS = { 
+					activate_decision = MTS_experiment_on_nerve_suppressants
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1250 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			set_temp_variable = { MTS_heretic_prisoners_added = -1250 }
+			MTS_add_new_heretic_prisoners = yes
+		}
+		modifier = {
+			army_infantry_defence_factor = 0.05
+			experience_loss_factor = -0.05
+			army_speed_factor = -0.1
+		}
+		remove_effect = {
+			clear_variable = MTS_shared_decision_3
+		}
 	}
 	MTS_adapt_adrenal_responses = {
 		allowed = {
-			tag = MTS
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
 		}
 		available = {
-			has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+			OR = {
+				has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+				OVERLORD = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+			}
 		}
 		visible = {
-			has_country_flag = MTS_burn_heretics
+			OR = {
+				has_country_flag = MTS_burn_heretics
+				AND = {
+					OR = {
+						tag = OAC
+						tag = OCS
+					}
+					OVERLORD = {
+						has_country_flag = MTS_burn_heretics
+						has_country_flag = MTS_united_inquisitors
+					}
+				}
+			}
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 1500 }
-			check_variable = { MTS_heretic_prisoners > 1499 }
+			check_variable = { global.MTS_heretic_prisoners > 1499 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 120
 		days_re_enable = 240
 		complete_effect = {
+			set_variable = { MTS_shared_decision_4 = 1 }
+			if = {
+				limit = { 
+					NOT = { tag = OAC }
+					OAC = { check_variable = { MTS_shared_decision_4 = 0 } }
+				}
+				OAC = { 
+					activate_decision = MTS_adapt_adrenal_responses
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1500 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = OCS } 
+					OCS = { check_variable = { MTS_shared_decision_4 = 0 } }
+				}
+				OCS = { 
+					activate_decision = MTS_adapt_adrenal_responses
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1500 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = MTS } 
+					MTS = { check_variable = { MTS_shared_decision_4 = 0 } }
+				}
+				MTS = { 
+					activate_decision = MTS_adapt_adrenal_responses
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 1500 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
 			set_temp_variable = { MTS_heretic_prisoners_added = -1500 }
 			MTS_add_new_heretic_prisoners = yes
 		}
@@ -200,6 +570,96 @@ MTS_heretic_test_subjects_category = {
 			army_attack_factor = 0.05
 			army_speed_factor = 0.05
 			army_org_factor = -0.075
+		}
+		remove_effect = {
+			clear_variable = MTS_shared_decision_4
+		}
+	}
+	MTS_trial_stimulant_meal_plans = {
+		allowed = {
+			OR = {
+				tag = MTS
+				tag = OAC
+				tag = OCS
+			}
+		}
+		available = {
+			OR = {
+				has_country_leader = { character = MTS_Pinpoint ruling_only = yes }
+				OVERLORD = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+			}
+		}
+		visible = {
+			OR = {
+				has_country_flag = MTS_burn_heretics
+				AND = {
+					OR = {
+						tag = OAC
+						tag = OCS
+					}
+					OVERLORD = {
+						has_country_flag = MTS_burn_heretics
+						has_country_flag = MTS_united_inquisitors
+					}
+				}
+			}
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { MTS_display_variable_hp = 2000 }
+			check_variable = { global.MTS_heretic_prisoners > 1999 }
+		}
+		custom_cost_text = MTS_decision_cost_HP_tt
+		days_remove = 150
+		days_re_enable = 200
+		complete_effect = {
+			set_variable = { MTS_shared_decision_5 = 1 }
+			if = {
+				limit = { 
+					NOT = { tag = OAC }
+					OAC = { check_variable = { MTS_shared_decision_5 = 0 } }
+				}
+				OAC = { 
+					activate_decision = MTS_trial_stimulant_meal_plans
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 2000 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = OCS } 
+					OCS = { check_variable = { MTS_shared_decision_5 = 0 } }
+				}
+				OCS = { 
+					activate_decision = MTS_trial_stimulant_meal_plans
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 2000 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			if = {
+				limit = { 
+					NOT = { tag = MTS } 
+					MTS = { check_variable = { MTS_shared_decision_5 = 0 } }
+				}
+				MTS = { 
+					activate_decision = MTS_trial_stimulant_meal_plans
+					hidden_effect = {
+						set_temp_variable = { MTS_heretic_prisoners_added = 2000 }
+						MTS_add_new_heretic_prisoners = yes
+					}
+				}
+			}
+			set_temp_variable = { MTS_heretic_prisoners_added = -2000 }
+			MTS_add_new_heretic_prisoners = yes
+		}
+		modifier = {
+			weekly_manpower = -300
+			political_power_factor = -0.05
+			industrial_capacity_factory = 0.1
+			industrial_capacity_dockyard = 0.1
 		}
 	}
 	MTS_project_sunrise = {
@@ -214,7 +674,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 5000 }
-			check_variable = { MTS_heretic_prisoners > 4999 }
+			check_variable = { global.MTS_heretic_prisoners > 4999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -245,7 +705,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 7500 }
-			check_variable = { MTS_heretic_prisoners > 7499 }
+			check_variable = { global.MTS_heretic_prisoners > 7499 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -276,7 +736,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 4000 }
-			check_variable = { MTS_heretic_prisoners > 3999 }
+			check_variable = { global.MTS_heretic_prisoners > 3999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -307,7 +767,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 3500 }
-			check_variable = { MTS_heretic_prisoners > 3499 }
+			check_variable = { global.MTS_heretic_prisoners > 3499 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -338,7 +798,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 6000 }
-			check_variable = { MTS_heretic_prisoners > 5999 }
+			check_variable = { global.MTS_heretic_prisoners > 5999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -373,7 +833,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 10000 }
-			check_variable = { MTS_heretic_prisoners > 9999 }
+			check_variable = { global.MTS_heretic_prisoners > 9999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -402,11 +862,11 @@ MTS_heretic_test_subjects_category = {
 		}
 		visible = {
 			has_country_flag = MTS_burn_heretics
-			has_country_flag = MTS_herticus_begun
+			has_country_flag = MTS_hereticus_begun
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 25000 }
-			check_variable = { MTS_heretic_prisoners > 24999 }
+			check_variable = { global.MTS_heretic_prisoners > 24999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
@@ -440,7 +900,7 @@ MTS_heretic_test_subjects_category = {
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { MTS_display_variable_hp = 50000 }
-			check_variable = { MTS_heretic_prisoners > 49999 }
+			check_variable = { global.MTS_heretic_prisoners > 49999 }
 		}
 		custom_cost_text = MTS_decision_cost_HP_tt
 		days_remove = 365
