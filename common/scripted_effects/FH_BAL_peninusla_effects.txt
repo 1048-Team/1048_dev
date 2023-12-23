@@ -562,7 +562,7 @@ MTS_calculate_state_prosperity_cost = {
 	set_variable = { MTS_consumer_goods_cost = MTS_total_consumer_cost }
 	set_variable = { MTS_political_power_cost = MTS_total_political_cost }
 }
-MTS_spawn_inquisitor_puppets = {
+MTS_spawn_inquisitor_puppets = { #Find the effect for copying the spawning country's tech
 	custom_effect_tooltip = MTS_rule_of_three_tt
 	hidden_effect = {
 		OCS = {
@@ -585,6 +585,22 @@ MTS_spawn_inquisitor_puppets = {
 			add_state_core = 81
 			add_state_core = 50
 			set_cosmetic_tag = MTS_military_puppet
+			load_oob = "OCS_1048"
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				load_oob = "OCS_1048_naval"
+			}
+			else = {
+				load_oob = "OCS_1048_naval_legacy"
+			}
+			transfer_technology = yes
+			transfer_society_ideas = yes
+			transfer_science_ideas = yes
+			transfer_poverty_ideas = yes
+			transfer_illiteracy_ideas = yes
+			get_current_government_type = yes
 		}
 		OAC = {
 			transfer_state = 15
@@ -622,6 +638,22 @@ MTS_spawn_inquisitor_puppets = {
 			add_state_core = 1193
 			add_state_core = 1194
 			set_cosmetic_tag = MTS_industry_puppet
+			load_oob = "OAC_1048"
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				load_oob = "OAC_1048_naval"
+			}
+			else = {
+				load_oob = "OAC_1048_naval_legacy"
+			}
+			transfer_technology = yes
+			transfer_society_ideas = yes
+			transfer_science_ideas = yes
+			transfer_poverty_ideas = yes
+			transfer_illiteracy_ideas = yes
+			get_current_government_type = yes
 		}
 		if = {
 			limit = {
@@ -639,6 +671,14 @@ MTS_spawn_inquisitor_puppets = {
 		else = {
 			puppet = OCS
 			puppet = OAC
+		}
+		hidden_effect = {
+			OCS = {
+				restore_previous_government_type = yes
+			}
+			OAC = {
+				restore_previous_government_type = yes
+			}
 		}
 	}
 	MTS_Emerald_Days = { set_nationality = OCS }
@@ -662,9 +702,6 @@ MTS_spawn_inquisitor_puppets = {
 				}
 			}
 		}
-		OCS = {
-			#add_ideas = MTS_militarist_ordo
-		}
 		random_country = {
 			limit = {
 				has_character = MTS_Light_Jolt
@@ -682,9 +719,6 @@ MTS_spawn_inquisitor_puppets = {
 					}
 				}
 			}
-		}
-		OAC = {
-			#add_ideas = MTS_industrialist_ordo
 		}
 	}
 	create_faction = MTS_buddy_inquisitors
