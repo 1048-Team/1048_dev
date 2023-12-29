@@ -8697,7 +8697,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_strength_of_sun"
-		#Idea here
+		add_ideas = MTS_might_of_sun
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -8714,7 +8714,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_hoofs_that_won_the_war"
-		#Idea here
+		add_ideas = MTS_tireless_hoofs
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8731,7 +8731,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_machine_goddess"
-		#Idea here
+		add_ideas = MTS_goddess_of_machines
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8748,7 +8748,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_guns_of_old"
-		#Idea here
+		swap_ideas = {
+			add_idea = MTS_old_fashioned_violence
+			remove_idea = MTS_tireless_hoofs
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8796,7 +8799,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_supplies_for_righteous"
-		#Idea here
+		swap_ideas = {
+			add_idea = MTS_goddess_of_the_mechanical
+			remove_idea = MTS_goddess_of_machines
+		}
 		###Maybe event of talking about how new logistics laws are already improving how ponies are receiving supplies for dealing with heretics, and how it has prevented heretic attacks
 	}
 	
@@ -8815,7 +8821,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_bred_from_jungle"
 		###Maybe event of some elite special forces exercise occuring, that also happens to take down some thestrals that are still resisting
-		#Idea here
+		add_ideas = MTS_bred_for_jungle
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8868,7 +8874,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_clearing_second_war"
-		#Idea here
+		add_ideas = MTS_clearing_for_war
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8906,7 +8912,50 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_cleansing_smoke"
-		#Effect here
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_by = ROOT
+					OWNER = { is_subject_of = ROOT }
+				}
+				OR = {
+					has_state_category = large_city
+					has_state_category = metropolis
+					has_state_category = megalopolis
+				}
+				industrial_complex > 2
+			}
+			remove_building = {
+				type = industrial_complex
+				level = 3
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+		}
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_by = ROOT
+					OWNER = { is_subject_of = ROOT }
+				}
+				OR = {
+					has_state_category = large_city
+					has_state_category = metropolis
+					has_state_category = megalopolis
+				}
+				industrial_complex > 2
+			}
+			remove_building = {
+				type = industrial_complex
+				level = 3
+			}
+			add_resource = {
+				type = tungsten
+				amount = 8
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8941,7 +8990,8 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_endless_construction"
-		#Idea here
+		###Maybe event of some inquisitors forcing a construction crew to continue on with their task, despite it being well past when they should have gone to bed, because they are not working hard enough for the Empress
+		add_ideas = MTS_endless_work
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8975,7 +9025,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_free_to_labor"
-		#Idea here
+		add_ideas = MTS_technically_free_labor
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8995,7 +9045,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_unending_debts"
-		#Idea here
+		add_ideas = MTS_debts_forever
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -9013,6 +9063,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_analyze_temptations"
 		###Possibly event of ponies being toiled for every waking moment because of their lower status as heretics, as they can be used as slaves for Daybreaker
+		add_ideas = MTS_slaves_for_eternity
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9034,7 +9085,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_hidden_depths"
 		###Possibly event of a collapse after workers try to construct a new room in one of the underground factories
-		#Idea here
+		add_ideas = MTS_depths_of_tartarus
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -9073,7 +9124,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_plunders_of_south"
-		#Idea here
+		add_ideas = MTS_plundered_south
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9090,7 +9141,83 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_enforce_border"
-		#Effect here
+		#custom_effect_tooltip = MTS_fortify_border_tt
+		50 = {
+			add_building_construction = {
+				type = bunker
+				province = 9557
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 982
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 11752
+				level = 2
+				instant_build = yes
+			}
+		}
+		35 = {
+			add_building_construction = {
+				type = bunker
+				province = 6531
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 3641
+				level = 2
+				instant_build = yes
+			}
+		}
+		84 = {
+			add_building_construction = {
+				type = bunker
+				province = 967
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 9990
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 925
+				level = 1
+				instant_build = yes
+			}
+		}
+		27 = {
+			add_building_construction = {
+				type = bunker
+				province = 6572
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = bunker
+				province = 11861
+				level = 2
+				instant_build = yes
+			}
+		}
+		28 = {
+			add_building_construction = {
+				type = bunker
+				province = 11838
+				level = 3
+				instant_build = yes
+			}
+		}
 		add_war_support = 0.05
 	}
 	
@@ -9161,7 +9288,15 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_mistress_of_secrets"
 		###Maybe Pinpoint punishing an inquisitor who shouldn't have been in her lab or looking at her research, even though they were technically allowed to be there
-		#Idea here
+		if = {
+			limit = {
+				has_dlc = "La Resistance"
+			}
+			add_ideas = MTS_secrets_to_everypony_lar
+		}
+		else = {
+			add_ideas = MTS_secrets_to_everypony
+		}
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9179,7 +9314,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_secrets_of_body"
-		#Idea here
+		add_ideas = MTS_bodily_defenses
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9197,6 +9332,8 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_wholistic_approach"
 		#Unlock test subject raids
+		unlock_decision_category_tooltip = MTS_heretic_test_subjects_category
+		set_country_flag = MTS_burn_heretics
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9391,6 +9528,48 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_plunders_of_south"
 		#Spawn divisions here
+		hidden_effect = {
+			division_template = {
+				name = "Custos Experiments"
+				is_locked = yes
+				division_cap = 6
+				division_names_group = SLE_INF_02
+				priority = 0
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+					artillery_brigade = { x = 3 y = 0 }
+					artillery_brigade = { x = 3 y = 1 }
+					artillery_brigade = { x = 3 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+					logistics_company = { x = 0 y = 2 }
+				}
+			}
+			28 = {
+				create_unit = { division = "division_template = \"Custos Experiments\" start_experience_factor = 0.1" owner = MTS prioritize_location = 963 }
+				create_unit = { division = "division_template = \"Custos Experiments\" start_experience_factor = 0.1" owner = MTS prioritize_location = 963 }
+				create_unit = { division = "division_template = \"Custos Experiments\" start_experience_factor = 0.1" owner = MTS prioritize_location = 963 }
+			}
+			50 = {
+				create_unit = { division = "division_template = \"Custos Experiments\" start_experience_factor = 0.1" owner = MTS prioritize_location = 9572 }
+				create_unit = { division = "division_template = \"Custos Experiments\" start_experience_factor = 0.1" owner = MTS prioritize_location = 9572 }
+				create_unit = { division = "division_template = \"Custos Experiments\" start_experience_factor = 0.1" owner = MTS prioritize_location = 9572 }
+			}
+			OCS = { set_country_flag = MTS_pinpoints_favored }
+		}
+		custom_effect_tooltip = MTS_spawn_legions_tt
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9408,6 +9587,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_righteous_overwatch"
 		###Follow some inquisitors as they're stymied by some of Pinpoint's new rules for eradicating heresy and also keeping themselves all mentally pure
+		###Should be able to be removed via decision later on, if focus is taken
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -9424,7 +9604,8 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_inquisitor_librarians"
-		#Idea here
+		###Follow some inquisitors as they try to parse how they are supposed to justify learning many things, including some that could be close to heresy, with their training against heresy; there's a lot of cognitive dissonance
+		add_ideas = MTS_wizardly_inquisitors
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -9475,7 +9656,10 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_project_to_death"
-		#Effect here
+		86 = { add_extra_state_shared_building_slots = 1 }
+		26 = { add_extra_state_shared_building_slots = 2 }
+		36 = { add_extra_state_shared_building_slots = 1 }
+		OAC = { add_stability = -0.05 }
 		###Maybe event of a low worker crisis since so many have been worked to uselessness or death by the constant projects that have been placed on them
 	}
 	
@@ -9529,7 +9713,16 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_investments_for_future"
-		#Effect here
+		36 = { add_resource = { type = oil amount = 24 } }
+		79 = { add_resource = { type = oil amount = 12 } }
+		221 = { add_resource = { type = steel amount = 20 } }
+		15 = { add_resource = { type = chromium amount = 8 } }
+		OCS = {
+			three_random_industrial_complex = yes
+			two_random_industrial_complex = yes
+			one_random_industrial_complex = yes
+			set_country_flag = MTS_pinpoints_favored
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -9572,7 +9765,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_secrets_of_mind"
-		#Idea here
+		add_ideas = MTS_mindful_defenses
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9605,10 +9798,78 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_silence_all_ears }
+	available = {
+		owns_state = 1196
+		owns_state = 1197
+		owns_state = 1198
+	}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_headquarters_of_sea"
-		#Effect here
+		1196 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				province = 20694
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				province = 20694
+				level = 3
+				instant_build = yes
+			}
+		}
+		1197 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				province = 20682
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				province = 20682
+				level = 3
+				instant_build = yes
+			}
+		}
+		1198 = {
+			add_building_construction = {
+				type = naval_base
+				province = 20678
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				province = 20669
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				province = 20678
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				province = 20669
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9625,7 +9886,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_silence_all_ears"
-		#Idea here
+		add_ideas = MTS_learning_from_sea
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9642,7 +9903,8 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_implore_suns_protection"
-		#Idea here
+		###Perhaps a short event of Pinpoint going all out on a religious ceremony to be blessed by Daybreaker in her conquest of HIP and the region
+		add_ideas = MTS_protection_from_sun
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -9660,7 +9922,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_span_globe"
-		#Idea here
+		add_ideas = MTS_reaching_the_globe
 		###Possible event of Pinpoint overlooking some new retrofits of ships preparing for invasion of Zebrica, which has a hiccup or two which nearly destroys a dock, and the pony in charge of it is punished accordingly
 	}
 	
@@ -9700,7 +9962,37 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_spring_surprise"
-		#War goals here
+		custom_effect_tooltip = MTS_prepare_for_battle_tt
+		775 = {
+			controller = {
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+		712 = {
+			controller = {
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+		1165 = {
+			controller = {
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -9785,7 +10077,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_feeble_testers"
-		#Idea here
+		add_ideas = MTS_thestral_labor
 		###Maybe event of some studies done by Pinpoint about how thestrals are inferior to be used as test subjects because of their affected physiology by Zebrica, either being too weak or too muscular or the like, something that throws it off
 	}
 	
@@ -9925,7 +10217,34 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_repair_naval_yards"
-		#Effect here
+		1202 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = dockyard
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 3
+				province = 4252
+				instant_build = yes
+			}
+		}
+		685 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 2
+				province = 18748
+				instant_build = yes
+			}
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -9943,7 +10262,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_merciful_torture"
-		#Idea here
+		add_ideas = MTS_thestral_research_subjects
 		###Maybe an event of Pinpoint finding something additionally interesting about the BAT thestrals, and that they would be even better test subjects
 	}
 	
