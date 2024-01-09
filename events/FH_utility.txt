@@ -960,6 +960,118 @@ country_event = { #STG is fed up with AWR's crap and conquers them
 	}
 }
 
+country_event = { #EEE decides to finally attack NEI because of their oppression of thestrals
+	id = equestria_activity.30
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.30"}
+	hidden = yes
+	
+	trigger = {
+		date > 1053.4.20
+		tag = EEE
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = NEI
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #STB goes to war with NRP to get some more breathing room
+	id = equestria_activity.31
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.31"}
+	hidden = yes
+	
+	trigger = {
+		tag = STB
+		date > 1053.6.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = NRP
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #BAL attempts to take back the MTS territory it lost
+	id = equestria_activity.32
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.32"}
+	hidden = yes
+	
+	trigger = {
+		tag = BAL
+		date > 1053.7.1
+		country_exists = MTS
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = MTS
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #If MTS is already eaten or never spawned, BAL goes to war with either NEI or EEE to secure more continental power
+	id = equestria_activity.33
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.33"}
+	hidden = yes
+	
+	trigger = {
+		tag = BAL
+		date > 1053.7.1
+		NOT = { country_exists = MTS }
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = { country_exists = EEE }
+			declare_war_on = {
+				target = EEE
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = { country_exists = NEI }
+			declare_war_on = {
+				target = NRP
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { #CLI goes to war with SPF to try and get more land to invade the mainland from
+	id = equestria_activity.34
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.34"}
+	hidden = yes
+	
+	trigger = {
+		tag = CLI
+		date > 1053.2.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = SPF
+			type = annex_everything
+		}
+	}
+}
+
 country_event = { #GRI annexes BOI
 	id = griffonia_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.1"}

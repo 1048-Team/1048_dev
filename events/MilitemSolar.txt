@@ -789,7 +789,16 @@ country_event = { #Some of the garrison of New Horseleans is called out onto a s
 	option = { #Time to see if you can handle the pressure.
 		name = militem.pinpoint.8.a
 		add_manpower = -25000
-		###Add one character for Pinpoint
+		MTS_Gallant = {
+			add_corps_commander_role = {
+				traits = { pony_race_trait solaris_militarium cautious politically_connected }
+				skill = 2
+				attack_skill = 1
+				defense_skill = 4
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
 	}
 }
 
@@ -804,7 +813,16 @@ country_event = { #Luminous is tracked down by some of Pinpoint's closest inquis
 	option = { #Where will love get you now?!
 		name = militem.pinpoint.9.a
 		add_war_support = -0.05
-		###Add another general
+		MTS_Keen_Blade = {
+			add_corps_commander_role = {
+				traits = { pony_race_trait = solaris_militarium trickster }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 1
+			}
+		}
 	}
 }
 
@@ -820,7 +838,16 @@ country_event = { #Follow Saber Rattle as he frantically goes about his tent or 
 		name = militem.pinpoint.10.a
 		retire_character = MTS_Saber_Rattle
 		add_stability = -0.05
-		###Pinpoint general
+		MTS_Glad_Tidings = {
+			add_corps_commander_role = {
+				traits = { pony_race_trait solaris_militarium politically_connected career_officer }
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
 	}
 }
 
@@ -849,6 +876,24 @@ country_event = { #A couple of prisoners are transported in some truck convoys t
 	option = { #Will we ever be free?
 		name = militem.pinpoint.12.a
 		add_ideas = MTS_crushing_corrections
+	}
+}
+
+country_event = { #Pinpoint is in slight awe of the room that she has chosen for her quarters in COBSOC's headquarters, since it is quite large, and she starts to go through a strong purge, while she hears fighting still in the city; she is completely nonchalant about the screams of death around her, and even actively enjoys it as she purges whatever she deems heretical in the room
+	id = militem.pinpoint.13
+	title = militem.pinpoint.13.t
+	desc = militem.pinpoint.13.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.13"}
+	
+	is_triggered_only = yes
+	
+	option = { #Home is where the heretic is not.
+		name = militem.pinpoint.13.a
+		add_stability = 0.03
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.02
+		}
 	}
 }
 
@@ -989,7 +1034,16 @@ country_event = { #A soldier struggles against some of his bonds, as he is broug
 	
 	option = { #These will serve ONLY the Empress!
 		name = militem.pinpoint.21.a
-		#Spawn divisions
+		30 = {
+			create_unit = { division = "division_template = \"Ordo Defenders\" start_experience_factor = 0.75" owner = MTS prioritize_location = 569 }
+		}
+		81 = {
+			create_unit = { division = "division_template = \"Ordo Defenders\" start_experience_factor = 0.3" owner = MTS prioritize_location = 11858 }
+		}
+		28 = {
+			create_unit = { division = "division_template = \"Ordo Defenders\" start_experience_factor = 0.9" owner = MTS prioritize_location = 963 }
+			create_unit = { division = "division_template = \"Inquisitous Legio\" start_experience_factor = 0.3" owner = MTS prioritize_location = 963 }
+		}
 	}
 }
 
@@ -1097,7 +1151,15 @@ country_event = { #A young worker is thrown into a camp with multiple guards, an
 	
 	option = { #This wasn't promised!
 		name = militem.pinpoint.28.a
-		###Three states get around 50k each
+		25 = {
+			add_manpower = 57382
+		}
+		36 = {
+			add_manpower = 61937
+		}
+		33 = {
+			add_manpower = 54836
+		}
 	}
 }
 
@@ -1639,7 +1701,7 @@ country_event = { #Convex breaks into one of the older research labs in BAT terr
 	
 	option = { #What blasphemy is this?!
 		name = militem.pinpoint.56.a
-		#Research bonuses or idea here
+		add_ideas = MTS_thestral_secrets
 	}
 }
 
@@ -1698,6 +1760,8 @@ country_event = { #Pinpoint screams as she uses some magic to make a zebra on th
 	option = { #What a waste.
 		name = militem.pinpoint.60.a
 		#Flag to unlock prisoner raids in zebra lands and some more test subjects
+		set_country_flag = MTS_raid_ABY
+		custom_effect_tooltip = MTS_use_catnip_tt
 	}
 }
 
@@ -1712,6 +1776,8 @@ country_event = { #An inquisitor assistant to Pinpoint winces as she and another
 	option = { #What's a few souls lost to save millions?
 		name = militem.pinpoint.61.a
 		add_stability = -0.05
+		set_temp_variable = { MTS_heretic_prisoners_added = 15000 }
+		MTS_add_new_heretic_prisoners = yes
 		#More test subjects, a research bonus or the like
 	}
 }
@@ -1780,7 +1846,10 @@ country_event = { #In a panic, a hippogriff prisoner is led into Pinpoint's lab,
 	
 	option = { #Good. I hate it when they whine all day.
 		name = militem.pinpoint.65.a
-		#Unlock HIP core subject raids, and more subjects for pool
+		set_temp_variable = { MTS_heretic_prisoners_added = 2000 }
+		MTS_add_new_heretic_prisoners = yes
+		set_country_flag = MTS_raid_HIP
+		custom_effect_tooltip = MTS_bad_feesh_tt
 	}
 }
 
@@ -1810,7 +1879,8 @@ country_event = { #A report written by Pinpoint herself, which is highly erratic
 	option = { #Peace shall be achieved!
 		name = militem.pinpoint.67.a
 		add_stability = -0.05
-		#A bunch more subjects
+		set_temp_variable = { MTS_heretic_prisoners_added = 15000 }
+		MTS_add_new_heretic_prisoners = yes
 	}
 }
 
@@ -1825,7 +1895,14 @@ country_event = { #Eagerly Pinpoint pulls back from her experiment, which is a b
 	option = { #The perfect pony!
 		name = militem.pinpoint.68.a
 		add_political_power = 200
-		#Maybe unique advisor which just gives stability and a research debuff
+		add_advisor_role = {
+			character = MTS_Sanguine
+			advisor = {
+				slot = political_advisor
+				idea_token = sanguine
+				traits = { the_first_cure }
+			}
+		}
 	}
 }
 
@@ -1839,6 +1916,9 @@ country_event = { #Sitting down in a throne, Pinpoint cackles to herself about h
 	
 	option = { #Sol Invictus Aeterna!
 		name = militem.pinpoint.69.a
+		MTS_Pinpoint = {
+			add_trait = { ideology = solarism trait = eradicator_of_heresy }
+		}
 		custom_effect_tooltip = MTS_heresy_eradicated_tt
 	}
 }
@@ -1933,7 +2013,7 @@ country_event = { #Pinpoint barges into a prison cell wing to inspect some of th
 	
 	option = { #You will be more useful alive than dead, sad to say.
 		name = militem.pinpoint.73.a
-		#idea here
+		add_ideas = MTS_corrected_inquisitors
 	}
 }
 
@@ -1947,7 +2027,7 @@ country_event = { #From a podium on the balcony of the castle, a priestess, who 
 	
 	option = { #May her light give us all wisdom.
 		name = militem.pinpoint.74.a
-		#idea here
+		add_ideas = MTS_beacon_of_power
 		every_state = {
 			limit = {
 				is_owned_by = ROOT
@@ -1972,7 +2052,7 @@ country_event = { #Pinpoint and another inquisitor march into a church in Sanctu
 	
 	option = { #I'd rather be alive, so I will.
 		name = militem.pinpoint.75.a
-		#idea here
+		add_ideas = MTS_corrected_adoratio
 	}
 }
 
@@ -1986,7 +2066,9 @@ country_event = { #From the balcony in the castle, Pinpoint looks out on the pon
 	
 	option = { #They will love me, whether they want to or not.
 		name = militem.pinpoint.76.a
-		#trait here
+		MTS_Pinpoint = {
+			add_trait = { ideology = solarism trait = imperial_continuer }
+		}
 	}
 }
 
@@ -2000,7 +2082,9 @@ country_event = { #Pinpoint hosts a speech from the throne room, as she has plac
 	
 	option = { #They will fear the Empress's wrath, whether they want to or not.
 		name = militem.pinpoint.77.a
-		#trait here
+		MTS_Pinpoint = {
+			add_trait = { ideology = solarism trait = empress_of_science }
+		}
 	}
 }
 
