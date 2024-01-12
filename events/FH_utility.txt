@@ -966,7 +966,7 @@ country_event = { #EEE decides to finally attack NEI because of their oppression
 	hidden = yes
 	
 	trigger = {
-		date > 1053.4.20
+		date > 1050.4.20
 		tag = EEE
 	}
 	
@@ -987,7 +987,7 @@ country_event = { #STB goes to war with NRP to get some more breathing room
 	
 	trigger = {
 		tag = STB
-		date > 1053.6.1
+		date > 1050.6.1
 	}
 	
 	fire_only_once = yes
@@ -1007,7 +1007,7 @@ country_event = { #BAL attempts to take back the MTS territory it lost
 	
 	trigger = {
 		tag = BAL
-		date > 1053.7.1
+		date > 1050.7.1
 		country_exists = MTS
 	}
 	
@@ -1028,7 +1028,7 @@ country_event = { #If MTS is already eaten or never spawned, BAL goes to war wit
 	
 	trigger = {
 		tag = BAL
-		date > 1053.7.1
+		date > 1050.7.1
 		NOT = { country_exists = MTS }
 	}
 	
@@ -1059,7 +1059,7 @@ country_event = { #CLI goes to war with SPF to try and get more land to invade t
 	
 	trigger = {
 		tag = CLI
-		date > 1053.2.1
+		date > 1050.2.1
 	}
 	
 	fire_only_once = yes
@@ -1068,6 +1068,90 @@ country_event = { #CLI goes to war with SPF to try and get more land to invade t
 		declare_war_on = {
 			target = SPF
 			type = annex_everything
+		}
+	}
+}
+
+country_event = { #STB goes to war with NID to get their ships
+	id = equestria_activity.35
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.35"}
+	hidden = yes
+	
+	trigger = {
+		tag = STB
+		date > 1051.3.1
+		NOT = { country_exists = NRP }
+		owns_state = 33
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = NID
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #BAL goes to war with CLI and SPF to regain their islands
+	id = equestria_activity.36
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.36"}
+	hidden = yes
+	
+	trigger = {
+		date > 1051.5.15
+		tag = BAL
+		NOT = { country_exists = EEE }
+		NOT = { country_exists = NEI }
+		owns_state = 30
+		owns_state = 16
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = { country_exists = SPF }
+			declare_war_on = {
+				target = SPF
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = { country_exists = CLI }
+			declare_war_on = {
+				target = CLI
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { #STB goes to war with BAL (or whoever controls it) to become the sole controller of the South-East
+	id = equestria_activity.37
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.37"}
+	hidden = yes
+	
+	trigger = {
+		date > 1052.6.1
+		tag = STB
+		owns_state = 33
+		owns_state = 221
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		1214 = {
+			OWNER = {
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
 		}
 	}
 }
