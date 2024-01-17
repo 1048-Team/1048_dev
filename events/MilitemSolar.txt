@@ -521,6 +521,45 @@ country_event = { #As some ponies come to the soup lines of the Adoratio they be
 	}
 }
 
+
+country_event = { #Report of taking the city of New Baltimare and how there is currently resistance in the city, and that the player will have the option of moving to New Baltimare, despite the chaos, or staying in New Horseleans. The option to move to New Baltimare will always remain an option, though
+	id = militem.100
+	title = militem.100.t
+	desc = militem.100.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.100"}
+	
+	trigger = {
+		tag = MTS
+		controls_state = 1214
+	}
+	fire_only_once = yes
+	
+	option = { #We must not be afraid of a few rebels.
+		name = militem.100.a
+		set_capital = { state = 1214 }
+		add_stability = -0.02
+		add_political_power = 20
+		if = {
+			limit = {
+				has_war = no
+			}
+			add_state_core = 1214
+		}
+		else = {
+			1214 = {
+				add_resistance = -25
+				add_compliance = 15
+			}
+		}
+	}
+	option = { #We shall wait until the situation has calmed on the peninsula.
+		name = militem.100.b
+		set_country_flag = MTS_didnt_move_capital
+		add_stability = 0.02
+		add_political_power = -20
+	}
+}
+
 #Scorched Earth#
 country_event = { #After dealing with the issues with Warm Night, Scorched Earth meets with Luminous Blade to discuss plans for getting what territory the Militem has to prepare for war with the South-East, and she expresses complete trust in the Empress and desire to purge, which makes him proud of her
 	id = militem.scorched.1
@@ -694,43 +733,11 @@ country_event = { #Scorched Earth assembles in front of some of his soldiers, an
 	}
 }
 
-country_event = { #Scorched Earth meets with his assembled armies outside of NH and he, with Luminous Blade, have a final speech speaking of how the communists are an insult to the Empress, and that the luxury that they live in is an abomination that must be wiped out
-	id = militem.scorched.24
-	title = militem.scorched.24.t
-	desc = militem.scorched.24.d
-	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.24"}
-	
-	is_triggered_only = yes
-	
-	option = { #They will fall before our faith!
-		name = militem.24.a
-		every_country = {
-			limit = {
-				is_in_array = { global.southeast_countries = THIS }
-			}
-			ROOT = {
-				if = {
-					limit = {
-						PREV = { 
-							NOT = { tag = MTS }
-							exists = yes
-						}
-					}
-					create_wargoal = {
-						target = PREV
-						type = annex_everything
-					}
-				}
-			}
-		}
-	}
-}
-
 country_event = { #Some of Scorched Earth's soldiers take the last few holdouts of resistance in New Baltimare around the palace of Cobalt Hoof and after it is disposed of, Scorched sees how it will make the perfect new capital, and agrees to move his station there after pressure from Luminous Blade
-	id = militem.scorched.25
-	title = militem.scorched.25.t
-	desc = militem.scorched.25.d
-	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.25"}
+	id = militem.scorched.12
+	title = militem.scorched.12.t
+	desc = militem.scorched.12.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.12"}
 	
 	trigger = {
 		tag = MTS
@@ -745,15 +752,93 @@ country_event = { #Some of Scorched Earth's soldiers take the last few holdouts 
 	fire_only_once = yes
 	
 	option = { #This should do wonders
-		name = militem.scorched.25.a
-		set_capital = { state = 1214 }
-		add_stability = 0.03
-		add_political_power = 20
+		name = militem.scorched.12.a
 		set_country_flag = MTS_conquered_southeast
 		mark_focus_tree_layout_dirty = yes
-		unlock_national_focus = MTS_southeastern_triumph
+		custom_effect_tooltip = MTS_new_ponies_burn_tt
 	}
 }
+
+country_event = { #Scorched Earth begins a speech from his new headquarters in the COBSOC building, speaking to the loyal soldiers who followed him into hell and back, and that they have a long road ahead, as they have integrated more uniniated into Militem Solar, and they will have work ahead to bring them into the fold, effectively starting over in the societal front, which he isn't happy about
+	id = militem.scorched.13
+	title = militem.scorched.13.t
+	desc = militem.scorched.13.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.13"}
+	
+	is_triggered_only = yes
+	
+	option = { #They will all see the light!
+		name = militem.scorched.13.a
+		add_stability = 0.05
+		remove_ideas = MTS_economic_minimalism
+		if = {
+			limit = {
+				has_idea = MTS_lean_supply_lines
+			}
+			remove_ideas = MTS_lean_supply_lines
+		}
+	}
+}
+
+country_event = { #A sergeant goes over some of the new punishments for the overly strict guidelines for being a soldier of the Militem, and takes great pleasure in knowing that he'll be able to dole it out with impunity
+	id = militem.scorched.14
+	title = militem.scorched.14.t
+	desc = militem.scorched.14.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.14"}
+	
+	is_triggered_only = yes
+	
+	option = { #I will enjoy this...
+		name = militem.scorched.14.a
+		add_ideas = MTS_strict_guidelines
+	}
+}
+
+country_event = { #After a long training session, some soldiers are trying to take a break and their CO believes that they are slacking off and demands they do more, which they refuse since they're at the point of exhaustion, and the CO decides to take matter into his hooves to punish them for insolence
+	id = militem.scorched.15
+	title = militem.scorched.15.t
+	desc = militem.scorched.15.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.15"}
+	
+	is_triggered_only = yes
+	
+	option = { #Perhaps I wasn't clear?
+		name = militem.scorched.15.a
+		add_ideas = MTS_harsh_guidelines
+	}
+}
+
+#country_event = { #Scorched Earth meets with his assembled armies outside of NH and he, with Luminous Blade, have a final speech speaking of how the communists are an insult to the Empress, and that the luxury that they live in is an abomination that must be wiped out
+#	id = militem.scorched.24
+#	title = militem.scorched.24.t
+#	desc = militem.scorched.24.d
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.24"}
+#	
+#	is_triggered_only = yes
+#	
+#	option = { #They will fall before our faith!
+#		name = militem.24.a
+#		every_country = {
+#			limit = {
+#				is_in_array = { global.southeast_countries = THIS }
+#			}
+#			ROOT = {
+#				if = {
+#					limit = {
+#						PREV = { 
+#							NOT = { tag = MTS }
+#							exists = yes
+#						}
+#					}
+#					create_wargoal = {
+#						target = PREV
+#						type = annex_everything
+#					}
+#				}
+#			}
+#		}
+#	}
+#}
 
 ###Pinpoint Events###
 country_event = { #Pinpoint first approaches about getting heretics to experiment on, as an offer to hopefully new ways to take out the enemy quicker
