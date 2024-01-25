@@ -1774,7 +1774,42 @@ country_event = { #A thestral, who is badly malnourished, is dragged from her ce
 	option = { #Such a convincing argument.
 		name = militem.scorched.55.a
 		add_stability = -0.1
-		###Units here
+		hidden_effect = {
+			division_template = {
+				name = "Thestral Fodder"
+				is_locked = yes
+				division_cap = 6
+				division_names_group = SLE_PEG_01
+				regiments = {
+					pegasi = { x = 0 y = 0 }
+					pegasi = { x = 0 y = 1 }
+					pegasi = { x = 0 y = 2 }
+					pegasi = { x = 0 y = 3 }
+					pegasi = { x = 1 y = 0 }
+					pegasi = { x = 1 y = 1 }
+					pegasi = { x = 1 y = 2 }
+					pegasi = { x = 1 y = 3 }
+				}
+				support = {
+					recon = { x = 0 y = 0 }
+					logistics_company = { x = 0 y = 1 }
+					engineer = { x = 0 y = 2 }
+					artillery = { x = 0 y = 3 }
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_tech = tech_pegasi }
+				}
+				set_technology = { tech_pegasi = 1 }
+			}
+		}
+		16 = { create_unit = { division = "name = \"Penal Group Flagellum\" division_template = \"Thestral Fodder\" start_experience_factor = 0" owner = MTS prioritize_location = 8622 } }
+		24 = { create_unit = { division = "name = \"Penal Group Aquarius\" division_template = \"Thestral Fodder\" start_experience_factor = 0" owner = MTS prioritize_location = 11264 } }
+		352 = { create_unit = { division = "name = \"Penal Group Salinus\" division_template = \"Thestral Fodder\" start_experience_factor = 0" owner = MTS prioritize_location = 405 } }
+		31 = { create_unit = { division = "name = \"Penal Group Impes\" division_template = \"Thestral Fodder\" start_experience_factor = 0" owner = MTS prioritize_location = 3652 } }
+		30 = { create_unit = { division = "name = \"Penal Group Umbra\" division_template = \"Thestral Fodder\" start_experience_factor = 0" owner = MTS prioritize_location = 569 } }
+		27 = { create_unit = { division = "name = \"Penal Group Nemus\" division_template = \"Thestral Fodder\" start_experience_factor = 0" owner = MTS prioritize_location = 12098 } }
 	}
 }
 
@@ -2277,6 +2312,202 @@ country_event = { #Scorched carefully scribes up a letter while Luminous enters 
 				}
 			}
 		}
+	}
+}
+
+country_event = { #Scorched Earth finally reads the report meant for him about the fate of the Empire, and how it's descended into either civil war, or Equestria has come out on top, or otherwise has fallen to weak-willed hedonists in charge, which makes him believe they're the only source of true Solarism left, and that they must liberate the Empire at all costs
+	id = militem.scorched.80
+	title = militem.scorched.80.t
+	desc = militem.scorched.80.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.80"}
+	
+	is_triggered_only = yes
+	
+	option = { #We are all that's left!
+		name = militem.scorched.80.a
+		add_war_support = 0.1
+	}
+}
+
+country_event = { #Follow a couple of the remaining scientists that are from COBSOC as they are released from prison, only to be forced to research anything and everything which Scorched Earth orders them to do, despite having basically no scientific equipment, because that is opulent
+	id = militem.scorched.81
+	title = militem.scorched.81.t
+	desc = militem.scorched.81.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.81"}
+	
+	is_triggered_only = yes
+	
+	option = { #How are we to science?
+		name = militem.scorched.81.a
+		add_tech_bonus = {
+			name = armor_bonus
+			bonus = 1
+			uses = 2
+			category = armor
+		}
+		add_tech_bonus = {
+			name = motorized_bonus
+			bonus = 1
+			uses = 1
+			category = motorized
+		}
+	}
+}
+
+country_event = { #Follow a group of soldiers, as they have been tasked with wiping out some of the thestral resistance, and test the new spells that some warm ages have developed for allowing night sight, and it doesn't go well, since they are so sensitive to light that they are blinded by the smallest thing
+	id = militem.scorched.82
+	title = militem.scorched.82.t
+	desc = militem.scorched.82.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.82"}
+	
+	is_triggered_only = yes
+	
+	option = { #It's an iterative process.
+		name = militem.scorched.82.a
+		add_ideas = MTS_blindsight
+	}
+}
+
+country_event = { #To showcase some of the new weapons that have been developed and designed for the South-East as a holier and a simpler weapon, although they constantly run into problems because the weapons are shoddily made since they're meant to be minimal
+	id = militem.scorched.83
+	title = militem.scorched.83.t
+	desc = militem.scorched.83.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.83"}
+	
+	is_triggered_only = yes
+	
+	option = { #How am I supposed to kill?!
+		name = militem.scorched.83.a
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			name = support_bonus
+			bonus = 1
+			uses = 1
+			category = support
+		}
+	}
+}
+
+country_event = { #Some of the first tanks that have been developed by Scorched Earth's scientists are showcased, and all are cripplingly overspecialized, although the only one that doesn't have issues is the one that is basically a moving cannon and that's it, which annoys him since it was supposed to be better than that, but he accepts it regardless
+	id = militem.scorched.84
+	title = militem.scorched.84.t
+	desc = militem.scorched.84.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.84"}
+	
+	is_triggered_only = yes
+	
+	option = { #Just make sure they work!
+		name = militem.scorched.84.a
+		add_ideas = MTS_weapons_of_glass
+	}
+}
+
+country_event = { #Some scientists and soldiers take out some thestrals from their prisons to monitor them as they supposedly let them free, so they can be studied regarding how they work in the jungle so well; every one is tracked with magic, and some are purged anyway when they aren't considered helpful
+	id = militem.scorched.85
+	title = militem.scorched.85.t
+	desc = militem.scorched.85.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.85"}
+	
+	is_triggered_only = yes
+	
+	option = { #At least they've provided some use.
+		name = militem.scorched.85.a
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.33
+			uses = 2
+			category = special_forces_doctrine
+		}
+		add_ideas = MTS_one_with_darkness
+	}
+}
+
+country_event = { #An officer gives a speech to his soldiers who are following him, and he goes on about how many of them are effectively worhtless, given that they are not willing to actually sacrifice themselves for the Empress, and he keeps drilling them, until a couple try to desert, and he shoots them dead then and there
+	id = militem.scorched.86
+	title = militem.scorched.86.t
+	desc = militem.scorched.86.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.86"}
+	
+	is_triggered_only = yes
+	
+	option = { #Any other wanderers?
+		name = militem.scorched.86.a
+		set_technology = { suicide_craft = 1 }
+		add_ideas = MTS_soldiers_reward
+	}
+}
+
+country_event = { #A worker who is clearly overworked and stressed wanders into a repurposed building set as a church, and he is completely unsure of how to proceed, and believes that one of the priestesses could help him, and the only advice she gives is basically a spiel on how asceticism is great and he leaves more stressed than before
+	id = militem.scorched.87
+	title = militem.scorched.87.t
+	desc = militem.scorched.87.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.87"}
+	
+	is_triggered_only = yes
+	
+	option = { #I don't that helped...
+		name = militem.scorched.87.a
+		add_ideas = MTS_non_material_wealth
+	}
+}
+
+country_event = { #Follow a family as they are constantly harrassed for daring to not donate everything they have for the impending war effort, and since they don't even have much, they don't see why they need to, which only leads to more persecution
+	id = militem.scorched.88
+	title = militem.scorched.88.t
+	desc = militem.scorched.88.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.88"}
+	
+	is_triggered_only = yes
+	
+	option = { #How is this tolerant?!
+		name = militem.scorched.88.a
+		add_ideas = MTS_useless_possessions
+	}
+}
+
+country_event = { #A couple bolts out of their house as they find out they will be raided soon by the Militarium of Militem Solar, because they have a few non-essential possessions still with them, and as they flee, they see others left destitute by intimidation by Scorched, and they are captured after they are chased, and taken back as heretics for running
+	id = militem.scorched.89
+	title = militem.scorched.89.t
+	desc = militem.scorched.89.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.89"}
+	
+	is_triggered_only = yes
+	
+	option = { #We only want a couple of things!
+		name = militem.scorched.88.a
+		add_ideas = MTS_happy_with_nothing
+	}
+}
+
+country_event = { #A worker who finally has some time off heads back to their home and is ambushed by some soldiers to take them to a new grotto set up for workers near their factory, which is even worse than the house they lived in before, and although they struggle, they are no match for the group
+	id = militem.scorched.90
+	title = militem.scorched.90.t
+	desc = militem.scorched.90.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.90"}
+	
+	is_triggered_only = yes
+	
+	option = { #I just want to go home!
+		name = militem.scorched.90.a
+		###Effect here
+	}
+}
+
+country_event = { #Soldiers go to raid one of the few remaining theatres in Militem Solar, because it is nothing but a waste of time when instead ponies could be training to fight for the Empress, and many of the ponies there are arrested for heresy for their work
+	id = militem.scorched.91
+	title = militem.scorched.91.t
+	desc = militem.scorched.91.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.90"}
+	
+	is_triggered_only = yes
+	
+	option = { #Do you have something against thespians?!
+		name = militem.scorched.91.a
+		add_ideas = MTS_no_fun_allowed
 	}
 }
 
