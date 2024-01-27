@@ -928,7 +928,7 @@ country_event = { #Follow a priestess, as well as some of her fellow priestesses
 			name = racial_bonus
 			uses = 2
 			bonus = 1
-			category = racial_tech
+			category = race_tech
 		}
 	}
 }
@@ -976,7 +976,7 @@ country_event = { #A couple of prisoners, who have been in the prison camps for 
 	
 	option = { #Fine specimens, of useless flesh sacks!
 		name = militem.scorched.26.a
-		add_ideas = MTS_prisons_for_purpose
+		add_ideas = MTS_prisons_for_a_purpose
 	}
 }
 
@@ -1043,8 +1043,8 @@ country_event = { #A brief missive is given from the chosen scribe of Militem So
 	option = { #Some might call it deplorable; I call it practical.
 		name = militem.scorched.29.a
 		swap_ideas = {
-			remove_idea = MTS_prisons_for_purpose
-			add_idea = MTS_prisons_for_purpose_2
+			remove_idea = MTS_prisons_for_a_purpose
+			add_idea = MTS_prisons_for_a_purpose_2
 		}
 	}
 }
@@ -1707,7 +1707,7 @@ country_event = { #Warm Night sees how the reject has affected both of her peers
 	option = { #May the Empress's light comfort you both.
 		name = militem.scorched.51.a
 		country_event = {
-			militem.scorched.52
+			id = militem.scorched.52
 			days = 7
 			random_days = 5
 		}
@@ -1724,7 +1724,7 @@ country_event = { #Scorched finally, after spending days in his room at a time, 
 	
 	option = { #This is the way!
 		name = militem.scorched.52.a
-		unlock_focus = MTS_new_revelation
+		unlock_national_focus = MTS_new_revelation
 	}
 }
 
@@ -1962,7 +1962,7 @@ country_event = { #A group of artisan specialists for specific types of firearms
 	option = { #We're helping now, aren't we?!
 		name = militem.scorched.63.a
 		swap_ideas = {
-			remove_idea = MTS_poverty_for_everpony
+			remove_idea = MTS_poverty_for_everypony
 			add_idea = MTS_sacrifice_for_the_empress
 		}
 		increase_poverty = yes
@@ -2255,6 +2255,7 @@ country_event = { #Scorched excitedly proclaims that the Empire has been reborn 
 	
 	option = { #SOL INVICTUS!
 		name = militem.scorched.77.a
+		set_cosmetic_tag = EQS_SOL
 		every_country = {
 			limit = {
 				any_owned_state = { is_claimed_by = EQS }
@@ -2349,7 +2350,7 @@ country_event = { #Follow a couple of the remaining scientists that are from COB
 			name = motorized_bonus
 			bonus = 1
 			uses = 1
-			category = motorized
+			category = motorized_equipment
 		}
 	}
 }
@@ -2388,7 +2389,7 @@ country_event = { #To showcase some of the new weapons that have been developed 
 			name = support_bonus
 			bonus = 1
 			uses = 1
-			category = support
+			category = support_tech
 		}
 	}
 }
@@ -2918,9 +2919,36 @@ country_event = { #A couple of Militem Solar soldiers are going around on their 
 		add_stability = -0.1
 		3 = {
 			add_resistance = 10
-			resistance_growth = 0.25
+			add_state_modifier = {
+				modifier = {
+					resistance_growth = 0.25
+				}
+			}
 		}
-		###Other major areas, plus Ponyville
+		2 = {
+			add_resistance = 10
+			add_state_modifier = {
+				modifier = {
+					resistance_growth = 0.25
+				}
+			}
+		}
+		12 = {
+			add_resistance = 10
+			add_state_modifier = {
+				modifier = {
+					resistance_growth = 0.25
+				}
+			}
+		}
+		75 = {
+			add_resistance = 10
+			add_state_modifier = {
+				modifier = {
+					resistance_growth = 0.25
+				}
+			}
+		}
 	}
 }
 
@@ -2935,6 +2963,460 @@ country_event = { #A slightly older inquisitor bursts into a house of a random c
 	option = { #You've sealed your fate.
 		name = militem.scorched.113.a
 		add_war_support = -0.05
+	}
+}
+
+country_event = { #A priestess is dragged in to the throne room, where Scorched has set himself and some other judges up, and he claims that she has been accused of negligence of duty and allowance of heresy through weakening ponies' minds, which she tries to protest against, but he keeps throwing accusations at her, to the point that eventually she slips up and he uses it against her to execute her
+	id = militem.scorched.114
+	title = militem.scorched.114.t
+	desc = militem.scorched.114.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.114"}
+	
+	is_triggered_only = yes
+	
+	option = { #Admit your guilt!
+		name = militem.scorched.114.a
+		every_state = {
+			limit = {
+				NOT = { is_core_of = ROOT }
+				is_owned_by = ROOT
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+			}
+			add_compliance = 5
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = { #Groups of soldiers swarm down upon the Cathedral of the Sun, during the middle of a service by a priestess, and they arrest the priestess while also sripping every effigy and ornate object from the cathedral, due to its opulent nature, which makes other ponies panic and flee
+	id = militem.scorched.115
+	title = militem.scorched.115.t
+	desc = militem.scorched.115.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.115"}
+	
+	is_triggered_only = yes
+	
+	option = { #Heads will roll!
+		name = militem.scorched.115.a
+		add_ideas = MTS_powerless_church
+	}
+}
+
+country_event = { #A latest report is given to Scorched about more attacks from the Harmonists, which he finally is able to see has some level of coordination among them, despite there being no outward signs they are working together, and he determines with Luminous that they need to do some forceful gathering of information from heretics
+	id = militem.scorched.116
+	title = militem.scorched.116.t
+	desc = militem.scorched.116.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.116"}
+	
+	is_triggered_only = yes
+	
+	option = { #They will be found by the light.
+		name = militem.scorched.116.a
+		every_state = {
+			limit = {
+				is_owned_by = ROOT
+				NOT = { is_core_of = ROOT }
+				OR = {
+					is_claimed_by = EQS
+					is_core_of = EQS
+				}
+			}
+			add_resistance = 5
+		}
+	}
+}
+
+country_event = { #After a short, final talk about their plan of attack, soldiers from Militem Solar raid one of the main inquisitor archives in the heart of Sanctum Solar, which is protected by "rogue" inquisitors, which leads to multiple deaths on both sides as well as destruction of some scrolls
+	id = militem.scorched.117
+	title = militem.scorched.117.t
+	desc = militem.scorched.117.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.117"}
+	
+	is_triggered_only = yes
+	
+	option = { #The faithful have no need of secrets!
+		name = militem.scorched.117.a
+		#Maybe make this an idea of +5% research, +15% racial and magic research, -10% ST
+		add_tech_bonus = {
+			name = racial_bonus
+			uses = 2
+			bonus = 1
+			category = race_tech
+		}
+		add_tech_bonus = {
+			name = magic_bonus
+			uses = 2
+			bonus = 1
+			category = magical_tech
+		}
+	}
+}
+
+country_event = { #Pulsar Beam is hauled, fighting as much as she can, into the throne room for Scorched to interrogate and grill about her crimes, and she remains defiant to him, and he eventually has her executed for failing her duties as an inquisitor
+	id = militem.scorched.118
+	title = militem.scorched.118.t
+	desc = militem.scorched.118.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.118"}
+	
+	is_triggered_only = yes
+	
+	option = { #You will learn your mistakes, in death.
+		name = militem.scorched.118.a
+		every_state = {
+			limit = {
+				is_owned_by = ROOT
+				NOT = { is_core_of = ROOT }
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+			}
+			add_compliance = 5
+			add_resistance = -5
+		}
+		hidden_effect = {
+			random_country = {
+				limit = { has_character = EQS_Pulsar_Beam }
+				retire_character = EQS_Pulsar_Beam
+			}
+		}
+	}
+}
+
+country_event = { #Scorched Earth marches into the cell area where Sunset is being held, and he angrily orders her to fall in line, as he would rather keep a continuity between him and the Empress so more will keep in line, and he threatens her life she doesn't agree, and she does, but only because she wants to keep other followers safe, not for his threats or for him or even the Empress
+	id = militem.scorched.119
+	title = militem.scorched.119.t
+	desc = militem.scorched.119.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.119"}
+	
+	is_triggered_only = yes
+	
+	option = { #Know that this is not the end.
+		name = militem.scorched.119.a
+		add_ideas = MTS_forgiven_clergy
+		EQS = {
+			EQS_Sunset_Shimmer_1048 = { set_nationality = ROOT }
+			EQS_Nightfall_Expanse = { set_nationality = ROOT }
+			EQS_Floodwater = { set_nationality = ROOT }
+			EQS_Whirlwind = { set_nationality = ROOT }
+		}
+		add_stability = -0.1
+		add_political_power = -50
+	}
+}
+
+country_event = { #Serene Shore nervously enters Scorched Earth's throne room to be told that now she will be the new Adoratio High Mage, which adds to her worry, since Scorched has dealt with Sunset permanently, and that she will be his mouth and ears of many of the possible hereies growing in the Empire
+	id = militem.scorched.120
+	title = militem.scorched.120.t
+	desc = militem.scorched.120.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.120"}
+	
+	is_triggered_only = yes
+	
+	option = { #I'm... honored.
+		name = militem.scorched.120.a
+		add_ideas = MTS_holy_replacements
+		IF = {
+			limit = {
+				has_idea = serene_shore
+			}
+			hidden_effect = { remove_ideas = serene_shore }
+			MTS_Serene_Shore = {
+				remove_advisor_role = { slot = political_advisor }
+				add_advisor_role = {
+					activate = yes
+					advisor = {
+						slot = political_advisor
+						idea_token = serene_shore
+						traits = { high_mage_shimmer_advisor }
+					}
+				}
+			}
+		}
+		ELSE = {
+			MTS_Serene_Shore = {
+				remove_advisor_role = { slot = political_advisor }
+				add_advisor_role = {
+					advisor = {
+						slot = political_advisor
+						idea_token = serene_shore
+						traits = { high_mage_shimmer_advisor }
+					}
+				}
+			}
+		}
+		IF = {
+			limit = { EQS = { has_character = EQS_Nova_Glow } }
+			EQS = {
+				EQS_Nova_Glow = { set_nationality = ROOT }
+			}
+		}
+		EQS = {
+			EQS_Obscura = { set_nationality = ROOT }
+		}
+		add_stability = 0.05
+		add_political_power = 25
+	}
+}
+
+country_event = { #Scorched furiously interrogates a pony he believes to be a heretic, who is pleading that they are loyal to the Empress, and doesn't know what he's talking about, and Luminous, who has been watching, intervenes, by stating that Scorched is losing himself, and torturing loyal citizens, which earns his ire, and they both fight, with the chance of him seeing reason and backing down, or just having her executed
+	id = militem.scorched.121
+	title = militem.scorched.121.t
+	desc = militem.scorched.121.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.121"}
+	
+	is_triggered_only = yes
+	
+	option = { #You're... right. There are other ways to make her talk.
+		name = militem.scorched.121.a
+		ai_chance = {
+			factor = 65
+		}
+		add_stability = 0.05
+	}
+	option = { #You are lost yourself. Maybe the Empress save your soul.
+		name = militem.scorched.121.b
+		ai_chance = {
+			factor = 35
+		}
+		retire_character = EQS_Luminous_Blade
+	}
+}
+
+country_event = { #After seeing again and and again reports of how much death and damage Quasar Pulse has caused before she was apprehended by Militem Solar, Scorched decides that the only course of action is to eliminate her as a threat permanently, and plans for her execution
+	id = militem.scorched.122
+	title = militem.scorched.122.t
+	desc = militem.scorched.122.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.122"}
+	
+	is_triggered_only = yes
+	
+	option = { #She is too much of a threat.
+		name = militem.scorched.122.a
+		add_ideas = MTS_blasphemy_removed
+		hidden_effect = {
+			random_country = {
+				limit = { has_character = EQS_Quasar_Pulse }
+				retire_character = EQS_Quasar_Pulse
+			}
+		}
+	}
+}
+
+country_event = { #For once in his rulership, Scorched Earth approaches with nervousness, as he gets closer to the cell in which Quasar Pulse is held, which shows signs of damage as she tried to break out, although it is in the Palace's strongest dungeons, and could resist the attacks that Quasar used against it, and he speaks with her, and states that she will be put down like an animal, but she has one chance to fight heresy with him, which she reluctantly agrees to
+	id = militem.scorched.123
+	title = militem.scorched.123.t
+	desc = militem.scorched.123.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.123"}
+	
+	is_triggered_only = yes
+	
+	option = { #Then let us crush heresy together.
+		name = militem.scorched.123.a
+		add_ideas = MTS_beast_chained
+		random_country = {
+			limit = { has_character = EQS_Quasar_Pulse }
+			EQS_Quasar_Pulse = { set_nationality = ROOT }
+		}
+	}
+}
+
+country_event = { #Scorched leads a personal attack against where he and some of the other inquisitors have triangulated the location of the leaders of the uprisings, who are some former Speculatores, including Astrum Solus, and they manage to take them partly by surprise, and in the ensuing battle, the speculatores are killed, and he determines they are finally going to have peace in the Empire
+	id = militem.scorched.124
+	title = militem.scorched.124.t
+	desc = militem.scorched.124.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.124"}
+	
+	is_triggered_only = yes
+	
+	option = { #Their secrets will die with them.
+		name = militem.scorched.124.a
+		add_stability = 0.15
+		add_tech_bonus = {
+			name = electronics_bonus
+			uses = 1
+			bonus = 1
+			category = electronics
+		}
+		hidden_effect = {
+			3 = { 
+				add_state_modifier = {
+					modifier = {
+						resistance_growth = -0.25
+					}
+				} 
+			}
+			2 = { 
+				add_state_modifier = {
+					modifier = {
+						resistance_growth = -0.25
+					}
+				} 
+			}
+			12 = { 
+				add_state_modifier = {
+					modifier = {
+						resistance_growth = -0.25
+					}
+				} 
+			}
+			75 = { 
+				add_state_modifier = {
+					modifier = {
+						resistance_growth = -0.25
+					}
+				} 
+			}
+		}
+	}
+}
+
+country_event = { #Scorched Earth, by himself, meets at a delapidated house, after he got a message about being spoken to by the leader of the rebels, who wants to make peace, since they knew he discovered them, and it's revealed to be Astrum Solus, who promises to end, so long as they still have the Speculatores around, otherwise she'll keep causing problems, which he won't want
+	id = militem.scorched.125
+	title = militem.scorched.125.t
+	desc = militem.scorched.125.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.125"}
+	
+	is_triggered_only = yes
+	
+	option = { #You make a bad argument, but I will accept.
+		name = militem.scorched.125.a
+		add_stability = -0.05
+		event_target:EQS_astrum_solus_target = {
+			set_nationality = ROOT
+		}
+		hidden_effect = {
+			3 = { resistance_growth = -0.25 }
+			2 = { resistance_growth = -0.25 }
+			12 = { resistance_growth = -0.25 }
+			75 = { resistance_growth = -0.25 }
+		}
+	}
+}
+
+country_event = { #Scorched Earth, with the Empire stabilized, heads out to the balcony of the palace to speak to forcibly assembled ponies, to give one final speach of chastisement for their sins, and that he will lead to them all being purified through their actions, and that he will lead the Empire to safety, through becoming the new Emperor, as the God-Empress couldn't even protect the Empire, which earns shock from all
+	id = militem.scorched.126
+	title = militem.scorched.126.t
+	desc = militem.scorched.126.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.126"}
+	
+	is_triggered_only = yes
+	
+	option = { #May we last for a thousand years!
+		name = militem.scorched.126.a
+		add_war_support = 0.05
+		add_stability = 0.05
+		every_state = {
+			limit = {
+				NOT = { is_core_of = EQS }
+				is_owned_by = ROOT
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+			}
+			add_compliance = 20
+			add_resistance = -20
+		}
+	}
+}
+
+country_event = { #Scorched walks into his throne room, waxing thoughtful for a moment on the glass of the Empress, and stating that he will lead the Empire into true greatness, which he wishes that Luminous would see as well, but he is prepared for the lonesome rode ahead, as the new Emperor of Ponykind.
+	id = militem.scorched.127
+	title = militem.scorched.127.t
+	desc = militem.scorched.127.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.127"}
+	
+	is_triggered_only = yes
+	
+	option = { #SOL INVICTUS!
+		name = militem.scorched.127.a
+		add_ideas = MTS_freeing_the_world
+		set_cosmetic_tag = EQS_SOL
+		every_country = {
+			limit = {
+				is_in_array = {
+					global.equus_nations = THIS.id
+				}
+				exists = yes
+				NOT = { tag = ROOT }
+			}
+			ROOT = {
+				create_wargoal = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = { #After the last conquests of Equus are completed, Scorched is shocked as ponies start to charge the palace, now that there is little to keep ponies from focusing on his horrible policies, which have ruined them all, and complete rebellion follows, with even the Adoratio getting in on it, with Serene Shore using his own weapon to end his life, and now repair the continental empire
+	id = militem.scorched.128
+	title = militem.scorched.128.t
+	desc = militem.scorched.128.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.scorched.128"}
+	
+	trigger = {
+		tag = MTS
+		all_country = {
+			NOT = { tag = MTS }
+			is_in_array = { global.equus_nations = THIS.id }
+			exists = no
+		}
+	}
+	fire_only_once = yes
+	
+	option = { #Sic Semper Tyranis.
+		name = militem.scorched.128.a
+		custom_effect_tooltip = MTS_fate_of_tyrants_tt
+		retire_character = EQS_Scorched_Earth
+		IF = {
+			limit = { has_completed_focus = MTS_replace_corrupt_priestesses }
+			MTS_Serene_Shore = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = solarism
+						traits = { high_mage_shimmer }
+					}
+				}
+			}
+		}
+		ELSE = {
+			IF = {
+				limit = { can_be_country_leader = EQS_Sunset_Shimmer_1048 }
+				promote_character = EQS_Sunset_Shimmer_1048
+				hidden_effect = {
+					IF = {
+						limit = {
+							EQS_Sunset_Shimmer_1048 = { has_trait = shield_of_the_empire }
+						}
+						EQS_Sunset_Shimmer_1048 = {
+							remove_trait = { trait = shield_of_the_empire ideology = solarism }
+							add_trait = { trainees = high_mage_shimmer ideology = solarism }
+						}
+					}
+				}
+			}
+			ELSE = {
+				EQS_Sunset_Shimmer_1048 = {
+					add_country_leader_role = {
+						promote_leader = yes
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = solarism
+							traits = { high_mage_shimmer }
+							desc = "POLITICS_SUNSET_SHIMMER_DESC"
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -2969,6 +3451,8 @@ country_event = { #A slightly older inquisitor bursts into a house of a random c
 #		}
 #	}
 #}
+
+###Warm Night Events###
 
 ###Pinpoint Events###
 country_event = { #Pinpoint first approaches about getting heretics to experiment on, as an offer to hopefully new ways to take out the enemy quicker
@@ -4697,7 +5181,7 @@ country_event = {
 					EQS_Scorched_Earth = { has_trait = supreme_general }
 				}
 				MTS_Scorched_Earth_and_Luminous_Blade = {
-					add_trait = { ideology solarism trait = supreme_general }
+					add_trait = { ideology = solarism trait = supreme_general }
 				}
 			}
 		}
