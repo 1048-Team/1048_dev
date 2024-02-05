@@ -1266,7 +1266,7 @@ country_event = { #Scorched learns about how with the war over and there being n
 	
 	option = { #I didn't see this coming...
 		name = militem.scorched.38.a
-		#Idea here, mostly local resource factor and construction
+		add_ideas = MTS_reality_strikes
 	}
 }
 
@@ -1280,7 +1280,7 @@ country_event = { #Scorched learns about how violence is spreading in some of th
 	
 	option = { #They should be praising her name!
 		name = militem.scorched.39.a
-		#Idea here, probably -15% ST and -25% pp
+		add_ideas = MTS_untrusted_goddess
 	}
 }
 
@@ -1294,7 +1294,7 @@ country_event = { #A priestess leads Scorched Earth and Luminous through a hospi
 	
 	option = { #But we are healthy!
 		name = militem.scorched.40.a
-		#Idea here, mostly monthly pop, org, and conscription
+		add_ideas = MTS_malnourished_population
 	}
 }
 
@@ -4386,7 +4386,11 @@ country_event = { #As part of the agreements for servicing thestrals, priestesse
 	option = { #Ingrates.
 		name = militem.warm.53.a
 		add_stability = 0.05
-		###Throw construction buff into thestral states
+		30 = { add_state_modifier = { state_production_speed_buildings_factor = 0.1 } }
+		31 = { add_state_modifier = { state_production_speed_buildings_factor = 0.1 } }
+		350 = { add_state_modifier = { state_production_speed_buildings_factor = 0.1 } }
+		36 = { add_state_modifier = { state_production_speed_buildings_factor = 0.1 } }
+		348 = { add_state_modifier = { state_production_speed_buildings_factor = 0.1 } }
 	}
 }
 
@@ -4400,7 +4404,26 @@ country_event = { #As part of a routine meeting with new recruits, Warm Night de
 	
 	option = { #Now do you understand?
 		name = militem.warm.54.a
-		###Make a skill 2 commando and a skill 1 trickster or expert delegator
+		MTS_Umbral_Petal = {
+			add_corps_commander_role = {
+				traits = { thestral_race_trait commando solaris_militarium }
+				skill = 2
+				attack_skill = 1
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 3
+			}
+		}
+		MTS_Sideswipe = {
+			add_corps_commander_role = {
+				traits = { thestral_race_trait trickster solaris_militarium }
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
 	}
 }
 
@@ -4414,7 +4437,10 @@ country_event = { #Warm Night is given a request by one of her harsher inquisito
 	
 	option = { #If only we didn't have to fall back on savagery.
 		name = militem.warm.55.a
-		###Add building slots
+		1214 = { add_extra_state_shared_building_slots = 1 }
+		15 = { add_extra_state_shared_building_slots = 1 }
+		24 = { add_extra_state_shared_building_slots = 1 }
+		33 = { add_extra_state_shared_building_slots = 1 }
 		every_state = {
 			limit = {
 				is_owned_by = ROOT
@@ -4455,7 +4481,11 @@ country_event = { #A nightshift manager of a factory, which can now operate than
 	option = { #You're sure that it won't backfire?
 		name = militem.warm.57.a
 		add_stability = 0.05
-		###Thestral state modifiers
+		30 = { add_state_modifier = { state_resources_factor = 0.05 } }
+		31 = { add_state_modifier = { state_resources_factor = 0.05 } }
+		350 = { add_state_modifier = { state_resources_factor = 0.05 } }
+		36 = { add_state_modifier = { state_resources_factor = 0.05 } }
+		348 = { add_state_modifier = { state_resources_factor = 0.05 } }
 	}
 }
 
@@ -4512,7 +4542,26 @@ country_event = { #Warm Night receives a report about how the thestrals have imp
 			limit = {
 				has_completed_focus = MTS_workforce_underpinnings
 			}
-			###Add state modifiers
+			30 = { 
+				add_state_modifier = { local_supplies = 0.15 }
+				add_state_modifier = { recruitable_population_factor = -0.15 }
+			}
+			31 = { 
+				add_state_modifier = { local_supplies = 0.15 }
+				add_state_modifier = { recruitable_population_factor = -0.15 }
+			}
+			350 = { 
+				add_state_modifier = { local_supplies = 0.15 }
+				add_state_modifier = { recruitable_population_factor = -0.15 }
+			}
+			36 = { 
+				add_state_modifier = { local_supplies = 0.15 }
+				add_state_modifier = { recruitable_population_factor = -0.15 }
+			}
+			348 = { 
+				add_state_modifier = { local_supplies = 0.15 }
+				add_state_modifier = { recruitable_population_factor = -0.15 }
+			}
 		}
 		ELSE = {
 			add_ideas = MTS_nocturnal_laborers
@@ -4657,6 +4706,160 @@ country_event = { #A missive is returned by EQS or SLW, either approving or cond
 		}
 		set_country_flag = MTS_EQS_rejected
 		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+country_event = { #As she waits for the entourage from Daybreaker or the other Solar Empire leader in New Horseleans, Warm Night worries about how accepted they will actually be, since she is far from orthodox, and she tries to play herself as more orthodox than she is when the priestesses arrive, although it's hard to hide given how ponies treat her on the street
+	id = militem.warm.64
+	title = militem.warm.64.t
+	desc = militem.warm.64.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.64"}
+	
+	is_triggered_only = yes
+	
+	option = { #They're just... overjoyed at serving the Empress!
+		name = militem.warm.64.a
+		add_stability = 0.02
+		add_political_power = 25
+	}
+}
+
+country_event = { #When Warm Night and the other priestesses return to New Baltimare, there are already protests about how Daybreaker will treat them too harshly, and if they aren't ensured freedoms soon there will be another war in the South-East, which she tries to calm down immediately, but it doesn't stop the obvious tension in the city from growing greater
+	id = militem.warm.65
+	title = militem.warm.65.t
+	desc = militem.warm.65.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.65"}
+	
+	is_triggered_only = yes
+	
+	option = { #This will blow over, probably.
+		name = militem.warm.65.a
+		add_ideas = MTS_peninsular_crossroads
+	}
+}
+
+country_event = { #As one of her first decrees as Daybreaker's ordained leader, Warm Night states that the Empress has heard their worries, and that she will be listening to their concerns, but the theocratic oligarchy will continue, of the Adoratio ruling only, and that they best not resist, lest the Empress retaliate for their defiance
+	id = militem.warm.66
+	title = militem.warm.66.t
+	desc = militem.warm.66.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.66"}
+	
+	is_triggered_only = yes
+	
+	option = { #Surely there must be better messaging than this?
+		name = militem.warm.66.a
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Warm Night sees how the government is clearly unpopular, and that it could turn into something far more dangerous if she doesn't do something and listen to them, and she goes against most recommendations and declares that she will lead the Ordo into their first elections, and then resign afterward, so they can have who they really wanted as their direct ruler and Daybreaker's chosen
+	id = militem.warm.67
+	title = militem.warm.67.t
+	desc = militem.warm.67.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.67"}
+	
+	is_triggered_only = yes
+	
+	option = { #Never wanted the job, anyway.
+		name = militem.warm.67.a
+		add_political_power = 100
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+	}
+}
+
+country_event = { #Warm Night tiredly waits for objections to be finished from a couple of other priestesses on the new theocratic council, and when they are done, she continues on with what she was reading, since she believes they're all rightful critiques of how the nation is being run, and she pushes for them to accept changes that are requested
+	id = militem.warm.68
+	title = militem.warm.68.t
+	desc = militem.warm.68.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.68"}
+	
+	is_triggered_only = yes
+	
+	option = { #Surely you can afford to drink a bit less wine?
+		name = militem.warm.68.a
+		add_ideas = MTS_adoratio_council
+	}
+}
+
+country_event = { #Warm Night uncomfortably presides over the talks of a new congress of the various states in the South-East, as they bicker and complain about how they will get a fair constitution for self-rule while remaining faithful for Daybreaker
+	id = militem.warm.69
+	title = militem.warm.69.t
+	desc = militem.warm.69.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.69"}
+	
+	is_triggered_only = yes
+	
+	option = { #"Trust me" doesn't cut it.
+		name = militem.warm.69.a
+		add_stability = 0.03
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #A priestess is escorted into the new courthouse in New Baltimare, regarding how she has treated some of the citizens who are worse off than others, and she freely admits to it, despite it being against what Ordo Meridian espouses, because she believes the ones whom she didn't help were unfaithful, and didn't deserve any assistance, which is effectively her admitting guilt
+	id = militem.warm.70
+	title = militem.warm.70.t
+	desc = militem.warm.70.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.70"}
+	
+	is_triggered_only = yes
+	
+	option = { #Wait until the Empress heres this!
+		name = militem.warm.70.a
+		add_ideas = MTS_eternal_aid
+	}
+}
+
+country_event = { #Since the Militem is now a proper Ordo, it requires a new archmage to lead it, and with a few candidates, among whom are some of the archmages that have lasted through the quiet purges of the aggressive ones, Warm Night spots Luminous and she prepares to make her the archmage, as a reward for her service, and also because she would continue the cause in the Empire proper
+	id = militem.warm.71
+	title = militem.warm.71.t
+	desc = militem.warm.71.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.71"}
+	
+	is_triggered_only = yes
+	
+	option = { #It is only due.
+		name = militem.warm.71.a
+		###Give Luminous a new trait and political advisor slot for being an archmage
+		OVERLORD = { set_country_flag = MTS_united_ordo } #This should set the GFX to be a single Ordo in the Empire, with Luminous as its leader; would have a project for expanding mines and oil fields of the Badlands; should matter whether puppeted or integrated
+	}
+}
+
+country_event = { #As the threat of others invading, especially changelings, is still on the mind of everypony in the Ordo, the new councils and congress realize that they need Solarist assistance, and seek it from Scorched, and use Warm Night to ask him, and he is annoyed but agrees
+	id = militem.warm.72
+	title = militem.warm.72.t
+	desc = militem.warm.72.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.72"}
+	
+	is_triggered_only = yes
+	
+	option = { #What would they do without me?
+		name = militem.warm.72.a
+		#Advisor here
+	}
+}
+
+country_event = { #Some voters, after turning out for the first free election in the Ordo, begin to go on a violent riot as the candidate for the New Baltimare elections who was considered to be a shoo-in, a priestess, is not, and instead is beaten by a thestral, which causes even more upset through the city
+	id = militem.warm.73
+	title = militem.warm.73.t
+	desc = militem.warm.73.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.73"}
+	
+	is_triggered_only = yes
+	
+	option = { #And we were the thugs?
+		name = militem.warm.73.a
+		add_political_power = -50
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
 	}
 }
 
