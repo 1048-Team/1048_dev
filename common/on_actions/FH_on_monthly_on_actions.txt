@@ -138,13 +138,24 @@ on_actions = {
 					has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 					has_country_flag = MTS_unlock_prosperity
 				}
-				every_state = {
-					limit = {
-						is_owned_by = MTS
+				if = {
+					limit = { has_idea = MTS_grand_leap_idea }
+					every_state = {
+						limit = { is_owned_by = MTS }
+						set_temp_variable = { MTS_state_prosperity_added = 5 }
+						MTS_add_state_prosperity = yes
+						MTS_calculate_state_prosperity = yes
 					}
-					#set_temp_variable = { MTS_state_prosperity_added = 0.1 } #Consider it to be a bit like EU4
-					#MTS_add_state_prosperity = yes
-					MTS_calculate_state_prosperity = yes
+				}
+				else = {
+					every_state = {
+						limit = {
+							is_owned_by = MTS
+						}
+						#set_temp_variable = { MTS_state_prosperity_added = 0.1 } #Consider it to be a bit like EU4
+						#MTS_add_state_prosperity = yes
+						MTS_calculate_state_prosperity = yes
+					}
 				}
 				if = {
 					limit = { has_country_flag = MTS_commie_ordos_tt }

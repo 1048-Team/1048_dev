@@ -57,6 +57,8 @@ has_super_force_attack = {
 		has_completed_focus = TBK_frenzied_horde
 		has_completed_focus = ZAR_no_remorse_no_retreat
 		has_country_flag = HIP_SIR_fanatic_tactics
+		###Fractured Harmony###
+		has_completed_focus = MTS_sacrifice_everything
 	}
 }
 
@@ -86,6 +88,8 @@ has_super_last_stand = {
 		has_completed_focus = HIP_glory_in_death
 		has_completed_focus = ZAR_no_remorse_no_retreat
 		has_country_flag = HIP_SIR_fanatic_tactics
+		###Fractured Harmony###
+		has_completed_focus = MTS_sacrifice_everything
 	}
 }
 
@@ -2363,4 +2367,24 @@ naval_focused_nation = {
 		}
 	}
 	any_controlled_state_is_coastal = yes
+}
+ai_is_doing_border_war_as_THIS_with_FROM_appropriate = {
+	# generic checks to check if we are not too likely in need of more troops somewhere else
+	has_war = no
+	num_divisions > 4
+	NOT = {
+		any_of_scopes = {
+			array = potential_and_current_enemies
+			OR = {
+				has_wargoal_against = PREV
+				is_justifying_wargoal_against = PREV
+				ROOT = {
+					OR = {
+						has_wargoal_against = PREV
+						is_justifying_wargoal_against = PREV
+					}
+				}
+			}
+		}
+	}
 }
