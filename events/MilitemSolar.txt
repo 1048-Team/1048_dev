@@ -521,6 +521,55 @@ country_event = { #As some ponies come to the soup lines of the Adoratio they be
 	}
 }
 
+country_event = { #Event for choosing a name for Red Glory, either reverting to Tenochtitlan, Faithful Beacon, Brilliant Dawn, Red Glory, or either Immolation (Scorched), Empress's Embrace (Warm), or Castellum Inquisitionis (Pinpoint)
+	id = militem.99
+	title = militem.99.t
+	desc = militem.99.d
+	picture = GFX_event_solarempire
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.99"}
+	
+	is_triggered_only = yes
+	
+	option = { #Red Glory
+		name = militem.99.a
+		add_stability = -0.02
+		add_political_power = 25
+	}
+	option = { #Tenochtitlan
+		name = militem.99.b
+		add_political_power = 10
+		set_province_name = { id = 8622 name = MTS_tenochtitlan }		
+	}
+	#option = { #Faithful Beacon
+	#	name = militem.99.c
+	#}
+	option = { #Brilliant Dawn
+		name = militem.99.e
+		add_war_support = 0.01
+		add_stability = 0.01
+		set_province_name = { id = 8622 name = MTS_brilliant_dawn }
+	}
+	option = { #Immolation
+		name = militem.99.f
+		trigger = {
+			has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+		}
+		add_war_support = 0.02
+		set_province_name = { id = 8622 name = MTS_immolation }
+	}
+	option = { #Empress's Embrace
+		name = militem.99.g
+		trigger = { has_country_leader = { character = MTS_Warm_Night  ruling_only = yes } }
+		add_stability = 0.02
+		set_province_name = { id = 8622 name = MTS_empresss_embrace }
+	}
+	option = { #Castellum Inquisitionis
+		name = militem.99.h
+		trigger = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+		add_political_power = 50
+		set_province_name = { id = 8622 name = MTS_castellum_inquisitionis }
+	}
+}
 
 country_event = { #Report of taking the city of New Baltimare and how there is currently resistance in the city, and that the player will have the option of moving to New Baltimare, despite the chaos, or staying in New Horseleans. The option to move to New Baltimare will always remain an option, though
 	id = militem.100
@@ -1294,7 +1343,7 @@ country_event = { #A priestess leads Scorched Earth and Luminous through a hospi
 	
 	option = { #But we are healthy!
 		name = militem.scorched.40.a
-		add_ideas = MTS_malnourished_population
+		add_ideas = MTS_malnourished_populace
 	}
 }
 
@@ -4841,7 +4890,18 @@ country_event = { #As the threat of others invading, especially changelings, is 
 	
 	option = { #What would they do without me?
 		name = militem.warm.72.a
-		#Advisor here
+		EQS_Scorched_Earth = {
+			add_advisor_role = {
+				advisor = {
+					slot = army_chief
+					cost = 200
+					idea_token = scorched_earth
+					traits = {
+						army_chief_defense_3
+					}
+				}
+			}
+		}
 	}
 }
 
