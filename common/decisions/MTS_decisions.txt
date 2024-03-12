@@ -1,4 +1,54 @@
 political_actions = {
+	MTS_raise_the_militias = {
+		allowed = { tag = MTS }
+		available = {
+			has_war = yes
+			OR = {
+				surrender_progress > 0.15
+				has_war_with_major = yes
+			}
+		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			has_completed_focus = MTS_embrace_regional_autonomy
+		}
+		cost = 75
+		days_remove = 20
+		complete_effect = { add_stability = -0.05 }
+		remove_effect = {
+			#Create militia here
+			set_country_flag = MTS_militias_created
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = { has_political_power > 100 add = 10 }
+			modifier = { AND = { has_war = yes surrender_progress > 0.15 } add = 25 }
+			modifier = { surrender_progress > 0.25 add = 50 }
+			modifier = { has_war_with_major = yes add = 20 }
+		}
+	}
+	MTS_retire_militias = {
+		allowed = { tag = MTS }
+		available = {
+			has_country_flag = MTS_militias_created
+			has_war = no
+		}
+		visible = {
+			has_country_flag = MTS_militias_created
+		}
+		days_remove = 7
+		complete_effect = { add_stability = 0.02 }
+		remove_effect = {
+			#remove militias
+			clr_country_flag = MTS_militias_created
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = { has_war = no add = 100 }
+		}
+	}
 	MTS_rename_red_glory = {
 		allowed = { tag = MTS }
 		visible = { owns_state = 16 }
