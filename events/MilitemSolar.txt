@@ -5768,7 +5768,8 @@ country_event = { #Warm Night breathes a couple of long sighs as she and a few o
 	
 	option = { #They will come around.
 		name = militem.warm.117.a
-		
+		set_capital = { state = 3 }
+		add_state_core = 3
 	}
 }
 
@@ -5782,7 +5783,18 @@ country_event = { #A wounded soldier from EQS is barely making ends meat living 
 	
 	option = { #Why must you do this?
 		name = militem.warm.118.a
-		
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+				is_owned_by = ROOT
+				NOT = { is_core_of = ROOT }
+			}
+			add_compliance = 5
+			add_resistance = -5
+		}
 	}
 }
 
@@ -5796,7 +5808,8 @@ country_event = { #As there is still much dissent in the Adoratio, Warm Night de
 	
 	option = { #They must listen!
 		name = militem.warm.119.a
-		
+		add_political_power = -150
+		add_stability = 0.05
 	}
 }
 
