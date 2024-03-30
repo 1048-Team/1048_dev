@@ -9113,6 +9113,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_hoofs_that_won_the_war }
+	mutually_exclusive = { focus = MTS_supplies_for_righteous }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_guns_of_old"
@@ -9126,37 +9127,6 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = MTS_mudslingers
-	x = 2
-	y = 1
-	relative_position_id = MTS_hoofs_that_won_the_war
-	
-	cost = 2.1
-	prerequisite = {
-		focus = MTS_hoofs_that_won_the_war
-		focus = MTS_machine_goddess
-	}
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus MTS_mudslingers"
-		add_tech_bonus = {
-			name = engineer_bonus
-			uses = 2
-			bonus = 1
-			category = engineers_tech
-		}
-		add_tech_bonus = {
-			name = tank_bonus
-			uses = 1
-			bonus = 0.5
-			category = cat_light_armor
-		}
-	}
-	
-	ai_will_do = { factor = 40 }
-}
-
-shared_focus = {
 	id = MTS_supplies_for_righteous
 	x = 0
 	y = 1
@@ -9164,6 +9134,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_machine_goddess }
+	mutually_exclusive = { focus = MTS_guns_of_old }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_supplies_for_righteous"
@@ -9203,7 +9174,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_guns_of_old }
-	mutually_exclusive = { focus = MTS_consecrate_tech_priestesses }
+	#mutually_exclusive = { focus = MTS_consecrate_tech_priestesses }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_inquisitors_of_battle"
@@ -9215,6 +9186,37 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = MTS_mudslingers
+	x = 2
+	y = 1
+	relative_position_id = MTS_guns_of_old
+	
+	cost = 2.1
+	prerequisite = {
+		focus = MTS_guns_of_old
+		focus = MTS_supplies_for_righteous
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_mudslingers"
+		add_tech_bonus = {
+			name = engineer_bonus
+			uses = 2
+			bonus = 1
+			category = engineers_tech
+		}
+		add_tech_bonus = {
+			name = tank_bonus
+			uses = 1
+			bonus = 0.5
+			category = cat_light_armor
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
 	id = MTS_consecrate_tech_priestesses
 	x = 0
 	y = 1
@@ -9222,7 +9224,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_supplies_for_righteous }
-	mutually_exclusive = { focus = MTS_inquisitors_of_battle }
+	#mutually_exclusive = { focus = MTS_inquisitors_of_battle }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_consecrate_tech_priestesses"
@@ -9261,6 +9263,7 @@ shared_focus = {
 		focus = MTS_inquisitors_of_battle
 		focus = MTS_consecrate_tech_priestesses
 	}
+	prerequisite = { focus = MTS_mudslingers }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_structured_and_logical"
@@ -9395,6 +9398,8 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_endless_construction }
+	mutually_exclusive = { focus = MTS_unending_debts }
+	mutually_exclusive = { focus = MTS_slaves_to_empress }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_free_to_labor"
@@ -9415,6 +9420,8 @@ shared_focus = {
 		focus = MTS_endless_construction
 		focus = MTS_watchers_of_sun
 	}
+	mutually_exclusive = { focus = MTS_free_to_labor }
+	mutually_exclusive = { focus = MTS_slaves_to_empress }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_unending_debts"
@@ -9432,11 +9439,14 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_watchers_of_sun }
+	mutually_exclusive = { focus = MTS_free_to_labor }
+	mutually_exclusive = { focus = MTS_unending_debts }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_analyze_temptations"
 		###Possibly event of ponies being toiled for every waking moment because of their lower status as heretics, as they can be used as slaves for Daybreaker
 		add_ideas = MTS_slaves_for_eternity
+		#add_ideas = slavery_economy ###Discuss on if it's worth switching to
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -10396,8 +10406,8 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_zebrica_conquered_tt
-			BAT = { country_exists = no }
-			HIP = { country_exists = no }
+			NOT = { country_exists = BAT }
+			NOT = { country_exists = HIP }
 			#Expand further; make into arrays for easier scripting
 		}
 	}
@@ -10420,8 +10430,8 @@ shared_focus = {
 	bypass = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_SOL_dead_tt
-			EQS = { country_exists = no }
-			SLW = { country_exists = no }
+			NOT = { country_exists = EQS }
+			NOT = { country_exists = SLW }
 		}
 	}
 	
@@ -10561,8 +10571,8 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_zebrica_conquered_tt
-			BAT = { country_exists = no }
-			HIP = { country_exists = no }
+			NOT = { country_exists = BAT }
+			NOT = { country_exists = HIP }
 			#Expand further; make into arrays for easier scripting
 		}
 	}
@@ -10588,8 +10598,8 @@ shared_focus = {
 	bypass = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_SOL_dead_tt
-			EQS = { country_exists = no }
-			SLW = { country_exists = no }
+			NOT = { country_exists = EQS }
+			NOT = { country_exists = SLW }
 		}
 	}
 	
