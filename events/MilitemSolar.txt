@@ -790,6 +790,7 @@ country_event = { #Some of Scorched Earth's soldiers take the last few holdouts 
 	
 	trigger = {
 		tag = MTS
+		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 		all_of_scopes = {
 			array = global.southeast_countries
 			OR = {
@@ -6839,7 +6840,7 @@ country_event = { #An inquisitor brings back a recently captured heretic, whom s
 }
 
 country_event = { #Pinpoint almost fruitlessly attempts to push some of her inquisitors and recruits to study the libraries that were in Baltimare and the like that COBSOC was holding for itself, since they are adamantly against that, since there are surely many heretical ideas, and they try to parse how they can do so without falling into heresy, which frustrates her to no end
-	id = militem.pinpoint.23
+	id = militem.pinpoint.23 #SLE receives a letter from MTS flaunting that they're going rogue to actually deal with heresy; or, Quasar sees how MTS is completely ignoring her and declares the nation fully heretical instead, especially after some attempts at communication were denied by Pinpoint
 	title = militem.pinpoint.23.t
 	desc = militem.pinpoint.23.d
 	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.23"}
@@ -6847,8 +6848,12 @@ country_event = { #Pinpoint almost fruitlessly attempts to push some of her inqu
 	is_triggered_only = yes
 	
 	option = { #Just, read!
-		name = militem.pinpoint.23.a
-		add_ideas = MTS_wizardly_inquisitors
+		name = militem.pinpoint.23.a #They will burn soon enough!
+		#add_ideas = MTS_wizardly_inquisitors
+		add_opinion_modifier = {
+			target = MTS
+			modifier = SLE_rogue_ordo
+		}
 	}
 }
 
@@ -6913,7 +6918,7 @@ country_event = { #Some workers are sent down into a tunnel that is being used t
 	
 	option = { #Maybe we can just cover it up in the logs?
 		name = militem.pinpoint.27.a
-		add_ideas = MTS_roads_of_bones
+		OAC = { add_ideas = MTS_roads_of_bones }
 	}
 }
 
@@ -6975,6 +6980,20 @@ country_event = { #A missive is sent to both Ordos by Pinpoint to demand that wi
 	
 	option = { #Let us become whole again.
 		name = militem.pinpoint.30.a
+		if = {
+			limit = { has_country_leader = { character = MTS_Emerald_Days } }
+			MTS_Emerald_Days = {
+				remove_country_leader_role = { ideology = solarism }
+				set_nationality = FROM
+			}
+		}
+		else_if = {
+			limit = { has_country_leader = { character = MTS_Light_Jolt } }
+			MTS_Light_Jolt = {
+				remove_country_leader_role = { ideology = solarism }
+				set_nationality = FROM
+			}
+		}
 		FROM = {
 			annex_country = {
 				target = ROOT
@@ -7077,7 +7096,7 @@ country_event = { #Some new recruits for the elite forces of Ordo Meridian are p
 	
 	option = { #Never go full heretic.
 		name = militem.pinpoint.33.a
-		add_ideas = MTS_bred_for_jungle
+		add_ideas = MTS_bred_for_the_jungle
 	}
 }
 
