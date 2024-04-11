@@ -16,6 +16,31 @@ on_actions = {
 				}
 				news_event = changelingianews.6
 			}
+			#MTS no call on offensive war, yes call on defensive war
+			if = {
+				limit = {
+					FROM = {
+						OR = {
+							AND = {
+								tag = MTS
+								has_government = communism
+								is_in_faction_with = SCS
+							}
+							AND = {
+								tag = SCS
+								is_in_faction_with = MTS
+							}
+						}
+						has_defensive_war_with = ROOT
+					}
+				}
+				if = {
+					limit = {
+						has_idea = MTS_no_friends_calling_offensive
+					}
+					remove_ideas = MTS_no_friends_calling_offensive
+				}
+			}
 		}
 	}
 	
@@ -77,6 +102,28 @@ on_actions = {
 					}
 				}
 				SOL_calculate_ordo_image = yes
+			}
+			#Return MTS/SCS to not call in offensive wars
+			if = {
+				limit = {
+					ROOT = { 
+						NOT = { 
+							has_idea = MTS_no_friends_calling_offensive
+							OR = {
+								AND = {
+									tag = MTS
+									has_government = communism
+									is_in_faction_with = SCS
+								}
+								AND = {
+									tag = SCS
+									is_in_faction_with = MTS
+								}
+							}
+						} 
+					}
+					add_ideas = MTS_no_friends_calling_offensive
+				}
 			}
 			###Begins the long list of integration stuff
 			if = {

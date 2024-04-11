@@ -367,6 +367,7 @@ country_event = { #Evening Tempest goes on a military exercise with some of the 
 				logistics_skill = 3
 			}
 		}
+		custom_effect_tooltip = MTS_clean_heading_stats_tt
 	}
 }
 
@@ -1188,7 +1189,7 @@ country_event = { #Scorched uncharacteristically grows anxious when he pens a le
 	
 	is_triggered_only = yes
 	
-	option = { #
+	option = { #Hopefully the Empress is feeling merciful...
 		name = militem.scorched.34.a
 		SLE = { country_event = militem.scorched.35 }
 	}
@@ -3148,6 +3149,7 @@ country_event = { #Scorched Earth marches into the cell area where Sunset is bei
 	option = { #Know that this is not the end.
 		name = militem.scorched.119.a
 		add_ideas = MTS_forgiven_clergy
+		###Refactor this to random_country block after move
 		EQS = {
 			EQS_Sunset_Shimmer_1048 = { set_nationality = ROOT }
 			EQS_Nightfall_Expanse = { set_nationality = ROOT }
@@ -3965,6 +3967,7 @@ country_event = { #As Warm Night prepares to rest of the night, she believes she
 				logistics_skill = 3
 			}
 		}
+		custom_effect_tooltip = MTS_silhouette_stats_tt
 		add_ideas = MTS_COBSOC_pardons
 	}
 }
@@ -4475,6 +4478,8 @@ country_event = { #As part of a routine meeting with new recruits, Warm Night de
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_umbral_petal_stats_tt
+		custom_effect_tooltip = MTS_sideswipe_stats_tt
 	}
 }
 
@@ -4877,7 +4882,7 @@ country_event = { #Since the Militem is now a proper Ordo, it requires a new arc
 	
 	option = { #It is only due.
 		name = militem.warm.71.a
-		###Give Luminous a new trait and political advisor slot for being an archmage
+		#Give Luminous a new trait and political advisor slot for being an archmage
 		EQS_Luminous_Blade = {
 			add_advisor_role = {
 				advisor = {
@@ -5517,7 +5522,7 @@ country_event = { #The player is given a report about how SCS has managed to rem
 	option = { #Let's see if they feel the same way.
 		name = militem.warm.101.a
 		SCS = { country_event = militem.warm.102 }
-		###If accepted, they would get hidden modifiers to not call in or want to be called in on an offensive war
+		#If accepted, they would get hidden modifiers to not call in or want to be called in on an offensive war
 	}
 }
 
@@ -5531,10 +5536,21 @@ country_event = { #SCS gets a proposal from MTS about forming a defensive allian
 	
 	option = { #Sounds like a good idea.
 		name = militem.warm.102.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_government = communism
+				factor = 2
+			}
+		}
 		FROM = { country_event = { id = militem.warm.103 days = 3 random_days = 3 } }
 	}
 	option = { #Never trust a Solarist, especially a commie Solarist.
 		name = militem.warm.102.b
+		ai_chance = {
+			base = 30
+		}
+		#Idea has to be removed and added via an on action, as it affects the desire to join in defensive wars
 		set_country_flag = SCS_rejected_MTS_alliance
 		FROM = { country_event = { id = militem.warm.103 days = 3 random_days = 3 } }
 	}
@@ -5550,11 +5566,27 @@ country_event = { #MTS gets the response from SCS, either expressing support, or
 	
 	option = { #I know they would see reason.
 		name = militem.warm.103.a
+		trigger = {
+			NOT = { SCS = { has_country_flag = SCS_rejected_MTS_alliance } }
+		}
 		create_faction = MTS_southern_pact
 		add_to_faction = FROM
+		hidden_effect = {
+			if = {
+				limit = { FROM = { is_ai = yes } }
+				FROM = {
+					add_ideas = MTS_no_friends_calling_offensive
+				}
+			}
+			if = {
+				limit = { is_ai = yes }
+				add_ideas = MTS_no_friends_calling_offensive
+			}
+		}
 	}
 	option = { #Their loss.
 		name = militem.warm.103.b
+		trigger = { SCS = { has_country_flag = SCS_rejected_MTS_alliance } }
 		uncomplete_national_focus = { focus = MTS_bonds_of_isolated }
 	}
 }
@@ -5951,7 +5983,18 @@ country_event = { #Warm Night barely holds back some anger as she grows upset at
 			}
 			EQS_Blueblood = { set_nationality = ROOT }
 		}
-		###Two other generals from the Militarium
+		random_country = {
+			limit = {
+				has_character = EQS_Floodwater
+			}
+			EQS_Floodwater = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Nightshade
+			}
+			EQS_Nightshade = { set_nationality = ROOT }
+		}
 	}
 }
 
@@ -6066,7 +6109,23 @@ country_event = { #After staying up far too late thinking, Warm Night attempts t
 	
 	option = { #I must spread this far and wide!
 		name = militem.warm.133.a
-		###Add country leader role and set ruling party here
+		MTS_Warm_Night = {
+			add_country_leader_role = {
+				country_leader = {
+					ideology = harmonic_theocracy
+					expire = "1965.1.1"
+					traits = { sympathetic_priestess }
+				}
+			}
+		}
+		set_party_name = {
+			ideology = democratic
+			name = MTS_reformed_priestesses
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = no
+		}
 	}
 }
 
@@ -6109,6 +6168,27 @@ country_event = { #As Warm Night enters her office, she is being hounded by a co
 	option = { #Just leave me alone!
 		name = militem.warm.136.a
 		#Advisors here
+		MTS_Tall_Stacks = {
+			add_advisor_role = {
+				slot = political_advisor
+				idea_token = tall_stacks
+				traits = { ruthless_capitalist }
+			}
+		}
+		MTS_Blotted_Ink = {
+			add_advisor_role = {
+				slot = political_advisor
+				idea_token = blotted_ink
+				traits = { silent_workhorse }
+			}
+		}
+		#MTS_Whiteboard = {
+		#	add_advisor_role = {
+		#		slot = political_advisor
+		#		idea_token = whiteboard
+		#		traits = { financial_expert }
+		#	}
+		#}
 	}
 }
 
@@ -6232,7 +6312,19 @@ country_event = { #Warm learns about how Scorched and Luminous are still rather 
 	
 	option = { #Just listen to me!
 		name = militem.warm.144.a
-		#Either give them a level, a new, shared trait, or improve their spirit by a small amount
+		###Either give them a level, a new, shared trait, or improve their spirit by a small amount
+		if = {
+			limit = { has_idea = MTS_experienced_guides }
+			swap_ideas = {
+				remove_idea = MTS_experienced_guides
+				add_idea = MTS_experienced_guides_2
+			}
+		}
+		###Maybe replace later with a trait of +5% leader xp gain and +5% recon
+		else = {
+			EQS_Scorched_Earth = { add_skill_level = 1 }
+			EQS_Luminous_Blade = { add_skill_level = 1 }
+		}
 	}
 }
 
@@ -6356,7 +6448,16 @@ country_event = { #Warm Night takes a final look around her office as she packs 
 	
 	option = { #I'm sure retirement will treat me okay.
 		name = militem.warm.150.a
-		###Add character here
+		MTS_Morning_Rain = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = harmonic_theocracy
+					expire = "1965.1.1"
+					traits = { }
+				}
+			}
+		}
 	}
 }
 
@@ -6576,6 +6677,7 @@ country_event = { #Some of the garrison of New Horseleans is called out onto a s
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_gallant_stats_tt
 	}
 }
 
@@ -6600,6 +6702,7 @@ country_event = { #Luminous is tracked down by some of Pinpoint's closest inquis
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_keen_blade_stats_tt
 	}
 }
 
@@ -6625,6 +6728,7 @@ country_event = { #Follow Saber Rattle as he frantically goes about his tent or 
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_glad_tidings_stats_tt
 	}
 }
 
@@ -7544,6 +7648,8 @@ country_event = { #Pinpoint marches around her lab with a checklist, asking inva
 	option = { #Now, how would you rate your pain out of ten?
 		name = militem.pinpoint.59.a
 		#Flag to unlock prisoner raids in ABY territory, and probably some more test subjects
+		set_country_flag = MTS_raid_ABY
+		custom_effect_tooltip = MTS_use_catnip_tt
 	}
 }
 
@@ -7558,8 +7664,8 @@ country_event = { #Pinpoint screams as she uses some magic to make a zebra on th
 	option = { #What a waste.
 		name = militem.pinpoint.60.a
 		#Flag to unlock prisoner raids in zebra lands and some more test subjects
-		set_country_flag = MTS_raid_ABY
-		custom_effect_tooltip = MTS_use_catnip_tt
+		set_country_flag = MTS_raid_zeebs
+		custom_effect_tooltip = MTS_time_to_rhyme_tt
 	}
 }
 
@@ -7617,7 +7723,12 @@ country_event = { #An inquisitor writes back to Pinpoint in a report, partially 
 	option = { #May we meet again, Archmage.
 		name = militem.pinpoint.63.a
 		add_manpower = -500
-		#Research bonus here
+		add_tech_bonus = {
+			name = electronics_bonus
+			uses = 2
+			bonus = 1
+			category = electronics
+		}
 	}
 }
 
