@@ -1903,7 +1903,7 @@ country_event = { #OAU causes problems in BAT
 	}
 }
 
-country_event = { #MGY wars CZR for their core territory
+country_event = { #MGY wars REM for their core territory
 	id = zebrica_activity.7
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.7"}
 	hidden = yes
@@ -1917,77 +1917,83 @@ country_event = { #MGY wars CZR for their core territory
 	
 	option = {
 		declare_war_on = {
-			target = CZR
-			type = take_core_state
-		}
-	}
-}
-
-country_event = { #EMR wars ABY
-	id = zebrica_activity.8
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.8"}
-	hidden = yes
-	
-	trigger = {
-		tag = EMR
-		date > 1050.3.12
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = ABY
+			target = REM
 			type = annex_everything
-		}
-	}
-}
-
-country_event = { #EMR annexes YMN
-	id = zebrica_activity.9
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.9"}
-	hidden = yes
-	
-	trigger = {
-		tag = EMR
-		date > 1053.7.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		annex_country = {
-			target = YMN
-			transfer_troops = yes
 		}
 		every_state = {
 			limit = {
-				is_core_of = YMN
+				is_owned_by = REM
 			}
-			add_core_of = EMR
+			add_core_of = ROOT
 		}
 	}
 }
 
-country_event = { #EMR wars KAR
-	id = zebrica_activity.10
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.10"}
-	hidden = yes
-	
-	trigger = {
-		tag = EMR
-		date > 1056.1.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = KAR
-			type = annex_everything
-		}
-	}
-}
+#country_event = { #EMR wars ABY
+#	id = zebrica_activity.8
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.8"}
+#	hidden = yes
+#
+#	trigger = {
+#		tag = EMR
+#		date > 1050.3.12
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		declare_war_on = {
+#			target = ABY
+#			type = annex_everything
+#		}
+#	}
+#}
+#
+#country_event = { #EMR annexes YMN
+#	id = zebrica_activity.9
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.9"}
+#	hidden = yes
+#
+#	trigger = {
+#		tag = EMR
+#		date > 1053.7.1
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		annex_country = {
+#			target = YMN
+#			transfer_troops = yes
+#		}
+#		every_state = {
+#			limit = {
+#				is_core_of = YMN
+#			}
+#			add_core_of = EMR
+#		}
+#	}
+#}
+
+#country_event = { #EMR wars KAR
+#	id = zebrica_activity.10
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.10"}
+#	hidden = yes
+#
+#	trigger = {
+#		tag = EMR
+#		date > 1056.1.1
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		declare_war_on = {
+#			target = KAR
+#			type = annex_everything
+#		}
+#	}
+#}
 
 country_event = { #ZWA wars MTA
 	id = zebrica_activity.11
@@ -2016,24 +2022,20 @@ country_event = { #STM wars ZWA and CZR
 	
 	trigger = {
 		tag = STM
-		date > 1053.1.1
+		date > 1051.1.14
 	}
 	
 	fire_only_once = yes
 	
 	option = {
 		declare_war_on = {
-			target = ZWA
-			type = annex_everything
-		}
-		declare_war_on = {
-			target = CZR
+			target = HSO
 			type = annex_everything
 		}
 	}
 }
 
-country_event = { #ZOO wars DEL
+country_event = { #ZOO wars DEL or IDO
 	id = zebrica_activity.13
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.13"}
 	hidden = yes
@@ -2046,44 +2048,63 @@ country_event = { #ZOO wars DEL
 	fire_only_once = yes
 	
 	option = {
-		declare_war_on = {
-			target = DEL
-			type = annex_everything
+		if = {
+			limit = {
+				DEL = {
+					exists = yes
+					NOT = { has_war_with = IDO }
+				}
+			}
+			declare_war_on = {
+				target = DEL
+				type = annex_everything
+			}
+		}
+		else_if = {
+			limit = {
+				IDO = {
+					exists = yes
+					NOT = { has_war_with = DEL }
+				}
+			}
 		}
 		every_state = {
 			limit = {
-				is_core_of = DEL
+				OR = {
+					is_core_of = DEL
+					is_core_of = IDO
+				}
 			}
 			add_core_of = ZOO
 		}
 	}
 }
 
-country_event = { #ROA and ZOO war KIR for their core territory in ZLU
-	id = zebrica_activity.14
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.14"}
-	hidden = yes
-	
-	trigger = {
-		tag = ZOO
-		date > 1056.3.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = ZLU
-			type = annex_everything
-		}
-		ROA = {
-			declare_war_on = {
-				target = ZLU
-				type = annex_everything
-			}
-		}
-	}
-}
+#country_event = { #ROA and ZOO war KIR for their core territory in ZLU
+#	id = zebrica_activity.14
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.14"}
+#	hidden = yes
+#
+#	trigger = {
+#		tag = ZOO
+#		date > 1056.3.1
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		declare_war_on = {
+#			target = ZLU
+#			type = annex_everything
+#		}
+#		ROA = {
+#			declare_war_on = {
+#				target = ZLU
+#				type = annex_everything
+#			}
+#		}
+#	}
+#}
 
 country_event = { #CTL wars MCW
 	id = zebrica_activity.15
