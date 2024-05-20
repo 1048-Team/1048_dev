@@ -2,6 +2,7 @@ add_namespace = griffonia_activity
 add_namespace = zebrica_activity
 add_namespace = equestria_activity
 
+###Equus###
 country_event = { #SMH or YAH wars with the other
 	id = equestria_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.1"}
@@ -786,7 +787,10 @@ country_event = { #CER creates a united heartlands
 	
 	trigger = {
 		tag = CER
-		WHY = { is_subject_of = ROOT }
+		OR = {
+			WHY = { is_subject_of = ROOT }
+			NOT = { country_exists = WHY }
+		}
 		exists = yes
 	}
 	
@@ -1045,7 +1049,7 @@ country_event = { #If MTS is already eaten or never spawned, BAL goes to war wit
 		if = {
 			limit = { country_exists = NEI }
 			declare_war_on = {
-				target = NRP
+				target = NEI
 				type = annex_everything
 			}
 		}
@@ -1156,6 +1160,7 @@ country_event = { #STB goes to war with BAL (or whoever controls it) to become t
 	}
 }
 
+###Griffonia###
 country_event = { #GRI annexes BOI
 	id = griffonia_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.1"}
@@ -1643,6 +1648,7 @@ country_event = { #All three superpowers war the League of Free Nations
 	}
 }
 
+###Zebrica###
 country_event = { #HPS joins EQC if they win
 	id = zebrica_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.1"}
@@ -2124,6 +2130,7 @@ country_event = { #CTH wars NZA for their core territory
 		}
 	}
 }
+
 #Launch Karkadannistan Civil War
 country_event = {
 	id = zebrica_activity.17
