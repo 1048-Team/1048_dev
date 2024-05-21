@@ -2448,12 +2448,15 @@ country_event = { ## TAI, MEL, and ZOO kill each other
 						original_tag = MEL
 						original_tag = ZOO
 					}
-					NOT = { has_war_with = PREV }
 				}
-				declare_war_on = {
-					target = PREV
-					type = annex_everything
+				if = {
+					limit = { NOT = { has_war_with = PREV } }
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
 				}
+				add_to_PREV_potential_cores = yes
 			}
 		}
 		ROOT = { #who will be a lucky bastard lol
@@ -2606,10 +2609,11 @@ country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
 					original_tag = REM
 				}
 			}
-			for_each_scope_loop = {
+			for_each_scope_loop = { #to give core stat bonuses
 				array = THIS.original_cores
 				add_core_of = ROOT
 			}
+			#add_to_ROOT_potential_cores = yes
 			declare_war_on = {
 				target = ROOT
 				type = annex_everything
@@ -2625,12 +2629,15 @@ country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
 						original_tag = NDR
 						original_tag = REM
 					}
-					NOT = { has_war_with = PREV }
 				}
-				declare_war_on = {
-					target = PREV
-					type = annex_everything
+				if = {
+					limit = { NOT = { has_war_with = PREV } }
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
 				}
+				add_to_PREV_potential_cores = yes
 			}
 		}
 		ROOT = {
