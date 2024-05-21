@@ -2038,23 +2038,13 @@ country_event = { #MGY wars REM for their core territory
 					type = annex_everything
 				}
 			}
-			if = {
+			every_controlled_state = {
 				limit = {
-					any_state = {
-						is_in_array = { NDR.original_cores = THIS }
-					}
+					is_claimed_by = ROOT #removing claim previsouly will break this moment so it would need to be changed with is_in_array check(s)
 				}
-				for_each_scope_loop = {
-					array = NDR.original_cores
-					add_core_of = ROOT
-					remove_claim_by = ROOT
-				}
+				add_core_of = ROOT
+				remove_claim_by = ROOT
 			}
-		}
-		for_each_scope_loop = {
-			array = REM.original_cores
-			add_core_of = ROOT
-			remove_claim_by = ROOT
 		}
 	}
 }
@@ -2180,12 +2170,16 @@ country_event = { #ZOO wars DEL & IDO
 	hidden = yes
 	
 	trigger = {
-		original_tag = ZOO
+		OR = {
+			original_tag = TAI
+			original_tag = MEL
+			original_tag = ZOO
+		}
 		exists = yes
 		has_war = no
 		is_subject = no
 		NOT = { country_exists = IDO }
-		date > 1054.6.1
+		date > 1052.4.4
 	}
 	
 	fire_only_once = yes
@@ -2550,7 +2544,7 @@ country_event = { #MGY wars NDR for their core territory
 	fire_only_once = yes
 	
 	option = {
-		random_other_country = {
+		every_other_country = {
 			limit = {
 				any_controlled_state = {
 					is_in_array = { NDR.original_cores = THIS }
@@ -2562,11 +2556,10 @@ country_event = { #MGY wars NDR for their core territory
 					type = annex_everything
 				}
 			}
-		}
-		for_each_scope_loop = {
-			array = NDR.original_cores
-			if = {
-				limit = { NOT = { is_core_of = ROOT } }
+			every_controlled_state = {
+				limit = {
+					is_claimed_by = ROOT #removing claim previsouly will break this moment so it would need to be changed with is_in_array check(s)
+				}
 				add_core_of = ROOT
 				remove_claim_by = ROOT
 			}
@@ -2772,7 +2765,7 @@ country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
 # 	hidden = yes
 	
 # 	trigger = {
-# 		original_tag = MGY
+# 		original_tag = YMN
 # 		exists = yes
 # 		has_war = no
 # 		is_subject = no
@@ -2821,7 +2814,7 @@ country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
 # 	hidden = yes
 	
 # 	trigger = {
-# 		original_tag = MGY
+# 		original_tag = ROA
 # 		exists = yes
 # 		has_war = no
 # 		is_subject = no
