@@ -1366,6 +1366,7 @@ country_event = { #GRI gets vanilla cores from NTR
 	trigger = {
 		original_tag = GRI
 		date > 1051.7.1
+		has_subject = NER
 	}
 	
 	fire_only_once = yes
@@ -1455,7 +1456,6 @@ country_event = { #EQC wars RCT
 	trigger = {
 		original_tag = EQC
 		exists = yes
-		has_war = no
 		is_subject = no
 		date > 1055.1.1
 	}
@@ -1601,7 +1601,6 @@ country_event = { #RCT wars GRI
 	trigger = {
 		original_tag = RCT
 		exists = yes
-		has_war = no
 		is_subject = no
 		date > 1055.1.1
 	}
@@ -1761,7 +1760,7 @@ country_event = { #HPS joins EQC if they win
 		exists = yes
 		is_subject = no
 		is_in_faction = no
-		#has_war = no
+		has_war = no
 		NOT = {
 			country_exists = HRL
 			country_exists = DOH
@@ -1775,11 +1774,11 @@ country_event = { #HPS joins EQC if they win
 		name = zebrica_activity.1.a
 		EQC = {
 			add_to_faction = HPS
-		}
-		country_event = {
-			id = zebrica_activity.2
-			days = 730
-			random_days = 365
+			country_event = {
+				id = zebrica_activity.2
+				days = 730
+				random_days = 365
+			}
 		}
 	}
 }
@@ -1794,14 +1793,13 @@ country_event = { #HPS is annexed by EQC
 	
 	option = {
 		name = zebrica_activity.2.a
-		EQC = {
-			annex_country = {
-				target = HPS
-				transfer_troops = yes
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
 			}
-			every_state = {
-				limit = { is_core_of = HPS }
-				add_core_of = EQC
+			set_autonomy = {
+				target = HPS
+				autonomous_state = autonomy_integrated_puppet
 			}
 		}
 	}
