@@ -2217,32 +2217,56 @@ country_event = { #TAI/MEL/ZOO wars DEL & IDO
 	}
 }
 
-# country_event = { #ROA and ZOO war KIR for their core territory in ZLU 
-## ROA attacks ZLU and their overlord or lackeys via zebrica_activity.28
-# 	id = zebrica_activity.14
-# 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.14"}
-# 	hidden = yes
+country_event = { #ILU final war stuff
+	id = zebrica_activity.14
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.14"}
+	#hidden = yes
+	is_triggered_only = yes
 	
-# 	trigger = {
-# 		original_tag = ZOO
-# 		date > 1056.3.1
-# 	}
-	
-# 	fire_only_once = yes
-	
-# 	option = {
-# 		declare_war_on = {
-# 			target = ZLU
-# 			type = annex_everything
-# 		}
-# 		ROA = {
-# 			declare_war_on = {
-# 				target = ZLU
-# 				type = annex_everything
-# 			}
-# 		}
-# 	}
-# }
+	fire_only_once = yes
+	title = zebrica_activity.14.t
+	desc = zebrica_activity.14.d
+	option = { #let's fucking go
+		name = zebrica_activity.14.a 
+		declare_war_on = {
+			target = ILU
+			type = annex_everything
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				check_variable = { ROOT.deployed_army_manpower_k > FROM.deployed_army_manpower_k }
+				add = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > -1
+				}
+				add = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = ILU
+					value < 0
+				}
+				add = 2
+			}
+		}
+	}
+	option = { #wtf r u serious?
+		name = zebrica_activity.14.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				FROM = {
+					has_tech = tech_kirin_astrology
+				}
+				factor = 0.75
+			}
+		}
+	}
+}
 
 country_event = { #CTL wars MCW
 	id = zebrica_activity.15
