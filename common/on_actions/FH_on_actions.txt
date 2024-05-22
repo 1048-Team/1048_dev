@@ -68,123 +68,239 @@ on_actions = {
 		}
 	}
 	
+	#ROOT is winner #FROM is loser
 	on_peaceconference_ended = { #For adding prosperity modifier to MTS Warm Night conquered states
 		effect = {
-			every_state = {
+			# PUT EVERYTHING IN THE IF BELOW
+			if = { # THE bypass_on_peaceconference_ended FLAG **HAS** TO BE SET BEFORE CALLING THE white_peace COMMAND AND CLEARED AFTERWARDS
 				limit = {
-					ROOT = { has_country_leader = { character = MTS_Warm_Night ruling_only = yes } }
-					is_owned_by = ROOT
-					NOT = { has_dynamic_modifier = { modifier = MTS_state_prosperity_modifier } }
-				}
-				add_dynamic_modifier = { modifier = MTS_state_prosperity_modifier }
-			}
-			#Should later do news events for SLE wars with CHN
-			if = {
-				limit = {
-					tag = CCA
-					FROM = { tag = CHN }
-				}
-				ROOT = { country_event = changeling_activity.38 }
-			}
-			else_if = { #CHN end war news
-				limit = {
-					tag = BUG
-					FROM = { tag = SLE }
-				}
-				news_event = changelingianews.7
-			}
-			else_if = { #Figure out image for Ordo management
-				limit = {
-					OR = {
-						is_EQS_SOL_1048 = yes
-						is_SLW_SOL = yes
-						is_MTS_SOL = yes
+					NOT = {
+						has_country_flag = bypass_on_peaceconference_ended
+						FROM = { has_country_flag = bypass_on_peaceconference_ended }
 					}
 				}
-				SOL_calculate_ordo_image = yes
-			}
-			#Return MTS/SCS to not call in offensive wars
-			else_if = {
-				limit = {
-					ROOT = { 
-						NOT = { 
-							has_idea = MTS_no_friends_calling_offensive
-							OR = {
-								AND = {
-									tag = MTS
-									has_government = communism
-									is_in_faction_with = SCS
-								}
-								AND = {
-									tag = SCS
-									is_in_faction_with = MTS
-								}
-							}
-						} 
+				log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_peaceconference_ended"
+				every_state = {
+					limit = {
+						ROOT = { has_country_leader = { character = MTS_Warm_Night ruling_only = yes } }
+						is_owned_by = ROOT
+						NOT = { has_dynamic_modifier = { modifier = MTS_state_prosperity_modifier } }
 					}
+					add_dynamic_modifier = { modifier = MTS_state_prosperity_modifier }
 				}
-				add_ideas = MTS_no_friends_calling_offensive
-			}
-			###Begins the long list of integration stuff
-			else_if = {
-				limit = {
-					ROOT = {
-						tag = MTS
-						is_subject = no
-					}
-					FROM = {
-						OR = {
-							tag = EQS
-							tag = SLW
-							tag = CRY
-							is_in_array = { global.changeling_hegemony = THIS.id }
-							AND = {
-								is_in_array = { global.shield_of_steel = THIS.id }
-								NOT = { tag = MWR }
-							}
-							is_in_array = { global.solar_empire_rumps = THIS.id }
-						}
-					}
-				}
-				FROM = { add_to_ROOT_potential_cores = yes }
-			}
-			else_if = {
-				limit = {
-					ROOT = {
-						OR = {
-							original_tag = ABY
-							original_tag = YMN
-						}
-					}
-				}
+				#Should later do news events for SLE wars with CHN
 				if = {
 					limit = {
+						tag = CCA
+						FROM = { tag = CHN }
+					}
+					ROOT = { country_event = changeling_activity.38 }
+				}
+				else_if = { #CHN end war news
+					limit = {
+						tag = BUG
+						FROM = { tag = SLE }
+					}
+					news_event = changelingianews.7
+				}
+				else_if = { #Figure out image for Ordo management
+					limit = {
+						OR = {
+							is_EQS_SOL_1048 = yes
+							is_SLW_SOL = yes
+							is_MTS_SOL = yes
+						}
+					}
+					SOL_calculate_ordo_image = yes
+				}
+				#Return MTS/SCS to not call in offensive wars
+				else_if = {
+					limit = {
+						ROOT = { 
+							NOT = { 
+								has_idea = MTS_no_friends_calling_offensive
+								OR = {
+									AND = {
+										tag = MTS
+										has_government = communism
+										is_in_faction_with = SCS
+									}
+									AND = {
+										tag = SCS
+										is_in_faction_with = MTS
+									}
+								}
+							} 
+						}
+					}
+					add_ideas = MTS_no_friends_calling_offensive
+				}
+				###Begins the long list of integration stuff
+				else_if = {
+					limit = {
+						ROOT = {
+							tag = MTS
+							is_subject = no
+						}
 						FROM = {
+							OR = {
+								tag = EQS
+								tag = SLW
+								tag = CRY
+								is_in_array = { global.changeling_hegemony = THIS.id }
+								AND = {
+									is_in_array = { global.shield_of_steel = THIS.id }
+									NOT = { tag = MWR }
+								}
+								is_in_array = { global.solar_empire_rumps = THIS.id }
+							}
+						}
+					}
+					FROM = { add_to_ROOT_potential_cores = yes }
+				}
+				else_if = { #ABY-YMN war and YMN stuffs
+					limit = {
+						ROOT = {
 							OR = {
 								original_tag = ABY
 								original_tag = YMN
 							}
 						}
 					}
-					FROM = { add_to_ROOT_potential_cores = yes }
-				}
-				else_if = {
-					limit = {
-						any_other_country = {
-							is_in_array = { ROOT.i_will_kill_you_later = THIS }
+					if = {
+						limit = {
+							FROM = {
+								OR = {
+									original_tag = ABY
+									original_tag = YMN
+								}
+							}
+						}
+						FROM = { add_to_ROOT_potential_cores = yes }
+					}
+					else_if = {
+						limit = {
+							any_other_country = {
+								is_in_array = { ROOT.i_will_kill_you_later = THIS }
+							}
+						}
+						country_event = {
+							id = zebrica_activity.23
+							days = 120
 						}
 					}
-					country_event = {
-						id = zebrica_activity.23
-						days = 120
+					else = { clear_array = ROOT.i_will_kill_you_later }
+				}
+				else_if = { # MGY stuffs
+					limit = {
+						ROOT = {
+							original_tag = MGY
+						}
+					}
+					if = {
+						limit = {
+							any_neighbor_country = {
+								NOT = { original_tag = ABY } #if YMN eventually eat ABY, MGY had better to get them ASAP before they got something from their new potential cores; that's why YMN check isn't added
+								any_controlled_state = {
+									OR = {
+										is_core_of = ROOT
+										is_claimed_by = ROOT
+									}
+								}
+							}
+						}
+						ROOT = { country_event = { id = zebrica_activity.19 days = 30 } } #kills another zebra desert tribes
+					}
+					else_if = { 
+						limit = {
+							has_war = no
+						}
+						ROOT = { country_event = { id = zebrica_activity.24 days = 300 } } #kills ABY
 					}
 				}
-				else = { clear_array = ROOT.i_will_kill_you_later }
+			
+				FROM = { country_event = { id = utility.10 hours = 1 } }
+				
+				update_global_arrays_all = yes
 			}
-			
-			FROM = { country_event = { id = utility.10 hours = 1 } }
-			
-			update_global_arrays_all = yes
 		}
 	}
+
+	
+	# ROOT is capitulated country, FROM is winner
+	# This is processed by the game DURING peace conference
+	# If you have any effects that annex/change state ownership, DO NOT put them here
+	# as that will crash the peace conference
+	on_capitulation = {
+		effect = {
+			log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_capitulation"
+			if = {
+				limit = {
+					OR = {
+						original_tag = CNT
+						original_tag = TAI
+						original_tag = MEL
+						original_tag = ZOO
+					}
+					FROM = {
+						has_focus_tree = generic_zebra_focus
+						is_ai = yes
+					}
+				}
+				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 } #this should be removed if you wanna add something for ABY, YMN, MGY
+				transfer_navy = { target = FROM }
+			}
+		}
+	}
+
+	on_monthly_MGY = {
+		effect = {
+			if = {
+				limit = {
+					has_war = yes
+					NOT = {
+						any_state = {
+							any_neighbor_state = {
+								owner = { has_war_with = MGY }
+							}
+						}
+					}
+				}
+				ROOT = { country_event = { id = zebrica_activity.19 days = 30 } } #kills another zebra desert tribes
+			}
+			else_if = {
+				limit = {
+					has_war_with = ABY
+					NOT = {
+						ABY = {
+							any_controlled_state = {
+								is_core_of = MGY
+							}
+						}
+					}
+				}
+				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
+				white_peace = MGY
+				ABY = {
+					every_owned_state = {
+						limit = {
+							is_core_of = MGY
+							#idk how to check if it's in another power's control
+						}
+						transfer_state_to = MGY
+					}
+				}
+			}
+		}
+	}
+
+	# on_monthly = {
+	# 	effect = {
+	# 		if = {
+	# 			limit = {
+	# 				has_war_with = CNT
+	# 			}
+	# 		}
+	# 	}
+	# }
 }
