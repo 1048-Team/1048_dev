@@ -271,13 +271,13 @@ country_event = { ### SOL
 	is_triggered_only = yes
 	trigger = {
 		is_ai = yes
-		is_subject = yes
 		OR = {
 			AND = {
+				is_subject = yes
 				check_variable = { num_owned_states = 1 }
 				capital_scope = {
 					is_coastal = no
-					is_island_state = no
+					is_state_considered_an_island = no
 				}
 				check_variable = { neighbors^num = 1 }
 				overlord = {
@@ -304,8 +304,40 @@ country_event = { ### SOL
 					NOT = { is_core_of = ROOT }
 				}
 			}
-			overlord = {
-				annex_country = { target = ROOT }
+			if = {
+				limit = { is_subject = yes }
+				overlord = {
+					annex_country = { target = ROOT }
+				}
+			}
+			else_if = {
+				limit = {
+					any_neighbor_country = {
+						is_ai = yes
+						all_of_scopes = {
+							array = ROOT.owned_states
+							is_core_of = PREV
+						}
+					}
+				}
+				random_neighbor_country = {
+					limit = {
+						is_ai = yes
+						all_of_scopes = {
+							array = ROOT.owned_states
+							is_core_of = PREV
+						}
+					}
+					annex_country = { target = ROOT }
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { exists = yes is_ai = yes }
+				}
+				FROM = {
+					annex_country = { target = ROOT }
+				}
 			}
 		}
 		else = {

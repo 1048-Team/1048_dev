@@ -9,7 +9,7 @@ on_actions = {
 				}
 				news_event = changelingianews.3
 			}
-			if = { #CHN war news events
+			else_if = { #CHN war news events
 				limit = {
 					tag = BUG
 					FROM = { tag = SLE }
@@ -17,7 +17,7 @@ on_actions = {
 				news_event = changelingianews.6
 			}
 			#MTS no call on offensive war, yes call on defensive war
-			if = {
+			else_if = {
 				limit = {
 					FROM = {
 						OR = {
@@ -86,14 +86,14 @@ on_actions = {
 				}
 				ROOT = { country_event = changeling_activity.38 }
 			}
-			if = { #CHN end war news
+			else_if = { #CHN end war news
 				limit = {
 					tag = BUG
 					FROM = { tag = SLE }
 				}
 				news_event = changelingianews.7
 			}
-			if = { #Figure out image for Ordo management
+			else_if = { #Figure out image for Ordo management
 				limit = {
 					OR = {
 						is_EQS_SOL_1048 = yes
@@ -104,7 +104,7 @@ on_actions = {
 				SOL_calculate_ordo_image = yes
 			}
 			#Return MTS/SCS to not call in offensive wars
-			if = {
+			else_if = {
 				limit = {
 					ROOT = { 
 						NOT = { 
@@ -126,7 +126,7 @@ on_actions = {
 				add_ideas = MTS_no_friends_calling_offensive
 			}
 			###Begins the long list of integration stuff
-			if = {
+			else_if = {
 				limit = {
 					ROOT = {
 						tag = MTS
@@ -147,6 +147,39 @@ on_actions = {
 					}
 				}
 				FROM = { add_to_ROOT_potential_cores = yes }
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						OR = {
+							original_tag = ABY
+							original_tag = YMN
+						}
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							OR = {
+								original_tag = ABY
+								original_tag = YMN
+							}
+						}
+					}
+					FROM = { add_to_ROOT_potential_cores = yes }
+				}
+				else_if = {
+					limit = {
+						any_other_country = {
+							is_in_array = { ROOT.i_will_kill_you_later = THIS }
+						}
+					}
+					country_event = {
+						id = zebrica_activity.23
+						days = 120
+					}
+				}
+				else = { clear_array = ROOT.i_will_kill_you_later }
 			}
 			
 			FROM = { country_event = { id = utility.10 hours = 1 } }

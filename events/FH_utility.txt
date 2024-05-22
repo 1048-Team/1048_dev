@@ -2710,149 +2710,176 @@ country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
 }
 
 
-# country_event = { #todo for STM
-# 	id = zebrica_activity.21
-# 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.21"}
-# 	hidden = yes
+country_event = { # STM
+	id = zebrica_activity.21
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.21"}
+	hidden = yes
 	
-# 	trigger = {
-# 		original_tag = STM
-# 		exists = yes
-# 		has_war = no
-# 		is_subject = no
-# 		date > 1052.4.20
-# 	}
+	trigger = {
+		original_tag = STM
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1052.1.20 # after a year from they eat HSO via zebrica_activity.12
+	}
 	
-# 	fire_only_once = yes
+	fire_only_once = yes
 	
-# 	option = {
-# 		random_other_country = {
-# 			limit = {
-# 				any_controlled_state = {
-# 					is_in_array = { REM.original_cores = THIS }
-# 				}
-# 			}
-# 			ROOT = {
-# 				declare_war_on = {
-# 					target = PREV
-# 					type = annex_everything
-# 				}
-# 			}
-# 			if = {
-# 				limit = {
-# 					any_state = {
-# 						is_in_array = { NDR.original_cores = THIS }
-# 					}
-# 				}
-# 				for_each_scope_loop = {
-# 					array = NDR.original_cores
-# 					add_core_of = ROOT
-# 					remove_claim_by = ROOT
-# 				}
-# 			}
-# 		}
-# 		for_each_scope_loop = {
-# 			array = REM.original_cores
-# 			add_core_of = ROOT
-# 			remove_claim_by = ROOT
-# 		}
-# 	}
-# }
+	option = {
+		# random_other_country = {
+		# 	limit = {
+		# 		any_controlled_state = {
+		# 			is_in_array = { REM.original_cores = THIS }
+		# 		}
+		# 	}
+		# 	ROOT = {
+		# 		declare_war_on = {
+		# 			target = PREV
+		# 			type = annex_everything
+		# 		}
+		# 	}
+		# 	if = {
+		# 		limit = {
+		# 			any_state = {
+		# 				is_in_array = { NDR.original_cores = THIS }
+		# 			}
+		# 		}
+		# 		for_each_scope_loop = {
+		# 			array = NDR.original_cores
+		# 			add_core_of = ROOT
+		# 			remove_claim_by = ROOT
+		# 		}
+		# 	}
+		# }
+		# for_each_scope_loop = {
+		# 	array = REM.original_cores
+		# 	add_core_of = ROOT
+		# 	remove_claim_by = ROOT
+		# }
+	}
+}
 
-# country_event = { #todo for YMN
-# 	id = zebrica_activity.22
-# 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.22"}
-# 	hidden = yes
+country_event = { # YMN seeks someone to kill
+	id = zebrica_activity.22
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.22"}
+	hidden = yes
 	
-# 	trigger = {
-# 		original_tag = YMN
-# 		exists = yes
-# 		has_war = no
-# 		is_subject = no
-# 		date > 1052.4.20
-# 	}
+	trigger = {
+		original_tag = YMN
+		exists = yes
+		has_war = no
+		is_subject = no
+		#date > 1052.4.20
+		any_of_scopes = {
+			array = ABY.original_cores
+			tooltip = activity22_event_trigger_tt
+			NOT = { is_core_of = ROOT }
+		}
+	}
 	
-# 	fire_only_once = yes
+	fire_only_once = yes
 	
-# 	option = {
-# 		random_other_country = {
-# 			limit = {
-# 				any_controlled_state = {
-# 					is_in_array = { REM.original_cores = THIS }
-# 				}
-# 			}
-# 			ROOT = {
-# 				declare_war_on = {
-# 					target = PREV
-# 					type = annex_everything
-# 				}
-# 			}
-# 			if = {
-# 				limit = {
-# 					any_state = {
-# 						is_in_array = { NDR.original_cores = THIS }
-# 					}
-# 				}
-# 				for_each_scope_loop = {
-# 					array = NDR.original_cores
-# 					add_core_of = ROOT
-# 					remove_claim_by = ROOT
-# 				}
-# 			}
-# 		}
-# 		for_each_scope_loop = {
-# 			array = REM.original_cores
-# 			add_core_of = ROOT
-# 			remove_claim_by = ROOT
-# 		}
-# 	}
-# }
+	option = {
+		every_neighbor_country = {
+			if = {
+				limit = {
+					check_variable = { ROOT.deployed_army_manpower_k < THIS.deployed_army_manpower_k }
+				}
+				add_to_array = { ROOT.i_will_kill_you_later = THIS }
+			}
+			else = { # I kill you rn
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+	}
+}
 
-# country_event = { #todo for ROA
-# 	id = zebrica_activity.23
-# 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.23"}
-# 	hidden = yes
+country_event = { # YMN decides whether kill someone or not
+	id = zebrica_activity.23
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.23"}
+	hidden = yes
+	is_triggered_only = yes #on_peaceconference_ended
+	#fire_only_once = yes
 	
-# 	trigger = {
-# 		original_tag = ROA
-# 		exists = yes
-# 		has_war = no
-# 		is_subject = no
-# 		date > 1052.4.20
-# 	}
+	option = {
+		if = {
+			limit = {
+				has_war = no
+				is_subject = no
+			}
+			random_neighbor_country = {
+				limit = { is_in_array = { ROOT.i_will_kill_you_later = THIS } }
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+		# else_if = { # in case further expansion needed
+		# 	limit = { }
+		# }
+		else = {
+			country_event = {
+				id = zebrica_activity.23
+				days = 120
+			}
+		}
+	}
+}
+country_event = { #todo for ROA
+	id = zebrica_activity.24
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.24"}
+	hidden = yes
 	
-# 	fire_only_once = yes
+	trigger = {
+		original_tag = ROA
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.5.20
+	}
 	
-# 	option = {
-# 		random_other_country = {
-# 			limit = {
-# 				any_controlled_state = {
-# 					is_in_array = { REM.original_cores = THIS }
-# 				}
-# 			}
-# 			ROOT = {
-# 				declare_war_on = {
-# 					target = PREV
-# 					type = annex_everything
-# 				}
-# 			}
-# 			if = {
-# 				limit = {
-# 					any_state = {
-# 						is_in_array = { NDR.original_cores = THIS }
-# 					}
-# 				}
-# 				for_each_scope_loop = {
-# 					array = NDR.original_cores
-# 					add_core_of = ROOT
-# 					remove_claim_by = ROOT
-# 				}
-# 			}
-# 		}
-# 		for_each_scope_loop = {
-# 			array = REM.original_cores
-# 			add_core_of = ROOT
-# 			remove_claim_by = ROOT
-# 		}
-# 	}
-# }
+	fire_only_once = yes
+	
+	# option = {
+	# 	random_other_country = {
+	# 		limit = {
+	# 			any_controlled_state = {
+	# 				is_in_array = { REM.original_cores = THIS }
+	# 			}
+	# 		}
+	# 		ROOT = {
+	# 			declare_war_on = {
+	# 				target = PREV
+	# 				type = annex_everything
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				any_state = {
+	# 					is_in_array = { NDR.original_cores = THIS }
+	# 				}
+	# 			}
+	# 			for_each_scope_loop = {
+	# 				array = NDR.original_cores
+	# 				add_core_of = ROOT
+	# 				remove_claim_by = ROOT
+	# 			}
+	# 		}
+	# 	}
+	# 	for_each_scope_loop = {
+	# 		array = REM.original_cores
+	# 		add_core_of = ROOT
+	# 		remove_claim_by = ROOT
+	# 	}
+	# }
+}
