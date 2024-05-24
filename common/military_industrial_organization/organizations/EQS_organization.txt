@@ -839,7 +839,21 @@ EQS_baltimare_organization = {
 	}
 	available = {
 		owner = {
-			owns_state = 13
+			OR = {
+				owns_state = 13
+				AND = {
+					is_subject = yes
+					overlord = {
+						owns_state = 13
+						OR = {
+							original_tag = EQS
+							original_tag = BAL
+							original_tag = SLW
+							original_tag = CER
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -995,7 +1009,7 @@ EQS_SOL_crimson_glare_manufactorum_organization = {
 		position = { x = 0 y = 1 }
 		relative_position_id = EQS_SOL_cloud_buoyancy_points
 		
-		any_parent = ( EQS_SOL_cloud_buoyancy_points }
+		any_parent = { EQS_SOL_cloud_buoyancy_points }
 		organization_modifier = {
 			military_industrial_organization_funds_gain = 0.1
 		}
@@ -1572,7 +1586,7 @@ EQS_macintosh_organization = {
 	include = generic_infantry_equipment_organization
 	name = macintosh
 	icon = GFX_idea_EQS_macintosh
-	allowed = {	
+	allowed = {
 		tag = EQS
 		has_dlc = "Arms Against Tyranny"
 	}
