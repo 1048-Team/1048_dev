@@ -252,4 +252,26 @@ on_actions = {
 			}
 		}
 	}
+
+	# scope is operative
+	# from scope is the country
+	on_operative_recruited = {
+		effect = {
+			log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_operative_recruited by FH_on_actions"
+			operative_add_starting_nationalities_and_race = yes
+			operative_add_secondary_nationalities = yes
+			if = {
+				limit = {
+					FROM = {
+						OR = {
+							original_tag = EQS
+							is_in_faction_with = EQS
+						}
+					}
+					has_trait = operative_agentbio_astrum
+				}
+				save_global_event_target_as = SLE_astrum_solus_target
+			}
+		}
+	}
 }
