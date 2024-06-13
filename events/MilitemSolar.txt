@@ -2969,6 +2969,14 @@ country_event = { #Scorched Earth leads some of his troops into Sanctum Solar an
 		name = militem.scorched.110.a
 		add_stability = 0.05
 		set_capital = { state = 3 }
+		if = {
+			limit = {
+				EQS = {
+					has_country_flag = EQS_renamed_sanctum_solar
+				}
+			}
+			reset_province_name = 179
+		}
 	}
 }
 
@@ -3177,11 +3185,28 @@ country_event = { #Scorched Earth marches into the cell area where Sunset is bei
 	option = { #Know that this is not the end.
 		name = militem.scorched.119.a
 		add_ideas = MTS_forgiven_clergy
-		###Refactor this to random_country block after move
-		EQS = {
-			EQS_Sunset_Shimmer_1048 = { set_nationality = ROOT }
-			EQS_Nightfall_Expanse = { set_nationality = ROOT }
+		random_country = {
+			limit = {
+				has_character = EQS_Sunset_Shimmer_1048
+				EQS_Sunset_Shimmer_1048 = { set_nationality = ROOT }
+			}
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Nightfall_Expanse
+				EQS_Nightfall_Expanse = { set_nationality = ROOT }
+			}
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Floodwater
+			}
 			EQS_Floodwater = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Whirlwind
+			}
 			EQS_Whirlwind = { set_nationality = ROOT }
 		}
 		add_stability = -0.1
@@ -3235,7 +3260,10 @@ country_event = { #Serene Shore nervously enters Scorched Earth's throne room to
 				EQS_Nova_Glow = { set_nationality = ROOT }
 			}
 		}
-		EQS = {
+		random_country = {
+			limit = {
+				has_character = EQS_Obscura
+			}
 			EQS_Obscura = { set_nationality = ROOT }
 		}
 		add_stability = 0.05
@@ -3423,8 +3451,24 @@ country_event = { #Scorched Earth, with the Empire stabilized, heads out to the 
 					is_claimed_by = EQS
 				}
 			}
-			add_compliance = 20
-			add_resistance = -20
+			add_compliance = 15
+			add_resistance = -15
+		}
+		#every_state = {
+		#	limit = {
+		#		OR = {
+		#			is_claimed_by = EQS
+		#			is_core_of = EQS
+		#		}
+		#		NOT = {
+		#			is_owned_by = ROOT
+		#			is_core_of = ROOT
+		#		}
+		#	}
+		#	add_to_ROOT_potential_cores = yes
+		#}
+		SLE = {
+			add_to_ROOT_potential_cores = yes
 		}
 	}
 }
