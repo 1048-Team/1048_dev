@@ -7385,7 +7385,19 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeastern_paradise"
-		add_ideas = MTS_paradise_of_southeast
+		if = {
+			limit = {
+				has_idea = MTS_paradise_of_southeast
+				NOT = { has_completed_focus = MTS_southeastern_paradise }
+			}
+			swap_ideas = {
+				remove_idea = MTS_paradise_of_southeast
+				add_idea = MTS_utopic_solarists
+			}
+		}
+		else = {
+			add_ideas = MTS_paradise_of_southeast
+		}
 	}
 	
 	ai_will_do = { factor = 160 }
