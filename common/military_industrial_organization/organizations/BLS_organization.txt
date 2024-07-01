@@ -1,0 +1,855 @@
+#####################
+
+###  ##  #  # # #  ##
+ #  #  # ## # # # #
+ #  #### # ## ##   #
+ #  #  # #  # # #   #
+ #  #  # #  # # # ##
+
+ ####################
+BLS_directorate_tanks_organization = {
+	name = BLS_directorate_tanks
+	equipment_type = { mio_cat_eq_all_light_tank mio_cat_eq_all_medium_tank mio_cat_eq_all_heavy_tank }
+	research_categories = { mio_cat_tech_all_armor_and_modules }
+	#icon = GFX_idea_BLS_directorate
+	allowed = {
+		original_tag = BLS
+		has_dlc = "Arms Against Tyranny"
+	}
+
+	tree_header_text = {
+		text = mio_header_armor_and_armaments
+		x = 1
+	}
+
+	tree_header_text = {
+		text = mio_header_engines
+		x = 5
+	}
+
+	tree_header_text = {
+		text = mio_header_design
+		x = 8
+	}
+
+	initial_trait = {
+		name = BLS_directorate_quality_tanks
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.125
+			military_industrial_organization_design_team_assign_cost = 2.5
+		}
+
+		equipment_bonus = {
+			breakthrough = 0.05
+		}
+
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_found_research_wing
+		name = BLS_found_research_wing
+
+		#icon = GFX_research
+
+		position = { x = 5 y = 0 }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_funds_gain = 0.25
+			military_industrial_organization_design_team_assign_cost = -0.5
+		}
+	}
+
+	trait = {
+		token = BLS_compartmentalized_engine_space
+		name = BLS_compartmentalized_engine_space
+
+		position = { x = -3 y = 1 }
+
+		parent = {
+			traits = {
+				BLS_found_research_wing
+			}
+		}
+		relative_position_id = BLS_found_research_wing
+
+		mutually_exclusive = { BLS_magic_heated_forging }
+
+		equipment_bonus = {
+			maximum_speed = 0.075
+			armor_value = -0.1
+		}
+	}
+
+	trait = {
+		token = BLS_micro_sloped_plating
+		name = BLS_micro_sloped_plating
+
+		position = { x = 0 y = 1 }
+
+		parent = {
+			traits = { BLS_compartmentalized_engine_space }
+		}
+		relative_position_id = BLS_compartmentalized_engine_space
+
+		equipment_bonus = {
+			breakthrough = 0.05
+			reliability = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_computerized_fuel_injectors
+		name = BLS_computerized_fuel_injectors
+
+		position = { x = 0 y = 1 }
+
+		parent = { traits = { BLS_micro_sloped_plating } }
+		relative_position_id = BLS_micro_sloped_plating
+
+		equipment_bonus = {
+			maximum_speed = 0.075
+			fuel_consumption = 0.035
+		}
+	}
+
+	trait = {
+		token = BLS_composite_track_plating
+		name = BLS_composite_track_plating
+
+		position = { x = -1 y = 1 }
+
+		parent = { traits = { BLS_computerized_fuel_injectors } }
+		relative_position_id = BLS_computerized_fuel_injectors
+
+		equipment_bonus = {
+			soft_attack = 0.02
+			defense = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_high_powered_laser_cannons
+		name = BLS_high_powered_laser_cannons
+
+		position = { x = 1 y = 1 }
+
+		parent = { traits = { BLS_computerized_fuel_injectors } }
+		relative_position_id = BLS_computerized_fuel_injectors
+
+		equipment_bonus = {
+			hard_attack = 0.1
+			ap_attack = 0.03
+		}
+		production_bonus = {
+			production_cost_factor = 0.075
+		}
+	}
+
+	trait = {
+		token = BLS_magic_heated_forging
+		name = BLS_magic_heated_forging
+
+		position = { x = 3 y = 1 }
+
+		parent = {
+			traits = {
+				BLS_found_research_wing
+			}
+		}
+		relative_position_id = BLS_found_research_wing
+
+		mutually_exclusive = { BLS_magic_heated_forging }
+
+		equipment_bonus = {
+			armor = 0.05
+			reliability = 0.03
+			maximum_speed = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_rapid_fire_flares
+		name = BLS_rapid_fire_flares
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_magic_heated_forging
+
+		parent = { traits = { BLS_magic_heated_forging } }
+
+		equipment_bonus = {
+			defense = 0.05
+			armor_value = 0.02
+		}
+		production_bonus = {
+			production_cost_factor = 0.04
+		}
+	}
+
+	trait = {
+		token = BLS_secondary_crankshafts
+		name = BLS_secondary_crankshafts
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_rapid_fire_flares
+
+		parent = { traits = { BLS_rapid_fire_flares } }
+
+		equipment_bonus = {
+			reliability = 0.05
+			maximum_speed = -0.02
+		}
+	}
+
+	trait = {
+		token = BLS_titanium_plated_turrets
+		name = BLS_titanium_plated_turrets
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_secondary_crankshafts
+
+		parent = { traits = { BLS_secondary_crankshafts } }
+
+		equipment_bonus = {
+			breakthrough = 0.02
+			reliability = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_magic_learning_tracking_algorithms
+		name = BLS_magic_learning_tracking_algorithms
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_secondary_crankshafts
+
+		parent = { traits = { BLS_secondary_crankshafts } }
+
+		equipment_bonus = {
+			defense = 0.05
+			armor_value = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.1
+		}
+	}
+
+	trait = {
+		token = BLS_nitrous_injectors
+		name = BLS_nitrous_injectors
+
+		position = { x = 0 y = 2 }
+		relative_position_id = BLS_found_research_wing
+
+		any_parent = {
+			BLS_compartmentalized_engine_space
+			BLS_magic_heated_forging
+		}
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+			fuel_consumption = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_shielded_gatling_turrets
+		name = BLS_shielded_gatling_turrets
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_nitrous_injectors
+
+		parent = { traits = { BLS_nitrous_injectors } }
+
+		equipment_bonus = {
+			soft_attack = 0.03
+			armor_value = 0.01
+		}
+	}
+
+	trait = {
+		token = BLS_prototype_reactive_armor
+		name = BLS_prototype_reactive_armor
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_nitrous_injectors
+
+		parent = { traits = { BLS_nitrous_injectors } }
+
+		equipment_bonus = {
+			armor_value = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.01
+		}
+	}
+
+	trait = {
+		token = BLS_polymer_based_alloys
+		name = BLS_polymer_based_alloys
+
+		position = { x = 0 y = 1 }
+
+		production_bonus = {
+			production_resource_penalty_factor = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_flash_welding_crumple_points
+		name = BLS_flash_welding_crumple_points
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_polymer_based_alloys
+
+		parent = { traits = { BLS_polymer_based_alloys } }
+
+		equipment_bonus = {
+			reliability = -0.02
+		}
+		production_bonus = {
+			production_capacity_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_focus_tested_designs
+		name = BLS_focus_tested_designs
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_polymer_based_alloys
+
+		parent = { traits = { BLS_polymer_based_alloys } }
+
+		production_bonus = {
+			production_efficiency_gain_factor = -0.15
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.1
+			military_industrial_organization_design_team_assign_cost = -0.25
+		}
+	}
+}
+
+
+#####################
+
+ ## #  # ### ###   ##
+#   #  #  #  #  # #
+ #  ####  #  ###   #
+  # #  #  #  #      #
+##  #  # ### #    ##
+
+#####################
+BLS_directorate_navy_organization = {
+	name = BLS_directorate_navy
+	equipment_type = { screen_ship capital_ship submarine }
+	research_categories = { mio_cat_tech_all_capital_ship_and_modules mio_cat_tech_all_screen_ship_and_modules mio_cat_tech_all_carrier_and_modules mio_cat_tech_all_submarine_and_modules }
+	#icon = GFX_idea_BLS_directorate
+	allowed = {
+		original_tag = BLS
+		has_dlc = "Arms Against Tyranny"
+	}
+
+	tree_header_text = {
+		text = mio_header_armor_and_armaments
+		x = 1
+	}
+
+	tree_header_text = {
+		text = mio_header_engines
+		x = 5
+	}
+
+	tree_header_text = {
+		text = mio_header_design
+		x = 8
+	}
+
+	initial_trait = {
+		name = BLS_directorate_quality_navy
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.125
+			military_industrial_organization_design_team_assign_cost = 2.5
+		}
+
+		equipment_bonus = {
+			max_strength = 0.05
+		}
+
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+}
+
+
+###########################
+
+###  #    ##  #  # ###  ##
+#  # #   #  # ## # #   #
+###  #   #### # ## ##   #
+#    #   #  # #  # #     #
+#    ### #  # #  # ### ##
+
+###########################
+BLS_directorate_planes_organization = {
+	name = BLS_directorate_planes
+	equipment_type = { mio_cat_eq_all_small_plane mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+	research_categories = { mio_cat_all_light_aircraft_and_modules mio_cat_all_medium_aircraft_and_modules mio_cat_all_heavy_aircraft_and_modules }
+	#icon = GFX_idea_BLS_directorate
+	allowed = {
+		original_tag = BLS
+		has_dlc = "Arms Against Tyranny"
+	}
+
+	tree_header_text = {
+		text = mio_header_armor_and_armaments
+		x = 1
+	}
+
+	tree_header_text = {
+		text = mio_header_engines
+		x = 5
+	}
+
+	tree_header_text = {
+		text = mio_header_design
+		x = 8
+	}
+
+	initial_trait = {
+		name = BLS_directorate_quality_tanks
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.125
+			military_industrial_organization_design_team_assign_cost = 2.5
+		}
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+		}
+
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+}
+
+
+
+###################################
+
+#   #  ##  ### ### ###  ### ### #
+## ## #  #  #  #   #  #  #  #   #
+# # # ####  #  ##  ###   #  ##  #
+#   # #  #  #  #   #  #  #  #   #
+#   # #  #  #  ### #  # ### ### ###
+
+
+###################################
+BLS_directorate_small_guns_organization = {
+	name = BLS_directorate_small_guns
+	equipment_type = { infantry_equipment magical_equipment support_equipment artillery_equipment }
+	research_categories = { infantry_weapons artillery magical_tech }
+	#icon = GFX_idea_BLS_directorate
+	allowed = {
+		original_tag = BLS
+		has_dlc = "Arms Against Tyranny"
+	}
+
+	tree_header_text = {
+		text = mio_header_armor_and_armaments
+		x = 1
+	}
+
+	tree_header_text = {
+		text = mio_header_engines
+		x = 5
+	}
+
+	tree_header_text = {
+		text = mio_header_design
+		x = 8
+	}
+
+	initial_trait = {
+		name = BLS_directorate_quality_guns
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.10
+			military_industrial_organization_design_team_assign_cost = 2.5
+		}
+
+		limit_to_equipment_type = { infantry_equipment magical_equipment artillery_equipment }
+
+		equipment_bonus = {
+			hard_attack = 0.05
+		}
+
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+}
+
+BLS_positronic_explosives_organization = {
+	name = BLS_positronic_explosives
+	equipment_type = { artillery_equipment anti_tank_equipment anti_air_equipment rocket_artillery_equipment }
+	research_categories = { mio_cat_all_artillery_equipment }
+
+	icon = GFX_idea_BLS_positronic_industries
+
+	allowed = {
+		original_tag = BLS
+		has_dlc = "Arms Against Tyranny"
+	}
+	available = { FROM = { has_character = BLS_Positron } }
+
+	initial_trait = {
+        name = BLS_mad_bomber
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+		}
+		equipment_bonus = {
+			soft_attack = 0.05
+			reliability = -0.02
+		}
+	}
+
+	trait = {
+		token = BLS_extreme_caliber_barrels
+		name = BLS_extreme_caliber_barrels
+
+		position = { x = 1 y = 0 }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			breakthrough = 0.01
+			reliability = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_exhaust_feeding_tubes
+		name = BLS_exhaust_feeding_tubes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_extreme_caliber_barrels
+
+		parent = { traits = { BLS_extreme_caliber_barrels } }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			defense = 0.02
+			soft_attack = 0.01
+		}
+	}
+
+	trait = {
+		token = BLS_composite_materials
+		name = BLS_composite_materials
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_exhaust_feeding_tubes
+
+		parent = { traits = { BLS_exhaust_feeding_tubes } }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = -0.03
+		}
+		production_bonus = {
+			production_cost_factor = -0.05
+			production_resource_need_factor = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_reaction_containment_shells
+		name = BLS_reaction_containment_shells
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_composite_materials
+
+		parent = { traits = { BLS_composite_materials } }
+		mutually_exclusive = { BLS_shaped_shrapnel_spells }
+		mutually_exclusive = { BLS_delayed_impact_explosives }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.1
+		}
+		production_bonus ={
+			production_cost_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_shaped_shrapnel_spells
+		name = BLS_shaped_shrapnel_spells
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_composite_materials
+
+		parent = { traits = { BLS_composite_materials } }
+		mutually_exclusive = { BLS_reaction_containment_shells }
+		mutually_exclusive = { BLS_delayed_impact_explosives }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			reliability = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_delayed_impact_explosives
+		name = BLS_delayed_impact_explosives
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_composite_materials
+
+		parent = { traits = { BLS_composite_materials } }
+		mutually_exclusive = { BLS_reaction_containment_shells }
+		mutually_exclusive = { BLS_shaped_shrapnel_spells }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			breakthrough = 0.03
+			defense = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_computerized_aiming_mechanism
+		name = BLS_computerized_aiming_mechanism
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_shaped_shrapnel_spells
+
+		any_parent = {
+			BLS_reaction_containment_shells
+			BLS_shaped_shrapnel_spells
+			BLS_delayed_impact_explosives
+		}
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			breakthrough = 0.03
+			defense = 0.03
+			reliability = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_permanent_contracts
+		name = BLS_permanent_contracts
+
+		position = { x = 2 y = 1 }
+		relative_position_id = BLS_extreme_caliber_barrels
+
+		any_parent = {
+			BLS_extreme_caliber_barrels
+			BLS_auto_loading_barrels
+		}
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.15
+		}
+	}
+
+	trait = {
+		token = BLS_directorate_research_wing
+		name = BLS_directorate_research_wing
+
+		position = { x = -2 y = 1 }
+		relative_position_id = BLS_auto_loading_barrels
+
+		any_parent = {
+			BLS_extreme_caliber_barrels
+			BLS_auto_loading_barrels
+		}
+
+		organization_modifier = {
+			military_industrial_organization_design_team_assign_cost = -0.15
+		}
+	}
+
+	trait = {
+		token = BLS_expanded_assembly_lines
+		name = BLS_expanded_assembly_lines
+
+		position = { x = 1 y = 2 }
+		relative_position_id = BLS_permanent_contracts
+
+		all_parents = {
+			BLS_permanent_contracts
+			BLS_directorate_research_wing
+		}
+
+		production_bonus = {
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_simplified_artillery_bodies
+		name = BLS_simplified_artillery_bodies
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_expanded_assembly_lines
+
+		parent = { traits = { BLS_expanded_assembly_lines } }
+		mutually_exclusive = { BLS_dedicated_anti_vehicle_department }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = 0.03
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.1
+		}
+	}
+
+	trait = {
+		token = BLS_dedicated_anti_vehicle_department
+		name = BLS_dedicated_anti_vehicle_department
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_expanded_assembly_lines
+
+		parent = { traits = { BLS_expanded_assembly_lines } }
+		mutually_exclusive = { BLS_simplified_artillery_bodies }
+
+		limit_to_equipment_type = { anti_tank_equipment anti_air_equipment }
+
+		equipment_bonus = {
+			anti_air_attack = 0.03
+			ap_attack = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_auto_loading_barrels
+		name = BLS_auto_loading_barrels
+
+		position = { x = 7 y = 0 }
+
+		limit_to_equipment_type = { anti_tank_equipment anti_air_equipment }
+
+		equipment_bonus = {
+			hard_attack = 0.05
+			anti_air_attack = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_magnetic_acceleration_coils
+		name = BLS_magnetic_acceleration_coils
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_auto_loading_barrels
+
+		parent = { traits = { BLS_auto_loading_barrels } }
+
+		limit_to_equipment_type = { anti_tank_equipment }
+
+		equipment_bonus = {
+			hard_attack = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_front_facing_shield_spells
+		name = BLS_front_facing_shield_spells
+
+		position = { x = -1 y = 2 }
+		relative_position_id = BLS_magnetic_acceleration_coils
+
+		parent = { traits = { BLS_magnetic_acceleration_coils } }
+		mutually_exclusive = { BLS_depleted_uranium_shells }
+
+		limit_to_equipment_type = { anti_tank_equipment }
+
+		equipment_bonus = {
+			defense = 0.05
+			reliability = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_depleted_uranium_shells
+		name = BLS_depleted_uranium_shells
+
+		position = { x = 0 y = 2 }
+		relative_position_id = BLS_magnetic_acceleration_coils
+
+		parent = { traits = { BLS_magnetic_acceleration_coils } }
+		mutually_exclusive = { BLS_front_facing_shield_spells }
+
+		limit_to_equipment_type = { anti_tank_equipment }
+
+		equipment_bonus = {
+			ap_attack = 0.15
+		}
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_mechanized_swivel_mounts
+		name = BLS_mechanized_swivel_mounts
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_auto_loading_barrels
+
+		parent = { traits = { BLS_auto_loading_barrels } }
+
+		limit_to_equipment_type = { anti_air_equipment }
+
+		equipment_bonus = {
+			anti_air_attack = 0.05
+		}
+		production_bonus ={
+			production_cost_factor = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_smart_timer_rounds
+		name = BLS_smart_timer_rounds
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_mechanized_swivel_mounts
+
+		parent = { traits = { BLS_mechanized_swivel_mounts } }
+
+		limit_to_equipment_type = { anti_air_equipment }
+
+		equipment_bonus = {
+			anti_air_attack = 0.1
+			ap_attack = 0.02
+		}
+	}
+}
