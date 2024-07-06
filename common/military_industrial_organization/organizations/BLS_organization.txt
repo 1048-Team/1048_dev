@@ -33,7 +33,7 @@ BLS_directorate_tanks_organization = {
 	}
 
 	initial_trait = {
-		name = BLS_directorate_quality_tanks
+		name = scientific_nexus_tanks
 
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.125
@@ -371,7 +371,7 @@ BLS_directorate_navy_organization = {
 	}
 
 	initial_trait = {
-		name = BLS_directorate_quality_navy
+		name = scientific_nexus_ships
 
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.125
@@ -384,6 +384,335 @@ BLS_directorate_navy_organization = {
 
 		production_bonus = {
 			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_found_research_wing
+		name = BLS_found_research_wing
+
+		#icon = GFX_research
+
+		position = { x = 4 y = 0 }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_funds_gain = 0.25
+			military_industrial_organization_design_team_assign_cost = -0.5
+		}
+	}
+
+	trait = {
+		token = BLS_refined_engine_pistons
+		name = BLS_refined_engine_pistons
+
+		position = { x = -2 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		parent = { traits = { BLS_found_research_wing } }
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+			fuel_consumption = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_dodecagonal_radar_matrices
+		name = BLS_dodecagonal_radar_matrices
+
+		position = { x = 2 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		parent = { traits = { BLS_found_research_wing } }
+
+		equipment_bonus = {
+			surface_detection = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.01
+		}
+	}
+
+	trait = {
+		token = BLS_prototype_automated_dockyards
+		name = BLS_prototype_automated_dockyards
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		any_parent = { BLS_found_research_wing }
+
+		production_bonus = {
+			production_capacity_factor = 0.1
+			production_resource_penalty_factor = 0.15
+		}
+	}
+
+	trait = {
+		token = BLS_prefabricated_bulkheads
+		name = BLS_prefabricated_bulkheads
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_prototype_automated_dockyards
+
+		any_parent = { BLS_prototype_automated_dockyards }
+
+		production_bonus = {
+			production_capacity_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_recycling_pumps
+		name = BLS_recycling_pumps
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_refined_engine_pistons
+
+		any_parent = { BLS_refined_engine_pistons }
+
+		limit_to_equipment_type = { screen_ship submarine }
+
+		equipment_bonus = {
+			max_range = 0.1
+			fuel_consumption = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_centrally_processed_tracking_computers
+		name = BLS_centrally_processed_tracking_computers
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_recycling_pumps
+
+		any_parent = { BLS_recycling_pumps }
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			anti_air_attack = 0.1
+			reliability = -0.02
+		}
+	}
+
+	trait = {
+		token = BLS_vacuum_sealed_torpedo_tubes
+		name = BLS_vacuum_sealed_torpedo_tubes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_centrally_processed_tracking_computers
+
+		any_parent = { BLS_centrally_processed_tracking_computers}
+
+		limit_to_equipment_type = { screen_ship submarine }
+
+		equipment_bonus = {
+			torpedo_attack = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_crystal_alloyed_armor
+		name = BLS_crystal_alloyed_armor
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_recycling_pumps
+
+		any_parent = { BLS_recycling_pumps }
+		mutually_exclusive = { BLS_crystal_reactive_armor }
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			armor_value = 0.1
+			max_strength = 0.02
+		}
+		production_bonus = {
+			production_cost_factor = 0.04
+		}
+	}
+
+	trait = {
+		token = BLS_rear_shielded_missile_tubes
+		name = BLS_rear_shielded_missile_tubes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_crystal_alloyed_armor
+
+		any_parent = { BLS_crystal_alloyed_armor }
+
+		limit_to_equipment_type = { screen_ship capital_ship }
+
+		equipment_bonus = {
+			lg_attack = 0.1
+		}
+	}
+
+	trait = {
+		token = BLS_plasma_cannon_flaps
+		name = BLS_plasma_cannon_flaps
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_crystal_alloyed_armor
+
+		any_parent = { BLS_crystal_alloyed_armor }
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			lg_attack = 0.05
+			lg_armor_piercing = 0.1
+			reliability = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_radar_deflecting_designs
+		name = BLS_radar_deflecting_designs
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_crystal_alloyed_armor
+
+		any_parent = { BLS_crystal_alloyed_armor }
+
+		limit_to_equipment_type = { screen_ship submarine }
+
+		equipment_bonus = {
+			visibility = -0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_turret_feeding_system
+		name = BLS_turret_feeding_system
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_dodecagonal_radar_matrices
+
+		any_parent = { BLS_dodecagonal_radar_matrices }
+
+		limit_to_equipment_type = { screen_ship capital_ship }
+
+		equipment_bonus = {
+			hg_attack = 0.1
+			lg_attack = 0.05
+			maximum_speed = -0.02
+		}
+	}
+
+	trait = {
+		token = BLS_crystal_reactive_armor
+		name = BLS_crystal_reactive_armor
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_turret_feeding_system
+
+		any_parent = { BLS_turret_feeding_system }
+		mutually_exclusive = { BLS_crystal_alloyed_armor }
+
+		limit_to_equipment_type = { capital_ship }
+
+		equipment_bonus = {
+			armor_value = 0.05
+			max_strength = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_lidar_guided_rockets
+		name = BLS_lidar_guided_rockets
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_crystal_reactive_armor
+
+		any_parent = { BLS_crystal_reactive_armor }
+
+		limit_to_equipment_type = { capital_ship }
+
+		equipment_bonus = {
+			hg_attack = 0.05
+			lg_attack = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_plankton_harvesting_fuel_refiners
+		name = BLS_plankton_harvesting_fuel_refiners
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_crystal_reactive_armor
+
+		any_parent = { BLS_crystal_reactive_armor }
+
+		equipment_bonus = {
+			fuel_consumption = -0.15
+			reliability = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_sphap
+		name = BLS_sphap
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_crystal_reactive_armor
+
+		any_parent = { BLS_crystal_reactive_armor }
+
+		limit_to_equipment_type = { capital_ship }
+
+		equipment_bonus = {
+			hg_attack = 0.1
+			hg_armor_piercing = 0.05
+			reliability = -0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_rotating_elevator_loops
+		name = BLS_rotating_elevator_loops
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_turret_feeding_system
+
+		any_parent = { BLS_turret_feeding_system }
+
+		limit_to_equipment_type = { mio_cat_eq_all_carrier }
+
+		equipment_bonus = {
+			carrier_size = 10
+			reliability = -0.1
+		}
+	}
+
+	trait = {
+		token = BLS_automated_bracket_firing
+		name = BLS_automated_bracket_firing
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_rotating_elevator_loops
+
+		any_parent = { BLS_rotating_elevator_loops }
+
+		limit_to_equipment_type = { mio_cat_eq_all_battleship }
+
+		equipment_bonus = {
+			hg_attack = 0.05
+			hg_armor_piercing = 0.02
 		}
 	}
 }
@@ -424,7 +753,8 @@ BLS_directorate_planes_organization = {
 	}
 
 	initial_trait = {
-		name = BLS_directorate_quality_tanks
+		#name = BLS_directorate_quality_planes
+		name = scientific_nexus_planes
 
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.125
@@ -437,6 +767,305 @@ BLS_directorate_planes_organization = {
 
 		production_bonus = {
 			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_found_research_wing
+		name = BLS_found_research_wing
+
+		#icon = GFX_research
+
+		position = { x = 4 y = 0 }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_funds_gain = 0.25
+			military_industrial_organization_design_team_assign_cost = -0.5
+		}
+	}
+
+	trait = {
+		token = BLS_fuselage_tapering
+		name = BLS_fuselage_tapering
+
+		position = { x = -3 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		any_parent = { BLS_found_research_wing }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+
+		equipment_bonus = {
+			air_range = 0.1
+		}
+		production_bonus = {
+			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_copilot_observation_seat
+		name = BLS_copilot_observation_seat
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_fuselage_tapering
+
+		any_parent = { BLS_fuselage_tapering }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+
+		equipment_bonus = {
+			air_defence = 0.03
+			air_agility = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_ground_targeting_fuselage_cannons
+		name = BLS_ground_targeting_fuselage_cannons
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_copilot_observation_seat
+
+		any_parent = { BLS_copilot_observation_seat }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+
+		equipment_bonus = {
+			air_ground_attack = 0.1
+			air_bombing = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_missile_triggered_flares
+		name = BLS_missile_triggered_flares
+
+		position = { x = 1 y = 1}
+		relative_position_id = BLS_copilot_observation_seat
+
+		any_parent = { BLS_copilot_observation_seat }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+
+		equipment_bonus = {
+			air_defence = 0.05
+			air_attack = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_ramjet_engines
+		name = BLS_ramjet_engines
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_ground_targeting_fuselage_cannons
+
+		any_parent = { BLS_ground_targeting_fuselage_cannons }
+		mutually_exclusive = { BLS_carbon_extracting_matrices }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+
+		equipment_bonus = {
+			maximum_speed = 0.15
+			air_agility = 0.03
+			fuel_consumption = 0.125
+		}
+	}
+
+	trait = {
+		token = BLS_carbon_extracting_matrices
+		name = BLS_carbon_extracting_matrices
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_missile_triggered_flares
+
+		any_parent = { BLS_missile_triggered_flares }
+		mutually_exclusive = { BLS_missile_triggered_flares }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_plane mio_cat_eq_all_large_plane }
+
+		equipment_bonus = {
+			air_range = 0.1
+			fuel_consumption = -0.03
+			reliability = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_fiberglass_skeletons
+		name = BLS_fiberglass_skeletons
+
+		position = { x = 3 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		any_parent = { BLS_found_research_wing }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			thrust = 0.05
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.02
+		}
+	}
+
+	trait = {
+		token = BLS_nose_mounted_autocannons
+		name = BLS_nose_mounted_autocannons
+
+		position = { x = -1 y = 2 }
+		relative_position_id = BLS_fiberglass_skeletons
+
+		any_parent = { BLS_fiberglass_skeletons }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_attack = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_third_generation_oxygen_intakes
+		name = BLS_third_generation_oxygen_intakes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_fiberglass_skeletons
+
+		any_parent = { BLS_fiberglass_skeletons }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			maximum_speed = 0.1
+			fuel_consumption = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_refined_g_force_suits
+		name = BLS_refined_g_force_suits
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_third_generation_oxygen_intakes
+
+		any_parent = { BLS_third_generation_oxygen_intakes }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_defence = 0.03
+			air_agility = 0.03
+		}
+		production_bonus = {
+			production_cost_factor = 0.01
+		}
+	}
+
+	trait = {
+		token = BLS_dedicated_missile_pods
+		name = BLS_dedicated_missile_pods
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_refined_g_force_suits
+
+		any_parent = { BLS_refined_g_force_suits }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_ground_attack = 0.15
+		}
+		production_bonus = {
+			production_cost_factor = 0.04
+		}
+	}
+
+	trait = {
+		token = BLS_fixed_wing_refinements
+		name = BLS_fixed_wing_refinements
+
+		position = { x = 2 y = 1 }
+		relative_position_id = BLS_fuselage_tapering
+
+		any_parent = { BLS_fuselage_tapering }
+		mutually_exclusive = { BLS_variable_canard_bodies }
+
+		equipment_bonus = {
+			air_agility = 0.02
+			reliability = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_variable_canard_bodies
+		name = BLS_variable_canard_bodies
+
+		position = { x = -2 y = 1 }
+		relative_position_id = BLS_fiberglass_skeletons
+
+		any_parent = { BLS_fiberglass_skeletons }
+		mutually_exclusive = { BLS_fixed_wing_refinements }
+
+		equipment_bonus = {
+			air_agility = 0.06
+			reliability = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_fly_by_wire_systems
+		name = BLS_fly_by_wire_systems
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_fixed_wing_refinements
+
+		any_parent = { BLS_fixed_wing_refinements BLS_variable_canard_bodies }
+
+		equipment_bonus = {
+			air_attack = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_prototype_thrust_vectoring
+		name = BLS_prototype_thrust_vectoring
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_fly_by_wire_systems
+
+		all_parents = { BLS_missile_triggered_flares BLS_fly_by_wire_systems }
+
+		equipment_bonus = {
+			air_agility = 0.075
+			reliability = -0.075
+		}
+	}
+
+	trait = {
+		token = BLS_radar_absorbing_frames
+		name = BLS_radar_absorbing_frames
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_fly_by_wire_systems
+
+		all_parents = { BLS_fly_by_wire_systems BLS_nose_mounted_autocannons }
+
+		equipment_bonus = {
+			air_agility = 0.075
+			air_defence = 0.03
+		}
+		production_bonus = {
+			production_cost_factor = 0.1
 		}
 	}
 }
@@ -454,9 +1083,9 @@ BLS_directorate_planes_organization = {
 
 ###################################
 BLS_directorate_small_guns_organization = {
-	name = BLS_directorate_small_guns
-	equipment_type = { infantry_equipment magical_equipment support_equipment artillery_equipment }
-	research_categories = { infantry_weapons artillery magical_tech }
+	name = BLS_directorate_small_arms
+	equipment_type = { infantry_equipment magical_equipment support_equipment }
+	research_categories = { infantry_weapons magical_tech }
 	#icon = GFX_idea_BLS_directorate
 	allowed = {
 		original_tag = BLS
@@ -479,14 +1108,14 @@ BLS_directorate_small_guns_organization = {
 	}
 
 	initial_trait = {
-		name = BLS_directorate_quality_guns
+		name = scientific_nexus_guns
 
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.10
 			military_industrial_organization_design_team_assign_cost = 2.5
 		}
 
-		limit_to_equipment_type = { infantry_equipment magical_equipment artillery_equipment }
+		limit_to_equipment_type = { infantry_equipment magical_equipment }
 
 		equipment_bonus = {
 			hard_attack = 0.05
@@ -494,6 +1123,305 @@ BLS_directorate_small_guns_organization = {
 
 		production_bonus = {
 			production_cost_factor = 0.03
+		}
+	}
+
+	trait = {
+		token = BLS_found_research_wing
+		name = BLS_found_research_wing
+
+		#icon = GFX_research
+
+		position = { x = 4 y = 0 }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+			military_industrial_organization_funds_gain = 0.25
+			military_industrial_organization_design_team_assign_cost = -0.5
+		}
+	}
+
+	trait = {
+		token = BLS_standardized_designs
+		name = BLS_standardized_designs
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		parent = { traits = { BLS_found_research_wing } }
+
+		equipment_bonus = {
+			reliability = 0.05
+		}
+		production_bonus = {
+			production_capacity_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_infantry_based_missile_pods
+		name = BLS_infantry_based_missile_pods
+
+		position = { x = -3 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		parent = { traits = { BLS_found_research_wing } }
+
+		limit_to_equipment_type = { infantry_equipment magical_equipment }
+
+		equipment_bonus = {
+			hard_attack = 0.25
+		}
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_super_heated_plasma_launchers
+		name = BLS_super_heated_plasma_launchers
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_infantry_based_missile_pods
+
+		parent = { traits = { BLS_infantry_based_missile_pods } }
+
+		limit_to_equipment_type = { infantry_equipment magical_equipment }
+
+		equipment_bonus = {
+			ap_attack = 0.075
+			reliability = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_composite_body_armor
+		name = BLS_composite_body_armor
+
+		position = { x = 0 y = 2 }
+		relative_position_id = BLS_super_heated_plasma_launchers
+
+		parent = { traits = { BLS_super_heated_plasma_launchers } }
+
+		limit_to_equipment_type = { infantry_equipment magical_equipment }
+
+		equipment_bonus = {
+			defense = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_plastic_based_components
+		name = BLS_plastic_based_components
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_standardized_designs
+
+		any_parent = {
+			BLS_infantry_based_missile_pods
+			BLS_non_toxic_lining
+		}
+
+		equipment_bonus = {
+			reliability = 0.03
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.02
+		}
+	}
+
+	trait = {
+		token = BLS_synthetic_crystal_matrices
+		name = BLS_synthetic_crystal_matrices
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_standardized_designs
+
+		any_parent = {
+			BLS_infantry_based_missile_pods
+			BLS_non_toxic_lining
+		}
+
+		equipment_bonus = {
+			reliability = 0.01
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_flechette_supplementary_rounds
+		name = BLS_flechette_supplementary_rounds
+
+		position = { x = -2 y = 1 }
+		relative_position_id = BLS_synthetic_crystal_matrices
+
+		all_parents = {
+			BLS_super_heated_plasma_launchers
+			BLS_synthetic_crystal_matrices
+		}
+		mutually_exclusive = { BLS_depleted_crystal_bullets }
+
+		limit_to_equipment_type = { infantry_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.125
+			defense = 0.04
+			ap_attack = -0.075
+			reliability = -0.03
+		}
+	}
+
+	trait = {
+		token = BLS_depleted_crystal_bullets
+		name = BLS_depleted_crystal_bullets
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_synthetic_crystal_matrices
+
+		all_parents = {
+			BLS_super_heated_plasma_launchers
+			BLS_synthetic_crystal_matrices
+		}
+		mutually_exclusive = { BLS_flechette_supplementary_rounds }
+
+		limit_to_equipment_type = { magical_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.075
+			hard_attack = 0.075
+			ap_attack = 0.05
+			reliability = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_biometric_safeties
+		name = BLS_biometric_safeties
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_flechette_supplementary_rounds
+
+		any_parent = {
+			BLS_flechette_supplementary_rounds
+			BLS_depleted_crystal_bullets
+		}
+
+		limit_to_equipment_type = { infantry_equipment magical_equipment }
+
+		equipment_bonus = {
+			defense = 0.03
+			reliability = 0.02
+		}
+	}
+
+	trait = {
+		token = BLS_non_toxic_lining
+		name = BLS_non_toxic_lining
+
+		position = { x = 3 y = 1 }
+		relative_position_id = BLS_found_research_wing
+
+		parent = { traits = { BLS_found_research_wing } }
+
+		limit_to_equipment_type = { support_equipment }
+
+		equipment_bonus = {
+			reliability = 0.04
+		}
+		production_bonus = {
+			production_cost_factor = 0.01
+		}
+	}
+
+	trait = {
+		token = BLS_night_vision_matrices
+		name = BLS_night_vision_matrices
+
+		position = { x = -1 y = 1 }
+		relative_position_id = BLS_non_toxic_lining
+
+		parent = { traits = { BLS_non_toxic_lining } }
+
+		limit_to_equipment_type = { support_equipment }
+
+		equipment_bonus = {
+			recon = 0.15
+		}
+	}
+
+	trait = {
+		token = BLS_defibrillators
+		name = BLS_defibrillators
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_non_toxic_lining
+
+		parent = { traits = { BLS_non_toxic_lining } }
+
+		limit_to_equipment_type = { support_equipment }
+
+		equipment_bonus = {
+			casualty_trickleback = 0.05
+			experience_loss_factor = -0.05
+		}
+	}
+
+	trait = {
+		token = BLS_experimental_serums
+		name = BLS_experimental_serums
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_night_vision_matrices
+
+		parent = { traits = { BLS_night_vision_matrices } }
+		mutually_exclusive = { BLS_standardized_healing_spells }
+
+		equipment_bonus = {
+			experience_loss_factor = -0.1
+			casualty_trickleback = 0.1
+			max_strength = -0.075
+		}
+	}
+
+	trait = {
+		token = BLS_standardized_healing_spells
+		name = BLS_standardized_healing_spells
+
+		position = { x = 0 y = 1 }
+		relative_position_id = BLS_defibrillators
+
+		parent = { traits = { BLS_defibrillators } }
+		mutually_exclusive = { BLS_experimental_serums }
+
+		equipment_bonus = {
+			experience_loss_factor = -0.03
+			casualty_trickleback = 0.03
+			max_strength = 0.05
+		}
+	}
+
+	trait = {
+		token = BLS_machine_packed_boxes
+		name = BLS_machine_packed_boxes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = BLS_experimental_serums
+
+		any_parent = {
+			BLS_experimental_serums
+			BLS_standardized_healing_spells
+		}
+
+		equipment_bonus = {
+			reliability = 0.03
+		}
+		production_bonus = {
+			production_efficiency_gain_factor = 0.075
 		}
 	}
 }
@@ -516,6 +1444,7 @@ BLS_positronic_explosives_organization = {
 
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.1
+			military_industrial_organization_design_team_assign_cost = 0.1
 		}
 		equipment_bonus = {
 			soft_attack = 0.05
@@ -687,7 +1616,8 @@ BLS_positronic_explosives_organization = {
 		}
 
 		organization_modifier = {
-			military_industrial_organization_design_team_assign_cost = -0.15
+			military_industrial_organization_design_team_assign_cost = -0.25
+			military_industrial_organization_research_bonus = 0.05
 		}
 	}
 
