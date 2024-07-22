@@ -1015,41 +1015,69 @@ STB_DEM_remove_from_opposing_candidates = {
 }
 STB_DEM_elect_candidate = {
 	log = "STB_DEM_elect_candidate running"
-	random_list = {
-		STB_DEM_candidate_1_support = {
-			promote_character = STB_Smiling_Embrace
-			log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_1_support]% chance"
-			set_variable = { STB_DEM_candidate_1_support = 40 }
-			set_variable = { STB_DEM_candidate_2_support = 20 }
-			set_variable = { STB_DEM_candidate_3_support = 20 }
-			set_variable = { STB_DEM_candidate_4_support = 20 }
+	hidden_effect = {
+		random_list = {
+			STB_DEM_candidate_1_support = {
+				if = {
+					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+					hidden = {
+						STB_unset_jade_turf_effects = yes
+					}
+				}
+				promote_character = STB_Smiling_Embrace
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_1_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 40 }
+				set_variable = { STB_DEM_candidate_2_support = 20 }
+				set_variable = { STB_DEM_candidate_3_support = 20 }
+				set_variable = { STB_DEM_candidate_4_support = 20 }
+			}
+			STB_DEM_candidate_2_support = {
+				if = {
+					limit = { NOT = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } } }
+					hidden_effect = {
+						STB_Jade_Turf_effects = yes
+					}
+				}
+				promote_character = STB_Jade_Turf
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_2_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 20 }
+				set_variable = { STB_DEM_candidate_2_support = 40 }
+				set_variable = { STB_DEM_candidate_3_support = 20 }
+				set_variable = { STB_DEM_candidate_4_support = 20 }
+			}
+			STB_DEM_candidate_3_support = {
+				if = {
+					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+					hidden = {
+						STB_unset_jade_turf_effects = yes
+					}
+				}
+				promote_character = STB_Liberty_Bell
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_3_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 20 }
+				set_variable = { STB_DEM_candidate_2_support = 20 }
+				set_variable = { STB_DEM_candidate_3_support = 40 }
+				set_variable = { STB_DEM_candidate_4_support = 20 }
+			}
+			STB_DEM_candidate_4_support = {
+				if = {
+					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+					hidden = {
+						STB_unset_jade_turf_effects = yes
+					}
+				}
+				promote_character = STB_Clean_Sweep
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_4_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 20 }
+				set_variable = { STB_DEM_candidate_2_support = 20 }
+				set_variable = { STB_DEM_candidate_3_support = 20 }
+				set_variable = { STB_DEM_candidate_4_support = 40 }
+			}
 		}
-		STB_DEM_candidate_2_support = {
-			promote_character = STB_Jade_Turf
-			log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_2_support]% chance"
-			set_variable = { STB_DEM_candidate_1_support = 20 }
-			set_variable = { STB_DEM_candidate_2_support = 40 }
-			set_variable = { STB_DEM_candidate_3_support = 20 }
-			set_variable = { STB_DEM_candidate_4_support = 20 }
-		}
-		STB_DEM_candidate_3_support = {
-			promote_character = STB_Liberty_Bell
-			log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_3_support]% chance"
-			set_variable = { STB_DEM_candidate_1_support = 20 }
-			set_variable = { STB_DEM_candidate_2_support = 20 }
-			set_variable = { STB_DEM_candidate_3_support = 40 }
-			set_variable = { STB_DEM_candidate_4_support = 20 }
-		}
-		STB_DEM_candidate_4_support = {
-			promote_character = STB_Clean_Sweep
-			log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_4_support]% chance"
-			set_variable = { STB_DEM_candidate_1_support = 20 }
-			set_variable = { STB_DEM_candidate_2_support = 20 }
-			set_variable = { STB_DEM_candidate_3_support = 20 }
-			set_variable = { STB_DEM_candidate_4_support = 40 }
-		}
+		activate_mission = STB_impending_election
+		log = "Set base percentages of winning for next election"
 	}
-	log = "Set base percentages of winning for next election"
+	custom_effect_tooltip = STB_i_love_democracy_tt
 }
 STB_DEM_calculate_divisor = {
 	if = {
@@ -1113,4 +1141,26 @@ STB_DEM_calculate_divisor = {
 		}
 	}
 	log = "Divisor is [?STB_DEM_divisor]"
+}
+STB_Jade_Turf_effects = {
+	set_rule = {
+		can_declare_war_on_same_ideology = yes
+	}
+	set_rule = {
+		can_only_justify_war_on_threat_country = no
+	}
+	set_rule = {
+		can_create_collaboration_government = yes
+	}
+}
+STB_unset_jade_turf_effects = {
+	set_rule = {
+		can_declare_war_on_same_ideology = no
+	}
+	set_rule = {
+		can_only_justify_war_on_threat_country = yes
+	}
+	set_rule = {
+		can_create_collaboration_government = no
+	}
 }
