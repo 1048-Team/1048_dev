@@ -1,0 +1,172 @@
+on_actions = {
+    on_send_volunteers = { #Liberty Bell check. FROM is any country with STB volunteers. ROOT is STB.
+        effect = {
+            FROM = {
+                if = {
+                    limit = {
+                        has_volunteers_amount_from = {
+                            tag = STB
+                            count > 0
+                        }
+                    }
+                    log = "[FROM.GetName] has volunteers from [ROOT.GetLeader]"
+                    ROOT = {
+                        if = {
+                            limit = {
+                                has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+                            }
+                            set_country_flag = STB_liberty_mandate_completed
+                        }
+                    }
+                }
+            }
+        }
+    }
+    on_peaceconference_ended = { #Only way that HOI allows for removing volunteer flag, which is dumb, but what can you do? ROOT is victor, FROM is loser.
+        effect = {
+            ROOT = {
+                if = {
+                    limit = {
+                        has_volunteers_amount_from = {
+                            tag = STB
+                            count > 0
+                        }
+                    }
+                    log = "[ROOT.GetName] no longer has volunteers from [STB.GetLeader]"
+                    STB = {
+                        if = {
+                            limit = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+                            clr_country_flag = STB_liberty_mandate_completed
+                        }
+                    }
+                }
+            }
+            FROM = {
+                if = {
+                    limit = {
+                        has_volunteers_amount_from = {
+                            tag = STB
+                            count > 0
+                        }
+                    }
+                    log = "[FROM.GetName] no longer has volunteers from [STB.GetLeader]"
+                    STB = {
+                        if = {
+                            limit = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+                            clr_country_flag = STB_liberty_mandate_completed
+                        }
+                    }
+                }
+            }
+        }
+    }
+    on_declare_war = { #Part of Smiling Embrace check. This resets the number of days at peace counter when either declared on by or when declaring on another country. FROM is the country declared war on, ROOT is the declaring country.
+        effect = {
+            FROM = {
+                if = {
+                    limit = {
+                        tag = STB
+                        has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+                    }
+                    log = "Resetting [FROM.GetName]'s peace counter"
+                    set_variable = { STB_peaceful_bois = 0 }
+                    if = {
+                        limit = {
+                            has_country_flag = STB_smiling_mandate_completed
+                        }
+                        clr_country_flag = STB_smiling_mandate_completed
+                    }
+                }
+            }
+            ROOT = {
+                if = {
+                    limit = {
+                        tag = STB
+                        has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+                    }
+                    log = "Resetting [FROM.GetName]'s peace counter"
+                    set_variable = { STB_peaceful_bois = 0 }
+                    if = {
+                        limit = {
+                            has_country_flag = STB_smiling_mandate_completed
+                        }
+                        clr_country_flag = STB_smiling_mandate_completed
+                    }
+                }
+            }
+        }
+    }
+    on_daily_STB = {
+        effect = {
+            log = "[GetDateText]: ROOT: [ROOT.GetName] on_daily_STB"
+            if = { #Jade Turf check. Runs every day that she is leader.
+                limit = {
+                set_temp_variable = { STB_factory_divisor = ROOT.num_of_factories }
+                set_temp_variable = { STB_total_military_factories = ROOT.num_of_military_factories }
+                add_to_temp_variable = { STB_total_military_factories = ROOT.num_of_naval_factories }
+                divide_temp_variable = { STB_total_military_factories = STB_factory_divisor }
+                check_variable = { var = STB_total_military_factories value = 0.7 compare = greater_than_or_equals }
+                has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+                NOT = { has_country_flag = STB_jade_mandate_completed }
+                }
+                log = "[ROOT.GetName] completed [ROOT.GetLeader]'s mandate"
+                set_country_flag = STB_jade_mandate_completed
+            }
+            if = {
+                limit = {
+                set_temp_variable = { STB_factory_divisor = ROOT.num_of_factories }
+                set_temp_variable = { STB_total_military_factories = ROOT.num_of_military_factories }
+                add_to_temp_variable = { STB_total_military_factories = ROOT.num_of_naval_factories }
+                divide_temp_variable = { STB_total_military_factories = STB_factory_divisor }
+                check_variable = { STB_total_military_factories < 0.7 }
+                has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+                has_country_flag = STB_jade_mandate_completed
+                }
+                log = "[ROOT.GetName] doesn't fulfill [ROOT.GetLeader]'s mandate"
+                clr_country_flag = STB_jade_mandate_completed
+            }
+            if = { #Part of Smiling Embrace check. This counts the number of days at peace, which is broken in a time of war.
+                limit = {
+                    has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+                    has_war = no
+                }
+                log = "[ROOT.GetName] has 1 more day of peace"
+                add_to_variable = { STB_peaceful_bois = 1 }
+                if = {
+                    limit = {
+                        check_variable = { STB_peaceful_bois > 364 }
+                        NOT = { has_country_flag = STB_smiling_mandate_completed }
+                    }
+                    log = "[ROOT.GetName] has completed [ROOT.GetLeader]'s mandate"
+                    set_country_flag = STB_smiling_mandate_completed
+                }
+            }
+            if = { #Clean Sweep check. See's if the country is demobilized enough to be prosperous.
+                limit = {
+                    has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+                    NOT = { has_country_flag = STB_clean_mandate_completed }
+                    check_variable = { num_armies < 49 }
+                    check_variable = { num_ships < 61 }
+                    check_variable = { num_deployed_planes < 2501 }
+                    has_war = no
+                }
+                log = "[ROOT.GetName] has completed [ROOT.GetLeader]'s mandate"
+                set_country_flag = STB_clean_mandate_completed
+            }
+            if = {
+                limit = {
+                    has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+                    has_country_flag = STB_clean_mandate_completed
+                    OR = {
+                        check_variable = { num_armies > 48 }
+                        check_variable = { num_ships > 60 }
+                        check_variable = { num_deployed_planes > 2500 }
+                        has_war = yes
+                    }
+                }
+                log = "[ROOT.GetName] doesn't fulfill [ROOT.GetLeader]'s mandate"
+                clr_country_flag = STB_clean_mandate_completed
+            }
+        }
+    }
+}

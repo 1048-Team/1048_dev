@@ -1016,11 +1016,108 @@ STB_DEM_remove_from_opposing_candidates = {
 STB_DEM_elect_candidate = {
 	log = "STB_DEM_elect_candidate running"
 	hidden_effect = {
+		if = {
+			limit = {
+				any_other_country = {
+					exists = yes
+					NOT = { is_subject_of = ROOT }
+				}
+			}
+			log = "Checking if mandate completed"
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+					has_country_flag = STB_smiling_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_1_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_1_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+					NOT = { has_country_flag = STB_smiling_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_1_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_1_support
+					min = 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+					has_country_flag = STB_jade_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_2_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_2_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+					NOT = { has_country_flag = STB_jade_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_2_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_2_support
+					min = 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+					has_country_flag = STB_liberty_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_3_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_3_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+					NOT = { has_country_flag = STB_liberty_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_3_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_3_support
+					min = 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+					has_country_flag = STB_clean_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_4_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_4_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+					NOT = { has_country_flag = STB_clean_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_4_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_4_support
+					min = 0
+				}
+			}
+		}
 		random_list = {
 			STB_DEM_candidate_1_support = {
 				if = {
 					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
-					hidden = {
+					hidden_effect = {
 						STB_unset_jade_turf_effects = yes
 					}
 				}
@@ -1048,7 +1145,7 @@ STB_DEM_elect_candidate = {
 			STB_DEM_candidate_3_support = {
 				if = {
 					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
-					hidden = {
+					hidden_effect = {
 						STB_unset_jade_turf_effects = yes
 					}
 				}
@@ -1062,7 +1159,7 @@ STB_DEM_elect_candidate = {
 			STB_DEM_candidate_4_support = {
 				if = {
 					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
-					hidden = {
+					hidden_effect = {
 						STB_unset_jade_turf_effects = yes
 					}
 				}
@@ -1073,6 +1170,12 @@ STB_DEM_elect_candidate = {
 				set_variable = { STB_DEM_candidate_3_support = 20 }
 				set_variable = { STB_DEM_candidate_4_support = 40 }
 			}
+		}
+		if = {
+			limit = {
+				check_variable = { STB_peaceful_bois > 0 }
+			}
+			set_variable = { STB_peaceful_bois = 0 }
 		}
 		activate_mission = STB_impending_election
 		log = "Set base percentages of winning for next election"
