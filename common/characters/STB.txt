@@ -30,13 +30,53 @@ characters = {
 			}
 		}
 
-		field_marshal = {
+		field_marshal = { #This gets reduced over the course of the early game, before the player can even use him
 			traits = { pony_race_trait politically_connected hero_of_the_revolution charismatic } #maybe a unique trait called Revolutionary Hero, which gives an additional 5% morale and 5% losses
-			skill = 1
-			attack_skill = 1
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 1
+			skill = 9
+			attack_skill = 8
+			defense_skill = 6
+			planning_skill = 9
+			logistics_skill = 5
+		}
+	}
+	STB_Oxide = {
+		name = STB_Oxide_name
+
+		country_leader = {
+			expire = "1965.1.1"
+			ideology = syndicalism
+			traits = {
+				anti_authoritarian_radical
+			}
+		}
+
+		corps_commander = {
+			traits = { pony_race_trait leader_of_the_revolution infantry_expert }
+			skill = 4
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 4
+		}
+
+		advisor = {
+			slot = high_command
+			idea_token = oxide
+			cost = 200
+			allowed = {
+				original_tag = STB
+			}
+			available = {
+				has_government = communism
+				has_character = STB_Oxide
+			}
+			visible = {
+				has_character = STB_Oxide
+			}
+
+			traits = { general_of_the_revolution }
+
+			ai_will_do = { factor = 1 }
 		}
 	}
 	STB_Vasiliy_Wheatin = {
@@ -55,6 +95,42 @@ characters = {
 				original_markist
 			}
 		}
+
+		advisor = {
+			slot = political_advisor
+			idea_token = cracked_chaff
+			allowed = {
+				original_tag = STB
+			}
+			available = {
+				has_government = communism
+				#Or has completed focus for allowing some members to continue serving under Solarist STB
+			}
+			visible = {
+				has_government = communism
+				NOT = { has_country_leader = { character = STB_Vasiliy_Wheatin ruling_only = yes } }
+			}
+
+			traits = { experienced_markist }
+
+			ai_will_do = { factor = 1 }
+		}
+	}
+	STB_Late_Bloom = {
+		name = STB_Late_Bloom_name
+		gender = female
+
+		advisor = {
+			slot = political_advisor
+			idea_token = late_bloom
+			allowed = {
+				original_tag = STB
+			}
+
+			traits = { silent_workhorse }
+
+			ai_will_do = { factor = 1 }
+		}
 	}
 	STB_Smiling_Embrace = {
 		name = STB_Smiling_Embrace_name
@@ -66,6 +142,34 @@ characters = {
 			traits = {
 				grassroots_fighter
 			}
+		}
+
+		advisor = {
+			slot = political_advisor
+			token = smiling_embrace
+			allowed = { original_tag = STB }
+			available = { has_government = democratic }
+			visible = { has_government = democratic }
+			traits = { popular_figurehead }
+
+			ai_will_do = { factor = 1 }
+		}
+	}
+	STB_Synergy = {
+		name = STB_Synergy_name
+
+		advisor = {
+			slot = political_advisor
+			token = synergy
+			allowed = { original_tag = STB }
+			available = {
+				has_government = democratic
+				has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+			}
+			visible = { has_government = democratic }
+			traits = { stable_hoof }
+
+			ai_will_do = { factor = 1 }
 		}
 	}
 	STB_Jade_Turf = {
@@ -79,7 +183,17 @@ characters = {
 				old_glory_seeker
 			}
 		}
-		#Will have to set a rule of justification without a country creating world tension as a hidden effect when she becomes leader, and then another that sets it when she no longer is leader
+
+		advisor = {
+			slot = political_advisor
+			token = jade_turf
+			allowed = { original_tag = STB }
+			available = { has_government = democratic }
+			visible = { has_government = democratic }
+			traits = { prince_of_terror }
+
+			ai_will_do = { factor = 1 }
+		}
 	}
 	STB_Clean_Sweep = {
 		name = STB_Clean_Sweep_name
@@ -90,6 +204,17 @@ characters = {
 			traits = {
 				number_cruncher
 			}
+		}
+
+		advisor = {
+			slot = political_advisor
+			token = clean_sweep
+			allowed = { original_tag = STB }
+			available = { has_government = democratic }
+			visible = { has_government = democratic }
+			traits = { money_master }
+
+			ai_will_do = { factor = 1 }
 		}
 	}
 	STB_Liberty_Bell = {
@@ -102,6 +227,103 @@ characters = {
 			traits = {
 				hopeful_internationalist
 			}
+		}
+
+		advisor = {
+			slot = political_advisor
+			token = liberty_bell
+			allowed = { original_tag = STB }
+			available = { has_government = democratic }
+			visible = { has_government = democratic }
+			traits = { mindful_liberator }
+
+			ai_will_do = { factor = 1 }
+		}
+	}
+	###Solarist Attache Characters###
+	STB_Holy_Pillar = {
+		name = STB_Holy_Pillar_name
+		gender = female
+
+		advisor = {
+			slot = political_advisor
+			idea_token = holy_pillar
+			allowed = {
+				original_tag = STB
+			}
+			available = {
+				has_government = fascism
+				#has_completed_focus = STB_end_honeymoon
+				has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+			}
+			visible = {
+				#has_completed_focus = STB_end_honeymoon
+			}
+
+			traits = { imperial_delegate }
+
+			ai_will_do = { factor = 3 }
+		}
+	}
+	STB_Burnt_Crag = {
+		name = STB_Burnt_Crag_name
+		gender = female
+
+		advisor = {
+			slot = political_advisor
+			idea_token = burnt_crag
+			allowed = {
+				original_tag = STB
+			}
+			available = {
+				has_government = fascism
+				#has_completed_focus = STB_end_honeymoon
+				has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+			}
+			visible = {
+				#has_completed_focus = STB_end_honeymoon
+			}
+
+			traits = { orthodoxy_enforcer }
+
+			ai_will_do = { factor = 5 }
+		}
+	}
+	STB_Turnpike = { #All three will get their roles added later in an event, when that is programmed, instead of being here
+		name = STB_Turnpike_name
+
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium infantry_officer }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+	STB_Mirabelle_Deus = {
+		name = STB_Mirabelle_Deus_name
+		gender = female
+
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium engineer_officer }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 4
+			planning_skill = 1
+			logistics_skill = 3
+		}
+	}
+	STB_Excelsis = {
+		name = STB_Excelsis_name
+
+		corps_commander = {
+			traits = { pony_race_trait solaris_militarium skilled_staffer }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 3
+			logistics_skill = 1
 		}
 	}
 	###HUG Characters###
