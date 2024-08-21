@@ -18,3 +18,174 @@ country_event = { #Lucky hosts a grand ceremony, spending more than is necessary
         add_political_power = 25
     }
 }
+
+country_event = { #Lucky leads an interrogation of a captured NID operative that was discovered in the territory directly surrounding Yukka Island and Lucky tries to get more info from them and eventually learns that they are wanting to settle that land themselves, which he can respond negatively to, or see it as a way to pawn off some crap land
+    id = stableside.2
+    title = stableside.2.t
+    desc = stableside.2.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.2" }
+
+    is_triggered_only = yes
+
+    option = { #Perhaps this could pay for some other... expenses.
+        name = stableside.2.a
+        add_stability = -0.05
+        351 = { set_demilitarized_zone = yes }
+        1213 = { set_demilitarized_zone = yes }
+        52 = { set_demilitarized_zone = yes }
+    }
+    option = { #I will cling to every scrap of land that I'm owed!
+        name = stableside.2.b
+        add_war_support = 0.05
+        add_manpower = -1482
+        #NID modifier here
+        351 = { set_demilitarized_zone = yes }
+        1213 = { set_demilitarized_zone = yes }
+        52 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Lucky attempts to lead a large number of soldiers to simply quash the growing NRP movement, which leads to a faster, and very one-sided battle against him as he overconfidently leads to the point of stupidity
+    id = stableside.5
+    title = stableside.5.t
+    desc = stableside.5.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.5" }
+
+    is_triggered_only = yes
+
+    option = { #It's merely a temporary setback. Just a bit rusty.
+        name = stableside.5.a
+        add_command_power = -15
+        STB_Lucky_Star = {
+            add_logistics = -1
+            add_planning = -2
+        }
+        50 = { set_demilitarized_zone = yes }
+        86 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Despite some of his other generals encouraging him to not do so, Lucky cooridinates with some smaller teams and heads out to try and snipe down the leaders of the NRP, although through both him not noticing a fairly obvious spy and also being overconfident with his stealth abilities, it is foiled and he is almost killed
+    id = stableside.6
+    title = stableside.6.t
+    desc = stableside.6.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.6" }
+
+    is_triggered_only = yes
+
+    option = { #All a test to make sure they were alert.
+        name = stableside.6.a
+        add_stability = -0.1
+        STB_Lucky_Star = {
+            add_attack = -2
+            add_defense = -1
+            add_planning = -2
+            add_logistics = -1
+        }
+        25 = { set_demilitarized_zone = yes }
+        79 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Lucky plans, despite the advice of his generals that the air force is not ready, to do a bombing run on a reported center of NRP activity, and he has his planes all go too close, which ends up making them get shot down instead of accomplishing any bombing or strafing at all
+    id = stableside.7
+    title = stableside.7.t
+    desc = stableside.7.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.7" }
+
+    is_triggered_only = yes
+
+    option = { #It was all part of the plan. They were scrap, anyway.
+        name = stableside.7.a
+        add_war_support = -0.15
+        STB_Lucky_Star = {
+            add_attack = -2
+            add_defense = -2
+            add_planning = -1
+            add_logistics = -1
+        }
+        33 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Lucky Star receives a report of coordinated strikes and uprisings in most of the rural territory and the larger centers that are not incredibly near to Stableside, and it was clear from his continued poking and attacks on the harmonist group of NRP that it further bolstered ponies to their side
+    id = stableside.8
+    title = stableside.8.t
+    desc = stableside.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.8" }
+
+    trigger = {
+        tag = STB
+        has_completed_focus = STB_strike_at_the_heart
+        has_completed_focus = STB_cut_off_head
+    }
+    mean_time_to_happen = {
+        days = 30
+    }
+    fire_only_once = yes
+
+    option = { #Oops.
+        name = stableside.8.a
+        add_stability = -0.1
+        add_war_support = -0.05
+        STB_Lucky_Star = {
+            remove_unit_leader_role = yes
+            add_field_marshal_role = {
+                traits = { pony_race_trait politically_connected hero_of_the_revolution charismatic } #maybe a unique trait called Revolutionary Hero, which gives an additional 5% morale and 5% losses
+                skill = 3
+                attack_skill = 3
+                defense_skill = 3
+                planning_skill = 2
+                logistics_skill = 2
+            }
+        }
+        custom_effect_tooltip = STB_all_according_to_plan_tt
+        hidden_effect = {
+            every_state = {
+                limit = {
+                    is_demilitarized_zone = yes
+                    is_owned_by = STB
+                }
+                transfer_state_to = NRP
+                add_core_of = NRP
+                set_demilitarized_zone = no
+            }
+            NRP = {
+                load_oob = "NRP_1048"
+            }
+        }
+    }
+    #One day, when NRP has content
+    #option = { #Maybe it'd be best to throw in our lot with them?
+    #    ai_chance = { factor = 0 }
+    #    name = stableside.8.b
+    #    hidden_effect = {
+    #        add_stability = -0.1
+    #        add_war_support = -0.05
+    #        STB_Lucky_Star = {
+    #            remove_unit_leader_role = yes
+    #            add_field_marshal_role = {
+    #                traits = { pony_race_trait politically_connected hero_of_the_revolution charismatic } #maybe a unique trait called Revolutionary Hero, which gives an additional 5% morale and 5% losses
+    #                skill = 3
+    #                attack_skill = 3
+    #                defense_skill = 3
+    #                planning_skill = 2
+    #                logistics_skill = 2
+    #            }
+    #        }
+    #        every_state = {
+    #            limit = {
+    #                is_demilitarized_zone = yes
+    #                is_owned_by = STB
+    #            }
+    #            transfer_state_to = NRP
+    #            add_core_of = NRP
+    #            set_demilitarized_zone = no
+    #        }
+    #        NRP = {
+    #            load_oob = "NRP_1048"
+    #            change_tag_from = ROOT
+    #        }
+    #    }
+    #}
+}

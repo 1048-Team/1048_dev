@@ -1,4 +1,5 @@
 ###Arch-Empire of Stableside Focus Tree###
+###Starting Tree###
 shared_focus = {
     id = STB_break_the_yoke
     x = 10
@@ -754,4 +755,247 @@ shared_focus = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_right_ship"
         ###Lucky for once gets nervous as he briefly gets assurance from Late Bloom that he'll do fine, although even she doesn't know everything he wrote for his speech, and he goes onto a radio broadcast, where he promises that the commune has served its purpose, and although there are still teething pains, they are going to create the grandest empire, under him; he corrects himself to call it an arch empire, simply because it's so grand, and he can already hear some surprise and unrest in the streets as he finishes
     }
+}
+
+###Military Tree###
+shared_focus = {
+    id = STB_unified_central_command
+    x = 25
+    y = 0
+
+    cost = 3
+    available = { has_completed_focus = STB_acceptable_losses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_unified_central_command"
+        army_experience = 15
+        navy_experience = 15
+        air_experience = 15
+    }
+
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_office_of_first_pilot
+    relative_position_id = STB_unified_central_command
+    x = -3
+    y = 1
+
+    cost = 3
+    prerequisite = { focus = STB_unified_central_command }
+    mutually_exclusive = { focus = STB_office_of_first_general }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_office_of_first_pilot"
+        air_experience = 35
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_office_of_first_general
+    relative_position_id = STB_unified_central_command
+    x = 0
+    y = 1
+
+    cost = 3
+    prerequisite = { focus = STB_unified_central_command }
+    mutually_exclusive = { focus = STB_office_of_first_pilot }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_office_of_first_general"
+        army_experience = 35
+    }
+
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_office_of_first_admiral
+    relative_position_id = STB_unified_central_command
+    x = 3
+    y = 1
+
+    cost = 3
+    prerequisite = { focus = STB_unified_central_command }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_office_of_first_admiral"
+        ###Event of Lucky walking in on the incredibly small navy office dressed like an Imperial admiral from the Solar Empire, and otherwise being a bit stereotypical of a salty admiral, as he wants to make sure they know he fits in with them, since they need better leadership to protect STB
+        STB_Lucky_Star = {
+            add_naval_commander_role = {
+                traits = { pony_race_trait navy_media_personality cuts_corners}
+                skill = 1
+                attack_skill = 1
+                defense_skill = 1
+                maneuvering_skill = 1
+                coordination_skill = 1
+            }
+        }
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_laying_the_pavement
+    relative_position_id = STB_office_of_first_pilot
+    x = 0
+    y = 1
+
+    cost = 3
+    prerequisite = {
+        focus = STB_office_of_first_pilot
+        focus = STB_office_of_first_general
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_laying_the_pavement"
+        15 = {
+            add_building_construction = {
+                type = air_base
+                level = 5
+                instant_build = yes
+            }
+            add_building_construction = {
+                type = anti_air_building
+                level = 2
+                instant_build = yes
+            }
+        }
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_establish_communication_uplinks
+    relative_position_id = STB_office_of_first_pilot
+    x = 2
+    y = 1
+
+    cost = 3
+    prerequisite = {
+        focus = STB_office_of_first_pilot
+        focus = STB_office_of_first_general
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_establish_communication_uplinks"
+        add_tech_bonus = {
+            name = electronics_bonus
+            bonus = 1
+            uses = 2
+            category = electronics
+        }
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_extensive_subcontracting
+    relative_position_id = STB_office_of_first_admiral
+    x = -1
+    y = 1
+
+    cost = 3
+    prerequisite = { focus = STB_office_of_first_admiral }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_extensive_subcontracting"
+        ###Event of some of the dock workers of STB coming up against a number of thestral foreign workers who are doing a job on destroyers or the like, and getting into a conflict with them, unti it's shown that they are being replaced, which angers them more
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_steal_changling_fishing_ships
+    relative_position_id = STB_office_of_first_admiral
+    x = 1
+    y = 1
+
+    cost = 3
+    prerequisite = { focus = STB_office_of_first_admiral }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_steal_changling_fishing_ships"
+        ###Event of a group of ponies sent by Lucky to sneak across the border and grab some changeling ships, and they are rather bumbling and don't know exactly how to sail it back, despite promising to do so, and barely escape without being captured, although the changelings are more confused than anything why they're just taking some fishing ships, when they have a nice navy
+        ###Probably add about 4 weak destroyers
+    }
+
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_flight_of_the_pegasi
+    relative_position_id = STB_office_of_first_pilot
+    x = -1
+    y = 2
+
+    cost = 3
+    prerequisite = { focus = STB_office_of_first_pilot}
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_flight_of_the_pegasi"
+        ###Some pilfered pegasi from NRP are used to help with training the pilots of STB, and are rather hesitant and nervous about helping, especially since they are consistently grilled about everything, as well
+    }
+
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_pinky_promise
+    relative_position_id = STB_laying_the_pavement
+    x = 1
+    y = 1
+
+    cost = 3
+    prerequisite = { focus = STB_laying_the_pavement }
+    prerequisite = { focus = STB_establish_communication_uplinks }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_pinky_promise"
+        ###Event of Lucky meeting with some of the militia members and doing all that he can to sway them to remain faithful to their service, mostly by promising more money, despite not having any money to really give, at least in the public funds, which gets called out, and he tries to deny it while still getting their loyalty
+    }
+
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_expand_drafting
+    relative_position_id = STB_office_of_first_general
+    x = 0
+    y = 2
+
+    cost = 3
+    prerequisite = { focus = STB_office_of_first_general}
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_expand_drafting"
+        ###Event of some already unhappy militia being forced to basically grab ponies from Stableside and Portland to serve in the military, which is slowly taking over the militia, and ponies are far from pleased by this, despite being offered more money to compensate
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_consistent_course_material
+    relative_position_id = STB_office_of_first_admiral
+    x = 0
+    y = 2
+
+    cost = 3
+    prerequisite = { focus = STB_extensive_subcontracting }
+    prerequisite = { focus = STB_steal_changling_fishing_ships }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_consistent_course_material"
+        ###Event of some new officers being taught on some previous course material from COBSOC, before it switches halfway through from the new printed material for Lucky's navy, and it is vastly different, if slightly better, than COBSOC's, which confuses many
+    }
+
+    ai_will_do = { factor = 80 }
 }
