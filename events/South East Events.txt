@@ -7,6 +7,7 @@ country_event = {
 	id = southeast.1
 	title = southeast.1.t
 	desc = southeast.1.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.1" }
 	is_triggered_only = yes 
 	option = {
 		name = southeast.1.a
@@ -17,6 +18,7 @@ country_event = {
 	id = southeast.2
 	title = southeast.2.t
 	desc = southeast.2.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.2" }
 	is_triggered_only = yes 
 	option = {
 		name = southeast.2.a
@@ -28,6 +30,7 @@ country_event = {
 	id = southeast.3
 	title = southeast.3.t
 	desc = southeast.3.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.3" }
 	is_triggered_only = yes 
 	option = {
 		name = southeast.3.a
@@ -40,6 +43,7 @@ country_event = { #Cobalt Hoof kicks the bucket, potentially ala Stalin in Death
 	id = southeast.4
 	title = southeast.4.t
 	desc = southeast.4.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.4" }
 	is_triggered_only = yes
 	
 	option = { #That can't bode well...
@@ -69,14 +73,58 @@ country_event = { #Cobalt Hoof kicks the bucket, potentially ala Stalin in Death
 	}
 }
 
-country_event = { #The Mingsplosion begins...
+country_event = { #First hints of unrest begin in BAL, with most of the interior becoming ungovernorable after multiple uprisings by indingenous groups
 	id = southeast.5
 	title = southeast.5.t
 	desc = southeast.5.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.5" }
+
+	is_triggered_only = yes
+
+	option = { #Mobilize every prole immediately!
+		name = southeast.5.a
+		add_stability = -0.2
+		custom_effect_tooltip = BAL_good_job_breaking_it_tt
+		hidden_effect = {
+			84 = { set_demilitarized_zone = yes }
+			37 = { set_demilitarized_zone = yes }
+			17 = { set_demilitarized_zone = yes }
+			30 = { set_demilitarized_zone = yes }
+			350 = { set_demilitarized_zone = yes }
+			31 = { set_demilitarized_zone = yes }
+			348 = { set_demilitarized_zone = yes }
+			16 = { set_demilitarized_zone = yes }
+			24 = { set_demilitarized_zone = yes }
+			88 = { set_demilitarized_zone = yes }
+			7 = { set_demilitarized_zone = yes }
+			10 = { set_demilitarized_zone = yes }
+			6 = { set_demilitarized_zone = yes }
+			4 = { set_demilitarized_zone = yes }
+			36 = { set_demilitarized_zone = yes }
+			35 = { set_demilitarized_zone = yes }
+			81 = { set_demilitarized_zone = yes }
+			32 = { set_demilitarized_zone = yes }
+			26 = { set_demilitarized_zone = yes }
+			353 = { set_demilitarized_zone = yes }
+			1193 = { set_demilitarized_zone = yes }
+			#news_event = southeast_news.1 #Cobalt is dead! The South-East is collapsing into chaos!
+			country_event = {
+				id = southeast.6
+				days = 7
+				random_days = 7
+			}
+		}
+	}
+}
+
+country_event = { #The Mingsplosion begins...
+	id = southeast.6
+	title = southeast.6.t
+	desc = southeast.6.d
 	is_triggered_only = yes
 	
 	option = { ###We'll get them back soon enough.
-		name = southeast.5.a
+		name = southeast.6.a
 		#news_event = southeast_news.1 #Cobalt is dead! Nations secede!
 		SPF = {
 			transfer_state = 4
@@ -102,6 +150,13 @@ country_event = { #The Mingsplosion begins...
 				load_oob = "SPF_1048_naval_legacy"
 			}
 		}
+		every_state = {
+			limit = {
+				is_owned_by = SPF
+				is_demilitarized_zone = yes
+			}
+			set_demilitarized_zone = no
+		}
 		CLI = {
 			transfer_state = 6
 			transfer_state = 7
@@ -124,6 +179,13 @@ country_event = { #The Mingsplosion begins...
 			else = {
 				load_oob = "CLI_1048_naval_legacy"
 			}
+		}
+		every_state = {
+			limit = {
+				is_owned_by = CLI
+				is_demilitarized_zone = yes
+			}
+			set_demilitarized_zone = no
 		}
 		hidden_effect = {
 			transfer_ship = {
@@ -168,7 +230,7 @@ country_event = { #The Mingsplosion begins...
 			}
 		}
 		country_event = {
-			id = southeast.6
+			id = southeast.7
 			days = 7
 			random_days = 5
 		}
@@ -176,13 +238,16 @@ country_event = { #The Mingsplosion begins...
 }
 
 country_event = { #Mingsplosion continues, with Lucky flipping the bird
-	id = southeast.6
-	title = southeast.6.t
-	desc = southeast.6.d
+	id = southeast.7
+	title = southeast.7.t
+	desc = southeast.7.d
 	is_triggered_only = yes
 	
 	option = { ###Maybe things are getting a bit hot...
-		name = southeast.6.a
+		name = southeast.7.a
+		STB = {
+			change_tag_from = ROOT
+		}
 		delete_unit_template_and_units = {
 			division_template = "Stableside Worker Protectors"
 		}
@@ -280,7 +345,7 @@ country_event = { #Mingsplosion continues, with Lucky flipping the bird
 			}
 		}
 		country_event = {
-			id = southeast.7
+			id = southeast.8
 			days = 15
 			random_days = 7
 		}
@@ -288,13 +353,13 @@ country_event = { #Mingsplosion continues, with Lucky flipping the bird
 }
 
 country_event = { #Bats do be EEEing, tho
-	id = southeast.7
-	title = southeast.7.t
-	desc = southeast.7.d
+	id = southeast.8
+	title = southeast.8.t
+	desc = southeast.8.d
 	is_triggered_only = yes
 	
 	option = { ###We helped them! They repay us like this?!
-		name = southeast.7.a
+		name = southeast.8.a
 		delete_unit_template_and_units = {
 			division_template = "Red Glory Jungle Guard"
 		}
@@ -321,6 +386,13 @@ country_event = { #Bats do be EEEing, tho
 			add_state_core = 83
 			load_oob = "EEE_1048"
 		}
+		every_state = {
+			limit = {
+				is_owned_by = EEE
+				is_demilitarized_zone = yes
+			}
+			set_demilitarized_zone = no
+		}
 		NEI = {
 			transfer_state = 88
 			transfer_state = 348
@@ -345,6 +417,13 @@ country_event = { #Bats do be EEEing, tho
 				load_oob = "NEI_1048_naval_legacy"
 			}
 		}
+		every_state = {
+			limit = {
+				is_owned_by = NEI
+				is_demilitarized_zone = yes
+			}
+			set_demilitarized_zone = no
+		}
 		hidden_effect = {
 			transfer_ship = {
 				type = destroyer
@@ -366,11 +445,6 @@ country_event = { #Bats do be EEEing, tho
 				type = destroyer
 				target = NEI
 			}
-		}
-		country_event = {
-			id = southeast.8
-			days = 7
-			random_days = 3
 		}
 		IF = { ###Ah Lawd he comin'
 			limit = {
@@ -406,9 +480,9 @@ country_event = { #Bats do be EEEing, tho
 }
 
 country_event = { ###Mingsplosion completes with greedy bugs and crazy ultranats
-	id = southeast.8
-	title = southeast.8.t
-	desc = southeast.8.d
+	id = southeast.9
+	title = southeast.9.t
+	desc = southeast.9.d
 	is_triggered_only = yes
 	
 	option = { ###Please be the end...
