@@ -4,6 +4,7 @@ shared_focus = {
     id = STB_break_the_yoke
     x = 10
     y = 0
+    allow_branch = { NOT = { has_country_flag = STB_southeast_victor } }
 
     cost = 1
 
@@ -755,6 +756,287 @@ shared_focus = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_right_ship"
         ###Lucky for once gets nervous as he briefly gets assurance from Late Bloom that he'll do fine, although even she doesn't know everything he wrote for his speech, and he goes onto a radio broadcast, where he promises that the commune has served its purpose, and although there are still teething pains, they are going to create the grandest empire, under him; he corrects himself to call it an arch empire, simply because it's so grand, and he can already hear some surprise and unrest in the streets as he finishes
     }
+}
+
+###Transition Tree for Lucky###
+shared_focus = {
+    id = STB_new_revolution
+    x = 10
+    y = 0
+
+    cost = 1
+    allow_branch = { has_country_flag = STB_southeast_victor }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_new_revolution"
+        ###Lucky holds a procession or parade with many of soldiers, marching through the damaged New Baltimare, and he uses it as an opportunity to hype himself up more, and start to build a bit more of a cult of personality around him, not that he already had it, and he proclaims that he'll have an even greater nation than COBSOC ever was, and that ponies can trust that he'll look after them, as he looks after himself
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_new_boss
+    x = -4
+    y = 1
+    relative_position_id = STB_new_revolution
+
+    cost = 2
+    prerequisite = { focus = STB_new_revolution }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_new_boss"
+        ###As one of his first actions, Lucky hosts a large execution of various generals and advisors to COBSOC as well as many other nations in the South-East, as he claims that they will all in some shape or another try to betray him, and that he'll cut them off first, since he is certain that they would fail anyway, and he gives them one final, mocking salute before they're all shot
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_same_as_old_boss
+    x = 4
+    y = 1
+    relative_position_id = STB_new_revolution
+
+    cost = 2
+    prerequisite = { focus = STB_new_revolution }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_same_as_old_boss"
+        ###Event of a pony that worked with COBSOC trying to flee New Baltimare as her house was raided just as she was coming back from finding some food for herself, and she does her best to try and avoid them as she runs through the ruins of the city, and while at first she thinks that she is fine, she ends up bumping into a patrol, which captures her anyway, since Lucky is doing all that he can to lock down the city like Cobalt did
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_continue_regional_militias
+    x = 0
+    y = 1
+    relative_position_id = STB_new_boss
+
+    cost = 2
+    prerequisite = { focus = STB_new_boss }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_continue_regional_militias"
+        #Idea here
+        ###Maybe event of some poines being encouraged to join one of the new militias, and finding out that it is anything but the fun they were promsied
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_utilize_repair_gangs
+    x = 0
+    y = 2
+    relative_position_id = STB_new_revolution
+
+    cost = 2
+    prerequisite = {
+        focus = STB_new_boss
+        focus = STB_same_as_old_boss
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_utilize_repair_gangs"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_mass_re_education
+    x = 0
+    y = 1
+    relative_position_id = STB_same_as_old_boss
+
+    cost = 2
+    prerequisite = { focus = STB_same_as_old_boss }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_mass_re_education"
+        ###Event of a COBSOC member being dragged into a newly erected room in a prison, which a few other ponies are already in, and being treated much like in Room 101 in 1984, where the fears of the pony are preyed upon, and also where the loyalty in Cobalt Hoof is broken, as they slowly become one to trust Lucky instead
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_appoint_loyal
+    x = -2
+    y = 1
+    relative_position_id = STB_continue_regional_militias
+
+    cost = 2
+    prerequisite = { focus = STB_continue_regional_militias }
+    mutually_exclusive = { focus = STB_example_of_traitors }
+    mutually_exclusive = { focus = STB_reborn_commissars }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_appoint_loyal"
+        ###Event of Lucky choosing a new pony to help lead a military tribunal or garrison like it is some class of school children, since he wants to keep the most effectively loyal, not the most competent, in charge, so he has no risk of being backstabbed; he uses one and makes sure to intimidate them to follow and rmain as faithful as they already have
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_example_of_traitors
+    x = 0
+    y = 1
+    relative_position_id = STB_continue_regional_militias
+
+    cost = 2
+    prerequisite = { focus = STB_continue_regional_militias }
+    mutually_exclusive = { focus = STB_appoint_loyal }
+    mutually_exclusive = { focus = STB_reborn_commissars }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_example_of_traitors"
+        ###Event of an officer who has been appointed by Lucky to oversee that the soldiers in the garrison of Red Glory are sufficiently loyal, since they are some of the traitor Neighua, and he inspects them all for a moment before doing something to thin out the number of ponies, and makes it sound like he is choosing the loyal ones, except that he's actually using them all as examples by executing them once done, to strike fear into the rest
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_reborn_commissars
+    x = 2
+    y = 2
+    relative_position_id = STB_new_boss
+
+    cost = 2
+    prerequisite = { focus = STB_new_boss }
+    mutually_exclusive = { focus = STB_appoint_loyal }
+    mutually_exclusive = { focus = STB_example_of_traitors }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_reborn_commissars"
+        ###A random citizen is surprised when she is stumbled into by a very obviously Lucky-aligned politcal commissar, since they have many symbols of Lucky's clique, and she is wary, because the pony, Slice Tail, strikes up conversation with her, and becomes more and more obvious that she knows basically everything about the citizen, which perturbs the citizen, shortly before she is arrested for the supposed proof of shopping for chemicals for taking out Lucky
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_big_brother
+    x = 2
+    y = 2
+    relative_position_id = STB_same_as_old_boss
+
+    cost = 2
+    prerequisite = { focus = STB_same_as_old_boss }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_big_brother"
+        ###A pony reluctantly enters the office of some political commissar or perhaps somepony related to a totally not Ministry of Truth, and is overly nervous at first, before they are prodded and pushed to finally admit that they saw some rather unacceptable (to Lucky) behaviour, and they are overly nervous about reporting it, since it's their one friend or perhaps spouse, but they are ultimately coerced to do so, since it would mean they'd be punished, too, otherwise
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_revolutionary_elites
+    x = 0
+    y = 1
+    relative_position_id = STB_example_of_traitors
+
+    cost = 2
+    prerequisite = {
+        focus = STB_appoint_loyal
+        focus = STB_example_of_traitors
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_revolutionary_elites"
+        #Spawn divisions here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_pass_ranks
+    x = 1
+    y = 1
+    relative_position_id = STB_reborn_commissars
+
+    cost = 2
+    prerequisite = { focus = STB_reborn_commissars }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_pass_ranks"
+        add_stability = -0.1
+        add_war_support = -0.05
+        #Buildings here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_labor_intensification
+    x = 1
+    y = 1
+    relative_position_id = STB_utilize_repair_gangs
+
+    cost = 2
+    prerequisite = { focus = STB_utilize_repair_gangs }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_labor_intensification"
+        ###Event of a prisoner gang being sent to fix a broken sewer drain, and that is all, and they are completely incredulous, since they believe that they could do a lot more, although they have some ideas of what they could do to try and sabotage Lucky, although it lands them in trouble with their overseer
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_regional_integration_campaigns
+    x = 0
+    y = 2
+    relative_position_id = STB_mass_re_education
+
+    cost = 2
+    prerequisite = { focus = STB_mass_re_education }
+    mutually_exclusive = { focus = STB_centralized_occupation_centers }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_regional_integration_campaigns"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_centralized_occupation_centers
+    x = 0
+    y = 1
+    relative_position_id = STB_big_brother
+
+    cost = 2
+    prerequisite = { focus = STB_big_brother }
+    mutually_exclusive = { focus = STB_regional_integration_campaigns }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_centralized_occupation_centers"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_new_star
+    x = 0
+    y = 1
+    relative_position_id = STB_labor_intensification
+
+    cost = 3
+    prerequisite = { focus = STB_labor_intensification }
+    prerequisite = {
+        focus = STB_revolutionary_elites
+        focus = STB_pass_ranks
+    }
+    prerequisite = {
+        focus = STB_regional_integration_campaigns
+        focus = STB_centralized_occupation_centers
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_new_star"
+        ###Event of Lucky holding a radio broadcast, and him mentioning how much of of what he has done has helped his ponies, but they probably notice that it's not really holding true to communist or COBSOC ideals, and he states there's a reason, and it happens at the same time that effectively everywhere banners of the Solar Empire unfurl, although they have his face on it, and he declares it's because he's going to end up being Daybreaker's hubby, and that he will make sure they're all ready to serve him, and her, which surprises everypony
+    }
+    ai_will_do = { factor = 320 }
 }
 
 ###Military Tree###
