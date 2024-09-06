@@ -765,7 +765,10 @@ shared_focus = {
     y = 0
 
     cost = 1
-    allow_branch = { has_country_flag = STB_southeast_victor }
+    allow_branch = {
+        has_country_flag = STB_southeast_victor
+        NOT = { has_completed_focus = STB_new_star }
+    }
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_new_revolution"
@@ -1035,8 +1038,429 @@ shared_focus = {
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_new_star"
         ###Event of Lucky holding a radio broadcast, and him mentioning how much of of what he has done has helped his ponies, but they probably notice that it's not really holding true to communist or COBSOC ideals, and he states there's a reason, and it happens at the same time that effectively everywhere banners of the Solar Empire unfurl, although they have his face on it, and he declares it's because he's going to end up being Daybreaker's hubby, and that he will make sure they're all ready to serve him, and her, which surprises everypony
+        #Temp
+        mark_focus_tree_layout_dirty = yes
     }
     ai_will_do = { factor = 320 }
+}
+
+###Historical Simping###
+shared_focus = {
+    id = STB_fulfilling_destiny
+    x = 10
+    y = 0
+
+    cost = 3
+    allow_branch = { has_completed_focus = STB_new_star }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_fulfilling_destiny"
+        ###Maybe event of Lucky nervously penning his first letter to Daybreaker or the Solar Empire, with much awkwardness and the like, and his secretary comes in and sees what he's doing before walking back out, as he looks at her a bit awkwardly
+        set_power_balance = {
+            id = STB_simp_or_no_simp
+            set_default = yes
+        }
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_drive_to_ruin
+    x = -8
+    y = 1
+    relative_position_id = STB_fulfilling_destiny
+
+    cost = 4
+    prerequisite = { focus = STB_fulfilling_destiny }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_drive_to_ruin"
+        ###Potentially an event of a bunch of new soldiers being run through bootcamp, although they have absolutely no desire to do so, since they are not even fighting for the Revolution anymore, and instead just for Lucky's delusions of grandeur and crush on Daybreaker
+        add_manpower = 25000
+        add_war_support = 0.05
+        add_stability = -0.05
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_fire_upon_seas
+    x = -4
+    y = 1
+    relative_position_id = STB_fulfilling_destiny
+
+    cost = 4
+    prerequisite = { focus = STB_fulfilling_destiny }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_fulfilling_destiny"
+        #Idea here
+        ###Maybe short event of Lucky forcing an entire new fleet to be scrapped because there weren't enough big, cool ships to impress Daybreaker with
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_solar_socialist_savior
+    x = 0
+    y = 1
+    relative_position_id = STB_fulfilling_destiny
+
+    cost = 4
+    prerequisite = { focus = STB_fulfilling_destiny }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_solar_socialist_savior"
+        #Modify idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_more_solarist_than_socialist
+    x = 4
+    y = 1
+    relative_position_id = STB_fulfilling_destiny
+
+    cost = 4
+    prerequisite = { focus = STB_fulfilling_destiny }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_more_solarist_than_socialist"
+        add_political_power = 75
+        #Move to limited exports here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_swarm_land
+    x = -1
+    y = 1
+    relative_position_id = STB_drive_to_ruin
+
+    cost = 3
+    prerequisite = { focus = STB_drive_to_ruin }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_swarm_land"
+        ###Event of some prisoners who were taken during the war to conquer the South-East being released from their cells and handed rifles, as Lucky moves to put down a small gesture of rebellion somewhere in the thestral lands, and they are at first a bit excited to be free, then they see that they'll be the first ones going into a fortress, and they are far from happy
+    }
+    ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+    id = STB_blueblood_tactics
+    x = 2
+    y = 1
+    relative_position_id = STB_drive_to_ruin
+
+    cost = 5
+    prerequisite = {
+        focus = STB_drive_to_ruin
+        focus = STB_fire_upon_seas
+    }
+
+    completion_reward = {
+        add_doctrine_cost_reduction = {
+            name = gp_bonus
+            uses = 2
+            cost_reduction = 0.5
+            category = grand_battleplan_category
+        }
+        add_power_balance_value = {
+            id = STB_simp_or_no_simp
+            value = 0.05
+            side = STB_soyboy
+        }
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_commandeer_drydocks
+    x = 0
+    y = 1
+    relative_position_id = STB_fire_upon_seas
+
+    cost = 4
+    prerequisite = { focus = STB_fire_upon_seas }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_commandeer_drydocks"
+        #Spawn navy
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_fish_into_coin
+    x = 2
+    y = 1
+    relative_position_id = STB_fire_upon_seas
+
+    cost = 5
+    prerequisite = { focus = STB_fire_upon_seas }
+    prerequisite = { focus = STB_solar_socialist_savior }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_fish_into_coin"
+        ###Event of a fisherman using his normal, rather crappy fishing boat, and then getting completely passed by a refitted destroyer, which even has a gun for defense against pirates, and effectively getting into a compeition, although he actually manages to still completely outclass them since they're a bunch of younger ponies who think they can beat some old-timer
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_invite_priestesses
+    x = 1
+    y = 1
+    relative_position_id = STB_solar_socialist_savior
+
+    cost = 5
+    prerequisite = { focus = STB_solar_socialist_savior }
+    mutually_exclusive = { focus = STB_equal_opportunity_goddess }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_invite_priestesses"
+        ###Event of a priestess getting a bag taken off her head, as she is revealed to be in one of the rooms of Lucky's residence, and that he is the one who is waiting for her to wake up, and she is obstinate, for obvious reasons, although he does manage to eventually coerce (after trying to simp) for her to serve in his country, mainly through being under constant guard
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_equal_opportunity_goddess
+    x = -2
+    y = 1
+    relative_position_id = STB_more_solarist_than_socialist
+
+    cost = 5
+    prerequisite = { focus = STB_more_solarist_than_socialist }
+    mutually_exclusive = { focus = STB_invite_priestesses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_equal_opportunity_goddess"
+        ###Event of a drunkard or some other obviously unfit pony to lead anypony, let alone congrgants, going to a tryout for Lucky's new priesthood of totally Solarist churches, and even though he basically waxes inanely about Daybreaker and it makes no sense, he still gets hired and has more money for booze
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_clear_room_for_statues
+    x = 0
+    y = 1
+    relative_position_id = STB_more_solarist_than_socialist
+
+    cost = 4
+    prerequisite = { focus = STB_more_solarist_than_socialist }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_clear_room_for_statues"
+        ###Event of some socalists trying to interfere with an operation to remove more of the monuments that Cobalt Hoof built for himself, since they believe it more edifying and beautiful than whatever will be built in its stead, especially since it is probably going to be some piece dedicated to Daybreaker or the like
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_pathways_for_decrees
+    x = 2
+    y = 1
+    relative_position_id = STB_more_solarist_than_socialist
+
+    cost = 4
+    prerequisite = { focus = STB_more_solarist_than_socialist }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_pathways_for_decrees"
+        #Railroad and supply hub here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_red_march
+    x = 0
+    y = 2
+    relative = STB_drive_to_ruin
+
+    cost = 4
+    prerequisite = { focus = STB_drive_to_ruin }
+    mutually_exclusive = { focus = STB_two_ends_meet }
+    mutually_exclusive = { focus = STB_whitecap_dominance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_red_march"
+        ###Short event of Lucky hosting another parade, as the military has already seen some improvements to its soldiers, since the idea of a militia is going away, and a soldier within the parade gets a bright idea of doing something out of order, and ends up causing a cannon or artillery to go off, and it escalates from there
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_two_ends_meet
+    x = 1
+    y = 1
+    relative_position_id = STB_blueblood_tactics
+
+    cost = 4
+    prerequisite = { focus = STB_blueblood_tactics }
+    mutually_exclusive = { focus = STB_red_march }
+    mutually_exclusive = { focus = STB_whitecap_dominance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_two_ends_meet"
+        ###Event of a few generals and admirals/captains meeting together for some coordination strategy of the two branches of the military (completely ignoring the air force - literally weren't invited) and they soon get to arguing with each other over what they should prioritize if they were invaded, which eventually makes Lucky order them all to shut up and listen to him and what should be done, although they are not happy with it
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_whitecap_dominance
+    x = 1
+    y = 1
+    relative_position_id = STB_commandeer_drydocks
+
+    cost = 4
+    prerequisite = { focus = STB_commandeer_drydocks }
+    mutually_exclusive = { focus = STB_red_march }
+    mutually_exclusive = { focus = STB_two_ends_meet }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_whitecap_dominance"
+        ###Event of some admirals or the like leading the newest fleet into deep water to perform some exercises, since they are supposedly seaworthy enough to be taken into such things, and it soon going awry when one springs a leak, and a second has a turret explode, which forces them to try and execute multiple emergency protocols
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_scourge_seas
+    x = 1
+    y = 1
+    relative_position_id = STB_fish_into_coin
+
+    cost = 3
+    prerequisite = { focus = STB_fish_into_coin }
+    mutually_exclusive = { focus = STB_tithing_for_day }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_scourge_seas"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_tithing_for_day
+    x = 0
+    y = 1
+    relative_position_id = STB_invite_priestesses
+
+    cost = 5
+    prerequisite = { focus = STB_invite_priestesses }
+    mutually_exclusive = { focus = STB_scourge_seas }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_tithing_for_day"
+        #Idea here
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_heresy_tax
+    x = 0
+    y = 1
+    relative_position_id = STB_equal_opportunity_goddess
+
+    cost = 3
+    prerequisite = { focus = STB_equal_opportunity_goddess }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_heresy_tax"
+        #Idea here
+        ###Potentially event of somepony being greeted by a tax collector, who makes overt and obnoxious remarks about how they are the worst scum in existence, but if they give money, then they'll be fine, and by this point, the pony is utterly defeated, and does whatever they ask
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_predetermined_choices
+    x = -2
+    y = 1
+    relative_position_id = STB_pathways_for_decrees
+
+    cost = 3
+    prerequisite = { focus = STB_pathways_for_decrees }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_predetermined_choices"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_hoofways_of_messangers
+    x = 0
+    y = 1
+    relative_position_id = STB_pathways_for_decrees
+
+    cost = 4
+    prerequisite = { focus = STB_pathways_for_decrees }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_hoofways_of_messangers"
+        every_state = {
+            limit = {
+                infrastructure > 2
+            }
+            add_building_construction = {
+                type = infrastructure
+                level = 1
+                instant_build = yes
+            }
+        }
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_labor_not_wasted
+    x = 2
+    y = 1
+    relative_position_id = STB_pathways_for_decrees
+
+    cost = 4
+    prerequisite = { focus = STB_pathways_for_decrees }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_labor_not_wasted"
+        ###Event of a few prisoners, who have been run ragged for days, trying desperately to argue with their boss on being allowed to rest, since they need to rest if they wish to remain useful, and the boss doesn't care, since they were ponies who fought against him in the war, and he is feeling vengeful, and he intends to run them until they perish
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_holy_fire_alternate_name
+    x = 0
+    y = 1
+    relative_position_id = STB_two_ends_meet
+
+    cost = 5
+    prerequisite = {
+        focus = STB_red_march
+        focus = STB_two_ends_meet
+        focus = STB_whitecap_dominance
+    }
+    available = {
+        power_balance_value = {
+            id = STB_simp_or_no_simp
+            value >0.499
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_holy_fire_alternate_name"
+        ###Event of a bomber or some soldiers performing a napalm test, and it happens to include some thestral villages, because Lucky also wants to show that he hates them as much as Daybreaker does, and it leads to hundred of thestrals perishing, which some of the soldiers who are more sadistic find amusing
+    }
 }
 
 ###Military Tree###
