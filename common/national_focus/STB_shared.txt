@@ -1280,7 +1280,7 @@ shared_focus = {
     id = STB_red_march
     x = 0
     y = 2
-    relative = STB_drive_to_ruin
+    relative_position_id = STB_drive_to_ruin
 
     cost = 4
     prerequisite = { focus = STB_drive_to_ruin }
@@ -1398,7 +1398,7 @@ shared_focus = {
 }
 
 shared_focus = {
-    id = STB_hoofways_of_messangers
+    id = STB_hoofways_of_messengers
     x = 0
     y = 1
     relative_position_id = STB_pathways_for_decrees
@@ -1407,7 +1407,7 @@ shared_focus = {
     prerequisite = { focus = STB_pathways_for_decrees }
 
     completion_reward = {
-        log = "[GetDateText]: [ROOT.GetName]: focus STB_hoofways_of_messangers"
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_hoofways_of_messengers"
         every_state = {
             limit = {
                 infrastructure > 2
@@ -1461,6 +1461,341 @@ shared_focus = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_holy_fire_alternate_name"
         ###Event of a bomber or some soldiers performing a napalm test, and it happens to include some thestral villages, because Lucky also wants to show that he hates them as much as Daybreaker does, and it leads to hundred of thestrals perishing, which some of the soldiers who are more sadistic find amusing
     }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_shared_vision
+    x = 1
+    y = 1
+    relative_position_id = STB_whitecap_dominance
+
+    cost = 5
+    prerequisite = { focus = STB_whitecap_dominance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_shared_vision"
+        ###Lucky visits his new flagship that's getting built, the HMS Snookums, and goes through an inspection of how far along it is, and the general appearance is similar to the Daybreak, although it is of worse quality, especially when he starts digging and finds multiple problems, as one even almost injures him, which makes him rather furious
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_mandatory_instruction_manuals
+    x = 0
+    y = 1
+    relative_position_id = STB_scourge_seas
+
+    cost = 4
+    prerequisite = { focus = STB_scourge_seas }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_labor_not_wasted"
+        ###Event of a pony working some kind of heavy machinery or a gun doing their best to figure out what is going in an instruction manual that she has been given, since she can't read at all, and was basically told to go figure it out in a short amount of time, and she is incredibly happy when she believes she's figured out a word or two, enough to not injure herself, except she didn't understand it properly at all and does exactly what she didn't want to do (injure herself); alterantively an event that discusses increasing literacy after a bout of accidents while studying
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_suns_generosity
+    x = 1
+    y = 1
+    relative_position_id = STB_tithing_for_day
+
+    cost = 5
+    prerequisite = {
+        focus = STB_tithing_for_day
+        focus = STB_heresy_tax
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_suns_generosity"
+        #Idea here and decrease poverty
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_thankful_life
+    x = 1
+    y = 1
+    relative_position_id = STB_predetermined_choices
+
+    cost = 4
+    prerequisite = { focus = STB_predetermined_choices }
+    prerequisite = { focus = STB_hoofways_of_messengers }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_thankful_life"
+        ###Event of a pony trying to petition Lucky to not effectively tear down all his factories to supply more weapons and Lucky telling him kindly to deal with it, as he doesn't particularly care for all the trinkets being made, but more weapons for being able to impress Daybreaker
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_motivation_for_all
+    x = 1
+    y = 1
+    relative_position_id = STB_hoofways_of_messengers
+
+    cost = 3
+    prerequisite = { focus = STB_hoofways_of_messengers }
+    prerequisite = { focus = STB_labor_not_wasted }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_motivation_for_all"
+        ###Event of a worker collective all gathered around some table or an early computer or the like, for determining who is the lucky pony who gets some benefits from Lucky for their week, since it is a random lot for the workers, to push them further to work, since more work means more entries into the prize pool, and after a pony is chosen, a fight breaks out since both ponies involved were wanting to win
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_more_fodder_slash_faithful
+    x = 0
+    y = 2
+    relative_position_id = STB_red_march
+
+    cost = 4
+    prerequisite = {
+        focus = STB_red_march
+        focus = STB_two_ends_meet
+        focus = STB_whitecap_dominance
+    }
+
+    completion_reward = {
+        add_manpower = 50000
+        add_tech_bonus = {
+            name = infantry_bonus
+            uses = 1
+            bonus = 1
+            category = infantry_weapons
+        }
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_size_always_matters
+    x = 0
+    y = 2
+    relative_position_id = STB_whitecap_dominance
+
+    cost = 4
+    prerequisite = { focus = STB_whitecap_dominance }
+
+    completion_reward = {
+        random_state = {
+            limit = {
+                is_coastal = yes
+                is_owned_by = ROOT
+            }
+            add_extra_state_shared_building_slots = 2
+            add_building_construction = {
+                type = dockyard
+                level = 2
+                instant_build = yes
+            }
+        }
+        add_tech_bonus = {
+            name = dd_bonus
+            uses = 1
+            bonus = 1
+            category = dd_tech
+        }
+        add_tech_bonus = {
+            name = bb_bonus
+            uses = 1
+            bonus = 1
+            category = bb_tech
+        }
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_why_not_both
+    x = 1
+    y = 1
+    relative_position_id = STB_heresy_tax
+
+    cost = 5
+    prerequisite = { focus = STB_heresy_tax }
+    available = {
+        power_balance_value = {
+            id = STB_simp_or_no_simp
+            value > 0.599
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_why_not_both"
+        ###Event of a worker, who is now addled with addiction for some kind of stimulant that they are given at his work, running for his life, although he can't very well, as he is being chased by knock-off inquisitors, who eventually capture him and torture him for why he dared to defile himself with such unholy things, and as he begs to be freed since it was given at work, per STB mandates ,they declare him violating the Empress's desires and haul him off to be burned at the stake, ignoring all his pleas for forgiveness
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_empresss_toys
+    x = 1
+    y = 1
+    relative_position_id = STB_more_fodder_slash_faithful
+
+    cost = 5
+    prerequisite = { focus = STB_more_fodder_slash_faithful }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_empresss_toys"
+        add_tech_bonus = {
+            name = armor_bonus
+            uses = 1
+            bonus = 1
+            category = armor
+        }
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_sailors_of_fire
+    x = -1
+    y = 1
+    relative_position_id = STB_size_always_matters
+
+    cost = 5
+    prerequisite = { focus = STB_size_always_matters }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_sailors_of_fire"
+        #Idea here
+    }
+}
+
+shared_focus = {
+    id = STB_civilian_sacrifice
+    x = -1
+    y = 2
+    relative_position_id = STB_mandatory_instruction_manuals
+
+    cost = 5
+    prerequisite = { focus = STB_mandatory_instruction_manuals }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_civilian_sacrifice"
+        ###Event of a sailor or two being boarded at first by pirates, then by Lucky's navy afterward, who take out the pirates, but then commandeer the ship for themselves, since it is in good enough shape, and better than, some of their own warships that they can use it for something more productive, which annoys the fishers to no end
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_patronage_of_goddess
+    x = 1
+    y = 2
+    relative_position_id = STB_mandatory_instruction_manuals
+
+    cost = 5
+    prerequisite = {
+        focus = STB_mandatory_instruction_manuals
+        focus = STB_suns_generosity
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_patronage_of_goddess"
+        ###Possibly event of some of the few scientists in the realm, and also some COBSOC scientists, being brought into their first study hall lecture, and being basically forced to read clear falsehoods that Daybreaker spreads, which infuriates them, although they are basically brought at gunpoint to say them
+        add_research_slot = 1
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_magical_augmentation
+    x = 0
+    y = 2
+    relative_position_id = STB_suns_generosity
+
+    cost = 4
+    prerequisite = { focus = STB_suns_generosity }
+    prerequisite = { focus = STB_why_not_both }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_magical_augmentation"
+        add_tech_bonus = {
+            name = race_bonus
+            uses = 3
+            bonus = 0.75
+            category = race_tech
+        }
+    }
+    ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+    id = STB_light_and_life
+    x = 1
+    y = 1
+    relative_position_id
+
+    cost = 5
+    prerequisite = { focus = STB_why_not_both }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_light_and_life"
+        ###Event of a bunch of school-aged foals being brought to a new class taught by one of the knock-off priestesses/priests, and immediately it starts giving exaggerated stories of what Daybreaker did to save the world time and again, although they are young enough, and they have enough of their questions answered that they start believing in the nonsense
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_hardened_workers
+    x = 1
+    y = 3
+    relative_position_id = STB_thankful_life
+
+    cost = 5
+    prerequisite = { focus = STB_thankful_life }
+    prerequisite = { focus = STB_motivation_for_all }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_hardened_workers"
+        #Idea here
+        ###Maybe event of some workers going through some of the extreme environments without breaking a sweat
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_mini_militarium
+    x = 1
+    y = 1
+    relative_position_id = STB_empresss_toys
+
+    cost = 5
+    prerequisite = { focus = STB_empresss_toys }
+    prerequisite = { focus = STB_sailors_of_fire }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_mini_militarium"
+        ###Lucky comes into a meeting of the general staff with additional flair, much more than usual, and his generals are a bit nonplussed, but don't mention any of it at first until he starts to try and change policy quickly, since he wants to make the entire military like the Militarium in SOL, which gets significant pushback immediately
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_grand_proposal
+    x = 0
+    y = 2
+    relative_position_id = STB_patronage_of_goddess
+
+    cost = 3
+    prerequisite = { focus = STB_mini_militarium }
+    prerequisite = { focus = STB_patronage_of_goddess }
+    prerequisite = { focus = STB_hardened_workers }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_grand_proposal"
+        ###Event of Lucky nervously working with his secretary (Late Bloom) to work on the proposal letter that he will send to the Solar Empire, which lists many of his accomplishments and the like, and otherwise is lovey-dovey for Daybreaker, which makes Late even more sarcastic and done with his crap, but they ultimately do something up and send it, which arrives in SOL shortly
+    }
+    ai_will_do = { factor = 640 }
 }
 
 ###Military Tree###
@@ -2057,8 +2392,8 @@ shared_focus = {
     }
 
     completion_reward = {
-       log = "[GetDateText]: [ROOT.GetName]: focus STB_handling_them_guns"
-       ###Event of some drilling by a sergeant, and trying to break the different recruits, which leads to a large exodus, other than a few, since the militia isn't happy dealing with the professional standards, in general; include some humorous reactions, but show the remaining few to be quite good
+    log = "[GetDateText]: [ROOT.GetName]: focus STB_handling_them_guns"
+    ###Event of some drilling by a sergeant, and trying to break the different recruits, which leads to a large exodus, other than a few, since the militia isn't happy dealing with the professional standards, in general; include some humorous reactions, but show the remaining few to be quite good
     }
 
     ai_will_do = { factor = 80 }
@@ -2325,7 +2660,7 @@ shared_focus = {
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_pony_element"
         ###Event of some union members doing what they can to prove that they are better than robots, and getting into a bit of a competition with the one roboticist that their factory has hired, which pushes them to about the edge, although the do manage to outdo the production of the bots by working around the clock
-     }
+    }
 
     ai_will_do = { factor = 40 }
 }
