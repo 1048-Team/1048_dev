@@ -795,7 +795,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_same_as_old_boss
-    x = 4
+    x = 3
     y = 1
     relative_position_id = STB_new_revolution
 
@@ -971,7 +971,7 @@ shared_focus = {
 shared_focus = {
     id = STB_labor_intensification
     x = 1
-    y = 1
+    y = 2
     relative_position_id = STB_utilize_repair_gangs
 
     cost = 2
@@ -1047,7 +1047,7 @@ shared_focus = {
 ###Historical Simping###
 shared_focus = {
     id = STB_fulfilling_destiny
-    x = 10
+    x = 9
     y = 0
 
     cost = 3
@@ -1066,7 +1066,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_drive_to_ruin
-    x = -8
+    x = -9
     y = 1
     relative_position_id = STB_fulfilling_destiny
 
@@ -1085,7 +1085,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_fire_upon_seas
-    x = -4
+    x = -5
     y = 1
     relative_position_id = STB_fulfilling_destiny
 
@@ -1118,7 +1118,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_more_solarist_than_socialist
-    x = 4
+    x = 5
     y = 1
     relative_position_id = STB_fulfilling_destiny
 
@@ -1195,7 +1195,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_fish_into_coin
-    x = 2
+    x = 3
     y = 1
     relative_position_id = STB_fire_upon_seas
 
@@ -1733,7 +1733,7 @@ shared_focus = {
     id = STB_light_and_life
     x = 1
     y = 1
-    relative_position_id
+    relative_position_id = STB_why_not_both
 
     cost = 5
     prerequisite = { focus = STB_why_not_both }
@@ -1796,6 +1796,105 @@ shared_focus = {
         ###Event of Lucky nervously working with his secretary (Late Bloom) to work on the proposal letter that he will send to the Solar Empire, which lists many of his accomplishments and the like, and otherwise is lovey-dovey for Daybreaker, which makes Late even more sarcastic and done with his crap, but they ultimately do something up and send it, which arrives in SOL shortly
     }
     ai_will_do = { factor = 640 }
+}
+
+###Lucky gets accepted###
+shared_focus = {
+    id = STB_donations_to_cathedral
+    x = -2
+    y = 1
+    relative_position_id = STB_grand_proposal
+
+    cost = 3
+    prerequisite = { focus = STB_grand_proposal }
+    allow_branch = { has_country_flag = EQS_accepted_proposal }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_donations_to_cathedral"
+        ###Event of Lucky heading to the Cathedral of the Sun with his new protrait that he commissioned from an artist in STB, and he is extremely excited to unveil it, but is a tad upset when Daybreaker isn't as keen on it, since the commission makes her out to be incredibly sensuous and the like, and it is doubly embarrassing since it's in the cathedral of the sun entirely for all to see, which doesn't make her impressed
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_blessed_alicorn
+    x = 0
+    y = 1
+    relative_position_id = STB_grand_proposal
+
+    cost = 3
+    prerequisite = { focus = STB_grand_proposal }
+    allow_branch = { has_country_flag = EQS_accepted_proposal }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_blessed_alicorn"
+        ###An awkward event of Lucky visiting Sanctum Solar and eating or otherwise spending time with Daybreaker, which overly embarrasses her and the like, and she questions why she ever agreed to his proposal, since he is making many suggestive and otherwise not proper comments around her staff
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_dowry_gifts
+    x = 2
+    y = 1
+    relative_position_id = STB_grand_proposal
+
+    cost = 3
+    prerequisite = { focus = STB_grand_proposal }
+    allow_branch = { has_country_flag = EQS_accepted_proposal }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_dowry_gifts"
+        3 = {
+            add_resource = {
+                type = rubber
+                amount = 12
+            }
+        }
+        15 = {
+            add_resource = {
+                type = crystals
+                amount = 8
+            }
+        }
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_political_union
+    x = -1
+    y = 1
+    relative_position_id = STB_blessed_alicorn
+
+    cost = 4
+    prerequisite = { focus = STB_donations_to_cathedral }
+    prerequisite = { focus = STB_blessed_alicorn }
+    mutually_exclusive = { focus = STB_heart_union }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_political_union"
+        ###Event for SOL for them to receive an offer for a proper political union, but otherwise keep themselves separate, which Daybreaker would be very much in favor of, as Lucky would rather control his Arch-Empire, and she'd rather control her Empire, and they can work together, but still keep their demesnse
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_heart_union
+    x = 1
+    y = 1
+    relative_position_id = STB_blessed_alicorn
+
+    cost = 4
+    prerequisite = { focus = STB_dowry_gifts }
+    prerequisite = { focus = STB_blessed_alicorn }
+    mutually_exclusive = { focus = STB_political_union }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_heart_union"
+        ###Event for SOL for them to receive an offer for a true personal union, which Lucky claims will allow his "Snookums" to focus entirely on war (she becomes a field marshal) and that he can do the day-to-day things, and that he is looking forward to her agreement, since he is so excited to finally be her emperor, and that he knows he'll do well, and Daybreaker is absolutely turned off by it but still has to consider it regardless
+    }
+    ai_will_do = { factor = 160 }
 }
 
 ###Military Tree###
