@@ -3451,6 +3451,523 @@ shared_focus = {
     ai_will_do = { factor = 160 }
 }
 
+shared_focus = {
+    id = STB_motivation_of_masses
+    x = 1
+    y = 1
+    relative_position_id = STB_paramount_paramilitary
+
+    cost = 5
+    prerequisite = {
+        focus = STB_paramount_paramilitary
+        focus = STB_new_orthodoxy
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_motivation_of_masses"
+        ###Lucky meets with Abscondtitus, since he is one of the only ponies of the Empire who didn't completely oppose Lucky, and in fact even welcomed him, since he was a way to help preserve the Empire, and he and Lucky discuss how they will plant some evidence in CHN that they are planning an invasion, and make a false flag attack, so they can quickly rally ponies behind him to wipe out the changelings
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_religion_of_loss
+    x = 1
+    y = 1
+    relative_position_id = STB_new_orthodoxy
+
+    cost = 4
+    prerequisite = {
+        focus = STB_new_orthodoxy
+        focus = STB_paramount_paramilitary
+    }
+    prerequisite = { focus = STB_forgiven_fodder }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_religion_of_loss"
+        ###Follow a priest as he goes through some of the streets of Sanctum Solar, seeking whom he may shake down for more money, and he does find a pony who looks at least with a bit of cash, and he declares that another tithe must be given, to fund Lucky's intended protection of the nation, which gets serious doubt from the pony, although they are basically forced into giving money if they want to live
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_officers_of_day
+    x = 1
+    y = 1
+    relative_position_id = STB_heralds_of_luck
+
+    cost = 4
+    prerequisite = { focus = STB_new_orthodoxy }
+    prerequisite = { focus = STB_forgiven_fodder }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_officers_of_day"
+        ###Follow a few soldiers as they chase down a fleeing Militarium officer, who has been part of the Militarium for years, but has gotten on the bad side of Lucky by making a few plans that go against some of his wishes, and it leads to a cat and mouse chase, which ultimately ends with the officer getting shot, which was what Lucky was wanting, anyway
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_show_force
+    x = 1
+    y = 1
+    relative_position_id = STB_forgiven_fodder
+
+    cost = 5
+    prerequisite = { focus = STB_forgiven_fodder }
+    prerequisite = { focus = STB_new_sun_god }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_show_force"
+        ###Lucky enters effectively a glorified prison, where he is almost attacked by Daybreaker, who is clearly infuriated by him, and he manages to stay safe, and instead starts an argument with her to get her to raise the sun when he finishes his speech that he is the new sun god, and she refuses, until she is coerced by force lest she perish, as she wants to live to one day make him suffer in return
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_bugs_everywhere
+    x = -1
+    y = 1
+    relative_position_id = STB_motivation_of_masses
+
+    cost = 5
+    prerequisite = { focus = STB_motivation_of_masses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_show_force"
+        ###Propaganda event of following on the radio some pony who is supposed to be like every other citizen, who speaks also of how great their nation is, and how much freedom they have, and then a cheesy narration as there are cheap sound effects of ponies being killed, and him crying out in fear for "sweet Lucky", ala Helldivers 2, with a final call to action of joining the military to stop the bugs
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_cleaning_house
+    x = 1
+    y = 1
+    relative_position_id = STB_religion_of_loss
+
+    cost = 3
+    prerequisite = {
+        focus = STB_religion_of_loss
+        focus = STB_officers_of_day
+    }
+    bypass = {
+        #CRY and rumps not existing
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_cleaning_house"
+        every_country = {
+            limit = {
+                is_in_array = global.solar_empire_rumps
+                exists = yes
+            }
+            ROOT = {
+                create_wargoal = {
+                    target = THIS.id
+                    type = annex_everything
+                }
+            }
+        }
+        if = {
+            limit = { country_exists = CRY }
+            create_wargoal = {
+                target = CRY
+                type = annex_everything
+            }
+        }
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_deity_no_more
+    x = 1
+    y = 1
+    relative_position_id = STB_show_force
+
+    cost = 5
+    prerequisite = { focus = STB_show_force }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_deity_no_more"
+        ###Lucky drags Daybreaker out in chains so that he can display her with his next speech or appearance ot the public, so that he can show her off as his prize, and that she has defeated her in battle, and she snarls that she will find a way to make him suffer forever, as he basically tries to fight her physically, and otherwise demean her and her feats and powers, and that she can't even raise the sun, but it was him all along, and the like
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_calling_exterminator
+    x = -1
+    y = 2
+    relative_position_id = STB_religion_of_loss
+
+    cost = 3
+    prerequisite = {
+        focus = STB_religion_of_loss
+        focus = STB_officers_of_day
+    }
+    bypass = {
+        #CHN and subjects don't exist
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_calling_exterminator"
+        #CHN wargoals
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_old_home
+    x = 1
+    y = 2
+    relative_position_id = STB_officers_of_day
+
+    cost = 3
+    prerequisite = {
+        focus = STB_religion_of_loss
+        focus = STB_officers_of_day
+    }
+    bypass = {
+        #STG and puppets don't exist
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_old_home"
+        #STG goals here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_information_highway
+    x = 1
+    y = 2
+    relative_position_id = STB_bugs_everywhere
+
+    cost = 6
+    prerequisite = { focus = STB_bugs_everywhere }
+    prerequisite = { focus = STB_calling_exterminator }
+    mutually_exclusive = { focus = STB_might_of_sword }
+    mutually_exclusive = { focus = STB_religions_tool }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_information_highway"
+        #Idea here
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_might_of_sword
+    x = 0
+    y = 2
+    relative_position_id = STB_cleaning_house
+
+    cost = 6
+    prerequisite = { focus = STB_cleaning_house }
+    mutually_exclusive = { focus = STB_information_highway }
+    mutually_exclusive = { focus = STB_religions_tool }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_might_of_sword"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_religions_tool
+    x = -1
+    y = 2
+    relative_position_id = STB_deity_no_more
+
+    cost = 6
+    prerequisite = { focus = STB_deity_no_more }
+    prerequisite = { focus = STB_old_home }
+    mutually_exclusive = { focus = STB_information_highway }
+    mutually_exclusive = { focus = STB_might_of_sword }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_religions_tool"
+        #Idea here
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_all_ponykind
+    x = 0
+    y = 1
+    relative_position_id = STB_might_of_sword
+
+    cost = 5
+    prerequisite = {
+        focus = STB_might_of_sword
+        focus = STB_information_highway
+        focus = STB_religions_tool
+    }
+    available = {
+        #Has conquered all wargoal countries
+        hidden_trigger = {
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+        }
+    }
+
+    select_effect = {
+        hidden_effect = {
+            ###Event of Lucky preparing a speech, about a week before the completion of the event, and he is going it over in his quarters, when he is surprised when Daybreaker or assassins appear in his room, depending on her state, and if Daybreaker, he is freaked out, since she is no longer inhibited by magic, and she gives him a short explanation that there are still some loyal ponies to her, but first she has to make sure he suffers like she did, and it ends with him burning him in flames; if an assassin, they are a loyal Solarist, and know that he is insane, and a heretic, and that they will end him there, which they do; it cancels the focus
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_all_ponykind"
+        create_wargoal = {
+            target = RCT
+            type = annex_everything
+        }
+    }
+}
+
+###Communist Fake-Out Tree###
+shared_focus = {
+    id = STB_wrest_situation
+    x = 10
+    y = 0
+
+    cost = 1
+    allow_branch = { has_country_leader = { character = STB_Oxide ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_wrest_situation"
+        ###Event of Oxide speaking with the rest of the generals in STB, after he calls them in after taking down Lucky, and he gives them a run-down of what happened, how he basically performed a coup, and they don't have to worry about Lucky's arrogance, ego, and micromanagement getting in their way, which is actually apprecaited; he has Cracked Chaff (Vasiliy) show them out or otherwise help them
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_no_goddess_of_night
+    x = -3
+    y = 1
+    relative_position_id = STB_wrest_situation
+
+    cost = 3
+    prerequisite = { focus = STB_wrest_situation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_no_goddess_of_night"
+        every_state = {
+            limit = {
+                is_core_of = EEE
+                is_owned_by = ROOT
+            }
+            add_resistance = 15
+            add_compliance = 10
+        }
+        #One EEE general, probably Laconic
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_permit_collab_government
+    x = 3
+    y = 1
+    relative_position_id = STB_wrest_situation
+
+    cost = 3
+    prerequisite = { focus = STB_wrest_situation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_permit_collab_government"
+        every_state = {
+            limit = {
+                OR = {
+                    is_core_of = BAL
+                    is_claimed_by = BAL
+                }
+                is_owned_by = ROOT
+            }
+            add_resistance = 15
+            add_compliance = 10
+        }
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_appeal_to_greed
+    x = 0
+    y = 2
+    relative_position_id = STB_wrest_situation
+
+    cost = 5
+    prerequisite = { focus = STB_wrest_situation }
+    mutually_exclusive = { focus = STB_bugs_bugs_bugs }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_appeal_to_greed"
+        ###Event sent to CHN about allowing them to buy off NID, with Oxide being a bit more forward than Lucky to Chrysalis, as he actually is able to get out to see her, and perhaps makes a bit of further offer, too, althought that's rejected no matter what what she says about NID
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_bugs_bugs_bugs
+    x = 0
+    y = 1
+    relative_position_id = STB_no_goddess_of_night
+
+    cost = 5
+    prerequisite = { focus = STB_no_goddess_of_night }
+    mutually_exclusive = { focus = STB_appeal_to_greed }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_bugs_bugs_bugs"
+        ###Event of Oxide looking a bit sheepish as it opens up, as he basically realizes that he's being read about in the event, especially because he is walked in on by a changeling, who is currently disguised as himself; the changeling is also sheepish, and Oxide denies that anything is going on, just that he wants to see how awesome others see him, since he knows he's amazing
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_appeal_to_unity
+    x = 0
+    y = 1
+    relative_position_id = STB_permit_collab_government
+
+    cost = 4
+    prerequisite = { focus = STB_permit_collab_government }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_appeal_to_unity"
+        #Effect here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_signals_of_ash
+    x = 2
+    y = 1
+    relative_position_id = STB_permit_collab_government
+
+    cost = 3
+    prerequisite = { focus = STB_permit_collab_government }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_signals_of_ash"
+        ###Event of some smoke signals going high into the sky, which are being read by either some Neighua or thestrals, who slowly interpret what it says, and it basically talks about how the world isn't right, or that they're being watched, or the like, and it ends with smoke signalling a "bop" from somepony being hit, as well as an "ouch!"
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_thestral_commandos
+    x = -2
+    y = 2
+    relative_position_id = STB_no_goddess_of_night
+
+    cost = 3
+    prerequisite = { focus = STB_no_goddess_of_night }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_thestral_commandos"
+        ###Event of a report about how the thestrals have been the most effective commandos ever made, because everypony who ever sees them think that they are too cute and adorable, because of their floof, to be any danger; it also gives some statistics on the amount of floof to fur ratio on thestrals, and how there is a perfect mix that they have, and otherwise goes on about how they are adorable
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_elite_tactics
+    x = -1
+    y = 1
+    relative_position_id = STB_appeal_to_greed
+
+    cost = 4
+    prerequisite = {
+        focus = STB_appeal_to_greed
+        focus = STB_appeal_to_unity
+    }
+    prerequisite = { focus = STB_no_goddess_of_night }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_elite_tactics"
+        ###Follow a thestral commando unit as they go in behind enemy lines, with the purposeful intent of being detected, because when they are caught, they act as innocent as possible, and adorable as possible, and manage to kill an entire squad because they all have heart attacks because of how cute the thestral is; the opening to the event is like a serious infiltration event
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_velvet_gloves
+    x = 1
+    y = 1
+    relative_position_id = STB_appeal_to_greed
+
+    cost = 5
+    prerequisite = {
+        focus = STB_appeal_to_greed
+        focus = STB_appeal_to_unity
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_velvet_gloves"
+        ###Oxide is in the middle of interrogating a pony from Baltimare, and at first it sounds incredibly serious, and he eventually reveals its either for the type of cigarette that Cobalt smoked, or something else completely mundane and inane, and continues torturing the pony because they refuse to give up the secret, even though it's actually no big deal; he even comments on how absurd it is
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_baltimare_on_our_mind
+    x = 0
+    y = 1
+    relative_position_id = STB_appeal_to_unity
+
+    cost = 5
+    prerequisite = { focus = STB_appeal_to_unity }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_baltimare_on_our_mind"
+        ###Event of Oxide going through New Baltimare in his mind, while he sings a very himan version of Georgia on My Mind, even though Baltimare replaces it, which he gets walked in on about and then promptly left because they are ignoring him
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_moon_reveals
+    x = 1
+    y = 1
+    relative_position_id = STB_elite_tactics
+
+    cost = 5
+    prerequisite = { focus = STB_elite_tactics }
+    prerequisite = { focus = STB_velvet_gloves }
+    mutually_exclusive = { focus = STB_sun_shines }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_moon_reveals"
+        ###Event in the middle of a date between Oxide and Gushing Pulse, who is acting not even close to the flirtatious and sultry pony she normally is, and they're have a normal chat around how ponies perceive them, and Gushing is going on about how she doesn't understand why ponies think she just wants to have sex with them all the time, just because she happens to be nice and paying attention to them, and basically calls out the player, which Oxide agrees with
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_sun_shines
+    x = 1
+    y = 1
+    relative_position_id = STB_velvet_gloves
+
+    cost = 5
+    prerequisite = { focus = STB_velvet_gloves }
+    prerequisite = { focus = STB_baltimare_on_our_mind }
+    mutually_exclusive = { focus = STB_moon_reveals }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_sun_shines"
+        ###Oxide wakes up in a start, realizing that he has been having only a dream, and that he isn't in some leadership role, and he's all well and good, and he goes back to sipping on drink on a tropical island, and then realizes he actually is the leader, when he gets bugged about something, and laments it as such; is raving a bit about a "John Hearts of Iron"
+    }
+}
+
 ###Military Tree###
 shared_focus = {
     id = STB_unified_central_command
