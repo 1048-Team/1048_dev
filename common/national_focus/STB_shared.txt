@@ -3968,6 +3968,296 @@ shared_focus = {
     }
 }
 
+###Vasiliy Tree###
+shared_focus = {
+    id = STB_decades_long_plan
+    x = 10
+    y = 0
+
+    cost = 3
+    allow_branch = { has_country_leader = { character = STB_Vasility_Wheatin ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_decades_long_plan"
+        ###Vasiliy has one last talk with Oxide, whom he shot and is watching bleed out, about how everypony in the South-East is insane, and only he has kept his wits about him; with the bats on the horizon with their cultists gaining strength, COBSOC twisting the Revolution, and the bugs seeking as much money as possible, only he can stop it, and gain revenge on those who betrayed the Revolution and him, and Oxide just wonders what he missesd before he dies
+    }
+    ai_will_do = { factor = 640 }
+}
+
+shared_focus = {
+    id = STB_establishing_fleet
+    x = -3
+    y = 1
+    relative_position_id = STB_decades_long_plan
+
+    cost = 3
+    prerequisite = { focus = STB_decades_long_plan }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_establishing_fleet"
+        ###Event of Vasiliy having a long chat with some of the prison wardens about how they are running of prisoners, since they are being used and worked to the bone to build a fleet for STB and also that they can't keep it up for much longer, and Vasiliy claims they are trying to undermine him and has them arrested to be new prisoners to work
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_fascists_by_another_name
+    x = 0
+    y = 1
+    relative_position_id = STB_fascists_by_another_name
+
+    cost = 3
+    prerequisite = { focus = STB_decades_long_plan }
+    bypass = { NOT = { country_exists = NRP } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_fascists_by_another_name"
+        create_wargoal = {
+            target = NRP
+            type = annex_everything
+        }
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_union_cultures
+    x = 0
+    y = 1
+    relative_position_id = STB_establishing_fleet
+
+    cost = 3
+    prerequisite = { focus = STB_establishing_fleet }
+    bypass = {
+        NOT = { country_exists = EEE }
+        NOT = { country_exists = NEI }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_union_cultures"
+        if = {
+            limit = {
+                country_exists = EEE
+            }
+            create_wargoal = {
+                type = annex_everything
+                target = EEE
+            }
+        }
+        if = {
+            limit = {
+                country_exists = NEI
+            }
+            create_wargoal = {
+                type = annex_everything
+                target = NEI
+            }
+        }
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_island_thrusts
+    x = -1
+    y = 1
+    relative_position_id = STB_fascists_by_another_name
+
+    cost = 3
+    prerequisite = {
+        focus = STB_establishing_fleet
+        focus = STB_fascists_by_another_name
+    }
+    bypass = {
+        NOT = { country_exists = CLI }
+        NOT = { country_exists = SPF }
+        OR = {
+            NOT = { country_exists = NID }
+            NID = { is_subject_of = ROOT }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_island_thrusts"
+        ###Event sent to NID being a very harsh letter by Vasiliy claiming that they will overwhelm the country if they do not surrender; NID can come back with offering cash and if rejected, come back again with cash and subjugation, which can be accepted
+        if = {
+            limit = {
+                country_exists = CLI
+            }
+            create_wargoal = {
+                type = annex_everything
+                target = CLI
+            }
+        }
+        if = {
+            limit = {
+                country_exists = SPF
+            }
+            create_wargoal = {
+                type = annex_everything
+                target = SPF
+            }
+        }
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_another_power
+    x = 2
+    y = 1
+    relative_position_id = STB_fascists_by_another_name
+
+    cost = 4
+    prerequisite = { focus = STB_fascists_by_another_name }
+    available = {
+        NRP = {
+           exists = no
+           all_cores_owned_by_ROOT_or_subject = yes
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_another_power"
+        ###Event of following a laborer from NRP, a former soldier, being worked to the bone on a farm, which has horrible technology, at least eighty years behind the world, and as they take a moment to breathe, they are hit or beaten for lazing around, and they try to argue they need a break, but are ignored, which leads them to further exhaustion
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_local_commissars
+    x = -1
+    y = 1
+    relative_position_id = STB_union_cultures
+
+    cost = 5
+    prerequisite = { focus = STB_union_cultures }
+    available = {
+        NEI = {
+            exists = no
+            all_cores_owned_by_ROOT_or_subject = yes
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_local_commissars"
+        ###Event of some Neighua police officers or the like going up to thestrals to question them, along the lines of a bobby with "oi, oi, oi, what's going on here?" and they are doing something completely innocent, yet they are eventually hauled off for giving the officers lip or the like, and otherwise being "Anti-Revolution"
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_forced_mechanization
+    x = 1
+    y = 1
+    relative_position_id = STB_union_cultures
+
+    cost = 5
+    prerequisite = { focus = STB_union_cultures }
+    mutually_exclusive = { focus = STB_rebuild_tank_corps }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_forced_mechanization"
+        ###Event of some farmers being dropped off "new" equipment from Stableside, which is far from high quality, but it is somewhat newer, and they still find it as hard to use and get farming done as with the old equipment, although this time they are watched to ensure they're using it properly by a commissar, which makes them nervous and actually worse, atlhough they pretend they're doing better
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_rebuild_tank_corps
+    x = -2
+    y = 1
+    relative_position_id = STB_another_power
+
+    cost = 5
+    prerequisite = { focus = STB_another_power }
+    mutually_exclusive = { focus = STB_forced_mechanization }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_rebuild_tank_corps"
+        ###Event of Vasiliy seeing the first tank procession that goes through Stableside, and feeling overly proud, even though the tanks are scraped together and rather scrappy, because it means that he is closer to rebuilding the glory of Stalliongrad, which makes a few around him nervous, since he finds it emotional, as he remembers what it was like before Sinister ousted him
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_unqualified_labor
+    x = 0
+    y = 1
+    relative_position_id = STB_another_power
+
+    cost = 4
+    prerequisite = { focus = STB_another_power }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_unqualified_labor"
+        two_random_industrial_complex = yes
+        one_random_arms_factory = yes
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_temple_fortresses
+    x = 0
+    y = 1
+    relative_position_id = STB_local_commissars
+
+    cost = 6
+    prerequisite = { focus = STB_local_commissars }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_temple_fortresses"
+        #Idea here
+        ###Maybe an event of some soldiers of STB doing what they can to oust the Ezmetzli from one of the ancient temples in the center of the jungle, which leads to excessive loss of life, since they are unprepared for the ambushes here that the Ezmetzli would have, but they ultimately win, and prepare to turn it into a fortress for suppressing the populace
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_one_year_plan
+    x = 0
+    y = 1
+    relative_position_id = STB_unqualified_labor
+
+    cost = 4
+    prerequisite = { focus = STB_unqualified_labor }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_one_year_plan"
+        #Idea here
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_dethrone_corruption
+    x = 1
+    y = 2
+    relative_position_id = STB_forced_mechanization
+
+    cost = 5
+    prerequisite = {
+        focus = STB_forced_mechanization
+        focus = STB_rebuild_tank_corps
+    }
+    bypass = {
+        NOT = { country_exists = BAL }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_dethrone_corruption"
+        #Idea here
+        1214 = { add_core_of = ROOT }
+        13 = { add_core_of = ROOT }
+        create_wargoal = {
+            type = annex_everything
+            target = BAL
+        }
+    }
+    ai_will_do = { factor = 320 }
+}
+
 ###Military Tree###
 shared_focus = {
     id = STB_unified_central_command
