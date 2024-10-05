@@ -4450,6 +4450,478 @@ shared_focus = {
     ai_will_do = { factor = 80 }
 }
 
+shared_focus = {
+    id = STB_civilian_control
+    x = 0
+    y = 2
+    relative_position_id = STB_sheep_fascist
+
+    cost = 3
+    prerequisite = { focus = STB_sheep_fascist }
+    mutually_exclusive = { focus = STB_military_directorate }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_civilian_control"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_military_directorate
+    x = 0
+    y = 2
+    relative_position_id = STB_labor_of_defense
+
+    cost = 3
+    prerequisite = { focus = STB_labor_of_defense }
+    mutually_exclusive = { focus = STB_civilian_control }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_military_directorate"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_grey_maned_superiors
+    x = 0
+    y = 2
+    relative_position_id = STB_eliminate_rot
+
+    cost = 4
+    prerequisite = { focus = STB_grey_maned_superiors }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_grey_maned_superiors"
+        ###Short event of Vasiliy meeting with Nestor, who he has managed to exfiltrate from Stalliongrad, and they have a reunion that is heartfelt, especially considering Stalliongrad is getting more and more absurd, as Nestor relates, and he also promises to help as long as he is able
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_new_eyes
+    x = 0
+    y = 2
+    relative_position_id = STB_whats_missing_in_gulag
+
+    cost = 4
+    prerequisite = { focus = STB_whats_missing_in_gulag }
+    prerequisite = { focus = STB_civilian_control }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_new_eyes"
+        ###Event of Vasiliy getting his first direct report from the new spy agency that was created, effectively a secret police like the NKVD, which he uses to pinpoint some more enemies of the Revolution that will need to be dealt with first, which makes even the reportee rather uncomfortable
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_armored_heart
+    x = 0
+    y = 2
+    relative_position_id = STB_marks_embarrassment
+
+    cost = 5
+    prerequisite = { focus = STB_marks_embarrassment }
+    prerequisite = { focus = STB_military_directorate }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_armored_heart"
+        #Light tank divisions here
+        add_tech_bonus = {
+            name = armor_bonus
+            uses = 1
+            bonus = 1
+            category = armor
+        }
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_proper_socialist_thought
+    x = 1
+    y = 1
+    relative_position_id = STB_grey_maned_superiors
+
+    cost = 5
+    prerequisite = { focus = STB_grey_maned_superiors }
+    prerequisite = { focus = STB_new_eyes }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_proper_socialist_thought"
+        #Bonuses here
+        ###Maybe a short event of somepony getting constantly corrected in a university or school, until they are taken away for "further correction"
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_marks_vision
+    x = 1
+    y = 2
+    relative_position_id = STB_civilian_control
+
+    cost = 5
+    prerequisite = {
+        focus = STB_new_eyes
+        focus = STB_armored_heart
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_marks_vision"
+        ###Event of Vasiliy hosting a grant reception or speech as he praises some of the new blood that is already coming through the ranks of the military and education system, and how they will be model examples of true Revolutionary thought, and ensure that there is no capitalist influence ever remaining in the country or elsewhere
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_utopia_guaranteeed
+    x = 1
+    y = 1
+    relative_position_id = STB_proper_socialist_thought
+
+    cost = 4
+    prerequisite = {
+        focus = STB_proper_socialist_thought
+        focus = STB_marks_vision
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_utopia_guaranteeed"
+        #Idea here
+        set_country_flag = STB_vasiliy_utopia_flag
+        mark_focus_tree_layout_dirty = yes
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_proletariat_diktat
+    x = 0
+    y = 1
+    relative_position_id = STB_utopia_guaranteeed
+
+    cost = 5
+    prerequisite = { focus = STB_utopia_guaranteeed }
+    allow_branch = { has_country_flag = STB_vasiliy_utopia_flag }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_proletariat_diktat"
+        ###Event of some basically master karens going around in a community, finding faults with every little thing that their other comrades are doing, and it slowly begins to drive ponies against them, although they can do nothing about it, given they don't have the weapons
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_necessity_of_planning
+    x = 2
+    y = 1
+    relative_position_id = STB_utopia_guaranteeed
+
+    cost = 5
+    prerequisite = { focus = STB_utopia_guaranteeed }
+    allow_branch = { has_country_flag = STB_vasiliy_utopia_flag }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_necessity_of_planning"
+        #Dynamic modifier here
+        ###Possibly an event detailing some of the five year plan initiatives, presented to Vasiliy, and when a point is raised about how the last five year that was done in STG caused some of the damage seen now, Vasiliy is dismissive that they simply didn't implement it correctly, and that they will be successful this time
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_foals_of_state
+    x = -6
+    y = 2
+    relative_position_id = STB_utopia_guaranteeed
+
+    cost = 5
+    prerequisite = { focus = STB_utopia_guaranteeed }
+    allow_branch = { has_country_flag = STB_vasiliy_utopia_flag }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_foals_of_state"
+        ###Event of some soldiers, who are known in the community since they are just regular members, barging into a home in the community and demanding to take a foal, whom they claim is being raised poorly, and who will be given proper education, care, and the like, by the state, which gets into conflict with the parents, although ultimately after a scuffle they still get the foal
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_poverty_abolished
+    x = 1
+    y = 1
+    relative_position_id = STB_proletariat_diktat
+
+    cost = 5
+    prerequisite = {
+        focus = STB_proletariat_diktat
+        focus = STB_necessity_of_planning
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_poverty_abolished"
+        #Increase poverty level
+        ###Possibly short event of a begger being arrested for being poor, which they question how that makes even a lick of sense
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_ministry_of_economic_prosperity
+    x = 0
+    y = 1
+    relative_position_id = STB_necessity_of_planning
+
+    cost = 4
+    prerequisite = { focus = STB_necessity_of_planning }
+    mutually_exclusive { focus = STB_regional_requirements }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_ministry_of_economic_prosperity"
+        #Increase poverty level
+        #Adjust modifier here
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_regional_requirements
+    x = 2
+    y = 1
+    relative_position_id = STB_necessity_of_planning
+
+    cost = 4
+    prerequisite = { focus = STB_necessity_of_planning }
+    mutually_exclusive = { focus = STB_ministry_of_economic_prosperity }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_regional_requirements"
+        #Increase poverty level
+        #Adjust modifier here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_foundational_education
+    x = -2
+    y = 1
+    relative_position_id = STB_foals_of_state
+
+    cost = 4
+    prerequisite = { focus = STB_foals_of_state }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_foundational_education"
+        #Idea here
+        ###Maybe an event of fillies and colts being forced to go to school when they could have been helping in the fields or the like
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_catch_young
+    x = 2
+    y = 1
+    relative_position_id = STB_foals_of_state
+
+    cost = 4
+    prerequisite = { focus = STB_foals_of_state }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_catch_young"
+        #Idea here
+        ###Maybe event of some high schoolers being held after detention for some kind of anti-Revolution remark or graffiti that they made and being disproportionately punished
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_community_participation_required
+    x = -2
+    y = 2
+    relative_position_id = STB_proletariat_diktat
+
+    cost = 3
+    prerequisite = { focus = STB_proletariat_diktat }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_community_participation_required"
+        ###Event of a community event being underway, and a couple of ponies are hanging back because they don't feel very interested, invested, or intrigued by what is going on, and they are found by a couple of police officers, who grill them then and there about why they are not participating, and conclude they are reactionaries and place them under arrest
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_socialist_stallion
+    x = 0
+    y = 2
+    relative_position_id = STB_proletariat_diktat
+
+    cost = 4
+    prerequisite = { focus = STB_proletariat_diktat }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_socialist_stallion"
+        ###Event on the radio of a propaganda piece that is the most stereotypical and masculine stallion around speaking about how he does many great things for the Revolution, and how others can be like him, and it is many "manly" activities, to prove that he's the ultimate sigma stallion
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_according_to_ability
+    x = 0
+    y = 1
+    relative_position_id = STB_ministry_of_economic_prosperity
+
+    cost = 5
+    prerequisite = { focus = STB_ministry_of_economic_prosperity }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_according_to_ability"
+        #Modifier adjustment
+        ###Maybe an event of a factory manager getting in trouble for being slightly over or under quoata on what they produce, or a mix of both
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_manifesto_reading_programs
+    x = -2
+    y = 1
+    relative_position_id = STB_foundational_education
+
+    cost = 4
+    prerequisite = { focus = STB_foundational_education }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_manifesto_reading_programs"
+        ###Event of a reading lesson being done on Marks' manifesto, and when the foals have questions about it, being incredibly simple and black and white with what it contains, and how it is better than anything else, which is obviously false, given the school is not doing the best in terms of finances in the event
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_community_first
+    x = 2
+    y = 1
+    relative_position_id = STB_foundational_education
+
+    cost = 5
+    prerequisite = { focus = STB_foundational_education }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_community_first"
+        ###Event following a few foals as they are in step with their teacher, as they go about doing some horrible community work, such as garbage cleanup (in disgusting conditions) or hospital cleaning, or something else; the teacher is not doing any of it, but giving lessons all the same on how to be the best comrade possible through what they are doing
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_teacher_knows_best
+    x = 0
+    y = 1
+    relative_position_id = STB_catch_young
+
+    cost = 5
+    prerequisite = { focus = STB_catch_young }
+    mutually_exclusive = { focus = STB_village_guidance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_teacher_knows_best"
+        ###Event of a parent-teacher meeting with some parents, where the teachers are claiming that the students are failing because of something that is going on in the home, which completely shocks the parents, and the teachers state that they will be taking further educational custody, and taht the parents can visit every so often
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_village_guidance
+    x = 0
+    y = 1
+    relative_position_id = STB_community_participation_required
+
+    cost = 5
+    prerequisite = { focus = STB_community_participation_required }
+    mutually_exclusive = { focus = STB_teacher_knows_best }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_village_guidance"
+        ###Event of everypony in a commune meeting with one mother and father, ala an intervention, and being basically told that they cannot keep their foal, since they are causing harm, and that they will be reaised by the community instead, and perhaps they will be able to actually parent again at some point, after they go through some instruction by the government
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_police_around_corner
+    x = 2
+    y = 1
+    relative_position_id = STB_socialist_stallion
+
+    cost = 4
+    prerequisite = { focus = STB_socialist_stallion }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_police_around_corner"
+        ###Event of a couple of ponies going out for a night on the town, either as a date or simply as a thing to do, and as time goes on, one starts getting drunker or the like, and suggesting things that go against most of what Vasiliy has implemented, which leads to the other actually slapping them with an arrest, since they were around all along to make sure that the first stayed loyal to the Revolution, which was failed
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_according_to_need
+    x = 1
+    y = 1
+    relative_position_id = STB_according_to_ability
+
+    cost = 5
+    prerequisite = { focus = STB_according_to_ability }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_according_to_need"
+        #Modifier adjustment here
+        ###Maybe short event of somepony's home being torn down because they are in the way of a new roadway or the like, even though they were supposed to be in an area that was safe from any future construction
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_artisan_assistance
+    x = 0
+    y = 2
+    relative_position_id = STB_regional_requirements
+
+    cost = 5
+    prerequisite = { focus = STB_regional_requirements }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_artisan_assistance"
+        #Modifier adjustment here
+        ###Maybe a short event of somepony coming into a supposedly cheap artisan and balking at just how much they're asking, since the customer doesn't have nearly that much in a month, let alone in a day
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_inter_immigration
+    x = 2
+    y = 2
+    relative_position_id = STB_regional_requirements
+
+    cost = 5
+    prerequisite = { focus = STB_regional_requirements }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_inter_immigration"
+        #Modifier adjustment here
+        ###Perhaps short event of some ponies trying to move between communes, since they are not happy with their current living situation, and the hellish conditions their new house is in when they arrive, which makes them regret their choice
+    }
+    ai_will_do = { factor = 80 }
+}
+
 ###Military Tree###
 shared_focus = {
     id = STB_unified_central_command
