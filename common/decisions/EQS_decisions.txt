@@ -144,6 +144,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 					EQS_create_daybreak_fleet = yes
 				}
 			}
+			set_country_flag = EQS_SOL_launched_daybreak
 		}
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_ran_out_of_time"
@@ -155,6 +156,130 @@ EQS_SOL_launching_HMS_daybreak_category = {
 					limit = { has_country_flag = EQS_SOL_daybreak_construct_fleet }
 					EQS_create_daybreak_fleet = yes
 				}
+			}
+			set_country_flag = EQS_SOL_launched_daybreak
+		}
+	}
+	EQS_SOL_delay_launch = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_no_recent_delays_tt
+				NOT = { has_country_flag = EQS_SOL_delayed_launch_flag }
+			}
+		}
+		visible = {
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
+		days_remove = 90
+		days_re_enable = 120
+		custom_cost_text = EQS_SOL_custom_cost_ST_7_5_tt
+		custom_cost_trigger = {
+			has_stability > 0.075
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_delay_launch"
+			###Potentially add for this and sabotage a variable that ticks up, and if it reaches a threshold, has an event of Daybreaker getting tired of delays and sabotage, and taking control of construction herself, and "correcting" the pony in charge of it
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 90
+			}
+			hidden_effect = {
+				add_stability = -0.075
+			}
+			set_country_flag = {
+				flag = EQS_SOL_delayed_launch_flag
+				days = 90
+				value = 1
+			}
+		}
+	}
+	EQS_SOL_sabotage_construction = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_no_recent_delays_tt
+				NOT = { has_country_flag = EQS_SOL_delayed_launch_flag }
+			}
+		}
+		visible = {
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
+		days_remove = 30
+		days_re_enable = 210
+		custom_cost_text = EQS_SOL_custom_cost_WS_10_tt
+		custom_cost_trigger = {
+			has_war_support > 0.1
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_sabotage_launch"
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 120
+			}
+			hidden_effect = {
+				add_war_support = -0.1
+			}
+			set_country_flag = {
+				flag = EQS_SOL_delayed_launch_flag
+				days = 150
+				value = 1
+			}
+		}
+	}
+	EQS_SOL_instigate_riot = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_no_recent_delays_tt
+				NOT = { has_country_flag = EQS_SOL_delayed_launch_flag }
+			}
+		}
+		visible = {
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
+		cost = 75
+		days_remove = 60
+		days_re_enable = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_instigate_riot"
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 60
+			}
+			set_country_flag = {
+				flag = EQS_SOL_delayed_launch_flag
+				days = 90
+				value = 1
+			}
+		}
+	}
+	EQS_SOL_find_fake_fault = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_SOL_no_recent_delays_tt
+				NOT = { has_country_flag = EQS_SOL_delayed_launch_flag }
+			}
+		}
+		visible = {
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
+		days_remove = 45
+		days_re_enable = 90
+		custom_cost_text = EQS_SOL_custom_cost_25_text_tt
+		custom_cost_trigger = {
+			has_navy_experience > 24.99
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_sabotage_launch"
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 45
+			}
+			hidden_effect = {
+				navy_experience = -25
+			}
+			set_country_flag = {
+				flag = EQS_SOL_delayed_launch_flag
+				days = 75
+				value = 1
 			}
 		}
 	}
@@ -170,7 +295,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			check_variable = { EQS_SOL_secondaries_upgraded < 5 }
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 10
+			has_navy_experience > 9.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_10_text_tt
 		days_remove = 45
@@ -202,7 +327,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			check_variable = { EQS_SOL_aa_upgraded < 4 }
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 5
+			has_navy_experience > 4.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_5_text_tt
 		days_remove = 30
@@ -233,7 +358,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			check_variable = { EQS_SOL_primaries_upgraded < 1 }
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 15
+			has_navy_experience > 14.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_15_text_tt
 		days_remove = 105
@@ -264,7 +389,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			check_variable = { EQS_SOL_secondary_cannons_upgraded < 2 }
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 25
+			has_navy_experience > 24.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_25_text_tt
 		days_remove = 75
@@ -291,7 +416,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = { check_variable = { EQS_SOL_armor_upgraded < 1 } }
 		custom_cost_trigger = {
-			has_navy_experience > 20
+			has_navy_experience > 19.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_20_text_tt
 		days_remove = 105
@@ -318,7 +443,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = { check_variable = { EQS_SOL_rangefinding_upgraded < 6 } }
 		custom_cost_trigger = {
-			has_navy_experience > 3
+			has_navy_experience > 2.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_3_text_tt
 		days_remove = 10
@@ -345,7 +470,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = { check_variable = { EQS_SOL_radar_upgraded < 6 } }
 		custom_cost_trigger = {
-			has_navy_experience > 3
+			has_navy_experience > 2.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_3_text_tt
 		days_remove = 7
@@ -372,7 +497,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = { check_variable = { EQS_SOL_recon_upgraded < 6 } }
 		custom_cost_trigger = {
-			has_navy_experience > 5
+			has_navy_experience > 4.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_5_text_tt
 		days_remove = 15
@@ -399,7 +524,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = { check_variable = { EQS_SOL_engine_upgraded < 4 } }
 		custom_cost_trigger = {
-			has_navy_experience > 15
+			has_navy_experience > 14.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_15_text_tt
 		days_remove = 90
@@ -426,7 +551,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			date > 1054.1.1
 		}
 		custom_cost_trigger = {
-			has_navy_experience > 35
+			has_navy_experience > 34.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_35_text_tt
 		days_remove = 365
