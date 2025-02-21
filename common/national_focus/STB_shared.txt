@@ -772,6 +772,8 @@ shared_focus = {
     cost = 1
     allow_branch = {
         has_country_flag = STB_southeast_victor
+        NOT = { has_country_leader = { character = STB_Oxide ruling_only = yes } }
+        NOT = { has_country_leader = { character = STB_Vasiliy_Wheatin ruling_only = yes } }
         NOT = { has_country_flag = STB_simp_beta }
         NOT = { has_country_flag = STB_chad_sigma }
     }
@@ -1177,7 +1179,7 @@ shared_focus = {
         add_power_balance_value = {
             id = STB_simp_or_no_simp
             value = 0.05
-            side = STB_soy_boy
+            tooltip_side = STB_soy_boy
         }
     }
     ai_will_do = { factor = 40 }
@@ -2449,6 +2451,123 @@ shared_focus = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_saviors_of_equestria"
         ###Lucky meets with Daybreaker after the territory of the Empire has been restored, and he comes a bit meekly, and states that he knows that she did most of the work, but he was the one who helped her get the push needed to win and free Equus, and she takes a moment to think, and then admits eventually that he is right, and that she appreciates it, for once, and that she will not consider ending him like she originally planned, but they are over; she will let him lead his nation, she will go back to hers, and they will keep the union, but he shouldn't talk to her again; he is a bit shocked, but does accept it in the end, although he's devastated
     }
+}
+
+###Lucky's Litte Solarist Surprise###
+shared_focus = {
+    id = STB_end_honeymoon
+    x = 0
+    y = 2
+    relative_position_id = STB_mini_militarium
+
+    cost = 3
+    allow_branch = {
+        OR = {
+            AND = {
+                is_debug = yes
+                has_country_flag = EQS_accepted_proposal
+            }
+            OR = {
+                has_completed_focus = STB_political_union
+                has_completed_focus = STB_heart_union
+            }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_end_honeymoon"
+        ###Lucky eagerly awaits on the landing pad outside his palace for Daybreaker to arrive, as he got a note to expect a visit, although he misinterpreted it being her rather than the inquisitors she's sending, and when the inquisitors do arrive, he is a bit surprised but also incredibly genuflective to them, and the lead inquisitor is rather annoyed at all of his effective groveling, and states that she will be taking over parts of the government, to ensure compliance; not that Daybreaker doesn't trust him, of course, but just for insurance purposes
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_gift_men
+    x = -2
+    y = 1
+    relative_position_id = STB_end_honeymoon
+
+    cost = 3
+    prerequisite = { focus = STB_end_honeymoon }
+    mutually_exclusive = { focus = STB_gift_machines }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_gift_men"
+        ###A letter from Lucky is sent to Daybreaker, in the most juvenile manner possible, begging for some more support since he's her beloved husband and that he needs to keep the South-East stable, which so many rebels and thestrals are making hard; he promises some fun the next time she visits, as obviously and rather grossly as possible
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_gift_machines
+    x = 2
+    y = 1
+    relative_position_id = STB_end_honeymoon
+
+    cost = 3
+    prerequisite = { focus = STB_end_honeymoon }
+    mutually_exclusive = { focus = STB_gift_men }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_gift_machines"
+        ###A letter from Lucky arrives for Daybreaker, and it is effectively whining about how there are so many pirates around the South-East, and they keep beating up his ships, and that he could use a hoof with getting them under control by maybe being given just a teensy-weensy fleet to wipe them out, and in return he promises that he'll do whatever she wants, like make her cake, massage her wings, etc., to Daybreaker's annoyance
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_new_tributes
+    x = 1
+    y = 1
+    relative_position_id = STB_gift_men
+
+    cost = 4
+    prerequisite = {
+        focus = STB_gift_men
+        focus = STB_gift_machines
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_new_tributes"
+        ###One of the inquisitors that arrived earlier enters Lucky's office after barging past his secretary to state that she has important demands from the Empress, now that the South-East has been mostly dealt with and that her husband definitely will keep things under control; she states that as he's effectively part of the Empire now, that he will have to provide tribute to retain his domain, and starts outlining what it is that is needed to be given, which makes him nervously agree, since it's obviously what Snookums wants and is for the best
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_southern_parish
+    x = -1
+    y = 1
+    relative_position_id = STB_gift_machines
+
+    cost = 4
+    prerequisite = {
+        focus = STB_gift_men
+        focus = STB_gift_machines
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_southern_parish"
+        ###Follow a thestral who works in Stableside see how the Adoratio has started to make moves into the city, and how the Inquisitionis is also hunting down who they suspect to heretics, which includes her, as she is stopped and interrogated on the spot, to the point of being arrested for clearly supporting NMM or the like, despite her non-answers and answers against it
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_snookums_visit
+    x = 1
+    y = 1
+    relative_position_id = STB_new_tributes
+
+    cost = 5
+    prerequisite = { focus = STB_new_tributes }
+    prerequisite = { focus = STB_southern_parish }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_snookums_visit"
+        ###Follow Daybreaker as Lucky shows her through some of the things he has had done for her in Stableside, as well as the work that the Cultus has done since moving in, and he embarrasses her a few times, since some of the artwork he's had done of her is rather risque or the like, or suggestive, and also basically sucks up to her, and whenver she says anything, he instantly agrees, which begins to annoy her, although she does see that he's willing and able to make the South-East follow her every command, and she tolerates his quirks in the end, even if she gets irritated by it
+    }
+    ai_will_do = { factor = 80 }
 }
 
 ###Lucky ahistorical incel###
@@ -3980,7 +4099,10 @@ shared_focus = {
     y = 0
 
     cost = 3
-    allow_branch = { has_country_leader = { character = STB_Vasility_Wheatin ruling_only = yes } }
+    allow_branch = {
+        has_country_leader = { character = STB_Vasiliy_Wheatin ruling_only = yes }
+        NOT = { has_country_flag = STB_southeast_victor }
+    }
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_decades_long_plan"
@@ -4270,7 +4392,7 @@ shared_focus = {
 
     cost = 2
     allow_branch = {
-        has_country_leader = { character = STB_Vasility_Wheatin ruling_only = yes }
+        has_country_leader = { character = STB_Vasiliy_Wheatin ruling_only = yes }
         has_country_flag = STB_southeast_victor
     }
 

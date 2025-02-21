@@ -1,4 +1,32 @@
 STB_debug_category = {
+    STB_nom_south_east = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            every_country = {
+                limit = {
+                    is_in_array = { array = global.southeast_countries value = THIS }
+                    exists = yes
+                    NOT = { tag = ROOT }
+                }
+                ROOT = {
+                    annex_country = {
+                        target = PREV
+                    }
+                }
+            }
+            every_state = {
+                limit = {
+                    OR = {
+                        is_claimed_by = BAL
+                        is_core_of = BAL
+                    }
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
     STB_load_lucky_transition_tree = {
         allowed = {
             tag = STB
@@ -13,36 +41,46 @@ STB_debug_category = {
             tag = STB
         }
         complete_effect = {
-            unlock_national_focus = STB_new_star
+            set_country_flag = STB_simp_beta
             mark_focus_tree_layout_dirty = yes
         }
     }
-    STB_activate_simp_BOP = {
+    STB_overlook_cringe = {
         allowed = {
             tag = STB
         }
-        available = {
-            NOT = { has_power_balance = { id = STB_simp_or_no_simp } }
-        }
+        visible = { has_country_flag = STB_simp_beta }
         complete_effect = {
-            set_power_balance = {
-                id = STB_simp_or_no_simp
-                set_default = yes
-            }
+            set_country_flag = EQS_accepted_proposal
+            mark_focus_tree_layout_dirty = yes
         }
     }
-    STB_activate_centralization_BOP = {
+    STB_be_declared_cringe = {
         allowed = {
             tag = STB
         }
-        available = {
-            NOT = { has_power_balance = { id = STB_lucky_centralization_bop } }
+        visible = { has_country_flag = STB_simp_beta }
+        complete_effect = {
+            set_country_flag = EQS_rejected_proposal
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_load_incel_tree = {
+        allowed = {
+            tag = STB
         }
         complete_effect = {
-            set_power_balance = {
-                id = STB_lucky_centralization_bop
-                set_default = yes
-            }
+            set_country_flag = STB_chad_sigma
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_load_oxide_fake_out_tree = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            promote_character = STB_Oxide
+            mark_focus_tree_layout_dirty = yes
         }
     }
     STB_promote_vasiliy = {
@@ -54,6 +92,9 @@ STB_debug_category = {
             promote_character = STB_Vasiliy_Wheatin
             STB_Vasiliy_Wheatin = { set_character_name = { name = STB_Vasiliy_Wheatin_name } }
             set_cosmetic_tag = STB_USSESE
+            set_country_flag = STB_southeast_victor
+            set_country_flag = STB_vasiliy_utopia_flag
+            mark_focus_tree_layout_dirty = yes
         }
     }
     STB_enable_harmonist_democracy = {
@@ -99,6 +140,34 @@ STB_debug_category = {
             promote_character = STB_Jade_Turf
             hidden_effect = {
                 STB_Jade_Turf_effects = yes
+            }
+        }
+    }
+    STB_activate_simp_BOP = {
+        allowed = {
+            tag = STB
+        }
+        available = {
+            NOT = { has_power_balance = { id = STB_simp_or_no_simp } }
+        }
+        complete_effect = {
+            set_power_balance = {
+                id = STB_simp_or_no_simp
+                set_default = yes
+            }
+        }
+    }
+    STB_activate_centralization_BOP = {
+        allowed = {
+            tag = STB
+        }
+        available = {
+            NOT = { has_power_balance = { id = STB_lucky_centralization_bop } }
+        }
+        complete_effect = {
+            set_power_balance = {
+                id = STB_lucky_centralization_bop
+                set_default = yes
             }
         }
     }
