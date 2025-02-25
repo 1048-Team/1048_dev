@@ -774,6 +774,7 @@ shared_focus = {
         has_country_flag = STB_southeast_victor
         NOT = { has_country_leader = { character = STB_Oxide ruling_only = yes } }
         NOT = { has_country_leader = { character = STB_Vasiliy_Wheatin ruling_only = yes } }
+        NOT = { has_direct_democracy_leader = yes }
         NOT = { has_country_flag = STB_simp_beta }
         NOT = { has_country_flag = STB_chad_sigma }
     }
@@ -5484,6 +5485,335 @@ shared_focus = {
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_no_compromises"
         ###Event of a single politican being dragged in to an interrogation by some under Vasiliy, as he has benefited greatly from the capitalist influences that Sinister's reign had, and they mostly toy with him, since they know he's guilty, and try to get him to admit to fault, so that they can strip everything from him with reason, rather than doing so out of suspicion, which eventually happens anyway
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_heros_restitution
+    x = 0
+    y = 1
+    relative_position_id = STB_conspirators_against_revolution
+
+    cost = 4
+    prerequisite = { focus = STB_conspirators_against_revolution }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_heros_restitution"
+        ###At least a three event chain going over trials of some of the STG characters, including Nestor Lunin and a couple of other vanilla characters, along with a couple of FH characters, to determine if they are innocent of the taint of Sinister and his clique or not; sparing characters would have them be transferred to STB, but would cost stability and war support, and vice versa
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_extend_dictatorship
+    x = 0
+    y = 2
+    relative_position_id = STB_motherland_of_yore
+
+    cost = 3
+    prerequisite = { focus = STB_motherland_of_yore }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_extend_dictatorship"
+        ###Vasiliy takes to the air waves to explain how they are still not close to achieving the dream of a truly free proletariat, but they must still allow him to have dictatorial powers for a while long, so that he can guide the Revolution properly
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_honoring_fallen
+    x = -1
+    y = 1
+    relative_position_id = STB_heros_restitution
+
+    cost = 4
+    prerequisite = { focus = STB_heros_restitution }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_honoring_fallen"
+        ###A short event of a eulogy to Altidiya, read by Vasiliy, as he believes that he finally is honoring her memory by creating a proper monument to her, since the one that Sinister created was too ostentatious for his liking, and also because he feels that Sinister betrayed what Altidiya wanted to accomplish, and he feels sorry that he didn't see it coming, and protected the Revolution as she would have wanted
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_reassessing_future
+    x = 1
+    y = 1
+    relative_position_id = STB_heros_restitution
+
+    cost = 4
+    prerequisite = {
+        focus = STB_heros_restitution
+        focus = STB_extend_dictatorship
+    }
+    mutually_exclusive = { focus = STB_staying_course }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_reassessing_future"
+        ###Follow Vasiliy as he wanders alone the palace of the Soviets, and begins to see that not everything that was inflicted by Sinister was because of his capitalist compromise, and that it was merely power going to his head, and using what was "good" in the Revolution to oppress others, and he sees where he is starting to follow the same path, and course corrects at least a tad
+    }
+    ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+    id = STB_staying_course
+    x = 0
+    y = 2
+    relative_position_id = STB_no_compromises
+
+    cost = 3
+    prerequisite = { focus = STB_no_compromises }
+    mutually_exclusive = { focus = STB_reassessing_future }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_staying_course"
+        ###Event of Vasiliy as he sees what he believes to be more evidences of Sinister's corruption of the Revolution, despite how it is clear that it is a fault of the Revolution itself (i.e., bread lines, oppression of individual thought, etc.), and he feels more justified than ever to make sure that the Revolution succeeds through force and control, which steels his heart against any thought of softening his stance on "threats" to the Revolution
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_life_to_fullest
+    x = 1
+    y = 1
+    relative_position_id = STB_honoring_fallen
+
+    cost = 5
+    prerequisite = { focus = STB_honoring_fallen }
+    prerequisite = { focus = STB_reassessing_future }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_life_to_fullest"
+        ###Maybe event of Vasiliy seeing the error in one or two of his emotional reactions and law implementations (none of the spirits, though), and seeing how he's harming the Revolution as well and that he must stop to keep it alive
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_answering_workers_cry
+    x = 1
+    y = 1
+    relative_position_id = STB_reassessing_future
+
+    cost = 2
+    prerequisite = {
+        focus = STB_reassessing_future
+        focus = STB_staying_course
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_answering_workers_cry"
+        ###Event of Vasiliy claiming that the workers of Equus have suffered for long enough under the oppression of the Solar Empire, the splinter states, and the changelings, and that the hour has come for them to finally be freed and brought into a workers' paradise, like it has always been promised
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_carry_not_sins
+    x = 1
+    y = 1
+    relative_position_id = STB_life_to_fullest
+
+    cost = 3
+    prerequisite = { focus = STB_life_to_fullest }
+    prerequisite = { focus = STB_answering_workers_cry }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_carry_not_sins"
+        ###Maybe a short event of Vasiliy meeting with one of Sinister's cliques or perhaps Ana herself to pardon her and getting them as an advisor; he is regretful of his hasty and reactionary actions
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_no_gods_no_princesses
+    x = 1
+    y = 1
+    relative_position_id = STB_answering_workers_cry
+
+    cost = 3
+    prerequisite = { focus = STB_answering_workers_cry }
+    available = {
+        OR = {
+            owns_state = 3
+            AND = {
+                controls_state = 3
+                NOT = { country_exists = EQS }
+            }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_answering_workers_cry"
+        ###Follow some STB soldiers as they go through Sanctum Solar and burn much of it to the ground, first starting with the Cathedral of the Sun, which is guarded by a number of priestesses and inquisitors, who attempt to hold off the attack by the communists, but are ultimately defeated and Vasiliy has a short speech about how they have shown the fascists and ignorant religious zealots that their goddess cannot help them
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_realizing_dream
+    x = 0
+    y = 2
+    relative_position_id = STB_answering_workers_cry
+
+    cost = 5
+    prerequisite = { focus = STB_answering_workers_cry }
+    available = {
+        custom_trigger_tooltip = {
+            tooltip = STB_all_EQS_core_states_controlled_tt
+            EQS = { all_cores_owned_by_ROOT = yes }
+            NER = { all_cores_owned_by_ROOT = yes }
+            CER = { all_cores_owned_by_ROOT = yes }
+            WHY = { all_cores_owned_by_ROOT = yes }
+            BLS = { all_cores_owned_by_ROOT = yes }
+            SCS = { all_cores_owned_by_ROOT = yes }
+            NCA = { all_cores_owned_by_ROOT = yes }
+            CCA = { all_cores_owned_by_ROOT = yes }
+            ###Changeling states here
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_realizing_dream"
+        ###Event of Vasiliy standing before the destroyed the palace of Sanctum Solar and declaring that the oppression of the workers of Equus has been accomplished, and that they can rest easy knowing that they will no longer suffer the yoke of fascists or capitalists, and that the hard-fought wars can finally end
+        ###Would unlock decisions to core EQS cores
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_end_quotas
+    x = -1
+    y = 1
+    relative_position_id = STB_realizing_dream
+
+    cost = 4
+    prerequisite = { focus = STB_realizing_dream }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_end_quotas"
+        #Idea here and lock to civilian economy
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_red_harmony
+    x = 1
+    y = 1
+    relative_position_id = STB_realizing_dream
+
+    cost = 4
+    prerequisite = { focus = STB_realizing_dream }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_red_harmony"
+        #Idea here and lock to volunteer only
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_marks_hope
+    x = 1
+    y = 1
+    relative_position_id = STB_end_quotas
+
+    cost = 5
+    prerequisite = { focus = STB_end_quotas }
+    prerequisite = { focus = STB_red_harmony }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_marks_hope"
+        ###Event of Vasiliy on his deathbed, with Ana and some of the other pardoned clique members of Sinister's circle, along with Nestor and a couple other vanilla characters, as he has a few final words and sees how the Revolution has succeeded; he knows that he'll soon be seeing Altidiya and that he hopes that he can be remembered and forgiven for what he had to do to liberate Equus
+        ###Alternate event is Vasiliy with only Nestor by his bedside as he complains that he can't die yet, as he hasn't truly finished the Revolution, and he worries about what he will have for a legacy, and how he he has failed Altidiya and her dream of a liberated Equus
+    }
+}
+
+###Direct Democracy###
+shared_focus = {
+    id = STB_harmonys_torch_rises
+    x = 10
+    y = 0
+
+    cost = 1
+    allow_branch = {
+        has_direct_democracy_leader = yes
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonys_torch_rises"
+        ###Smiling Embrace takes to the airwaves after she leads a group of soldiers into Lucky's palace to oust him, and she briefly gets supported by Synergy, since she's a bit worried about it, but goes on to proclaim that ponies will need not fear her nor anypony of the OED, and that they will liberate the South-East and restore Harmony, together
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_toward_righteousness
+    x = -3
+    y = 1
+    relative_position_id = STB_harmonys_torch_rises
+
+    cost = 2
+    prerequisite = { focus = STB_harmonys_torch_rises }
+    bypass = { NOT = { country_exists = BAL } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_toward_righteousness"
+        create_wargoal = {
+            type = annex_everything
+            target = BAL
+        }
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_rekindle_flames
+    x = -2
+    y = 1
+    relative_position_id = STB_toward_righteousness
+
+    cost = 2
+    prerequisite = { focus = STB_toward_righteousness }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_rekindle_flames"
+        ###Jade Turf gets up before a number of citizens in one of the first meetings held by the new polity and she begins to lay the groundwork for how Harmony once fell, but that they have a chance to restore it, if they bleed for it, and that the ponies in BAL should not be spared, if they resist Harmony's spread, and that they will bring back the old ways, one fight at a time
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_cry_to_mountains
+    x = 2
+    y = 1
+    relative_position_id = STB_toward_righteousness
+
+    cost = 2
+    prerequisite = { focus = STB_toward_righteousness }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_cry_to_mountains"
+        ###Follow Liberty Bell as she visits some of the slummier areas of Stableside or Comet Cape and she uses it as a way to reach out to some of the disenfranchised and get them to agree to help with freeing the South-East and restoring Harmony; she is rather forceful, in a polite and encouraging way
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_implement_war_rations
+    x = 3
+    y = 2
+    relative_position_id = STB_harmonys_torch_rises
+
+    cost = 3
+    prerequisite = { focus = STB_harmonys_torch_rises }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_implement_war_rations"
+        #Idea here
     }
     ai_will_do = { factor = 40 }
 }
