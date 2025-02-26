@@ -4,7 +4,10 @@ shared_focus = {
     id = STB_break_the_yoke
     x = 10
     y = 0
-    allow_branch = { NOT = { has_country_flag = STB_southeast_victor } }
+    allow_branch = {
+        NOT = { has_country_flag = STB_southeast_victor }
+        NOT = { has_direct_democracy_leader = yes }
+    }
 
     cost = 1
 
@@ -5741,6 +5744,7 @@ shared_focus = {
     cost = 1
     allow_branch = {
         has_direct_democracy_leader = yes
+        NOT = { has_country_flag = STB_southeast_victor }
     }
 
     completion_reward = {
@@ -5816,6 +5820,421 @@ shared_focus = {
         #Idea here
     }
     ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_required_borrowing
+    x = 0
+    y = 1
+    relative_position_id = STB_rekindle_flames
+
+    cost = 3
+    prerequisite = { focus = STB_rekindle_flames }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_required_borrowing"
+        ###Event of Jade Turf arguing with some of the assembly and with Smiling Embrace that they need ot pillage what they can from those who resist them so that they can liberate the rest of the lands, with a bit of twisted logic of it in the end, but it convinces Smiling, if only because the rest of the assembly agrees
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_alike_goals
+    x = 2
+    y = 1
+    relative_position_id = STB_cry_to_mountains
+
+    cost = 3
+    prerequisite = {
+        focus = STB_cry_to_mountains
+        focus = STB_implement_war_rations
+    }
+    bypass = {
+        NOT = { country_exists = EEE }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_alike_goals"
+        ###Short event for EEE of being offered to integrate with STB, since they're fighting for liberation, too; EEE can accept on historical, can propose an alliance instead, or reject; if they accept in some fashion, gain war goal on NEI if not taken out already; if rejected, gain goal on EEE and NEI
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_counter_counter_revolutionaries
+    x = 1
+    y = 1
+    relative_position_id = STB_implement_war_rations
+
+    cost = 3
+    prerequisite = { focus = STB_implement_war_rations }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_counter_counter_revolutionaries"
+        ###Maybe event to follow some grassroots members of the OED as they prep for a raid on a hold-out of some ponies still siding with Lucky, who have been causing some stability issues, such as preventing shipments to the frontline and the like, and it leads to a firefight, and more violence than wished, as they basiclaly have to kill the communists to end the threat
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_unchain_dogs
+    x = 0
+    y = 1
+    relative_position_id = STB_required_borrowing
+
+    cost = 3
+    prerequisite = { focus = STB_required_borrowing }
+    mutually_exclusive = { focus = STB_freedom_fight }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_unchain_dogs"
+        ###Maybe short event of Jade giving another inflammatory speech about how Harmony must be fought for, and that the only way to see peace is to fight for it
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_freedom_fight
+    x = 0
+    y = 2
+    relative_position_id = STB_cry_to_mountains
+
+    cost = 3
+    prerequisite = { focus = STB_cry_to_mountains }
+    mutually_exclusive = { focus = STB_unchain_dogs }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_freedom_fight"
+        ###Perhaps short event of Liberty Bell going through one of the recently liberated areas and releasing some of the administrators, and she talks them into working with the OED to maintain a peaceful South-East, in return for promises of their own freedom to do what they wish within reason
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_nyctophillia
+    x = 1
+    y = 1
+    relative_position_id = STB_alike_goals
+
+    cost = 4
+    prerequisite = { focus = STB_alike_goals }
+    available = {
+        OR = {
+            is_in_faction_with = EEE
+            AND = {
+                controls_state = 37
+                controls_state = 17
+                controls_state = 30
+                controls_state = 350
+                controls_state = 31
+            }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_nyctophillia"
+        ###Event of Nocturne Vision working with some soldiers and freedom fighters from the OED on a night-time raid against some COBSOC supply depots, and it turns into a fray as the troops are spotted, but Nocturne and some of the other thestrals are not, and help with taking out the guards so the depots can be destroyed
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_limited_de_luckyisation
+    x = 0
+    y = 1
+    relative_position_id = STB_counter_counter_revolutionaries
+
+    cost = 3
+    prerequisite = { focus = STB_counter_counter_revolutionaries }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_limited_de_luckyisation"
+        ###Short event of some ponies from the OED going through a number of former Lucky Star memorials and monuments to tear down anything that can be from it to leave it instead as things to be used by Harmonists or the like
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_southern_borders
+    x = 2
+    y = 1
+    relative_position_id = STB_unchain_dogs
+
+    cost = 2
+    prerequisite = {
+        focus = STB_unchain_dogs
+        focus = STB_freedom_fight
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_southern_borders"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_restore_old_companies
+    x = 1
+    y = 1
+    relative_position_id = STB_freedom_fight
+
+    cost = 3
+    prerequisite = {
+        focus = STB_unchain_dogs
+        focus = STB_freedom_fight
+        focus = STB_nyctophillia
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_restore_old_companies"
+        ###Maybe short event of Smiling Embrace going through some of the old factories of one of the MIOs in the South-East and having a short speech to new workers who will be toiling there, and how their work will help protect it for years to come
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_crepuscular_beauties
+    x = 0
+    y = 1
+    relative_position_id = STB_nyctophillia
+
+    cost = 3
+    prerequisite = { focus = STB_nyctophillia }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_crepuscular_beauties"
+        ###Possibly a short event of Smiling meeting with Nocturne about further aid to help restore Equestria and Harmony, and they both discuss how they can better the other, even if Nocturne is a bit hesitant at first
+        #Generals are Nocturne, Laconic, and possibly one of the Crescents
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_clean_up_in_progress
+    x = 10
+    y = 0
+
+    cost = 1
+    allow_branch = {
+        has_direct_democracy_leader = yes
+        has_country_flag = STB_southeast_victor
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_nyctophillia"
+        ###A short event of Smiling taking to the radio again to pronounce victory over COBSOC, and she declares that she will soon relinquish control, but must first make sure that Harmony is guarded through a slight prolonging of her executive powers, which earns her a bit of distaste from some of the assembly that hears it
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_tabulate_losses
+    x = 0
+    y = 1
+    relative_position_id = STB_clean_up_in_progress
+
+    cost = 2
+    prerequisite = { focus = STB_clean_up_in_progress }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_tabulate_losses"
+        ###Follow some ponies working for Smiling to help perform a census of all ponies who are eighteen or older, and they get practically assaulted by the ponies they visit, since they are far from welcome and seen as conquerors, which leads to more tension in the South-East
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_funding_police
+    x = -2
+    y = 2
+    relative_position_id = STB_clean_up_in_progress
+
+    cost = 2
+    prerequisite = { focus = STB_clean_up_in_progress }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_funding_police"
+        ###Clean Sweep meets with Smiling regarding funding for security of the election, which gets Smiling a bit on edge, since she doesn't believe there will be much violence, and he tries to open her eyes on it, and get the funding that he needs for enough security and cops to keep things safe, which leads to a bit of an argument, which he ultimately wins
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_security_against_future
+    x = 2
+    y = 1
+    relative_position_id = STB_tabulate_losses
+
+    cost = 2
+    prerequisite = { focus = STB_tabulate_losses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_security_against_future"
+        ###Follow Jade as she meets with Smiling over security details and soldier positioning for the elections, which gets Smiling irritated again by it, because she is confident that peace will prevail, although Jade eventually gets approval for more soldiers, despite Smiling's objections
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_reparation_grants
+    x = 2
+    y = 1
+    relative_position_id = STB_funding_police
+
+    cost = 3
+    prerequisite = { focus = STB_funding_police }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_reparation_grants"
+        ###Clean meets with some of the ponies in charge of finances of the new nation, as he can't make the decision he would like to do on his own, and he argues how there needs to be some sort of support to try and quell the anger in the ponies who have been affected by the war, since it has done little good to spread Harmony, and he proposes monetary reparations, which gets resistance, but is ultimately approved
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_polling_stations
+    x = 0
+    y = 2
+    relative_position_id = STB_tabulate_losses
+
+    cost = 5
+    prerequisite = { focus = STB_tabulate_losses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_polling_stations"
+        ###Maybe short event of ponies beginning the voting station setup, and how there are ponies who waltz in confused, since free elections is a foreign concept to them
+        add_stability = 0.05
+        add_popularity = {
+            ideology = democratic
+            popularity = 0.05
+        }
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_applications_of_liberation
+    x = 2
+    y = 1
+    relative_position_id = STB_security_against_future
+
+    cost = 3
+    prerequisite = { focus = STB_security_against_future }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_applications_of_liberation"
+        #Doctrine bonus here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_southern_broadcasting_corporation
+    x = 0
+    y = 1
+    relative_position_id = STB_reparation_grants
+
+    cost = 3
+    prerequisite = { focus = STB_reparation_grants }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_southern_broadcasting_corporation"
+        ###Event of Smiling Embrace plus the other candidates meeting on a radio show for a debate, which the coordinator is rather poor at, given that debates never really happened under Lucky, and while it is awkward, Smiling manages to come out on top because she had the most gracious answers to the tougher questions
+    }
+    ai_will_do = { factor = 20 }
+}
+
+shared_focus = {
+    id = STB_watchers_of_crowds
+    x = 0
+    y = 2
+    relative_position_id = STB_funding_police
+
+    cost = 3
+    prerequisite = {
+        focus = STB_reparation_grants
+        focus = STB_polling_stations
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_watchers_of_crowds"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_civilian_guard
+    x = 0
+    y = 2
+    relative_position_id = STB_security_against_future
+
+    cost = 3
+    prerequisite = { focus = STB_security_against_future }
+    mutually_exclusive = { focus = STB_military_matters }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_civilian_guard"
+        ###Maybe short event detailing that a civilian guard will have better access and trust with the population during the election, and that they will get a few more ponies eager to serve Harmony and free Equestria
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_military_matters
+    x = 0
+    y = 1
+    relative_position_id = STB_applications_of_liberation
+
+    cost = 3
+    prerequisite = { focus = STB_applications_of_liberation }
+    mutually_exclusive = { focus = STB_civilian_guard }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_military_matters"
+        ###Maybe short event detailing that Jade has been pushing for more military policing since there have been credible threats against the elections, and that civilians simply aren't equipped or trained enough to stop it, and that using her will ensure that there is enought safety for the election
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_vigilant_voters
+    x = 0
+    y = 1
+    relative_position_id = STB_watchers_of_crowds
+
+    cost = 5
+    prerequisite = { focus = STB_watchers_of_crowds }
+    mutually_exclusive = { focus = STB_unrestricted_access }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_vigilant_voters"
+        ###An event detailing how close it was in the elections after a number of undesireables and blatant terrorists were arrested; in the end, Jade Turf and Clean Sweep are neck and neck in the race, and it's up to the player to decide who wins, based on policy
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_unrestricted_access
+    x = 0
+    y = 2
+    relative_position_id = STB_polling_stations
+
+    cost = 5
+    prerequisite = {
+        focus = STB_reparation_grants
+        focus = STB_polling_stations
+        focus = STB_civilian_guard
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_unrestricted_access"
+        ###An event detailing how close the elections were, given that there were unprecedented numbers of voters, although fears of an attack were ultimately proven pointless, as there was no terrorism, and the end results are verging as a tie between Smiling Embrace and Liberty Bell, and the player must choose who to have lead based on policy
+        ###For either focus, if not enough preparation was done, it will instead be following Jade as she tries to get last-minute security details done, and then a bomb going off in a nearby building where the rest of the candidates were, and Jade rushing over to find that she is the only part of the OED leadership left; will start a three or four chain event for establishing control as a dictator and also finding who planned the attack and retaliating
+    }
+    ai_will_do = { factor = 160 }
 }
 
 ###Military Tree###
