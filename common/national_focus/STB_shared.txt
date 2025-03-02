@@ -6450,7 +6450,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_cost_of_business
-    x = 2
+    x = 1
     y = 1
     relative_position_id = STB_balanced_sheets
 
@@ -6460,13 +6460,36 @@ shared_focus = {
         focus = STB_extracting_value
         focus = STB_everypony_reason
     }
-    available = { has_country_leader = { character = STB_Clean_Sweep ruling_only = yes } }
+    available = {
+        has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+        NOT = { has_completed_focus = STB_fight_for_everypony }
+        NOT = { has_completed_focus = STB_economy_for_warfare }
+    }
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_cost_of_business"
         ###Follow Clean Sweep as he does some last minute prep for his speech that he's going to make at the assembly, as it is one of the times they meet, and he soon goes there to pronounce some ideas and suggestions he has for them to follow in their deliberations, as it would lead to more economic prosperity, and he goes through some of them, and gets pushback because of how it's different from how Lucky did it, and he continues insisting, since they must push past what Lucky did to prosper
     }
     ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_future_guarantees
+    x = -1
+    y = 1
+    relative_position_id = STB_extracting_value
+
+    cost = 5
+    prerequisite = {
+        focus = STB_extracting_value
+        focus = STB_everypony_reason
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_future_guarantees"
+        ###Short event of Liberty and Clean holding a speech at the new wing of Stableside University, and speaking about how it will usher in a new wave of prosperity and Harmony both in the South-East and across the continent
+    }
+    ai_will_do = { factor = 160 }
 }
 
 shared_focus = {
@@ -6499,11 +6522,32 @@ shared_focus = {
     cost = 4
     prerequisite = { focus = STB_subversive_order }
     mutually_exclusive = { focus = STB_voluntary_factories }
-    available = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+    available = {
+        has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+        NOT = { has_completed_focus = STB_harmony_at_home }
+        NOT = { has_completed_focus = STB_everyponys_choice }
+    }
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonys_doorsteps"
         ###Liberty meets with most of the generals outside of her friends, as she isn't sure they'd all agree, and she goes through some of her thought process for a proper, professional, external peacekeeping force, as they would need to protect themselves as well as Harmony's interests elsewhere, and she gets a bit of dissatisfaction at first, but eventually wins them over since she effectively guilts them into agreeing
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_harmonys_wings
+    x = 1
+    y = 1
+    relative_position_id = STB_subversive_order
+
+    cost = 3
+    prerequisite = { focus = STB_subversive_order }
+    available = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonys_wings"
+        ###Follow Liberty as she visits the volunteer air wing corps and attempts to further bump up their spirits as she sees how they're prepared for spreading Harmony wherever asked, and for the most part learns about their lives and their fears, which she tries to assuage
     }
     ai_will_do = { factor = 40 }
 }
@@ -6563,12 +6607,340 @@ shared_focus = {
 }
 
 ###Jade and Smiling Sections###
+shared_focus = {
+    id = STB_harmony_all_costs
+    x = 5
+    y = 1
+    relative_position_id = STB_unrestricted_access
+
+    cost = 3
+    prerequisite = {
+        focus = STB_vigilant_voters
+        focus = STB_unrestricted_access
+    }
+    available = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmony_all_costs"
+        ###Follow Jade as she gets into a small verbal altercation with some of the ponies of the assembly, since she is trying to pass some resolutions that will give her a bit more executive authority and also focus on the military, which she believes is necessary to keep Harmony safe after they fought for it
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_continuing_course
+    x = 10
+    y = 1
+    relative_position_id = STB_unrestricted_access
+
+    cost = 3
+    prerequisite = {
+        focus = STB_vigilant_voters
+        focus = STB_unrestricted_access
+    }
+    available = { has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_continuing_course"
+        ###Follow Smiling Embrace as she nervously gets before the assembly again to talk about how they have honored her with more trust by re-electing her, and that she will do all that she can to safeguard Harmony while respecting everypony, and that they will one day liberate Canterlot and Equestria and restore Harmony to the land
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_learning_from_equestrias_mistakes
+    x = -2
+    y = 1
+    relative_position_id = STB_harmony_all_costs
+
+    cost = 3
+    prerequisite = { focus = STB_harmony_all_costs }
+    available = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_learning_from_equestrias_mistakes"
+        ###Jade meets with some of the military staff to go over what she has effectively determined to be some of Equestria's biggest mistakes during the Great War, which were also some things that they were doing in the liberation war, which gets some of their hackles raised, although she does eventually get them to agree to adapt and move on
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_academic_warfare
+    x = 2
+    y = 1
+    relative_position_id = STB_harmony_all_costs
+
+    cost = 4
+    prerequisite = {
+        focus = STB_harmony_all_costs
+        focus = STB_continuing_course
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_academic_warfare"
+        ###Short event of Jade and Smiling meeting with their new wing of the Stableside war academy to see how it is being used for doctrinal research, which has some interesting prototypes and theories, some good, some bad, which puts at least Smiling off
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_needed_supports
+    x = 0
+    y = 1
+    relative_position_id = STB_continuing_course
+
+    cost = 3
+    prerequisite = { focus = STB_continuing_course }
+    available = { has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_needed_supports"
+        ###Follow Smiling as she visits the primary hospital in Stableside or Red Glory, under guise of being just another pony needing help, until she meets with a nurse or doctor, and states that she's actually there to give them funding, since they desperately need it, given all the suffering in the South-East, which effectively brings them to tears
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_vital_pathways
+    x = 2
+    y = 1
+    relative_position_id = STB_continuing_course
+
+    cost = 3
+    prerequisite = { focus = STB_continuing_course }
+    available = { has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_vital_pathways"
+        ###Perhaps a short event of a worker trying to take a break from helping with the railroads and just getting into more danger or trouble with the jungle fauna around him
+        #Level 3 railway from Stableside to Red Glory to New Baltimare and Stableside to New Yukka City; level 1 railroad from Red Glory to Ayacachtli
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_harmony_at_home
+    x = 0
+    y = 1
+    relative_position_id = STB_learning_from_equestrias_mistakes
+
+    cost = 4
+    prerequisite = { focus = STB_learning_from_equestrias_mistakes }
+    available = {
+        has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+        NOT = { has_completed_focus = STB_harmonys_doorsteps }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmony_at_home"
+        ###Jade meets off the books with the generals that she knows she can trust to instruct on new tactics that she believes will be necessary while fighting the Solar Empire or other fascists, and that it'll effectively be scorched earth, leaving nothing in the wake of being pushed back, which horrifies them all, but she convinces them to do it
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_fight_for_everypony
+    x = 0
+    y = 2
+    relative_position_id = STB_harmony_all_costs
+
+    cost = 4
+    prerequisite = { focus = STB_harmony_all_costs }
+    mutually_exclusive = { focus = STB_everyponys_choice }
+    available = {
+        has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+        NOT = { has_completed_focus = STB_cost_of_business }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_fight_for_everypony"
+        ###Possibly short event of Jade Turf getting in hot water with the assembly for forcing through legislation about mandatory service for two years when hitting the age of eighteen, and she doesn't back down and keeps it as she used her power that she was given by them
+        #Idea here; possibly reduce her chance at re-election by 15%
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_everyponys_choice
+    x = 0
+    y = 1
+    relative_position_id = STB_academic_warfare
+
+    cost = 4
+    prerequisite = { focus = STB_academic_warfare }
+    mutually_exclusive = { focus = STB_fight_for_everypony }
+    available = {
+        has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+        NOT = { has_completed_focus = STB_harmonys_doorsteps }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_everyponys_choice"
+        ###Possibly a short event of Smiling with the assembly finishing some of the legislation about conscription standards and when they can conscript, which stresses her since she believes there should be more done, but she ultimately has no choice and goes along with them
+        #Idea here; possibly increase her chance of re-election by 5%
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_defend_coastlines
+    x = 2
+    y = 1
+    relative_position_id = STB_vital_pathways
+
+    cost = 3
+    prerequisite = { focus = STB_vital_pathways }
+    available = { has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_defend_coastlines"
+        ###Follow a captain of a light frigate as she believes she can chase down a pirate cruiser from the remainder of Blueflame's pirate fleet, which she gets into combat with, despite being outgunned, but she is able to simply skirt around them until they surrender from the pot shots she can take
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_mountain_fortresses
+    x = -1
+    y = 1
+    relative_position_id = STB_harmony_at_home
+
+    cost = 4
+    prerequisite = { focus = STB_harmony_at_home }
+    available = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_mountain_fortresses"
+        ###Follow Jade as she and a small number of ponies venture into the Badlands to see where they could set up the strongest fortifications in case the worst would happen, and they soon run into danger with some of the wildlife there, as she still pressses on due to her belief that it'll pay off, which gets a couple injured, but they endure
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_no_better_government
+    x = 0
+    y = 1
+    relative_position_id = STB_fight_for_everypony
+
+    cost = 5
+    prerequisite = { focus = STB_fight_for_everypony }
+    available = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_no_better_government"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_economy_for_warfare
+    x = 0
+    y = 2
+    relative_position_id = STB_needed_supports
+
+    cost = 5
+    prerequisite = {
+        focus = STB_everyponys_choice
+        focus = STB_vital_pathways
+    }
+    available = {
+        has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+        NOT = { has_completed_focus = STB_cost_of_business }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_economy_for_warfare"
+        ###Follow Smiling Embrace as she meets with a few of the CEOs or other leaders of the different military contractors, including the changeling ones, that are in the South-East and she spends most of her time trying to speak corporate, and promises them that they will get some funding and steady support from her and the assembly, although she feels loath to truly admit it
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_professional_guerillas
+    x = 0
+    y = 2
+    relative_position_id = STB_harmony_at_home
+
+    cost = 3
+    prerequisite = { focus = STB_harmony_at_home }
+    mutually_exclusive = { focus = STB_standardized_warriors }
+    available = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_professional_guerillas"
+        ###Follow Jade as she goes on a training mission with some of the new militia units that will play support for the main army, and they are woefully underprepared, aside from her, as they head into the jungle, and she effectively saves all of them even though she'd rather not
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_standardized_warriors
+    x = 0
+    y = 1
+    relative_position_id = STB_no_better_government
+
+    cost = 3
+    prerequisite = { focus = STB_no_better_government }
+    mutually_exclusive = { focus = STB_professional_guerillas }
+    available = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_standardized_warriors"
+        ###Smiling Embrace arrives at a military parade, as she and the other major leaders of the OED were personally invited by Jade, and they didn't want to refuse since they all still need to work together, although the entire time, she is rather miffed given that she and the others don't believe they need to be as militaristic as Jade is certain they need to be, and she mostly grumbles to Synergy or the other leaders about it
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_biggest_guns
+    x = 0
+    y = 1
+    relative_position_id = STB_economy_for_warfare
+
+    cost = 3
+    prerequisite = { focus = STB_economy_for_warfare }
+    mutually_exclusive = { focus = STB_nicest_guns }
+    available = { has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_biggest_guns"
+        ###Follow Smiling as she inspects the first of hopefully many railway guns that will be produced in the South-East, as she believes it will lead to the least loss of life, and the engineer that is giving her the tour is rather proud, especially with the collateral damage it can inflict, which makes her all the more nervous about it, and she leaves questioning her choice
+        ###Should also spawn a railway gun called "Celestia's Hoof" and give the railway gun tech if not already; all the free stuff is because people rarely go for railway guns unless already winning
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_nicest_guns
+    x = 2
+    y = 1
+    relative_position_id = STB_economy_for_warfare
+
+    cost = 3
+    prerequisite = { focus = STB_economy_for_warfare }
+    mutually_exclusive = { focus = STB_biggest_guns }
+    available = { has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes } }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_nicest_guns"
+        ###A short report of some new research into magical weaponry, and that the tests have gone well, aside from a couple of rather catastrophic mishaps
+    }
+    ai_will_do = { factor = 80 }
+}
+
+###Shared Political Leadership Tree###
 
 ###Military Tree###
 shared_focus = {
     id = STB_unified_central_command
     x = 25
     y = 0
+    offset = {
+        x = 10
+        trigger = { has_direct_democracy_leader = yes }
+    }
 
     cost = 3
     available = {
@@ -7263,6 +7635,10 @@ shared_focus = {
     id = STB_grip_of_iron
     x = 40
     y = 0
+    offset = {
+        x = 10
+        trigger = { has_direct_democracy_leader = yes}
+    }
 
     cost = 3
     available = { has_country_flag = STB_southeast_victor }
