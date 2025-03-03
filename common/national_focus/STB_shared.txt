@@ -6019,6 +6019,7 @@ shared_focus = {
     allow_branch = {
         has_direct_democracy_leader = yes
         has_country_flag = STB_southeast_victor
+        NOT = { has_country_flag = STB_lone_jade }
     }
 
     completion_reward = {
@@ -6240,7 +6241,7 @@ shared_focus = {
 ###Clean and Liberty Sections###
 shared_focus = {
     id = STB_organized_show
-    x = -10
+    x = -11
     y = 1
     relative_position_id = STB_vigilant_voters
 
@@ -6262,7 +6263,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_leading_cause
-    x = -6
+    x = -7
     y = 1
     relative_position_id = STB_vigilant_voters
 
@@ -6609,7 +6610,7 @@ shared_focus = {
 ###Jade and Smiling Sections###
 shared_focus = {
     id = STB_harmony_all_costs
-    x = 5
+    x = 7
     y = 1
     relative_position_id = STB_unrestricted_access
 
@@ -6629,7 +6630,7 @@ shared_focus = {
 
 shared_focus = {
     id = STB_continuing_course
-    x = 10
+    x = 11
     y = 1
     relative_position_id = STB_unrestricted_access
 
@@ -6931,6 +6932,326 @@ shared_focus = {
 }
 
 ###Shared Political Leadership Tree###
+shared_focus = {
+    id = STB_polity_policy
+    x = 1
+    y = 1
+    relative_position_id = STB_vigilant_voters
+
+    cost = 5
+    prerequisite = {
+        focus = STB_vigilant_voters
+        focus = STB_unrestricted_access
+    }
+    available = { has_direct_democracy_leader = yes }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_polity_policy"
+        ###Smiling Embrace, regardless of who won, as she is the face of the OED leaders, steps up to a podium in Stableside to proclaim that they are now a new nation, a nation of freedom and Harmony, and that they fought hard for it, but must be vigilant to keep it going, and she proclaims that it'll be a new holiday every year for celebrating their freedom
+        ###Should trigger a holiday event every year which gives +25pp and +1% ST; first time would have a more in-depth description of the holiday from the eyes of Smiling Embrace as she celebrates it with her family, afterward it will simply be a generic "it happened again this year, and ponies love it"; should also check for a leap year when triggered, set a flag, and then have a variable count up, so that it takes into acount leap years in the future
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_ministries_reborn
+    x = -2
+    y = 1
+    relative_position_id = STB_polity_policy
+
+    cost = 5
+    prerequisite = { focus = STB_polity_policy }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_ministries_reborn"
+        ###Smiling bursts into Jade's office where Jade is also speaking with Clean Sweep, and she is rather furious about something that Jade and Clean are going to propose to the assembly, that they resurrect the ministries that COBSOC had and she believes that it'll only end up hurting their new citizens, but Clean points out how it won't be the exact same, as they want to use it for efficiency for good, and she eventually gets talked into supporting
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_harmony_done_right
+    x = 0
+    y = 1
+    relative_position_id = STB_polity_policy
+
+    cost = 3
+    prerequisite = { focus = STB_polity_policy }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmony_done_right"
+        ###Smiling Embrace tiredly continues to debate with the rest of the assembly of ponies as well as her other OED members how exactly they should codify rights, and gets rather pedantic about some of the wording, as she feels some of it could give rise to somepony like Cobalt or Lucky again, which slowly begins to grate on the other members
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_light_beacon
+    x = 2
+    y = 1
+    relative_position_id = STB_polity_policy
+
+    cost = 4
+    prerequisite = { focus = STB_polity_policy }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_light_beacon"
+        ###Liberty Bell barges into Jade's office as she has proposed an alternate resolution to her own, as Liberty wants to work with the various harmonist powers on Equus and other continents, if they so want, and Jade is proposing isolation and militarism, and they argue for a while, which ends in gridlock, since they both stand by their ideals, and they are certain one will have to triumph over the other
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_unified_ponies
+    x = 0
+    y = 1
+    relative_position_id = STB_harmony_done_right
+
+    cost = 3
+    prerequisite = { focus = STB_harmony_done_right }
+    prerequisite = { focus = STB_light_beacon }
+    mutually_exclusive = { focus = STB_mission_purity }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_unified_ponies"
+        ###Liberty takes charge of the assembly meeting where she and Jade's proposals go head to head and her arguments manage to eventually sway them, as she reiterates how they will need to get as much help as possible, although a few believe her naive, since the direct democracy concept is rather radical, but they agree to send out the word for allying with other pony and harmonist nations, although Jade is confident it will fail
+    }
+    ai_will_do = {
+        factor = 40
+        modifier = {
+            has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+            factor = 8
+        }
+    }
+}
+
+shared_focus = {
+    id = STB_mission_purity
+    x = 0
+    y = 1
+    relative_position_id = STB_light_beacon
+
+    cost = 4
+    prerequisite = { focus = STB_light_beacon }
+    mutually_exclusive = { focus = STB_unified_ponies }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_mission_purity"
+        ###Although Liberty first starts to argue for her proposal in the assembly, Jade soon interjects and effectively talks over her, and convinces them that they would be in danger compromising with some of the other forms of Harmony, which are just dictatorships in disguise, and that they need to prove that direct democracy is the way and that alone
+    }
+    ai_will_do = {
+        factor = 40
+        modifier = {
+            has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+            factor = 8
+        }
+    }
+}
+
+shared_focus = {
+    id = STB_readied_hammer
+    x = -1
+    y = 2
+    relative_position_id = STB_ministries_reborn
+
+    cost = 4
+    prerequisite = { focus = STB_ministries_reborn }
+    mutually_exclusive = { focus = STB_striking_hot_iron }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_readied_hammer"
+        ###Maybe short event of Jade and some generals visiting the new fort line or some of the workers there having a tough time of it but being willing to continue because it'll keep their nation safe
+        #Forts here
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_striking_hot_iron
+    x = -1
+    y = 1
+    relative_position_id = STB_unified_ponies
+
+    cost = 4
+    prerequisite = {
+        focus = STB_unified_ponies
+        focus = STB_mission_purity
+    }
+    mutually_exclusive = { focus = STB_readied_hammer }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_striking_hot_iron"
+        ###A short event of some ponies prepping with some training against what are common Solarist tactics, and getting a bit banged up in the process when one gets a tad overconfident in their skills
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_restorative_promises
+    x = 1
+    y = 1
+    relative_position_id = STB_unified_ponies
+
+    cost = 5
+    prerequisite = {
+        focus = STB_unified_ponies
+        focus = STB_mission_purity
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_restorative_promises"
+        ###The leader of STB begins his or her speech regarding the current state of the Polity, and that they are getting closer to their ultimate goal, and that they will need every pony they can to help and free Equestria from the grips of dictators, and that they will restore Harmony as it should be, which gets a number of ponies to sign up because of it
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_blending_jungle
+    x = -1
+    y = 1
+    relative_position_id = STB_readied_hammer
+
+    cost = 3
+    prerequisite = { focus = STB_readied_hammer }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_blending_jungle"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_eyes_and_ears
+    x = 1
+    y = 1
+    relative_position_id = STB_readied_hammer
+
+    cost = 3
+    prerequisite = { focus = STB_readied_hammer }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_eyes_and_ears"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_consumer_guidance_acts
+    x = 0
+    y = 1
+    relative_position_id = STB_restorative_promises
+
+    cost = 5
+    prerequisite = { focus = STB_restorative_promises }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_consumer_guidance_acts"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_feel_situation
+    x = 2
+    y = 1
+    relative_position_id = STB_restorative_promises
+
+    cost = 4
+    prerequisite = { focus = STB_restorative_promises }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_feel_situation"
+        ###Follow a couple of spies that are sent out by the current leader as they slip across the border into Mareway, which is still heavily Solarist influenced, and they attempt to blend in, which they mostly do, but come close a couple of times to being discovered, and they ultimately have to retreat before they're found out for good
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_southern_bit
+    x = -4
+    y = 1
+    relative_position_id = STB_consumer_guidance_acts
+
+    cost = 5
+    prerequisite = { focus = STB_consumer_guidance_acts }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_southern_bit"
+        ###Smiling Embrace enters Clean Sweep's office to talk about the new bit that was proposed and how it worrying because there isn't enough of an economic backing to justify it, and he shuts down her fears, but they still persist but she agrees to it in the end, although she's still skeptical
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_iterate_on_wartime_tech
+    x = 1
+    y = 2
+    relative_position_id = STB_striking_hot_iron
+
+    cost = 4
+    prerequisite = { focus = STB_striking_hot_iron }
+    prerequisite = { focus = STB_consumer_guidance_acts }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_iterate_on_wartime_tech"
+        ###Follow Jade Turf as she is being demonstrated some of the new tanks that have been developed for the liberation war against Equestria, and they are still a bit on the low-tech side, but much better than what they had before, and she is rather intrigued by them all, but also startled when one detonates, since not all the bugs are ironed out yet
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_intel_is_intel
+    x = 0
+    y = 1
+    relative_position_id = STB_feel_situation
+
+    cost = 4
+    prerequisite = { focus = STB_feel_situation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_intel_is_intel"
+        ###Follow some recon trainees as they are placed on their first training mission, which leaves them in the Badlands and for them to find their way out, all the while avoiding another team who is tracking them down to simulate an enemy group, and it leads to a chase that they just barely win when they escape the Badlands before the veteran team which earns them some respect
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_artificial_thestrals
+    x = 0
+    y = 1
+    relative_position_id = STB_iterate_on_wartime_tech
+
+    cost = 4
+    prerequisite = { focus = STB_iterate_on_wartime_tech }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_artificial_thestrals"
+        ###Maybe short event of some ponies being tested for how they handle wind tunnel effects by a thestral in order to apply it to new plane bodies, which is frowned upon by the rest of the Polity's research team (could be Gushing)
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_freedom_ultimatum
+    x = 1
+    y = 2
+    relative_position_id = STB_consumer_guidance_acts
+
+    cost = 5
+    prerequisite = { focus = STB_consumer_guidance_acts }
+    prerequisite = { focus = STB_intel_is_intel }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_freedom_ultimatum"
+        ###A short event of all the OED leaders gathering to pen the best letter they can demanding the surrender of whomever controls Canterlot, and Smiling especially is nervous about it, but knows they have to give one chance for peace before sending it off
+    }
+    ai_will_do = { factor = 320 }
+}
 
 ###Military Tree###
 shared_focus = {
