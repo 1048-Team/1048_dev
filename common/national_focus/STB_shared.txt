@@ -2078,7 +2078,7 @@ shared_focus = {
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_room_elephant"
-        ###Event of Lucky trying to speak with Daybreaker about how Quasar is basically being a bully on him, since she is convinced that he is a heretic (which he technically is) and he keeps pestering her until she finally relants and talks to him about it, which ends up being a bit of a disaggreement on what should be done, and one of them finally relents after more arguing
+        ###Event of Lucky trying to speak with Daybreaker about how Quasar is basically being a bully on him, since she is convinced that he is a heretic (which he technically is) and he keeps pestering her until she finally relants and talks to him about it, which ends up being a bit of a disagreement on what should be done, and one of them finally relents after more arguing
     }
     ai_will_do = { factor = 80 }
 }
@@ -7237,18 +7237,290 @@ shared_focus = {
 }
 
 shared_focus = {
+    id = STB_knowledge_is_power
+    x = 0
+    y = 1
+    relative_position_id = STB_intel_is_intel
+
+    cost = 3
+    prerequisite = { focus = STB_intel_is_intel }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_knowledge_is_power"
+        ###Maybe event of recruitment propaganda for the spy agency of STB to promise victory and honor for after the war
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
     id = STB_freedom_ultimatum
     x = 1
-    y = 2
+    y = 3
     relative_position_id = STB_consumer_guidance_acts
 
     cost = 5
     prerequisite = { focus = STB_consumer_guidance_acts }
-    prerequisite = { focus = STB_intel_is_intel }
+    prerequisite = { focus = STB_knowledge_is_power }
+    available = {
+        OR = {
+            OR = {
+                has_completed_focus = STB_professional_guerillas
+                has_completed_focus = STB_standardized_warriors
+                has_completed_focus = STB_biggest_guns
+                has_completed_focus = STB_nicest_guns
+            }
+            OR = {
+                AND = {
+                    has_completed_focus = STB_harmonys_wings
+                    has_completed_focus = STB_voluntary_factories
+                }
+                has_completed_focus = STB_harmonys_doorsteps
+                has_completed_focus = STB_extended_contracts
+            }
+        }
+    }
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_freedom_ultimatum"
         ###A short event of all the OED leaders gathering to pen the best letter they can demanding the surrender of whomever controls Canterlot, and Smiling especially is nervous about it, but knows they have to give one chance for peace before sending it off
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_temporarily_permanent
+    x = 0
+    y = 1
+    relative_position_id = STB_freedom_ultimatum
+
+    cost = 5
+    prerequisite = { focus = STB_freedom_ultimatum }
+    available = { owns_state = 3 }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_temporarily_permanent"
+        ###Event of Smiling Embrace being effectively pushed but mostly heavily supported by Synergy to agree to the requests of the Assembly to temporarily take complete executive power again, since Smiling is worried that she'll simply become another dictator, and he does get her to agree with time and a bit of tender talking
+        #Should also disable elections
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_attention_to_edges
+    x = -4
+    y = 1
+    relative_position_id = STB_temporarily_permanent
+
+    cost = 5
+    prerequisite = { focus = STB_temporarily_permanent }
+    #Should have a check later for owning the rumps, or have a small tree to take the heartland after
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_attention_to_edges"
+        ###Follow Smiling and Synergy as they go through the ruins of Whinnyapolis as part of their tour through the rump states, and Smiling feels convicted to fix much of what has been inflicted by the Solarist control, and has a speech promising as much, which gains some approval from the populace who attends
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_treat_heartland
+    x = 0
+    y = 1
+    relative_position_id = STB_temporarily_permanent
+
+    cost = 4
+    prerequisite = { focus = STB_temporarily_permanent }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_treat_heartland"
+        ###Follow Smiling as she is brought in to see some of the propaganda that is being made for putting around Canterlot and elsewhere, as they want to try and encourage everypony to work together, and she feels conflicted, since it will help, she believes, but also is the same tactics as what Daybreaker and Lucky both utilized and she's unsure if it is wise to mimic
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_recognize_accomplishment
+    x = -2
+    y = 1
+    relative_position_id = STB_attention_to_edges
+
+    cost = 4
+    prerequisite = { focus = STB_attention_to_edges }
+    available = { owns_state = 74 }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_recognize_accomplishment"
+        ###Smiling meets with Nebula Flare, who has been released from prison, to speak about her being one of the new professors of Bales' universities, as they are the foremost educational region in Equestria, and Nebula takes a bit of convincing, since she is going to be hamstrung in some of her research, but ultimately agrees; the conversation is cold but cordial
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_aristocratic_acceptance
+    x = 2
+    y = 1
+    relative_position_id = STB_treat_heartland
+
+    cost = 3
+    prerequisite = { focus = STB_treat_heartland }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_aristocratic_acceptance"
+        ###Smiling hosts a number of ponies from the aristocracy in her office, and they are all rather irritated with her, since she is effectively a commoner, and she states that they will be allowed to return to their positions, but it will be much more ceremonial, as the aristocracy had too much influence of the government before, and she gives limitations they have to basically veto positions, which gets more grumbling in return
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_loyalty_to_harmony
+    x = 2
+    y = 2
+    relative_position_id = STB_attention_to_edges
+
+    cost = 3
+    prerequisite = { focus = STB_attention_to_edges }
+    mutually_exclusive = { focus = STB_fealty_to_harmony }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_loyalty_to_harmony"
+        ###Smiling watches on as her proposition to return the diarchy, or to have Luna return (or Twilight) as the ruling princess is shut down by ponies in the Assembly, since they believe that it will lead to the same mistakes that led to the first fracturing of Equestria, even though she knows it won't, especially with new limits placed on it
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_fealty_to_harmony
+    x = 0
+    y = 2
+    relative_position_id = STB_treat_heartland
+
+    cost = 3
+    prerequisite = { focus = STB_treat_heartland }
+    mutually_exclusive = { focus = STB_loyalty_to_harmony }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_loyalty_to_harmony"
+        ###Follow Smiling as she speaks with Synergy about her letter that she's going to pen to either Luna or Twilight to return and preside over the nation again; if Luna, then it'll be with Celestia, if she's been captured and the darkness removed from her, if not, it'll be ruling alone; she is extremely nervous, and he does his best to comfort her about coming as far as she had, and they have another tender moment
+    }
+    ai_will_do = { factor = 80 } #Except historical focuses on
+}
+
+shared_focus = {
+    id = STB_harmonious_living
+    x = 0
+    y = 1
+    relative_position_id = STB_aristocratic_acceptance
+
+    cost = 4
+    prerequisite = { focus = STB_aristocratic_acceptance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonious_living"
+        ###Maybe short event of Smiling meeting with the rest of the OED leaders to approve a constitution with some slight disagreements here and there
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_voices_to_voiceless
+    x = 0
+    y = 3
+    relative_position_id = STB_attention_to_edges
+
+    cost = 4
+    prerequisite = { focus = STB_attention_to_edges }
+    prerequisite = { focus = STB_loyalty_to_harmony }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_voices_to_voiceless"
+        ###Maybe short event of some advisors, perhaps Nebula or another named character from the rump states getting heated in the Assembly about how they've been ignored in the repair of the nation, and that the ponies they represent need to have some sort of assistance in the process
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_elections_for_all
+    x = 0
+    y = 1
+    relative_position_id = STB_loyalty_to_harmony
+
+    cost = 5
+    prerequisite = { focus = STB_loyalty_to_harmony }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_elections_for_all"
+        ###Event summarizing the first elections that were held in Equestria's history and how there was some tension, which was partly stoked by Smiling herself as she appeared hesitant to admit they were now a republic, but ultimately went fine, with all levels of government but Smiling, who was promised to be the first president of the country regardless, because of her beloved status in the Assembly
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_diarchy_with_reason
+    x = 2
+    y = 1
+    relative_position_id = STB_fealty_to_harmony
+
+    cost = 5
+    prerequisite = { focus = STB_fealty_to_harmony }
+    #May have to check that an alicorn accepted later
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_diarchy_with_reason"
+        ###Smiling excitedly hosts the first session of the restored Equestria parliament, as ponies have been chosen to represent all citizens of Equestria, and she sees Celestia/Luna/Twilight as part of it as well, as she sits in on the first laws being passed, which she will either accept or veto, but not ultimately stop, as she is nothing more than a constitutional monarch with limited powers, which Smiling believes the best form of liberty
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_grand_equestrian_republic
+    x = -2
+    y = 1
+    relative_position_id = STB_elections_for_all
+
+    cost = 5
+    prerequisite = { focus = STB_elections_for_all }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_grand_equestrian_republic"
+        ###Follow Smiling as she's led in by Synergy and the other OED leaders to a special cabinet session, which is to reveal that she will have a statue of her created in the same park as where Daybreaker once had hers, and while Smiling is honored, she feels deflated, because they went too far into basically mythicizing her, rather than accepting that they needed a strong leader like one of the Princesses
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_harmonys_torch_restored
+    x = 2
+    y = 1
+    relative_position_id = STB_elections_for_all
+
+    cost = 5
+    prerequisite = {
+        focus = STB_elections_for_all
+        focus = STB_diarchy_with_reason
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonys_torch_restored"
+        ###Smiling morosely looks out over Canterlot as she packs up her office, as she has handed in a resignation letter, and has already chosen somepony to succeed her as president, and she believes that her work was ultimately a failure, as the disunited voices of Equestria will eventually come back to make the republic collapse; if the diarchy was restored, she's instead happy to finally be done, and that she can rejoice that Harmony has been restored with the Princesses to lead it, and spends a bit of time with Synergy as she packs, and they both talk about the last decade or so, and how they never thought they could pull it off
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_a_royal_appointment
+    x = 2
+    y = 1
+    relative_position_id = STB_diarchy_with_reason
+
+    cost = 5
+    prerequisite = { focus = STB_diarchy_with_reason }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_a_royal_appointment"
+        ###Follow Smiling as she giddily has her first meeting directly with whichever Princess or Princesses are in charge, and she excitedly talks about how it was her dream to meet them and restore things to how it once was, and she is given a personal thanks for her work, which puts her eventually over the moon, to the Princess's/Princesses' bemusement
     }
     ai_will_do = { factor = 320 }
 }
