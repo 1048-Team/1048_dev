@@ -14,9 +14,13 @@ on_actions = {
                         if = {
                             limit = {
                                 has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+                                NOT = { has_country_flag = STB_liberty_mandate_cooldown }
                             }
                             set_country_flag = STB_liberty_mandate_completed
                         }
+                    }
+                    FROM = {
+                        set_country_flag = STB_has_liberty_volunteers
                     }
                 }
             }
@@ -35,7 +39,10 @@ on_actions = {
                     log = "[ROOT.GetName] no longer has volunteers from [STB.GetLeader]"
                     STB = {
                         if = {
-                            limit = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+                            limit = {
+                                has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+                                has_country_flag = STB_liberty_mandate_completed
+                            }
                             clr_country_flag = STB_liberty_mandate_completed
                         }
                     }
@@ -52,7 +59,10 @@ on_actions = {
                     log = "[FROM.GetName] no longer has volunteers from [STB.GetLeader]"
                     STB = {
                         if = {
-                            limit = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+                            limit = {
+                                has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+                                has_country_flag = STB_liberty_mandate_completed
+                            }
                             clr_country_flag = STB_liberty_mandate_completed
                         }
                     }
@@ -96,9 +106,39 @@ on_actions = {
             }
         }
     }
+    on_daily = {
+        effect = {
+            if = {
+                limit = {
+                    STB = { has_country_leader = { character = STB_Liberty_Bell ruling_only = yes } }
+                    has_country_flag = STB_has_liberty_volunteers
+                    NOT = {
+                        has_volunteers_amount_from = {
+                            tag = STB
+                            count > 0
+                        }
+                    }
+                }
+                log = "[GetDateText]: [ROOT.GetName] on_daily volunteer check FH"
+                clr_country_flag = STB_has_liberty_volunteers
+            }
+            if = {
+                limit = {
+                    STB = {
+                        has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+                        NOT = { has_country_flag = STB_liberty_mandate_completed }
+                        NOT = { has_country_flag = STB_liberty_mandate_cooldown }
+                    }
+                    has_country_flag = STB_has_liberty_volunteers
+                }
+                log = "[GetDateText]: [ROOT.GetName] on_daily volunteer check FH"
+                STB = { set_country_flag = STB_liberty_mandate_completed }
+            }
+        }
+    }
     on_daily_STB = {
         effect = {
-            log = "[GetDateText]: ROOT: [ROOT.GetName] on_daily_STB"
+            log = "[GetDateText]: [ROOT.GetName] on_daily_STB"
             if = { #Jade Turf check. Runs every day that she is leader.
                 limit = {
                     set_temp_variable = { STB_factory_divisor = ROOT.num_of_factories }
@@ -108,6 +148,7 @@ on_actions = {
                     check_variable = { var = STB_total_military_factories value = 0.7 compare = greater_than_or_equals }
                     has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
                     NOT = { has_country_flag = STB_jade_mandate_completed }
+                    NOT = { has_country_flag = STB_jade_mandate_cooldown }
                 }
                 log = "[ROOT.GetName] completed [ROOT.GetLeader]'s mandate"
                 set_country_flag = STB_jade_mandate_completed
@@ -121,6 +162,7 @@ on_actions = {
                     check_variable = { STB_total_military_factories < 0.7 }
                     has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
                     has_country_flag = STB_jade_mandate_completed
+                    NOT = { has_country_flag = STB_jade_mandate_cooldown }
                 }
                 log = "[ROOT.GetName] doesn't fulfill [ROOT.GetLeader]'s mandate"
                 clr_country_flag = STB_jade_mandate_completed
@@ -141,7 +183,7 @@ on_actions = {
                     set_country_flag = STB_smiling_mandate_completed
                 }
             }
-            if = { #Clean Sweep check. See's if the country is demobilized enough to be prosperous.
+            if = { #Clean Sweep check. Sees if the country is demobilized enough to be prosperous.
                 limit = {
                     has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
                     NOT = { has_country_flag = STB_clean_mandate_completed }

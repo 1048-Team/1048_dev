@@ -27,7 +27,7 @@ scripted_gui = {
                 image = GFX_placeholder_poster
             }
             STB_DEM_candidate_2_button = {
-                image = GFX_placeholder_poster
+                image = GFX_jade_turf_poster
             }
             STB_DEM_candidate_3_button = {
                 image = GFX_placeholder_poster
@@ -51,6 +51,12 @@ scripted_gui = {
         effects = {
             STB_DEM_candidate_information_button_click = {
                 clear_variable = STB_candidate
+                if = {
+                    limit = {
+                        check_variable = { STB_DEM_candidate_bio_open > 0 }
+                    }
+                    clear_variable = STB_DEM_candidate_bio_open
+                }
             }
             STB_DEM_candidate_button_click = {
                 set_variable = { STB_DEM_candidate_bio_open = 1 }
@@ -59,6 +65,12 @@ scripted_gui = {
                 set_temp_variable = { STB_candidate_number = STB_candidate }
                 #add_political_power = 1
                 STB_DEM_add_candidate_support = yes
+            }
+        }
+
+        properties = {
+            STB_DEM_candidate_button = {
+                image = "[GetSTBCandidatePortrait]"
             }
         }
     }
