@@ -4,6 +4,7 @@ add_namespace = stableside.harmonists
 add_namespace = stableside.oxide
 add_namespace = stableside.vasiliy
 
+###Opening events###
 country_event = { #Lucky hosts a grand ceremony, spending more than is necessary, to host a grand ceremony in Stableside, where everypony is forced to attend, whether they love him or not
     id = stableside.1
     title = stableside.1.t
@@ -188,6 +189,89 @@ country_event = { #Lucky Star receives a report of coordinated strikes and upris
     #        }
     #    }
     #}
+}
+
+###Harmonist path###
+country_event = { #The election that STB has after the OED succeeds and the dictatorship of Smiling Embrace wraps up, recapping how many ponies were out and how it was tense at points, but the results went off without a hitch, with the closest results being between either Clean and Jade or Smiling and Liberty
+    id = stableside.harmonists.50 #If not prepared enough, then it will recap that the voting first started going okay, and it seemed like things would be fine, until a number of ponies across the country organized a bombing attack, including the home station in Stableside, where the other leaders, minus Jade, were and that the status of the others aside from Jade are unknown
+    title = stableside.harmonists.50.t
+    desc = stableside.harmonists.50.da #Should change eventually to determine between whether it was the vigilant voters focus or the unrestircted access focus, as well as if the election security variable is high enough
+
+    is_triggered_only = yes
+
+    option = { #Smiling is kept in charge!
+        name = stableside.harmonists.50.a
+        trigger = {
+            has_completed_focus = STB_unrestricted_access
+            check_variable = { STB_election_security > 3 }
+        }
+        add_political_power = 50
+    }
+    option = { #Liberty narrowly slides into victory!
+        name = stableside.harmonists.50.b
+        trigger = {
+            has_completed_focus = STB_unrestricted_access
+            check_variable = { STB_election_security > 3 }
+        }
+        STB_Liberty_Bell = { promote_character = yes }
+    }
+    option = { #Clean Sweep sweeps the election!
+        name = stableside.harmonists.50.c
+        trigger = {
+            has_completed_focus = STB_vigilant_voters
+            check_variable = { STB_election_security > 3 }
+        }
+        STB_Clean_Sweep = { promote_character = yes }
+    }
+    option = { #Jade edges out the win!
+        name = stableside.harmonists.50.d
+        trigger = {
+            has_completed_focus = STB_vigilant_voters
+            check_variable = { STB_election_security > 3 }
+        }
+        STB_Jade_Turf = { promote_character = yes }
+    }
+    option = { #This is horrible! The horror! The HORROR!
+        name = stableside.harmonists.50.e
+        trigger = {
+            check_variable = { STB_election_security < 4 }
+        }
+        custom_effect_tooltip = STB_loosey_goosey_tt
+        hidden_effect = {
+            country_event = {
+                id = stableside.harmonists.300
+                days = 1
+            }
+        }
+    }
+}
+
+###Jade Turf Bulldog path###
+country_event = { #The aftermath of the terrorist attack by COBOSC remnants has Jade searching frantically through the rubble of the buildings that her friends and compatriots were in, and finding their remains, and realizing that she's the only one left who can continue the OED's mission, which gnaws at her
+    id = stableside.harmonists.300
+    title = stableside.harmonists.300.t
+    desc = stableside.harmonists.300.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.harmonists.300" }
+
+    is_triggered_only = yes
+
+    option = { #Harmony will be avenged.
+        name = stableside.harmonists.300.a
+        custom_effect_tooltip = STB_angy_jade_tt
+        hidden_effect = {
+            STB_Jade_Turf = {
+                promote_character = yes
+            }
+            STB_Jade_Turf_effects = yes
+            retire_character = STB_Smiling_Embrace
+            retire_character = STB_Synergy
+            retire_character = STB_Clean_Sweep
+            retire_character = STB_Liberty_Bell
+        }
+        add_stability = -0.1
+        set_country_flag = STB_lone_jade
+        mark_focus_tree_layout_dirty = yes
+    }
 }
 
 ###Harmonist hidden/utility events###
