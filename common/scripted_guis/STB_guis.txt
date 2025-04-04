@@ -100,17 +100,61 @@ scripted_gui = {
 
         visible = { always = yes }
 
+        triggers = { #Will have to define when they are visible in scripted triggers
+            STB_stableside_region_button_visible = { owns_stableside_region = yes }
+            STB_portland_region_button_visible = { owns_portland_region = yes }
+            STB_southern_sun_region_button_visible = { owns_southern_sun_region = yes }
+            STB_tail_peninsula_region_button_visible = { owns_tail_peninsula_region = yes }
+            STB_hughills_region_button_visible = { owns_hughills_region = yes }
+            STB_thestral_mountains_region_button_visible = { owns_thestral_mountains_region = yes }
+            STB_deep_jungle_region_button_visible = { owns_deep_jungle_region = yes }
+            STB_south_neighua_region_button_visible = { owns_south_neighua_region = yes }
+            STB_north_neighua_region_button_visible = { owns_north_neighua_region = yes }
+            STB_new_horseleans_region_button_visible = { owns_new_horseleans_region = yes }
+            STB_baltimare_region_button_visible = { owns_baltimare_region = yes }
+            STB_puerto_caballo_and_summer_islands_button_visible = { owns_puerto_caballo_and_summer_islands = yes }
+            STB_spa_and_smaug_islands_button_visible = { owns_spa_and_smaug_islands = yes }
+            STB_dragon_island_button_visible = { owns_dragon_island = yes }
+        }
+
         effects = {
             STB_stableside_region_button_click = {
-                set_variable = { STB_debug_suppression = 1 }
+                #set_variable = { STB_debug_suppression = 1 }
+                set_variable = { STB_region = 1 }
             }
+            STB_portland_region_button_click = { set_variable = { STB_region = 2 } }
+            STB_southern_sun_region_button_click = { set_variable = { STB_region = 3 } }
+            STB_tail_peninsula_region_button_click = { set_variable = { STB_region = 4 } }
+            STB_hughills_region_button_click = { set_variable = { STB_region = 5 } }
+            STB_thestral_mountains_region_button_click = { set_variable = { STB_region = 6 } }
+            STB_deep_jungle_region_button_click = { set_variable = { STB_region = 7 } }
+            STB_south_neighua_region_button_click = { set_variable = { STB_region = 8 } }
+            STB_north_neighua_region_button_click = { set_variable = { STB_region = 9 } }
+            STB_new_horseleans_region_button_click = { set_variable = { STB_region = 10 } }
+            STB_baltimare_region_button_click = { set_variable = { STB_region = 11 } }
+            STB_puerto_caballo_and_summer_islands_button_click = { set_variable = { STB_region = 12 } }
+            STB_spa_and_smaug_islands_button_click = { set_variable = { STB_region = 13 } }
+            STB_dragon_island_button_click = { set_variable = { STB_region = 14 } }
         }
     }
 
-    STB_oed_suppress_debug = {
+    STB_suppression_information_window_popup = {
         context_type = player_context
-        window_name = "STB_suppress_debug_window"
+        window_name = "STB_suppression_information_window"
 
-        visible = { check_variable = { STB_debug_suppression = 1 } }
+        ai_enabled = { always = no }
+
+        visible = { check_variable = { STB_region > 0 } }
+
+        effects = {
+            STB_suppression_options_close_button_click = { clear_variable = STB_region }
+        }
     }
+
+    #STB_oed_suppress_debug = {
+    #    context_type = player_context
+    #    window_name = "STB_suppress_debug_window"
+    #
+    #    visible = { check_variable = { STB_debug_suppression = 1 } }
+    #}
 }
