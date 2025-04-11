@@ -1,4 +1,4 @@
-version="1.0"
+version="1"
 tags={
 	"Alternative History"
 	"National Focuses"
@@ -8,7 +8,5 @@ name="EaW: Fractured Harmony"
 dependencies={
 	"Equestria at War"
 }
-#replace_path = "events"
-
-supported_version="1.13.*"
-path="mod/1048_dev/"
+supported_version="1.14.*"
+path="C:/Users/user/Documents/Paradox Interactive/Hearts of Iron IV/mod/1048_dev"

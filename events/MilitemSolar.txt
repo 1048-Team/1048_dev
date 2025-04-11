@@ -133,6 +133,7 @@ country_event = { #From the perspective of one of the thestral warbands that hel
 				type = industrial_complex
 				damage = 1
 			}
+			set_demilitarized_zone = no
 		}
 	}
 }
@@ -363,10 +364,11 @@ country_event = { #Evening Tempest goes on a military exercise with some of the 
 				skill = 2
 				attack_skill = 2
 				defense_skill = 1
-				planning_skill = 1
-				logistics_skill = 3
+				maneuvering_skill = 1
+				coordination_skill = 3
 			}
 		}
+		custom_effect_tooltip = MTS_clean_heading_stats_tt
 	}
 }
 
@@ -521,6 +523,83 @@ country_event = { #As some ponies come to the soup lines of the Adoratio they be
 	}
 }
 
+country_event = { #Event for choosing a name for New Baltimare, either renaming it to Baltimare, Light's Point, or Molten Bay
+	id = militem.98
+	title = militem.98.t
+	desc = militem.98.d
+	picture = GFX_event_solarempire
+	immediate = {log="[GetDateText]: [Root.GetName]: event militem.98"}
+
+	trigger = {
+		tag = MTS
+		owns_state = 1214
+	}
+	fire_only_once = yes
+
+	option = { #Baltimare
+		name = militem.98.a
+		add_political_power = 5
+		set_province_name = { id = 13011 name = MTS_baltimare }
+	}
+	option = { #Light's Point
+		name = militem.98.b
+		set_province_name = { id = 13011 name = MTS_lights_point }
+	}
+	option = { #Molten Bay
+		name = militem.98.c
+		set_province_name = { id = 13011 name = MTS_molten_bay }
+	}
+}
+
+country_event = { #Event for choosing a name for Red Glory, either reverting to Tenochtitlan, Faithful Beacon, Brilliant Dawn, Red Glory, or either Immolation (Scorched), Empress's Embrace (Warm), or Castellum Inquisitionis (Pinpoint)
+	id = militem.99
+	title = militem.99.t
+	desc = militem.99.d
+	picture = GFX_event_solarempire
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.99"}
+	
+	is_triggered_only = yes
+	
+	option = { #Red Glory
+		name = militem.99.a
+		add_stability = -0.02
+		add_political_power = 25
+	}
+	option = { #Tenochtitlan
+		name = militem.99.b
+		add_political_power = 10
+		set_province_name = { id = 8622 name = MTS_tenochtitlan }		
+	}
+	#option = { #Faithful Beacon
+	#	name = militem.99.c
+	#}
+	option = { #Brilliant Dawn
+		name = militem.99.e
+		add_war_support = 0.01
+		add_stability = 0.01
+		set_province_name = { id = 8622 name = MTS_brilliant_dawn }
+	}
+	option = { #Immolation
+		name = militem.99.f
+		trigger = {
+			has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+		}
+		add_war_support = 0.02
+		set_province_name = { id = 8622 name = MTS_immolation }
+	}
+	option = { #Empress's Embrace
+		name = militem.99.g
+		trigger = { has_country_leader = { character = MTS_Warm_Night  ruling_only = yes } }
+		add_stability = 0.02
+		set_province_name = { id = 8622 name = MTS_empresss_embrace }
+	}
+	option = { #Castellum Inquisitionis
+		name = militem.99.h
+		trigger = { has_country_leader = { character = MTS_Pinpoint ruling_only = yes } }
+		add_political_power = 50
+		set_province_name = { id = 8622 name = MTS_castellum_inquisitionis }
+	}
+}
 
 country_event = { #Report of taking the city of New Baltimare and how there is currently resistance in the city, and that the player will have the option of moving to New Baltimare, despite the chaos, or staying in New Horseleans. The option to move to New Baltimare will always remain an option, though
 	id = militem.100
@@ -741,6 +820,7 @@ country_event = { #Some of Scorched Earth's soldiers take the last few holdouts 
 	
 	trigger = {
 		tag = MTS
+		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
 		all_of_scopes = {
 			array = global.southeast_countries
 			OR = {
@@ -1138,7 +1218,7 @@ country_event = { #Scorched uncharacteristically grows anxious when he pens a le
 	
 	is_triggered_only = yes
 	
-	option = { #
+	option = { #Hopefully the Empress is feeling merciful...
 		name = militem.scorched.34.a
 		SLE = { country_event = militem.scorched.35 }
 	}
@@ -1294,7 +1374,7 @@ country_event = { #A priestess leads Scorched Earth and Luminous through a hospi
 	
 	option = { #But we are healthy!
 		name = militem.scorched.40.a
-		add_ideas = MTS_malnourished_population
+		add_ideas = MTS_malnourished_populace
 	}
 }
 
@@ -1643,7 +1723,7 @@ country_event = { #Scorched is completely shocked when he gets word back that hi
 		add_political_power = -75
 		mark_focus_tree_layout_dirty = yes
 		add_timed_idea = {
-			idea = MTS_quiet_contemplation
+			idea = MTS_inward_reflection
 			days = 120
 		}
 		hidden_effect = {
@@ -2235,9 +2315,9 @@ country_event = { #Luminous agrees to become his Empress and he the Emperor, whi
 	
 	option = { #We will serve together.
 		name = militem.scorched.76.a
-		promote_character = MTS_Scorched_Earth_and_Luminous_Blade
 		custom_effect_tooltip = MTS_totally_swapping_traits_tt
 		hidden_effect = {
+			promote_character = MTS_Scorched_Earth_and_Luminous_Blade
 			MTS_Scorched_Earth_and_Luminous_Blade = {
 				add_trait = { trait = supreme_general }
 			}
@@ -2256,6 +2336,7 @@ country_event = { #Scorched excitedly proclaims that the Empire has been reborn 
 	option = { #SOL INVICTUS!
 		name = militem.scorched.77.a
 		set_cosmetic_tag = EQS_SOL
+		add_ideas = MTS_burn_the_occupiers
 		every_country = {
 			limit = {
 				any_owned_state = { is_claimed_by = EQS }
@@ -2438,7 +2519,7 @@ country_event = { #An officer gives a speech to his soldiers who are following h
 	option = { #Any other wanderers?
 		name = militem.scorched.86.a
 		set_technology = { suicide_craft = 1 }
-		add_ideas = MTS_soldiers_reward
+		add_ideas = MTS_soldiers_rewards
 	}
 }
 
@@ -2479,7 +2560,7 @@ country_event = { #A couple bolts out of their house as they find out they will 
 	is_triggered_only = yes
 	
 	option = { #We only want a couple of things!
-		name = militem.scorched.88.a
+		name = militem.scorched.89.a
 		add_ideas = MTS_happy_with_nothing
 	}
 }
@@ -2592,7 +2673,7 @@ country_event = { #Luminous uncomfortably meets with many of the remaining inqui
 	is_triggered_only = yes
 	
 	option = { #I do not like it, either.
-		name = militem.scorched.91.a
+		name = militem.scorched.96.a
 		add_ideas = MTS_salvation_of_the_heathens
 	}
 }
@@ -2635,7 +2716,7 @@ country_event = { #An already heavily beaten prisoner is woken by some magic by 
 	is_triggered_only = yes
 	
 	option = { #You will learn your place!
-		name = militem.scorched.91.a
+		name = militem.scorched.99.a
 		add_manpower = -7500
 		add_stability = 0.1
 	}
@@ -2889,6 +2970,14 @@ country_event = { #Scorched Earth leads some of his troops into Sanctum Solar an
 		name = militem.scorched.110.a
 		add_stability = 0.05
 		set_capital = { state = 3 }
+		if = {
+			limit = {
+				EQS = {
+					has_country_flag = EQS_renamed_sanctum_solar
+				}
+			}
+			reset_province_name = 179
+		}
 	}
 }
 
@@ -3097,10 +3186,28 @@ country_event = { #Scorched Earth marches into the cell area where Sunset is bei
 	option = { #Know that this is not the end.
 		name = militem.scorched.119.a
 		add_ideas = MTS_forgiven_clergy
-		EQS = {
+		random_country = {
+			limit = {
+				has_character = EQS_Sunset_Shimmer_1048
+			}
 			EQS_Sunset_Shimmer_1048 = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Nightfall_Expanse
+			}
 			EQS_Nightfall_Expanse = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Floodwater
+			}
 			EQS_Floodwater = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Whirlwind
+			}
 			EQS_Whirlwind = { set_nationality = ROOT }
 		}
 		add_stability = -0.1
@@ -3154,7 +3261,10 @@ country_event = { #Serene Shore nervously enters Scorched Earth's throne room to
 				EQS_Nova_Glow = { set_nationality = ROOT }
 			}
 		}
-		EQS = {
+		random_country = {
+			limit = {
+				has_character = EQS_Obscura
+			}
 			EQS_Obscura = { set_nationality = ROOT }
 		}
 		add_stability = 0.05
@@ -3342,8 +3452,24 @@ country_event = { #Scorched Earth, with the Empire stabilized, heads out to the 
 					is_claimed_by = EQS
 				}
 			}
-			add_compliance = 20
-			add_resistance = -20
+			add_compliance = 15
+			add_resistance = -15
+		}
+		#every_state = {
+		#	limit = {
+		#		OR = {
+		#			is_claimed_by = EQS
+		#			is_core_of = EQS
+		#		}
+		#		NOT = {
+		#			is_owned_by = ROOT
+		#			is_core_of = ROOT
+		#		}
+		#	}
+		#	add_to_ROOT_potential_cores = yes
+		#}
+		SLE = {
+			add_to_ROOT_potential_cores = yes
 		}
 	}
 }
@@ -3914,6 +4040,7 @@ country_event = { #As Warm Night prepares to rest of the night, she believes she
 				logistics_skill = 3
 			}
 		}
+		custom_effect_tooltip = MTS_silhouette_stats_tt
 		add_ideas = MTS_COBSOC_pardons
 	}
 }
@@ -4098,7 +4225,7 @@ country_event = { #After just converting to Solarism, a pony is given a long-win
 	
 	option = { #You will not need them in the future.
 		name = militem.warm.38.a
-		add_ideas = MTS_equal_worshipers
+		add_ideas = MTS_equal_worshippers
 	}
 }
 
@@ -4424,6 +4551,8 @@ country_event = { #As part of a routine meeting with new recruits, Warm Night de
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_umbral_petal_stats_tt
+		custom_effect_tooltip = MTS_sideswipe_stats_tt
 	}
 }
 
@@ -4826,7 +4955,18 @@ country_event = { #Since the Militem is now a proper Ordo, it requires a new arc
 	
 	option = { #It is only due.
 		name = militem.warm.71.a
-		###Give Luminous a new trait and political advisor slot for being an archmage
+		#Give Luminous a new trait and political advisor slot for being an archmage
+		EQS_Luminous_Blade = {
+			add_advisor_role = {
+				advisor = {
+					slot = political
+					idea_token = luminous_blade
+					traits = {
+						warrior_archmage
+					}
+				}
+			}
+		}
 		OVERLORD = { set_country_flag = MTS_united_ordo } #This should set the GFX to be a single Ordo in the Empire, with Luminous as its leader; would have a project for expanding mines and oil fields of the Badlands; should matter whether puppeted or integrated
 	}
 }
@@ -4841,7 +4981,18 @@ country_event = { #As the threat of others invading, especially changelings, is 
 	
 	option = { #What would they do without me?
 		name = militem.warm.72.a
-		#Advisor here
+		EQS_Scorched_Earth = {
+			add_advisor_role = {
+				advisor = {
+					slot = army_chief
+					cost = 200
+					idea_token = scorched_earth
+					traits = {
+						army_chief_defensive_3
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -4908,6 +5059,7 @@ country_event = { #Warm Night tiredly listens as a different on the council that
 			remove_idea = MTS_adoratio_council
 			add_idea = MTS_wise_priestesses
 		}
+		remove_ideas = MTS_peninsular_crossroads
 	}
 }
 
@@ -4937,10 +5089,15 @@ country_event = { #Warm Night presides over the final election results of the re
 	is_triggered_only = yes
 	
 	option = { #The candidate hopefully will solve things.
-		name = militem.warm.72.a
+		name = militem.warm.78.a
 		set_politics = {
 			ruling_party = democratic
 			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = democratic
+			long_name = MTS_legal_heretics_long
+			name = MTS_legal_heretics
 		}
 		MTS_Sugar_Swirl = {
 			add_country_leader_role = {
@@ -4954,6 +5111,7 @@ country_event = { #Warm Night presides over the final election results of the re
 			}
 		}
 		###Have multiple options for leaders eventually
+		remove_ideas = MTS_peninsular_crossroads
 	}
 }
 
@@ -5025,10 +5183,23 @@ country_event = { #A short event of a letter from Warm Night requesting that the
 	}
 	option = { #They know how to run themselves. They may stay "free."
 		name = militem.warm.82.b
+		PREV = {
+			MTS_Warm_Night = { set_nationality = ROOT }
+			MTS_Serene_Shore = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = religious_socialism
+						traits = { arch_priestess }
+					}
+				}
+			}
+		}
 	}
 }
 
-country_event = { #After a number of days, the letter that Warm Night was dreading returns and sheis unsurprised yet worried that she and the South-East have been declared heretical, which means their fate is sealed in death
+country_event = { #After a number of days, the letter that Warm Night was dreading returns and she is unsurprised yet worried that she and the South-East have been declared heretical, which means their fate is sealed in death
 	id = militem.warm.83
 	title = militem.warm.83.t
 	desc = militem.warm.83.d
@@ -5108,7 +5279,33 @@ country_event = { #A low-ranking officer in the Militarium grumbles and complain
 	option = { #Now I must shower...
 		name = militem.warm.87.a
 		add_ideas = MTS_regional_militias
-		#Milita template
+		hidden_effect = {
+			set_variable = { MTS_militias_cap = 24 }
+			division_template = {
+				name = "Minutemares" 
+				division_names_group = SLE_INF_02
+				template_counter = 68
+				is_locked = yes
+				force_allow_recruiting = yes
+				division_cap = 24
+
+				regiments = { 
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+					militia = { x = 2 y = 0 }
+					militia = { x = 2 y = 1 }
+					artillery_brigade = { x = 3 y = 0 }
+				}
+				support = { 
+					engineer = { x = 0 y = 0 }
+				}
+			}
+			28 = { create_unit = { division = "name = \"The Flaming Apples\" division_template = \"Minutemares\" start_experience_factor = 0.3" officer = { name = MTS_Presto_Gravy_name portraits = { } } owner = ROOT id = 963 } }
+			81 = { create_unit = { division = "name = \"The Raging Pears\" division_template = \"Minutemares\" start_experience_factor = 0.1" owner = ROOT id = 11858 } }
+		}
+		custom_effect_tooltip = MTS_another_settlement_needs_your_help_tt
 	}
 }
 
@@ -5170,10 +5367,12 @@ country_event = { #Scorched and Luminous both find Warm Night in her quarters to
 		EQS_Luminous_Blade = {
 			remove_unit_leader_role = yes
 			add_advisor_role = {
-				slot = high_command
-				cost = 150
-				idea_token = luminous_blade
-				traits = { army_special_forces_3 }
+				advisor = {
+					slot = high_command
+					cost = 150
+					idea_token = luminous_blade
+					traits = { army_commando_3 }
+				}
 			}
 		}
 	}
@@ -5396,7 +5595,7 @@ country_event = { #The player is given a report about how SCS has managed to rem
 	option = { #Let's see if they feel the same way.
 		name = militem.warm.101.a
 		SCS = { country_event = militem.warm.102 }
-		###If accepted, they would get hidden modifiers to not call in or want to be called in on an offensive war
+		#If accepted, they would get hidden modifiers to not call in or want to be called in on an offensive war
 	}
 }
 
@@ -5410,12 +5609,23 @@ country_event = { #SCS gets a proposal from MTS about forming a defensive allian
 	
 	option = { #Sounds like a good idea.
 		name = militem.warm.102.a
-		FROM = { country_event = { id = militem.warm.103 days = 3 random_days = 3 }
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_government = communism
+				factor = 2
+			}
+		}
+		FROM = { country_event = { id = militem.warm.103 days = 3 random_days = 3 } }
 	}
 	option = { #Never trust a Solarist, especially a commie Solarist.
 		name = militem.warm.102.b
+		ai_chance = {
+			base = 30
+		}
+		#Idea has to be removed and added via an on action, as it affects the desire to join in defensive wars
 		set_country_flag = SCS_rejected_MTS_alliance
-		FROM = { country_event = { id = militem.warm.103 days = 3 random_days = 3 }
+		FROM = { country_event = { id = militem.warm.103 days = 3 random_days = 3 } }
 	}
 }
 
@@ -5429,12 +5639,28 @@ country_event = { #MTS gets the response from SCS, either expressing support, or
 	
 	option = { #I know they would see reason.
 		name = militem.warm.103.a
+		trigger = {
+			NOT = { SCS = { has_country_flag = SCS_rejected_MTS_alliance } }
+		}
 		create_faction = MTS_southern_pact
 		add_to_faction = FROM
+		hidden_effect = {
+			if = {
+				limit = { FROM = { is_ai = yes } }
+				FROM = {
+					add_ideas = MTS_no_friends_calling_offensive
+				}
+			}
+			if = {
+				limit = { is_ai = yes }
+				add_ideas = MTS_no_friends_calling_offensive
+			}
+		}
 	}
 	option = { #Their loss.
 		name = militem.warm.103.b
-		uncomplete_national_focus = MTS_bonds_of_isolated
+		trigger = { SCS = { has_country_flag = SCS_rejected_MTS_alliance } }
+		uncomplete_national_focus = { focus = MTS_bonds_of_isolated }
 	}
 }
 
@@ -5448,7 +5674,7 @@ country_event = { #A radio propaganda broadcast goes into fake depths of how som
 	
 	option = { #Friends would be nice, though...
 		name = militem.warm.104.a
-		add_ideas = MTS_pure_peninsula
+		add_ideas = MTS_a_pure_path
 	}
 }
 
@@ -5477,7 +5703,7 @@ country_event = { #A new speculatore trained only in the South-East chases throu
 	
 	option = { #Keep our borders safe!
 		name = militem.warm.106.a
-		MTS_private_spies
+		add_ideas = MTS_private_spies
 	}
 }
 
@@ -5552,7 +5778,9 @@ country_event = { #Although she is tired, Warm Night attends one of the thestral
 			ideology = communism
 			popularity = 0.05
 		}
-		#Get something from EEE here
+		EEE = {
+			EEE_Laconic_Azure = { set_nationality = ROOT }
+		}
 	}
 }
 
@@ -5613,7 +5841,6 @@ country_event = { #A report for Warm Night about how the thestral indentured ser
 			add_ideas = MTS_great_migration_evil
 		}
 		ELSE = {
-			limit = { has_completed_focus = MTS_rescinding_hatred }
 			add_ideas = MTS_great_migration_good
 		}
 	}
@@ -5629,10 +5856,690 @@ country_event = { #Follow Warm Night at night, as she goes cloaked through many 
 	
 	option = { #Perhaps it's finally time for a vacation...
 		name = militem.warm.116.a
-		custom_effect_tooltip = MTS_syncretic_victory_tt
+		custom_effect_tooltip = MTS_syncretic_victory_tt\
+		if = {
+			limit = { has_idea = MTS_paradise_of_southeast }
+			swap_ideas = {
+				remove_idea = MTS_paradise_of_southeast
+				add_idea = MTS_utopic_solarists
+			}
+		}
+		else = {
+			add_ideas = MTS_paradise_of_southeast
+		}
+	}
+}
+
+country_event = { #Warm Night breathes a couple of long sighs as she and a few other priestesses wait in a ruined hall leading to the balcony over the courtyard of the Imperial Palace, which she plans to use to speak to the new subjects of her, and after fussing a bit, she does go out and state how she will make them live better than before, and gently show them how they were misguided, which doesn't go over well, like she thought
+	id = militem.warm.117
+	title = militem.warm.117.t
+	desc = militem.warm.117.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.117"}
+	
+	is_triggered_only = yes
+	
+	option = { #They will come around.
+		name = militem.warm.117.a
+		set_capital = { state = 3 }
+		add_state_core = 3
+	}
+}
+
+country_event = { #A wounded soldier from EQS is barely making ends meet living on the streets, and he sees a couple of priestesses approach him, which makes him feel far more guilty about taking the lives of a couple of other priestesses, which has haunted him since the war, and he tries to hide, although they approach and tell him to calm down, as they will help prop him up, as he is forgiven, despite his misdeeds, which makes him break down into tears
+	id = militem.warm.118
+	title = militem.warm.118.t
+	desc = militem.warm.118.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.118"}
+	
+	is_triggered_only = yes
+	
+	option = { #Why must you do this?
+		name = militem.warm.118.a
+		every_state = {
+			limit = {
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+				is_owned_by = ROOT
+				NOT = { is_core_of = ROOT }
+			}
+			add_compliance = 5
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = { #As there is still much dissent in the Adoratio, Warm Night decides to sit in on one of the latest meetings that they are having, and listens to what she believes is completely corrupt theology, which she can finally take no more, and despite her escorts' concern, stands up to correct them and call them all to repent for a better way forward, which only drives her out of the church instead
+	id = militem.warm.119
+	title = militem.warm.119.t
+	desc = militem.warm.119.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.119"}
+	
+	is_triggered_only = yes
+	
+	option = { #They must listen!
+		name = militem.warm.119.a
+		add_political_power = -150
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Scorched Earth leads a few of his own soldiers toward the Militarium headquarters in Sanctum Solar, getting no resistance along the way, until he reaches the main entrance of the fortress and demands to speak with Blueblood, who is holed up there, and the two of them argue about who ruined the Empire (him or Blueblood), and Scorched does intimidate some soldiers to let him in to deal with Blueblood
+	id = militem.warm.120
+	title = militem.warm.120.t
+	desc = militem.warm.120.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.120"}
+	
+	is_triggered_only = yes
+	
+	option = { #I hope that I don't have to listen to his prattling much longer...
+		name = militem.warm.120.a
+		add_command_power = 25
+		every_state = {
+			limit = {
+				NOT = { is_core_of = ROOT }
+				is_owned_by = ROOT
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+			}
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = { #A report is provided to Warm Night of some of the results of the latest expensive program to raise some of the ponies affected by the war out of abject poverty, as it has proven so far to keep them from growing resentful enough to consider becoming heretics, although there is still some risk of some ponies using their gifts for fighting against the Empress, which some detractors have latched onto
+	id = militem.warm.121
+	title = militem.warm.121.t
+	desc = militem.warm.121.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.121"}
+	
+	is_triggered_only = yes
+	
+	option = { #They will always be naysayers.
+		name = militem.warm.121.a
+		every_state = {
+			limit = {
+				NOT = { is_core_of = ROOT }
+				is_owned_by = ROOT
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+			}
+			add_compliance = 5
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = { #A couple of inquisitors that have been with MTS since the beginning come out to a speech that Warm Night is holding in front of the Cathedral of the Sun and are shocked when she declares that the Inquisitionis is no more, since it was attempting to keep power for itself, instead of doing what it could to help ponies, and that all willing inquisitors will be given roles as priestesses, and others will be allowed to leave, so long as they do not cause trouble
+	id = militem.warm.122
+	title = militem.warm.122.t
+	desc = militem.warm.122.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.122"}
+	
+	is_triggered_only = yes
+	
+	option = { #How will we keep order?!
+		name = militem.warm.122.a
+		add_ideas = MTS_inquisitionis_dissolved
+	}
+}
+
+country_event = { #As she is dragged into the throne room to see Warm Night, Quasar Pulse, whose magic is stopped by an inhibitor ring, is furious to see Warm Night and curses her for being a heretic, which only disappoints Warm Night as she claims Quasar's statement only reinforces Warm's decision regarding executing her, although she will give Quasar a chance to see how the Inquisitionis will improve by meeting their new Lady Inquisitor, Radiant Bliss
+	id = militem.warm.123
+	title = militem.warm.123.t
+	desc = militem.warm.123.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.123"}
+	
+	is_triggered_only = yes
+	
+	option = { #She's more animal than pony at this rate.
+		name = militem.warm.123.a
+		add_ideas = MTS_new_inquisitionis
+	}
+}
+
+country_event = { #Scorched Earth goes to speak with some of the captured generals of the Empire, who are not pleased at all about being arrested, and tries to argue with them that they can work for the true purpose of Daybreaker, not what the twisted words of Blueblood convinced them were her desires, like he once was; he doesn't fully believe it himself, since he still doesn't fully agree with Warm Night, and they can sense it, which makes it difficult to convince them
+	id = militem.warm.124
+	title = militem.warm.124.t
+	desc = militem.warm.124.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.124"}
+	
+	is_triggered_only = yes
+	
+	option = { #Listen for once!
+		name = militem.warm.124.a
+		add_manpower = 75000
+		every_state = {
+			limit = {
+				NOT = { is_core_of = ROOT }
+				is_owned_by = ROOT
+				OR = {
+					is_core_of = EQS
+					is_claimed_by = EQS
+				}
+			}
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = { #Warm Night holds a service outside of the Cathedral of the Sun, as she commemorates the liberation of Sanctum Solar and declares that a new holy day, where ponies will have freedom to worship the Empress, or anything else they wish, so long as it is first given to the Empress, will be held, which earns some cheers from the crowd before she silences them to go on about those who perished freeing it, which earns a bit of derision instead, since ponies' families were affected by the conquest
+	id = militem.warm.125
+	title = militem.warm.125.t
+	desc = militem.warm.125.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.125"}
+	
+	is_triggered_only = yes
+	
+	option = { #We can't all be satisfied.
+		name = militem.warm.125.a
+		3 = {
+			add_state_modifier = { modifier = { recruitable_population_factor = 0.15 } }
+			add_state_modifier = { modifier = { state_production_speed_buildings_factor = 0.15 } }
+		}
+	}
+}
+
+country_event = { #Warm Night barely holds back some anger as she grows upset at Blueblood during her negotiations with him, as he is still behind bars, although he has said that he is open to working with her, and it mostly revolves around how much control of the Militarium that he will have, as she wishes for Scorched to lead, while he wants control; he is using flirts and the like to throw her off her A game, and it slowly gets to her before she gives in and lets him have some control, which he is most pleased about
+	id = militem.warm.126
+	title = militem.warm.126.t
+	desc = militem.warm.126.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.126"}
+	
+	is_triggered_only = yes
+	
+	option = { #Pleasure doing business? Yeah, right.
+		name = militem.warm.126.a
+		add_ideas = MTS_united_militarium
+		random_country = {
+			limit = {
+				has_character = EQS_Blueblood
+			}
+			EQS_Blueblood = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Floodwater
+			}
+			EQS_Floodwater = { set_nationality = ROOT }
+		}
+		random_country = {
+			limit = {
+				has_character = EQS_Nightshade
+			}
+			EQS_Nightshade = { set_nationality = ROOT }
+		}
+	}
+}
+
+country_event = { #Warm Night cautiously enters the prison chambers where Daybreaker or the regent is being held, and she speaks with them for a short while regarding her temporary reign over the Empire, and she relenquishes command to the leader, which surprises them, as she states she doesn't want to lead, but she has reformed the Empire into a better position religiously, and it almost gets Daybreaker or the regent to prepare to execute Warm Night, but they think better given how it would cause unrest with ponies clearly liking Warm
+	id = militem.warm.127
+	title = militem.warm.127.t
+	desc = militem.warm.127.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.127"}
+	
+	is_triggered_only = yes
+	
+	option = { #Perhaps this can be a way forward.
+		name = militem.warm.127.a
+		set_cosmetic_tag = EQS_SOL
+		add_ideas = MTS_daybreaker_limited
+	}
+}
+
+country_event = { #As Warm Night's train pulls into Canterlot, she is taken to see Celestia in the throne room, which makes her nervous, since it's like the palace but isn't, since it's already been redecorated, and she has a talk with Celestia, who tries to assuage her fears, and promises she'll be in Canterlot a while, since she is so close to seeing harmony for what it is
+	id = militem.warm.128
+	title = militem.warm.128.t
+	desc = militem.warm.128.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.128"}
+	
+	is_triggered_only = yes
+	
+	option = { #Thanks, I think.
+		name = militem.warm.128.a
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.01
+		}
+		add_political_power = 10
+	}
+}
+
+country_event = { #One of the following days, Celestia and Warm Night go through some of the repaired sections of Canterlot or the palace, which Celestia uses to show how she's not the devil that Warm and others were taught, as she is helping to restore the prosperity Equestria and building back ponies in Harmony, and she points out how she is similar to Warm's ideals, in many ways, if Warm would just move a bit further along in her path toward liberating ponies
+	id = militem.warm.129
+	title = militem.warm.129.t
+	desc = militem.warm.129.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.129"}
+	
+	is_triggered_only = yes
+	
+	option = { #You make a point...
+		name = militem.warm.129.a
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.02
+		}
+	}
+}
+
+country_event = { #Warm Night follows Celestia as she goes to a reopening of a community center or another place that many of the less fortunate in Canterlot go to, and she is spoken to by some of the different ponies there, and learns how much Celestia has actually helped already, and a few are curious enough to see what she sees, since she has an outside perspective with being a former Solarist
+	id = militem.warm.130
+	title = militem.warm.130.t
+	desc = militem.warm.130.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.130"}
+	
+	is_triggered_only = yes
+	
+	option = { #Well, now that you mention it...
+		name = militem.warm.130.a
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.02
+		}
+	}
+}
+
+country_event = { #At the nudging of Celestia, Warm Night visits one of the former chapter houses of Canterlot, and meets with a few of the reformed priestesses there, who share how they have been working with helping the community expand and recover from the civil war, and they get to chatting about how their faith helped them through tough times, which starts to help Warm form some new friendships, which she appreciates while she's there
+	id = militem.warm.131
+	title = militem.warm.131.t
+	desc = militem.warm.131.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.131"}
+	
+	is_triggered_only = yes
+	
+	option = { #Maybe we can stay in contact?
+		name = militem.warm.131.a
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #During one of her final days in Canterlot, Celestia meets with Warm Night to ask her to come with a case that has recently come before her, and Warm Night is a bit confused, untils she sees that it's somepony who was arrested in self-defense during the war, but has since gone on to try and fight to make Canterlot free from royalty and religion entirely, a truly antithetical pony, and she is left with the choice of mercy or punishment, and reluctantly chooses the former
+	id = militem.warm.132
+	title = militem.warm.132.t
+	desc = militem.warm.132.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.132"}
+	
+	is_triggered_only = yes
+	
+	option = { #Everypony deserves a second chance...
+		name = militem.warm.132.a
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+	}
+}
+
+country_event = { #After staying up far too late thinking, Warm Night attempts to find and speak with Celestia late at night, and she talks about her experiences in Canterlot and how she didn't see how much even her last bits of Solarism were holding her back, and pledges to follow Celestia and work in Harmony with others, which Celestia tries to dissuade her about, since she doesn't want religion, but Warm remains firm in her commitment, and leaves a changed pony
+	id = militem.warm.133
+	title = militem.warm.133.t
+	desc = militem.warm.133.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.133"}
+	
+	is_triggered_only = yes
+	
+	option = { #I must spread this far and wide!
+		name = militem.warm.133.a
+		MTS_Warm_Night = {
+			add_country_leader_role = {
+				country_leader = {
+					ideology = harmonic_theocracy
+					expire = "1965.1.1"
+					traits = { sympathetic_priestess }
+				}
+			}
+		}
+		set_party_name = {
+			ideology = democratic
+			name = MTS_reformed_priestesses
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = no
+		}
+	}
+}
+
+country_event = { #Shortly after her return to the South-East, Warm Night is brought into another meeting regarding defending the nation against the changelings in particular, as well as some recent activity caused by them, and when she does come in, since she's late, Scorched Earth calls her out for siding with the enemy, which places her on the defensive to convince them that all is well and that Celestia can be trusted
+	id = militem.warm.134
+	title = militem.warm.134.t
+	desc = militem.warm.134.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.134"}
+	
+	is_triggered_only = yes
+	
+	option = { #This is not heresy!
+		name = militem.warm.134.a
+		add_command_power = -20
+	}
+}
+
+country_event = { #A radio advertisement for a new mango factory or mango store, or something else that is related to thestrals in some way plays on the radio in a thestral family, and it is incredibly awkward as it hypes up that it's from a company in Equestria to come into the South-East, and that they have great testimonials, despite not even having stores yet, and the testimonials of the thestrals are clearly faked and badly acted
+	id = militem.warm.135
+	title = militem.warm.135.t
+	desc = militem.warm.135.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.135"}
+	
+	is_triggered_only = yes
+	
+	option = { #Because THAT makes me want to buy there.
+		name = militem.warm.135.a
+		add_ideas = MTS_capitalist_encouragements
+	}
+}
+
+country_event = { #As Warm Night enters her office, she is being hounded by a couple of different businessponies from Equestria, who are both rather obnoxious to her, and she is being chastised about her fiscal policy, which has completely bankrupted the South-East, and she tries to defend herself, until they show a rather thorough presentation that shows how the nation would collapse soon without some level of austerity, which she reluctantly agrees to
+	id = militem.warm.136
+	title = militem.warm.136.t
+	desc = militem.warm.136.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.136"}
+	
+	is_triggered_only = yes
+	
+	option = { #Just leave me alone!
+		name = militem.warm.136.a
+		#Advisors here
+		MTS_Tall_Stacks = {
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = tall_stacks
+					traits = { ruthless_capitalist }
+				}
+			}
+		}
+		MTS_Blotted_Ink = {
+			add_advisor_role = {
+				advisor = {
+					slot = political_advisor
+					idea_token = blotted_ink
+					traits = { silent_workhorse }
+				}
+			}
+		}
+		#MTS_Whiteboard = {
+		#	add_advisor_role = {
+		#		slot = political_advisor
+		#		idea_token = whiteboard
+		#		traits = { financial_expert }
+		#	}
+		#}
+	}
+}
+
+country_event = { #After stepping out of some transport, Warm Night brings Scorched Earth under guard to see some of the new subdivisions in different areas of New Horseleans, and how the Harmonist influence has actually helped the area recover more, since it was only recently that there were still craters and the like from the initial siege, and she also shows how they are still living by some standard of minimalism, which helps them all work better for Celestia, which he begrudgingly acknowleges
+	id = militem.warm.137
+	title = militem.warm.137.t
+	desc = militem.warm.137.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.137"}
+	
+	is_triggered_only = yes
+	
+	option = { #Is this not what you strove for?
+		name = militem.warm.137.a
+		add_political_power = 5
+	}
+}
+
+country_event = { #Warm Night leads Luminous through the port of entry into Sunny Shoals, which was one of the areas that both of them frequented for different reasons, and it is built up far better than it was under the Solar Empire, and ponies are clearly at ease and happy there, and she goes on to show and describe how Celestia has helped protect ponies better than Daybreaker, which she knows was part of the reason that Luminous joined the Inquisitionis, which slowly convinces Luminous to recant
+	id = militem.warm.138
+	title = militem.warm.138.t
+	desc = militem.warm.138.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.138"}
+	
+	is_triggered_only = yes
+	
+	option = { #You can still achieve your dreams with her.
+		name = militem.warm.138.a
+		add_political_power = 5
+	}
+}
+
+country_event = { #A captain in the Militarium of the South-East goes through some of the different barracks of his former troops, who are packing up, and he gives them a few words of encouragement, and he goes to his own quarters, where he is already packed, save for a picture or two of his family, and also some clippings about excessive conscription, and he has a small soliloquy regarding his time there, and how he made the best of a horrible situation
+	id = militem.warm.139
+	title = militem.warm.139.t
+	desc = militem.warm.139.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.139"}
+	
+	is_triggered_only = yes
+	
+	option = { #We did good.
+		name = militem.warm.139.a
+		add_manpower = -200000
+		add_ideas = MTS_manageable_army_size
+	}
+}
+
+country_event = { #Warm Night nervously meets with Celestia in the COBSOC headquarters along with a couple of other priestesses or inquisitors, and Celestia has her own delegation, and they talk briefly before they have their dinner, as part of Celestia's tour of the South-East, to ensure that it's progressing well, and Warm tries to pump herself up, and Celestia simply tells her that she's doing fine and not to be nervous, and that Celestia will visit again to see how progress is coming
+	id = militem.warm.140
+	title = militem.warm.140.t
+	desc = militem.warm.140.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.140"}
+	
+	is_triggered_only = yes
+	
+	option = { #I think she's more nerveracking than Daybreaker...
+		name = militem.warm.140.a
+		add_stability = 0.03
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+		add_political_power = 25
+	}
+}
+
+country_event = { #Scorched and Luminous are brought together outside one of the courtrooms in the COBSOC palace, and they both are a bit nervous and maybe a tad bit awkward due to untold feelings for each other, and before they go in, they promise they will remain loyal to each other, and when they are brought in, they are surprised that they are pardoned by Warm Night, as she wishes to keep them in the Dominion to aid with its defense, and because they deserve a second chance, like her
+	id = militem.warm.141
+	title = militem.warm.141.t
+	desc = militem.warm.141.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.141"}
+	
+	is_triggered_only = yes
+	
+	option = { #I suppose we accept.
+		name = militem.warm.141.a
+		add_war_support = 0.05
+		custom_effect_tooltip = MTS_magical_friendship_tt
+	}
+}
+
+country_event = { #As Scorched and Luminous are brought in for the tribunal that Warm Night has to head, Warm nervously thinks exactly about how she should approach the topic, since she still has the letter of partial agreement of Celestia regarding the state of their service, and after giving a few non-answers to their own questions for why they are being tried, she reluctantly states that Celestia will not let them serve, but has allowed a pardon, and they are free to live their civilian lives, and she also jokes about them being able to marry now
+	id = militem.warm.142
+	title = militem.warm.142.t
+	desc = militem.warm.142.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.142"}
+	
+	is_triggered_only = yes
+	
+	option = { #Just stay protected, okay?
+		name = militem.warm.142.a
+		add_stability = 0.05
+		add_ideas = MTS_experienced_guides
+	}
+}
+
+country_event = { #Celestia arrives to a field outside of Baltimare, and she is rather nonplussed as Warm showcases how their army has become more specialized, and also modernized, to reduce the number of bodies needed and the risks associated with war, and as she goes on, she grows more nervous, since Celestia has remained mostly silent (Celestia is in armor) and she believes that she has messed up somehow, and then Celestia reluctantly states she has done well, and that her mind is elsewhere for the war, which worries Warm
+	id = militem.warm.143
+	title = militem.warm.143.t
+	desc = militem.warm.143.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.143"}
+	
+	is_triggered_only = yes
+	
+	option = { #Just don't change your mind.
+		name = militem.warm.143.a
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+	}
+}
+
+country_event = { #Warm learns about how Scorched and Luminous are still rather staunch solarists, and she brings them to her quarters in her chapter house (or former chapter house), and she tries to convince them that they are not fully protected, and that they no longer have to serve a corrupted Celestia, as Celestia has done more for ponies than Daybreaker ever has, and they can all serve her together, as friends, and it slowly convinces both of them to relent
+	id = militem.warm.144
+	title = militem.warm.144.t
+	desc = militem.warm.144.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.144"}
+	
+	is_triggered_only = yes
+	
+	option = { #Just listen to me!
+		name = militem.warm.144.a
+		###Either give them a level, a new, shared trait, or improve their spirit by a small amount
+		if = {
+			limit = { has_idea = MTS_experienced_guides }
+			swap_ideas = {
+				remove_idea = MTS_experienced_guides
+				add_idea = MTS_experienced_guides_2
+			}
+		}
+		###Maybe replace later with a trait of +5% leader xp gain and +5% recon
+		else = {
+			EQS_Scorched_Earth = { add_skill_level = 1 }
+			EQS_Luminous_Blade = { add_skill_level = 1 }
+		}
+	}
+}
+
+country_event = { #Fat Stacks meets with Warm Night with a rather large presentation or the like with reports regarding the state of the South-East, and as he goes through and shows how ponies' lives have improved, Warm begins to become a bit more flustered and emotional as it is clear her dream of ponies being able to survive and follow their dreams has come to pass
+	id = militem.warm.145
+	title = militem.warm.145.t
+	desc = militem.warm.145.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.145"}
+	
+	is_triggered_only = yes
+	
+	option = { #This is everything everypony could need!
+		name = militem.warm.145.a
 		swap_ideas = {
-			remove_idea = MTS_paradise_of_southeast
-			add_idea = MTS_utopic_solarists
+			remove_idea = MTS_seez
+			add_idea = MTS_seez_advantage
+		}
+	}
+}
+
+country_event = { #A report is provided speaking of a recent hurricane that the pegasi weren't able to stave off and how the different divisions of the military helped with the recovery in the aftermath, and how they did more than what would be required of the military to get ponies back on their hooves, such as even donations or looking after kids, etc., and how ponies are better off because of it
+	id = militem.warm.146
+	title = militem.warm.146.t
+	desc = militem.warm.146.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.146"}
+	
+	is_triggered_only = yes
+	
+	option = { #They've taken things to heart.
+		name = militem.warm.146.a
+		swap_ideas = {
+			remove_idea = MTS_volunteers_of_harmony
+			add_idea = MTS_liberation_warriors
+		}
+	}
+}
+
+country_event = { #After meeting with a few final delegates from Equestria who have been going around to report back to Celestia, Warm Night gives them a sealed letter for them to take to Celestia, and states that it must be only for Celestia; afterward she goes to her quarters to ruminate, and feel a bit of satisfaction at all the work she had done
+	id = militem.warm.147
+	title = militem.warm.147.t
+	desc = militem.warm.147.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.147"}
+	
+	is_triggered_only = yes
+	
+	option = { #Harmony is true strength, after all.
+		name = militem.warm.147.a
+		custom_effect_tooltip = MTS_ask_mommy_tia_tt
+		OVERLORD = {
+			country_event = militem.warm.148
+		}
+	}
+}
+
+country_event = { #Celestia is given a letter from Warm Night stating how she believes that the South-East's scars have been healed, and they should become part of Equestria again, asking to be properly relieved of duty
+	id = militem.warm.148
+	title = militem.warm.148.t
+	desc = militem.warm.148.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.148"}
+	
+	is_triggered_only = yes
+	
+	option = { #I welcome my ponies back into harmony.
+		name = militem.warm.148.a
+		FROM = {
+			country_event = {
+				id = militem.warm.149
+				days = 3
+				random_days = 7
+			}
+		}
+	}
+	option = { #There are still pain points. We should remain separate for now.
+		name = militem.warm.148.b
+		FROM = {
+			country_event = {
+				id = militem.warm.150
+				days = 3
+				random_days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Warm Night takes a sip or two of a drink that she has at a cafe looking out over Eclipse Gulf, and she soon is met up with by Scorched and Luminous, who she starts to chat with regarding how civilian life is treating all three of them, especially since Scorched and Luminous are now engaged or married, and she ends with a couple of thoughts about how they have helped ponies in the end, and that the second chances they were given were not wasted, as they get back to chatting about random things
+	id = militem.warm.149
+	title = militem.warm.149.t
+	desc = militem.warm.149.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.149"}
+	
+	is_triggered_only = yes
+	
+	option = { #I feel a bit of relaxation is in order, no?
+		name = militem.warm.149.a
+		#custom_effect_tooltip = MTS_yoink_the_southeast_tt
+		custom_effect_tooltip = MTS_true_harmony_tt
+		OVERLORD = {
+			annex_country = {
+				target = ROOT
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_core_of = ROOT
+					}
+					add_core_of = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Warm Night takes a final look around her office as she packs up some of the items she had in it, not that there were many, and she meets with the pony who is replacing her, who is one of the governors from Equestria, and she asks that it not be messed up, what she has left, as she departs, thinking on if she made the right choice to retire.
+	id = militem.warm.150
+	title = militem.warm.150.t
+	desc = militem.warm.150.d
+	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.warm.150"}
+	
+	is_triggered_only = yes
+	
+	option = { #I'm sure retirement will treat me okay.
+		name = militem.warm.150.a
+		MTS_Morning_Rain = {
+			add_country_leader_role = {
+				promote_leader = yes
+				country_leader = {
+					ideology = harmonic_theocracy
+					expire = "1965.1.1"
+					traits = { }
+				}
+			}
 		}
 	}
 }
@@ -5853,6 +6760,7 @@ country_event = { #Some of the garrison of New Horseleans is called out onto a s
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_gallant_stats_tt
 	}
 }
 
@@ -5869,7 +6777,7 @@ country_event = { #Luminous is tracked down by some of Pinpoint's closest inquis
 		add_war_support = -0.05
 		MTS_Keen_Blade = {
 			add_corps_commander_role = {
-				traits = { pony_race_trait = solaris_militarium trickster }
+				traits = { pony_race_trait solaris_militarium trickster }
 				skill = 2
 				attack_skill = 2
 				defense_skill = 2
@@ -5877,6 +6785,7 @@ country_event = { #Luminous is tracked down by some of Pinpoint's closest inquis
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_keen_blade_stats_tt
 	}
 }
 
@@ -5902,6 +6811,7 @@ country_event = { #Follow Saber Rattle as he frantically goes about his tent or 
 				logistics_skill = 1
 			}
 		}
+		custom_effect_tooltip = MTS_glad_tidings_stats_tt
 	}
 }
 
@@ -6117,7 +7027,7 @@ country_event = { #An inquisitor brings back a recently captured heretic, whom s
 }
 
 country_event = { #Pinpoint almost fruitlessly attempts to push some of her inquisitors and recruits to study the libraries that were in Baltimare and the like that COBSOC was holding for itself, since they are adamantly against that, since there are surely many heretical ideas, and they try to parse how they can do so without falling into heresy, which frustrates her to no end
-	id = militem.pinpoint.23
+	id = militem.pinpoint.23 #SLE receives a letter from MTS flaunting that they're going rogue to actually deal with heresy; or, Quasar sees how MTS is completely ignoring her and declares the nation fully heretical instead, especially after some attempts at communication were denied by Pinpoint
 	title = militem.pinpoint.23.t
 	desc = militem.pinpoint.23.d
 	immediate = {log = "[GetDateText]: [Root.GetName]: event militem.pinpoint.23"}
@@ -6125,8 +7035,12 @@ country_event = { #Pinpoint almost fruitlessly attempts to push some of her inqu
 	is_triggered_only = yes
 	
 	option = { #Just, read!
-		name = militem.pinpoint.23.a
-		add_ideas = MTS_wizardly_inquisitors
+		name = militem.pinpoint.23.a #They will burn soon enough!
+		#add_ideas = MTS_wizardly_inquisitors
+		add_opinion_modifier = {
+			target = MTS
+			modifier = SLE_rogue_ordo
+		}
 	}
 }
 
@@ -6191,7 +7105,7 @@ country_event = { #Some workers are sent down into a tunnel that is being used t
 	
 	option = { #Maybe we can just cover it up in the logs?
 		name = militem.pinpoint.27.a
-		add_ideas = MTS_roads_of_bones
+		OAC = { add_ideas = MTS_roads_of_bones }
 	}
 }
 
@@ -6253,6 +7167,20 @@ country_event = { #A missive is sent to both Ordos by Pinpoint to demand that wi
 	
 	option = { #Let us become whole again.
 		name = militem.pinpoint.30.a
+		if = {
+			limit = { has_country_leader = { character = MTS_Emerald_Days } }
+			MTS_Emerald_Days = {
+				remove_country_leader_role = { ideology = solarism }
+				set_nationality = FROM
+			}
+		}
+		else_if = {
+			limit = { has_country_leader = { character = MTS_Light_Jolt } }
+			MTS_Light_Jolt = {
+				remove_country_leader_role = { ideology = solarism }
+				set_nationality = FROM
+			}
+		}
 		FROM = {
 			annex_country = {
 				target = ROOT
@@ -6322,7 +7250,7 @@ country_event = { #Instead of being demanded to integrate, the Ordos are given t
 			}
 		}
 		FROM = { 
-			country_event = { id = militem.pinpoint.27 days = 3 }
+			country_event = { id = militem.pinpoint.31 days = 3 }
 			end_puppet = ROOT
 		}
 		leave_faction = yes
@@ -6355,7 +7283,7 @@ country_event = { #Some new recruits for the elite forces of Ordo Meridian are p
 	
 	option = { #Never go full heretic.
 		name = militem.pinpoint.33.a
-		add_ideas = MTS_bred_for_jungle
+		add_ideas = MTS_bred_for_the_jungle
 	}
 }
 
@@ -6411,7 +7339,10 @@ country_event = { #A squad of soldiers receives orders directly from Pinpoint, w
 	
 	option = { #Can you leave us in peace?!
 		name = militem.pinpoint.37.a
-		add_ideas = MTS_structured_military
+		swap_ideas = {
+			add_idea = MTS_structured_military
+			remove_idea = MTS_disrupted_ordo
+		}
 	}
 }
 
@@ -6567,7 +7498,7 @@ country_event = { #Follow a mare as she tries to stay together while she's taken
 	}
 }
 
-country_event = { #Emerald Days and Light Jolt are boths summoned back to New Horseleans to listen to Pinpoint's plan that she has, which is a convoluted mess akin to many conspiracy theories about how thestrals are dumb enough to believe that if she claims she is harmonist, they will follow her, although Emerald at least thinks it's insane enough to work; Light doesn't
+country_event = { #Emerald Days and Light Jolt are both summoned back to New Horseleans to listen to Pinpoint's plan that she has, which is a convoluted mess akin to many conspiracy theories about how thestrals are dumb enough to believe that if she claims she is harmonist, they will follow her, although Emerald at least thinks it's insane enough to work; Light doesn't
 	id = militem.pinpoint.47
 	title = militem.pinpoint.47.t
 	desc = militem.pinpoint.47.d
@@ -6611,7 +7542,7 @@ country_event = { #When a thestral wakes on an operating table, she panics as sh
 	}
 }
 
-country_event = { #In eagerness, Pinpoint goes out on an expedition to launch some new gene weaponry bombs that she has developed based on the research of thestrals, although she doesn't plan to be in teh battlefield when they go off, she ensures her soldiers that things will be fine; they don't go as fine as she believes, as some of her soldiers die, although she passes it off as thestral inbreeding
+country_event = { #In eagerness, Pinpoint goes out on an expedition to launch some new gene weaponry bombs that she has developed based on the research of thestrals, although she doesn't plan to be in the battlefield when they go off, she ensures her soldiers that things will be fine; they don't go as fine as she believes, as some of her soldiers die, although she passes it off as thestral inbreeding
 	id = militem.pinpoint.50
 	title = militem.pinpoint.50.t
 	desc = militem.pinpoint.50.d
@@ -6718,16 +7649,16 @@ country_event = { #A pair of soldiers are on patrol, complaining about having to
 	
 	option = { #You will serve the Empress, even if you are all dead!
 		name = militem.pinpoint.54.a
+		save_current_manpower = yes
 		every_state = {
 			limit = {
 				is_core_of = BAT
 			}
 			add_compliance = 5
 			add_resistance = -10
-			save_current_manpower = yes
 			add_manpower = -20000
-			restore_previous_manpower = yes
 		}
+		restore_previous_manpower = yes
 	}
 }
 
@@ -6800,6 +7731,8 @@ country_event = { #Pinpoint marches around her lab with a checklist, asking inva
 	option = { #Now, how would you rate your pain out of ten?
 		name = militem.pinpoint.59.a
 		#Flag to unlock prisoner raids in ABY territory, and probably some more test subjects
+		set_country_flag = MTS_raid_ABY
+		custom_effect_tooltip = MTS_use_catnip_tt
 	}
 }
 
@@ -6814,8 +7747,8 @@ country_event = { #Pinpoint screams as she uses some magic to make a zebra on th
 	option = { #What a waste.
 		name = militem.pinpoint.60.a
 		#Flag to unlock prisoner raids in zebra lands and some more test subjects
-		set_country_flag = MTS_raid_ABY
-		custom_effect_tooltip = MTS_use_catnip_tt
+		set_country_flag = MTS_raid_zeebs
+		custom_effect_tooltip = MTS_time_to_rhyme_tt
 	}
 }
 
@@ -6873,7 +7806,12 @@ country_event = { #An inquisitor writes back to Pinpoint in a report, partially 
 	option = { #May we meet again, Archmage.
 		name = militem.pinpoint.63.a
 		add_manpower = -500
-		#Research bonus here
+		add_tech_bonus = {
+			name = electronics_bonus
+			uses = 2
+			bonus = 1
+			category = electronics
+		}
 	}
 }
 

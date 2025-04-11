@@ -150,6 +150,7 @@ ideas = {
 				conversion_cost_mil_to_civ_factor = 0.4
 				generate_wargoal_tension = 1.00
 				join_faction_tension = 0.20
+				lend_lease_tension = 0.10
 				send_volunteers_tension = 0.20
 				guarantee_tension = 0.5
 				max_fuel_factor = -0.35
@@ -177,8 +178,8 @@ ideas = {
 
 			modifier = {
 				consumer_goods_expected_value = 0.40
-				production_speed_industrial_complex_factor = -0.50
-				production_speed_arms_factory_factor = -0.50
+				production_speed_industrial_complex_factor = -0.40
+				production_speed_arms_factory_factor = -0.40
 				conversion_cost_civ_to_mil_factor= 0.40
 				conversion_cost_mil_to_civ_factor = 0.40
 				production_speed_infrastructure_factor = -0.25
@@ -245,6 +246,8 @@ ideas = {
 				industry_repair_factor = 0.15
                 political_power_gain = -0.25
                 stability_factor = -0.20
+                democratic_acceptance = -25
+                communism_acceptance = -25
 			}
 			research_bonus = {
 				electronics = -0.05
@@ -426,6 +429,35 @@ ideas = {
             }
 			cancel_if_invalid = no
 		}
+
+		CES_doomsday_economy = {
+            picture = tot_economic_mobilisation
+
+			allowed = {
+				original_tag = CES
+			}
+
+			visible = {
+				has_country_flag = CES_shadow_path
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.15
+				production_speed_arms_factory_factor = 0.1
+				conversion_cost_civ_to_mil_factor= -0.1
+				conversion_cost_mil_to_civ_factor = -0.1
+				fuel_gain_factor = -0.1
+			}
+			default = no
+
+            allowed_to_remove = {
+                always = no
+            }
+			cancel_if_invalid = no
+		}
 		
 		HIP_siren_economy = {
 			picture = HIP_SIR_economy
@@ -435,7 +467,10 @@ ideas = {
 			}
 			
 			visible = {
-				has_completed_focus = HIP_SIR_no_time_for_games
+				has_country_flag = HIP_SIR_economy_modify
+				NOT = {
+					has_country_flag = HIP_SIR_kill_magic
+				}
 			}
 			
 			cost = 150
@@ -485,6 +520,7 @@ ideas = {
 		civilian_economy = {
     
 			available = {
+				NOT = { has_country_flag = EQC_MARESOC_laws }
 				NOT = {
 					has_country_flag = war_economy_only_flag
 				}
@@ -499,9 +535,14 @@ ideas = {
 						}
 					}
 				}
-				NOT = {
-				    has_country_flag = ZES_pasarinha_economy_block
-                }
+				if = {
+					limit = {
+						tag = ZES
+					}
+					NOT = {
+						has_country_flag = ZES_pasarinha_economy_block
+					}
+				}
 				if = {
 					limit = { has_completed_focus = LSC_violet_revolution }
 					NOT = {
@@ -518,9 +559,6 @@ ideas = {
 					hidden_trigger = {
 						has_country_flag = BAT_national_catastrophe
 					}
-				}
-				NOT = {
-					has_country_flag = ZES_pasarinha_economy_block
 				}
 				if = {
 					limit = {
@@ -560,8 +598,13 @@ ideas = {
 				NOT = {
 					has_country_flag = war_economy_only_flag
 				}
-				NOT = {
-					has_country_flag = ZES_pasarinha_economy_block
+				if = {
+					limit = {
+						tag = ZES
+					}
+					NOT = {
+						has_country_flag = ZES_pasarinha_economy_block
+					}
 				}
 				NOT = {
 					has_country_flag = demilitarized
@@ -575,6 +618,7 @@ ideas = {
 				}
 				NOT = { has_country_flag = economic_laws_blocked }
 				has_war_support > 0.15
+				NOT = { has_country_flag = EQC_MARESOC_laws }
 			}
 
 			cost = 150
@@ -601,24 +645,25 @@ ideas = {
 
 					is_major = yes
 				}
+
+				modifier = {
+					# Revert from Tot Mob if we have low manpower
+					factor = 100
+					has_idea = tot_economic_mobilisation
+					has_war = no
+				}
 			}
 		}
 
 		partial_economic_mobilisation = {
 
 			available = {
+				has_war_support > 0.25
 				if = {
-					limit = { has_country_flag = is_maresoc }
-					has_country_flag = is_maresoc
-				}
-				else = {
-					has_war_support > 0.25
-					if = {
-						limit = {
-							tag = event_target:equestria
-						}
-						NOT = { has_country_flag = economic_laws_blocked }
+					limit = {
+						tag = event_target:equestria
 					}
+					NOT = { has_country_flag = economic_laws_blocked }
 				}
 				NOT = {
 					has_country_flag = war_economy_only_flag
@@ -627,8 +672,13 @@ ideas = {
 					has_country_flag = demilitarized
 				}
 				NOT = { has_country_flag = economic_laws_blocked }
-				NOT = {
-					has_country_flag = ZES_pasarinha_economy_block
+				if = {
+					limit = {
+						tag = ZES
+					}
+					NOT = {
+						has_country_flag = ZES_pasarinha_economy_block
+					}
 				}
 				if = {
 					limit = {
@@ -644,6 +694,7 @@ ideas = {
 					}
 					NOT = { has_completed_focus = MTS_complete_demobilization }
 				}
+				NOT = { has_country_flag = EQC_MARESOC_laws }
 			}
 
 			cost = 150
@@ -667,34 +718,35 @@ ideas = {
 
 					is_major = yes
 				}
+
+				modifier = {
+					# Revert from Tot Mob if we have low manpower
+					factor = 150
+					has_idea = tot_economic_mobilisation
+					has_war = no
+				}
 			}
 		}
 
 		war_economy = {
 
 			available = {
+				has_war = yes
+				has_war_support > 0.5
 				if = {
-					limit = { has_country_flag = is_maresoc }
-					has_country_flag = is_maresoc
+					limit = {
+						tag = event_target:equestria
+					}
+					NOT = { has_country_flag = economic_laws_blocked }
 				}
-				else = {
-					has_war = yes
-					has_war_support > 0.5
-					if = {
-						limit = {
-							tag = event_target:equestria
+				if = {
+					limit = {
+						original_tag = EQC
+						NOT = {
+							has_country_flag = is_maresoc
 						}
-						NOT = { has_country_flag = economic_laws_blocked }
 					}
-					if = {
-						limit = {
-							original_tag = EQC
-							NOT = {
-								has_country_flag = is_maresoc
-							}
-						}
-						has_completed_focus = EQC_full_economic_commitment
-					}
+					has_completed_focus = EQC_full_economic_commitment
 				}
 				if = {
 					limit = {
@@ -708,11 +760,21 @@ ideas = {
 					has_country_flag = demilitarized
 				}
 				NOT = { has_country_flag = economic_laws_blocked }
-				NOT = {
-					has_country_flag = BAL_anarchy_laws
+				if = {
+					limit = {
+						tag = BAL
+					}
+					NOT = {
+						has_country_flag = BAL_anarchy_laws
+					}
 				}
-				NOT = {
-					has_country_flag = ZES_pasarinha_economy_block
+				if = {
+					limit = {
+						tag = ZES
+					}
+					NOT = {
+						has_country_flag = ZES_pasarinha_economy_block
+					}
 				}
 				if = {
 					limit = {
@@ -721,6 +783,7 @@ ideas = {
 					NOT = { has_completed_focus = MTS_complete_demobilization }
 					NOT = { has_completed_focus = MTS_retain_preparedness }
 				}
+				NOT = { has_country_flag = EQC_MARESOC_laws }
 			}
 
 			cost = 150
@@ -746,54 +809,57 @@ ideas = {
 				}
 
 				modifier = {
-					add = 1800
-					
-					# revert from closed_economy if we have large allies
-					has_idea = closed_economy
-					has_large_ally_not_pick_closed_economy = yes
+					# Revert from Tot Mob if we have low manpower
+					factor = 100
+					has_idea = tot_economic_mobilisation
+					OR = {
+						manpower_per_military_factory < 14000
+						has_war = no
+					}
 				}
 			}
 		}
 
 		tot_economic_mobilisation = {
-
+			visible = {
+				if = {
+					limit = {
+						has_idea = totaler_krieg_economy
+					}
+					NOT = { has_idea = totaler_krieg_economy }
+				}
+			}
 
 			available = {
-				if = {
-					limit = { has_country_flag = is_maresoc }
-					has_country_flag = is_maresoc
+				has_war = yes
+				has_war_support > 0.8
+				OR = {
+					any_enemy_country = {
+						ic_ratio = {
+							tag = ROOT
+							ratio > 0.5
+						}
+					}
+					surrender_progress > 0.5
 				}
-				else = {
-					has_war = yes
-					has_war_support > 0.8
-					OR = {
-						any_enemy_country = {
-							ic_ratio = {
-								tag = ROOT
-								ratio > 0.5
-							}
-						}
-						surrender_progress > 0.5
-					}
 
-					if = {
-						limit = {
-							tag = event_target:equestria
-						}
-						NOT = { has_country_flag = economic_laws_blocked }
+				if = {
+					limit = {
+						tag = event_target:equestria
 					}
-					if = {
-						limit = {
-							original_tag = EQC
-						}
-						has_completed_focus = EQC_full_economic_commitment
+					NOT = { has_country_flag = economic_laws_blocked }
+				}
+				if = {
+					limit = {
+						original_tag = EQC
 					}
-					if = {
-						limit = {
-							original_tag = ELF
-						}
-						NOT = { has_completed_focus = ELF_left_1_b }
+					has_completed_focus = EQC_full_economic_commitment
+				}
+				if = {
+					limit = {
+						original_tag = ELF
 					}
+					NOT = { has_completed_focus = ELF_left_1_b }
 				}
 				if = {
 					limit = {
@@ -807,11 +873,21 @@ ideas = {
 					has_country_flag = demilitarized
 				}
 				NOT = { has_country_flag = economic_laws_blocked }
-				NOT = {
-					has_country_flag = BAL_anarchy_laws
+				if = {
+					limit = {
+						tag = BAL
+					}
+					NOT = {
+						has_country_flag = BAL_anarchy_laws
+					}
 				}
-				NOT = {
-					has_country_flag = ZES_pasarinha_economy_block
+				if = {
+					limit = {
+						tag = ZES
+					}
+					NOT = {
+						has_country_flag = ZES_pasarinha_economy_block
+					}
 				}
 				if = {
 					limit = {
@@ -820,21 +896,27 @@ ideas = {
 					NOT = { has_completed_focus = MTS_complete_demobilization }
 					NOT = { has_completed_focus = MTS_retain_preparedness }
 				}
+				NOT = { has_country_flag = EQC_MARESOC_laws }
 			}
 
 			ai_will_do = {
 				factor = 1
 
 				modifier = {
-					factor = 25
+					factor = 15
 					#Prio this if nation has a lot of manpower compared to MIC
-					manpower_per_military_factory > 15000
+					manpower_per_military_factory > 50000
 				}
 
 				modifier = {
 					#Block  unless nation has a lot of manpower
 					factor = 0
-					manpower_per_military_factory < 7000
+					manpower_per_military_factory < 25000
+				}
+
+				modifier = {
+					factor = 0
+					has_political_power < 250
 				}
 
 
@@ -846,13 +928,30 @@ ideas = {
 						has_idea = limited_conscription
 					}
 				}
+
+				modifier = {
+					#Prio if low on manpower
+					factor = 0
+					has_war = yes
+					has_manpower < 50000
+				}
+
+				modifier = {
+					factor = 0
+					has_capitulated = yes
+				}
+
+				modifier = {
+					factor = 0
+					has_war = no
+				}
 			}
 
 			cost = 150
 			removal_cost = -1
 
 			modifier = {
-				consumer_goods_expected_value = 0.10
+				consumer_goods_expected_value = 0.15
 				conscription = -0.015
 				production_speed_arms_factory_factor = 0.3
 				conversion_cost_civ_to_mil_factor= -0.3
@@ -861,6 +960,146 @@ ideas = {
 			}
 
 			cancel_if_invalid = no
+		}
+		totaler_krieg_economy = {
+
+			visible = {
+				has_idea = totaler_krieg_economy
+			}
+
+			available = {
+				has_idea = totaler_krieg_economy
+				has_war_with_major = yes
+				has_war_support > 0.8
+				any_enemy_country = {
+					ic_ratio = {
+						tag = ROOT
+						ratio > 0.5
+					}
+				}
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.15
+				conscription = -0.02
+				production_speed_arms_factory_factor = 0.2
+				production_speed_dockyard_factor = 0.2
+				conversion_cost_civ_to_mil_factor = -0.3
+				conversion_cost_mil_to_civ_factor = -0.3
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+			}
+			cancel_if_invalid = no
+		}
+		EQC_MARESOC_mobilization = {
+			picture = tot_economic_mobilisation
+
+			allowed = {
+				always = no
+			}
+			visible = {
+				has_idea = EQC_MARESOC_mobilization
+			}
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.225
+				political_power_gain = 0.15
+				production_speed_arms_factory_factor = 0.35
+				production_speed_industrial_complex_factor = 0.1
+				production_speed_dockyard_factor = 0.15
+				industrial_capacity_dockyard = -0.1
+				industrial_capacity_factory = -0.1
+				research_speed_factor = 0.05
+				production_factory_max_efficiency_factor = -0.3
+				production_factory_efficiency_gain_factor = -0.3
+				line_change_production_efficiency_factor = -0.5
+				local_resources_factor = -0.25
+			}
+		}
+		autarkic_economy = {
+			visible = {
+				has_idea = autarkic_economy
+			}
+
+			available = {
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				min_export = 0.15
+				#industrial_capacity_factory = 0.05
+				#industrial_capacity_dockyard = 0.05
+				production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.05
+				lend_lease_tension = 0.20
+				faction_trade_opinion_factor = 0.25
+				#cic_construction_boost = -0.05
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = { #Germany should always for AutarkicEconomy if its available
+   				factor = 100
+
+   				modifier = {
+   					add = 500
+   					has_idea = limited_exports
+   				}
+
+   				modifier = {
+   					add = 1500
+   					has_idea = closed_economy
+   					has_large_ally_not_pick_closed_economy = yes
+   				}
+   			}
+		}
+
+		autarkic_economy_improved = {
+			picture = autarkic_economy
+			name = autarkic_economy
+			visible = {
+				has_idea = autarkic_economy_improved
+			}
+
+			available = {
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				min_export = 0.15
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+				production_speed_buildings_factor = 0.1
+				research_speed_factor = 0.05
+				lend_lease_tension = 0.20
+				faction_trade_opinion_factor = 0.5
+				#cic_construction_boost = -0.05
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = { #Germany should always for AutarkicEconomy if its available
+   				factor = 100
+
+   				modifier = {
+   					add = 500
+   					has_idea = limited_exports
+   				}
+
+   				modifier = {
+   					add = 1500
+   					has_idea = closed_economy
+   					has_large_ally_not_pick_closed_economy = yes
+   				}
+   			}
 		}
 		collectivized_society = {
 
@@ -1013,6 +1252,14 @@ ideas = {
 						has_completed_focus = JER_kind_capitalism
 					}
 				}
+				if = {
+					limit = {
+						original_tag = KIR
+					}
+					NOT = {
+						has_country_flag = KIR_blocked_free_trade
+					}
+				}
 			}
 			
 			available = {
@@ -1162,6 +1409,14 @@ ideas = {
 				}
 			}
 			visible = {
+				if = {
+					limit = {
+						original_tag = KIR
+					}
+					NOT = {
+						has_country_flag = KIR_blocked_free_trade
+					}
+				}
 			    if = {
 				    limit = {
 					    original_tag = JER
@@ -1323,10 +1578,10 @@ ideas = {
 			    }
 
 				# minors not at war should want to get the bonuses from free trade
+				# now applies to majors as well
 				modifier = {
 				    add = -1
 				 
-					is_major = no
 				 	has_war = no
 			 	}
 			 
@@ -1402,6 +1657,14 @@ ideas = {
 				        has_completed_focus = CVA_CTH_the_socialist_market_economy
 					}
 				}
+				if = {
+				    limit = {
+					    original_tag = JER
+					}
+					NOT = {
+					    has_completed_focus = JER_kind_capitalism
+					}
+				}
 			}
 			rule = {
 				can_access_market = no
@@ -1443,6 +1706,12 @@ ideas = {
 					# since they will require our trades
 					has_large_ally_not_pick_closed_economy = yes
 				}
+
+				modifier = {
+					add = -1
+
+					has_war = no
+				}
 			}
 		}
 		
@@ -1467,6 +1736,10 @@ ideas = {
 			on_add = {
 				custom_effect_tooltip = closed_economy_TT
 			}
+			rule = {
+				can_access_market = no
+				desc = can_not_access_market_closed_economy
+			}
 			modifier = {
 				min_export = 0
 				trade_opinion_factor = -1
@@ -1474,6 +1747,8 @@ ideas = {
 				navy_intel_to_others = -10.0
 				army_intel_to_others = -10.0
 				airforce_intel_to_others = -10.0
+				lend_lease_tension = 0.4
+				cic_construction_boost = -0.1
 			}
 			allowed_to_remove = {
 				always = no
@@ -1497,13 +1772,6 @@ ideas = {
 					}
 				}
 			}
-			on_add = {
-				custom_effect_tooltip = closed_economy_TT
-			}
-			rule = {
-				can_access_market = no
-				desc = can_not_access_market_closed_economy
-			}
 			modifier = {
 				industrial_capacity_factory = 0.1
 				industrial_capacity_dockyard = 0.1
@@ -1513,8 +1781,6 @@ ideas = {
 				min_export = 0.25
 				civilian_intel_to_others = 5.00
 				navy_intel_to_others = 5.00
-				lend_lease_tension = 0.40
-				cic_construction_boost = -0.1
 			}
 			allowed_to_remove = {
 				always = no
@@ -1656,8 +1922,10 @@ ideas = {
 		JER_kind_capitalism_idea = {
 		    picture = free_trade
 			
+			allowed = {
+				original_tag = JER
+			}
 			visible = {
-			    original_tag = JER
 			    has_completed_focus = JER_kind_capitalism
 			}
 			
@@ -1674,6 +1942,9 @@ ideas = {
 				civilian_intel_to_others = 20.0
 				navy_intel_to_others = 10.0
 			}
+			allowed_to_remove = {
+				always = no
+			}
 
 			cancel_if_invalid = no
 		}
@@ -1681,8 +1952,10 @@ ideas = {
 		CVA_CTH_markest_socialist_trade = {
 		    picture = free_trade
 			
+			allowed = {
+				original_tag = CVA
+			}
 			visible = {
-			    original_tag = CVA
 			    has_completed_focus = CVA_CTH_open_up
 			}
 			
@@ -1796,6 +2069,34 @@ ideas = {
 			rule = {
 				can_access_market = no
 				desc = can_not_access_market_closed_economy
+			}
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+
+		CES_hidden_economy = {
+			picture = closed_economy
+			cost = 150
+			removal_cost = -1
+			allowed = {
+				original_tag = CES
+			}
+			visible = {
+			    has_country_flag = CES_shadow_path
+			}
+			on_add = {
+				custom_effect_tooltip = closed_economy_TT
+			}
+			modifier = {
+				min_export = 0
+				trade_opinion_factor = -1
+				civilian_intel_to_others = -15.0
+				navy_intel_to_others = -10.0
+				army_intel_to_others = -10.0
+				airforce_intel_to_others = -10.0
 			}
 			allowed_to_remove = {
 				always = no

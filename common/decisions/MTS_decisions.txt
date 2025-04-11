@@ -1,4 +1,60 @@
 political_actions = {
+	MTS_raise_the_militias = {
+		allowed = { tag = MTS }
+		available = {
+			has_war = yes
+			OR = {
+				surrender_progress > 0.15
+				has_war_with_major = yes
+			}
+		}
+		visible = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			has_completed_focus = MTS_embrace_regional_autonomy
+		}
+		cost = 75
+		days_remove = 20
+		complete_effect = { add_stability = -0.05 }
+		remove_effect = {
+			#Create militia here
+			set_country_flag = MTS_militias_created
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = { has_political_power > 100 add = 10 }
+			modifier = { AND = { has_war = yes surrender_progress > 0.15 } add = 25 }
+			modifier = { surrender_progress > 0.25 add = 50 }
+			modifier = { has_war_with_major = yes add = 20 }
+		}
+	}
+	MTS_retire_militias = {
+		allowed = { tag = MTS }
+		available = {
+			has_country_flag = MTS_militias_created
+			has_war = no
+		}
+		visible = {
+			has_country_flag = MTS_militias_created
+		}
+		days_remove = 7
+		complete_effect = { add_stability = 0.02 }
+		remove_effect = {
+			#remove militias
+			clr_country_flag = MTS_militias_created
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = { has_war = no add = 100 }
+		}
+	}
+	MTS_rename_red_glory = {
+		allowed = { tag = MTS }
+		visible = { owns_state = 16 }
+		fire_only_once = yes
+		complete_effect = { country_event = militem.99 }
+	}
 	MTS_return_to_normal = {
 		allowed = { tag = MTS }
 		visible = {
@@ -146,13 +202,17 @@ MTS_heretic_test_subjects_category = {
 					}
 					AND = {
 						is_owned_by = ROOT
-						is_core_of = HIP
-						is_claimed_by = HIP
+						OR = {
+							is_core_of = HIP
+							is_core_of = WNG
+							is_claimed_by = HIP
+						}
 						OWNER = { has_country_flag = MTS_raid_HIP }
 					}
 					AND = {
 						is_owned_by = ROOT
 						is_core_of = BAT
+						OWNER = { has_country_flag = MTS_raid_zeebs }
 					}
 					AND = {
 						is_owned_by = ROOT
@@ -784,7 +844,7 @@ MTS_heretic_test_subjects_category = {
 			monthly_population = -0.2
 		}
 		remove_effect = {
-			#country_event = militem.pinpoint.900 #An event of test subject results on utilizing fire magic to cleanse ponies of heresy; should give an org bonus and soft and hard attack bonus to mage companies
+			country_event = militem.pinpoint.900 #An event of test subject results on utilizing fire magic to cleanse ponies of heresy; should give an org bonus and soft and hard attack bonus to mage companies
 			add_to_variable = { MTS_culminating_research = 1 }
 		}
 	}
@@ -815,7 +875,7 @@ MTS_heretic_test_subjects_category = {
 			monthly_population = -0.2
 		}
 		remove_effect = {
-			#country_event = militem.pinpoint.901 #An event of test subject results on different kinetic weaponry being utilized to improve how to put down more heretics, although it's not directly part of curing heresy; should give breakthrough and soft attack to infantry equipment
+			country_event = militem.pinpoint.901 #An event of test subject results on different kinetic weaponry being utilized to improve how to put down more heretics, although it's not directly part of curing heresy; should give breakthrough and soft attack to infantry equipment
 			add_to_variable = { MTS_culminating_research = 1 }
 		}
 	}
@@ -846,7 +906,7 @@ MTS_heretic_test_subjects_category = {
 			monthly_population = -0.2
 		}
 		remove_effect = {
-			#country_event = militem.pinpoint.902 #An event of test subject results on how some research on pony muscular structure has given rise to some new armor schemes based on earth ponies, to improve the armor of Militem Solar; should give increased defense and armor of tanks, reduced speed
+			country_event = militem.pinpoint.902 #An event of test subject results on how some research on pony muscular structure has given rise to some new armor schemes based on earth ponies, to improve the armor of Militem Solar; should give increased defense and armor of tanks, reduced speed
 			add_to_variable = { MTS_culminating_research = 1 }
 		}
 	}
@@ -877,7 +937,7 @@ MTS_heretic_test_subjects_category = {
 			monthly_population = -0.2
 		}
 		remove_effect = {
-			#country_event = militem.pinpoint.903 #An event of test subject results how pegasus study have given insights into better plane frames; should give increased agility and production cost
+			country_event = militem.pinpoint.903 #An event of test subject results how pegasus study have given insights into better plane frames; should give increased agility and production cost
 			add_to_variable = { MTS_culminating_research = 1 }
 		}
 	}
@@ -908,7 +968,7 @@ MTS_heretic_test_subjects_category = {
 			monthly_population = -0.2
 		}
 		remove_effect = {
-			#country_event = militem.pinpoint.904 #An event of test subject results on studying unicorn magic and how its tied into the brain about how they've created basic targeting computers for ships; should increase attack and reliability
+			country_event = militem.pinpoint.904 #An event of test subject results on studying unicorn magic and how its tied into the brain about how they've created basic targeting computers for ships; should increase attack and reliability
 			add_to_variable = { MTS_culminating_research = 1 }
 		}
 	}
@@ -1010,7 +1070,7 @@ MTS_heretic_test_subjects_category = {
 			monthly_population = -0.2
 		}
 		remove_effect = {
-			#country_event = militem.pinpoint.905 #Pinpoint finally has a breakthrough of what could be behind heretical thought, after she basically lobotomizes a test subject
+			country_event = militem.pinpoint.905 #Pinpoint finally has a breakthrough of what could be behind heretical thought, after she basically lobotomizes a test subject
 		}
 	}
 }

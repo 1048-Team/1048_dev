@@ -1,0 +1,357 @@
+add_namespace = stableside
+add_namespace = stableside.lucky
+add_namespace = stableside.harmonists
+add_namespace = stableside.oxide
+add_namespace = stableside.vasiliy
+
+###Opening events###
+country_event = { #Lucky hosts a grand ceremony, spending more than is necessary, to host a grand ceremony in Stableside, where everypony is forced to attend, whether they love him or not
+    id = stableside.1
+    title = stableside.1.t
+    desc = stableside.1.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.1" }
+
+    is_triggered_only = yes
+
+    option = { #Now is the time for the era of Lucky!
+        name = stableside.1.a
+        add_stability = 0.03
+        add_political_power = 25
+    }
+}
+
+country_event = { #Lucky leads an interrogation of a captured NID operative that was discovered in the territory directly surrounding Yukka Island and Lucky tries to get more info from them and eventually learns that they are wanting to settle that land themselves, which he can respond negatively to, or see it as a way to pawn off some crap land
+    id = stableside.2
+    title = stableside.2.t
+    desc = stableside.2.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.2" }
+
+    is_triggered_only = yes
+
+    option = { #Perhaps this could pay for some other... expenses.
+        name = stableside.2.a
+        add_stability = -0.05
+        351 = { set_demilitarized_zone = yes }
+        1213 = { set_demilitarized_zone = yes }
+        52 = { set_demilitarized_zone = yes }
+    }
+    option = { #I will cling to every scrap of land that I'm owed!
+        name = stableside.2.b
+        add_war_support = 0.05
+        add_manpower = -1482
+        #NID modifier here
+        351 = { set_demilitarized_zone = yes }
+        1213 = { set_demilitarized_zone = yes }
+        52 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Lucky attempts to lead a large number of soldiers to simply quash the growing NRP movement, which leads to a faster, and very one-sided battle against him as he overconfidently leads to the point of stupidity
+    id = stableside.5
+    title = stableside.5.t
+    desc = stableside.5.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.5" }
+
+    is_triggered_only = yes
+
+    option = { #It's merely a temporary setback. Just a bit rusty.
+        name = stableside.5.a
+        add_command_power = -15
+        STB_Lucky_Star = {
+            add_logistics = -1
+            add_planning = -2
+        }
+        50 = { set_demilitarized_zone = yes }
+        86 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Despite some of his other generals encouraging him to not do so, Lucky cooridinates with some smaller teams and heads out to try and snipe down the leaders of the NRP, although through both him not noticing a fairly obvious spy and also being overconfident with his stealth abilities, it is foiled and he is almost killed
+    id = stableside.6
+    title = stableside.6.t
+    desc = stableside.6.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.6" }
+
+    is_triggered_only = yes
+
+    option = { #All a test to make sure they were alert.
+        name = stableside.6.a
+        add_stability = -0.1
+        STB_Lucky_Star = {
+            add_attack = -2
+            add_defense = -1
+            add_planning = -2
+            add_logistics = -1
+        }
+        25 = { set_demilitarized_zone = yes }
+        79 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Lucky plans, despite the advice of his generals that the air force is not ready, to do a bombing run on a reported center of NRP activity, and he has his planes all go too close, which ends up making them get shot down instead of accomplishing any bombing or strafing at all
+    id = stableside.7
+    title = stableside.7.t
+    desc = stableside.7.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.7" }
+
+    is_triggered_only = yes
+
+    option = { #It was all part of the plan. They were scrap, anyway.
+        name = stableside.7.a
+        add_war_support = -0.15
+        STB_Lucky_Star = {
+            add_attack = -2
+            add_defense = -2
+            add_planning = -1
+            add_logistics = -1
+        }
+        33 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #Lucky Star receives a report of coordinated strikes and uprisings in most of the rural territory and the larger centers that are not incredibly near to Stableside, and it was clear from his continued poking and attacks on the harmonist group of NRP that it further bolstered ponies to their side
+    id = stableside.8
+    title = stableside.8.t
+    desc = stableside.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.8" }
+
+    trigger = {
+        tag = STB
+        has_completed_focus = STB_strike_at_the_heart
+        has_completed_focus = STB_cut_off_head
+    }
+    mean_time_to_happen = {
+        days = 10
+    }
+    fire_only_once = yes
+
+    option = { #Oops.
+        name = stableside.8.a
+        add_stability = -0.1
+        add_war_support = -0.05
+        STB_Lucky_Star = {
+            remove_unit_leader_role = yes
+            add_field_marshal_role = {
+                traits = { pony_race_trait politically_connected hero_of_the_revolution charismatic } #maybe a unique trait called Revolutionary Hero, which gives an additional 5% morale and 5% losses
+                skill = 3
+                attack_skill = 3
+                defense_skill = 3
+                planning_skill = 2
+                logistics_skill = 2
+            }
+        }
+        custom_effect_tooltip = STB_all_according_to_plan_tt
+        hidden_effect = {
+            every_state = {
+                limit = {
+                    is_demilitarized_zone = yes
+                    is_owned_by = STB
+                }
+                transfer_state_to = NRP
+                add_core_of = NRP
+                set_demilitarized_zone = no
+            }
+            NRP = {
+                load_oob = "NRP_1048"
+            }
+        }
+    }
+    #One day, when NRP has content
+    #option = { #Maybe it'd be best to throw in our lot with them?
+    #    ai_chance = { factor = 0 }
+    #    name = stableside.8.b
+    #    hidden_effect = {
+    #        add_stability = -0.1
+    #        add_war_support = -0.05
+    #        STB_Lucky_Star = {
+    #            remove_unit_leader_role = yes
+    #            add_field_marshal_role = {
+    #                traits = { pony_race_trait politically_connected hero_of_the_revolution charismatic } #maybe a unique trait called Revolutionary Hero, which gives an additional 5% morale and 5% losses
+    #                skill = 3
+    #                attack_skill = 3
+    #                defense_skill = 3
+    #                planning_skill = 2
+    #                logistics_skill = 2
+    #            }
+    #        }
+    #        every_state = {
+    #            limit = {
+    #                is_demilitarized_zone = yes
+    #                is_owned_by = STB
+    #            }
+    #            transfer_state_to = NRP
+    #            add_core_of = NRP
+    #            set_demilitarized_zone = no
+    #        }
+    #        NRP = {
+    #            load_oob = "NRP_1048"
+    #            change_tag_from = ROOT
+    #        }
+    #    }
+    #}
+}
+
+###Harmonist path###
+country_event = { #The election that STB has after the OED succeeds and the dictatorship of Smiling Embrace wraps up, recapping how many ponies were out and how it was tense at points, but the results went off without a hitch, with the closest results being between either Clean and Jade or Smiling and Liberty
+    id = stableside.harmonists.50 #If not prepared enough, then it will recap that the voting first started going okay, and it seemed like things would be fine, until a number of ponies across the country organized a bombing attack, including the home station in Stableside, where the other leaders, minus Jade, were and that the status of the others aside from Jade are unknown
+    title = stableside.harmonists.50.t
+    desc = stableside.harmonists.50.da #Should change eventually to determine between whether it was the vigilant voters focus or the unrestircted access focus, as well as if the election security variable is high enough
+
+    is_triggered_only = yes
+
+    option = { #Smiling is kept in charge!
+        name = stableside.harmonists.50.a
+        trigger = {
+            has_completed_focus = STB_unrestricted_access
+            check_variable = { STB_election_security > 3 }
+        }
+        add_political_power = 50
+    }
+    option = { #Liberty narrowly slides into victory!
+        name = stableside.harmonists.50.b
+        trigger = {
+            has_completed_focus = STB_unrestricted_access
+            check_variable = { STB_election_security > 3 }
+        }
+        STB_Liberty_Bell = { promote_character = yes }
+    }
+    option = { #Clean Sweep sweeps the election!
+        name = stableside.harmonists.50.c
+        trigger = {
+            has_completed_focus = STB_vigilant_voters
+            check_variable = { STB_election_security > 3 }
+        }
+        STB_Clean_Sweep = { promote_character = yes }
+    }
+    option = { #Jade edges out the win!
+        name = stableside.harmonists.50.d
+        trigger = {
+            has_completed_focus = STB_vigilant_voters
+            check_variable = { STB_election_security > 3 }
+        }
+        STB_Jade_Turf = { promote_character = yes }
+    }
+    option = { #This is horrible! The horror! The HORROR!
+        name = stableside.harmonists.50.e
+        trigger = {
+            check_variable = { STB_election_security < 4 }
+        }
+        custom_effect_tooltip = STB_loosey_goosey_tt
+        hidden_effect = {
+            country_event = {
+                id = stableside.harmonists.300
+                days = 1
+            }
+        }
+    }
+}
+
+###Jade Turf Bulldog path###
+country_event = { #The aftermath of the terrorist attack by COBOSC remnants has Jade searching frantically through the rubble of the buildings that her friends and compatriots were in, and finding their remains, and realizing that she's the only one left who can continue the OED's mission, which gnaws at her
+    id = stableside.harmonists.300
+    title = stableside.harmonists.300.t
+    desc = stableside.harmonists.300.d
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.harmonists.300" }
+
+    is_triggered_only = yes
+
+    option = { #Harmony will be avenged.
+        name = stableside.harmonists.300.a
+        custom_effect_tooltip = STB_angy_jade_tt
+        hidden_effect = {
+            STB_Jade_Turf = {
+                promote_character = yes
+            }
+            STB_Jade_Turf_effects = yes
+            retire_character = STB_Smiling_Embrace
+            retire_character = STB_Synergy
+            retire_character = STB_Clean_Sweep
+            retire_character = STB_Liberty_Bell
+        }
+        add_stability = -0.1
+        set_country_flag = STB_lone_jade
+        mark_focus_tree_layout_dirty = yes
+    }
+}
+
+###Harmonist hidden/utility events###
+country_event = { #Triggered event to give the bonuses for the leader that was in charge upon the new season of rulership
+    id = stableside.harmonists.1000
+    immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.harmonists.1000" }
+    hidden = yes
+
+    is_triggered_only = yes
+
+    option = {
+        if = {
+            limit = { has_country_flag = STB_smiling_mandate_completed }
+            add_stability = 0.075
+            add_political_power = 100
+            clr_country_flag = STB_smiling_mandate_completed
+            set_var = { STB_peaceful_bois = 0 }
+        }
+        else_if = {
+            limit = { has_country_flag = STB_jade_mandate_completed }
+            add_war_support = 0.05
+            add_manpower = 25000
+            set_country_flag = {
+                flag = STB_jade_mandate_cooldown
+                value = 1
+                days = 365
+            }
+            clr_country_flag = STB_jade_mandate_completed
+        }
+        else_if = {
+            limit = { has_country_flag = STB_clean_mandate_completed }
+            if = {
+                limit = {
+                    any_state = {
+                        is_owned_by = ROOT
+                        free_building_slots = {
+                            building = industrial_complex
+                            slots > 0
+                            include_locked = yes
+                        }
+                    }
+                }
+                random_state = {
+                    limit = {
+                        is_owned_by = ROOT
+                        free_building_slots = {
+                            building = industrial_complex
+                            slots > 0
+                            include_locked = yes
+                        }
+                    }
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                    add_extra_state_shared_building_slots = 1
+                }
+            }
+            #Idea here
+            clr_country_flag = STB_clean_mandate_completed
+        }
+        else_if = {
+            limit = { has_country_flag = STB_liberty_mandate_completed }
+            #Idea here
+            every_country = {
+                limit = {
+                    has_volunteers_amount_from = {
+                        tag = ROOT
+                        count > 0
+                    }
+                }
+                #Idea here
+            }
+            clr_country_flag = STB_liberty_mandate_completed
+            set_country_flag = {
+                flag = STB_liberty_mandate_cooldown
+                value = 1
+                days = 365
+            }
+        }
+    }
+}

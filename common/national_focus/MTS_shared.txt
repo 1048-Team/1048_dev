@@ -1021,7 +1021,30 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_theatre_of_learning"
-		add_ideas = MTS_theatres_of_war
+		#add_ideas = MTS_theatres_of_war
+		#For now just effect, but maybe event of Mudslide or Soylent Green going through a training scenario, powered by magic, where they have to sacrifice some of their troops to get to the ultimate goal, and they don't, which gets them criticized by Scorched or a proxy of him
+		MTS_Mudslide = {
+			add_corps_commander_role = {
+				traits = { pony_race_trait swamp_fox solaris_militarium }
+				skill = 2
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 3
+			}
+		}
+		custom_effect_tooltip = MTS_mudslide_stats_tt
+		MTS_Soylent_Green = {
+			add_corps_commander_role = {
+				traits = { pony_race_trait jungle_rat ranger solaris_militarium }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 2
+			}
+		}
+		custom_effect_tooltip = MTS_soylent_green_stats_tt
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -3074,6 +3097,11 @@ shared_focus = {
 	
 	cost = 3
 	prerequisite = { focus = MTS_rescue_empress }
+	allow_branch = {
+		is_EQS_SOL_1048 = yes
+		owns_state = 3
+		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+	}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_empire_freed"
@@ -4132,7 +4160,7 @@ shared_focus = {
 	allow_branch = {
 		owns_state = 3
 		has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
-		#has_completed_focus = MTS_last_torch
+		is_EQS_SOL_1048 = no
 	}
 	available = {
 		owns_state = 3
@@ -5243,7 +5271,13 @@ shared_focus = {
 	
 	allow_branch = {
 		has_country_flag = MTS_conquered_southeast
-		has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+		OR = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			AND = {
+				is_subject_of = SLE
+				has_government = democratic
+			}
+		}
 	}
 	cost = 1
 	
@@ -6304,7 +6338,13 @@ shared_focus = {
 	prerequisite = { focus = MTS_our_place_with_sun }
 	allow_branch = {
 		has_country_flag = MTS_EQS_accepted
-		has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+		OR = {
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			AND = {
+				is_subject_of = SLE
+				has_government = democratic
+			}
+		}
 		EQS = { NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } } }
 	}
 	
@@ -6503,7 +6543,7 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_grand_leap"
 		###New work programs for ponies are opened for them to contribute to the final step toward a prosperous South-East, which for the first time ever, is not using slave or endentured labor to do it
 		add_timed_idea = {
-			idea = MTS_grand_leap
+			idea = MTS_grand_leap_idea
 			days = 180
 		}
 		custom_effect_tooltip = MTS_line_go_up_tt
@@ -6600,6 +6640,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_first_law_charity"
 		###A large charity campaign is held across the Ordo as priestesses are given orders to drain much of the church coffers to support ponies, which is expensive, but does help increase the standard of living
+		country_event = militem.warm.74
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -6653,6 +6694,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_religious_liberty"
 		###Event of a charter about religious liberties that the thestrals and communists will have, although it is all within the framework of solarism, which still leaves many stipulations about what is allowed by the citizenry
+		country_event = militem.warm.75
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -6688,6 +6730,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_wise_council"
 		###Warm Night meets with some of her councilors on a new matter, which is mostly regarding some more unrest in the thestral population, and after a long discussion, actually comes to an agreement, which makes her pleased she chose to continue the theocracy
+		country_event = militem.warm.76
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -6728,6 +6771,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_drilling_for_liquid_gold"
 		###A thestral encounters some strange liquids on the ground in their old favourite spot that they normally hunted at, and she is confused at what she sees, before others find out that it's oil, which starts a new oil rush
+		country_event = militem.warm.77
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -6766,6 +6810,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_transitional_chairponies"
 		###After a tense election, a new pony is elected as the first transitional president of the republic, until the final position it is determined to be in the Solar Empire is determined
+		country_event = militem.warm.78
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -6783,6 +6828,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_high_mage_of_south"
 		###Warm Night is honored with a statue of herself that was started by some of the ponies in the South-East to celebrate her guidance that she has given them, and she is given the title of high mage and head of the Adoratio council
+		country_event = militem.warm.79
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -6821,6 +6867,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_figure_of_salvation"
 		###Warm Night is summoned into the congressional building for the new republic, and she expects that she will be tried for some of her sins that she committed, but instead is given an honory title as the religious head of the state, to guide them further
+		country_event = militem.warm.80
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -6842,6 +6889,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_peninsula_repaired"
 		###Warm Night puts away some of her last items into a small bag that she will take with her back to the Empire, as she has sent a petition with the approval of the council/congress, and she has a last talk with Scorched and Luminous, thanking them for their service, before she heads out of the governmental building
+		country_event = militem.warm.81
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -6864,6 +6912,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_suns_disapproval"
 		###Warm Night receives the letter back from the Solar Empire, which declares her a heretic and that the South-East will eventually be under the Empress's control, and she is saddened but she is not surprised given her theological differences
+		country_event = militem.warm.83
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -6881,6 +6930,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_defense_for_ages"
 		###Warm Night meets with Scorched Earth over the possibilities of what an invasion from EQS would be like, and while he is pessimistic, he does give a clear picture that they need more to defend when the entire might of the Empire might be upon them and that they might be able to survive if they prepare enough
+		country_event = militem.warm.84
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -6898,6 +6948,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_comforters_of_lost"
 		###A priestess holds a long, arduous conversation with multiple confessing ponies about their worries regarding the Empress's rejection of Warm Night, and effectively bribes them to believe that things will be fine
+		country_event = militem.warm.85
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -6974,6 +7025,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_suns_disapproval"
 		###A priestess opens the doors to her church for morning worship and is nearly trampled by the number of ponies who were already waiting and she is both surprised and pleased at the new congregants, and she tries to assuage fears that they keep repeating about the Empire so that they may be comforted
+		country_event = militem.warm.86
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -6992,6 +7044,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_embrace_regional_autonomy"
 		###Some thestral warbands are approached by an officer of the Imperial military, who is overly nervous, as the thestrals are clearly angry at them for being there, and he offers them some service and autonomy to help defend the Ordo, to which they will begrudgingly agree
+		country_event = militem.warm.87
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7010,6 +7063,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_unique_light"
 		###Event of various different worshippers having a disagreement on how exactly they should worship Daybreaker, or even what she represents, and a priestess interrupting them all before they come to blows over it, to make sure they realize taht so long as they worship Daybreaker, it doesn't matter
+		country_event = militem.warm.88
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7028,6 +7082,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_true_image"
 		###After much discussion and arguing, Warm Night does manage to get the other priestesses to agree to her effective heresy, by changing the nature of how the Adoratio presents Daybreaker, to instead be a pony to aspire to in terms of virtues and strength, not as a creature to be worshipped, and instead focus on doing good instead of loving Daybreaker
+		country_event = militem.warm.89
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7084,6 +7139,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_married_to_job"
 		###At a retirement ceremony for Scorched Earth, Luminous also announces she will be following suit and going with him, and although Warm Night is happy for them, she also admits her worry about how two of her most promising generals will leave the Ordo defenseless, but they promise to continue to serve, in a reduced capacity anyway
+		country_event = militem.warm.90
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7123,6 +7179,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_on_home_turf"
 		###A new officer recruit is sent through the wringer on their final test, which involves a practice scenario in the jungle, to learn the dangers of it, and how to survive, and they struggle with it, and almost lose most of their command before passing, due to a bit of ingenuity on their part
+		country_event = militem.warm.91
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7176,6 +7233,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_engines_of_future"
 		###A worker, being preached to the entire time, struggles to accomplish one of her tasks that she has been given for a new, expansive manufactory for the future, and she nearly passes out before being taken away
+		country_event = militem.warm.92
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7196,6 +7254,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_ramp_up_recycling"
 		###A short radio ad of how recycling is every pony's duty to serve the Empress and keep the Ordo safe and secure, and that ponies who don't follow will suffer some consequences socially
+		country_event = militem.warm.93
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7213,6 +7272,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_furrows_of_food"
 		###A farmer is provided new tools that will greatly innovate how they harvest food, although they are rather clueless since they were not given proper instructions and almost burns down their fields of maize and gets popcorn
+		country_event = militem.warm.94
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7247,6 +7307,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_healthcare_served_fresh"
 		###Event of Warm Night and some of her advisors looking at proposed healthcare plans, and nopony coming to any agreement since all have benefits, although one eventually decides to just do all of them, which gets greenlit after they all realize they were being pedantic
+		country_event = militem.warm.95
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7313,6 +7374,9 @@ shared_focus = {
 	relative_position_id = MTS_empires_of_stone
 	
 	cost = 4
+	available = {
+		#Prosperity of 70 in all SE states
+	}
 	prerequisite = {
 		focus = MTS_jungles_of_concrete
 		focus = MTS_empires_of_stone
@@ -7321,7 +7385,19 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeastern_paradise"
-		add_ideas = MTS_paradise_of_southeast
+		if = {
+			limit = {
+				has_idea = MTS_paradise_of_southeast
+				NOT = { has_completed_focus = MTS_southeastern_paradise }
+			}
+			swap_ideas = {
+				remove_idea = MTS_paradise_of_southeast
+				add_idea = MTS_utopic_solarists
+			}
+		}
+		else = {
+			add_ideas = MTS_paradise_of_southeast
+		}
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7339,6 +7415,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_independent_actor"
 		###Warm Night assembles a group of various ponies in the Adoratio and Militarium wings to prepare for how they will handle their own foreign policy, since they are now a truly independent nation
+		country_event = militem.warm.96
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7356,6 +7433,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_inward_healing"
 		###Warm Night assembles a different group of ponies, mainly of Adoratio priestesses, to handle the clear divides in society that still exist, especially with the thestrals, as they must be integrated to keep the Ordo stable
+		country_event = militem.warm.97
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7394,6 +7472,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_withdraw_from_world_stage"
 		###After a long series of talks and also predictions, Warm Night ends up closing all borders and ports of entry for merchants, as she feels that it is too risky to bring in agents from the Solar Empire or elsewhere, although she allows some refugee resettlement to remain
+		country_event = militem.warm.98
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -7411,6 +7490,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_exempting_brokenhearted"
 		###A few ponies are given the approval via lottery or some other method to be allowed entrance into the Ordo, which causes them great joy as they were waiting for weeks to be let in; the ponies are from one of the other rump states or from STG
+		country_event = militem.warm.99
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7464,6 +7544,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_jobs_for_jobless"
 		###An unemployed pony who is actually happy with their life living off some social welfare is forced to start work on a construction team by some of the Militarium there and she bemoans how she has to work for a living again
+		country_event = militem.warm.100
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -7490,6 +7571,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_bonds_of_isolated"
 		###After reports of the Changeling Hegemony collapsing and SCS remaining free, Warm Night weighs her options of offering to form an alliance or not, although she is finally convinced that it is for the better
+		country_event = militem.warm.101
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7508,6 +7590,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_path_of_purity"
 		###Short event of a radio broadcast about how some ponies were wanting the nation to align with some other power on the continent, and then going on about how it's a unique country that must remain pure of any ideological corruption, and that they will be staying the course alone
+		country_event = militem.warm.104
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7529,6 +7612,10 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_shared_missions"
 		###Maybe event of a combined training exercise with south-eastern and southern forces, and the camaraderie that it builds to give them the will to fight against the larger countries around them; bypass focus if they reject
+		country_event = militem.warm.105
+		hidden_effect = {
+			country_event = militem.warm.105
+		}
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7549,6 +7636,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_privacy_for_everypony"
 		###Follow a new, South-Eastern speculatore as she runs an op to recapture some intelligence that was stolen and in the end has to take down a Solarist speculatore who was trying to flee the country
+		country_event = militem.warm.106
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7566,6 +7654,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_southeast_homeguard"
 		###Possibly event of some training exercise with the new elite guards of the South-East getting into a scrap with one of the last remaining mythical creatures in Equestria such as a bugbear or the like and coming out on top
+		country_event = militem.warm.107
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7587,6 +7676,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_salvation_outside_the_empress"
 		###After wrapping up another series of meetings with her council, Warm Night spends a bit of time in prayer and thought about how she's led ponies into a new hope outside of the Empress, which worries what might happen to her if she ever is taken back to the Empire, but she concludes for the time being that the South-East is her mission, and she will nurture it
+		country_event = militem.warm.108
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7651,6 +7741,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_token_labor_force"
 		###A thestral is called in by her manager about her performance in an office job or the like and is fired for little reason other than they found another thestral who will work for even less, which makes her even more resentful at them and the thestral that replaced her
+		country_event = militem.warm.109
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7668,6 +7759,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_logical_endless_workday"
 		###A thestrals manager has her first evening on the job as she meets with her employers to talk about the plans for thestral workforce expansion, which she is pleased about as ponies seem to finally be accepting her and others, as it is clear that thestrals help improve productivity at night
+		country_event = militem.warm.110
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7685,6 +7777,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_lunar_solar_cycle"
 		###Warm Night attends one of the thestral holidays that they hold at night, and as she meets with a couple of thestral community leaders she is in awe at some of the decorations they set up; would effectively be like a New Year or similar celebration
+		country_event = militem.warm.111
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -7702,6 +7795,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_good_pencil_pushers"
 		###Maybe event of some thestral clerks being pressed into emergency militia forces, which goes poorly for them
+		country_event = militem.warm.112
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7720,6 +7814,7 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_solarist_thestrals"
 		###Some thestral parents are appalled when their children return from their schools decrying some of their culture as thestrals, which signifies some of the harsh chastising that they received for their heritage from the schools they are required to go to
 		###+0.02 communism, +5% land night attack, -5% org
+		country_event = militem.warm.113
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7737,6 +7832,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_nocturnal_strike_teams"
 		###Thestrals, in a new experimental strike team, show some of their night tactics and skills against one of the better groups in Militem Solar and handily defeats them, which earns them a new spot in the military
+		country_event = militem.warm.114
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7757,6 +7853,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_great_migration"
 		###Dual loc event which will detail either the amount of thestrals that have been forced to work in the cities to keep the expansion growing and the problems already caused, or thestrals flocking to the cities for economic opportunity and how it's caused tensions but they are already bearing fruit for employers
+		country_event = militem.warm.115
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7775,6 +7872,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_faith_perfected_socialism"
 		###Warm Night walks through, under cover, the streets of New Baltimare and sees how life has been improved for so many, and how they all still remain faithful to Daybreaker, despite the troubles they had experienced for so long, and she is proud of the accomplishment that so many have earned, and that they will be a shining beacon of peace and prosperity and the benefits of Solarism to everypony
+		country_event = militem.warm.116
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -7796,6 +7894,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_critical_mistakes"
 		###As the last of the resistance in Sanctum Solar is taken, Warm Night moves to establish at least a bit of trust by holding a speech from the palace that she will not oppress them like they expect, but they will be educated on their misdeeds and misguidance, and that they will live far better than before
+		country_event = militem.warm.117
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -7813,6 +7912,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_addressing_sore_horn"
 		###Follow one of the injured soldiers from SOL in the war between them and MTS and how he is given charity more than he deserves since he ended up killing a couple of priestesses before the war as over, but he is told that all are forgiven and will be helped, which pricks his heart
+		country_event = militem.warm.118
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -7830,6 +7930,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_differences_of_theology"
 		###Warm Night marches into one of the churches that are still used by the mainline Adoratio, and she sits in on some of their worries and statements about faith and Daybreaker and then she lambasts them, since she reveals who she is, and tries to convict them that they are betraying what it means to be a priestess, with only marginal success
+		country_event = militem.warm.119
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7847,6 +7948,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_mending_broken_links"
 		###Scorched Earth arrives at the headquarters of the Militarium, where Blueblood has holed up, and he has an effective shouting match with Blueblood, and does eventually get other soldiers to let him in, so he can arrest Blueblood himself for holding back the Militarium and the Empire
+		country_event = militem.warm.120
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7864,6 +7966,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_stamping_out_economic_radicalism"
 		###A report is presented of how the newest, expensive programs are being applied to the poorest and most devestated by the war to keep them from growing resentful or radicalized, and it reports how it's going well, even if not everypony agrees with it, even in Warm Night's cabinet
+		country_event = militem.warm.121
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7882,6 +7985,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_dissolve_inquisitionis"
 		###Presenation of a new law, penned by Warm Night herself, declaring how the Inquisitionis was corrupting the Empire and trying to keep power for itself, and that she is disbanding it; effectively immediately, inquisitors would become priestesses, or be arrested, so the Empire may be a better place
+		country_event = militem.warm.122
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -7900,6 +8004,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_appoint_new_lady_inquisitor"
 		###Warm Night brings forth Quasar Pulse, who is heavily guarded and also has an inhibitor ring, in to declare that she is no longer Lady Inquisitor, and that she will see who will replace her before she is executed for crimes against the Empire and ponies, which only gets Quasar Pulse to hate her more; the new pony is another MTS priestess
+		country_event = militem.warm.123
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -7917,6 +8022,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_honoring_service"
 		###Scorched Earth awkwardly meets with some of his peers from before, who are distrustful of him, and he works at convincing them, despite being arrested at the moment, that they can be released if they promise to hold to higher ideals than what has been done in the Empire so far, which only gets a few to agree
+		country_event = militem.warm.124
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8139,6 +8245,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_holiest_city"
 		###A new holiday is held for when Sanctum Solar was freed from the tyranny of the old Inquisitionis as well as Daybreaker/the Regent being liberated from them, and it is even more religious than most other ceremonies that have been held by Warm Night, who comments on it as such
+		country_event = militem.warm.125
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8156,6 +8263,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_united_general_staff"
 		###Warm Night has a long, tiring, and frustrating negotiation with Blueblood to convince him to continue working for the Empire and also to stop souring other ponies' opinions of her, too, and he is overly flirty with her, to annoy her, mostly, but after some dealing, he does agree, although it means he is digging his hooves into more of the Militarium than before
+		country_event = militem.warm.126
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8175,6 +8283,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_monarch_with_limits"
 		###Warm Night meets with an imprisoned Daybreaker or regent, to tell them that they are free to lead the Empire again, as she never wanted to do so, but she warns how the Empire has changed, and that she has brought the Adoratio to a place where they will defend better ideals than what Daybreaker had for them, which almost leads to Daybreaker/the Regent to reject her, although they agree in the end because of her boldness
+		country_event = militem.warm.127
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -8198,11 +8307,13 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_acceptance_of_false_goddess"
 		###Warm Night is invited to Canterlot, and she goes on a train, and feels nervous because she is certain she will be facing some kind of punishment, but she felt compelled to go, and she is actually welcomed by Celestia, although is told she'll be studying a while there, under Celestia's guidance
+		country_event = militem.warm.128
 	}
 	
 	ai_will_do = { factor = 320 }
 }
 
+###Potentially remove these next two focuses, have two or three events of Warm Night's lessons play before the rest of the tree is allowed
 shared_focus = {
 	id = MTS_entreating_reason
 	x = -2
@@ -8335,6 +8446,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_new_gospel"
 		###After returning to the South-East, Warm Night is confronted by both Luminous and Scorched about her visit and she tries to assuage them that she is still committed but that she has been enlightened, but is not a heretic
+		country_event = militem.warm.134
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8371,6 +8483,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_radical_reforms"
 		###Event of a cheesy advertisement for the economic opportunity for ponies to make a living in the South-East, which is mostly filled with false information or awkward statements from thestrals about how great it is, or the like
+		country_event = militem.warm.135
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8388,6 +8501,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_relinquish_control"
 		###Warm Night enters her office when she sees that there is a pony at her desk pouring over different account books, which is causing them much stress because of the horrible economic balances, and she is barely able to agree to his demands of continuing to scry through things to keep the South-East afloat
+		country_event = militem.warm.136
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -8405,6 +8519,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_minimal_disruption"
 		###Warm Night drags Scorched Earth along to one of the new harmonist settlements, and she shows how they are still following some of the minimalist tenets of Militem Solar, but are doing it to benefit everypony, which SE begrudgingly admits is worthwhile
+		country_event = militem.warm.137
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8422,6 +8537,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_redirected_fervor"
 		###Warm Night takes Luminous Blade through the Ordo that she and Scorced Earth once worked in, and she shows how ponies are still working together, and even protecting each other from some of the threats from the jungles and the like, just like Luminous swore to the ponies, which makes Luminous ponder her purpose
+		country_event = militem.warm.138
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8439,6 +8555,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_mass_honorable_discharge"
 		###Follow a soldier as their last day on the job as a warrior for the Militem Solar, and he has a few emotional moments with his squadmates before they are sent back to their homes and cities
+		country_event = militem.warm.139
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8474,6 +8591,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_royal_tour"
 		###A dinner between Warm Night, a couple of other Solarists, and Celestia is held in acknowledgement of Celestia's visit to the South-East to show that things are progressing well, and Celestia spends a short time discussing with Warm Night her improvement on a personal level to motivate her
+		country_event = militem.warm.140
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8493,6 +8611,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_full_pardons"
 		###Warm Night brings both SE and LB before her in a tribunal, which has them both concerned about their future, but she soon informs them that they are being fully pardoned, since she convinced Celestia to see the merit of their skills to continue on
+		country_event = militem.warm.141
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -8512,6 +8631,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_early_retirements"
 		###After bringing them forward in a tribunal, Warm Night admits that she was only able to partly stave off Celestia's requirements for justice and that both SE and LB must retire from all forms of service, but they will be allowed to live freely otherwise
+		country_event = militem.warm.142
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8530,6 +8650,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_royal_inspection"
 		###A nervous Warm Night waits for Celestia to see how their army has become more specialized and demobilized, and since Celestia is still silent on her opinion of it, that she might not have accomplished what was desired, but Celestia soon reassures her that she is on the right course
+		country_event = militem.warm.143
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8585,7 +8706,8 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_wayward_wanderers"
-		###Warm Night holds one final meeting with LB and SE because she worries because they are still at risk of facing some kind of prosecution, and she urges them to turn to harmony and to fallow what ponies were always meant to do, and it finally convinces them
+		###Warm Night holds one final meeting with LB and SE because she worries because they are still at risk of facing some kind of prosecution, and she urges them to turn to harmony and to follow what ponies were always meant to do, and it finally convinces them
+		country_event = militem.warm.144
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8603,7 +8725,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_warriors_of_peace"
-		add_ideas = MTS_warriors_of_peace
+		add_ideas = MTS_warriors_of_peace_idea
 	}
 	
 	ai_will_do = { factor = 40 }
@@ -8721,6 +8843,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_helping_themselves"
 		###Warm Night works with Fat Stacks to see how the economic outlook has improved in the South-East since he's helped, and she feels slightly emotional that her vision of a prosperous South-East is coming to fruition and that ponies can live in peace
+		country_event = militem.warm.145
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8738,6 +8861,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_liberated_army"
 		###Warm Night sees a report about how the military helped the ponies who suffered in the wake of a hurricane on one of the islands and the nation has united behind ideals of helping each other
+		country_event = militem.warm.146
 	}
 	
 	ai_will_do = { factor = 80 }
@@ -8760,6 +8884,7 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_embrace_of_sun"
 		###After the annexation of the South-East, Warm Night meets with both Scorched Earth and Luminous at a new restaurant in New Horseleans, and they chat together, as friends, about how they have integrated into the new Equestria, and that in the end, the South-East did better than any could have hoped
+		country_event = militem.warm.147
 	}
 	
 	ai_will_do = { factor = 320 }
@@ -9023,6 +9148,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_hoofs_that_won_the_war }
+	mutually_exclusive = { focus = MTS_supplies_for_righteous }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_guns_of_old"
@@ -9036,37 +9162,6 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = MTS_mudslingers
-	x = 2
-	y = 1
-	relative_position_id = MTS_hoofs_that_won_the_war
-	
-	cost = 2.1
-	prerequisite = {
-		focus = MTS_hoofs_that_won_the_war
-		focus = MTS_machine_goddess
-	}
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus MTS_mudslingers"
-		add_tech_bonus = {
-			name = engineer_bonus
-			uses = 2
-			bonus = 1
-			category = engineers_tech
-		}
-		add_tech_bonus = {
-			name = tank_bonus
-			uses = 1
-			bonus = 0.5
-			category = cat_light_armor
-		}
-	}
-	
-	ai_will_do = { factor = 40 }
-}
-
-shared_focus = {
 	id = MTS_supplies_for_righteous
 	x = 0
 	y = 1
@@ -9074,6 +9169,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_machine_goddess }
+	mutually_exclusive = { focus = MTS_guns_of_old }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_supplies_for_righteous"
@@ -9113,7 +9209,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_guns_of_old }
-	mutually_exclusive = { focus = MTS_consecrate_tech_priestesses }
+	#mutually_exclusive = { focus = MTS_consecrate_tech_priestesses }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_inquisitors_of_battle"
@@ -9125,6 +9221,37 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = MTS_mudslingers
+	x = 2
+	y = 1
+	relative_position_id = MTS_guns_of_old
+	
+	cost = 2.1
+	prerequisite = {
+		focus = MTS_guns_of_old
+		focus = MTS_supplies_for_righteous
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_mudslingers"
+		add_tech_bonus = {
+			name = engineer_bonus
+			uses = 2
+			bonus = 1
+			category = engineers_tech
+		}
+		add_tech_bonus = {
+			name = tank_bonus
+			uses = 1
+			bonus = 0.5
+			category = cat_light_armor
+		}
+	}
+	
+	ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
 	id = MTS_consecrate_tech_priestesses
 	x = 0
 	y = 1
@@ -9132,7 +9259,7 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_supplies_for_righteous }
-	mutually_exclusive = { focus = MTS_inquisitors_of_battle }
+	#mutually_exclusive = { focus = MTS_inquisitors_of_battle }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_consecrate_tech_priestesses"
@@ -9171,6 +9298,7 @@ shared_focus = {
 		focus = MTS_inquisitors_of_battle
 		focus = MTS_consecrate_tech_priestesses
 	}
+	prerequisite = { focus = MTS_mudslingers }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_structured_and_logical"
@@ -9305,6 +9433,8 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_endless_construction }
+	mutually_exclusive = { focus = MTS_unending_debts }
+	mutually_exclusive = { focus = MTS_slaves_to_empress }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_free_to_labor"
@@ -9325,6 +9455,8 @@ shared_focus = {
 		focus = MTS_endless_construction
 		focus = MTS_watchers_of_sun
 	}
+	mutually_exclusive = { focus = MTS_free_to_labor }
+	mutually_exclusive = { focus = MTS_slaves_to_empress }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_unending_debts"
@@ -9342,11 +9474,14 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_watchers_of_sun }
+	mutually_exclusive = { focus = MTS_free_to_labor }
+	mutually_exclusive = { focus = MTS_unending_debts }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_analyze_temptations"
 		###Possibly event of ponies being toiled for every waking moment because of their lower status as heretics, as they can be used as slaves for Daybreaker
 		add_ideas = MTS_slaves_for_eternity
+		#add_ideas = slavery_economy ###Discuss on if it's worth switching to
 	}
 	
 	ai_will_do = { factor = 160 }
@@ -9721,6 +9856,28 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = MTS_state_obvious
+	x = 0
+	y = 1
+	relative_position_id = MTS_temporary_measures
+	
+	cost = 2.9
+	prerequisite = { focus = MTS_temporary_measures }
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MTS_state_obvious"
+		custom_effect_tooltip = MTS_angy_sun_tt
+		remove_ideas = MTS_unsanctioned_ordo
+		###Will give SLE a short event of a letter from Pinpoint pretty much telling them to get lost, as they are clearly the corrupt ones and that she will destroy heresy where they couldn't; ruins relations and gives some war support to them
+		hidden_effect = {
+			SLE = { country_event = militem.pinpoint.23 }
+		}
+	}
+	
+	ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
 	id = MTS_buffer_zone
 	x = -2
 	y = 1
@@ -9874,10 +10031,10 @@ shared_focus = {
 	id = MTS_righteous_overwatch
 	x = 0
 	y = 1
-	relative_position_id = MTS_temporary_measures
+	relative_position_id = MTS_state_obvious
 	
 	cost = 2.9
-	prerequisite = { focus = MTS_temporary_measures }
+	prerequisite = { focus = MTS_state_obvious }
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_righteous_overwatch"
@@ -9888,23 +10045,23 @@ shared_focus = {
 	ai_will_do = { factor = 40 }
 }
 
-shared_focus = {
-	id = MTS_inquisitor_librarians
-	x = 0
-	y = 1
-	relative_position_id = MTS_righteous_overwatch
-	
-	cost = 2.9
-	prerequisite = { focus = MTS_righteous_overwatch }
-	
-	completion_reward = {
-		log = "[GetDateText]: [Root.GetName]: Focus MTS_inquisitor_librarians"
-		country_event = militem.pinpoint.23
-		###Follow some inquisitors as they try to parse how they are supposed to justify learning many things, including some that could be close to heresy, with their training against heresy; there's a lot of cognitive dissonance
-	}
-	
-	ai_will_do = { factor = 40 }
-}
+#shared_focus = {
+#	id = MTS_inquisitor_librarians
+#	x = 0
+#	y = 1
+#	relative_position_id = MTS_righteous_overwatch
+#	
+#	cost = 2.9
+#	prerequisite = { focus = MTS_righteous_overwatch }
+#	
+#	completion_reward = {
+#		log = "[GetDateText]: [Root.GetName]: Focus MTS_inquisitor_librarians"
+#		country_event = militem.pinpoint.23
+#		###Follow some inquisitors as they try to parse how they are supposed to justify learning many things, including some that could be close to heresy, with their training against heresy; there's a lot of cognitive dissonance
+#	}
+#	
+#	ai_will_do = { factor = 40 }
+#}
 
 shared_focus = {
 	id = MTS_the_sweathouse
@@ -10028,7 +10185,7 @@ shared_focus = {
 	id = MTS_return_to_normal
 	x = 0
 	y = 3
-	relative_position_id = MTS_inquisitor_librarians
+	relative_position_id = MTS_righteous_overwatch
 	
 	cost = 4.2
 	prerequisite = {
@@ -10180,6 +10337,11 @@ shared_focus = {
 	
 	cost = 2.9
 	prerequisite = { focus = MTS_silence_all_ears }
+	available = {
+		owns_state = 1196
+		owns_state = 1197
+		owns_state = 1198
+	}
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_silence_all_ears"
@@ -10260,32 +10422,34 @@ shared_focus = {
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus MTS_spring_surprise"
 		custom_effect_tooltip = MTS_prepare_for_battle_tt
-		775 = {
-			controller = {
-				ROOT = {
-					create_wargoal = {
-						target = PREV
-						type = annex_everything
+		hidden_effect = {
+			775 = {
+				controller = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
 					}
 				}
 			}
-		}
-		712 = {
-			controller = {
-				ROOT = {
-					create_wargoal = {
-						target = PREV
-						type = annex_everything
+			712 = {
+				controller = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
 					}
 				}
 			}
-		}
-		1165 = {
-			controller = {
-				ROOT = {
-					create_wargoal = {
-						target = PREV
-						type = annex_everything
+			1165 = {
+				controller = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
 					}
 				}
 			}
@@ -10306,8 +10470,8 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_zebrica_conquered_tt
-			BAT = { country_exists = no }
-			HIP = { country_exists = no }
+			NOT = { country_exists = BAT }
+			NOT = { country_exists = HIP }
 			#Expand further; make into arrays for easier scripting
 		}
 	}
@@ -10330,8 +10494,8 @@ shared_focus = {
 	bypass = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_SOL_dead_tt
-			EQS = { country_exists = no }
-			SLW = { country_exists = no }
+			NOT = { country_exists = EQS }
+			NOT = { country_exists = SLW }
 		}
 	}
 	
@@ -10471,8 +10635,8 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_zebrica_conquered_tt
-			BAT = { country_exists = no }
-			HIP = { country_exists = no }
+			NOT = { country_exists = BAT }
+			NOT = { country_exists = HIP }
 			#Expand further; make into arrays for easier scripting
 		}
 	}
@@ -10498,8 +10662,8 @@ shared_focus = {
 	bypass = {
 		custom_trigger_tooltip = {
 			tooltip = MTS_SOL_dead_tt
-			EQS = { country_exists = no }
-			SLW = { country_exists = no }
+			NOT = { country_exists = EQS }
+			NOT = { country_exists = SLW }
 		}
 	}
 	
@@ -10582,7 +10746,6 @@ shared_focus = {
 	relative_position_id = MTS_merciful_torture
 	
 	cost = 2.9
-	prerequisite = { focus = MTS_merciful_torture }
 	prerequisite = { focus = MTS_repair_naval_yards }
 	
 	completion_reward = {

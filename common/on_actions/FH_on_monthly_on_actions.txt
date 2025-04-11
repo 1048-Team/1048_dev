@@ -199,4 +199,101 @@ on_actions = {
 			}
 		}
 	}
+	on_monthly_MGY = {
+		effect = {
+			log = "[GetDateText]: ROOT: [Root.GetName] on_monthly_MGY"
+			if = {
+				limit = {
+					has_war = yes
+					NOT = {
+						any_state = {
+							any_neighbor_state = {
+								owner = { has_war_with = MGY }
+							}
+						}
+					}
+				}
+				ROOT = { country_event = { id = zebrica_activity.19 days = 30 } } #kills another zebra desert tribes
+			}
+			else_if = {
+				limit = {
+					has_war_with = ABY
+					NOT = {
+						ABY = {
+							any_controlled_state = {
+								is_core_of = MGY
+							}
+						}
+					}
+				}
+				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
+				white_peace = MGY
+				ABY = {
+					every_owned_state = {
+						limit = {
+							is_core_of = MGY
+							#idk how to check if it's in another power's control
+						}
+						transfer_state_to = MGY
+					}
+				}
+			}
+		}
+	}
+
+	on_monthly_ILU = {
+		effect = {
+			log = "[GetDateText]: ROOT: [Root.GetName] on_monthly_ILU"
+			if = {
+				limit = {
+					date > 1056.6.6 #subject to change ofc
+					has_war = yes
+				}
+				random_list = {
+					3 = {
+						random_neighbor_country = {
+							limit = {
+								has_war_with = ILU
+								is_subject = no
+							}
+							random_other_country = {
+								limit = {
+									NOT = {
+										has_war_with = ILU
+										has_war_with = PREV
+									}
+									is_neighbor_of = ILU
+									if = {
+										limit = {
+											NOT = { country_exists = MGY }
+											original_tag = STM
+										}
+										has_country_flag = FG_STM_got_MGY_flag
+									}
+								}
+								country_event = {
+									id = zebrica_activity.14
+									random_days = 27
+									random_hours = 23
+								}
+							}
+						}
+					}
+					2 = {
+						modifier = { #kirin dice used in every kirin random_list
+							factor = 0.75
+							any_neighbor_country = {
+								OR = {
+									any_allied_country = {
+										has_tech = tech_kirin_astrology
+									}
+									has_tech = tech_kirin_astrology
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

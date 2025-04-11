@@ -7,9 +7,6 @@ characters = {
 				large = "gfx/leaders/EQS/Daybreaker.tga"
 				small = "GFX_idea_EQS_daybreaker_1048"
 			}
-			civilian = {
-				large = "gfx/leaders/EQS/Daybreaker.tga"
-			}
 		}
 		field_marshal = {
 			traits = { pony_race_trait solar_fury }
@@ -32,7 +29,6 @@ characters = {
 			ideology = solarism
 			expire = "1965.1.1"
 			desc = "POLITICS_DAYBREAKER_DESC"
-			id = -1
 			traits = { daybreaker_god2_1048 }
 		}
 	}
@@ -67,10 +63,7 @@ characters = {
 		portraits = {
 			army = {
 				large = "gfx/leaders/EQS/Sunset.tga"
-				small = "GFX_idea_EQS_sunset_shimmer"
-			}
-			civilian = {
-				large = "gfx/leaders/EQS/Sunset.tga"
+				small = "GFX_idea_EQS_sunset_shimmer_1048"
 			}
 		}
 		field_marshal = {
@@ -147,7 +140,6 @@ characters = {
 			}
 			civilian = {
 				small = "GFX_idea_EQS_aurora_shinespark"
-				large = "gfx/leaders/EQS/Aurora_Shinespark.tga"
 			}
 		}
 		corps_commander = {
@@ -228,17 +220,16 @@ characters = {
 			}
 			civilian = {
 				small = "GFX_idea_EQS_blueblood"
-				large = "gfx/leaders/EQS/Blueblood.tga"
 			}
 		}
 		field_marshal = {
-			traits = { pony_race_trait lord_commander media_personality not_stonks_genius unyielding_defender politically_connected }
-			skill = 3
-			attack_skill = 1
+			traits = { pony_race_trait lord_commander media_personality daybreakers_favorite unyielding_defender arrogant_prick }
+			skill = 4
+			attack_skill = 3
 			defense_skill = 4
-			planning_skill = 4
-			logistics_skill = 1
-			desc = EQS_arrogant_cunt_desc
+			planning_skill = 1
+			logistics_skill = 5
+			#desc = EQS_arrogant_cunt_desc
 			visible = {
 				if = {
 					limit = {
@@ -259,7 +250,7 @@ characters = {
 			ideology = despotism
 			desc = "POLITICS_BLUEBLOOD_DESC"
 			traits = {
-				the_stallion_who_would_be_god
+				imperial_relative
 			}
 		}
 		advisor = {
@@ -270,7 +261,7 @@ characters = {
 			}
 			visible = { 
 				original_tag = EQS
-				hidden_trigger = { NOT = { has_government = democratic } }
+				NOT = { has_government = democratic }
 			}
 			available = {
 				hidden_trigger = {
@@ -295,7 +286,7 @@ characters = {
 			}
 			visible = {
 				can_create_intelligence_agency = yes
-				hidden_trigger = { NOT = { has_government = democratic } }
+				NOT = { has_government = democratic }
 			}
 			available = {
 				has_intelligence_agency = yes
@@ -857,6 +848,9 @@ characters = {
 		name = EQS_Nightfall_Expanse_name
 		gender = female
 		portraits = {
+			civilian = {
+				large = "gfx/scientists/EQS/Nightfall_Expanse.tga"
+			}
 			army = {
 				small = "GFX_idea_EQS_nightfall_expanse"
 			}
@@ -867,8 +861,10 @@ characters = {
 			cost = 125
 			ledger = army
 			allowed = {
-				original_tag = EQS
-				original_tag = MTS
+				OR = {
+					original_tag = EQS
+					original_tag = MTS
+				}
 			}
 			available = {
 				custom_trigger_tooltip = {
@@ -887,6 +883,17 @@ characters = {
 			}
 			research_bonus = { magical_tech = 0.075 }
 			traits = { mage_supremacist }
+		}
+
+		scientist = {
+			traits = { scientist_trait_brilliant_theorist }
+			skills = {
+				specialization_magical = 2
+			}
+
+			visible = {
+				OWNER = { NOT = { has_government = democratic } }
+			}
 		}
 	}
 	
@@ -1601,6 +1608,18 @@ characters = {
 			ai_will_do = { factor = 1 }
 		}
 	}
+
+	EQS_Flashpoint = {
+		name = EQS_Flashpoint_name
+		portraits = {
+		}
+		scientist = {
+			traits = { scientist_trait_armored_specialist scientist_trait_fast_learner }
+			skills = {
+				specialization_land = 2
+			}
+		}
+	}
 	
 	EQS_allen_spark_1048 = {
 		name = EQS_allen_spark
@@ -1682,6 +1701,32 @@ characters = {
 					}
 				}
 				has_country_flag = harmonist_commanders_return
+			}
+		}
+	}
+
+	EQS_Applesnack = {
+		name = EQS_Applesnack_name
+		portraits = {
+			army = {
+				large = "gfx/leaders/EQS/Applesnack.tga"
+			}
+		}
+
+		corps_commander = {
+			traits = { pony_race_trait inflexible_strategist infantry_leader }
+			skill = 4
+			attack_skill = 2
+			defense_skill = 4
+			planning_skill = 3
+			logistics_skill = 4
+			visible = {
+				if = {
+					limit = {
+						original_tag = EQS
+					}
+					has_country_flag = harmonist_commanders_return
+				}
 			}
 		}
 	}
@@ -1992,9 +2037,16 @@ characters = {
 			available = {
 			}
 			research_bonus = {
-				rocketry = 0.10
+				rocketry = 0.15
 			}
 			traits = { rocket_scientist }
+		}
+
+		scientist = {
+			traits = { scientist_trait_rocketry_specialist scientist_trait_brilliant_theorist }
+			skills = {
+				specialization_air = 3
+			}
 		}
 	}
 	

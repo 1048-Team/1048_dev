@@ -9,10 +9,7 @@ country_event = {
 	picture = GFX_event_solarempire 
 	
 	is_triggered_only = yes
-	immediate = {
-		NID_spawn_handelsflotte_subs = yes
-	}
-	
+
 	option = { 
 		name = gesellschaft.1.a
 		
@@ -456,7 +453,7 @@ country_event = {
 	
 	option = { 
 		name = gesellschaft.17.a
-		custom_effect_tooltip = NID_bank_cost_6_mil_tt
+		custom_effect_tooltip = NID_pay_6_mil_tt
 		custom_effect_tooltip = NID_gain_dockyard_5_tt
 		hidden_effect = {
 			add_to_variable = {
@@ -895,6 +892,9 @@ country_event = {
 			relation = guarantee
 			active = no
 		}
+		NID = {
+			country_event = gesellschaft.33
+		}
 	}
 }
 
@@ -1079,6 +1079,8 @@ country_event = {
 				target = NEI
 				modifier = large_increase
 			}
+			mark_focus_tree_layout_dirty = yes
+			load_focus_tree = NID_southeast_unification
 			news_event = corpofluff.3
 		}
 	}
@@ -1091,12 +1093,49 @@ country_event = {
 	desc = gesellschaft.40.d
 	picture = GFX_event_solarempire 
 	
-	is_triggered_only = yes
+	trigger = {
+		tag = NID
+		SPF = { exists = yes }
+	}
+	fire_only_once = yes
 	
 	option = { 
 		name = gesellschaft.40.a
 		ai_chance = {
 			base = 70
+		}
+		add_stability = -0.02
+		navy_experience = 15
+	}
+}
+
+country_event = {
+	id = gesellschaft.41
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.41"}
+	title = gesellschaft.41.t
+	desc = gesellschaft.41.d
+	picture = GFX_event_solarempire 
+	
+	
+	trigger = {
+		tag = NID
+		NRP = { exists = yes }
+	}
+	fire_only_once = yes
+	
+	option = { 
+		name = gesellschaft.41.a
+		ai_chance = {
+			base = 70
+		}
+		transfer_state = 52
+		transfer_state = 1213
+		transfer_state = 351
+		hidden_effect = {
+			country_event = {
+				id = gesellschaft.25
+				days = 5
+			}
 		}
 		
 	}

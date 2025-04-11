@@ -1467,11 +1467,6 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_beg_vesalipolis_for_aid
 	}
-	available = {
-		custom_trigger_tooltip = {
-			tooltip = NID_has_5_mil_tt
-		}
-	}
 	ai_will_do = {
 		factor = 100
 	}
@@ -1492,7 +1487,7 @@ shared_focus = {
 				}
 				support = {
 					mot_recon = { x = 0 y = 0 }
-					mot_artillery_brigade = { x = 0 y = 1 }
+					artillery = { x = 0 y = 1 }
 				}
 		}
 		capital_scope = {
@@ -1542,6 +1537,16 @@ shared_focus = {
 			add_building_construction = {
 				type = radar_station
 				level = 1
+			}
+		}
+		add_state_core = 52
+		add_state_core = 1213
+		add_state_core = 351
+		hidden_effect = {
+			STB = {
+				remove_state_core = 52
+				remove_state_core = 1213
+				remove_state_core = 351
 			}
 		}
 	}
@@ -2912,6 +2917,32 @@ shared_focus = {
 			remove_idea = NID_continental_port2
 			add_idea = NID_continental_port3
 		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_claimed_by = NID
+				}
+				remove_claim_by = NID
+			}
+			every_state = {
+				limit = {
+					is_core_of = BAL
+				}
+				remove_core_of = BAL
+			}
+			every_state = {
+				limit = {
+					is_claimed_by = MTS
+				}
+				remove_claim_by = MTS
+			}
+			every_state = {
+				limit = {
+					is_core_of = MTS
+				}
+				remove_core_of = MTS
+			}
+		}
 	}
 }
 
@@ -2927,7 +2958,7 @@ shared_focus = {
 
 	allow_branch = {
 		always = yes
-		#has_completed_focus = NID_our_own_hegemony
+		has_completed_focus = NID_our_own_hegemony
 	}
 	prerequisite = {
 		focus = NID_prepared_to_face_foe
@@ -3319,7 +3350,7 @@ shared_focus = {
 	id = NID_invest_in_aviation
 	icon = GFX_BAL_please_help
 	cost = 4.42
-	x = 44
+	x = 42
 	y = 3
 	ai_will_do = {
 		factor = 100
@@ -3667,11 +3698,14 @@ shared_focus = {
 	id = NID_aim_for_practicality
 	icon = GFX_BAL_please_help
 	cost = 4.42
-	x = 52
+	x = 46
 	y = 5
 
 	mutually_exclusive = {
 		focus = NID_aim_for_power_projection
+	}
+	available = {
+		has_completed_focus = NID_modern_navy_achieved
 	}
 
 	ai_will_do = {
@@ -3693,6 +3727,9 @@ shared_focus = {
 
 	mutually_exclusive = {
 		focus = NID_aim_for_practicality
+	}
+	available = {
+		has_completed_focus = NID_modern_navy_achieved
 	}
 
 	ai_will_do = {
@@ -4168,11 +4205,17 @@ shared_focus = {
 	id = NID_begin_colonial_rearmament
 	icon = GFX_BAL_please_help
 	cost = 4.42
-	x = 65
-	y = 3
+	x = 44
+	y = 14
 
 	ai_will_do = {
 		factor = 100
+	}
+	prerequisite = {
+		focus = NID_our_own_hegemony
+	}
+	allow_branch = {
+		has_completed_focus = NID_our_own_hegemony
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_begin_colonial_rearmament"
