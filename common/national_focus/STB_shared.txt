@@ -8546,6 +8546,462 @@ shared_focus = {
     ai_will_do = { factor = 320 }
 }
 
+###Celestia Jade Tree###
+shared_focus = {
+    id = STB_reclaiming_sunlight
+    x = 0
+    y = 1
+    relative_position_id = STB_stepping_into_harmonys_glory
+
+    cost = 5
+    allow_branch = { has_country_flag = STB_jade_chose_celestia }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_reclaiming_sunlight"
+        ###Event of Jade providing a hand-off speech for Celestia, who is clearly discomforted about being allowed in power yet again, and promises that with Celestia at the helm again for Equestria that things will go well for them all, as she was the best at leading in Harmony
+    }
+    ai_will_do = { factor = 640 }
+}
+
+shared_focus = {
+    id = STB_promises_of_harmony
+    x = -2
+    y = 1
+    relative_position_id = STB_reclaiming_sunlight
+
+    cost = 4
+    prerequisite = { focus = STB_reclaiming_sunlight }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_promises_of_harmony"
+        ###Celestia anxiously arrives to a radio booth, where she is greeted with awe and trepidation by the ponies in the station, and she feels the guilt of being given the position back again getting to her, but she manages to push it down so that she can interact with the ponies and answer their questions, ultimately promising what Jade said earlier about Harmony being resotred for everypony in Equestria
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_promises_of_restitution
+    x = 2
+    y = 1
+    relative_position_id = STB_reclaiming_sunlight
+
+    cost = 4
+    prerequisite = { focus = STB_reclaiming_sunlight }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_promises_of_restitution"
+        ###Celestia arrives in Salvation Plaza and momentarily flashes back to how it was used in the past by Daybreaker, but she pushes the thoughts aside as she sees the number of ponies who have come to hear her, and she promises that everypony who was wronged by her as Daybreaker and the Solarists will be recompensed, and that the ship will be righted by restoring respect between ponies
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_severed_trust
+    x = -1
+    y = 1
+    relative_position_id = STB_promises_of_harmony
+
+    cost = 3
+    prerequisite = { focus = STB_promises_of_harmony }
+    available = {
+        CRY = {
+            exists = yes
+            OR = {
+                is_in_faction_with = ROOT
+                AND = {
+                    OR = {
+                        has_country_leader = { character = CRY_princess_cadance ruling_only = yes }
+                        has_country_leader = { character = CRY_flurry_heart_1048 ruling_only = yes }
+                    }
+                    NOT = { is_in_faction_with = ROOT }
+                }
+            }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_severed_trust"
+        ###Celestia arrives in CRY to meet with either Flurry Heart or Cadance, who is also nervous, just like her, and they have a bit of a staredown for a moment or so, since they have only thus far interacted jvia a few letters, and at first they both have no words to say, with Celsetia finally breaking down first to apologize for how she failed them all, but with Cadance or Flurry also apologizing for many of the mistakes that CRY made post Great War
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_princess_of_harmony
+    x = 0
+    y = 2
+    relative_position_id = STB_reclaiming_sunlight
+
+    cost = 4
+    prerequisite = {
+        focus = STB_promises_of_harmony
+        focus = STB_promises_of_restitution
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_princess_of_harmony"
+        ###Follow Celestia as she first enters her court chambers again to hold Day Court, as she has not had ever had the chance to do so since she returned, as she never had the chance while leading the nation before, and she gets a bit overwhelmed by the ponies all looking at her, waiting for her to begin, and she finally gathers the nerve to start, and to begin to fix through legislation the nation
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_immediate_reparations
+    x = 2
+    y = 1
+    relative_position_id = STB_promises_of_restitution
+
+    cost = 3
+    prerequisite = { focus = STB_promises_of_restitution }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_immediate_reparations"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_honor_service
+    x = -2
+    y = 2
+    relative_position_id = STB_promises_of_harmony
+
+    cost = 4
+    prerequisite = { focus = STB_promises_of_harmony }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_honor_service"
+        ###Follow an officer on his last day in STB's military, as he has been given an extremely easy out to retirement at a young age, and he has absolutely taken it, and he is surprised by a small party to see him off, and as he's about to leave, he gets dragged back into a few final meetings, and ultimately convinced to stay on as he is an expert in whatever is currently being dealt with (such as insurrections or the like)
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_retool_plans
+    x = 0
+    y = 2
+    relative_position_id = STB_promises_of_harmony
+
+    cost = 4
+    prerequisite = { focus = STB_promises_of_harmony }
+    mutually_exclusive = { focus = STB_continue_safety }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_retool_plans"
+        #Idea here
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_continue_safety
+    x = 1
+    y = 1
+    relative_position_id = STB_princess_of_harmony
+
+    cost = 4
+    prerequisite = { focus = STB_princess_of_harmony }
+    mutually_exclusive = { focus = STB_retool_plans }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_continue_safety"
+        #Idea here
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_capital_for_all
+    x = 1
+    y = 1
+    relative_position_id = STB_immediate_reparations
+
+    cost = 3
+    prerequisite = { focus = STB_immediate_reparations }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_capital_for_all"
+        ###Event of Celestia gathering with a number of ponies standing outside a recently repaired section of Canterlot, which is rather obvious given the difference in the age of the bricks and stonework of the area, and she holds a speech about how the ponies living there were brave to do so, and that they deserved to finally have their lives restored after the war, and that it was only through the contribution of many ponies helping each other that it was done
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_harmonys_vanguard
+    x = -1
+    y = 1
+    relative_position_id = STB_honor_service
+
+    cost = 4
+    prerequisite = { focus = STB_honor_service }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonys_vanguard"
+        ###Follow some troops as they perform a test infiltration of enemy cities by going through some of the danker and more dangerous areas of Manehattan, and they get into an altercation in a slum, with a few belligerent ponies that they are unable to shake off, and it ultimately makes them fail their mission, since they weren't supposed to actually take down any citizens even if aggressive
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_war_forges_to_plow_shears
+    x = 0
+    y = 1
+    relative_position_id = STB_retool_plans
+
+    cost = 5
+    prerequisite = {
+        focus = STB_retool_plans
+        focus = STB_continue_safety
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_war_forges_to_plow_shears"
+        #Effect here
+        ###Possibly small event of a worker having a last look at his former employment, before she leaves for her new job the next day, as the factory she worked at was closed because the weapons it made were no longer needed
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_promise_warriors_work
+    x = 2
+    y = 1
+    relative_position_id = STB_retool_plans
+
+    cost = 5
+    prerequisite = {
+        focus = STB_retool_plans
+        focus = STB_continue_safety
+    }
+    mutually_exclusive = { focus = STB_return_normalcy }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_promise_warriors_work"
+        ###Jade Turf enters Celestia's chambers, where she is waiting for Jade already, and Jade is a tad confused, since she was under the impression taht, because of her harsh leadership, she'd be left alone or possibly brought forward to give an account of her decisions, but Celestia at first chats her up, then finally requests that she return to government, as there are needs that only she can fill, which Jade finally agrees to do
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_return_normalcy
+    x = 0
+    y = 2
+    relative_position_id = STB_immediate_reparations
+
+    cost = 5
+    prerequisite = { focus = STB_immediate_reparations }
+    mutually_exclusive = { focus = STB_promise_warriors_work }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_return_normalcy"
+        ###Celestia sits down with Jade after requesting her for a surprise visit, as Jade was expecting to mostly just fade away into obscurity, and Celestia finds it more amusing than anything that is the case, since she wants to catch up with the pony who helped to restore Equestria and Harmony, and they chat for a while mostly about what is happening in politics, and Jade grows a bit more open with her thoughts about her late friends, which Celsetia tries to console her with
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_thriving_and_surviving
+    x = -1
+    y = 2
+    relative_position_id = STB_retool_plans
+
+    cost = 5
+    prerequisite = { focus = STB_retool_plans }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_thriving_and_surviving"
+        #Idea here and lock to civ economy
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_wizened_wariness
+    x = 2
+    y = 1
+    relative_position_id = STB_promise_warriors_work
+
+    cost = 5
+    prerequisite = { focus = STB_promise_warriors_work }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_thriving_and_surviving"
+        #Idea here and lock to early mob
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_encourage_prosperity
+    x = 0
+    y = 2
+    relative_position_id = STB_continue_safety
+
+    cost = 5
+    prerequisite = { focus = STB_continue_safety }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_encourage_prosperity"
+        #Idea here and loc to civ economy
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_expand_ponies_voices
+    x = 1
+    y = 1
+    relative_position_id = STB_return_normalcy
+
+    cost = 4
+    prerequisite = { focus = STB_return_normalcy }
+    prerequisite = { focus = STB_capital_for_all }
+    mutually_exclusive = { focus = STB_privy_to_all }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_return_normalcy"
+        ###Event of Celestia watching from the background as she uses a disguise to observe the first meeting of the new Equestrian parliament, and the first laws that it tries to pass, as she has stepped back to be nothing more than a figurehead, as she believes that the OED had the right idea, and that ponies should lead themselves, even if she feels a bit of regret for not being able to best lead her ponies like she believed she would
+    }
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = STB_privy_to_all
+    x = 1
+    y = 2
+    relative_position_id = STB_capital_for_all
+
+    cost = 4
+    prerequisite = { focus = STB_capital_for_all }
+    mutually_exclusive = { focus = STB_expand_ponies_voices }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_privy_to_all"
+        ###Event of Celestia watching as the new privy council she has created files into their dedicated chambers to begin deliberation on different aspects of running the country, and she spends a bit longer looking at Jade, whom she has convinced to be one of the ministers of the council, and soon enough they get into disagreements about how to perform different actions, which she feels at home with, as it reminds her of time as Princess before the Great War
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_eternal_beacon
+    x = 0
+    y = 1
+    relative_position_id = STB_wizened_wariness
+
+    cost = 7
+    prerequisite = {
+        focus = STB_thriving_and_surviving
+        focus = STB_wizened_wariness
+        focus = STB_encourage_prosperity
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_eternal_beacon"
+        ###Event of Celestia observing from her balcony a parade that honors her and to a lesser extent Jade as it recalls the liberation that Jade brought and the restoration of the crown as well, and she muses about how she has not done most of the work, and that Jade was the one truly responsible, and she wonders if she'll ever be truly worthy of her ponies' love, like she used to have, and she watches in silence, eventually leaving for her chambers, to ruminate further
+    }
+    ai_will_do = { factor = 320}
+}
+
+###Luna Jade Tree###
+shared_focus = {
+    id = STB_era_of_night
+    x = 0
+    y = 1
+    relative_position_id = STB_stepping_into_harmonys_glory
+
+    cost = 5
+    allow_branch = { has_country_flag = STB_jade_chose_luna }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_era_of_night"
+        ###Jade meets with Luna, who is rather grumpy still about everything that has happened in regarding to Equestria, to hand over the reins to Luna, and she has a brief speech about how Luna will follow in Celestia's hoofsteps and bring greatness back to Harmony and Equestria
+    }
+    ai_will_do = { factor = 320 }
+}
+
+shared_focus = {
+    id = STB_prepare_for_victory
+    x = 0
+    y = 1
+    relative_position_id = STB_era_of_night
+
+    cost = 3
+    prerequisite = { focus = STB_era_of_night }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_prepare_for_victory"
+        ###Follow Luna as she meets with some of the castle staff and prepares a speech for why the populace must be ready for war at any chance, because they must end the threat that Marelandia has been for generations and topple MARESOC to restore some balance to the world and for retribution for the pain that it caused Celestia and everypony else in her wake
+    }
+    ai_will_do = { factor = 160 }
+}
+
+shared_focus = {
+    id = STB_soldier_matters
+    x = -3
+    y = 1
+    relative_position_id = STB_prepare_for_victory
+
+    cost = 4
+    prerequisite = { focus = STB_prepare_for_victory }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_eternal_beacon"
+        ###Follow a soldier as he rushes out of his barracks in a bit of a huff as a surprise inspection by Luna and some of her staff is brought upon his regiment, and when she arrives, she is curt and to the point, and also biting, as she is not impressed with some of the discipline in the ranks, as it is not like her own Night Guard, whom she places in charge over them, to ensure that they are trained to proper standards to defeat MARESOC
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_leadership_matters
+    x = 2
+    y = 1
+    relative_position_id = STB_prepare_for_victory
+
+    cost = 4
+    prerequisite = { focus = STB_prepare_for_victory }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_leadership_matters"
+        ###Event of Luna having her first meeting with a new high command of Equestria, which has not met since the end of the Great War, and she goes on about what she sees and what they see about how the Equestrian military must be rebuilt, and both sides go through many examples of inefficient or ineffective aspects, and squabble over how to best resolve them
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_harmonious_overwatch
+    x = 0
+    y = 2
+    relative_position_id = STB_prepare_for_victory
+
+    cost = 5
+    prerequisite = { focus = STB_prepare_for_victory }
+    mutually_exclusive = { focus = STB_wave_guardians }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_harmonious_living"
+        ###Short event of Luna meeting with the reborn Wonderbolts and some of the other air commanders, and going through effectively a voting process to determine who is the best suited for leading the invasion of EQC, which none of them want, since it's an insane responsibility and there is the risk of failure, which Luna makes clear she isn't going to tolerate
+    }
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = STB_wave_guardians
+    x = 0
+    y = 1
+    relative_position_id = STB_leadership_matters
+
+    cost = 5
+    prerequisite = { focus = STB_leadership_matters }
+    mutually_exclusive = { focus = STB_harmonious_overwatch }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_wave_guardians"
+        ###Short event of the pony appointed by Luna to lead the invasion of EQC through naval warfare panicking as it's an ask that few would consider sane, since a cross-continental invasion without any friendly land to invade from already is effectively suicide, but he pushes himself to start thinking of ways, and ideates through a few that are rather far-fetched, such as cloaked ships, false transponders, etc., and begins to come to a better idea of what can work
+    }
+    ai_will_do = { factor = 40 }
+}
+
 ###Military Tree###
 shared_focus = {
     id = STB_unified_central_command
