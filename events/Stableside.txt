@@ -39,10 +39,71 @@ country_event = { #Lucky leads an interrogation of a captured NID operative that
         name = stableside.2.b
         add_war_support = 0.05
         add_manpower = -1482
-        #NID modifier here
+        #NID opinion modifier here
         351 = { set_demilitarized_zone = yes }
         1213 = { set_demilitarized_zone = yes }
         52 = { set_demilitarized_zone = yes }
+    }
+}
+
+country_event = { #NID's leader receives a letter from Lucky, begging in the most polite and non-obvious ways possible for materiel for his military to help fend off the NRP, and he offers extensive payments from his private coffers, as well as the tax base, and otherwise tries to act chummy with the leader
+    id = stableside.3
+    title = stableside.3.t
+    desc = stableside.3.d
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside.3" }
+
+    is_triggered_only = yes
+
+    option = { #Money is money.
+        name = stableside.3.a
+        FROM = {
+            country_event = {
+                id = stableside.1001
+                days = 3
+            }
+        }
+    }
+    option = { #How about a better deal? For us, anyway.
+        name = stableside.3.b
+        FROM = {
+            country_event = {
+                id = stableside.1002
+                days = 3
+            }
+        }
+    }
+    option = { #Hah! Like we'd trust him!
+        name = stableside.3.c
+    }
+}
+
+country_event = { #NID receives another letter from Lucky, which is a bit more hastily written than the guns letter, offering them the region around the bay of New Yukka City to be theirs, in exchange for money and supplies, but it's absolutely a good deal, although his initial asking price is through the roof, which they do point out in a response
+    id = stableside.4
+    title = stableside.4.t
+    desc = stableside.4
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside.4" }
+
+    is_triggered_only = yes
+
+    option = { #Avoiding bloodshed for that land would be ideal.
+        name = stableside.4.a
+        set_country_flag = STB_NID_mone
+        FROM = {
+            country_event = {
+                id = stableside.1004
+                days = 3
+            }
+        }
+    }
+    option = { #Why waste money on that when we can take it easily?
+        name = stableside.4.b
+        set_country_flag = STB_NID_tightwads
+        FROM = {
+            country_event = {
+                id = stableside.1004
+                days = 3
+            }
+        }
     }
 }
 
@@ -191,6 +252,22 @@ country_event = { #Lucky Star receives a report of coordinated strikes and upris
     #}
 }
 
+country_event = { #Follow Lucky as marches through some of the jungle closer to the claimed territory by NID, and have him speak with one of his flag officers who will carry orders to the rest of the army to assault the the NID location, and whne he's done speaking, he turns to see that not only that officer, but the rest of his staff are changelings, who are all holding guns at him, and he curses about it always being the bugs that get to him
+    id = stableside.9
+    title = stableside.9.t
+    desc = stableside.9.d
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside.9" }
+
+    is_triggered_only = yes
+
+    option = { #Figures
+        name = stableside.9.a
+        #Transfer states
+        add_stability = -0.1
+        add_manpower = -25000
+    }
+}
+
 ###Harmonist path###
 country_event = { #The election that STB has after the OED succeeds and the dictatorship of Smiling Embrace wraps up, recapping how many ponies were out and how it was tense at points, but the results went off without a hitch, with the closest results being between either Clean and Jade or Smiling and Liberty
     id = stableside.harmonists.50 #If not prepared enough, then it will recap that the voting first started going okay, and it seemed like things would be fine, until a number of ponies across the country organized a bombing attack, including the home station in Stableside, where the other leaders, minus Jade, were and that the status of the others aside from Jade are unknown
@@ -274,7 +351,7 @@ country_event = { #The aftermath of the terrorist attack by COBOSC remnants has 
     }
 }
 
-###Harmonist hidden/utility events###
+###Hidden/utility events###
 country_event = { #Triggered event to give the bonuses for the leader that was in charge upon the new season of rulership
     id = stableside.harmonists.1000
     immediate = { log = "[GetDateText]: [ROOT.GetName]: event stableside.harmonists.1000" }
@@ -353,5 +430,106 @@ country_event = { #Triggered event to give the bonuses for the leader that was i
                 days = 365
             }
         }
+    }
+}
+
+country_event = { #Lucky receives a short telegram back from NID's leader stating that they'll take his money, and probably invest it into better weapons to defend themselves when he inevitably tries to go for them, and wishes him the best of luck
+    id = stableside.1001
+    title = stableside.1001.t
+    desc = stableside.1001.d
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside.1001" }
+
+    is_triggered_only = yes
+
+    option = { #At least we got the guns.
+        name = stableside.1001.a
+        #Idea here for NID and STB
+        #Guns for STB
+    }
+}
+
+country_event = { #Counter offer from NID for resource rights in STB's states for two years for guns
+    id = stableside.1002
+    title = stableside.1002.t
+    desc = stableside.1002.d
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside.1002" }
+
+    is_triggered_only = yes
+
+    option = { #Fine...
+        name = stableside.1002.a
+        #Effect here
+        set_country_flag = STB_accepted_state_deal
+        FROM = {
+            country_event = {
+                id = stableside.1003
+                days = 3
+            }
+        }
+    }
+    option = { #Preposterious! We need those resources!
+        name = stableside.1002.b
+        set_country_flag = STB_rejected_state_deal
+        FROM = {
+            country_event = {
+                id = stableside.1003
+                days = 3
+            }
+        }
+    }
+}
+
+country_event = { #The leader of NID receives a harshly worded response from Lucky, effectively calling them nothing but blood-sucking parasites and that they won't leech off his land, which makes the leader chuckle since that was the response that was hoped for, since they don't like Lucky at all
+    id = stableside.1003
+    title = {
+        trigger = { FROM = { has_country_flag = STB_accepted_state_deal } }
+        text = stableside.1003.t_a
+    }
+    title = {
+        trigger = { FROM = { has_country_flag = STB_rejected_state_deal } }'
+        text = stableside.1003.t_b
+    }
+    desc = {
+        trigger = { FROM = { has_country_flag = STB_accepted_state_deal } }
+        text = stableside.1003.d_a
+    }
+    desc = {
+        trigger = { FROM = { has_country_flag = STB_rejected_state_deal } }
+        text = stableside.1003.d_b
+    }
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside.1003" }
+
+    is_triggered_only = yes
+
+    option = { #Their loss.
+        name = stableside.1003.a
+    }
+}
+
+country_event = { #Lucky receives the communication from NID about their decision for buying the land around the island, and if it's positive, is elated and begins pulling troops immediately to send them off hunting for the NRP, or is furious since it'll mean more losses for his already stretched-thin forces
+    id = stableside.1004
+    title = {
+        trigger = { FROM = { has_country_flag = STB_NID_mone } }
+        text = stableside.1004.t_a
+    }
+    title = {
+        trigger = { FROM = { has_country_flag = STB_NID_tightwads} }
+        text = stableside.1004.t_b
+    }
+    desc = {
+        trigger = { FROM = { has_country_flag = STB_NID_mone } }
+        text = stableside.1004.d_a
+    }
+    desc = {
+        trigger = { FROM = { has_country_flag = STB_NID_tightwads } }
+        text = stableside.1004.d_b
+    }
+    immediate = { log = "[GetDateText]: [ROOT.GetNameDef]: event stableside." }
+
+    is_triggered_only = yes
+
+    option = { #
+        name = stableside.
+
     }
 }
