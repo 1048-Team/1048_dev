@@ -3510,7 +3510,7 @@ shared_focus = {
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_paramount_paramilitary"
-        ###Event following a soldier as he does what he can to hunt down an inquisitor acolyte or even an initiate, and when he does find her, she is cowering because she only recently became an inquisitor, and is far from prepared to fully deal with something like it, and he does start to feel guilt about having to take her out ala Order 66, but still does it anyway, although regretfully, since he sees a bit of his daughter/sister in her
+        ###Event following a soldier as he does what he can to hunt down an inquisitor acolyte or even an initiate, and when he does find her, she is cowering because she only recently became an inquisitor, and is far from prepared to fully deal with something like it, and he does start to feel guilt about having to take her out a la Order 66, but still does it anyway, although regretfully, since he sees a bit of his daughter/sister in her
     }
     ai_will_do = { factor = 80 }
 }
@@ -3723,7 +3723,7 @@ shared_focus = {
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_deity_no_more"
-        ###Lucky drags Daybreaker out in chains so that he can display her with his next speech or appearance ot the public, so that he can show her off as his prize, and that she has defeated her in battle, and she snarls that she will find a way to make him suffer forever, as he basically tries to fight her physically, and otherwise demean her and her feats and powers, and that she can't even raise the sun, but it was him all along, and the like
+        ###Lucky drags Daybreaker out in chains so that he can display her with his next speech or appearance ot the public, so that he can show her off as his prize, and that he has defeated her in battle, and she snarls that she will find a way to make him suffer forever, as he basically tries to fight her physically, and otherwise demean her and her feats and powers, and that she can't even raise the sun, but it was him all along, and the like
     }
     ai_will_do = { factor = 80 }
 }
@@ -3846,6 +3846,12 @@ shared_focus = {
             has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
         }
     }
+    allow_branch = {
+        hidden_trigger = {
+            owns_state = 3
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+        }
+    }
 
     select_effect = {
         hidden_effect = {
@@ -3855,11 +3861,41 @@ shared_focus = {
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: focus STB_all_ponykind"
-        create_wargoal = {
-            target = RCT
-            type = annex_everything
+        custom_effect_tooltip = STB_additional_focuses_tt
+        effect_tooltip = {
+            create_wargoal = {
+                target = RCT
+                type = annex_everything
+            }
         }
     }
+    ai_will_do = { factor = 640 }
+}
+
+shared_focus = {
+    id = STB_ambitions_price
+    x = 0
+    y = 1
+    relative_position_id = STB_might_of_sword
+
+    cost = 0.1
+    prerequisite = {
+        focus = STB_might_of_sword
+        focus = STB_information_highway
+        focus = STB_religions_tool
+    }
+    allow_branch = {
+        hidden_trigger = {
+            owns_state = 3
+            has_country_flag = STB_lucky_downed
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: focus STB_ambitions_price"
+        ###Country event of the aftermath of Lucky being killed by Daybreaker/assassins from the Ordos, and with either Daybreaker or an archmage sitting back down on the throne and declaring that the dark age of the Empire is over, and that a new golden age of peace for ponies has been achieved for their rule
+    }
+    ai_will_do = { factor = 640 }
 }
 
 ###Communist Fake-Out Tree###
