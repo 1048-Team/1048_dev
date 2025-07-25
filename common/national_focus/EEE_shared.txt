@@ -1,4 +1,5 @@
 ###Was Test4Echo secretly a Lunarist bat-lover all along?!###
+###Opening Tree
 shared_focus = {
     id = EEE_bat_into_hell
     x = 0
@@ -7,12 +8,627 @@ shared_focus = {
     cost = 1
 
     completion_reward = {
-        log = "[GetDateText]: [ROOT.GetName]: Focuss EEE_bat_into_hell"
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_bat_into_hell"
         #Events begin, yay!
         ###Stellar Note simply watches as Lucky's militia retreats and thestrals take to the streets to celebrate freedom, as she knows they are now on their own, and she is not in any way, shape, or form prepared to lead a fully independent bat nation
+        ###Secretly trigger short event chain for Nocturne researching another death in Ayacachtli, which earns a bit of suspicion on her and also danger to her since she encounters an Ezmetzli agent who ends up killing themselves versus capture
     }
 
     ai_will_do = {
         factor = 640
+    }
+}
+
+shared_focus = {
+    id = EEE_hope_for_best
+    x = -2
+    y = 1
+    relative_position_id = EEE_bat_into_hell
+
+    cost = 2
+    prerequisite = { focus = EEE_bat_into_hell }
+    mutually_exclusive = { focus = EEE_preemptive_response }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_hope_for_best"
+        ###Short event describing that it'd be best not to anger the Neighua and hope that actually coexisting will lead to them slowly de-escalating, and work defensively
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_preemptive_response
+    x = 2
+    y = 1
+    relative_position_id = EEE_bat_into_hell
+
+    cost = 2
+    prerequisite = { focus = EEE_bat_into_hell }
+    mutually_exclusive = { focus = EEE_hope_for_best }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_preemptive_response"
+        ###Short event stating that at the behest of some tribal leaders in the NEI regions, the militia, which is already strained and underequipped, will be used to occupy Red Glory, since it's the main settlement of the Neighua, and that they will have to keep them in line until they can be forced to end the rivalry
+    }
+
+    ai_will_do = {
+        factor = 320
+    }
+}
+
+shared_focus = {
+    id = EEE_encourage_migration #Should speak about regardless of what is said by the Neighua, should warn all thestrals that can leave to leave, in case the worst happens
+    x = 0
+    y = 2
+    relative_position_id = EEE_bat_into_hell
+
+    cost = 2
+    prerequisite = {
+        focus = EEE_hope_for_best
+        focus = EEE_preemptive_response
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_encourage_migration"
+        #Effect here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_arrest_likely
+    x = 0
+    y = 1
+    relative_position_id = EEE_preemptive_response
+
+    cost = 2
+    prerequisite = { focus = EEE_preemptive_response }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_arrest_likely"
+        ###Short event of a tribal Neighua leader getting arrested in his own home, as he has been an agitator against the thestrals for years and needs to be put on trial for his actions and hopefully make the Neighua less rowdy
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_quiet_on_home_front
+    x = -1
+    y = 2
+    relative_position_id = EEE_hope_for_best
+
+    cost = 2
+    prerequisite = { focus = EEE_hope_for_best }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_quiet_on_home_front"
+        ###Short event of Stellar simply taking a moment to not worry about politics, since things have been rather quiet; perhaps introduce family, friend, or lover for her to spend time with
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_early_warning_signs
+    x = 1
+    y = 1
+    relative_position_id = EEE_arrest_likely
+
+    cost = 2
+    prerequisite = { focus = EEE_arrest_likely }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_early_warning_signs"
+        ###Short event of Stellar feeling tense and anxious as she can sense there's growing unrest in the Neighua and she meets with the Council to try and get more military stationed there to prevent an uprising, although they question it, with Waning especially being against it, despite being penchant for violent ideas
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_support_of_elders
+    x = -2
+    y = 1
+    relative_position_id = EEE_quiet_on_home_front
+
+    cost = 3
+    prerequisite = { focus = EEE_quiet_on_home_front }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_support_of_elders"
+        ###Maybe event of Stellar meeting with some of the tribal elders to get them to throw themselves behind her, for at least the time being, to support her plans to keep the nation stable while the chaos of the Neighua and confederation are happening
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_petitioning_tribes
+    x = 0
+    y = 1
+    relative_position_id = EEE_quiet_on_home_front
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_quiet_on_home_front
+        focus = EEE_early_warning_signs
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_petitioning_tribes"
+        ###Stellar goes to some of the remaining tribes and asks for support for keeping the land stable and protected during this crisis, and gets some pledges of a few warriors to keep the peace
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_assessing_damage
+    x = -1
+    y = 1
+    relative_position_id = EEE_early_warning_signs
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_quiet_on_home_front
+        focus = EEE_early_warning_signs
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_assessing_damage"
+        ###Possibly event of going with Nocturne to begin a reconstruction assessment of Ayacachtli from the liberation it received after Lucky retreated, and Nocturne takes time to warn Stellar to stay the course, and that she'll support Stellar
+        30 = {
+            add_extra_state_shared_building_slots = 1
+        }
+        add_stability = 0.02
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_burning_midnight_oil
+    x = 2
+    y = 1
+    relative_position_id = EEE_early_warning_signs
+
+    cost = 5
+    prerequisite = {
+        focus = EEE_quiet_on_home_front
+        focus = EEE_early_warning_signs
+    }
+    available = {
+        custom_trigger_tooltip = {
+            tooltip = EEE_bossy_boots_tt
+            check_variable = { EEE_stellar_election_influence > 69.99 }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_burning_midnight_oil"
+        ###Possibly short event of Stellar arguing with the Moonspeaker Council on reforms she WILL get passed, and Waning of all ponies supports her; it could also be Waning if Stellar got supported by Gushing, as a sudden change of tone, with Nocturne or just a random council member throwing in support otherwise; Waning would be a surprise
+    }
+
+    ai_will_do = {
+        factor = 40
+        modifier = {
+            check_variable = { EEE_stellar_election_influence > 84.99 }
+            factor = 8
+        }
+    }
+}
+
+shared_focus = {
+    id = EEE_debt_for_production
+    x = -2
+    y = 1
+    relative_position_id = EEE_petitioning_tribes
+
+    cost = 3
+    prerequisite = { focus = EEE_petitioning_tribes }
+    mutually_exclusive = { focus = EEE_promissory_military_investments }
+    available = {
+        NID = {
+            exists = yes
+            has_opinion = {
+                target = ROOT
+                value > 55
+            }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_debt_for_production"
+        ###Short event of Stellar arguing with the Council about indebting themselves to NID being the best option so they can move forward, before sending off a letter to NID asking to take loans from them to help rebuild infrastructure and a dam that Cobalt never finished
+    }
+
+    ai_will_do = { factor = 80 }
+}
+
+shared_focus = {
+    id = EEE_promissory_military_investments
+    x = 2
+    y = 1
+    relative_position_id = EEE_petitioning_tribes
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_petitioning_tribes
+        focus = EEE_assessing_damage
+    }
+    mutually_exclusive = { focus = EEE_debt_for_production }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_promissory_military_investments"
+        ###Short event of Stellar arguing with Nocturne and being supported by Waning for the increased military funding to avoid a risk of a more bloody war with the Neighua
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_meeting_enemy
+    x = 0
+    y = 1
+    relative_position_id = EEE_assessing_damage
+
+    cost = 3
+    prerequisite = { focus = EEE_assessing_damage }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_meeting_enemy"
+        ###Tranquil Serenade and Nocturne, who wanted to come along, meet with Red Dusk and Tranquil Serenade, as Stellar tries to get on the same ground as them, so that whoever succeeds in being chosen as the new tribal head, that they will have the best interest of the nation at heart; Tranquil and Red cannot agree on anything
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_basking_in_moonlight
+    x = -1
+    y = 1
+    relative_position_id = EEE_burning_midnight_oil
+
+    cost = 5
+    prerequisite = { focus = EEE_burning_midnight_oil }
+    mutually_exclusive = { focus = EEE_eclipsing_moon }
+    available = {
+        custom_trigger_tooltip = {
+            tooltip = EEE_bossy_boots_tt
+            check_variable = { EEE_stellar_election_influence > 69.99 }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_basking_in_moonlight"
+        #Trait here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_eclipsing_moon
+    x = 1
+    y = 1
+    relative_position_id = EEE_burning_midnight_oil
+
+    cost = 5
+    prerequisite = { focus = EEE_burning_midnight_oil }
+    mutually_exclusive = { focus = EEE_basking_in_moonlight }
+    available = {
+        custom_trigger_tooltip = {
+            tooltip = EEE_bossy_boots_tt
+            check_variable = { EEE_stellar_election_influence > 69.99 }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_eclipsing_moon"
+        #Trait here
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_anti_corruption_campaigns
+    x = 0
+    y = 2
+    relative_position_id = EEE_petitioning_tribes
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_debt_for_production
+        focus = EEE_promissory_military_investments
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_anti_corruption_campaigns"
+        ###Event of citizens reacting to another Moonspeaker being arrested on charges of corruption, as they were receiving instructions from the mysterious Conductor, and how it seems many of them look to be in the pocket of whoever it is
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_stability_ensured
+    x = 1
+    y = 1
+    relative_position_id = EEE_promissory_military_investments
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_promissory_military_investments
+        focus = EEE_meeting_enemy
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_stability_ensured"
+        ###Stellar makes a short speech about how despite the string of murders and disappearances, she is going to make sure that the thestrals stay safe, and that whoever is perpetrating them, either an organization or an individual, will be brought to justice
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_earmark_civilian_funds
+    x = 0
+    y = 1
+    relative_position_id = EEE_meeting_enemy
+
+    cost = 2
+    prerequisite = { focus = EEE_meeting_enemy }
+    mutually_exclusive = { focus = EEE_dogear_military_funds }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_earmark_civilian_funds"
+        one_random_industrial_complex = yes
+        #Increase Red Dusk influence by 10
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_dogear_military_funds
+    x = 2
+    y = 1
+    relative_position_id = EEE_meeting_enemy
+
+    cost = 2
+    prerequisite = { focus = EEE_meeting_enemy }
+    mutually_exclusive = { focus = EEE_earmark_civilian_funds }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_dogear_military_funds"
+        one_random_arms_factory = 1
+        30 = {
+            add_resource = {
+                type = steel
+                amount = 4
+            }
+        }
+        #Increase Tranquil influence by 7.5
+    }
+}
+
+shared_focus = {
+    id = EEE_open_conductor_case
+    x = 1
+    y = 1
+    relative_position_id = EEE_anti_corruption_campaigns
+
+    cost = 3
+    prerequisite = { focus = EEE_anti_corruption_campaigns }
+    prerequisite = { focus = EEE_stability_ensured }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_open_conductor_case"
+        ###Stellar finds a mysterious note from an unnamed pony pointing to an ancient cult called the Ezmetzli being behind what's going on with the murders, and that there is some evidence to be found in a random house, which contains the remains of the pony that Nocturne dealt with at the start; Stellar opens a case file to begin searching
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_equal_plans
+    x = 1
+    y = 1
+    relative_position_id = EEE_earmark_civilian_funds
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_earmark_civilian_funds
+        focus = EEE_dogear_military_funds
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_equal_plans"
+        ###Event going over the two main opponents' economic proposal, with also the option of sticking with Stellar Note's; Red's gives 2 civs and 4 steel in Ayacachtli only, Tranquil gives a civ and a mil and moves to partial mobilization, Stellar adds two building slots and moves to partial mobilization
+        ###Red Dusk and Tranquil gain 10 influence from either decision, Stellar 5
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_fitting_tribute
+    x = 2
+    y = 1
+    relative_position_id = EEE_open_conductor_case
+
+    cost = 1
+    prerequisite = { focus = EEE_open_conductor_case }
+    prerequisite = { focus = EEE_equal_plans }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_fitting_tribute"
+        ###Stellar Note, nervous and worried the Moonspeakers won't be chosen, prays at the temple in Ayacachtli, with her friend/family/lover from earlier; she isn't very religious, and feels awkward praying to Luna, but still petitions for support regardless
+    }
+
+    ai_will_do = {
+        factor = 640
+    }
+}
+
+###Industry###
+shared_focus = {
+    id = EEE_emergency_economic_grants
+    x = -20
+    y = 0
+
+    cost = 3
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_emergency_economic_grants"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 80 #Temp values
+    }
+}
+
+shared_focus = {
+    id = EEE_connecting_tribes
+    x = -12
+    y = 0
+
+    cost = 3
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_connecting_tribes"
+        #Bonus here, possibly short event of the first railroad in a village making them quite curious
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+###Army and Air###
+shared_focus = {
+    id = EEE_ayacachtli_air_college
+    x = 20
+    y = 0
+
+    cost = 3
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_ayacachtli_air_college"
+        #Event of choosing what the college should focus on for its doctrine
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_embracing_air
+    x = 24
+    y = 0
+
+    cost = 3
+    mutually_exclusive = { focus = EEE_embracing_jungle }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_embracing_air"
+        air_experience = 20
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_embracing_jungle
+    x = 36
+    y = 0
+
+    cost = 3
+    mutually_exclusive = { focus = EEE_embracing_air }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_embracing_air"
+        army_experience = 20
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_centralize_militia_authority
+    x = 40
+    y = 0
+
+    cost = 3
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_centralize_militia_authority"
+        #Idea here and maybe first high command meeting where there is much bickering between the different tribal groups
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+###Navy###
+shared_focus = {
+    id = EEE_what_are_ships
+    x = 54
+    y = 0
+
+    cost = 3
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_what_are_ships"
+        navy_experience = 50
+    }
+
+    ai_will_do = {
+        factor = 80
     }
 }
