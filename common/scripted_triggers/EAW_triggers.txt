@@ -114,7 +114,7 @@ can_remove_DED = {
 		tag = NLR
 		AND = {
 			tag = ABY
-			has_completed_focus = ABY_AF_are_worth_taking_over
+			has_completed_focus = KTZ_are_worth_taking_over
 		}
 		has_country_leader = { ruling_only = yes character = AET_prelate_ludwig_ebonwing }
 		AND = {
@@ -2193,6 +2193,20 @@ any_potential_enemy_is_on_the_same_landmass = {
 is_state_on_the_same_landmass_as_prev = {
 	check_variable = {
 		state_land_connection_index = PREV.state_land_connection_index
+	}
+}
+
+# Private trigger used by get_bop_value effect
+check_bop_value_loop_trigger = {
+	meta_trigger = {
+		text = {
+			power_balance_value = {
+				id = [BOP_NAME]
+				value < [INFLUENCE]
+			}
+		}
+		INFLUENCE = "[?bop_value]"
+		BOP_NAME  = "[GetBoPTokenFromID]"
 	}
 }
 
