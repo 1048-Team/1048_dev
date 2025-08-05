@@ -1,6 +1,7 @@
 on_actions = {
 	on_monthly_EQS = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_EQS FH"
 			if = {
 				limit = {
 					NOT = { has_country_flag = equestria_returned }
@@ -47,6 +48,7 @@ on_actions = {
 	}
 	on_monthly_SLW = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_SLW"
 			if = {
 				limit = {
 					exists = yes
@@ -94,6 +96,7 @@ on_actions = {
 	}
 	on_monthly_YAH = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_YAH"
 			if = {
 				limit = {
 					exists = yes
@@ -114,6 +117,7 @@ on_actions = {
 	}
 	on_monthly_BLS = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_BLS"
 			if = {
 				limit = {
 					exists = yes
@@ -132,6 +136,7 @@ on_actions = {
 	}
 	on_monthly_MTS = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_MTS"
 			if = {
 				limit = {
 					exists = yes
@@ -196,6 +201,29 @@ on_actions = {
 						SOL_low_authority_derived_stats = yes
 					}
 				}
+			}
+		}
+	}
+	on_monthly_EEE = {
+		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_EEE"
+			if = {
+				limit = {
+					has_country_flag = EEE_ezmetzli_coup
+					is_subject = no
+				}
+				add_to_variable = { EEE_clock_is_ticking_gushing = modifier@EEE_doom } #Variable to store how much Doom there is
+				clamp_variable = {
+					var = EEE_clock_is_ticking_gushing
+					min = EEE_doom_min
+					max = EEE_doom_max
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { EEE_clock_is_ticking_gushing = EEE_doom_max }
+				}
+				#At this time, nothing, but event will fire that will make non-standard game over for them. Check DED code for what was done.
 			}
 		}
 	}

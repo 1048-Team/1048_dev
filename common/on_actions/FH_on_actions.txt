@@ -274,4 +274,36 @@ on_actions = {
 			}
 		}
 	}
+
+	# EEEEEEEEEEEEEEEE
+	# Shouldn't need to fiddle with this. Wiki says only fires once, once first at war; won't fire again unless at peace first
+	# THIS is the country that is now in a state of war
+	on_war = {
+		effect = {
+			log = "[GetDateText]: THIS: [THIS.GetName]: on_war"
+			if = {
+				limit = {
+					tag = EEE
+					has_country_flag = EEE_ezmetzli_coup
+					is_subject = no
+				}
+				add_to_variable = { EEE_doom_rate = -1 }
+			}
+		}
+	}
+
+	# THIS is the country that is now at peace
+	on_peace = {
+		effect = {
+			log = "[GetDateText]: THIS: [THIS.GetName]: on_peace"
+			if = {
+				limit = {
+					tag = EEE
+					has_country_flag = EEE_ezmetzli_coup
+					is_subject = no
+				}
+				add_to_variable = { EEE_doom_rate = 1 }
+			}
+		}
+	}
 }
