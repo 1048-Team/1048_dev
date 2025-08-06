@@ -1,0 +1,87 @@
+###Should all check to make sure they can be met
+EEE_sacrifice_state_pop = {
+    add_stability = -0.05
+    add_manpower = -10000
+    save_current_manpower = yes
+    random_state = {
+        limit = {
+            is_owned_and_controlled_by = ROOT
+            NOT = { has_state_flag = EEE_bored_goddess }
+            state_population > 35000
+        }
+        add_manpower = -25000
+        add_state_flag = EEE_bored_goddess
+    }
+    set_temporary_variable = { EEE_doom_change = -5 }
+    EEE_calculate_doom_change = yes
+    restore_previous_manpower = yes
+}
+
+EEE_sacrifice_prisoners_effect = {
+    add_stability = -0.05
+    add_to_variable = { EEE_ezmetzli_prisoners = -25000 }
+    custom_effect_tooltip = EEE_prisoners_sacrificed_tt
+    set_country_flag = {
+        flag = EEE_ezmetzli_prisoner_sacrifice_cooldown
+        days = 90
+        value = 1
+    }
+    set_temporary_variable = { EEE_doom_change = -5 }
+    EEE_calculate_doom_change = yes
+}
+
+EEE_sacrifice_divisions_effect = { #Could be abused by making 5 1k divisions. Will have to look at options for preventing that
+    add_manpower = -35000
+    add_war_support = -0.05
+    random_country_division = {
+        destroy_unit = yes
+    }
+    random_country_division = {
+        destroy_unit = yes
+    }
+    random_country_division = {
+        destroy_unit = yes
+    }
+    set_country_flag = {
+        flag = EEE_ezmetzli_soldier_sacrifice_cooldown
+        days = 90
+        value = 1
+    }
+    set_temporary_variable = { EEE_doom_change = -10 }
+    EEE_calculate_doom_change = yes
+}
+
+EEE_sacrifice_character_effect = { #Immune characters are Gushing, Nocturne, Stellar, Waning, Moonlight, Moonlight and Waning, Tranquil, Red Dusk, and any character not visible while the country is led by the Ezmetzli
+    add_political_power = -100
+    random_character = {
+        limit = {
+            NOT = { has_character_flag = EEE_immune_to_sacrifice }
+        }
+        retire = yes
+    }
+    set_country_flag = {
+        flag = EEE_ezmetzli_character_sacrifice_cooldown
+        days = 180
+        value = 1
+    }
+    set_temporary_variable = { EEE_doom_change = -20 }
+    EEE_calculate_doom_change = yes
+}
+
+EEE_calculate_doom_change = {
+    add_to_variable = { EEE_clock_is_ticking_gushing = EEE_doom_change } #Temp variable added
+    clamp_variable = {
+        var = EEE_clock_is_ticking_gushing
+        min = EEE_doom_min
+        max = EEE_doom_max
+    }
+    if = {
+        limit = {
+            check_variable = { EEE_doom_change < 0 }
+        }
+        custom_effect_tooltip = EEE_doom_change_loss_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_doom_change_gain_tt
+    }
+}
