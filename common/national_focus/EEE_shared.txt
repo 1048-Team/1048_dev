@@ -1681,7 +1681,7 @@ shared_focus = {
 ###Navy###
 shared_focus = {
     id = EEE_what_are_ships
-    x = 56
+    x = 54
     y = 0
 
     cost = 3
@@ -1693,5 +1693,591 @@ shared_focus = {
 
     ai_will_do = {
         factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_restealing_booty
+    x = -4
+    y = 1
+    relative_position_id = EEE_what_are_ships
+
+    cost = 3
+    prerequisite = { focus = EEE_what_are_ships }
+    available = {
+        OR = {
+            controls_state = 24
+            controls_state = 16
+        }
+        has_country_flag = EEE_angy_natives
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_restealing_booty"
+        ###Event of some thestral commandos doing what they can to capture some of the unused ships that were left in drydock in one of the ports in former EEE territory, as they were taken by the Neighua when they rebelled
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_doubling_production
+    x = 0
+    y = 1
+    relative_position_id = EEE_what_are_ships
+
+    cost = 3
+    prerequisite = { focus = EEE_what_are_ships }
+    available = {
+        16 = { is_owned_and_controlled_by = ROOT }
+        has_country_flag = EEE_angy_natives
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_doubling_production"
+        16 = {
+            add_extra_state_shared_building_slots = 2
+            add_building_construction = {
+                type = dockyard
+                level = 2
+                instant_build = yes
+            }
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_artery_to_sea
+    x = 4
+    y = 1
+    relative_position_id = EEE_what_are_ships
+
+    cost = 3
+    prerequisite = { focus = EEE_what_are_ships }
+    available = {
+        24 = { is_owned_and_controlled_by = ROOT }
+        has_country_flag = EEE_angy_natives
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_artery_to_sea"
+        24 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+                type = dockyard
+                level = 1
+                instant_build = yes
+            }
+            add_building_construction = {
+                type = naval_base
+                level = 2
+                instant_build = yes
+                province = 11264
+            }
+            add_building_construction = {
+                type = coastal_bunker
+                level = 3
+                instant_build = yes
+                province = 11264
+            }
+            add_building_construction = {
+                type = bunker
+                level = 1
+                instant_build = yes
+                province = 11264
+            }
+        }
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_learning_from_cheapest
+    x = -2
+    y = 1
+    relative_position_id = EEE_restealing_booty
+
+    cost = 3
+    prerequisite = { focus = EEE_restealing_booty }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_learning_from_cheapest"
+        #Idea here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_embracing_sea
+    x = -2
+    y = 1
+    relative_position_id = EEE_doubling_production
+
+    cost = 4
+    prerequisite = { focus = EEE_doubling_production }
+    mutually_exclusive = { focus = EEE_emulate_greats }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_embracing_sea"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_emulate_greats
+    x = 2
+    y = 1
+    relative_position_id = EEE_doubling_production
+
+    cost = 4
+    prerequisite = { focus = EEE_doubling_production }
+    mutually_exclusive = { focus = EEE_embracing_sea }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_emulate_greats"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_required_guidance
+    x = 2
+    y = 1
+    relative_position_id = EEE_artery_to_sea
+
+    cost = 3
+    prerequisite = { focus = EEE_artery_to_sea }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_required_guidance"
+        ###Event of Squeaky Wheel effectively begging some thestrals or non-thestrals she knows to help with leading the fleet, as she wants to see them be a force to be reckoned with, but is entirely incapable on her own, which eventually gets a few to relent, including one retired admiral who served under Luna's tenure as princess with Celestia
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_diving_deeper
+    x = -1
+    y = 1
+    relative_position_id = EEE_embracing_sea
+
+    cost = 3
+    prerequisite = { focus = EEE_embracing_sea }
+    mutually_exclusive = { focus = EEE_hidden_battleships }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_diving_deeper"
+        ###Event of thestrals testing a new sub design, trying to go as deep as possible in the Mareanas Trench, and getting close to imploding before finally going up, perhaps encountering a siren or two who aren't the Dazzlings, as a nod to the lore change; maybe kelpies instead
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_hidden_battleships
+    x = 1
+    y = 1
+    relative_position_id = EEE_embracing_sea
+
+    cost = 3
+    prerequisite = { focus = EEE_embracing_sea }
+    mutually_exclusive = { focus = EEE_diving_deeper }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_hidden_battleships"
+        ###Event of some field tests with subs that are designed to go toe-to-toe with screen ships, anyway, and how the testers go a bit overboard with the live-fire torpedo attacks, which end up causing untold damage along the shore, but at least the explosions looked cool
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_middling_option
+    x = -1
+    y = 1
+    relative_position_id = EEE_emulate_greats
+
+    cost = 3
+    prerequisite = { focus = EEE_emulate_greats }
+    mutually_exclusive = { focus = EEE_modern_option }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_middling_option"
+        #Tech bonus for BCs here, or heavy ships if MTG
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_modern_option
+    x = 1
+    y = 1
+    relative_position_id = EEE_emulate_greats
+
+    cost = 3
+    prerequisite = { focus = EEE_emulate_greats }
+    mutually_exclusive = { focus = EEE_middling_option }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_modern_option"
+        #Tech bonus here
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_slinking_through_water
+    x = 1
+    y = 1
+    relative_position_id = EEE_diving_deeper
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_diving_deeper
+        focus = EEE_hidden_battleships
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_slinking_through_water"
+        #Bonus and idea here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_high_seeeeeees
+    x = 0
+    y = 3
+    relative_position_id = EEE_doubling_production
+
+    cost = 3
+    prerequisite = { focus = EEE_doubling_production }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_high_seeeeeees"
+        #Tech bonus here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_crashing_through_waves
+    x = 1
+    y = 1
+    relative_position_id = EEE_middling_option
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_middling_option
+        focus = EEE_modern_option
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_crashing_through_waves"
+        #Bonus and idea here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_shadow_strikes
+    x = 1
+    y = 3
+    relative_position_id = EEE_learning_from_cheapest
+
+    cost = 3
+    prerequisite = { focus = EEE_learning_from_cheapest }
+    prerequisite = { focus = EEE_diving_deeper }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_shadow_strikes"
+        ###Short event of some sub captains trying new techniques put in place by the admiralty, which are risky by their very nature, and it ends up leading to a close call with one of the other subs, but the simulated targets were destroyed without ever detecting the thestrals
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_insider_knowledge
+    x = 0
+    y = 2
+    relative_position_id = EEE_diving_deeper
+
+    cost = 3
+    prerequisite = { focus = EEE_diving_deeper }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_insider_knowledge"
+        #Bonuses here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_solar_applications
+    x = 0
+    y = 2
+    relative_position_id = EEE_hidden_battleships
+
+    cost = 3
+    prerequisite = { focus = EEE_hidden_battleships }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_solar_applications"
+        #Bonuses here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_heavy_destroyers
+    x = 0
+    y = 2
+    relative_position_id = EEE_middling_option
+
+    cost = 3
+    prerequisite = { focus = EEE_middling_option }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_heavy_destroyers"
+        ###Event of a pirate preparing to go in on a couple of civilian ships, then coming into a battle with a single battlecruiser, which is markedly nimble for its size, which eventually manages to out-class them, and sink them to the bottom of the ocean as they're being used as convoy protection and as screen ships
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_carrying_waves
+    x = 0
+    y = 2
+    relative_position_id = EEE_modern_option
+
+    cost = 3
+    prerequisite = { focus = EEE_modern_option }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_carrying_waves"
+        ###Event of a new carrier design being tested, with both expanded landing strips and also a prototypical storage system, and the admiral on deck watches as the demonstration of it finishes up, and it nearly goes awry when there's a mechanical issue, although it does show the promise the system has, and it's greenlit anyway
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_tribes_to_themselves
+    x = -1
+    y = 3
+    relative_position_id = EEE_required_guidance
+
+    cost = 3
+    prerequisite = { focus = EEE_modern_option }
+    prerequisite = { focus = EEE_required_guidance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_tribes_to_themselves"
+        ###Event of a carrier responding all on itself to an incursion by some pirates or perhaps some remnant naval forces from COBSOC or one of the COBSOC splinters, and they end up cleaing house despite also taking some hits, thanks to new armor plating and techniques, which earns the gratitude of the civilians they rescued
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_claws_of_dark
+    x = 1
+    y = 1
+    relative_position_id = EEE_insider_knowledge
+
+    cost = 4
+    prerequisite = {
+        focus = EEE_insider_knowledge
+        focus = EEE_solar_applications
+    }
+    mutually_exclusive = {
+        focus = EEE_natural_weapons
+        focus = EEE_fangs_of_night
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_claws_of_dark"
+        #Idea here
+        ###Perhaps event of some subs responding to a naval exercise by another nation, and using it as a chance to warn other countries about the thestrals being a serious force to contend with, and sending off a few stray torpedoes and appearing visible briefly to inspire fear before running away with their superior speed
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_natural_weapons
+    x = 0
+    y = 2
+    relative_position_id = EEE_high_seeeeeees
+
+    cost = 4
+    prerequisite = {
+        focus = EEE_insider_knowledge
+        focus = EEE_solar_applications
+        focus = EEE_heavy_destroyers
+        focus = EEE_carrying_waves
+    }
+    prerequisite = { focus = EEE_high_seeeeeees }
+    mutually_exclusive = {
+        focus = EEE_claws_of_dark
+        focus = EEE_fangs_of_night
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_natural_weapons"
+        #Idea here
+        ###Potentially event of some marines in training landing on a shoreline and getting into melee combat, using their fangs as weapons as taught, and some of them being a bit hesitant since that is effectively acting no more than like an animal, which they would rather avoid, but get forced to do it anyway, lest they are drummed out of service
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_fangs_of_night
+    x = 1
+    y = 1
+    relative_position_id = EEE_heavy_destroyers
+
+    cost = 4
+    prerequisite = {
+        focus = EEE_heavy_destroyers
+        focus = EEE_carrying_waves
+    }
+    mutually_exclusive = {
+        focus = EEE_claws_of_dark
+        focus = EEE_natural_weapons
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_fangs_of_night"
+        #Idea here
+        ###Possibly event of a training exercise between two fleets being interrupted by a small pirate fleet, as it was thought that they'd be too weak fighting each other to prevent them all from being captured, and the ships end up getting into a cooridnated fist fight, which the thestrals ships manage to win, with more prizes afterward
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_volatile_mixtures
+    x = 0
+    y = 2
+    relative_position_id = EEE_solar_applications
+
+    cost = 3
+    prerequisite = { focus = EEE_solar_applications }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_volatile_mixtures"
+        ###Event of a sub using some of the new torpedoes with napalm and other mixtures of magic and chemicals preparing to do a final test of its weapons, as requested by the admiralty, and one of the torpedoes exploding before being loaded because a pony sneezed on it, and quickly leading to a chain reaction that destroys most of the sub, although it's still deemed mostly successful
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_bristling_barnacles
+    x = 0
+    y = 2
+    relative_position_id = EEE_heavy_destroyers
+
+    cost = 3
+    prerequisite = { focus = EEE_heavy_destroyers }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_bristling_barnacles"
+        ###A captain of a new battlecruiser, which has had its armament against other heavy ships markedly weakened, is ordered to try destroying one of the old destroyers or other ships that are no longer used due to age, and he is eager to get underway, to the point he orders the attack on the wrong ship, which is utterly destroyed, adn tries to pass the blame elsewhere, although the test shows that they are deadly versus light sihps
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_a_new_glory
+    x = 0
+    y = 2
+    relative_position_id = EEE_natural_weapons
+
+    cost = 5
+    prerequisite = {
+        focus = EEE_claws_of_dark
+        focus = EEE_natural_weapons
+        focus = EEE_fangs_of_night
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_a_new_glory"
+        #Idea here
+    }
+
+    ai_will_do = {
+        factor = 160
     }
 }
