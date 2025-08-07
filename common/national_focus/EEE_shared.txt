@@ -512,14 +512,19 @@ shared_focus = {
 ###Industry###
 shared_focus = {
     id = EEE_emergency_economic_grants
-    x = -20
+    x = -21
     y = 0
 
     cost = 3
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: Focus EEE_emergency_economic_grants"
-        #Bonus here
+        add_tech_bonus = {
+            name = industry_bonus
+            uses = 1
+            bonus = 1
+            category = industry
+        }
     }
 
     ai_will_do = {
@@ -529,7 +534,7 @@ shared_focus = {
 
 shared_focus = {
     id = EEE_connecting_tribes
-    x = -12
+    x = -11
     y = 0
 
     cost = 3
@@ -541,6 +546,847 @@ shared_focus = {
 
     ai_will_do = {
         factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_shifting_sands
+    x = -1
+    y = 1
+    relative_position_id = EEE_emergency_economic_grants
+
+    cost = 3
+    prerequisite = { focus = EEE_emergency_economic_grants }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_shifting_sands"
+        two_random_industrial_complex = yes
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_following_through
+    x = 1
+    y = 1
+    relative_position_id = EEE_emergency_economic_grants
+
+    cost = 3
+    prerequisite = { focus = EEE_emergency_economic_grants }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_following_through"
+        ###Perhaps short event of some ponies using mining reports from COBSOC to find some materials beneath the mountains in Ayacachtli, and not realizing that there are numerous dangers, such as weak walls and animals or just terrain itself, which nearly gets them killed
+        37 = {
+            add_resource = {
+                type = tungsten
+                amount = 8
+            }
+        }
+        30 = {
+            add_resource = {
+                type = chromium
+                amount = 4
+            }
+        }
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_new_jewel
+    x = 4
+    y = 1
+    relative_position_id = EEE_emergency_economic_grants
+
+    cost = 3
+    prerequisite = { focus = EEE_emergency_economic_grants }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_new_jewel"
+        ###Perhaps short event of some construction to expand Ayacachtli outside of its cavern, which leaves the thestrals working it nervous and prone to mistakes
+        30 = {
+            add_extra_state_shared_building_slots = 2
+            #State modifier here
+        }
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_peninsular_soul
+    x = -4
+    y = 1
+    relative_position_id = EEE_connecting_tribes
+
+    cost = 3
+    prerequisite = { focus = EEE_connecting_tribes }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_peninsular_soul"
+        ###Perhaps short event of some thestral visitors from elsewhere in the Peninsula, who are in awe of the culture of Ayacachtli, since they'd never visited before under COBSOC, and they may act a bit clueless because of it to the rest of the culture
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_other_mudponies
+    x = -1
+    y = 1
+    relative_position_id = EEE_connecting_tribes
+
+    cost = 3
+    prerequisite = { focus = EEE_connecting_tribes }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_other_mudponies"
+        #Bonuses here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_extracting_engineering
+    x = 1
+    y = 1
+    relative_position_id = EEE_connecting_tribes
+
+    cost = 3
+    prerequisite = { focus = EEE_connecting_tribes }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_extracting_engineering"
+        #Bonuses here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_replicating_promises
+    x = 1
+    y = 1
+    relative_position_id = EEE_shifting_sands
+
+    cost = 3
+    prerequisite = { focus = EEE_shifting_sands }
+    prerequisite = { focus = EEE_following_through }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_replicating_promises"
+        ###Perhaps a short event of opening the dam and how it was still built to some of COBSOC's standards, it quickly springing a leak, while it's still being lauded
+        #Dam should be for state 31
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_modern_miracle
+    x = -1
+    y = 1
+    relative_position_id = EEE_new_jewel
+
+    cost = 3
+    prerequisite = { focus = EEE_new_jewel }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_modern_miracle"
+        ###Event of opening the first, proper hospital in Ayacachtli, and how it is already being filled heavily by ponies who have been left permanently injured in the dangers of the land, or by the uprisings against COBSOC in the past
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_dedicated_industrial_sectors
+    x = 1
+    y = 1
+    relative_position_id = EEE_new_jewel
+
+    cost = 3
+    prerequisite = { focus = EEE_new_jewel }
+    prerequisite = { focus = EEE_peninsular_soul }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_dedicated_industrial_sectors"
+        30 = {
+            add_extra_state_shared_building_slots = 1
+        }
+        if = {
+            limit = { has_idea = pre_industrial_society }
+            swap_ideas = { add_idea = pre_industrial_society2 remove_idea = pre_industrial_society }
+        }
+        else_if = {
+            limit = { has_idea = pre_industrial_society2 }
+            swap_ideas = { add_idea = outdated_industry remove_idea = pre_industrial_society }
+        }
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_correct_economic_resistance
+    x = 1
+    y = 1
+    relative_position_id = EEE_peninsular_soul
+
+    cost = 3
+    prerequisite = { focus = EEE_peninsular_soul }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_correct_economic_resistance"
+        ###Event of tension between some of the residents of Ayacachtli and owners of new factories, who are a mix of both thestrals and non-thestrals, as they believe the factories will pollute and ruin the city, and the owners try to get them to see reason, although it gets close to a proper riot before order is restored
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_floral_removal
+    x = 1
+    y = 1
+    relative_position_id = EEE_other_mudponies
+
+    cost = 3
+    prerequisite = { focus = EEE_other_mudponies }
+    prerequisite = { focus = EEE_extracting_engineering }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_floral_removal"
+        ###Event following some of the ponies working for the Jungle Clearing Safety Committee, and how they observe one of the jobs to help clear the roads and railways in the jungle and finding constant faults with it, which annoys all the workers, who try to rid themselves of him
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_heart_of_jungle
+    x = 0
+    y = 1
+    relative_position_id = EEE_dedicated_industrial_sectors
+
+    cost = 5
+    prerequisite = { focus = EEE_modern_miracle }
+    prerequisite = { focus = EEE_correct_economic_resistance }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_heart_of_jungle"
+        30 = {
+            improve_state_category = yes
+        }
+        if = {
+            limit = { has_idea = pre_industrial_society }
+            swap_ideas = { add_idea = pre_industrial_society2 remove_idea = pre_industrial_society }
+        }
+        else_if = {
+            limit = { has_idea = pre_industrial_society2 }
+            swap_ideas = { add_idea = outdated_industry remove_idea = pre_industrial_society }
+        }
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_chipping_protections
+    x = 0
+    y = 2
+    relative_position_id = EEE_replicating_promises
+
+    cost = 4
+    prerequisite = { focus = EEE_replicating_promises }
+    available = {
+        NOT = { has_country_flag = EEE_recently_yoinked_tribe_land } #Country flag set by each of these focuses that reduce protections for tribal land; is set to be true for 60 days
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_chipping_protections"
+        ###Perhaps short event of some tribes protesting at having factories built on land promised to them
+        #Modify idea here
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_embracing_COBSOC
+    x = 3
+    y = 2
+    relative_position_id = EEE_replicating_promises
+
+    cost = 4
+    prerequisite = { focus = EEE_replicating_promises }
+    mutually_exclusive = { focus = EEE_roots_of_society }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_embracing_COBSOC"
+        #Bonuses here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_roots_of_society
+    x = -3
+    y = 2
+    relative_position_id = EEE_floral_removal
+
+    cost = 4
+    prerequisite = { focus = EEE_floral_removal }
+    mutually_exclusive = { focus = EEE_embracing_COBSOC }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_roots_of_society"
+        #Bonuses here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_adapting_to_world
+    x = 0
+    y = 2
+    relative_position_id = EEE_floral_removal
+
+    cost = 4
+    prerequisite = { focus = EEE_floral_removal }
+    available = {
+        NOT = { has_country_flag = EEE_recently_yoinked_tribe_land }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_adapting_to_world"
+        ###Perhaps short event of negotiators from Ayacachtli meeting with some tribe delegates to strong-arm them into giving up some of their land for construction to expand the country's industry
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_minimal_compensation
+    x = -1
+    y = 1
+    relative_position_id = EEE_embracing_COBSOC
+
+    cost = 3
+    prerequisite = { focus = EEE_embracing_COBSOC }
+    available = {
+        NOT = { has_country_flag = EEE_recently_yoinked_tribe_land }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_minimal_compensation"
+        ###Perhaps short event of some tribes complaining about being paid little for the land they have to give up, which are ignored by the government since they'd reduce the amount of money they'd get from taxes
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_leveraging_mountains
+    x = 1
+    y = 1
+    relative_position_id = EEE_embracing_COBSOC
+
+    cost = 3
+    prerequisite = { focus = EEE_embracing_COBSOC }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_leveraging_mountains"
+        30 = {
+            add_resource = {
+                type = steel
+                amount = 12
+            }
+            add_resource = {
+                type = aluminium
+                amount = 6
+            }
+        }
+        37 = {
+            add_resource = {
+                type = steel
+                amount = 8
+            }
+            add_resource = {
+                type = aluminium
+                amount = 4
+            }
+        }
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_seekers_of_soil
+    x = -1
+    y = 1
+    relative_position_id = EEE_roots_of_society
+
+    cost = 3
+    prerequisite = { focus = EEE_roots_of_society }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_seekers_of_soil"
+        #Idea here
+        ###Maybe short event of how thestrals have been trained to find and scope out the nearest resources through their magical senses alone
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_aggressive_negotiation
+    x = 1
+    y = 1
+    relative_position_id = EEE_roots_of_society
+
+    cost = 4
+    prerequisite = { focus = EEE_roots_of_society }
+    available = {
+        NOT = { has_country_flag = EEE_recently_yoinked_tribe_land }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_aggressive_negotiation"
+        ###Potentially event of weaving and worming around negotiations and written agreements with the tribes to get them to agree to more land being given up for factories
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_industrial_charity
+    x = 0
+    y = 2
+    relative_position_id = EEE_chipping_protections
+
+    cost = 4
+    prerequisite = { focus = EEE_chipping_protections }
+    prerequisite = { focus = EEE_minimal_compensation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_industrial_charity"
+        ###Possibly short event of an accountant for a factory trying to worm out of giving more taxes than necessary, and finding it extremely difficult, since there are so many things that they must donate to to support the poor
+        decrease_poverty = yes
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_immediate_responses
+    x = 1
+    y = 1
+    relative_position_id = EEE_minimal_compensation
+
+    cost = 3
+    prerequisite = { focus = EEE_minimal_compensation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_immediate_responses"
+        two_random_industrial_complex = yes
+        one_random_industrial_complex = yes
+        one_random_arms_factory = yes
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_book_situation
+    x = 0
+    y = 3
+    relative_position_id = EEE_heart_of_jungle
+
+    cost = 4
+    prerequisite = {
+        focus = EEE_embracing_COBSOC
+        focus = EEE_roots_of_society
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_book_situation"
+        ###Event of some Moonspeakers teaching foals in a classroom, along with many adults, and being bombarded with sometimes rather inane or downright silly questions, while trying to teach them all to read more effectively, which frustrates a number of them
+        decrease_illiteracy = yes
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_natural_exploitation
+    x = -1
+    y = 1
+    relative_position_id = EEE_aggressive_negotiation
+
+    cost = 3
+    prerequisite = { focus = EEE_aggressive_negotiation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_natural_exploitation"
+        ###Maybe short event of some miners or the like reluctantly having to split their earnings from selling resources extracted from tribal land with the tribes themselves
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_artisanal_wages
+    x = 0
+    y = 2
+    relative_position_id = EEE_adapting_to_world
+
+    cost = 4
+    prerequisite = { focus = EEE_adapting_to_world }
+    prerequisite = { focus = EEE_aggressive_negotiation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_artisanal_wages"
+        ###Perhaps an event of an artisan trying to refuse being given any welfare money, as she sees it as an insult to her craft, which bemuses the government ponies, since she is having difficulty selling any of her wares, which are very niche wing shields for jungle trackers and trailblazers
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_strong_offenses
+    x = -1
+    y = 1
+    relative_position_id = EEE_immediate_responses
+
+    cost = 4
+    prerequisite = { focus = EEE_immediate_responses }
+    mutually_exclusive = { focus = EEE_stronger_defenses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_strong_offenses"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_stronger_defenses
+    x = 0
+    y = 2
+    relative_position_id = EEE_leveraging_mountains
+
+    cost = 4
+    prerequisite = { focus = EEE_leveraging_mountains }
+    mutually_exclusive = { focus = EEE_strong_offenses }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_stronger_defenses"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_itemized_industrial_parks
+    x = 0
+    y = 2
+    relative_position_id = EEE_seekers_of_soil
+
+    cost = 4
+    prerequisite = { focus = EEE_seekers_of_soil }
+    mutually_exclusive = { focus = EEE_strategic_positioning }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_itemized_industrial_parks"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_strategic_positioning
+    x = 1
+    y = 1
+    relative_position_id = EEE_natural_exploitation
+
+    cost = 4
+    prerequisite = { focus = EEE_natural_exploitation }
+    mutually_exclusive = { focus = EEE_itemized_industrial_parks }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_strategic_positioning"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_remote_suburbs
+    x = -1
+    y = 1
+    relative_position_id = EEE_strong_offenses
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_strong_offenses
+        focus = EEE_stronger_defenses
+    }
+    available = { #Will probably need custom tooltip
+        check_variable = { EEE_reduced_tribe_land_attempts = 3 }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_remote_suburbs"
+        ###Potentially short event of some thestrals traveling in from distant villages to Ayacachtli for the week, since they are so far from home that there is little point traveling back, which makes them a bit annoyed, although they have to go, to earn enough to live
+        #Effect here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_black_and_blue
+    x = 1
+    y = 1
+    relative_position_id = EEE_strong_offenses
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_strong_offenses
+        focus = EEE_stronger_defenses
+    }
+    available = {
+        check_variable = { EEE_reduced_tribe_land_attempts = 3 }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_black_and_blue"
+        #Effect here
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_thestral_wisdom
+    x = 0
+    y = 2
+    relative_position_id = EEE_book_situation
+
+    cost = 5
+    prerequisite = { focus = EEE_book_situation }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_thestral_wisdom"
+        ###Possibly event of some of the first university classes being held, and how it seems all great and new, until homework is assigned
+        Improve_Science_Base = yes
+        if = {
+            limit = { num_research_slots < 5 }
+            add_research_slot = 1
+        }
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_shock_girders
+    x = 1
+    y = 1
+    relative_position_id = EEE_itemized_industrial_parks
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_itemized_industrial_parks
+        focus = EEE_strategic_positioning
+    }
+    available = {
+        check_variable = { EEE_reduced_tribe_land_attempts = 3 }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_shock_girders"
+        #Bonus here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_hubs_of_jungle
+    x = 1
+    y = 1
+    relative_position_id = EEE_strategic_positioning
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_itemized_industrial_parks
+        focus = EEE_strategic_positioning
+    }
+    available = {
+        check_variable = { EEE_reduced_tribe_land_attempts = 3 }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_hubs_of_jungle"
+        ###Event of transport technicians traveling to Ayacachtli for delivering the goods manufactured in other villages to help keep the industrial machine moving, and them dealing with some of the inspections and even customs they have to go through
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_pony_economy
+    x = 1
+    y = 1
+    relative_position_id = EEE_remote_suburbs
+
+    cost = 5
+    prerequisite = { focus = EEE_remote_suburbs }
+    prerequisite = { focus = EEE_black_and_blue }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_pony_economy"
+        #Bonus here
+        increase_society_development = yes
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_scouting_villages
+    x = -1
+    y = 1
+    relative_position_id = EEE_thestral_wisdom
+
+    cost = 4
+    prerequisite = { focus = EEE_thestral_wisdom }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_scouting_villages"
+        ###Possibly event on the plans for reducing illiteracy in the villages that are remote from the cities and towns, or Moonspeakers traveling to and fro, near and far, through the villages to teach, which earns them gratitude, but also slowly wears them down as they can never keep constant relationships up
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_uncharted_heights
+    x = 1
+    y = 1
+    relative_position_id = EEE_thestral_wisdom
+
+    cost = 4
+    prerequisite = { focus = EEE_thestral_wisdom }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_uncharted_heights"
+        ###Event of some new thestral scientists working on how to enhance either some of their senses aside from sight, or perhaps their wingpower to match pegasi, which involves numerous, perhaps questionable research decisions, which worries the test subjects before they're subjected to the techniques to supposedly improve their bodies
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_thestral_economy
+    x = 1
+    y = 1
+    relative_position_id = EEE_shock_girders
+
+    cost = 5
+    prerequisite = { focus = EEE_shock_girders }
+    prerequisite = { focus = EEE_hubs_of_jungle }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_thestral_economy"
+        #Bonus here
+        increase_society_development = yes
     }
 }
 
