@@ -225,6 +225,66 @@ on_actions = {
 				}
 				#At this time, nothing, but event will fire that will make non-standard game over for them. Check DED code for what was done.
 			}
+			if = { #This might change to on weekly or on daily
+				limit = {
+					has_country_flag = EEE_what_of_thy_soul
+					is_subject = no
+					OR = {
+						check_variable = { EEE_soul_corruption_moonlight_ticking_value > 0 }
+						check_variable = { EEE_soul_corruption_waning_ticking_value > 0 }
+						NOT = { check_variable = { EEE_soul_corruption_ticking_value = 0 } }
+					}
+				}
+				if = {
+					limit = { NOT = { check_variable = { EEE_soul_corruption_ticking_value = 0 } } }
+					if = {
+						limit = { NOT = { has_country_flag = EEE_moonlight_dead } }
+						EEE_Moonlight_Crescent = {
+							add_to_variable = { EEE_moonlight_soul_corruption = EEE_soul_corruption_ticking_value }
+							clamp_variable = {
+								var = EEE_moonlight_soul_corruption
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+							#Eventually have an event of Moonlight committing suicide at 85 soul corruption, as he realizes what's happening but sees no way to turn back
+						}
+						EEE_Waning_Crescent = {
+							add_to_variable = { EEE_waning_soul_corruption = EEE_soul_corruption_ticking_value }
+							clamp_variable = {
+								var = EEE_waning_soul_corruption
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							NOT = { has_country_flag = EEE_moonlight_dead }
+							check_variable = { EEE_soul_corruption_moonlight_ticking_value > 0 }
+						}
+						EEE_Moonlight_Crescent = {
+							add_to_variable = { EEE_moonlight_soul_corruption = EEE_soul_corruption_moonlight_ticking_value }
+							clamp_variable = {
+								var = EEE_moonlight_soul_corruption
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+						}
+					}
+					else_if = {
+						limit = { check_variable = { EEE_soul_corruption_waning_ticking_value > 0 } }
+						EEE_Waning_Crescent = {
+							add_to_variable = { EEE_waning_soul_corruption = EEE_soul_corruption_waning_ticking_value }
+							clamp_variable = {
+								var = EEE_soul_corruption_waning_ticking_value
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+						}
+						#If Waning gets to 100 soul corruption, she cannot use any more of her abilities, although any passive buffs stay the same; there will be some debuffs for it, too, mainly to her unit leader, and to some parts of the country
+					}
+				}
+			}
 		}
 	}
 	on_monthly_MGY = {
