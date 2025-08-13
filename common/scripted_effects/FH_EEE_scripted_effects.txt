@@ -9,6 +9,379 @@ EEE_startup_character_flags = { #Any invisible characters should gain the flag, 
     EEE_Moonlight_and_Waning = { set_character_flag = EEE_immune_to_sacrifice }
 }
 
+###Tribal Elections###
+EEE_start_tribal_confederation_election = {
+    hidden_effect = {
+        if = {
+            limit = { NOT = { has_country_flag = EEE_stellar_game_player } }
+            EEE_stellar_election_randomness = yes
+        }
+        if = {
+            limit = { NOT = { has_country_flag = EEE_red_game_player } }
+            EEE_red_election_randomness = yes
+        }
+        if = {
+            limit = { NOT = { has_country_flag = EEE_tranquil_game_player } }
+            EEE_tranquil_election_randomness = yes
+        }
+    }
+}
+
+EEE_confederation_popularity_decay = {
+    if = {
+        limit = {
+            has_country_flag = EEE_stellar_game_player
+            check_variable = { EEE_stellar_note_popularity > 0 }
+        }
+        add_to_variable = { EEE_stellar_note_popularity = -0.5 }
+        add_to_variable = { EEE_red_dusk_popularity = 0.25 }
+        add_to_variable = { EEE_tranquil_serenade_popularity = 0.25 }
+        clamp_variable = {
+            var = EEE_stellar_note_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_red_dusk_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_tranquil_serenade_popularity
+            max = 100
+            min = 0
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = EEE_red_game_player
+            check_variable = { EEE_red_dusk_popularity > 0 }
+        }
+        add_to_variable = { EEE_red_dusk_popularity = -0.5 }
+        add_to_variable = { EEE_stellar_note_popularity = 0.25 }
+        add_to_variable = { EEE_tranquil_serenade_popularity = 0.25 }
+        clamp_variable = {
+            var = EEE_stellar_note_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_red_dusk_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_tranquil_serenade_popularity
+            max = 100
+            min = 0
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = EEE_tranquil_game_player
+            check_variable = { EEE_tranquil_serenade_popularity > 0 }
+        }
+        add_to_variable = { EEE_tranquil_serenade_popularity = -0.5 }
+        add_to_variable = { EEE_red_dusk_popularity = 0.25 }
+        add_to_variable = { EEE_stellar_note_popularity = 0.25 }
+        clamp_variable = {
+            var = EEE_stellar_note_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_red_dusk_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_tranquil_serenade_popularity
+            max = 100
+            min = 0
+        }
+    }
+}
+
+#Randomness generator which makes sure that the AI doesn't do the same decision again right after the other
+EEE_tranquil_election_randomness = {
+    hidden_effect = {
+        random_list = {
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 1 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 1 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 2 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 2 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 3 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 3 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 4 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 4 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 5 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 5 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 6 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 6 }
+            }
+            1 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 7 }
+                    NOT = { has_country_flag = EEE_tranquil_election_special_used }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 7 }
+            }
+        }
+        country_event = {
+            id = thestral.1001
+            days = 10
+            random_days = 20
+        }
+    }
+}
+
+EEE_tranquil_random_election_activity = {
+    if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 1 } }
+        activate_mission = EEE_tranquil_organize_youth_rally_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 2 } }
+        activate_mission = EEE_tranquil_bash_COBSOCS_legacy_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 3 } }
+        activate_mission = EEE_tranquil_promise_religious_freedom_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 4 } }
+        activate_mission = EEE_tranquil_listen_to_tribal_concerns_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 5 } }
+        activate_mission = EEE_tranquil_critique_moonspeaker_lackeys_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 6 } }
+        activate_mission = EEE_tranquil_widespread_anti_communist_campaign_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 7 } }
+        activate_mission = EEE_tranquil_point_to_shadow_ruler_mission
+    }
+}
+
+EEE_red_election_randomness = {
+    hidden_effect = {
+        random_list = {
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 1 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 1 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 2 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 2 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 3 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 3 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 4 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 4 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 5 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 5 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 6 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 6 }
+            }
+            1 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 7 }
+                    NOT = { has_country_flag = EEE_red_election_special_used }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 7 }
+            }
+        }
+        country_event = {
+            id = thestral.1002
+            days = 10
+            random_days = 20
+        }
+    }
+}
+
+EEE_red_random_election_activity = {
+    if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 1 } }
+        activate_mission = EEE_red_host_workers_rally_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 2 } }
+        activate_mission = EEE_red_sway_moonspeaker_member_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 3 } }
+        activate_mission = EEE_red_expose_moonspeaker_failings_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 4 } }
+        activate_mission = EEE_red_promote_rapid_infrastructure_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 5 } }
+        activate_mission = EEE_red_volunteer_reconstruction_workers_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 6 } }
+        activate_mission = EEE_red_reveal_council_lies_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 7 } }
+        activate_mission = EEE_red_organize_national_strike_mission
+    }
+}
+
+EEE_stellar_election_randomness = {
+    hidden_effect = {
+        random_list = {
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 1 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 1 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 2 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 2 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 3 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 3 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 4 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 4 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 5 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 5 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 6 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 6 }
+            }
+            1 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 7 }
+                    check_variable = { EEE_libel_and_slander < 4 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 7 }
+            }
+        }
+        country_event = {
+            id = thestral.1003
+            days = 10
+            random_days = 20
+        }
+    }
+}
+
+EEE_stellar_random_election_activity = {
+    if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 1 } }
+        activate_mission = EEE_stellar_host_religious_rally_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 2 } }
+        activate_mission = EEE_stellar_promise_union_privileges_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 3 } }
+        activate_mission = EEE_stellar_highlight_history_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 4 } }
+        activate_mission = EEE_stellar_visit_distant_tribes_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 5 } }
+        activate_mission = EEE_stellar_guarantee_safety_reforms_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 6 } }
+        activate_mission = EEE_stellar_meet_with_city_leaders_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 7 } }
+        activate_mission = EEE_stellar_smear_opponents_mission
+    }
+}
+
 ###Should all check to make sure they can be met
 EEE_sacrifice_state_pop = {
     add_stability = -0.05
