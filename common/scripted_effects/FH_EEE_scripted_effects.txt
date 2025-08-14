@@ -382,6 +382,84 @@ EEE_stellar_random_election_activity = {
     }
 }
 
+EEE_calculate_confederation_popularity_change = {
+    add_to_variable = { EEE_stellar_note_popularity = EEE_stellar_popularity_change } #Temp variable added
+    add_to_variable = { EEE_tranquil_serenade_popularity = EEE_tranquil_popularity_change }
+    add_to_variable = { EEE_red_dusk_popularity = EEE_red_popularity_change }
+    #set_temp_variable = { EEE_stellar_pre_clamp_popularity = EEE_stellar_note_popularity } #Edge case temp variables. Unimplemented right now, as no final decision on whether to allow cases where all three candidates could be at 0% or 100%, due to current logic
+    #set_temp_variable = { EEE_tranquil_pre_clamp_popularity = EEE_tranquil_serenade_popularity } #This would take the final totals before clamping, then have the clamped variables subtracted from them
+    #set_temp_variable = { EEE_red_pre_clamp_popularity = EEE_red_dusk_popularity } #After that, they will have their remainders evenly divided between the two candidates not supported by the player, to ensure that they don't get extra popularity where they don't need to
+    clamp_variable = {
+        var = EEE_stellar_note_popularity
+        min = 0
+        max = 100
+    }
+    clamp_variable = {
+        var = EEE_tranquil_serenade_popularity
+        min = 0
+        max = 100
+    }
+    clamp_variable = {
+        var = EEE_red_dusk_popularity
+        min = 0
+        max = 100
+    }
+    subtract_from_temp_variable = { EEE_stellar_pre_clamp_popularity = EEE_stellar_note_popularity }
+    subtract_from_temp_variable = { EEE_tranquil_pre_clamp_popularity = EEE_tranquil_serenade_popularity }
+    subtract_from_temp_variable = { EEE_red_pre_clamp_popularity = EEE_red_dusk_popularity }
+    #if = {
+    #    limit = {
+    #        NOT = { check_variable = { EEE_stellar_pre_clamp_popularity = 0 } }
+    #    }
+    #    divide_temp_variable = { EEE_stellar_pre_clamp_popularity = 2 }
+    #    subtract_from_temp_variable = { EEE_tranquil_serenade_popularity = EEE_stellar_pre_clamp_popularity }
+    #    subtract_from_temp_variable = { EEE_red_dusk_popularity = EEE_stellar_pre_clamp_popularity }
+    #}
+    #if = {
+    #    limit = {
+    #        NOT = { check_variable = { EEE_tranquil_pre_clamp_popularity = 0 } }
+    #    }
+    #    divide_temp_variable = { EEE_tranquil_pre_clamp_popularity = 2 }
+    #    subtract_from_temp_variable = { EEE_stellar_note_popularity = EEE_stellar_pre_clamp_popularity }
+    #    subtract_from_temp_variable = { EEE_red_dusk_popularity = EEE_stellar_pre_clamp_popularity }
+    #}
+    #if = {
+    #    limit = {
+    #        NOT = { check_variable = { EEE_red_pre_clamp_popularity = 0 } }
+    #    }
+    #    divide_temp_variable = { EEE_red_pre_clamp_popularity = 2 }
+    #    subtract_from_temp_variable = { EEE_tranquil_serenade_popularity = EEE_stellar_pre_clamp_popularity }
+    #    subtract_from_temp_variable = { EEE_stellar_note_popularity = EEE_stellar_pre_clamp_popularity }
+    #}
+    if = {
+        limit = {
+            check_variable = { EEE_stellar_popularity_change > 0 }
+        }
+        custom_effect_tooltip = EEE_stellar_popularity_gain_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_stellar_popularity_loss_tt
+    }
+    if = {
+        limit = {
+            check_variable = { EEE_tranquil_popularity_change > 0 }
+        }
+        custom_effect_tooltip = EEE_tranquil_popularity_gain_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_tranquil_popularity_loss_tt
+    }
+    if = {
+        limit = {
+            check_variable = { EEE_red_popularity_change > 0 }
+        }
+        custom_effect_tooltip = EEE_red_popularity_gain_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_red_popularity_loss_tt
+    }
+}
+
 ###Should all check to make sure they can be met
 EEE_sacrifice_state_pop = {
     add_stability = -0.05
