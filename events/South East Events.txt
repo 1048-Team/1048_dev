@@ -468,6 +468,17 @@ country_event = { #Mingsplosion continues with Lucky flipping the bird
 			}
 		}
 	}
+	after = {
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = STB
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
+		}
+	}
 }
 
 country_event = { #Bats do be EEEing, tho
@@ -505,6 +516,15 @@ country_event = { #Bats do be EEEing, tho
 				add_state_core = 24
 				add_state_core = 83
 				load_oob = "EEE_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "EEE_1048_naval"
+				}
+				else = {
+					load_oob = "EEE_1048_naval_legacy"
+				}
 			}
 		}
 	}
@@ -538,6 +558,15 @@ country_event = { #Bats do be EEEing, tho
 				add_state_core = 24
 				add_state_core = 83
 				load_oob = "EEE_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "EEE_1048_naval"
+				}
+				else = {
+					load_oob = "EEE_1048_naval_legacy"
+				}
 			}
 		}
 	}
@@ -548,6 +577,14 @@ country_event = { #Bats do be EEEing, tho
 				limit = {
 					is_owned_by = EEE
 					is_demilitarized_zone = yes
+					NOT = { #Since the Neighua aren't the happiest about them, either
+						state = 88
+						state = 348
+						state = 16
+						state = 352
+						state = 24
+						state = 83
+					}
 				}
 				set_demilitarized_zone = no
 			}
