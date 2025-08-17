@@ -526,8 +526,7 @@ EEE_tribal_confederation_category = {
 			EEE_calculate_confederation_popularity_change = yes
 		}
 	}
-}
-#AI "decisions"
+	#AI "decisions"
 	EEE_stellar_host_religious_rally_mission = {
 		allowed = {
 			always = no
@@ -874,17 +873,18 @@ EEE_tribal_confederation_category = {
 			}
 		}
 		days_mission_timeout = 28
-		modifier = {
-			industrial_capacity_dockyard = -0.15
-			industrial_capacity_factory = -0.15
-			production_speed_buildings_factor = -0.1
-			communism_drift = 0.05
-		}
+		#modifier = {
+		#	industrial_capacity_dockyard = -0.15
+		#	industrial_capacity_factory = -0.15
+		#	production_speed_buildings_factor = -0.1
+		#	communism_drift = 0.05
+		#}
 		timeout_effect = {
 			log = "[GetDateText]: [ROOT.GetName]: decision remove EEE_red_organize_national_strike_mission"
 			#Red only
 			set_country_flag = EEE_red_election_special_used
 			custom_effect_tooltip = EEE_choose_strike_wisely_mission_tt
+			#Give timed spirit with the same stats for two months
 			set_temp_variable = { EEE_stellar_popularity_change = -15 }
 			set_temp_variable = { EEE_tranquil_popularity_change = -10 }
 			set_temp_variable = { EEE_red_popularity_change = 25 }
@@ -932,14 +932,18 @@ EEE_tribal_confederation_category = {
 			}
 		}
 		days_mission_timeout = 14
-		modifier = {
-			communism_drift = -0.02
-			stability_weekly = -0.005
-			neutrality_drift = 0.02
-		}
 		timeout_effect = {
 			log = "[GetDateText]: [ROOT.GetName]: decision remove EEE_tranquil_bash_COBSOCS_legacy_mission"
 			#Tranquil and Stellar
+			add_stability = -0.01
+			add_popularity = {
+				ideology = communism
+				popularity = 0.005
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.005
+			}
 			set_temp_variable = { EEE_stellar_popularity_change = 3 }
 			set_temp_variable = { EEE_tranquil_popularity_change = 6 }
 			set_temp_variable = { EEE_red_popularity_change = -9 }
@@ -1062,14 +1066,15 @@ EEE_tribal_confederation_category = {
 			}
 		}
 		days_mission_timeout = 21
-		modifier = {
-			stability_weekly = -0.02
-			neutrality_drift = -0.03
-		}
 		timeout_effect = {
 			log = "[GetDateText]: [ROOT.GetName]: decision remove EEE_tranquil_widespread_anti_communist_campaigns_mission"
 			#Tranquil only
 			set_country_flag = EEE_tranquil_election_special_used
+			add_stability = -0.06
+			add_popularity = {
+				ideology = neutrality
+				popularity = -0.02
+			}
 			custom_effect_tooltip = EEE_one_shot_exposure_mission_tt
 			set_temp_variable = { EEE_stellar_popularity_change = -15 }
 			set_temp_variable = { EEE_tranquil_popularity_change = 25 }
@@ -1078,3 +1083,4 @@ EEE_tribal_confederation_category = {
 			EEE_tranquil_election_randomness = yes
 		}
 	}
+}
