@@ -1,0 +1,144 @@
+add_namespace = thestral
+add_namespace = thestral_debug
+add_namespace = ezmetzli
+add_namespace = ezmetzli_gushing
+add_namespace = ezmetzli_crescents
+add_namespace = custodiens
+
+country_event = { #Choose the "player" for the confederation election mechanic
+	id = thestral.999
+	title = thestral.999.t
+	desc = thestral.999.d
+	immediate = {log = "[GetDateText]: [ROOT.GetName]: event thestral.999"}
+
+	is_triggered_only = yes
+
+	option = { #Stellar Note
+		name = thestral.999.a
+		custom_effect_tooltip = EEE_confederation_choice_decay_tt
+		set_country_flag = EEE_stellar_game_player
+	}
+	option = { #Red Dusk
+		name = thestral.999.b
+		custom_effect_tooltip = EEE_confederation_choice_decay_tt
+		set_country_flag = EEE_red_game_player
+	}
+	option = { #Tranquil Serenade
+		name = thestral.999.c
+		custom_effect_tooltip = EEE_confederation_choice_decay_tt
+		set_country_flag = EEE_tranquil_game_player
+	}
+	after = {
+		#Scripted effect to make sure that the right missions are activated to simulate other characters doing things
+		set_country_flag = EEE_tribal_race_begin
+		EEE_start_tribal_confederation_election = yes
+	}
+}
+
+country_event = { ###EEE has its own tiny explosion as NEI refuses to be controlled by them and starts to fight back against the thestral militia and take over most of the coast and Red Glory while killing many thestrals in the process
+	id = thestral.1000
+	title = thestral.1000.t
+	desc = thestral.1000.d
+	immediate = {log = "[GetDateText]: [ROOT.GetName]: event thestral.1000"}
+
+	is_triggered_only = yes
+
+	option = {
+		name = thestral.1000.a
+		custom_effect_tooltip = EEE_eee_no_longer_tt
+		hidden_effect = {
+			NEI = {
+				transfer_state = 88
+				transfer_state = 348
+				transfer_state = 16
+				transfer_state = 352
+				transfer_state = 24
+				transfer_state = 83
+				add_state_core = 88
+				add_state_core = 348
+				add_state_core = 16
+				add_state_core = 352
+				add_state_core = 24
+				add_state_core = 83
+				load_oob = "NEI_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "NEI_1048_naval"
+				}
+				else = {
+					load_oob = "NEI_1048_naval_legacy"
+				}
+			}
+			transfer_ship = {
+				type = destroyer
+				target = NEI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = NEI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = NEI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = NEI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = NEI
+			}
+			remove_state_core = 88
+			remove_state_core = 348
+			remove_state_core = 16
+			remove_state_core = 352
+			remove_state_core = 24
+			remove_state_core = 83
+			add_state_claim = 88
+			add_state_claim = 348
+			add_state_claim = 16
+			add_state_claim = 352
+			add_state_claim = 24
+			add_state_claim = 83
+		}
+	}
+}
+
+country_event = { #Hidden event for choosing which mission will be done next for Tranquil
+	id = thestral.1001
+	immediate = {log = "[GetDateText]: [ROOT.GetName]: event thestral.1001"}
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		EEE_tranquil_random_election_activity = yes
+	}
+}
+
+country_event = { #Hidden event for choosing which mission will be done next for Red
+	id = thestral.1002
+	immediate = {log = "[GetDateText]: [ROOT.GetName]: event thestral.1002"}
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		EEE_red_random_election_activity = yes
+	}
+}
+
+country_event = { #Hidden event for choosing which mission will be done next for Stellar
+	id = thestral.1003
+	immediate = {log = "[GetDateText]: [ROOT.GetName]: event thestral.1003"}
+	hidden = yes
+
+	is_triggered_only = yes
+
+	option = {
+		EEE_stellar_random_election_activity = yes
+	}
+}

@@ -1,0 +1,55 @@
+STB_debug_category = {
+    allowed = {
+        tag = STB
+        is_debug = yes
+    }
+    priority = { base = 125 }
+}
+
+STB_BOP_centralization_category = {
+    allowed = {
+        tag = STB
+    }
+}
+
+STB_simping_category = {
+    allowed = {
+        tag = STB
+    }
+    priority = { base = 121 }
+    visible = { }
+}
+
+STB_DEM_elections_category = {
+    allowed = {
+        tag = STB
+    }
+    priority = { base = 120 }
+    visible = {
+        OR = {
+            has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+            has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+            has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+            has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+        }
+        NOT = { has_country_flag = STB_lone_jade }
+    }
+    visible_when_empty = yes
+    scripted_gui = STB_DEM_election_ui
+}
+
+STB_OED_suppression_category = {
+    allowed = {
+        tag = STB
+    }
+    priority = { base = 119 }
+    visible = {
+        OR = {
+            has_completed_focus = STB_snatch_old_lands
+            is_debug = yes #Remove later
+        }
+        NOT = { has_country_flag = STB_southeast_victor }
+    }
+    visible_when_empty = yes
+    scripted_gui = STB_oed_suppression_category_window
+}

@@ -1,6 +1,7 @@
 on_actions = {
 	on_monthly_EQS = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_EQS FH"
 			if = {
 				limit = {
 					NOT = { has_country_flag = equestria_returned }
@@ -47,6 +48,7 @@ on_actions = {
 	}
 	on_monthly_SLW = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_SLW"
 			if = {
 				limit = {
 					exists = yes
@@ -94,6 +96,7 @@ on_actions = {
 	}
 	on_monthly_YAH = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_YAH"
 			if = {
 				limit = {
 					exists = yes
@@ -114,6 +117,7 @@ on_actions = {
 	}
 	on_monthly_BLS = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_BLS"
 			if = {
 				limit = {
 					exists = yes
@@ -132,19 +136,250 @@ on_actions = {
 	}
 	on_monthly_MTS = {
 		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_MTS"
 			if = {
 				limit = {
 					exists = yes
 					has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 					has_country_flag = MTS_unlock_prosperity
 				}
-				every_state = {
-					limit = {
-						is_owned_by = MTS
+				if = {
+					limit = { has_idea = MTS_grand_leap_idea }
+					every_state = {
+						limit = { is_owned_by = MTS }
+						set_temp_variable = { MTS_state_prosperity_added = 5 }
+						MTS_add_state_prosperity = yes
+						MTS_calculate_state_prosperity = yes
 					}
-					#set_temp_variable = { MTS_state_prosperity_added = 0.1 } #Consider it to be a bit like EU4
-					#MTS_add_state_prosperity = yes
-					MTS_calculate_state_prosperity = yes
+				}
+				else = {
+					every_state = {
+						limit = {
+							is_owned_by = MTS
+						}
+						#set_temp_variable = { MTS_state_prosperity_added = 0.1 } #Consider it to be a bit like EU4
+						#MTS_add_state_prosperity = yes
+						MTS_calculate_state_prosperity = yes
+					}
+				}
+				if = {
+					limit = { has_country_flag = MTS_commie_ordos_tt }
+					add_to_variable = { SOL_imperial_authority_pool = modifier@SOL_imperial_authority }
+					set_variable = { SOL_imperial_authority_monthly = modifier@SOL_imperial_authority }
+					SOL_calculate_loyal_ordos = yes
+					add_to_variable = { SOL_imperial_authority_monthly = SOL_loyal_ordos_bonus }
+					add_to_variable = { SOL_imperial_authority_pool = SOL_loyal_ordos_bonus }
+					SOL_calculate_disloyal_ordos = yes
+					add_to_variable = { SOL_imperial_authority_monthly = SOL_disloyal_ordos_malus }
+					add_to_variable = { SOL_imperial_authority_pool = SOL_disloyal_ordos_malus }
+					SOL_ordos_number_bonus = yes
+					add_to_variable = { SOL_imperial_authority_monthly = SOL_number_of_ordos_bonus }
+					add_to_variable = { SOL_imperial_authority_pool = SOL_number_of_ordos_bonus }
+					clamp_variable = {
+						var = SOL_imperial_authority_pool
+						min = SOL_imperial_authority_min
+						max = SOL_imperial_authority_max
+					}
+					IF = {
+						limit = {
+							check_variable = {
+								var = SOL_imperial_authority_pool
+								value = 75
+								compare = greater_than_or_equals
+							}
+						}
+						SOL_high_authority_derived_stats = yes
+					}
+					IF = {
+						limit = {
+							check_variable = {
+								var = SOL_imperial_authority_pool
+								value = 40
+								compare = less_than_or_equals
+							}
+						}
+						SOL_low_authority_derived_stats = yes
+					}
+				}
+			}
+		}
+	}
+	on_monthly_EEE = {
+		effect = {
+			log = "[GetDateText]: [ROOT.GetName] on_monthly_EEE"
+			if = {
+				limit = {
+					has_country_flag = EEE_ezmetzli_coup
+					is_subject = no
+				}
+				add_to_variable = { EEE_clock_is_ticking_gushing = modifier@EEE_doom } #Variable to store how much Doom there is
+				clamp_variable = {
+					var = EEE_clock_is_ticking_gushing
+					min = EEE_doom_min
+					max = EEE_doom_max
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { EEE_clock_is_ticking_gushing = EEE_doom_max }
+				}
+				#At this time, nothing, but event will fire that will make non-standard game over for them. Check DED code for what was done.
+			}
+			if = { #This might change to on weekly or on daily
+				limit = {
+					has_country_flag = EEE_what_of_thy_soul
+					is_subject = no
+					OR = {
+						check_variable = { EEE_soul_corruption_moonlight_ticking_value > 0 }
+						check_variable = { EEE_soul_corruption_waning_ticking_value > 0 }
+						NOT = { check_variable = { EEE_soul_corruption_ticking_value = 0 } }
+					}
+				}
+				if = {
+					limit = { NOT = { check_variable = { EEE_soul_corruption_ticking_value = 0 } } }
+					if = {
+						limit = { NOT = { has_country_flag = EEE_moonlight_dead } }
+						EEE_Moonlight_Crescent = {
+							add_to_variable = { EEE_moonlight_soul_corruption = EEE_soul_corruption_ticking_value }
+							clamp_variable = {
+								var = EEE_moonlight_soul_corruption
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+							#Eventually have an event of Moonlight committing suicide at 85 soul corruption, as he realizes what's happening but sees no way to turn back
+						}
+						EEE_Waning_Crescent = {
+							add_to_variable = { EEE_waning_soul_corruption = EEE_soul_corruption_ticking_value }
+							clamp_variable = {
+								var = EEE_waning_soul_corruption
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							NOT = { has_country_flag = EEE_moonlight_dead }
+							check_variable = { EEE_soul_corruption_moonlight_ticking_value > 0 }
+						}
+						EEE_Moonlight_Crescent = {
+							add_to_variable = { EEE_moonlight_soul_corruption = EEE_soul_corruption_moonlight_ticking_value }
+							clamp_variable = {
+								var = EEE_moonlight_soul_corruption
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+						}
+					}
+					else_if = {
+						limit = { check_variable = { EEE_soul_corruption_waning_ticking_value > 0 } }
+						EEE_Waning_Crescent = {
+							add_to_variable = { EEE_waning_soul_corruption = EEE_soul_corruption_waning_ticking_value }
+							clamp_variable = {
+								var = EEE_soul_corruption_waning_ticking_value
+								min = EEE_soul_corruption_min
+								max = EEE_soul_corruption_max
+							}
+						}
+						#If Waning gets to 100 soul corruption, she cannot use any more of her abilities, although any passive buffs stay the same; there will be some debuffs for it, too, mainly to her unit leader, and to some parts of the country
+					}
+				}
+			}
+		}
+	}
+	on_monthly_MGY = {
+		effect = {
+			log = "[GetDateText]: ROOT: [Root.GetName] on_monthly_MGY"
+			if = {
+				limit = {
+					has_war = yes
+					NOT = {
+						any_state = {
+							any_neighbor_state = {
+								owner = { has_war_with = MGY }
+							}
+						}
+					}
+				}
+				ROOT = { country_event = { id = zebrica_activity.19 days = 30 } } #kills another zebra desert tribes
+			}
+			else_if = {
+				limit = {
+					has_war_with = ABY
+					NOT = {
+						ABY = {
+							any_controlled_state = {
+								is_core_of = MGY
+							}
+						}
+					}
+				}
+				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
+				white_peace = MGY
+				ABY = {
+					every_owned_state = {
+						limit = {
+							is_core_of = MGY
+							#idk how to check if it's in another power's control
+						}
+						transfer_state_to = MGY
+					}
+				}
+			}
+		}
+	}
+
+	on_monthly_ILU = {
+		effect = {
+			log = "[GetDateText]: ROOT: [Root.GetName] on_monthly_ILU"
+			if = {
+				limit = {
+					date > 1056.6.6 #subject to change ofc
+					has_war = yes
+				}
+				random_list = {
+					3 = {
+						random_neighbor_country = {
+							limit = {
+								has_war_with = ILU
+								is_subject = no
+							}
+							random_other_country = {
+								limit = {
+									NOT = {
+										has_war_with = ILU
+										has_war_with = PREV
+									}
+									is_neighbor_of = ILU
+									if = {
+										limit = {
+											NOT = { country_exists = MGY }
+											original_tag = STM
+										}
+										has_country_flag = FG_STM_got_MGY_flag
+									}
+								}
+								country_event = {
+									id = zebrica_activity.14
+									random_days = 27
+									random_hours = 23
+								}
+							}
+						}
+					}
+					2 = {
+						modifier = { #kirin dice used in every kirin random_list
+							factor = 0.75
+							any_neighbor_country = {
+								OR = {
+									any_allied_country = {
+										has_tech = tech_kirin_astrology
+									}
+									has_tech = tech_kirin_astrology
+								}
+							}
+						}
+					}
 				}
 			}
 		}

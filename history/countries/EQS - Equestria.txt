@@ -205,6 +205,7 @@ set_technology = {
 	tech_military_police = 1
 	tech_engineers = 1
 	trench_warfare = 1
+	tech_trucks = 1
 	motorised_infantry = 1
 	interwar_antiair = 1
 	base_strike = 1
@@ -322,16 +323,15 @@ set_popularities = {
 }
 
 set_politics = {
-
 	ruling_party = fascism
 	last_election = "1.10.10"
 	election_frequency = 36
 	elections_allowed = no
 }
-
+set_country_flag = has_custom_advisors
+set_country_flag = has_custom_spymaster
 
 add_ideas = {
-
 partial_economic_mobilisation
 limited_exports
 no_poverty
@@ -345,6 +345,12 @@ EQS_solar_inquisition
 EQS_great_war_aftermath
 EQS_heretical_commanders
 EQS_imperial_authority_spirit
+}
+if = {
+	limit = {
+		is_ai = yes
+	}
+	add_ideas = EQS_block_ai_justification
 }
 add_dynamic_modifier = { modifier = EQS_imperial_authority_effects }
 
@@ -376,9 +382,23 @@ reverse_add_opinion_modifier = {
 	target = CHN
 	modifier = mortal_enemies
 }
+add_opinion_modifier = {
+	target = STB
+	modifier = SLE_unrequited_love
+}
 
 ###Events###
 #Start of Manehattan uprising
+country_event = {
+	id = solar.52
+	days = 175
+	random_days = 35
+}
+country_event = {
+	id = solar.53
+	days = 220
+	random_days = 15
+}
 country_event = {
 	id = solar.54
 	days = 284
@@ -386,7 +406,7 @@ country_event = {
 }
 #Raven's death
 country_event = {
-	id = solar.57
+	id = solar.58
 	days = 180
 	random_days = 45
 }
@@ -478,6 +498,8 @@ recruit_character = EQS_Whirlwind
 recruit_character = EQS_Obscura
 recruit_character = EQS_Surface_Tension
 recruit_character = EQS_Floodwater
+recruit_character = EQS_Applesnack
+recruit_character = EQS_Flashpoint
 
 ###Vanilla SOL Characters###
 
@@ -507,10 +529,11 @@ if = {
 	create_operative_leader = {
 		name = EQS_Astrum_Solus_name
 		GFX = GFX_portrait_astrum_solus
-		bypass_recruitment = yes
+		bypass_recruitment = no #it doesn't work though
 		available_to_spy_master = yes
 		nationalities = {
 			EQS
+			EQC
 			STG
 			CRY
 			SCS
@@ -540,7 +563,7 @@ if = {
 			operative_commando operative_linguist operative_safe_cracker operative_escape_artist
 			pony_race_trait
 		}
-		female = yes
+		gender = female
 	}
 }
 
@@ -572,7 +595,7 @@ if = {
 			tank_nsb_armor_upgrade = 1
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/EQS_armoured_tractor.dds"
+		icon = "GFX_commonwealth_2d_gwtank_medium"
 	}
 	create_equipment_variant = {
 		name = "Molten Pike"
@@ -590,7 +613,7 @@ if = {
 			tank_nsb_armor_upgrade = 1
 		}
 		obsolete = yes
-		icon = "gfx/interface/technologies/EQS_armoured_tractor.dds"
+		icon = "GFX_commonwealth_2d_gwtank_medium"
 	}	
 	create_equipment_variant = {
 		name = "Immortal Class A"
@@ -608,7 +631,7 @@ if = {
 			tank_nsb_armor_upgrade = 3
 			tank_nsb_engine_upgrade = 2
 		}
-		icon = "gfx/interface/equipmentdesigner/tanks/designer/ENG/ENG_light_BAB_camo.dds"
+		icon = "GFX_ENG_light_BAB_camo"
 		obsolete = yes #export only
 	}
 
@@ -628,7 +651,7 @@ if = {
 			tank_nsb_armor_upgrade = 3
 			tank_nsb_engine_upgrade = 2
 		}
-		icon = "gfx/interface/equipmentdesigner/tanks/designer/ENG/ENG_light_BAB_camo.dds"
+		icon = "GFX_ENG_light_BAB_camo"
 		obsolete = yes #export only
 	}
 	create_equipment_variant = {
@@ -646,7 +669,7 @@ if = {
 			tank_nsb_engine_upgrade = 2
 			tank_nsb_armor_upgrade = 1
 		}
-		icon = "gfx/interface/technologies/EQS_breezie_n.dds"
+		icon = "GFX_commonwealth_2d_basic_light_tank_medium"
 		obsolete = yes #used for oob
 	}
 	create_equipment_variant = {
@@ -662,7 +685,7 @@ if = {
 			special_type_slot_1 = tank_radio_1
 			special_type_slot_2 = smoke_launchers
 		}
-		icon = "gfx/interface/technologies/EQS_breezie_n.dds"
+		icon = "GFX_commonwealth_2d_basic_light_tank_medium"
 		upgrades = {
 			tank_nsb_engine_upgrade = 2
 			tank_nsb_armor_upgrade = 1
@@ -685,7 +708,7 @@ if = {
 			tank_nsb_armor_upgrade = 1
 			tank_nsb_engine_upgrade = 2
 		}
-		icon = "gfx/interface/technologies/ENG_basic_light_tank.dds"
+		icon = "GFX_ENG_basic_light_tank_medium"
 	}
 }
 

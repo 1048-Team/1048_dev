@@ -21,6 +21,23 @@ is_SLW_SOL = {
 		}
 	}
 }
+is_MTS_SOL = {
+	custom_trigger_tooltip = {
+		tooltip = MTS_is_SOL_tp
+		tag = MTS
+		has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+		has_country_flag = MTS_commie_ordos_tt
+	}
+}
+MTS_has_scorched_as_leader = {
+	custom_trigger_tooltip = {
+		tooltip = MTS_has_scorched_tp
+		OR = {
+			has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+			has_country_leader = { character = MTS_Scorched_Earth_and_Luminous_Blade ruling_only = yes }
+		}
+	}
+}
 is_feudal_vassal_1048 = {
 	OR = {
 		original_tag = NTR
@@ -171,14 +188,17 @@ is_major_equus_core = {
 		344 = { is_core_of = PREV }
 		251 = { is_core_of = PREV }
 		66 = { is_core_of = PREV }
-		1214 = { is_core_of = PREV }
+		AND = {
+			NOT = { has_country_flag = SEE }
+			1214 = { is_core_of = PREV }
+		}
 	}
 }
 owns_big_equus_city = {
 	OR = {
 		owns_state = 122
 		AND = {
-			NOT = { tag = BAL }
+			NOT = { has_country_flag = SEE }
 			owns_state = 15
 		}
 		owns_state = 21
@@ -188,10 +208,7 @@ owns_big_equus_city = {
 		owns_state = 1218
 		AND = {
 			NOT = {
-				OR = {
-					tag = NEI
-					tag = BAL
-				}
+				has_country_flag = SEE
 			}
 			owns_state = 16
 		}
@@ -218,8 +235,14 @@ is_big_equus_core = {
 		1217 = { is_core_of = PREV }
 		76 = { is_core_of = PREV }
 		1218 = { is_core_of = PREV }
-		16 = { is_core_of = PREV }
-		11 = { is_core_of = PREV }
+		AND = {
+			NOT = { has_country_flag = SEE }
+			16 = { is_core_of = PREV }
+		}
+		AND = {
+			NOT = { has_country_flag = SEE }
+			11 = { is_core_of = PREV }
+		}
 	}
 }
 ###Medals###
@@ -238,6 +261,7 @@ should_have_SOL_medals = {
 			has_government = fascism
 			WHY_Solar_Strike = { is_country_leader = yes }
 		}
+		original_tag = MTS
 	}
 }
 should_have_BAL_medals_FH = {

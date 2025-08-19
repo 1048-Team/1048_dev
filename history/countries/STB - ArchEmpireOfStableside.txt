@@ -77,7 +77,9 @@ if = {
 	}
 	set_technology = {
 		early_submarine = 1
-		basic_submarine = 1
+		early_destroyer = 1
+		early_light_cruiser = 1
+		early_heavy_cruiser = 1
 		transport = 1
 	}
 }
@@ -87,6 +89,7 @@ if = {
 	}
 	set_technology = {
 		early_ship_hull_light = 1
+		early_ship_hull_cruiser = 1
 		basic_depth_charges = 1
 		basic_torpedo = 1
 		early_ship_hull_submarine = 1
@@ -99,13 +102,13 @@ if = {
 set_convoys = 20
 set_popularities = {
 	democratic = 10
-	fascism = 70
-	communism = 6
-	neutrality = 14
+	fascism = 25
+	communism = 59
+	neutrality = 6
 }
 set_politics = {
 
-	ruling_party = fascism
+	ruling_party = communism
 	last_election = "1000.10.10"
 	election_frequency = 36
 	elections_allowed = no
@@ -114,19 +117,182 @@ set_politics = {
 
 add_ideas = {
 	pony_race
-	pre_industrial_society2
+	outdated_industry2
 	better_science_base
-	lack_of_scientists2
+	lack_of_scientists
 	poverty2
+	extensive_conscription
+	partial_economic_mobilisation
+	closed_economy
+
+	#STB_hero_worship
+	STB_industrial_economy
+	STB_overwhelmed_militia
+	#STB_smitten_by_daybreaker
 }
 
-set_stability = 0.35
-set_war_support = 0.60
+add_dynamic_modifier = {
+	modifier = STB_hero_worship
+}
+
+set_stability = 0.20
+set_war_support = 0.35
 
 recruit_character = STB_Lucky_Star
+recruit_character = STB_Vasiliy_Wheatin
+recruit_character = STB_Smiling_Embrace
+recruit_character = STB_Jade_Turf
+recruit_character = STB_Clean_Sweep
+recruit_character = STB_Liberty_Bell
+recruit_character = STB_Oxide
+recruit_character = STB_Holy_Pillar
+recruit_character = STB_Burnt_Crag
+recruit_character = STB_Turnpike
+recruit_character = STB_Mirabelle_Deus
+recruit_character = STB_Excelsis
+recruit_character = STB_Synergy
+recruit_character = STB_Late_Bloom
+recruit_character = STB_Bright_Glisten
+recruit_character = STB_Sharp_Point
+recruit_character = STB_Firm_Foundation
+recruit_character = STB_Whitecap
+recruit_character = STB_Mayflower
+recruit_character = STB_Pearly_White
+recruit_character = STB_Rapid_Rider
+recruit_character = STB_Sunny_Shores
+recruit_character = STB_Fiber_Optic
+recruit_character = STB_Clipper
+recruit_character = STB_Darklight
+recruit_character = STB_Long_Mile
+recruit_character = STB_White_Noise
+recruit_character = STB_Evening_Poppy
+recruit_character = STB_Grassroots
+recruit_character = STB_Purple_Heart
+recruit_character = STB_Beaten_Path
+recruit_character = STB_Clear_Skies
+recruit_character = STB_Wind_Tunnel
+recruit_character = STB_Thunderhead
+recruit_character = STB_Firefly
+recruit_character = STB_Penumbral_Lantern
+recruit_character = STB_Feather_Preen
+recruit_character = STB_Austere_Gift
+recruit_character = STB_Peat_Bog
+recruit_character = STB_Sicklecell
+recruit_character = STB_Morning_Mirage
+recruit_character = STB_Crimson_Fall
+recruit_character = STB_Crash_Course
+recruit_character = STB_Clip_Clop
+recruit_character = STB_Flowing_Vale
+recruit_character = STB_Sweet_Honey
+recruit_character = STB_Pierced_Veil
+recruit_character = STB_Autumn_Leaf
+recruit_character = STB_Venustra_Loquela
+recruit_character = STB_Esoteric
+
+set_country_flag = has_custom_advisors
+set_country_flag = has_custom_spymaster
+
+#Eventually move this to when Lucky goes public about his love for Daybreaker/Celestia
+add_opinion_modifier = {
+	target = EQS
+	modifier = STB_woo_daybreaker
+}
+
+set_variable = { STB_DEM_candidate_1_support = 25 }
+set_variable = { STB_DEM_candidate_2_support = 25 }
+set_variable = { STB_DEM_candidate_3_support = 25 }
+set_variable = { STB_DEM_candidate_4_support = 25 }
 
 set_rule = {
 	can_generate_female_aces = yes
 	can_generate_female_unit_leaders  = yes
 	can_generate_female_country_leaders = yes
+}
+if = {
+	limit = {
+		has_dlc = "Man the Guns"
+	}
+	# Submarines #
+	create_equipment_variant = {
+		name = "Liberator Class"
+		name_group = BAL_SS_HISTORICAL
+		type = ship_hull_submarine_1
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Worker Class"
+		type = ship_hull_light_1
+		name_group = BAL_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = empty
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Party Class"
+		type = ship_hull_light_1
+		name_group = BAL_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = ship_depth_charge_1
+		}
+	}
+	# Light Cruisers #
+	create_equipment_variant = {
+		name = "Factory Class"
+		type = ship_hull_cruiser_1
+		name_group = BAL_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = empty
+			mid_1_custom_slot = ship_light_medium_battery_1
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Heavy Cruisers #
+	create_equipment_variant = {
+		name = "Proletariat Class"
+		type = ship_hull_cruiser_1
+		name_group = BAL_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			fixed_ship_armor_slot = ship_armor_cruiser_1
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = ship_medium_battery_1
+		}
+	}
 }

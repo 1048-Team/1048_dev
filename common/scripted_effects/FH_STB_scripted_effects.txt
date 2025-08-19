@@ -1,0 +1,372 @@
+###STB###
+#Should be used to calculate the chance of winning for the STB_DEM candidate, by having a default of 25 assigned to each candidate, then adding them all together, then dividing by 4 to give a 25% chance of winning. It should be affected in another effect on the chance to win. Will need to also calculate a remainder and apply the rest to the candidates when another hits 0%.
+STB_DEM_add_candidate_support = {
+	set_temp_variable = { STB_candidate_support_amount = 5 }
+	STB_DEM_apply_to_candidate_number = yes
+	set_temp_variable = { STB_candidate_divisor = STB_candidate_support_amount }
+	STB_DEM_calculate_divisor = yes
+	divide_temp_variable = { STB_candidate_divisor = STB_DEM_divisor }
+	STB_DEM_remove_from_opposing_candidates = yes
+}
+STB_DEM_apply_to_candidate_number = {
+	if = {
+		limit = { check_variable = { STB_candidate_number = 1 } }
+		add_to_variable = { STB_DEM_candidate_1_support = STB_candidate_support_amount }
+		clamp_variable = {
+			var = STB_DEM_candidate_1_support
+			max = 100
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 2 } }
+		add_to_variable = { STB_DEM_candidate_2_support = STB_candidate_support_amount }
+		clamp_variable = {
+			var = STB_DEM_candidate_2_support
+			max = 100
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 3 } }
+		add_to_variable = { STB_DEM_candidate_3_support = STB_candidate_support_amount }
+		clamp_variable = {
+			var = STB_DEM_candidate_3_support
+			max = 100
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 4 } }
+		add_to_variable = { STB_DEM_candidate_4_support = STB_candidate_support_amount }
+		clamp_variable = {
+			var = STB_DEM_candidate_4_support
+			max = 100
+		}
+	}
+}
+STB_DEM_remove_from_opposing_candidates = {
+	if = {
+		limit = { check_variable = { STB_candidate_number = 1 } }
+		subtract_from_variable = { STB_DEM_candidate_2_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_2_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_3_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_3_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_4_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_4_support
+			min = 0
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 2 } }
+		subtract_from_variable = { STB_DEM_candidate_1_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_1_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_3_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_3_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_4_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_4_support
+			min = 0
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 3 } }
+		subtract_from_variable = { STB_DEM_candidate_1_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_1_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_2_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_2_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_4_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_4_support
+			min = 0
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 4 } }
+		subtract_from_variable = { STB_DEM_candidate_1_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_1_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_2_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_2_support
+			min = 0
+		}
+		subtract_from_variable = { STB_DEM_candidate_3_support = STB_candidate_divisor }
+		clamp_variable = {
+			var = STB_DEM_candidate_3_support
+			min = 0
+		}
+	}
+}
+STB_DEM_elect_candidate = {
+	log = "STB_DEM_elect_candidate running"
+	hidden_effect = {
+		if = {
+			limit = {
+				any_other_country = {
+					exists = yes
+					NOT = { is_subject_of = ROOT }
+				}
+			}
+			log = "Checking if mandate completed"
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+					has_country_flag = STB_smiling_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_1_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_1_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Smiling_Embrace ruling_only = yes }
+					NOT = { has_country_flag = STB_smiling_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_1_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_1_support
+					min = 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+					has_country_flag = STB_jade_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_2_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_2_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+					NOT = { has_country_flag = STB_jade_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_2_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_2_support
+					min = 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+					has_country_flag = STB_liberty_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_3_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_3_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Liberty_Bell ruling_only = yes }
+					NOT = { has_country_flag = STB_liberty_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_3_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_3_support
+					min = 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+					has_country_flag = STB_clean_mandate_completed
+				}
+				add_to_variable = { STB_DEM_candidate_4_support = 15 }
+				clamp_variable = {
+					var = STB_DEM_candidate_4_support
+					max = 100
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_leader = { character = STB_Clean_Sweep ruling_only = yes }
+					NOT = { has_country_flag = STB_clean_mandate_completed }
+				}
+				add_to_variable = { STB_DEM_candidate_4_support = -10 }
+				clamp_variable = {
+					var = STB_DEM_candidate_4_support
+					min = 0
+				}
+			}
+		}
+		random_list = {
+			STB_DEM_candidate_1_support = {
+				if = {
+					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+					hidden_effect = {
+						STB_unset_jade_turf_effects = yes
+					}
+				}
+				promote_character = STB_Smiling_Embrace
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_1_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 40 }
+				set_variable = { STB_DEM_candidate_2_support = 20 }
+				set_variable = { STB_DEM_candidate_3_support = 20 }
+				set_variable = { STB_DEM_candidate_4_support = 20 }
+			}
+			STB_DEM_candidate_2_support = {
+				if = {
+					limit = { NOT = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } } }
+					hidden_effect = {
+						STB_Jade_Turf_effects = yes
+					}
+				}
+				promote_character = STB_Jade_Turf
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_2_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 20 }
+				set_variable = { STB_DEM_candidate_2_support = 40 }
+				set_variable = { STB_DEM_candidate_3_support = 20 }
+				set_variable = { STB_DEM_candidate_4_support = 20 }
+			}
+			STB_DEM_candidate_3_support = {
+				if = {
+					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+					hidden_effect = {
+						STB_unset_jade_turf_effects = yes
+					}
+				}
+				promote_character = STB_Liberty_Bell
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_3_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 20 }
+				set_variable = { STB_DEM_candidate_2_support = 20 }
+				set_variable = { STB_DEM_candidate_3_support = 40 }
+				set_variable = { STB_DEM_candidate_4_support = 20 }
+			}
+			STB_DEM_candidate_4_support = {
+				if = {
+					limit = { has_country_leader = { character = STB_Jade_Turf ruling_only = yes } }
+					hidden_effect = {
+						STB_unset_jade_turf_effects = yes
+					}
+				}
+				promote_character = STB_Clean_Sweep
+				log = "[ROOT.GetLeader] has won with [?STB_DEM_candidate_4_support]% chance"
+				set_variable = { STB_DEM_candidate_1_support = 20 }
+				set_variable = { STB_DEM_candidate_2_support = 20 }
+				set_variable = { STB_DEM_candidate_3_support = 20 }
+				set_variable = { STB_DEM_candidate_4_support = 40 }
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { STB_peaceful_bois > 0 }
+			}
+			set_variable = { STB_peaceful_bois = 0 }
+		}
+		activate_mission = STB_impending_election
+		log = "Set base percentages of winning for next election"
+	}
+	custom_effect_tooltip = STB_i_love_democracy_tt
+}
+STB_DEM_calculate_divisor = {
+	if = {
+		limit = { check_variable = { STB_candidate_number = 1 } }
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_2_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_3_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_4_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 2 } }
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_1_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_3_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_4_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 3 } }
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_1_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_2_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_4_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+	}
+	if = {
+		limit = { check_variable = { STB_candidate_number = 4 } }
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_1_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_2_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+		if = {
+			limit = { check_variable = { STB_DEM_candidate_3_support > 0 } }
+			add_to_temp_variable = { STB_DEM_divisor = 1 }
+		}
+	}
+	log = "Divisor is [?STB_DEM_divisor]"
+}
+STB_Jade_Turf_effects = {
+	set_rule = {
+		can_declare_war_on_same_ideology = yes
+	}
+	set_rule = {
+		can_only_justify_war_on_threat_country = no
+	}
+	set_rule = {
+		can_create_collaboration_government = yes
+	}
+}
+STB_unset_jade_turf_effects = {
+	set_rule = {
+		can_declare_war_on_same_ideology = no
+	}
+	set_rule = {
+		can_only_justify_war_on_threat_country = yes
+	}
+	set_rule = {
+		can_create_collaboration_government = no
+	}
+}

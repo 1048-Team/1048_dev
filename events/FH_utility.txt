@@ -2,6 +2,7 @@ add_namespace = griffonia_activity
 add_namespace = zebrica_activity
 add_namespace = equestria_activity
 
+###Equus###
 country_event = { #SMH or YAH wars with the other
 	id = equestria_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.1"}
@@ -100,7 +101,9 @@ country_event = { #MWR leaves STG
 	hidden = yes
 	
 	trigger = {
-		tag = MWR
+		original_tag = MWR
+		exists = yes
+		has_war = no
 		date > 1050.7.1
 	}
 	
@@ -108,6 +111,9 @@ country_event = { #MWR leaves STG
 	
 	option = {
 		leave_faction = yes
+		OVERLORD = {
+			end_puppet = ROOT
+		}
 		set_politics = {
 			ruling_party = fascism
 			elections_allowed = no
@@ -138,7 +144,10 @@ country_event = { #NVC eats GRF
 	hidden = yes
 	
 	trigger = {
-		tag = NVC
+		original_tag = NVC
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1051.5.1
 	}
 	
@@ -158,7 +167,10 @@ country_event = { #VRG wars NVC and GRF
 	hidden = yes
 	
 	trigger = {
-		tag = VRG
+		original_tag = VRG
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1051.6.1
 	}
 	
@@ -188,13 +200,12 @@ country_event = { #NVC or VRG wars MWR
 	
 	trigger = {
 		OR = {
-			tag = NVC
-			tag = VRG
+			original_tag = NVC
+			original_tag = VRG
 		}
-		OR = {
-			NOT = { country_exists = NVC }
-			NOT = { country_exists = VRG }
-		}
+		exists = yes
+		has_war = no
+		is_subject = no
 		country_exists = MWR
 		owns_state = 1217
 		date > 1052.8.10
@@ -217,13 +228,12 @@ country_event = { #NVC or VRG wars SCH and JGR
 	
 	trigger = {
 		OR = {
-			tag = NVC
-			tag = VRG
+			original_tag = NVC
+			original_tag = VRG
 		}
-		OR = {
-			NOT = { country_exists = NVC }
-			NOT = { country_exists = VRG }
-		}
+		exists = yes
+		has_war = no
+		is_subject = no
 		owns_state = 1217
 		date > 1054.2.14
 	}
@@ -259,13 +269,12 @@ country_event = { #NVC or VRG wars SMH and YAH
 	
 	trigger = {
 		OR = {
-			tag = NVC
-			tag = VRG
+			original_tag = NVC
+			original_tag = VRG
 		}
-		OR = {
-			NOT = { country_exists = NVC }
-			NOT = { country_exists = VRG }
-		}
+		exists = yes
+		has_war = no
+		is_subject = no
 		owns_state = 1217
 		date > 1056.1.1
 	}
@@ -301,13 +310,12 @@ country_event = { #NVC or VRG wars CHN for core states
 	
 	trigger = {
 		OR = {
-			tag = NVC
-			tag = VRG
+			original_tag = NVC
+			original_tag = VRG
 		}
-		OR = {
-			NOT = { country_exists = NVC }
-			NOT = { country_exists = VRG }
-		}
+		exists = yes
+		has_war = no
+		is_subject = no
 		owns_state = 1217
 		date > 1057.6.1
 	}
@@ -330,7 +338,7 @@ country_event = { #WHY gets the option ot stay or leave SOL
 	desc = equestria_activity.11.d
 	
 	trigger = {
-		tag = WHY
+		original_tag = WHY
 		date > 1050.1.1
 		date < 1051.1.1
 	}
@@ -472,7 +480,10 @@ country_event = { #Why wars BLS
 	hidden = yes
 	
 	trigger = {
-		tag = WHY
+		original_tag = WHY
+		exists = yes
+		has_war = no
+		is_subject = no
 		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
 		NOT = { country_exists = NER }
 		country_exists = BLS
@@ -495,8 +506,15 @@ country_event = { #Why wars CLD
 	hidden = yes
 	
 	trigger = {
-		tag = WHY
+		original_tag = WHY
+		exists = yes
+		has_war = no
+		is_subject = no
 		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		CLD = {
+			exists = yes
+			NOT = { is_subject_of = SLE }
+		}
 		date > 1053.7.7
 	}
 	
@@ -522,8 +540,14 @@ country_event = { #Why wars CER
 	hidden = yes
 	
 	trigger = {
-		tag = WHY
+		original_tag = WHY
+		exists = yes
+		is_subject = no
 		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+		CER = {
+			exists = yes
+			NOT = { is_subject_of = SLE }
+		}
 		date > 1053.10.1
 	}
 	
@@ -552,7 +576,10 @@ country_event = { #Why wars SOL/SLW
 	hidden = yes
 	
 	trigger = {
-		tag = WHY
+		original_tag = WHY
+		exists = yes
+		has_war = no
+		is_subject = no
 		has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
 		date > 1055.1.1
 	}
@@ -593,7 +620,9 @@ country_event = { #CER forms alliance with CLD
 	hidden = yes
 	
 	trigger = {
-		tag = CER
+		original_tag = CER
+		exists = yes
+		is_subject = no
 		date > 1051.4.17
 	}
 	
@@ -624,9 +653,14 @@ country_event = { #CER reaches out to NER to join
 	hidden = yes
 	
 	trigger = {
-		tag = CER
+		original_tag = CER
+		exists = yes
+		is_faction_leader = yes
 		date > 1052.1.1
-		country_exists = NER
+		NER = {
+			exists = yes
+			NOT = { is_subject_of = SLE }
+		}
 	}
 	
 	fire_only_once = yes
@@ -673,8 +707,13 @@ country_event = { #CER sends an invitation to BLS
 	hidden = yes
 	
 	trigger = {
-		tag = CER
-		country_exists = BLS
+		original_tag = CER
+		exists = yes
+		is_faction_leader = yes
+		BLS = {
+			exists = yes
+			NOT = { is_subject_of = SLE }
+		}
 		date > 1052.3.1
 	}
 	
@@ -739,7 +778,10 @@ country_event = { #CER prepares to finish off WHY
 	desc = equestria_activity.24.d
 	
 	trigger = {
-		tag = CER
+		original_tag = CER
+		exists = yes
+		has_war = no
+		is_faction_leader = yes
 		date > 1054.1.1
 		CLD = {
 			OR = {
@@ -765,6 +807,10 @@ country_event = { #CER prepares to finish off WHY
 				is_in_faction_with = ROOT
 			}
 		}
+		WHY = {
+			exists = yes
+			NOT = { is_subject_of = SLE }
+		}
 	}
 	
 	fire_only_once = yes
@@ -785,9 +831,13 @@ country_event = { #CER creates a united heartlands
 	desc = equestria_activity.25.d
 	
 	trigger = {
-		tag = CER
-		WHY = { is_subject_of = ROOT }
+		original_tag = CER
+		OR = {
+			WHY = { is_subject_of = ROOT }
+			NOT = { country_exists = WHY }
+		}
 		exists = yes
+		is_subject = no
 	}
 	
 	fire_only_once = yes
@@ -866,7 +916,8 @@ country_event = { #CER unites the heartlands completely with EQS's conquest
 	desc = equestria_activity.26.d
 	
 	trigger = {
-		tag = CER
+		original_tag = CER
+		exists = yes
 		NOT = { country_exists = SLW }
 		NOT = { country_exists = EQS }
 	}
@@ -896,7 +947,7 @@ country_event = { #AWR is couped by unhappy peasants
 	hidden = yes
 	
 	trigger = {
-		tag = AWR
+		original_tag = AWR
 		date > 1050.6.20
 	}
 	mean_time_to_happen = { days = 90 }
@@ -960,6 +1011,227 @@ country_event = { #STG is fed up with AWR's crap and conquers them
 	}
 }
 
+country_event = { #EEE decides to finally attack NEI because of their oppression of thestrals
+	id = equestria_activity.30
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.30"}
+	hidden = yes
+	
+	trigger = {
+		date > 1050.4.20
+		tag = EEE
+		exists = yes
+		has_war = no
+		is_subject = no
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = NEI
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #STB goes to war with NRP to get some more breathing room
+	id = equestria_activity.31
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.31"}
+	hidden = yes
+	
+	trigger = {
+		tag = STB
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.6.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = NRP
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #BAL attempts to take back the MTS territory it lost
+	id = equestria_activity.32
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.32"}
+	hidden = yes
+	
+	trigger = {
+		tag = BAL
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.7.1
+		country_exists = MTS
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = MTS
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #If MTS is already eaten or never spawned, BAL goes to war with either NEI or EEE to secure more continental power
+	id = equestria_activity.33
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.33"}
+	hidden = yes
+	
+	trigger = {
+		tag = BAL
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.7.1
+		NOT = { country_exists = MTS }
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = { country_exists = EEE }
+			declare_war_on = {
+				target = EEE
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = { country_exists = NEI }
+			declare_war_on = {
+				target = NEI
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { #CLI goes to war with SPF to try and get more land to invade the mainland from
+	id = equestria_activity.34
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.34"}
+	hidden = yes
+	
+	trigger = {
+		tag = CLI
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.2.1
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = SPF
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #STB goes to war with NID to get their ships
+	id = equestria_activity.35
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.35"}
+	hidden = yes
+	
+	trigger = {
+		tag = STB
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1051.3.1
+		NOT = { country_exists = NRP }
+		owns_state = 33
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		declare_war_on = {
+			target = NID
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #BAL goes to war with CLI and SPF to regain their islands
+	id = equestria_activity.36
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.36"}
+	hidden = yes
+	
+	trigger = {
+		date > 1051.5.15
+		tag = BAL
+		exists = yes
+		has_war = no
+		is_subject = no
+		NOT = { country_exists = EEE }
+		NOT = { country_exists = NEI }
+		owns_state = 30
+		owns_state = 16
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = { country_exists = SPF }
+			declare_war_on = {
+				target = SPF
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = { country_exists = CLI }
+			declare_war_on = {
+				target = CLI
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { #STB goes to war with BAL (or whoever controls it) to become the sole controller of the South-East
+	id = equestria_activity.37
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.37"}
+	hidden = yes
+	
+	trigger = {
+		date > 1052.6.1
+		tag = STB
+		exists = yes
+		has_war = no
+		is_subject = no
+		owns_state = 33
+		owns_state = 221
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		1214 = {
+			OWNER = {
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+}
+
+###Griffonia###
 country_event = { #GRI annexes BOI
 	id = griffonia_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.1"}
@@ -968,7 +1240,8 @@ country_event = { #GRI annexes BOI
 	hidden = yes
 	
 	trigger = {
-		tag = GRI
+		original_tag = GRI
+		has_subject = BOI
 		date > 1051.1.1
 	}
 	
@@ -997,7 +1270,8 @@ country_event = { #GRI annexes HLQ
 	hidden = yes
 	
 	trigger = {
-		tag = GRI
+		original_tag = GRI
+		has_subject = HLQ
 		date > 1052.1.1
 	}
 	
@@ -1026,7 +1300,10 @@ country_event = { #GRI wars TRD
 	hidden = yes
 	
 	trigger = {
-		tag = GRI
+		original_tag = GRI
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1049.1.1
 	}
 	
@@ -1055,7 +1332,10 @@ country_event = { #GRI wars FAT
 	hidden = yes
 	
 	trigger = {
-		tag = GRI
+		original_tag = GRI
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1051.1.1
 	}
 	
@@ -1084,8 +1364,9 @@ country_event = { #GRI gets vanilla cores from NTR
 	hidden = yes
 	
 	trigger = {
-		tag = GRI
+		original_tag = GRI
 		date > 1051.7.1
+		has_subject = NTR
 	}
 	
 	fire_only_once = yes
@@ -1117,7 +1398,10 @@ country_event = { #GRI wars EQC
 	hidden = yes
 	
 	trigger = {
-		tag = GRI
+		original_tag = GRI
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1054.1.1
 	}
 	
@@ -1140,7 +1424,8 @@ country_event = { #EQC annexes SIC
 	hidden = yes
 	
 	trigger = {
-		tag = EQC
+		original_tag = EQC
+		has_subject = SIC
 		date > 1052.1.1
 	}
 	
@@ -1169,7 +1454,9 @@ country_event = { #EQC wars RCT
 	hidden = yes
 	
 	trigger = {
-		tag = EQC
+		original_tag = EQC
+		exists = yes
+		is_subject = no
 		date > 1055.1.1
 	}
 	
@@ -1192,7 +1479,8 @@ country_event = { #RCT annexes LNS
 	hidden = yes
 	
 	trigger = {
-		tag = RCT
+		original_tag = RCT
+		has_subject = LNS
 		date > 1050.1.1
 	}
 	
@@ -1221,7 +1509,8 @@ country_event = { #RCT annexes BAR
 	hidden = yes
 	
 	trigger = {
-		tag = RCT
+		original_tag = RCT
+		has_subject = BAR
 		date > 1050.6.30
 	}
 	
@@ -1250,7 +1539,8 @@ country_event = { #RCT annexes NIM
 	hidden = yes
 	
 	trigger = {
-		tag = RCT
+		original_tag = RCT
+		has_subject = NIM
 		date > 1051.6.30
 	}
 	
@@ -1279,7 +1569,8 @@ country_event = { #RCT cores non-core states
 	hidden = yes
 	
 	trigger = {
-		tag = RCT
+		original_tag = RCT
+		exists = yes
 		date > 1053.1.1
 	}
 	
@@ -1308,7 +1599,9 @@ country_event = { #RCT wars GRI
 	hidden = yes
 	
 	trigger = {
-		tag = RCT
+		original_tag = RCT
+		exists = yes
+		is_subject = no
 		date > 1055.1.1
 	}
 	
@@ -1331,7 +1624,9 @@ country_event = { #BRF expands faction to HLR, FBK, and BAK
 	hidden = yes
 	
 	trigger = {
-		tag = BRF
+		original_tag = BRF
+		exists = yes
+		is_subject = no
 		date > 1050.11.1
 	}
 	
@@ -1353,7 +1648,10 @@ country_event = { #FBK lets BAK core state controlled and one more
 	hidden = yes
 	
 	trigger = {
-		tag = BAK
+		original_tag = BAK
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1051.4.1
 	}
 	
@@ -1375,7 +1673,8 @@ country_event = { #BRF forms free country federation
 	hidden = yes
 	
 	trigger = {
-		tag = BRF
+		original_tag = BRF
+		is_faction_leader = yes
 		date > 1052.5.1
 	}
 	
@@ -1418,7 +1717,8 @@ country_event = { #All three superpowers war the League of Free Nations
 	hidden = yes
 	
 	trigger = {
-		tag = BRF
+		original_tag = BRF
+		exists = yes
 		date > 1053.1.1
 	}
 	
@@ -1447,6 +1747,7 @@ country_event = { #All three superpowers war the League of Free Nations
 	}
 }
 
+###Zebrica###
 country_event = { #HPS joins EQC if they win
 	id = zebrica_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.1"}
@@ -1455,7 +1756,11 @@ country_event = { #HPS joins EQC if they win
 	hidden = yes
 	
 	trigger = {
-		tag = HPS
+		original_tag = HPS
+		exists = yes
+		is_subject = no
+		is_in_faction = no
+		has_war = no
 		NOT = {
 			country_exists = HRL
 			country_exists = DOH
@@ -1469,11 +1774,11 @@ country_event = { #HPS joins EQC if they win
 		name = zebrica_activity.1.a
 		EQC = {
 			add_to_faction = HPS
-		}
-		country_event = {
-			id = zebrica_activity.2
-			days = 730
-			random_days = 365
+			country_event = {
+				id = zebrica_activity.2
+				days = 730
+				random_days = 365
+			}
 		}
 	}
 }
@@ -1488,14 +1793,13 @@ country_event = { #HPS is annexed by EQC
 	
 	option = {
 		name = zebrica_activity.2.a
-		EQC = {
-			annex_country = {
-				target = HPS
-				transfer_troops = yes
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
 			}
-			every_state = {
-				limit = { is_core_of = HPS }
-				add_core_of = EQC
+			set_autonomy = {
+				target = HPS
+				autonomous_state = autonomy_integrated_puppet
 			}
 		}
 	}
@@ -1509,11 +1813,12 @@ country_event = { #HIP potentially wars DOH
 	hidden = yes
 	
 	trigger = {
-		tag = HIP
-		OR = {
-			NOT = { country_exists = HRL }
-			NOT = { country_exists = HPS }
-		}
+		original_tag = HIP
+		exists = yes
+		has_war = no
+		is_subject = no
+		NOT = { country_exists = HRL }
+		NOT = { country_exists = HPS }
 	}
 	
 	fire_only_once = yes
@@ -1569,11 +1874,12 @@ country_event = { #Winner of the HIP war cores territory
 	
 	trigger = {
 		OR = {
-			tag = HIP
-			tag = HPS
-			tag = HRL
-			tag = DOH
+			original_tag = HIP
+			original_tag = HPS
+			original_tag = HRL
+			original_tag = DOH
 		}
+		exists = yes
 		has_war = no
 	}
 	
@@ -1618,8 +1924,19 @@ country_event = { #OAU causes problems in BAT
 	hidden = yes
 	
 	trigger = {
-		tag = BAT
+		original_tag = BAT
 		date > 1053.6.20
+		any_state = {
+			OR = {
+				STATE = 691 #New Mareidian, Ursagrad
+				STATE = 692 #Manerba, Manerba Midoun
+				STATE = 728 #Tobuck
+				STATE = 729 #Darnaigh
+				STATE = 815 #Huiactlali
+				STATE = 1205 #Miharzehir
+			}
+			is_owned_and_controlled_by_ROOT_or_ally = yes
+		}
 	}
 	
 	fire_only_once = yes
@@ -1628,13 +1945,21 @@ country_event = { #OAU causes problems in BAT
 		name = zebrica_activity.6.a
 		random_list = {
 			33 = {
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by_ROOT_or_ally = yes
+						OR = {
+							STATE = 691 #New Mareidian, Ursagrad(cursed)
+							STATE = 692 #Manerba, Manerba Midoun
+							STATE = 728 #Tobuck
+							STATE = 729 #Darnaigh
+							STATE = 815 #Huiactlali, Moonspeaker(cringe) Hollow
+							STATE = 1205 #Miharzehir
+						}
+					}
+					transfer_state_to = OAU
+				}
 				OAU = {
-					transfer_state = 692
-					transfer_state = 1205
-					transfer_state = 728
-					transfer_state = 729
-					transfer_state = 815
-					transfer_state = 691
 					declare_war_on = {
 						target = ROOT
 						type = annex_everything
@@ -1701,91 +2026,116 @@ country_event = { #OAU causes problems in BAT
 	}
 }
 
-country_event = { #MGY wars CZR for their core territory
+country_event = { #MGY wars REM for their core territory
 	id = zebrica_activity.7
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.7"}
 	hidden = yes
 	
 	trigger = {
-		tag = MGY
+		original_tag = MGY
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1052.4.20
 	}
 	
 	fire_only_once = yes
 	
 	option = {
-		declare_war_on = {
-			target = CZR
-			type = take_core_state
-		}
-	}
-}
-
-country_event = { #EMR wars ABY
-	id = zebrica_activity.8
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.8"}
-	hidden = yes
-	
-	trigger = {
-		tag = EMR
-		date > 1050.3.12
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = ABY
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #EMR annexes YMN
-	id = zebrica_activity.9
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.9"}
-	hidden = yes
-	
-	trigger = {
-		tag = EMR
-		date > 1053.7.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		annex_country = {
-			target = YMN
-			transfer_troops = yes
-		}
-		every_state = {
+		random_neighbor_country = {
 			limit = {
-				is_core_of = YMN
+				any_controlled_state = {
+					is_in_array = { REM.original_cores = THIS }
+				}
 			}
-			add_core_of = EMR
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_claimed_by = ROOT #previsouly removing claim will break this moment so it would need to be changed with is_in_array check(s)
+				}
+				add_core_of = ROOT
+				remove_claim_by = ROOT
+			}
 		}
 	}
 }
 
-country_event = { #EMR wars KAR
-	id = zebrica_activity.10
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.10"}
-	hidden = yes
-	
-	trigger = {
-		tag = EMR
-		date > 1056.1.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = KAR
-			type = annex_everything
-		}
-	}
-}
+#country_event = { #EMR wars ABY
+#	id = zebrica_activity.8
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.8"}
+#	hidden = yes
+#
+#	trigger = {
+#		original_tag = EMR
+		# exists = yes
+		# is_subject = no
+		# any_owned_state = {
+		# 	is_coastal = yes
+		# 	is_neighbor_of = YMN
+		# }
+#		date > 1050.3.12
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		declare_war_on = {
+#			target = ABY
+#			type = annex_everything
+#		}
+#	}
+#}
+#
+#country_event = { #EMR annexes YMN
+#	id = zebrica_activity.9
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.9"}
+#	hidden = yes
+#
+#	trigger = {
+#		original_tag = EMR
+#		date > 1053.7.1
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		annex_country = {
+#			target = YMN
+#			transfer_troops = yes
+#		}
+#		every_state = {
+#			limit = {
+#				is_core_of = YMN
+#			}
+#			add_core_of = EMR
+#		}
+#	}
+#}
+
+#country_event = { #EMR wars KAR
+#	id = zebrica_activity.10
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.10"}
+#	hidden = yes
+#
+#	trigger = {
+#		original_tag = EMR
+#		date > 1056.1.1
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		declare_war_on = {
+#			target = KAR
+#			type = annex_everything
+#		}
+#	}
+#}
 
 country_event = { #ZWA wars MTA
 	id = zebrica_activity.11
@@ -1793,7 +2143,10 @@ country_event = { #ZWA wars MTA
 	hidden = yes
 	
 	trigger = {
-		tag = ZWA
+		original_tag = ZWA
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1051.3.1
 	}
 	
@@ -1807,77 +2160,129 @@ country_event = { #ZWA wars MTA
 	}
 }
 
-country_event = { #STM wars ZWA and CZR
+country_event = { #STM wars HSO
 	id = zebrica_activity.12
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.12"}
 	hidden = yes
 	
 	trigger = {
-		tag = STM
-		date > 1053.1.1
+		original_tag = STM
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.1.14
 	}
 	
 	fire_only_once = yes
 	
 	option = {
 		declare_war_on = {
-			target = ZWA
+			target = HSO
 			type = annex_everything
 		}
-		declare_war_on = {
-			target = CZR
-			type = annex_everything
-		}
+		HSO = { add_to_ROOT_potential_cores = yes }
 	}
 }
 
-country_event = { #ZOO wars DEL
+country_event = { #TAI/MEL/ZOO wars DEL & IDO
 	id = zebrica_activity.13
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.13"}
 	hidden = yes
 	
 	trigger = {
-		tag = ZOO
-		date > 1054.6.1
+		OR = {
+			original_tag = TAI
+			original_tag = MEL
+			original_tag = ZOO
+		}
+		exists = yes
+		has_war = no
+		is_subject = no
+		NOT = { country_exists = IDO }
+		date > 1054.4.4
 	}
 	
 	fire_only_once = yes
 	
 	option = {
-		declare_war_on = {
-			target = DEL
-			type = annex_everything
-		}
-		every_state = {
+		every_other_country = {
 			limit = {
-				is_core_of = DEL
+				any_controlled_state = {
+					OR = {
+						is_in_array = { DEL.original_cores = THIS }
+						is_in_array = { IDO.original_cores = THIS }
+					}
+				}
 			}
-			add_core_of = ZOO
+			ROOT = {
+				declare_war_on = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					OR = {
+						is_core_of = IDO
+						is_core_of = DEL
+					}
+				}
+				add_core_of = ROOT
+			}
 		}
 	}
 }
 
-country_event = { #ROA and ZOO war KIR for their core territory in ZLU
+country_event = { #ILU final war stuff
 	id = zebrica_activity.14
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.14"}
-	hidden = yes
+	#hidden = yes
+	is_triggered_only = yes
 	
-	trigger = {
-		tag = ZOO
-		date > 1056.3.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
+	#fire_only_once = yes
+	title = zebrica_activity.14.t
+	desc = zebrica_activity.14.d
+	option = { #let's fucking go
+		name = zebrica_activity.14.a 
 		declare_war_on = {
-			target = ZLU
+			target = ILU
 			type = annex_everything
 		}
-		ROA = {
-			declare_war_on = {
-				target = ZLU
-				type = annex_everything
+		ai_chance = {
+			base = 1
+			modifier = {
+				check_variable = { ROOT.deployed_army_manpower_k > FROM.deployed_army_manpower_k }
+				add = 2
+			}
+			modifier = {
+				check_variable = { ROOT.deployed_army_manpower_k > ILU.deployed_army_manpower_k }
+				add = 10
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > -1
+				}
+				add = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = ILU
+					value < 0
+				}
+				add = 2
+			}
+		}
+	}
+	option = { #wtf r u serious?
+		name = zebrica_activity.14.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				FROM = {
+					has_tech = tech_kirin_astrology
+				}
+				factor = 0.75
 			}
 		}
 	}
@@ -1889,7 +2294,10 @@ country_event = { #CTL wars MCW
 	hidden = yes
 	
 	trigger = {
-		tag = CTL
+		original_tag = CTL
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1055.1.1
 	}
 	
@@ -1909,7 +2317,10 @@ country_event = { #CTH wars NZA for their core territory
 	hidden = yes
 	
 	trigger = {
-		tag = CTH
+		original_tag = CTH
+		exists = yes
+		has_war = no
+		is_subject = no
 		date > 1054.1.1
 	}
 	
@@ -1926,5 +2337,907 @@ country_event = { #CTH wars NZA for their core territory
 			target = NZA
 			type = annex_everything
 		}
+	}
+}
+
+#Launch Karkadannistan Civil War
+country_event = {
+	id = zebrica_activity.17
+	immediate = { log = "[GetDateText]: [Root.GetName]: event zebrica_activity.17" }
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		KAC = {
+			inherit_technology = KAR
+			transfer_state = 1005
+			transfer_state = 1007
+			transfer_state = 802
+			transfer_state = 1010
+			transfer_state = 1023
+			transfer_state = 794
+			transfer_state = 1022
+			transfer_state = 804
+			transfer_state = 1021
+		}
+		KAC = { 
+			every_owned_state = {
+				add_core_of = KAC
+			}
+		}
+		KAP = {
+			inherit_technology = KAR
+			transfer_state = 1004
+			transfer_state = 797
+			transfer_state = 1001
+			transfer_state = 1003
+			transfer_state = 1002
+		}
+		KAP = { 
+			every_owned_state = {
+				add_core_of = KAP
+			}
+			1002 = {
+				add_victory_points = {
+					province = 14043
+					value = 20
+				}
+			}
+			set_capital = {
+				state = 1002
+			}
+		}
+		KAF = {
+			inherit_technology = KAR
+			transfer_state = 998
+			transfer_state = 999
+			transfer_state = 874
+			transfer_state = 809
+			transfer_state = 1000
+		}
+		KAF = { 
+			every_owned_state = {
+				add_core_of = KAF
+			}
+		}
+		KAW = {
+			inherit_technology = KAR
+			transfer_state = 796
+			transfer_state = 811
+			transfer_state = 1020
+			transfer_state = 791
+			transfer_state = 1019
+			transfer_state = 803
+		}
+		KAW = { 
+			every_owned_state = {
+				add_core_of = KAW
+			}
+		}
+		KAH = {
+			inherit_technology = KAR
+			transfer_state = 1013
+			transfer_state = 1014
+			transfer_state = 800
+			transfer_state = 1015
+		}
+		KAH = { 
+			every_owned_state = {
+				add_core_of = KAH
+			}
+		}
+		KAD = {
+			inherit_technology = KAR
+			transfer_state = 1018
+			transfer_state = 805
+			transfer_state = 793
+			transfer_state = 1017
+			transfer_state = 1016
+			transfer_state = 1012
+		}
+		KAD = { 
+			every_owned_state = {
+				add_core_of = KAD
+			}
+		}
+	}
+}
+
+country_event = { ## TAI, MEL, and ZOO kill each other
+	id = zebrica_activity.18
+	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.18"}
+	title = zebrica_activity.18.t
+	desc = zebrica_activity.18.d
+	#picture = GFX_event_KIR_hamlet #this is hidden event bro
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		OR = {
+			original_tag = TAI
+			original_tag = MEL
+			original_tag = ZOO
+		}
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.02.03
+	}
+	mean_time_to_happen = {
+		days = 90
+	}
+	
+	option = {
+		name = zebrica_activity.18.a
+		add_political_power = 100
+		army_experience = 75
+		every_neighbor_country = {
+			limit = {
+				OR = {
+					original_tag = TAI
+					original_tag = MEL
+					original_tag = ZOO
+				}
+			}
+			add_to_ROOT_potential_cores = yes
+			declare_war_on = {
+				target = ROOT
+				type = annex_everything
+			}
+			random_neighbor_country = {
+				limit = {
+					OR = {
+						original_tag = TAI
+						original_tag = MEL
+						original_tag = ZOO
+					}
+				}
+				if = {
+					limit = { NOT = { has_war_with = PREV } }
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_PREV_potential_cores = yes
+			}
+		}
+		ROOT = { #who will be a lucky bastard lol
+			division_template = {
+				name = "Veteran Militia"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 2 }
+			}
+			random_list = {
+				3 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 2 }
+					}
+				}
+				2 = {
+				}
+			}
+			random_list = {
+				3 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+					}
+				}
+				2 = {
+				}
+			}
+			division_template = {
+				name = "Veteran Infantry"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+			}
+			random_list = {
+				3 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+					}
+				}
+				2 = {
+				}
+			}
+			random_list = {
+				3 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+					}
+				}
+				2 = {
+				}
+			}
+		}
+	}
+}
+
+country_event = { #MGY wars random neighbor except ABY
+	id = zebrica_activity.19
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.19"}
+	hidden = yes
+	
+	# trigger = {
+	# 	original_tag = MGY
+	# 	exists = yes
+	# 	has_war = no
+	# 	is_subject = no
+	# 	date > 1053.4.20 #12 months later since zebrica_activity.7
+	# }
+	is_triggered_only = yes # 30 days later since triggered by on_peace_conference_ended
+	#fire_only_once = yes
+	
+	option = {
+		random_neighbor_country = {
+			limit = {
+				any_controlled_state = {
+					OR = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				NOT = { original_tag = ABY }
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_claimed_by = ROOT #removing claim previsouly will break this moment so it would need to be changed with is_in_array check(s)
+				}
+				add_core_of = ROOT
+				remove_claim_by = ROOT
+			}
+		}
+	}
+}
+
+country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
+	id = zebrica_activity.20
+	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.20"}
+	title = zebrica_activity.20.t
+	desc = zebrica_activity.20.d
+	#picture = GFX_event_KIR_hamlet #this is hidden event bro
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		original_tag = ILU
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.2.01 #who cares about the season when they are gonna wage a war?
+	}
+	mean_time_to_happen = {
+		days = 90
+	}
+	
+	option = {
+		name = zebrica_activity.20.a
+		add_political_power = 100
+		army_experience = 75
+		every_other_country = {
+			limit = {
+				OR = {
+					original_tag = TNT
+					original_tag = ZIT
+					original_tag = AZI
+					original_tag = CAM
+					original_tag = ZAJ
+					original_tag = NDR
+					original_tag = REM
+				}
+			}
+			for_each_scope_loop = { #to give core stat bonuses
+				array = THIS.original_cores
+				add_core_of = ROOT
+			}
+			declare_war_on = {
+				target = ROOT
+				type = annex_everything
+			}
+			every_other_country = {
+				limit = {
+					OR = {
+						original_tag = TNT
+						original_tag = ZIT
+						original_tag = AZI
+						original_tag = CAM
+						original_tag = ZAJ
+						original_tag = NDR
+						original_tag = REM
+					}
+				}
+				if = {
+					limit = { NOT = { has_war_with = PREV } }
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_PREV_potential_cores = yes
+			}
+		}
+		ROOT = {
+			add_ideas = FH_you_can_do_it_dude_idea
+			division_template = {
+				name = "Veteran Militia"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 4 }
+			}
+			random_list = {
+				93 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 2 }
+					}
+				}
+				2 = {
+				}
+			}
+			random_list = {
+				93 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+					}
+				}
+				2 = {
+				}
+			}
+			division_template = {
+				name = "Veteran Infantry"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+			}
+			random_list = {
+				93 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+					}
+				}
+				2 = {
+				}
+			}
+			random_list = {
+				93 = {
+					capital_scope = {
+						create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+					}
+				}
+				2 = {
+				}
+			}
+		}
+	}
+}
+
+country_event = { # YMN seeks someone to kill
+	id = zebrica_activity.22
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.22"}
+	hidden = yes
+	
+	trigger = {
+		original_tag = YMN
+		exists = yes
+		has_war = no
+		is_subject = no
+		#date > 1052.4.20
+		any_of_scopes = {
+			array = ABY.original_cores
+			tooltip = activity22_event_trigger_tt
+			NOT = { is_core_of = ROOT }
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		every_neighbor_country = {
+			if = {
+				limit = {
+					check_variable = { ROOT.deployed_army_manpower_k < THIS.deployed_army_manpower_k }
+				}
+				add_to_array = { ROOT.i_will_kill_you_later = THIS }
+			}
+			else = { # I kill you rn
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+	}
+}
+
+country_event = { # YMN decides whether kill someone or not
+	id = zebrica_activity.23
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.23"}
+	hidden = yes
+	is_triggered_only = yes #on_peaceconference_ended
+	#fire_only_once = yes
+	
+	option = {
+		if = {
+			limit = {
+				has_war = no
+				is_subject = no
+			}
+			random_neighbor_country = { #this can be replaced with every_other_country
+				limit = { is_in_array = { ROOT.i_will_kill_you_later = THIS } }
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+		# else_if = { # in case further expansion needed
+		# 	limit = { }
+		# }
+		else = {
+			country_event = {
+				id = zebrica_activity.23
+				days = 120
+			}
+		}
+	}
+}
+country_event = { #MGY wars ABY for their core territory
+	id = zebrica_activity.24
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.24"}
+	hidden = yes
+	is_triggered_only = yes #300 days since on_peaceconference_ended
+	fire_only_once = yes
+	
+	option = {
+		random_neighbor_country = { #this can be replaced with every_other_country
+			limit = {
+				any_controlled_state = {
+					OR = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_claimed_by = ROOT #removing claim previsouly will break this moment so it would need to be changed with is_in_array check(s)
+				}
+				add_core_of = ROOT
+				remove_claim_by = ROOT
+			}
+		}
+	}
+}
+
+country_event = { # ROA kills CNT
+	id = zebrica_activity.25
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.25"}
+	hidden = yes
+	
+	trigger = {
+		original_tag = ROA
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1050.5.20
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		add_political_power = 100
+		army_experience = 100
+		navy_experience = 100
+		random_neighbor_country = { #this can be replaced with every_other_country
+			limit = {
+				any_controlled_state = {
+					is_in_array = { CNT.original_cores = THIS }
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+				add_ai_strategy = {
+					type = invade
+					value = 100
+					id = PREV
+				}
+			}
+		}
+		CNT = { add_to_ROOT_potential_cores = yes }
+	}
+}
+
+country_event = { ## TAI/MEL/ZOO go war with CNT/ROA for state_1136
+	id = zebrica_activity.26
+	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.26"}
+	#picture = GFX_event_KIR_hamlet #this is hidden event bro
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		OR = {
+			original_tag = TAI
+			original_tag = MEL
+			original_tag = ZOO
+		}
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1053.01.03
+	}
+	mean_time_to_happen = {
+		days = 90
+	}
+	
+	option = {
+		# add_political_power = 100
+		# army_experience = 75
+		# navy_experience = 75
+		add_state_core = 1136
+		declare_war_on = {
+			target = 1136.owner
+			generator = { 1136 } #Kambanarahavavy
+			type = take_core_state
+		}
+		hidden_effect = {
+			create_wargoal = { 
+				type = take_core_state
+				generator = { 1136 } #Kambanarahavavy
+				target = FROM
+			}
+		}
+		1136 = {
+			owner = {
+				add_ai_strategy = {
+					type = invade
+					id = ROOT
+					value = 100
+				}
+				add_ideas = FH_you_can_do_naval_invasion_dude_idea
+				save_event_target_as = fuck_you_pdx
+			}
+		}
+		add_ai_strategy = {
+			type = invade
+			id = event_target:fuck_you_pdx
+			value = 100
+		}
+	}
+}
+
+country_event = { ## ROA starts zebra expedition
+	id = zebrica_activity.27
+	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.27"}
+	#picture = GFX_event_KIR_hamlet #this is hidden event bro
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		original_tag = ROA
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1053.01.03
+	}
+	mean_time_to_happen = {
+		days = 90
+	}
+	
+	option = {
+		add_political_power = 200
+		army_experience = 175
+		navy_experience = 175
+		every_other_country = {
+			limit = {
+				any_controlled_state = {
+					OR = {
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { TAI.original_cores = THIS }
+						is_in_array = { ZOO.original_cores = THIS }
+					}
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					type = annex_everything
+					target = PREV
+				}
+				add_ai_strategy = {
+					type = invade
+					id = PREV
+					value = 100
+				}
+			}
+			add_ai_strategy = {
+				type = invade
+				id = ROOT
+				value = 100
+			}
+		}
+		add_ideas = FH_you_can_do_naval_invasion_dude_idea
+		MEL = { add_to_ROOT_potential_cores = yes }
+		TAI = { add_to_ROOT_potential_cores = yes }
+		ZOO = { add_to_ROOT_potential_cores = yes }
+	}
+}
+
+country_event = { ## ROA attacks ZLU and their overlord or lackeys
+	id = zebrica_activity.28
+	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.28"}
+	#picture = GFX_event_KIR_hamlet #this is hidden event bro
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		original_tag = ROA
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1054.01.03
+	}
+	mean_time_to_happen = {
+		days = 90
+	}
+	
+	option = {
+		random_neighbor_country = { #this can be replaced with every_other_country
+			limit = {
+				any_controlled_state = {
+					is_in_array = { ZLU.original_cores = THIS }
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					type = annex_everything
+					target = PREV
+				}
+			}
+			every_other_country = {
+				limit = { is_in_faction_with = PREV }
+				ROOT = {
+					declare_war_on = {
+						type = annex_everything
+						target = PREV
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+		ZLU = { add_to_ROOT_potential_cores = yes }
+	}
+}
+country_event = { ## ROA attacks ILU
+	id = zebrica_activity.29
+	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.29"}
+	#picture = GFX_event_KIR_hamlet #this is hidden event bro
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		original_tag = ROA
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1057.01.03
+		country_exists = ILU
+	}
+	mean_time_to_happen = {
+		days = 90
+	}
+	
+	option = {
+		declare_war_on = {
+			type = annex_everything
+			target = ILU
+		}
+	}
+}
+
+country_event = { # STM kills ZWA
+	id = zebrica_activity.30
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.30"}
+	hidden = yes
+	
+	trigger = {
+		original_tag = STM
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1051.1.20 # after a year from they eat HSO via zebrica_activity.12
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		random_neighbor_country = { #this can be replaced with every_other_country
+			limit = {
+				any_controlled_state = {
+					is_in_array = { ZWA.original_cores = THIS } #ZWA can be dead by MTA
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+			add_to_ROOT_potential_cores = yes
+			every_neighbor_country = {
+				limit = {
+					OR = {
+						is_in_faction_with = PREV
+						has_war_with = PREV
+					}
+				}
+				ROOT = {
+					declare_war_on = {
+						type = annex_everything
+						target = PREV
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+	}
+}
+
+country_event = { # STM kills ABY/YMN
+	id = zebrica_activity.31
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.31"}
+	hidden = yes
+	
+	trigger = {
+		original_tag = STM
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1053.1.20 # after 2 years from they eat lakers via zebrica_activity.30
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		every_neighbor_country = { #this can be replaced with every_other_country
+			limit = {
+				any_controlled_state = {
+					is_in_array = { YMN.original_cores = THIS } #ABY is holding YMN core state at start
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+			add_to_ROOT_potential_cores = yes
+		}
+	}
+}
+
+country_event = { # STM kills EMR (but why? do they look juicy?)
+	id = zebrica_activity.32
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.32"}
+	hidden = yes
+	
+	trigger = {
+		original_tag = STM
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1055.1.20 # after 2 years from they eat cats via zebrica_activity.31
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		every_neighbor_country = { #this can be replaced with every_other_country
+			limit = {
+				any_controlled_state = {
+					is_in_array = { EMR.original_cores = THIS }
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		EMR = { add_to_ROOT_potential_cores = yes }
+	}
+}
+
+country_event = { # STM kills MGY/ILU(probably had eaten MGY)
+	id = zebrica_activity.33
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.33"}
+	hidden = yes
+	
+	trigger = {
+		original_tag = STM
+		exists = yes
+		has_war = no
+		is_subject = no
+		date > 1057.1.20 # after 2 years from they eat hoarses via zebrica_activity.32
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		every_other_country = {
+			limit = {
+				any_controlled_state = {
+					is_in_array = { MGY.original_cores = THIS }
+				}
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		MGY = { add_to_ROOT_potential_cores = yes }
+		set_country_flag = FG_STM_got_MGY_flag
 	}
 }

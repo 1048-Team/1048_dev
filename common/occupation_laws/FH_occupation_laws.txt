@@ -72,7 +72,7 @@ EQS_adoratio_occupation = { #Integrationist SOL policy
 			original_tag = EQS
 			original_tag = SLW
 		}
-		NOT = { EQS_Sunbutt = { is_country_leader = yes } }
+		NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
 		OR = {
 			check_variable = { potential_cores^num > 0 }
 			check_variable = { potential_original_cores^num > 0 }
@@ -92,7 +92,7 @@ EQS_adoratio_occupation = { #Integrationist SOL policy
 			}
 		}
 		hidden_trigger = {
-			NOT = { EQS_Sunbutt = { is_country_leader = yes } }
+			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
 			OR = {
 				check_variable = { potential_cores^num > 0 }
 				check_variable = { potential_original_cores^num > 0 }
@@ -129,9 +129,13 @@ EQS_inquisitionis_occupation = { #Suppressionist SOL policy
 		OR = {
 			original_tag = EQS
 			original_tag = SLW
+			AND = {
+				original_tag = MTS
+				has_country_flag = MTS_inquisitionis_laws
+			}
 		}
 		NOT = { has_country_flag = EQS_AUR_improved_inquisitionis_occupation }
-		NOT = { EQS_Sunbutt = { is_country_leader = yes } }
+		NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
 		NOT = {
 			original_tag = DED
 			hidden_trigger = { original_tag = EWI }
@@ -139,16 +143,22 @@ EQS_inquisitionis_occupation = { #Suppressionist SOL policy
 	}
 	
 	available = {
-		custom_trigger_tooltip = {
-			tooltip = EQS_is_solar_empire_tt
-			OR = {
-				original_tag = EQS
-				original_tag = SLW
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = EQS_is_solar_empire_tt
+				OR = {
+					original_tag = EQS
+					original_tag = SLW
+				}
 			}
-		}
-		hidden_trigger = {
-			NOT = { EQS_Sunbutt = { is_country_leader = yes } }
-			NOT = { has_country_flag = EQS_AUR_improved_inquisitionis_occupation }
+			hidden_trigger = {
+				NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
+				NOT = { has_country_flag = EQS_AUR_improved_inquisitionis_occupation }
+			}
+			AND = {
+				original_tag = MTS
+				has_country_flag = MTS_inquisitionis_laws
+			}
 		}
 		NOT = {
 			original_tag = DED
@@ -160,7 +170,7 @@ EQS_inquisitionis_occupation = { #Suppressionist SOL policy
 		resistance_target 				= -0.40
 		required_garrison_factor 		= -0.25	
 		resistance_damage_to_garrison 	= 0.15	
-		compliance_gain 				= -0.030
+		compliance_gain 				= 1
 		local_manpower  				= -0.35
 		local_intel_to_enemies			= -0.25
 		resistance_garrison_penetration_chance = -0.1

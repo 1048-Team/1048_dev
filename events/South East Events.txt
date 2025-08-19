@@ -1,12 +1,13 @@
 add_namespace = southeast
-add_namespace = southeast.debug
-
+add_namespace = new_baltimare
+add_namespace = nrf
 
 
 country_event = {
 	id = southeast.1
 	title = southeast.1.t
 	desc = southeast.1.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.1" }
 	is_triggered_only = yes 
 	option = {
 		name = southeast.1.a
@@ -17,6 +18,7 @@ country_event = {
 	id = southeast.2
 	title = southeast.2.t
 	desc = southeast.2.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.2" }
 	is_triggered_only = yes 
 	option = {
 		name = southeast.2.a
@@ -28,6 +30,7 @@ country_event = {
 	id = southeast.3
 	title = southeast.3.t
 	desc = southeast.3.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.3" }
 	is_triggered_only = yes 
 	option = {
 		name = southeast.3.a
@@ -36,110 +39,649 @@ country_event = {
 	}	
 }
 
-
-
-
-country_event = { ###Debug event to spawn the Mingsplosion
-	id = southeast.debug.1
-	title = southeast.debug.1.t
-	desc = southeast.debug.1.d
+country_event = { #Cobalt Hoof kicks the bucket, potentially ala Stalin in Death of Stalin
+	id = southeast.4
+	title = southeast.4.t
+	desc = southeast.4.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.4" }
 	is_triggered_only = yes
-	trigger = {
-		tag = BAL
-		NOT = {
-			has_country_leader = {
-				ruling_only = yes 
-				name = "Cobalt Hoof"
+	
+	option = { #That can't bode well...
+		name = southeast.4.a
+		custom_effect_tooltip = BAL_begun_the_mingsplosion_has_tt
+		#set_cosmetic_tag = BAL_new_red_front
+		BAL_Steel_Frame = {
+			add_country_leader_role = {
+				promote_leader = yes
+			
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = mareland_socialism
+					traits = {
+						first_citizen_trait
+					}
+				}
 			}
 		}
-		NOT = {
-			has_country_flag = BAL_successor_chosen
+		hidden_effect = {
+			retire_character = BAL_cobalt_hoof
+			country_event = {
+				id = southeast.5
+				days = 7
+				random_days = 7
+			}
 		}
-		has_country_flag = BAL_cobalt_dead
 	}
+}
+
+country_event = { #First hints of unrest begin in BAL, with most of the interior becoming ungovernorable after multiple uprisings by indingenous groups
+	id = southeast.5
+	title = southeast.5.t
+	desc = southeast.5.d
+	immediate = { log = "[GetDateText]: [ROOT.GetName]: event southeast.5" }
+
+	is_triggered_only = yes
+
+	option = { #Mobilize every prole immediately!
+		name = southeast.5.a
+		add_stability = -0.2
+		custom_effect_tooltip = BAL_good_job_breaking_it_tt
+		hidden_effect = {
+			84 = { set_demilitarized_zone = yes }
+			37 = { set_demilitarized_zone = yes }
+			17 = { set_demilitarized_zone = yes }
+			30 = { set_demilitarized_zone = yes }
+			350 = { set_demilitarized_zone = yes }
+			31 = { set_demilitarized_zone = yes }
+			348 = { set_demilitarized_zone = yes }
+			16 = { set_demilitarized_zone = yes }
+			24 = { set_demilitarized_zone = yes }
+			88 = { set_demilitarized_zone = yes }
+			7 = { set_demilitarized_zone = yes }
+			10 = { set_demilitarized_zone = yes }
+			6 = { set_demilitarized_zone = yes }
+			4 = { set_demilitarized_zone = yes }
+			36 = { set_demilitarized_zone = yes }
+			35 = { set_demilitarized_zone = yes }
+			81 = { set_demilitarized_zone = yes }
+			32 = { set_demilitarized_zone = yes }
+			26 = { set_demilitarized_zone = yes }
+			353 = { set_demilitarized_zone = yes }
+			1193 = { set_demilitarized_zone = yes }
+			news_event = {
+				id = southeastnews.1 #Cobalt is dead! The South-East is collapsing into chaos!
+				hours = 6
+			}
+			country_event = {
+				id = southeast.6
+				days = 7
+				random_days = 7
+			}
+		}
+	}
+}
+
+country_event = { #The Mingsplosion begins...
+	id = southeast.6
+	title = southeast.6.t
+	desc = southeast.6.d
+	is_triggered_only = yes
 	
-	fire_only_once = yes
+	option = { ###We'll get them back soon enough.
+		name = southeast.6.a
+		custom_effect_tooltip = BAL_yar_har_tt
+		hidden_effect = {
+			#news_event = southeast_news.2 #Cobalt is dead! Nations secede!
+			SPF = {
+				transfer_state = 4
+				transfer_state = 1212
+				transfer_state = 328
+				transfer_state = 1195
+				transfer_state = 1194
+				transfer_state = 1193
+				add_state_core = 4
+				add_state_core = 328
+				add_state_core = 1212
+				add_state_core = 1195
+				add_state_core = 1193
+				add_state_core = 1194
+				load_oob = "SPF_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "SPF_1048_naval"
+				}
+				else = {
+					load_oob = "SPF_1048_naval_legacy"
+				}
+			}
+			every_state = {
+				limit = {
+					is_owned_by = SPF
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
+			CLI = {
+				transfer_state = 6
+				transfer_state = 7
+				transfer_state = 8
+				transfer_state = 9
+				transfer_state = 10
+				add_state_core = 6
+				add_state_core = 7
+				add_state_core = 8
+				add_state_core = 8
+				add_state_core = 9
+				add_state_core = 10
+				load_oob = "CLI_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "CLI_1048_naval"
+				}
+				else = {
+					load_oob = "CLI_1048_naval_legacy"
+				}
+			}
+			every_state = {
+				limit = {
+					is_owned_by = CLI
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
+			hidden_effect = {
+				transfer_ship = {
+					type = light_cruiser
+					target = CLI
+				}
+				transfer_ship = {
+					type = destroyer
+					target = CLI
+				}
+				transfer_ship = {
+					type = destroyer
+					target = CLI
+				}
+				transfer_ship = {
+					type = destroyer
+					target = CLI
+				}
+				transfer_ship = {
+					type = destroyer
+					target = CLI
+				}
+				transfer_ship = {
+					type = destroyer
+					target = CLI
+				}
+				transfer_ship = {
+					type = destroyer
+					target = SPF
+				}
+				transfer_ship = {
+					type = destroyer
+					target = SPF
+				}
+				transfer_ship = {
+					type = destroyer
+					target = SPF
+				}
+				transfer_ship = {
+					type = destroyer
+					target = SPF
+				}
+			}
+			country_event = {
+				id = southeast.7
+				days = 7
+				random_days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Mingsplosion continues with Lucky flipping the bird
+	id = southeast.7
+	title = southeast.7.t
+	desc = southeast.7.d
+	is_triggered_only = yes
 	
+	option = { ###Maybe things are getting a bit hot...
+		name = southeast.7.a
+		custom_effect_tooltip = BAL_cringe_simp_tt
+		hidden_effect = {
+			delete_unit_template_and_units = {
+				division_template = "Stableside Worker Protectors"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Stableside Lucky Guard"
+			}
+			STB = {
+				set_cosmetic_tag = STB_stable_republic
+				transfer_state = 34
+				transfer_state = 15
+				add_state_core = 15
+				add_state_core = 34
+				###NID states###
+				transfer_state = 351
+				transfer_state = 1213
+				transfer_state = 52
+				add_state_core = 1213
+				add_state_core = 351
+				add_state_core = 52
+				###NRP states###
+				transfer_state = 36
+				transfer_state = 32
+				transfer_state = 86
+				transfer_state = 26
+				transfer_state = 353
+				transfer_state = 25
+				transfer_state = 79
+				transfer_state = 33
+				transfer_state = 50
+				transfer_state = 35
+				transfer_state = 81
+				add_state_core = 33
+				add_state_core = 36
+				add_state_core = 32
+				add_state_core = 86
+				add_state_core = 26
+				add_state_core = 353
+				add_state_core = 25
+				add_state_core = 79
+				add_state_core = 35
+				add_state_core = 81
+				add_state_core = 50
+				load_oob = "STB_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "STB_1048_naval"
+				}
+				else = {
+					load_oob = "STB_1048_naval_legacy"
+				}
+			}
+			hidden_effect = {
+				transfer_ship = {
+					prefer_name = "BNS Big Sister"
+					type = heavy_cruiser
+					target = STB
+				}
+				transfer_ship = {
+					type = light_cruiser
+					target = STB
+				}
+				transfer_ship = {
+					type = light_cruiser
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+			}
+			country_event = {
+				id = southeast.8
+				days = 15
+				random_days = 7
+			}
+		}
+	}
+
+	option = { ###Maybe things are getting a bit hot...
+		name = southeast.7.b
+		custom_effect_tooltip = BAL_write_love_letters_tt
+		hidden_effect = {
+			STB = {
+				change_tag_from = ROOT
+			}
+			delete_unit_template_and_units = {
+				division_template = "Stableside Worker Protectors"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Stableside Lucky Guard"
+			}
+			STB = {
+				set_cosmetic_tag = STB_stable_republic
+				transfer_state = 34
+				transfer_state = 15
+				add_state_core = 15
+				add_state_core = 34
+				###NID states###
+				transfer_state = 351
+				transfer_state = 1213
+				transfer_state = 52
+				add_state_core = 1213
+				add_state_core = 351
+				add_state_core = 52
+				###NRP states###
+				transfer_state = 36
+				transfer_state = 32
+				transfer_state = 86
+				transfer_state = 26
+				transfer_state = 353
+				transfer_state = 25
+				transfer_state = 79
+				transfer_state = 33
+				transfer_state = 50
+				transfer_state = 35
+				transfer_state = 81
+				add_state_core = 33
+				add_state_core = 36
+				add_state_core = 32
+				add_state_core = 86
+				add_state_core = 26
+				add_state_core = 353
+				add_state_core = 25
+				add_state_core = 79
+				add_state_core = 35
+				add_state_core = 81
+				add_state_core = 50
+				load_oob = "STB_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "STB_1048_naval"
+				}
+				else = {
+					load_oob = "STB_1048_naval_legacy"
+				}
+			}
+			hidden_effect = {
+				transfer_ship = {
+					prefer_name = "BNS Big Sister"
+					type = heavy_cruiser
+					target = STB
+				}
+				transfer_ship = {
+					type = light_cruiser
+					target = STB
+				}
+				transfer_ship = {
+					type = light_cruiser
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+				transfer_ship = {
+					type = destroyer
+					target = STB
+				}
+			}
+			country_event = {
+				id = southeast.8
+				days = 15
+				random_days = 7
+			}
+		}
+	}
+	after = {
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = STB
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
+		}
+	}
+}
+
+country_event = { #Bats do be EEEing, tho
+	id = southeast.8
+	title = southeast.8.t
+	desc = southeast.8.d
+	is_triggered_only = yes
+	
+	option = { ###We helped them! They repay us like this?!
+		name = southeast.8.a
+		custom_effect_tooltip = BAL_vogue_vampirism_tt
+		hidden_effect = {
+			EEE = {
+				transfer_state = 31
+				transfer_state = 350
+				transfer_state = 30
+				transfer_state = 17
+				transfer_state = 37
+				transfer_state = 88
+				transfer_state = 348
+				transfer_state = 16
+				transfer_state = 352
+				transfer_state = 24
+				transfer_state = 83
+				add_state_core = 31
+				add_state_core = 350
+				add_state_core = 30
+				add_state_core = 17
+				add_state_core = 37
+				###Thestrals do be living here, tho###
+				add_state_core = 88
+				add_state_core = 348
+				add_state_core = 16
+				add_state_core = 352
+				add_state_core = 24
+				add_state_core = 83
+				load_oob = "EEE_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "EEE_1048_naval"
+				}
+				else = {
+					load_oob = "EEE_1048_naval_legacy"
+				}
+			}
+		}
+	}
 	option = {
-		name = southeast.debug.1.b
-		ai_chance = { factor = 65 }
-		set_cosmetic_tag = BAL_new_red_front
-		set_global_flag = balsplosion
-		SPF = {
-			transfer_state = 4
-			transfer_state = 1212
-			transfer_state = 328
-			transfer_state = 1195
-			add_state_core = 4
-			add_state_core = 328
-			add_state_core = 1212
-			add_state_core = 1195
+		name = souhteast.8.b
+		custom_effect_tooltip = BAL_astarion_beckons_tt
+		hidden_effect = {
+			EEE = {
+				change_tag_from = ROOT
+				transfer_state = 31
+				transfer_state = 350
+				transfer_state = 30
+				transfer_state = 17
+				transfer_state = 37
+				transfer_state = 88
+				transfer_state = 348
+				transfer_state = 16
+				transfer_state = 352
+				transfer_state = 24
+				transfer_state = 83
+				add_state_core = 31
+				add_state_core = 350
+				add_state_core = 30
+				add_state_core = 17
+				add_state_core = 37
+				###Thestrals do be living here, tho###
+				add_state_core = 88
+				add_state_core = 348
+				add_state_core = 16
+				add_state_core = 352
+				add_state_core = 24
+				add_state_core = 83
+				load_oob = "EEE_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "EEE_1048_naval"
+				}
+				else = {
+					load_oob = "EEE_1048_naval_legacy"
+				}
+			}
 		}
-		CLI = {
-			transfer_state = 6
-			transfer_state = 7
-			transfer_state = 8
-			transfer_state = 9
-			transfer_state = 10
-			add_state_core = 6
-			add_state_core = 7
-			add_state_core = 8
-			add_state_core = 8
-			add_state_core = 9
-			add_state_core = 10
+	}
+
+	after = {
+		hidden_effect = {
+			every_state= {
+				limit = {
+					is_owned_by = EEE
+					is_demilitarized_zone = yes
+					NOT = { #Since the Neighua aren't the happiest about them, either
+						state = 88
+						state = 348
+						state = 16
+						state = 352
+						state = 24
+						state = 83
+					}
+				}
+				set_demilitarized_zone = no
+			}
+			transfer_ship = {
+				type = destroyer
+				target = EEE
+			}
+			transfer_ship = {
+				type = destroyer
+				target = EEE
+			}
+			transfer_ship = {
+				type = destroyer
+				target = EEE
+			}
+			transfer_ship = {
+				type = destroyer
+				target = EEE
+			}
+			transfer_ship = {
+				type = destroyer
+				target = EEE
+			}
+			IF = { ###Ah Lawd he comin'
+				limit = {
+					AND = {
+						country_exists = EQS
+						NOT = { country_exists = SLW }
+					}
+				}
+				EQS = {
+					country_event = {
+						id = solar.122
+						days = 10
+						random_days = 5
+					}
+				}
+			}
+			ELSE_IF = {
+				limit = {
+					AND = {
+						country_exists = SLW
+						NOT = { country_exists = EQS }
+					}
+				}
+				SLW = {
+					country_event = {
+						id = solar.122
+						days = 10
+						random_days = 5
+					}
+				}
+			}
+			delete_unit_template_and_units = {
+				division_template = "Red Glory Jungle Guard"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Red Glory COBSOC Militia"
+			}
+			country_lock_all_division_template = no
+			news_event = {
+				id = southeastnews.2 #South-East implodes!
+				hours = 6
+			}
 		}
+	}
+}
+
+country_event = { ###Mingsplosion completes with greedy bugs and crazy ultranats - no longer called, since STB will handle that instead
+	id = southeast.9
+	title = southeast.9.t
+	desc = southeast.9.d
+	is_triggered_only = yes
+	
+	option = { ###Please be the end...
+		name = southeast.9.a
+		#news_event = southeast_news.2 #The South-East implodes!
 		STB = {
-			transfer_state = 34
-			transfer_state = 15
-			transfer_state = 50
-			transfer_state = 35
-			transfer_state = 81
-			add_state_core = 50
-			add_state_core = 15
-			add_state_core = 34
-			add_state_core = 35
-			add_state_core = 81
+			drop_cosmetic_tag = yes
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			set_popularities = {
+				democratic = 10
+				fascism = 70
+				communism = 6
+				neutrality = 14
+			}
 		}
 		NID = {
 			transfer_state = 351
 			transfer_state = 1213
-			transfer_state = 221
-			transfer_state = 33
-			transfer_state = 1194
-			transfer_state = 1193
-			add_state_core = 221
+			transfer_state = 52
 			add_state_core = 1213
 			add_state_core = 351
-			add_state_core = 33
-			add_state_core = 1193
-			add_state_core = 1194
-		}
-		EEE = {
-			transfer_state = 31
-			transfer_state = 350
-			transfer_state = 30
-			transfer_state = 17
-			transfer_state = 37
-			add_state_core = 31
-			add_state_core = 350
-			add_state_core = 30
-			add_state_core = 17
-			add_state_core = 37
-			load_oob = "EEE_1048"
-		}
-		NEI = {
-			transfer_state = 88
-			transfer_state = 348
-			transfer_state = 16
-			transfer_state = 352
-			transfer_state = 24
-			transfer_state = 83
-			add_state_core = 88
-			add_state_core = 348
-			add_state_core = 16
-			add_state_core = 352
-			add_state_core = 24
-			add_state_core = 83
+			add_state_core = 52
 		}
 		NRP = {
 			transfer_state = 36
@@ -149,8 +691,11 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			transfer_state = 353
 			transfer_state = 25
 			transfer_state = 79
-			transfer_state = 52
-			add_state_core = 52
+			transfer_state = 33
+			transfer_state = 35
+			transfer_state = 81
+			transfer_state = 50
+			add_state_core = 33
 			add_state_core = 36
 			add_state_core = 32
 			add_state_core = 86
@@ -158,49 +703,12 @@ country_event = { ###Debug event to spawn the Mingsplosion
 			add_state_core = 353
 			add_state_core = 25
 			add_state_core = 79
+			add_state_core = 35
+			add_state_core = 81
+			add_state_core = 50
+			load_oob = "NRP_1048"
 		}
-		every_state = {
-			limit = {
-				AND = {
-					is_core_of = BAL
-					NOT = {
-						is_owned_by = BAL
-					}
-				}
-			}
-			remove_core_of = BAL
-			add_claim_by = BAL
-		}
-		IF = {
-			limit = {
-				AND = {
-					country_exists = EQS
-					NOT = { country_exists = SLW }
-				}
-			}
-			EQS = {
-				country_event = {
-					id = solar.122
-					days = 90
-					random_days = 30
-				}
-			}
-		}
-		ELSE_IF = {
-			limit = {
-				AND = {
-					country_exists = SLW
-					NOT = { country_exists = EQS }
-				}
-			}
-			SLW = {
-				country_event = {
-					id = solar.122
-					days = 90
-					random_days = 30
-				}
-			}
-		}
+		country_lock_all_division_template = no
 	}
 }
 
@@ -523,21 +1031,34 @@ country_event = { #The current leader of Baltimare is informed of an incursion b
 					load_oob = "MTS_1048_naval_legacy"
 				}
 			}
-			MTS = {
-				EQS_Scorched_Earth = {
-					add_country_leader_role = {
-						promote_leader = yes
-						
-						country_leader = {
-							expire = "1965.1.1"
-							ideology = solarism
-							desc = POLITICS_SCORCHED_EARTH_1048_DESC
-							traits = {
-								warrior_ascetic
-							}
+		MTS = {
+			EQS_Scorched_Earth = {
+				add_country_leader_role = {
+					promote_leader = yes
+					
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = solarism
+						desc = POLITICS_SCORCHED_EARTH_1048_DESC
+						traits = {
+							warrior_ascetic
 						}
 					}
 				}
 			}
+		}
+	}
+}
+
+country_event = { #The current leader is informed of a failed attempt to invade by the Solar Empire, as they fought between themselves, but some soldiers have still deserted and have now formed bands of solarist terrorists that are causing problems in the northern states that the NRF controls
+	id = southeast.601
+	title = southeast.601.t
+	desc = southeast.601.d
+	
+	is_triggered_only = yes
+	
+	option = { #Like we need even MORE problems...
+		name = southeast.601.a
+		#Add state modifiers
 	}
 }

@@ -2576,6 +2576,35 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = BLS_artisans_of_the_stars
+	x = 0
+	y = 1
+	relative_position_id = BLS_establish_ley_line
+
+	cost = 5
+	prerequisite = { focus = BLS_establish_ley_line }
+	#Maybe only available with 100 dark magic? Remove 100 dark magic once selected
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus BLS_artisans_of_the_stars"
+		###Maybe an event of some of the definitely safe working conditions that are in the Star Forge, with a safety inspector (one of the last few) writing up so many violations, and feeling Solar Flare's wrath for his waste of resources
+		if = {
+			limit = { has_dlc = "Arms Against Tyranny"}
+			set_country_flag = BLS_meatbag_forge_aat
+			#custom_effect_tooltip = BLS_haha_kotor_reference_tt
+			show_mio_tooltip = BLS_the_star_forge_organization
+		}
+		else = {
+			set_country_flag = BLS_meatbag_forge
+			custom_effect_tooltip = BLS_unlock_tt
+			show_ideas_tooltip = BLS_the_star_forge #Should be +15% magic weapon research, +5% magic weapon breakthrough and soft attack
+		}
+	}
+
+	ai_will_do = { factor = 50 }
+}
+
+shared_focus = {
 	id = BLS_ground_level
 	x = 0
 	y = 1
@@ -3678,15 +3707,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus BLS_carpeted_fury"
-		IF = {
-			limit = {
-				has_dlc = "By Blood Alone"
-			}
-			add_ideas = BLS_rolling_thunder_BBA
-		}
-		ELSE = {
-			add_ideas = BLS_rolling_thunder
-		}
+		add_ideas = BLS_rolling_thunder
 	}
 	
 	ai_will_do = { factor = 45 }

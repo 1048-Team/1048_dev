@@ -1,0 +1,669 @@
+STB_debug_category = {
+    STB_nom_south_east = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            every_country = {
+                limit = {
+                    is_in_array = { array = global.southeast_countries value = THIS }
+                    exists = yes
+                    NOT = { tag = ROOT }
+                }
+                ROOT = {
+                    annex_country = {
+                        target = PREV
+                    }
+                }
+            }
+            every_state = {
+                limit = {
+                    OR = {
+                        is_claimed_by = BAL
+                        is_core_of = BAL
+                    }
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+    STB_load_lucky_transition_tree = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            set_country_flag = STB_southeast_victor
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_load_simp_tree = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            set_country_flag = STB_simp_beta
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_overlook_cringe = {
+        allowed = {
+            tag = STB
+        }
+        visible = { has_country_flag = STB_simp_beta }
+        complete_effect = {
+            set_country_flag = EQS_accepted_proposal
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_be_declared_cringe = {
+        allowed = {
+            tag = STB
+        }
+        visible = { has_country_flag = STB_simp_beta }
+        complete_effect = {
+            set_country_flag = EQS_rejected_proposal
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_load_incel_tree = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            set_country_flag = STB_chad_sigma
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_load_oxide_fake_out_tree = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            promote_character = STB_Oxide
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_promote_vasiliy = {
+        allowed = {
+            tag = STB
+        }
+        available = { NOT = { has_country_leader = { character = STB_Vasiliy_Wheatin ruling_only = yes } } }
+        complete_effect = {
+            promote_character = STB_Vasiliy_Wheatin
+            STB_Vasiliy_Wheatin = { set_character_name = { name = STB_Vasiliy_Wheatin_name } }
+            set_cosmetic_tag = STB_USSESE
+            set_country_flag = STB_southeast_victor
+            set_country_flag = STB_vasiliy_utopia_flag
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_enable_harmonist_democracy = {
+        allowed = {
+            tag = STB
+        }
+        available = { NOT = { has_government = democratic } }
+        complete_effect = {
+            if = {
+                limit = {
+                    OR = {
+                        NOT = { has_country_leader = { character = STB_Smiling_Embrace  ruling_only = yes } }
+                        NOT = { has_government = democratic }
+                    }
+                }
+                set_politics = {
+                    ruling_party = democratic
+                    elections_allowed = no
+                    long_name = STB_harmonist_hillbillies_democratic_party_long
+                    name = STB_harmonist_hillbillies_democratic_party
+                }
+                set_cosmetic_tag = STB_Stellaris
+                promote_character = STB_Smiling_Embrace
+            }
+        }
+    }
+    STB_load_post_war_democracy_tree = {
+        allowed = {
+            tag = STB
+        }
+        complete_effect = {
+            set_country_flag = STB_southeast_victor
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_start_election = {
+        allowed = {
+            tag = STB
+        }
+        available = { has_government = democratic }
+        complete_effect = {
+            #This should be a scripted effect, as it will probably require a bit of calculation with HOI4 math
+            STB_DEM_elect_candidate = yes
+        }
+    }
+    STB_elect_jade = {
+        allowed = {
+            tag = STB
+        }
+        available = { has_government = democratic }
+        complete_effect = {
+            promote_character = STB_Jade_Turf
+            hidden_effect = {
+                STB_Jade_Turf_effects = yes
+            }
+        }
+    }
+    STB_load_only_jade_tree = {
+        allowed = {
+            tag = STB
+        }
+        available = {
+            has_government = democratic
+            has_country_leader = { character = STB_Jade_Turf ruling_only = yes }
+        }
+        complete_effect = {
+            set_country_flag = STB_lone_jade
+            mark_focus_tree_layout_dirty = yes
+        }
+    }
+    STB_activate_simp_BOP = {
+        allowed = {
+            tag = STB
+        }
+        available = {
+            NOT = { has_power_balance = { id = STB_simp_or_no_simp } }
+        }
+        complete_effect = {
+            set_power_balance = {
+                id = STB_simp_or_no_simp
+                set_default = yes
+            }
+        }
+    }
+    STB_activate_centralization_BOP = {
+        allowed = {
+            tag = STB
+        }
+        available = {
+            NOT = { has_power_balance = { id = STB_lucky_centralization_bop } }
+        }
+        complete_effect = {
+            set_power_balance = {
+                id = STB_lucky_centralization_bop
+                set_default = yes
+            }
+        }
+    }
+}
+STB_DEM_elections_category = {
+    STB_impending_election = {
+        allowed = { tag = STB }
+        activation = {
+            has_government = democratic
+            NOT = { has_country_flag = STB_lone_jade }
+        }
+        available = { NOT = { has_government = democratic } }
+        visible = { has_government = democratic }
+        days_mission_timeout = 730
+        is_good = yes
+        timeout_effect = {
+            STB_DEM_elect_candidate = yes
+            hidden_effect = {
+                country_event = stableside.harmonists.1000
+            }
+        }
+    }
+}
+STB_simping_category = {
+    ###Special
+    STB_pen_love_letter = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 15
+        days_re_enable = 120
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_pen_love_letter"
+            #Event eventually
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = 0.05
+                tooltip_side = STB_soy_boy
+            }
+        }
+    }
+    ###Special
+
+    STB_write_romantic_haiku = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 15
+        days_re_enable = 120
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_write_romantic_haiku"
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = 0.05
+                tooltip_side = STB_soy_boy
+            }
+        }
+    }
+    STB_hold_holiday_for_daybreaker = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 35
+        days_re_enable = 150
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_hold_holiday_for_daybreaker"
+            add_stability = -0.03
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = 0.075
+                tooltip_side = STB_soy_boy
+            }
+        }
+    }
+    STB_implement_solarist_ideals = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 50
+        days_re_enable = 210
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_implement_solarist_ideals"
+            add_stability = -0.07
+            add_war_support = -0.05
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = 0.1
+                tooltip_side = STB_soy_boy
+            }
+        }
+    }
+    STB_send_choicest_gifts = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 30
+        days_remove = 30
+        days_re_enable = 90
+        modifier = {
+            consumer_goods_factor = 0.1
+            industrial_capacity_factory = -0.05
+            political_power_gain = -0.05
+        }
+        remove_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_pen_love_letter"
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = 0.075
+                tooltip_side = STB_soy_boy
+            }
+            #Event that SOL gets for an idea that gives -0.05 consumer goods and +0.03 factory output for sixty days; Daybreaker actually appreciates it
+        }
+    }
+    STB_convert_to_solarism = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+            #has_completed_focus = STB_become_one_with_her #Or some similar name; option to allow converting to Solarism, which will give a +25 relations boost to SOL, or -25 to EQS, and also a buff of -0.1 monthly pop and +0.05 army morale
+        }
+        fire_only_once = yes
+        cost = 5
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_convert_to_solarism"
+            #Event of his conversion, eventually, which is filled with pomp and circumstance, and a lot of sucking up to Daybreaker
+            add_stability = -0.15
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = 0.33
+                tooltip_side = STB_soy_boy
+            }
+        }
+    }
+
+    STB_burn_secret_pictures_of_her_flank = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 15
+        days_re_enable = 120
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_burn_secret_pictures_of_her_flank"
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = -0.05
+                tooltip_side = STB_incel
+            }
+        }
+    }
+    STB_create_new_statue_of_lucky = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 35
+        days_re_enable = 150
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_create_new_statue_of_lucky"
+            add_popularity = {
+                ideology = fascism
+                popularity = 0.02
+            }
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = -0.075
+                tooltip_side = STB_incel
+            }
+        }
+    }
+    STB_increase_anti_solarist_propaganda = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 50
+        days_re_enable = 210
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_increase_anti_solarist_propaganda"
+            add_popularity = {
+                ideology = fascism
+                popularity = 0.03
+            }
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = -0.1
+                tooltip_side = STB_incel
+            }
+        }
+    }
+    STB_send_insults_by_pony = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+        }
+        cost = 30
+        days_remove = 30
+        days_re_enable = 90
+        modifier = {
+            command_power_gain = -0.05
+            weekly_manpower = -100
+            consumer_goods_factor = 0.1
+        }
+        remove_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_send_insults_by_pony"
+            #Event for SOL receiving the insult, which can have some randomized text, if possible, of about ten insults, ala Stellaris's insults, which gives an "insulted" idea, by reducing party popularity stability factor by -0.05 and political power gain by -0.1
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = -0.075
+                tooltip_side = STB_incel
+            }
+        }
+    }
+    STB_deny_celestia_existed = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_simp_or_no_simp }
+            #has_completed_focus = STB_whos_celestia #Or similar name; option to allow denying Celestia ever existed, reducing SOL/EQS opinion by -30 and giving a spirit that gives +10% core defence and -5% army moral
+        }
+        cost = 5
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_deny_celestia_existed"
+            #Event eventually for Lucky denying Celestia/Daybreaker, and that he never had a crush on her, even though others remember that he did; when voiced, the naysayres are executed
+            add_power_balance_value = {
+                id = STB_simp_or_no_simp
+                value = -0.33
+                tooltip_side = STB_incel
+            }
+        }
+    }
+}
+
+STB_BOP_centralization_category = {
+    STB_give_minister_control = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 25
+        days_re_enable = 90
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_give_minister_control"
+            add_stability = -0.02
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = -0.05
+                tooltip_side = STB_decentralization
+            }
+        }
+    }
+    STB_approve_autonomous_commune = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 35
+        days_re_enable = 45
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_approve_autonomous_commune"
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = -0.05
+                tooltip_side = STB_decentralization
+            }
+        }
+    }
+    STB_divest_public_assets = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 25
+        days_remove = 60
+        days_re_enable = 60
+        modifier = {
+            consumer_goods_factor = 0.1
+        }
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_divest_public_assets"
+        }
+        remove_effect = {
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = -0.1
+                tooltip_side = STB_decentralization
+            }
+        }
+    }
+    STB_loosen_paramilitary_regulations = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 40
+        days_remove = 70
+        days_re_enable = 120
+        modifier = {
+            experience_gain_army = -0.01
+            power_balance_weekly = -0.005
+        }
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_loosen_paramilitary_regulations"
+        }
+        remove_effect = {
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = -0.05
+                tooltip_side = STB_decentralization
+            }
+        }
+    }
+    STB_force_new_powers = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 25
+        days_remove = 90
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_force_new_powers"
+            add_stability = 0.02
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = 0.05
+                tooltip_side = STB_centralization
+            }
+        }
+    }
+    STB_crack_down_on_independent_spirit = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 35
+        days_re_enable = 45
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_crack_down_on_independent_spirit"
+            add_stability = -0.03
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = 0.05
+                tooltip_side = STB_centralization
+            }
+        }
+    }
+    STB_seize_communal_resources = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 25
+        days_remove = 60
+        days_re_enable = 60
+        modifier = {
+            stability_weekly = -0.001
+            war_support_weekly = -0.001
+        }
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_seize_communal_resources"
+        }
+        remove_effect = {
+            set_temp_variable = { popularity_reduction = -0.03 }
+            reduce_party_popularity = yes
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = 0.1
+                tooltip_side = STB_centralization
+            }
+        }
+    }
+    STB_scrutinize_the_military = {
+        allowed = {
+            tag = STB
+        }
+        visible = {
+            tag = STB
+            has_country_leader = { character = STB_Lucky_Star ruling_only = yes }
+            has_power_balance = { id = STB_lucky_centralization_bop }
+        }
+        cost = 40
+        days_remove = 70
+        days_re_enable = 120
+        modifier = {
+            experience_gain_army = -0.03
+            experience_gain_navy = -0.03
+            experience_gain_air = -0.03
+            power_balance_weekly = 0.005
+        }
+        complete_effect = {
+            log = "[GetDateText]: [Root.GetName]: Decision STB_scrutinize_the_military"
+        }
+        remove_effect = {
+            add_power_balance_value = {
+                id = STB_lucky_centralization_bop
+                value = 0.05
+                tooltip_side = STB_centralization
+            }
+        }
+    }
+}

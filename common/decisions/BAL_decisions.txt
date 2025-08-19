@@ -2,121 +2,12 @@
 BAL_debug_decisions_category = {
 	BAL_explode_southeast = {
 		available = {
-			NOT = { has_global_flag = balsplosion }
-		}
-		visible = {
+			is_debug = yes
 			NOT = { has_global_flag = balsplosion }
 		}
 		fire_only_once = yes
 		complete_effect = {
-			set_cosmetic_tag = BAL_new_red_front
-			set_global_flag = balsplosion
-			SPF = {
-				transfer_state = 4
-				transfer_state = 1212
-				transfer_state = 328
-				transfer_state = 1195
-				add_state_core = 4
-				add_state_core = 328
-				add_state_core = 1212
-				add_state_core = 1195
-			}
-			CLI = {
-				transfer_state = 6
-				transfer_state = 7
-				transfer_state = 8
-				transfer_state = 9
-				transfer_state = 10
-				add_state_core = 6
-				add_state_core = 7
-				add_state_core = 8
-				add_state_core = 8
-				add_state_core = 9
-				add_state_core = 10
-			}
-			STB = {
-				transfer_state = 34
-				transfer_state = 15
-				transfer_state = 50
-				transfer_state = 35
-				transfer_state = 81
-				add_state_core = 50
-				add_state_core = 15
-				add_state_core = 34
-				add_state_core = 35
-				add_state_core = 81
-			}
-			NID = {
-				transfer_state = 351
-				transfer_state = 1213
-				transfer_state = 221
-				transfer_state = 33
-				transfer_state = 1194
-				transfer_state = 1193
-				add_state_core = 221
-				add_state_core = 1213
-				add_state_core = 351
-				add_state_core = 33
-				add_state_core = 1193
-				add_state_core = 1194
-			}
-			EEE = {
-				transfer_state = 31
-				transfer_state = 350
-				transfer_state = 30
-				transfer_state = 17
-				transfer_state = 37
-				add_state_core = 31
-				add_state_core = 350
-				add_state_core = 30
-				add_state_core = 17
-				add_state_core = 37
-				load_oob = "EEE_1048"
-			}
-			NEI = {
-				transfer_state = 88
-				transfer_state = 348
-				transfer_state = 16
-				transfer_state = 352
-				transfer_state = 24
-				transfer_state = 83
-				add_state_core = 88
-				add_state_core = 348
-				add_state_core = 16
-				add_state_core = 352
-				add_state_core = 24
-				add_state_core = 83
-			}
-			NRP = {
-				transfer_state = 36
-				transfer_state = 32
-				transfer_state = 86
-				transfer_state = 26
-				transfer_state = 353
-				transfer_state = 25
-				transfer_state = 79
-				transfer_state = 52
-				add_state_core = 52
-				add_state_core = 36
-				add_state_core = 32
-				add_state_core = 86
-				add_state_core = 26
-				add_state_core = 353
-				add_state_core = 25
-				add_state_core = 79
-			}
-			every_state = {
-				limit = {
-					AND = {
-						is_core_of = BAL
-						NOT = {
-							is_owned_by = BAL
-						}
-					}
-				}
-				remove_core_of = BAL
-				add_claim_by = BAL
-			}
+			BAL_debug_explode_the_peninsula = yes
 		}
 	}
 	BAL_spawn_MTS = {
@@ -183,71 +74,6 @@ BAL_debug_decisions_category = {
 		}
 		complete_effect = {
 			EEE = { change_tag_from = ROOT }
-		}
-	}
-	EEE_promote_Gushing = {
-		available = {
-			tag = EEE
-			NOT = { has_country_leader = { character = EEE_Gushing_Pulse ruling_only = yes } }
-		}
-		visible = { tag = EEE }
-		complete_effect = {
-			IF = {
-				limit = {
-					NOT = { has_government = fascism }
-				}
-				set_politics = {
-					ruling_party = fascism
-					elections_allowed = no
-				}
-			}
-			promote_character = EEE_Gushing_Pulse
-			set_country_flag = EEE_ezmetzli_coup
-			set_portraits = {
-				character = EEE_Gushing_Pulse
-				army = {
-					large = "gfx/leaders/EEE/Gushing_Pulse.tga"
-					small = "GFX_idea_EEE_gushing_pulse"
-				}
-			}
-		}
-	}
-	EEE_promote_Nocturne = {
-		available = {
-			tag = EEE
-			NOT = { has_country_leader = { character = EEE_Nocturne_Vision ruling_only = yes } }
-		}
-		visible = { tag = EEE }
-		complete_effect = {
-			IF = {
-				limit = {
-					NOT = { has_government = democratic }
-				}
-				set_politics = {
-					ruling_party = democratic
-					elections_allowed = no
-				}
-			}
-			promote_character = EEE_Nocturne_Vision
-		}
-	}
-	EEE_promote_Moonlight_and_Waning = {
-		available = {
-			tag = EEE
-			NOT = { has_country_leader = { character = EEE_Moonlight_and_Waning ruling_only = yes } }
-		}
-		visible = { tag = EEE }
-		complete_effect = {
-			IF = {
-				limit = {
-					NOT = { has_government = fascism }
-				}
-				set_politics = {
-					ruling_party = fascism
-					elections_allowed = no
-				}
-			}
-			promote_character = EEE_Moonlight_and_Waning
 		}
 	}
 	BAL_switch_to_BAL = {
@@ -341,6 +167,15 @@ BAL_debug_decisions_category = {
 					ruling_party = communism
 					elections_allowed = no
 				}
+				if = {
+					limit = {
+						communism < 0.5
+					}
+					add_popularity = {
+						ideology = communism
+						popularity = 0.5
+					}
+				}
 			}
 			if = {
 				limit = { NOT = { can_be_country_leader = MTS_Warm_Night } }
@@ -350,6 +185,7 @@ BAL_debug_decisions_category = {
 						country_leader = {
 							ideology = religious_socialism
 							expire = "1965.1.1"
+							desc = "POLITICS_WARM_NIGHT_DESC"
 							traits = { 
 								sympathetic_priestess
 							}
@@ -359,6 +195,57 @@ BAL_debug_decisions_category = {
 			}
 			else = {
 				promote_character = MTS_Warm_Night
+			}
+		}
+	}
+	MTS_add_arrays = {
+		available = {
+			tag = MTS
+			has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
+			has_global_flag = balsplosion
+		}
+		visible = {
+			tag = MTS
+		}
+		fire_only_once = yes
+		complete_effect = {
+			set_country_flag = MTS_unlock_prosperity
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = BAL
+						is_core_of = MTS
+					}
+				}
+				add_to_array = { MTS.north_states = THIS.id }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = EEE
+						is_core_of = NEI
+					}
+				}
+				add_to_array = { MTS.central_states = THIS.id }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = NRP
+						is_core_of = NID
+						is_core_of = STB
+					}
+				}
+				add_to_array = { MTS.southern_states = THIS.id }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = SPF
+						is_core_of = CLI
+					}
+				}
+				add_to_array = { MTS.island_states = THIS.id }
 			}
 		}
 	}
@@ -396,6 +283,7 @@ BAL_debug_decisions_category = {
 						country_leader = {
 							ideology = solarism
 							expire = "1965.1.1"
+							desc = "POLITICS_PINPOINT_DESC"
 							traits = {
 								experimental_inquisitor
 							}
@@ -409,7 +297,6 @@ BAL_debug_decisions_category = {
 	MTS_promote_Scorched_Earth = {
 		available = {
 			tag = MTS
-			NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } }
 		}
 		visible = {
 			tag = MTS
@@ -429,7 +316,7 @@ BAL_debug_decisions_category = {
 				}
 			}
 			if = {
-				limit = { NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } } }
+				limit = { MTS_has_scorched_as_leader = no }
 				promote_character = EQS_Scorched_Earth
 			}
 		}
@@ -459,16 +346,25 @@ BAL_debug_decisions_category = {
 					}
 				}
 			}
+			every_state = {
+				limit = {
+					OR = {
+						is_claimed_by = BAL
+						is_core_of = BAL
+					}
+				}
+				add_core_of = ROOT
+			}
 		}
 	}
 	MTS_simulate_EQS_SOL_acceptance = {
 		available = {
 			tag = MTS
 			OR = {
-				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				MTS_has_scorched_as_leader = yes
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
-			EQS = { NOT = { has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes } } }
+			EQS = { NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } } }
 			has_country_flag = MTS_conquered_southeast
 		}
 		visible = {
@@ -476,7 +372,7 @@ BAL_debug_decisions_category = {
 		}
 		complete_effect = {
 			set_country_flag = MTS_EQS_accepted
-			get_current_government_type_FH = yes
+			get_current_government_type = yes
 			EQS = {
 				if = {
 					limit = {
@@ -492,7 +388,7 @@ BAL_debug_decisions_category = {
 					puppet = ROOT
 				}
 			}
-			restore_previous_government_type_FH = yes
+			restore_previous_government_type = yes
 			mark_focus_tree_layout_dirty = yes
 		}
 	}
@@ -500,7 +396,7 @@ BAL_debug_decisions_category = {
 		available = {
 			tag = MTS
 			OR = {
-				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				MTS_has_scorched_as_leader = yes
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
 			EQS = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
@@ -511,7 +407,8 @@ BAL_debug_decisions_category = {
 		}
 		complete_effect = {
 			set_country_flag = MTS_EQS_accepted
-			get_current_government_type_FH = yes
+			get_current_government_type = yes
+			set_cosmetic_tag = MTS_EQS_puppet
 			EQS = {
 				if = {
 					limit = {
@@ -527,7 +424,7 @@ BAL_debug_decisions_category = {
 					puppet = ROOT
 				}
 			}
-			restore_previous_government_type_FH = yes
+			restore_previous_government_type = yes
 			mark_focus_tree_layout_dirty = yes
 		}
 	}
@@ -535,7 +432,7 @@ BAL_debug_decisions_category = {
 		available = {
 			tag = MTS
 			OR = {
-				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				MTS_has_scorched_as_leader = yes
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
 			has_country_flag = MTS_conquered_southeast
@@ -552,7 +449,7 @@ BAL_debug_decisions_category = {
 		available = {
 			tag = MTS
 			OR = {
-				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				MTS_has_scorched_as_leader = yes
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
 			has_country_flag = MTS_conquered_southeast
@@ -570,7 +467,7 @@ BAL_debug_decisions_category = {
 		available = {
 			tag = MTS
 			OR = {
-				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				MTS_has_scorched_as_leader = yes
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
 			has_country_flag = MTS_conquered_southeast
@@ -588,10 +485,9 @@ BAL_debug_decisions_category = {
 		available = {
 			tag = MTS
 			OR = {
-				has_country_leader = { character = EQS_Scorched_Earth ruling_only = yes }
+				MTS_has_scorched_as_leader = yes
 				has_country_leader = { character = MTS_Warm_Night ruling_only = yes }
 			}
-			has_country_flag = MTS_conquered_southeast
 		}
 		visible = {
 			tag = MTS

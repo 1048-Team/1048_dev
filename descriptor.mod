@@ -9,5 +9,6 @@ dependencies={
 	"Equestria at War"
 }
 #replace_path = "events"
+path="/mod/1048_dev"
 
-supported_version="1.12.*"
+supported_version="1.16.*"

@@ -330,6 +330,11 @@ BLS_debug_path_decision_category = {
 			}
 		}
 	}
+	BLS_max_star_forge = {
+		complete_effect = {
+			mio:BLS_the_star_forge_organization = { add_mio_size = 19 }
+		}
+	}
 }
 BLS_debug_cultist_resurrection_category = {
 	BLS_update_numbers = {
@@ -804,6 +809,26 @@ BLS_the_dark_arts_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision BLS_add_efficient_resurrection"
 			set_country_flag = BLS_better_resurrections
 			add_to_variable = { BLS_necromantic_power_pool = -300 }
+		}
+	}
+	BLS_empower_the_star_forge = {
+		icon = generic_magic
+		allowed = {
+			original_tag = BLS
+		}
+		visible = {
+			has_country_flag = BLS_meatbag_forge_aat
+			mio:BLS_the_star_forge_organization = { has_mio_size < 19 }
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { BLS_display_variable_np = 75 }
+			check_variable = { BLS_necromantic_power_pool > 74.99 }
+		}
+		custom_cost_text = BLS_resurrect_cultists_np_tt
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLS_empower_the_star_forge"
+			add_to_variable = { BLS_necromantic_power_pool = -75 }
+			mio:BLS_the_star_forge_organization = { add_mio_size = 1 }
 		}
 	}
 }
