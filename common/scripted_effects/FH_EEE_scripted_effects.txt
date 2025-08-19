@@ -1,0 +1,549 @@
+EEE_startup_character_flags = { #Any invisible characters should gain the flag, too. They will be removed when they become visible or gain a role
+    EEE_stellar_note = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Gushing_Pulse = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Waning_Crescent = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Moonlight_Crescent = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Red_Dusk = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Nocturne_Vision = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Laconic_Azure = { set_character_flag = EEE_immune_to_sacrifice }
+    EEE_Moonlight_and_Waning = { set_character_flag = EEE_immune_to_sacrifice }
+}
+
+###Tribal Elections###
+EEE_start_tribal_confederation_election = {
+    hidden_effect = {
+        if = {
+            limit = { NOT = { has_country_flag = EEE_stellar_game_player } }
+            EEE_stellar_election_randomness = yes
+        }
+        if = {
+            limit = { NOT = { has_country_flag = EEE_red_game_player } }
+            EEE_red_election_randomness = yes
+        }
+        if = {
+            limit = { NOT = { has_country_flag = EEE_tranquil_game_player } }
+            EEE_tranquil_election_randomness = yes
+        }
+    }
+}
+
+EEE_confederation_popularity_decay = {
+    if = {
+        limit = {
+            has_country_flag = EEE_stellar_game_player
+            check_variable = { EEE_stellar_note_popularity > 0 }
+        }
+        add_to_variable = { EEE_stellar_note_popularity = -0.5 }
+        add_to_variable = { EEE_red_dusk_popularity = 0.25 }
+        add_to_variable = { EEE_tranquil_serenade_popularity = 0.25 }
+        clamp_variable = {
+            var = EEE_stellar_note_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_red_dusk_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_tranquil_serenade_popularity
+            max = 100
+            min = 0
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = EEE_red_game_player
+            check_variable = { EEE_red_dusk_popularity > 0 }
+        }
+        add_to_variable = { EEE_red_dusk_popularity = -0.5 }
+        add_to_variable = { EEE_stellar_note_popularity = 0.25 }
+        add_to_variable = { EEE_tranquil_serenade_popularity = 0.25 }
+        clamp_variable = {
+            var = EEE_stellar_note_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_red_dusk_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_tranquil_serenade_popularity
+            max = 100
+            min = 0
+        }
+    }
+    if = {
+        limit = {
+            has_country_flag = EEE_tranquil_game_player
+            check_variable = { EEE_tranquil_serenade_popularity > 0 }
+        }
+        add_to_variable = { EEE_tranquil_serenade_popularity = -0.5 }
+        add_to_variable = { EEE_red_dusk_popularity = 0.25 }
+        add_to_variable = { EEE_stellar_note_popularity = 0.25 }
+        clamp_variable = {
+            var = EEE_stellar_note_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_red_dusk_popularity
+            max = 100
+            min = 0
+        }
+        clamp_variable = {
+            var = EEE_tranquil_serenade_popularity
+            max = 100
+            min = 0
+        }
+    }
+}
+
+#Randomness generator which makes sure that the AI doesn't do the same decision again right after the other
+EEE_tranquil_election_randomness = {
+    hidden_effect = {
+        random_list = {
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 1 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 1 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 2 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 2 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 3 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 3 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 4 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 4 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 5 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 5 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 6 }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 6 }
+            }
+            1 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_tranquil_election_randomness_variable = 7 }
+                    NOT = { has_country_flag = EEE_tranquil_election_special_used }
+                }
+                set_variable = { EEE_tranquil_election_randomness_variable = 7 }
+            }
+        }
+        country_event = {
+            id = thestral.1001
+            days = 10
+            random_days = 20
+        }
+    }
+}
+
+EEE_tranquil_random_election_activity = {
+    if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 1 } }
+        activate_mission = EEE_tranquil_organize_youth_rally_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 2 } }
+        activate_mission = EEE_tranquil_bash_COBSOCS_legacy_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 3 } }
+        activate_mission = EEE_tranquil_promise_religious_freedom_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 4 } }
+        activate_mission = EEE_tranquil_listen_to_tribal_concerns_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 5 } }
+        activate_mission = EEE_tranquil_critique_moonspeaker_lackeys_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 6 } }
+        activate_mission = EEE_tranquil_widespread_anti_communist_campaign_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_tranquil_election_randomness_variable = 7 } }
+        activate_mission = EEE_tranquil_point_to_shadow_ruler_mission
+    }
+}
+
+EEE_red_election_randomness = {
+    hidden_effect = {
+        random_list = {
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 1 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 1 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 2 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 2 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 3 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 3 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 4 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 4 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 5 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 5 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 6 }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 6 }
+            }
+            1 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_red_election_randomness_variable = 7 }
+                    NOT = { has_country_flag = EEE_red_election_special_used }
+                }
+                set_variable = { EEE_red_election_randomness_variable = 7 }
+            }
+        }
+        country_event = {
+            id = thestral.1002
+            days = 10
+            random_days = 20
+        }
+    }
+}
+
+EEE_red_random_election_activity = {
+    if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 1 } }
+        activate_mission = EEE_red_host_workers_rally_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 2 } }
+        activate_mission = EEE_red_sway_moonspeaker_member_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 3 } }
+        activate_mission = EEE_red_expose_moonspeaker_failings_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 4 } }
+        activate_mission = EEE_red_promote_rapid_infrastructure_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 5 } }
+        activate_mission = EEE_red_volunteer_reconstruction_workers_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 6 } }
+        activate_mission = EEE_red_reveal_council_lies_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_red_election_randomness_variable = 7 } }
+        activate_mission = EEE_red_organize_national_strike_mission
+    }
+}
+
+EEE_stellar_election_randomness = {
+    hidden_effect = {
+        random_list = {
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 1 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 1 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 2 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 2 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 3 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 3 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 4 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 4 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 5 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 5 }
+            }
+            2 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 6 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 6 }
+            }
+            1 = {
+                modifier = {
+                    factor = 0
+                    check_variable = { EEE_stellar_election_randomness_variable = 7 }
+                    check_variable = { EEE_libel_and_slander < 4 }
+                }
+                set_variable = { EEE_stellar_election_randomness_variable = 7 }
+            }
+        }
+        country_event = {
+            id = thestral.1003
+            days = 10
+            random_days = 20
+        }
+    }
+}
+
+EEE_stellar_random_election_activity = {
+    if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 1 } }
+        activate_mission = EEE_stellar_host_religious_rally_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 2 } }
+        activate_mission = EEE_stellar_promise_union_privileges_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 3 } }
+        activate_mission = EEE_stellar_highlight_history_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 4 } }
+        activate_mission = EEE_stellar_visit_distant_tribes_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 5 } }
+        activate_mission = EEE_stellar_guarantee_safety_reforms_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 6 } }
+        activate_mission = EEE_stellar_meet_with_city_leaders_mission
+    }
+    else_if = {
+        limit = { check_variable = { EEE_stellar_election_randomness_variable = 7 } }
+        activate_mission = EEE_stellar_smear_opponents_mission
+    }
+}
+
+EEE_calculate_confederation_popularity_change = {
+    add_to_variable = { EEE_stellar_note_popularity = EEE_stellar_popularity_change } #Temp variable added
+    add_to_variable = { EEE_tranquil_serenade_popularity = EEE_tranquil_popularity_change }
+    add_to_variable = { EEE_red_dusk_popularity = EEE_red_popularity_change }
+    #set_temp_variable = { EEE_stellar_pre_clamp_popularity = EEE_stellar_note_popularity } #Edge case temp variables. Unimplemented right now, as no final decision on whether to allow cases where all three candidates could be at 0% or 100%, due to current logic
+    #set_temp_variable = { EEE_tranquil_pre_clamp_popularity = EEE_tranquil_serenade_popularity } #This would take the final totals before clamping, then have the clamped variables subtracted from them
+    #set_temp_variable = { EEE_red_pre_clamp_popularity = EEE_red_dusk_popularity } #After that, they will have their remainders evenly divided between the two candidates not supported by the player, to ensure that they don't get extra popularity where they don't need to
+    clamp_variable = {
+        var = EEE_stellar_note_popularity
+        min = 0
+        max = 100
+    }
+    clamp_variable = {
+        var = EEE_tranquil_serenade_popularity
+        min = 0
+        max = 100
+    }
+    clamp_variable = {
+        var = EEE_red_dusk_popularity
+        min = 0
+        max = 100
+    }
+    subtract_from_temp_variable = { EEE_stellar_pre_clamp_popularity = EEE_stellar_note_popularity }
+    subtract_from_temp_variable = { EEE_tranquil_pre_clamp_popularity = EEE_tranquil_serenade_popularity }
+    subtract_from_temp_variable = { EEE_red_pre_clamp_popularity = EEE_red_dusk_popularity }
+    #if = {
+    #    limit = {
+    #        NOT = { check_variable = { EEE_stellar_pre_clamp_popularity = 0 } }
+    #    }
+    #    divide_temp_variable = { EEE_stellar_pre_clamp_popularity = 2 }
+    #    subtract_from_temp_variable = { EEE_tranquil_serenade_popularity = EEE_stellar_pre_clamp_popularity }
+    #    subtract_from_temp_variable = { EEE_red_dusk_popularity = EEE_stellar_pre_clamp_popularity }
+    #}
+    #if = {
+    #    limit = {
+    #        NOT = { check_variable = { EEE_tranquil_pre_clamp_popularity = 0 } }
+    #    }
+    #    divide_temp_variable = { EEE_tranquil_pre_clamp_popularity = 2 }
+    #    subtract_from_temp_variable = { EEE_stellar_note_popularity = EEE_stellar_pre_clamp_popularity }
+    #    subtract_from_temp_variable = { EEE_red_dusk_popularity = EEE_stellar_pre_clamp_popularity }
+    #}
+    #if = {
+    #    limit = {
+    #        NOT = { check_variable = { EEE_red_pre_clamp_popularity = 0 } }
+    #    }
+    #    divide_temp_variable = { EEE_red_pre_clamp_popularity = 2 }
+    #    subtract_from_temp_variable = { EEE_tranquil_serenade_popularity = EEE_stellar_pre_clamp_popularity }
+    #    subtract_from_temp_variable = { EEE_stellar_note_popularity = EEE_stellar_pre_clamp_popularity }
+    #}
+    if = {
+        limit = {
+            check_variable = { EEE_stellar_popularity_change > 0 }
+        }
+        custom_effect_tooltip = EEE_stellar_popularity_gain_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_stellar_popularity_loss_tt
+    }
+    if = {
+        limit = {
+            check_variable = { EEE_tranquil_popularity_change > 0 }
+        }
+        custom_effect_tooltip = EEE_tranquil_popularity_gain_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_tranquil_popularity_loss_tt
+    }
+    if = {
+        limit = {
+            check_variable = { EEE_red_popularity_change > 0 }
+        }
+        custom_effect_tooltip = EEE_red_popularity_gain_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_red_popularity_loss_tt
+    }
+}
+
+###Should all check to make sure they can be met
+EEE_sacrifice_state_pop = {
+    add_stability = -0.05
+    add_manpower = -10000
+    save_current_manpower = yes
+    random_state = {
+        limit = {
+            is_owned_and_controlled_by = ROOT
+            NOT = { has_state_flag = EEE_bored_goddess }
+            state_population > 35000
+        }
+        add_manpower = -25000
+        set_state_flag = EEE_bored_goddess
+    }
+    set_temp_variable = { EEE_doom_change = -5 }
+    EEE_calculate_doom_change = yes
+    restore_previous_manpower = yes
+}
+
+EEE_sacrifice_prisoners_effect = {
+    add_stability = -0.05
+    add_to_variable = { EEE_ezmetzli_prisoners = -25000 }
+    custom_effect_tooltip = EEE_prisoners_sacrificed_tt
+    set_country_flag = {
+        flag = EEE_ezmetzli_prisoner_sacrifice_cooldown
+        days = 90
+        value = 1
+    }
+    set_temp_variable = { EEE_doom_change = -5 }
+    EEE_calculate_doom_change = yes
+}
+
+EEE_sacrifice_divisions_effect = { #Could be abused by making 5 1k divisions. Will have to look at options for preventing that
+    add_manpower = -35000
+    add_war_support = -0.05
+    random_country_division = {
+        destroy_unit = yes
+    }
+    random_country_division = {
+        destroy_unit = yes
+    }
+    random_country_division = {
+        destroy_unit = yes
+    }
+    set_country_flag = {
+        flag = EEE_ezmetzli_soldier_sacrifice_cooldown
+        days = 90
+        value = 1
+    }
+    set_temp_variable = { EEE_doom_change = -10 }
+    EEE_calculate_doom_change = yes
+}
+
+EEE_sacrifice_character_effect = { #Immune characters are Gushing, Nocturne, Stellar, Waning, Moonlight, Moonlight and Waning, Tranquil, Red Dusk, and any character not visible while the country is led by the Ezmetzli
+    add_political_power = -100
+    random_character = {
+        limit = {
+            NOT = { has_character_flag = EEE_immune_to_sacrifice }
+        }
+        retire = yes
+    }
+    set_country_flag = {
+        flag = EEE_ezmetzli_character_sacrifice_cooldown
+        days = 180
+        value = 1
+    }
+    set_temp_variable = { EEE_doom_change = -20 }
+    EEE_calculate_doom_change = yes
+}
+
+EEE_calculate_doom_change = {
+    add_to_variable = { EEE_clock_is_ticking_gushing = EEE_doom_change } #Temp variable added
+    clamp_variable = {
+        var = EEE_clock_is_ticking_gushing
+        min = EEE_doom_min
+        max = EEE_doom_max
+    }
+    if = {
+        limit = {
+            check_variable = { EEE_doom_change < 0 }
+        }
+        custom_effect_tooltip = EEE_doom_change_loss_tt
+    }
+    else = {
+        custom_effect_tooltip = EEE_doom_change_gain_tt
+    }
+}
