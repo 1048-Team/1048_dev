@@ -1,0 +1,82 @@
+raiding_category = {
+	icon = GFX_decision_category_infiltration
+
+	allowed = {
+		OR = {
+			original_tag = LNS
+			original_tag = MNC
+			original_tag = FIR
+			original_tag = BAN
+			original_tag = GFF
+			original_tag = GRY
+			original_tag = SIC
+			original_tag = OLV
+			original_tag = HEL
+		}
+	}
+
+	visible = {
+		OR = {
+			AND = {
+				original_tag = GFF
+				NOT = {
+					has_government = democratic
+					has_government = neutrality
+				}
+			}
+			AND = {
+				original_tag = FIR
+				has_completed_focus = FIR_raids
+				NOT = {
+					has_government = democratic
+					has_government = communism
+				}
+			}
+			AND = {
+				original_tag = MNC
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+					AND = {
+						has_government = communism
+						has_completed_focus = MNC_back_to_raiding
+					}
+				}
+			}
+			AND = {
+				original_tag = LNS
+				has_country_flag = LNS_bandit_takeover
+				has_government = fascism
+			}
+			AND = {
+				original_tag = BAN
+				has_government = fascism
+				NOT = { has_country_flag = BAN_civil_war_started }
+			}
+			AND = {
+				original_tag = SIC
+				has_government = fascism
+				has_completed_focus = SIC_blood_for_angry
+			}
+			AND = {
+				original_tag = OLV
+				OR = {
+					AND = {
+						has_government = fascism
+						has_completed_focus = OLV_return_to_tradition
+					}
+					has_country_flag = OLV_bandit
+					has_country_flag = OLV_viking
+				}
+			}
+			AND = {
+				original_tag = HEL
+				has_country_flag = HEL_banditry_unlocked
+			}
+		}
+	}
+	
+	  priority = {
+        base = 125
+    }
+}
