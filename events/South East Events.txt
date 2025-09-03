@@ -1013,7 +1013,9 @@ country_event = { #The current leader of Baltimare is informed of an incursion b
 	
 	option = { #Won't somepony do SOMETHING?
 		name = southeast.600.a
-		MTS = {
+		custom_effect_tooltip = BAL_remain_unburned_tt
+		hidden_effect = {
+			MTS = {
 				transfer_state = 27
 				transfer_state = 28
 				transfer_state = 84
@@ -1031,20 +1033,62 @@ country_event = { #The current leader of Baltimare is informed of an incursion b
 					load_oob = "MTS_1048_naval_legacy"
 				}
 			}
-		MTS = {
-			EQS_Scorched_Earth = {
-				add_country_leader_role = {
-					promote_leader = yes
-					
-					country_leader = {
-						expire = "1965.1.1"
-						ideology = solarism
-						desc = POLITICS_SCORCHED_EARTH_1048_DESC
-						traits = {
-							warrior_ascetic
+			MTS = {
+				EQS_Scorched_Earth = {
+					add_country_leader_role = {
+						promote_leader = yes
+
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = solarism
+							desc = POLITICS_SCORCHED_EARTH_1048_DESC
+							traits = {
+								warrior_ascetic
+							}
 						}
 					}
 				}
+			}
+		}
+	}
+	option = { #Maybe there's a chance to join them...
+		name = southeast.600.b
+		custom_effect_tooltip = BAL_burn_some_battos_tt
+		hidden_effect = {
+			MTS = {
+				transfer_state = 27
+				transfer_state = 28
+				transfer_state = 84
+				add_state_core = 84
+				add_state_core = 28
+				add_state_core = 27
+				load_oob = "MTS_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "MTS_1048_naval"
+				}
+				else = {
+					load_oob = "MTS_1048_naval_legacy"
+				}
+			}
+			MTS = {
+				EQS_Scorched_Earth = {
+					add_country_leader_role = {
+						promote_leader = yes
+
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = solarism
+							desc = POLITICS_SCORCHED_EARTH_1048_DESC
+							traits = {
+								warrior_ascetic
+							}
+						}
+					}
+				}
+				change_tag_from = ROOT
 			}
 		}
 	}
