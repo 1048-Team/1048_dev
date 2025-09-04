@@ -1,0 +1,715 @@
+FH_demo_south_east_skeleton_category = {
+    EEE_NEI_powder_keg = {
+        available = {
+            date > 1049.6.1
+        }
+        visible = {
+            OR = {
+                tag = EEE
+                tag = NEI
+            }
+            NOT = {
+                OR = {
+                    NEI = { has_country_flag = FH_demo_chose_war }
+                    EEE = { has_country_flag = FH_demo_chose_war }
+                }
+            }
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = NEI
+        war_with_on_complete = EEE
+        complete_effect = {
+            set_country_flag = FH_demo_chose_war
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove EEE_NEI_powder_keg"
+            if = {
+                limit = {
+                    tag = NEI
+                }
+                declare_war_on = {
+                    target = EEE
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    tag = EEE
+                }
+                declare_war_on = {
+                    target = NEI
+                    type = annex_everything
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1049.8.1
+                factor = 0
+            }
+        }
+    }
+    EEE_reform_militia = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        cost = 50 #Placeholder
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
+            remove_ideas = EEE_tribal_militias
+        }
+    }
+    EEE_national_reform = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_national_reform"
+            remove_ideas = EEE_tribal_politics
+        }
+    }
+    EEE_industrial_boons = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        cost = 100
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_industrial_boons"
+            remove_ideas = EEE_tribal_holdings
+        }
+    }
+    EEE_eliminating_the_cults = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+            has_manpower > 70000
+            has_stability > 0.6
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
+            add_manpower = -28395
+            add_stability = -0.15
+            remove_ideas = EEE_night_whispering
+        }
+    }
+    BAL_civilize_tribals = {
+        available = {
+            date > 1049.11.1
+        }
+        visible = {
+            tag = BAL
+            OR = {
+                country_exists = EEE
+                country_exists = NEI
+            }
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = EEE
+        war_with_on_complete = NEI
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_civilize_tribals"
+            declare_war_on = {
+                target = EEE
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NEI
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1050.3.1
+                factor = 0
+            }
+        }
+    }
+    BAL_reclaim_new_horseleans = {
+        available = {
+            date > 1050.6.1
+        }
+        visible = {
+            tag = BAL
+            country_exists = MTS
+        }
+        days_remove = 7
+        war_with_on_complete = MTS
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_reclaim_new_horseleans"
+            declare_war_on = {
+                target = MTS
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    BAL_finish_restructuring = {
+        available = {
+            date > 1050.9.1
+        }
+        visible = {
+            tag = BAL
+            OR = {
+                country_exists = STB
+                country_exists = NID
+                country_exists = NRP
+            }
+        }
+        days_remove = 14
+        war_with_on_complete = STB
+        war_with_on_complete = NID
+        war_with_on_complete = NRP
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_finish_restructuring"
+            declare_war_on = {
+                tag = STB
+                type = annex_everything
+            }
+            declare_war_on = {
+                tag = NID
+                type = annex_everything
+            }
+            declare_war_on = {
+                tag = NRP
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    SPF_expand_hoards = {
+        available = {
+            date > 1049.8.1
+        }
+        visible = {
+            tag = SPF
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = CLI
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove SPF_expand_hoards"
+            declare_war_on = {
+                target = CLI
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    CLI_liberate_the_islands = {
+        available = {
+            date > 1049.2.1
+        }
+        visible = {
+            tag = CLI
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = SPF
+        war_with_on_complete = NID
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CLI_liberate_the_islands"
+            declare_war_on = {
+                target = SPF
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NID
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    STB_smack_insults = {
+        available = {
+            date > 1050.1.1
+        }
+        visible = {
+            tag = STB
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = NRP
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_smack_insults"
+            declare_war_on = {
+                target = NRP
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1050.4.1
+                factor = 0
+            }
+        }
+    }
+    STB_take_backsies = {
+        available = {
+            date = 1050.4.1
+        }
+        visible = {
+            tag = STB
+            country_exists = NID
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = NID
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_take_backsies"
+            declare_war_on = {
+                target = NID
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1050.7.1
+                factor = 0
+            }
+        }
+    }
+    STB_securing_glory = {
+        available = {
+            date = 1050.10.1
+        }
+        visible = {
+            OR = {
+                tag = STB
+                tag = NRP
+            }
+            OR = {
+                country_exists = EEE
+                country_exists = NEI
+            }
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = EEE
+        war_with_on_complete = NEI
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_securing_glory"
+            declare_war_on = {
+                target = EEE
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NEI
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1051.1.1
+                factor = 0
+            }
+        }
+    }
+    STB_claiming_the_crown = {
+        available = {
+            date = 1051.3.1
+        }
+        visible = {
+            OR = {
+                tag = STB
+                tag = NRP
+            }
+            OR = {
+                country_exists = MTS
+                country_exists = BAL
+            }
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = BAL
+        war_with_on_complete = MTS
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_claiming_the_crown"
+            declare_war_on = {
+                target = MTS
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = BAL
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1051.5.1
+                factor = 0
+            }
+        }
+    }
+    NRP_install_pesticide = {
+        available = {
+            date = 1049.9.1
+        }
+        visible = {
+            tag = NRP
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = NID
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NRP_install_pesticide"
+            declare_war_on = {
+                target = NID
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1050.1.1
+                factor = 0
+            }
+        }
+    }
+    NRP_dictatorship_toppling = {
+        available = {
+            date = 1050.1.1
+        }
+        visible = {
+            tag = NRP
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = NRP
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NRP_dictatorship_toppling"
+            declare_war_on = {
+                target = STB
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    NID_solidify_assets = {
+        available = {
+            date > 1049.11.1
+        }
+        visible = {
+            tag = NID
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = SPF
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_solidify_assets"
+            declare_war_on = {
+                target = SPF
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    MTS_wipe_out_thestral_resistance = {
+        available = {
+            date > 1049.1.1
+        }
+        visible = {
+            tag = MTS
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MTS_wipe_out_thestral_resistance"
+            save_current_manpower = yes
+            84 = {
+                set_demilitarized_zone = no
+                add_manpower = -23790
+            }
+            restore_previous_manpower = yes
+            add_stability = -0.075
+            add_manpower = -1742
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    MTS_end_the_reminder = {
+        available = {
+            date > 1051.1.1
+        }
+        visible = {
+            tag = MTS
+        }
+        fire_only_once = yes
+        days_remove = 21
+        war_with_on_complete = STB
+        war_with_on_complete = NEI
+        war_with_on_complete = NID
+        war_with_on_complete = BAL
+        war_with_on_complete = CLI
+        war_with_on_complete = SPF
+        war_with_on_complete = EEE
+        war_with_on_complete = NRP
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_end_the_reminder"
+            every_country = {
+                limit = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+                ROOT = {
+                    declare_war_on = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    south_east_recore_jungle = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+            EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+            EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        fire_only_once = yes
+        cost = 75
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_jungle"
+            every_state = {
+                limit = {
+                    OR = {
+                        is_core_of = EEE
+                        is_core_of = NEI
+                    }
+                }
+                add_core_of = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    south_east_recore_southeastern_end = {
+        available = {
+            STB = { all_cores_owned_by_ROOT_or_subject = yes }
+            NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            STB = { all_cores_owned_by_ROOT_or_subject = yes }
+            NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        fire_only_once = yes
+        cost = 75
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_southeastern_end"
+            every_state = {
+                limit = {
+                    OR = {
+                        is_core_of = STB
+                        is_core_of = NRP
+                    }
+                }
+                add_core_of = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    south_east_recore_northwest_end = {
+        available = {
+            MTS = { all_cores_owned_by_ROOT_or_subject = yes }
+            BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            MTS = { all_cores_owned_by_ROOT_or_subject = yes }
+            BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        fire_only_once = yes
+        cost = 75
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_northwest_end"
+            every_state = {
+                limit = {
+                    OR = {
+                        is_core_of = MTS
+                        is_core_of = BAL
+                    }
+                }
+                add_core_of = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    south_east_recore_islands = {
+        available = {
+            NID = { all_cores_owned_by_ROOT_or_subject = yes }
+            CLI = { all_cores_owned_by_ROOT_or_subject = yes }
+            SPF = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            NID = { all_cores_owned_by_ROOT_or_subject = yes }
+            CLI = { all_cores_owned_by_ROOT_or_subject = yes }
+            SPF = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        fire_only_once = yes
+        cost = 75
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_islands"
+            every_state = {
+                limit = {
+                    OR = {
+                        is_core_of = NID
+                        is_core_of = CLI
+                        is_core_of = SPF
+                    }
+                }
+                add_core_of = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    south_east_overlooked_isles = {
+        available = {
+            custom_trigger_tooltip = {
+                tooltip = BAL_owns_all_peninsula_tt
+                MTS = { all_cores_owned_by_ROOT_or_subject = yes }
+                BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+                EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+                NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+                NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+                STB = { all_cores_owned_by_ROOT_or_subject = yes }
+                221 = {
+                    OR = {
+                        CONTROLLER = {
+                            tag = ROOT
+                            is_subject_of = ROOT
+                        }
+                    }
+                }
+            }
+        }
+        visible = {
+            MTS = { all_cores_owned_by_ROOT_or_subject = yes }
+            BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+            EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+            NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+            STB = { all_cores_owned_by_ROOT_or_subject = yes }
+            221 = {
+                OR = {
+                    CONTROLLER = {
+                        tag = ROOT
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            OR = {
+                country_exists = CLI
+                country_exists = SPF
+            }
+            NOT = {
+                tag = CLI
+                tag = SPF
+                date > 1052.1.1
+            }
+        }
+        fire_only_once = yes
+        days_remove = 7
+        war_with_on_complete = CLI
+        war_with_on_complete = SPF
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove south_east_overlooked_isles"
+            declare_war_on = {
+                target = CLI
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = SPF
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    south_east_get_on_with_it = {
+        visible = {
+            date > 1052.1.1
+        }
+        fire_only_once = yes
+        days_remove = 7
+        war_with_on_complete = BAL
+        war_with_on_complete = MTS
+        war_with_on_complete = STB
+        war_with_on_complete = NID
+        war_with_on_complete = NRP
+        war_with_on_complete = NEI
+        war_with_on_complete = EEE
+        war_with_on_complete = CLI
+        war_with_on_complete = SPF
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove south_east_get_on_with_it"
+            every_country = {
+                limit = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+                ROOT = {
+                    declare_war_on = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+}
