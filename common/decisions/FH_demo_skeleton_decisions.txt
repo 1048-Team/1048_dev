@@ -55,6 +55,9 @@ FH_demo_south_east_skeleton_category = {
         available = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
         }
+        visible = {
+            tag = EEE
+        }
         cost = 50 #Placeholder
         fire_only_once = yes
         complete_effect = {
@@ -66,6 +69,9 @@ FH_demo_south_east_skeleton_category = {
         available = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
         }
+        visible = {
+            tag = EEE
+        }
         cost = 75
         fire_only_once = yes
         complete_effect = {
@@ -76,6 +82,9 @@ FH_demo_south_east_skeleton_category = {
     EEE_industrial_boons = {
         available = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
         }
         cost = 100
         fire_only_once = yes
@@ -89,6 +98,9 @@ FH_demo_south_east_skeleton_category = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
             has_manpower > 70000
             has_stability > 0.6
+        }
+        visible = {
+            tag = EEE
         }
         cost = 75
         fire_only_once = yes
@@ -197,6 +209,56 @@ FH_demo_south_east_skeleton_category = {
             }
         }
     }
+    BAl_party_purge = {
+        available = {
+            date > 1049.3.1
+        }
+        visible = {
+            tag = BAL
+        }
+        cost = 50
+        days_remove = 60
+        modifier = {
+            political_power_gain = -0.35
+            stability_weekly_factor = -0.02
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAl_party_purge"
+            remove_ideas = BAL_party_conflict
+        }
+    }
+    BAL_restructure_quotas = {
+        available = {
+            date > 1050.1.1
+            num_of_civilian_factories > 15
+        }
+        visible = {
+            tag = BAL
+        }
+        cost = 100
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BAL_restructure_quotas"
+            remove_ideas = BAL_collapsed_economy
+        }
+    }
+    BAL_forced_recognition = {
+        available = {
+            NOT = {
+                any_other_country = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+            }
+        }
+        visible = {
+            tag = BAL
+        }
+        cost = 150
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BAL_forced_recognition"
+            remove_ideas = BAL_no_recognition
+        }
+    }
     SPF_expand_hoards = {
         available = {
             date > 1049.8.1
@@ -271,7 +333,7 @@ FH_demo_south_east_skeleton_category = {
     }
     STB_take_backsies = {
         available = {
-            date = 1050.4.1
+            date > 1050.4.1
         }
         visible = {
             tag = STB
@@ -297,7 +359,7 @@ FH_demo_south_east_skeleton_category = {
     }
     STB_securing_glory = {
         available = {
-            date = 1050.10.1
+            date > 1050.10.1
         }
         visible = {
             OR = {
@@ -334,7 +396,7 @@ FH_demo_south_east_skeleton_category = {
     }
     STB_claiming_the_crown = {
         available = {
-            date = 1051.3.1
+            date > 1051.3.1
         }
         visible = {
             OR = {
@@ -367,6 +429,35 @@ FH_demo_south_east_skeleton_category = {
                 date < 1051.5.1
                 factor = 0
             }
+        }
+    }
+    STB_refocus_efforts = {
+        available = {
+            date > 1049.2.1
+        }
+        visible = {
+            tag = STB
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STB_refocus_efforts"
+            remove_ideas = STB_industrial_economy
+        }
+    }
+    STB_underwhelm_results = {
+        available = {
+            date > 1049.5.1
+            controls_state = 33
+        }
+        visible = {
+            tag = STB
+        }
+        cost = 100
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STB_underwhelm_results"
+            remove_ideas = STB_overwhelmed_militia
         }
     }
     NRP_install_pesticide = {
@@ -440,6 +531,34 @@ FH_demo_south_east_skeleton_category = {
             factor = 10
         }
     }
+    NID_pay_down_squabbles = {
+        available = {
+            date > 1049.6.1
+        }
+        visible = {
+            tag = NID
+        }
+        cost = 125
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision NID_pay_down_squabbles"
+            remove_ideas = NID_merc_prt_tensions
+        }
+    }
+    NID_shirk_restrictions = {
+        available = {
+            date > 1049.6.1
+        }
+        visible = {
+            tag = NID
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision NID_shirk_restrictions"
+            remove_ideas = NID_no_aviation_industry_idea
+        }
+    }
     MTS_wipe_out_thestral_resistance = {
         available = {
             date > 1049.1.1
@@ -457,10 +576,77 @@ FH_demo_south_east_skeleton_category = {
             }
             restore_previous_manpower = yes
             add_stability = -0.075
-            add_manpower = -1742
+            add_war_support = -0.05
         }
         ai_will_do = {
             factor = 10
+        }
+    }
+    MTS_micro_compensation = {
+        available = {
+            date > 1049.6.1
+            num_of_civilian_factories > 7
+        }
+        visible = {
+            tag = MTS
+        }
+        fire_only_once = yes
+        cost = 75
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MTS_micro_compensation"
+            remove_ideas = MTS_miniscule_industry
+        }
+    }
+    MTS_reject_rejection = {
+        available = {
+            date > 1049.6.1
+            has_idea = extensive_conscription
+            num_divisions > 12
+        }
+        visible = {
+            tag = MTS
+        }
+        cost = 100
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MTS_reject_rejection"
+            remove_ideas = MTS_corrupted_conscripts
+        }
+    }
+    MTS_acquire_sunscreen = {
+        available = {
+            date > 1049.6.1
+            has_idea = extensive_conscription
+            has_war_support > 0.45
+        }
+        visible = {
+            tag = MTS
+        }
+        cost = 75 #XP later
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MTS_acquire_sunscreen"
+            remove_ideas = MTS_ill_adapted_heat_tolerance
+        }
+    }
+    MTS_forgiven_ordo = {
+        available = {
+            NOT = {
+                any_other_country = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+            }
+        }
+        visible = {
+            tag = MTS
+        }
+        cost = 150
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MTS_forgiven_ordo"
+            remove_ideas = MTS_unsanctioned_ordo
+            set_cosmetic_tag = MTS_SOL_puppet
         }
     }
     MTS_end_the_reminder = {
