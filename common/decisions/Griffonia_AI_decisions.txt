@@ -480,6 +480,100 @@ GRI_AI_decision_category = {
             }
         }
     }
+    GRI_kill_FAT = {
+        available = {
+            date > 1049.5.1
+        }
+        days_remove = 30
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = FAT
+        remove_effect = {
+            declare_war_on = {
+                target = FAT
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+    GRI_kill_TRD = {
+        available = {
+            date > 1051.11.1
+        }
+        days_remove = 30
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = TRD
+        remove_effect = {
+            declare_war_on = {
+                target = TRD
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+    GRI_integrate_NTR = {
+        available = {
+            date > 1052.06.1
+            is_subject = no
+            NTR = {
+                is_subject_of = GRI
+            }
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_state = {
+                limit = {
+                    is_core_of = NTR
+                }
+                add_core_of = GRI
+            }
+            annex_country = {
+                target = NTR
+                transfer_troops = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+    GRI_integrate_BOI = {
+        available = {
+            date > 1052.12.1
+            is_subject = no
+            BOI = {
+                is_subject_of = GRI
+            }
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_state = {
+                limit = {
+                    is_core_of = BOI
+                }
+                add_core_of = GRI
+            }
+            annex_country = {
+                target = BOI
+                transfer_troops = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
 }
 
 RCT_AI_decision_category = {
@@ -672,6 +766,259 @@ RCT_AI_decision_category = {
                 white_peace = BAR
                 white_peace = NIM
             }
+        }
+    }
+    RCT_integrate_NIM = {
+        available = {
+            date > 1050.05.1
+            is_subject = no
+            NIM = {
+                is_subject_of = RCT
+            }
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_state = {
+                limit = {
+                    is_core_of = NIM
+                }
+                add_core_of = RCT
+            }
+            annex_country = {
+                target = NIM
+                transfer_troops = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+}
+
+BAK_AI_decision_category = {
+    BAK_kill_FBK = {
+        available = {
+            date > 1048.04.1
+        }
+        days_remove = 10
+        cost = 10
+        fire_only_once = yes
+        war_with_on_remove = FBK
+        complete_effect = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 2
+            }
+            add_offsite_building = {
+                type = arms_factory
+                level = 2
+            }
+        }
+        remove_effect = {
+            declare_war_on = {
+                target = FBK
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    BAK_core_FBK = {
+        available = {
+            date > 1050.01.1
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_owned_state = {
+                limit = {
+                    is_core_of = FBK
+                }
+                add_core_of = BAK
+            }
+            hidden_effect = {
+            two_random_arms_factory = yes
+            two_random_arms_factory = yes
+            two_random_arms_factory = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+}
+
+HLR_AI_decision_category = {
+    HLR_posture_north = {
+        available = {
+            GRI = { has_war = yes }
+        }
+        days_remove = 15
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            573 = {
+                transfer_state_to = HLR
+                remove_core_of = NTR
+                add_core_of = HLR
+            }
+            602 = {
+                transfer_state_to = HLR
+                remove_core_of = NTR
+                add_core_of = HLR
+            }
+            574 = {
+                transfer_state_to = HLR
+                remove_core_of = NTR
+                add_core_of = HLR
+            }
+            hidden_effect = {
+            two_random_industrial_complex = yes
+            two_random_industrial_complex = yes
+            two_random_industrial_complex = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    HLR_ally_BAK = {
+        available = {
+            BAK = { exists = yes }
+            date > 1050.03.3
+        }
+        days_remove = 15
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            create_faction = "Harmony-Pact"
+            add_to_faction = BAK
+            add_opinion_modifier = {
+                target = BAK
+                modifier = huge_increase
+            }
+            reverse_add_opinion_modifier = {
+                target = BAK
+                modifier = huge_increase
+            }
+            add_ai_strategy = {
+                type = alliance
+                id = BAK
+                value = 200
+            }
+            two_random_industrial_complex = yes
+            two_random_dockyards = yes
+            BAK = {
+                add_ai_strategy = {
+                    type = alliance
+                    id = HLR
+                    value = 200
+                }
+                two_random_industrial_complex = yes
+                two_random_dockyards = yes
+            }
+            
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+
+    HLR_finish_FBK = {
+        available = {
+            FBK = { 
+                exists = yes 
+                has_country_flag = FBK_expelled_BAK_flag
+            }
+            is_in_faction_with = BAK
+        }
+        days_remove = 50
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = FBK
+        remove_effect = {
+            add_state_claim = 639
+            add_state_claim = 640
+            add_state_claim = 643
+            add_state_claim = 642
+            add_state_core = 639
+            add_state_core = 640
+            add_state_core = 643
+            add_state_core = 642
+            every_state = {
+                limit = {
+                    is_core_of = FBK
+                    NOT = { is_claimed_by = HLR }
+                }
+                add_claim_by = BAK
+            }
+            declare_war_on = {
+                target = FBK
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    HLR_posture_north_2 = {
+        available = {
+            GRI = { has_war = yes }
+            date > 1051.09.1
+        }
+        days_remove = 15
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            459 = {
+                transfer_state_to = HLR
+                add_core_of = HLR
+            }
+            1226 = {
+                transfer_state_to = HLR
+                add_core_of = HLR
+            }
+            476 = {
+                transfer_state_to = HLR
+                add_core_of = HLR
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+}
+
+FBK_AI_decision_category = {
+    FBK_expel_BAK = {
+        available = {
+            has_war_with = BAK
+            controls_state = 517
+            controls_state = 455
+            controls_state = 603
+        }
+        days_remove = 5
+        cost = 5
+        fire_only_once = yes
+        remove_effect = {
+            white_peace = BAK
+            transfer_state = 517
+            set_country_flag = FBK_expelled_BAK_flag
+        }
+
+        ai_will_do = {
+            base = 100
         }
     }
 }
