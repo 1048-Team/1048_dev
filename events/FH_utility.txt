@@ -95,241 +95,48 @@ country_event = { #YAH wars SMH for good
 	}
 }
 
-country_event = { #MWR leaves STG
-	id = equestria_activity.4
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.4"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = MWR
-		exists = yes
-		has_war = no
-		date > 1050.7.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		leave_faction = yes
-		OVERLORD = {
-			end_puppet = ROOT
-		}
-		set_politics = {
-			ruling_party = fascism
-			elections_allowed = no
-		}
-		add_popularity = {
-			ideology = fascism
-			popularity = 0.33
-		}
-		random_list = {
-			35 = {
-				STG = {
-					declare_war_on = {
-						target = MWR
-						type = puppet_wargoal_focus
-					}
-				}
-			}
-			65 = { 
-				remove_from_array = { global.shield_of_steel = ROOT.id }
-			}
-		}
-	}
-}
-
-country_event = { #NVC eats GRF
-	id = equestria_activity.5
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.5"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = NVC
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1051.5.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = GRF
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #VRG wars NVC and GRF
-	id = equestria_activity.6
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.6"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = VRG
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1051.6.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = NVC
-			type = annex_everything
-		}
-		IF = {
-			limit = {
-				country_exists = GRF
-			}
-			declare_war_on = {
-				target = GRF
-				type = annex_everything
-			}
-		}
-	}
-}
-
-country_event = { #NVC or VRG wars MWR
-	id = equestria_activity.7
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.7"}
-	hidden = yes
-	
-	trigger = {
-		OR = {
-			original_tag = NVC
-			original_tag = VRG
-		}
-		exists = yes
-		has_war = no
-		is_subject = no
-		country_exists = MWR
-		owns_state = 1217
-		date > 1052.8.10
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = MWR
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #NVC or VRG wars SCH and JGR
-	id = equestria_activity.8
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.8"}
-	hidden = yes
-	
-	trigger = {
-		OR = {
-			original_tag = NVC
-			original_tag = VRG
-		}
-		exists = yes
-		has_war = no
-		is_subject = no
-		owns_state = 1217
-		date > 1054.2.14
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		IF = {
-			limit = {
-				country_exists = SCH
-			}
-			declare_war_on = {
-				target = SCH
-				type = annex_everything
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = JGR
-			}
-			declare_war_on = {
-				target = JGR
-				type = annex_everything
-			}
-		}
-	}
-}
-
-country_event = { #NVC or VRG wars SMH and YAH
-	id = equestria_activity.9
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.9"}
-	hidden = yes
-	
-	trigger = {
-		OR = {
-			original_tag = NVC
-			original_tag = VRG
-		}
-		exists = yes
-		has_war = no
-		is_subject = no
-		owns_state = 1217
-		date > 1056.1.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		IF = {
-			limit = {
-				country_exists = SMH
-			}
-			declare_war_on = {
-				target = SMH
-				type = annex_everything
-			}
-		}
-		IF = {
-			limit = {
-				country_exists = YAH
-			}
-			declare_war_on = {
-				target = YAH
-				type = annex_everything
-			}
-		}
-	}
-}
-
-country_event = { #NVC or VRG wars CHN for core states
-	id = equestria_activity.10
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.10"}
-	hidden = yes
-	
-	trigger = {
-		OR = {
-			original_tag = NVC
-			original_tag = VRG
-		}
-		exists = yes
-		has_war = no
-		is_subject = no
-		owns_state = 1217
-		date > 1057.6.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		set_temp_variable = { GRF_core_state_owner = 1221.OWNER }
-		declare_war_on = {
-			target = var:GRF_core_state_owner
-			type = take_core_state
-		}
-	}
-}
+#country_event = { #MWR leaves STG
+#	id = equestria_activity.4
+#	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.4"}
+#	hidden = yes
+#
+#	trigger = {
+#		original_tag = MWR
+#		exists = yes
+#		has_war = no
+#		date > 1050.7.1
+#	}
+#
+#	fire_only_once = yes
+#
+#	option = {
+#		leave_faction = yes
+#		OVERLORD = {
+#			end_puppet = ROOT
+#		}
+#		set_politics = {
+#			ruling_party = fascism
+#			elections_allowed = no
+#		}
+#		add_popularity = {
+#			ideology = fascism
+#			popularity = 0.33
+#		}
+#		random_list = {
+#			35 = {
+#				STG = {
+#					declare_war_on = {
+#						target = MWR
+#						type = puppet_wargoal_focus
+#					}
+#				}
+#			}
+#			65 = {
+#				remove_from_array = { global.shield_of_steel = ROOT.id }
+#			}
+#		}
+#	}
+#}
 
 country_event = { #WHY gets the option ot stay or leave SOL
 	id = equestria_activity.11
@@ -405,7 +212,6 @@ country_event = { #Opaline tries to coup WHY to become leader
 	
 	option = { #She be leading, bb
 		name = equestria_activity.13.a
-		set_cosmetic_tag = WHY_G5
 		WHY_Opaline_Arcana = {
 			add_country_leader_role = {
 				promote_leader = yes
@@ -428,6 +234,7 @@ country_event = { #Opaline tries to coup WHY to become leader
 			}
 			drop_cosmetic_tag = yes
 		}
+		set_cosmetic_tag = WHY_G5
 		news_event = fhequusnews.1
 		hidden_effect = {
 			country_event = {
@@ -1007,226 +814,6 @@ country_event = { #STG is fed up with AWR's crap and conquers them
 				is_core_of = AWR
 			}
 			add_core_of = STG
-		}
-	}
-}
-
-country_event = { #EEE decides to finally attack NEI because of their oppression of thestrals
-	id = equestria_activity.30
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.30"}
-	hidden = yes
-	
-	trigger = {
-		date > 1050.4.20
-		tag = EEE
-		exists = yes
-		has_war = no
-		is_subject = no
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = NEI
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #STB goes to war with NRP to get some more breathing room
-	id = equestria_activity.31
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.31"}
-	hidden = yes
-	
-	trigger = {
-		tag = STB
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1050.6.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = NRP
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #BAL attempts to take back the MTS territory it lost
-	id = equestria_activity.32
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.32"}
-	hidden = yes
-	
-	trigger = {
-		tag = BAL
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1050.7.1
-		country_exists = MTS
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = MTS
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #If MTS is already eaten or never spawned, BAL goes to war with either NEI or EEE to secure more continental power
-	id = equestria_activity.33
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.33"}
-	hidden = yes
-	
-	trigger = {
-		tag = BAL
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1050.7.1
-		NOT = { country_exists = MTS }
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		if = {
-			limit = { country_exists = EEE }
-			declare_war_on = {
-				target = EEE
-				type = annex_everything
-			}
-		}
-		if = {
-			limit = { country_exists = NEI }
-			declare_war_on = {
-				target = NEI
-				type = annex_everything
-			}
-		}
-	}
-}
-
-country_event = { #CLI goes to war with SPF to try and get more land to invade the mainland from
-	id = equestria_activity.34
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.34"}
-	hidden = yes
-	
-	trigger = {
-		tag = CLI
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1050.2.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = SPF
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #STB goes to war with NID to get their ships
-	id = equestria_activity.35
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.35"}
-	hidden = yes
-	
-	trigger = {
-		tag = STB
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1051.3.1
-		NOT = { country_exists = NRP }
-		owns_state = 33
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		declare_war_on = {
-			target = NID
-			type = annex_everything
-		}
-	}
-}
-
-country_event = { #BAL goes to war with CLI and SPF to regain their islands
-	id = equestria_activity.36
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.36"}
-	hidden = yes
-	
-	trigger = {
-		date > 1051.5.15
-		tag = BAL
-		exists = yes
-		has_war = no
-		is_subject = no
-		NOT = { country_exists = EEE }
-		NOT = { country_exists = NEI }
-		owns_state = 30
-		owns_state = 16
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		if = {
-			limit = { country_exists = SPF }
-			declare_war_on = {
-				target = SPF
-				type = annex_everything
-			}
-		}
-		if = {
-			limit = { country_exists = CLI }
-			declare_war_on = {
-				target = CLI
-				type = annex_everything
-			}
-		}
-	}
-}
-
-country_event = { #STB goes to war with BAL (or whoever controls it) to become the sole controller of the South-East
-	id = equestria_activity.37
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.37"}
-	hidden = yes
-	
-	trigger = {
-		date > 1052.6.1
-		tag = STB
-		exists = yes
-		has_war = no
-		is_subject = no
-		owns_state = 33
-		owns_state = 221
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		1214 = {
-			OWNER = {
-				ROOT = {
-					declare_war_on = {
-						target = PREV
-						type = annex_everything
-					}
-				}
-			}
 		}
 	}
 }
