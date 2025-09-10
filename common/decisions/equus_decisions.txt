@@ -90,9 +90,9 @@ form_equestria_category = {
 	reintigrating_the_southeast = {
 		available = {
 			owns_state = 1214
-			NOT = {
-				has_country_flag = SEE
-			}
+		}
+		visible = {
+			NOT = { has_country_flag = SEE }
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -224,22 +224,25 @@ form_equestria_category = {
 		}
 		fire_only_once = yes
 		highlight_states = {
-			highlight_states_trigger = {
-				is_core_of = CHN
-				is_claimed_by = ROOT
+			highlight_state_targets = {
+				state = 173
+				state = 175
+				state = 138
+				state = 137
+				state = 136
+				state = 172
+				state = 1216
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision equestria_restored"
-			every_state = {
-				limit = {
-					AND = {
-						is_core_of = CHN
-						is_claimed_by = ROOT
-					}
-				}
-				add_core_of = ROOT
-			}
+			add_state_core = 173
+			add_state_core = 175
+			add_state_core = 138
+			add_state_core = 137
+			add_state_core = 136
+			add_state_core = 172
+			add_state_core = 1216
 		}
 	}
 }
@@ -265,6 +268,14 @@ form_yakyakistan_category = {
 			}
 		}
 		fire_only_once = yes
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = {
+					array = global.YAK_territory
+					value = THIS.id
+				}
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision claim_the_throne"
 			set_country_flag = reformed_YAK
@@ -299,6 +310,17 @@ form_yakyakistan_category = {
 			has_war = no
 		}
 		fire_only_once = yes
+		highlight_states = {
+			highlight_state_targets = {
+				state = 335
+				state = 336
+				state = 337
+				state = 281
+				state = 278
+				state = 277
+				state = 342
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision integrate_old_territory"
 			add_state_core = 335
@@ -318,6 +340,14 @@ form_PLB_category = {
 			has_war = no
 		}
 		fire_only_once = yes
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = {
+					array = global.PLB_territory
+					value = THIS.id
+				}
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision reform_our_communities"
 			every_state = {
@@ -346,6 +376,17 @@ form_nova_griffonia_cetegory = {
 			AND = {
 				NOT = { original_tag = GRF }
 				NOT = { has_cosmetic_tag = GRF_EMP }
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = {
+						array = global.GRF_territory
+						value = THIS.id
+					}
+					state = 1217
+				}
 			}
 		}
 		fire_only_once = yes
@@ -381,9 +422,8 @@ form_nova_griffonia_cetegory = {
 	}
 }
 form_western_griffonian_empire_category = {
-	assert_imperial_de_jure_authority = {
+	GRF_assert_imperial_de_jure_authority = {
 		available = {
-			owns_state = 1217
 			owns_state = 281
 			owns_state = 243
 			has_war = no
@@ -392,34 +432,79 @@ form_western_griffonian_empire_category = {
 			original_tag = GRF
 			NOT = { has_country_flag = reformed_western_griffon_empire }
 		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = {
+					array = global.GRF_territory
+					value = THIS.id
+				}
+				OR = {
+					is_core_of = NVC
+					is_core_of = VRG
+				}
+			}
+		}
+		cost = 50
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision a_new_nova_griffonia"
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GRF_assert_imperial_de_jure_authority"
+			set_country_flag = GRF_first_core_expansion
 			every_state = {
 				limit = {
+					is_in_array = {
+						array = global.GRF_territory
+						value = THIS.id
+					}
 					OR = {
-						is_in_array = {
-							array = global.GRF_territory
-							value = THIS.id
-						}
-						state = 1217
+						is_core_of = NVC
+						is_core_of = VRG
 					}
 				}
 				add_core_of = ROOT
 			}
-			IF = {
+		}
+	}
+	GRF_return_the_old_colonial_borders = {
+		available = {
+			owns_state = 338
+			owns_state = 288
+			has_war = no
+		}
+		visible = {
+			original_tag = GRF
+			has_country_flag = GRF_first_core_expansion
+			NOT = { has_country_flag = reformed_western_griffon_empire }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = {
+					array = global.GRF_territory
+					value = THIS.id
+				}
+				OR = {
+					is_core_of = MWR
+					is_core_of = SCH
+				}
+			}
+		}
+		cost = 35
+		fire_only_once = yes
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GRF_return_the_old_colonial_borders"
+			every_state = {
 				limit = {
-					NOT = {
-						1217 = { is_capital = yes }
+					is_in_array = {
+						array = global.GRF_territory
+						value = THIS.id
+					}
+					OR = {
+						is_core_of = MWR
+						is_core_of = SCH
 					}
 				}
-				set_capital = { state = 1217 }
-			}
-			IF = {
-				limit = {
-					NOT = { original_tag = GRF }
-				}
-				set_cosmetic_tag = GRF_NEW
+				add_core_of = ROOT
 			}
 		}
 	}
@@ -435,6 +520,17 @@ form_western_griffonian_empire_category = {
 			owns_state = 325
 		}
 		fire_only_once = yes
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = {
+						array = global.WGE_territory
+						value = THIS.id
+					}
+					state = 1217
+				}
+			}
+		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
 			set_country_flag = reformed_western_griffon_empire
