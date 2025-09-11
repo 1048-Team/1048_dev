@@ -751,24 +751,24 @@ country_event = { #CER unites the heartlands completely with EQS's conquest
 country_event = { #AWR is couped by unhappy peasants
 	id = equestria_activity.27
 	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.27"}
-	hidden = yes
+	title = equestria_activity.27.t
+	desc = equestria_activity.27.d
 	
-	trigger = {
-		original_tag = AWR
-		date > 1050.6.20
-	}
-	mean_time_to_happen = { days = 90 }
-	fire_only_once = yes
+	is_triggered_only = yes
 	
 	option = {
-		STG = { end_puppet = AWR }
-		set_cosmetic_tag = AWR_free
-		country_event = {
-			id = equestria_activity.28
-			days = 30
-			random_days = 250
+		name = equestria_activity.27.a
+		custom_effect_tooltip = AWR_freefalling_tt
+		hidden_effect = {
+			STG = { end_puppet = AWR }
+			set_cosmetic_tag = AWR_free
+			country_event = {
+				id = equestria_activity.28
+				days = 30
+				random_days = 250
+			}
+			retire_character = AWR_Dumb_Luck
 		}
-		retire_character = AWR_Dumb_Luck
 	}
 }
 
@@ -782,39 +782,9 @@ country_event = { #AWR is couped again by unhappy soldiers or sailors
 	option = {
 		set_cosmetic_tag = AWR_doubleplusfree
 		STG = {
-			random_list = {
-				65 = {
-					country_event = {
-						id = equestria_activity.29
-						days = 200
-						random_days = 300
-					}
-				}
-				35 = { }
-			}
+			set_country_flag = STG_spurned_AWR_puppet
 		}
 		retire_character = AWR_Sheer_Skill
-	}
-}
-
-country_event = { #STG is fed up with AWR's crap and conquers them
-	id = equestria_activity.29
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.29"}
-	hidden = yes
-	
-	is_triggered_only = yes
-	
-	option = {
-		create_wargoal = {
-			type = annex_everything
-			target = AWR
-		}
-		every_state = {
-			limit = {
-				is_core_of = AWR
-			}
-			add_core_of = STG
-		}
 	}
 }
 
