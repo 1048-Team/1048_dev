@@ -194,6 +194,35 @@ STB_debug_category = {
         }
     }
 }
+STB_political_struggle_category = {
+    STB_political_parties_update_popularity_mission = {
+        activation = {
+            always = yes
+        }
+        available = {
+            always = no
+        }
+        icon = mission_icon
+        is_good = no
+        days_mission_timeout = 7
+        selectable_mission = no
+        timeout_effect = {
+            set_temp_variable = { STB_communist_party_growth = 0.01 }
+            set_temp_variable = { STB_harmonist_party_growth = 0.01 }
+            multiply_temp_variable = { STB_communist_party_growth = STB_communist_popularity_var }
+            multiply_temp_variable = { STB_harmonist_party_growth = STB_harmonist_popularity_var }
+            add_popularity = {
+                ideology = communism
+                popularity = STB_communist_party_growth
+            }
+            add_popularity = {
+                ideology = democratic
+                popularity = STB_harmonist_party_growth
+            }
+            activate_mission = STB_political_parties_update_popularity_mission
+        }
+    }
+}
 STB_DEM_elections_category = {
     STB_impending_election = {
         allowed = { tag = STB }
