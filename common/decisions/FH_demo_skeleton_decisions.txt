@@ -2007,6 +2007,113 @@ FH_demo_equus_heartland_skeleton_category = {
             factor = 15
         }
     }
+    CLD_CER_NER_state_border_wars = {
+        visible = {
+            OR = {
+                AND = {
+                    tag = CER
+                    any_state = {
+                        NOT = { is_owned_by = CER }
+                        OR = {
+                            is_core_of = CLD
+                            is_core_of = CCA
+                            is_core_of = SCS
+                        }
+                        OR = {
+                            is_claimed_by = CER
+                            is_core_of = CER
+                        }
+                    }
+                }
+                AND = {
+                    tag = CLD
+                    any_state = {
+                        NOT = { is_owned_by = CLD }
+                        OR = {
+                            is_core_of = CER
+                            is_core_of = NER
+                        }
+                        OR = {
+                            is_claimed_by = CLD
+                            is_core_of = CLD
+                        }
+                    }
+                }
+                AND = {
+                    tag = NER
+                    any_state = {
+                        NOT = { is_owned_by = NER }
+                        OR = {
+                            is_core_of = CLD
+                            is_core_of = NCA
+                        }
+                        OR = {
+                            is_claimed_by = NER
+                            is_core_of = NER
+                        }
+                    }
+                }
+            }
+        }
+        state_target = yes
+        target_trigger = {
+            FROM = {
+                OR = {
+                    is_claimed_by = ROOT
+                    is_core_of = ROOT
+                }
+                OR = {
+                    is_core_of = CLD
+                    is_core_of = NCA
+                    is_core_of = CCA
+                    is_core_of = NER
+                    is_core_of = CER
+                    is_core_of = SCS
+                }
+                NOT = { is_owned_by = ROOT }
+            }
+        }
+        days_re_enable = 180
+        cost = 35
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CLD_CER_NER_state_border_wars"
+            FROM = {
+                set_temp_variable = { FH_defending_state = id }
+                log = "[?FH_defending_state.GetName]"
+                set_state_flag = FH_defender_state
+            }
+            random_state = {
+                limit = {
+                    any_neighbor_state = {
+                        state = var:FH_defending_state
+                    }
+                    is_owned_by = ROOT
+                }
+                set_temp_variable = { FH_attacking_state = id }
+                log = "[?FH_attacking_state.GetName]"
+            }
+            start_border_war = {
+                change_state_after_war = no
+                attacker = {
+                    state = var:FH_attacking_state
+                    num_provinces = 4
+                    on_win = fh_demo.3
+                    on_lose = fh_demo.4
+                    on_cancel = fh_demo.5
+                }
+                defender = {
+                    state = var:FH_defending_state
+                    num_provinces = 4
+                    on_win = fh_demo.6
+                    on_lose = fh_demo.4
+                    on_cancel = fh_demo.5
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 5
+        }
+    }
 }
 
 FH_demo_CRY_skeleton_category = {
