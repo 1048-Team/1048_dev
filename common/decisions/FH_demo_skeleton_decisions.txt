@@ -1893,7 +1893,6 @@ FH_demo_equus_heartland_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove CLD_CER_NER_state_border_wars"
             FROM = {
                 set_temp_variable = { FH_defending_state = id }
-                log = "[?FH_defending_state.GetName]"
                 set_state_flag = FH_defender_state
             }
             random_state = {
@@ -1904,7 +1903,6 @@ FH_demo_equus_heartland_skeleton_category = {
                     is_owned_by = ROOT
                 }
                 set_temp_variable = { FH_attacking_state = id }
-                log = "[?FH_attacking_state.GetName]"
             }
             start_border_war = {
                 change_state_after_war = no
@@ -1927,5 +1925,62 @@ FH_demo_equus_heartland_skeleton_category = {
         ai_will_do = {
             factor = 5
         }
+    }
+    CER_crack_down_on_protests = {
+        visible = {
+            tag = CER
+            date < 1049.4.1
+            is_ai = no
+        }
+        cost = 50
+        days_remove = 35
+        days_re_enable = 90
+        modifier = {
+            political_power_gain = -0.15
+            stability_weekly_factor = 0.007
+            war_support_weekly_factor = 0.007
+            communism_drift = -0.03
+            fascism_drift = -0.03
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_crack_down_on_protests"
+        }
+    }
+    CER_end_the_hunt = {
+        visible = {
+            tag = CER
+            date > 1049.4.1
+        }
+        cost = 150
+        days_remove = 70
+        fire_only_once = yes
+        modifier = {
+            stability_weekly_factor = -0.002
+            political_power_gain = -0.25
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_end_the_hunt"
+            remove_ideas = CER_legitimacy_crisis
+            remove_ideas = CER_infinite_regency
+        }
+        ai_will_do = { factor = 1 }
+    }
+    CER_council_funds_for_industry = {
+        visible = {
+            tag = CER
+            date > 1050.9.1
+        }
+        cost = 150
+        days_remove = 70
+        modifier = {
+            political_power_gain = -0.15
+            consumer_goods_factor = 0.25
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_end_the_hunt"
+            remove_ideas = CER_lacking_urbanization
+            remove_ideas = CER_equestrias_breadbasket
+        }
+        ai_will_do = { factor = 1 }
     }
 }
