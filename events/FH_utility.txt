@@ -251,6 +251,59 @@ country_event = { #Opaline tries to coup WHY to become leader
 	}
 }
 
+country_event = { #CLD elections; speak about general position of each one and then remove idea
+	id = equestria_activity.14 #Lead into news event about election as well
+	immediate = {log = "[GetDateText]: [Root.GetName]: event equestria_activity.14"}
+	title = equestria_activity.14.t
+	desc = equestria_activity.14.d
+
+	is_triggered_only = yes
+
+	option = { #Lead on, Marshal Soarin'!
+		name = equestria_activity.14.a
+		add_stability = 0.03
+		add_political_power = 25
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.15
+		}
+	}
+	option = { #Praline Sweets is the path forward.
+		name = equestria_activity.14.b
+		ai_chance = {
+			is_historical_focus_on = yes
+			factor = 0
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.25
+		}
+	}
+	option = { #The Senate will ensure stability and security for our new society.
+		name = equestria_activity.14.c
+		ai_chance = {
+			is_historical_focus_on = yes
+			factor = 0
+		}
+		set_politics = {
+			ruling_party = fascism
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.25
+		}
+	}
+
+	after = {
+		remove_ideas = CLD_democratic_tide
+	}
+}
+
 country_event = { #CER forms alliance with CLD
 	id = equestria_activity.19
 	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.19"}
