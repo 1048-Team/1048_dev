@@ -71,3 +71,241 @@
 # 		} 
 # 	}
 # }
+
+HIP_AI_category = {
+    core_all_hippogriffia = {
+        available = {
+            HIP_civil_war_over = yes
+        }
+        days_remove = 15
+        fire_only_once = yes
+        complete_effect = {
+            remove_ideas = HPS_HIP_civil_war
+            if = {
+                limit = {
+                    DOH = { is_in_faction_with = ROOT }
+                }
+                DOH = {
+                    remove_ideas = HPS_HIP_civil_war
+                }
+            }
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove core_all_hippogriffia"
+            every_state = {
+                limit = {
+                    OR = {
+                        is_core_of = HIP
+                        is_core_of = HPS
+                        is_core_of = HRL
+                        is_core_of = DOH
+                    }
+                    is_owned_by = ROOT
+                }
+                add_core_of = ROOT
+            }
+            if = {
+                limit = {
+                    DOH = {
+                        exists = yes
+                        is_in_faction_with = HIP
+                    }
+                }
+                every_state = {
+                    limit = {
+                        is_claimed_by = HIP
+                        is_owned_by = DOH
+                    }
+                    add_core_of = DOH
+                }
+            }
+        }
+        ai_will_do = { factor = 100 }
+    }
+    reclaim_foreign_owned_land = {
+        available = {
+            HIP_civil_war_over = yes
+        }
+        days_remove = 30
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = WNG
+        war_with_on_remove = NZA
+        war_with_on_remove = BAT
+        war_with_on_remove = WIN
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove reclaim_foreign_owned_land"
+            695 = {
+                OWNER = {
+                    ROOT = {
+                        create_wargoal = {
+                            type = take_claimed_state
+                            target = PREV
+                            generator = { 695 }
+                        }
+                    }
+                }
+            }
+            696 = {
+                OWNER = {
+                    ROOT = {
+                        create_wargoal = {
+                            type = take_claimed_state
+                            target = PREV
+                            generator = { 696 }
+                        }
+                    }
+                }
+            }
+            1199 = {
+                OWNER = {
+                    ROOT = {
+                        create_wargoal = {
+                            type = take_claimed_state
+                            target = PREV
+                            generator = { 1199 }
+                        }
+                    }
+                }
+            }
+            1204 = {
+                OWNER = {
+                    ROOT = {
+                        create_wargoal = {
+                            type = take_claimed_state
+                            target = PREV
+                            generator = { 1204 }
+                        }
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1052.6.1
+                factor = 0
+            }
+        }
+    }
+    resettle_the_chains = {
+        available = {
+            owns_state = 695
+            owns_state = 696
+            owns_state = 1199
+        }
+        days_remove = 10
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove resettle_the_chains"
+            695 = { add_core_of = ROOT }
+            696 = { add_core_of = ROOT }
+            1199 = { add_core_of = ROOT }
+            1204 = { add_core_of = ROOT }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    HPS_reunite_with_the_party = {
+        allowed = {
+            tag = HPS
+        }
+        available = {
+            HIP_civil_war_over = yes
+        }
+        visible = {
+            is_ai = yes
+        }
+        cost = 25
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision HPS_reunite_with_the_party"
+            EQC = {
+                country_event = {
+                    id = zebrica_activity.1
+                }
+            }
+        }
+    }
+    HIP_consider_backstabbing = {
+        allowed = {
+            tag = HIP
+        }
+        available = {
+            date > 1048.7.1
+            country_exists = DOH
+            OR = {
+                NOT = { country_exists = HRL }
+                NOT = { country_exists = HPS }
+            }
+        }
+        visible = {
+            is_ai = yes
+        }
+        days_remove = 21
+        war_with_on_remove = DOH
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove HIP_consider_backstabbing"
+            random_list = {
+                55 = {
+                    DOH = {
+                        set_country_flag = DOH_pass_the_knife
+                    }
+                }
+                45 = {
+                    remove_from_faction = DOH
+                    declare_war_on = {
+                        target = DOH
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    DOH_ponder_betrayal = {
+        allowed = {
+            tag = DOH
+        }
+        available = {
+            OR = {
+                has_country_flag = DOH_pass_the_knife
+                AND = {
+                    date > 1048.8.1
+                    HIP = {
+                        is_ai = no
+                        exists = yes
+                    }
+                }
+                OR = {
+                    NOT = { country_exists = HRL }
+                    NOT = { country_exists = HPS }
+                }
+            }
+        }
+        visible = {
+            is_ai = yes
+        }
+        days_remove = 21
+        war_with_on_remove = HIP
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove DOH_ponder_betrayal"
+            random_list = {
+                75 = {
+                    leave_faction = yes
+                    declare_war_on = {
+                        target = HIP
+                        type = annex_everything
+                    }
+                }
+                25 = { }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+}

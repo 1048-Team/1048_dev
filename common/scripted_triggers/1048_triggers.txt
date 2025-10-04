@@ -270,6 +270,73 @@ owns_all_equus_states = {
 		}
 	}
 }
+HIP_civil_war_over = {
+	custom_trigger_tooltip = {
+		tooltip = HIP_sole_survivor_tt
+		if = {
+			limit = {
+				tag = HIP
+			}
+			OR = {
+				is_in_faction_with = DOH
+				NOT = { country_exists = DOH }
+			}
+			NOT = { country_exists = HPS }
+			NOT = { country_exists = HRL }
+			1165 = {
+				OWNER = {
+					OR = {
+						tag = HIP
+						AND = {
+							tag = DOH
+							is_in_faction_with = HIP
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = DOH
+			}
+			OR = {
+				is_in_faction_with = HIP
+				NOT = { country_exists = HIP }
+			}
+			NOT = { country_exists = HPS }
+			NOT = { country_exists = HRL }
+			1165 = {
+				OWNER = {
+					OR = {
+						tag = DOH
+						AND = {
+							tag = HIP
+							is_in_faction_with = DOH
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = HPS
+			}
+			NOT = { country_exists = DOH }
+			NOT = { country_exists = HRL }
+			NOT = { country_exists = HIP }
+			owns_state = 1165
+		}
+		else_if = {
+			limit = {
+				tag = HRL
+			}
+			NOT = { country_exists = DOH }
+			NOT = { country_exists = HPS }
+			NOT = { country_exists = HIP }
+			owns_state = 1165
+		}
+	}
+}
 ###Medals###
 should_have_SOL_medals = {
 	OR = {

@@ -725,25 +725,12 @@ country_event = { #HPS joins EQC if they win
 	desc = zebrica_activity.1.d
 	hidden = yes
 	
-	trigger = {
-		original_tag = HPS
-		exists = yes
-		is_subject = no
-		is_in_faction = no
-		has_war = no
-		NOT = {
-			country_exists = HRL
-			country_exists = DOH
-			country_exists = HIP
-		}
-	}
-	
-	fire_only_once = yes
+	is_triggered_only = yes
 	
 	option = {
 		name = zebrica_activity.1.a
-		EQC = {
-			add_to_faction = HPS
+		add_to_faction = HPS
+		hidden_effect = {
 			country_event = {
 				id = zebrica_activity.2
 				days = 730
@@ -758,131 +745,14 @@ country_event = { #HPS is annexed by EQC
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.2"}
 	title = zebrica_activity.2.t
 	desc = zebrica_activity.2.d
-	hidden = yes
 	is_triggered_only = yes
 	
 	option = {
 		name = zebrica_activity.2.a
-		if = {
-			limit = {
-				has_dlc = "Together for Victory"
-			}
-			set_autonomy = {
-				target = HPS
-				autonomous_state = autonomy_integrated_puppet
-			}
+		set_autonomy = {
+			target = HPS
+			autonomous_state = autonomy_integrated_puppet
 		}
-	}
-}
-
-country_event = { #HIP potentially wars DOH
-	id = zebrica_activity.3
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.3"}
-	title = zebrica_activity.3.t
-	desc = zebrica_activity.3.d
-	hidden = yes
-	
-	trigger = {
-		original_tag = HIP
-		exists = yes
-		has_war = no
-		is_subject = no
-		NOT = { country_exists = HRL }
-		NOT = { country_exists = HPS }
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = zebrica_activity.3.a
-		random_list = {
-			55 = {
-				DOH = {
-					country_event = zebrica_activity.4
-				}
-			}
-			45 = {
-				remove_from_faction = DOH
-				declare_war_on = {
-					target = DOH
-					type = annex_everything
-				}
-			}
-		}
-	}
-}
-
-country_event = { #DOH potentially wars HIP
-	id = zebrica_activity.4
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.4"}
-	title = zebrica_activity.4.t
-	desc = zebrica_activity.4.d
-	hidden = yes
-	is_triggered_only = yes
-	
-	option = {
-		name = zebrica_activity.4.a
-		random_list = {
-			75 = {
-				leave_faction = yes
-				declare_war_on = {
-					target = HIP
-					type = annex_everything
-				}
-			}
-			25 = { }
-		}
-	}
-}
-
-country_event = { #Winner of the HIP war cores territory
-	id = zebrica_activity.5
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.5"}
-	title = zebrica_activity.5.t
-	desc = zebrica_activity.5.d
-	hidden = yes
-	
-	trigger = {
-		OR = {
-			original_tag = HIP
-			original_tag = HPS
-			original_tag = HRL
-			original_tag = DOH
-		}
-		exists = yes
-		has_war = no
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = zebrica_activity.5.a
-		every_state = {
-			limit = {
-				OR = {
-					is_core_of = HIP
-					is_claimed_by = HIP
-				}
-				is_owned_by = ROOT
-			}
-			add_core_of = ROOT
-		}
-		IF = {
-			limit = {
-				DOH = {
-					is_in_faction_with = HIP
-				}
-			}
-			every_state = {
-				limit = {
-					is_claimed_by = HIP
-					is_owned_by = DOH
-				}
-				add_core_of = DOH
-			}
-			remove_ideas = HPS_HIP_civil_war
-		}
-		remove_ideas = HPS_HIP_civil_war
 	}
 }
 
@@ -914,7 +784,7 @@ country_event = { #OAU causes problems in BAT
 	option = {
 		name = zebrica_activity.6.a
 		random_list = {
-			33 = {
+			40 = {
 				every_state = {
 					limit = {
 						is_owned_and_controlled_by_ROOT_or_ally = yes
@@ -991,7 +861,7 @@ country_event = { #OAU causes problems in BAT
 					target = OAU
 				}
 			}
-			67 = { }
+			60 = { }
 		}
 	}
 }
