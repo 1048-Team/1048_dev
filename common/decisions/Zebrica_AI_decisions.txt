@@ -309,3 +309,176 @@ HIP_AI_category = {
         }
     }
 }
+MGY_AI_category = {
+    MGY_smack_REM = {
+        available = {
+            date > 1052.4.20
+            is_subject = no
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MGY_smack_REM"
+            random_neighbor_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { REM.original_cores = THIS }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+                every_controlled_state = {
+                    limit = {
+                        is_in_array = { REM.original_cores = THIS } #previsouly removing claim will break this moment so it would need to be changed with is_in_array check(s)
+                    }
+                    add_core_of = ROOT
+                    remove_claim_by = ROOT
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    MGY_force_REM_submission = {
+        available = {
+            REM = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MGY_force_REM_submission"
+            every_controlled_state = {
+                limit = {
+                    is_in_array = { REM.original_cores = THIS }
+                }
+                add_core_of = ROOT
+                remove_claim_by = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    MGY_continue_reclamation = {
+        available = {
+            NOT = { country_exists = REM }
+            any_state = {
+                OR = {
+                    is_core_of = ROOT
+                    is_claimed_by = ROOT
+                }
+                OWNER = {
+                    NOT = {
+                        tag = ABY
+                        tag = ROOT
+                    }
+                    is_neighbor_of = ROOT
+                }
+            }
+        }
+        days_re_enable = 180
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MGY_continue_reclamation"
+            random_neighbor_country = {
+                limit = {
+                    any_controlled_state = {
+                        OR = {
+                            is_core_of = MGY
+                            is_claimed_by = MGY
+                        }
+                    }
+                    NOT = { tag = ABY }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    MGY_final_reconquests = {
+        available = {
+            REM = {
+                all_cores_owned_by_ROOT = yes
+                all_core_state = {
+                    is_core_of = ROOT
+                }
+            }
+            OR = {
+                country_exists = yes
+                any_state = {
+                    OR = {
+                        is_claimed_by = ROOT
+                        is_core_of = ROOT
+                    }
+                    NOT = { is_owned_by = ROOT }
+                }
+            }
+            date > 1056.3.20
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MGY_final_reconquests"
+            every_neighbor_country = {
+                limit = {
+                    any_controlled_state = {
+                        OR = {
+                            is_core_of = MGY
+                            is_claimed_by = MGY
+                        }
+                    }
+                    CONTROLLER = {
+                        ROOT = {
+                            create_wargoal = {
+                                target = PREV
+                                type = annex_everything
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    MGY_dynastic_restoration = {
+        available = {
+            ABY = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            every_controlled_state = {
+                limit = {
+                    is_in_array = { ABY.original_cores = THIS }
+                    is_claimed_by = ROOT
+                }
+                add_core_of = ROOT
+                remove_claim_by = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+}

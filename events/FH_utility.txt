@@ -849,45 +849,6 @@ country_event = { #OAU causes problems in BAT
 	}
 }
 
-country_event = { #MGY wars REM for their core territory
-	id = zebrica_activity.7
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.7"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = MGY
-		exists = yes
-		has_war = no
-		is_subject = no
-		date > 1052.4.20
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		random_neighbor_country = {
-			limit = {
-				any_controlled_state = {
-					is_in_array = { REM.original_cores = THIS }
-				}
-			}
-			ROOT = {
-				declare_war_on = {
-					target = PREV
-					type = annex_everything
-				}
-			}
-			every_controlled_state = {
-				limit = {
-					is_claimed_by = ROOT #previsouly removing claim will break this moment so it would need to be changed with is_in_array check(s)
-				}
-				add_core_of = ROOT
-				remove_claim_by = ROOT
-			}
-		}
-	}
-}
-
 #country_event = { #EMR wars ABY
 #	id = zebrica_activity.8
 #	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.8"}
@@ -1400,49 +1361,6 @@ country_event = { ## TAI, MEL, and ZOO kill each other
 	}
 }
 
-country_event = { #MGY wars random neighbor except ABY
-	id = zebrica_activity.19
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.19"}
-	hidden = yes
-	
-	# trigger = {
-	# 	original_tag = MGY
-	# 	exists = yes
-	# 	has_war = no
-	# 	is_subject = no
-	# 	date > 1053.4.20 #12 months later since zebrica_activity.7
-	# }
-	is_triggered_only = yes # 30 days later since triggered by on_peace_conference_ended
-	#fire_only_once = yes
-	
-	option = {
-		random_neighbor_country = {
-			limit = {
-				any_controlled_state = {
-					OR = {
-						is_core_of = ROOT
-						is_claimed_by = ROOT
-					}
-				}
-				NOT = { original_tag = ABY }
-			}
-			ROOT = {
-				declare_war_on = {
-					target = PREV
-					type = annex_everything
-				}
-			}
-			every_controlled_state = {
-				limit = {
-					is_claimed_by = ROOT #removing claim previsouly will break this moment so it would need to be changed with is_in_array check(s)
-				}
-				add_core_of = ROOT
-				remove_claim_by = ROOT
-			}
-		}
-	}
-}
-
 country_event = { ## ILU, TNT, ZIT, AZI, CAM, ZAJ, NDR, REM will kill each other
 	id = zebrica_activity.20
 	immediate = {log = "[GetDateText]: [Root.GetName]: event zebrica_activity.20"}
@@ -1656,39 +1574,6 @@ country_event = { # YMN decides whether kill someone or not
 			country_event = {
 				id = zebrica_activity.23
 				days = 120
-			}
-		}
-	}
-}
-country_event = { #MGY wars ABY for their core territory
-	id = zebrica_activity.24
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.24"}
-	hidden = yes
-	is_triggered_only = yes #300 days since on_peaceconference_ended
-	fire_only_once = yes
-	
-	option = {
-		random_neighbor_country = { #this can be replaced with every_other_country
-			limit = {
-				any_controlled_state = {
-					OR = {
-						is_core_of = ROOT
-						is_claimed_by = ROOT
-					}
-				}
-			}
-			ROOT = {
-				declare_war_on = {
-					target = PREV
-					type = annex_everything
-				}
-			}
-			every_controlled_state = {
-				limit = {
-					is_claimed_by = ROOT #removing claim previsouly will break this moment so it would need to be changed with is_in_array check(s)
-				}
-				add_core_of = ROOT
-				remove_claim_by = ROOT
 			}
 		}
 	}
