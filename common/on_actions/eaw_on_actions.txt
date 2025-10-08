@@ -2,6 +2,7 @@ on_actions = {
 	
 	on_startup = {
 		effect = {
+			###All starting core state arrays should be replaced with TAG.original_cores in code checks
 			###Changeling Hegemony Countries###
 			add_to_array = { global.changeling_hegemony = CHN.id }
 			add_to_array = { global.changeling_hegemony = NCA.id }
@@ -131,6 +132,15 @@ on_actions = {
 				add_to_array = { global.CWR_territory = THIS.id }
 			}
 			
+			###ABY starting states claimed by MGY###
+			every_state = {
+				limit = {
+					is_owned_by = ABY
+					is_claimed_by = MGY
+				}
+				add_to_array = { global.MGY_claimed_ABY_territory = THIS.id }
+			}
+
 			###Arrays for all starting territories of Equus nations that can have Ordos be made in them###
 			every_state = {
 				limit = {
@@ -246,6 +256,7 @@ on_actions = {
 				add_to_array = { global.ordo_salus_territory = THIS.id }
 			}
 			
+			###The Ordo stuff and BLS stuff should be done in their respective history files
 			###Ordo Loyalty startup###
 			add_to_array = { global.ordo_loyalty_array = 50 }
 			add_to_array = { global.ordo_loyalty_array = 47 }
