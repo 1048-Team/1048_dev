@@ -468,6 +468,7 @@ MGY_AI_category = {
         }
         fire_only_once = yes
         complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MGY_dynastic_restoration"
             every_controlled_state = {
                 limit = {
                     is_in_array = { ABY.original_cores = THIS }
@@ -479,6 +480,756 @@ MGY_AI_category = {
         }
         ai_will_do = {
             factor = 100
+        }
+    }
+}
+ROA_AI_category = {
+    ROA_reclaim_peninsula = {
+        available = {
+            is_subject = no
+            date > 1050.5.20
+        }
+        visible = {
+            is_ai = yes
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision ROA_reclaim_peninsula"
+            add_political_power = 100
+            army_experience = 100
+            navy_experience = 100
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { CNT.original_cores = THIS }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                    add_ai_strategy = {
+                        type = invade
+                        value = 100
+                        id = PREV
+                    }
+                }
+            }
+            CNT = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    ROA_interior_expeditions = {
+        available = {
+            is_subject = no
+            date > 1053.1.3
+        }
+        visible = {
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 90
+        war_with_on_remove = MEL
+        war_with_on_remove = TAI
+        war_with_on_remove = ZOO
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ROA_interior_expeditions"
+            add_political_power = 200
+            army_experience = 175
+            navy_experience = 175
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        OR = {
+                            is_in_array = { MEL.original_cores = THIS }
+                            is_in_array = { TAI.original_cores = THIS }
+                            is_in_array = { ZOO.original_cores = THIS }
+                        }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        type = annex_everything
+                        target = PREV
+                    }
+                    add_ai_strategy = {
+                        type = invade
+                        id = PREV
+                        value = 100
+                    }
+                }
+                add_ai_strategy = {
+                    type = invade
+                    id = ROOT
+                    value = 100
+                }
+            }
+            add_ideas = FH_you_can_do_naval_invasion_dude_idea
+            MEL = { add_to_ROOT_potential_cores = yes }
+            TAI = { add_to_ROOT_potential_cores = yes }
+            ZOO = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    ROA_traveling_east = {
+        available = {
+            is_subject = no
+            date > 1054.1.3
+            ZOO = { all_cores_owned_by_ROOT = yes }
+            TAI = { all_cores_owned_by_ROOT = yes }
+            MEL = { all_cores_owned_by_ROOT = yes }
+        }
+        visible = {
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 90
+        war_with_on_remove = ZLU
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ROA_traveling_east"
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { ZLU.original_cores = THIS }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        type = annex_everything
+                        target = PREV
+                    }
+                }
+            }
+            ZLU = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    ROA_for_roams_glory = {
+        available = {
+            is_subject = no
+            date > 1057.1.3
+            ZLU = { all_cores_owned_by_ROOT = yes }
+        }
+        visible = {
+            is_ai = yes
+        }
+        days_remove = 90
+        fire_only_once = yes
+        war_with_on_remove = ILU
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remoive ROA_for_roams_glory"
+            every_other_country = {
+                limit = {
+                    any_owned_state = {
+                        is_core_of = ILU
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    ROA_expanding_frontiers = {
+        available = {
+            is_subject = no
+            ILU = { all_cores_owned_by_ROOT = yes }
+        }
+        visible = {
+            is_ai = yes
+        }
+        cost = 300
+        fire_only_once = yes
+        days_remove = 365
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision ROA_expanding_frontiers"
+            every_state = {
+                limit = {
+                    is_core_of = ILU
+                }
+                add_core_of = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    zebride_control_timeout = {
+        days_mission_timeout = 30
+        timeout_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: mission timeout zebride_control_timeout"
+            set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 }
+            white_peace = event_target:zebride_conqueror
+        }
+    }
+}
+STM_AI_category = {
+    STM_restore_stolen_assets = {
+        available = {
+            is_subject = no
+            date > 1050.1.14
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STM_restore_stolen_assets"
+            create_wargoal = {
+                target = HSO
+                type = annex_everything
+            }
+            HSO = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    STM_franchise_expansion = {
+        available = {
+            is_subject = no
+            date > 1051.1.20
+            HSO = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STM_franchise_expansion"
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { ZWA.original_cores = THIS } #ZWA can be dead by MTA
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+                add_to_ROOT_potential_cores = yes
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    STM_hostile_takeover = {
+        available = {
+            is_subject = no
+            date > 1053.1.20
+            ZWA = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STM_hostile_takeover"
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { YMN.original_cores = THIS }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+                add_to_ROOT_potential_cores = yes
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    STM_friendly_merger = {
+        available = {
+            is_subject = no
+            date > 1055.1.20
+            YMN = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STM_friendly_merger"
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { EMR.original_cores = THIS }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+            EMR = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    STM_business_unit_acquisition = {
+        available = {
+            is_subject = no
+            date > 1057.1.20
+            EMR = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STM_business_unit_acquisition"
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        is_in_array = { MGY.original_cores = THIS }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+            MGY = { add_to_ROOT_potential_cores = yes }
+            set_country_flag = FG_STM_got_MGY_flag
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+}
+ZWA_AI_category = {
+    ZWA_yoink_MTA = {
+        available = {
+            is_subject = no
+            date > 1051.3.1
+        }
+        fire_only_once = yes
+        days_remove = 30
+        war_with_on_remove = MTA
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ZWA_yoink_MTA"
+            create_wargoal = {
+                target = MTA
+                type = annex_everything
+            }
+            MTA = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+}
+zebride_AI_category = {
+    #In case want to change Zebride behaviour
+    #ZOO_civilize_war_bands = {
+    #    available = {
+    #        is_subject = no
+    #        date > 1051.7.4
+    #        tag = ZOO
+    #        OR = {
+    #            country_exists = TAI
+    #            country_exists = MEL
+    #        }
+    #    }
+    #    fire_only_once = yes
+    #    complete_effect = {
+    #        log = "[GetDateText]: [ROOT.GetName]: decision ZOO_civilize_war_bands"
+    #        if = {
+    #            limit = {
+    #                country_exists = MEL
+    #            }
+    #            create_wargoal = {
+    #                target = MEL
+    #                type = annex_everything
+    #            }
+    #        }
+    #        if = {
+    #            limit = {
+    #                country_exists  = TAI
+    #            }
+    #            create_wargoal = {
+    #                target = TAI
+    #                type = annex_everything
+    #            }
+    #        }
+    #    }
+    #    ai_will_do = {
+    #        factor = 100
+    #        modifier = {
+    #            has_war = yes
+    #            factor = 0
+    #        }
+    #    }
+    #}
+    #TAI_MEL_eternal_spats = {
+    #    available = {
+    #        is_subject = no
+    #        OR = {
+    #            AND = {
+    #                tag = TAI
+    #                country_exists = MEL
+    #            }
+    #            AND = {
+    #                tag = MEL
+    #                country_exists = TAI
+    #            }
+    #        }
+    #        date > 1048.6.1
+    #        NOT = { has_country_flag = TAI_MEL_war_cooldown }
+    #    }
+    #    days_re_enable = 90
+    #    complete_effect = {
+    #        log = "[GetDateText]: [ROOT.GetName]: decision TAI_MEL_eternal_spats"
+    #        TAI = {
+    #            set_temp_variable_to_random = {
+    #                var = TAI_war_cooldown_var
+    #                min = 90
+    #                max = 140
+    #                integer = yes
+    #            }
+    #            set_country_flag = {
+    #                flag = TAI_MEL_war_cooldown
+    #                days = var:TAI_war_cooldown_var
+    #                value = 1
+    #            }
+    #        }
+    #        MEL = {
+    #            set_temp_variable_to_random = {
+    #                var = TAI_war_cooldown_var
+    #                min = 90
+    #                max = 140
+    #                integer = yes
+    #            }
+    #            set_country_flag = {
+    #                flag = TAI_MEL_war_cooldown
+    #                days = var:TAI_war_cooldown_var
+    #                value = 1
+    #            }
+    #            if = {
+    #                limit = {
+    #                    NOT = { has_war_with = ZOO }
+    #                }
+    #                activate_mission = TAI_MEL_war_timer
+    #            }
+    #        }
+    #        if = {
+    #            limit = {
+    #                tag = TAI
+    #            }
+    #            declare_war_on = {
+    #                target = MEL
+    #                type = annex_everything
+    #            }
+    #        }
+    #        if = {
+    #            limit = {
+    #                tag = MEL
+    #            }
+    #            declare_war_on = {
+    #                target = TAG
+    #                type = annex_everything
+    #            }
+    #        }
+    #    }
+    #    ai_will_do = {
+    #        factor = 100
+    #    }
+    #}
+    #TAI_MEL_war_timer = {
+    #    days_mission_timeout = 60
+    #    timeout_effect = {
+    #        MEL = { white_peace = TAI }
+    #    }
+    #}
+    zebride_time_to_nuke_each_other = {
+        available = {
+            is_subject = no
+            date > 1050.2.3
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision zebride_time_to_nuke_each_other"
+            add_political_power = 100
+            army_experience = 75
+            every_neighbor_country = {
+                limit = {
+                    OR = {
+                        original_tag = TAI
+                        original_tag = MEL
+                        original_tag = ZOO
+                    }
+                }
+                add_to_ROOT_potential_cores = yes
+                declare_war_on = {
+                    target = ROOT
+                    type = annex_everything
+                }
+                random_neighbor_country = {
+                    limit = {
+                        OR = {
+                            original_tag = TAI
+                            original_tag = MEL
+                            original_tag = ZOO
+                        }
+                    }
+                    if = {
+                        limit = { NOT = { has_war_with = PREV } }
+                        declare_war_on = {
+                            target = PREV
+                            type = annex_everything
+                        }
+                    }
+                    add_to_PREV_potential_cores = yes
+                }
+            }
+            ROOT = { #who will be a lucky bastard lol
+                division_template = {
+                    name = "Veteran Militia"
+                    regiments = {
+                        infantry = { x = 0 y = 0 }
+                        infantry = { x = 0 y = 1 }
+                        infantry = { x = 0 y = 2 }
+                        infantry = { x = 1 y = 0 }
+                        infantry = { x = 1 y = 1 }
+                    }
+                    support = {
+                    }
+                }
+                capital_scope = {
+                    create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 2 }
+                }
+                random_list = {
+                    3 = {
+                        capital_scope = {
+                            create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 2 }
+                        }
+                    }
+                    2 = {
+                    }
+                }
+                random_list = {
+                    3 = {
+                        capital_scope = {
+                            create_unit = { division = "division_template = \"Veteran Militia\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+                        }
+                    }
+                    2 = {
+                    }
+                }
+                division_template = {
+                    name = "Veteran Infantry"
+                    regiments = {
+                        infantry = { x = 0 y = 0 }
+                        infantry = { x = 0 y = 1 }
+                        infantry = { x = 0 y = 2 }
+                        infantry = { x = 0 y = 3 }
+                        infantry = { x = 1 y = 0 }
+                        infantry = { x = 1 y = 1 }
+                        infantry = { x = 1 y = 2 }
+                        infantry = { x = 1 y = 3 }
+                    }
+                    support = {
+                        artillery = { x = 0 y = 0 }
+                    }
+                }
+                capital_scope = {
+                    create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+                }
+                random_list = {
+                    3 = {
+                        capital_scope = {
+                            create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+                        }
+                    }
+                    2 = {
+                    }
+                }
+                random_list = {
+                    3 = {
+                        capital_scope = {
+                            create_unit = { division = "division_template = \"Veteran Infantry\" start_equipment_factor = 1.2 start_experience_factor = 0.4" owner = ROOT count = 1 }
+                        }
+                    }
+                    2 = {
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    zebride_expand_peninsular_influence = {
+        available = {
+            only_zebride_nation_remaining = yes
+            date > 1054.4.4
+            is_subject = no
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision zebride_expand_peninsular_influence"
+            every_other_country = {
+                limit = {
+                    any_controlled_state = {
+                        OR = {
+                            is_in_array = { DEL.original_cores = THIS }
+                            is_in_array = { IDO.original_cores = THIS }
+                        }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        type = annex_everything
+                        target = PREV
+                    }
+                }
+                every_controlled_state = {
+                    limit = {
+                        OR = {
+                            is_core_of = IDO
+                            is_core_of = DEL
+                        }
+                    }
+                    add_core_of = ROOT
+                }
+            }
+        }
+    }
+    zebride_dominion_over_bay = {
+        available = {
+            only_zebride_nation_remaining = yes
+            date > 1055.6.7
+            DEL = { all_cores_owned_by_ROOT = yes }
+            IDO = { all_cores_owned_by_ROOT = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision zebride_dominion_over_bay"
+            add_state_core = 1136
+            create_wargoal = {
+                type = take_core_state
+                generator = { 1136 } #Kambanarahavavy
+                target = FROM
+            }
+            1136 = {
+                owner = {
+                    add_ai_strategy = {
+                        type = invade
+                        id = ROOT
+                        value = 100
+                    }
+                    add_ideas = FH_you_can_do_naval_invasion_dude_idea
+                    save_event_target_as = thanks_pdx
+                }
+            }
+            add_ai_strategy = {
+                type = invade
+                id = event_target:thanks_pdx
+                value = 100
+            }
+        }
+    }
+}
+CTL_AI_category = {
+    CTL_finish_punishment = {
+        available = {
+            is_subject = no
+            date > 1055.1.1
+        }
+        fire_only_once = yes
+        days_remove = 30
+        war_with_on_remove = MCW
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CTL_finish_punishment"
+            create_wargoal = {
+                target = MCW
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+}
+CTH_AI_category = {
+    CTH_punch_bat_puppets = {
+        available = {
+            is_subject = no
+            date > 1054.1.1
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_remove = NZA
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision_remove CTH_punch_bat_puppets"
+            create_wargoal = {
+                target = NZA
+                type = annex_everything
+            }
+            NZA = { add_to_ROOT_potential_cores = yes }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
         }
     }
 }
