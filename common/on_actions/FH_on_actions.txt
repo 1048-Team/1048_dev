@@ -105,51 +105,6 @@ on_actions = {
 					}
 					SOL_calculate_ordo_image = yes
 				}
-				#Return MTS/SCS to not call in offensive wars
-				else_if = {
-					limit = {
-						ROOT = { 
-							NOT = { 
-								has_idea = MTS_no_friends_calling_offensive
-								OR = {
-									AND = {
-										tag = MTS
-										has_government = communism
-										is_in_faction_with = SCS
-									}
-									AND = {
-										tag = SCS
-										is_in_faction_with = MTS
-									}
-								}
-							} 
-						}
-					}
-					add_ideas = MTS_no_friends_calling_offensive
-				}
-				###Begins the long list of integration stuff
-				else_if = {
-					limit = {
-						ROOT = {
-							tag = MTS
-							is_subject = no
-						}
-						FROM = {
-							OR = {
-								tag = EQS
-								tag = SLW
-								tag = CRY
-								is_in_array = { global.changeling_hegemony = THIS.id }
-								AND = {
-									is_in_array = { global.shield_of_steel = THIS.id }
-									NOT = { tag = MWR }
-								}
-								is_in_array = { global.solar_empire_rumps = THIS.id }
-							}
-						}
-					}
-					FROM = { add_to_ROOT_potential_cores = yes }
-				}
 				else_if = { #ABY-YMN war and YMN stuffs
 					limit = {
 						ROOT = {
@@ -182,6 +137,51 @@ on_actions = {
 						}
 					}
 					else = { clear_array = ROOT.i_will_kill_you_later }
+				}
+				#Return MTS/SCS to not call in offensive wars
+				if = {
+					limit = {
+						ROOT = { 
+							NOT = { 
+								has_idea = MTS_no_friends_calling_offensive
+								OR = {
+									AND = {
+										tag = MTS
+										has_government = communism
+										is_in_faction_with = SCS
+									}
+									AND = {
+										tag = SCS
+										is_in_faction_with = MTS
+									}
+								}
+							} 
+						}
+					}
+					add_ideas = MTS_no_friends_calling_offensive
+				}
+				###Begins the long list of integration stuff
+				if = {
+					limit = {
+						ROOT = {
+							tag = MTS
+							is_subject = no
+						}
+						FROM = {
+							OR = {
+								tag = EQS
+								tag = SLW
+								tag = CRY
+								is_in_array = { global.changeling_hegemony = THIS.id }
+								AND = {
+									is_in_array = { global.shield_of_steel = THIS.id }
+									NOT = { tag = MWR }
+								}
+								is_in_array = { global.solar_empire_rumps = THIS.id }
+							}
+						}
+					}
+					FROM = { add_to_ROOT_potential_cores = yes }
 				}
 			
 				FROM = { country_event = { id = utility.10 hours = 1 } }
@@ -225,18 +225,6 @@ on_actions = {
 			log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_operative_recruited by FH_on_actions"
 			operative_add_starting_nationalities_and_race = yes
 			operative_add_secondary_nationalities = yes
-			if = {
-				limit = {
-					FROM = {
-						OR = {
-							original_tag = EQS
-							is_in_faction_with = EQS
-						}
-					}
-					has_trait = operative_agentbio_astrum
-				}
-				save_global_event_target_as = SLE_astrum_solus_target
-			}
 		}
 	}
 
@@ -268,6 +256,40 @@ on_actions = {
 					is_subject = no
 				}
 				add_to_variable = { EEE_doom_rate = 1 }
+			}
+		}
+	}
+
+	# ROOT is new controller, FROM is old controller, FROM.FROM is state ID
+	# Peace out for ROA/Zebride war
+	on_state_control_changed = {
+		effect = {
+			log = "[GetDateText]: THIS: [THIS.GetName]: on_state_control_changed"
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							tag = ZOO
+							tag = MEL
+							tag = TAI
+						}
+					}
+					FROM = {
+						OR = {
+							tag = CNT
+							tag = ROA
+						}
+					}
+					FROM.FROM = {
+						state = 1136
+					}
+				}
+				ROOT = {
+					save_global_event_target = zebride_conqueror
+				}
+				FROM = {
+					activate_mission = zebride_control_timeout
+				}
 			}
 		}
 	}
