@@ -1,5 +1,6 @@
 on_actions = {
 
+	#ROOT is country declaring war; FROM is country being declared on
 	on_declare_war = {
 		effect = {
 			if = {
@@ -40,6 +41,16 @@ on_actions = {
 					}
 					remove_ideas = MTS_no_friends_calling_offensive
 				}
+			}
+			else_if = {
+				limit = {
+					tag = ILU
+					NOT = { has_idea = FH_you_can_do_it_dude_idea }
+					NOT = {
+						date > 1058.1.1 #Should be strong enough by that point to bully most other AI nations
+					}
+				}
+				add_ideas = FH_you_can_do_it_dude_idea
 			}
 		}
 	}
@@ -264,6 +275,20 @@ on_actions = {
 					is_subject = no
 				}
 				add_to_variable = { EEE_doom_rate = 1 }
+			}
+			if = {
+				limit = {
+					tag = ILU
+					has_war = no
+				}
+				delete_unit_template_and_units = {
+					division_template = "Illuminated Militia"
+					disband = yes
+				}
+				delete_unit_template_and_units = {
+					division_template = "Illuminated Infantry"
+					disband = yes
+				}
 			}
 		}
 	}

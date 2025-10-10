@@ -1,76 +1,265 @@
-# Illuminate_AI_category = {
-# 	ILU_finish_ZIT = {
-# 		allowed = {
-# 			original_tag = ILU
-# 		}
-# 		available = {
-# 			date > 1048.3.1
-# 		}
-# 		days_remove = 10
-# 		remove_effect = {
-# 			create_wargoal = {
-# 				target = ZIT
-# 				type = annex_everything
-# 			}
-# 		} 
-# 	}
-# 	ILU_integrate_ZIT = {
-# 		allowed = {
-# 			original_tag = ILU
-# 		}
-# 		available = {
-# 			owns_state = 899
-# 		}
-# 		days_remove = 10
-# 		remove_effect = {
-# 			add_state_core = 899
-# 			add_state_core = 898
-# 			add_state_core = 1041
-# 			add_state_core = 905
-# 			every_state = {
-# 				limit = {
-# 					is_core_of = ZIT
-# 				}
-# 				remove_core_of = ZIT
-# 			}
-# 		} 
-# 	}
-# 	ILU_avenge_the_humiliation = {
-# 		allowed = {
-# 			original_tag = ILU
-# 		}
-# 		available = {
-# 			owns_state = 899
-# 			date > 1048.10.1
-# 		}
-# 		days_remove = 10
-# 		remove_effect = {
-# 			if = {
-# 				limit = { AZI = { exists = yes } }
-# 				create_wargoal = {
-# 					target = AZI
-# 					type = annex_everything
-# 				}
-# 			}
-# 			if = {
-# 				limit = { ZAJ = { exists = yes } }
-# 				create_wargoal = {
-# 					target = ZAJ
-# 					type = annex_everything
-# 				}
-# 			}
-# 			every_state = {
-# 				limit = {
-# 					OR = {
-# 						is_core_of = AZI
-# 						is_core_of = ZAJ
-# 					}
-# 				}
-# 				add_claim_by = ILU
-# 			}
-# 		} 
-# 	}
-# }
+Illuminate_AI_category = {
+	ILU_finish_ZIT = {
+		available = {
+			date > 1048.3.1
+		}
+		days_remove = 10
+		fire_only_once = yes
+		remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ILU_finish_ZIT"
+			create_wargoal = {
+				target = ZIT
+				type = annex_everything
+			}
+			division_template = {
+				name = "Illuminated Militia"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Illuminated Militia\" start_equipment_factor = 1 start_experience_factor = 0.4" owner = ROOT count = 4 }
+			}
+			division_template = {
+				name = "Illuminated Infantry"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Illuminated Infantry\" start_equipment_factor = 1 start_experience_factor = 0.4" owner = ROOT count = 2 }
+			}
+		}
+		ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+		}
+	}
+	ILU_integrate_ZIT = {
+		available = {
+			owns_state = 899
+		}
+		days_remove = 10
+		remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ILU_integrate_ZIT"
+			every_state = {
+				limit = {
+					is_core_of = ZIT
+				}
+				add_core_of = ROOT
+				remove_core_of = ZIT
+			}
+		}
+		ai_will_do = {
+            factor = 100
+		}
+	}
+	ILU_avenge_the_humiliation = {
+		available = {
+			owns_state = 899
+			date > 1048.10.1
+		}
+		days_remove = 10
+		remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ILU_avenge_the_humiliation"
+            every_other_country = {
+                limit = {
+                    any_owned_state = {
+                        OR = {
+                            is_in_array = { AZI.original_cores = THIS }
+                            is_in_array = { ZAJ.original_cores = THIS }
+                        }
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = AZI
+						is_core_of = ZAJ
+					}
+				}
+				add_claim_by = ROOT
+			}
+			division_template = {
+				name = "Illuminated Militia"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Illuminated Militia\" start_equipment_factor = 1 start_experience_factor = 0.4" owner = ROOT count = 4 }
+			}
+			division_template = {
+				name = "Illuminated Infantry"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Illuminated Infantry\" start_equipment_factor = 1 start_experience_factor = 0.4" owner = ROOT count = 2 }
+			}
+		}
+		ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+		}
+	}
+	ILU_integrate_tribes = {
+        available = {
+            owns_state = 891
+            owns_state = 878
+        }
+        days_remove = 10
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ILU_integrate_tribes"
+            every_state = {
+                limit = {
+                    OR = {
+                        is_core_of = AZI
+                        is_core_of = ZAJ
+                    }
+                    add_core_of = ROOT
+                    remove_claim_by = ROOT
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+	}
+	ILU_eternal_crusades = {
+        available = {
+            owns_state = 899
+            owns_state = 891
+            owns_state = 878
+            date > 1050.2.1
+        }
+        days_remove = 70
+        war_with_on_remove = TNT
+        war_with_on_remove = CAM
+        war_with_on_remove = NDR
+        war_with_on_remove = REM
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove ILU_eternal_crusades"
+            add_political_power = 100
+            army_experience = 125
+            every_other_country = {
+                limit = {
+                    any_owned_state = {
+                        OR = {
+                            is_in_array = { TNT.original_cores = THIS }
+                            is_in_array = { CAM.original_cores = THIS }
+                            is_in_array = { NDR.original_cores = THIS }
+                            is_in_array = { REM.original_cores = THIS }
+                        }
+                    }
+                }
+                ROOT = {
+                    declare_war_on = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+            division_template = {
+				name = "Illuminated Militia"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Illuminated Militia\" start_equipment_factor = 1 start_experience_factor = 0.4" owner = ROOT count = 10 }
+			}
+			division_template = {
+				name = "Illuminated Infantry"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			capital_scope = {
+				create_unit = { division = "division_template = \"Illuminated Infantry\" start_equipment_factor = 1 start_experience_factor = 0.4" owner = ROOT count = 6 }
+			}
+			every_state = {
+                limit = {
+                    OR = {
+                        is_in_array = { TNT.original_cores = THIS }
+                        is_in_array = { CAM.original_cores = THIS }
+                        is_in_array = { NDR.original_cores = THIS }
+                        is_in_array = { REM.original_cores = THIS }
+                    }
+                }
+			}
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+	}
+}
 
 HIP_AI_category = {
     core_all_hippogriffia = {
