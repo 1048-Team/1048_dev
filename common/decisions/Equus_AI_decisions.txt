@@ -1,0 +1,106 @@
+YAH_SMH_AI_category = {
+    YAH_SMH_warlord_dominance = {
+        available = {
+            is_subject = no
+            OR = {
+                AND = {
+                    tag = SMH
+                    country_exists = YAH
+                }
+                AND = {
+                    tag = YAH
+                    country_exists = SMH
+                }
+            }
+            date > 1048.6.1
+            NOT = { has_country_flag = YAH_SMH_skirmish_cooldown }
+        }
+        days_re_enable = 90
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision YAH_SMH_warlord_dominance"
+            #Sets a temp variable to a random integer between 150 and 210 and then uses that for the number of days for the country flag lifespan
+            #AI usually takes a decision as soon as it's available for them, so this means that it will always be random who declares war on who first, unless one of the two nations is played by a human
+            YAH = {
+                set_temp_variable_to_random = {
+                    var = YAH_skirmish_cooldown_var
+                    min = 150
+                    max = 210
+                    integer = yes
+                }
+                set_country_flag = {
+                    flag = YAH_SMH_skirmish_cooldown
+                    days = var:YAH_skirmish_cooldown_var
+                    value = 1
+                }
+            }
+            SMH = {
+                set_temp_variable_to_random = {
+                    var = SMH_skirmish_cooldown_var
+                    min = 90
+                    max = 140
+                    integer = yes
+                }
+                set_country_flag = {
+                    flag = YAH_SMH_skirmish_cooldown
+                    days = var:SMH_skirmish_cooldown_var
+                    value = 1
+                }
+            }
+            if = {
+                limit = {
+                    tag = SMH
+                }
+                declare_war_on = {
+                    target = YAH
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    tag = YAH
+                }
+                declare_war_on = {
+                    target = SMH
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    date < 1052.1.1
+                }
+                random_country = {
+                    limit = {
+                        OR = {
+                            tag = SMH
+                            tag = YAH
+                        }
+                        is_ai = yes
+                    }
+                    activate_mission = YAH_SMH_skirmish_timer
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    YAH_SMH_skirmish_timer = {
+        days_mission_timeout = 30
+        timeout_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: mission_timeout YAH_SMH_skirmish_timer"
+            set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
+            if = {
+                limit = {
+                    tag = YAH
+                }
+                white_peace = SMH
+            }
+            if = {
+                limit = {
+                    tag = SMH
+                }
+                white_peace = YAH
+            }
+        }
+    }
+}
