@@ -1972,16 +1972,406 @@ FH_demo_equus_heartland_skeleton_category = {
         }
         cost = 150
         days_remove = 70
+        fire_only_once = yes
         modifier = {
             political_power_gain = -0.15
             consumer_goods_factor = 0.25
         }
         remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_end_the_hunt"
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_council_funds_for_industry"
             remove_ideas = CER_lacking_urbanization
             remove_ideas = CER_equestrias_breadbasket
         }
         ai_will_do = { factor = 1 }
+    }
+    CER_recognize_daybreakers_threat = {
+        visible = {
+            tag = CER
+            date > 1051.4.17
+            is_subject = no
+            CLD = {
+                exists = yes
+                is_subject = no
+            }
+        }
+        cost = 75
+        days_remove = 35
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_recognize_daybreakers_threat"
+            CLD = { country_event = equestria_activity.19 }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CER_expand_defense_faction_membership = {
+        visible = {
+            tag = CER
+            date > 1053.1.1
+            is_faction_leader = yes
+            is_subject = no
+            any_other_country = {
+                OR = {
+                    tag = NER
+                    tag = BLS
+                    tag = WHY
+                }
+                NOT = { has_country_flag = CER_rejected_alliance }
+                NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+                is_subject = no
+            }
+        }
+        cost = 50
+        days_remove = 14
+        days_re_enable = 60
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_expand_defense_faction_membership"
+            random_other_country = {
+                limit = {
+                    OR = {
+                        tag = NER
+                        tag = BLS
+                        tag = WHY
+                    }
+                    is_subject = no
+                    NOT = { has_country_flag = CER_rejected_alliance }
+                    NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+                }
+                country_event = equestria_activity.20
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CER_topple_the_mad_inquisitor = {
+        visible = {
+            tag = CER
+            date > 1054.1.1
+            is_faction_leader = yes
+            is_subject = no
+            WHY = {
+                exists = yes
+                NOT = { is_subject_of = SLE }
+                has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+            }
+        }
+        cost = 25
+        days_remove = 35
+        war_with_on_remove = WHY
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_topple_the_mad_inquisitor"
+            create_wargoal = {
+                target = WHY
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    CER_a_complete_front = {
+        visible = {
+            tag = CER
+            CLD = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+            BLS = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+            NER = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+            WHY = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+        }
+        cost = 75
+        days_remove = 70
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_a_complete_front"
+            every_other_country = {
+                limit = {
+                    OR = {
+                        tag = NER
+                        tag = CLD
+                        tag = BLS
+                        tag = WHY
+                    }
+                    is_in_faction_with = ROOT
+                    exists = yes
+                }
+                country_event = equestria_activity.22
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CER_beat_down_EQS = {
+        visible = {
+            tag = CER
+            date > 1055.1.1
+            is_subject = no
+            country_exists = SLE
+        }
+        cost = 50
+        days_remove = 70
+        war_with_on_remove = EQS
+        war_with_on_remove = SLW
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_beat_down_EQS"
+            create_wargoal = {
+                target = SLE
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    CER_united_at_last = {
+        visible = {
+            tag = CER
+            owns_state = 3
+            NOT = { country_exists = SLE }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision CER_united_at_last"
+            set_cosmetic_tag = EQS_NEW
+            every_state = {
+                limit = {
+                    is_core_of = EQS
+                }
+                add_core_of = ROOT
+            }
+            set_capital = { state = 3 }
+            set_province_name = { id = 179 name = renamed_canterlot }
+            hidden_effect = {
+                news_event = fhequusnews.5
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CLD_redelegate_responsibilities = {
+        visible = {
+            tag = CLD
+            date > 1051.5.7
+        }
+        cost = 75
+        days_remove = 70
+        modifier = {
+            stability_weekly_factor = -0.005
+            political_power_gain = -0.25
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CLD_redelegate_responsibilities"
+            remove_ideas = CLD_extreme_centralization
+        }
+        ai_will_do = { factor = 1 }
+    }
+    NER_singular_purposes = {
+        visible = {
+            tag = NER
+            WHY = { all_cores_owned_by_ROOT = yes }
+        }
+        cost = 25
+        days_remove = 14
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_singular_purposes"
+            remove_ideas = NER_splintered_community
+        }
+        ai_will_do = { factor = 1 }
+    }
+    NER_community_intercessions = {
+        visible = {
+            tag = NER
+            date > 1052.1.1
+        }
+        cost = 75
+        days_remove = 35
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_community_intercessions"
+            remove_ideas = NER_inter_commune_rivalries
+        }
+        ai_will_do = { factor = 1 }
+    }
+    NER_centralize_military_command = {
+        visible = {
+            tag = NER
+            date > 1050.9.1
+        }
+        cost = 100
+        days_remove = 35
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_centralize_military_command"
+            remove_ideas = NER_commune_militias
+        }
+        ai_will_do = { factor = 1 }
+    }
+    NER_retire_vascular_brood = {
+        visible = {
+            tag = NER
+            date > 1051.6.1
+        }
+        cost = 125
+        days_remove = 35
+        modifier = {
+            consumer_goods_factor = 0.25
+            war_support_weekly_factor = -0.02
+            experience_gain_army = -0.03
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_retire_vascular_brood"
+            remove_ideas = NER_veteran_changeling_commanders
+        }
+        ai_will_do = { factor = 1 }
+    }
+}
+
+FH_demo_CRY_skeleton_category = {
+    CRY_the_practical_leader = {
+        visible = {
+            date > 1049.7.20
+        }
+        cost = 25
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision CRY_the_practical_leader"
+            promote_character = CRY_luna
+            hidden_effect = {
+                remove_ideas = luna_advisor
+                add_ideas = princess_cadance
+                set_cosmetic_tag = CRY_LUN
+            }
+            add_popularity = {
+                ideology = fascism
+                popularity = 0.02
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    CRY_end_the_protests = {
+        visible = {
+            has_country_leader = { character = CRY_luna ruling_only = yes }
+        }
+        cost = 75
+        days_remove = 30
+        fire_only_once = yes
+        modifier = {
+            stability_weekly_factor = -0.005
+            weekly_manpower = -750
+            production_output_factory = -0.15
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CRY_end_the_protests"
+            remove_ideas = CRY_union_unrest
+        }
+        ai_will_do = {
+            factor = 15
+        }
+    }
+    CRY_earmark_military_funding = {
+        visible = {
+            has_country_leader = { character = CRY_luna ruling_only = yes }
+            date > 1050.2.4
+        }
+        cost = 100
+        days_remove = 70
+        fire_only_once = yes
+        modifier = {
+            consumer_goods_factor = 0.35
+            political_power_gain = -0.15
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CRY_earmark_military_funding"
+            remove_ideas = CRY_dilapidated_army
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    CRY_shirk_the_treaty = {
+        visible = {
+            has_country_leader = { character = CRY_luna ruling_only = yes }
+            date > 1050.10.30
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision CRY_shirk_the_treaty"
+            remove_ideas = CRY_treaty_of_gossamer_hills
+            1220 = {
+                set_demilitarized_zone = no
+            }
+            CHN = {
+                add_opinion_modifier = {
+                    target = ROOT
+                    modifier = hostility
+                }
+                hidden_effect = {
+                    remove_ideas = CHN_gossamer_hills
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    CRY_retake_the_east = {
+        visible = {
+            date > 1051.1.1
+        }
+        cost = 25
+        days_remove = 14
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CRY_retake_the_east"
+            98 = {
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 20
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
     }
 }
 FH_demo_BRF_skeleton_category = {

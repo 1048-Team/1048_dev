@@ -206,329 +206,314 @@ country_event = { #CLD elections; speak about general position of each one and t
 	}
 }
 
+country_event = { #CER proposes alliance with CLD
+	id = equestria_activity.18
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.18"}
+	title = equestria_activity.18.t
+	desc = equestria_activity.18.d
+	
+	is_triggered_only = yes
+	
+	option = { #Better to end our squabbles and face her first, then fight it out.
+		name = equestria_activity.18.a
+		set_country_flag = CLD_accepted_defense_faction
+		#create_faction = CER_dem_faction
+		#add_to_faction = CLD
+		#news_event = fhequusnews.3
+		#hidden_effect = {
+		#	remove_opinion_modifier = {
+		#		target = CLD
+		#		modifier = CER_CLD_unrecognized_successor
+		#	}
+		#	CLD = {
+		#		remove_opinion_modifier = {
+		#			target = CER
+		#			modifier = CER_CLD_unrecognized_successor
+		#		}
+		#	}
+		#}
+	}
+	option = { #Daybreaker has blustered for years. The fear is unfounded.
+		name = equestria_activity.18.b
+		set_country_flag = CLD_rejected_defense_faction
+	}
+
+	after = {
+		FROM = {
+			country_event = {
+				id = equestria_activity.19
+				days = 1
+				random_days = 7
+			}
+		}
+	}
+}
+
 country_event = { #CER forms alliance with CLD
 	id = equestria_activity.19
 	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.19"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = CER
-		exists = yes
-		is_subject = no
-		date > 1051.4.17
+	title = equestria_activity.19.t
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CLD_accepted_defense_faction
+			}
+		}
+		text = equestria_activity.19.d_a
 	}
-	
-	fire_only_once = yes
-	
-	option = {
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CLD_rejected_defense_faction
+			}
+			text = equestria_activity.19.d_b
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = { #We shall defeat her united, as friends!
+		name = equestria_activity.19.a
+		trigger = {
+			FROM = {
+				has_country_flag = CLD_accepted_defense_faction
+			}
+		}
 		create_faction = CER_dem_faction
-		add_to_faction = CLD
+		add_to_faction = FROM
 		news_event = fhequusnews.3
 		hidden_effect = {
 			remove_opinion_modifier = {
-				target = CLD
+				target = FROM
 				modifier = CER_CLD_unrecognized_successor
 			}
-			CLD = {
+			FROM = {
 				remove_opinion_modifier = {
 					target = CER
 					modifier = CER_CLD_unrecognized_successor
 				}
+				clr_country_flag = CLD_accepted_defense_faction
+			}
+		}
+	}
+	option = { #We will stand together, even if you have to come kicking and screaming!
+		name = equestria_activity.19.b
+		trigger = {
+			FROM = {
+				has_country_flag = CLD_rejected_defense_faction
+			}
+		}
+		create_faction = CER_dem_faction
+		create_wargoal = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
+		FROM = {
+			clr_country_flag = CLD_rejected_defense_faction
+		}
+	}
+}
+
+country_event = { #CER reaches out to another rump country to propose joining a defensive alliance.
+	id = equestria_activity.20
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.20"}
+	title = equestria_activity.20.t
+	desc = equestria_activity.20.d
+	
+	is_triggered_only = yes
+	
+	option = { #We must defend ourselves from that madmare!
+		name = equestria_activity.20.a
+		set_country_flag = CER_accepted_alliance
+	}
+	option = { #Daybreaker is all bark and no bite. We don't need any assistance.
+		name = equestria_activity.20.b
+		set_country_flag = CER_rejected_alliance
+	}
+
+	after = {
+		FROM = {
+			country_event = {
+				id = equestria_activity.21
+				days = 1
+				random_days = 7
 			}
 		}
 	}
 }
 
-country_event = { #CER reaches out to NER to join
-	id = equestria_activity.20
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.20"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = CER
-		exists = yes
-		is_faction_leader = yes
-		date > 1052.1.1
-		NER = {
-			exists = yes
-			NOT = { is_subject_of = SLE }
-		}
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		NER = {
-			country_event = equestria_activity.21
-		}
-	}
-}
-
-country_event = { #NER gets to choose if they join CER's faction or not
+country_event = { #CER receives the targeted country's response, and can prepare for a smackdown if rejected
 	id = equestria_activity.21
 	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.21"}
 	title = equestria_activity.21.t
-	desc = equestria_activity.21.d
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CER_accepted_alliance
+			}
+		}
+		text = equestria_activity.21.d_a
+	}
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CER_rejected_alliance
+			}
+		}
+		text = equestria_activity.21.d_b
+	}
 	
 	is_triggered_only = yes
 	
 	option = { #We will restore what Equestria once was, together!
 		name = equestria_activity.21.a
-		ai_chance = {
-			modifier = { is_historical_focus_on = yes add = 10 }
+		trigger = {
+			FROM = {
+				has_country_flag = CER_accepted_alliance
+			}
 		}
-		CER = { add_to_faction = NER }
+		add_to_faction = FROM
+		FROM = { clr_country_flag = CER_accepted_alliance }
 	}
-	option = { #We can't make a deal with them!
+	option = { #Freedom from Daybreaker is non-negotiable!
 		name = equestria_activity.21.b
-		ai_chance = {
-			modifier = { has_war_with = WHY factor = 0 }
-		}
-		CER = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = NER
-			}
-		}
-	}
-}
-
-country_event = { #CER sends an invitation to BLS
-	id = equestria_activity.22
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.22"}
-	hidden = yes
-	
-	trigger = {
-		original_tag = CER
-		exists = yes
-		is_faction_leader = yes
-		BLS = {
-			exists = yes
-			NOT = { is_subject_of = SLE }
-		}
-		date > 1052.3.1
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		BLS = {
-			country_event = equestria_activity.23
-		}
-	}
-}
-
-country_event = { #BLS is allowed to choose if they join CER's faction or not
-	id = equestria_activity.23
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.23"}
-	title = equestria_activity.23.t
-	desc = equestria_activity.23.d
-	
-	is_triggered_only = yes
-	
-	option = { #So long as we are allowed to continue our science projects!
-		name = equestria_activity.23.a
-		ai_chance = {
-			modifier = { is_historical_focus_on = yes add = 10 }
-		}
 		trigger = {
-			NOT = { has_country_flag = BLS_solar_flare_resurrected }
-		}
-		CER = { add_to_faction = BLS }
-	}
-	option = { #We have done fine on our own!
-		name = equestria_activity.23.b
-		trigger = {
-			NOT = { has_country_flag = BLS_solar_flare_resurrected }
-		}
-		ai_chance = {
-			modifier = { has_war_with = WHY factor = 0 }
-		}
-		CER = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = BLS
+			FROM = {
+				has_country_flag = CER_rejected_alliance
 			}
 		}
-	}
-	option = { #They think that they are my equals?!
-		name = equestria_activity.23.c
-		trigger = { has_country_flag = BLS_solar_flare_resurrected }
-		CER = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = BLS
-			}
-		}
-	}
-}
-
-country_event = { #CER prepares to finish off WHY
-	id = equestria_activity.24
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.24"}
-	title = equestria_activity.24.t
-	desc = equestria_activity.24.d
-	
-	trigger = {
-		original_tag = CER
-		exists = yes
-		has_war = no
-		is_faction_leader = yes
-		date > 1054.1.1
-		CLD = {
-			OR = {
-				exists = no
-				is_in_faction_with = ROOT
-			}
-		}
-		CER = {
-			OR = {
-				exists = no
-				is_in_faction_with = ROOT
-			}
-		}
-		NER = {
-			OR = {
-				exists = no
-				is_in_faction_with = ROOT
-			}
-		}
-		BLS = {
-			OR = {
-				exists = no
-				is_in_faction_with = ROOT
-			}
-		}
-		WHY = {
-			exists = yes
-			NOT = { is_subject_of = SLE }
-		}
-	}
-	
-	fire_only_once = yes
-	
-	option = { #We must stabilize before we can focus on the true enemy
-		name = equestria_activity.24.a
 		create_wargoal = {
-			target = WHY
+			target = FROM
 			type = puppet_wargoal_focus
 		}
 	}
 }
 
-country_event = { #CER creates a united heartlands
-	id = equestria_activity.25
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.25"}
-	title = equestria_activity.25.t
-	desc = equestria_activity.25.d
-	
-	trigger = {
-		original_tag = CER
-		OR = {
-			WHY = { is_subject_of = ROOT }
-			NOT = { country_exists = WHY }
-		}
-		exists = yes
-		is_subject = no
+country_event = { #CER proposes complete integration to fight against Daybreaker
+	id = equestria_activity.22
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.22"}
+	title = equestria_activity.22.t
+	desc = equestria_activity.22.d
+
+	is_triggered_only = yes
+
+	option = { #We must integrate to survive!
+		name = equestria_activity.22.a
+		set_country_flag = CER_accepted_integration
 	}
-	
-	fire_only_once = yes
-	
-	option = { #We must integrate to fight the Solarists!
-		name = equestria_activity.25.a
-		set_cosmetic_tag = CER_equestrian_heart
-		annex_country = {
-			target = CLD
-			transfer_troops = yes
-		}
-		if = {
-			limit = {
-				country_exists = NER
-			}
-			annex_country = {
-				target = NER
-				transfer_troops = yes
+	option = { #Autonomous region is acceptable.
+		name = equestria_activity.22.b
+		set_country_flag = CER_compromise_integration
+	}
+	option = { #This was a ploy! Never!
+		name = equestria_activity.22.c
+		set_country_flag = CER_rejected_integration
+	}
+
+	after = {
+		FROM = {
+			country_event = {
+				id = equestria_activity.23
+				days = 1
+				random_days = 3
 			}
 		}
-		if = {
-			limit = {
-				country_exists = BLS
-			}
-			annex_country = {
-				target = BLS
-				transfer_troops = yes
-			}
-		}
-		if = {
-			limit = {
-				country_exists = WHY
-			}
-			annex_country = {
-				target = WHY
-				transfer_troops = yes
-			}
-		}
-		if = {
-			limit = {
-				country_exists = EQS
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = EQS
-			}
-		}
-		if = {
-			limit = {
-				country_exists = SLW
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = SLW
-			}
-		}
-		every_state = {
-			limit = {
-				OR = {
-					is_core_of = BLS
-					is_core_of = WHY
-					is_core_of = NER
-					is_core_of = CLD
-				}
-			}
-			add_core_of = ROOT
-		}
-		news_event = fhequusnews.4
 	}
 }
 
-country_event = { #CER unites the heartlands completely with EQS's conquest
-	id = equestria_activity.26
-	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.26"}
-	title = equestria_activity.26.t
-	desc = equestria_activity.26.d
-	
-	trigger = {
-		original_tag = CER
-		exists = yes
-		NOT = { country_exists = SLW }
-		NOT = { country_exists = EQS }
+country_event = { #CER creates a united heartlands
+	id = equestria_activity.23
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.23"}
+	title = equestria_activity.23.t
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CER_accepted_integration
+			}
+		}
+		text = equestria_activity.23.d_a
+	}
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CER_compromise_integration
+			}
+		}
+		text = equestria_activity.23.d_b
+	}
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = CER_rejected_integration
+			}
+		}
+		text = equestria_activity.23.d_c
 	}
 	
-	fire_only_once = yes
+	is_triggered_only = yes
 	
-	option = { #We have achieved peace!
-		name = equestria_activity.26
-		set_cosmetic_tag = EQS_NEW
+	option = { #We must integrate to fight the Solarists!
+		name = equestria_activity.25.a
+		trigger = {
+			FROM = {
+				has_country_flag = CER_accepted_integration
+			}
+		}
+		annex_country = {
+			target = FROM
+			transfer_troops = yes
+		}
+		FROM = { clr_country_flag = CER_accepted_integration }
+	}
+	option = { #It's acceptable enough.
+		name = equestria_activity.25.b
+		trigger = {
+			FROM = {
+				has_country_flag = CER_compromise_integration
+			}
+		}
+		set_autonomy = {
+			target = FROM
+			autonomous_state = autonomy_puppet
+		}
+		FROM = { clr_country_flag = CER_compromise_integration }
+	}
+	option = { #Harmony is paramount, even if spread by the sword.
+		name = equestria_activity.25.c
+		trigger = {
+			FROM = {
+				has_country_flag = CER_rejected_integration
+			}
+		}
+		FROM = {
+			leave_faction = yes
+			clr_country_flag = CER_rejected_integration
+		}
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				NOT = { has_cosmetic_tag = CER_equestrian_heart }
+			}
+			set_cosmetic_tag = CER_equestrian_heart
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = CER_seen_news_event }
+			}
+			news_event = fhequusnews.4
+			set_country_flag = CER_seen_news_event
+		}
 		every_state = {
 			limit = {
-				is_core_of = EQS
+				is_core_of = FROM
 			}
 			add_core_of = ROOT
-		}
-		set_capital = { state = 3 }
-		set_province_name = { id = 179 name = renamed_canterlot }
-		hidden_effect = {
-			news_event = fhequusnews.5
 		}
 	}
 }
@@ -575,47 +560,145 @@ country_event = { #AWR is couped again by unhappy soldiers or sailors
 
 ###Griffonia###
 
-country_event = { #BRF forms free country federation
-	id = griffonia_activity.16
-	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.15"}
-	title = griffonia_activity.16.t
-	desc = griffonia_activity.16.d
-	hidden = yes
+country_event = { #BRF proposes to other free nation league members about unifying
+	id = griffonia_activity.1
+	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.1"}
+	title = griffonia_activity.1.t
+	desc = griffonia_activity.1.d
 	
-	trigger = {
-		original_tag = BRF
-		is_faction_leader = yes
-		date > 1052.5.1
+	is_triggered_only = yes
+	
+	option = { #We are stronger together.
+		name = griffonia_activity.1.a
+		set_country_flag = FH_accepted_league_integration
+		ai_chance = {
+			factor = 2
+		}
 	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = griffonia_activity.16.a
-		annex_country = {
-			target = LUS
-			transfer_troops = yes
+	option = { #We would be agreeable to some integration.
+		name = griffonia_activity.1.b
+		set_country_flag = FH_league_integration_compromise
+		ai_chance = {
+			factor = 2
 		}
-		annex_country = {
-			target = GRY
-			transfer_troops = yes
+	}
+	option = { #A nonsense proposal. We work together as allies.
+		name = griffonia_activity.1.c
+		set_country_flag = FH_league_integration_rejection
+		ai_chance = {
+			factor = 1
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
 		}
-		annex_country = {
-			target = GRU
-			transfer_troops = yes
+	}
+	option = { #He's no better than the Empire! It's been a farce the entire time!
+		name = griffonia_activity.1.e
+		set_country_flag = FH_league_integration_complete_rejection
+		ai_chance = {
+			factor = 1
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
 		}
-		every_state = {
+	}
+
+	after = {
+		FROM = {
+			country_event = {
+				id = griffonia_activity.2
+				days = 1
+				random_days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Consequences of the integration proposal
+	id = griffonia_activity.2
+	immediate = {log = "[GetDateText]: [Root.GetName] event griffonia_activity.2"}
+	title = griffonia_activity.2.t
+	desc = {
+		trigger = { FROM = { has_country_flag = FH_accepted_league_integration } }
+		text = griffonia_activity.2.d_a
+	}
+	desc = {
+		trigger = { FROM = { has_country_flag = FH_league_integration_compromise } }
+		text = griffonia_activity.2.d_b
+	}
+	desc = {
+		trigger = { FROM = { has_country_flag = FH_league_integration_rejection } }
+		text = griffonia_activity.2.d_c
+	}
+	desc = {
+		trigger = { FROM = { has_country_flag = FH_league_integration_complete_rejection } }
+		text = griffonia_activity.2.d_d
+	}
+
+	option = { #Excellent!/An acceptable compromise/They will see reason eventually/Everygriff will be free of communism, whether they like it or not!
+		name = griffonia_activity.2.a #This should be scripted loc
+		if = {
 			limit = {
-				OR = {
-					is_core_of = LUS
-					is_core_of = GRY
-					is_core_of = GRU
-					is_claimed_by = GRU
+				FROM = {
+					has_country_flag = FH_accepted_league_integration
 				}
 			}
-			add_core_of = BRF
+			FROM = { clr_country_flag = FH_accepted_league_integration }
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
 		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_country_flag = FH_league_integration_compromise
+				}
+			}
+			FROM = { clr_country_flag = FH_league_integration_compromise }
+			set_autonomy = {
+				target = FROM
+				autonomous_state = autonomy_puppet
+			}
+		}
+		else_if = {
+			limit = {
+				FROM = {
+					has_country_flag = FH_league_integration_rejection
+				}
+			}
+			FROM = { clr_country_flag = FH_league_integration_rejection }
+			add_stability = -0.02
+			add_political_power = -25
+		}
+		else = {
+			FROM = { clr_country_flag = FH_league_integration_complete_rejection }
+			FROM = {
+				FROM = { clr_country_flag = FH_league_integration_complete_rejection }
+				leave_faction = yes
+			}
+			create_wargoal = {
+				target = FROM
+				type = annex_everything
+			}
+		}
+	}
+
+	after = {
 		set_cosmetic_tag = BRF_united
+		hidden_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = FROM
+						is_claimed_by = FROM
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
 	}
 }
 
