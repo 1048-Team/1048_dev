@@ -2364,3 +2364,39 @@ FH_demo_CRY_skeleton_category = {
         }
     }
 }
+FH_demo_BRF_skeleton_category = {
+    BRF_propose_unification = {
+        available = {
+            date > 1051.12.31
+            is_subject = no
+            is_faction_leader = yes
+            any_other_country = {
+                OR = {
+                    tag = LUS
+                    tag = GRY
+                    tag = GRU
+                }
+                is_in_faction_with = ROOT
+            }
+        }
+        cost = 50
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BRF_propose_unification"
+            every_other_country = {
+                limit = {
+                    OR = {
+                        tag = LUS
+                        tag = GRY
+                        tag = GRU
+                    }
+                    is_in_faction_with = ROOT
+                }
+                country_event = griffonia_activity.1
+            }
+        }
+        ai_will_do = {
+            factor = 1000
+        }
+    }
+}
