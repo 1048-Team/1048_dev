@@ -2159,16 +2159,213 @@ FH_demo_equus_heartland_skeleton_category = {
         }
         cost = 150
         days_remove = 70
+        fire_only_once = yes
         modifier = {
             political_power_gain = -0.15
             consumer_goods_factor = 0.25
         }
         remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_end_the_hunt"
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_council_funds_for_industry"
             remove_ideas = CER_lacking_urbanization
             remove_ideas = CER_equestrias_breadbasket
         }
         ai_will_do = { factor = 1 }
+    }
+    CER_recognize_daybreakers_threat = {
+        visible = {
+            tag = CER
+            date > 1051.4.17
+            is_subject = no
+            CLD = {
+                exists = yes
+                is_subject = no
+            }
+        }
+        cost = 75
+        days_remove = 35
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_recognize_daybreakers_threat"
+            CLD = { country_event = equestria_activity.19 }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CER_expand_defense_faction_membership = {
+        visible = {
+            tag = CER
+            date > 1053.1.1
+            is_faction_leader = yes
+            is_subject = no
+            any_other_country = {
+                OR = {
+                    tag = NER
+                    tag = BLS
+                    tag = WHY
+                }
+                NOT = { has_country_flag = CER_rejected_alliance }
+                NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+                is_subject = no
+            }
+        }
+        cost = 50
+        days_remove = 14
+        days_re_enable = 60
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_expand_defense_faction_membership"
+            random_other_country = {
+                limit = {
+                    OR = {
+                        tag = NER
+                        tag = BLS
+                        tag = WHY
+                    }
+                    is_subject = no
+                    NOT = { has_country_flag = CER_rejected_alliance }
+                    NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+                }
+                country_event = equestria_activity.20
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CER_topple_the_mad_inquisitor = {
+        visible = {
+            tag = CER
+            date > 1054.1.1
+            is_faction_leader = yes
+            is_subject = no
+            WHY = {
+                exists = yes
+                NOT = { is_subject_of = SLE }
+                has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+            }
+        }
+        cost = 25
+        days_remove = 35
+        war_with_on_remove = WHY
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_topple_the_mad_inquisitor"
+            create_wargoal = {
+                target = WHY
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    CER_a_complete_front = {
+        visible = {
+            tag = CER
+            CLD = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+            BLS = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+            NER = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+            WHY = {
+                OR = {
+                    exists = no
+                    is_in_faction_with = ROOT
+                }
+            }
+        }
+        cost = 75
+        days_remove = 70
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_a_complete_front"
+            every_other_country = {
+                limit = {
+                    OR = {
+                        tag = NER
+                        tag = CLD
+                        tag = BLS
+                        tag = WHY
+                    }
+                    is_in_faction_with = ROOT
+                    exists = yes
+                }
+                country_event = equestria_activity.22
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    CER_beat_down_EQS = {
+        visible = {
+            tag = CER
+            date > 1055.1.1
+            is_subject = no
+            country_exists = SLE
+        }
+        cost = 50
+        days_remove = 70
+        war_with_on_remove = EQS
+        war_with_on_remove = SLW
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_beat_down_EQS"
+            create_wargoal = {
+                target = SLE
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    CER_united_at_last = {
+        visible = {
+            tag = CER
+            owns_state = 3
+            NOT = { country_exists = SLE }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision CER_united_at_last"
+            set_cosmetic_tag = EQS_NEW
+            every_state = {
+                limit = {
+                    is_core_of = EQS
+                }
+                add_core_of = ROOT
+            }
+            set_capital = { state = 3 }
+            set_province_name = { id = 179 name = renamed_canterlot }
+            hidden_effect = {
+                news_event = fhequusnews.5
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
     }
     CLD_redelegate_responsibilities = {
         visible = {
