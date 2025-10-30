@@ -1865,3 +1865,1011 @@ TRD_formables_category = {
 		}
 	}
 }
+EQC_formables_category = {
+	EQC_always_griffonian = {
+		available = {
+			GRI = { all_original_cores_owned_by_ROOT = yes }
+			BOI = { all_original_cores_owned_by_ROOT = yes }
+			JER = { all_original_cores_owned_by_ROOT = yes }
+			TRD = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { GRI.original_cores = THIS }
+					is_in_array = { BOI.original_cores = THIS }
+					is_in_array = { JER.original_cores = THIS }
+					is_in_array = { TRD.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_always_griffonian"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { GRI.original_cores = THIS }
+						is_in_array = { BOI.original_cores = THIS }
+						is_in_array = { JER.original_cores = THIS }
+						is_in_array = { TRD.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_always_evian = {
+		available = {
+			owns_state = 508
+			owns_state = 608
+			owns_state = 598
+			owns_state = 512
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { global.league_states = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_always_evian"
+			every_state = {
+				limit = {
+					is_in_array = { global.league_states = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_unpony_limelight = {
+		available = {
+			RCT = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { RCT.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_limelight"
+			every_state = {
+				limit = {
+					is_in_array = { RCT.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			#set_province_name here for 5013
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_hug_MIT = {
+		available = {
+			MIT = { is_in_faction_with = ROOT }
+		}
+		visible = {
+			date > 1053.1.1
+			tag = EQC
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_hug_MIT"
+			#Event for demanding subjugation of MIT
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_GRIFFSOC = {
+		available = {
+			FAT = { all_cores_owned_by_ROOT_or_subject = yes }
+            JER = { all_cores_owned_by_ROOT_or_subject = yes }
+            GRI = { all_cores_owned_by_ROOT_or_subject = yes }
+            MIT = { all_cores_owned_by_ROOT_or_subject = yes }
+            BRF = { all_cores_owned_by_ROOT_or_subject = yes }
+            TRD = { all_cores_owned_by_ROOT_or_subject = yes }
+            SIC = { all_cores_owned_by_ROOT_or_subject = yes }
+            BOI = { all_cores_owned_by_ROOT_or_subject = yes }
+            LUS = { all_cores_owned_by_ROOT_or_subject = yes }
+            GRU = { all_cores_owned_by_ROOT_or_subject = yes }
+            HLQ = { all_cores_owned_by_ROOT_or_subject = yes }
+            GRY = { all_cores_owned_by_ROOT_or_subject = yes }
+            BAR = { all_cores_owned_by_ROOT_or_subject = yes }
+            NIM = { all_cores_owned_by_ROOT_or_subject = yes }
+            LNS = { all_cores_owned_by_ROOT_or_subject = yes }
+            RCT = { all_cores_owned_by_ROOT_or_subject = yes }
+            FBK = { all_cores_owned_by_ROOT_or_subject = yes }
+            BAK = { all_cores_owned_by_ROOT_or_subject = yes }
+            HLR = { all_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_on_continent = asia
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_GRIFFSOC"
+			set_country_flag = EQC_complete_griffonian_control
+			set_cosmetic_tag = EQC_griffonia
+			every_state = {
+				limit = {
+					is_on_continent = asia
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_said_the_line = {
+		available = {
+			has_country_flag = EQC_complete_griffonian_control
+		}
+		visible = {
+			has_country_flag = EQC_complete_griffonian_control
+			date > 1056.1.1
+			tag = EQC
+		}
+		fire_only_once = yes
+		days_remove = 180
+		complete_effect = {
+			#News event warning of Marelandia's declaration that the world will fall to MARESOC and love Big Sister
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove EQC_said_the_line"
+			every_country = {
+				limit = {
+					exists = yes
+					NOT = { is_subject_of = ROOT }
+				}
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				date < 1057.1.1
+				factor = 0
+			}
+		}
+	}
+	EQC_always_daybreaker = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = EQC_controls_all_original_EQS_territory
+				all_of_scopes = {
+					array = global.EQS_starting_territory
+					is_controlled_by = ROOT
+				}
+				all_of_scopes = {
+					array = global.EQS_original_territory
+					is_controlled_by = ROOT
+				}
+				NOT = { is_core_of = STG }
+			}
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { global.EQS_starting_territory = THIS }
+					is_in_array = { global.EQS_original_territory = THIS }
+				}
+				NOT = { is_core_of = STG }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_always_daybreaker"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { global.EQS_starting_territory = THIS }
+						is_in_array = { global.EQS_original_territory = THIS }
+					}
+					NOT = { is_core_of = STG }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_unpony_chrysalis = {
+		available = {
+			CHN = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { CHN.original_cores = THIS }
+				NOT = { is_in_array = { global.EQS_original_territory = THIS } }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_chrysalis"
+			every_state = {
+				limit = {
+					is_in_array = { CHN.original_cores = THIS }
+					NOT = { is_in_array = { global.EQS_original_territory = THIS } }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_unpony_caramel_marks = {
+		available = {
+			STG = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { STG.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_caramel_marks"
+			every_state = {
+				limit = {
+					is_in_array = { STG.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			#Name change
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	EQC_the_party_rules_all = {
+		available = {
+				#Needs to be a trigger for ALL starting Zebrican countries to be owned by EQC
+		}
+		visible = { tag = EQC }
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1202
+				state = 1204
+				state = 712
+				state = 697
+				state = 733
+				state = 775
+				state = 741
+				state = 937
+				state = 875
+				state = 1223
+				state = 721
+				state = 1176
+				state = 1168
+				state = 1059
+				state = 1071
+				state = 909
+				state = 982
+				state = 1009
+				state = 1017
+				state = 868
+				state = 874
+				state = 995
+				state = 956
+				state = 949
+				state = 900
+				state = 1208
+				state = 834
+				state = 810
+				state = 790
+				state = 1106
+				state = 1137
+				state = 1139
+				state = 1158
+				state = 726
+				state = 1054
+				state = 1135
+				state = 1040
+				state = 1036
+				state = 1047
+				state = 784
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision EQC_the_party_rules_all"
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 1202
+						state = 1204
+						state = 712
+						state = 697
+						state = 733
+						state = 775
+						state = 741
+						state = 937
+						state = 875
+						state = 1223
+						state = 721
+						state = 1176
+						state = 1168
+						state = 1059
+						state = 1071
+						state = 909
+						state = 982
+						state = 1009
+						state = 1017
+						state = 868
+						state = 874
+						state = 995
+						state = 956
+						state = 949
+						state = 900
+						state = 1208
+						state = 834
+						state = 810
+						state = 790
+						state = 1106
+						state = 1137
+						state = 1139
+						state = 1158
+						state = 726
+						state = 1054
+						state = 1135
+						state = 1040
+						state = 1036
+						state = 1047
+						state = 784
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SIC_MIT_mares_mares_mares = {
+		available = {
+			356 = { is_owned_and_controlled_by = ROOT }
+		}
+		visible = {
+			NOT = { tag = EQC }
+			NOT = { country_exists = EQC }
+			356 = { is_owned_and_controlled_by = ROOT }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { EQC.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision SIC_MIT_mares_mares_mares"
+			every_state = {
+				limit = {
+					is_in_array = { EQC.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = EQC_maresoc
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+BRF_formables_category = {
+	BRF_revive_coltstream_treaty = {
+		available = {
+			RCT = { all_original_cores_owned_by_ROOT_or_ally = yes }
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_splintered_RCT }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { RCT.original_cores = THIS }
+					is_in_array = { BAR.original_cores = THIS }
+					is_in_array = { NIM.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_revive_coltstream_treaty"
+			#Break up RCT; event for BAK
+			set_global_flag = BRF_splintered_RCT
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BRF_request_peace = {
+		available = {
+			OR = {
+				date > 1051.1.1
+				threat > 0.33
+			}
+			country_exists = HLR
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_requested_HLR_join }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_request_peace"
+			#Event for inviting HLR, or perhaps generic to do that
+			set_global_flag = BRF_requested_HLR_join
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				NOT = { tag = BRF }
+				date < 1052.1.1
+				factor = 0
+			}
+		}
+	}
+	BRF_ponies_united = {
+		available = {
+			OR = {
+				date > 1051.1.1
+				threat > 0.33
+			}
+			country_exists = FBK
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_requested_FBK_join }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_ponies_united"
+			#Event for inviting FBK; probably generic loc
+			set_global_flag = BRF_requested_FBK_join
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				NOT = { tag = BRF }
+				date < 1052.1.1
+				factor = 0
+			}
+		}
+	}
+	BRF_big_stonks = {
+		available = {
+			OR = {
+				date > 1052.1.1
+				threat > 0.45
+			}
+			country_exists = TRD
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_requested_TRD_join }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_big_stonks"
+			#Event for inviting TRD
+			set_global_flag = BRF_requested_TRD_join
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				NOT = { tag = BRF }
+				date < 1053.1.1
+				factor = 0
+			}
+		}
+	}
+	BRF_zealous_republicans = {
+		available = {
+			OR = {
+				date > 1052.6.1
+				threat > 0.5
+			}
+			country_exists = FAT
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_requested_FAT_join }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_zealous_republicans"
+			#Event for inviting FAT
+			set_global_flag = BRF_requested_FAT_join
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				NOT = { tag = BRF }
+				date < 1053.6.1
+				factor = 0
+			}
+		}
+	}
+	BRF_return_the_exiles = {
+		available = {
+			OR = {
+				date > 1054.1.1
+				threat > 0.6
+			}
+			country_exists = WNG
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_requested_WNG_join }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_return_the_exiles"
+			#Event for inviting WNG
+			set_global_flag = BRF_requested_WNG_join
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				NOT = { tag = BRF }
+				date < 1055.1.1
+				factor = 0
+			}
+		}
+	}
+	BRF_herzland_stability = {
+		available = {
+			GRI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_splintered_GRI }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { GRI.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_herzland_stability"
+			#Splinter nations
+			set_global_flag = BRF_splintered_GRI
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BRF_southern_restoration = {
+		available = {
+			EQC = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			MIT = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			SIC = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			JER = { all_original_cores_owned_by_ROOT_or_ally = yes }
+		}
+		visible = {
+			NOT = { has_global_flag = BRF_splintered_EQC }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { EQC.original_cores = THIS }
+					is_in_array = { SIC.original_cores = THIS }
+					is_in_array = { MIT.original_cores = THIS }
+					is_in_array = { JER.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_southern_restoration"
+			#Splinter nations, assign cosmetic tags
+			set_global_flag = BRF_splintered_EQC
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+BAK_formables_category = {
+	BAK_secure_frontlines = {
+		available = {
+			FBK = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				is_in_array = { FBK.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BAK_secure_frontlines"
+			every_state = {
+				limit = {
+					is_in_array = { FBK.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BAK_spread_constitutional_monarchism = {
+		available = {
+			HLR = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { HLR.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BAK_spread_constitutional_monarchism"
+			every_state = {
+				limit = {
+					is_in_array = { HLR.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BAK_manifest_destiny = {
+		available = {
+			RCT = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { RCT.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BAK_manifest_destiny"
+			every_state = {
+				limit = {
+					is_in_array = { RCT.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+	BAK_managed_democracy = {
+		available = {
+			FAT = { all_cores_owned_by_ROOT_or_subject = yes }
+            JER = { all_cores_owned_by_ROOT_or_subject = yes }
+            GRI = { all_cores_owned_by_ROOT_or_subject = yes }
+            MIT = { all_cores_owned_by_ROOT_or_subject = yes }
+            BRF = { all_cores_owned_by_ROOT_or_subject = yes }
+            TRD = { all_cores_owned_by_ROOT_or_subject = yes }
+            SIC = { all_cores_owned_by_ROOT_or_subject = yes }
+            BOI = { all_cores_owned_by_ROOT_or_subject = yes }
+            LUS = { all_cores_owned_by_ROOT_or_subject = yes }
+            GRU = { all_cores_owned_by_ROOT_or_subject = yes }
+            HLQ = { all_cores_owned_by_ROOT_or_subject = yes }
+            GRY = { all_cores_owned_by_ROOT_or_subject = yes }
+            BAR = { all_cores_owned_by_ROOT_or_subject = yes }
+            NIM = { all_cores_owned_by_ROOT_or_subject = yes }
+            LNS = { all_cores_owned_by_ROOT_or_subject = yes }
+            RCT = { all_cores_owned_by_ROOT_or_subject = yes }
+            FBK = { all_cores_owned_by_ROOT_or_subject = yes }
+            EQC = { all_cores_owned_by_ROOT_or_subject = yes }
+            HLR = { all_cores_owned_by_ROOT_or_subject = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_on_continent = asia
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BAK_managed_democracy"
+			every_state = {
+				limit = {
+					is_on_continent = asia
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = BAK_grif
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+RCT_formables_category = {
+	RCT_safe_society = {
+		available = {
+			BRF = { all_original_cores_owned_by_ROOT = yes }
+			LUS = { all_original_cores_owned_by_ROOT = yes }
+			GRU = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			GRY = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = RCT }
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { BRF.original_cores = THIS }
+					is_in_array = { LUS.original_cores = THIS }
+					is_in_array = { GRU.original_cores = THIS }
+					is_in_array = { GRY.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision RCT_safe_society"
+			effect_tooltip = {
+				release_autonomy = {
+					target = BRF
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							is_in_array = { LUS.original_cores = THIS }
+							is_in_array = { GRU.original_cores = THIS }
+							is_in_array = { GRY.original_cores = THIS }
+						}
+					}
+					add_core_of = BRF
+					transfer_state_to = BRF
+				}
+				set_autonomy = {
+					target = BRF
+					autonomous_state = autonomy_puppet
+				}
+			}
+			BRF = { set_cosmetic_tag = BRF_RCT }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	RCT_secure_society = {
+		available = {
+			SIC = { all_original_cores_owned_by_ROOT = yes }
+			MIT = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = RCT }
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { MIT.original_cores = THIS }
+					is_in_array = { SIC.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision RCT_secure_society"
+			release_autonomy = {
+				target = MIT
+				autonomous_state = autonomy_puppet
+			}
+			release = {
+				target = SIC
+				autonomous_state = autonomy_puppet
+			}
+			MIT = { set_cosmetic_tag = MIT_RCT }
+			SIC = { set_cosmetic_tag = SIC_RCT }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	RCT_dead_reds = {
+		available = {
+			EQC = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = RCT }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { EQC.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision RCT_dead_reds"
+			release_autonomy = {
+				target = EQC
+				autonomous_state = autonomy_puppet
+			}
+			EQC = { set_cosmetic_tag = EQC_RCT }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	RCT_end_griffonian_war = {
+		available = {
+			GRI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { tag = RCT }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { GRI.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision RCT_end_griffonian_war"
+			release_autonomy = {
+				target = GRI
+				autonomous_state = autonomy_puppet
+			}
+			GRI = { set_cosmetic_tag = GRI_RCT }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	RCT_somehow_RCT_returned = {
+		available = {
+			RCT = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = {
+			OR = {
+				tag = BAR
+				tag = NIM
+				tag = LNS
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { RCT.original_cores = THIS }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision RCT_somehow_RCT_returned"
+			every_state = {
+				limit = {
+					is_in_array = { RCT.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = RCT_new_order
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+FBK_formables_category = {
+	FBK_pony_kingdom = {
+		available = {
+			BAK = { all_original_cores_owned_by_ROOT = yes }
+			RCT = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { BAK.original_cores = THIS }
+					is_in_array = { RCT.original_cores = THIS }
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision FBK_pony_kingdom"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { BAK.original_cores = THIS }
+						is_in_array = { RCT.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+
+###Zebrica###
+MCW_formables_category = {
+	MCW_grand_poobah = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = MCW_owns_all_lost_territory_tt
+				720 = { is_owned_by = ROOT }
+				806 = { is_owned_by = ROOT }
+				717 = { is_owned_by = ROOT }
+				718 = { is_owned_by = ROOT }
+				724 = { is_owned_by = ROOT }
+				726 = { is_owned_by = ROOT }
+				727 = { is_owned_by = ROOT }
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 720
+				state = 724
+				state = 717
+				state = 718
+				state = 806
+				state = 726
+				state = 727
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision MCW_grand_poobah"
+			add_stability = 0.075
+			add_political_power = 100
+			726 = { add_core_of = ROOT }
+			727 = { add_core_of = ROOT }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	MCW_stonk_ports = {
+		available = {
+			OR = {
+				1168 = { is_owned_by = ROOT }
+				1169 = { is_owned_by = ROOT }
+				1176 = { is_owned_by = ROOT }
+				1185 = { is_owned_by = ROOT }
+				1163 = { is_owned_by = ROOT }
+				1181 = { is_owned_by = ROOT }
+				1097 = { is_owned_by = ROOT }
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1168
+				state = 1169
+				state = 1176
+				state = 1185
+				state = 1163
+				state = 1181
+				state = 1097
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision MCW_stonk_ports"
+			1168 = { add_core_of = ROOT }
+			1169 = { add_core_of = ROOT }
+			1176 = { add_core_of = ROOT }
+			1185 = { add_core_of = ROOT }
+			1163 = { add_core_of = ROOT }
+			1181 = { add_core_of = ROOT }
+			1097 = { add_core_of = ROOT }
+			#Event for any holders of core territory not owned by MCW to hand it over or war
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
