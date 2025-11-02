@@ -396,6 +396,22 @@ HIP_AI_category = {
             factor = 100
         }
     }
+    end_legation_city_status = {
+        available = {
+            WIN = { all_original_cores_owned_by_ROOT = yes }
+        }
+        days_remove = 7
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove end_legation_city_status"
+            every_state = {
+                limit = {
+                    is_core_of = WIN
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
     HPS_reunite_with_the_party = {
         allowed = {
             tag = HPS
@@ -415,6 +431,79 @@ HIP_AI_category = {
                     id = zebrica_activity.1
                 }
             }
+        }
+    }
+    HPS_proclaim_perfect_zebrican_socialism = {
+        allowed = {
+            tag = HPS
+        }
+        available = {
+            HIP_civil_war_over = yes
+            BAT = { all_original_cores_owned_by_ROOT = yes }
+            ZAR = { all_original_cores_owned_by_ROOT = yes }
+            NZA = { all_original_cores_owned_by_ROOT = yes }
+            CTH = { all_original_cores_owned_by_ROOT = yes }
+            custom_trigger_tooltip = {
+                tooltip = HPS_owns_possible_MCW_cores_tt
+                all_of_scopes = {
+                    array = MCW.original_cores
+                    OR = {
+                        is_owned_by = ROOT
+                        AND = {
+                            NOT = { country_exists = MCW }
+                            is_owned_by = MIT
+                        }
+                    }
+                }
+            }
+            CTL = { all_original_cores_owned_by_ROOT = yes }
+            LMB = { all_original_cores_owned_by_ROOT = yes }
+            CGI = { all_original_cores_owned_by_ROOT = yes }
+        }
+        highlight_states = {
+            highlight_states_trigger = {
+                OR = {
+                    is_in_array = { BAT.original_cores = THIS }
+                    is_in_array = { ZAR.original_cores = THIS }
+                    is_in_array = { NZA.original_cores = THIS }
+                    is_in_array = { CTH.original_cores = THIS }
+                    is_in_array = { CTL.original_cores = THIS }
+                    is_in_array = { LMB.original_cores = THIS }
+                    is_in_array = { CGI.original_cores = THIS }
+                    AND = {
+                        is_in_array = { MCW.original_cores = THIS }
+                        is_owned_by = ROOT
+                    }
+                }
+            }
+        }
+        fire_only_once = yes
+        days_remove = 21
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove HPS_proclaim_perfect_zebrican_socialism"
+            set_cosmetic_tag = HPS_north_zebrica
+            every_state = {
+                limit = {
+                    OR = {
+                        is_in_array = { BAT.original_cores = THIS }
+                        is_in_array = { ZAR.original_cores = THIS }
+                        is_in_array = { NZA.original_cores = THIS }
+                        is_in_array = { CTH.original_cores = THIS }
+                        is_in_array = { CTL.original_cores = THIS }
+                        is_in_array = { LMB.original_cores = THIS }
+                        is_in_array = { CGI.original_cores = THIS }
+                        AND = {
+                            is_in_array = { MCW.original_cores = THIS }
+                            is_owned_by = ROOT
+                        }
+                    }
+                }
+                add_core_of = ROOT
+                #News event for such
+            }
+        }
+        ai_will_do = {
+            factor = 100
         }
     }
     HIP_consider_backstabbing = {
