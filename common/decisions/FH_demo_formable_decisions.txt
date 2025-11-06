@@ -3365,3 +3365,1558 @@ BAT_formables_category = {
 		}
 	}
 }
+BRS_formables_category = {
+	BRS_hindian_support_center = {
+		available = {
+			CTL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { CTL.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRS_hindian_support_center"
+			set_cosmetic_tag = HIN_UNI
+			every_state = {
+				limit = {
+					is_in_array = { CTL.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BRS_fabulous = {
+		available = {
+			date > 1050.1.1
+		}
+		visible = {
+			NOT = { has_country_flag = BRS_sought_peace }
+		}
+		fire_only_once = yes
+		days_remove = 30
+		war_with_on_remove = KIR
+		complete_effect = {
+			set_country_flag = BRS_war_only_option
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove BRS_fabulous"
+			OVERLORD = {
+				set_autonomy = {
+					target = ROOT
+					autonomous_state = autonomy_free
+				}
+			}
+			leave_faction = yes
+			declare_war_on = {
+				target = KIR
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BRS_only_raj = {
+		available = {
+			KIR = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = {
+			has_country_flag = BRS_war_only_option
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { KIR.original_cores = THIS }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRS_only_raj"
+			every_state = {
+				limit = {
+					is_in_array = { KIR.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = BRS_JAM
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	BRS_kiria_now_best_friend = {
+		available = {
+			date > 1050.1.1
+		}
+		visible = {
+			NOT = { has_country_flag = BRS_war_only_option }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRS_kiria_now_best_friend"
+			#Country event to Kiria; war otherwise
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+KIR_formables_category = {
+	KIR_pat_zeb = {
+		available = {
+			ZOO = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			TAI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			MEL = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			ZLU = {
+				exists = yes
+				is_subject_of = ROOT
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
+					is_in_array = { MEL.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision KIR_pat_zeb"
+			add_to_variable = { KIR_decision_counter = 1 }
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { ZOO.original_cores = THIS }
+						is_in_array = { TAI.original_cores = THIS }
+						is_in_array = { MEL.original_cores = THIS }
+					}
+				}
+				add_core_of = ZLU
+				if = {
+					limit = {
+						is_owned_by = ROOT
+					}
+					transfer_state_to = ZLU
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	KIR_griffon_tribute = {
+		available = {
+			DEL = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			IDO = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			YAN = {
+				exists = yes
+				is_subject = no
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+					is_in_array = { YAN.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision KIR_griffon_tribute"
+			add_to_variable = { KIR_decision_counter = 1 }
+			#Event here
+			#Set cosmetic tag in it, too
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	KIR_befriend_centaurs = {
+		available = {
+			all_of_scopes = {
+				array = global.original_ancient_pact_states
+				tooltip = KIR_owns_all_ancient_pact_states_tt
+				OWNER = {
+					OR = {
+						tag = ROOT
+						is_subject_of = ROOT
+					}
+				}
+			}
+			CNT = {
+				OR = {
+					AND = {
+						exists = yes
+						is_subject = no
+					}
+					AND = {
+						exists = no
+						all_original_cores_owned_by_ROOT_or_subject = yes
+					}
+				}
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				if = {
+					limit = {
+						country_exists = CNT
+					}
+					is_in_array = { global.original_ancient_pact_states = THIS }
+				}
+				else = {
+					OR = {
+						is_in_array = { global.original_ancient_pact_states = THIS }
+						is_in_array = { CNT.original_cores = THIS }
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision KIR_befriend_centaurs"
+			add_to_variable = { KIR_decision_counter = 1 }
+			if = {
+				limit = {
+					CNT = {
+						exists = yes
+						is_subject = no
+					}
+				}
+				#Event here
+			}
+			else_if = {
+				limit = {
+					CNT = {
+						exists = no
+						all_original_cores_owned_by_ROOT_or_subject = yes
+					}
+				}
+				effect_tooltip = {
+					release_autonomy = {
+						target = CNT
+						autonomous_state = autonomy_puppet
+					}
+				}
+				CNT = { set_cosmetic_tag = CNT_KIR }
+				hidden_effect = {
+					every_state = {
+						limit = {
+							OR = {
+								is_in_array = { global.original_ancient_pact_states = THIS }
+								is_in_array = { CNT.original_cores = THIS }
+							}
+						}
+						transfer_state_to = CNT
+						if = {
+							limit = {
+								NOT = { is_core_of = CNT }
+							}
+							add_core_of = CNT
+						}
+					}
+					set_autonomy = {
+						target = CNT
+						autonomous_state = autonomy_puppet
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	KIR_griffonize_roam = {
+		available = {
+			ROA = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { ROA.original_cores = THIS }
+				NOT = { is_in_array = global.original_ancient_pact_states = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision KIR_griffonize_roam"
+			add_to_variable = { KIR_decision_counter = 1 }
+			effect_tooltip = {
+				release_autonomy = {
+					target = ROA
+					autonomous_state = autonomy_puppet
+				}
+			}
+			ROA = { set_cosmetic_tag = ROA_KIR }
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_in_array = { ROA.original_cores = THIS }
+						NOT = { is_in_array = { global.original_ancient_pact_states = THIS } }
+					}
+					transfer_state_to = ROA
+				}
+				set_autonomy = {
+					target = ROA
+					autonomous_state = autonomy_puppet
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	KIR_pat_deet = {
+		available = {
+			CTL = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			BRS = { is_subject_of = ROOT }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { CTL.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision KIR_pat_deet"
+			add_to_variable = { KIR_decision_counter = 1 }
+			every_state = {
+				limit = {
+					is_in_array = { CTL.original_cores = THIS }
+				}
+				add_core_of = BRS
+				if = {
+					limit = {
+						NOT = { is_owned_by = BRS }
+					}
+					transfer_state_to = BRS
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	KIR_harmonic_mandate = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = KIR_all_other_decisions_taken_tt
+				check_variable = { KIR_decision_counter = 5 }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision KIR_harmonic_mandate"
+			add_stability = 0.15
+			add_political_power = 200
+			every_possible_country = {
+				limit = {
+					is_subject_of = ROOT
+				}
+				add_autonomy_score = {
+					value = -500
+					localization = KIR_drop_dat_bass_tt
+				}
+			}
+			set_cosmetic_tag = KIR_ming_expy
+		}
+	}
+}
+NVA_formables_category = {
+	NVA_western_trek = {
+		available = {
+			date > 1051.1.1
+			country_exists = ZOO
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { ZOO.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		days_remove = 21
+		war_with_on_remove = ZOO
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove NVA_western_trek"
+			declare_war_on = {
+				target = ZOO
+				type = annex_everything
+			}
+			every_state = {
+				limit = {
+					is_in_array = { ZOO.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	NVA_south_east_boogaloo = {
+		available = {
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = IDO
+		war_with_on_remove = DEL
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove NVA_south_east_boogaloo"
+			if = {
+				limit = {
+					country_exists = IDO
+				}
+				declare_war_on = {
+					target = IDO
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = DEL
+				}
+				declare_war_on = {
+					target = DEL
+					type = annex_everything
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { IDO.original_cores = THIS }
+						is_in_array = { DEL.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	NVA_yank_north = {
+		available = {
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1057
+				state = 1086
+				state = 1058
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision NVA_yank_north"
+			#Event asking for north
+			#If playing nice, gain new cosmetic tag, Grand Zaikiria; either way, core states
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	NVA_channel_flame = {
+		available = {
+			owns_state = 1057
+			owns_state = 1058
+			owns_state = 1086
+		}
+		visible = { is_ai = no }
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = KIR
+		complete_effect = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			KIR = {
+				set_autonomy = {
+					target = ROOT
+					autonomous_state = autonomy_free
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove NVA_channel_flame"
+			declare_war_on = {
+				target = KIR
+				type = annex_everything
+			}
+		}
+	}
+	NVA_oh_no_nirik = {
+		available = {
+			KIR = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { is_ai = no }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { KIR.original_cores = THIS }
+				NOT = {
+					state = 1057
+					state = 1058
+					state = 1086
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision NVA_oh_no_nirik"
+			every_state = {
+				limit = {
+					is_in_array = { KIR.original_cores = THIS }
+					NOT = {
+						state = 1057
+						state = 1058
+						state = 1086
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = NVA_ASH
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+ZLU_formables_category = {
+	ZLU_drumbeat_march = {
+		available = {
+			date > 1050.6.20
+			OR = {
+				country_exists = TAI
+				country_exists = ZOO
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { TAI.original_cores = THIS }
+					is_in_array = { ZOO.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		days_remove = 21
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove ZLU_drumbeat_march"
+			if = {
+				limit = {
+					country_exists = TAI
+				}
+				declare_war_on = {
+					target = TAI
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = ZOO
+				}
+				declare_war_on = {
+					target = ZOO
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	ZLU_savage_march = {
+		available = {
+			TAI = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			ZOO = { all_original_cores_owned_by_ROOT_or_ally = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+					is_in_array = { MEL.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		days_remove = 28
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove ZLU_savage_march"
+			if = {
+				limit = {
+					country_exists = MEL
+				}
+				declare_war_on = {
+					target = MEL
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = DEL
+				}
+				declare_war_on = {
+					target = DEL
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = IDO
+				}
+				declare_war_on = {
+					target = IDO
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	ZLU_petition_senpai = {
+		available = {
+			TAI = { all_original_cores_owned_by_ROOT = yes }
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+			MEL = { all_original_cores_owned_by_ROOT = yes }
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { NVA.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
+					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+					is_in_array = { MEL.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision ZLU_petition_senpai"
+			#Event for NVA control from KIR
+			#Must be approved by NVA, too; if refused, lose puppet on them, allow ZLU to invade
+			#If approved, cosmetic tag of Zebride Protectorate
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { TAI.original_cores = THIS }
+						is_in_array = { ZOO.original_cores = THIS }
+						is_in_array = { IDO.original_cores = THIS }
+						is_in_array = { DEL.original_cores = THIS }
+						is_in_array = { MEL.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+TAI_formables_category = {
+	TAI_crush_splinter_states = {
+		available = {
+			MEL = { all_original_cores_owned_by_ROOT = yes }
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { MEL.original_cores = THIS }
+					is_in_array = { ZOO.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision TAI_crush_splinter_states"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { ZOO.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	TAI_sea_dive = {
+		available = {
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { DEL.original_cores = THIS }
+					is_in_array = { IDO.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision TAI_sea_dive"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { DEL.original_cores = THIS }
+						is_in_array = { IDO.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = TAI_EMP
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	TAI_set_the_sun = {
+		available = {
+			KIR = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { KIR.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision TAI_set_the_sun"
+			every_state = {
+				limit = {
+					is_in_array = { KIR.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+MEL_formables_category = {
+	MEL_slice_and_dice = {
+		available = {
+			TAI = { all_original_cores_owned_by_ROOT = yes }
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { MEL.original_cores = THIS }
+					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+					is_in_array = { IDO.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision MEL_slice_and_dice"
+			if = {
+				limit = {
+					country_exists = IDO
+				}
+				declare_war_on = {
+					target = IDO
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = DEL
+				}
+				declare_war_on = {
+					target = DEL
+					type = annex_everything
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { ZOO.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	MEL_western_vacation = {
+		available = {
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { DEL.original_cores = THIS }
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { CNT.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision MEL_western_vacation"
+			if = {
+				limit = {
+					country_exists = CNT
+				}
+				declare_war_on = {
+					target = CNT
+					type = annex_everything
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { DEL.original_cores = THIS }
+						is_in_array = { IDO.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	MEL_cloudy_with_chance_of_death = {
+		available = {
+			CNT = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { CNT.original_cores = THIS }
+					is_in_array = { ROA.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision MEL_cloudy_with_chance_of_death"
+			every_state = {
+				limit = {
+					is_in_array = { CNT.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					country_exists = ROA
+				}
+				create_wargoal = {
+					target = ROA
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					909 = { NOT = { is_owned_by = ROA } }
+				}
+				909 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								target = PREV
+								type = annex_everything
+							}
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	MEL_exact_vengeance = {
+		available = {
+			ROA = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { ROA.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision MEL_exact_vengeance"
+			every_state = {
+				limit = {
+					is_in_array = { ROA.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = MEL_SCY
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+ZOO_formables_category = {
+	ZOO_settle_legions = {
+		available = {
+			MEL = { all_original_cores_owned_by_ROOT = yes }
+			TAI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { MEL.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision ZOO_settle_legions"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { TAI.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = ZOO_LEG
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	ZOO_eastern_federatii = {
+		available = {
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { has_cosmetic_tag = ZOO_LEG }
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision ZOO_eastern_federatii"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { IDO.original_cores = THIS }
+						is_in_array = { DEL.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = ZOO_KIN
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	ZOO_expand_legacy = {
+		available = {
+			KIR = { all_original_cores_owned_by_ROOT = yes }
+			NVA = { all_original_cores_owned_by_ROOT = yes }
+			ZLU = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { has_cosmetic_tag = ZOO_KIN }
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { KIR.original_cores = THIS }
+					is_in_array = { NVA.original_cores = THIS }
+					is_in_array = { ZLU.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision ZOO_expand_legacy"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { KIR.original_cores = THIS }
+						is_in_array = { NVA.original_cores = THIS }
+						is_in_array = { ZLU.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = ZOO_NIR
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	ZOO_new_kaiser = {
+		available = {
+			ROA = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = { has_cosmetic_tag = ZOO_EMP }
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { ROA.original_cores = THIS }
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision ZOO_new_kaiser"
+			every_state = {
+				limit = {
+					is_in_array = { ROA.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = ZOO_KAI
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+IDO_formables_category = {
+	IDO_rush_reference = {
+		available = {
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { DEL.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision IDO_rush_reference"
+			every_state = {
+				limit = {
+					is_in_array = { DEL.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	IDO_anti_roam_homies = {
+		available = {
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+			MEL = { all_original_cores_owned_by_ROOT = yes }
+			TAI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { MEL.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision IDO_anti_roam_homies"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { ZOO.original_cores = THIS }
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { TAI.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					CNT = {
+						exists = yes
+						is_subject = no
+					}
+				}
+				#Event to ask to join federation
+			}
+			set_cosmetic_tag = IDO_FED
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+DEL_formables_category = {
+	DEL_enforce_faith = {
+		available = {
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { IDO.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision DEL_enforce_faith"
+			every_state = {
+				limit = {
+					is_in_array = { IDO.original_cores = yes }
+				}
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					country_exists = ZOO
+				}
+				create_wargoal = {
+					target = ZOO
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = TAI
+				}
+				create_wargoal = {
+					target = TAI
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = MEL
+				}
+				create_wargoal = {
+					target = MEL
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	DEL_protect_traditions = {
+		available = {
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+			MEL = { all_original_cores_owned_by_ROOT = yes }
+			TAI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { MEL.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision DEL_protect_traditions"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { ZOO.original_cores = THIS }
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { TAI.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	DEL_become_commie = {
+		available = {
+			KIR = { all_original_cores_owned_by_ROOT = yes }
+			NVA = { all_original_cores_owned_by_ROOT = yes }
+			ZLU = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { NVA.original_cores = THIS }
+					is_in_array = { ZLU.original_cores = THIS }
+					#Bunch of state IDs
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision DEL_become_commie"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { NVA.original_cores = THIS }
+						is_in_array = { ZLU.original_cores = THIS }
+						#State IDs
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = DEL_COM
+			#Change leader subideology, or use Rising Sun
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	DEL_crush_wealth = {
+		available = {
+			ROA = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { ROA.original_cores = yes }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision DEL_crush_wealth"
+			every_state = {
+				limit = {
+					is_in_array = { ROA.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	DEL_continental_ambitions = {
+		available = {
+			ROA = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = {
+			is_ai = no
+			has_cosmetic_tag = DEL_COM
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1202
+				state = 1204
+				state = 712
+				state = 697
+				state = 733
+				state = 775
+				state = 741
+				state = 937
+				state = 875
+				state = 1223
+				state = 721
+				state = 1176
+				state = 1168
+				state = 1059
+				state = 1071
+				state = 909
+				state = 982
+				state = 1009
+				state = 1017
+				state = 868
+				state = 874
+				state = 995
+				state = 956
+				state = 949
+				state = 900
+				state = 1208
+				state = 834
+				state = 810
+				state = 790
+				state = 1106
+				state = 1137
+				state = 1139
+				state = 1158
+				state = 726
+				state = 1054
+				state = 1135
+				state = 1040
+				state = 1036
+				state = 1047
+				state = 784
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision DEL_continental_ambitions"
+			every_possible_country = {
+				limit = {
+					is_on_continent = africa
+					exists = yes
+				}
+				ROOT = {
+					create_wargoal = {
+						type = annex_everything
+						target = PREV
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 1202
+						state = 1204
+						state = 712
+						state = 697
+						state = 733
+						state = 775
+						state = 741
+						state = 937
+						state = 875
+						state = 1223
+						state = 721
+						state = 1176
+						state = 1168
+						state = 1059
+						state = 1071
+						state = 909
+						state = 982
+						state = 1009
+						state = 1017
+						state = 868
+						state = 874
+						state = 995
+						state = 956
+						state = 949
+						state = 900
+						state = 1208
+						state = 834
+						state = 810
+						state = 790
+						state = 1106
+						state = 1137
+						state = 1139
+						state = 1158
+						state = 726
+						state = 1054
+						state = 1135
+						state = 1040
+						state = 1036
+						state = 1047
+						state = 784
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = DEL_RED
+		}
+	}
+}
+YAN_formables_category = {
+	YAN_integrate_natives = {
+		available = {
+			ZOO = { all_original_cores_owned_by_ROOT = yes }
+			MEL = { all_original_cores_owned_by_ROOT = yes }
+			TAI = { all_original_cores_owned_by_ROOT = yes }
+			IDO = { all_original_cores_owned_by_ROOT = yes }
+			DEL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { MEL.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
+					is_in_array = { IDO.original_cores = THIS }
+					is_in_array = { DEL.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision YAN_integrate_natives"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { ZOO.original_cores = THIS }
+						is_in_array = { MEL.original_cores = THIS }
+						is_in_array = { TAI.original_cores = THIS }
+						is_in_array = { IDO.original_cores = THIS }
+						is_in_array = { DEL.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	YAN_flap_home = {
+		available = {
+			date > 1050.9.1
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision YAN_flap_home"
+			#Event will ask who to send request to join to; response varies based on current government's ideology and if that faction exists
+			if = {
+				limit = {
+					country_exists = WNG
+				}
+				create_wargoal = {
+					target = WNG
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	YAN_winge_for_haukland = {
+		available = {
+			WNG = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { WNG.original_cores = yes }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision YAN_winge_for_haukland"
+			#Event demanding Haukland from FAT (most likely)
+			every_state = {
+				limit = {
+					is_in_array = { WNG.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	YAN_lock_in = {
+		available = {
+			#Owns Haukland states
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				#Haukland states
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision YAN_lock_in"
+			every_state = {
+				limit = {
+					#Haukland states
+				}
+				#add_core_of = ROOT
+			}
+			#Create wargoals on who ever owns Sunset and Neu-Griffenheim
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	YAN_WW2_reference = {
+		available = {
+			GRI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { WNG.original_cores = yes }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision YAN_WW2_reference"
+			every_state = {
+				limit = {
+					is_in_array = { GRI.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = YAN_FEA
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	YAN_exile_survivors = {
+		available = {
+			EQC = { all_original_cores_owned_by_ROOT = yes }
+			JER = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { EQC.original_cores = yes }
+					is_in_array = { JER.original_cores = yes }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision YAN_exile_survivors"
+			release_autonomy = {
+				target = JER
+				autonomous_state = autonomy_puppet
+			}
+			effect_tooltip = {
+				release_autonomy = {
+					target = WNG
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_claimed_by = WNG
+						is_on_continent = asia
+					}
+					add_core_of = WNG
+					transfer_state_to = WNG
+				}
+				set_autonomy = {
+					target = WNG
+					autonomous_state = autonomy_puppet
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
