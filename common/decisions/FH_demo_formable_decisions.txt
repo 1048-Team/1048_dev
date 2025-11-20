@@ -1198,6 +1198,592 @@ form_changelingian_protectorates_category = {
 		}
 	}
 }
+SCS_formables_category = {
+	SCS_change_in_management = {
+		visible = {
+			is_subject = no
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SCS_change_in_management"
+			set_cosmetic_tag = SCS_APL
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SCS_american_expy_moment = {
+		available = {
+			BAL = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { BAL.original_cores = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SCS_american_expy_moment"
+			every_state = {
+				limit = {
+					is_in_array = { BAL.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				set_cosmetic_tag = SCS_PET_CHN
+			}
+			else = {
+				set_cosmetic_tag = SCS_PET_APL
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SCS_eastern_extraction_board = {
+		available = {
+			EQS = { all_original_cores_owned_by_ROOT = yes }
+			WHY = { all_original_cores_owned_by_ROOT = yes }
+			BLS = { all_original_cores_owned_by_ROOT = yes }
+			CER = { all_original_cores_owned_by_ROOT = yes }
+			CLD = { all_original_cores_owned_by_ROOT = yes }
+			NER = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { EQS.original_cores = THIS }
+					is_in_array = { WHY.original_cores = THIS }
+					is_in_array = { BLS.original_cores = THIS }
+					is_in_array = { CER.original_cores = THIS }
+					is_in_array = { CLD.original_cores = THIS }
+					is_in_array = { NER.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SCS_eastern_extraction_board"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { EQS.original_cores = THIS }
+						is_in_array = { WHY.original_cores = THIS }
+						is_in_array = { BLS.original_cores = THIS }
+						is_in_array = { CER.original_cores = THIS }
+						is_in_array = { CLD.original_cores = THIS }
+						is_in_array = { NER.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SCS_politely_take_over = {
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SCS_owns_all_EQS_states_tt
+				3 = { is_core_of = ROOT } #No way to core this aside from the last two decisions being taken
+				1214 = { is_core_of = ROOT }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SCS_politely_take_over"
+			#Event demanding other puppets to CHN
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	SCS_core_go_up = {
+		available = {
+			all_of_scopes = {
+				tooltip = SCS_owns_all_original_EQS_states_tt
+				array = global.EQS_original_territory
+				OWNER = {
+					OR = {
+						tag = ROOT
+						AND = {
+							tag = CHN
+							is_subject_of = CHN
+						}
+					}
+				}
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { global.EQS_original_territory = THIS }
+				NOT = { is_owned_by = CHN }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision SCS_core_go_up"
+			every_state = {
+				limit = {
+					is_in_array = { global.EQS_original_territory = THIS }
+					NOT = { is_owned_by = CHN }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = SCS_EQS
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+CCA_formables_category = {
+	CCA_new_franchises = {
+		available = {
+			EQS = { all_original_cores_owned_by_ROOT = yes }
+			WHY = { all_original_cores_owned_by_ROOT = yes }
+			BLS = { all_original_cores_owned_by_ROOT = yes }
+			CER = { all_original_cores_owned_by_ROOT = yes }
+			CLD = { all_original_cores_owned_by_ROOT = yes }
+			NER = { all_original_cores_owned_by_ROOT = yes }
+			is_subject = no
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { EQS.original_cores = THIS }
+					is_in_array = { WHY.original_cores = THIS }
+					is_in_array = { BLS.original_cores = THIS }
+					is_in_array = { CER.original_cores = THIS }
+					is_in_array = { CLD.original_cores = THIS }
+					is_in_array = { NER.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CCA_new_franchises"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { EQS.original_cores = THIS }
+						is_in_array = { WHY.original_cores = THIS }
+						is_in_array = { BLS.original_cores = THIS }
+						is_in_array = { CER.original_cores = THIS }
+						is_in_array = { CLD.original_cores = THIS }
+						is_in_array = { NER.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = CCA_center
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CCA_money_for_land = {
+		available = {
+			OR = {
+				AND = {
+					is_subject_of = CHN
+					date > 1051.6.1
+				}
+				AND = {
+					is_subject = no
+					owns_state = 3
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CCA_money_for_land"
+			if = {
+				limit = {
+					is_subject_of = CHN
+				}
+				#Event offering to buy off CHN for puppets
+			}
+			else = {
+				14 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								target = PREV
+								type = annex_everything
+							}
+						}
+					}
+				}
+				21 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								target = PREV
+								type = annex_everything
+							}
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CCA_equestrian_refinancing = {
+		available = {
+			all_of_scopes = {
+				array = global.EQS_original_territory
+				tooltip = EQC_controls_all_original_EQS_territory
+				is_owned_by = ROOT
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { global.EQS_original_territory = THIS }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CCA_equestrian_refinancing"
+			every_state = {
+				limit = {
+					is_in_array = { global.EQS_original_territory = THIS }
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = CCA_EQS
+		}
+	}
+}
+NCA_formables_category = {
+	NCA_beg_for_freedom = {
+		available = {
+			date > 1051.6.1
+			has_army_manpower = {
+				size > 100000
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCA_beg_for_freedom"
+			#Event asking for the ability to declare war on neighbouring pony states
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	NCA_smack_NER = {
+		visible = {
+			has_country_flag = NCA_chryssy_agrees
+			NER = {
+				exists = yes
+				is_subject = no
+			}
+		}
+		days_remove = 35
+		war_with_on_remove = NER
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCA_smack_NER"
+			create_wargoal = {
+				target = NER
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	NCA_slap_CLD = {
+		visible = {
+			has_country_flag = NCA_chryssy_agrees
+			CLD = {
+				exists = yes
+				is_subject = no
+			}
+		}
+		days_remove = 35
+		war_with_on_remove = CLD
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCA_slap_CLD"
+			create_wargoal = {
+				target = CLD
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	NCA_equestrian_oppression = {
+		available = {
+			EQS = { all_original_cores_owned_by_ROOT = yes }
+			WHY = { all_original_cores_owned_by_ROOT = yes }
+			BLS = { all_original_cores_owned_by_ROOT = yes }
+			CLD = { all_original_cores_owned_by_ROOT = yes }
+			CER = { all_original_cores_owned_by_ROOT = yes }
+			NER = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { EQS.original_cores = THIS }
+					is_in_array = { WHY.original_cores = THIS }
+					is_in_array = { BLS.original_cores = THIS }
+					is_in_array = { CLD.original_cores = THIS }
+					is_in_array = { CER.original_cores = THIS }
+					is_in_array = { NER.original_cores = THIS }
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCA_equestrian_oppression"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { EQS.original_cores = THIS }
+						is_in_array = { WHY.original_cores = THIS }
+						is_in_array = { BLS.original_cores = THIS }
+						is_in_array = { CLD.original_cores = THIS }
+						is_in_array = { CER.original_cores = THIS }
+						is_in_array = { NER.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = NCA_EQS
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	NCA_petition_land = {
+		available = {
+			EQS = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision NCA_petition_land"
+			#Event begging for CCA and SCS; get cores on transfer
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+OLE_formables_category = {
+	OLE_push_restoration = {
+		available = {
+			date > 1052.9.1
+			has_army_manpower = {
+				size = 250000
+			}
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_claimed_by = OLE
+				is_owned_by = CHN
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision OLE_push_restoration"
+			#Event demanding old territories back; acceptance prevents further decisions, rejection continues decisions
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	OLE_reject_bugs = {
+		available = {
+			has_army_manpower = {
+				size = 400000
+			}
+		}
+		visible = {
+			has_country_flag = OLE_chyrssy_rejected
+		}
+		fire_only_once = yes
+		days_remove = 21
+		war_with_on_remove = CHN
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision OLE_reject_bugs"
+			CHN = {
+				set_autonomy = {
+					target = ROOT
+					autonomous_state = autonomy_free
+				}
+			}
+			leave_faction = yes
+			declare_war_on = {
+				target = CHN
+				type = annex_everything
+			}
+			drop_cosmetic_tag = yes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	OLE_form_grand_olenia = {
+		available = {
+			all_of_scopes = {
+				array = global.original_OLE_states
+				tooltip = OLE_owns_original_OLE_territory_tt
+				is_controlled_by = ROOT
+			}
+			controls_state = 1216
+			controls_state = 248
+			controls_state = 309
+			controls_state = 252
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { global.original_OLE_states = THIS }
+					state = 1216
+					state = 248
+					state = 309
+					state = 252
+					state = 246
+					state = 291
+					state = 307
+					state = 258
+					state = 308
+					state = 260
+					state = 303
+					state = 304
+					state = 306
+					state = 305
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision OLE_form_grand_olenia"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { global.original_OLE_states = THIS }
+						state = 1216
+						state = 248
+						state = 309
+						state = 252
+						state = 246
+						state = 291
+						state = 307
+						state = 258
+						state = 308
+						state = 260
+						state = 303
+						state = 304
+						state = 306
+						state = 305
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = OLE_grand
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	OLE_how_the_turn_tables = {
+		available = {
+			CHN = { all_original_cores_owned_by_ROOT = yes }
+		}
+		visible = {
+			has_cosmetic_tag = OLE_grand
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_in_array = { CHN.original_cores = THIS }
+				NOT = { is_core_of = ROOT }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision OLE_how_the_turn_tables"
+			effect_tooltip = {
+				release_autonomy = {
+					target = CHN
+					autonomous_state = autonomy_puppet
+				}
+			}
+			CHN = { set_cosmetic_tag = CHN_OLE }
+			effect_tooltip = {
+				release_autonomy = {
+					target = PLB
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_in_array = { CHN.original_cores = THIS }
+						NOT = { is_core_of = ROOT }
+					}
+					transfer_state_to = CHN
+				}
+				set_autonomy = {
+					target = CHN
+					autonomous_state = autonomy_puppet
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 313
+							state = 312
+							state = 314
+							state = 264
+							state = 262
+							state = 263
+							state = 1222
+							state = 1221
+						}
+					}
+					transfer_state_to = PLB
+					add_core_of = PLB
+				}
+				set_autonomy = {
+					target = PLB
+					autonomy_puppet = autonomy_puppet
+				}
+				PLB = {
+					load_focus_tree = generic_focus
+					remove_ideas = {
+						PLB_outcasts
+						PLB_clan_divides
+						PLB_paying_off_tech_purchase
+					}
+				}
+			}
+			PLB = { set_cosmetic_tag = PLB_OLE }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
 
 ###Griffonia###
 HLR_formables_category = {
