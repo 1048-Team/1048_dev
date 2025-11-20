@@ -609,9 +609,30 @@ form_western_griffonian_empire_category = {
 				limit = {
 					NOT = {
 						has_cosmetic_tag = GRF_EMP
+						tag = VRG
+						tag = NVC
+						tag = MWR
 					}
 				}
 				set_cosmetic_tag = GRF_EMP
+			}
+			else_if = {
+				limit = {
+					tag = VRG
+				}
+				set_cosmetic_tag = VRG_EMP
+			}
+			else_if = {
+				limit = {
+					tag = VRG
+				}
+				set_cosmetic_tag = NVC_EMP
+			}
+			else_if = {
+				limit = {
+					tag = MWR
+				}
+				set_cosmetic_tag = MWR_EMP
 			}
 			IF = {
 				limit = {
@@ -627,6 +648,58 @@ form_western_griffonian_empire_category = {
 					days = 1
 				}
 			}
+		}
+	}
+}
+SCH_formables_category = {
+	SCH_form_auroral_north = {
+		available = {
+			GRF = { all_original_cores_owned_by_ROOT = yes }
+			JGR = { all_original_cores_owned_by_ROOT = yes }
+			VRG = { all_original_cores_owned_by_ROOT = yes }
+			NVC = { all_original_cores_owned_by_ROOT = yes }
+			YAH = { all_original_cores_owned_by_ROOT = yes }
+			SMH = { all_original_cores_owned_by_ROOT = yes }
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_in_array = { global.WGE_territory = THIS }
+					state = 262
+					state = 263
+					state = 264
+					state = 314
+					state = 312
+					state = 331
+					state = 305
+					state = 306
+				}
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
+			every_state = {
+				limit = {
+					OR = {
+						is_in_array = { global.WGE_territory = THIS }
+						state = 262
+						state = 263
+						state = 264
+						state = 314
+						state = 312
+						state = 331
+						state = 305
+						state = 306
+					}
+				}
+				add_core_of = ROOT
+			}
+			set_cosmetic_tag = SCH_AUR
+			#News event, probably, for the formation of the super state
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 }
