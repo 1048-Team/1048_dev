@@ -1766,7 +1766,7 @@ OLE_formables_category = {
 				}
 				set_autonomy = {
 					target = PLB
-					autonomy_puppet = autonomy_puppet
+					autonomous_state = autonomy_puppet
 				}
 				PLB = {
 					load_focus_tree = generic_focus
@@ -1927,9 +1927,9 @@ HLR_formables_category = {
                     }
                 }
                 add_core_of = ROOT
-                #Set capital to Neu-Griffenheim
-                set_capital = { state = 674 }
             }
+            #Set capital to Neu-Griffenheim
+            set_capital = { state = 674 }
         }
         ai_will_do = {
             factor = 100
@@ -1942,7 +1942,7 @@ HLR_formables_category = {
             SIC = { all_original_cores_owned_by_ROOT = yes }
         }
         highlight_states = {
-            highlight_state_targets = {
+            highlight_states_trigger = {
                 OR = {
                     is_in_array = { JER.original_cores = THIS }
                     is_in_array = { EQC.original_cores = THIS }
@@ -2057,8 +2057,8 @@ reform_griffonian_empire_category = {
                     }
                 }
                 add_core_of = ROOT
-                set_capital = { state = 674 }
             }
+			set_capital = { state = 674 }
         }
         ai_will_do = {
             factor = 100
@@ -2134,8 +2134,8 @@ FAT_formables_category = {
                     }
                 }
                 add_core_of = ROOT
-                set_capital = { state = 674 }
             }
+            set_capital = { state = 674 }
         }
         ai_will_do = {
             factor = 100
@@ -2649,10 +2649,9 @@ EQC_formables_category = {
 					is_controlled_by = ROOT
 				}
 				all_of_scopes = {
-					array = global.EQS_original_territory
+					array = global.EQS_original_territory_minus_STG
 					is_controlled_by = ROOT
 				}
-				NOT = { is_core_of = STG }
 			}
 		}
 		visible = { tag = EQC }
@@ -3084,7 +3083,7 @@ BAK_formables_category = {
 			FBK = { all_original_cores_owned_by_ROOT = yes }
 		}
 		highlight_states = {
-			highlight_state_targets = {
+			highlight_states_trigger = {
 				is_in_array = { FBK.original_cores = THIS }
 			}
 		}
@@ -3262,7 +3261,7 @@ RCT_formables_category = {
 				target = MIT
 				autonomous_state = autonomy_puppet
 			}
-			release = {
+			release_autonomy = {
 				target = SIC
 				autonomous_state = autonomy_puppet
 			}
@@ -3938,7 +3937,7 @@ BAT_formables_category = {
 	}
 	BAT_secret_fealty = {
 		available = {
-			LMB = { any_original_core_owned_by_ROOT_or_subject = yes }
+			LMB = { any_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3962,7 +3961,7 @@ BAT_formables_category = {
 	}
 	BAT_freecawia = {
 		available = {
-			MCW = { any_original_core_owned_by_ROOT_or_subject = yes }
+			MCW = { any_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -4280,7 +4279,7 @@ KIR_formables_category = {
 		highlight_states = {
 			highlight_states_trigger = {
 				is_in_array = { ROA.original_cores = THIS }
-				NOT = { is_in_array = global.original_ancient_pact_states = THIS }
+				NOT = { is_in_array = { global.original_ancient_pact_states = THIS } }
 			}
 		}
 		fire_only_once = yes
@@ -5319,7 +5318,7 @@ DEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision DEL_continental_ambitions"
 			every_possible_country = {
 				limit = {
-					is_on_continent = africa
+					is_zebrican_continent_country = yes
 					exists = yes
 				}
 				ROOT = {
@@ -5800,7 +5799,7 @@ ROA_formables_category = {
 			ZLU = { all_original_cores_owned_by_ROOT = yes }
 		}
 		highlight_states = {
-			highlight_state_targets = {
+			highlight_states_trigger = {
 				is_in_array = { ZLU.original_cores = THIS }
 			}
 		}
@@ -5854,7 +5853,7 @@ ROA_formables_category = {
 			every_possible_country = {
 				limit = {
 					exists = yes
-					is_on_continent = africa
+					is_zebrican_continent_country = yes
 				}
 				ROOT = {
 					create_wargoal = {
@@ -6754,7 +6753,7 @@ KAR_formables_category = {
 ZWA_TIM_formables_category = {
 	ZWA_TIM_united_federation = {
 		available = {
-			NDR = { all_original_cores_owned_by_ROOT_or_ally = YES }
+			NDR = { all_original_cores_owned_by_ROOT_or_ally = yes }
 			if = {
 				limit = {
 					tag = TIM
@@ -7454,7 +7453,7 @@ EMR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EMR_tiny_zebrican_bite"
 			every_possible_country = {
 				limit = {
-					is_on_continent = africa
+					is_zebrican_continent_country = yes
 					exists = yes
 				}
 				ROOT = {
@@ -8176,8 +8175,8 @@ STM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision STM_rubber_conglomeration"
 			every_possible_country = {
 				limit = {
-					is_in_array = global.southeast_countries
-					exist = yes
+					is_in_array = { global.southeast_countries = THIS }
+					exists = yes
 				}
 				ROOT = {
 					create_wargoal = {
@@ -8200,7 +8199,7 @@ STM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision STM_honoring_past_executives"
 			every_possible_country = {
 				limit = {
-					is_on_continent = europe
+					is_equestrian_continent_country = yes
 					exists = yes
 				}
 				ROOT = {
@@ -8210,9 +8209,9 @@ STM_formables_category = {
 					}
 				}
 			}
-			ai_will_do = {
-				factor = 100
-			}
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 	STM_total_corporate_control = {
@@ -8224,7 +8223,7 @@ STM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision STM_total_corporate_control"
 			every_possible_country = {
 				limit = {
-					is_on_continent = asia
+					is_zebrican_continent_country = yes
 					exists = yes
 				}
 				ROOT = {
@@ -8234,9 +8233,9 @@ STM_formables_category = {
 					}
 				}
 			}
-			ai_will_do = {
-				factor = 100
-			}
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 	STM_reap_franchise_profits = {
@@ -8393,7 +8392,7 @@ AWR_formables_category = {
 			NOT = {
 				any_other_country = {
 					exists = yes
-					is_on_continent = europe
+					is_equestrian_continent_country = yes
 				}
 			}
 		}
@@ -8409,10 +8408,10 @@ AWR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_equus"
 			every_state = {
 				limit = {
-					is_on_continent = europe
+					is_equestrian_continent_country = yes
 					NOT = { is_core_of = ROOT }
 				}
-				is_core_of = ROOT
+				add_core_of = ROOT
 			}
 			every_other_country = {
 				limit = {
@@ -8558,7 +8557,7 @@ AWR_formables_category = {
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
-			highlight_state_targets = {
+			highlight_states_trigger = {
 				OR = {
 					is_in_array = { BRF.original_cores = THIS }
 					is_in_array = { GRU.original_cores = THIS }
@@ -8602,7 +8601,7 @@ AWR_formables_category = {
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
-			highlight_state_targets = {
+			highlight_states_trigger = {
 				OR = {
 					is_in_array = { JER.original_cores = THIS }
 					#Tarrin states
@@ -8644,7 +8643,7 @@ AWR_formables_category = {
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
-			highlight_state_targets = {
+			highlight_states_trigger = {
 				OR = {
 					is_in_array = { EQC.original_cores = THIS }
 					is_in_array = { SIC.original_cores = THIS }
@@ -8954,64 +8953,6 @@ AWR_formables_category = {
 				}
 				set_autonomy = {
 					target = STM
-					autonomous_state = autonomy_puppet
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	AWR_freest_sand_creatures = {
-		available = {
-			AZI = { all_original_cores_owned_by_ROOT = yes }
-			ZAJ = { all_original_cores_owned_by_ROOT = yes }
-			ZIT = { all_original_cores_owned_by_ROOT = yes }
-			ILU = { all_original_cores_owned_by_ROOT = yes }
-			NDR = { all_original_cores_owned_by_ROOT = yes }
-			REM = { all_original_cores_owned_by_ROOT = yes }
-			MGY = { all_original_cores_owned_by_ROOT = yes }
-			TIM = { all_original_cores_owned_by_ROOT = yes }
-		}
-		visible = { has_country_flag = AWR_world_crusade }
-		highlight_states = {
-			highlight_states_trigger = {
-				OR = {
-					is_in_array = { AZI.original_cores = THIS }
-					is_in_array = { ZAJ.original_cores = THIS }
-					is_in_array = { ZIT.original_cores = THIS }
-					is_in_array = { ILU.original_cores = THIS }
-					is_in_array = { NDR.original_cores = THIS }
-					is_in_array = { REM.original_cores = THIS }
-					is_in_array = { MGY.original_cores = THIS }
-					is_in_array = { TIM.original_cores = THIS }
-				}
-			}
-		}
-		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_sand_creatures"
-			custom_effect_tooltip = AWR_release_MGY_tt
-			hidden_effect = {
-				MGY = { set_cosmetic_tag = MGY_AWR }
-				every_state = {
-					limit = {
-						OR = {
-							is_in_array = { AZI.original_cores = THIS }
-							is_in_array = { ZAJ.original_cores = THIS }
-							is_in_array = { ZIT.original_cores = THIS }
-							is_in_array = { ILU.original_cores = THIS }
-							is_in_array = { NDR.original_cores = THIS }
-							is_in_array = { REM.original_cores = THIS }
-							is_in_array = { MGY.original_cores = THIS }
-							is_in_array = { TIM.original_cores = THIS }
-						}
-					}
-					transfer_state_to = MGY
-					add_core_of = MGY
-				}
-				set_autonomy = {
-					target = MGY
 					autonomous_state = autonomy_puppet
 				}
 			}

@@ -1,6 +1,65 @@
 add_namespace = griffonia_activity
 add_namespace = zebrica_activity
 add_namespace = equestria_activity
+add_namespace = fh_utility
+
+country_event = { #Random event to have YAH or SMH declare on the other
+	id = fh_utility.1
+	immediate = {log = "[GetDateText]: [Root.GetName] event fh_utility.1"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		country_event = {
+			id = fh_utility.2
+			days = 90
+			random_days = 60
+		}
+	}
+}
+
+country_event = { #The war declaration for the YAH-SMH skirmishing, since it doesn't work with country flags and random variables
+	id = fh_utility.2
+	immediate = {log = "[GetDateText]: [Root.GetName] event fh_utility.2"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		if = {
+			limit = {
+				tag = SMH
+			}
+			declare_war_on = {
+				target = YAH
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				tag = YAH
+			}
+			declare_war_on = {
+				target = SMH
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				date < 1052.1.1
+			}
+			random_country = {
+				limit = {
+					OR = {
+						tag = SMH
+						tag = YAH
+					}
+					is_ai = yes
+				}
+				activate_mission = YAH_SMH_skirmish_timer
+			}
+		}
+	}
+}
 
 ###Equus###
 #country_event = { #MWR leaves STG
@@ -171,8 +230,10 @@ country_event = { #CLD elections; speak about general position of each one and t
 	option = { #Praline Sweets is the path forward.
 		name = equestria_activity.14.b
 		ai_chance = {
-			is_historical_focus_on = yes
-			factor = 0
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
 		}
 		set_politics = {
 			ruling_party = democratic
@@ -186,8 +247,10 @@ country_event = { #CLD elections; speak about general position of each one and t
 	option = { #The Senate will ensure stability and security for our new society.
 		name = equestria_activity.14.c
 		ai_chance = {
-			is_historical_focus_on = yes
-			factor = 0
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
 		}
 		set_politics = {
 			ruling_party = fascism
@@ -266,8 +329,8 @@ country_event = { #CER forms alliance with CLD
 			FROM = {
 				has_country_flag = CLD_rejected_defense_faction
 			}
-			text = equestria_activity.19.d_b
 		}
+		text = equestria_activity.19.d_b
 	}
 
 	is_triggered_only = yes
@@ -636,6 +699,8 @@ country_event = { #Consequences of the integration proposal
 		trigger = { FROM = { has_country_flag = FH_league_integration_complete_rejection } }
 		text = griffonia_activity.2.d_d
 	}
+
+	is_triggered_only = yes
 
 	option = { #Excellent!/An acceptable compromise/They will see reason eventually/Everygriff will be free of communism, whether they like it or not!
 		name = griffonia_activity.2.a #This should be scripted loc
