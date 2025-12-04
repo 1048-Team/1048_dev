@@ -1,0 +1,85 @@
+@manifest_fulfilled_value = 0.75
+
+faction_manifest_reclaim_imperium = {
+    name = reclaim_imperium_goal_name
+    description = reclaim_imperium_goal_desc
+    is_manifest = yes
+    available = {
+        collection_contains = {
+            collection = collection:solarist_nations
+            country = ROOT
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = collection:equestrian_original_states
+        completed_amount_collection = collection:controlled_equestrian_original_states
+
+        range = { min = 0.15 max = 0.85 }
+
+        scale = {
+            army_morale_factor = 0.05
+            resistance_target = -0.1
+            resistance_growth = -0.25
+            required_garrison_factor = 0.1
+            resistance_damage_to_garrison = 0.1
+        }
+
+        reversed = {
+            army_core_attack_factor = 0.15
+            army_core_defence_factor = 0.15
+            mobilization_speed = 0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    breakthrough_factor = 0.1
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_freedom_for_everycreature = {
+    name = freedom_for_everycreature_name
+    description = freedom_for_everycreature_desc
+    is_manifest = yes
+    available = {
+        OR = {
+            tag = EQC
+            AND = {
+                EQC = {
+                    OR = {
+                        exists = no
+                        NOT = { has_government = communism }
+                    }
+                }
+                has_cosmetic_tag = EQC_maresoc
+            }
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = game:all_states
+        completed_amount_collection = collection:all_controlled_world_states
+
+        range = { min = 0.1 max = 0.9 }
+
+        scale = {
+            war_stability_factor = 0.15
+            justify_war_goal_time = -0.25
+            non_core_manpower = 0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    compliance_growth = -0.2
+                    non_core_manpower = 0.1
+                    factory_energy_consumption = -0.05
+                }
+            }
+        }
+    }
+}
