@@ -15,4 +15,4 @@ replace_path="common/bookmarks"
 replace_path="events"
 path="/mod/1048_dev"
 
-supported_version="1.16.*"
+supported_version="1.17.*"
