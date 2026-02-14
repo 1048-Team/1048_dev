@@ -1,202 +1,4 @@
-FH_demo_south_east_skeleton_category = {
-    EEE_NEI_powder_keg = {
-        available = {
-            date > 1049.6.1
-        }
-        visible = {
-            OR = {
-                tag = EEE
-                tag = NEI
-            }
-            NOT = {
-                OR = {
-                    NEI = { has_country_flag = FH_demo_chose_war }
-                    EEE = { has_country_flag = FH_demo_chose_war }
-                }
-            }
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = NEI
-        war_with_on_complete = EEE
-        complete_effect = {
-            set_country_flag = FH_demo_chose_war
-        }
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove EEE_NEI_powder_keg"
-            if = {
-                limit = {
-                    tag = NEI
-                }
-                declare_war_on = {
-                    target = EEE
-                    type = annex_everything
-                }
-            }
-            if = {
-                limit = {
-                    tag = EEE
-                }
-                declare_war_on = {
-                    target = NEI
-                    type = annex_everything
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                date < 1049.8.1
-                factor = 0
-            }
-        }
-    }
-    EEE_reform_militia = {
-        available = {
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-        }
-        cost = 50 #Placeholder
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
-            remove_ideas = EEE_tribal_militias
-        }
-    }
-    EEE_national_reform = {
-        available = {
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-        }
-        cost = 75
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision EEE_national_reform"
-            remove_ideas = EEE_tribal_politics
-        }
-    }
-    EEE_industrial_boons = {
-        available = {
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-        }
-        cost = 100
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision EEE_industrial_boons"
-            remove_ideas = EEE_tribal_holdings
-        }
-    }
-    EEE_eliminating_the_cults = {
-        available = {
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-            has_manpower > 70000
-            has_stability > 0.6
-        }
-        cost = 75
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
-            add_manpower = -28395
-            add_stability = -0.15
-            remove_ideas = EEE_night_whispering
-        }
-    }
-    BAL_civilize_tribals = {
-        available = {
-            date > 1049.11.1
-        }
-        visible = {
-            tag = BAL
-            OR = {
-                country_exists = EEE
-                country_exists = NEI
-            }
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = EEE
-        war_with_on_complete = NEI
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_civilize_tribals"
-            declare_war_on = {
-                target = EEE
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NEI
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                date < 1050.3.1
-                factor = 0
-            }
-        }
-    }
-    BAL_reclaim_new_horseleans = {
-        available = {
-            date > 1050.6.1
-        }
-        visible = {
-            tag = BAL
-            country_exists = MTS
-        }
-        days_remove = 7
-        war_with_on_complete = MTS
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_reclaim_new_horseleans"
-            declare_war_on = {
-                target = MTS
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                has_war = yes
-                factor = 0
-            }
-        }
-    }
-    BAL_finish_restructuring = {
-        available = {
-            date > 1050.9.1
-        }
-        visible = {
-            tag = BAL
-            OR = {
-                country_exists = STB
-                country_exists = NID
-                country_exists = NRP
-            }
-        }
-        days_remove = 14
-        war_with_on_complete = STB
-        war_with_on_complete = NID
-        war_with_on_complete = NRP
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_finish_restructuring"
-            declare_war_on = {
-                target = STB
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NID
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NRP
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                has_war = yes
-                factor = 0
-            }
-        }
-    }
+south_east_skeleton_category = {
     SPF_expand_hoards = {
         available = {
             date > 1049.8.1
@@ -242,131 +44,6 @@ FH_demo_south_east_skeleton_category = {
         }
         ai_will_do = {
             factor = 10
-        }
-    }
-    STB_smack_insults = {
-        available = {
-            date > 1050.1.1
-        }
-        visible = {
-            tag = STB
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = NRP
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_smack_insults"
-            declare_war_on = {
-                target = NRP
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                date < 1050.4.1
-                factor = 0
-            }
-        }
-    }
-    STB_take_backsies = {
-        available = {
-            date = 1050.4.1
-        }
-        visible = {
-            tag = STB
-            country_exists = NID
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = NID
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_take_backsies"
-            declare_war_on = {
-                target = NID
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                date < 1050.7.1
-                factor = 0
-            }
-        }
-    }
-    STB_securing_glory = {
-        available = {
-            date = 1050.10.1
-        }
-        visible = {
-            OR = {
-                tag = STB
-                tag = NRP
-            }
-            OR = {
-                country_exists = EEE
-                country_exists = NEI
-            }
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = EEE
-        war_with_on_complete = NEI
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_securing_glory"
-            declare_war_on = {
-                target = EEE
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NEI
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                date < 1051.1.1
-                factor = 0
-            }
-        }
-    }
-    STB_claiming_the_crown = {
-        available = {
-            date = 1051.3.1
-        }
-        visible = {
-            OR = {
-                tag = STB
-                tag = NRP
-            }
-            OR = {
-                country_exists = MTS
-                country_exists = BAL
-            }
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = BAL
-        war_with_on_complete = MTS
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove STB_claiming_the_crown"
-            declare_war_on = {
-                target = MTS
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = BAL
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                date < 1051.5.1
-                factor = 0
-            }
         }
     }
     NRP_install_pesticide = {
@@ -419,86 +96,6 @@ FH_demo_south_east_skeleton_category = {
             }
         }
     }
-    NID_solidify_assets = {
-        available = {
-            date > 1049.11.1
-        }
-        visible = {
-            tag = NID
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_complete = SPF
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_solidify_assets"
-            declare_war_on = {
-                target = SPF
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    MTS_wipe_out_thestral_resistance = {
-        available = {
-            date > 1049.1.1
-        }
-        visible = {
-            tag = MTS
-        }
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision MTS_wipe_out_thestral_resistance"
-            save_current_manpower = yes
-            84 = {
-                set_demilitarized_zone = no
-                add_manpower = -23790
-            }
-            restore_previous_manpower = yes
-            add_stability = -0.075
-            add_manpower = -1742
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    MTS_end_the_reminder = {
-        available = {
-            date > 1051.1.1
-        }
-        visible = {
-            tag = MTS
-        }
-        fire_only_once = yes
-        days_remove = 21
-        war_with_on_complete = STB
-        war_with_on_complete = NEI
-        war_with_on_complete = NID
-        war_with_on_complete = BAL
-        war_with_on_complete = CLI
-        war_with_on_complete = SPF
-        war_with_on_complete = EEE
-        war_with_on_complete = NRP
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_end_the_reminder"
-            every_country = {
-                limit = {
-                    has_country_flag = SEE
-                    exists = yes
-                }
-                ROOT = {
-                    declare_war_on = {
-                        target = PREV
-                        type = annex_everything
-                    }
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
     south_east_recore_jungle = {
         available = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
@@ -507,6 +104,13 @@ FH_demo_south_east_skeleton_category = {
         visible = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
             EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+            NOT = {
+                tag = MTS
+                tag = BAL
+                tag = EEE
+                tag = STB
+                tag = NID
+            }
             has_global_flag = balsplosion
         }
         fire_only_once = yes
@@ -535,6 +139,13 @@ FH_demo_south_east_skeleton_category = {
         visible = {
             STB = { all_cores_owned_by_ROOT_or_subject = yes }
             NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+            NOT = {
+                tag = MTS
+                tag = BAL
+                tag = EEE
+                tag = STB
+                tag = NID
+            }
             has_global_flag = balsplosion
         }
         fire_only_once = yes
@@ -563,6 +174,14 @@ FH_demo_south_east_skeleton_category = {
         visible = {
             MTS = { all_cores_owned_by_ROOT_or_subject = yes }
             BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+            NOT = {
+                tag = MTS
+                tag = BAL
+                tag = EEE
+                tag = STB
+                tag = NID
+            }
+            has_global_flag = balsplosion
         }
         fire_only_once = yes
         cost = 75
@@ -592,6 +211,14 @@ FH_demo_south_east_skeleton_category = {
             NID = { all_cores_owned_by_ROOT_or_subject = yes }
             CLI = { all_cores_owned_by_ROOT_or_subject = yes }
             SPF = { all_cores_owned_by_ROOT_or_subject = yes }
+            NOT = {
+                tag = MTS
+                tag = BAL
+                tag = EEE
+                tag = STB
+                tag = NID
+            }
+            has_global_flag = balsplosion
         }
         fire_only_once = yes
         cost = 75
@@ -656,6 +283,13 @@ FH_demo_south_east_skeleton_category = {
                 tag = SPF
                 date > 1052.1.1
             }
+            NOT = {
+                tag = MTS
+                tag = BAL
+                tag = EEE
+                tag = STB
+                tag = NID
+            }
         }
         fire_only_once = yes
         days_remove = 7
@@ -679,6 +313,13 @@ FH_demo_south_east_skeleton_category = {
     south_east_get_on_with_it = {
         visible = {
             date > 1052.1.1
+            NOT = {
+                tag = MTS
+                tag = BAL
+                tag = EEE
+                tag = STB
+                tag = NID
+            }
         }
         fire_only_once = yes
         days_remove = 7
@@ -716,7 +357,7 @@ FH_demo_south_east_skeleton_category = {
     }
 }
 
-FH_demo_WGE_skeleton_category = {
+WGE_skeleton_category = {
     MWR_flip_STG_bird = {
         available = {
             has_war = no
@@ -982,7 +623,7 @@ FH_demo_WGE_skeleton_category = {
     }
 }
 
-FH_demo_STG_region_skeleton_category = {
+STG_region_skeleton_category = {
     AWR_peace_out_STG = {
         available = {
             is_subject_of = STG
@@ -1046,7 +687,7 @@ FH_demo_STG_region_skeleton_category = {
     }
 }
 
-FH_demo_equus_heartland_skeleton_category = {
+equus_heartland_skeleton_category = {
     BLS_appoint_nebula_excavation = {
         visible = {
             tag = BLS
@@ -1163,302 +804,6 @@ FH_demo_equus_heartland_skeleton_category = {
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_foal_stimulus_cheques"
             remove_ideas = BLS_looming_population_collapse
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    BLS_rectify_complaints = {
-        visible = {
-            tag = BLS
-            date > 1051.3.1
-        }
-        cost = 100
-        days_remove = 60
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_rectify_complaints"
-            remove_ideas = BLS_unsafe_working_conditions
-        }
-    }
-    BLS_secure_northern_perimeter = {
-        visible = {
-            tag = BLS
-            date > 1051.5.1
-        }
-        cost = 25
-        days_remove = 21
-        fire_only_once = yes
-        war_with_on_complete = WHY
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_secure_northern_perimeter"
-            create_wargoal = {
-                target = WHY
-                type = annex_everything
-            }
-        }
-        ai_will_do = {
-            factor = 5
-        }
-    }
-    BLS_eastern_buffer = {
-        visible = {
-            tag = BLS
-            date > 1051.10.1
-            country_exists = NER
-        }
-        cost = 25
-        days_remove = 21
-        fire_only_once = yes
-        war_with_on_complete = NER
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_eastern_buffer"
-            create_wargoal = {
-                target = NER
-                type = puppet_wargoal_focus
-            }
-        }
-        ai_will_do = {
-            factor = 5
-            modifier = {
-                has_war = yes
-                factor = 0
-            }
-        }
-    }
-    BLS_foreign_student_integration = {
-        visible = {
-            tag = BLS
-            WHY = { all_cores_owned_by_ROOT = yes }
-        }
-        highlight_states = {
-            highlight_states_trigger = {
-                is_core_of = WHY
-            }
-        }
-        cost = 75
-        days_remove = 45
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_foreign_student_integration"
-            every_state = {
-                limit = {
-                    is_core_of = WHY
-                    is_owned_by = ROOT
-                }
-                add_core_of = ROOT
-            }
-        }
-        ai_will_do = {
-            factor = 15
-        }
-    }
-    BLS_buffer_around_changelings = {
-        visible = {
-            tag = BLS
-            visible = { NER = { all_cores_owned_by_ROOT = yes } }
-        }
-        highlight_states = {
-            highlight_states_trigger = {
-                is_core_of = NER
-                NOT = { is_core_of = ROOT }
-            }
-        }
-        cost = 30
-        days_remove = 15
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_buffer_around_changelings"
-            release_autonomy = {
-                target = NER
-                autonomy_state = autonomy_puppet
-            }
-            hidden_effect = {
-                70 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    BLS_expand_the_safety_net = {
-        visible = {
-            tag = BLS
-            date > 1052.2.24
-            NER = {
-                is_subject_of = ROOT
-            }
-            OR = {
-                country_exists = CER
-                country_exists = CLD
-            }
-        }
-        cost = 25
-        days_remove = 35
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_expand_the_safety_net"
-            if = {
-                limit = {
-                    country_exists = CLD
-                }
-                create_wargoal = {
-                    target = CLD
-                    type = puppet_wargoal_focus
-                }
-            }
-            if = {
-                limit = {
-                    country_exists = CER
-                }
-                create_wargoal = {
-                    target = CER
-                    type = puppet_wargoal_focus
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    BLS_neutral_forts = {
-        visible = {
-            tag = BLS
-            OR = {
-                CER = { all_cores_owned_by_ROOT = yes }
-                CLD = { all_cores_owned_by_ROOT = yes }
-            }
-        }
-        highlight_states = {
-            highlight_states_trigger = {
-                OR = {
-                    is_core_of = CER
-                    is_core_of = CLD
-                }
-                is_owned_by = ROOT
-            }
-        }
-        cost = 25
-        days_remove = 35
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_neutral_forts"
-            if = {
-                limit = {
-                    CER = { all_cores_owned_by_ROOT = yes }
-                }
-                release_autonomy = {
-                    target = CER
-                    autonomy_state = autonomy_puppet
-                }
-            }
-            if = {
-                limit = {
-                    CLD = { all_cores_owned_by_ROOT = yes }
-                }
-                release_autonomy = {
-                    target = CLD
-                    autonomy_state = autonomy_puppet
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 20
-            modifier = {
-                has_war = yes
-                factor = 0
-            }
-        }
-    }
-    BLS_secure_science = {
-        visible = {
-            tag = BLS
-            date > 1053.8.1
-        }
-        cost = 25
-        days_remove = 35
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_secure_science"
-            3 = {
-                ROOT = {
-                    create_wargoal = {
-                        target = PREV
-                        type = annex_everything
-                    }
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-            modifier = {
-                NOT = {
-                    NER = { is_subject_of = ROOT }
-                    CER = { is_subject_of = ROOT }
-                    CLD = { is_subject_of = ROOT }
-                }
-                factor = 0
-            }
-        }
-    }
-    BLS_integrate_glory = {
-        visible = {
-            tag = BLS
-            owns_state = 3
-            owns_state = 75
-            owns_state = 12
-        }
-        highlight_states = {
-            highlight_states_trigger = {
-                is_core_of = EQS
-                NOT = {
-                    state = 3
-                    state = 39
-                    state = 186
-                    state = 223
-                    state = 40
-                    state = 104
-                }
-            }
-        }
-        cost = 70
-        days_remove = 70
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision BLS_integrate_glory"
-            custom_effect_tooltip = BLS_steal_sanctum_univeristy_tt
-            hidden_effect = {
-                release_autonomy = {
-                    target = EQS
-                    autonomy_state = autonomy_puppet
-                }
-                3 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-                39 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-                186 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-                223 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-                40 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-                104 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
-                }
-            }
         }
         ai_will_do = {
             factor = 10
@@ -1909,16 +1254,16 @@ FH_demo_equus_heartland_skeleton_category = {
                 attacker = {
                     state = var:FH_attacking_state
                     num_provinces = 4
-                    on_win = fh_demo.3
-                    on_lose = fh_demo.4
-                    on_cancel = fh_demo.5
+                    on_win = fh_raid.3
+                    on_lose = fh_raid.4
+                    on_cancel = fh_raid.5
                 }
                 defender = {
                     state = var:FH_defending_state
                     num_provinces = 4
-                    on_win = fh_demo.6
-                    on_lose = fh_demo.4
-                    on_cancel = fh_demo.5
+                    on_win = fh_raid.6
+                    on_lose = fh_raid.4
+                    on_cancel = fh_raid.5
                 }
             }
         }
@@ -2255,126 +1600,7 @@ FH_demo_equus_heartland_skeleton_category = {
         ai_will_do = { factor = 1 }
     }
 }
-
-FH_demo_CRY_skeleton_category = {
-    CRY_the_practical_leader = {
-        visible = {
-            date > 1049.7.20
-        }
-        cost = 25
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision CRY_the_practical_leader"
-            promote_character = CRY_luna
-            hidden_effect = {
-                remove_ideas = luna_advisor
-                add_ideas = princess_cadance
-                set_cosmetic_tag = CRY_LUN
-            }
-            add_popularity = {
-                ideology = fascism
-                popularity = 0.02
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    CRY_end_the_protests = {
-        visible = {
-            has_country_leader = { character = CRY_luna ruling_only = yes }
-        }
-        cost = 75
-        days_remove = 30
-        fire_only_once = yes
-        modifier = {
-            stability_weekly_factor = -0.005
-            weekly_manpower = -750
-            industrial_capacity_factory = -0.15
-        }
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove CRY_end_the_protests"
-            remove_ideas = CRY_union_unrest
-        }
-        ai_will_do = {
-            factor = 15
-        }
-    }
-    CRY_earmark_military_funding = {
-        visible = {
-            has_country_leader = { character = CRY_luna ruling_only = yes }
-            date > 1050.2.4
-        }
-        cost = 100
-        days_remove = 70
-        fire_only_once = yes
-        modifier = {
-            consumer_goods_factor = 0.35
-            political_power_gain = -0.15
-        }
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove CRY_earmark_military_funding"
-            remove_ideas = CRY_dilapidated_army
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    CRY_shirk_the_treaty = {
-        visible = {
-            has_country_leader = { character = CRY_luna ruling_only = yes }
-            date > 1050.10.30
-        }
-        cost = 75
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision CRY_shirk_the_treaty"
-            remove_ideas = CRY_treaty_of_gossamer_hills
-            1220 = {
-                set_demilitarized_zone = no
-            }
-            CHN = {
-                add_opinion_modifier = {
-                    target = ROOT
-                    modifier = hostility
-                }
-                hidden_effect = {
-                    remove_ideas = CHN_gossamer_hills
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    CRY_retake_the_east = {
-        visible = {
-            date > 1051.1.1
-        }
-        cost = 25
-        days_remove = 14
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove CRY_retake_the_east"
-            98 = {
-                ROOT = {
-                    create_wargoal = {
-                        target = PREV
-                        type = annex_everything
-                    }
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 20
-            modifier = {
-                has_war = yes
-                factor = 0
-            }
-        }
-    }
-}
-FH_demo_BRF_skeleton_category = {
+BRF_skeleton_category = {
     BRF_propose_unification = {
         available = {
             date > 1051.12.31
