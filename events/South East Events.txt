@@ -84,7 +84,7 @@ country_event = { #First hints of unrest begin in BAL, with most of the interior
 
 	option = { #Mobilize every prole immediately!
 		name = southeast.5.a
-		add_stability = -0.2
+		add_stability = -0.25
 		custom_effect_tooltip = BAL_good_job_breaking_it_tt
 		hidden_effect = {
 			84 = { set_demilitarized_zone = yes }
@@ -129,6 +129,8 @@ country_event = { #The Mingsplosion begins...
 	
 	option = { ###We'll get them back soon enough.
 		name = southeast.6.a
+		NID = { remove_ideas = NID_buggy_trade }
+		remove_ideas = BAL_buggy_trade
 		custom_effect_tooltip = BAL_yar_har_tt
 		hidden_effect = {
 			#news_event = southeast_news.2 #Cobalt is dead! Nations secede!
@@ -156,12 +158,59 @@ country_event = { #The Mingsplosion begins...
 					load_oob = "SPF_1048_naval_legacy"
 				}
 			}
-			every_state = {
-				limit = {
-					is_owned_by = SPF
-					is_demilitarized_zone = yes
+			CLI = {
+				transfer_state = 6
+				transfer_state = 7
+				transfer_state = 8
+				transfer_state = 9
+				transfer_state = 10
+				add_state_core = 6
+				add_state_core = 7
+				add_state_core = 8
+				add_state_core = 8
+				add_state_core = 9
+				add_state_core = 10
+				load_oob = "CLI_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "CLI_1048_naval"
 				}
-				set_demilitarized_zone = no
+				else = {
+					load_oob = "CLI_1048_naval_legacy"
+				}
+			}
+		}
+	}
+	option = {
+		name = southeast.6.b
+		custom_effect_tooltip = BAL_har_yar_tt
+		hidden_effect = {
+			SPF = {
+				transfer_state = 4
+				transfer_state = 1212
+				transfer_state = 328
+				transfer_state = 1195
+				transfer_state = 1194
+				transfer_state = 1193
+				add_state_core = 4
+				add_state_core = 328
+				add_state_core = 1212
+				add_state_core = 1195
+				add_state_core = 1193
+				add_state_core = 1194
+				load_oob = "SPF_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "SPF_1048_naval"
+				}
+				else = {
+					load_oob = "SPF_1048_naval_legacy"
+				}
+				change_tag_from = ROOT
 			}
 			CLI = {
 				transfer_state = 6
@@ -186,6 +235,71 @@ country_event = { #The Mingsplosion begins...
 					load_oob = "CLI_1048_naval_legacy"
 				}
 			}
+		}
+	}
+	option = {
+		name = southest.6.c
+		custom_effect_tooltip = BAL_ray_rah_tt
+		hidden_effect = {
+			SPF = {
+				transfer_state = 4
+				transfer_state = 1212
+				transfer_state = 328
+				transfer_state = 1195
+				transfer_state = 1194
+				transfer_state = 1193
+				add_state_core = 4
+				add_state_core = 328
+				add_state_core = 1212
+				add_state_core = 1195
+				add_state_core = 1193
+				add_state_core = 1194
+				load_oob = "SPF_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "SPF_1048_naval"
+				}
+				else = {
+					load_oob = "SPF_1048_naval_legacy"
+				}
+			}
+			CLI = {
+				transfer_state = 6
+				transfer_state = 7
+				transfer_state = 8
+				transfer_state = 9
+				transfer_state = 10
+				add_state_core = 6
+				add_state_core = 7
+				add_state_core = 8
+				add_state_core = 8
+				add_state_core = 9
+				add_state_core = 10
+				load_oob = "CLI_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "CLI_1048_naval"
+				}
+				else = {
+					load_oob = "CLI_1048_naval_legacy"
+				}
+			}
+			change_tag_from = ROOT
+		}
+	}
+	after = {
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_by = SPF
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
 			every_state = {
 				limit = {
 					is_owned_by = CLI
@@ -193,47 +307,45 @@ country_event = { #The Mingsplosion begins...
 				}
 				set_demilitarized_zone = no
 			}
-			hidden_effect = {
-				transfer_ship = {
-					type = light_cruiser
-					target = CLI
-				}
-				transfer_ship = {
-					type = destroyer
-					target = CLI
-				}
-				transfer_ship = {
-					type = destroyer
-					target = CLI
-				}
-				transfer_ship = {
-					type = destroyer
-					target = CLI
-				}
-				transfer_ship = {
-					type = destroyer
-					target = CLI
-				}
-				transfer_ship = {
-					type = destroyer
-					target = CLI
-				}
-				transfer_ship = {
-					type = destroyer
-					target = SPF
-				}
-				transfer_ship = {
-					type = destroyer
-					target = SPF
-				}
-				transfer_ship = {
-					type = destroyer
-					target = SPF
-				}
-				transfer_ship = {
-					type = destroyer
-					target = SPF
-				}
+			transfer_ship = {
+				type = light_cruiser
+				target = CLI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = CLI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = CLI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = CLI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = CLI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = CLI
+			}
+			transfer_ship = {
+				type = destroyer
+				target = SPF
+			}
+			transfer_ship = {
+				type = destroyer
+				target = SPF
+			}
+			transfer_ship = {
+				type = destroyer
+				target = SPF
+			}
+			transfer_ship = {
+				type = destroyer
+				target = SPF
 			}
 			country_event = {
 				id = southeast.7
@@ -478,6 +590,9 @@ country_event = { #Bats do be EEEing, tho
 	
 	option = { ###We helped them! They repay us like this?!
 		name = southeast.8.a
+		remove_ideas = BAL_red_glory
+		remove_ideas = BAL_imminent_war
+		country_lock_all_division_template = no
 		custom_effect_tooltip = BAL_vogue_vampirism_tt
 		hidden_effect = {
 			EEE = {
@@ -633,7 +748,6 @@ country_event = { #Bats do be EEEing, tho
 			delete_unit_template_and_units = {
 				division_template = "Red Glory COBSOC Militia"
 			}
-			country_lock_all_division_template = no
 			news_event = {
 				id = southeastnews.2 #South-East implodes!
 				hours = 6
@@ -1002,7 +1116,9 @@ country_event = { #The current leader of Baltimare is informed of an incursion b
 	
 	option = { #Won't somepony do SOMETHING?
 		name = southeast.600.a
-		MTS = {
+		custom_effect_tooltip = BAL_remain_unburned_tt
+		hidden_effect = {
+			MTS = {
 				transfer_state = 27
 				transfer_state = 28
 				transfer_state = 84
@@ -1020,20 +1136,62 @@ country_event = { #The current leader of Baltimare is informed of an incursion b
 					load_oob = "MTS_1048_naval_legacy"
 				}
 			}
-		MTS = {
-			EQS_Scorched_Earth = {
-				add_country_leader_role = {
-					promote_leader = yes
-					
-					country_leader = {
-						expire = "1965.1.1"
-						ideology = solarism
-						desc = POLITICS_SCORCHED_EARTH_1048_DESC
-						traits = {
-							warrior_ascetic
+			MTS = {
+				EQS_Scorched_Earth = {
+					add_country_leader_role = {
+						promote_leader = yes
+
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = solarism
+							desc = POLITICS_SCORCHED_EARTH_1048_DESC
+							traits = {
+								warrior_ascetic
+							}
 						}
 					}
 				}
+			}
+		}
+	}
+	option = { #Maybe there's a chance to join them...
+		name = southeast.600.b
+		custom_effect_tooltip = BAL_burn_some_battos_tt
+		hidden_effect = {
+			MTS = {
+				transfer_state = 27
+				transfer_state = 28
+				transfer_state = 84
+				add_state_core = 84
+				add_state_core = 28
+				add_state_core = 27
+				load_oob = "MTS_1048"
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					load_oob = "MTS_1048_naval"
+				}
+				else = {
+					load_oob = "MTS_1048_naval_legacy"
+				}
+			}
+			MTS = {
+				EQS_Scorched_Earth = {
+					add_country_leader_role = {
+						promote_leader = yes
+
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = solarism
+							desc = POLITICS_SCORCHED_EARTH_1048_DESC
+							traits = {
+								warrior_ascetic
+							}
+						}
+					}
+				}
+				change_tag_from = ROOT
 			}
 		}
 	}

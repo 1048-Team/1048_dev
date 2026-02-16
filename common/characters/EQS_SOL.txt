@@ -11,6 +11,7 @@ characters = {
 		field_marshal = {
 			traits = { pony_race_trait solar_fury }
 			skill = 4
+			desc = "EQS_daybreaker_general_desc"
 			attack_skill = 6
 			defense_skill = 1
 			planning_skill = 4
@@ -69,6 +70,7 @@ characters = {
 		field_marshal = {
 			traits = { fading_experience high_mage brilliant_strategist thorough_planner pony_race_trait }
 			skill = 5
+			desc = "EQS_sunset_shimmer_general_desc"
 			attack_skill = 4
 			defense_skill = 3
 			planning_skill = 5
@@ -97,6 +99,7 @@ characters = {
 		advisor = {
 			slot = political_advisor
 			idea_token = sunset_shimmer
+			desc = "POLITICS_SUNSET_SHIMMER_DESC"
 			allowed = {
 				OR = {
 					original_tag = EQS
@@ -177,6 +180,7 @@ characters = {
 		advisor = {
 			slot = political_advisor
 			idea_token = aurora_shinespark
+			desc = "POLITICS_AURORA_SHINESPARK_DESC"
 			allowed = {
 				OR = {
 					original_tag = EQS
@@ -229,7 +233,7 @@ characters = {
 			defense_skill = 4
 			planning_skill = 1
 			logistics_skill = 5
-			#desc = EQS_arrogant_cunt_desc
+			desc = "EQS_blueblood_general_desc"
 			visible = {
 				if = {
 					limit = {
@@ -248,7 +252,7 @@ characters = {
 		country_leader = {
 			expire = "1965.1.1"
 			ideology = despotism
-			desc = "POLITICS_BLUEBLOOD_DESC"
+			desc = "POLITICS_BLUEBLOOD_1048_DESC"
 			traits = {
 				imperial_relative
 			}
@@ -256,6 +260,7 @@ characters = {
 		advisor = {
 			slot = political_advisor
 			idea_token = blueblood
+			#desc = "POLITICS_BLUEBLOOD_1048_DESC"
 			allowed = {
 				original_tag = EQS
 			}
@@ -268,42 +273,130 @@ characters = {
 					NOT = { has_country_flag = blueblood_arrested }
 				}
 			}
-			traits = { prince_of_terror }
+			traits = { imperial_commander }
 		}
 	}
-	
+
 	EQS_Absconditus_Lumen = {
-		name = EQS_Absconditus_Lumen_name
-		portraits = {
-			
-		}
-		advisor = {
-			slot = political_advisor
-			idea_token = absconditus_lumen
-			allowed = {
-				original_tag = EQS
-				has_dlc = "La Resistance"
+		instance = {
+			allowed = { has_dlc = "La Resistance" }
+			name = EQS_Absconditus_Lumen_name
+			portraits = {
+				civilian = {
+					small = "gfx/interface/ideas/generic_scientists_small/idea_pony_scientist_male_1.tga"
+				}
 			}
-			visible = {
-				can_create_intelligence_agency = yes
-				NOT = { has_government = democratic }
-			}
-			available = {
-				has_intelligence_agency = yes
-				hidden_trigger = { NOT = { has_government = democratic } }
-			}
-			traits = { head_of_intelligence }
-			
-			ai_will_do = {
-				factor = 1
-				modifier = {
-					has_intelligence_agency = no
-					factor = 0
+			advisor = {
+				allowed = { original_tag = EQS }
+				slot = political_advisor
+				idea_token = absconditus_lumen
+				#desc = edgy_spy_horse_desc
+				cost = 175
+				available = {
+					has_intelligence_agency = yes
+					is_EQS_SOL_1048 = yes
+					NOT = { has_idea = astrum_solus }
+				}
+				visible = {
+					NOT = { has_government = democratic }
+				}
+				traits = { speculatore_director_lar }
+
+				ai_will_do = {
+					factor = 1
+					modifier = {
+						has_intelligence_agency = no
+						factor = 0
+					}
 				}
 			}
 		}
+		instance = {
+			allowed = { NOT = { has_dlc = "La Resistance" } }
+			name = EQS_absconditus_lumen
+			portraits = {
+				civilian = {
+					small = "gfx/interface/ideas/generic_scientists_small/idea_pony_scientist_male_1.tga"
+				}
+			}
+			advisor = {
+				allowed = { original_tag = EQS }
+				slot = political_advisor
+				idea_token = absconditus_lumen
+				#desc = edgy_spy_horse_desc
+				cost = 175
+				available = {
+					has_intelligence_agency = yes
+					is_EQS_SOL_1048 = yes
+					NOT = { has_idea = astrum_solus }
+				}
+				visible = {
+					NOT = { has_government = democratic }
+				}
+				traits = { speculatore_director }
+			}
+		}
 	}
 	
+	EQS_astrum_solus = {
+		instance = {
+			allowed = { has_dlc = "La Resistance" }
+			name = EQS_Astrum_Solus_name
+			gender = female
+			portraits = {
+				civilian = {
+					small = "gfx/interface/ideas/advisors/EQS/EQS_astrum_solus.tga"
+				}
+			}
+			advisor = {
+				allowed = { original_tag = EQS }
+				slot = political_advisor
+				idea_token = astrum_solus
+				desc = operative_agentbio_astrum_desc
+				cost = 175
+				available = {
+					has_intelligence_agency = yes
+					is_EQS_SOL_1048 = yes
+					NOT = { has_idea = absconditus_lumen }
+				}
+				visible = {
+					NOT = {
+						has_government = democratic
+					}
+				}
+				traits = { speculatore_agent_lar }
+			}
+		}
+		instance = {
+			allowed = { NOT = { has_dlc = "La Resistance" } }
+			name = EQS_Astrum_Solus_name
+			gender = female
+			portraits = {
+				civilian = {
+					small = "gfx/interface/ideas/advisors/EQS/EQS_astrum_solus.tga"
+				}
+			}
+			advisor = {
+				allowed = { original_tag = EQS }
+				slot = political_advisor
+				idea_token = astrum_solus
+				desc = operative_agentbio_astrum_desc
+				cost = 175
+				available = {
+					has_intelligence_agency = yes
+					is_EQS_SOL_1048 = yes
+					NOT = { has_idea = absconditus_lumen }
+				}
+				visible = {
+					NOT = {
+						has_government = democratic
+					}
+				}
+				traits = { speculatore_agent }
+			}
+		}
+	}
+
 	EQS_Starlight_Glimmer_1048 = {
 		name = EQS_Starlight_Glimmer_name
 		gender = female
@@ -481,9 +574,10 @@ characters = {
 				small = "GFX_idea_quasar_pulse"
 			}
 		}
-		corps_commander = {
-			traits = { pony_race_trait crushing_death harsh_leader solaris_inquisitionis }
+		field_marshal = {
+			traits = { pony_race_trait crushing_death harsh_leader lady_inquisitor_general }
 			legacy_id = 5103
+			desc = "EQS_quasar_pulse_general_desc"
 			skill = 2
 			attack_skill = 4
 			defense_skill = 1
@@ -498,14 +592,29 @@ characters = {
 							original_tag = MTS
 						}
 					}
-					OR = {
-						original_tag = SLW
-						original_tag = MTS
-						has_country_flag = new_daybreaker_generals
-						has_character_flag = EQS_quasar_promoted
+					NOT = {
+						has_government = democratic
+						has_government = communism
 					}
 				}
 			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = quasar_pulse
+			desc = "POLITICS_QUASAR_PULSE_DESC"
+			allowed = {
+				original_tag = EQS
+			}
+			visible = {
+				NOT = {
+					has_government = democratic
+					has_government = communism
+				}
+			}
+			traits = { quasar_lady_inquisitor }
+
+			ai_will_do = { factor = 1 }
 		}
 	}
 	
@@ -577,6 +686,9 @@ characters = {
 			defense_skill = 1
 			planning_skill = 1
 			logistics_skill = 3
+			visible = {
+				has_country_flag = new_daybreaker_generals
+			}
 		}
 	}
 	
@@ -1349,6 +1461,72 @@ characters = {
 			traits = { overworked_secretary_advisor }
 		}
 	}
+
+	EQS_midnight_storm = { #Evening Squall's daughter
+		name = EQS_midnight_storm
+		gender = female
+
+		navy_leader = {
+			traits = { pony_race_trait navy_career_officer lancer } #Another trait called high_expectations, or something like that, which speaks of her heritage of being Evening Squall's daughter, and basically living and breathing the navy all her life, +20% ships in engagement, +5% critial damage, -25% retreat speed, -15% retreat chance, +5% xp gain
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			maneuvering_skill = 2
+			coordination_skill = 1
+		}
+	}
+
+	EQS_vortex = {
+		name = EQS_vortex
+
+		navy_leader = {
+			traits = { pony_race_trait ironside }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			maneuvering_skill = 2
+			coordination_skill = 2
+		}
+	}
+
+	EQS_sortie = {
+		name = EQS_sortie
+		gender = female
+
+		navy_leader = {
+			traits = { pony_race_trait air_controller }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			maneuvering_skill = 1
+			coordination_skill = 1
+		}
+		advisor = {
+			slot = navy_chief
+			idea_token = sortie
+
+			allowed = {
+				original_tag = EQS
+			}
+
+			traits = { navy_chief_naval_aviation_1 }
+		}
+	}
+
+	EQS_full_steam = {
+		name = EQS_full_steam
+
+		advisor = {
+			slot = navy_chief
+			idea_token = full_steam
+			cost = 100
+
+			allowed = {
+				original_tag = EQS
+			}
+			traits = { navy_chief_decisive_battle_2 }
+		}
+	}
 	
 	EQS_Nightshade = {
 		name = EQS_Nightshade_name
@@ -1934,63 +2112,40 @@ characters = {
 		}
 	}
 	
-	EQS_eqs6_1048 = {
-		name = EQS_eqs6
-		portraits = {
-			army = {
-				small = "GFX_portrait_pony_generic_navy_9_small"
-			}
-		}
-		advisor = {
-			slot = navy_chief
-			idea_token = eqs6
-			cost = 100
-			allowed = {
-				original_tag = EQS
-			}
-			available = {
-			}
-			traits = { navy_chief_naval_aviation_2 }
-
-			ai_will_do = {
-				factor = 1
-			}
-		}
-	}
-	
-	EQS_cynosura_1048={
-		name=EQS_cynosura
-		gender = female
-		portraits={
-			army={
-				large="gfx/leaders/EQS/Cynosura.tga"
-				small="GFX_idea_EQS_cynosura"
-			}
-		}
-		navy_leader={
-			traits={ navy_career_officer pony_race_trait ironside }
-			skill=4
-			attack_skill=3
-			defense_skill=5
-			maneuvering_skill=3
-			coordination_skill=2
-			desc = EQS_cynosura_desc
-		}
-		advisor = {
-			slot = navy_chief
-			idea_token = cynosura
-			cost = 100
-			allowed = {
-				original_tag = EQS
-			}
-			available = {
-			}
-			traits = { navy_chief_decisive_battle_2 }
-			ai_will_do = {
-				factor = 1
-			}
-		}
-	}
+	#Undecided if Cynosura is dead or not
+	#EQS_cynosura_1048={
+	#	name=EQS_cynosura
+	#	gender = female
+	#	portraits={
+	#		army={
+	#			large="gfx/leaders/EQS/Cynosura.tga"
+	#			small="GFX_idea_EQS_cynosura"
+	#		}
+	#	}
+	#	navy_leader={
+	#		traits={ navy_career_officer pony_race_trait ironside }
+	#		skill=4
+	#		attack_skill=3
+	#		defense_skill=5
+	#		maneuvering_skill=3
+	#		coordination_skill=2
+	#		desc = EQS_cynosura_desc
+	#	}
+	#	advisor = {
+	#		slot = navy_chief
+	#		idea_token = cynosura
+	#		cost = 100
+	#		allowed = {
+	#			original_tag = EQS
+	#		}
+	#		available = {
+	#		}
+	#		traits = { navy_chief_decisive_battle_2 }
+	#		ai_will_do = {
+	#			factor = 1
+	#		}
+	#	}
+	#}
 	
 	EQS_wonderbolts_1048 = {
 		name = EQS_Wonderbolts_name
@@ -2050,24 +2205,6 @@ characters = {
 		}
 	}
 	
-	EQS_madoor_stronghammer_1048={
-		name=EQS_madoor_stronghammer
-		portraits={
-			army={
-				large="gfx/leaders/EQS/Madoor.tga"
-				small="GFX_idea_EQS_madoor_stronghammer"
-			}
-		}
-		navy_leader={
-			traits={ sea_and_sky pony_race_trait }
-			skill=4
-			attack_skill=3
-			defense_skill=3
-			maneuvering_skill=4
-			coordination_skill=3
-		}
-	}
-	
 	EQS_evening_squall_1048={
 		name=EQS_evening_squall
 		portraits={
@@ -2084,41 +2221,16 @@ characters = {
 			maneuvering_skill=3
 			coordination_skill=5
 		}
-	}
-	
-	EQS_dust_hoover_1048={
-		name=EQS_dust_hoover
-		portraits={
-			army={
-				large="gfx/leaders/VAN/Admiral.tga"
-				small="GFX_idea_EQS_dust_hoover"
+		advisor = {
+			slot = navy_chief
+			idea_token = evening_squall
+			cost = 200
+
+			allowed = {
+				original_tag = EQS
 			}
-		}
-		navy_leader={
-			traits={ navy_media_personality pony_race_trait }
-			skill=2
-			attack_skill=2
-			defense_skill=2
-			maneuvering_skill=2
-			coordination_skill=1
-		}
-	}
-	
-	EQS_copper_gearheart_cog_1048={
-		name=EQS_copper_gearheart_cog
-		portraits={
-			army={
-				large="gfx/leaders/EQS/Gearheart.tga"
-				small="GFX_idea_EQS_copper"
-			}
-		}
-		navy_leader={
-			traits={ naval_architect pony_race_trait }
-			skill=3
-			attack_skill=2
-			defense_skill=3
-			maneuvering_skill=3
-			coordination_skill=2
+
+			traits = { navy_chief_maneuver_3 }
 		}
 	}
 	

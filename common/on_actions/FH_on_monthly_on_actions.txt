@@ -94,27 +94,6 @@ on_actions = {
 			}
 		}
 	}
-	on_monthly_YAH = {
-		effect = {
-			log = "[GetDateText]: [ROOT.GetName] on_monthly_YAH"
-			if = {
-				limit = {
-					exists = yes
-					country_exists = SMH
-					NOT = { has_global_flag = YAH_recent_warlord_fight }
-				}
-				if = {
-					limit = {
-						date > 1052.1.1
-					}
-					country_event = equestria_activity.3
-				}
-				else = {
-					country_event = equestria_activity.1
-				}
-			}
-		}
-	}
 	on_monthly_BLS = {
 		effect = {
 			log = "[GetDateText]: [ROOT.GetName] on_monthly_BLS"
@@ -292,39 +271,28 @@ on_actions = {
 			log = "[GetDateText]: ROOT: [Root.GetName] on_monthly_MGY"
 			if = {
 				limit = {
-					has_war = yes
-					NOT = {
-						any_state = {
-							any_neighbor_state = {
-								owner = { has_war_with = MGY }
-							}
-						}
-					}
-				}
-				ROOT = { country_event = { id = zebrica_activity.19 days = 30 } } #kills another zebra desert tribes
-			}
-			else_if = {
-				limit = {
 					has_war_with = ABY
 					NOT = {
 						ABY = {
 							any_controlled_state = {
-								is_core_of = MGY
+								OR = {
+									is_claimed_by = MGY
+									is_core_of = MGY
+								}
 							}
 						}
 					}
 				}
-				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
-				white_peace = MGY
-				ABY = {
-					every_owned_state = {
-						limit = {
-							is_core_of = MGY
-							#idk how to check if it's in another power's control
+				every_state = {
+					limit = {
+						is_in_array = { global.MGY_claimed_ABY_territory = THIS }
+						OWNER = {
+							has_war_with = MGY
 						}
-						transfer_state_to = MGY
 					}
 				}
+				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
+				white_peace = ABY
 			}
 		}
 	}

@@ -1,0 +1,230 @@
+equestrian_original_states = {
+    input = constant:fh_state_groups.original_equestrian_states
+    name = COLLECTION_EQUESTRIAN_ORIGINAL_STATES
+}
+
+controlled_equestrian_original_states = {
+    input = collection:equestrian_original_states
+    name = COLLECTION_CONTROLLED_EQUESTRIAN_ORIGINAL_STATES
+    operators = {
+        limit = {
+            is_controlled_by_ROOT_or_ally = yes
+        }
+    }
+}
+
+solarist_nations = {
+    input = game:all_countries
+    name = COLLECTION_SOLARIST_NATIONS
+    operators = {
+        limit = {
+            has_country_leader_ideology = solarism
+        }
+    }
+}
+
+all_griffonia_states = {
+    input = game:all_states
+    name = COLLECTION_ALL_GRIFFONIA_STATES
+    operators = {
+        limit = {
+            is_on_continent = asia
+        }
+    }
+}
+
+all_equus_states = {
+    input = game:all_states
+    name = COLLECTION_ALL_EQUUS_STATES
+    operators = {
+        limit = {
+            is_on_continent = europe
+        }
+    }
+}
+
+all_zebrica_states = {
+    input = game:all_states
+    name = COLLECTION_ALL_ZEBRICA_STATES
+    operators = {
+        limit = {
+            is_on_continent = africa
+        }
+    }
+}
+
+all_controlled_world_states = {
+    input = game:all_states
+    name = COLLECTION_ALL_CONTROLLED_WORLD_STATES
+    operators = {
+        limit = {
+            is_controlled_by_ROOT_or_ally = yes
+        }
+    }
+}
+
+all_states_with_oil = {
+    input = game:all_states
+    name = COLLECTION_ALL_STATES_WITH_OIL
+    operators = {
+        limit = {
+            has_resources_amount = {
+                resource = oil
+                amount > 0
+            }
+        }
+    }
+}
+
+all_controlled_states_with_oil = {
+    input = collection:all_states_with_oil
+    name = COLLECTION_ALL_CONTROLLED_STATES_WITH_OIL
+    operators = {
+        limit = {
+            is_controlled_by_ROOT_or_ally = yes
+        }
+    }
+}
+
+all_south_eastern_zebrican_states = {
+    input = constant:fh_state_groups.south_eastern_zebrican_states
+    name = COLLECTION_ALL_SOUTH_EASTERN_ZEBRICAN_STATES
+}
+
+all_controlled_south_eastern_zebrican_states = {
+    input = collection:all_south_eastern_zebrican_states
+    name = COLLECTION_ALL_CONTROLLED_SOUTH_EASTERN_ZEBRICAN_STATES
+    operators = {
+        limit = {
+            is_controlled_by_ROOT_or_ally = yes
+        }
+    }
+}
+
+all_north_zebrican_states = {
+    input = constant:fh_state_groups.all_north_zebrican_states
+    name = COLLECTION_ALL_NORTH_ZEBRICAN_STATES
+}
+
+all_controlled_north_zebrican_states = {
+    input = collection:all_north_zebrican_states
+    name = COLLECTION_ALL_CONTROLLED_NORTH_ZEBRICAN_STATES
+    operators = {
+        limit = {
+            is_controlled_by_ROOT_or_ally = yes
+        }
+    }
+}
+
+non_capitulated_harmonist_countries = {
+    input = game:all_countries
+    name = COLLECTION_NON_CAPITULATED_HARMONIST_COUNTRIES
+    operators = {
+        limit = {
+            has_capitulated = no
+            has_government = democratic
+        }
+    }
+}
+
+non_capitulated_harmonist_countries_in_faction = {
+    input = collection:non_capitulated_harmonist_countries
+    name = COLLECTION_NON_CAPITULATED_HARMONIST_COUNTRIES_IN_FACTION
+    operators = {
+        limit = {
+            is_in_faction_with = ROOT
+        }
+    }
+}
+
+non_capitulated_harmonist_countries_with_armies_smaller_than_HIP = {
+    input = collection:non_capitulated_harmonist_countries
+    name = COLLECTION_NON_CAPITULATED_HARMONIST_COUNTRIES_WITH_ARMIES_SMALLER_THAN_HIP
+    operators = {
+        limit = {
+            fighting_army_strength_ratio = {
+                tag = HIP
+                ratio < 1
+            }
+        }
+    }
+}
+
+non_capitulated_majors_with_less_factories_than_STG = {
+    input = collection:non_capitulated_majors
+    name = COLLECTION_NON_CAPITULATED_MAJORS_WITH_LESS_FACTORIES_THAN_STG
+    operators = {
+        limit = {
+            ic_ratio = {
+                tag = STG
+                ratio < 1
+            }
+        }
+    }
+}
+
+zebrican_countries = {
+    input = constant:fh_country_groups.all_zebrican_countries
+    name = COLLECTION_ALL_ZEBRICAN_COUNTRIES
+}
+
+puppeted_zebrican_countries = {
+    input = collection:zebrican_countries
+    name = COLLECTION_ALL_PUPPETED_ZEBRICAN_COUNTRIES
+    operators = {
+        limit = {
+            is_subject_of = ROOT
+        }
+    }
+}
+
+griffon_nations = {
+    input = game:all_countries
+    name = COLLECTION_ALL_GRIFFON_NATIONS
+    operators = {
+        limit = {
+            has_idea = griffon_race
+        }
+    }
+}
+
+griffon_nations_with_rad_bor = {
+    input = collection:griffon_nations
+    name = COLLECTION_ALL_GRIFFON_NATIONS_WITH_RAD_BOR
+    operators = {
+        limit = {
+            has_country_leader_ideology = rad_bor
+        }
+    }
+}
+
+all_griffonian_fh_nations = {
+    input = constant:fh_country_groups.all_griffonian_countries
+    name = COLLECTION_ALL_GRIFFONIAN_NATIONS
+}
+
+all_puppeted_griffonian_fh_nations = {
+    input = collection:all_griffonian_fh_nations
+    name = COLLECTION_ALL_PUPPETED_GRIFFONIAN_NATIONS
+    operators = {
+        limit = {
+            is_subject_of = ROOT
+            NOT = { tag = ROOT }
+        }
+    }
+}
+
+all_southern_griffonian_states = {
+    input = constant:fh_state_groups.all_south_eastern_griffonian_states
+    name = COLLECTION_ALL_SOUTHERN_GRIFFONIAN_STATES
+}
+
+all_controlled_southern_griffonian_states = {
+    input = collection:all_southern_griffonian_states
+    name = COLLECTION_ALL_CONTROLLED_SOUTHERN_GRIFFONIAN_STATES
+    operators = {
+        limit = {
+            is_controlled_by_ROOT_or_ally = yes
+        }
+    }
+}

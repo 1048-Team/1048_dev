@@ -1,0 +1,83 @@
+add_namespace = fh_raid
+
+#Template
+#country_event = {
+#    id = fh_raid.
+#    title = fh_raid.
+#    desc = fh_raid.
+#    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_raid."}
+#
+#    is_triggered_only = yes
+#
+#    option = {
+#        name = fh_raid.
+#    }
+#}
+
+country_event = { #Victory in border conflicts
+    id = fh_raid.3
+    title = fh_raid.3.t
+    desc = fh_raid.3.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_raid.3"}
+
+    is_triggered_only = yes
+
+    option = { #Huzzah, the land has been expanded!
+        name = fh_raid.3.a
+        add_political_power = 25
+        add_stability = 0.02
+        random_state = {
+            limit = {
+                any_neighbor_state = { state = FROM }
+                has_state_flag = FH_defender_state
+            }
+            clr_state_flag = FH_defender_state
+            transfer_state_to = ROOT
+        }
+    }
+}
+
+country_event = { #Border conflict failed to take state
+    id = fh_raid.4
+    title = fh_raid.4.t
+    desc = fh_raid.4.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_raid.4"}
+
+    is_triggered_only = yes
+
+    option = { #Poo...
+        name = fh_raid.4.a
+        add_political_power = -25
+        add_stability = -0.03
+    }
+}
+
+country_event = { #Border conflict inconclusive
+    id = fh_raid.5
+    title = fh_raid.5.t
+    desc = fh_raid.5.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_raid.5"}
+
+    is_triggered_only = yes
+
+    option = { #Well, all right then.
+        name = fh_raid.5.a
+        add_political_power = 5
+    }
+}
+
+country_event = { #Successfully repelled border raide
+    id = fh_raid.6
+    title = fh_raid.6.t
+    desc = fh_raid.6.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_raid.5"}
+
+    is_triggered_only = yes
+
+    option = { #Huzzah, the states haven't been doubled!
+        name = fh_raid.6.a
+        add_political_power = 50
+        add_stability = 0.02
+        add_war_support = 0.01
+    }
+}

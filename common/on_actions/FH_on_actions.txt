@@ -1,5 +1,6 @@
 on_actions = {
 
+	#ROOT is country declaring war; FROM is country being declared on
 	on_declare_war = {
 		effect = {
 			if = {
@@ -40,6 +41,16 @@ on_actions = {
 					}
 					remove_ideas = MTS_no_friends_calling_offensive
 				}
+			}
+			else_if = {
+				limit = {
+					tag = ILU
+					NOT = { has_idea = FH_you_can_do_it_dude_idea }
+					NOT = {
+						date > 1058.1.1 #Should be strong enough by that point to bully most other AI nations
+					}
+				}
+				add_ideas = FH_you_can_do_it_dude_idea
 			}
 		}
 	}
@@ -113,51 +124,6 @@ on_actions = {
 					}
 					SOL_calculate_ordo_image = yes
 				}
-				#Return MTS/SCS to not call in offensive wars
-				else_if = {
-					limit = {
-						ROOT = { 
-							NOT = { 
-								has_idea = MTS_no_friends_calling_offensive
-								OR = {
-									AND = {
-										tag = MTS
-										has_government = communism
-										is_in_faction_with = SCS
-									}
-									AND = {
-										tag = SCS
-										is_in_faction_with = MTS
-									}
-								}
-							} 
-						}
-					}
-					add_ideas = MTS_no_friends_calling_offensive
-				}
-				###Begins the long list of integration stuff
-				else_if = {
-					limit = {
-						ROOT = {
-							tag = MTS
-							is_subject = no
-						}
-						FROM = {
-							OR = {
-								tag = EQS
-								tag = SLW
-								tag = CRY
-								is_in_array = { global.changeling_hegemony = THIS.id }
-								AND = {
-									is_in_array = { global.shield_of_steel = THIS.id }
-									NOT = { tag = MWR }
-								}
-								is_in_array = { global.solar_empire_rumps = THIS.id }
-							}
-						}
-					}
-					FROM = { add_to_ROOT_potential_cores = yes }
-				}
 				else_if = { #ABY-YMN war and YMN stuffs
 					limit = {
 						ROOT = {
@@ -191,32 +157,50 @@ on_actions = {
 					}
 					else = { clear_array = ROOT.i_will_kill_you_later }
 				}
-				else_if = { # MGY stuffs
+				#Return MTS/SCS to not call in offensive wars
+				if = {
 					limit = {
-						ROOT = {
-							original_tag = MGY
-						}
-					}
-					if = {
-						limit = {
-							any_neighbor_country = {
-								NOT = { original_tag = ABY } #if YMN eventually eat ABY, MGY had better to get them ASAP before they got something from their new potential cores; that's why YMN check isn't added
-								any_controlled_state = {
-									OR = {
-										is_core_of = ROOT
-										is_claimed_by = ROOT
+						ROOT = { 
+							NOT = { 
+								has_idea = MTS_no_friends_calling_offensive
+								OR = {
+									AND = {
+										tag = MTS
+										has_government = communism
+										is_in_faction_with = SCS
+									}
+									AND = {
+										tag = SCS
+										is_in_faction_with = MTS
 									}
 								}
+							} 
+						}
+					}
+					add_ideas = MTS_no_friends_calling_offensive
+				}
+				###Begins the long list of integration stuff
+				if = {
+					limit = {
+						ROOT = {
+							tag = MTS
+							is_subject = no
+						}
+						FROM = {
+							OR = {
+								tag = EQS
+								tag = SLW
+								tag = CRY
+								is_in_array = { global.changeling_hegemony = THIS.id }
+								AND = {
+									is_in_array = { global.shield_of_steel = THIS.id }
+									NOT = { tag = MWR }
+								}
+								is_in_array = { global.solar_empire_rumps = THIS.id }
 							}
 						}
-						ROOT = { country_event = { id = zebrica_activity.19 days = 30 } } #kills another zebra desert tribes
 					}
-					else_if = { 
-						limit = {
-							has_war = no
-						}
-						ROOT = { country_event = { id = zebrica_activity.24 days = 300 } } #kills ABY
-					}
+					FROM = { add_to_ROOT_potential_cores = yes }
 				}
 			
 				FROM = { country_event = { id = utility.10 hours = 1 } }
@@ -260,18 +244,6 @@ on_actions = {
 			log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_operative_recruited by FH_on_actions"
 			operative_add_starting_nationalities_and_race = yes
 			operative_add_secondary_nationalities = yes
-			if = {
-				limit = {
-					FROM = {
-						OR = {
-							original_tag = EQS
-							is_in_faction_with = EQS
-						}
-					}
-					has_trait = operative_agentbio_astrum
-				}
-				save_global_event_target_as = SLE_astrum_solus_target
-			}
 		}
 	}
 
@@ -303,6 +275,54 @@ on_actions = {
 					is_subject = no
 				}
 				add_to_variable = { EEE_doom_rate = 1 }
+			}
+			if = {
+				limit = {
+					tag = ILU
+					has_war = no
+				}
+				delete_unit_template_and_units = {
+					division_template = "Illuminated Militia"
+					disband = yes
+				}
+				delete_unit_template_and_units = {
+					division_template = "Illuminated Infantry"
+					disband = yes
+				}
+			}
+		}
+	}
+
+	# ROOT is new controller, FROM is old controller, FROM.FROM is state ID
+	# Peace out for ROA/Zebride war
+	on_state_control_changed = {
+		effect = {
+			log = "[GetDateText]: THIS: [THIS.GetName]: on_state_control_changed"
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							tag = ZOO
+							tag = MEL
+							tag = TAI
+						}
+					}
+					FROM = {
+						OR = {
+							tag = CNT
+							tag = ROA
+						}
+					}
+					FROM.FROM = {
+						state = 1136
+					}
+				}
+				ROOT = {
+					save_global_event_target_as = zebride_conqueror
+				}
+				FROM = {
+					activate_mission = zebride_control_timeout
+				}
 			}
 		}
 	}

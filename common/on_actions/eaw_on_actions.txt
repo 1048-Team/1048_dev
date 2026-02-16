@@ -2,6 +2,7 @@ on_actions = {
 	
 	on_startup = {
 		effect = {
+			###All starting core state arrays should be replaced with TAG.original_cores in code checks
 			###Changeling Hegemony Countries###
 			add_to_array = { global.changeling_hegemony = CHN.id }
 			add_to_array = { global.changeling_hegemony = NCA.id }
@@ -131,6 +132,121 @@ on_actions = {
 				add_to_array = { global.CWR_territory = THIS.id }
 			}
 			
+			###ABY starting states claimed by MGY###
+			every_state = {
+				limit = {
+					is_owned_by = ABY
+					is_claimed_by = MGY
+				}
+				add_to_array = { global.MGY_claimed_ABY_territory = THIS.id }
+			}
+
+			###Starting BOI-owned states###
+			every_state = {
+				limit = {
+					is_core_of = BOI
+					is_owned_by = BOI
+				}
+				add_to_array = { BOI.starting_owned_states = THIS.id }
+			}
+
+			###League of Free Nations states###
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = LUS
+						is_core_of = GRY
+						is_core_of = GRU
+						is_core_of = BRF
+					}
+					OR = {
+						is_owned_by = LUS
+						is_owned_by = GRY
+						is_owned_by = GRU
+						is_owned_by = BRF
+					}
+				}
+				add_to_array = { global.league_states = THIS.id }
+			}
+
+			###Original EQC states###
+			every_state = {
+				limit = {
+					OR = {
+						state = 358
+						state = 359
+						state = 355
+						state = 357
+						state = 354
+						state = 356
+						state = 363
+						state = 364
+						state = 362
+						state = 365
+						state = 361
+						state = 360
+						state = 675
+						state = 676
+					}
+				}
+				add_to_array = { global.original_EQC_states = THIS.id }
+			}
+
+			###Original GAR/Centaur states###
+			every_state = {
+				limit = {
+					OR = {
+						state = 1046
+						state = 330
+						state = 1049
+						state = 1048
+						state = 1047
+						state = 1051
+						state = 1053
+						state = 1108
+						state = 1111
+						state = 1110
+						state = 1147
+						state = 1109
+					}
+				}
+				add_to_array = { global.original_ancient_pact_states = THIS.id }
+			}
+
+			###Original OLE states###
+			every_state = {
+				limit = {
+					OR = {
+						state = 218
+						state = 224
+						state = 296
+						state = 69
+						state = 217
+						state = 216
+						state = 219
+						state = 215
+						state = 195
+						state = 292
+						state = 300
+						state = 302
+						state = 301
+						state = 331
+						state = 1228
+						state = 1229
+					}
+				}
+				add_to_array = { global.original_OLE_states = THIS.id }
+			}
+
+			###Starting MCW states###
+			every_state = {
+				limit = {
+					is_owned_by = MCW
+					is_core_of = MCW
+				}
+				add_to_array = { global.starting_MCW_states = THIS.id }
+			}
+
 			###Arrays for all starting territories of Equus nations that can have Ordos be made in them###
 			every_state = {
 				limit = {
@@ -188,6 +304,7 @@ on_actions = {
 						is_core_of = JGR
 						is_claimed_by = JGR
 					}
+					NOT = { is_claimed_by = YAH }
 				}
 				add_to_array = { global.PLB_territory = THIS.id }
 			}
@@ -222,30 +339,76 @@ on_actions = {
 			}
 			
 			###Solar Empire states###
+			#every_state = {
+			#	limit = {
+			#		is_core_of = EQS
+			#	}
+			#	add_to_array = { global.EQS_starting_territory = THIS.id }
+			#}
 			every_state = {
 				limit = {
-					is_core_of = EQS
-				}
-				add_to_array = { global.EQS_starting_territory = THIS.id }
-			}
-			every_state = {
-				limit = {
-					is_claimed_by = EQS
+					OR = {
+						is_core_of = BLS
+						is_core_of = WHY
+						is_core_of = NER
+						is_core_of = CER
+						is_core_of = CLD
+						is_core_of = BAL
+						is_core_of = NID
+						is_core_of = SCS
+						is_core_of = CCA
+						is_core_of = NCA
+						is_core_of = AWR
+						is_core_of = STG
+						is_core_of = EQS
+						state = 136
+						state = 137
+						state = 138
+						state = 172
+						state = 173
+						state = 175
+						state = 1216
+					}
+					NOT = {
+						state = 6
+						state = 7
+						state = 8
+						state = 9
+						state = 10
+						state = 328
+					}
 				}
 				add_to_array = { global.EQS_original_territory = THIS.id }
+			}
+			#Only for demo formables
+			every_state = {
+				limit = {
+					is_in_array = { global.EQS_original_territory = THIS }
+					NOT = {
+						is_core_of = STG
+						is_core_of = AWR
+					}
+				}
+				add_to_array = { global.EQS_original_territory_minus_STG = THIS.id }
 			}
 			
 			###Ordo Salus states###
 			every_state = {
 				limit = {
-					AND = {
-						is_core_of = CHN
-						is_claimed_by = EQS
+					OR = {
+						state = 136
+						state = 137
+						state = 138
+						state = 172
+						state = 173
+						state = 175
+						state = 1216
 					}
 				}
 				add_to_array = { global.ordo_salus_territory = THIS.id }
 			}
 			
+			###The Ordo stuff and BLS stuff should be done in their respective history files
 			###Ordo Loyalty startup###
 			add_to_array = { global.ordo_loyalty_array = 50 }
 			add_to_array = { global.ordo_loyalty_array = 47 }
@@ -358,45 +521,6 @@ on_actions = {
 				SIC = { send_embargo = PREV }
 				MIT = { send_embargo = PREV }
 			}
-			
-			###Create array of all Equus tags###
-			add_to_array = { global.equus_nations = EQS.id }
-			add_to_array = { global.equus_nations = SLW.id }
-			add_to_array = { global.equus_nations = BLS.id }
-			add_to_array = { global.equus_nations = CLD.id }
-			add_to_array = { global.equus_nations = NER.id }
-			add_to_array = { global.equus_nations = CER.id }
-			add_to_array = { global.equus_nations = AWR.id }
-			add_to_array = { global.equus_nations = CWR.id }
-			add_to_array = { global.equus_nations = STG.id }
-			add_to_array = { global.equus_nations = YAH.id }
-			add_to_array = { global.equus_nations = MWR.id }
-			add_to_array = { global.equus_nations = SMH.id }
-			add_to_array = { global.equus_nations = JGR.id }
-			add_to_array = { global.equus_nations = SCH.id }
-			add_to_array = { global.equus_nations = NVC.id }
-			add_to_array = { global.equus_nations = GRF.id }
-			add_to_array = { global.equus_nations = CRY.id }
-			add_to_array = { global.equus_nations = NCA.id }
-			add_to_array = { global.equus_nations = CCA.id }
-			add_to_array = { global.equus_nations = SCS.id }
-			add_to_array = { global.equus_nations = CHN.id }
-			add_to_array = { global.equus_nations = OLE.id }
-			add_to_array = { global.equus_nations = BAL.id }
-			add_to_array = { global.equus_nations = EEE.id }
-			add_to_array = { global.equus_nations = MTS.id }
-			add_to_array = { global.equus_nations = STB.id }
-			add_to_array = { global.equus_nations = CLI.id }
-			add_to_array = { global.equus_nations = SPF.id }
-			add_to_array = { global.equus_nations = NID.id }
-			add_to_array = { global.equus_nations = NEI.id }
-			add_to_array = { global.equus_nations = NRP.id }
-			add_to_array = { global.equus_nations = ALA.id }
-			add_to_array = { global.equus_nations = TRS.id }
-			add_to_array = { global.equus_nations = OAC.id }
-			add_to_array = { global.equus_nations = OCS.id }
-			add_to_array = { global.equus_nations = WHY.id }
-			add_to_array = { global.equus_nations = VRG.id }
 			
 			###YOINKED FROM EAW###
 			###Operative Setup; Yoinked from EaW###

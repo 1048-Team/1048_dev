@@ -150,7 +150,6 @@ SOL_Celestia_Returned = {
 	EQS_Midwinter_Halo = { set_nationality = SLW }
 	EQS_Swift_Wing_1048 = { set_nationality = SLW }
 	EQS_Orion_Star_1048 = { set_nationality = SLW }
-	EQS_dust_hoover_1048 = { set_nationality = SLW }
 	EQS_Bellum_Iceheart = { set_nationality = SLW }
 	EQS_Molten_Song = { set_nationality = SLW }
 	EQS_evening_squall_1048 = { set_nationality = SLW }
@@ -533,155 +532,78 @@ EQS_light_drafting = {
 ###I REALLY LOVE NOT HAVING SWITCHES OR MODULES NOT SUPPORTING VARIABLES. IT'S SO GREAT!!!!!!###
 EQS_create_daybreak = {
 	if = {
-		limit = { has_dlc = "Man the Guns" }
-		if = {
-			limit = { NOT = { has_tech = semi_modern_ship_hull_super_heavy } }
-			set_technology = { semi_modern_ship_hull_super_heavy = 1 }
+		limit = { NOT = { has_tech = semi_modern_ship_hull_super_heavy } }
+		set_technology = { semi_modern_ship_hull_super_heavy = 1 }
+	}
+	if = {
+		limit = {
+			EQS_hms_daybreak_not_upgraded = yes
 		}
-		if = {
-			limit = {
-				EQS_hms_daybreak_not_upgraded = yes
-			}
-			create_equipment_variant = { #Base variant
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 0
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_battery_slot = ship_super_heavy_battery_1
-					fixed_ship_anti_air_slot = ship_anti_air_2
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-					fixed_ship_radar_slot = empty
-					fixed_ship_engine_slot = heavy_ship_engine_2
-					fixed_ship_secondaries_slot = ship_secondaries_1
-					fixed_ship_armor_slot = ship_armor_shbb
-					front_1_custom_slot = empty
-					front_2_custom_slot = empty
-					mid_1_custom_slot = empty
-					mid_2_custom_slot = ship_secondaries_1
-					mid_3_custom_slot = empty
-					rear_1_custom_slot = ship_super_heavy_battery_1
-					rear_2_custom_slot = empty
-				}
-			}
-		}
-		else = {
-			create_equipment_variant = { #Base variant
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 0
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_battery_slot = ship_super_heavy_battery_1
-					fixed_ship_anti_air_slot = ship_anti_air_2
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-					fixed_ship_radar_slot = empty
-					fixed_ship_engine_slot = heavy_ship_engine_2
-					fixed_ship_secondaries_slot = ship_secondaries_1
-					fixed_ship_armor_slot = ship_armor_shbb
-					front_1_custom_slot = empty
-					front_2_custom_slot = empty
-					mid_1_custom_slot = empty
-					mid_2_custom_slot = ship_secondaries_1
-					mid_3_custom_slot = empty
-					rear_1_custom_slot = ship_super_heavy_battery_1
-					rear_2_custom_slot = empty
-				}
-			}
-		}
-		###For equipping upgraded tech
-		EQS_upgrade_secondaries = yes
-		EQS_upgrade_aa = yes
-		EQS_upgrade_primaries = yes
-		EQS_upgrade_secondary_cannons = yes
-		EQS_upgrade_armor = yes
-		EQS_upgrade_fcs = yes
-		EQS_upgrade_radar = yes
-		EQS_upgrade_engines = yes
-		EQS_upgrade_recon = yes
-		create_ship = {
+		create_equipment_variant = { #Base variant
+			name = "Daybreak Class"
 			type = ship_hull_super_heavy_2
-			equipment_variant = "Daybreak Class"
-			creator = ROOT
-			name = "HMS Daybreak"
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 0
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_battery_slot = ship_super_heavy_battery_1
+				fixed_ship_anti_air_slot = ship_anti_air_2
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+				fixed_ship_radar_slot = empty
+				fixed_ship_engine_slot = heavy_ship_engine_2
+				fixed_ship_secondaries_slot = ship_secondaries_1
+				fixed_ship_armor_slot = ship_armor_shbb
+				front_1_custom_slot = empty
+				front_2_custom_slot = empty
+				mid_1_custom_slot = empty
+				mid_2_custom_slot = ship_secondaries_1
+				mid_3_custom_slot = empty
+				rear_1_custom_slot = ship_super_heavy_battery_1
+				rear_2_custom_slot = empty
+			}
 		}
 	}
 	else = {
-		if = { limit = { NOT = { has_tech = heavy_battleship2 } } }
-		set_technology = { heavy_battleship2 = 1 }
-		if = {
-			limit = { check_variable = { EQS_SOL_daybreak_upgrades = 35 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = SH_battleship_2
-				upgrades = {
-					ship_gun_upgrade = 5
-					ship_armor_upgrade = 5
-					ship_anti_air_upgrade = 5
-					ship_engine_upgrade = 5
-					ship_reliability_upgrade = 5
-				}
+		create_equipment_variant = { #Base variant
+			name = "Daybreak-Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 0
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_battery_slot = ship_super_heavy_battery_1
+				fixed_ship_anti_air_slot = ship_anti_air_2
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+				fixed_ship_radar_slot = empty
+				fixed_ship_engine_slot = heavy_ship_engine_2
+				fixed_ship_secondaries_slot = ship_secondaries_1
+				fixed_ship_armor_slot = ship_armor_shbb
+				front_1_custom_slot = empty
+				front_2_custom_slot = empty
+				mid_1_custom_slot = empty
+				mid_2_custom_slot = ship_secondaries_1
+				mid_3_custom_slot = empty
+				rear_1_custom_slot = ship_super_heavy_battery_1
+				rear_2_custom_slot = empty
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_daybreak_upgrades < 26 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = SH_battleship_2
-				upgrades = {
-					ship_gun_upgrade = 3
-					ship_armor_upgrade = 3
-					ship_anti_air_upgrade = 3
-					ship_engine_upgrade = 3
-					ship_reliability_upgrade = 3
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_daybreak_upgrades < 16 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = SH_battleship_2
-				upgrades = {
-					ship_gun_upgrade = 3
-					ship_armor_upgrade = 2
-					ship_anti_air_upgrade = 2
-					ship_engine_upgrade = 3
-					ship_reliability_upgrade = 2
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_daybreak_upgrades < 6 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = SH_battleship_2
-				upgrades = {
-					ship_gun_upgrade = 2
-					ship_armor_upgrade = 1
-					ship_anti_air_upgrade = 1
-					ship_engine_upgrade = 2
-					ship_reliability_upgrade = 1
-				}
-			}
-		}
-		else = {
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = SH_battleship_2
-				upgrades = {
-					ship_gun_upgrade = 1
-					ship_armor_upgrade = 1
-				}
-			}
-		}
-		create_ship = {
-			type = SH_battleship_2
-			equipment_variant = "Daybreak Class"
-		}
+	}
+	###For equipping upgraded tech
+	EQS_upgrade_secondaries = yes
+	EQS_upgrade_aa = yes
+	EQS_upgrade_primaries = yes
+	EQS_upgrade_secondary_cannons = yes
+	EQS_upgrade_armor = yes
+	EQS_upgrade_fcs = yes
+	EQS_upgrade_radar = yes
+	EQS_upgrade_engines = yes
+	EQS_upgrade_recon = yes
+	create_ship = {
+		type = ship_hull_super_heavy_2
+		equipment_variant = "Daybreak Class"
+		creator = ROOT
+		name = "HMS Daybreak"
 	}
 }
 EQS_upgrade_secondaries = {
@@ -1707,177 +1629,119 @@ EQS_upgrade_recon = {
 }
 EQS_create_daybreak_fleet = {
 	if = {
-		limit = { has_dlc = "Man the Guns" }
-		if = {
-			limit = { NOT = { has_tech = advanced_ship_hull_light } }
-			set_technology = { advanced_ship_hull_light = 1 }
-		}
-		if = {
-			limit = { NOT = { has_tech = advanced_ship_hull_cruiser } }
-			set_technology = { advanced_ship_hull_cruiser = 1 }
-		}
-	}
-	else = {
-		if = { 
-			limit = { NOT = { has_tech = advanced_destroyer } }
-			set_technology = { advanced_destroyer = 1 }
-		}
-		if = {
-			limit = { NOT = { has_tech = advanced_light_cruiser } }
-			set_technology = { advanced_light_cruiser = 1 }
-		}
-		if = {
-			limit = { NOT = { has_tech = advanced_heavy_cruiser } }
-			set_technology = { advanced_heavy_cruiser = 1 }
-		}
+		limit = { NOT = { has_tech = advanced_ship_hull_light } }
+		set_technology = { advanced_ship_hull_light = 1 }
 	}
 	if = {
-		limit = { has_dlc = "Man the Guns" }
-		create_equipment_variant = {
-			name = "Polebearer Class"
-			type = ship_hull_light_4
-			name_group = SOL_DD_HISTORICAL
-			allow_without_tech = yes
-			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-			modules = {
-				fixed_ship_battery_slot = ship_light_battery_4
-				fixed_ship_engine_slot = light_ship_engine_4
-				fixed_ship_anti_air_slot = ship_anti_air_4
-				fixed_ship_fire_control_system_slot = ship_torpedo_data_computer_4
-				fixed_ship_radar_slot = ship_radar_4
-				fixed_ship_torpedo_slot = ship_torpedo_4
-				rear_1_custom_slot = ship_torpedo_4
-				mid_1_custom_slot = ship_anti_air_4
-				mid_2_custom_slot = ship_torpedo_4
-				front_1_custom_slot = ship_anti_air_4
-			}
-		}
-		create_equipment_variant = {
-			name = "Praetorian Class"
-			type = ship_hull_cruiser_4
-			name_group = SOL_CL_HISTORICAL
-			allow_without_tech = yes
-			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-			modules = {
-				fixed_ship_battery_slot = ship_light_medium_battery_4
-				fixed_ship_engine_slot = cruiser_ship_engine_4
-				fixed_ship_anti_air_slot = ship_anti_air_4
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_4
-				fixed_ship_radar_slot = ship_radar_4
-				fixed_ship_secondaries_slot = dp_ship_secondaries_2
-				front_1_custom_slot = ship_light_medium_battery_4
-				mid_1_custom_slot = ship_torpedo_4
-				mid_2_custom_slot = dp_ship_secondaries_2
-				rear_1_custom_slot = ship_airplane_launcher_3
-				rear_2_custom_slot = ship_light_ASM_battery_1
-			}
-		}
-		create_equipment_variant = {
-			name = "Heir Class"
-			type = ship_hull_cruiser_4
-			name_group = SOL_CA_HISTORICAL
-			allow_without_tech = yes
-			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-			modules = {
-				fixed_ship_battery_slot = ship_medium_battery_4
-				fixed_ship_engine_slot = cruiser_ship_engine_4
-				fixed_ship_anti_air_slot = ship_anti_air_4
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_4
-				fixed_ship_radar_slot = ship_radar_4
-				fixed_ship_secondaries_slot = dp_ship_secondaries_2
-				fixed_ship_armor_slot = ship_armor_cruiser_3
-				front_1_custom_slot = ship_anti_air_4
-				mid_1_custom_slot = ship_medium_ASM_battery_1
-				mid_2_custom_slot = dp_ship_secondaries_2
-				rear_1_custom_slot = ship_medium_ASM_battery_1
-				rear_2_custom_slot = ship_medium_battery_4
-			}
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_light_4
-			equipment_variant = "Polebearer Class"
-		}
-		create_ship = {
-			type = ship_hull_cruiser_4
-			equipment_variant = "Praetorian Class"
-		}
-		create_ship = {
-			type = ship_hull_cruiser_4
-			equipment_variant = "Praetorian Class"
-		}
-		create_ship = {
-			type = ship_hull_cruiser_4
-			equipment_variant = "Praetorian Class"
-		}
-		create_ship = {
-			type = ship_hull_cruiser_4
-			equipment_variant = "Heir Class"
+		limit = { NOT = { has_tech = advanced_ship_hull_cruiser } }
+		set_technology = { advanced_ship_hull_cruiser = 1 }
+	}
+	create_equipment_variant = {
+		name = "Polebearer Class"
+		type = ship_hull_light_4
+		name_group = SOL_DD_HISTORICAL
+		allow_without_tech = yes
+		design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_4
+			fixed_ship_engine_slot = light_ship_engine_4
+			fixed_ship_anti_air_slot = ship_anti_air_4
+			fixed_ship_fire_control_system_slot = ship_torpedo_data_computer_4
+			fixed_ship_radar_slot = ship_radar_4
+			fixed_ship_torpedo_slot = ship_torpedo_4
+			rear_1_custom_slot = ship_torpedo_4
+			mid_1_custom_slot = ship_anti_air_4
+			mid_2_custom_slot = ship_torpedo_4
+			front_1_custom_slot = ship_anti_air_4
 		}
 	}
-	else = {
-		create_ship = {
-			type = destroyer_4
+	create_equipment_variant = {
+		name = "Praetorian Class"
+		type = ship_hull_cruiser_4
+		name_group = SOL_CL_HISTORICAL
+		allow_without_tech = yes
+		design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+		modules = {
+			fixed_ship_battery_slot = ship_light_medium_battery_4
+			fixed_ship_engine_slot = cruiser_ship_engine_4
+			fixed_ship_anti_air_slot = ship_anti_air_4
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_4
+			fixed_ship_radar_slot = ship_radar_4
+			fixed_ship_secondaries_slot = dp_ship_secondaries_2
+			front_1_custom_slot = ship_light_medium_battery_4
+			mid_1_custom_slot = ship_torpedo_4
+			mid_2_custom_slot = dp_ship_secondaries_2
+			rear_1_custom_slot = ship_airplane_launcher_3
+			rear_2_custom_slot = ship_light_ASM_battery_1
 		}
-		create_ship = {
-			type = destroyer_4
+	}
+	create_equipment_variant = {
+		name = "Heir Class"
+		type = ship_hull_cruiser_4
+		name_group = SOL_CA_HISTORICAL
+		allow_without_tech = yes
+		design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_4
+			fixed_ship_engine_slot = cruiser_ship_engine_4
+			fixed_ship_anti_air_slot = ship_anti_air_4
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_4
+			fixed_ship_radar_slot = ship_radar_4
+			fixed_ship_secondaries_slot = dp_ship_secondaries_2
+			fixed_ship_armor_slot = ship_armor_cruiser_3
+			front_1_custom_slot = ship_anti_air_4
+			mid_1_custom_slot = ship_medium_ASM_battery_1
+			mid_2_custom_slot = dp_ship_secondaries_2
+			rear_1_custom_slot = ship_medium_ASM_battery_1
+			rear_2_custom_slot = ship_medium_battery_4
 		}
-		create_ship = {
-			type = destroyer_4
-		}
-		create_ship = {
-			type = destroyer_4
-		}
-		create_ship = {
-			type = destroyer_4
-		}
-		create_ship = {
-			type = destroyer_4
-		}
-		create_ship = {
-			type = destroyer_4
-		}
-		create_ship = {
-			type = destroyer_4
-		}
-		create_ship = {
-			type = light_cruiser_4
-		}
-		create_ship = {
-			type = light_cruiser_4
-		}
-		create_ship = {
-			type = light_cruiser_4
-		}
-		create_ship = {
-			type = heavy_cruiser_4
-		}
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_light_4
+		equipment_variant = "Polebearer Class"
+	}
+	create_ship = {
+		type = ship_hull_cruiser_4
+		equipment_variant = "Praetorian Class"
+	}
+	create_ship = {
+		type = ship_hull_cruiser_4
+		equipment_variant = "Praetorian Class"
+	}
+	create_ship = {
+		type = ship_hull_cruiser_4
+		equipment_variant = "Praetorian Class"
+	}
+	create_ship = {
+		type = ship_hull_cruiser_4
+		equipment_variant = "Heir Class"
 	}
 }

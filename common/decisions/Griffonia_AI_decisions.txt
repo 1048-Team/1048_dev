@@ -1,8 +1,7 @@
 EQC_AI_decision_category = {
     EQC_fix_economy_1 = {
         available = {
-            tag = EQC
-            is_ai = yes
+            date > 1053.1.1
         }
         days_remove = 730
         cost = 150
@@ -12,11 +11,7 @@ EQC_AI_decision_category = {
         }
 
         ai_will_do = {
-            base = 0
-            modifier = {
-                date > 1053.1.1
-                add = 5
-            }
+            base = 10
             modifier = {
                 date > 1053.1.1
                 has_war_with = GRI
@@ -26,8 +21,7 @@ EQC_AI_decision_category = {
     }
     EQC_fix_economy_2 = {
         available = {
-            tag = EQC
-            is_ai = yes
+            date > 1055.1.1
         }
         days_remove = 365
         cost = 150
@@ -37,17 +31,12 @@ EQC_AI_decision_category = {
         }
 
         ai_will_do = {
-            base = 0
-            modifier = {
-                date > 1055.1.1
-                add = 30
-            }
+            base = 10
         }
     }
     EQC_fix_military = {
         available = {
-            tag = EQC
-            is_ai = yes
+            date > 1052.1.1
         }
         days_remove = 500
         fire_only_once = yes
@@ -69,6 +58,967 @@ EQC_AI_decision_category = {
                 date > 1052.1.1
                 add = 10
             }
+        }
+    }
+    EQC_start_limited_war_1 = {
+        available = {
+            date > 1048.4.1
+        }
+        fire_only_once = yes
+        cost = 0
+        days_remove = 20
+        war_with_on_remove = GRI
+        war_with_on_remove = BRF
+        war_with_on_remove = RCT
+        complete_effect = {
+            GRI = { activate_mission = GRI_limited_war_1_mission }
+            RCT = { activate_mission = RCT_limited_war_1_mission }
+        }
+        remove_effect = {
+            #GRI & Puppets
+            declare_war_on = {
+                target = GRI
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = BOI
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = HLQ
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NTR
+                type = annex_everything
+            }
+            #League of Free Nations
+            declare_war_on = {
+                target = BRF
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = LUS
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = GRY
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = GRU
+                type = annex_everything
+            }
+            #River Republic
+            declare_war_on = {
+                target = RCT
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = LNS
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = BAR
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NIM
+                type = annex_everything
+            }
+            activate_mission = EQC_war_GRI_mission
+            activate_mission = EQC_war_LFN_mission
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    EQC_war_GRI_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            IF = {
+                limit = {
+                    has_country_flag = EQC_GRI_war_flag_2
+                }
+            }
+            OR = {
+                AND = {
+                    532 = { is_controlled_by_ROOT_or_ally = yes }
+                    391 = { is_controlled_by_ROOT_or_ally = yes }
+                    489 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    532 = { is_controlled_by_ROOT_or_ally = yes }
+                    391 = { is_controlled_by_ROOT_or_ally = yes }
+                    494 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    532 = { is_controlled_by_ROOT_or_ally = yes }
+                    489 = { is_controlled_by_ROOT_or_ally = yes }
+                    494 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+            }
+        }
+        is_good = no
+        days_mission_timeout = 100
+        complete_effect = {
+            every_enemy_country = {
+                limit = {
+                    OR = {
+                        tag = GRI
+                        is_in_faction_with = GRI
+                    }
+                }
+                white_peace = EQC
+                white_peace = SIC
+                white_peace = MIT
+                white_peace = HPS
+            }
+            IF = {
+                limit = {
+                    has_country_flag = EQC_GRI_war_flag_2
+                }
+                transfer_state = 679
+                transfer_state = 471
+                transfer_state = 488
+                transfer_state = 532
+                transfer_state = 489
+                clr_country_flag = EQC_GRI_war_flag_2
+                set_country_flag = EQC_GRI_war_flag_1
+                GRI = { clr_country_flag = EQC_GRI_war_flag_2 set_country_flag = EQC_GRI_war_flag_1 }
+            }
+        }
+        timeout_effect = {
+            every_enemy_country = {
+                white_peace = EQC
+                white_peace = SIC
+                white_peace = MIT
+                white_peace = HPS
+            }
+        }
+    }
+    EQC_war_LFN_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            IF = {
+                limit = {
+                    has_country_flag = EQC_LFN_war_flag_1
+                }
+            }
+            OR = {
+                AND = {
+                    615 = { is_controlled_by_ROOT_or_ally = yes }
+                    385 = { is_controlled_by_ROOT_or_ally = yes }
+                    589 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    615 = { is_controlled_by_ROOT_or_ally = yes }
+                    385 = { is_controlled_by_ROOT_or_ally = yes }
+                    414 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    615 = { is_controlled_by_ROOT_or_ally = yes }
+                    589 = { is_controlled_by_ROOT_or_ally = yes }
+                    414 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+            }
+        }
+        is_good = no
+        days_mission_timeout = 80
+        complete_effect = {
+            every_enemy_country = {
+                limit = {
+                    NOT = {
+                        OR = {
+                            tag = GRI
+                            is_in_faction_with = GRI
+                        }
+                    }
+                }
+                white_peace = EQC
+                white_peace = SIC
+                white_peace = MIT
+                white_peace = HPS
+            }
+            IF = {
+                limit = {
+                    has_country_flag = EQC_LFN_war_flag_1
+                }
+                SIC = {
+                    transfer_state = 606
+                }
+                MIT = {
+                    transfer_state = 651
+                    transfer_state = 589
+                    transfer_state = 385
+                }
+                clr_country_flag = EQC_LFN_war_flag_1
+                set_country_flag = EQC_LFN_war_flag_0
+            }
+        }
+        timeout_effect = {
+            every_enemy_country = {
+                limit = {
+                    NOT = {
+                        OR = {
+                            tag = GRI
+                            is_in_faction_with = GRI
+                        }
+                    }
+                }
+                white_peace = EQC
+                white_peace = SIC
+                white_peace = MIT
+                white_peace = HPS
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+GRI_AI_decision_category = {
+    GRI_limited_war_1_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            always = no
+        }
+        is_good = no
+        war_with_on_timeout = RCT
+        days_mission_timeout = 20
+        timeout_effect = {
+            #River Republic
+            declare_war_on = {
+                target = RCT
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = LNS
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = BAR
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NIM
+                type = annex_everything
+            }
+            activate_mission = GRI_war_RCT_mission
+            activate_mission = GRI_war_EQC_mission
+        }
+    }
+    GRI_war_RCT_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            IF = {
+                limit = {
+                    has_country_flag = GRI_RCT_war_flag_2
+                }
+            }
+            OR = {
+                AND = {
+                    1210 = { is_controlled_by_ROOT_or_ally = yes }
+                    552 = { is_controlled_by_ROOT_or_ally = yes }
+                    634 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    1210 = { is_controlled_by_ROOT_or_ally = yes }
+                    552 = { is_controlled_by_ROOT_or_ally = yes }
+                    543 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    1210 = { is_controlled_by_ROOT_or_ally = yes }
+                    634 = { is_controlled_by_ROOT_or_ally = yes }
+                    543 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+            }
+        }
+        is_good = no
+        days_mission_timeout = 100
+        complete_effect = {
+            every_enemy_country = {
+                limit = {
+                    OR = {
+                        tag = RCT
+                        is_in_faction_with = RCT
+                    }
+                }
+                white_peace = GRI
+                white_peace = BOI
+                white_peace = HLQ
+                white_peace = NTR
+            }
+            IF = {
+                limit = {
+                    has_country_flag = GRI_RCT_war_flag_2
+                }
+                IF = {
+                    limit = {
+                        HLQ = { exists = yes }
+                    }
+                    HLQ = {
+                        transfer_state = 634
+                        transfer_state = 1209
+                        transfer_state = 537
+                        transfer_state = 1210
+                        transfer_state = 552
+                    }
+                }
+                ELSE = {
+                    transfer_state = 634
+                    transfer_state = 1209
+                    transfer_state = 537
+                    transfer_state = 1210
+                    transfer_state = 552
+                }
+                clr_country_flag = GRI_RCT_war_flag_2
+                set_country_flag = GRI_RCT_war_flag_3
+                RCT = { clr_country_flag = GRI_RCT_war_flag_2 set_country_flag = GRI_RCT_war_flag_3 }
+            }
+        }
+        timeout_effect = {
+            every_enemy_country = {
+                white_peace = GRI
+                white_peace = BOI
+                white_peace = HLQ
+                white_peace = NTR
+            }
+        }
+    }
+    GRI_war_EQC_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            IF = {
+                limit = {
+                    has_country_flag = EQC_GRI_war_flag_2
+                }
+            }
+            OR = {
+                AND = {
+                    389 = { is_controlled_by_ROOT_or_ally = yes }
+                    470 = { is_controlled_by_ROOT_or_ally = yes }
+                    442 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    389 = { is_controlled_by_ROOT_or_ally = yes }
+                    470 = { is_controlled_by_ROOT_or_ally = yes }
+                    401 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    389 = { is_controlled_by_ROOT_or_ally = yes }
+                    442 = { is_controlled_by_ROOT_or_ally = yes }
+                    401 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+            }
+        }
+        is_good = no
+        days_mission_timeout = 100
+        complete_effect = {
+            every_enemy_country = {
+                limit = {
+                    OR = {
+                        tag = EQC
+                        is_in_faction_with = EQC
+                    }
+                }
+                white_peace = GRI
+                white_peace = BOI
+                white_peace = HLQ
+                white_peace = NTR
+            }
+            IF = {
+                limit = {
+                    has_country_flag = EQC_GRI_war_flag_2
+                }
+                IF = {
+                    limit = {
+                        BOI = { exists = yes }
+                    }
+                    BOI = {
+                        transfer_state = 383
+                        transfer_state = 384
+                        transfer_state = 389
+                        transfer_state = 531
+                        transfer_state = 490
+                    }
+                }
+                ELSE = {
+                    transfer_state = 383
+                    transfer_state = 384
+                    transfer_state = 389
+                    transfer_state = 531
+                    transfer_state = 490
+                }
+                clr_country_flag = EQC_GRI_war_flag_2
+                set_country_flag = EQC_GRI_war_flag_3
+                EQC = { clr_country_flag = EQC_GRI_war_flag_2 set_country_flag = EQC_GRI_war_flag_3 }
+            }
+        }
+        timeout_effect = {
+            every_enemy_country = {
+                white_peace = GRI
+                white_peace = BOI
+                white_peace = HLQ
+                white_peace = NTR
+            }
+        }
+    }
+    GRI_kill_FAT = {
+        available = {
+            date > 1049.5.1
+        }
+        days_remove = 30
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = FAT
+        remove_effect = {
+            declare_war_on = {
+                target = FAT
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+    GRI_kill_TRD = {
+        available = {
+            date > 1051.11.1
+        }
+        days_remove = 30
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = TRD
+        remove_effect = {
+            declare_war_on = {
+                target = TRD
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+    GRI_integrate_NTR = {
+        available = {
+            date > 1052.06.1
+            is_subject = no
+            NTR = {
+                is_subject_of = GRI
+            }
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_state = {
+                limit = {
+                    is_core_of = NTR
+                }
+                add_core_of = GRI
+            }
+            annex_country = {
+                target = NTR
+                transfer_troops = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+    GRI_integrate_BOI = {
+        available = {
+            date > 1052.12.1
+            is_subject = no
+            BOI = {
+                is_subject_of = GRI
+            }
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_state = {
+                limit = {
+                    is_core_of = BOI
+                }
+                add_core_of = GRI
+            }
+            annex_country = {
+                target = BOI
+                transfer_troops = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+}
+
+RCT_AI_decision_category = {
+    RCT_limited_war_1_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            always = no
+        }
+        is_good = no
+        war_with_on_timeout = BRF
+        days_mission_timeout = 20
+        timeout_effect = {
+            #League of Free Nations
+            declare_war_on = {
+                target = BRF
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = LUS
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = GRY
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = GRU
+                type = annex_everything
+            }
+            activate_mission = RCT_war_GRI_mission
+            activate_mission = RCT_war_LFN_mission
+        }
+    }
+    RCT_war_GRI_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            IF = {
+                limit = {
+                    has_country_flag = GRI_RCT_war_flag_2
+                }
+            }
+            OR = {
+                AND = {
+                    1211 = { is_controlled_by_ROOT_or_ally = yes }
+                    633 = { is_controlled_by_ROOT_or_ally = yes }
+                    554 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    1211 = { is_controlled_by_ROOT_or_ally = yes }
+                    633 = { is_controlled_by_ROOT_or_ally = yes }
+                    505 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    1211 = { is_controlled_by_ROOT_or_ally = yes }
+                    505 = { is_controlled_by_ROOT_or_ally = yes }
+                    554 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+            }
+        }
+        is_good = no
+        days_mission_timeout = 100
+        complete_effect = {
+            every_enemy_country = {
+                limit = {
+                    OR = {
+                        tag = GRI
+                        is_in_faction_with = GRI
+                    }
+                }
+                white_peace = RCT
+                white_peace = LNS
+                white_peace = BAR
+                white_peace = NIM
+            }
+            IF = {
+                limit = {
+                    has_country_flag = GRI_RCT_war_flag_2
+                }
+                IF = {
+                    limit = {
+                        LNS = { exists = yes }
+                    }
+                    LNS = {
+                        transfer_state = 650
+                        transfer_state = 633
+                        transfer_state = 553
+                        transfer_state = 1211
+                        transfer_state = 540
+                        transfer_state = 505
+                    }
+                }
+                ELSE = {
+                    transfer_state = 650
+                    transfer_state = 633
+                    transfer_state = 553
+                    transfer_state = 1211
+                    transfer_state = 540
+                    transfer_state = 505
+                }
+                clr_country_flag = GRI_RCT_war_flag_2
+                set_country_flag = GRI_RCT_war_flag_1
+                GRI = { clr_country_flag = GRI_RCT_war_flag_2 set_country_flag = GRI_RCT_war_flag_1 }
+            }
+        }
+        timeout_effect = {
+            every_enemy_country = {
+                white_peace = RCT
+                white_peace = LNS
+                white_peace = BAR
+                white_peace = NIM
+            }
+        }
+    }
+    RCT_war_LFN_mission = {
+        activation = {
+            always = no
+        }
+        available = {
+            IF = {
+                limit = {
+                    has_country_flag = RCT_LFN_war_flag_1
+                }
+            }
+            OR = {
+                AND = {
+                    598 = { is_controlled_by_ROOT_or_ally = yes }
+                    608 = { is_controlled_by_ROOT_or_ally = yes }
+                    610 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    598 = { is_controlled_by_ROOT_or_ally = yes }
+                    608 = { is_controlled_by_ROOT_or_ally = yes }
+                    596 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+                AND = {
+                    598 = { is_controlled_by_ROOT_or_ally = yes }
+                    610 = { is_controlled_by_ROOT_or_ally = yes }
+                    596 = { is_controlled_by_ROOT_or_ally = yes }
+                }
+            }
+        }
+        is_good = no
+        days_mission_timeout = 80
+        complete_effect = {
+            every_enemy_country = {
+                limit = {
+                    NOT = {
+                        OR = {
+                            tag = GRI
+                            is_in_faction_with = GRI
+                        }
+                    }
+                }
+                white_peace = RCT
+                white_peace = LNS
+                white_peace = BAR
+                white_peace = NIM
+            }
+            IF = {
+                limit = {
+                    has_country_flag = RCT_LFN_war_flag_1
+                }
+                    transfer_state = 592
+                    transfer_state = 610
+                    transfer_state = 631
+                    transfer_state = 597
+                    transfer_state = 598
+                    transfer_state = 609
+                    transfer_state = 596
+                clr_country_flag = RCT_LFN_war_flag_1
+                set_country_flag = RCT_LFN_war_flag_0
+            }
+        }
+        timeout_effect = {
+            every_enemy_country = {
+                limit = {
+                    NOT = {
+                        OR = {
+                            tag = GRI
+                            is_in_faction_with = GRI
+                        }
+                    }
+                }
+                white_peace = RCT
+                white_peace = LNS
+                white_peace = BAR
+                white_peace = NIM
+            }
+        }
+    }
+    RCT_integrate_NIM = {
+        available = {
+            date > 1050.05.1
+            is_subject = no
+            NIM = {
+                is_subject_of = RCT
+            }
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_state = {
+                limit = {
+                    is_core_of = NIM
+                }
+                add_core_of = RCT
+            }
+            annex_country = {
+                target = NIM
+                transfer_troops = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 10
+        }
+    }
+}
+
+BAK_AI_decision_category = {
+    BAK_kill_FBK = {
+        available = {
+            date > 1048.04.1
+        }
+        days_remove = 10
+        cost = 10
+        fire_only_once = yes
+        war_with_on_remove = FBK
+        complete_effect = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 2
+            }
+            add_offsite_building = {
+                type = arms_factory
+                level = 2
+            }
+        }
+        remove_effect = {
+            declare_war_on = {
+                target = FBK
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    BAK_core_FBK = {
+        available = {
+            date > 1050.01.1
+        }
+        days_remove = 10
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            every_owned_state = {
+                limit = {
+                    is_core_of = FBK
+                }
+                add_core_of = BAK
+            }
+            hidden_effect = {
+            two_random_arms_factory = yes
+            two_random_arms_factory = yes
+            two_random_arms_factory = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+}
+
+HLR_AI_decision_category = {
+    HLR_posture_north = {
+        available = {
+            GRI = { has_war = yes }
+        }
+        days_remove = 15
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            573 = {
+                transfer_state_to = HLR
+                remove_core_of = NTR
+                add_core_of = HLR
+            }
+            602 = {
+                transfer_state_to = HLR
+                remove_core_of = NTR
+                add_core_of = HLR
+            }
+            574 = {
+                transfer_state_to = HLR
+                remove_core_of = NTR
+                add_core_of = HLR
+            }
+            hidden_effect = {
+            two_random_industrial_complex = yes
+            two_random_industrial_complex = yes
+            two_random_industrial_complex = yes
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    HLR_ally_BAK = {
+        available = {
+            BAK = { exists = yes }
+            date > 1050.03.3
+        }
+        days_remove = 15
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            create_faction = "Harmony-Pact"
+            add_to_faction = BAK
+            add_opinion_modifier = {
+                target = BAK
+                modifier = huge_increase
+            }
+            reverse_add_opinion_modifier = {
+                target = BAK
+                modifier = huge_increase
+            }
+            add_ai_strategy = {
+                type = alliance
+                id = BAK
+                value = 200
+            }
+            two_random_industrial_complex = yes
+            two_random_dockyards = yes
+            BAK = {
+                add_ai_strategy = {
+                    type = alliance
+                    id = HLR
+                    value = 200
+                }
+                two_random_industrial_complex = yes
+                two_random_dockyards = yes
+            }
+            
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+
+    HLR_finish_FBK = {
+        available = {
+            FBK = { 
+                exists = yes 
+                has_country_flag = FBK_expelled_BAK_flag
+            }
+            is_in_faction_with = BAK
+        }
+        days_remove = 50
+        cost = 50
+        fire_only_once = yes
+        war_with_on_remove = FBK
+        remove_effect = {
+            add_state_claim = 639
+            add_state_claim = 640
+            add_state_claim = 643
+            add_state_claim = 642
+            add_state_core = 639
+            add_state_core = 640
+            add_state_core = 643
+            add_state_core = 642
+            every_state = {
+                limit = {
+                    is_core_of = FBK
+                    NOT = { is_claimed_by = HLR }
+                }
+                add_claim_by = BAK
+            }
+            declare_war_on = {
+                target = FBK
+                type = annex_everything
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+    HLR_posture_north_2 = {
+        available = {
+            GRI = { has_war = yes }
+            date > 1051.09.1
+        }
+        days_remove = 15
+        cost = 50
+        fire_only_once = yes
+        remove_effect = {
+            459 = {
+                transfer_state_to = HLR
+                add_core_of = HLR
+            }
+            1226 = {
+                transfer_state_to = HLR
+                add_core_of = HLR
+            }
+            476 = {
+                transfer_state_to = HLR
+                add_core_of = HLR
+            }
+        }
+
+        ai_will_do = {
+            base = 100
+        }
+    }
+}
+
+FBK_AI_decision_category = {
+    FBK_expel_BAK = {
+        available = {
+            has_war_with = BAK
+            controls_state = 517
+            controls_state = 455
+            controls_state = 603
+        }
+        days_remove = 5
+        cost = 5
+        fire_only_once = yes
+        remove_effect = {
+            white_peace = BAK
+            transfer_state = 517
+            set_country_flag = FBK_expelled_BAK_flag
+        }
+
+        ai_will_do = {
+            base = 100
         }
     }
 }

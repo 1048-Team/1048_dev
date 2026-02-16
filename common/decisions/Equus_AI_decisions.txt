@@ -1,0 +1,127 @@
+YAH_SMH_AI_category = {
+    YAH_SMH_warlord_dominance = {
+        available = {
+            is_subject = no
+            OR = {
+                AND = {
+                    tag = SMH
+                    country_exists = YAH
+                }
+                AND = {
+                    tag = YAH
+                    country_exists = SMH
+                }
+            }
+            date > 1048.6.1
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision YAH_SMH_warlord_dominance"
+            #Sets a temp variable to a random integer between 150 and 210 and then uses that for the number of days for the country flag lifespan
+            #AI usually takes a decision as soon as it's available for them, so this means that it will always be random who declares war on who first, unless one of the two nations is played by a human
+            if = {
+                limit = {
+                    tag = SMH
+                }
+                declare_war_on = {
+                    target = YAH
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    tag = YAH
+                }
+                declare_war_on = {
+                    target = SMH
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    date < 1052.1.1
+                }
+                random_country = {
+                    limit = {
+                        OR = {
+                            tag = SMH
+                            tag = YAH
+                        }
+                        is_ai = yes
+                    }
+                    activate_mission = YAH_SMH_skirmish_timer
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
+    YAH_SMH_skirmish_timer = {
+        days_mission_timeout = 30
+        cancel_trigger = {
+            OR = {
+                NOT = { country_exists = YAH }
+                NOT = { country_exists = SMH }
+            }
+        }
+        timeout_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: mission_timeout YAH_SMH_skirmish_timer"
+            set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 }
+            if = {
+                limit = {
+                    tag = YAH
+                }
+                white_peace = SMH
+            }
+            if = {
+                limit = {
+                    tag = SMH
+                }
+                white_peace = YAH
+            }
+            if = {
+                limit = {
+                    YAH = { is_ai = yes }
+                    SMH = { is_ai = yes }
+                }
+                set_temp_variable_to_random = {
+                    var = global.YAH_SMH_selector
+                    min = 1
+                    max = 2
+                    integer = yes
+                }
+                if = {
+                    limit = {
+                        check_variable = { global.YAH_SMH_selector = 1 }
+                    }
+                    YAH = {
+                        country_event = fh_utility.1
+                    }
+                }
+                else_if = {
+                    limit = {
+                        check_variable = { global.YAH_SMH_selector = 2 }
+                    }
+                    SMH = {
+                        country_event = fh_utility.1
+                    }
+                }
+            }
+            else = {
+                if = {
+                    limit = {
+                        YAH = { is_ai = yes }
+                    }
+                    YAH = { country_event = fh_utility.1 }
+                }
+                else_if = {
+                    limit = {
+                        SMH = { is_ai = yes }
+                    }
+                    SMH = { country_event = fh_utility.1 }
+                }
+            }
+        }
+    }
+}

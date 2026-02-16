@@ -1,0 +1,403 @@
+@manifest_fulfilled_value = 0.75
+
+faction_manifest_reclaim_imperium = {
+    name = reclaim_imperium_goal_name
+    description = reclaim_imperium_goal_desc
+    is_manifest = yes
+    available = {
+        THIS = {
+            has_country_leader_ideology = solarism
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = collection:equestrian_original_states
+        completed_amount_collection = collection:controlled_equestrian_original_states
+
+        range = { min = 0.15 max = 0.85 }
+
+        scale = {
+            army_morale_factor = 0.05
+            resistance_target = -0.1
+            resistance_growth = -0.25
+            required_garrison_factor = 0.1
+            resistance_damage_to_garrison = 0.1
+        }
+
+        reversed = {
+            army_core_attack_factor = 0.15
+            army_core_defence_factor = 0.15
+            mobilization_speed = 0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    breakthrough_factor = 0.1
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_freedom_for_everycreature = {
+    name = freedom_for_everycreature_name
+    description = freedom_for_everycreature_desc
+    is_manifest = yes
+    available = {
+        OR = {
+            tag = EQC
+            AND = {
+                EQC = {
+                    OR = {
+                        exists = no
+                        NOT = { has_government = communism }
+                    }
+                }
+                has_cosmetic_tag = EQC_maresoc
+            }
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = game:all_states
+        completed_amount_collection = collection:all_controlled_world_states
+
+        range = { min = 0.1 max = 0.9 }
+
+        scale = {
+            war_stability_factor = 0.15
+            justify_war_goal_time = -0.25
+            non_core_manpower = 0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    compliance_growth = -0.2
+                    non_core_manpower = 0.1
+                    factory_energy_consumption = -0.05
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_secure_democracy = {
+    name = secure_democracy_name
+    description = secure_democracy_desc
+    is_manifest = yes
+    available = {
+        original_tag = RCT
+    }
+    ratio_progress = {
+        total_amount_collection = collection:all_griffonian_fh_nations
+        completed_amount_collection = collection:all_puppeted_griffonian_fh_nations
+
+        range = { max = 0.8 }
+
+        scale = {
+            puppet_cost_factor = -0.15
+            subjects_autonomy_gain = -0.05
+            master_ideology_drift = 0.05
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    political_power_factor = 0.1
+                    monthly_population = 0.15
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_maintain_independence = {
+    name = maintain_independence_name
+    description = maintain_independence_desc
+    is_manifest = yes
+    available = {
+        OR = {
+            tag = BRF
+            tag = LUS
+            tag = GRY
+            tag = GRU
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = collection:all_southern_griffonian_states
+        completed_amount_collection = collection:all_controlled_southern_griffonian_states
+
+        range = { min = 0.1 max = 0.85 }
+
+        scale = {
+            stability_factor = 0.1
+            army_morale_factor = 0.1
+        }
+
+        reversed = {
+            surrender_limit = 0.15
+            conscription_factor = 0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    army_org_factor = 0.05
+                    communism_drift = -0.03
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_evangelize_the_griffons = {
+    name = evangelize_the_griffons_name
+    description = evangelize_the_griffons_desc
+    is_manifest = yes
+    available = {
+        tag = GRI
+    }
+    ratio_progress = {
+        total_amount_collection = collection:griffon_nations
+        completed_amount_collection = collection:griffon_nations_with_rad_bor
+
+        range = { min = 0.25 max = 0.75 }
+
+        scale = {
+            army_attack_factor = 0.05
+            puppet_cost_factor = -0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    production_speed_buildings_factor = 0.1
+                    stability_factor = 0.1
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_gib_oil = {
+    name = gib_oil_name
+    description = gib_oil_desc
+    is_manifest = yes
+    available = {
+        tag = EMR
+    }
+    ratio_progress = {
+        total_amount_collection = collection:all_states_with_oil
+        completed_amount_collection = collection:all_controlled_states_with_oil
+
+        range = { min = 0.05 max = 0.9 }
+
+        scale = {
+            trade_opinion_factor = 0.25
+            local_resources_factor = 0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    local_resources_factor = 0.05
+                    consumer_goods_expected_value = -0.03
+                }
+            }
+        }
+    }
+}
+
+#BAT, CTH, CTL manifest
+faction_manifest_hegemony_over_north_zebrica = {
+    name = hegemony_over_north_zebrica_name
+    description = hegemony_over_north_zebrica_desc
+    is_manifest = yes
+    available = {
+        OR = {
+            tag = BAT
+            tag = CTH
+            tag = CTL
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = collection:all_north_zebrican_states
+        completed_amount_collection = collection:all_controlled_north_zebrican_states
+
+        range = { min = 0.15 max = 0.9 }
+
+        scale = {
+            compliance_growth = 0.1
+            industrial_capacity_dockyard = 0.15
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    non_core_manpower = 0.1
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_grow_tributary_base = {
+    name = grow_tributary_base_name
+    description = grow_tributary_base_desc
+    is_manifest = yes
+    available = {
+        tag = KIR
+    }
+    ratio_progress = {
+        total_amount_collection = collection:zebrican_countries
+        completed_amount_collection = collection:puppeted_zebrican_countries
+
+        range = { min = 0.2 max = 0.85 }
+
+        scale = {
+            min_export = -0.1
+            stability_factor = 0.15
+            political_power_factor = 0.05
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    war_support_factor = -0.25
+                    local_resources_factor = 0.1
+                    production_speed_buildings_factor = 0.1
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_pax_roamana = {
+    name = pax_roamana_name
+    description = pax_roamana_desc
+    is_manifest = yes
+    available = {
+        OR = {
+            tag = ROA
+            tag = ZOO #Technically Roaman rump state
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = collection:all_south_eastern_zebrican_states
+        completed_amount_collection = collection:all_controlled_south_eastern_zebrican_states
+
+        range = { min = 0.1 max = 0.85 }
+
+        scale = {
+            army_org_factor = 0.1
+            special_forces_cap = 0.1
+            conscription_factor = -0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    special_forces_cap = 0.05
+                    special_forces_attack_factor = 0.05
+                    special_forces_defence_factor = 0.05
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_harmonism_unopposed = {
+    name = harmonism_unopposed_name
+    description = harmonism_unopposed_desc
+    is_manifest = yes
+    available = {
+        OR = {
+            tag = ZWA
+            tag = TIM
+        }
+    }
+    ratio_progress = {
+        total_amount_collection = collection:non_capitulated_harmonist_countries
+        completed_amount_collection = collection:non_capitulated_harmonist_countries_in_faction
+
+        range = { max = 0.75 }
+
+        scale = {
+            trade_opinion_factor = 0.25
+            factory_energy_consumption = -0.1
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    army_morale_factor = 0.1
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_libertys_ward = {
+    name = libertys_ward_name
+    description = libertys_ward_desc
+    is_manifest = yes
+    available = {
+        tag = HIP
+    }
+    ratio_progress = {
+        total_amount_collection = collection:non_capitulated_harmonist_countries
+        completed_amount_collection = collection:non_capitulated_harmonist_countries_with_armies_smaller_than_HIP
+
+        scale = {
+            army_morale_factor = 0.1
+            training_time_army_factor = -0.15
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    conscription_factor = 0.05
+                }
+            }
+        }
+    }
+}
+
+faction_manifest_workers_paradise = {
+    name = workers_paradise_name
+    description = workers_paradise_desc
+    is_manifest = yes
+    available = {
+        tag = STG
+    }
+    ratio_progress = {
+        total_amount_collection = collection:non_capitulated_majors
+        completed_amount_collection = collection:non_capitulated_majors_with_less_factories_than_STG
+
+        scale = {
+            production_speed_buildings_factor = 0.1
+            production_factory_efficiency_gain_factor = 0.15
+        }
+
+        progress_sections = {
+            manifest_fulfilled = {
+                min = @manifest_fulfilled_value
+                modifier = {
+                    industrial_capacity_factory = 0.1
+                    conscription_factor = -0.1
+                }
+            }
+        }
+    }
+}
