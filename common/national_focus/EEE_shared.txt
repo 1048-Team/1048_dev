@@ -509,6 +509,239 @@ shared_focus = {
     }
 }
 
+###Stellar/Gushing/Nocturne starting path###
+shared_focus = {
+    id = EEE_second_chances
+    x = 0
+    y = 1
+    relative_position_id = EEE_fitting_tribute
+
+    cost = 1
+    prerequisite = { focus = EEE_fitting_tribute }
+    allow_branch = { has_country_flag = EEE_status_quo }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_second_chances"
+        ###Results of the election come into the Moonspeakers, and Stellar is elated that she is kept in charge, which leads to a small celebration; she may or may not thank Luna, although she still keeps her secularist mindset; alternate version if Gushing supports will include Gushing providing the news, and promising to be in touch for more help
+    }
+
+    ai_will_do = {
+        factor = 640
+    }
+}
+
+shared_focus = {
+    id = EEE_reciprocate_in_kind
+    x = -3
+    y = 1
+    relative_position_id = EEE_second_chances
+
+    cost = 2
+    prerequisite = { focus = EEE_second_chances }
+    mutually_exclusive = { focus = EEE_eventual_coexistence }
+    available = {
+        if = {
+            limit = {
+                has_country_flag = EEE_custodien_guidance
+            }
+            NOT = { has_country_flag = EEE_custodien_guidance }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_reciprocate_in_kind"
+        ###Event of Waning arguing in front of the Moonspeakers for wiping out the Neighua or the like, and getting pushback from Nocturne, but ultimately convincing through fear that the Neighua must be stopped, and otherwise getting Nocturne out-voted
+    }
+
+    ai_will_do = {
+        factor = 20
+    }
+}
+
+shared_focus = {
+    id = EEE_eventual_coexistence
+    x = -1
+    y = 1
+    relative_position_id = EEE_second_chances
+
+    cost = 2
+    prerequisite = { focus = EEE_second_chances }
+    mutually_exclusive = { focus = EEE_reciprocate_in_kind }
+    available = {
+        if = {
+            limit = {
+                has_country_flag = EEE_ezmetzli_coup
+            }
+            NOT = { has_country_flag = EEE_ezmetzli_coup }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_eventual_coexistence"
+        ###Event of Nocturne arguing in front of the Moonspeakers (like Waning), for finding a way to coexist with the Neighua, since there are plenty that could be convinced to not hate thestrals, and the peninsula would be all the better for it, as they could work together in unity; it gets pushback from Waning, but Nocturne explains how it could work, and she's out-voted
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_approach_reasonable
+    x = 1
+    y = 1
+    relative_position_id = EEE_second_chances
+
+    cost = 2
+    prerequisite = { focus = EEE_second_chances }
+    available = {
+        if = {
+            limit = {
+                has_country_flag = EEE_ezmetzli_coup
+            }
+            NOT = { has_country_flag = EEE_ezmetzli_coup }
+        }
+    }
+    on_uncomplete = {
+        clr_country_flag = EEE_milkwater_thestral
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_approach_reasonable"
+        ###Possibly event of Stellar speaking with Nocturne, asking her to help as best she can, as much as she doesn't approve all methods, since she is a thestral like the others; she has combat experience, Stellar can tell, and she could aid so much with defending thestrals; Nocturne is hesistant but eventually relents
+        set_country_flag = EEE_milkwater_thestral
+        custom_effect_tooltip = nocturne_vision_stats_tp
+    }
+
+    ai_will_do = {
+        factor = 20
+    }
+}
+
+shared_focus = {
+    id = EEE_occupying_occupants
+    x = -1
+    y = 1
+    relative_position_id = EEE_reciprocate_in_kind
+    dynamic = yes
+
+    cost = 2
+    prerequisite = { focus = EEE_reciprocate_in_kind }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_occupying_occupants"
+        if = {
+            limit = {
+                has_country_flag = EEE_ezmetzli_coup
+            }
+            ###Event of Gushing Pulse going through the Ezmetzli, to have them all partake in bloodletting prisoners, to teach them all how to best extract pain and blood from sacrifices
+        }
+        else = {
+            ###Event of Waning training some of the militia in Ayacachtli on how to be merciless with enforcing laws and of order, specifically for the Neighua, which perturbs some of the thestrals, but they obey regardless
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_raid_unclean
+    x = 1
+    y = 1
+    relative_position_id = EEE_reciprocate_in_kind
+
+    cost = 2
+    prerequisite = {
+        focus = EEE_reciprocate_in_kind
+        focus = EEE_eventual_coexistence
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_raid_unclean"
+        ###Event of raiding an abandoned COBSOC cache and garrison, which is already being overrun by the jungle, and some of them barely make it out because of some traps left behind or the like
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_council_benefits
+    x = 0
+    y = 2
+    relative_position_id = EEE_second_chances
+
+    cost = 2
+    prerequisite = { focus = EEE_second_chances }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_council_benefits"
+        ###Potentially event of Stellar getting into an argument with a couple of the councilors to relinquish some of their wealth, as it will be used to help the thestrals rebuild, which leads to tension before she manages to overrule them
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_tribal_feud
+    x = 2
+    y = 2
+    relative_position_id = EEE_second_chances
+
+    cost = 2
+    prerequisite = { focus = EEE_second_chances }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_tribal_feud"
+        ###Follow a thestral in their new job of handling tribal feuds, and they are currently facilitating talks between two different members of tribes that live near to each other, and tries to act like it's some therapy session, but eventually gets involved in the argument, too, which accomplishes little
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_jungle_help
+    x = 0
+    y = 1
+    relative_position_id = EEE_occupying_occupants
+    dynamic = yes
+
+    cost = 3
+    prerequisite = { focus = EEE_occupying_occupants }
+    available = {
+        if = {
+            limit = {
+                NOT = { has_country_flag = EEE_ezmetzli_coup }
+            }
+            has_country_flag = EEE_incredibly_polite_offer
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_jungle_help"
+        if = {
+            limit = {
+                NOT = { has_country_flag = EEE_ezmetzli_coup}
+            }
+            ###Event of Gushing meeting with Stellar, as she promised, and giving Stellar some advice on what she needs to do to help keep the realm stable, and offering her own services, as well as that of her tribe, which Stellar cautiously accepts, since she could use all the help she could get
+        }
+        else = {
+            ###Event of Gushing savoring some of the minor members of the Moonspeaker council, doing all she can to extend their suffering by wounding them, piercing them, toying with them, and being almost seductive in her actions, before finally killing them and perhaps sipping on a bit of their blood herself
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
 ###Industry###
 shared_focus = {
     id = EEE_emergency_economic_grants
