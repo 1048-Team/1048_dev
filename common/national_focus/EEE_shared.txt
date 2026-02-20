@@ -532,7 +532,7 @@ shared_focus = {
 
 shared_focus = {
     id = EEE_reciprocate_in_kind
-    x = -3
+    x = -4
     y = 1
     relative_position_id = EEE_second_chances
 
@@ -560,7 +560,7 @@ shared_focus = {
 
 shared_focus = {
     id = EEE_eventual_coexistence
-    x = -1
+    x = -2
     y = 1
     relative_position_id = EEE_second_chances
 
@@ -739,6 +739,731 @@ shared_focus = {
 
     ai_will_do = {
         factor = 40
+    }
+}
+
+
+shared_focus = {
+    id = EEE_warrior_council
+    x = 0
+    y = 1
+    relative_position_id = EEE_raid_unclean
+
+    cost = 3
+    prerequisite = { focus = EEE_raid_unclean }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_warrior_council"
+        ###Maybe short event of the Moonspeakers being constantly inerrupted in one of their meetings for the impending war for the South-East by their militia captains, who are not at all deferential to their authority, and otherwise cause tension
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_voluntary_coaching
+    x = 1
+    y = 2
+    relative_position_id = EEE_eventual_coexistence
+
+    cost = 2
+    prerequisite = { focus = EEE_eventual_coexistence }
+    available = {
+        custom_trigger_tooltip = {
+            tooltip = EEE_tick_tock_team_tt
+            NOT = { has_country_flag = EEE_team_management }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_voluntary_coaching"
+        ###Maybe short event of some thestral citizens trying to bridge some gaps with the Neighua along the border and being attacked, which they retreat from
+        add_manpower = 12500
+        add_stability = 0.02
+        add_war_support = -0.02
+    }
+
+    ai_will_do = {
+        factor = 20
+    }
+}
+
+shared_focus = {
+    id = EEE_moon_bathing
+    x = 1
+    y = 1
+    relative_position_id = EEE_council_benefits
+
+    cost = 2
+    prerequisite = { focus = EEE_council_benefits }
+    prerequisite = { focus = EEE_tribal_feud }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_moon_bathing"
+        30 = {
+            add_extra_state_shared_building_slots = 2
+            add_building_construction = {
+                type = industrial_complex
+                level = 2
+                instant_build = yes
+            }
+        }
+        add_stability = -0.1
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_buggy_investments
+    x = 1
+    y = 1
+    relative_position_id = EEE_tribal_feud
+
+    cost = 2
+    prerequisite = { focus = EEE_tribal_feud }
+    available = {
+        NID = {
+            exists = yes
+            is_subject = no
+        }
+        custom_trigger_tooltip = {
+            tooltip = EEE_tick_tock_team_tt
+            NOT = { has_country_flag = EEE_team_management }
+        }
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_buggy_investments"
+        ###Maybe event of Stellar being persuaded to work with NID, or possibly hosting a NID representative and showing some of the things they can offer in exchange for guns; triggers short event asking for guns in NID, who can agree or disagree
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_night_warrior_blade
+    x = -3
+    y = 1
+    relative_position_id = EEE_moon_bathing
+
+    cost = 3
+    prerequisite = { focus = EEE_warrior_council }
+    prerequisite = { focus = EEE_moon_bathing }
+    mutually_exclusive = { focus = EEE_economically_overcome }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_night_warrior_blade"
+        ###Event of Waning training some of the thestral militias to be more aggressive and take advantage of their natural abilities and night vision to eke out victory, with examples to be done on either each other or on captured Neighua, provided by Gushing, which perturbs the recruits
+        ###Will increase Gushing's influence on the council
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_economically_overcome
+    x = -1
+    y = 1
+    relative_position_id = EEE_buggy_investments
+
+    cost = 3
+    prerequisite ={
+        focus = EEE_moon_bathing
+        focus = EEE_buggy_investments
+    }
+    mutually_exclusive = { focus = EEE_night_warrior_blade }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_economically_overcome"
+        ###Event of a thestral worker in either a factory or workshop being tasked far beyond his capabilities, as he has already worked extensively, into the morning hours, and a mistake he makes nearly costs the entire building, which gets him in trouble instead of being sent home to rest
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_throwing_hooves
+    x = 2
+    y = 1
+    relative_position_id = EEE_night_warrior_blade
+
+    cost = 2
+    prerequisite = {
+        focus = EEE_night_warrior_blade
+        focus = EEE_economically_overcome
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_throwing_hooves"
+        ###Event of Stellar Note meeting with the different captains and generals of the militia to discuss final strategy, and she is nervous about the how she will be possibly condemning many thestrals to die just to ensure their survival, which she finds detestable but necessary as there's no other way to finally be safe from the Neighua
+        #Would be where, if Gushing has enough influence (if still going with that, otherwise would be just guaranteed), would launch her coup; event would be different, instead being Waning approaching Stellar, congratulating her on preparing the nation, and then killing all those around her, before claiming that her maestro wishes to thank Stellar personally, and knocks her out
+        create_wargoal = {
+            target = NEI
+            type = annex_everything
+        }
+    }
+
+    ai_will_do = {
+        factor = 320
+    }
+}
+
+shared_focus = {
+    id = EEE_bitter_friend
+    x = 0
+    y = 1
+    relative_position_id = EEE_throwing_hooves
+
+    cost = 2
+    prerequisite = { focus = EEE_throwing_hooves }
+    available = {
+        owns_state = 16
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_bitter_friend"
+        ###Event of Stellar meeting with the leader of NEI to force a treaty with them, since there is still a bit of fighting in Tenochtitlan, and after a short conflict with some of the elite guards provided by Waning, she manages to break through and get them to surrender, for good
+    }
+
+    ai_will_do = {
+        factor = 320
+    }
+}
+
+shared_focus = {
+    id = EEE_righting_wrongs
+    x = -2
+    y = 1
+    relative_position_id = EEE_bitter_friend
+
+    cost = 3
+    prerequisite = { focus = EEE_bitter_friend }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_righting_wrongs"
+        ###Event of some of the Neighua leaders and advisors being tried by the Moonspeakers for their crimes, and Stellar hesitantly convicts them and sentences them to death for their intended genocide of thestrals, which she values far more than anything else
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_lost_blood
+    x = 2
+    y = 1
+    relative_position_id = EEE_bitter_friend
+
+    cost = 2
+    prerequisite = { focus = EEE_bitter_friend }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_lost_blood"
+        ###Maybe short event of a thestral family that appeared in one of the events for the Neighua rebellion returning home and seeing how much their home has changed from the Neighua living there, and getting into a conflict with the ones that claimed it, before ultimatley having the militia that came to guard them kick the Neighua out; they are happy the entire time, as a dissonance to the acts in the event
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_less_evil
+    x = -2
+    y = 1
+    relative_position_id = EEE_righting_wrongs
+
+    cost = 3
+    prerequisite = { focus = EEE_righting_wrongs }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_less_evil"
+        ###Event of a Neighua tribe member being put through some of the educational ringers that have been set up by the thestrals to try and get some of them to acclimate to the idea of thestrals living among them, and how they are the same as regular ponies, but it only ends up making them hate thestrals more, instead
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_erase_past
+    x = 0
+    y = 1
+    relative_position_id = EEE_righting_wrongs
+
+    cost = 3
+    prerequisite = { focus = EEE_righting_wrongs }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_erase_past"
+        ###Event of some Neighua who want to visit some of their temples being barred, as the temple is currently being cleared of any teachings that their own priests had and otherwise completely destroying their history, as if they believe that their ancestors were right in hating thestrals, they could to repeat the same acts
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_danger_stellar_note
+    x = 0
+    y = 2
+    relative_position_id = EEE_bitter_friend
+
+    cost = 2
+    prerequisite = { focus = EEE_bitter_friend }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_danger_stellar_note"
+        ###Event of Stellar meeting with her generals, who have penned together another invasion plan, this time of the South-East, as there are those within it that are all preparing to go to war with each other, and them, to come out as the only successor of Cobalt Hoof, and she tries to protest against it, but is eventually convinced that it is the only way to survive and protect her thestrals
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_second_ayacachtli
+    x = -2
+    y = 1
+    relative_position_id = EEE_less_evil
+
+    cost = 4
+    prerequisite = { focus = EEE_less_evil }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_second_ayacachtli"
+        ###Maybe short event of some thestral workers arriving in Tenochtitlan and assessing their opportunities, and being greeted with hostility by the occupied Neighua, which almost makes them leave after nearly being assaulted by a couple near the entrance to the city, before they are stopped by the militia guarding the city
+        16 = {
+            add_extra_state_shared_building_slots = 2
+            #Modifier here
+        }
+    }
+
+    ai_will_do = {
+        factor = 20
+    }
+}
+
+shared_focus = {
+    id = EEE_reintroduce_bats
+    x = 1
+    y = 1
+    relative_position_id = EEE_less_evil
+
+    cost = 3
+    prerequisite = { focus = EEE_less_evil }
+    prerequisite = { focus = EEE_erase_past }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_reintroduce_bats"
+        ###Coring alert here; maybe change to flat-out getting the cores
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_future_knowledge
+    x = -1
+    y = 1
+    relative_position_id = EEE_danger_stellar_note
+
+    cost = 3
+    prerequisite = { focus = EEE_erase_past }
+    prerequisite = { focus = EEE_danger_stellar_note }
+    mutually_exclusive = { focus = EEE_victorious_memories }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_future_knowledge"
+        #Idea here; not lost when moving to next stage, same with other focus; all others are
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_victorious_memories
+    x = 0
+    y = 2
+    relative_position_id = EEE_lost_blood
+
+    cost = 3
+    prerequisite = { focus = EEE_lost_blood }
+    mutually_exclusive = { focus = EEE_future_knowledge }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_victorious_memories"
+        #Idea here
+    }
+
+    ai_will_do = { factor = 40 }
+}
+
+shared_focus = {
+    id = EEE_southern_protection
+    x = -1
+    y = 1
+    relative_position_id = EEE_future_knowledge
+
+    cost = 1.45
+    prerequisite = {
+        focus = EEE_future_knowledge
+        focus = EEE_victorious_memories
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_southern_protection"
+        #Make conditions for these
+        create_wargoal = {
+            target = STB
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = NID
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = NRP
+            type = annex_everything
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+        modifier = {
+            has_war = yes
+            factor = 0.1
+        }
+    }
+}
+
+shared_focus = {
+    id = EEE_northern_push
+    x = 1
+    y = 1
+    relative_position_id = EEE_future_knowledge
+
+    cost = 1.45
+    prerequisite = {
+        focus = EEE_future_knowledge
+        focus = EEE_victorious_memories
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_northern_push"
+        create_wargoal = {
+            target = BAL
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = MTS
+            type = annex_everything
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+        modifier = {
+            has_war = yes
+            factor = 0.1
+        }
+    }
+}
+
+shared_focus = {
+    id = EEE_reclaiming_chains
+    x = 1
+    y = 1
+    relative_position_id = EEE_victorious_memories
+
+    cost = 1.45
+    prerequisite = {
+        focus = EEE_future_knowledge
+        focus = EEE_victorious_memories
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_reclaiming_chains"
+        create_wargoal = {
+            target = SPF
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = CLI
+            type = annex_everything
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+        modifier = {
+            has_war = yes
+            factor = 0.1
+        }
+    }
+}
+
+###Ezmetzli appearance hidden focuses###
+shared_focus = {
+    id = EEE_monster_realized
+    x = 0
+    y = 1
+    relative_position_id = EEE_jungle_help
+
+    cost = 1
+    prerequisite = { focus = EEE_jungle_help }
+    available = {
+        has_country_leader = { character = EEE_Gushing_Pulse ruling_only = yes }
+    }
+    #allow_branch = {
+    #   has_country_flag = EEE_ezmetzli_coup
+    #}
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_monster_realized"
+        ###Gushing gleefully meets a slwoly awakening Stellar, who is currently strapped onto a sacrifical bed on the top of one of the Ezmetzli's temples, deep in the jungle, and Gushing plays with her, regarding how she was foolish to trust such a pony like Gushing, and Gushing eventually ends Stellar entirely, after savoring making her bleed first; Stellar is resigned, confused, but ultimately defiant
+    }
+
+    ai_will_do = {
+        factor = 640
+    }
+}
+
+shared_focus = {
+    id = EEE_rite_of_wrath
+    x = -2
+    y = 1
+    relative_position_id = EEE_monster_realized
+
+    cost = 2
+    prerequisite = { focus = EEE_monster_realized }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_rite_of_wrath"
+        ###Possibly short event of some Ezmetzli troops being pushed to prepare for war, through gruesome rites such as leaving only one pony standing in a bloody free for all, and whoever lets their anger control them ends up being the winner
+        #Idea here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_plowshare_blades
+    x = 0
+    y = 1
+    relative_position_id = EEE_monster_realized
+
+    cost = 3
+    prerequisite = { focus = EEE_monster_realized }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_plowshare_blades"
+        ###Maybe short event of innocent thestrals being forced to build new sweatshops for weapons, and the Ezmetzli being ruthless in their slave-driving
+        two_random_arms_factory = yes
+        two_random_arms_factory = yes
+        one_random_arms_factory = yes
+        #Remove 2 civ factories here
+        add_stability = -0.15
+        add_political_power = -50
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_rite_of_knowledge
+    x = 2
+    y = 1
+    relative_position_id = EEE_monster_realized
+
+    cost = 2
+    prerequisite = { focus = EEE_monster_realized }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_rite_of_knowledge"
+        ###Possible short event of an Ezmetzli raid on the Temple of the Moon, where they slaughter any Moonspeakers resist, so they can pillage the books and knowledge inside so they can study any and all pony groups that have been in the South-East, including Cobalt Hoof's clique, so they know exactly how to exploit them, since the Moonspeakers take meticulous records of everything in the South-East (that hasn't been erased by either cults)
+        #Idea here
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+#Mutually exclusive focuses here affect how much of the BoP that the two sides of the Ezmetzli have after taking the South-East
+shared_focus = {
+    id = EEE_blood_of_all
+    x = -1
+    y = 1
+    relative_position_id = EEE_rite_of_wrath
+
+    cost = 3
+    prerequisite = { focus = EEE_rite_of_wrath }
+    mutually_exclusive = { focus = EEE_surgical_removals }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_blood_of_all"
+        ###Event of Gushing whipping her soldiers into a frenzy, promising them that they will paint the peninsula in blood, which will be a pleasing offering to the Moon Goddess, and feed the Eternal Song, which is culminated by killing another Moonspeaker to prove their superiority
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_surgical_removals
+    x = 1
+    y = 1
+    relative_position_id = EEE_rite_of_wrath
+
+    cost = 3
+    prerequisite = { focus = EEE_rite_of_wrath }
+    mutually_exclusive = { focus = EEE_blood_of_all }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_surgical_removals"
+        ###Waning and Moonlight gain an audience with Gushing, who is in the middle of preparing her speech for the other event, and argue for their side of finding the right ponies on the enemy side and taking them out, to sow confusion, rather than just throwing bodies at the problem, and successfully win her over by promising that the peninsual will still drown in the blood of their enemies regardless, but with less of their own
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_follow_goddess
+    x = -1
+    y = 1
+    relative_position_id = EEE_rite_of_knowledge
+
+    cost = 3
+    prerequisite = { focus = EEE_rite_of_knowledge }
+    mutually_exclusive = { focus = EEE_follow_chosen }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_follow_goddess"
+        ###Event of Waning and Moonlight hosting a grand sermon about how their cause is just and right, and that the Moon Goddess herself will bless them all for their struggles, and how if the Ezmetzli serve her without question, they will each be unstoppable warriors, and receive perhaps a smidgen of the blessings that they and Gushing have earned; they focus more on the Moon Goddess than Gushing
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_follow_chosen
+    x = 1
+    y = 1
+    relative_position_id = EEE_rite_of_knowledge
+
+    cost = 3
+    prerequisite = { focus = EEE_rite_of_knowledge }
+    mutually_exclusive = { focus = EEE_follow_goddess }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_follow_chosen"
+        ###Event of Gushing forcing the Crescents to stand aside as she makes a completely off the cuff speech to the Ezmetzli, claiming how she has been directly chosen by the Moon Goddess, as hearer of the Eternal Song, to ensure its purity, and that she will ensure that every last one of them will be blessed by the Goddess, if they do what she needs them to do for bathing the whole peninsula in the blood of their enemies, and obey her whims at every turn; this irritates the Crescents
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_kill_kill_kill
+    x = 0
+    y = 2
+    relative_position_id = EEE_plowshare_blades
+
+    cost = 0.5
+    prerequisite = { focus = EEE_plowshare_blades }
+    #Maybe make it only available after making the choices for the blessings
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_kill_kill_kill"
+        ###Possibly short event of Gushing promising each soldier their fill of ending the defilers of the Song, and how they will be blessed by the Moon Goddess for their service, which is applauded by all assembled before her in Ayacachtli; the moon would be coming through the one hole in the cavern, which would make her appear even more the chosen of the Moon Goddess
+        declare_war_on = {
+            target = NEI
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = NID
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = SPF
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = STB
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = BAL
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = NRP
+            type = annex_everything
+        }
+        create_wargoal = {
+            target = MTS
+            type = annex_everything
+        }
+    }
+
+    ai_will_do = {
+        base = 0
+        modifier = {
+            OR = {
+                has_completed_focus = EEE_blood_of_all
+                has_completed_focus = EEE_surgical_removals
+            }
+            add = 40
+        }
+        modifier = {
+            OR = {
+                has_completed_focus = EEE_follow_goddess
+                has_completed_focus = EEE_follow_chosen
+            }
+            add = 40
+        }
+        modifier = {
+            OR = {
+                has_completed_focus = EEE_blood_of_all
+                has_completed_focus = EEE_surgical_removals
+            }
+            OR = {
+                has_completed_focus = EEE_follow_goddess
+                has_completed_focus = EEE_follow_chosen
+            }
+            factor = 12
+        }
     }
 }
 
