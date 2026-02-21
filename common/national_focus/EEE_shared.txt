@@ -1514,7 +1514,7 @@ shared_focus = {
     relative_position_id = EEE_thestral_peninsula
 
     cost = 1
-    prerequisite = { focus = EEE_perfect_equals }
+    prerequisite = { focus = EEE_thestral_peninsula }
 
     completion_reward = {
         log = "[GetDateText]: [ROOT.GetName]: Focus EEE_perfect_equals"
@@ -1580,6 +1580,215 @@ shared_focus = {
 
     ai_will_do = {
         factor = 640
+    }
+}
+
+shared_focus = {
+    id = EEE_dismissing_unneeded
+    x = 1
+    y = 1
+    relative_position_id = EEE_perfect_equals
+
+    cost = 2
+    prerequisite = { focus = EEE_perfect_equals }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_dismissing_unneeded"
+        ###Short event of a militia thestral being given the axe from the militia, and packing up some of his gear to give back, with one of the officers of the militia watching to make sure that all is given back from his home, and he is a bit grumpy about having to give up some things he was using for personal use as well, like hunting
+    }
+
+    ai_will_do = {
+        factor = 320
+    }
+}
+
+shared_focus = {
+    id = EEE_import_techs
+    x = 3
+    y = 1
+    relative_position_id = EEE_perfect_equals
+
+    cost = 2
+    prerequisite = { focus = EEE_perfect_equals }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_import_techs"
+        ###Short event perhaps of Purple Spark or another Milkwater character tied to the Moonspeakers penning up a letter to send to some of the remaining free nations in the world for assistance for getting on their hooves, and promising to pay back anything given
+        #Would send events to CRY, STG, CHN, MGY, HIP, and KIR, so long as they exist; in order, the bonuses would be excavation, armor, CAS, race tech, destroyers, and artillery; each one would give a 66% bonus, and a 0.3 ahead reduction
+    }
+
+    ai_will_do = {
+        factor = 320
+    }
+}
+
+shared_focus = {
+    id = EEE_forward_thinkers
+    x = -20
+    y = 1
+    relative_position_id = EEE_promises_kept
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_pushing_envelope
+        focus = EEE_educational_encounters
+        focus = EEE_promises_kept
+        focus = EEE_dismissing_unneeded
+        focus = EEE_import_techs
+    }
+    mutually_exclusive = { focus = EEE_breaking_shackles }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_forward_thinkers"
+        ###Short event of Stellar meeting with Nocturne after a council meeting to discuss moving thestral society forward into a united and modernized country, which does rub Nocturne a bit the wrong way, since it means making the Moonspeakers have less influence, and they have a chance to do good, but she agrees in the end
+        #Increase Nocturne approval, decrease Marble Strata
+    }
+
+    ai_will_do = {
+        factor = 160
+    }
+}
+
+shared_focus = {
+    id = EEE_breaking_shackles
+    x = -16
+    y = 1
+    relative_position_id = EEE_promises_kept
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_pushing_envelope
+        focus = EEE_educational_encounters
+        focus = EEE_promises_kept
+        focus = EEE_dismissing_unneeded
+        focus = EEE_import_techs
+    }
+    mutually_exclusive = { focus = EEE_forward_thinkers }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_breaking_shackles"
+        ###Short event of Stellar meeting with Marble about leading an effort to push forward traditionalist, but secular--since the Moonspeakers should eventually fade away--values to the thestrals, so they can remain a great nation, without relying on antiquated beliefs to give them strength, which surprises Marble but she is willing to take up the task
+        #Decrease Nocturne approval, increase Marble approval
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_fruitful_land
+    x = -10
+    y = 1
+    relative_position_id = EEE_promises_kept
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_pushing_envelope
+        focus = EEE_educational_encounters
+        focus = EEE_promises_kept
+        focus = EEE_dismissing_unneeded
+        focus = EEE_import_techs
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_fruitful_land"
+        add_tech_bonus = {
+            name = EEE_fruitful_land
+            bonus = 0.5
+            uses = 1
+            category = industry
+        }
+        random_state = {
+            limit = {
+                is_owned_and_controlled_by = ROOT
+            }
+            add_resource = {
+                type = crystals
+                amount = 8
+            }
+        }
+        random_state = {
+            limit = {
+                is_owned_and_controlled_by = ROOT
+            }
+            add_resource = {
+                type = crystals
+                amount = 2
+            }
+            add_resource = {
+                type = steel
+                amount = 6
+            }
+        }
+    }
+
+    ai_will_do = {
+        factor = 40
+    }
+}
+
+shared_focus = {
+    id = EEE_ascendant_artistry
+    x = -6
+    y = 1
+    relative_position_id = EEE_promises_kept
+
+    cost = 3
+    prerequisite = {
+        focus = EEE_pushing_envelope
+        focus = EEE_educational_encounters
+        focus = EEE_promises_kept
+        focus = EEE_dismissing_unneeded
+        focus = EEE_import_techs
+    }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_ascendant_artistry"
+        ###Possibly short event of some artisans under Marble meeting for crafting some of the best examples of goods that can be sold in a wider market for funding the nation, and getting into disagreements on what that could be
+        random_state = {
+            limit = {
+                is_owned_and_controlled_by = ROOT
+                free_building_slots = {
+                    building = industrial_complex
+                    size > 1
+                    include_locked = yes
+                }
+            }
+            add_resource = {
+                type = steel
+                amount = 8
+            }
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+        }
+    }
+
+    ai_will_do = {
+        factor = 80
+    }
+}
+
+shared_focus = {
+    id = EEE_last_opera
+    x = 0
+    y = 1
+    relative_position_id = EEE_promises_kept
+
+    cost = 2
+    prerequisite = { focus = EEE_promises_kept }
+
+    completion_reward = {
+        log = "[GetDateText]: [ROOT.GetName]: Focus EEE_last_opera"
+        ###Event of Stellar meeting with the council to speak about her intentions of opening the investigations into all the murders recently in Ayacachtli, which is approved of by all but Waning, who argues that it is a waste of time and resources, when they could instead be focusing on defending thestrals against the Solar Empire or the like; all others agree it will bring peace to the thestrals if a culprit is found, though, and she's overruled
+    }
+
+    ai_will_do = {
+        factor = 40
     }
 }
 

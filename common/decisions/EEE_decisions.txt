@@ -8,10 +8,38 @@ EEE_debug_category = {
 			mark_focus_tree_layout_dirty = yes
 		}
 	}
+	EEE_load_stellar_tree = {
+		available = {
+			NOT = { has_country_flag = EEE_stellar_united_peninsula }
+		}
+		complete_effect = {
+			set_country_flag = EEE_stellar_united_peninsula
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = {
+					has_country_flag = EEE_ezmetzli_coup
+				}
+				clr_country_flag = EEE_ezmetzli_coup
+			}
+			if = {
+				limit = {
+					has_country_flag = EEE_custodien_guidance
+				}
+				clr_country_flag = EEE_custodien_guidance
+			}
+			if = {
+				limit = {
+					has_cosmetic_tag = EEE_ezmetzli
+				}
+				drop_cosmetic_tag = yes
+			}
+		}
+	}
     EEE_promote_Gushing = {
 		available = {
 			tag = EEE
 			NOT = { has_country_leader = { character = EEE_Gushing_Pulse ruling_only = yes } }
+			NOT = { has_country_flag = EEE_ezmetzli_coup }
 		}
 		visible = { tag = EEE }
 		complete_effect = {
@@ -44,12 +72,26 @@ EEE_debug_category = {
 				add_trait = { trait = ezmetzli_general }
 			}
 			add_dynamic_modifier = { modifier = EEE_ticking_doom }
+			if = {
+				limit = {
+					has_country_flag = EEE_stellar_united_peninsula
+				}
+				clr_country_flag = EEE_stellar_united_peninsula
+			}
+			if = {
+				limit = {
+					has_country_flag = EEE_custodien_guidance
+				}
+				clr_country_flag = EEE_custodien_guidance
+			}
+			mark_focus_tree_layout_dirty = yes
 		}
 	}
 	EEE_promote_Nocturne = {
 		available = {
 			tag = EEE
 			NOT = { has_country_leader = { character = EEE_Nocturne_Vision ruling_only = yes } }
+			NOT = { has_country_flag = EEE_custodien_guidance }
 		}
 		visible = { tag = EEE }
 		complete_effect = {
@@ -75,12 +117,32 @@ EEE_debug_category = {
 				add_trait = { trait = moon_guardian }
 				add_trait = { trait = custodiens_nocte }
 			}
+			if = {
+				limit = {
+					has_country_flag = EEE_stellar_united_peninsula
+				}
+				clr_country_flag = EEE_stellar_united_peninsula
+			}
+			if = {
+				limit = {
+					has_country_flag = EEE_ezmetzli_coup
+				}
+				clr_country_flag = EEE_ezmetzli_coup
+			}
+			mark_focus_tree_layout_dirty = yes
+			if = {
+				limit = {
+					has_cosmetic_tag = EEE_ezmetzli
+				}
+				drop_cosmetic_tag = yes
+			}
 		}
 	}
 	EEE_promote_Moonlight_and_Waning = {
 		available = {
 			tag = EEE
 			has_country_leader = { character = EEE_Gushing_Pulse ruling_only = yes }
+			has_country_flag = EEE_ezmetzli_coup
 		}
 		visible = { tag = EEE }
 		complete_effect = {
