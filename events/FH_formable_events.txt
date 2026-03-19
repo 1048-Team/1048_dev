@@ -1,0 +1,656 @@
+add_namespace = formable_event
+
+#Template
+#country_event = {
+#    id = formable_event.
+#    title = formable_event.
+#    desc = formable_event.
+#    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event."}
+#
+#    is_triggered_only = yes
+#
+#    option = {
+#        name = formable_event.
+#    }
+#}
+
+country_event = { #SCS requests to be given the land of the other puppets
+    id = formable_event.1
+    title = formable_event.1.t
+    desc = formable_event.1.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.1"}
+
+    is_triggered_only = yes
+
+    option = { #Sure thing, totally trustworthy puppet!
+        name = formable_event.1.a
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 5
+                strength_ratio = {
+                    tag = FROM
+                    ratio > 0.66
+                }
+            }
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.2
+                days = 1
+            }
+        }
+    }
+
+    option = { #Are you mad?!
+        name = formable_event.1.b
+        ai_chance = {
+            factor = 2
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.3
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #CHN is happy and agrees to give over the other puppets
+    id = formable_event.2
+    title = formable_event.2.t
+    desc = formable_event.2.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.2"}
+
+    is_triggered_only = yes
+
+    option = { #Huzzah! The formables have been doubled!
+        name = formable_event.2.a
+        if = {
+            limit = {
+                NCA = {
+                    exists = yes
+                    is_subject_of = FROM
+                    is_ai = yes
+                }
+            }
+            annex_country = {
+                target = NCA
+                transfer_troops = yes
+            }
+            every_state = {
+                limit = {
+                    is_core_of = NCA
+                }
+                add_core_of = ROOT
+            }
+        }
+        if = {
+            limit = {
+                CCA = {
+                    exists = yes
+                    is_subject_of = FROM
+                    is_ai = yes
+                }
+            }
+            annex_country = {
+                target = CCA
+                transfer_troops = yes
+            }
+            every_state = {
+                limit = {
+                    is_core_of = CCA
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+}
+
+country_event = { #CHN be madde and says the big no to giving over puppets to SCS
+    id = formable_event.3
+    title = formable_event.3.t
+    desc = formable_event.3.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.3"}
+
+    is_triggered_only = yes
+
+    option = { #Buck you and the horse you rode in on!
+        name = formable_event.3.a
+        if = {
+            limit = {
+                is_in_faction_with = FROM
+            }
+            leave_faction = yes
+        }
+        if = {
+            limit = {
+                is_subject_of = FROM
+            }
+            FROM = {
+                end_puppet = ROOT
+            }
+        }
+        if = {
+            limit = {
+                NCA = {
+                    exists = yes
+                    is_ai = yes
+                }
+            }
+            create_wargoal = {
+                target = NCA
+                type = annex_everything
+            }
+            every_state = {
+                limit = {
+                    is_core_of = NCA
+                }
+                add_core_of = ROOT
+            }
+        }
+        if = {
+            limit = {
+                CCA = {
+                    exists = yes
+                    is_ai = yes
+                }
+            }
+            create_wargoal = {
+                target = CCA
+                type = annex_everything
+            }
+            every_state = {
+                limit = {
+                    is_core_of = CCA
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+}
+
+country_event = { #CCA sends an offer to buy out the other puppets' lands to CHN
+    id = formable_event.4
+    title = formable_event.4.t
+    desc = formable_event.4.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.4"}
+
+    is_triggered_only = yes
+
+    option = { #Stonks!
+        name = formable_event.4.a
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 5
+                strength_ratio = {
+                    tag = FROM
+                    ratio > 0.66
+                }
+            }
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.5
+                days = 1
+            }
+        }
+    }
+
+    option = { #We can exploit them better...
+        name = formable_event.4.b
+        ai_chance = {
+            factor = 2
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.6
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #CHN agrees to be given gobs of cash for puppets
+    id = formable_event.5
+    title = formable_event.5.t
+    desc = formable_event.5.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.5"}
+
+    is_triggered_only = yes
+
+    option = { #The art of the deal.
+        name = formable_event.5.a
+        if = {
+            limit = {
+                NCA = {
+                    exists = yes
+                    is_subject_of = FROM
+                    is_ai = yes
+                }
+            }
+            annex_country = {
+                target = NCA
+                transfer_troops = yes
+            }
+            every_state = {
+                limit = {
+                    is_core_of = NCA
+                }
+                add_core_of = ROOT
+            }
+        }
+        if = {
+            limit = {
+                SCS = {
+                    exists = yes
+                    is_subject_of = FROM
+                    is_ai = yes
+                }
+            }
+            annex_country = {
+                target = SCS
+                transfer_troops = yes
+            }
+            every_state = {
+                limit = {
+                    is_core_of = SCS
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+}
+
+country_event = { #CHN will never be bought out for filth lucre
+    id = formable_event.6
+    title = formable_event.6.t
+    desc = formable_event.6.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.6"}
+
+    is_triggered_only = yes
+
+    option = { #Time for a free intervention!
+        name = formable_event.6.a
+        if = {
+            limit = {
+                is_in_faction_with = FROM
+            }
+            leave_faction = yes
+        }
+        if = {
+            limit = {
+                is_subject_of = FROM
+            }
+            FROM = {
+                end_puppet = ROOT
+            }
+        }
+        if = {
+            limit = {
+                NCA = {
+                    exists = yes
+                    is_ai = yes
+                }
+            }
+            create_wargoal = {
+                target = NCA
+                type = annex_everything
+            }
+            every_state = {
+                limit = {
+                    is_core_of = NCA
+                }
+                add_core_of = ROOT
+            }
+        }
+        if = {
+            limit = {
+                SCS = {
+                    exists = yes
+                    is_ai = yes
+                }
+            }
+            create_wargoal = {
+                target = SCS
+                type = annex_everything
+            }
+            every_state = {
+                limit = {
+                    is_core_of = SCS
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+}
+
+country_event = { #NCA politely asks if they can mess up some of the non-changeling nations
+    id = formable_event.7
+    title = formable_event.7.t
+    desc = formable_event.7.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.7"}
+
+    is_triggered_only = yes
+
+    option = { #Who are we to prevent a bit of fun?
+        name = formable_event.7.a
+        FROM = {
+            country_event = {
+                id = formable_event.8
+                days = 1
+            }
+        }
+        set_country_flag = CHN_chrysalis_approves
+    }
+
+    option = { #No fun for you!
+        name = formable_event.7.b
+        ai_chance = {
+            factor = 1
+            modifier = {
+                is_historical_focus_on = yes
+                FROM = { is_ai = no }
+                factor = 0
+            }
+            modifier = {
+                FROM = { is_ai = yes }
+                factor = 3
+            }
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.8
+                days = 1
+            }
+        }
+        set_country_flag = CHN_chrysalis_be_mean
+    }
+}
+
+country_event = { #CHN is happy and agrees to give over the other puppets
+    id = formable_event.8
+    title = formable_event.8.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_chrysalis_approves
+            }
+        }
+        text = formable_event.8.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_chrysalis_be_mean
+            }
+            text = formable_event.8.d_b
+        }
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.8"}
+
+    is_triggered_only = yes
+
+    option = { #Love for the love god!
+        name = formable_event.8.a
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_chrysalis_approves
+            }
+        }
+        set_country_flag = NCA_chryssy_agrees
+    }
+    option = { #Oh, okay.
+        name = formable_event.8.b
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_chrysalis_be_mean
+            }
+        }
+    }
+}
+
+country_event = { #NCA requests that they can break a few spines for CHN instead by controlling the other puppets
+    id = formable_event.9
+    title = formable_event.9.t
+    desc = formable_event.9.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.9"}
+
+    is_triggered_only = yes
+
+    option = { #Gooooood
+        name = formable_event.9.a
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 5
+                strength_ratio = {
+                    tag = FROM
+                    ratio > 0.66
+                }
+            }
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.10
+                days = 1
+            }
+        }
+    }
+
+    option = { #We can exploit them better...
+        name = formable_event.9.b
+        ai_chance = {
+            factor = 2
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.11
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #CHN is fine with losing the administrative headache for NCA to control instead
+    id = formable_event.10
+    title = formable_event.10.t
+    desc = formable_event.10.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.10"}
+
+    is_triggered_only = yes
+
+    option = { #More land for the meat grinder.
+        name = formable_event.10.a
+        if = {
+            limit = {
+                CCA = {
+                    exists = yes
+                    is_subject_of = FROM
+                    is_ai = yes
+                }
+            }
+            annex_country = {
+                target = CCA
+                transfer_troops = yes
+            }
+            every_state = {
+                limit = {
+                    is_core_of = CCA
+                }
+                add_core_of = ROOT
+            }
+        }
+        if = {
+            limit = {
+                SCS = {
+                    exists = yes
+                    is_subject_of = FROM
+                    is_ai = yes
+                }
+            }
+            annex_country = {
+                target = SCS
+                transfer_troops = yes
+            }
+            every_state = {
+                limit = {
+                    is_core_of = SCS
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+}
+
+country_event = { #CHN loves bureaucracy or something
+    id = formable_event.11
+    title = formable_event.11.t
+    desc = formable_event.11.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.11"}
+
+    is_triggered_only = yes
+
+    option = { #Then we shall do it ourselves.
+        name = formable_event.11.a
+        if = {
+            limit = {
+                is_in_faction_with = FROM
+            }
+            leave_faction = yes
+        }
+        if = {
+            limit = {
+                is_subject_of = FROM
+            }
+            FROM = {
+                end_puppet = ROOT
+            }
+        }
+        if = {
+            limit = {
+                CCA = {
+                    exists = yes
+                    is_ai = yes
+                }
+            }
+            create_wargoal = {
+                target = NCA
+                type = annex_everything
+            }
+            every_state = {
+                limit = {
+                    is_core_of = NCA
+                }
+                add_core_of = ROOT
+            }
+        }
+        if = {
+            limit = {
+                SCS = {
+                    exists = yes
+                    is_ai = yes
+                }
+            }
+            create_wargoal = {
+                target = SCS
+                type = annex_everything
+            }
+            every_state = {
+                limit = {
+                    is_core_of = SCS
+                }
+                add_core_of = ROOT
+            }
+        }
+    }
+}
+
+country_event = { #OLE suggests that CHN should return the old lands because they're nice, floofy deer
+    id = formable_event.12
+    title = formable_event.12.t
+    desc = formable_event.12.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.12"}
+
+    is_triggered_only = yes
+
+    option = { #Eh, they ARE pretty floofy...
+        name = formable_event.12.a
+        FROM = {
+            country_event = {
+                id = formable_event.13
+                days = 1
+            }
+        }
+        set_country_flag = CHN_pet_floof
+    }
+
+    option = { #We shall not give into their floofy ways!
+        name = formable_event.12.b
+        ai_chance = {
+            factor = 1
+            modifier = {
+                is_historical_focus_on = yes
+                FROM = { is_ai = no }
+                factor = 0
+            }
+            modifier = {
+                FROM = { is_ai = yes }
+                factor = 3
+            }
+        }
+        FROM = {
+            country_event = {
+                id = formable_event.13
+                days = 1
+            }
+        }
+        set_country_flag = CHN_shave_the_deet
+    }
+}
+
+country_event = { #CHN is rather decisive about their very decisiony decision
+    id = formable_event.13
+    title = formable_event.13.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_pet_floof
+            }
+        }
+        text = formable_event.13.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_shave_the_deet
+            }
+            text = formable_event.13.d_b
+        }
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.13"}
+
+    is_triggered_only = yes
+
+    option = { #Oh? That's unexpected.
+        name = formable_event.13.a
+        trigger = {
+            FROM = {
+                has_country_flag = CHN_pet_floof
+            }
+        }
+        every_state = {
+            limit = {
+                is_in_array = { global.original_OLE_states = THIS }
+                is_owned_and_controlled_by = OVERLORD
+            }
+            transfer_state_to = ROOT
+            add_core_of = ROOT
+        }
+    }
+    option = { #Figures.
+        name = formable_event.13.b
+        set_country_flag = OLE_chyrssy_rejected
+    }
+}
