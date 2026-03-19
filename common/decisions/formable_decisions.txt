@@ -1127,14 +1127,10 @@ form_changelingian_protectorates_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHN_destroy_the_ponies"
-			#Must be first because releasing puppet somehow kills claims
-			every_state = {
-				limit = {
-						OR = {
-							is_core_of = EQS
-							is_core_of = BAL
-							is_claimed_by = EQS
-						}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_in_array = { global.EQS_original_territory = THIS }
 						NOT = {
 							OR = {
 								is_core_of = STG
@@ -1144,10 +1140,26 @@ form_changelingian_protectorates_category = {
 								is_core_of = SCS
 							}
 						}
+					}
+					transfer_state_to = EQS
+					if = {
+						limit = {
+							NOT = { is_core_of = EQS }
+						}
+						add_core_of = EQS
+					}
 				}
-				add_core_of = EQS
+				set_autonomy = {
+					target = EQS
+					autonomous_state = autonomy_reichsprotectorate
+				}
 			}
-			release_puppet = EQS
+			effect_tooltip = {
+				release_autonomy = {
+					target = EQS
+					autonomous_state = autonomy_reichsprotectorate
+				}
+			}
 			EQS = {
 				add_to_tech_sharing_group = CHN_research
 				set_country_flag = is_changeling_puppet
@@ -1317,6 +1329,7 @@ SCS_formables_category = {
 				3 = { is_core_of = ROOT } #No way to core this aside from the last two decisions being taken
 				1214 = { is_core_of = ROOT }
 			}
+			is_subject_of = CHN
 		}
 		fire_only_once = yes
 		complete_effect = {
