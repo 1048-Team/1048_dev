@@ -1968,7 +1968,14 @@ HLR_formables_category = {
                 owns_state = 585
                 owns_state = 542
             }
-            BOI = { all_original_cores_owned_by_ROOT = yes } #Will have to make a scripted trigger
+            custom_trigger_tooltip = {
+                tooltip = HLR_own_BOI_territory
+                owns_state = 679
+                owns_state = 471
+                owns_state = 488
+                owns_state = 489
+                owns_state = 532
+            }
             HLQ = { all_original_cores_owned_by_ROOT = yes }
         }
         highlight_states = {
@@ -2098,7 +2105,14 @@ reform_griffonian_empire_category = {
 				owns_state = 585
 				owns_state = 542
             }
-            BOI = { all_original_cores_owned_by_ROOT = yes }
+            custom_trigger_tooltip = {
+                tooltip = HLR_own_BOI_territory
+                owns_state = 679
+                owns_state = 471
+                owns_state = 488
+                owns_state = 489
+                owns_state = 532
+            }
             HLQ = { all_original_cores_owned_by_ROOT = yes }
         }
         highlight_states = {
@@ -2623,7 +2637,10 @@ EQC_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			#set_province_name here for 5013
+			set_province_name = {
+				id = 5013
+				name = EQC_big_sister_arrived
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -2640,7 +2657,9 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_hug_MIT"
-			#Event for demanding subjugation of MIT
+			MIT = {
+				country_event = formable_event.14
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -2686,12 +2705,6 @@ EQC_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			hidden_effect = {
-				news_event = {
-					id = formable_news.14
-					hours = 6
-				}
-			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -2709,7 +2722,12 @@ EQC_formables_category = {
 		fire_only_once = yes
 		days_remove = 180
 		complete_effect = {
-			#News event warning of Marelandia's declaration that the world will fall to MARESOC and love Big Sister
+			hidden_effect = {
+				news_event = {
+					id = formable_news.14
+					days = 175
+				}
+			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision remove EQC_said_the_line"
@@ -2821,7 +2839,10 @@ EQC_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			#Name change
+			set_province_name = {
+				id = 488
+				name = EQc_big_sister_arriveder
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -2829,7 +2850,14 @@ EQC_formables_category = {
 	}
 	EQC_the_party_rules_all = {
 		available = {
-				#Needs to be a trigger for ALL starting Zebrican countries to be owned by EQC
+			#Should hopefully work, otherwise many original_cores owned by ROOT checks
+			all_collection_elements = {
+				collection = {
+					input = collection:zebrican_countries
+					operators = { core_states }
+				}
+				is_owned_and_controlled_by = ROOT
+			}
 		}
 		visible = { tag = EQC }
 		highlight_states = {
@@ -2982,6 +3010,140 @@ BRF_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_revive_coltstream_treaty"
 			#Break up RCT; event for BAK
+			custom_effect_tooltip = BRF_triple_republic_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						GRY = {
+							exists = yes
+							is_in_faction_with = ROOT
+						}
+					}
+					every_state = {
+						limit = {
+							is_core_of = GRY
+							NOT = { is_owned_and_controlled_by = GRY }
+							OR = {
+								is_owned_and_controlled_by = ROOT
+								AND = {
+									OWNER = {
+										is_in_faction_with = GRY
+										is_in_faction_with = ROOT
+									}
+									CONTROLLER = {
+										is_in_faction_with = GRY
+										is_in_faction_with = ROOT
+									}
+								}
+							}
+						}
+						transfer_state_to = GRY
+					}
+				}
+				if = {
+					limit = {
+						GRU = {
+							exists = yes
+							is_in_faction_with = ROOT
+						}
+					}
+					every_state = {
+						limit = {
+							is_core_of = GRU
+							NOT = { is_owned_and_controlled_by = GRU }
+							OR = {
+								is_owned_and_controlled_by = ROOT
+								AND = {
+									OWNER = {
+										is_in_faction_with = GRU
+										is_in_faction_with = ROOT
+									}
+									CONTROLLER = {
+										is_in_faction_with = GRU
+										is_in_faction_with = ROOT
+									}
+								}
+							}
+						}
+						transfer_state_to = GRU
+					}
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = BAR
+							AND = {
+								is_core_of = NIM
+								NOT = { is_core_of = RCT }
+							}
+							state = 629
+							state = 627
+							state = 580
+							state = 621
+							state = 628
+							state = 617
+							state = 618
+						}
+					}
+					transfer_state_to = BAR
+					add_core_of = BAR
+					remove_core_of = NIM
+				}
+				set_autonomy = {
+					target = BAR
+					autonomous_state = autonomy_puppet
+				}
+				BAR = { set_cosmetic_tag = BAR_BRF }
+				every_state = {
+					limit = {
+						OR = {
+							AND = {
+								is_core_of = NIM
+								is_core_of = RCT
+							}
+							state = 620
+							state = 587
+							state = 646
+							state = 649
+							state = 638
+							state = 461
+							state = 438
+						}
+					}
+					transfer_state_to = NIM
+					add_core_of = NIM
+				}
+				set_autonomy = {
+					target = NIM
+					autonomous_state = autonomy_puppet
+				}
+				NIM = { set_cosmetic_tag = NIM_BRF }
+				every_state = {
+					limit = {
+						OR = {
+							AND = {
+								is_core_of = RCT
+								OR = {
+									is_owned_and_controlled_by = ROOT
+									OWNER = {
+										NOT = { is_subject_of = ROOT }
+										is_in_faction_with = ROOT
+									}
+								}
+							}
+							is_core_of = LNS
+						}
+					}
+				}
+				set_autonomy = {
+					target = RCT
+					autonomous_state = autonomy_puppet
+				}
+				RCT = { set_cosmetic_tag = RCT_BRF }
+			}
+			BAK = {
+				country_event = formable_event.16
+			}
 			set_global_flag = BRF_splintered_RCT
 		}
 		ai_will_do = {
@@ -3002,7 +3164,9 @@ BRF_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_request_peace"
-			#Event for inviting HLR, or perhaps generic to do that
+			HLR = {
+				country_event = formable_event.16
+			}
 			set_global_flag = BRF_requested_HLR_join
 		}
 		ai_will_do = {
@@ -3028,7 +3192,9 @@ BRF_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_ponies_united"
-			#Event for inviting FBK; probably generic loc
+			FBK = {
+				country_event = formable_event.16
+			}
 			set_global_flag = BRF_requested_FBK_join
 		}
 		ai_will_do = {
@@ -3054,7 +3220,9 @@ BRF_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_big_stonks"
-			#Event for inviting TRD
+			TRD = {
+				country_event = formable_event.16
+			}
 			set_global_flag = BRF_requested_TRD_join
 		}
 		ai_will_do = {
@@ -3080,7 +3248,9 @@ BRF_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_zealous_republicans"
-			#Event for inviting FAT
+			FAT = {
+				country_event = formable_event.16
+			}
 			set_global_flag = BRF_requested_FAT_join
 		}
 		ai_will_do = {
@@ -3106,7 +3276,9 @@ BRF_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_return_the_exiles"
-			#Event for inviting WNG
+			WNG = {
+				country_event = formable_event.16
+			}
 			set_global_flag = BRF_requested_WNG_join
 		}
 		ai_will_do = {
@@ -3133,7 +3305,86 @@ BRF_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_herzland_stability"
-			#Splinter nations
+			custom_effect_tooltip = BRF_toppled_empire_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						FAT = { is_in_faction_with = ROOT }
+					}
+					every_state = {
+						limit = {
+							OR = {
+								AND = {
+									is_claimed_by = FAT
+									NOT = { is_core_of = GRI }
+									NOT = { is_core_of = HLR }
+								}
+								state = 556
+								state = 557
+								state = 432
+								state = 485
+								state = 449
+								state = 450
+								state = 584
+								state = 474
+								state = 480
+								state = 548
+								state = 581
+								state = 475
+								state = 477
+								state = 476
+								state = 1226
+								state = 459
+							}
+							OWNER = {
+								OR = {
+									tag = ROOT
+									is_in_faction_with = ROOT
+								}
+							}
+						}
+						transfer_state_to = FAT
+						add_core_of = FAT
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = BOI
+						is_owned_and_controlled_by = BRF
+					}
+					add_core_of = BRF
+				}
+				every_state = {
+					limit = {
+						is_core_of = GRI
+						NOT = { is_core_of = FAT }
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_in_faction_with = ROOT
+							}
+						}
+					}
+					transfer_state_to = GRI
+				}
+				every_state = {
+					limit = {
+						is_core_of = HLQ
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_in_faction_with = ROOT
+							}
+						}
+					}
+					transfer_state_to = GRI
+				}
+				set_autonomy = {
+					target = GRI
+					autonomous_state = autonomy_puppet
+				}
+				GRI = { set_cosmetic_tag = GRI_BRF }
+			}
 			set_global_flag = BRF_splintered_GRI
 		}
 		ai_will_do = {
@@ -3242,7 +3493,7 @@ BAK_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			set_cosmetic_tag = BAK_RCT
+			set_cosmetic_tag = BAK_RIV
 			hidden_effect = {
 				news_event = {
 					id = formable_news.16
@@ -3402,6 +3653,18 @@ RCT_formables_category = {
 				autonomous_state = autonomy_puppet
 			}
 			EQC = { set_cosmetic_tag = EQC_RCT }
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = BOI
+							is_core_of = JER
+						}
+						is_owned_and_controlled_by = ROOT
+					}
+					transfer_state_to = EQC
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
