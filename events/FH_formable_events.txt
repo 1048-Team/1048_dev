@@ -1,19 +1,5 @@
 add_namespace = formable_event
 
-#Template
-#country_event = {
-#    id = formable_event.
-#    title = formable_event.
-#    desc = formable_event.
-#    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event."}
-#
-#    is_triggered_only = yes
-#
-#    option = {
-#        name = formable_event.
-#    }
-#}
-
 country_event = { #SCS requests to be given the land of the other puppets
     id = formable_event.1
     title = formable_event.1.t
@@ -654,3 +640,174 @@ country_event = { #CHN is rather decisive about their very decisiony decision
         set_country_flag = OLE_chyrssy_rejected
     }
 }
+
+country_event = { #Big Sister be gunning for MIT's independence
+    id = formable_event.14
+    title = formable_event.14.t
+    desc = formable_event.14
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.14"}
+
+    is_triggered_only = yes
+
+    option = { #They completely outnumber us...
+        name = formable_event.14.a
+        ai_chance = {
+            modifier = {
+                factor = 8
+                strength_ratio = {
+                    target = FROM
+                    ratio < 0.75
+                }
+            }
+        }
+        set_country_flag = MIT_pulled_a_french
+    }
+    option = { #We shan't give in!
+        name = formable_event.14.b
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.15
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #MIT gives its response and ideally is smart
+    id = formable_event.15
+    title = formable_event.15.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = MIT_pulled_a_french
+            }
+        }
+        text = formable_event.15.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = MIT_pulled_a_french }
+            }
+        }
+        text = formable_event.15.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.15"}
+
+    is_triggered_only = yes
+
+    option = { #Asterion was always a part of Marelandia
+        name = formable_event.15.a
+        if = {
+            limit = {
+                FROM = {
+                    has_country_flag = MIT_pulled_a_french
+                }
+            }
+            set_autonomy = {
+                target = FROM
+                autonomous_state = autonomy_puppet
+            }
+        }
+        else = {
+            create_wargoal = {
+                target = FROM
+                type = puppet_wargoal_focus
+            }
+        }
+    }
+}
+
+country_event = { #BRF asks [COUNTRY] to please join their most amazing league ever
+    id = formable_event.16
+    title = formable_event.16.t
+    desc = formable_event.16.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.16"}
+
+    is_triggered_only = yes
+
+    option = { #Sure, why not?
+        name = formable_event.16.a
+        ai_chance = {
+            factor = 3
+        }
+        set_country_flag = BRF_expand_faction
+    }
+
+    option = { #Nah, sounds cringe.
+        name = formable_event.16.b
+        ai_chance = {
+            factor = 1
+        }
+        set_country_flag = BRF_sad_faction_noises
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.17
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #BRF gets the response from the country they begged/requested
+    id = formable_event.17
+    title = formable_event.17.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = BRF_expand_faction
+            }
+        }
+        text = formable_event.17.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = BRF_sad_faction_noises
+            }
+            text = formable_event.17.d_b
+        }
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event."}
+
+    is_triggered_only = yes
+
+    option = { #We shall stand united!
+        name = formable_event.17.a
+        trigger = {
+            FROM = {
+                has_country_flag = BRF_expand_faction
+            }
+        }
+        add_to_faction = FROM
+    }
+
+    option = { #Welp.
+        name = formable_event.17.b
+        trigger = {
+            FROM = {
+                has_country_flag = BRF_sad_faction_noises
+            }
+        }
+    }
+}
+
+#Template
+#country_event = {
+#    id = formable_event.
+#    title = formable_event.
+#    desc = formable_event.
+#    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event."}
+#
+#    is_triggered_only = yes
+#
+#    option = {
+#        name = formable_event.
+#    }
+#}
