@@ -798,6 +798,341 @@ country_event = { #BRF gets the response from the country they begged/requested
     }
 }
 
+country_event = { #MCW goes on the warpath for land they never considered core territory before now; how colonialist
+    id = formable_event.18
+    title = formable_event.18.t
+    desc = formable_event.18.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.18"}
+
+    is_triggered_only = yes
+
+    option = { #They aren't that important.
+        name = formable_event.18.a
+        ai_chance = {
+            modifier = {
+                factor = 3
+                strength_ratio = {
+                    target = FROM
+                    ratio < 0.7
+                }
+            }
+        }
+        set_country_flag = MCW_agreed_to_transfer
+    }
+
+    option = { #They can take it from our cold, dead hooves/claws!
+        name = formable_event.18.b
+        ai_chance = {
+            modifier = {
+                factor = 0
+                FROM = {
+                    is_ai = yes
+                }
+            }
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.19
+                days = 1
+                random_days = 3
+            }
+        }
+    }
+}
+
+country_event = { #MCW gets the response back from any owners of their "true" core land
+    id = formable_event.19
+    title = formable_event.19.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = MCW_agreed_to_transfer
+            }
+            text = formable_event.19.d_a
+        }
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = MCW_agreed_to_transfer }
+            }
+            text = formable_event.19.d_b
+        }
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.19"}
+
+    is_triggered_only = yes
+
+    option = { #Stonks!
+        name = formable_event.19.a
+        trigger = {
+            FROM = {
+                has_country_flag = MCW_agreed_to_transfer
+            }
+        }
+        every_state = {
+            limit = {
+                OR = {
+                    state = 1168
+                    state = 1169
+                    state = 1176
+                    state = 1185
+                    state = 1163
+                    state = 1181
+                    state = 1097
+                }
+                is_owned_and_controlled_by = FROM
+            }
+            transfer_state_to = ROOT
+        }
+    }
+
+    option = { #Negative aura, man.
+        name = formable_event.19.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = MCW_agreed_to_transfer }
+            }
+        }
+        create_wargoal = {
+            target = FROM
+            goal = take_core_state
+        }
+    }
+}
+
+country_event = { #ZAR politely asks the nation to integrate with them, promising BAT to come in after them if they don't.
+    id = formable_event.20
+    title = formable_event.20.t
+    desc = formable_event.20.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.20"}
+
+    is_triggered_only = yes
+
+    option = { #We don't have much choice, do we?
+        name = formable_event.20
+        ai_chance = {
+            factor = 3
+        }
+        set_country_flag = ZAR_accepted_integration
+    }
+
+    option = { #Let the desert swallow them!
+        name = formable_event.20
+        ai_chance = {
+            modifier = {
+                factor = 2
+                strength_ratio = {
+                    target = FROM
+                    ratio > 0.5
+                }
+            }
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.21
+                days = 1
+                random_days = 2
+            }
+        }
+    }
+}
+
+country_event = { #ZAR gets the response from the two AZI nations for integration, and will war if denied
+    id = formable_event.21
+    title = formable_event.21.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = ZAR_accepted_integration
+            }
+        }
+        text = formable_event.21.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ZAR_accepted_integration }
+            }
+        }
+        text = formable_event.21.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.21"}
+
+    is_triggered_only = yes
+
+    option = { #Not like they stood a chance.
+        name = formable_event.21.a
+        trigger = {
+            FROM = {
+                has_country_flag = ZAR_accepted_integration
+            }
+        }
+        annex_country = {
+            target = FROM
+            transfer_troops = yes
+        }
+    }
+
+    option = { #Did they catch sun stroke?!
+        name = formable_event.21.b
+        trigger = {
+            FROM = { NOT = { has_country_flag = ZAR_accepted_integration } }
+        }
+        declare_war_on = {
+            target = FROM
+            type = annex_everything
+        }
+    }
+
+    after = {
+        every_state = {
+            limit = {
+                is_core_of = FROM
+            }
+            add_core_of = ROOT
+        }
+    }
+}
+
+country_event = { #BAT offers to LMB to be their new overlord and fight against CTL if LMB wants their land back at all
+    id = formable_event.22
+    title = formable_event.22.t
+    desc = formable_event.22.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.22"}
+
+    is_triggered_only = yes
+
+    option = { #It's a tempting offer we can't refuse.
+        name = formable_event.22.a
+        ai_chance = {
+            modifier = {
+                factor = 4
+                CTL = {
+                    strength_ratio = {
+                        target = FROM
+                        ratio < 0.75
+                    }
+                }
+            }
+        }
+        set_country_flag = BAT_backstabbing
+        effect_tooltip = {
+            leave_faction = yes
+            FROM = {
+                set_autonomy = {
+                    target = ROOT
+                    autonomous_state = autonomy_satellite
+                }
+            }
+            every_state = {
+                limit = {
+                    is_core_of = ROOT
+                    OWNER = {
+                        OR = {
+                            tag = FROM
+                            is_in_faction_with = FROM
+                        }
+                    }
+                }
+                transfer_state_to = ROOT
+            }
+        }
+    }
+
+    option = { #It's a tempting offer that we can refuse.
+        name = formable_event.22.b
+        ai_chance = {
+            modifier = {
+                factor = 3
+                CTL = {
+                    strength_ratio = {
+                        target = FOM
+                        ratio > 0.75
+                    }
+                }
+            }
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = formable_event.23
+        }
+    }
+}
+
+country_event = { #BAT receives the response from LMB regarding their offer of fealty for cores
+    id = formable_event.23
+    title = formable_event.23.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = BAT_backstabbing
+            }
+        }
+        text = formable_event.23.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = BAT_backstabbing}
+            }
+        }
+        text = formable_event.23.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.23"}
+
+    is_triggered_only = yes
+
+    option = { #The veil expands...
+        name = formable_event.23.a
+        trigger = {
+            FROM = {
+                has_country_flag = BAT_backstabbing
+            }
+        }
+        FROM = {
+            leave_faction = yes
+        }
+        set_autonomy = {
+            target = FROM
+            autonomous_state = autonomy_satellite
+        }
+        every_state = {
+            limit = {
+                is_core_of = FROM
+                OWNER = {
+                    OR = {
+                        tag = ROOT
+                        is_in_faction_with = ROOT
+                    }
+                }
+            }
+            transfer_state_to = FROM
+        }
+        declare_war_on = {
+            target = CTL
+            type = annex_everything
+        }
+    }
+
+    option = { #The veil will smother them in time...
+        name = formable_event.23.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = BAT_backstabbing }
+            }
+        }
+    }
+}
+
 #Template
 #country_event = {
 #    id = formable_event.

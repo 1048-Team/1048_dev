@@ -3415,7 +3415,218 @@ BRF_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRF_southern_restoration"
 			#Splinter nations, assign cosmetic tags
-			set_global_flag = BRF_splintered_EQC
+			if = {
+				limit = {
+					WNG = {
+						is_in_faction_with = ROOT
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = EQC
+						is_claimed_by = WNG
+						NOT = {
+							state = 535
+							state = 395
+							state = 394
+						}
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_in_faction_with = ROOT
+							}
+						}
+					}
+					transfer_state_to = WNG
+					add_core_of = WNG
+				}
+			}
+			else = {
+				hidden_effect = {
+					every_state = {
+						limit = {
+							is_in_array = { EQC.original_cores = THIS }
+							is_claimed_by = WNG
+							NOT = {
+								state = 535
+								state = 395
+								state = 394
+							}
+							OWNER = {
+								OR = {
+									tag = ROOT
+									is_in_faction_with = ROOT
+								}
+							}
+						}
+					}
+					transfer_state_to = EQC
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = BOI
+						AND = {
+							is_core_of = BRF
+							is_core_of = MIT
+						}
+					}
+				}
+				transfer_state_to = BRF
+				add_core_of = BRF
+			}
+			if = {
+				limit = {
+					514 = {
+						NOT = { is_owned_and_controlled_by = GRU }
+					}
+					GRU = {
+						exists = yes
+						is_in_faction_with = ROOT
+					}
+				}
+				514 = { transfer_state_to = GRU }
+			}
+			effect_tooltip = {
+				release_autonomy = {
+					target = CYA
+					autonomous_state = autonomy_puppet
+				}
+				release_autonomy = {
+					target = MIT
+					autonomous_state = autonomy_puppet
+				}
+				release_autonomy = {
+					target = EQC
+					autonomous_state = autonomy_puppet
+				}
+				release_autonomy = {
+					target = JER
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = CYA
+					reserve_dynamic_country = yes
+					every_state = {
+						limit = {
+							OR = {
+								is_in_array = { SIC.original_cores = THIS }
+								state = 511
+								state = 535
+								state = 395
+								state = 394
+							}
+						}
+						transfer_state_to = PREV
+						add_core_of = PREV
+					}
+					ROOT = {
+						set_autonomy = {
+							target = PREV
+							autonomous_state = autonomy_puppet
+						}
+						PREV = {
+							transfer_technology = yes
+							transfer_society_ideas = yes
+							transfer_science_ideas = yes
+							transfer_poverty_ideas = yes
+							transfer_illiteracy_ideas = yes
+						}
+					}
+					add_ideas = griffon_race
+					set_cosmetic_tag = CYA
+					set_capital = { state = 671 }
+				}
+				every_state = {
+					limit = {
+						is_in_array = { MIT.original_cores = THIS }
+						NOT = {
+							OR = {
+								is_core_of = GRU
+								is_core_of = BRF
+								state = 511
+							}
+						}
+					}
+					transfer_state_to = MIT
+				}
+				set_autonomy = {
+					target = MIT
+					autonomous_state = autonomy_puppet
+				}
+				MIT = { drop_cosmetic_tag = yes }
+				if = {
+					limit = {
+						NOT = { country_exists = MCW }
+					}
+					718 = {
+						transfer_state_to = MIT
+					}
+					717 = {
+						transfer_state_to = MIT
+					}
+					720 = {
+						transfer_state_to = MIT
+					}
+					806 = {
+						transfer_state_to = MIT
+					}
+				}
+				every_state = {
+					limit = {
+						is_in_array = { global.original_EQC_states = THIS }
+					}
+					transfer_state_to = EQC
+				}
+				set_autonomy = {
+					target = EQC
+					autonomous_state = autonomy_puppet
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = JER
+							state = 501
+							state = 672
+							state = 442
+							state = 500
+							state = 401
+							state = 470
+							state = 673
+						}
+					}
+					transfer_state_to = JER
+					add_core_of = JER
+				}
+				set_autonomy = {
+					target = JER
+					autonomous_state = autonomy_puppet
+				}
+				JER = {
+					load_focus_tree = generic_griffon_focus
+				}
+			}
+			if = {
+				limit = {
+					country_exists = MCW
+				}
+				every_state = {
+					limit = {
+						is_core_of = MCW
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_in_faction_with = ROOT
+							}
+						}
+					}
+					transfer_state_to = MCW
+				}
+			}
+			EQC = { set_cosmetic_tag = EQC_BRF }
 			hidden_effect = {
 				news_event = {
 					id = formable_news.15
@@ -3846,7 +4057,24 @@ MCW_formables_category = {
 			1163 = { add_core_of = ROOT }
 			1181 = { add_core_of = ROOT }
 			1097 = { add_core_of = ROOT }
-			#Event for any holders of core territory not owned by MCW to hand it over or war
+			every_other_country = {
+				limit = {
+					OR = {
+						owns_state = 1168
+						owns_state = 1169
+						owns_state = 1176
+						owns_state = 1185
+						owns_state = 1163
+						owns_state = 1181
+						owns_state = 1097
+					}
+					NOT = {
+						tag = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				country_event = formable_event.18
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -3879,7 +4107,7 @@ CTH_formables_category = {
 	}
 	CTH_hindian_call_centers = {
 		available = {
-			CTL = { all_original_cores_owned_by_ROOT = yes }
+			CTL = { all_original_cores_owned_by_ROOT_or_ally = yes }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -3889,7 +4117,6 @@ CTH_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision CTH_hindian_call_centers"
-			#Release specified nations
 			effect_tooltip = {
 				release_autonomy = {
 					target = CTL
@@ -3901,6 +4128,67 @@ CTH_formables_category = {
 				}
 				release_autonomy = {
 					target = SPL
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 1103
+							state = 1166
+							state = 1167
+							state = 1186
+							state = 1187
+							state = 1171
+							state = 1161
+							state = 1105
+							state = 1162
+							state = 1168
+						}
+					}
+					transfer_state_to = HIN
+					add_core_of = HIN
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 1096
+							state = 1098
+							state = 1179
+							state = 1180
+							state = 1181
+							state = 1178
+							state = 1173
+							state = 1183
+							state = 1177
+							state = 1182
+							state = 1163
+						}
+					}
+					transfer_state_to = SPL
+					add_core_of = SPL
+				}
+				every_state = {
+					limit = {
+						is_in_array = { CTL.original_cores = THIS }
+						NOT = {
+							is_core_of = SPL
+							is_core_of = HIN
+						}
+					}
+					transfer_state_to = CTL
+				}
+				set_autonomy = {
+					target = CTL
+					autonomous_state = autonomy_puppet
+				}
+				set_autonomy = {
+					target = SPL
+					autonomous_state = autonomy_puppet
+				}
+				set_autonomy = {
+					target = HIN
 					autonomous_state = autonomy_puppet
 				}
 			}
@@ -3961,7 +4249,12 @@ CTL_formables_category = {
 			every_state = {
 				limit = {
 					OR = {
-						#State IDs for eastern island
+						state = 722
+						state = 820
+						state = 831
+						state = 725
+						state = 721
+						state = 723
 					}
 				}
 			}
@@ -4003,7 +4296,48 @@ CTL_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision CTL_nom_llam"
-			#Event demanding integration; denial is war goal
+			if = {
+				limit = {
+					LMB = {
+						is_ai = yes
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = LMB
+					transfer_troops = yes
+				}
+				every_state = {
+					limit = {
+						is_in_array = { LMB.original_cores = THIS }
+					}
+					add_core_of = ROOT
+				}
+			}
+			else_if = {
+				limit = {
+					LMB = {
+						is_ai = no
+						is_subject_of = ROOT
+					}
+				}
+				every_state = {
+					limit = {
+						is_in_array = { LMB.original_cores = THIS }
+						is_owned_and_controlled_by = ROOT
+					}
+					transfer_state_to = LMB
+				}
+			}
+			else = {
+				every_state = {
+					limit = {
+						is_in_array = { LMB.original_cores = THIS }
+						is_owned_and_controlled_by = ROOT
+					}
+					add_core_of = ROOT
+				}
+			}
 			add_to_variable = { CTL_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
@@ -4067,7 +4401,105 @@ CTL_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision CTL_boop_kirins"
-			#Coring fun and releasing fun
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = BRS
+						state = 1088
+						state = 1087
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					GAZ = { all_original_cores_owned_by_ROOT_or_subject = yes }
+				}
+				release_autonomy = {
+					target = GAZ
+					autonomous_state = autonomy_puppet
+				}
+			}
+			if = {
+				limit = {
+					ZLU = { all_original_cores_owned_by_ROOT_or_subject = yes }
+				}
+				release_autonomy = {
+					target = ZLU
+					autonomous_state = autonomy_puppet
+				}
+			}
+			if = {
+				limit = {
+					NVA = { all_original_cores_owned_by_ROOT_or_subject = yes }
+				}
+				release_autonomy = {
+					target = NVA
+					autonomous_state = autonomy_puppet
+				}
+			}
+			effect_tooltip = {
+				release_autonomy = {
+					target = KIR
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_in_array = { KIR.original_cores = THIS }
+						NOT = {
+							state = 1087
+							state = 1088
+						}
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+								is_in_faction_with = ROOT
+							}
+						}
+					}
+					transfer_state_to = KIR
+				}
+				set_autonomy = {
+					target = KIR
+					autonomous_state = autonomy_puppet
+				}
+				if = {
+					limit = {
+						NVA = { is_subject_of = ROOT }
+					}
+					if = {
+						limit = {
+							1086 = { is_owned_and_controlled_by = KIR }
+						}
+						1086 = {
+							transfer_state_to = NVA
+							add_core_of = NVA
+						}
+					}
+					if = {
+						limit = {
+							1057 = { is_owned_and_controlled_by = KIR }
+						}
+						1057 = {
+							transfer_state_to = NVA
+							add_core_of = NVA
+						}
+					}
+					if = {
+						limit = {
+							1058 = { is_owned_and_controlled_by = KIR }
+						}
+						1058 = {
+							transfer_state_to = NVA
+							add_core_of = NVA
+						}
+					}
+				}
+			}
 			add_to_variable = { CTL_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
@@ -4249,7 +4681,12 @@ ZAR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZAR_sand_love_letters"
-			#Event for both countries
+			ZAJ = {
+				country_event = formable_event.20
+			}
+			AZI = {
+				country_event = formable_event.20
+			}
 		}
 	}
 	ZAR_camel_cams = {
@@ -4269,7 +4706,9 @@ ZAR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZAR_camel_cams"
-			#Event for CAM
+			CAM = {
+				country_event = formable_event.20
+			}
 		}
 	}
 	ZAR_riverlands_mk_2 = {
@@ -4286,7 +4725,9 @@ ZAR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZAR_riverlands_mk_2"
-			#Event here
+			REM = {
+				country_event = formable_event.20
+			}
 		}
 	}
 	ZAR_yankee_go_home = {
@@ -4313,7 +4754,15 @@ ZAR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZAR_yankee_go_home"
-			#Event here
+			NDR = {
+				country_event = formable_event.20
+			}
+			ILU = {
+				country_event = formable_event.20
+			}
+			ZIT = {
+				country_event = formable_event.20
+			}
 			set_cosmetic_tag = ZAR_CON
 		}
 	}
@@ -4372,7 +4821,7 @@ BAT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision BAT_baaaaaaaaaat"
 			release_autonomy = {
 				target = CGI
-				autonomous_state = autonomy_puppet
+				autonomous_state = autonomy_satellite
 			}
 			CGI = { set_cosmetic_tag = CGI_BAT }
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
@@ -4408,7 +4857,14 @@ BAT_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BAT_secret_fealty"
-			#Event for offer
+			custom_effect_tooltip = BAT_eeeeeeeeeee_tt #Warning that if LMB accepts that BAT will instantly go to war with CTL as part of their obligation
+			LMB = {
+				country_event = {
+					id = formable_event.22
+					days = 1
+					random_days = 3
+				}
+			}
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
@@ -4438,7 +4894,7 @@ BAT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision BAT_freecawia"
 			release_autonomy = {
 				target = MCW
-				autonomous_state = autonomy_puppet
+				autonomous_state = autonomy_satellite
 			}
 			MCW = { set_cosmetic_tag = MCW_BAT }
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
@@ -4502,7 +4958,7 @@ BRS_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRS_hindian_support_center"
-			set_cosmetic_tag = HIN_UNI
+			set_cosmetic_tag = BRS_HIN
 			every_state = {
 				limit = {
 					is_in_array = { CTL.original_cores = THIS }
@@ -4588,6 +5044,17 @@ BRS_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BRS_kiria_now_best_friend"
 			#Country event to Kiria; war otherwise
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = no
+			}
+			OVERLORD = {
+				set_autonomy = {
+					target = ROOT
+					autonomous_state = autonomy_free
+				}
+			}
+			set_cosmetic_tag = BRS_BUD
 		}
 		ai_will_do = {
 			factor = 100
