@@ -5111,8 +5111,16 @@ KIR_formables_category = {
 			DEL = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			IDO = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			YAN = {
-				exists = yes
-				is_subject = no
+				OR = {
+					AND = {
+						exists = yes
+						is_subject = no
+					}
+					AND = {
+						exists = no
+						all_original_cores_owned_by_ROOT_or_subject = yes
+					}
+				}
 			}
 		}
 		highlight_states = {
@@ -5128,8 +5136,39 @@ KIR_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision KIR_griffon_tribute"
 			add_to_variable = { KIR_decision_counter = 1 }
-			#Event here
-			#Set cosmetic tag in it, too
+			if = {
+				limit = {
+					YAN = {
+						exists = yes
+						is_subject = no
+					}
+				}
+				YAN = {
+					country_event = formable_event.24
+				}
+			}
+			else = {
+				release_autonomy = {
+					target = YAN
+					autonomous_state = autonomy_puppet
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_in_array = { IDO.original_cores = THIS }
+							is_in_array = { DEL.original_cores = THIS }
+						}
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
+						}
+					}
+					transfer_state_to = YAN
+					add_core_of = YAN
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -5187,7 +5226,9 @@ KIR_formables_category = {
 						is_subject = no
 					}
 				}
-				#Event here
+				CNT = {
+					country_event = formable_event.26
+				}
 			}
 			else_if = {
 				limit = {
@@ -5202,7 +5243,7 @@ KIR_formables_category = {
 						autonomous_state = autonomy_puppet
 					}
 				}
-				CNT = { set_cosmetic_tag = CNT_KIR }
+				CNT = { set_cosmetic_tag = KIR_puppet }
 				hidden_effect = {
 					every_state = {
 						limit = {
@@ -5459,6 +5500,7 @@ NVA_formables_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision remove NVA_channel_flame"
+			set_cosmetic_tag = NVA_NIR
 			declare_war_on = {
 				target = KIR
 				type = annex_everything
@@ -5624,7 +5666,12 @@ ZLU_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZLU_petition_senpai"
-			#Event for NVA control from KIR
+			KIR = {
+				country_event = formable_event.28
+			}
+			NVA = {
+				country_event = formable_event.28
+			}
 			#Must be approved by NVA, too; if refused, lose puppet on them, allow ZLU to invade
 			#If approved, cosmetic tag of Zebride Protectorate
 			every_state = {
@@ -5867,6 +5914,7 @@ MEL_formables_category = {
 					}
 				}
 			}
+			set_cosmetic_tag = MEL_VER
 		}
 		ai_will_do = {
 			factor = 100
@@ -6086,7 +6134,9 @@ IDO_formables_category = {
 						is_subject = no
 					}
 				}
-				#Event to ask to join federation
+				CNT = {
+					country_event = formable_event.31
+				}
 			}
 			set_cosmetic_tag = IDO_FED
 		}
@@ -6190,7 +6240,17 @@ DEL_formables_category = {
 				OR = {
 					is_in_array = { NVA.original_cores = THIS }
 					is_in_array = { ZLU.original_cores = THIS }
-					#Bunch of state IDs
+					state = 1086
+					state = 1057
+					state = 1058
+					state = 1082
+					state = 1080
+					state = 1081
+					state = 926
+					state = 1077
+					state = 1073
+					state = 1076
+					state = 1074
 				}
 			}
 		}
@@ -6202,13 +6262,32 @@ DEL_formables_category = {
 					OR = {
 						is_in_array = { NVA.original_cores = THIS }
 						is_in_array = { ZLU.original_cores = THIS }
-						#State IDs
+						state = 1086
+						state = 1057
+						state = 1058
+						state = 1082
+						state = 1080
+						state = 1081
+						state = 926
+						state = 1077
+						state = 1073
+						state = 1076
+						state = 1074
 					}
 				}
 				add_core_of = ROOT
 			}
 			set_cosmetic_tag = DEL_COM
-			#Change leader subideology, or use Rising Sun
+			every_possible_country = {
+				limit = {
+					has_character = KIR_rising_sun
+				}
+				KIR_rising_sun = {
+					set_nationality = ROOT
+					set_country_leader_ideology = democratic_socialism
+					promote_character = yes
+				}
+			}
 			hidden_effect = {
 				news_event = {
 					id = formable_news.30
@@ -6414,7 +6493,7 @@ YAN_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision YAN_flap_home"
-			#Event will ask who to send request to join to; response varies based on current government's ideology and if that faction exists
+			country_event = formable_event.33
 			if = {
 				limit = {
 					country_exists = WNG
@@ -6441,7 +6520,24 @@ YAN_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision YAN_winge_for_haukland"
-			#Event demanding Haukland from FAT (most likely)
+			custom_effect_tooltip = YAN_yoink_hawks_tt
+			hidden_effect = {
+				658 = {
+					OWNER = {
+						country_event = formable_event.36
+					}
+				}
+				659 = {
+					OWNER = {
+						country_event = formable_event.36
+					}
+				}
+				660 = {
+					OWNER = {
+						country_event = formable_event.36
+					}
+				}
+			}
 			every_state = {
 				limit = {
 					is_in_array = { WNG.original_cores = THIS }
@@ -6455,11 +6551,17 @@ YAN_formables_category = {
 	}
 	YAN_lock_in = {
 		available = {
-			#Owns Haukland states
+			owns_state = 658
+			owns_state = 659
+			owns_state = 660
 		}
 		highlight_states = {
 			highlight_state_targets = {
-				#Haukland states
+				OR = {
+					state = 658
+					state = 659
+					state = 660
+				}
 			}
 		}
 		fire_only_once = yes
@@ -6467,11 +6569,34 @@ YAN_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision YAN_lock_in"
 			every_state = {
 				limit = {
-					#Haukland states
+					OR = {
+						state = 658
+						state = 659
+						state = 660
+					}
 				}
-				#add_core_of = ROOT
+				add_core_of = ROOT
 			}
-			#Create wargoals on who ever owns Sunset and Neu-Griffenheim
+			356 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+			674 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -6483,8 +6608,17 @@ YAN_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				is_in_array = { WNG.original_cores = yes }
-				#Bunch of FEA state IDs
+				OR = {
+					state = 433
+					state = 497
+					state = 498
+					state = 434
+					state = 538
+					state = 520
+					state = 441
+					state = 440
+					state = 666
+				}
 			}
 		}
 		fire_only_once = yes
@@ -6492,11 +6626,21 @@ YAN_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision YAN_WW2_reference"
 			every_state = {
 				limit = {
-					is_in_array = { GRI.original_cores = THIS }
+					OR = {
+						state = 433
+						state = 497
+						state = 498
+						state = 434
+						state = 538
+						state = 520
+						state = 441
+						state = 440
+						state = 666
+					}
 				}
 				add_core_of = ROOT
 			}
-			set_cosmetic_tag = YAN_FEA
+			set_cosmetic_tag = FEA
 			hidden_effect = {
 				news_event = {
 					id = formable_news.32
@@ -6779,7 +6923,9 @@ ROA_formables_category = {
 						is_subject_of = KIR
 					}
 				}
-				#Event demanding ZLU
+				KIR = {
+					country_event = formable_event.38
+				}
 			}
 			else_if = {
 				limit = {
@@ -6788,7 +6934,7 @@ ROA_formables_category = {
 						is_subject = no
 					}
 				}
-				#event demanding ZLU, but directly. Can be same event as KIR event, just with dynamic loc
+				country_event = formable_event.38
 			}
 		}
 		ai_will_do = {
@@ -7153,7 +7299,32 @@ MGY_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision MGY_catnip_intervention"
-			#Offer alliance to ZWA and MTA
+			if = {
+				limit = {
+					948 = {
+						OWNER = {
+							OR = {
+								tag = ZWA
+								tag = TIM
+							}
+						}
+					}
+				}
+				948 = {
+					OWNER = {
+						country_event = formable_event.44
+					}
+				}
+			}
+			if = {
+				limit = {
+					MTA = {
+						exists = yes
+						is_subject = no
+					}
+				}
+				country_event = formable_event.44
+			}
 			775 = {
 				OWNER = {
 					ROOT = {
@@ -7195,9 +7366,37 @@ MGY_formables_category = {
 					autonomous_state = autonomy_puppet
 				}
 			}
-			custom_effect_tooltip = MGY_super_gamer_hours_tt
+			custom_effect_tooltip = MGY_super_gamer_hours_tt #Destroy lots of land, basically
 			hidden_effect = {
-				#Set up array with ASS and ANS states to transfer to ANS
+				create_dynamic_country = {
+					reserve_dynamic_country = yes
+					original_tag = ANS
+					every_state = {
+						limit = {
+							OR = {
+								state = 801
+								state = 807
+								state = 808
+								state = 790
+								state = 792
+								state = 810
+								state = 795
+								state = 827
+								state = 828
+								state = 812
+								state = 799
+							}
+						}
+						transfer_state_to = PREV
+						add_core_of = PREV
+					}
+					ROOT = {
+						set_autonomy = {
+							target = PREV
+							autonomous_state = autonomy_puppet
+						}
+					}
+				}
 				775 = {
 					remove_building = {
 						type = arms_factory
@@ -7208,9 +7407,13 @@ MGY_formables_category = {
 						level = 25
 					}
 					set_state_category = wasteland
+					add_victory_points = {
+						province = 15710
+						value = -19
+					}
 					set_province_name = {
 						id = 15710
-						name = "Panthera Ruins" #Change to loc key
+						name = MGY_panthera_ruins #Change to loc key
 					}
 				}
 			}
@@ -7308,7 +7511,7 @@ NDR_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			set_cosmetic_tag = REM_RIV
+			set_cosmetic_tag = NDR_RIV
 			if = {
 				limit = {
 					country_exists = ILU
@@ -7407,6 +7610,7 @@ ILU_formables_category = {
 				}
 				add_core_of = ROOT
 			}
+			set_cosmetic_tag = ILU_BIG
 			every_possible_country = {
 				limit = {
 					exists = yes
@@ -7417,6 +7621,12 @@ ILU_formables_category = {
 						target = PREV
 						type = annex_everything
 					}
+				}
+			}
+			hidden_effect = {
+				news_event = {
+					id = formable_news.38
+					hours = 6
 				}
 			}
 		}
@@ -7493,12 +7703,6 @@ ILU_formables_category = {
 					NOT = { is_core_of = ROOT }
 				}
 				add_core_of = ROOT
-			}
-			hidden_effect = {
-				news_event = {
-					id = formable_news.38
-					hours = 6
-				}
 			}
 		}
 	}
@@ -7828,15 +8032,35 @@ ZWA_TIM_formables_category = {
 				limit = {
 					tag = ZWA
 					is_in_faction_with = TIM
+					TIM = { is_ai = yes }
 				}
-				#Event to TIM to be annexed; refusal means war
+				annex_country = {
+					target = TIM
+					transfer_troops = yes
+				}
+				every_state = {
+					limit = {
+						is_in_array = { TIM.original_cores = THIS }
+					}
+					add_core_of = ROOT
+				}
 			}
 			else_if = {
 				limit = {
 					tag = TIM
 					is_in_faction_with = ZWA
+					ZWA = { is_ai = yes }
 				}
-				#Event to ZWA to be annexed; refusal means war
+				annex_country = {
+					target = ZWA
+					transfer_troops = yes
+				}
+				every_state = {
+					limit = {
+						is_in_array = { ZWA.original_cores = THIS }
+					}
+					add_core_of = ROOT
+				}
 			}
 			else = {
 				if = {
@@ -7877,14 +8101,32 @@ ZWA_TIM_formables_category = {
 	}
 	ZWA_TIM_expand_west = {
 		available = {
-			TIM = { all_original_cores_owned_by_ROOT = yes }
+			if = {
+				limit = {
+					TIM = { is_ai = no }
+				}
+				TIM = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			}
+			else = {
+				TIM = { all_original_cores_owned_by_ROOT = yes }
+			}
 			NDR = { all_original_cores_owned_by_ROOT = yes }
-			ZWA = { all_original_cores_owned_by_ROOT = yes }
+			if = {
+				limit = {
+					ZWA = { is_ai = no }
+				}
+				ZWA = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			}
+			else = {
+				ZWA = { all_original_cores_owned_by_ROOT = yes }
+			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZWA_TIM_expand_east"
-			#Event for MTA
+			MTA = {
+				country_event = formable_event.40
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -7892,9 +8134,25 @@ ZWA_TIM_formables_category = {
 	}
 	ZWA_TIM_eastern_expedition = {
 		available = {
-			TIM = { all_original_cores_owned_by_ROOT = yes }
+			if = {
+				limit = {
+					TIM = { is_ai = no }
+				}
+				TIM = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			}
+			else = {
+				TIM = { all_original_cores_owned_by_ROOT = yes }
+			}
 			NDR = { all_original_cores_owned_by_ROOT = yes }
-			ZWA = { all_original_cores_owned_by_ROOT = yes }
+			if = {
+				limit = {
+					ZWA = { is_ai = no }
+				}
+				ZWA = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			}
+			else = {
+				ZWA = { all_original_cores_owned_by_ROOT = yes }
+			}
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -7909,7 +8167,9 @@ ZWA_TIM_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ZWA_TIM_eastern_expedition"
-			#Event for ROA
+			ROA = {
+				country_event = formable_event.40
+			}
 			if = {
 				limit = {
 					country_exists = HSO
@@ -7953,10 +8213,10 @@ ZWA_TIM_formables_category = {
 	}
 	ZWA_TIM_evaporate_STM = {
 		available = {
-			TNT = { all_original_cores_owned_by_ROOT = yes }
-			ZIT = { all_original_cores_owned_by_ROOT = yes }
-			HSO = { all_original_cores_owned_by_ROOT = yes }
-			ILU = { all_original_cores_owned_by_ROOT = yes }
+			TNT = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			ZIT = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			HSO = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			ILU = { all_original_cores_owned_by_ROOT_or_ally = yes }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -8032,7 +8292,18 @@ ZWA_TIM_formables_category = {
 					type = annex_everything
 				}
 			}
-			#Event to demand integration with ROA and MTA
+			if = {
+				limit = {
+					country_exists = ROA
+				}
+				ROA = { country_event = formable_event.42 }
+			}
+			if = {
+				limit = {
+					country_exists = MTA
+				}
+				MTA = { country_event = formable_event.42 }
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -8138,9 +8409,40 @@ MTA_formables_category = {
 					autonomous_state = autonomy_puppet
 				}
 			}
+			hidden_effect = {
+				create_dynamic_country = {
+					reserve_dynamic_country = yes
+					original_tag = ANS
+					every_state = {
+						limit = {
+							OR = {
+								state = 801
+								state = 807
+								state = 808
+								state = 790
+								state = 792
+								state = 810
+								state = 795
+								state = 827
+								state = 828
+								state = 812
+								state = 799
+							}
+						}
+						transfer_state_to = PREV
+						add_core_of = PREV
+					}
+					ROOT = {
+						set_autonomy = {
+							target = PREV
+							autonomous_state = autonomy_puppet
+						}
+					}
+				}
 			if = {
 				limit = {
 					country_exists = MGY
+					is_subject = no
 				}
 				every_state = {
 					limit = {
@@ -8149,7 +8451,9 @@ MTA_formables_category = {
 					}
 					transfer_state_to = MGY
 				}
-				#Event for inviting MGY to faction
+				MGY = {
+					country_event = formable_event.46
+				}
 			}
 			every_state = {
 				limit = {
@@ -8183,18 +8487,25 @@ MTA_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision MTA_horsey_peace"
-			effect_tooltip = {
-				release_autonomy = {
-					target = EMR
-					autonomous_state = autonomy_puppet
-				}
-				release_autonomy = {
-					target = SDL
-					autonomous_state = autonomy_puppet
-				}
+			release_autonomy = {
+				target = EMR
+				autonomous_state = autonomy_puppet
 			}
-			EMR = { drop_cosmetic_tag = yes }
-			#Will have to create array of vanilla EMR states for the two transfers of states
+			EMR = {
+				set_cosmetic_tag = MTA_EMR_republic
+			}
+			#effect_tooltip = {
+			#	release_autonomy = {
+			#		target = EMR
+			#		autonomous_state = autonomy_puppet
+			#	}
+			#	release_autonomy = {
+			#		target = SDL
+			#		autonomous_state = autonomy_puppet
+			#	}
+			#}
+			#EMR = { drop_cosmetic_tag = yes }
+			##Will have to create array of vanilla EMR states for the two transfers of states
 		}
 		ai_will_do = {
 			factor = 100
@@ -8508,6 +8819,7 @@ EMR_formables_category = {
 				limit = {
 					is_zebrican_continent_country = yes
 					exists = yes
+					NOT = { is_subject_of = ROOT }
 				}
 				ROOT = {
 					create_wargoal = {
@@ -8517,7 +8829,12 @@ EMR_formables_category = {
 				}
 			}
 			set_cosmetic_tag = EMR_CAL
-			#News event for EMR being rather hungy
+			hidden_effect = {
+				news_event = {
+					id = formable_news.43
+					hours = 6
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -8586,12 +8903,6 @@ EMR_formables_category = {
 				add_core_of = ROOT
 			}
 			set_cosmetic_tag = EMR_ZEB
-			hidden_effect = {
-				news_event = {
-					id = formable_news.43
-					hours = 6
-				}
-			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -8607,7 +8918,14 @@ WNG_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision WNG_gilippo_submission"
-			#Event to WIN
+			if = {
+				limit = {
+					country_exists = WIN
+				}
+				WIN = {
+					country_event = formable_event.48
+				}
+			}
 			if = {
 				limit = {
 					country_exists = HPS
@@ -8688,16 +9006,31 @@ WNG_formables_category = {
 	WNG_rejoin_buddies = {
 		available = {
 			CTH = {
-				exists = yes
-				is_subject = no
-				is_faction_leader = yes
+				OR = {
+					AND = {
+						exists = yes
+						is_subject = no
+						is_in_faction = yes
+					}
+					exists = no
+					is_subject = yes
+				}
 			}
 		}
 		visible = { has_cosmetic_tag = WNG_HIP }
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision WNG_rejoin_buddies"
-			#Offer to rejoin CTH; can reject
+			if = {
+				limit = {
+					CTH = {
+						exists = yes
+						is_subject = no
+						is_in_faction = yes
+					}
+				}
+				country_event = formable_event.50
+			}
 			create_wargoal = {
 				target = EQC
 				type = annex_everything
@@ -9179,12 +9512,12 @@ STM_formables_category = {
 	}
 	STM_finalize_market_dominance = {
 		available = {
-			KIR = { all_original_cores_owned_by_ROOT = yes }
-			BAT = { all_original_cores_owned_by_ROOT = yes }
+			CTH = { all_original_cores_owned_by_ROOT = yes }
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision STM_finalize_market_dominance"
+			set_cosmetic_tag = STM_super_corpo
 			1176 = {
 				OWNER = {
 					ROOT = {
@@ -9521,7 +9854,22 @@ AWR_formables_category = {
 					is_in_array = { FAT.original_cores = THIS }
 					is_in_array = { NTR.original_cores = THIS }
 					is_in_array = { HLR.original_cores = THIS }
-					#State IDs
+					state = 432
+					state = 449
+					state = 450
+					state = 583
+					state = 485
+					state = 557
+					state = 556
+					state = 548
+					state = 480
+					state = 474
+					state = 581
+					state = 475
+					state = 1226
+					state = 477
+					state = 476
+					state = 459
 				}
 			}
 		}
@@ -9531,7 +9879,37 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_HLR_tt
 			hidden_effect = {
 				HLR = { set_cosmetic_tag = HLR_AWR }
-				#Transfer states and puppet
+				every_state = {
+					limit = {
+						OR = {
+							is_in_array = { FAT.original_cores = THIS }
+							is_in_array = { NTR.original_cores = THIS }
+							is_in_array = { HLR.original_cores = THIS }
+							state = 432
+							state = 449
+							state = 450
+							state = 583
+							state = 485
+							state = 557
+							state = 556
+							state = 548
+							state = 480
+							state = 474
+							state = 581
+							state = 475
+							state = 1226
+							state = 477
+							state = 476
+							state = 459
+						}
+					}
+					add_core_of = HLR
+					transfer_state_to = HLR
+				}
+				set_autonomy = {
+					target = HLR
+					autonomous_state = autonomy_puppet
+				}
 			}
 		}
 		ai_will_do = {
@@ -9551,21 +9929,68 @@ AWR_formables_category = {
 					is_in_array = { TRD.original_cores = THIS }
 				}
 				NOT = {
-					is_core_of = GRI
-					OWNER = {
-						is_subject_of = ROOT
-					}
+					state = 432
+					state = 449
+					state = 450
+					state = 583
+					state = 485
+					state = 557
+					state = 556
+					state = 548
+					state = 480
+					state = 474
+					state = 581
+					state = 475
+					state = 1226
+					state = 477
+					state = 476
+					state = 459
 				}
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_empire"
+			set_cosmetic_tag = AWR_free_griffonia
 			custom_effect_tooltip = AWR_release_GRI_tt
 			hidden_effect = {
 				GRI = { set_cosmetic_tag = GRI_AWR }
-				#Same as HLR
-				#If EQC is already puppeted, transfer BOI territory
+				every_state = {
+					limit = {
+						OR = {
+							is_in_array = { GRI.original_cores = THIS }
+							is_in_array = { TRD.original_cores = THIS }
+							AND = {
+								is_in_array = { BOI.original_cores = THIS }
+								is_owned_by = ROOT
+							}
+						}
+						NOT = {
+							state = 432
+							state = 449
+							state = 450
+							state = 583
+							state = 485
+							state = 557
+							state = 556
+							state = 548
+							state = 480
+							state = 474
+							state = 581
+							state = 475
+							state = 1226
+							state = 477
+							state = 476
+							state = 459
+						}
+					}
+					add_core_of = GRI
+					transfer_state_to = GRI
+				}
+				set_autonomy = {
+					target = GRI
+					autonomous_state = autonomy_puppet
+				}
 			}
 		}
 		ai_will_do = {
@@ -9645,6 +10070,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_evians"
+			set_cosmetic_tag = AWR_free_evi
 			custom_effect_tooltip = AWR_release_BRF_tt
 			hidden_effect = {
 				BRF = { set_cosmetic_tag = BRF_AWR }
@@ -9673,28 +10099,42 @@ AWR_formables_category = {
 	AWR_freest_frenchies = {
 		available = {
 			JER = { all_original_cores_owned_by_ROOT = yes }
-			#Tarrin states
+			487 = { is_owned_and_controlled_by = ROOT }
+			521 = { is_owned_and_controlled_by = ROOT }
+			652 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
 				OR = {
 					is_in_array = { JER.original_cores = THIS }
-					#Tarrin states
+					state = 487
+					state = 521
+					state = 652
 				}
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_frenchies"
+			set_cosmetic_tag = AWR_free_jerk
 			custom_effect_tooltip = AWR_release_JER_tt
 			hidden_effect = {
-				JER = { set_cosmetic_tag = JER_AWR }
+				JER = {
+					set_cosmetic_tag = JER_AWR
+					load_focus_tree = generic_griffon_focus
+					remove_ideas = {
+						JER_memories
+						JER_legacy_of_coltbert
+					}
+				}
 				every_state = {
 					limit = {
 						OR = {
 							is_in_array = { JER.original_cores = THIS }
-							#Tarrin states
+							state = 487
+							state = 521
+							state = 652
 						}
 					}
 					transfer_state_to = JER
@@ -9762,6 +10202,21 @@ AWR_formables_category = {
 					target = EQC
 					autonomous_state = autonomy_puppet
 				}
+				if = {
+					limit = {
+						GRI = {
+							is_subject_of = ROOT
+						}
+					}
+					every_state = {
+						limit = {
+							is_in_array = { BOI.original_cores = THIS }
+							is_owned_by = ROOT
+						}
+						add_core_of = GRI
+						transfer_state_to = GRI
+					}
+				}
 			}
 		}
 		ai_will_do = {
@@ -9803,6 +10258,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_north_zebricans"
+			set_cosmetic_tag = AWR_free_north_zeebs
 			custom_effect_tooltip = AWR_release_HIP_tt
 			hidden_effect = {
 				HIP = { set_cosmetic_tag = HIP_AWR }
@@ -9852,6 +10308,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_deets"
+			set_cosmetic_tag = AWR_free_floof
 			custom_effect_tooltip = AWR_release_CTL_tt
 			hidden_effect = {
 				CTL = { set_cosmetic_tag = CTL_AWR }
@@ -9963,6 +10420,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_larpers"
+			set_cosmetic_tag = AWR_free_romeaboos
 			custom_effect_tooltip = AWR_release_ROA_tt
 			hidden_effect = {
 				ROA = { set_cosmetic_tag = ROA_AWR }
@@ -10011,6 +10469,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_south_zeebs"
+			set_cosmetic_tag = AWR_free_corporations
 			custom_effect_tooltip = AWR_release_STM_tt
 			hidden_effect = {
 				STM = { set_cosmetic_tag = STM_AWR }
@@ -10066,6 +10525,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_sand_creatures"
+			set_cosmetic_tag = AWR_coarse_and_rough
 			custom_effect_tooltip = AWR_release_MGY_tt
 			hidden_effect = {
 				MGY = { set_cosmetic_tag = MGY_AWR }
@@ -10112,6 +10572,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_oil"
+			set_cosmetic_tag = AWR_free_horsies
 			custom_effect_tooltip = AWR_release_EMR_tt
 			hidden_effect = {
 				EMR = { set_cosmetic_tag = EMR_AWR }
@@ -10139,7 +10600,7 @@ AWR_formables_category = {
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = AWR_a_winner_is_you_tt
-				#Maybe always = yes
+				tag = AWR
 			}
 		}
 		visible = {

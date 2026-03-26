@@ -1133,6 +1133,1565 @@ country_event = { #BAT receives the response from LMB regarding their offer of f
     }
 }
 
+country_event = { #YAN receives a notice from KIR that if they submit they will gain all the land of IDO and DEL
+    id = formable_event.24
+    title = formable_event.24.t
+    desc = formable_event.24.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.24"}
+
+    is_triggered_only = yes
+
+    option = { #A generous offer! We accept.
+        name = formable_event.24.a
+        set_country_flag = KIR_YAN_accepted
+    }
+
+    option = { #We value our independence too much for free land.
+        name = formable_event.24.b
+        ai_chance = {
+            factor = 0.5
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.25
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #KIR receives the response from YAN
+    id = formable_event.25
+    title = formable_event.25.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = KIR_YAN_accepted
+            }
+        }
+        text = formable_event.25.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = KIR_YAN_accepted }
+            }
+        }
+        text = formable_event.25.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.25"}
+
+    is_triggered_only = yes
+
+    option = { #It's free real estate. For both of us!
+        name = formable_event.25.a
+        trigger = {
+            FROM = {
+                has_country_flag = KIR_YAN_accepted
+            }
+        }
+        set_autonomy = {
+            target = FROM
+            autonomous_state = autonomy_puppet
+        }
+        FROM = { set_cosmetic_tag = KIR_puppet }
+        every_state = {
+            limit = {
+                OR = {
+                    is_in_array = { IDO.original_cores = THIS }
+                    is_in_array = { DEL.original_cores = THIS }
+                }
+                OWNER = {
+                    OR = {
+                        tag = ROOT
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            transfer_state_to = FROM
+            add_core_of = FROM
+        }
+    }
+
+    option = { #Guess we can give it to somecreature else.
+        name = formable_event.25.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = KIR_YAN_accepted }
+            }
+        }
+        every_state = {
+            limit = {
+                OR = {
+                    is_in_array = { IDO.original_cores = THIS }
+                    is_in_array = { DEL.original_cores = THIS }
+                }
+                OWNER = {
+                    OR = {
+                        tag = ROOT
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            transfer_state_to = ZLU
+        }
+    }
+}
+
+country_event = { #CNT is offered the chance to become a puppet in exchange for security under KIR
+    id = formable_event.26
+    title = formable_event.26.t
+    desc = formable_event.26.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.26"}
+
+    is_triggered_only = yes
+
+    option = { #They are rather fuzzy and soft...
+        name = formable_event.26.a
+        ai_chance = {
+            modifier = {
+                factor = 3
+                strength_ratio = {
+                    target = FROM
+                    ratio < 0.7
+                }
+            }
+        }
+        set_country_flag = KIR_CNT_accepted
+    }
+
+    option = { #Their fuzziness and softness can't sway us!
+        name = formable_event.27.b
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.27
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #KIR receives the response from CNT
+    id = formable_event.27
+    title = formable_event.27.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = KIR_CNT_accepted
+            }
+        }
+        text = formable_event.27.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = KIR_CNT_accepted }
+            }
+        }
+        text = formable_event.27.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.27"}
+
+    is_triggered_only = yes
+
+    option = { #How wise
+        name = formable_event.27.a
+        trigger = {
+            FROM = {
+                has_country_flag = KIR_YAN_accepted
+            }
+        }
+        set_autonomy = {
+            target = FROM
+            autonomous_state = autonomy_puppet
+        }
+        FROM = { set_cosmetic_tag = KIR_puppet }
+    }
+
+    option = { #They didn't really have much of an option
+        name = formable_event.27.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = KIR_YAN_accepted }
+            }
+        }
+        create_wargoal = {
+            type = puppet_wargoal_focus
+            target = FROM
+        }
+    }
+}
+
+country_event = { #KIR and NVA both get a demand for NVA to integrate into ZLU; both must agree to have it taken into ZLU
+    id = formable_event.28
+    title = formable_event.28.t
+    desc = formable_event.28.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.28"}
+
+    is_triggered_only = yes
+
+    option = { #It is agreeable.
+        name = formable_event.28.a
+        trigger = {
+            tag = KIR
+        }
+        ai_chance = {
+            modifier = {
+                factor = 3
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.5
+                    }
+                }
+            }
+        }
+        set_country_flag = ZLU_KIR_agreed
+    }
+
+    option = { #So long as they respect us.
+        name = formable_event.28.b
+        trigger = {
+            tag = NVA
+        }
+        ai_chance = {
+            modifier = {
+                factor = 2
+                strength_ratio = {
+                    target = FROM
+                    ratio < 0.8
+                }
+            }
+            modifier = {
+                factor = 5
+                FROM = { is_ai = yes }
+            }
+        }
+        set_country_flag = ZLU_NVA_agreed
+    }
+
+    option = { #They ask too much.
+        name = formable_event.28.c
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.29
+                days = 1
+                random_days = 3
+            }
+        }
+    }
+}
+
+country_event = { #ZLU gets the response from NVA and KIR
+    id = formable_event.29
+    title = formable_event.29.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = ZLU_KIR_agreed
+            }
+        }
+        text = formable_event.29.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = ZLU_NVA_agreed
+            }
+        }
+        text = formable_event.29.d_b
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                tag = KIR
+                NOT = { has_country_flag = ZLU_KIR_agreed }
+            }
+        }
+        text = formable_event.29.d_c
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                tag = NVA
+                NOT = { has_country_flag = ZLU_NVA_agreed }
+            }
+        }
+        text = formable_event.29.d_d
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.29"}
+
+    is_triggered_only = yes
+
+    option = { #One down...
+        name = formable_event.29.a
+        trigger = {
+            FROM = {
+                OR = {
+                    has_country_flag = ZLU_NVA_agreed
+                    has_country_flag = ZLU_KIR_agreed
+                }
+            }
+        }
+        add_to_variable = { ZLU_event_tracker = 1 }
+    }
+
+    option = { #Well...
+        name = formable_event.29.b
+        trigger = {
+            FROM = {
+                OR = {
+                    AND = {
+                        tag = NVA
+                        NOT = { has_country_flag = ZLU_NVA_agreed }
+                    }
+                    AND = {
+                        tag = KIR
+                        NOT = { has_country_flag = ZLU_KIR_agreed }
+                    }
+                }
+            }
+        }
+    }
+
+    after = {
+        if = {
+            limit = {
+                check_variable = { ZLU_event_tracker = 2 }
+            }
+            country_event = {
+                id = formable_event.30
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #Final result of ZLU begging for NVA's territory
+    id = formable_event.30
+    title = formable_event.30.t
+    desc = {
+        trigger = {
+            KIR = { has_country_flag = ZLU_KIR_agreed }
+            NVA = { has_country_flag = ZLU_NVA_agreed }
+        }
+        text = formable_event.30.d_a
+    }
+    desc = {
+        trigger = {
+            OR = {
+                KIR = { NOT = { has_country_flag = ZLU_KIR_agreed } }
+                NVA = { NOT = { has_country_flag = ZLU_NVA_agreed } }
+            }
+        }
+        text = formable_event.30.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.30"}
+
+    is_triggered_only = yes
+
+    option = { #All according to plan...
+        name = formable_event.30.a
+        trigger = {
+            KIR = { has_country_flag = ZLU_KIR_agreed }
+            NVA = { has_country_flag = ZLU_NVA_agreed }
+        }
+        annex_country = {
+            target = NVA
+            transfer_troops = yes
+        }
+        every_state = {
+            limit = {
+                is_core_of = NVA
+            }
+            add_core_of = ROOT
+        }
+    }
+
+    option = { #Well darn...
+        name = formable_event.30.b
+        trigger = {
+            OR = {
+                KIR = { NOT = { has_country_flag = ZLU_KIR_agreed } }
+                NVA = { NOT = { has_country_flag = ZLU_NVA_agreed } }
+            }
+        }
+    }
+}
+
+country_event = { #IDO asks CNT if they wish to be best buds by joining a faction
+    id = formable_event.31
+    title = formable_event.31.t
+    desc = formable_event.31.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.32"}
+
+    is_triggered_only = yes
+
+    option = { #More friends is always good.
+        name = formable_event.32.a
+        ai_chance = {
+            modifier = {
+                factor = 2
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.75
+                    }
+                }
+            }
+        }
+        set_country_flag = IDO_CNT_agreed
+    }
+
+    option = { #Notaur is home. Please leave a message.
+        name = formable_event.32.b
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.32
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #IDO gets CNT's response regarding joining a faction
+    id = formable_event.32
+    title = formable_event.32.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = IDO_CNT_agreed
+            }
+        }
+        text = formable_event.32.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = IDO_CNT_agreed }
+            }
+        }
+        text = formable_event.32.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.32"}
+
+    is_triggered_only = yes
+
+    option = { #Centaurs are friends. Not enemies.
+        name = formable_event.32.a
+        trigger = {
+            FROM = {
+                has_country_flag = IDO_CNT_agreed
+            }
+        }
+        add_to_faction = FROM
+    }
+
+    option = { #Centaurs could be friends...
+        name = formable_event.32.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = IDO_CNT_agreed }
+            }
+        }
+    }
+}
+
+country_event = { #YAN debates which continental power to align with to eventually retake their homeland in FEA
+    id = formable_event.33
+    title = formable_event.33.t
+    desc = formable_event.33.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.33"}
+
+    is_triggered_only = yes
+
+    option = { #The Chiropterrans have maintained stability all these years. They could help.
+        name = formable_event.33.a
+        ai_chance = {
+            factor = 4
+        }
+        trgger = {
+            BAT = {
+                exists = yes
+                is_faction_leader = yes
+            }
+        }
+        BAT = {
+            country_event = {
+                id = formable_event.34
+                days = 3
+            }
+        }
+    }
+
+    option = { #The Colthaginians keep a sizeable military. They could fight the Empire with us.
+        name = formable_event.33.b
+        ai_chance = {
+            factor = 3
+            modifier = {
+                factor = 2
+                BAT = {
+                    OR = {
+                        exists = no
+                        is_subject_of = CTH
+                    }
+                }
+            }
+        }
+        trgger = {
+            CTH = {
+                exists = yes
+                is_faction_leader = yes
+            }
+        }
+        CTH = {
+            country_event = {
+                id = formable_event.34
+                days = 3
+            }
+        }
+    }
+
+    option = { #Hindia is a superpower. They can easily aid us.
+        name = formable_event.33.b
+        ai_chance = {
+            factor = 3
+        }
+        trgger = {
+            CTL = {
+                exists = yes
+                is_faction_leader = yes
+            }
+        }
+        CTL = {
+            country_event = {
+                id = formable_event.34
+                days = 3
+            }
+        }
+    }
+
+    option = { #The Abyssinians desire vengeance against the Wingbardians. They will help us.
+        name = formable_event.33.e
+        trgger = {
+            ABY = {
+                exists = yes
+                is_subject = no
+                is_in_faction = no
+            }
+        }
+        ABY = {
+            country_event = {
+                id = formable_event.34
+                days = 3
+            }
+        }
+    }
+}
+
+country_event = { #The chosen recipient of YAN's request gets an ask to let them join or form a faction
+    id = formable_event.34
+    title = formable_event.34.t
+    desc = {
+        trigger = {
+            NOT = {
+                tag = ABY
+            }
+        }
+        text = formable_event.34.d_a
+    }
+    desc = {
+        trigger = {
+            tag = ABY
+        }
+        text = formable_event.34.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.34"}
+
+    is_triggered_only = yes
+
+    option = { #Sure, they can join.
+        name = formable_event.34.a
+        ai_chance = {
+            factor = 2.5
+        }
+        trigger = {
+            NOT = {
+                tag = ABY
+            }
+        }
+        set_country_flag = YAN_new_buddies
+    }
+
+    option = { #We could use any friends we can get.
+        name = formable_event.34.b
+        ai_chance = {
+            factor = 4
+        }
+        trigger = {
+            tag = ABY
+        }
+        set_country_flag = YAN_new_buddies
+    }
+
+    option = { #What have they done at all in the last forty years? Ignore them.
+        name = formable_event.34.c
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.35
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #YAN receives the response from one of the faction leaders or ABY about their request
+    id = formable_event.35
+    title = formable_event.35.t
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { tag = ABY }
+                has_country_flag = YAN_new_buddies
+            }
+        }
+        text = formable_event.35.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                tag = ABY
+                has_country_flag = YAN_new_buddies
+            }
+        }
+        text = formable_event.35.d_b
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { tag = ABY }
+                NOT = { has_country_flag = YAN_new_buddies }
+            }
+        }
+        text = formable_event.35.d_c
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { tag = ABY }
+                NOT = { has_country_flag = YAN_new_buddies }
+            }
+        }
+        text = formable_event.35.d_d
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.35"}
+
+    is_triggered_only = yes
+
+    option = { #We'll be great friends!
+        name = formable_event.35.
+        trigger = {
+            FROM = {
+                NOT = { tag = ABY }
+                has_country_flag = YAN_new_buddies
+            }
+        }
+        FROM = {
+            add_to_faction = ROOT
+        }
+    }
+
+    option = { #New best friends!
+        name = formable_event.35.b
+        trigger = {
+            FROM = {
+                tag = ABY
+                has_country_flag = YAN_new_buddies
+            }
+        }
+        create_faction_from_template = faction_template_industrial_focus
+        hidden_effect = {
+            set_faction_name = YAN_griffon_reconquest_faction_name
+        }
+        add_to_faction = FROM
+    }
+
+    option = { #Well, we'll still defeat them by ourselves!
+        name = formable_event.35.c
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = YAN_new_buddies }
+            }
+        }
+        add_war_support = 0.15
+        add_political_power = 100
+        add_manpower = 50000
+    }
+}
+
+country_event = { #The owner or owners of HAU's states receive a demand from YAN to cede the islands or face war, which they can accept or refuse
+    id = formable_event.36
+    title = formable_event.36.t
+    desc = formable_event.36.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.36"}
+
+    is_triggered_only = yes
+
+    option = { #It's not worth the hassle.
+        name = formable_event.36.a
+        ai_chance = {
+            modifier = {
+                factor = 5
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.6
+                    }
+                }
+            }
+        }
+        set_country_flag = YAN_HAU_ceded
+    }
+
+    option = { #What are they going to do? Cross an ocean?
+        name = formable_event.36.b
+        ai_chance = {
+            factor = 2.5
+        }
+    }
+
+    after = {
+        country_event = {
+            id = formable_event.37
+            days = 1
+            random_days = 2
+        }
+    }
+}
+
+country_event = { #YAN receives the response from the owners of HAU's states
+    id = formable_event.37
+    title = formable_event.37.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = YAN_HAU_ceded
+            }
+        }
+        text = formable_event.37.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = YAN_HAU_ceded }
+            }
+        }
+        text = formable_event.37.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.37"}
+
+    is_triggered_only = yes
+
+    option = { #Wait, really?
+        name = formable_event.37.a
+        trigger = {
+            FROM = {
+                has_country_flag = YAN_HAU_ceded
+            }
+        }
+        658 = {
+            transfer_state_to = ROOT
+        }
+        659 = {
+            transfer_state_to = ROOT
+        }
+        660 = {
+            transfer_state_to = ROOT
+        }
+    }
+
+    option = { #Not surprised, to be honest.
+        name = formable_event.37.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = YAN_HAU_ceded }
+            }
+        }
+        658 = {
+            OWNER = {
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = take_state_focus
+                        generator = 658
+                    }
+                }
+            }
+        }
+        659 = {
+            OWNER = {
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = take_state_focus
+                        generator = 659
+                    }
+                }
+            }
+        }
+        660 = {
+            OWNER = {
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = take_state_focus
+                        generator = 660
+                    }
+                }
+            }
+        }
+    }
+}
+
+country_event = { #ROA demands ZLU and will war for it if not given
+    id = formable_event.38
+    title = formable_event.38.t
+    desc = {
+        trigger = {
+            tag = KIR
+        }
+        text = formable_event.38.d_a
+    }
+    desc = {
+        trigger = {
+            tag = ZLU
+        }
+        text = formable_event.38.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.38"}
+
+    is_triggered_only = yes
+
+    option = { #They can have it.
+        name = formable_event.38.a
+        trigger = {
+            tag = KIR
+        }
+        ai_chance = {
+            modifier = {
+                factor = 3
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.75
+                    }
+                }
+            }
+        }
+        set_country_flag = ROA_KIR_agreed
+    }
+
+    option = { #How can we resist them?
+        name = formable_event.38.b
+        trigger = {
+            tag = ZLU
+        }
+        ai_chance = {
+            modifier = {
+                factor = 2
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.5
+                    }
+                }
+            }
+        }
+        set_country_flag = ROA_KIR_agreed
+    }
+
+    option = { #Never!
+        name = formable_event.38.c
+        ai_chance = {
+            factor = 2
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.39
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #ROA receives the response from the chosen country
+    id = formable_event.39
+    title = formable_event.39.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = ROA_KIR_agreed
+            }
+        }
+        text = formable_event.39.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ROA_KIR_agreed }
+            }
+        }
+        text = formable_event.39.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.39"}
+
+    is_triggered_only = yes
+
+    option = { #A wise choice.
+        name = formable_event.39.a
+        trigger = {
+            FROM = {
+                has_country_flag = ROA_KIR_agreed
+            }
+        }
+        annex_country = {
+            target = ZLU
+        }
+    }
+
+    option = { #They dare test our legions?!
+        name = formable_event.39.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ROA_KIR_agreed }
+            }
+        }
+        create_wargoal = {
+            target = ZLU
+            type = annex_everything
+        }
+    }
+}
+
+country_event = { #ZWA/TIM asks for MTA/ROA to join their cause or face consequences
+    id = formable_event.40
+    title = formable_event.40.t
+    desc = formable_event.40.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.40.d"}
+
+    is_triggered_only = yes
+
+    option = { #Might as well.
+        name = formable_event.40.a
+        ai_chance = {
+            modifier = {
+                factor = 3
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.75
+                    }
+                }
+            }
+        }
+        set_country_flag = ZWA_accepted_alliance
+    }
+
+    option = { #Nopony's home, leave us alone.
+        name = formable_event.40.b
+        ai_chance = {
+            factor = 0.5
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.41
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #ZWA/TIM receives a response from MTA/ROA regarding whether or not they want to be allies
+    id = formable_event.41
+    title = formable_event.41.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = ZWA_accepted_alliance
+            }
+        }
+        text = formable_event.41.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ZWA_accepted_alliance }
+            }
+        }
+        text = formable_event.41.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.41"}
+
+    is_triggered_only = yes
+
+    option = { #We shall stand stronger together!
+        name = formable_event.41.a
+        trigger = {
+            FROM = {
+                has_country_flag = ZWA_accepted_alliance
+            }
+        }
+        add_to_faction = FROM
+    }
+
+    option = { #It wasn't just a suggestion...
+        name = formable_event.41.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ZWA_accepted_alliance }
+            }
+        }
+        create_wargoal = {
+            target = FROM
+            type = puppet_wargoal_focus
+        }
+    }
+}
+
+country_event = { #ZWA/TIM asks for MTA/ROA to integrate or be destroyed
+    id = formable_event.42
+    title = formable_event.42.t
+    desc = formable_event.42.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.42.d"}
+
+    is_triggered_only = yes
+
+    option = { #We let them grow too powerful for their own good.
+        name = formable_event.42.a
+        ai_chance = {
+            modifier = {
+                factor = 2.5
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.75
+                    }
+                }
+            }
+        }
+        set_country_flag = ZWA_accepted_integration
+    }
+
+    option = { #We will fight for our survival!
+        name = formable_event.42.b
+        leave_faction = yes
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.43
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #ZWA/TIM receives a response from MTA/ROA regarding whether or not accept being integrated into the country
+    id = formable_event.43
+    title = formable_event.43.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = ZWA_accepted_integration
+            }
+        }
+        text = formable_event.43.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ZWA_accepted_integration }
+            }
+        }
+        text = formable_event.43.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.43"}
+
+    is_triggered_only = yes
+
+    option = { #One people! One freedom!
+        name = formable_event.43.a
+        trigger = {
+            FROM = {
+                has_country_flag = ZWA_accepted_integration
+            }
+        }
+        annex_country = {
+            target = FROM
+            transfer_troops = yes
+        }
+    }
+
+    option = { #Freedom isn't a choice.
+        name = formable_event.43.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = ZWA_accepted_alliance }
+            }
+        }
+        create_wargoal = {
+            target = FROM
+            type = annex_everything
+        }
+    }
+
+    after = {
+       every_state = {
+            limit = {
+                is_in_array = { FROM.original_cores = THIS }
+            }
+            add_core_of = ROOT
+        }
+    }
+}
+
+country_event = { #ZWA/TIM/MTA receives an invite from MGY to form a new faction against ABY and they can choose to decline or accept
+    id = formable_event.44
+    title = formable_event.44.t
+    desc = formable_event.44.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.44"}
+
+    is_triggered_only = yes
+
+    option = { We must work together against tyrants!
+        name = formable_event.44.a
+        ai_chance = {
+            modifier = {
+                factor = 2.5
+                OR = {
+                    tag = TIM
+                    tag = ZWA
+                }
+            }
+        }
+        set_country_flag = MGY_accepted_alliance
+    }
+
+    option = { #They are too bloodthirsty for their own good.
+        name = formable_event.44.b
+    }
+
+    after = {
+        if = {
+            limit = {
+                OR = {
+                    tag = ZWA
+                    tag = TIM
+                }
+            }
+            FROM = {
+                country_event = {
+                    id = formable_event.45
+                    days = 1
+                }
+            }
+        }
+        else = {
+            FROM = {
+                country_event = {
+                    id = formable_event.45
+                    days = 3
+                }
+            }
+        }
+    }
+}
+
+country_event = { #MGY receives the response from ZWA/TIM/MTA; if ZWA/TIM agrees, MGY joins their faction, and MTA will after that; if they don't, but MTA agrees, then MGY will form a new faction with MTA
+    id = formable_event.45
+    title = formable_event.45.t
+    desc = {
+        trigger = {
+            FROM = {
+                OR = {
+                    tag = ZWA
+                    tag = TIM
+                }
+                has_country_flag = MGY_accepted_alliance
+            }
+        }
+        text = formable_event.45.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                OR = {
+                    tag = ZWA
+                    tag = TIM
+                }
+                NOT = { has_country_flag = MGY_accepted_alliance }
+            }
+        }
+        text = formable_event.45.d_b
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                tag = MTA
+                has_country_flag = MGY_accepted_alliance
+            }
+        }
+        text = formable_event.45.d_c
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                tag = MTA
+                NOT = { has_country_flag = MGY_accepted_alliance }
+            }
+        }
+        text = formable_event.45.d_d
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.45"}
+
+    is_triggered_only = yes
+
+    option = { #Stronger together!
+        name = formable_event.45.a
+        trigger = {
+            FROM = {
+                OR = {
+                    tag = ZWA
+                    tag = TIM
+                }
+                has_country_flag = MGY_accepted_alliance
+            }
+        }
+        FROM = { add_to_faction = ROOT }
+    }
+
+    option = { #I guess they didn't want to be friends...
+        name = formable_event.45.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = MGY_accepted_alliance }
+            }
+        }
+    }
+
+    option = { #We could use their help.
+        name = formable_event.45.c
+        trigger = {
+            FROM = {
+                tag = MTA
+                has_country_flag = MGY_accepted_alliance
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    is_in_faction_with = ZWA
+                    is_in_faction_with = TIM
+                }
+            }
+            FACTION_LEADER = {
+                add_to_faction = FROM
+            }
+        }
+        else = {
+            if = {
+                limit = {
+                    is_in_faction = no
+                }
+                create_faction_from_template = faction_template_generic_dominance
+                set_faction_name = MGY_anti_cat_faction
+            }
+            add_to_faction = FROM
+        }
+    }
+}
+
+country_event = { #MGY is invited by MTA to a faction since they were so kind to return all the territory to them
+    id = formable_event.46
+    title = formable_event.46.t
+    desc = formable_event.46.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.46"}
+
+    is_triggered_only = yes
+
+    option = { #How kind of them. We accept!
+        name = formable_event.46.a
+        ai_chance = {
+            factor = 3
+        }
+        set_country_flag = MTA_MGY_accepted
+    }
+
+    option = { #How kind of them. Yoink!
+        name = formable_event.46.b
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.47
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #MTA receives the response from MGY
+    id = formable_event.47
+    title = formable_event.47.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = MTA_MGY_accepted
+            }
+        }
+        text = formable_event.47.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = MTA_MGY_accepted }
+            }
+        }
+        text = formable_event.47.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.47"}
+
+    is_triggered_only = yes
+
+    option = { #We shall free horse kind, together!
+        name = formable_event.47.a
+        trigger = {
+            FROM = {
+                has_country_flag = MTA_MGY_accepted
+            }
+        }
+        if = {
+            limit = {
+                is_in_faction = no
+            }
+            create_faction_from_template = faction_template_generic_dominance
+            set_faction_name = MTA_free_EMR_faction
+        }
+        add_to_faction = FROM
+    }
+}
+
+country_event = { #WIN receives a request from WNG to be integrated so they can get a foothold in Hippogriffia, with the promise of supporting their citizens and treating them autonomously otherwise
+    id = formable_event.48
+    title = formable_event.48.t
+    desc = formable_event.48.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.48"}
+
+    is_triggered_only = yes
+
+    option = { #It is agreeable.
+        name = formable_event.48.a
+        ai_chance = {
+            modifier = {
+                factor = 6
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.8
+                    }
+                }
+            }
+        }
+        set_country_flag = WNG_WIN_accepted
+    }
+
+    option = { #They're out of their minds.
+        name = formable_event.48.b
+        ai_chance = {
+            factor = 2
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.49
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #WNG receives WIN's response to the request to be annexed
+    id = formable_event.49
+    title = formable_event.49.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = WNG_WIN_accepted
+            }
+        }
+        text = formable_event.49.d_a
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.49"}
+
+    is_triggered_only = yes
+
+    option = { #Il Duce's plans never fail!
+        name = formable_event.49.a
+        trigger = {
+            FROM = {
+                has_country_flag = WNG_WIN_accepted
+            }
+        }
+        annex_country = {
+            target = FROM
+            transfer_troops = yes
+        }
+    }
+
+    option = { #Il Duce's plans NEVER fail!
+        name = formable_event.49.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = WNG_WIN_accepted }
+            }
+        }
+        hidden_effect = {
+            BAT = {
+                if = {
+                    limit = {
+                        has_guaranteed = FROM
+                    }
+                    diplomatic_relation = {
+                        country = FROM
+                        relation = guarantee
+                        active = no
+                    }
+                }
+            }
+        }
+        declare_war_on = {
+            target = FROM
+            type = annex_everything
+        }
+    }
+
+    after = {
+        1204 = {
+            add_core_of = ROOT
+        }
+    }
+}
+
+country_event = { #WNG asks politely to work with their old best pals, Colthage
+    id = formable_event.50
+    title = formable_event.50.t
+    desc = formable_event.50.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.50"}
+
+    is_triggered_only = yes
+
+    option = { #They did help as best they could in fighting HIP...
+        name = formable_event.50.a
+        ai_chance = {
+            modifier = {
+                factor = 3
+                FROM = {
+                    strength_ratio = {
+                        target = ROOT
+                        ratio > 0.5
+                    }
+                }
+            }
+        }
+        set_country_flag = WNG_CTH_accepted
+    }
+
+    option = { #They fell to Marelandia, what can they hope to do?
+        name = formable_event.50.b
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.51
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #WNG to gets CTH's response
+    id = formable_event.51
+    title = formable_event.51.t
+    desc = {
+        trigger = {
+            FROM = {
+                has_country_flag = WNG_CTH_accepted
+            }
+        }
+        text = formable_event.51.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = WNG_CTH_accepted }
+            }
+        }
+        text = formable_event.51.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.51"}
+
+    is_triggered_only = yes
+
+    option = { #Il Duce's plans never fail!
+        name = formable_event.51.a
+        trigger = {
+            FROM = {
+                has_country_flag = WNG_CTH_accepted
+            }
+        }
+        FROM = {
+            add_to_faction = ROOT
+        }
+    }
+
+    option = { #Il Duce's plans never FAIL!
+        name = formable_event.51.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = WNG_CTH_accepted }
+            }
+        }
+        add_political_power = 100
+        add_war_support = 0.1
+    }
+}
+
 #Template
 #country_event = {
 #    id = formable_event.
