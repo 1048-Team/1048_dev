@@ -2850,13 +2850,52 @@ EQC_formables_category = {
 	}
 	EQC_the_party_rules_all = {
 		available = {
-			#Should hopefully work, otherwise many original_cores owned by ROOT checks
-			all_collection_elements = {
-				collection = {
-					input = collection:zebrican_countries
-					operators = { core_states }
-				}
-				is_owned_and_controlled_by = ROOT
+			custom_trigger_tooltip = {
+				tooltip = EQC_wc_boi_tt
+				HIP = { all_original_cores_owned_by_ROOT = yes }
+				HPS = { all_original_cores_owned_by_ROOT = yes }
+				DOH = { all_original_cores_owned_by_ROOT = yes }
+				HRL = { all_original_cores_owned_by_ROOT = yes }
+				WIN = { all_original_cores_owned_by_ROOT = yes }
+				BAT = { all_original_cores_owned_by_ROOT = yes }
+				ZAR = { all_original_cores_owned_by_ROOT = yes }
+				NZA = { all_original_cores_owned_by_ROOT = yes }
+				CTH = { all_original_cores_owned_by_ROOT = yes }
+				CGI = { all_original_cores_owned_by_ROOT = yes }
+				MCW = { all_original_cores_owned_by_ROOT = yes }
+				CTL = { all_original_cores_owned_by_ROOT = yes }
+				LMB = { all_original_cores_owned_by_ROOT = yes }
+				ABY = { all_original_cores_owned_by_ROOT = yes }
+				MGY = { all_original_cores_owned_by_ROOT = yes }
+				REM = { all_original_cores_owned_by_ROOT = yes }
+				NDR = { all_original_cores_owned_by_ROOT = yes }
+				ZAJ = { all_original_cores_owned_by_ROOT = yes }
+				AZI = { all_original_cores_owned_by_ROOT = yes }
+				CAM = { all_original_cores_owned_by_ROOT = yes }
+				TIM = { all_original_cores_owned_by_ROOT = yes }
+				YMN = { all_original_cores_owned_by_ROOT = yes }
+				ILU = { all_original_cores_owned_by_ROOT = yes }
+				ZIT = { all_original_cores_owned_by_ROOT = yes }
+				TNT = { all_original_cores_owned_by_ROOT = yes }
+				ZWA = { all_original_cores_owned_by_ROOT = yes }
+				HSO = { all_original_cores_owned_by_ROOT = yes }
+				EMR = { all_original_cores_owned_by_ROOT = yes }
+				MTA = { all_original_cores_owned_by_ROOT = yes }
+				KAR = { all_original_cores_owned_by_ROOT = yes }
+				STM = { all_original_cores_owned_by_ROOT = yes }
+				ROA = { all_original_cores_owned_by_ROOT = yes }
+				CNT = { all_original_cores_owned_by_ROOT = yes }
+				TAI = { all_original_cores_owned_by_ROOT = yes }
+				MEL = { all_original_cores_owned_by_ROOT = yes }
+				ZOO = { all_original_cores_owned_by_ROOT = yes }
+				IDO = { all_original_cores_owned_by_ROOT = yes }
+				DEL = { all_original_cores_owned_by_ROOT = yes }
+				YAN = { all_original_cores_owned_by_ROOT = yes }
+				ZLU = { all_original_cores_owned_by_ROOT = yes }
+				KIR = { all_original_cores_owned_by_ROOT = yes }
+				NVA = { all_original_cores_owned_by_ROOT = yes }
+				GAZ = { all_original_cores_owned_by_ROOT = yes }
+				BRS = { all_original_cores_owned_by_ROOT = yes }
 			}
 		}
 		visible = { tag = EQC }
@@ -3459,8 +3498,8 @@ BRF_formables_category = {
 								}
 							}
 						}
+						transfer_state_to = EQC
 					}
-					transfer_state_to = EQC
 				}
 			}
 			every_state = {
@@ -6284,10 +6323,10 @@ DEL_formables_category = {
 				}
 				KIR_rising_sun = {
 					set_nationality = ROOT
-					set_country_leader_ideology = democratic_socialism
 					promote_character = yes
 				}
 			}
+			set_country_leader_ideology = democratic_socialism
 			hidden_effect = {
 				news_event = {
 					id = formable_news.30
@@ -6557,11 +6596,9 @@ YAN_formables_category = {
 		}
 		highlight_states = {
 			highlight_state_targets = {
-				OR = {
-					state = 658
-					state = 659
-					state = 660
-				}
+				state = 658
+				state = 659
+				state = 660
 			}
 		}
 		fire_only_once = yes
@@ -7413,7 +7450,7 @@ MGY_formables_category = {
 					}
 					set_province_name = {
 						id = 15710
-						name = MGY_panthera_ruins #Change to loc key
+						name = MGY_panthera_ruins
 					}
 				}
 			}
@@ -8439,35 +8476,36 @@ MTA_formables_category = {
 						}
 					}
 				}
-			if = {
-				limit = {
-					country_exists = MGY
-					is_subject = no
+				if = {
+					limit = {
+						country_exists = MGY
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							is_claimed_by = MGY
+							is_core_of = ABY
+						}
+						transfer_state_to = MGY
+					}
+					MGY = {
+						country_event = formable_event.46
+					}
 				}
 				every_state = {
 					limit = {
-						is_claimed_by = MGY
-						is_core_of = ABY
+						is_in_array = { YMN.original_cores = THIS }
 					}
-					transfer_state_to = MGY
+					add_core_of = ROOT
 				}
-				MGY = {
-					country_event = formable_event.46
-				}
-			}
-			every_state = {
-				limit = {
-					is_in_array = { YMN.original_cores = THIS }
-				}
-				add_core_of = ROOT
-			}
-			if = {
-				limit = {
-					country_exists = EMR
-				}
-				create_wargoal = {
-					target = EMR
-					type = annex_everything
+				if = {
+					limit = {
+						country_exists = EMR
+					}
+					create_wargoal = {
+						target = EMR
+						type = annex_everything
+					}
 				}
 			}
 		}
