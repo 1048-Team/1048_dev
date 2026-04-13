@@ -7651,7 +7651,10 @@ ILU_formables_category = {
 			every_possible_country = {
 				limit = {
 					exists = yes
-					NOT = { tag = ROOT }
+					NOT = {
+						tag = ROOT
+						tag = ZZZ
+					}
 				}
 				ROOT = {
 					create_wargoal = {
@@ -9688,12 +9691,28 @@ STM_formables_category = {
 	STM_reap_franchise_profits = {
 		available = {
 			all_other_country = {
-				exists = no
+				if = {
+					limit = {
+						tag = ZZZ
+					}
+					exists = yes
+				}
+				else = {
+					exists = no
+				}
 			}
 		}
 		visible = {
 			all_other_country = {
-				exists = no
+				if = {
+					limit = {
+						tag = ZZZ
+					}
+					exists = yes
+				}
+				else = {
+					exists = no
+				}
 			}
 		}
 		fire_only_once = yes
@@ -10643,9 +10662,17 @@ AWR_formables_category = {
 		}
 		visible = {
 			all_other_country = {
-				OR = {
-					exists = no
-					is_subject_of = ROOT
+				if = {
+					limit = {
+						tag = ZZZ
+					}
+					exists = yes
+				}
+				else = {
+					OR = {
+						exists = no
+						is_subject_of = ROOT
+					}
 				}
 			}
 		}
@@ -10664,7 +10691,10 @@ AWR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freeeeeeeeeeeeeeeee"
 			every_state = {
 				limit = {
-					NOT = { is_core_of = ROOT }
+					NOT = {
+						is_core_of = ROOT
+						state = 1209
+					}
 				}
 				add_core_of = ROOT
 			}
