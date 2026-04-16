@@ -2119,15 +2119,15 @@ FH_demo_equus_heartland_skeleton_category = {
             date < 1049.4.1
             is_ai = no
         }
-        cost = 50
+        cost = 25
         days_remove = 35
         days_re_enable = 90
         modifier = {
             political_power_gain = -0.15
             stability_weekly_factor = 0.007
             war_support_weekly_factor = 0.007
-            communism_drift = -0.03
-            fascism_drift = -0.03
+            communism_drift = -0.04
+            fascism_drift = -0.04
         }
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove CER_crack_down_on_protests"
@@ -2138,7 +2138,7 @@ FH_demo_equus_heartland_skeleton_category = {
             tag = CER
             date > 1049.4.1
         }
-        cost = 150
+        cost = 70
         days_remove = 70
         fire_only_once = yes
         modifier = {
@@ -2345,7 +2345,13 @@ FH_demo_equus_heartland_skeleton_category = {
         visible = {
             tag = CER
             owns_state = 3
-            NOT = { country_exists = SLE }
+            EQS = { all_original_cores_owned_by_ROOT = yes }
+        }
+        highlight_states = {
+            highlight_states_trigger = {
+                is_on_continent = europe
+                is_in_array = { EQS.original_cores = THIS }
+            }
         }
         fire_only_once = yes
         complete_effect = {
@@ -2361,10 +2367,73 @@ FH_demo_equus_heartland_skeleton_category = {
             set_province_name = { id = 179 name = renamed_canterlot }
             hidden_effect = {
                 news_event = fhequusnews.5
+                every_faction_member = {
+                    limit = {
+                        is_ai = yes
+                        exists = yes
+                        OR = {
+                            tag = BLS
+                            tag = NER
+                            tag = WHY
+                            tag = CLD
+                        }
+                    }
+                    ROOT = {
+                        annex_country = {
+                            target = PREV
+                            transfer_troops = yes
+                        }
+                        every_state = {
+                            limit = {
+                                is_core_of = PREV
+                            }
+                            add_core_of = ROOT
+                        }
+                    }
+                }
             }
         }
         ai_will_do = {
             factor = 100
+        }
+    }
+    CER_reclaim_harmonys_birthright = {
+        visible = {
+            tag = CER
+            has_cosmetic_tag = EQS_NEW
+            has_government = democratic
+        }
+        fire_only_once = yes
+        days_remove = 21
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision CER_reclaim_harmonys_birthright"
+            every_other_country = {
+                limit = {
+                    exists = yes
+                    OR = {
+                        has_country_flag = SEE
+                        tag = AWR
+                        tag = STG
+                        tag = SCS
+                        tag = CCA
+                        tag = NCA
+                        tag = CHN
+                    }
+                }
+                ROOT = {
+                    create_wargoal = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
         }
     }
     CLD_redelegate_responsibilities = {
