@@ -2693,6 +2693,146 @@ country_event = { #WNG to gets CTH's response
     }
 }
 
+country_event = { #NVA requests rather forcefully that KIR give them the old land that they once all had and KIR can accept or not
+    id = formable_event.52
+    title = formable_event.52.t
+    desc = formable_event.52.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.52"}
+
+    is_triggered_only = yes
+
+    option = { #They can have it.
+        name = formable_event.52.a
+        ai_chance = {
+            modifier = {
+                factor = 3
+                FROM = {
+                    strength_ratio = {
+                        tag = ROOT
+                        ratio > 0.5
+                    }
+                }
+            }
+        }
+        set_country_flag = NVA_KIR_agrees
+    }
+
+    option = { #Why would we give up our land?
+        name = formable_event.52.b
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.53
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #NVA receives the response from KIR about whether or not they have been given the land as asked
+    id = formable_event.53
+    title = formable_event.53.t
+    desc = {
+        trigger = {
+            FROM = { has_country_flag = NVA_KIR_agrees }
+        }
+        text = formable_event.53.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = NVA_KIR_agrees }
+            }
+        }
+        text = formable_event.53.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.53"}
+
+    is_triggered_only = yes
+
+    option = { #Excellent!
+        name = formable_event.53.a
+        trigger = {
+            FROM = { has_country_flag = NVA_KIR_agrees }
+        }
+        1057 = {
+            transfer_state_to = ROOT
+            add_core_of = ROOT
+        }
+        1086 = {
+            transfer_state_to = ROOT
+            add_core_of = ROOT
+        }
+        1058 = {
+            transfer_state_to = ROOT
+            add_core_of = ROOT
+        }
+    }
+
+    option = { #They dare insult us?!
+        name = formable_event.53.b
+    }
+
+    after = {
+        hidden_effect = {
+            country_event = {
+                id = formable_event.54
+                days = 7
+                random_days = 14
+            }
+        }
+    }
+}
+
+country_event = { #With either the integration or the rejection of the lost territories, NVA can choose to go further, or exact revenge
+    id = formable_event.54
+    title = formable_event.54.t
+    desc = {
+        trigger = {
+            KIR = { has_country_flag = NVA_KIR_agrees }
+        }
+        text = formable_event.54.d_a #Do we want to go further?
+    }
+    desc = {
+        trigger = {
+            KIR = {
+                NOT = { has_country_flag = NVA_KIR_agrees }
+            }
+        }
+        text = formable_event.54.d_b #We must punish KIR!
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.54"}
+
+    is_triggered_only = yes
+
+    option = { #It was all part of the plan...
+        name = formable_event.54.a
+        trigger = {
+            KIR = {
+                has_country_flag = NVA_KIR_agrees
+            }
+        }
+        set_country_flag = NVA_nirking_time
+    }
+
+    option = { #They must suffer for their insolence!
+        name = formable_event.54.b
+        trigger = {
+            KIR = {
+                NOT = {
+                    has_country_flag = NVA_KIR_agrees
+                }
+            }
+        }
+        set_country_flag = NVA_nirking_time
+    }
+
+    option = { #We must stand strong...
+        name = formable_event.54.c
+    }
+}
 
 #Flavor
 country_event = { #AWR culminating event
