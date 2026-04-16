@@ -10169,6 +10169,7 @@ AWR_formables_category = {
 			CLD = { all_original_cores_owned_by_ROOT = yes }
 		}
 		highlight_states = {
+			is_on_continent = europe
 			highlight_states_trigger = {
 				OR = {
 					is_in_array = { EQS.original_cores = THIS }
@@ -10183,7 +10184,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_revolutionaries"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					OR = {
 						is_in_array = { EQS.original_cores = THIS }
@@ -10217,6 +10218,7 @@ AWR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { BAL.original_cores = THIS }
 					is_in_array = { CRY.original_cores = THIS }
@@ -10228,7 +10230,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_equestrians"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					OR = {
 						is_in_array = { BAL.original_cores = THIS }
@@ -10255,6 +10257,7 @@ AWR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { CHN.original_cores = THIS }
 					is_in_array = { CCA.original_cores = THIS }
@@ -10267,7 +10270,7 @@ AWR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_changelings"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					OR = {
 						is_in_array = { CHN.original_cores = THIS }
@@ -10295,14 +10298,16 @@ AWR_formables_category = {
 		available = {
 			NOT = {
 				any_other_country = {
+					limit = {
+						is_equestrian_continent_country = yes
+					}
 					exists = yes
-					is_equestrian_continent_country = yes
 				}
 			}
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				is_on_continent = equus
+				is_on_continent = europe
 				NOT = { is_core_of = ROOT }
 			}
 		}
@@ -10311,7 +10316,7 @@ AWR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freest_equus"
 			every_state = {
 				limit = {
-					is_equestrian_continent_country = yes
+					is_on_continent = europe
 					NOT = { is_core_of = ROOT }
 				}
 				add_core_of = ROOT
@@ -10319,6 +10324,10 @@ AWR_formables_category = {
 			every_other_country = {
 				limit = {
 					exists = yes
+					OR = {
+						is_zebrican_continent_country = yes
+						is_griffon_continent_country = yes
+					}
 				}
 				ROOT = {
 					create_wargoal = {
@@ -10368,6 +10377,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { FAT.original_cores = THIS }
 					is_in_array = { NTR.original_cores = THIS }
@@ -10397,7 +10407,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_HLR_tt
 			hidden_effect = {
 				HLR = { set_cosmetic_tag = HLR_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { FAT.original_cores = THIS }
@@ -10442,6 +10452,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { GRI.original_cores = THIS }
 					is_in_array = { TRD.original_cores = THIS }
@@ -10473,7 +10484,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_GRI_tt
 			hidden_effect = {
 				GRI = { set_cosmetic_tag = GRI_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { GRI.original_cores = THIS }
@@ -10533,6 +10544,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { HLQ.original_cores = THIS }
 					is_in_array = { BAR.original_cores = THIS }
@@ -10549,7 +10561,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_RCT_tt
 			hidden_effect = {
 				RCT = { set_cosmetic_tag = RCT_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { HLQ.original_cores = THIS }
@@ -10583,6 +10595,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { BRF.original_cores = THIS }
 					is_in_array = { GRU.original_cores = THIS }
@@ -10598,7 +10611,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_BRF_tt
 			hidden_effect = {
 				BRF = { set_cosmetic_tag = BRF_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { BRF.original_cores = THIS }
@@ -10636,6 +10649,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { JER.original_cores = THIS }
 					state = 487
@@ -10658,7 +10672,7 @@ AWR_formables_category = {
 						JER_legacy_of_coltbert
 					}
 				}
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { JER.original_cores = THIS }
@@ -10695,6 +10709,7 @@ AWR_formables_category = {
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
+			is_on_continent = asia
 			highlight_states_trigger = {
 				OR = {
 					is_in_array = { EQC.original_cores = THIS }
@@ -10716,7 +10731,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_EQC_tt
 			hidden_effect = {
 				EQC = { set_cosmetic_tag = EQC_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { EQC.original_cores = THIS }
@@ -10776,6 +10791,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { HIP.original_cores = THIS }
 					is_in_array = { HPS.original_cores = THIS }
@@ -10798,7 +10814,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_HIP_tt
 			hidden_effect = {
 				HIP = { set_cosmetic_tag = HIP_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { HIP.original_cores = THIS }
@@ -10841,6 +10857,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { CTL.original_cores = THIS }
 					is_in_array = { LMB.original_cores = THIS }
@@ -10854,7 +10871,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_CTL_tt
 			hidden_effect = {
 				CTL = { set_cosmetic_tag = CTL_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { CTL.original_cores = THIS }
@@ -10897,6 +10914,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = afria
 				OR = {
 					is_in_array = { KIR.original_cores = THIS }
 					is_in_array = { BRS.original_cores = THIS }
@@ -10918,7 +10936,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_KIR_tt
 			hidden_effect = {
 				KIR = { set_cosmetic_tag = KIR_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { KIR.original_cores = THIS }
@@ -10957,6 +10975,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ROA.original_cores = THIS }
 					is_in_array = { CNT.original_cores = THIS }
@@ -10972,7 +10991,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_ROA_tt
 			hidden_effect = {
 				ROA = { set_cosmetic_tag = ROA_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { ROA.original_cores = THIS }
@@ -11011,6 +11030,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { STM.original_cores = THIS }
 					is_in_array = { KAR.original_cores = THIS }
@@ -11027,7 +11047,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_STM_tt
 			hidden_effect = {
 				STM = { set_cosmetic_tag = STM_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { STM.original_cores = THIS }
@@ -11070,6 +11090,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { AZI.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -11089,7 +11110,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_MGY_tt
 			hidden_effect = {
 				MGY = { set_cosmetic_tag = MGY_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { AZI.original_cores = THIS }
@@ -11123,6 +11144,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ABY.original_cores = THIS }
 					is_in_array = { EMR.original_cores = THIS }
@@ -11136,7 +11158,7 @@ AWR_formables_category = {
 			custom_effect_tooltip = AWR_release_EMR_tt
 			hidden_effect = {
 				EMR = { set_cosmetic_tag = EMR_AWR }
-				every_state = {
+				every_owned_state = {
 					limit = {
 						OR = {
 							is_in_array = { ABY.original_cores = THIS }
@@ -11175,7 +11197,6 @@ AWR_formables_category = {
 					limit = {
 						tag = ZZZ
 					}
-					exists = yes
 				}
 				else = {
 					OR = {
