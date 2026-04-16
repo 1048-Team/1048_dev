@@ -4033,7 +4033,26 @@ RCT_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			set_cosmetic_tag = RCT_new_order
+			if = {
+				limit = {
+					check_variable = { global.river_union_iteration = 0 }
+				}
+				add_to_variable = { global.river_union_iteration = 1 }
+				set_cosmetic_tag = RCT_newer_order
+			}
+			else_if = {
+				limit = {
+					check_variable = { global.river_union_iteration = 1 }
+				}
+				add_to_variable = { global.river_union_iteration = 1 }
+				set_cosmetic_tag = RCT_newerer_order
+			}
+			else_if = {
+				limit = {
+					check_variable = { global.river_union_iteration = 2 }
+				}
+				set_cosmetic_tag = RCT_newererest_order
+			}
 			hidden_effect = {
 				news_event = {
 					id = formable_news.18
