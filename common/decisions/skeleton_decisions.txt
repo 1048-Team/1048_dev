@@ -1,4 +1,280 @@
 south_east_skeleton_category = {
+    EEE_NEI_powder_keg = {
+        available = {
+            date > 1049.6.1
+        }
+        visible = {
+            OR = {
+                tag = EEE
+                tag = NEI
+            }
+            NOT = {
+                OR = {
+                    NEI = { has_country_flag = FH_demo_chose_war }
+                    EEE = { has_country_flag = FH_demo_chose_war }
+                }
+            }
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = NEI
+        war_with_on_complete = EEE
+        complete_effect = {
+            set_country_flag = FH_demo_chose_war
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove EEE_NEI_powder_keg"
+            if = {
+                limit = {
+                    tag = NEI
+                }
+                declare_war_on = {
+                    target = EEE
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    tag = EEE
+                }
+                declare_war_on = {
+                    target = NEI
+                    type = annex_everything
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1049.8.1
+                factor = 0
+            }
+        }
+    }
+    EEE_reform_militia = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+        }
+        cost = 50 #Placeholder
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
+            remove_ideas = EEE_tribal_militias
+        }
+    }
+    EEE_national_reform = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_national_reform"
+            remove_ideas = EEE_tribal_politics
+        }
+    }
+    EEE_industrial_boons = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+        }
+        cost = 100
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_industrial_boons"
+            remove_ideas = EEE_tribal_holdings
+        }
+    }
+    EEE_eliminating_the_cults = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+            has_manpower > 70000
+            has_stability > 0.6
+        }
+        visible = {
+            tag = EEE
+        }
+        cost = 75
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
+            add_manpower = -28395
+            add_stability = -0.15
+            remove_ideas = EEE_night_whispering
+        }
+    }
+    BAL_civilize_tribals = {
+        available = {
+            date > 1049.11.1
+        }
+        visible = {
+            tag = BAL
+            OR = {
+                country_exists = EEE
+                country_exists = NEI
+            }
+        }
+        fire_only_once = yes
+        days_remove = 14
+        war_with_on_complete = EEE
+        war_with_on_complete = NEI
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_civilize_tribals"
+            declare_war_on = {
+                target = EEE
+                type = annex_everything
+            }
+            declare_war_on = {
+                target = NEI
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                date < 1050.3.1
+                factor = 0
+            }
+        }
+    }
+    BAL_reclaim_new_horseleans = {
+        available = {
+            date > 1050.6.1
+        }
+        visible = {
+            tag = BAL
+            country_exists = MTS
+        }
+        days_remove = 7
+        war_with_on_complete = MTS
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_reclaim_new_horseleans"
+            declare_war_on = {
+                target = MTS
+                type = annex_everything
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    BAL_finish_restructuring = {
+        available = {
+            date > 1050.9.1
+        }
+        visible = {
+            tag = BAL
+            date > 1050.9.1
+            OR = {
+                country_exists = STB
+                country_exists = NID
+                country_exists = NRP
+            }
+        }
+        days_remove = 14
+        war_with_on_complete = STB
+        war_with_on_complete = NID
+        war_with_on_complete = NRP
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_finish_restructuring"
+            if = {
+                limit = {
+                    country_exists = STB
+                }
+                declare_war_on = {
+                    target = STB
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = NID
+                }
+                declare_war_on = {
+                    target = NID
+                    type = annex_everything
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = NRP
+                }
+                declare_war_on = {
+                    target = NRP
+                    type = annex_everything
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    BAL_party_purge = {
+        available = {
+            date > 1049.3.1
+        }
+        visible = {
+            tag = BAL
+        }
+        cost = 50
+        days_remove = 60
+        modifier = {
+            political_power_gain = -0.35
+            stability_weekly_factor = -0.02
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove BAl_party_purge"
+            remove_ideas = BAL_party_conflict
+        }
+    }
+    BAL_restructure_quotas = {
+        available = {
+            date > 1050.1.1
+            num_of_civilian_factories > 15
+        }
+        visible = {
+            tag = BAL
+        }
+        cost = 100
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BAL_restructure_quotas"
+            remove_ideas = BAL_collapsed_economy
+        }
+    }
+    BAL_forced_recognition = {
+        available = {
+            NOT = {
+                any_other_country = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+            }
+        }
+        visible = {
+            tag = BAL
+        }
+        cost = 150
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BAL_forced_recognition"
+            remove_ideas = BAL_no_recognition
+        }
+    }
     SPF_expand_hoards = {
         available = {
             date > 1049.8.1
