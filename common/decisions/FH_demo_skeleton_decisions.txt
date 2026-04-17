@@ -176,6 +176,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = BAL
+            date > 1050.9.1
             OR = {
                 country_exists = STB
                 country_exists = NID
@@ -188,17 +189,32 @@ FH_demo_south_east_skeleton_category = {
         war_with_on_complete = NRP
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove BAL_finish_restructuring"
-            declare_war_on = {
-                target = STB
-                type = annex_everything
+            if = {
+                limit = {
+                    country_exists = STB
+                }
+                declare_war_on = {
+                    target = STB
+                    type = annex_everything
+                }
             }
-            declare_war_on = {
-                target = NID
-                type = annex_everything
+            if = {
+                limit = {
+                    country_exists = NID
+                }
+                declare_war_on = {
+                    target = NID
+                    type = annex_everything
+                }
             }
-            declare_war_on = {
-                target = NRP
-                type = annex_everything
+            if = {
+                limit = {
+                    country_exists = NRP
+                }
+                declare_war_on = {
+                    target = NRP
+                    type = annex_everything
+                }
             }
         }
         ai_will_do = {
