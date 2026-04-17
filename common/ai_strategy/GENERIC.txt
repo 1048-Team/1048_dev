@@ -1,0 +1,836 @@
+CHN_no_one_loves_them = {
+	allowed = {
+		NOT = { tag = CHN }
+	}
+	enable = {
+		CHN = {
+			exists = yes
+			has_government = fascism
+		}
+		NOT = { 
+			is_subject_of = CHN
+			is_in_faction_with = CHN
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = alliance
+		id = "CHN"
+		value = -500
+	}
+	ai_strategy = {
+		type = befriend
+		id = "CHN"
+		value = -50
+	}
+	ai_strategy = {
+		type = support
+		id = "CHN"
+		value = -200
+	}
+	ai_strategy = {
+		type = send_volunteers_desire
+		id = "CHN"
+		value = -200
+	}
+}
+
+CHN_no_one_loves_them_rev = { # Reverse strategy
+	reversed = yes
+	allowed = {
+		original_tag = CHN
+	}
+	enable = {
+		NOT = { tag = CHN }
+		NOT = {
+			tag = JAK # make changelings help out Jaks as long as Yaks exist
+			country_exists = YAK
+		}
+		NOT = {
+			tag = GRF
+			OR = {
+				has_civil_war = yes 
+				has_war_with = STG
+			}
+		}
+		CHN = {
+			has_government = fascism
+		}
+		NOT = { 
+			is_subject_of = CHN
+			is_in_faction_with = CHN
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = alliance
+		id = "CHN"
+		value = -500
+	}
+	ai_strategy = {
+		type = befriend
+		id = "CHN"
+		value = -50
+	}
+	ai_strategy = {
+		type = support
+		id = "CHN"
+		value = -200
+	}
+	ai_strategy = {
+		type = send_volunteers_desire
+		id = "CHN"
+		value = -200
+	}
+}
+
+NCH_ignore = {
+	allowed = {
+		NOT = { original_tag = NCH }
+	}
+	enable = {
+		NCH = { has_idea = NCH_Splendid_Isolation_idea }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = ignore
+		id = "NCH"
+		value = 200
+	}
+}
+
+NCH_ignore_rev = {
+	reversed = yes
+	allowed = {
+		original_tag = NCH
+	}
+	enable = {
+		NCH = { has_idea = NCH_Splendid_Isolation_idea }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = ignore
+		id = "NCH"
+		value = 200
+	}
+}
+
+BAN_ANG_YAL_not_ally_WNG = {
+	allowed = {
+		OR = {
+			original_tag = ANG
+			original_tag = YAL
+			original_tag = BAN
+		}
+	}
+	enable = {
+		NOT = {
+			AND = {
+				WNG = { has_government = democratic }
+				has_government = democratic
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = alliance
+		id = "WNG"
+		value = -500
+	}
+	ai_strategy = {
+		type = alliance
+		id = "TAL"
+		value = -500
+	}
+	ai_strategy = {
+		type = alliance
+		id = "FRN"
+		value = -500
+	}
+}
+destroy_maar_AET = {
+	allowed = {
+		NOT = { tag = AET }
+	}
+	enable = {
+		AET = {
+			exists = yes
+			has_country_leader = { ruling_only = yes character = GRI_archon_eros_vii }
+		}
+		NOT = {
+			AND = {
+				tag = MNC
+				has_country_leader = { ruling_only = yes character = MNC_eriviar_sunstriker }
+				has_completed_focus = MNC_chosen_of_maar
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "AET"
+		value = 50
+	}
+	ai_strategy = {
+		type = conquer
+		id = "AET"
+		value = 50
+	}
+	ai_strategy = {
+		type = contain
+		id = "AET"
+		value = 200
+	}
+	ai_strategy = {
+		type = befriend
+		id = "AET"
+		value = -999
+	}
+	ai_strategy = {
+		type = alliance
+		id = "AET"
+		value = -999
+	}
+	ai_strategy = {
+		type = protect
+		id = "AET"
+		value = -999
+	}
+}
+
+destroy_maar_MNC = {
+	allowed = {
+		NOT = { tag = MNC }
+	}
+	enable = {
+		MNC = {
+			exists = yes
+			has_country_leader = { ruling_only = yes character = MNC_eriviar_sunstriker }
+			has_completed_focus = MNC_chosen_of_maar
+		}
+		NOT = {
+			has_country_leader = { ruling_only = yes character = GRI_archon_eros_vii }
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "MNC"
+		value = 50
+	}
+	ai_strategy = {
+		type = conquer
+		id = "MNC"
+		value = 50
+	}
+	ai_strategy = {
+		type = contain
+		id = "MNC"
+		value = 200
+	}
+	ai_strategy = {
+		type = befriend
+		id = "MNC"
+		value = -999
+	}
+	ai_strategy = {
+		type = alliance
+		id = "MNC"
+		value = -999
+	}
+	ai_strategy = {
+		type = protect
+		id = "MNC"
+		value = -999
+	}
+}
+
+GRF_save_eq_for_EQS = {
+	allowed = {
+		tag = GRF
+	}
+	enable = {
+		has_war = no
+		is_subject = no
+		event_target:equestria = { 
+			has_war_with = CHN
+		}
+		NOT = {
+			has_country_flag = GRF_helped_EQS
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = save_equipment
+		id = infantry_equipment
+		value = 1001
+	}
+}
+
+GRF_save_eq_for_EQS_cw = {
+	allowed = {
+		tag = GRF
+	}
+	enable = {
+		tag = GRF
+		has_war = no
+		is_subject = no
+		event_target:equestria = { 
+			has_war_with = NLR 
+		}
+		NOT = {
+			has_country_flag = GRF_helped_EQS_cw
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = save_equipment
+		id = infantry_equipment
+		value = 1001
+	}
+}
+
+GRF_unhappy_with_no_merc_payment = {
+	reversed = yes
+	enable_reverse = {
+		GRF = {
+			has_idea = GRF_send_mercs
+			is_subject = no
+		}
+	}
+	enable = {
+		has_country_flag = mercs_refused_payment_GRF
+		NOT = {
+			is_subject_of = GRF
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "GRF"
+		value = 100
+	}
+	ai_strategy = {
+		type = contain
+		id = "GRF"
+		value = 200
+	}
+	ai_strategy = {
+		type = support
+		id = "GRF"
+		value = -200
+	}
+}
+
+TRD_unhappy_with_no_merc_payment = {
+	reversed = yes
+	enable_reverse = {
+		TRD = {
+			has_completed_focus = TRD_robber_baron
+			has_government = neutrality
+			is_subject = no
+		}
+	}
+	enable = {
+		has_country_flag = mercs_refused_payment_TRD
+		NOT = {
+			is_subject_of = TRD
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "TRD"
+		value = 100
+	}
+	ai_strategy = {
+		type = contain
+		id = "TRD"
+		value = 200
+	}
+	ai_strategy = {
+		type = support
+		id = "TRD"
+		value = -200
+	}
+}
+
+ignore_EYR = {
+	enable = {
+		EYR = {
+			NOT = {
+				is_subject_of = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+		country_exists = ERI
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = support
+		id = "EYR"
+		value = -200
+	}
+	ai_strategy = {
+		type = protect
+		id = "EYR"
+		value = -200
+	}
+	ai_strategy = {
+		type = ignore
+		id = "EYR"
+		value = 50
+	}
+}
+
+ignore_ERI = {
+	enable = {
+		ERI = {
+			NOT = {
+				is_subject_of = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+		country_exists = EYR
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = support
+		id = "ERI"
+		value = -200
+	}
+	ai_strategy = {
+		type = protect
+		id = "ERI"
+		value = -200
+	}
+	ai_strategy = {
+		type = ignore
+		id = "ERI"
+		value = 50
+	}
+}
+
+yaks_hate_jaks = {
+	allowed = {
+		tag = YAK
+	}
+	enable = {
+		JAK = {
+			NOT = {
+				is_subject_of = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "JAK"
+		value = 200
+	}
+	ai_strategy = {
+		type = conquer
+		id = "JAK"
+		value = 150
+	}
+}
+
+jaks_hate_yaks = {
+	allowed = {
+		tag = JAK
+	}
+	enable = {
+		YAK = {
+			NOT = {
+				is_subject_of = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = antagonize
+		id = "YAK"
+		value = 200
+	}
+	ai_strategy = {
+		type = conquer
+		id = "YAK"
+		value = 150
+	}
+}
+
+dislike_bandits_LNS = {
+	allowed = {
+		NOT = { tag = LNS }
+	}
+	enable = {
+		LNS = { 
+			has_government = fascism
+			has_country_leader = { ruling_only = yes character = LNS_rosa_heidenreich }
+			is_subject = no
+		}
+		is_bandit_nation = no
+		NOT = { 
+			is_subject_of = LNS
+			is_in_faction_with = LNS
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = protect
+		id = "LNS"
+		value = -200
+	}
+	ai_strategy = {
+		type = befriend
+		id = "LNS"
+		value = -100
+	}
+	ai_strategy = {
+		type = equipment_market_trade_desire
+		id = LNS
+		value = -25
+	}
+}
+
+dislike_bandits_MNC = {
+	allowed = {
+		NOT = { tag = MNC }
+	}
+	enable = {
+		MNC = { 
+			has_government = fascism 
+			is_subject = no
+		}
+		is_bandit_nation = no
+		NOT = { 
+			is_subject_of = MNC
+			is_in_faction_with = MNC
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = protect
+		id = "MNC"
+		value = -200
+	}
+	ai_strategy = {
+		type = befriend
+		id = "MNC"
+		value = -100
+	}
+	ai_strategy = {
+		type = equipment_market_trade_desire
+		id = MNC
+		value = -25
+	}
+}
+
+maresoc_hate_everyone = {
+	reversed = yes
+	allowed = {
+		original_tag = EQC
+	}
+	enable_reverse = {
+		EQC = {
+			has_government = communism
+			has_country_flag = is_maresoc
+			is_subject = no
+			OR = {
+				has_country_leader = { ruling_only = yes character = EQC_maresoc }
+				has_country_leader = { ruling_only = yes character = EQC_big_sister }
+			}
+		}
+	}
+	enable = {
+		NOT = { tag = EQC }
+		EQC = {
+			has_government = communism
+			has_country_flag = is_maresoc
+			is_subject = no
+			OR = {
+				has_country_leader = { ruling_only = yes character = EQC_maresoc }
+				has_country_leader = { ruling_only = yes character = EQC_big_sister }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = alliance
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = support
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = protect
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = befriend
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "EQC"
+		value = 200
+	}
+	ai_strategy = {
+		type = conquer
+		id = "EQC"
+		value = 200
+	}
+}
+
+everyone_hate_maresoc = {
+	enable = {
+		NOT = { tag = EQC }
+		EQC = {
+			has_government = communism
+			has_country_flag = is_maresoc
+			is_subject = no
+			OR = {
+				has_country_leader = { ruling_only = yes character = EQC_maresoc }
+				has_country_leader = { ruling_only = yes character = EQC_big_sister }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = alliance
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = support
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = protect
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = befriend
+		id = "EQC"
+		value = -500
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "EQC"
+		value = 100
+	}
+}
+
+
+interested_in_magic = {
+	allowed = {
+		interested_in_magic = yes
+		NOT = { original_tag = MTA }
+	}
+	enable = {
+		has_tech = magical_weapons
+		num_of_military_factories > 60
+		OR = {
+			has_equipment = { magical_equipment > 1000 }
+			check_variable = { potential_and_current_enemies^num < 1 }
+		}
+	}
+	abort = {
+		NOT = { num_of_military_factories > 60 }
+	}
+	ai_strategy = {
+		type = template_prio
+		id = magical_infantry
+		value = 10
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = magical_infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -30
+	}
+}
+
+interested_in_magic_tech = {
+	allowed = {
+		interested_in_magic = no
+	}
+	enable = {
+		has_tech = magical_weapons
+		OR = {
+			has_tech = tech_horse_magical_infantry
+			has_tech = tech_pony_magical_infantry
+		}
+		num_of_military_factories > 60
+		OR = {
+			has_equipment = { magical_equipment > 1000 }
+			check_variable = { potential_and_current_enemies^num < 1 }
+		}
+	}
+	abort = {
+		NOT = { num_of_military_factories > 60 }
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = magical_infantry
+		value = 10
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = magical_infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -30
+	}
+}
+
+# will produce almost no regular infantry
+super_interested_in_magic = {
+	allowed = {
+		original_tag = MTA
+	}
+	enable = {
+		has_tech = magical_weapons
+		OR = {
+			has_equipment = { magical_equipment > 1000 }
+			check_variable = { potential_and_current_enemies^num < 1 }
+		}
+	}
+	abort = {
+		always = no
+	}
+	ai_strategy = {
+		type = template_prio
+		id = magical_infantry
+		value = 50
+	}
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = -50
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = magical_infantry
+		value = 50
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -65
+	}
+}
+
+even_more_interested_in_magic = {
+	allowed = {
+		original_tag = EQS
+	}
+	enable = {
+		is_EQS_SOL = yes
+		has_completed_focus = SOL_mage_army
+		has_tech = magical_weapons
+	}
+	abort = {
+		always = no
+	}
+	ai_strategy = {
+		type = template_prio
+		id = magical_infantry
+		value = 10
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = magical_infantry
+		value = 15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -15
+	}
+}
+
+no_one_leaves_raft = {
+	allowed = {
+		OR = {
+			original_tag = WAR
+			original_tag = ZUM
+			original_tag = CTH
+			original_tag = ZAR
+		}
+	}
+	enable = {
+		is_in_faction_with = HIP
+		HIP = {
+			has_government = neutrality
+			is_subject = no
+			has_completed_focus = HIP_international_obligations
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = alliance
+		id = "HIP"
+		value = 500
+	}
+	ai_strategy = {
+		type = ignore_claim
+		id = "HIP"
+		value = 1
+	}
+}
+
+no_one_leaves_raft_reverse = {
+	allowed = {
+		OR = {
+			original_tag = WAR
+			original_tag = ZUM
+			original_tag = CTH
+			original_tag = ZAR
+		}
+	}
+	reversed = yes
+	enable = {
+		is_in_faction_with = HIP
+		HIP = {
+			has_government = neutrality
+			is_subject = no
+			has_completed_focus = HIP_international_obligations
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = alliance
+		id = "HIP"
+		value = 500
+	}
+	ai_strategy = {
+		type = ignore_claim
+		id = "HIP"
+		value = 1
+	}
+}
