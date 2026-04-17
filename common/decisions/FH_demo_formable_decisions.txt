@@ -3754,13 +3754,14 @@ BAK_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { FBK.original_cores = THIS }
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BAK_secure_frontlines"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_in_array = { FBK.original_cores = THIS }
 				}
@@ -3785,13 +3786,14 @@ BAK_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { HLR.original_cores = THIS }
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BAK_spread_constitutional_monarchism"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_in_array = { HLR.original_cores = THIS }
 				}
@@ -3808,13 +3810,14 @@ BAK_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { RCT.original_cores = THIS }
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision BAK_manifest_destiny"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_in_array = { RCT.original_cores = THIS }
 				}
@@ -5436,7 +5439,7 @@ BRS_formables_category = {
 	}
 	BRS_fabulous = {
 		available = {
-			date > 1050.1.1
+			date > 1051.1.1
 		}
 		visible = {
 			NOT = { has_country_flag = BRS_sought_peace }
@@ -5463,6 +5466,14 @@ BRS_formables_category = {
 		}
 		ai_will_do = {
 			factor = 100
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+			modifier = {
+				factor = 0
+				1176 = { NOT = { is_owned_and_controlled_by = ROOT } }
+			}
 		}
 	}
 	BRS_only_raj = {
@@ -5499,7 +5510,7 @@ BRS_formables_category = {
 	}
 	BRS_kiria_now_best_friend = {
 		available = {
-			date > 1050.1.1
+			date > 1051.1.1
 		}
 		visible = {
 			NOT = { has_country_flag = BRS_war_only_option }
@@ -5521,7 +5532,11 @@ BRS_formables_category = {
 			set_cosmetic_tag = BRS_BUD
 		}
 		ai_will_do = {
-			factor = 100
+			factor = 125
+			modifier = {
+				factor = 0
+				1176 = { NOT = { is_owned_by = ROOT } }
+			}
 		}
 	}
 }
@@ -5788,18 +5803,6 @@ KIR_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision KIR_pat_deet"
 			add_to_variable = { KIR_decision_counter = 1 }
-			every_state = {
-				limit = {
-					is_in_array = { CTL.original_cores = THIS }
-				}
-				add_core_of = BRS
-				if = {
-					limit = {
-						NOT = { is_owned_by = BRS }
-					}
-					transfer_state_to = BRS
-				}
-			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -6093,6 +6096,15 @@ ZLU_formables_category = {
 				declare_war_on = {
 					target = MEL
 					type = annex_everything
+				}
+				if = {
+					limit = {
+						is_ai = yes
+						MEL = { is_ai = yes }
+					}
+					MEL = {
+						add_ideas = surrender_limit_reduction
+					}
 				}
 			}
 			if = {
@@ -6635,7 +6647,7 @@ DEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision DEL_enforce_faith"
 			every_state = {
 				limit = {
-					is_in_array = { IDO.original_cores = yes }
+					is_in_array = { IDO.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
@@ -6664,6 +6676,15 @@ DEL_formables_category = {
 				create_wargoal = {
 					target = MEL
 					type = annex_everything
+				}
+				if = {
+					limit = {
+						is_ai = yes
+						MEL = { is_ai = yes }
+					}
+					MEL = {
+						add_ideas = surrender_limit_reduction
+					}
 				}
 			}
 		}
