@@ -246,6 +246,126 @@ form_crystal_empire_category = {
 	}
 }
 form_changelingian_protectorates_category = {
+	CHN_revive_military_apparatus = {
+		available = {
+			date > 1048.12.31
+		}
+		cost = 150
+		days_remove = 365
+		fire_only_once = yes
+		modifier = {
+			army_experience = -0.05
+			war_support_factor = -0.15
+			consumer_goods_factor = 0.2
+			army_org_factor = -0.2
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_revive_military_apparatus"
+			swap_ideas = {
+				remove_idea = CHN_idea_memory_44
+				add_idea = CHN_idea_memory_44_better
+			}
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+		}
+	}
+	CHN_finish_military_restructuring = {
+		available = {
+			date > 1050.12.31
+		}
+		visible = {
+			has_idea = CHN_idea_memory_44_better
+		}
+		cost = 100
+		days_remove = 180
+		fire_only_once = yes
+		modifier = {
+			army_experience = -0.15
+			army_defence_factor = -0.1
+			army_offence_factor = -0.1
+			army_org_factor = -0.05
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_finish_military_restructuring"
+			remove_ideas = CHN_idea_memory_44_better
+		}
+	}
+	CHN_break_the_corporate_backs = {
+		available = {
+			date > 1049.6.30
+		}
+		cost = 75
+		days_remove = 90
+		fire_only_once = yes
+		modifier = {
+			consumer_goods_factor = 0.15
+			industrial_capacity_factory = -0.2
+			industrial_capacity_dockyard = -0.2
+			stability_weekly = -0.002
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_break_the_corporate_backs"
+			remove_ideas = CHN_idea_corp
+		}
+	}
+	CHN_rally_around_the_queen = {
+		available = {
+			date > 1049.6.30
+		}
+		cost = 35
+		days_remove = 150
+		fire_only_once = yes
+		modifier = {
+			political_power_gain = -0.4
+			stability_weekly = 0.001
+			fascism_drift = 0.02
+		}
+		complete_effect = {
+			add_stability = -0.1
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_rally_around_the_queen"
+			remove_ideas = CHN_idea_politic_unified
+		}
+	}
+	CHN_arrest_squabblers = {
+		available = {
+			date > 1049.10.31
+		}
+		cost = 60
+		days_remove = 60
+		fire_only_once = yes
+		modifier = {
+			political_power_gain = -0.15
+			monthly_population = -0.25
+			weekly_manpower = -250
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_arrest_squabblers"
+			remove_ideas = CHN_political_infighting
+		}
+	}
+	CHN_stimulate_other_economic_activities = {
+		available = {
+			date > 1050.6.30
+		}
+		cost = 125
+		days_remove = 365
+		fire_only_once = yes
+		modifier = {
+			consumer_goods_factor = 0.25
+			political_power_gain = -0.1
+			conscription_factor = -0.15
+			stability_weekly = 0.001
+			production_speed_industrial_complex_factor = 0.1
+			production_speed_arms_factory_factor = -0.15
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_stimulate_other_economic_activities"
+			remove_ideas = CHN_idea_CHN_economy
+		}
+	}
 	CHN_institute_polar_bear_authority = {
 		available = {
 			custom_trigger_tooltip = {
@@ -862,14 +982,7 @@ form_changelingian_protectorates_category = {
 	CHN_protect_the_penguins = {
 		available = {
 			SCH = {
-				all_core_state = {
-					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
-					}
-				}
+				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 		}
 		fire_only_once = yes
@@ -936,24 +1049,10 @@ form_changelingian_protectorates_category = {
 	CHN_revive_west_griffonia = {
 		available = {
 			MWR = {
-				all_core_state = {
-					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
-					}
-				}
+				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 			NVC = {
-				all_core_state = {
-					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
-					}
-				}
+				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 			1217 = {
 				OR = {
@@ -1036,14 +1135,7 @@ form_changelingian_protectorates_category = {
 	CHN_crush_communisms_cradle = {
 		available = {
 			STG = {
-				all_core_state = {
-					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
-					}
-				}
+				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 		}
 		fire_only_once = yes
@@ -1081,14 +1173,7 @@ form_changelingian_protectorates_category = {
 	CHN_steal_crystal_love = {
 		available = {
 			CRY = {
-				all_core_state = {
-					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
-					}
-				}
+				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 			CWR = {
 				all_core_state = {
@@ -1156,84 +1241,28 @@ form_changelingian_protectorates_category = {
 			custom_trigger_tooltip = {
 				tooltip = CHN_owns_all_east_and_southeast_states
 				EQS = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				BAL = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				CER = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				CLD = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				NER = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				WHY = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				BLS = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 				AWR = {
-					all_core_state = {
-						OR = {
-							is_owned_by = ROOT
-							owner = {
-								is_puppet_of = ROOT
-							}
-						}
-					}
+					all_original_cores_owned_by_ROOT_or_subject = yes
 				}
 			}
 		}
@@ -6932,7 +6961,7 @@ DEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				is_in_array = { ROA.original_cores = yes }
+				is_in_array = { ROA.original_cores = THIS }
 			}
 		}
 		fire_only_once = yes
@@ -6954,7 +6983,6 @@ DEL_formables_category = {
 			ROA = { all_original_cores_owned_by_ROOT = yes }
 		}
 		visible = {
-			is_ai = no
 			has_cosmetic_tag = DEL_COM
 		}
 		highlight_states = {
