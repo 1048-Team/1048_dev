@@ -263,3 +263,90 @@ country_event = { #Successfully repelled border raide
         add_war_support = 0.01
     }
 }
+
+country_event = { #Choose the princess to lead CRY
+    id = fh_demo.7
+    title = fh_demo.7.t
+    desc = fh_demo.7.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_demo.7"}
+
+    is_triggered_only = yes
+
+    option = { #Cadance
+        name = fh_demo.7.a
+    }
+
+    option = { #Twilight
+        name = fh_demo.7.b
+        promote_character = CRY_twilight_sparkle
+        hidden_effect = {
+            remove_ideas = twilight_sparkle
+            add_ideas = princess_cadance
+        }
+    }
+
+    option = { #Luna
+        name = fh_demo.7.c
+        promote_character = CRY_luna
+        hidden_effect = {
+            remove_ideas = luna
+            add_ideas = princess_cadance
+            set_cosmetic_tag = CRY_LUN
+        }
+    }
+
+    option = { #Flurry Heart convinces them all to let her lead
+        name = fh_demo.7.e
+        promote_character = CRY_flurry_heart_1048
+        hidden_effect = {
+            remove_ideas = flurryheart
+            add_ideas = princess_cadance
+        }
+    }
+}
+
+country_event = { #Temp event for CRY losing Shining and choosing a replacement
+    id = fh_demo.8
+    title = fh_demo.8.t
+    desc = fh_demo.8.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_demo.8"}
+
+    is_triggered_only = yes
+
+    option = { #Misty Night is the most experienced.
+        name = fh_demo.8.a
+        CRY_misty_night_1048 = {
+            promote_leader = yes
+            add_trait = { trait = royal_guard_commander }
+        }
+    }
+
+    option = { #Flash Sentry has the same defensive-mindedness as Shining.
+        name = fh_demo.8.b
+        CRY_flash_sentry_1048 = {
+            promote_leader = yes
+            hidden_effect = {
+                remove_trait = { trait = recently_promoted }
+            }
+            add_trait = { trait = royal_guard_commander }
+        }
+    }
+
+    option = { #Rainbow Dash is an Element and skilled commander. It should be her.
+        name = fh_demo.8.c
+        add_political_power = -50
+        add_command_power = -25
+        CRY_rainbowdash = {
+            promote_leader = yes
+            add_skill_level = 1
+            add_trait = { trait = royal_guard_commander }
+            hidden_effect = {
+                remove_trait = { trait = recently_promoted }
+            }
+        }
+    }
+
+    after = {
+        retire_character = CRY_shining_armour_1048
+    }
+}
