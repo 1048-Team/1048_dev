@@ -79,6 +79,127 @@ form_crystal_sickle_union_category = {
 	}
 }
 form_crystal_empire_category = {
+	CRY_end_the_protests = {
+		available = {
+			date > 1048.6.30
+		}
+		fire_only_once = yes
+		cost = 150
+		days_remove = 35
+		modifier = {
+			political_power_gain = -0.5
+			stability_weekly = -0.02
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_end_the_protests"
+			remove_ideas = CRY_union_unrest
+		}
+		ai_will_do = {
+			modifier = {
+				date < 1049.1.1
+				factor = 0
+			}
+		}
+	}
+	CRY_re_establish_military_funding = {
+		available = {
+			date > 1050.6.30
+		}
+		fire_only_once = yes
+		cost = 75
+		days_remove = 70
+		modifier = {
+			army_experience = -0.1
+			consumer_goods_factor = 0.25
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_re_establish_military_funding"
+			remove_ideas = CRY_dilapidated_army
+		}
+	}
+	CRY_repudiate_CHN_treaty = {
+		available = {
+			date > 1051.8.31
+			has_army_manpower > 500000
+		}
+		fire_only_once = yes
+		cost = 100
+		days_remove = 21
+		war_with_on_remove = CHN
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_repudiate_CHN_treaty"
+			remove_ideas = CRY_treaty_of_gossamer_hills
+			1220 = {
+				set_demilitarized_zone = no
+			}
+			custom_effect_tooltip = CRY_could_lead_to_war_tt
+			hidden_effect = {
+				diplomatic_relation = {
+					country = CHN
+					relation = non_aggression_pact
+					active = no
+				}
+				CHN = {
+					country_event = {
+						id = formable_event.57
+						days = 7
+					}
+					remove_ideas = CHN_gossamer_hills
+				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	CRY_send_STG_ultimatum = {
+		available = {
+			NOT = { has_idea = CRY_dilapidated_army }
+		}
+		fire_only_once = yes
+		days_remove = 14
+		war_with_on_remove = CWR
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_send_STG_ultimatum"
+			if = {
+				limit = {
+					NOT = { has_country_leader = { character = CRY_luna } }
+				}
+				if = {
+					limit = {
+						CWR = {
+							is_subject = yes
+						}
+					}
+					CWR = {
+						OVERLORD = {
+							country_event = formable_event.55
+						}
+					}
+				}
+				else = {
+					CWR = {
+						country_event = formable_event.55
+					}
+				}
+			}
+			else = {
+				create_wargoal = {
+					target = CWR
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
 	CRY_welcome_back_lost_friends = {
 		available = {
 			has_war = no
