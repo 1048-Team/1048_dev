@@ -2834,6 +2834,146 @@ country_event = { #With either the integration or the rejection of the lost terr
     }
 }
 
+country_event = { #CRY demands that with their army matters sorted that STG/CWR surrender before a war leads to more death
+    id = formable_event.55
+    title = formable_event.55.t
+    desc = formable_event.55.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.55"}
+
+    is_triggered_only = yes
+
+    option = { #They've mobilized far more than we thought...
+        name = formable_event.55.a
+        ai_chance = {
+            modifier = {
+                FROM = {
+                    strength_ratio = {
+                        tag = ROOT
+                        ratio > 0.85
+                    }
+                }
+                factor = 6
+            }
+        }
+        set_country_flag = CRY_CWR_agreed
+    }
+
+    option = { #They're nothing but a paper tiger!
+        name = formable_event.55.b
+        ai_chance = {
+            factor = 2
+        }
+    }
+
+    after = {
+        FROM = {
+            country_event = {
+                id = formable_event.56
+                days = 1
+            }
+        }
+    }
+}
+
+country_event = { #CRY gets the response from STG/CWR regarding their polite request of taking back the land they're owed
+    id = formable_event.56
+    title = formable_event.56.t
+    desc = {
+        trigger = {
+            FROM = { has_country_flag = CRY_CWR_agreed }
+        }
+        text = formable_event.56.d_a
+    }
+    desc = {
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = CRY_CWR_agreed }
+            }
+        }
+        text = formable_event.56.d_b
+    }
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.56"}
+
+    is_triggered_only = yes
+
+    option = { #The best we could hope for.
+        name = formable_event.56.a
+        trigger = {
+            FROM = { has_country_flag = CRY_CWR_agreed }
+        }
+        annex_country = {
+            target = CWR
+        }
+    }
+
+    option = { #So they have chosen war...
+        name = formable_event.56.b
+        trigger = {
+            FROM = {
+                NOT = { has_country_flag = CRY_CWR_agreed }
+            }
+        }
+        create_wargoal = {
+            target = CWR
+            type = annex_everything
+        }
+    }
+}
+
+country_event = { #CHN is informed about CRY thumbing their nose as the treaty and has the option to go after them
+    id = formable_event.57
+    title = formable_event.57.t
+    desc = formable_event.57.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event.57"}
+
+    is_triggered_only = yes
+
+    option = { #So [CRY.GetLeader] has grown a spine, huh?
+        name = formable_event.57.a
+        ai_chance = {
+            factor = 10
+            modifier = {
+                has_idea = CHN_idea_memory_44
+                factor = 0 #Don't go into a war when you can't train units
+            }
+            modifier = {
+                has_idea = CHN_idea_CHN_economy
+                factor = 0.3 #Less likely if economy is weak
+            }
+            modifier = {
+                FROM = {
+                    strength_ratio = {
+                        tag = ROOT
+                        ratio > 0.7
+                    }
+                }
+                factor = 0.5 #Less likely if high losses are possible
+            }
+        }
+    }
+
+    option = { #They are no longer our concern.
+        name = formable_event.57.b
+        ai_chance = {
+            factor = 3
+        }
+    }
+}
+
+#Template
+#country_event = {
+#    id = formable_event.
+#    title = formable_event.
+#    desc = formable_event.
+#    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event."}
+#
+#    is_triggered_only = yes
+#
+#    option = {
+#        name = formable_event.
+#    }
+#}
+
 #Flavor
 country_event = { #AWR culminating event
     id = formable_flavor_event.1
@@ -2886,17 +3026,3 @@ country_event = { #STM culminating event
         name = formable_flavor_event.4.a
     }
 }
-
-#Template
-#country_event = {
-#    id = formable_event.
-#    title = formable_event.
-#    desc = formable_event.
-#    immediate = {log = "[GetDateText]: [ROOT.GetName] event formable_event."}
-#
-#    is_triggered_only = yes
-#
-#    option = {
-#        name = formable_event.
-#    }
-#}
