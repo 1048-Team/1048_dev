@@ -1,8 +1,8 @@
 form_equestria_category = {
-	form_equestria = {
+	EQS_form_equestria = {
 		available = {
 			is_subject = no
-			owns_state = 3
+			3 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			NOT = {
@@ -13,11 +13,12 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = EQS
+				is_on_continent = europe
+				is_in_array = { EQS.original_cores = THIS }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision form_equestria"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_form_equestria"
 			every_state = {
 				limit = {
 					is_core_of = EQS
@@ -46,16 +47,16 @@ form_equestria_category = {
 			set_capital = { state = 3 }
 		}
 	}
-	rename_sanctum_solar = {
+	EQS_rename_sanctum_solar = {
 		available = {
 			is_subject = no
-			has_cosmetic_tag = EQS_NEW
-			owns_state = 3
+			3 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
 			NOT = { has_country_leader = { character = WHY_Solar_Strike ruling_only = yes } }
 			NOT = { tag = CER }
+			has_cosmetic_tag = EQS_NEW
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -64,19 +65,19 @@ form_equestria_category = {
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision rename_sanctum_solar"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_rename_sanctum_solar"
 			set_province_name = { id = 179 name = renamed_canterlot }
 			set_global_flag = canterlot_has_been_renamed
 		}
 	}
-	heartlands_victory = {
+	EQS_heartlands_victory = {
 		available = {
 			is_subject = no
-			owns_state = 74
-			owns_state = 1218
-			owns_state = 122
-			owns_state = 70
-			owns_state = 170
+			74 = { is_owned_and_controlled_by = ROOT }
+			1218 = { is_owned_and_controlled_by = ROOT }
+			122 = { is_owned_and_controlled_by = ROOT }
+			70 = { is_owned_and_controlled_by = ROOT }
+			170 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			NOT = {
@@ -91,38 +92,40 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
-					is_core_of = WHY
-					is_core_of = NER
-					is_core_of = CLD
-					is_core_of = BLS
-					is_core_of = CER
+					is_in_array = { WHY.original_cores = THIS }
+					is_in_array = { NER.original_cores = THIS }
+					is_in_array = { CLD.original_cores = THIS }
+					is_in_array = { BLS.original_cores = THIS }
+					is_in_array = { CER.original_cores = THIS }
 				}
 				NOT = { is_core_of = ROOT }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision heartlands_victory"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_heartlands_victory"
 			every_state = {
 				limit = {
-					AND = {
-						OR = {
-							is_core_of = WHY
-							is_core_of = NER
-							is_core_of = CLD
-							is_core_of = BLS
-							is_core_of = CER
-						}
-						NOT = { is_core_of = ROOT }
+					is_on_continent = europe
+					OR = {
+						is_in_array = { WHY.original_cores = THIS }
+						is_in_array = { NER.original_cores = THIS }
+						is_in_array = { CLD.original_cores = THIS }
+						is_in_array = { BLS.original_cores = THIS }
+						is_in_array = { CER.original_cores = THIS }
 					}
+					NOT = { is_core_of = ROOT }
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	reintigrating_the_southeast = {
+	EQS_reintigrating_the_southeast = {
 		available = {
-			owns_state = 1214
+			1214 = { is_owned_and_controlled_by = ROOT }
+			15 = { is_owned_and_controlled_by = ROOT }
+			16 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			NOT = {
@@ -133,32 +136,25 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				OR = {
-					is_core_of = BAL
-					is_claimed_by = BAL
-				}
+				is_on_continent = europe
+				is_in_array = { BAL.original_cores = THIS }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision reintigrating_the_southeast"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_reintigrating_the_southeast"
 			every_state = {
 				limit = {
-					OR = {
-						is_core_of = BAL
-						is_claimed_by = BAL
-					}
+					is_on_continent = europe
+					is_in_array = { BAL.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	reclaim_severyana = {
+	EQS_reclaim_severyana = {
 		available = {
-			owns_state = 153
-			NOT = {
-				country_exists = STG
-				country_exists = AWR
-			}
+			153 = { is_owned_and_controlled_by = ROOT }
+			525 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			NOT = { tag = BLS }
@@ -166,26 +162,28 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
-					is_core_of = STG
-					is_core_of = AWR
+					is_in_array = { STG.original_cores = THIS }
+					is_in_array = { AWR.original_cores = THIS }
 				}
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision reclaim_severyana"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_reclaim_severyana"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
-						is_core_of = AWR
-						is_core_of = STG
+						is_in_array = { AWR.original_cores = THIS }
+						is_in_array = { STG.original_cores = THIS }
 					}
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	southern_glory = {
+	EQS_southern_glory = {
 		available = {
 			controls_state = 21
 			OR = {
@@ -201,20 +199,22 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = SCS
+				is_on_continent = europe
+				is_in_array = { SCS.original_cores = THIS }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision southern_glory"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_southern_glory"
 			every_state = {
 				limit = {
-					is_core_of = SCS
+					is_on_continent = europe
+					is_in_array = { SCS.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	reinvest_in_las_pegasus = {
+	EQS_reinvest_in_las_pegasus = {
 		available = {
 			controls_state = 66
 			OR = {
@@ -230,20 +230,22 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = CCA
+				is_on_continent = europe
+				is_in_array = { CCA.original_cores = THIS }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision reinvest_in_las_pegasus"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_reinvest_in_las_pegasus"
 			every_state = {
 				limit = {
-					is_core_of = CCA
+					is_on_continent = europe
+					is_in_array = { CCA.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	reclaim_the_west_coast = {
+	EQS_reclaim_the_west_coast = {
 		available = {
 			controls_state = 14
 			OR = {
@@ -259,20 +261,22 @@ form_equestria_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = NCA
+				is_on_continent = europe
+				is_in_array = { NCA.original_cores = THIS }
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision reclaim_the_west_coast"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_reclaim_the_west_coast"
 			every_state = {
 				limit = {
-					is_core_of = NCA
+					is_on_continent = europe
+					is_in_array = { NCA.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	equestria_restored = {
+	EQS_equestria_restored = {
 		available = {
 			controls_state = 1216
 		}
@@ -294,7 +298,7 @@ form_equestria_category = {
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision equestria_restored"
+			log = "[GetDateText]: [Root.GetName]: Decision EQS_equestria_restored"
 			add_state_core = 173
 			add_state_core = 175
 			add_state_core = 138
@@ -306,10 +310,9 @@ form_equestria_category = {
 	}
 }
 form_yakyakistan_category = {
-	claim_the_throne = {
+	YAH_SMH_claim_the_throne = {
 		available = {
-			owns_state = 11
-			has_war = no
+			11 = { is_owned_and_controlled_by = ROOT }
 			custom_trigger_tooltip = {
 				tooltip = YAK_dead_rival_warlord_tt
 				OR = {
@@ -329,6 +332,7 @@ form_yakyakistan_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = {
 					array = global.YAK_territory
 					value = THIS.id
@@ -336,10 +340,11 @@ form_yakyakistan_category = {
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision claim_the_throne"
+			log = "[GetDateText]: [Root.GetName]: Decision YAH_SMH_claim_the_throne"
 			set_country_flag = reformed_YAK
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = {
 						array = global.YAK_territory
 						value = THIS.id
@@ -357,16 +362,15 @@ form_yakyakistan_category = {
 			}
 		}
 	}
-	integrate_old_territory = {
+	YAH_SMH_integrate_old_territory = {
 		available = {
-			owns_state = 335
-			owns_state = 336
-			owns_state = 337
-			owns_state = 281
-			owns_state = 278
-			owns_state = 277
-			owns_state = 342
-			has_war = no
+			335 = { is_owned_and_controlled_by = ROOT }
+			336 = { is_owned_and_controlled_by = ROOT }
+			337 = { is_owned_and_controlled_by = ROOT }
+			281 = { is_owned_and_controlled_by = ROOT }
+			278 = { is_owned_and_controlled_by = ROOT }
+			277 = { is_owned_and_controlled_by = ROOT }
+			342 = { is_owned_and_controlled_by = ROOT }
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -393,14 +397,14 @@ form_yakyakistan_category = {
 	}
 }
 form_PLB_category = {
-	reform_our_communities = {
+	JGR_reform_our_communities = {
 		available = {
-			owns_state = 290
-			has_war = no
+			290 = { is_owned_and_controlled_by = ROOT }
 		}
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = {
 					array = global.PLB_territory
 					value = THIS.id
@@ -408,9 +412,10 @@ form_PLB_category = {
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision reform_our_communities"
+			log = "[GetDateText]: [Root.GetName]: Decision JGR_reform_our_communities"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = {
 						array = global.PLB_territory
 						value = THIS.id
@@ -424,12 +429,11 @@ form_PLB_category = {
 	}
 }
 form_nova_griffonia_cetegory = {
-	a_new_nova_griffonia = {
+	GRF_a_new_nova_griffonia = {
 		available = {
-			owns_state = 1217
-			owns_state = 281
-			owns_state = 243
-			has_war = no
+			1217 = { is_owned_and_controlled_by = ROOT }
+			281 = { is_owned_and_controlled_by = ROOT }
+			243 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			AND = {
@@ -439,6 +443,7 @@ form_nova_griffonia_cetegory = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = {
 						array = global.GRF_territory
@@ -450,9 +455,10 @@ form_nova_griffonia_cetegory = {
 		}
 		fire_only_once = yes
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision a_new_nova_griffonia"
+			log = "[GetDateText]: [Root.GetName]: Decision GRF_a_new_nova_griffonia"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = {
 							array = global.GRF_territory
@@ -483,41 +489,40 @@ form_nova_griffonia_cetegory = {
 form_western_griffonian_empire_category = {
 	GRF_assert_imperial_de_jure_authority = {
 		available = {
-			owns_state = 281
-			owns_state = 243
-			has_war = no
+			281 = { is_owned_and_controlled_by = ROOT }
+			243 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			original_tag = GRF
-			NOT = { has_country_flag = reformed_western_griffon_empire }
+			NOT = { has_country_flag = GRF_reformed_western_griffon_empire }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = {
 					array = global.GRF_territory
 					value = THIS.id
 				}
 				OR = {
-					is_core_of = NVC
-					is_core_of = VRG
+					is_in_array = { NVC.original_cores = THIS }
+					is_in_array = { VRG.original_cores = THIS }
 				}
 			}
 		}
-		cost = 50
 		fire_only_once = yes
-		days_remove = 60
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove GRF_assert_imperial_de_jure_authority"
 			set_country_flag = GRF_first_core_expansion
 			every_state = {
+				is_on_continent = europe
 				limit = {
 					is_in_array = {
 						array = global.GRF_territory
 						value = THIS.id
 					}
 					OR = {
-						is_core_of = NVC
-						is_core_of = VRG
+						is_in_array = { NVC.original_cores = THIS }
+						is_in_array = { VRG.original_cores = THIS }
 					}
 				}
 				add_core_of = ROOT
@@ -526,61 +531,60 @@ form_western_griffonian_empire_category = {
 	}
 	GRF_return_the_old_colonial_borders = {
 		available = {
-			owns_state = 338
-			owns_state = 288
-			has_war = no
+			338 = { is_owned_and_controlled_by = ROOT }
+			288 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = {
 			original_tag = GRF
 			has_country_flag = GRF_first_core_expansion
-			NOT = { has_country_flag = reformed_western_griffon_empire }
+			NOT = { has_country_flag = GRF_reformed_western_griffon_empire }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = {
 					array = global.GRF_territory
 					value = THIS.id
 				}
 				OR = {
-					is_core_of = MWR
-					is_core_of = SCH
+					is_in_array = { MWR.original_cores = THIS }
+					is_in_array = { SCH.original_cores = THIS }
 				}
 			}
 		}
-		cost = 35
 		fire_only_once = yes
-		days_remove = 60
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove GRF_return_the_old_colonial_borders"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = {
 						array = global.GRF_territory
 						value = THIS.id
 					}
 					OR = {
-						is_core_of = MWR
-						is_core_of = SCH
+						is_in_array = { MWR.original_cores = THIS }
+						is_in_array = { SCH.original_cores = THIS }
 					}
 				}
 				add_core_of = ROOT
 			}
 		}
 	}
-	rebirth_of_the_western_empire = {
+	GRF_rebirth_of_the_western_empire = {
 		available = {
-			has_war = no
-			owns_state = 1217
-			owns_state = 243
-			owns_state = 281
-			owns_state = 289
-			owns_state = 11
-			owns_state = 274
-			owns_state = 325
+			1217 = { is_owned_and_controlled_by = ROOT }
+			243 = { is_owned_and_controlled_by = ROOT }
+			281 = { is_owned_and_controlled_by = ROOT }
+			289 = { is_owned_and_controlled_by = ROOT }
+			11 = { is_owned_and_controlled_by = ROOT }
+			274 = { is_owned_and_controlled_by = ROOT }
+			325 = { is_owned_and_controlled_by = ROOT }
 		}
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = {
 						array = global.WGE_territory
@@ -592,9 +596,10 @@ form_western_griffonian_empire_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
-			set_country_flag = reformed_western_griffon_empire
+			set_country_flag = GRF_reformed_western_griffon_empire
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = {
 							array = global.WGE_territory
@@ -663,6 +668,7 @@ SCH_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { global.WGE_territory = THIS }
 					state = 262
@@ -681,6 +687,7 @@ SCH_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = { global.WGE_territory = THIS }
 						state = 262
