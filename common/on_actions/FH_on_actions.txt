@@ -285,36 +285,20 @@ on_actions = {
 		}
 	}
 
-	# ROOT is new controller, FROM is old controller, FROM.FROM is state ID
-	# Peace out for ROA/Zebride war
-	on_state_control_changed = {
+	#ROOT is nation being puppeted; FROM is overlord
+	on_puppet = {
 		effect = {
-			log = "[GetDateText]: THIS: [THIS.GetName]: on_state_control_changed"
+			log = "[GetDateText]: THIS: [THIS.GetName]: FH on_puppet"
 			if = {
 				limit = {
 					ROOT = {
-						OR = {
-							tag = ZOO
-							tag = MEL
-							tag = TAI
-						}
+						tag = MIT
 					}
 					FROM = {
-						OR = {
-							tag = CNT
-							tag = ROA
-						}
-					}
-					FROM.FROM = {
-						state = 1136
+						tag = EQC
 					}
 				}
-				ROOT = {
-					save_global_event_target_as = zebride_conqueror
-				}
-				FROM = {
-					activate_mission = zebride_control_timeout
-				}
+				set_cosmetic_tag = MIT_mareland_puppet
 			}
 		}
 	}
