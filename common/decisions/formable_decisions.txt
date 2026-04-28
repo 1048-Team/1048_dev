@@ -44,14 +44,16 @@ form_crystal_sickle_union_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = CRY
+				is_on_continent = europe
+				is_in_array = { CRY.original_cores = THIS }
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision form_crystal_sickle_union"
 			every_state = {
 				limit = {
-					is_core_of = CRY
+					is_on_continent = europe
+					is_in_array = { CRY.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
@@ -212,24 +214,21 @@ form_crystal_empire_category = {
 	}
 	CRY_welcome_back_lost_friends = {
 		available = {
-			has_war = no
-			CWR = {
-				all_core_state = {
-					is_owned_by = ROOT
-				}
-			}
+			CWR = { all_original_cores_owned_by_ROOT = yes }
 		}
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = CWR
+				is_on_continent = europe
+				is_in_array = { CRY.original_cores = THIS }
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CRY_welcome_back_lost_friends"
 			every_state = {
 				limit = {
-					is_core_of = CWR
+					is_on_continent = europe
+					is_in_array = { CRY.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
@@ -988,24 +987,36 @@ form_changelingian_protectorates_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				is_core_of = SCH
+				is_on_continent = europe
+				is_in_array = { SCH.original_cores = THIS }
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHN_protect_the_penguins"
-			release_puppet = SCH
+			effect_tooltip = {
+				release_autonomy = {
+					target = SCH
+					autonomous_state = autonomy_reichsprotectorate
+				}
+			}
 			SCH = {
 				add_to_tech_sharing_group = CHN_research
 				set_country_flag = is_changeling_puppet
 				drop_cosmetic_tag = yes
 				set_cosmetic_tag = PNG_CHN_protectorate
 			}
-			every_state = {
-				limit = {
-					is_core_of = SCH
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_on_continent = europe
+						is_in_array = { SCH.original_cores = THIS }
+					}
+					transfer_state_to = SCH
 				}
-				SCH = { transfer_state = PREV }
-				add_core_of = SCH
+				set_autonomy = {
+					target = SCH
+					autonomous_state = autonomy_reichsprotectorate
+				}
 			}
 			CHN = {
 				SCH = { transfer_technology = yes }
@@ -1074,9 +1085,10 @@ form_changelingian_protectorates_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
-					is_core_of = MWR
-					is_core_of = NVC
+					is_in_array = { MWR.original_cores = THIS }
+					is_in_array = { NVC.original_cores = THIS }
 					state = 1217
 					state = 271
 				}
@@ -1094,34 +1106,45 @@ form_changelingian_protectorates_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHN_revive_west_griffonia"
-			release_puppet = GRF
+			effect_tooltip = {
+				release_autonomy = {
+					target = GRF
+					autonomous_state = autonomy_reichsprotectorate
+				}
+			}
 			GRF = {
 				add_to_tech_sharing_group = CHN_research
 				set_country_flag = is_changeling_puppet
 				drop_cosmetic_tag = yes
 				set_cosmetic_tag = GRF_CHN_duchy
 			}
-			every_state = {
-				limit = {
-					OR = {
-						is_core_of = MWR
-						is_core_of = NVC
-						state = 1217
-						state = 271
-					}
-					if = {
-						limit = {
-							336 = {
-								is_owned_by = SMH
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							is_in_array = { MWR.original_cores = THIS }
+							is_in_array = { NVC.original_cores = THIS }
+							state = 1217
+							state = 271
+						}
+						if = {
+							limit = {
+								336 = {
+									is_owned_by = SMH
+								}
+							}
+							NOT = {
+								state = 336
 							}
 						}
-						NOT = {
-							state = 336
-						}
 					}
+					transfer_state_to = GRF
+					add_core_of = GRF
 				}
-				GRF = { transfer_state = PREV }
-				add_core_of = GRF
+				set_autonomy = {
+					target = GRF
+					autonomous_state = autonomy_reichsprotectorate
+				}
 			}
 
 			CHN = {
@@ -1141,25 +1164,36 @@ form_changelingian_protectorates_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				OR = {
-					is_core_of = STG
-				}
+				is_on_continent = europe
+				is_in_array = { STG.original_cores = THIS }
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHN_crush_communisms_cradle"
-			release_puppet = STG
+			effect_tooltip = {
+				release_autonomy = {
+					target = STG
+					autonomous_state = autonomy_reichsprotectorate
+				}
+			}
 			STG = {
 				add_to_tech_sharing_group = CHN_research
 				set_country_flag = is_changeling_puppet
 				drop_cosmetic_tag = yes
 				set_cosmetic_tag = STG_CHN_purification
 			}
-			every_state = {
-				limit = {
-					is_core_of = STG
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_on_continent = europe
+						is_in_array = { STG.original_cores = THIS }
+					}
+					transfer_state_to = STG
 				}
-				STG = { transfer_state = PREV }
+				set_autonomy = {
+					target = STG
+					autonomous_state = autonomy_reichsprotectorate
+				}
 			}
 
 			CHN = {
@@ -1176,52 +1210,54 @@ form_changelingian_protectorates_category = {
 				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 			CWR = {
-				all_core_state = {
-					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
-					}
-				}
+				all_original_cores_owned_by_ROOT_or_subject = yes
 			}
 		}
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
-					is_core_of = CRY
-					is_core_of = CWR
+					is_in_array = { CRY.original_cores = THIS }
+					is_in_array = { CWR.original_cores = THIS }
 				}
 			}
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHN_steal_crystal_love"
-			release_puppet = CRY
+			effect_tooltip = {
+				release_autonomy = {
+					target = CRY
+					autonomous_state = autonomy_reichsprotectorate
+				}
+			}
 			CRY = {
 				add_to_tech_sharing_group = CHN_research
 				set_country_flag = is_changeling_puppet
 				drop_cosmetic_tag = yes
 				set_cosmetic_tag = CRY_CHN_extraction
 			}
-			every_state = {
-				limit = {
-					OR = {
-						is_core_of = CRY
-						is_core_of = CWR
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_on_continent = europe
+						OR = {
+							is_in_array = { CRY.original_cores = THIS }
+							is_in_array = { CWR.original_cores = THIS }
+						}
 					}
+					transfer_state_to = CRY
+					add_core_of = CRY
 				}
-				CRY = { transfer_state = PREV }
-				add_core_of = CRY
-			}
-			if = {
-				limit = {
+				if = {
+					limit = {
+						1220 = {
+							is_demilitarized_zone = yes
+						}
+					}
 					1220 = {
-						is_demilitarized_zone = yes
+						set_demilitarized_zone = no
 					}
-				}
-				1220 = {
-					set_demilitarized_zone = no
 				}
 			}
 
@@ -1269,11 +1305,8 @@ form_changelingian_protectorates_category = {
 		fire_only_once = yes
 		highlight_states = {
 			highlight_states_trigger = {
-				OR = {
-					is_core_of = EQS
-					is_core_of = BAL
-					is_claimed_by = EQS
-				}
+				is_on_continent = europe
+				is_in_array = { global.EQS_original_territory = THIS }
 				NOT = {
 					OR = {
 						is_core_of = STG
@@ -1290,6 +1323,7 @@ form_changelingian_protectorates_category = {
 			hidden_effect = {
 				every_state = {
 					limit = {
+						is_on_continent = europe
 						is_in_array = { global.EQS_original_territory = THIS }
 						NOT = {
 							OR = {
@@ -1313,6 +1347,9 @@ form_changelingian_protectorates_category = {
 					target = EQS
 					autonomous_state = autonomy_reichsprotectorate
 				}
+				EQS = {
+					load_focus_tree = generic_focus
+				}
 			}
 			effect_tooltip = {
 				release_autonomy = {
@@ -1329,9 +1366,6 @@ form_changelingian_protectorates_category = {
 
 			CHN = {
 				EQS = { transfer_technology = yes }
-			}
-			EQS = {
-				load_focus_tree = generic_focus
 			}
 		}
 		ai_will_do = {
@@ -1414,6 +1448,7 @@ SCS_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = { BAL.original_cores = THIS }
 			}
 		}
@@ -1422,6 +1457,7 @@ SCS_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision SCS_american_expy_moment"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = { BAL.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -1451,6 +1487,7 @@ SCS_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { EQS.original_cores = THIS }
 					is_in_array = { WHY.original_cores = THIS }
@@ -1466,6 +1503,7 @@ SCS_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision SCS_eastern_extraction_board"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = { EQS.original_cores = THIS }
 						is_in_array = { WHY.original_cores = THIS }
@@ -1537,6 +1575,7 @@ SCS_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = { global.EQS_original_territory = THIS }
 				NOT = { is_owned_by = CHN }
 			}
@@ -1546,6 +1585,7 @@ SCS_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision SCS_core_go_up"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = { global.EQS_original_territory = THIS }
 					NOT = { is_owned_by = CHN }
 				}
@@ -1571,6 +1611,7 @@ CCA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { EQS.original_cores = THIS }
 					is_in_array = { WHY.original_cores = THIS }
@@ -1664,6 +1705,7 @@ CCA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = { global.EQS_original_territory = THIS }
 			}
 		}
@@ -1672,6 +1714,7 @@ CCA_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision CCA_equestrian_refinancing"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = { global.EQS_original_territory = THIS }
 					NOT = { is_core_of = ROOT }
 				}
@@ -1829,6 +1872,7 @@ NCA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { EQS.original_cores = THIS }
 					is_in_array = { WHY.original_cores = THIS }
@@ -1844,6 +1888,7 @@ NCA_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision NCA_equestrian_oppression"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = { EQS.original_cores = THIS }
 						is_in_array = { WHY.original_cores = THIS }
@@ -1887,6 +1932,7 @@ OLE_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_claimed_by = OLE
 				is_owned_by = CHN
 			}
@@ -1945,6 +1991,7 @@ OLE_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
 					is_in_array = { global.original_OLE_states = THIS }
 					state = 1216
@@ -1969,6 +2016,7 @@ OLE_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: Decision OLE_form_grand_olenia"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = { global.original_OLE_states = THIS }
 						state = 1216
@@ -2010,6 +2058,7 @@ OLE_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = { CHN.original_cores = THIS }
 				NOT = { is_core_of = ROOT }
 			}
@@ -2033,6 +2082,7 @@ OLE_formables_category = {
 			hidden_effect = {
 				every_state = {
 					limit = {
+						is_on_continent = europe
 						is_in_array = { CHN.original_cores = THIS }
 						NOT = { is_core_of = ROOT }
 					}
@@ -2044,6 +2094,7 @@ OLE_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = europe
 						OR = {
 							state = 313
 							state = 312
@@ -2088,6 +2139,7 @@ HLR_formables_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = asia
                 OR = {
                     is_in_array = { FBK.original_cores = THIS }
                     is_in_array = { BAK.original_cores = THIS }
@@ -2100,6 +2152,7 @@ HLR_formables_category = {
             set_cosmetic_tag = HLR_NOR
             every_state = {
                 limit = {
+					is_on_continent = asia
                     OR = {
                         is_in_array = { FBK.original_cores = THIS }
                         is_in_array = { BAK.original_cores = THIS }
@@ -2126,6 +2179,7 @@ HLR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { RCT.original_cores = THIS }
 					is_in_array = { NIM.original_cores = THIS }
@@ -2145,6 +2199,7 @@ HLR_formables_category = {
 			RCT = { set_cosmetic_tag = RIV_exile }
 			hidden_effect = {
 				every_state = {
+					is_on_continent = asia
 					limit = {
 						OR = {
 							is_in_array = { RCT.original_cores = THIS }
@@ -2204,6 +2259,7 @@ HLR_formables_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = asia
                 OR = {
                     is_in_array = { GRI.original_cores = THIS }
                     is_in_array = { BOI.starting_owned_states = THIS }
@@ -2221,6 +2277,7 @@ HLR_formables_category = {
             log = "[GetDateText]: [Root.GetName]: decision HLR_restore_griffonian_throne"
             set_cosmetic_tag = HLR_GRI
             every_state = {
+				is_on_continent = asia
                 limit = {
                     OR = {
                         is_in_array = { GRI.original_cores = yes }
@@ -2250,6 +2307,7 @@ HLR_formables_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = asia
                 OR = {
                     is_in_array = { JER.original_cores = THIS }
                     is_in_array = { EQC.original_cores = THIS }
@@ -2275,12 +2333,13 @@ HLR_formables_category = {
             }
             hidden_effect = {
 				every_state = {
+					is_on_continent = asia
 					limit = {
 						OR = {
-							is_core_of = SIC
+							is_in_array = { SIC.original_cores = THIS }
 							AND = {
 								is_core_of = EQC
-								NOT = { is_in_array = { original_EQC_states = THIS } }
+								NOT = { is_in_array = { global.original_EQC_states = THIS } }
 							}
 						}
 					}
@@ -2302,7 +2361,7 @@ HLR_formables_category = {
             hidden_effect = {
 				every_state = {
 					limit = {
-						is_in_array = { original_EQC_states = THIS }
+						is_in_array = { global.original_EQC_states = THIS }
 					}
 					transfer_state_to = EQC
 				}
@@ -2341,6 +2400,7 @@ reform_griffonian_empire_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = asia
                 OR = {
                     is_in_array = { GRI.original_cores = THIS }
                     is_in_array = { BOI.starting_owned_states = THIS }
@@ -2360,6 +2420,7 @@ reform_griffonian_empire_category = {
             every_state = {
                 limit = {
                     OR = {
+						is_on_continent = asia
                         is_in_array = { GRI.original_cores = yes }
                         is_in_array = { BOI.original_cores = yes }
                         is_in_array = { HLQ.original_cores = yes }
@@ -2386,6 +2447,7 @@ FAT_formables_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = asia
                 is_in_array = { TRD.original_cores = THIS }
             }
         }
@@ -2394,6 +2456,7 @@ FAT_formables_category = {
             log = "[GetDateText]: [Root.GetName]: decision FAT_incorporate_freedom"
             every_state = {
                 limit = {
+					is_on_continent = asia
                     is_in_array = { TRD.original_cores = THIS }
                 }
             }
@@ -2418,6 +2481,7 @@ FAT_formables_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = asia
                 OR = {
                     is_in_array = { GRI.original_cores = THIS }
                     is_in_array = { BOI.starting_owned_states = THIS }
@@ -2436,6 +2500,7 @@ FAT_formables_category = {
             set_cosmetic_tag = FAT_GRI
             every_state = {
                 limit = {
+					is_on_continent = asia
                     OR = {
                         is_in_array = { GRI.original_cores = THIS }
                         is_in_array = { BOI.original_cores = THIS }
@@ -2512,6 +2577,7 @@ GRI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { TRD.original_cores = THIS }
 			}
 		}
@@ -2520,6 +2586,7 @@ GRI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_autonomous_no_more"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { TRD.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -2536,6 +2603,7 @@ GRI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { HLR.original_cores = THIS }
 					is_in_array = { FBK.original_cores = THIS }
@@ -2547,6 +2615,7 @@ GRI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_purge_heretics"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					OR = {
 						is_in_array = { HLR.original_cores = THIS }
 						is_in_array = { FBK.original_cores = THIS }
@@ -2565,6 +2634,7 @@ GRI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { FAT.original_cores = THIS }
 			}
 		}
@@ -2572,6 +2642,7 @@ GRI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_end_republic"
 			every_state = {
+				is_on_continent = asia
 				limit = {
 					is_in_array = { FAT.original_cores = THIS }
 				}
@@ -2590,6 +2661,7 @@ GRI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { BOI.original_cores = THIS }
 					is_in_array = { NTR.original_cores = THIS }
@@ -2602,6 +2674,7 @@ GRI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_integrate_autonomies"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					OR = {
 						is_in_array = { BOI.original_cores = THIS }
 						is_in_array = { NTR.original_cores = THIS }
@@ -2622,6 +2695,7 @@ GRI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { JER.original_cores = THIS }
 					is_in_array = { EQC.original_cores = THIS }
@@ -2632,6 +2706,7 @@ GRI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_revenge_of_grover"
 			every_state = {
+				is_on_continent = asia
 				limit = {
 					OR = {
 						is_in_array = { JER.original_cores = THIS }
@@ -2653,6 +2728,7 @@ GRI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { RCT.original_cores = THIS }
 					is_in_array = { NIM.original_cores = THIS }
@@ -2665,6 +2741,7 @@ GRI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_expulsed_ponies"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					OR = {
 						is_in_array = { RCT.original_cores = THIS }
 						is_in_array = { NIM.original_cores = THIS }
@@ -2735,6 +2812,7 @@ TRD_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { FAT.original_cores = THIS }
 			}
 		}
@@ -2743,6 +2821,7 @@ TRD_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision TRD_united_fronts"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { FAT.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -2758,6 +2837,7 @@ TRD_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { GRI.original_cores = THIS }
 			}
 		}
@@ -2766,6 +2846,7 @@ TRD_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision TRD_free_trade_empire"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { GRI.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -2788,6 +2869,7 @@ EQC_formables_category = {
 		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { GRI.original_cores = THIS }
 					is_in_array = { BOI.original_cores = THIS }
@@ -2801,6 +2883,7 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_griffonian"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					OR = {
 						is_in_array = { GRI.original_cores = THIS }
 						is_in_array = { BOI.original_cores = THIS }
@@ -2825,6 +2908,7 @@ EQC_formables_category = {
 		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { global.league_states = THIS }
 			}
 		}
@@ -2833,6 +2917,7 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_evian"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { global.league_states = THIS }
 				}
 				add_core_of = ROOT
@@ -2849,6 +2934,7 @@ EQC_formables_category = {
 		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { RCT.original_cores = THIS }
 			}
 		}
@@ -2857,6 +2943,7 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_limelight"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { RCT.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -2875,7 +2962,7 @@ EQC_formables_category = {
 			MIT = { is_in_faction_with = ROOT }
 		}
 		visible = {
-			date > 1053.1.1
+			date > 1051.1.1
 			tag = EQC
 		}
 		fire_only_once = yes
@@ -2981,7 +3068,7 @@ EQC_formables_category = {
 			custom_trigger_tooltip = {
 				tooltip = EQC_controls_all_original_EQS_territory
 				all_of_scopes = {
-					array = global.EQS_starting_territory
+					array = EQS.original_cores
 					is_controlled_by = ROOT
 				}
 				all_of_scopes = {
@@ -2993,8 +3080,9 @@ EQC_formables_category = {
 		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				OR = {
-					is_in_array = { global.EQS_starting_territory = THIS }
+					is_in_array = { EQS.original_cores = THIS }
 					is_in_array = { global.EQS_original_territory = THIS }
 				}
 				NOT = { is_core_of = STG }
@@ -3004,9 +3092,10 @@ EQC_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_daybreaker"
 			every_state = {
+				is_on_continent = europe
 				limit = {
 					OR = {
-						is_in_array = { global.EQS_starting_territory = THIS }
+						is_in_array = { EQS.original_cores = THIS }
 						is_in_array = { global.EQS_original_territory = THIS }
 					}
 					NOT = { is_core_of = STG }
@@ -3025,6 +3114,7 @@ EQC_formables_category = {
 		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = { CHN.original_cores = THIS }
 				NOT = { is_in_array = { global.EQS_original_territory = THIS } }
 			}
@@ -3034,6 +3124,7 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_chrysalis"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = { CHN.original_cores = THIS }
 					NOT = { is_in_array = { global.EQS_original_territory = THIS } }
 				}
@@ -3051,6 +3142,7 @@ EQC_formables_category = {
 		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = europe
 				is_in_array = { STG.original_cores = THIS }
 			}
 		}
@@ -3059,13 +3151,14 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_caramel_marks"
 			every_state = {
 				limit = {
+					is_on_continent = europe
 					is_in_array = { STG.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
 			set_province_name = {
 				id = 488
-				name = EQc_big_sister_arriveder
+				name = EQC_big_sister_arriveder
 			}
 		}
 		ai_will_do = {
@@ -3236,6 +3329,7 @@ EQC_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { EQC.original_cores = THIS }
 			}
 		}
@@ -3244,6 +3338,7 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision SIC_MIT_mares_mares_mares"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { EQC.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -3308,6 +3403,7 @@ BRF_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { RCT.original_cores = THIS }
 					is_in_array = { BAR.original_cores = THIS }
@@ -3330,7 +3426,8 @@ BRF_formables_category = {
 					}
 					every_state = {
 						limit = {
-							is_core_of = GRY
+							is_on_continent = asia
+							is_in_array = { GRY.original_cores = THIS }
 							NOT = { is_owned_and_controlled_by = GRY }
 							OR = {
 								is_owned_and_controlled_by = ROOT
@@ -3358,7 +3455,8 @@ BRF_formables_category = {
 					}
 					every_state = {
 						limit = {
-							is_core_of = GRU
+							is_on_continent = asia
+							is_in_array = { GRY.original_cores = THIS }
 							NOT = { is_owned_and_controlled_by = GRU }
 							OR = {
 								is_owned_and_controlled_by = ROOT
@@ -3379,10 +3477,11 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = asia
 						OR = {
 							is_core_of = BAR
 							AND = {
-								is_core_of = NIM
+								is_in_array = { NIM.original_cores = THIS }
 								NOT = { is_core_of = RCT }
 							}
 							state = 629
@@ -3405,6 +3504,7 @@ BRF_formables_category = {
 				BAR = { set_cosmetic_tag = BAR_BRF }
 				every_state = {
 					limit = {
+						is_on_continent = asia
 						OR = {
 							AND = {
 								is_core_of = NIM
@@ -3429,6 +3529,7 @@ BRF_formables_category = {
 				NIM = { set_cosmetic_tag = NIM_BRF }
 				every_state = {
 					limit = {
+						is_on_continent = asia
 						OR = {
 							AND = {
 								is_core_of = RCT
@@ -3443,6 +3544,8 @@ BRF_formables_category = {
 							is_core_of = LNS
 						}
 					}
+					transfer_state_to = RCT
+					add_core_of = RCT
 				}
 				set_autonomy = {
 					target = RCT
@@ -3608,6 +3711,7 @@ BRF_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { GRI.original_cores = THIS }
 			}
 		}
@@ -3621,12 +3725,15 @@ BRF_formables_category = {
 						FAT = { is_in_faction_with = ROOT }
 					}
 					every_state = {
+						is_on_continent = asia
 						limit = {
 							OR = {
 								AND = {
 									is_claimed_by = FAT
-									NOT = { is_core_of = GRI }
-									NOT = { is_core_of = HLR }
+									NOT = {
+										is_in_array = { GRI.original_cores = THIS }
+										is_in_array = { HLR.original_cores = THIS }
+									}
 								}
 								state = 556
 								state = 557
@@ -3658,14 +3765,15 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
-						is_core_of = BOI
+						is_in_array = { BOI.original_cores = THIS }
 						is_owned_and_controlled_by = BRF
 					}
 					add_core_of = BRF
 				}
 				every_state = {
 					limit = {
-						is_core_of = GRI
+						is_on_continent = asia
+						is_in_array = { GRI.original_cores = THIS }
 						NOT = { is_core_of = FAT }
 						OWNER = {
 							OR = {
@@ -3678,7 +3786,8 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
-						is_core_of = HLQ
+						is_on_continent = asia
+						is_in_array = { HLQ.original_cores = THIS }
 						OWNER = {
 							OR = {
 								tag = ROOT
@@ -3712,6 +3821,7 @@ BRF_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { EQC.original_cores = THIS }
 					is_in_array = { SIC.original_cores = THIS }
@@ -3732,7 +3842,8 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
-						is_core_of = EQC
+						is_on_continent = asia
+						is_in_array = { EQC.original_cores = THIS }
 						is_claimed_by = WNG
 						NOT = {
 							state = 535
@@ -3754,6 +3865,7 @@ BRF_formables_category = {
 				hidden_effect = {
 					every_state = {
 						limit = {
+							is_on_continent = asia
 							is_in_array = { EQC.original_cores = THIS }
 							is_claimed_by = WNG
 							NOT = {
@@ -3774,8 +3886,9 @@ BRF_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					OR = {
-						is_core_of = BOI
+						is_in_array = { BOI.original_cores = THIS }
 						AND = {
 							is_core_of = BRF
 							is_core_of = MIT
@@ -3821,6 +3934,7 @@ BRF_formables_category = {
 					reserve_dynamic_country = yes
 					every_state = {
 						limit = {
+							is_on_continent = asia
 							OR = {
 								is_in_array = { SIC.original_cores = THIS }
 								state = 511
@@ -3851,6 +3965,7 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = asia
 						is_in_array = { MIT.original_cores = THIS }
 						NOT = {
 							OR = {
@@ -3886,6 +4001,7 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = asia
 						is_in_array = { global.original_EQC_states = THIS }
 					}
 					transfer_state_to = EQC
@@ -3896,8 +4012,9 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = asia
 						OR = {
-							is_core_of = JER
+							is_in_array = { JER.original_cores = THIS }
 							state = 501
 							state = 672
 							state = 442
@@ -3924,7 +4041,8 @@ BRF_formables_category = {
 				}
 				every_state = {
 					limit = {
-						is_core_of = MCW
+						is_on_continent = africa
+						is_in_array = { MCW.original_cores = THIS }
 						OWNER = {
 							OR = {
 								tag = ROOT
@@ -4091,6 +4209,7 @@ RCT_formables_category = {
 		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { BRF.original_cores = THIS }
 					is_in_array = { LUS.original_cores = THIS }
@@ -4110,6 +4229,7 @@ RCT_formables_category = {
 			}
 			hidden_effect = {
 				every_state = {
+					is_on_continent = asia
 					limit = {
 						OR = {
 							is_in_array = { LUS.original_cores = THIS }
@@ -4139,6 +4259,7 @@ RCT_formables_category = {
 		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { MIT.original_cores = THIS }
 					is_in_array = { SIC.original_cores = THIS }
@@ -4170,6 +4291,7 @@ RCT_formables_category = {
 		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { EQC.original_cores = THIS }
 			}
 		}
@@ -4183,6 +4305,7 @@ RCT_formables_category = {
 			EQC = { set_cosmetic_tag = EQC_RCT }
 			hidden_effect = {
 				every_state = {
+					is_on_continent = asia
 					limit = {
 						OR = {
 							is_core_of = BOI
@@ -4205,6 +4328,7 @@ RCT_formables_category = {
 		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { GRI.original_cores = THIS }
 			}
 		}
@@ -4234,6 +4358,7 @@ RCT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				is_in_array = { RCT.original_cores = THIS }
 			}
 		}
@@ -4241,6 +4366,7 @@ RCT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision RCT_somehow_RCT_returned"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					is_in_array = { RCT.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -4285,6 +4411,7 @@ FBK_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = asia
 				OR = {
 					is_in_array = { BAK.original_cores = THIS }
 					is_in_array = { RCT.original_cores = THIS }
@@ -4295,6 +4422,7 @@ FBK_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision FBK_pony_kingdom"
 			every_state = {
 				limit = {
+					is_on_continent = asia
 					OR = {
 						is_in_array = { BAK.original_cores = THIS }
 						is_in_array = { RCT.original_cores = THIS }
@@ -4424,6 +4552,7 @@ CTH_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { LMB.original_cores = THIS }
 			}
 		}
@@ -4432,6 +4561,7 @@ CTH_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CTH_llam_bomb"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { LMB.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -4447,6 +4577,7 @@ CTH_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTL.original_cores = THIS }
 			}
 		}
@@ -4469,6 +4600,7 @@ CTH_formables_category = {
 			}
 			hidden_effect = {
 				every_state = {
+					is_on_continent = africa
 					limit = {
 						OR = {
 							state = 1103
@@ -4488,6 +4620,7 @@ CTH_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						OR = {
 							state = 1096
 							state = 1098
@@ -4507,6 +4640,7 @@ CTH_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { CTL.original_cores = THIS }
 						NOT = {
 							is_core_of = SPL
@@ -4542,6 +4676,7 @@ CTH_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { BAT.original_cores = THIS }
 			}
 		}
@@ -4550,6 +4685,7 @@ CTH_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CTH_ow_the_edge"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { BAT.original_cores = THIS }
 				}
 			}
@@ -4576,6 +4712,7 @@ CTL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { global.starting_MCW_states = THIS }
 			}
 		}
@@ -4584,6 +4721,7 @@ CTL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CTL_yoink_birbs"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						state = 722
 						state = 820
@@ -4603,6 +4741,7 @@ CTL_formables_category = {
 			MCW = { set_cosmetic_tag = MCW_CTL }
 			hidden_effect = {
 				every_state = {
+					is_on_continent = africa
 					limit = {
 						NOT = { is_core_of = ROOT }
 						is_core_of = MCW
@@ -4645,6 +4784,7 @@ CTL_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { LMB.original_cores = THIS }
 					}
 					add_core_of = ROOT
@@ -4659,6 +4799,7 @@ CTL_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { LMB.original_cores = THIS }
 						is_owned_and_controlled_by = ROOT
 					}
@@ -4668,6 +4809,7 @@ CTL_formables_category = {
 			else = {
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { LMB.original_cores = THIS }
 						is_owned_and_controlled_by = ROOT
 					}
@@ -4695,6 +4837,7 @@ CTL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTH.original_cores = THIS }
 			}
 		}
@@ -4728,6 +4871,7 @@ CTL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { KIR.original_cores = THIS }
 					is_in_array = { BRS.original_cores = THIS }
@@ -4739,6 +4883,7 @@ CTL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CTL_boop_kirins"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_core_of = BRS
 						state = 1088
@@ -4784,6 +4929,7 @@ CTL_formables_category = {
 			hidden_effect = {
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { KIR.original_cores = THIS }
 						NOT = {
 							state = 1087
@@ -4939,6 +5085,7 @@ CGI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { CAM.original_cores = THIS }
 					is_in_array = { AZI.original_cores = THIS }
@@ -4951,6 +5098,7 @@ CGI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CGI_new_boyz"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { CAM.original_cores = THIS }
 						is_in_array = { AZI.original_cores = THIS }
@@ -4970,6 +5118,7 @@ CGI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTH.original_cores = THIS }
 			}
 		}
@@ -4977,6 +5126,7 @@ CGI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision CGI_khaaaaaaaaan"
 			every_state = {
+				is_on_continent = africa
 				limit = {
 					is_in_array = { CTH.original_cores = THIS }
 				}
@@ -5008,6 +5158,7 @@ ZAR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { AZI.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -5036,6 +5187,7 @@ ZAR_formables_category = {
 		visible = { country_exists = CAM }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CAM.original_cores = THIS }
 			}
 		}
@@ -5055,6 +5207,7 @@ ZAR_formables_category = {
 		visible = { country_exists = REM }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { REM.original_cores = THIS }
 			}
 		}
@@ -5080,6 +5233,7 @@ ZAR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { NDR.original_cores = THIS }
 					is_in_array = { ILU.original_cores = THIS }
@@ -5110,6 +5264,7 @@ BAT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTH.original_cores = THIS }
 			}
 		}
@@ -5118,6 +5273,7 @@ BAT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision BAT_finished_backstab"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { CTH.original_cores = THIS }
 				}
 				add_core_of = NZA
@@ -5149,6 +5305,7 @@ BAT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CGI.original_cores = THIS }
 			}
 		}
@@ -5181,6 +5338,7 @@ BAT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { LMB.original_cores = THIS }
 				OWNER = {
 					OR = {
@@ -5222,6 +5380,7 @@ BAT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { MCW.original_cores = THIS }
 			}
 		}
@@ -5254,6 +5413,7 @@ BAT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTL.original_cores = THIS }
 			}
 		}
@@ -5302,11 +5462,12 @@ HIP_formables_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision HIP_core_all_hippogriffia"
             every_state = {
                 limit = {
+					is_on_continent = africa
                     OR = {
-                        is_core_of = HIP
-                        is_core_of = HPS
-                        is_core_of = HRL
-                        is_core_of = DOH
+                        is_in_array = { HIP.original_cores = THIS }
+                        is_in_array = { HPS.original_cores = THIS }
+                        is_in_array = { HRL.original_cores = THIS }
+                        is_in_array = { DOH.original_cores = THIS }
                     }
                     is_owned_by = ROOT
                 }
@@ -5422,16 +5583,13 @@ HIP_formables_category = {
     }
     HIP_end_legation_city_status = {
         available = {
-            WIN = { all_original_cores_owned_by_ROOT = yes }
+            1204 = { is_owned_and_controlled_by = ROOT }
         }
         fire_only_once = yes
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision HIP_end_legation_city_status"
-            every_state = {
-                limit = {
-                    is_core_of = WIN
-                }
-                add_core_of = ROOT
+            1204 = {
+				add_core_of = ROOT
             }
         }
     }
@@ -5442,7 +5600,6 @@ HIP_formables_category = {
         available = {
             HIP_civil_war_over = yes
         }
-        cost = 25
         fire_only_once = yes
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision HPS_reunite_with_the_party"
@@ -5452,6 +5609,9 @@ HIP_formables_category = {
                     id = zebrica_activity.1
                 }
             }
+        }
+        ai_will_do = {
+			factor = 10
         }
     }
     HPS_proclaim_perfect_zebrican_socialism = {
@@ -5483,6 +5643,7 @@ HIP_formables_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
+				is_on_continent = africa
                 OR = {
                     is_in_array = { BAT.original_cores = THIS }
                     is_in_array = { ZAR.original_cores = THIS }
@@ -5499,12 +5660,12 @@ HIP_formables_category = {
             }
         }
         fire_only_once = yes
-        days_remove = 21
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove HPS_proclaim_perfect_zebrican_socialism"
             set_cosmetic_tag = HPS_north_zebrica
             every_state = {
                 limit = {
+					is_on_continent = africa
                     OR = {
                         is_in_array = { BAT.original_cores = THIS }
                         is_in_array = { ZAR.original_cores = THIS }
@@ -5529,7 +5690,7 @@ HIP_formables_category = {
             }
         }
         ai_will_do = {
-            factor = 100
+            factor = 50
         }
     }
     HIP_consider_backstabbing = {
@@ -5552,12 +5713,12 @@ HIP_formables_category = {
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove HIP_consider_backstabbing"
             random_list = {
-                55 = {
+                60 = {
                     DOH = {
                         set_country_flag = DOH_pass_the_knife
                     }
                 }
-                45 = {
+                40 = {
                     remove_from_faction = DOH
                     declare_war_on = {
                         target = DOH
@@ -5598,14 +5759,14 @@ HIP_formables_category = {
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove DOH_ponder_betrayal"
             random_list = {
-                75 = {
+                65 = {
                     leave_faction = yes
                     declare_war_on = {
                         target = HIP
                         type = annex_everything
                     }
                 }
-                25 = { }
+                35 = { }
             }
         }
         ai_will_do = {
@@ -5620,6 +5781,7 @@ BRS_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTL.original_cores = THIS }
 			}
 		}
@@ -5629,6 +5791,7 @@ BRS_formables_category = {
 			set_cosmetic_tag = BRS_HIN
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { CTL.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -5686,6 +5849,7 @@ BRS_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { KIR.original_cores = THIS }
 			}
 		}
@@ -5693,6 +5857,7 @@ BRS_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision BRS_only_raj"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { KIR.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -5840,6 +6005,7 @@ KIR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZOO.original_cores = THIS }
 					is_in_array = { TAI.original_cores = THIS }
@@ -5853,6 +6019,7 @@ KIR_formables_category = {
 			add_to_variable = { KIR_decision_counter = 1 }
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZOO.original_cores = THIS }
 						is_in_array = { TAI.original_cores = THIS }
@@ -5891,6 +6058,7 @@ KIR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { IDO.original_cores = THIS }
 					is_in_array = { DEL.original_cores = THIS }
@@ -5920,6 +6088,7 @@ KIR_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						OR = {
 							is_in_array = { IDO.original_cores = THIS }
 							is_in_array = { DEL.original_cores = THIS }
@@ -5968,12 +6137,14 @@ KIR_formables_category = {
 		highlight_states = {
 			highlight_states_trigger = {
 				if = {
+					is_on_continent = africa
 					limit = {
 						country_exists = CNT
 					}
 					is_in_array = { global.original_ancient_pact_states = THIS }
 				}
 				else = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { global.original_ancient_pact_states = THIS }
 						is_in_array = { CNT.original_cores = THIS }
@@ -6013,6 +6184,7 @@ KIR_formables_category = {
 				hidden_effect = {
 					every_state = {
 						limit = {
+							is_on_continent = africa
 							OR = {
 								is_in_array = { global.original_ancient_pact_states = THIS }
 								is_in_array = { CNT.original_cores = THIS }
@@ -6043,6 +6215,7 @@ KIR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ROA.original_cores = THIS }
 				NOT = { is_in_array = { global.original_ancient_pact_states = THIS } }
 			}
@@ -6060,6 +6233,7 @@ KIR_formables_category = {
 			ROA = { set_cosmetic_tag = ROA_KIR }
 			hidden_effect = {
 				every_state = {
+					is_on_continent = africa
 					limit = {
 						is_in_array = { ROA.original_cores = THIS }
 						NOT = { is_in_array = { global.original_ancient_pact_states = THIS } }
@@ -6083,6 +6257,7 @@ KIR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CTL.original_cores = THIS }
 			}
 		}
@@ -6090,6 +6265,13 @@ KIR_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision KIR_pat_deet"
 			add_to_variable = { KIR_decision_counter = 1 }
+			every_owned_state = {
+				limit = {
+					is_in_array = { CTL.original_cores = THIS }
+				}
+				transfer_state_to = BRS
+				add_core_of = BRS
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -6134,6 +6316,7 @@ NVA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ZOO.original_cores = THIS }
 			}
 		}
@@ -6148,6 +6331,7 @@ NVA_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ZOO.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6163,6 +6347,7 @@ NVA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { IDO.original_cores = THIS }
 					is_in_array = { DEL.original_cores = THIS }
@@ -6195,6 +6380,7 @@ NVA_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { IDO.original_cores = THIS }
 						is_in_array = { DEL.original_cores = THIS }
@@ -6279,6 +6465,7 @@ NVA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { KIR.original_cores = THIS }
 				NOT = {
 					state = 1057
@@ -6292,6 +6479,7 @@ NVA_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision NVA_oh_no_nirik"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { KIR.original_cores = THIS }
 					NOT = {
 						state = 1057
@@ -6325,6 +6513,7 @@ ZLU_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { TAI.original_cores = THIS }
 					is_in_array = { ZOO.original_cores = THIS }
@@ -6365,6 +6554,7 @@ ZLU_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { IDO.original_cores = THIS }
 					is_in_array = { DEL.original_cores = THIS }
@@ -6427,6 +6617,7 @@ ZLU_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { NVA.original_cores = THIS }
 					is_in_array = { TAI.original_cores = THIS }
@@ -6450,6 +6641,7 @@ ZLU_formables_category = {
 			#If approved, cosmetic tag of Zebride Protectorate
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { TAI.original_cores = THIS }
 						is_in_array = { ZOO.original_cores = THIS }
@@ -6474,6 +6666,7 @@ TAI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { MEL.original_cores = THIS }
 					is_in_array = { ZOO.original_cores = THIS }
@@ -6485,6 +6678,7 @@ TAI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision TAI_crush_splinter_states"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { MEL.original_cores = THIS }
 						is_in_array = { ZOO.original_cores = THIS }
@@ -6504,6 +6698,7 @@ TAI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { DEL.original_cores = THIS }
 					is_in_array = { IDO.original_cores = THIS }
@@ -6515,6 +6710,7 @@ TAI_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision TAI_sea_dive"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { DEL.original_cores = THIS }
 						is_in_array = { IDO.original_cores = THIS }
@@ -6534,6 +6730,7 @@ TAI_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { KIR.original_cores = THIS }
 			}
 		}
@@ -6541,6 +6738,7 @@ TAI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision TAI_set_the_sun"
 			every_state = {
+				is_on_continent = africa
 				limit = {
 					is_in_array = { KIR.original_cores = THIS }
 				}
@@ -6560,6 +6758,7 @@ MEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { MEL.original_cores = THIS }
 					is_in_array = { ZOO.original_cores = THIS }
@@ -6591,6 +6790,7 @@ MEL_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { MEL.original_cores = THIS }
 						is_in_array = { ZOO.original_cores = THIS }
@@ -6610,6 +6810,7 @@ MEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { DEL.original_cores = THIS }
 					is_in_array = { IDO.original_cores = THIS }
@@ -6631,6 +6832,7 @@ MEL_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { DEL.original_cores = THIS }
 						is_in_array = { IDO.original_cores = THIS }
@@ -6649,6 +6851,7 @@ MEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { CNT.original_cores = THIS }
 					is_in_array = { ROA.original_cores = THIS }
@@ -6660,6 +6863,7 @@ MEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision MEL_cloudy_with_chance_of_death"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { CNT.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6700,6 +6904,7 @@ MEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ROA.original_cores = THIS }
 			}
 		}
@@ -6708,6 +6913,7 @@ MEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision MEL_exact_vengeance"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ROA.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6738,6 +6944,7 @@ ZOO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZOO_settle_legions"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { MEL.original_cores = THIS }
 						is_in_array = { TAI.original_cores = THIS }
@@ -6759,6 +6966,7 @@ ZOO_formables_category = {
 		visible = { has_cosmetic_tag = ZOO_LEG }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { IDO.original_cores = THIS }
 					is_in_array = { DEL.original_cores = THIS }
@@ -6770,6 +6978,7 @@ ZOO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZOO_eastern_federatii"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { IDO.original_cores = THIS }
 						is_in_array = { DEL.original_cores = THIS }
@@ -6792,6 +7001,7 @@ ZOO_formables_category = {
 		visible = { has_cosmetic_tag = ZOO_KIN }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { KIR.original_cores = THIS }
 					is_in_array = { NVA.original_cores = THIS }
@@ -6804,6 +7014,7 @@ ZOO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZOO_expand_legacy"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { KIR.original_cores = THIS }
 						is_in_array = { NVA.original_cores = THIS }
@@ -6832,6 +7043,7 @@ ZOO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZOO_new_kaiser"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ROA.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6856,6 +7068,7 @@ IDO_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { DEL.original_cores = THIS }
 			}
 		}
@@ -6864,6 +7077,7 @@ IDO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision IDO_rush_reference"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { DEL.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6881,6 +7095,7 @@ IDO_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZOO.original_cores = THIS }
 					is_in_array = { MEL.original_cores = THIS }
@@ -6893,6 +7108,7 @@ IDO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision IDO_anti_roam_homies"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZOO.original_cores = THIS }
 						is_in_array = { MEL.original_cores = THIS }
@@ -6926,6 +7142,7 @@ DEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { IDO.original_cores = THIS }
 			}
 		}
@@ -6934,6 +7151,7 @@ DEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision DEL_enforce_faith"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { IDO.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6987,6 +7205,7 @@ DEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZOO.original_cores = THIS }
 					is_in_array = { MEL.original_cores = THIS }
@@ -6999,6 +7218,7 @@ DEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision DEL_protect_traditions"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZOO.original_cores = THIS }
 						is_in_array = { MEL.original_cores = THIS }
@@ -7020,6 +7240,7 @@ DEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { NVA.original_cores = THIS }
 					is_in_array = { ZLU.original_cores = THIS }
@@ -7042,6 +7263,7 @@ DEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision DEL_become_commie"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { NVA.original_cores = THIS }
 						is_in_array = { ZLU.original_cores = THIS }
@@ -7088,6 +7310,7 @@ DEL_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ROA.original_cores = THIS }
 			}
 		}
@@ -7096,6 +7319,7 @@ DEL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision DEL_crush_wealth"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ROA.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -7173,6 +7397,7 @@ DEL_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						state = 1202
 						state = 1204
@@ -7239,6 +7464,7 @@ YAN_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZOO.original_cores = THIS }
 					is_in_array = { MEL.original_cores = THIS }
@@ -7253,6 +7479,7 @@ YAN_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision YAN_integrate_natives"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZOO.original_cores = THIS }
 						is_in_array = { MEL.original_cores = THIS }
@@ -7439,6 +7666,7 @@ YAN_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { EQC.original_cores = yes }
 					is_in_array = { JER.original_cores = yes }
@@ -7487,6 +7715,7 @@ CNT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { TAI.original_cores = yes }
 					is_in_array = { MEL.original_cores = yes }
@@ -7499,6 +7728,7 @@ CNT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CNT_hate_zeebs"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { TAI.original_cores = yes }
 						is_in_array = { MEL.original_cores = yes }
@@ -7537,6 +7767,7 @@ CNT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { DEL.original_cores = yes }
 					is_in_array = { IDO.original_cores = yes }
@@ -7548,6 +7779,7 @@ CNT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CNT_nom_survivors"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { IDO.original_cores = yes }
 						is_in_array = { DEL.original_cores = yes }
@@ -7575,6 +7807,7 @@ CNT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ROA.original_cores = THIS }
 			}
 		}
@@ -7583,6 +7816,7 @@ CNT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CNT_centauric_restoration"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ROA.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -7607,6 +7841,7 @@ ROA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CNT.original_cores = THIS }
 			}
 		}
@@ -7630,6 +7865,7 @@ ROA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ZOO.original_cores = THIS }
 			}
 		}
@@ -7654,6 +7890,7 @@ ROA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { MEL.original_cores = THIS }
 					is_in_array = { TAI.original_cores = THIS }
@@ -7665,6 +7902,7 @@ ROA_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ROA_end_savages"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { MEL.original_cores = THIS }
 						is_in_array = { TAI.original_cores = THIS }
@@ -7691,6 +7929,7 @@ ROA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ZLU.original_cores = THIS }
 			}
 		}
@@ -7727,6 +7966,7 @@ ROA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ZLU.original_cores = THIS }
 			}
 		}
@@ -7735,6 +7975,7 @@ ROA_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ROA_healed_republic"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ZLU.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -7760,6 +8001,7 @@ ROA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { NVA.original_cores = THIS }
 					is_in_array = { BRS.original_cores = THIS }
@@ -7773,6 +8015,7 @@ ROA_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ROA_roamaboo"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { NVA.original_cores = THIS }
 						is_in_array = { BRS.original_cores = THIS }
@@ -7820,6 +8063,7 @@ CAM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { AZI.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -7837,6 +8081,7 @@ CAM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision CAM_super_stewards"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { AZI.original_cores = THIS }
 						is_in_array = { ZAJ.original_cores = THIS }
@@ -7864,6 +8109,7 @@ AZI_ZAJ_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { AZI.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -7875,6 +8121,7 @@ AZI_ZAJ_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AZI_ZAJ_desert_mastery"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { AZI.original_cores = THIS }
 						is_in_array = { ZAJ.original_cores = THIS }
@@ -7895,6 +8142,7 @@ AZI_ZAJ_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZIT.original_cores = THIS }
 					is_in_array = { ILU.original_cores = THIS }
@@ -7924,6 +8172,7 @@ AZI_ZAJ_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { CAM.original_cores = THIS }
 			}
 		}
@@ -7932,6 +8181,7 @@ AZI_ZAJ_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AZI_ZAJ_break_camels"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { CAM.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -7949,6 +8199,7 @@ AZI_ZAJ_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { REM.original_cores = THIS }
 					is_in_array = { NDR.original_cores = THIS }
@@ -7961,6 +8212,7 @@ AZI_ZAJ_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AZI_ZAJ_land_of_rivers"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { REM.original_cores = THIS }
 						is_in_array = { NDR.original_cores = THIS }
@@ -7987,6 +8239,7 @@ AZI_ZAJ_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { AZI.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -8004,6 +8257,7 @@ AZI_ZAJ_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision AZI_ZAJ_desert_mastery"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { TNT.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -8022,6 +8276,7 @@ MGY_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { REM.original_cores = THIS }
 					is_in_array = { NDR.original_cores = THIS }
@@ -8032,11 +8287,12 @@ MGY_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision MGY_unite_republics"
 			every_state = {
+				is_on_continent = africa
 				limit = {
 					is_claimed_by = ROOT
 					OR = {
-						is_core_of = NDR
-						is_core_of = REM
+						is_in_array = { NDR.original_cores = THIS }
+						is_in_array = { REM.original_cores = THIS }
 					}
 				}
 				add_core_of = ROOT
@@ -8123,6 +8379,7 @@ MGY_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ABY.original_cores = THIS }
 			}
 		}
@@ -8132,7 +8389,7 @@ MGY_formables_category = {
 			every_state = {
 				limit = {
 					is_claimed_by = ROOT
-					is_core_of = ABY
+					is_in_array = { ABY.original_cores = THIS }
 				}
 				add_core_of = ROOT
 			}
@@ -8213,6 +8470,7 @@ REM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { MGY.original_cores = THIS }
 			}
 		}
@@ -8221,6 +8479,7 @@ REM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision REM_chill_rivers"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { MGY.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -8240,6 +8499,7 @@ NDR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { MGY.original_cores = THIS }
 					is_in_array = { REM.original_cores = THIS }
@@ -8251,6 +8511,7 @@ NDR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision NDR_less_chill_rivers"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { MGY.original_cores = THIS }
 						is_in_array = { REM.original_cores = THIS }
@@ -8273,6 +8534,7 @@ NDR_formables_category = {
 		visible = { has_country_flag = NDR_conquered_original_MGY }
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZWA.original_cores = THIS }
 					is_in_array = { TIM.original_cores = THIS }
@@ -8284,6 +8546,7 @@ NDR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision NDR_no_chill_rivers"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZWA.original_cores = THIS }
 						is_in_array = { TIM.original_cores = THIS }
@@ -8329,6 +8592,7 @@ ZIT_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ILU.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -8345,6 +8609,7 @@ ZIT_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { AZI.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -8366,6 +8631,7 @@ ILU_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZIT.original_cores = THIS }
 					is_in_array = { ZAJ.original_cores = THIS }
@@ -8380,6 +8646,7 @@ ILU_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ILU_big_brain_time"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZIT.original_cores = THIS }
 						is_in_array = { ZAJ.original_cores = THIS }
@@ -8448,6 +8715,7 @@ ILU_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { MGY.original_cores = THIS }
 					is_in_array = { BAT.original_cores = THIS }
@@ -8513,6 +8781,7 @@ TNT_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision TNT_gone_to_the_dogs"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						state = 1050
 						state = 1052
@@ -8540,6 +8809,7 @@ HSO_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ZIT.original_cores = THIS }
 					is_in_array = { ILU.original_cores = THIS }
@@ -8554,6 +8824,7 @@ HSO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision HSO_central_heritage"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { ZIT.original_cores = THIS }
 						is_in_array = { ILU.original_cores = THIS }
@@ -8622,6 +8893,7 @@ HSO_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { STM.original_cores = THIS }
 			}
 		}
@@ -8630,6 +8902,7 @@ HSO_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision HSO_new_management"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { STM.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -8728,6 +9001,7 @@ KAR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision KAR_venice_mode"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						state = 962
 						state = 994
@@ -8799,6 +9073,7 @@ ZWA_TIM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { NDR.original_cores = THIS }
 			}
 		}
@@ -8807,6 +9082,7 @@ ZWA_TIM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZWA_TIM_united_federation"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { NDR.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -8823,6 +9099,7 @@ ZWA_TIM_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { TIM.original_cores = THIS }
 					}
 					add_core_of = ROOT
@@ -8840,6 +9117,7 @@ ZWA_TIM_formables_category = {
 				}
 				every_state = {
 					limit = {
+						is_on_continent = africa
 						is_in_array = { ZWA.original_cores = THIS }
 					}
 					add_core_of = ROOT
@@ -8853,6 +9131,7 @@ ZWA_TIM_formables_category = {
 					}
 					every_state = {
 						limit = {
+							is_on_continent = africa
 							is_in_array = { ZWA.original_cores = THIS }
 						}
 						add_core_of = ROOT
@@ -8865,6 +9144,7 @@ ZWA_TIM_formables_category = {
 					}
 					every_state = {
 						limit = {
+							is_on_continent = africa
 							is_in_array = { TIM.original_cores = THIS }
 						}
 						add_core_of = ROOT
@@ -8939,6 +9219,7 @@ ZWA_TIM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { TNT.original_cores = THIS }
 					is_in_array = { ZIT.original_cores = THIS }
@@ -9003,6 +9284,7 @@ ZWA_TIM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { TNT.original_cores = THIS }
 					is_in_array = { ZIT.original_cores = THIS }
@@ -9016,6 +9298,7 @@ ZWA_TIM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZWA_TIM_evaporate_STM"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { TNT.original_cores = THIS }
 						is_in_array = { ZIT.original_cores = THIS }
@@ -9045,6 +9328,7 @@ ZWA_TIM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { STM.original_cores = THIS }
 			}
 		}
@@ -9053,6 +9337,7 @@ ZWA_TIM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZWA_TIM_living_in_limelight"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { STM.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -9101,6 +9386,7 @@ ZWA_TIM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ROA.original_cores = THIS }
 					is_in_array = { MTA.original_cores = THIS }
@@ -9114,6 +9400,7 @@ ZWA_TIM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision ZWA_TIM_supreme_republic"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { CNT.original_cores = THIS }
 						is_in_array = { KAR.original_cores = THIS }
@@ -9173,6 +9460,7 @@ MTA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { ABY.original_cores = THIS }
 					is_in_array = { YMN.original_cores = THIS }
@@ -9198,6 +9486,7 @@ MTA_formables_category = {
 					original_tag = ANS
 					every_state = {
 						limit = {
+							is_on_continent = africa
 							OR = {
 								state = 801
 								state = 807
@@ -9229,8 +9518,9 @@ MTA_formables_category = {
 					}
 					every_state = {
 						limit = {
+							is_on_continent = africa
 							is_claimed_by = MGY
-							is_core_of = ABY
+							is_in_array = { ABY.original_cores = THIS }
 						}
 						transfer_state_to = MGY
 					}
@@ -9265,6 +9555,7 @@ MTA_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { EMR.original_cores = THIS }
 			}
 		}
@@ -9303,6 +9594,7 @@ YMN_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ABY.original_cores = THIS }
 			}
 		}
@@ -9311,6 +9603,7 @@ YMN_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision YMN_formables_category"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ABY.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -9342,6 +9635,7 @@ YMN_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { MTA.original_cores = THIS }
 			}
 		}
@@ -9350,6 +9644,7 @@ YMN_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision YMN_punishment_of_betrayers"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { YMN.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -9375,6 +9670,7 @@ YMN_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ZWA.original_cores = THIS }
 			}
 		}
@@ -9383,6 +9679,7 @@ YMN_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision YMN_free_stampedes"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ZWA.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -9401,6 +9698,7 @@ EMR_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { ABY.original_cores = THIS }
 			}
 		}
@@ -9409,6 +9707,7 @@ EMR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EMR_faith_by_fire"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { ABY.original_cores = THIS }
 				}
 			}
@@ -9761,6 +10060,7 @@ WNG_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_claimed_by = HIP
 				NOT = {
 					is_core_of = ROOT
@@ -9773,6 +10073,7 @@ WNG_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision WNG_griff_alliance"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_claimed_by = HIP
 					NOT = {
 						is_core_of = ROOT
@@ -9830,6 +10131,7 @@ WNG_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				is_in_array = { EQC.original_cores = THIS }
 			}
 		}
@@ -9838,6 +10140,7 @@ WNG_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision WNG_no_place_like_home"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					is_in_array = { EQC.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -9858,10 +10161,11 @@ WNG_formables_category = {
 STM_formables_category = {
 	STM_regain_stolen_assets = {
 		available = {
-			date > 1052.1.1
+			date > 1051.6.1
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { HSO.original_cores = THIS }
 					is_in_array = { TNT.original_cores = THIS }
@@ -9893,6 +10197,7 @@ STM_formables_category = {
 			}
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { HSO.original_cores = THIS }
 						is_in_array = { TNT.original_cores = THIS }
@@ -9956,6 +10261,7 @@ STM_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
+				is_on_continent = africa
 				OR = {
 					is_in_array = { TIM.original_cores = THIS }
 					is_in_array = { ZWA.original_cores = THIS }
@@ -9968,6 +10274,7 @@ STM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision STM_synergizing_alignments"
 			every_state = {
 				limit = {
+					is_on_continent = africa
 					OR = {
 						is_in_array = { TIM.original_cores = THIS }
 						is_in_array = { ZWA.original_cores = THIS }
