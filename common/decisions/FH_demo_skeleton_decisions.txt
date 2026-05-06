@@ -143,6 +143,10 @@ FH_demo_south_east_skeleton_category = {
                 date < 1050.3.1
                 factor = 0
             }
+            modifier = {
+                country_exists = MTS
+                factor = 0
+            }
         }
     }
     BAL_reclaim_new_horseleans = {
@@ -703,23 +707,31 @@ FH_demo_south_east_skeleton_category = {
     }
     south_east_recore_jungle = {
         available = {
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-            EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+            NEI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            EEE = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-            EEE = { all_cores_owned_by_ROOT_or_subject = yes }
+            NEI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            EEE = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_global_flag = balsplosion
         }
+        highlight_states = {
+            highlight_states_trigger = {
+                is_on_continent = europe
+                OR = {
+                    is_in_array = { EEE.original_cores = THIS }
+                    is_in_array = { NEI.original_cores = THIS }
+                }
+            }
+        }
         fire_only_once = yes
-        cost = 75
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_jungle"
-            every_state = {
+            every_owned_state = {
                 limit = {
                     OR = {
-                        is_core_of = EEE
-                        is_core_of = NEI
+                        is_in_array = { EEE.original_cores = THIS }
+                        is_in_array = { NEI.original_cores = THIS }
                     }
                 }
                 add_core_of = ROOT
@@ -731,23 +743,31 @@ FH_demo_south_east_skeleton_category = {
     }
     south_east_recore_southeastern_end = {
         available = {
-            STB = { all_cores_owned_by_ROOT_or_subject = yes }
-            NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+            STB = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            NRP = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            STB = { all_cores_owned_by_ROOT_or_subject = yes }
-            NRP = { all_cores_owned_by_ROOT_or_subject = yes }
+            STB = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            NRP = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_global_flag = balsplosion
         }
+        highlight_states = {
+            highlight_states_trigger = {
+                is_on_continent = europe
+                OR = {
+                    is_in_array = { STB.original_cores = THIS }
+                    is_in_array = { NRP.original_cores = THIS }
+                }
+            }
+        }
         fire_only_once = yes
-        cost = 75
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_southeastern_end"
-            every_state = {
+            every_owned_state = {
                 limit = {
                     OR = {
-                        is_core_of = STB
-                        is_core_of = NRP
+                        is_in_array = { STB.original_cores = THIS }
+                        is_in_array = { NRP.original_cores = THIS }
                     }
                 }
                 add_core_of = ROOT
@@ -759,22 +779,36 @@ FH_demo_south_east_skeleton_category = {
     }
     south_east_recore_northwest_end = {
         available = {
-            MTS = { all_cores_owned_by_ROOT_or_subject = yes }
+            MTS = { all_original_cores_owned_by_ROOT_or_subject = yes }
             BAL = { all_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            MTS = { all_cores_owned_by_ROOT_or_subject = yes }
+            MTS = { all_original_cores_owned_by_ROOT_or_subject = yes }
             BAL = { all_cores_owned_by_ROOT_or_subject = yes }
         }
+        highlight_states = {
+            highlight_states_trigger = {
+                is_on_continent = europe
+                OR = {
+                    is_in_array = { MTS.original_cores = THIS }
+                    state = 1214
+                    state = 13
+                    state = 82
+                    state = 90
+                }
+            }
+        }
         fire_only_once = yes
-        cost = 75
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_northwest_end"
-            every_state = {
+            every_owned_state = {
                 limit = {
                     OR = {
-                        is_core_of = MTS
-                        is_core_of = BAL
+                        is_in_array = { MTS.original_cores = THIS }
+                        state = 1214
+                        state = 13
+                        state = 82
+                        state = 90
                     }
                 }
                 add_core_of = ROOT
@@ -786,26 +820,35 @@ FH_demo_south_east_skeleton_category = {
     }
     south_east_recore_islands = {
         available = {
-            NID = { all_cores_owned_by_ROOT_or_subject = yes }
-            CLI = { all_cores_owned_by_ROOT_or_subject = yes }
-            SPF = { all_cores_owned_by_ROOT_or_subject = yes }
+            NID = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            CLI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            SPF = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            NID = { all_cores_owned_by_ROOT_or_subject = yes }
-            CLI = { all_cores_owned_by_ROOT_or_subject = yes }
-            SPF = { all_cores_owned_by_ROOT_or_subject = yes }
+            NID = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            CLI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            SPF = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_global_flag = balsplosion
         }
+        highlight_states = {
+            highlight_states_trigger = {
+                is_on_continent = europe
+                OR = {
+                    is_in_array = { NID.original_cores = THIS }
+                    is_in_array = { CLI.original_cores = THIS }
+                    is_in_array = { SPF.original_cores = THIS }
+                }
+            }
+        }
         fire_only_once = yes
-        cost = 75
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision south_east_recore_islands"
-            every_state = {
+            every_owned_state = {
                 limit = {
                     OR = {
-                        is_core_of = NID
-                        is_core_of = CLI
-                        is_core_of = SPF
+                        is_in_array = { NID.original_cores = THIS }
+                        is_in_array = { CLI.original_cores = THIS }
+                        is_in_array = { SPF.original_cores = THIS }
                     }
                 }
                 add_core_of = ROOT
@@ -819,15 +862,39 @@ FH_demo_south_east_skeleton_category = {
         available = {
             custom_trigger_tooltip = {
                 tooltip = BAL_owns_all_peninsula_tt
-                MTS = { all_cores_owned_by_ROOT_or_subject = yes }
-                BAL = { all_cores_owned_by_ROOT_or_subject = yes }
-                EEE = { all_cores_owned_by_ROOT_or_subject = yes }
-                NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-                NRP = { all_cores_owned_by_ROOT_or_subject = yes }
-                STB = { all_cores_owned_by_ROOT_or_subject = yes }
-                221 = {
+                MTS = { all_original_cores_owned_by_ROOT_or_subject = yes }
+                EEE = { all_original_cores_owned_by_ROOT_or_subject = yes }
+                NEI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+                NRP = { all_original_cores_owned_by_ROOT_or_subject = yes }
+                STB = { all_original_cores_owned_by_ROOT_or_subject = yes }
+                NID = { all_original_cores_owned_by_ROOT_or_subject = yes}
+                1214 = {
                     OR = {
-                        CONTROLLER = {
+                        OWNER = {
+                            tag = ROOT
+                            is_subject_of = ROOT
+                        }
+                    }
+                }
+                13 = {
+                    OR = {
+                        OWNER = {
+                            tag = ROOT
+                            is_subject_of = ROOT
+                        }
+                    }
+                }
+                82 = {
+                    OR = {
+                        OWNER = {
+                            tag = ROOT
+                            is_subject_of = ROOT
+                        }
+                    }
+                }
+                90 = {
+                    OR = {
+                        OWNER = {
                             tag = ROOT
                             is_subject_of = ROOT
                         }
@@ -836,15 +903,39 @@ FH_demo_south_east_skeleton_category = {
             }
         }
         visible = {
-            MTS = { all_cores_owned_by_ROOT_or_subject = yes }
-            BAL = { all_cores_owned_by_ROOT_or_subject = yes }
-            EEE = { all_cores_owned_by_ROOT_or_subject = yes }
-            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
-            NRP = { all_cores_owned_by_ROOT_or_subject = yes }
-            STB = { all_cores_owned_by_ROOT_or_subject = yes }
-            221 = {
+            MTS = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            EEE = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            NEI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            NRP = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            STB = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            NID = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            1214 = {
                 OR = {
-                    CONTROLLER = {
+                    OWNER = {
+                        tag = ROOT
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            13 = {
+                OR = {
+                    OWNER = {
+                        tag = ROOT
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            82 = {
+                OR = {
+                    OWNER = {
+                        tag = ROOT
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            90 = {
+                OR = {
+                    OWNER = {
                         tag = ROOT
                         is_subject_of = ROOT
                     }
@@ -936,7 +1027,10 @@ FH_demo_WGE_skeleton_category = {
             hidden_effect = {
                 leave_faction = yes
                 OVERLORD = {
-                    end_puppet = yes
+                    set_autonomy = {
+                        target = ROOT
+                        autonomy_state = autonomy_free
+                    }
                 }
                 set_politics = {
                     ruling_party = fascism
@@ -946,6 +1040,7 @@ FH_demo_WGE_skeleton_category = {
                     ideology = fascism
                     popularity = 0.33
                 }
+                drop_cosmetic_tag = yes
                 random_list = {
                     35 = {
                         STG = {
@@ -972,8 +1067,7 @@ FH_demo_WGE_skeleton_category = {
             tag = NVC
         }
         fire_only_once = yes
-        cost = 25
-        days_remove = 35
+        days_remove = 28
         war_with_on_complete = GRF
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NVC_capture_the_throne"
@@ -982,7 +1076,13 @@ FH_demo_WGE_skeleton_category = {
                 type = annex_everything
             }
         }
-        ai_will_do = { factor = 10 }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
     }
     VRG_backstab_NVC = {
         available = {
@@ -995,8 +1095,7 @@ FH_demo_WGE_skeleton_category = {
             tag = VRG
         }
         fire_only_once = yes
-        cost = 50
-        days_remove = 14
+        days_remove = 7
         war_with_on_complete = NVC
         war_with_on_complete = GRF
         remove_effect = {
@@ -1005,21 +1104,32 @@ FH_demo_WGE_skeleton_category = {
                 target = NVC
                 type = annex_everything
             }
-            create_wargoal = {
-                target = GRF
-                type = annex_everything
+            if = {
+                limit = {
+                    country_exists = GRF
+                }
+                create_wargoal = {
+                    target = GRF
+                    type = annex_everything
+                }
             }
         }
-        ai_will_do = { factor = 10 }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
     }
     VRG_NVC_recapture_southern_GRF = {
         available = {
-            owns_state = 1217
+            1217 = { is_owned_and_controlled_by = ROOT }
             is_subject = no
-            date > 1052.8.10
+            date > 1051.8.10
         }
         visible = {
-            date > 1052.8.10
+            date > 1051.8.10
             OR = {
                 AND = {
                     tag = NVC
@@ -1030,10 +1140,9 @@ FH_demo_WGE_skeleton_category = {
                     NOT = { country_exists = NVC }
                 }
             }
-            country_exists = MWR #For now
+            country_exists = MWR
         }
         fire_only_once = yes
-        cost = 50
         days_remove = 35
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove VRG_NVC_recapture_southern_GRF"
@@ -1041,17 +1150,58 @@ FH_demo_WGE_skeleton_category = {
                 type = annex_everything
                 target = MWR
             }
+            if = {
+                limit = {
+                    OR = {
+                        MWR = {
+                            is_subject_of = STG
+                        }
+                        338 = { is_owned_by = STG }
+                    }
+                }
+                custom_effect_tooltip = VRG_NVC_force_surrender_tt
+                set_country_flag = VRG_NVC_can_force_white_peace
+            }
         }
-        ai_will_do = { factor = 10 }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
+    }
+    VRG_NVC_submit_our_demands = {
+        available = {
+            338 = { is_controlled_by = ROOT }
+        }
+        visible = {
+            has_country_flag = VRG_NVC_can_force_white_peace
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision VRG_NVC_submit_our_demands"
+            #Change this to a series of events, probably
+            white_peace = STG
+            every_state = {
+                limit = {
+                    is_in_array = { STG.original_cores = THIS }
+                }
+                transfer_state_to = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 10
+        }
     }
     VRG_NVC_punch_the_bear = {
         available = {
-            owns_state = 1217
+            1217 = { is_owned_and_controlled_by = ROOT }
             is_subject = no
-            date > 1054.2.14
+            date > 1052.2.14
         }
         visible = {
-            date > 1054.2.14
+            date > 1052.2.14
             OR = {
                 AND = {
                     tag = NVC
@@ -1067,7 +1217,6 @@ FH_demo_WGE_skeleton_category = {
                 country_exists = JGR
             }
         }
-        cost = 50
         fire_only_once = yes
         days_remove = 35
         remove_effect  = {
@@ -1091,16 +1240,22 @@ FH_demo_WGE_skeleton_category = {
                 }
             }
         }
-        ai_will_do = { factor = 10 }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
     }
     VRG_NVC_yikes_the_yaks = {
         available = {
-            owns_state = 1217
+            1217 = { is_owned_and_controlled_by = ROOT }
             is_subject = no
-            date > 1056.1.1
+            date > 1053.1.1
         }
         visible = {
-            date > 1056.1.1
+            date > 1053.1.1
             OR = {
                 AND = {
                     tag = NVC
@@ -1116,7 +1271,6 @@ FH_demo_WGE_skeleton_category = {
                 country_exists = YAH
             }
         }
-        cost = 50
         fire_only_once = yes
         days_remove = 35
         remove_effect = {
@@ -1140,26 +1294,32 @@ FH_demo_WGE_skeleton_category = {
                 }
             }
         }
-        ai_will_do = { factor = 10 }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+        }
     }
     VRG_NVC_clap_the_changelings = {
         available = {
             custom_trigger_tooltip = {
                 tooltip = NVC_VRG_slurped_up_everything_tt
-                owns_state = 1217
-                owns_state = 243
-                owns_state = 338
-                owns_state = 281
-                owns_state = 325
-                owns_state = 62
-                owns_state = 274
-                owns_state = 11
+                GRF = { all_original_cores_owned_by_ROOT = yes }
+                NVC = { all_original_cores_owned_by_ROOT = yes }
+                MWR = { all_original_cores_owned_by_ROOT = yes }
+                VRG = { all_original_cores_owned_by_ROOT = yes }
+                SCH = { all_original_cores_owned_by_ROOT = yes }
+                JGR = { all_original_cores_owned_by_ROOT = yes }
+                YAH = { all_original_cores_owned_by_ROOT = yes }
+                SMH = { all_original_cores_owned_by_ROOT = yes }
             }
             is_subject = no
-            date > 1057.6.1
+            date > 1054.6.1
         }
         visible = {
-            date > 1057.6.1
+            date > 1054.6.1
             OR = {
                 AND = {
                     tag = NVC
@@ -1171,7 +1331,6 @@ FH_demo_WGE_skeleton_category = {
                 }
             }
         }
-        cost = 100
         fire_only_once = yes
         days_remove = 70
         remove_effect = {
@@ -1180,6 +1339,13 @@ FH_demo_WGE_skeleton_category = {
             create_wargoal = {
                 target = var:GRF_core_state_owner
                 type = take_claimed_state
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
             }
         }
     }
@@ -1194,13 +1360,12 @@ FH_demo_STG_region_skeleton_category = {
         visible = {
             is_subject_of = STG
             tag = AWR
-            date > 1050.6.20
         }
-        cost = 50
         fire_only_once = yes
-        days_remove = 70
+        days_remove = 35
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove AWR_peace_out_STG"
+            custom_effect_tooltip = AWR_may_make_STG_angy_tt
             country_event = equestria_activity.27
         }
     }
@@ -1209,9 +1374,8 @@ FH_demo_STG_region_skeleton_category = {
             tag = STG
             has_country_flag = STG_spurned_AWR_puppet
         }
-        cost = 100
         fire_only_once = yes
-        days_remove = 35
+        days_remove = 21
         war_with_on_complete = AWR
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove STG_end_AWRs_crap"
@@ -1223,7 +1387,7 @@ FH_demo_STG_region_skeleton_category = {
         ai_will_do = {
             factor = 10
             modifier = {
-                date < 1052.1.1
+                date < 1051.1.1
                 factor = 0
             }
         }
@@ -1231,15 +1395,15 @@ FH_demo_STG_region_skeleton_category = {
     STG_integrate_chaos = {
         visible = {
             tag = STG
-            AWR = { all_cores_owned_by_ROOT = yes }
+            AWR = { all_original_cores_owned_by_ROOT = yes }
         }
-        cost = 75
         fire_only_once = yes
-        days_remove = 140
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove STG_integrate_chaos"
-            every_state = {
-                limit = { is_core_of = AWR }
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STG_integrate_chaos"
+            every_owned_state = {
+                limit = {
+                    is_in_array = { AWR.original_cores = THIS }
+                }
                 add_core_of = ROOT
             }
         }
@@ -1303,14 +1467,20 @@ FH_demo_equus_heartland_skeleton_category = {
     BLS_delve_deeper_into_necropolis = {
         visible = {
             tag = BLS
-            NOT = { check_variable = { BLS_excavation_var > 3 } }
+            check_variable = { BLS_excavation_var < 3 }
         }
         cost = 75
         days_remove = 90
         days_re_enable = 150
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_delve_deeper_into_necropolis"
-            custom_effect_tooltip = BLS_for_science_tt
+            if = {
+                limit = { check_variable = { BLS_excavation_var < 3 } }
+                custom_effect_tooltip = BLS_for_science_tt
+            }
+            else = {
+                custom_effect_tooltip = BLS_super_science_tt
+            }
             add_to_variable = { BLS_excavation_research_var = 0.04 }
             add_to_variable = { BLS_excavation_consumer_goods_var = 0.075 }
             add_to_variable = { BLS_excavation_stability_var = -0.025 }
@@ -1342,6 +1512,7 @@ FH_demo_equus_heartland_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision BLS_finalize_dig"
             custom_effect_tooltip = BLS_how_boring_tt
             remove_dynamic_modifier = { modifier = BLS_ancient_necropolis }
+            74 = { remove_dynamic_modifier = { modifier = BLS_necropolis } }
         }
         ai_will_do = {
             factor = 0
@@ -1389,7 +1560,6 @@ FH_demo_equus_heartland_skeleton_category = {
             tag = BLS
             date > 1051.5.1
         }
-        cost = 25
         days_remove = 21
         fire_only_once = yes
         war_with_on_complete = WHY
@@ -1410,7 +1580,6 @@ FH_demo_equus_heartland_skeleton_category = {
             date > 1051.10.1
             country_exists = NER
         }
-        cost = 25
         days_remove = 21
         fire_only_once = yes
         war_with_on_complete = NER
@@ -1436,18 +1605,16 @@ FH_demo_equus_heartland_skeleton_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
-                is_core_of = WHY
+                is_on_continent = europe
+                is_in_array = { WHY.original_cores = THIS }
             }
         }
-        cost = 75
-        days_remove = 45
         fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_foreign_student_integration"
-            every_state = {
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BLS_foreign_student_integration"
+            every_owned_state = {
                 limit = {
-                    is_core_of = WHY
-                    is_owned_by = ROOT
+                    is_in_array = { WHY.original_cores = THIS }
                 }
                 add_core_of = ROOT
             }
@@ -1459,27 +1626,35 @@ FH_demo_equus_heartland_skeleton_category = {
     BLS_buffer_around_changelings = {
         visible = {
             tag = BLS
-            NER = { all_cores_owned_by_ROOT = yes }
+            NER = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
-                is_core_of = NER
+                is_on_continent = europe
+                is_in_array = { NER.original_cores = THIS }
                 NOT = { is_core_of = ROOT }
             }
         }
-        cost = 30
-        days_remove = 15
         fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_buffer_around_changelings"
-            release_autonomy = {
-                target = NER
-                autonomy_state = autonomy_puppet
+            effect_tooltip = {
+                release_autonomy = {
+                    target = NER
+                    autonomy_state = autonomy_puppet
+                }
             }
             hidden_effect = {
-                70 = {
-                    add_core_of = ROOT
-                    transfer_state_to = ROOT
+                every_state = {
+                    limit = {
+                        is_in_array = { NER.original_cores = THIS }
+                        NOT = { is_core_of = ROOT }
+                    }
+                    transfer_state_to = NER
+                }
+                set_autonomy = {
+                    target = NER
+                    autonomy_state = autonomy_puppet
                 }
             }
         }
@@ -1499,7 +1674,6 @@ FH_demo_equus_heartland_skeleton_category = {
                 country_exists = CLD
             }
         }
-        cost = 25
         days_remove = 35
         fire_only_once = yes
         remove_effect = {
@@ -1531,39 +1705,65 @@ FH_demo_equus_heartland_skeleton_category = {
         visible = {
             tag = BLS
             OR = {
-                CER = { all_cores_owned_by_ROOT = yes }
-                CLD = { all_cores_owned_by_ROOT = yes }
+                CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
+                CLD = { all_original_cores_owned_by_ROOT_or_subject = yes }
             }
         }
         highlight_states = {
             highlight_states_trigger = {
+                is_on_continent = europe
                 OR = {
-                    is_core_of = CER
-                    is_core_of = CLD
+                    is_in_array = { CER.original_cores = THIS }
+                    is_in_array = { CLD.original_cores = THIS }
                 }
-                is_owned_by = ROOT
             }
         }
-        cost = 25
-        days_remove = 35
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove BLS_neutral_forts"
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BLS_neutral_forts"
             if = {
                 limit = {
-                    CER = { all_cores_owned_by_ROOT = yes }
+                    CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
                 }
-                release_autonomy = {
-                    target = CER
-                    autonomy_state = autonomy_puppet
+                effect_tooltip = {
+                    release_autonomy = {
+                        target = CER
+                        autonomy_state = autonomy_puppet
+                    }
+                }
+                hidden_effect = {
+                    every_state = {
+                        limit = {
+                            is_in_array = { CER.original_cores = THIS }
+                        }
+                        transfer_state_to = CER
+                    }
+                    set_autonomy = {
+                        target = CER
+                        autonomy_state = autonomy_puppet
+                    }
                 }
             }
             if = {
                 limit = {
-                    CLD = { all_cores_owned_by_ROOT = yes }
+                    CLD = { all_original_cores_owned_by_ROOT_or_subject = yes }
                 }
-                release_autonomy = {
-                    target = CLD
-                    autonomy_state = autonomy_puppet
+                effect_tooltip = {
+                    release_autonomy = {
+                        target = CLD
+                        autonomy_state = autonomy_puppet
+                    }
+                }
+                hidden_effect = {
+                    every_state = {
+                        limit = {
+                            is_in_array = { CLD.original_cores = THIS }
+                        }
+                        transfer_state_to = CLD
+                    }
+                    set_autonomy = {
+                        target = CLD
+                        autonomy_state = autonomy_puppet
+                    }
                 }
             }
         }
@@ -1580,7 +1780,6 @@ FH_demo_equus_heartland_skeleton_category = {
             tag = BLS
             date > 1053.8.1
         }
-        cost = 25
         days_remove = 35
         fire_only_once = yes
         remove_effect = {
@@ -1609,13 +1808,12 @@ FH_demo_equus_heartland_skeleton_category = {
     BLS_integrate_glory = {
         visible = {
             tag = BLS
-            owns_state = 3
-            owns_state = 75
-            owns_state = 12
+            EQS = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
-                is_core_of = EQS
+                is_on_continent = europe
+                is_in_array = { EQS.original_cores = THIS }
                 NOT = {
                     state = 3
                     state = 39
@@ -1626,14 +1824,18 @@ FH_demo_equus_heartland_skeleton_category = {
                 }
             }
         }
-        cost = 70
-        days_remove = 70
         fire_only_once = yes
-        remove_effect = {
+        complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision BLS_integrate_glory"
             custom_effect_tooltip = BLS_steal_sanctum_univeristy_tt
             hidden_effect = {
-                release_autonomy = {
+                every_state = {
+                    limit = {
+                        is_in_array = { EQS.original_cores = THIS }
+                    }
+                    transfer_state_to = EQS
+                }
+                set_autonomy = {
                     target = EQS
                     autonomy_state = autonomy_puppet
                 }
@@ -1716,6 +1918,10 @@ FH_demo_equus_heartland_skeleton_category = {
             }
             retire_character = WHY_Horizon_Sunrise
             remove_ideas = WHY_heretic_cult
+            set_party_name = {
+                ideology = neutrality
+                name = WHY_heresy
+            }
         }
         ai_will_do = {
             factor = 10
@@ -1798,7 +2004,6 @@ FH_demo_equus_heartland_skeleton_category = {
             tag = WHY
             date > 1051.10.1
         }
-        cost = 25
         fire_only_once = yes
         days_remove = 21
         war_with_on_complete = NER
@@ -1818,7 +2023,6 @@ FH_demo_equus_heartland_skeleton_category = {
             tag = WHY
             date > 1052.4.1
         }
-        cost = 25
         fire_only_once = yes
         days_remove = 21
         war_with_on_complete = BLS
@@ -1843,7 +2047,6 @@ FH_demo_equus_heartland_skeleton_category = {
             date > 1052.9.12
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
-        cost = 25
         fire_only_once = yes
         days_remove = 21
         war_with_on_complete = CLD
@@ -1868,7 +2071,6 @@ FH_demo_equus_heartland_skeleton_category = {
             date > 1053.2.4
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
-        cost = 25
         fire_only_once = yes
         days_remove = 21
         war_with_on_complete = CER
@@ -1890,7 +2092,7 @@ FH_demo_equus_heartland_skeleton_category = {
     WHY_the_new_generation = {
         visible = {
             tag = WHY
-            CER = { all_cores_owned_by_ROOT_or_subject = yes }
+            CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
         cost = 10
@@ -1920,7 +2122,6 @@ FH_demo_equus_heartland_skeleton_category = {
             date > 1055.1.1
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
-        cost = 25
         fire_only_once = yes
         days_remove = 35
         remove_effect = {
@@ -1941,22 +2142,21 @@ FH_demo_equus_heartland_skeleton_category = {
     WHY_government_expansion = {
         visible = {
             tag = WHY
-            NER = { all_cores_owned_by_ROOT_or_subject = yes }
+            NER = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
-                is_core_of = NER
+                is_on_continent = europe
+                is_in_array = { NER.original_cores = THIS }
                 NOT = { is_core_of = ROOT }
             }
         }
-        cost = 50
         fire_only_once = yes
-        days_remove = 70
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_government_expansion"
-            every_state = {
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision WHY_government_expansion"
+            every_owned_state = {
                 limit = {
-                    is_core_of = NER
+                    is_in_array = { NER.original_cores = THIS }
                     NOT = { is_core_of = ROOT }
                 }
                 add_core_of = ROOT
@@ -1973,17 +2173,16 @@ FH_demo_equus_heartland_skeleton_category = {
         }
         highlight_states = {
             highlight_states_trigger = {
-                is_core_of = BLS
+                is_on_continent = europe
+                is_in_array = { BLS.original_cores = THIS }
             }
         }
-        cost = 50
         fire_only_once = yes
-        days_remove = 35
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_university_integration"
-            every_state = {
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision WHY_university_integration"
+            every_owned_state = {
                 limit = {
-                    is_core_of = BLS
+                    is_in_array = { BLS.original_cores = THIS }
                 }
                 add_core_of = ROOT
             }
@@ -1995,26 +2194,24 @@ FH_demo_equus_heartland_skeleton_category = {
     WHY_harmonys_gasp = {
         visible = {
             tag = WHY
-            CER = { all_cores_owned_by_ROOT_or_subject = yes }
-            CLD = { all_cores_owned_by_ROOT_or_subject = yes }
+            CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
+            CLD = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
                 OR = {
-                    is_core_of = CLD
-                    is_core_of = CER
+                    is_in_array = { CLD.original_cores = THIS }
+                    is_in_array = { CER.original_cores = THIS }
                 }
             }
         }
-        cost = 100
-        days_remove = 105
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_harmonys_gasp"
-            every_state = {
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision WHY_harmonys_gasp"
+            every_owned_state = {
                 limit = {
                     OR = {
-                        is_core_of = CER
-                        is_core_of = CLD
+                        is_in_array = { CER.original_cores = THIS }
+                        is_in_array = { CLD.original_cores = THIS }
                     }
                 }
                 add_core_of = ROOT
@@ -2421,8 +2618,8 @@ FH_demo_equus_heartland_skeleton_category = {
         }
         fire_only_once = yes
         days_remove = 21
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision CER_reclaim_harmonys_birthright"
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_reclaim_harmonys_birthright"
             every_other_country = {
                 limit = {
                     exists = yes
