@@ -151,8 +151,8 @@ country_event = {
         }
     }
     option = {
-        name = fh_demo.2.a
-        custom_effect_tooltip = EEE_default_expression_tt
+        name = fh_demo.2.b
+        custom_effect_tooltip = EEE_default_rage_tt
         hidden_effect = {
             NEI = {
                 transfer_state = 88
@@ -340,6 +340,7 @@ country_event = { #Temp event for CRY losing Shining and choosing a replacement
             promote_leader = yes
             add_skill_level = 1
             add_trait = { trait = royal_guard_commander }
+            add_trait = { trait = politically_connected }
             hidden_effect = {
                 remove_trait = { trait = recently_promoted }
             }
@@ -348,5 +349,53 @@ country_event = { #Temp event for CRY losing Shining and choosing a replacement
 
     after = {
         retire_character = CRY_shining_armour_1048
+        hidden_effect = {
+            every_country = {
+                limit = {
+                    capital_scope = { is_on_continent = europe }
+                    #NOT = { tag = WNG }
+                }
+                news_event = {
+                    id = fhequusnews.8
+                    hours = 6
+                }
+            }
+        }
+    }
+}
+
+country_event = { #Death of Sinister and replacing him with Feather Bangs
+    id = fh_demo.9
+    title = fh_demo.9.t
+    desc = fh_demo.9.d
+    immediate = {log = "[GetDateText]: [ROOT.GetName]: event fh_demo.9"}
+
+    is_triggered_only = yes
+
+    option = { #The Soviet has spoken!
+        name = fh_demo.9.a
+        retire_character = STG_sinister_serov_1048
+        STG_feather_bangs = {
+            add_country_leader_role = {
+                promote_leader = yes
+                country_leader = {
+                    ideology = socialism
+                    expire = "1965.1.1"
+                    traits = { }
+                }
+            }
+        }
+        hidden_effect = {
+            every_country = {
+                limit = {
+                    capital_scope = { is_on_continent = europe }
+                    NOT = { tag = WNG }
+                }
+                news_event = {
+                    id = fhequusnews.9
+                    hours = 6
+                }
+            }
+        }
     }
 }
