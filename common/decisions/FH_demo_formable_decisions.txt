@@ -121,7 +121,7 @@ form_crystal_empire_category = {
 		cost = 75
 		days_remove = 70
 		modifier = {
-			army_experience = -0.1
+			experience_gain_army = -0.1
 			consumer_goods_factor = 0.25
 		}
 		remove_effect = {
@@ -132,7 +132,9 @@ form_crystal_empire_category = {
 	CRY_repudiate_CHN_treaty = {
 		available = {
 			date > 1051.8.31
-			has_army_manpower > 500000
+			has_army_manpower = {
+				size > 500000
+			}
 		}
 		fire_only_once = yes
 		cost = 100
@@ -253,7 +255,7 @@ form_changelingian_protectorates_category = {
 		days_remove = 365
 		fire_only_once = yes
 		modifier = {
-			army_experience = -0.05
+			experience_gain_army = -0.05
 			war_support_factor = -0.15
 			consumer_goods_factor = 0.2
 			army_org_factor = -0.2
@@ -280,9 +282,9 @@ form_changelingian_protectorates_category = {
 		days_remove = 180
 		fire_only_once = yes
 		modifier = {
-			army_experience = -0.15
+			experience_gain_army = -0.15
 			army_defence_factor = -0.1
-			army_offence_factor = -0.1
+			army_attack_factor = -0.1
 			army_org_factor = -0.05
 		}
 		remove_effect = {
@@ -2201,8 +2203,8 @@ HLR_formables_category = {
 			RCT = { set_cosmetic_tag = RIV_exile }
 			hidden_effect = {
 				every_state = {
-					is_on_continent = asia
 					limit = {
+						is_on_continent = asia
 						OR = {
 							is_in_array = { RCT.original_cores = THIS }
 							is_in_array = { NIM.original_cores = THIS }
@@ -2279,8 +2281,8 @@ HLR_formables_category = {
             log = "[GetDateText]: [Root.GetName]: decision HLR_restore_griffonian_throne"
             set_cosmetic_tag = HLR_GRI
             every_state = {
-				is_on_continent = asia
                 limit = {
+					is_on_continent = asia
                     OR = {
                         is_in_array = { GRI.original_cores = yes }
                         is_in_array = { BOI.original_cores = yes }
@@ -2335,8 +2337,8 @@ HLR_formables_category = {
             }
             hidden_effect = {
 				every_state = {
-					is_on_continent = asia
 					limit = {
+						is_on_continent = asia
 						OR = {
 							is_in_array = { SIC.original_cores = THIS }
 							AND = {
@@ -2644,8 +2646,8 @@ GRI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_end_republic"
 			every_state = {
-				is_on_continent = asia
 				limit = {
+					is_on_continent = asia
 					is_in_array = { FAT.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -2708,8 +2710,8 @@ GRI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision GRI_revenge_of_grover"
 			every_state = {
-				is_on_continent = asia
 				limit = {
+					is_on_continent = asia
 					OR = {
 						is_in_array = { JER.original_cores = THIS }
 						is_in_array = { EQC.original_cores = THIS }
@@ -3094,8 +3096,8 @@ EQC_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_daybreaker"
 			every_state = {
-				is_on_continent = europe
 				limit = {
+					is_on_continent = europe
 					OR = {
 						is_in_array = { EQS.original_cores = THIS }
 						is_in_array = { global.EQS_original_territory = THIS }
@@ -3727,8 +3729,8 @@ BRF_formables_category = {
 						FAT = { is_in_faction_with = ROOT }
 					}
 					every_state = {
-						is_on_continent = asia
 						limit = {
+							is_on_continent = asia
 							OR = {
 								AND = {
 									is_claimed_by = FAT
@@ -4231,8 +4233,8 @@ RCT_formables_category = {
 			}
 			hidden_effect = {
 				every_state = {
-					is_on_continent = asia
 					limit = {
+						is_on_continent = asia
 						OR = {
 							is_in_array = { LUS.original_cores = THIS }
 							is_in_array = { GRU.original_cores = THIS }
@@ -4307,11 +4309,11 @@ RCT_formables_category = {
 			EQC = { set_cosmetic_tag = EQC_RCT }
 			hidden_effect = {
 				every_state = {
-					is_on_continent = asia
 					limit = {
+						is_on_continent = asia
 						OR = {
-							is_core_of = BOI
-							is_core_of = JER
+							is_in_array = { BOI.original_cores = THIS }
+							is_in_array = { JER.original_cores = THIS }
 						}
 						is_owned_and_controlled_by = ROOT
 					}
@@ -4602,8 +4604,8 @@ CTH_formables_category = {
 			}
 			hidden_effect = {
 				every_state = {
-					is_on_continent = africa
 					limit = {
+						is_on_continent = africa
 						OR = {
 							state = 1103
 							state = 1166
@@ -4733,6 +4735,7 @@ CTL_formables_category = {
 						state = 723
 					}
 				}
+				add_core_of = ROOT
 			}
 			effect_tooltip = {
 				release_autonomy = {
@@ -4742,12 +4745,10 @@ CTL_formables_category = {
 			}
 			MCW = { set_cosmetic_tag = MCW_CTL }
 			hidden_effect = {
-				every_state = {
-					is_on_continent = africa
+				every_owned_state = {
 					limit = {
 						NOT = { is_core_of = ROOT }
-						is_core_of = MCW
-						is_owned_by = ROOT
+						is_in_array = { MCW.original_cores = THIS }
 					}
 					transfer_state_to = MCW
 				}
@@ -5128,8 +5129,8 @@ CGI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision CGI_khaaaaaaaaan"
 			every_state = {
-				is_on_continent = africa
 				limit = {
+					is_on_continent = africa
 					is_in_array = { CTH.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -6235,8 +6236,8 @@ KIR_formables_category = {
 			ROA = { set_cosmetic_tag = ROA_KIR }
 			hidden_effect = {
 				every_state = {
-					is_on_continent = africa
 					limit = {
+						is_on_continent = africa
 						is_in_array = { ROA.original_cores = THIS }
 						NOT = { is_in_array = { global.original_ancient_pact_states = THIS } }
 					}
@@ -6740,8 +6741,8 @@ TAI_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision TAI_set_the_sun"
 			every_state = {
-				is_on_continent = africa
 				limit = {
+					is_on_continent = africa
 					is_in_array = { KIR.original_cores = THIS }
 				}
 				add_core_of = ROOT
@@ -8289,8 +8290,8 @@ MGY_formables_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision MGY_unite_republics"
 			every_state = {
-				is_on_continent = africa
 				limit = {
+					is_on_continent = africa
 					is_claimed_by = ROOT
 					OR = {
 						is_in_array = { NDR.original_cores = THIS }
@@ -10922,10 +10923,12 @@ AWR_formables_category = {
 		available = {
 			NOT = {
 				any_other_country = {
-					limit = {
-						is_equestrian_continent_country = yes
+					if = {
+						limit = {
+							is_equestrian_continent_country = yes
+						}
+						exists = yes
 					}
-					exists = yes
 				}
 			}
 		}
