@@ -1,19 +1,10 @@
 ﻿capital = 76
 
-oob = "OLE_1048"
+set_oob = "OLE_1048"
 
-set_research_slots = 4
+set_research_slots = 3
 
 set_cosmetic_tag = OLE_CHN_FH
-
-add_breakthrough_progress = {
-	specialization = specialization_naval
-	value = 0.3
-}
-add_breakthrough_progress = {
-	specialization = specialization_land
-	value = 0.1
-}
 
 set_technology = {
 	deer_race = 1
@@ -21,15 +12,21 @@ set_technology = {
 	melee_weapons1 = 1
 	pre_gw_artillery = 1
 	infantry_weapons = 1
+	infantry_weapons1 = 1
 	interwar_antitank = 1
 	gw_artillery = 1
 	tech_support = 1
-	tech_mountaineers = 1
-	tech_recon = 1
-	fuel_silos = 1
-	basic_train = 1
 	tech_trucks = 1
 	motorised_infantry = 1
+	tech_jager = 1
+	tech_recon = 1
+	tech_engineers = 1
+	synth_oil_experiments = 1
+	fuel_silos = 1
+	fuel_refining = 1
+	interwar_antiair = 1
+	tech_military_police = 1
+	basic_train = 1
 }
 if = {
 	limit = { has_dlc = "By Blood Alone" }
@@ -38,8 +35,12 @@ if = {
 		early_bombs = 1
 		aircraft_construction = 1
 		engines_1 = 1
+		engines_2 = 1
 		iw_small_airframe = 1
 		iw_medium_airframe = 1
+		basic_small_airframe = 1
+		basic_medium_airframe = 1
+		bba_early_transport_plane = 1
 	}
 
 	create_equipment_variant = {
@@ -53,6 +54,37 @@ if = {
 		icon = "GFX_olenia_2d_early_fighter_medium"
 	}
 	create_equipment_variant = {
+		name = "KH/5 (Carrier)"
+		type = cv_small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_olenia_2d_early_fighter_medium"
+	}
+	create_equipment_variant = {
+		name = "Lokki-Seagull TP/3"
+		type = small_plane_naval_bomber_airframe_1
+		modules = {
+			fixed_main_weapon_slot = torpedo_mounting
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_olenia_2d_naval_bomber1_medium"
+	}
+	create_equipment_variant = {
+		name = "Lokki-Seagull TP/3 (Carrier)"
+		type = cv_small_plane_naval_bomber_airframe_1
+		modules = {
+			fixed_main_weapon_slot = torpedo_mounting
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_olenia_2d_naval_bomber1_medium"
+	}
+
+	create_equipment_variant = {
 		name = "PP/4"
 		type = medium_plane_airframe_0
 		modules = {
@@ -62,15 +94,18 @@ if = {
 		}
 		icon = "GFX_olenia_2d_early_bomber_medium"
 	}
-	#set_air_oob = "OLE_1007_air_bba"
+	set_air_oob = "OLE_1048_air_bba"
+}
 
-	else = {
-		set_technology = {
-			early_fighter = 1
-			early_bomber = 1
-		}
-		#set_air_oob = "OLE_1007_air_legacy"
+else = {
+	set_technology = {
+		early_fighter = 1
+		cv_early_fighter = 1
+		fighter1 = 1
+		early_bomber = 1
+		early_transport_plane = 1
 	}
+	set_air_oob = "OLE_1048_air_legacy"
 }
 actually_fix_weapon_techs = yes #THIS HAS TO BE CALLED IN EVERY HISTORY FILE RIGHT AFTER MAIN set_technology!
 if = {
@@ -93,19 +128,31 @@ if = {
 set_technology = {
 	basic_naval_mines = 1
 	submarine_mine_laying = 1
-	basic_depth_charges = 1
-	basic_torpedo = 1
-	basic_battery = 1
-	early_ship_hull_submarine = 1
-	basic_ship_hull_submarine = 1
+	torpedo_gunboats = 1
 	early_ship_hull_light = 1
 	basic_ship_hull_light = 1
+	protected_cruisers = 1
 	early_ship_hull_cruiser = 1
-	early_ship_hull_heavy = 1
-	coastal_defense_ships = 1
+	basic_ship_hull_cruiser = 1
 	pre_dreadnoughts = 1
+	early_ship_hull_heavy = 1
+	basic_ship_hull_heavy = 1
+	early_ship_hull_submarine = 1
+	coastal_defense_ship = 1
 	mtg_transport = 1
+	basic_torpedo = 1
+	improved_ship_torpedo_launcher = 1
+	basic_battery = 1
+	basic_light_battery = 1
+	basic_heavy_battery = 1
+	basic_depth_charges = 1
+	sonar = 1
+	basic_fire_control_system = 1
+	basic_cruiser_armor_scheme = 1
+	early_ship_hull_carrier = 1
+	basic_heavy_armor_scheme = 1
 }
+set_naval_oob = "OLE_1048_naval"
 if = {
 	limit = {
 		has_dlc = "No Step Back"
@@ -129,11 +176,6 @@ if = {
 	}
 }
 	
-add_equipment_to_stockpile = {
-	type = infantry_equipment_0
-	amount = 1500
-	producer = OLE
-}
 CHN = {
 	set_autonomy = {
 		target = OLE
@@ -180,17 +222,6 @@ create_equipment_variant = {
 		rear_1_custom_slot = ship_mine_layer_sub
 	}
 }
-create_equipment_variant = {
-	name = "Hauki Class"
-	type = ship_hull_submarine_1
-	name_group = OLE_SS_HISTORICAL
-	parent_version = 0
-	modules = {
-		fixed_ship_torpedo_slot = ship_torpedo_sub_1
-		fixed_ship_engine_slot = sub_ship_engine_1
-		rear_1_custom_slot = empty
-	}
-}
 # Destroyers #
 create_equipment_variant = {
 	name = "Vesilisko Class"				# minelayer
@@ -215,31 +246,33 @@ create_equipment_variant = {
 	name_group = OLE_DD_HISTORICAL
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_light_battery_1
-		fixed_ship_anti_air_slot = ship_anti_air_1
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
-		fixed_ship_torpedo_slot = ship_torpedo_1
-		mid_1_custom_slot = empty
-		rear_1_custom_slot = ship_depth_charge_1
-	}
-	obsolete = yes
-}
-create_equipment_variant = {
-	name = "Saukko Class"
-	type = ship_hull_light_2
-	name_group = OLE_DD_HISTORICAL
-	parent_version = 0
-	modules = {
 		fixed_ship_battery_slot = ship_light_battery_2
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
-		fixed_ship_torpedo_slot = ship_torpedo_2
-		mid_1_custom_slot = ship_light_battery_2
+		fixed_ship_engine_slot = light_ship_engine_1
+		fixed_ship_torpedo_slot = ship_torpedo_1
+		mid_1_custom_slot = ship_torpedo_1
 		rear_1_custom_slot = ship_depth_charge_1
+	}
+}
+# Light Cruisers #
+create_equipment_variant = {
+	name = "Sakara Class"
+	type = ship_hull_cruiser_1
+	name_group = OLE_CL_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_medium_battery_2
+		fixed_ship_anti_air_slot = ship_anti_air_1
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = cruiser_ship_engine_1
+		fixed_ship_armor_slot = ship_armor_cruiser_1
+		fixed_ship_secondaries_slot = ship_secondaries_1
+		mid_1_custom_slot = ship_airplane_launcher_1
+		mid_2_custom_slot = ship_light_medium_battery_2
+		rear_1_custom_slot = ship_light_medium_battery_2
 	}
 }
 # Heavy Cruisers #
@@ -249,71 +282,35 @@ create_equipment_variant = {
 	name_group = OLE_CL_HISTORICAL
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_medium_battery_1
+		fixed_ship_battery_slot = ship_medium_battery_2
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = cruiser_ship_engine_2
+		fixed_ship_engine_slot = cruiser_ship_engine_1
 		fixed_ship_armor_slot = ship_armor_cruiser_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
-		mid_1_custom_slot = ship_anti_air_1
-		mid_2_custom_slot = ship_secondaries_1
-		rear_1_custom_slot = ship_medium_battery_1
-	}
-}
-# Cruisers #
-create_equipment_variant = {
-	name = "Sakara Class"
-	type = ship_hull_cruiser_1
-	name_group = OLE_CL_HISTORICAL
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_light_medium_battery_1
-		fixed_ship_anti_air_slot = ship_anti_air_1
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = cruiser_ship_engine_2
-		fixed_ship_armor_slot = ship_armor_cruiser_1
 		mid_1_custom_slot = ship_airplane_launcher_1
-		mid_2_custom_slot = ship_torpedo_1
-		rear_1_custom_slot = ship_mine_layer_1
+		mid_2_custom_slot = ship_medium_battery_2
+		rear_1_custom_slot = ship_medium_battery_2
 	}
 }
 # BC #
-create_equipment_variant = {
-	name = "Crown Class"
-	type = ship_hull_pre_dreadnought
-	name_group = OLE_BB_BC_HISTORICAL
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_heavy_battery_1
-		fixed_ship_anti_air_slot = ship_anti_air_1
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = heavy_ship_engine_1
-		fixed_ship_secondaries_slot = ship_secondaries_1
-		fixed_ship_armor_slot = ship_armor_bb_1
-		front_1_custom_slot = ship_anti_air_1
-		mid_1_custom_slot = ship_secondaries_1
-		rear_1_custom_slot = empty
-	}
-}
 create_equipment_variant = {
 	name = "Aldar Class"
 	type = ship_hull_heavy_1
 	name_group = OLE_BB_BC_HISTORICAL
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_heavy_battery_1
+		fixed_ship_battery_slot = ship_heavy_battery_2
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_1
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = heavy_ship_engine_2
+		fixed_ship_engine_slot = heavy_ship_engine_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
 		fixed_ship_armor_slot = ship_armor_bc_1
-		front_1_custom_slot = ship_anti_air_1
-		mid_1_custom_slot = empty
-		mid_2_custom_slot = ship_secondaries_1
-		rear_1_custom_slot = ship_heavy_battery_1
+		front_1_custom_slot = ship_heavy_battery_2
+		mid_1_custom_slot = ship_anti_air_1
+		mid_2_custom_slot = ship_airplane_launcher_1
+		rear_1_custom_slot = ship_heavy_battery_2
 	}
 }
