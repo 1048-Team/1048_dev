@@ -1,0 +1,552 @@
+has_unsupported_economic_law = {
+	hidden_trigger = { NOT = { has_idea = EQS_block_econ_demob } }
+	if = {
+		limit = { original_tag = EQC }
+		NOT = { has_country_flag = is_maresoc }
+	}
+	if = {
+		limit = { original_tag = PLB }
+		NOT = { has_cosmetic_tag = PLB_ice_bear }
+	}
+	NOT = { 
+		has_idea = detached_country 
+		has_idea = GRF_political_chaos
+		has_idea = GRF_doused_flames
+		has_idea = FAT_republican_struggle
+	}
+	if = {
+		limit = {
+			has_idea = low_economic_mobilisation
+		}
+		has_idea = low_economic_mobilisation
+		has_war_support < 0.15
+	}
+	else_if = {
+		limit = {
+			has_idea = partial_economic_mobilisation
+		}
+		has_idea = partial_economic_mobilisation
+		has_war_support < 0.25
+	}
+	else_if = {
+		limit = {
+			has_idea = war_economy
+		}
+		has_idea = war_economy
+		OR = {
+			has_war_support < 0.5
+			has_government = democratic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = tot_economic_mobilisation
+		}
+		has_idea = tot_economic_mobilisation
+		OR = {
+			has_war_support < 0.8
+			has_government = democratic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = totaler_krieg_economy
+		}
+		has_idea = totaler_krieg_economy
+		has_war_support < 0.8
+	}
+	else = {
+		always = no
+	}
+}
+has_unsupported_manpower_law = {
+	hidden_trigger = { NOT = { has_country_flag = KAT_expand_recruitment_flag } }
+	hidden_trigger = { NOT = { has_idea = EQS_block_manpower_demob } }
+	if = {
+		limit = { original_tag = EQC }
+		NOT = { has_country_flag = is_maresoc }
+	}
+	if = {
+		limit = {
+			tag = {
+				original_tag = GRI
+				original_tag = RCT
+			}
+		}
+		NOT = { has_country_flag = prevent_demobilization }
+	}
+	if = {
+		limit = { original_tag = PLB }
+		NOT = { has_cosmetic_tag = PLB_ice_bear }
+	}
+	NOT = { 
+		has_idea = detached_country 
+		has_idea = GRF_political_chaos
+		has_idea = GRF_doused_flames
+		has_idea = FAT_republican_struggle
+	}
+	if = {
+		limit = {
+			has_idea = limited_conscription
+		}
+		has_idea = limited_conscription
+		has_war_support < 0.1
+		NOT = { has_government = communism }
+		NOT = { has_government = fascism }
+		if = {
+			limit = { has_idea = FAT_republican_struggle }
+			NOT = { has_idea = FAT_republican_struggle }
+		}
+		if = {
+			limit = { tag = NIM }
+			NOT = { has_idea = NIM_warrior_society }
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = extensive_conscription
+		}
+		has_idea = extensive_conscription
+		has_war_support < 0.2
+		OR = {
+			AND = {
+				NOT = { has_government = communism }
+				NOT = { has_government = fascism }
+			}
+			tag = EQS
+		}
+		if = {
+			limit = { tag = NIM }
+			NOT = { has_idea = NIM_warrior_society }
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = service_by_requirement
+		}
+		has_idea = service_by_requirement
+		OR = {
+			has_war_support < 0.6
+			has_government = neutrality
+			has_government = democratic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = all_adults_serve
+		}
+		has_idea = all_adults_serve
+	}
+	else_if = {
+		limit = {
+			has_idea = scraping_the_barrel
+		}
+		has_idea = scraping_the_barrel
+	}
+	else = {
+		always = no
+	}
+}
+
+# Thanks to Rylock and Kaiserreich team
+needs_army_reduction_for_manpower = {
+	has_manpower < 100
+
+	#first calculate how much manpower all the battalions need if they were at full strength
+	set_temp_variable = { total_manpower_need = 0 }
+	set_temp_variable = { num_batt = num_battalions_with_type@amphibious_armor }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@amphibious_mechanized }
+	multiply_temp_variable = { num_batt = 1.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@anti_tank }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }		
+	set_temp_variable = { num_batt = num_battalions_with_type@anti_tank_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@mot_anti_tank_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@anti_air }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@mot_anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@armored_car }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@artillery }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@rocket_artillery }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@rocket_artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@engineer }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@field_hospital }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@heavy_armor }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@infantry }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@bicycle_battalion }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@penal_battalion }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@marine }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@mountaineers }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@paratrooper }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@motorized }
+	multiply_temp_variable = { num_batt = 1.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@mechanized }
+	multiply_temp_variable = { num_batt = 1.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@light_armor }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@logistics_company }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@maintenance_company }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@medium_armor }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@military_police }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@modern_armor }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@recon }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@mot_recon }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@armored_car_recon }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@light_tank_recon }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@signal_company }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@light_sp_anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@medium_sp_anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@heavy_sp_anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@super_heavy_sp_anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@modern_sp_anti_air_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@light_sp_artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@medium_sp_artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@heavy_sp_artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@super_heavy_sp_artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@modern_sp_artillery_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@super_heavy_armor }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@light_tank_destroyer_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@medium_tank_destroyer_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@heavy_tank_destroyer_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@super_heavy_tank_destroyer_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@modern_tank_destroyer_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	#GTD added
+	set_temp_variable = { num_batt = num_battalions_with_type@super_heavy_artillery }
+	multiply_temp_variable = { num_batt = 1.0 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@self_propelled_super_heavy_artillery }
+	multiply_temp_variable = { num_batt = 1.0 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@assault_engineer }
+	multiply_temp_variable = { num_batt = 0.12 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@armored_engineer }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@helicopter_field_hospital }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@helicopter_brigade }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@land_cruiser }
+	multiply_temp_variable = { num_batt = 1.0 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@helicopter_transport }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@armored_maintenance }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@motorized_military_police }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@helicopter_recon }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@armored_signal }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@sturmtruppe_battalion }
+	multiply_temp_variable = { num_batt = 1.0 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	# EaW units
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@magical_infantry }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@magical_motorized }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@magical_mechanized }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@pegasi }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@unicorn_company }
+	multiply_temp_variable = { num_batt = 0.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@troll_hound }
+	multiply_temp_variable = { num_batt = 0.1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@ursas }
+	multiply_temp_variable = { num_batt = 0.1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@jager }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@infiltrator_company }
+	multiply_temp_variable = { num_batt = 0.4 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@knights }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@ironpaws }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@light_dragons }
+	multiply_temp_variable = { num_batt = 0.75 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@heavy_dragons }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	 
+	set_temp_variable = { num_batt = num_battalions_with_type@kirin_vanguards }
+    multiply_temp_variable = { num_batt = 1 }
+    add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@kirin_braves }
+    multiply_temp_variable = { num_batt = 0.4 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@windigo_horrors }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@magical_tank_detachment }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@magical_artillery }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@attack_helicopter_company }
+	multiply_temp_variable = { num_batt = 0.5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@tatzlwurm }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@spirit_warriors }
+	multiply_temp_variable = { num_batt = 1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@anti_tank_rifles }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@hydras }
+	multiply_temp_variable = { num_batt = 0.1 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@light_flame_tank }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@medium_flame_tank }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@heavy_flame_tank }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@modern_flame_tank }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@super_heavy_flame_tank }
+	multiply_temp_variable = { num_batt = 0.3 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@bone_abomination }
+	multiply_temp_variable = { num_batt = 2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@living_factory }
+	multiply_temp_variable = { num_batt = 5 }
+	add_to_temp_variable = { total_manpower_need = num_batt }	
+	set_temp_variable = { num_batt = num_battalions_with_type@dark_mages }
+	multiply_temp_variable = { num_batt = 0.05 }
+	set_temp_variable = { num_batt = num_battalions_with_type@magical_shock_company }
+	multiply_temp_variable = { num_batt = 0.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@self_propelled_super_heavy_anti_air }
+	multiply_temp_variable = { num_batt = 1.0 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@hovercraft_pioneers }
+	multiply_temp_variable = { num_batt = 0.45 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@spirit_grenadier_company }
+	multiply_temp_variable = { num_batt = 0.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	set_temp_variable = { num_batt = num_battalions_with_type@tunnel_drill_company }
+	multiply_temp_variable = { num_batt = 0.2 }
+	add_to_temp_variable = { total_manpower_need = num_batt }
+	
+	#now add to that any manpower we currently have in the deployment queue
+	set_temp_variable = { num_in_queue = amount_manpower_in_deployment_queue }
+	divide_temp_variable = { num_in_queue = 1000 }
+	add_to_temp_variable = { total_manpower_need = num_in_queue }
+
+	#calculate total available manpower. 
+	#WARNING: Do not use max_available_manpower_k as it doesn't account for manpower from effects
+	#(whether directly through manpower = x or through spawned troops with manpower in them)
+	set_temp_variable = { total_manpower_available = deployed_army_manpower_k } # army
+	add_to_temp_variable = { total_manpower_available = deployed_navy_manpower_k } # navy
+	add_to_temp_variable = { total_manpower_available = deployed_airforce_manpower_k } # airforce
+	add_to_temp_variable = { total_manpower_available = manpower_k } # reserve
+	add_to_temp_variable = { total_manpower_available = num_in_queue } # training
+
+	#Account for conscription going up
+	#Yes, this isn't perfect, but the associated variables do not exist
+	#max_available_manpower_k gets the current manpower from mobilization (as written above, effect manpower is not included)
+	#So we can figure out how much manpower will get mobilized by looking at the ratio
+	#and then taking a multiple of max_available_manpower_k
+	if = {
+		limit = { # Currently has conscripted 25% or less of what it can
+			conscription_ratio < 0.26
+		}
+		set_temp_variable = { manpower_being_mobilized = max_available_manpower_k }
+		multiply_temp_variable = { manpower_being_mobilized = 3 }
+		add_to_temp_variable = { total_manpower_available = manpower_being_mobilized }
+	}
+	else_if = {
+		limit = { # Currently has conscripted 50% or less of what it can
+			conscription_ratio < 0.51
+		}
+		set_temp_variable = { manpower_being_mobilized = max_available_manpower_k }
+		add_to_temp_variable = { total_manpower_available = manpower_being_mobilized }
+	}
+	else_if = {
+		limit = { # Currently has conscripted 50% or less of what it can
+			conscription_ratio < 0.67
+		}
+		set_temp_variable = { manpower_being_mobilized = max_available_manpower_k }
+		multiply_temp_variable = { manpower_being_mobilized = 0.5 }
+		add_to_temp_variable = { total_manpower_available = manpower_being_mobilized }
+	}
+	
+	log = "total_manpower_need [?total_manpower_need] total_manpower_available [?total_manpower_available]"
+
+	#now divide that by our maximum available manpower
+	divide_temp_variable = { total_manpower_need = total_manpower_available }
+	
+	log = "total_manpower_ratio [?total_manpower_need]"
+
+	#now we can check to see if we are over the limit
+	#we only consider disbanding divisions if we are 25% above what we need - in other words, 
+	#our divisions are on average 25% under their expected strength
+	check_variable = { total_manpower_need > 1.25 }
+}
+
+has_excessive_army_size = {
+	has_manpower < 15000
+	is_exempt_from_division_limit = no
+	set_temp_variable = {
+		upper_limit = num_of_factories
+	}
+	if = {
+		limit = {
+			has_war = yes
+		}
+		multiply_temp_variable = {
+			upper_limit = 1.2
+		}
+	}
+	if = {
+		limit = {
+			is_major = yes
+		}
+		multiply_temp_variable = {
+			upper_limit = 1.15
+		}
+	}
+	if = {
+		limit = {
+			threat > 0.71
+		}
+		multiply_temp_variable = {
+			upper_limit = 1.1
+		}
+	}
+	add_to_temp_variable = {
+		upper_limit = 20
+	}
+	check_variable = {
+		num_divisions > upper_limit
+	}	
+}
