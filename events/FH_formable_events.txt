@@ -1384,13 +1384,20 @@ country_event = { #KIR and NVA both get a demand for NVA to integrate into ZLU; 
     }
 
     after = {
-        FROM = {
-            country_event = {
-                id = formable_event.29
-                days = 1
-                random_days = 3
+        add_to_variable = { global.KIR_NVA_choice_tracker = 1 }
+        if = {
+            limit = {
+                check_variable = { global.KIR_NVA_choice_tracker = 2 }
+            }
+            FROM = {
+                country_event = {
+                    id = formable_event.29
+                    days = 1
+                    random_days = 3
+                }
             }
         }
+        clr_variable = global.KIR_NVA_choice_tracker
     }
 }
 
@@ -1796,7 +1803,7 @@ country_event = { #YAN receives the response from one of the faction leaders or 
     desc = {
         trigger = {
             FROM = {
-                NOT = { tag = ABY }
+                tag = ABY
                 NOT = { has_country_flag = YAN_new_buddies }
             }
         }
