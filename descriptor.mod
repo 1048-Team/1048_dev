@@ -8,8 +8,8 @@ name="EaW: Fractured Harmony"
 dependencies={
 	"Equestria at War"
 }
-replace_path="common/ai_focuses"
-replace_path="common/ai_strategy"
+#replace_path="common/ai_focuses"
+#replace_path="common/ai_strategy"
 replace_path="common/ai_strategy_plans"
 replace_path="common/bookmarks"
 replace_path="events"
