@@ -77,19 +77,7 @@ EQC_AI_decision_category = {
         remove_effect = {
             #GRI & Puppets
             declare_war_on = {
-                target = GRI
-                type = annex_everything
-            }
-            declare_war_on = {
                 target = BOI
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = HLQ
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NTR
                 type = annex_everything
             }
             #League of Free Nations
@@ -97,37 +85,22 @@ EQC_AI_decision_category = {
                 target = BRF
                 type = annex_everything
             }
-            declare_war_on = {
-                target = LUS
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = GRY
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = GRU
-                type = annex_everything
-            }
             #River Republic
-            declare_war_on = {
-                target = RCT
-                type = annex_everything
-            }
             declare_war_on = {
                 target = LNS
                 type = annex_everything
             }
-            declare_war_on = {
-                target = BAR
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NIM
-                type = annex_everything
-            }
             activate_mission = EQC_war_GRI_mission
             activate_mission = EQC_war_LFN_mission
+            add_threat = -42.5
+            if = {
+                limit = {
+                    GRI = { is_ai = no }
+                }
+                RCT = {
+                    activate_mission = RCT_limited_war_1_mission
+                }
+            }
         }
 
         ai_will_do = {
@@ -288,6 +261,60 @@ EQC_AI_decision_category = {
 
 
 GRI_AI_decision_category = {
+    #Only triggers if EQC is played by a human
+    GRI_start_limited_war_1 = {
+        available = {
+            date > 1048.4.1
+            EQC = { is_ai = no }
+        }
+        fire_only_once = yes
+        cost = 0
+        days_remove = 20
+        war_with_on_remove = EQC
+        war_with_on_remove = BRF
+        war_with_on_remove = RCT
+        complete_effect = {
+            RCT = { activate_mission = RCT_limited_war_1_mission }
+        }
+        remove_effect = {
+            #GRI & Puppets
+            declare_war_on = {
+                target = SIC
+                type = annex_everything
+            }
+            #League of Free Nations
+            declare_war_on = {
+                target = BRF
+                type = annex_everything
+            }
+            #River Republic
+            declare_war_on = {
+                target = LNS
+                type = annex_everything
+            }
+            add_threat = -42.5
+            activate_mission = GRI_limited_war_1_mission
+            if = {
+                limit = {
+                    EQC = {
+                        is_ai = no
+                    }
+                    BRF = {
+                        is_ai = yes
+                    }
+                }
+                BRF = {
+                    declare_war_on = {
+                        target = SIC
+                        type = annex_everything
+                    }
+                    add_threat = -15
+                }
+            }
+        }
+
+        ai_will_do = { base = 100 }
+    }
     GRI_limited_war_1_mission = {
         activation = {
             always = no
@@ -301,23 +328,29 @@ GRI_AI_decision_category = {
         timeout_effect = {
             #River Republic
             declare_war_on = {
-                target = RCT
-                type = annex_everything
-            }
-            declare_war_on = {
                 target = LNS
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = BAR
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = NIM
                 type = annex_everything
             }
             activate_mission = GRI_war_RCT_mission
             activate_mission = GRI_war_EQC_mission
+            add_threat = -11.1
+            if = {
+                limit = {
+                    RCT = {
+                        is_ai = no
+                    }
+                    BRF = {
+                        is_ai = yes
+                    }
+                }
+                BRF = {
+                    declare_war_on = {
+                        target = LNS
+                        type = annex_everything
+                    }
+                    add_threat = -11
+                }
+            }
         }
     }
     GRI_war_RCT_mission = {
@@ -482,7 +515,7 @@ GRI_AI_decision_category = {
     }
     GRI_kill_FAT = {
         available = {
-            date > 1049.5.1
+            date > 1050.5.1
         }
         days_remove = 30
         cost = 50
@@ -501,7 +534,7 @@ GRI_AI_decision_category = {
     }
     GRI_kill_TRD = {
         available = {
-            date > 1051.11.1
+            date > 1052.11.1
         }
         days_remove = 30
         cost = 50
@@ -520,7 +553,7 @@ GRI_AI_decision_category = {
     }
     GRI_integrate_NTR = {
         available = {
-            date > 1052.06.1
+            date > 1053.06.1
             is_subject = no
             NTR = {
                 is_subject_of = GRI
@@ -549,7 +582,7 @@ GRI_AI_decision_category = {
     }
     GRI_integrate_BOI = {
         available = {
-            date > 1052.12.1
+            date > 1053.12.1
             is_subject = no
             BOI = {
                 is_subject_of = GRI
@@ -592,23 +625,24 @@ RCT_AI_decision_category = {
         timeout_effect = {
             #League of Free Nations
             declare_war_on = {
-                target = BRF
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = LUS
-                type = annex_everything
-            }
-            declare_war_on = {
                 target = GRY
-                type = annex_everything
-            }
-            declare_war_on = {
-                target = GRU
                 type = annex_everything
             }
             activate_mission = RCT_war_GRI_mission
             activate_mission = RCT_war_LFN_mission
+            add_threat = -7.4
+            if = {
+                limit = {
+                    GRI = {
+                        is_ai = no
+                    }
+                }
+                declare_war_on = {
+                    target = HLQ
+                    type = annex_everything
+                }
+                add_threat = -11
+            }
         }
     }
     RCT_war_GRI_mission = {
@@ -772,7 +806,7 @@ RCT_AI_decision_category = {
     }
     RCT_integrate_NIM = {
         available = {
-            date > 1050.05.1
+            date > 1051.05.1
             is_subject = no
             NIM = {
                 is_subject_of = RCT
@@ -804,7 +838,7 @@ RCT_AI_decision_category = {
 BAK_AI_decision_category = {
     BAK_kill_FBK = {
         available = {
-            date > 1048.04.1
+            date > 1050.04.1
         }
         days_remove = 10
         cost = 10
@@ -862,6 +896,7 @@ HLR_AI_decision_category = {
     HLR_posture_north = {
         available = {
             GRI = { has_war = yes }
+            NTR = { is_ai = yes }
         }
         days_remove = 15
         cost = 50
@@ -978,6 +1013,7 @@ HLR_AI_decision_category = {
         available = {
             GRI = { has_war = yes }
             date > 1051.09.1
+            NTR = { is_ai = yes }
         }
         days_remove = 15
         cost = 50
