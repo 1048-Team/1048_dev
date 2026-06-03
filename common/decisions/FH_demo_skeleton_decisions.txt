@@ -1,4 +1,38 @@
 FH_demo_south_east_skeleton_category = {
+    #SE_ai_actually_invade_pls = {
+    #    available = {
+    #        owns_state = 1214
+    #        owns_state = 15
+    #        owns_state = 16
+    #        owns_state = 30
+    #        owns_state = 28
+    #        owns_state = 30
+    #        NOT = {
+    #            OR = {
+    #                SPF = { is_ai = no }
+    #                NID = { is_ai = no }
+    #                CLI = { is_ai = no }
+    #            }
+    #        }
+    #    }
+    #    visible = {
+    #        is_ai = yes
+    #    }
+    #    fire_only_once = yes
+    #    complete_effect = {
+    #        log = "[GetDateText]: [ROOT.GetName]: decision SE_ai_actually_invade_pls"
+    #        add_equipment_to_stockpile = {
+    #            type = convoy
+    #            amount = 500
+    #            producer = ROOT
+    #        }
+    #        generic_DD_template = yes
+    #        generic_CL_template = yes
+    #        generic_CA_template = yes
+    #        load_oob = "Southeast_naval_invasion_encouragement"
+    #        set_country_flag = SE_clean_up_cheaty_ships
+    #    }
+    #}
     EEE_NEI_powder_keg = {
         available = {
             date > 1049.6.1
@@ -557,6 +591,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = NID
+            is_ai = no
         }
         cost = 125
         fire_only_once = yes
@@ -571,11 +606,42 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = NID
+            is_ai = no
         }
         cost = 75
         fire_only_once = yes
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision NID_shirk_restrictions"
+            remove_ideas = NID_no_aviation_industry_idea
+        }
+    }
+    NID_pay_down_squabbles_ai = {
+        available = {
+            date > 1049.6.1
+        }
+        visible = {
+            tag = NID
+            is_ai = yes
+        }
+        days_remove = 120
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_pay_down_squabbles_ai"
+            remove_ideas = NID_merc_prt_tensions
+        }
+    }
+    NID_shirk_restrictions_ai = {
+        available = {
+            date > 1049.6.1
+        }
+        visible = {
+            tag = NID
+            is_ai = yes
+        }
+        days_remove = 368
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_shirk_restrictions_ai"
             remove_ideas = NID_no_aviation_industry_idea
         }
     }
@@ -609,6 +675,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = MTS
+            is_ai = no
         }
         fire_only_once = yes
         cost = 75
@@ -625,6 +692,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = MTS
+            is_ai = no
         }
         cost = 100
         fire_only_once = yes
@@ -641,11 +709,60 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = MTS
+            is_ai = no
         }
         cost = 75 #XP later
         fire_only_once = yes
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision MTS_acquire_sunscreen"
+            remove_ideas = MTS_ill_adapted_heat_tolerance
+        }
+    }
+    MTS_micro_compensation_ai = {
+        available = {
+            date > 1049.6.1
+            num_of_civilian_factories > 7
+        }
+        visible = {
+            tag = MTS
+            is_ai = yes
+        }
+        days_remove = 90
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_micro_compensation_ai"
+            remove_ideas = MTS_miniscule_industry
+        }
+    }
+    MTS_reject_rejection_ai = {
+        available = {
+            date > 1049.6.1
+            num_divisions > 12
+        }
+        visible = {
+            tag = MTS
+            is_ai = yes
+        }
+        days_remove = 65
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_reject_rejection_ai"
+            remove_ideas = MTS_corrupted_conscripts
+        }
+    }
+    MTS_acquire_sunscreen_ai = {
+        available = {
+            date > 1049.6.1
+            has_war_support > 0.45
+        }
+        visible = {
+            tag = MTS
+            is_ai = yes
+        }
+        days_remove = 120
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_acquire_sunscreen_ai"
             remove_ideas = MTS_ill_adapted_heat_tolerance
         }
     }
