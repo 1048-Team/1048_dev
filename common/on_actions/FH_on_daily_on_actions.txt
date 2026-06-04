@@ -1,82 +1,106 @@
 on_actions = {
 	on_daily_EQS = {
 		effect = {
-			IF = {
+			if = {
 				limit = {
-					check_variable = {
-						var = SOL_imperial_authority_pool
-						value = 75
-						compare = greater_than_or_equals
-					}
 					NOT = { has_country_flag = equestria_returned }
 				}
-				SOL_high_authority_bonus = yes
-			}
-			IF = {
-				limit = {
-					check_variable = {
-						var = SOL_imperial_authority_pool
-						value = 25
-						compare = less_than_or_equals
-					}
-				}
-				SOL_low_authority_malus = yes
-			}
-			#log = "on_daily_EQS"
-		}
-	}
-	on_daily_SLW = {
-		effect = {
-			if = {
-				limit = {
-					exists = yes
-					EQS_Nova_Glow = { is_country_leader = yes }
-					check_variable = {
-						var = SOL_imperial_authority_pool
-						value = 75
-						compare = greater_than_or_equals
-					}
-				}
-				SOL_high_authority_bonus = yes
-			}
-			IF = {
-				limit = {
-					check_variable = {
-						var = SOL_imperial_authority_pool
-						value = 25
-						compare = less_than_or_equals
-					}
-				}
-				SOL_low_authority_malus = yes
-			}
-		}
-	}
-	on_daily_BLS = {
-		effect = {
-			if = {
-				limit = {
-					exists = yes
-					BLS_has_uncored_home_states = yes
-				}
-				add_to_variable = { BLS_evangelistic_fervor_pool = modifier@BLS_evangelistic_fervor }
+				add_to_variable = { SOL_imperial_authority_pool = modifier@SOL_imperial_authority }
+				set_variable = { SOL_imperial_authority_monthly = modifier@SOL_imperial_authority }
+				SOL_calculate_loyal_ordos = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_loyal_ordos_bonus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_loyal_ordos_bonus }
+				SOL_calculate_disloyal_ordos = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_disloyal_ordos_malus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_disloyal_ordos_malus }
+				SOL_ordos_number_bonus = yes
+				add_to_variable = { SOL_imperial_authority_monthly = SOL_number_of_ordos_bonus }
+				add_to_variable = { SOL_imperial_authority_pool = SOL_number_of_ordos_bonus }
 				clamp_variable = {
-					var = BLS_evangelistic_fervor_pool
-					min = 0
-					max = 10
+					var = SOL_imperial_authority_pool
+					min = SOL_imperial_authority_min
+					max = SOL_imperial_authority_max
 				}
-			}
-			if = {
-				limit = {
-					exists = yes
-					has_country_flag = BLS_resurrect_dead_cultists
-				}
-				add_to_variable = { BLS_necromantic_power_pool = modifier@BLS_necromantic_power }
-				clamp_variable = {
-					var = BLS_necromantic_power_pool
-					min = 0
-					max = BLS_necromantic_power_pool_max
-				}
+				#IF = {
+				#	limit = {
+				#		check_variable = {
+				#			var = SOL_imperial_authority_pool
+				#			value = 75
+				#			compare = greater_than_or_equals
+				#		}
+				#	}
+				#	#Unconvinced ticking loyalty increase or decrease is worth it. Leave effects commented out for now, but still in the code
+				#	#SOL_high_authority_bonus = yes
+				#}
+				#IF = {
+				#	limit = {
+				#		check_variable = {
+				#			var = SOL_imperial_authority_pool
+				#			value = 25
+				#			compare = less_than_or_equals
+				#		}
+				#	}
+				#	#SOL_low_authority_malus = yes
+				#}
 			}
 		}
 	}
+	#on_daily_SLW = {
+	#	effect = {
+	#		if = {
+	#			limit = {
+	#				exists = yes
+	#				has_country_leader = { character = EQS_Nova_Glow ruling_only = yes }
+	#			}
+	#			if = {
+	#				limit = {
+	#					check_variable = {
+	#						var = SOL_imperial_authority_pool
+	#						value = 75
+	#						compare = greater_than_or_equals
+	#					}
+	#				}
+	#				SOL_high_authority_bonus = yes
+	#			}
+	#			IF = {
+	#				limit = {
+	#					check_variable = {
+	#						var = SOL_imperial_authority_pool
+	#						value = 25
+	#						compare = less_than_or_equals
+	#					}
+	#				}
+	#				SOL_low_authority_malus = yes
+	#			}
+	#		}
+	#	}
+	#}
+	#on_daily_BLS = {
+	#	effect = {
+	#		if = {
+	#			limit = {
+	#				exists = yes
+	#				BLS_has_uncored_home_states = yes
+	#			}
+	#			add_to_variable = { BLS_evangelistic_fervor_pool = modifier@BLS_evangelistic_fervor }
+	#			clamp_variable = {
+	#				var = BLS_evangelistic_fervor_pool
+	#				min = 0
+	#				max = 10
+	#			}
+	#		}
+	#		if = {
+	#			limit = {
+	#				exists = yes
+	#				has_country_flag = BLS_resurrect_dead_cultists
+	#			}
+	#			add_to_variable = { BLS_necromantic_power_pool = modifier@BLS_necromantic_power }
+	#			clamp_variable = {
+	#				var = BLS_necromantic_power_pool
+	#				min = 0
+	#				max = BLS_necromantic_power_pool_max
+	#			}
+	#		}
+	#	}
+	#}
 }
