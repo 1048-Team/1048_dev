@@ -1083,6 +1083,9 @@ form_changelingian_protectorates_category = {
 					}
 				}
 			}
+			SCH = {
+				is_puppet_of = ROOT
+			}
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -1296,6 +1299,10 @@ form_changelingian_protectorates_category = {
 					transfer_state_to = CRY
 					add_core_of = CRY
 				}
+				set_autonomy = {
+					target = CRY
+					autonomous_state = autonomy_reichsprotectorate
+				}
 				if = {
 					limit = {
 						1220 = {
@@ -1477,6 +1484,9 @@ form_changelingian_protectorates_category = {
 }
 SCS_formables_category = {
 	SCS_change_in_management = {
+		available = {
+			is_subject = no
+		}
 		visible = {
 			is_subject = no
 		}
@@ -5757,86 +5767,86 @@ HIP_formables_category = {
             factor = 50
         }
     }
-    HIP_consider_backstabbing = {
-        allowed = {
-            tag = HIP
-        }
-        available = {
-            date > 1048.7.1
-            country_exists = DOH
-            OR = {
-                NOT = { country_exists = HRL }
-                NOT = { country_exists = HPS }
-            }
-        }
-        visible = {
-            is_ai = yes
-        }
-        days_remove = 21
-        war_with_on_remove = DOH
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove HIP_consider_backstabbing"
-            random_list = {
-                60 = {
-                    DOH = {
-                        set_country_flag = DOH_pass_the_knife
-                    }
-                }
-                40 = {
-                    remove_from_faction = DOH
-                    declare_war_on = {
-                        target = DOH
-                        type = annex_everything
-                    }
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    DOH_ponder_betrayal = {
-        allowed = {
-            tag = DOH
-        }
-        available = {
-            OR = {
-                has_country_flag = DOH_pass_the_knife
-                AND = {
-                    date > 1048.8.1
-                    HIP = {
-                        is_ai = no
-                        exists = yes
-                    }
-                }
-                OR = {
-                    NOT = { country_exists = HRL }
-                    NOT = { country_exists = HPS }
-                }
-            }
-        }
-        visible = {
-            is_ai = yes
-        }
-        days_remove = 21
-        war_with_on_remove = HIP
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove DOH_ponder_betrayal"
-            random_list = {
-                65 = {
-                    leave_faction = yes
-                    declare_war_on = {
-                        target = HIP
-                        type = annex_everything
-                    }
-                }
-                35 = { }
-            }
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
+    #HIP_consider_backstabbing = {
+    #    allowed = {
+    #        tag = HIP
+    #    }
+    #    available = {
+    #        date > 1048.7.1
+    #        country_exists = DOH
+    #        OR = {
+    #            NOT = { country_exists = HRL }
+    #            NOT = { country_exists = HPS }
+    #        }
+    #    }
+    #    visible = {
+    #        is_ai = yes
+    #    }
+    #    days_remove = 21
+    #    war_with_on_remove = DOH
+    #    remove_effect = {
+    #        log = "[GetDateText]: [ROOT.GetName]: decision remove HIP_consider_backstabbing"
+    #        random_list = {
+    #            60 = {
+    #                DOH = {
+    #                    set_country_flag = DOH_pass_the_knife
+    #                }
+    #            }
+    #            40 = {
+    #                remove_from_faction = DOH
+    #                declare_war_on = {
+    #                    target = DOH
+    #                    type = annex_everything
+    #                }
+    #            }
+    #        }
+    #    }
+    #    ai_will_do = {
+    #        factor = 10
+    #    }
+    #}
+    #DOH_ponder_betrayal = {
+    #    allowed = {
+    #        tag = DOH
+    #    }
+    #    available = {
+    #        OR = {
+    #            has_country_flag = DOH_pass_the_knife
+    #            AND = {
+    #                date > 1048.8.1
+    #                HIP = {
+    #                    is_ai = no
+    #                    exists = yes
+    #                }
+    #            }
+    #            OR = {
+    #                NOT = { country_exists = HRL }
+    #                NOT = { country_exists = HPS }
+    #            }
+    #        }
+    #    }
+    #    visible = {
+    #        is_ai = yes
+    #    }
+    #    days_remove = 21
+    #    war_with_on_remove = HIP
+    #    remove_effect = {
+    #        log = "[GetDateText]: [ROOT.GetName]: decision remove DOH_ponder_betrayal"
+    #        random_list = {
+    #            65 = {
+    #                leave_faction = yes
+    #                declare_war_on = {
+    #                    target = HIP
+    #                    type = annex_everything
+    #                }
+    #            }
+    #            35 = { }
+    #        }
+    #    }
+    #    ai_will_do = {
+    #        factor = 10
+    #    }
+    #}
 }
 BRS_formables_category = {
 	BRS_hindian_support_center = {

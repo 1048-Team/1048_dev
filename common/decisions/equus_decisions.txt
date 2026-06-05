@@ -425,6 +425,12 @@ form_PLB_category = {
 			}
 			set_capital = { state = 290 }
 			set_cosmetic_tag = PLB_NEW
+			hidden_effect = {
+				news_event = {
+					id = formable_news.1
+					hours = 6
+				}
+			}
 		}
 	}
 }
@@ -629,7 +635,7 @@ form_western_griffonian_empire_category = {
 			}
 			else_if = {
 				limit = {
-					tag = VRG
+					tag = NVC
 				}
 				set_cosmetic_tag = NVC_EMP
 			}
@@ -648,9 +654,38 @@ form_western_griffonian_empire_category = {
 				set_capital = { state = 1217 }
 			}
 			hidden_effect = {
-				news_event = {
-					id = fhequusnews.7
-					days = 1
+				if = {
+					limit = {
+						tag = VRG
+					}
+					news_event = {
+						id = formable_news.6
+						hours = 6
+					}
+				}
+				else_if = {
+					limit = {
+						tag = NVC
+					}
+					news_event = {
+						id = formable_news.8
+						hours = 6
+					}
+				}
+				else_if = {
+					limit = {
+						tag = MWR
+					}
+					news_event = {
+						id = formable_news.9
+						hours = 6
+					}
+				}
+				else = {
+					news_event = {
+						id = fhequusnews.7
+						hours = 6
+					}
 				}
 			}
 		}
@@ -703,7 +738,12 @@ SCH_formables_category = {
 				add_core_of = ROOT
 			}
 			set_cosmetic_tag = SCH_AUR
-			#News event, probably, for the formation of the super state
+			hidden_effect = {
+				news_event = {
+					id = formable_news.7
+					hours = 6
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
