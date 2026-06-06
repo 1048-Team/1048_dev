@@ -1404,6 +1404,23 @@ form_changelingian_protectorates_category = {
 				EQS = {
 					load_focus_tree = generic_focus
 				}
+				random_country = {
+					limit = {
+						has_character = GRF_protector_kute
+					}
+					GRF_protector_kute = {
+						set_nationality = EQS
+					}
+					GRF_protector_kute = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = changeling_ideology
+								expire = "1965.1.1"
+							}
+						}
+					}
+				}
 			}
 			effect_tooltip = {
 				release_autonomy = {
@@ -2428,6 +2445,31 @@ HLR_formables_category = {
 					target = EQC
 					autonomous_state = autonomy_puppet
 				}
+				EQC = {
+					EQC_triple_sevens = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = liberalism
+								expire = "1965.1.1"
+							}
+						}
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = socialism
+								expire = "1965.1.1"
+							}
+						}
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = stratocracy
+								expire = "1965.1.1"
+							}
+						}
+					}
+				}
             }
         }
         ai_will_do = {
@@ -2518,6 +2560,7 @@ FAT_formables_category = {
 					is_on_continent = asia
                     is_in_array = { TRD.original_cores = THIS }
                 }
+                add_core_of = ROOT
             }
         }
         ai_will_do = {
@@ -3763,7 +3806,7 @@ BRF_formables_category = {
 	}
 	BRF_herzland_stability = {
 		available = {
-			GRI = { all_original_cores_owned_by_ROOT = yes }
+			GRI = { all_original_cores_owned_by_ROOT_or_ally = yes }
 		}
 		visible = {
 			NOT = { has_global_flag = BRF_splintered_GRI }
@@ -3810,6 +3853,8 @@ BRF_formables_category = {
 								state = 476
 								state = 1226
 								state = 459
+								state = 583
+								state = 582
 							}
 							OWNER = {
 								OR = {
@@ -3825,7 +3870,6 @@ BRF_formables_category = {
 				every_state = {
 					limit = {
 						is_in_array = { BOI.original_cores = THIS }
-						is_owned_and_controlled_by = BRF
 					}
 					add_core_of = BRF
 				}
@@ -4201,7 +4245,7 @@ BAK_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			set_cosmetic_tag = BAK_RIV
+			set_cosmetic_tag = RIV_13
 			hidden_effect = {
 				country_event = formable_flavor_event.3
 			}
@@ -4260,7 +4304,7 @@ BAK_formables_category = {
 RCT_formables_category = {
 	RCT_safe_society = {
 		available = {
-			BRF = { all_original_cores_owned_by_ROOT = yes }
+			BRF = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			LUS = { all_original_cores_owned_by_ROOT = yes }
 			GRU = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			GRY = { all_original_cores_owned_by_ROOT = yes }
@@ -4294,6 +4338,7 @@ RCT_formables_category = {
 							is_in_array = { LUS.original_cores = THIS }
 							is_in_array = { GRU.original_cores = THIS }
 							is_in_array = { GRY.original_cores = THIS }
+							is_in_array = { BRF.original_cores = THIS }
 						}
 					}
 					add_core_of = BRF
@@ -4305,6 +4350,18 @@ RCT_formables_category = {
 				}
 			}
 			BRF = { set_cosmetic_tag = BRF_RCT }
+			add_to_variable = { RCT_freedom_score = 1 }
+			if = {
+				limit = {
+					check_variable = { RCT_freedom_score = 4 }
+				}
+				hidden_effect = {
+					news_event = {
+						id = formable_news.18
+						hours = 6
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -4313,7 +4370,7 @@ RCT_formables_category = {
 	RCT_secure_society = {
 		available = {
 			SIC = { all_original_cores_owned_by_ROOT = yes }
-			MIT = { all_original_cores_owned_by_ROOT = yes }
+			MIT = { all_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		visible = { tag = RCT }
 		highlight_states = {
@@ -4338,6 +4395,18 @@ RCT_formables_category = {
 			}
 			MIT = { set_cosmetic_tag = MIT_RCT }
 			SIC = { set_cosmetic_tag = SIC_RCT }
+			add_to_variable = { RCT_freedom_score = 1 }
+			if = {
+				limit = {
+					check_variable = { RCT_freedom_score = 4 }
+				}
+				hidden_effect = {
+					news_event = {
+						id = formable_news.18
+						hours = 6
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -4374,6 +4443,43 @@ RCT_formables_category = {
 					}
 					transfer_state_to = EQC
 				}
+				EQC = {
+					EQC_triple_sevens = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = liberalism
+								expire = "1965.1.1"
+							}
+						}
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = socialism
+								expire = "1965.1.1"
+							}
+						}
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = stratocracy
+								expire = "1965.1.1"
+							}
+						}
+					}
+				}
+			}
+			add_to_variable = { RCT_freedom_score = 1 }
+			if = {
+				limit = {
+					check_variable = { RCT_freedom_score = 4 }
+				}
+				hidden_effect = {
+					news_event = {
+						id = formable_news.18
+						hours = 6
+					}
+				}
 			}
 		}
 		ai_will_do = {
@@ -4399,6 +4505,18 @@ RCT_formables_category = {
 				autonomous_state = autonomy_puppet
 			}
 			GRI = { set_cosmetic_tag = GRI_RCT }
+			add_to_variable = { RCT_freedom_score = 1 }
+			if = {
+				limit = {
+					check_variable = { RCT_freedom_score = 4 }
+				}
+				hidden_effect = {
+					news_event = {
+						id = formable_news.18
+						hours = 6
+					}
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -4449,12 +4567,6 @@ RCT_formables_category = {
 					check_variable = { global.river_union_iteration = 2 }
 				}
 				set_cosmetic_tag = RCT_newererest_order
-			}
-			hidden_effect = {
-				news_event = {
-					id = formable_news.18
-					hours = 6
-				}
 			}
 		}
 		ai_will_do = {
@@ -6129,6 +6241,9 @@ KIR_formables_category = {
 					}
 				}
 			}
+		}
+		visible = {
+			is_subject = no
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -11006,13 +11121,16 @@ AWR_formables_category = {
 	}
 	AWR_freest_equus = {
 		available = {
-			NOT = {
+			custom_trigger_tooltip = {
+				tooltip = AWR_freest_hugs_best_hugs_tt
 				any_other_country = {
 					if = {
 						limit = {
-							is_equestrian_continent_country = yes
+							capital_scope = {
+								is_on_continent = europe
+							}
 						}
-						exists = yes
+						exists = no
 					}
 				}
 			}
@@ -11020,7 +11138,11 @@ AWR_formables_category = {
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = europe
-				NOT = { is_core_of = ROOT }
+				NOT = {
+					is_core_of = ROOT
+					state = 1196
+					state = 1197
+				}
 			}
 		}
 		fire_only_once = yes
@@ -11084,6 +11206,7 @@ AWR_formables_category = {
 				477 = { is_owned_and_controlled_by = ROOT}
 				476 = { is_owned_and_controlled_by = ROOT}
 				459 = { is_owned_and_controlled_by = ROOT}
+				582 = { is_owned_and_controlled_by = ROOT }
 			}
 		}
 		visible = { has_country_flag = AWR_world_crusade }
@@ -11110,6 +11233,7 @@ AWR_formables_category = {
 					state = 477
 					state = 476
 					state = 459
+					state = 582
 				}
 			}
 		}
@@ -11141,6 +11265,7 @@ AWR_formables_category = {
 							state = 477
 							state = 476
 							state = 459
+							state = 582
 						}
 					}
 					add_core_of = HLR
@@ -11160,6 +11285,7 @@ AWR_formables_category = {
 		available = {
 			TRD = { all_original_cores_owned_by_ROOT = yes }
 			GRI = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			BOI = { all_original_cores_owned_by_ROOT = yes }
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
@@ -11168,6 +11294,7 @@ AWR_formables_category = {
 				OR = {
 					is_in_array = { GRI.original_cores = THIS }
 					is_in_array = { TRD.original_cores = THIS }
+					is_in_array = { BOI.original_cores = THIS }
 				}
 				NOT = {
 					state = 432
@@ -11201,10 +11328,7 @@ AWR_formables_category = {
 						OR = {
 							is_in_array = { GRI.original_cores = THIS }
 							is_in_array = { TRD.original_cores = THIS }
-							AND = {
-								is_in_array = { BOI.original_cores = THIS }
-								is_owned_by = ROOT
-							}
+							is_in_array = { BOI.original_cores = THIS }
 						}
 						NOT = {
 							state = 432
@@ -11252,6 +11376,7 @@ AWR_formables_category = {
 			NIM = { all_original_cores_owned_by_ROOT = yes }
 			FBK = { all_original_cores_owned_by_ROOT = yes }
 			BAK = { all_original_cores_owned_by_ROOT = yes }
+			LNS = { all_original_cores_owned_by_ROOT = yes }
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
@@ -11264,6 +11389,7 @@ AWR_formables_category = {
 					is_in_array = { NIM.original_cores = THIS }
 					is_in_array = { BAK.original_cores = THIS }
 					is_in_array = { FBK.original_cores = THIS }
+					is_in_array = { LNS.original_cores = THIS }
 				}
 			}
 		}
@@ -11282,6 +11408,7 @@ AWR_formables_category = {
 							is_in_array = { NIM.original_cores = THIS }
 							is_in_array = { BAK.original_cores = THIS }
 							is_in_array = { FBK.original_cores = THIS }
+							is_in_array = { LNS.original_cores = THIS }
 						}
 					}
 					transfer_state_to = RCT
@@ -11299,7 +11426,7 @@ AWR_formables_category = {
 	}
 	AWR_freest_evians = {
 		available = {
-			BRF = { all_original_cores_owned_by_ROOT = yes }
+			BRF = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			GRU = { all_original_cores_owned_by_ROOT = yes }
 			GRY = { all_original_cores_owned_by_ROOT = yes }
 			LUS = { all_original_cores_owned_by_ROOT = yes }
@@ -11354,9 +11481,6 @@ AWR_formables_category = {
 	AWR_freest_frenchies = {
 		available = {
 			JER = { all_original_cores_owned_by_ROOT = yes }
-			487 = { is_owned_and_controlled_by = ROOT }
-			521 = { is_owned_and_controlled_by = ROOT }
-			652 = { is_owned_and_controlled_by = ROOT }
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
@@ -11364,9 +11488,6 @@ AWR_formables_category = {
 				is_on_continent = asia
 				OR = {
 					is_in_array = { JER.original_cores = THIS }
-					state = 487
-					state = 521
-					state = 652
 				}
 			}
 		}
@@ -11388,9 +11509,6 @@ AWR_formables_category = {
 					limit = {
 						OR = {
 							is_in_array = { JER.original_cores = THIS }
-							state = 487
-							state = 521
-							state = 652
 						}
 					}
 					transfer_state_to = JER
@@ -11417,7 +11535,7 @@ AWR_formables_category = {
 			EQC = { all_original_cores_owned_by_ROOT = yes }
 			SIC = { all_original_cores_owned_by_ROOT = yes }
 			MIT = { all_original_cores_owned_by_ROOT_or_subject = yes }
-			WNG = { all_original_cores_owned_by_ROOT = yes }
+			WNG = { all_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
@@ -11450,12 +11568,6 @@ AWR_formables_category = {
 							is_in_array = { SIC.original_cores = THIS }
 							is_in_array = { MIT.original_cores = THIS }
 							is_in_array = { WNG.original_cores = THIS }
-						}
-						NOT = {
-							is_core_of = MIT
-							OWNER = {
-								is_subject_of = ROOT
-							}
 						}
 					}
 					transfer_state_to = EQC
@@ -11549,6 +11661,17 @@ AWR_formables_category = {
 					target = HIP
 					autonomous_state = autonomy_puppet
 				}
+				HIP = {
+					HIP_skystar = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = leninism
+								expire = "1965.1.1"
+							}
+						}
+					}
+				}
 			}
 			hidden_effect = {
 				news_event = {
@@ -11564,7 +11687,7 @@ AWR_formables_category = {
 	AWR_freest_deets = {
 		available = {
 			CTL = { all_original_cores_owned_by_ROOT = yes }
-			LMB = { all_original_cores_owned_by_ROOT = yes }
+			LMB = { all_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
@@ -11626,7 +11749,7 @@ AWR_formables_category = {
 		visible = { has_country_flag = AWR_world_crusade }
 		highlight_states = {
 			highlight_states_trigger = {
-				is_on_continent = afria
+				is_on_continent = africa
 				OR = {
 					is_in_array = { KIR.original_cores = THIS }
 					is_in_array = { BRS.original_cores = THIS }
@@ -11931,6 +12054,7 @@ AWR_formables_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision AWR_freeeeeeeeeeeeeeeee"
+			custom_effect_tooltip = AWR_download_more_RAM_tt
 			every_state = {
 				limit = {
 					NOT = {
@@ -11942,7 +12066,7 @@ AWR_formables_category = {
 			}
 			every_possible_country = {
 				limit = {
-					is_subject = ROOT
+					is_subject_of = ROOT
 				}
 				ROOT = {
 					annex_country = {
