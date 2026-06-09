@@ -1,4 +1,193 @@
 ###Equus###
+SOL_formables_category = {
+	SOL_avenge_secession = {
+		visible = {
+			has_country_flag = SOL_finished_official_content
+		}
+		cost = 35
+		days_remove = 35
+		fire_only_once = yes
+		war_with_on_remove = BAL
+		war_with_on_remove = MTS
+		war_with_on_remove = STB
+		war_with_on_remove = NRP
+		war_with_on_remove = EEE
+		war_with_on_remove = NEI
+		war_with_on_remove = NID
+		war_with_on_remove = SPF
+		war_with_on_remove = CLI
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_avenge_secession"
+			every_country = {
+				limit = {
+					exists = yes
+					is_in_array = { global.southeast_countries = THIS }
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1054.8.10
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	SOL_end_the_betrayers = {
+		available = {
+			BAL = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+		}
+		cost = 35
+		days_remove = 35
+		fire_only_once = yes
+		war_with_on_remove = STG
+		war_with_on_remove = CRW
+		war_with_on_remove = AWR
+		war_with_on_remove = MWR
+		war_with_on_remove = CRY
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_end_the_betrayers"
+			every_country = {
+				limit = {
+					exists = yes
+					OR = {
+						tag = CRY
+						is_in_array = { global.shield_of_steel = THIS }
+					}
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1055.11.1
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	SOL_recompense_for_the_great_war = {
+		available = {
+			STG = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			CWR = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			AWR = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			CRY = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+		}
+		cost = 70
+		days_remove = 70
+		fire_only_once = yes
+		war_with_on_remove = CHN
+		war_with_on_remove = OLE
+		war_with_on_remove = SCS
+		war_with_on_remove = CCA
+		war_with_on_remove = NCA
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_recompense_for_the_great_war"
+			every_country = {
+				limit = {
+					exists = yes
+					is_in_array = { global.changeling_hegemony = THIS }
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_array = { global.changeling_hegemony = THIS }
+					NOT = {
+						tag = CHN
+						tag = OLE
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1057.6.1
+				factor = 0
+			}
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	SOL_drag_them_back = {
+		available = {
+			CHN = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_on_continent = europe
+				is_claimed_by = ROOT
+				is_core_of = CHN
+			}
+		}
+		cost = 100
+		days_remove = 180
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_drag_them_back"
+			every_owned_state = {
+				limit = {
+					is_on_continent = europe
+					is_claimed_by = ROOT
+					is_core_of = CHN
+				}
+				add_core_of = ROOT
+			}
+			set_province_name = {
+				id = 748
+				name = renamed_chrysalia
+			}
+			1216 = {
+				set_state_name = renamed_chrysalia_state
+			}
+			136 = {
+				set_state_name = renamed_chrysalia_plains_state
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
 form_ussre_category = {
 	form_ussre = {
 		available = {
