@@ -4442,31 +4442,30 @@ RCT_formables_category = {
 						is_owned_and_controlled_by = ROOT
 					}
 					transfer_state_to = EQC
+					add_core_of = EQC
 				}
 				EQC = {
 					EQC_triple_sevens = {
 						add_country_leader_role = {
-							promote_leader = yes
 							country_leader = {
 								ideology = liberalism
 								expire = "1965.1.1"
 							}
 						}
 						add_country_leader_role = {
-							promote_leader = yes
 							country_leader = {
 								ideology = socialism
 								expire = "1965.1.1"
 							}
 						}
 						add_country_leader_role = {
-							promote_leader = yes
 							country_leader = {
 								ideology = stratocracy
 								expire = "1965.1.1"
 							}
 						}
 					}
+					promote_character = EQC_triple_sevens
 				}
 			}
 			add_to_variable = { RCT_freedom_score = 1 }
@@ -4503,6 +4502,25 @@ RCT_formables_category = {
 			release_autonomy = {
 				target = GRI
 				autonomous_state = autonomy_puppet
+			}
+			release_autonomy = {
+				target = NTR
+				autonomous_state = autonomy_puppet
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_in_array = { BOI.original_cores = THIS }
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
+						}
+					}
+					transfer_state_to = GRI
+					add_core_of = GRI
+				}
 			}
 			GRI = { set_cosmetic_tag = GRI_RCT }
 			add_to_variable = { RCT_freedom_score = 1 }
@@ -5473,7 +5491,7 @@ BAT_formables_category = {
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
-					limit = { check_variable = { CTL_news_conquest_tracker = 5 } }
+					limit = { check_variable = { BAT_news_conquest_tracker = 5 } }
 					news_event = {
 						id = formable_news.24
 						hours = 6
@@ -5506,7 +5524,7 @@ BAT_formables_category = {
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
-					limit = { check_variable = { CTL_news_conquest_tracker = 5 } }
+					limit = { check_variable = { BAT_news_conquest_tracker = 5 } }
 					news_event = {
 						id = formable_news.24
 						hours = 6
@@ -5548,7 +5566,7 @@ BAT_formables_category = {
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
-					limit = { check_variable = { CTL_news_conquest_tracker = 5 } }
+					limit = { check_variable = { BAT_news_conquest_tracker = 5 } }
 					news_event = {
 						id = formable_news.24
 						hours = 6
@@ -5581,7 +5599,7 @@ BAT_formables_category = {
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
-					limit = { check_variable = { CTL_news_conquest_tracker = 5 } }
+					limit = { check_variable = { BAT_news_conquest_tracker = 5 } }
 					news_event = {
 						id = formable_news.24
 						hours = 6
@@ -5614,7 +5632,7 @@ BAT_formables_category = {
 			add_to_variable = { BAT_news_conquest_tracker = 1 }
 			hidden_effect = {
 				if = {
-					limit = { check_variable = { CTL_news_conquest_tracker = 5 } }
+					limit = { check_variable = { BAT_news_conquest_tracker = 5 } }
 					news_event = {
 						id = formable_news.24
 						hours = 6
@@ -6261,36 +6279,43 @@ KIR_formables_category = {
 			add_to_variable = { KIR_decision_counter = 1 }
 			if = {
 				limit = {
-					YAN = {
-						exists = yes
-						is_subject = no
+					NVA = {
+						is_ai = yes
 					}
 				}
-				YAN = {
-					country_event = formable_event.24
-				}
-			}
-			else = {
-				release_autonomy = {
-					target = YAN
-					autonomous_state = autonomy_puppet
-				}
-				every_state = {
+				if = {
 					limit = {
-						is_on_continent = africa
-						OR = {
-							is_in_array = { IDO.original_cores = THIS }
-							is_in_array = { DEL.original_cores = THIS }
+						YAN = {
+							exists = yes
+							is_subject = no
 						}
-						OWNER = {
+					}
+					YAN = {
+						country_event = formable_event.24
+					}
+				}
+				else = {
+					release_autonomy = {
+						target = YAN
+						autonomous_state = autonomy_puppet
+					}
+					every_state = {
+						limit = {
+							is_on_continent = africa
 							OR = {
-								tag = ROOT
-								is_subject_of = ROOT
+								is_in_array = { IDO.original_cores = THIS }
+								is_in_array = { DEL.original_cores = THIS }
+							}
+							OWNER = {
+								OR = {
+									tag = ROOT
+									is_subject_of = ROOT
+								}
 							}
 						}
+						transfer_state_to = YAN
+						add_core_of = YAN
 					}
-					transfer_state_to = YAN
-					add_core_of = YAN
 				}
 			}
 		}
@@ -6441,13 +6466,34 @@ KIR_formables_category = {
 	}
 	KIR_pat_deet = {
 		available = {
-			CTL = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			all_of_scopes = {
+				array = CTL.original_cores
+				tooltip = KIR_owns_all_initial_CTL_states_tt
+				if = {
+					limit = {
+						NOT = { state = 1104 }
+					}
+					OWNER = {
+						OR = {
+							tag = ROOT
+							is_subject_of = ROOT
+						}
+					}
+				}
+			}
 			BRS = { is_subject_of = ROOT }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = africa
-				is_in_array = { CTL.original_cores = THIS }
+				OR = {
+					is_in_array = { CTL.original_cores = THIS }
+					AND = {
+						is_in_array = { BRS.original_cores = THIS }
+						NOT = { is_owned_by = BRS }
+					}
+					state = 724
+				}
 			}
 		}
 		fire_only_once = yes
@@ -6456,10 +6502,38 @@ KIR_formables_category = {
 			add_to_variable = { KIR_decision_counter = 1 }
 			every_owned_state = {
 				limit = {
-					is_in_array = { CTL.original_cores = THIS }
+					OR = {
+						is_in_array = { CTL.original_cores = THIS }
+						AND = {
+							is_in_array = { BRS.original_cores = THIS }
+							NOT = { is_owned_by = BRS }
+						}
+					}
 				}
 				transfer_state_to = BRS
 				add_core_of = BRS
+			}
+			if = {
+				limit = {
+					OWNER = {
+						OR = {
+							tag = ROOT
+							is_subject_of = ROOT
+						}
+					}
+				}
+				if = {
+					limit = {
+						country_exist = MCW
+					}
+					transfer_state = 724
+				}
+				else = {
+					724 = {
+						transfer_state_to = BRS
+						add_core_of = BRS
+					}
+				}
 			}
 		}
 		ai_will_do = {
@@ -6617,7 +6691,6 @@ NVA_formables_category = {
 			owns_state = 1086
 		}
 		visible = {
-			is_ai = no
 			has_country_flag = NVA_niriking_time
 		}
 		fire_only_once = yes
@@ -6656,6 +6729,9 @@ NVA_formables_category = {
 				target = KIR
 				type = annex_everything
 			}
+		}
+		ai_will_do = {
+			factor = 0
 		}
 	}
 	NVA_oh_no_nirik = {
@@ -7236,7 +7312,7 @@ ZOO_formables_category = {
 		available = {
 			ROA = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { has_cosmetic_tag = ZOO_EMP }
+		visible = { has_cosmetic_tag = ZOO_NIR }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_in_array = { ROA.original_cores = THIS }
@@ -8474,9 +8550,6 @@ AZI_ZAJ_formables_category = {
 }
 MGY_formables_category = {
 	MGY_unite_republics = {
-		available = {
-			date > 1052.4.20
-		}
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = africa
@@ -8487,8 +8560,11 @@ MGY_formables_category = {
 			}
 		}
 		fire_only_once = yes
-		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: decision MGY_unite_republics"
+		days_remove = 70
+		war_with_on_remove = NDR
+		war_with_on_remove = REM
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove MGY_unite_republics"
 			every_state = {
 				limit = {
 					is_on_continent = africa
@@ -8517,6 +8593,13 @@ MGY_formables_category = {
 					target = NDR
 					type = annex_everything
 				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1050.4.20
+				factor = 0
 			}
 		}
 	}
@@ -8562,7 +8645,9 @@ MGY_formables_category = {
 						is_subject = no
 					}
 				}
-				country_event = formable_event.44
+				MTA = {
+					country_event = formable_event.44
+				}
 			}
 			775 = {
 				OWNER = {
@@ -8573,6 +8658,13 @@ MGY_formables_category = {
 						}
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1051.11.1
+				factor = 0
 			}
 		}
 	}
@@ -8655,6 +8747,18 @@ MGY_formables_category = {
 						id = 15710
 						name = MGY_panthera_ruins
 					}
+				}
+				every_state = {
+					limit = {
+						is_in_array = { ABY.original_cores = THIS }
+						is_owned_and_controlled_by = ROOT
+						NOT = { is_claimed_by = ROOT }
+					}
+					transfer_state_to = ABY
+				}
+				set_autonomy = {
+					target = ABY
+					autonomous_state = autonomy_puppet
 				}
 			}
 			hidden_effect = {
@@ -9481,7 +9585,24 @@ ZWA_TIM_formables_category = {
 	ZWA_TIM_evaporate_STM = {
 		available = {
 			TNT = { all_original_cores_owned_by_ROOT_or_ally = yes }
-			ZIT = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			all_of_scopes = {
+				array = ZIT.original_cores
+				tooltip = ZWA_TIM_owns_all_starting_ZIT_cores_tt
+				if = {
+					limit = {
+						NOT = {
+							state = 897
+							state = 894
+						}
+					}
+					OWNER = {
+						OR = {
+							tag = ROOT
+							is_in_faction_with = ROOT
+						}
+					}
+				}
+			}
 			HSO = { all_original_cores_owned_by_ROOT_or_ally = yes }
 			ILU = { all_original_cores_owned_by_ROOT_or_ally = yes }
 		}
@@ -9714,37 +9835,48 @@ MTA_formables_category = {
 						}
 					}
 				}
-				if = {
+				every_state = {
 					limit = {
-						country_exists = MGY
-						is_subject = no
+						is_on_continent = africa
+						is_in_array = { ABY.original_cores = THIS }
 					}
-					every_state = {
-						limit = {
-							is_on_continent = africa
-							is_claimed_by = MGY
-							is_in_array = { ABY.original_cores = THIS }
-						}
-						transfer_state_to = MGY
-					}
-					MGY = {
-						country_event = formable_event.46
-					}
+					transfer_state_to = ABY
+				}
+				set_autonomy = {
+					target = ABY
+					autonomous_state = autonomy_puppet
+				}
+			}
+			if = {
+				limit = {
+					country_exists = MGY
+					is_subject = no
 				}
 				every_state = {
 					limit = {
-						is_in_array = { YMN.original_cores = THIS }
+						is_on_continent = africa
+						is_claimed_by = MGY
+						is_in_array = { ABY.original_cores = THIS }
 					}
-					add_core_of = ROOT
+					transfer_state_to = MGY
 				}
-				if = {
-					limit = {
-						country_exists = EMR
-					}
-					create_wargoal = {
-						target = EMR
-						type = annex_everything
-					}
+				MGY = {
+					country_event = formable_event.46
+				}
+			}
+			every_state = {
+				limit = {
+					is_in_array = { YMN.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+			if = {
+				limit = {
+					country_exists = EMR
+				}
+				create_wargoal = {
+					target = EMR
+					type = annex_everything
 				}
 			}
 		}
@@ -10537,6 +10669,36 @@ STM_formables_category = {
 					}
 				}
 			}
+			733 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+			758 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+			766 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
 			hidden_effect = {
 				news_event = {
 					id = formable_news.45
@@ -10926,7 +11088,7 @@ STM_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision STM_total_corporate_control"
 			every_possible_country = {
 				limit = {
-					is_zebrican_continent_country = yes
+					is_griffon_continent_country = yes
 					exists = yes
 				}
 				ROOT = {
@@ -11123,15 +11285,38 @@ AWR_formables_category = {
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = AWR_freest_hugs_best_hugs_tt
-				any_other_country = {
-					if = {
-						limit = {
-							capital_scope = {
-								is_on_continent = europe
-							}
-						}
-						exists = no
-					}
+				NOT = {
+					country_exists = NID
+					country_exists = BAL
+					country_exists = NRP
+					country_exists = NEI
+					country_exists = EEE
+					country_exists = MTS
+					country_exists = CLI
+					country_exists = SPF
+					country_exists = STB
+					country_exists = EQS
+					country_exists = SLW
+					country_exists = CER
+					country_exists = CLD
+					country_exists = WHY
+					country_exists = BLS
+					country_exists = NER
+					country_exists = CRY
+					country_exists = STG
+					country_exists = MWR
+					country_exists = VRG
+					country_exists = NVC
+					country_exists = GRF
+					country_exists = SMH
+					country_exists = YAH
+					country_exists = JGR
+					country_exists = SCH
+					country_exists = SCS
+					country_exists = CCA
+					country_exists = NCA
+					country_exists = OLE
+					country_exists = CHN
 				}
 			}
 		}
