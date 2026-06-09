@@ -201,7 +201,7 @@ form_ussre_category = {
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision form_ussre_category"
+			log = "[GetDateText]: [Root.GetName]: Decision form_ussre"
 			every_state = {
 				limit = {
 					is_on_continent = europe
@@ -1808,13 +1808,16 @@ SCS_formables_category = {
 			all_of_scopes = {
 				tooltip = SCS_owns_all_original_EQS_states_tt
 				array = global.EQS_original_territory
-				OWNER = {
-					OR = {
-						tag = ROOT
-						AND = {
-							tag = CHN
-							ROOT = {
-								is_subject_of = CHN
+				hidden_trigger = {
+					is_on_continent = europe
+					OWNER = {
+						OR = {
+							tag = ROOT
+							AND = {
+								tag = CHN
+								ROOT = {
+									is_subject_of = CHN
+								}
 							}
 						}
 					}
@@ -1964,8 +1967,21 @@ CCA_formables_category = {
 		available = {
 			all_of_scopes = {
 				array = global.EQS_original_territory
-				tooltip = EQC_controls_all_original_EQS_territory
-				is_owned_by = ROOT
+				tooltip = SCS_owns_all_original_EQS_states_tt
+				hidden_trigger = {
+					is_on_continent = europe
+					OWNER = {
+						OR = {
+							tag = ROOT
+							AND = {
+								tag = CHN
+								ROOT = {
+									is_subject_of = CHN
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		highlight_states = {
@@ -2769,6 +2785,8 @@ FAT_formables_category = {
             }
             BOI = { all_original_cores_owned_by_ROOT = yes }
             HLQ = { all_original_cores_owned_by_ROOT = yes }
+            owns_state = 584
+            owns_state = 430
         }
         highlight_states = {
             highlight_states_trigger = {
@@ -2782,6 +2800,8 @@ FAT_formables_category = {
 					state = 601
 					state = 585
 					state = 542
+					state = 584
+					state = 430
                 }
             }
         }
@@ -2801,6 +2821,8 @@ FAT_formables_category = {
 						state = 601
 						state = 585
 						state = 542
+						state = 584
+						state = 430
                     }
                 }
                 add_core_of = ROOT
@@ -2863,6 +2885,9 @@ FAT_formables_category = {
 }
 GRI_formables_category = {
 	GRI_expand_training_regimen = {
+		allowed = {
+			tag = GRI
+		}
 		available = {
 			date > 1053.6.1
 		}
@@ -2871,7 +2896,7 @@ GRI_formables_category = {
 		custom_cost_trigger = {
 			set_temp_variable = { GRI_army_experience_cost = 100 }
 			set_temp_variable = { GRI_command_power_cost = 50 }
-			army_experience > 99.99
+			has_army_experience > 99.99
 			command_power > 49.99
 		}
 		custom_cost_text = GRI_dynamic_decision_cost_tt
@@ -2897,6 +2922,9 @@ GRI_formables_category = {
 		}
 	}
 	GRI_introduce_secularization = {
+		allowed = {
+			tag = GRI
+		}
 		available = {
 			date > 1054.6.1
 		}
@@ -3200,6 +3228,9 @@ TRD_formables_category = {
 }
 EQC_formables_category = {
 	EQC_retool_quotas = {
+		allowed = {
+			tag = EQC
+		}
 		visible = {
 			date > 1052.1.1
 			is_ai = no
@@ -3209,11 +3240,14 @@ EQC_formables_category = {
 		days_remove = 180
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision remove EQC_retool_quotas"
-			custom_effect_tooltip = EQC_always_free_economy_t
+			custom_effect_tooltip = EQC_always_free_economy_tt
 			clr_country_flag = EQC_MARESOC_laws
 		}
 	}
 	EQC_always_functional = {
+		allowed = {
+			tag = EQC
+		}
 		visible = {
 			date > 1054.1.1
 			is_ai = no
@@ -3227,6 +3261,9 @@ EQC_formables_category = {
 		}
 	}
 	EQC_never_corruption = {
+		allowed = {
+			tag = EQC
+		}
 		visible = {
 			date > 1053.1.1
 			is_ai = no
@@ -4592,6 +4629,9 @@ BAK_formables_category = {
 }
 RCT_formables_category = {
 	RCT_riverlander_wealth = {
+		allowed = {
+			tag = RCT
+		}
 		available = {
 			date > 1054.6.1
 		}
@@ -4607,14 +4647,17 @@ RCT_formables_category = {
 		}
 	}
 	RCT_riverlander_mobilization = {
+		allowed = {
+			tag = RCT
+		}
 		available = {
 			date > 1054.6.1
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { RCT_army_experience_cost = 125 }
 			set_temp_variable = { RCT_pp_experience_cost = 150 }
-			army_experience > 124.99
-			political_power > 149.99
+			has_army_experience > 124.99
+			has_political_power > 149.99
 		}
 		custom_cost_text = RCT_dynamic_cost_tt
 		fire_only_once = yes
@@ -6659,10 +6702,12 @@ KIR_formables_category = {
 			all_of_scopes = {
 				array = global.original_ancient_pact_states
 				tooltip = KIR_owns_all_ancient_pact_states_tt
-				OWNER = {
-					OR = {
-						tag = ROOT
-						is_subject_of = ROOT
+				hidden_trigger = {
+					OWNER = {
+						OR = {
+							tag = ROOT
+							is_subject_of = ROOT
+						}
 					}
 				}
 			}
@@ -6800,14 +6845,16 @@ KIR_formables_category = {
 			all_of_scopes = {
 				array = CTL.original_cores
 				tooltip = KIR_owns_all_initial_CTL_states_tt
-				if = {
-					limit = {
-						NOT = { state = 1104 }
-					}
-					OWNER = {
-						OR = {
-							tag = ROOT
-							is_subject_of = ROOT
+				hidden_effect = {
+					if = {
+						limit = {
+							NOT = { state = 1104 }
+						}
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
 						}
 					}
 				}

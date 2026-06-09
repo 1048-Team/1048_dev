@@ -12,9 +12,15 @@ YAH_SMH_AI_category = {
                     country_exists = SMH
                 }
             }
-            date > 1048.6.1
+            date > 1048.5.2
         }
-        fire_only_once = yes
+        visible = {
+            NOT = { has_country_flag = YAH_SMH_war_blocker }
+        }
+        days_remove = 30
+        war_with_on_remove = YAH
+        war_with_on_remove = SMH
+        days_re_enable = 90
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision YAH_SMH_warlord_dominance"
             #Sets a temp variable to a random integer between 150 and 210 and then uses that for the number of days for the country flag lifespan
@@ -59,11 +65,15 @@ YAH_SMH_AI_category = {
     }
     YAH_SMH_skirmish_timer = {
         days_mission_timeout = 30
+        allowed = {
+            always = no
+        }
+        available = {
+            always = no
+        }
         cancel_trigger = {
-            OR = {
-                NOT = { country_exists = YAH }
-                NOT = { country_exists = SMH }
-            }
+            NOT = { country_exists = YAH }
+            NOT = { country_exists = SMH }
         }
         timeout_effect = {
             log = "[GetDateText]: [ROOT.GetName]: mission_timeout YAH_SMH_skirmish_timer"
@@ -73,12 +83,14 @@ YAH_SMH_AI_category = {
                     tag = YAH
                 }
                 white_peace = SMH
+                set_country_flag = YAH_SMH_war_blocker
             }
             if = {
                 limit = {
                     tag = SMH
                 }
                 white_peace = YAH
+                set_country_flag = YAH_SMH_war_blocker
             }
             if = {
                 limit = {
