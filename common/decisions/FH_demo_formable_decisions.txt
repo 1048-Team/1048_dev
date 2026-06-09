@@ -2673,6 +2673,55 @@ FAT_formables_category = {
     }
 }
 GRI_formables_category = {
+	GRI_expand_training_regimen = {
+		available = {
+			date > 1053.6.1
+		}
+		fire_only_once = yes
+		days_remove = 300
+		custom_cost_trigger = {
+			set_temp_variable = { GRI_army_experience_cost = 100 }
+			set_temp_variable = { GRI_command_power_cost = 50 }
+			army_experience > 99.99
+			command_power > 49.99
+		}
+		custom_cost_text = GRI_dynamic_decision_cost_tt
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -100
+				add_command_power = -50
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove GRI_expand_training_regimen"
+			remove_ideas = GRI_hyper_trained_military
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 10
+				OR = {
+					has_war_with = EQC
+					has_war_with = RCT
+				}
+			}
+		}
+	}
+	GRI_introduce_secularization = {
+		available = {
+			date > 1054.6.1
+		}
+		fire_only_once = yes
+		days_remove = 215
+		cost = 125
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove GRI_introduce_secularization "
+			remove_ideas = GRI_excessive_church_taxes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	GRI_autonomous_no_more = {
 		available = {
 			TRD = { all_original_cores_owned_by_ROOT = yes }
@@ -2961,6 +3010,57 @@ TRD_formables_category = {
 	}
 }
 EQC_formables_category = {
+	EQC_retool_quotas = {
+		visible = {
+			date > 1052.1.1
+			is_ai = no
+		}
+		cost = 150
+		fire_only_once = yes
+		days_remove = 180
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove EQC_retool_quotas"
+			custom_effect_tooltip = EQC_always_free_economy_t
+			clr_country_flag = EQC_MARESOC_laws
+		}
+	}
+	EQC_always_functional = {
+		visible = {
+			date > 1054.1.1
+			is_ai = no
+		}
+		cost = 150
+		fire_only_once = yes
+		days_remove = 365
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove EQC_always_functional"
+			remove_ideas = always_correct_quotas
+		}
+	}
+	EQC_never_corruption = {
+		visible = {
+			date > 1053.1.1
+			is_ai = no
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { EQC_decision_army_xp_cost = 75 }
+			set_temp_variable = { EQC_decision_army_pp_cost = 100 }
+            has_army_experience > 74.99
+            has_political_power > 99.99
+        }
+        custom_cost_text = EQC_decision_cost_dynamic_tt
+        complete_effect = {
+			hidden_effect = {
+				add_political_power = -100
+				army_experience = -75
+			}
+        }
+        days_remove = 270
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove EQC_never_corruption"
+			remove_ideas = EQC_eager_recruits
+        }
+	}
 	EQC_always_griffonian = {
 		available = {
 			GRI = { all_original_cores_owned_by_ROOT = yes }
@@ -4302,6 +4402,48 @@ BAK_formables_category = {
 	}
 }
 RCT_formables_category = {
+	RCT_riverlander_wealth = {
+		available = {
+			date > 1054.6.1
+		}
+		cost = 200
+		days_remove = 65
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove RCT_riverlander_wealth"
+			remove_ideas = RCT_needless_micro_management
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	RCT_riverlander_mobilization = {
+		available = {
+			date > 1054.6.1
+		}
+		custom_cost_trigger = {
+			set_temp_variable = { RCT_army_experience_cost = 125 }
+			set_temp_variable = { RCT_pp_experience_cost = 150 }
+			army_experience > 124.99
+			political_power > 149.99
+		}
+		custom_cost_text = RCT_dynamic_cost_tt
+		fire_only_once = yes
+		days_remove = 110
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -125
+				add_political_power = -150
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove RCT_riverlander_mobilization"
+			remove_ideas = RCT_extreme_specialization
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+	}
 	RCT_safe_society = {
 		available = {
 			BRF = { all_original_cores_owned_by_ROOT_or_subject = yes }
