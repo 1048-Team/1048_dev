@@ -25,12 +25,517 @@ on_actions = {
 					unlock_project_facilities = yes
 				}
             }
-            ###Demo###
-            set_global_flag = FH_game_demo
-            every_possible_country = {
-                limit = { is_ai = no }
-                country_event = solar_demo.1
-            }
+            every_country = {			#this needed to fix AI div template selection, so AI won't take any template with reduced width if not has a flag
+				limit = {
+					NOT = { has_country_flag = AI_reduced_combat_width_inf }
+					NOT = { has_country_flag = AI_reduced_combat_width_arm }
+				}
+				random_list = {
+					70 = {  }
+					10 = {
+						set_country_flag = AI_reduced_combat_width_inf
+						set_country_flag = AI_reduced_combat_width_arm
+					}
+					10 = {
+						set_country_flag = AI_reduced_combat_width_arm
+					}
+					10 = {
+						set_country_flag = AI_reduced_combat_width_inf
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					NOT = { state = 1209 }
+				}
+				if = {
+					limit = {
+						is_on_continent = europe #Equestria
+					}
+					add_to_array = { global.europe_states = THIS }
+				}
+				else_if = {
+					limit = {
+						is_on_continent = asia #Griffonia
+					}
+					add_to_array = { global.asia_states = THIS }
+				}
+				else_if = {
+					limit = {
+						is_on_continent = africa #Zebrica
+					}
+					add_to_array = { global.africa_states = THIS }
+				}
+				add_to_variable = { global.wc_states_required = 1 }
+			}
+
+			ZZZ = { initialize_night_trait_tokens = yes }
+
+			if = {
+				limit = {
+					OR = {
+						has_game_rule = {
+							rule = ai_production_fix
+							option = PRODUCTION_FIX_ENABLE
+						}
+						has_game_rule = {
+							rule = ai_production_fix
+							option = AI_TRAINING_AND_PRODUCTION_FIX_ENABLE
+						}
+					}
+				}
+				every_country = {
+					add_dynamic_modifier = { modifier = AI_production_efficiency_fix }
+					set_variable = { AI_production_efficiency_fix_var = global.difficulty }
+					divide_variable = { AI_production_efficiency_fix_var = 5 }
+					if = {
+						limit = {
+							difficulty > 2
+						}
+						set_variable = { AI_production_max_efficiency_fix_var = 0.2 }
+					}
+					if = {
+						limit = {
+							difficulty > 3
+						}
+						add_to_variable = {
+							var = AI_production_max_efficiency_fix_var
+							value = 0.2
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						has_game_rule = {
+							rule = ai_production_fix
+							option = AI_TRAINING_FIX_ENABLE
+						}
+						has_game_rule = {
+							rule = ai_production_fix
+							option = AI_TRAINING_AND_PRODUCTION_FIX_ENABLE
+						}
+					}
+				}
+				every_country = {
+					add_dynamic_modifier = { modifier = AI_minimum_training_fix }
+					set_variable = { AI_minimum_training_level_fix_var = 0.6 }
+					set_variable = { AI_training_time_army_factor_fix_var = -0.33 }
+				}
+			}
+
+			#Using the land_indexes we can determine land connection. Any state with a land connection to these states will NOT be considered an island in is_state_considered_an_island
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 3.id } #Canterlot - Equus
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 875.id } #Colthage - Zebrica
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 382.id } #Griffenheim - Griffonia
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 360.id } #Southern Cross - Cross Island belonging to New Mareland
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 1165.id } #Mount Aris - Hippogriffia
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 721.id } #Sao Penario - Macawia
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 715.id } #Espiritio forte - Ornithia
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 726.id } #Sri Cervidae - Tanikama
+			add_to_array = { global.is_defined_as_continental_landmass_capital = 1137.id } #Sokatramaraina - Sambovato
+
+			SOL = {
+				setup_generic_advisor_portraits = yes
+				mark_land_connected_states = yes
+				if = {
+					limit = { is_ai = no }
+					random_other_country = {
+						limit = {
+							is_ai = yes
+							NOT = {
+								has_focus_tree = generic_focus
+								has_focus_tree = generic_griffon_focus
+								has_focus_tree = generic_zebra_focus
+							}
+						}
+						#set_variable = { eaw_welcome_screen = 1 }
+						country_event = solar_demo.1
+						capital_scope = { SOL = { goto_state = PREV } }
+						change_tag_from = PREV
+					}
+				}
+			}
+
+			every_possible_country = { # Merge with next every_possible country?
+				set_continent_flags_on_every_possible_country = yes
+			}
+			set_global_flag = continent_flags_set
+
+			###Lots of EaW copied stuff###
+			every_possible_country = {
+                #Create a list of all generals who have night related traits.
+				every_unit_leader = {
+					for_each_loop = {
+						array = global.night_trait_tokens
+						value = v
+
+						#Loop through all the traits in initialize_night_trait_tokens and see if the unit leader has any.
+						#For some reason there's no trigger to check if a unit leader has a trait.
+						#replace_unit_leader_trait is a broken effect that does not work properly (it doesn't even have official documentation lol).
+						#However, it does add the "trait" if and only if the unit leader has the specified "replace" trait.
+						#This can be used to see if the unit leader has the "replace" trait by checking for a custom modifier in night_test_trait.
+						#Ask me for further details. -Blue
+						meta_effect = {
+							text = {
+								replace_unit_leader_trait = {
+									trait = night_test_trait
+									replace = [TRAIT]
+								}
+							}
+							TRAIT = "[?v.GetTokenKey]"
+						}
+						if = {
+							#If this is true, then the unit leader has v as a trait
+							limit = {
+								check_variable = { leader_modifier@night_test_trait_modifier = 1 }
+							}
+							add_to_array = { night_related_traits = v }
+							if = {
+								limit = {
+									NOT = { is_in_array = { global.unit_leaders_to_update = THIS } }
+								}
+								add_to_array = { global.unit_leaders_to_update = THIS }
+							}
+
+							#Remove the test trait
+							remove_unit_leader_trait = night_test_trait
+						}
+					}
+				}
+				# added in vanilla 1.9.2
+				add_ai_strategy = {
+					type = pp_spend_priority
+					id = guarantee
+					value = -50
+				}
+				if = {
+					limit = {
+						exists = yes
+					}
+					# added in vanilla 1.9.2
+					capital_scope = {
+						set_variable = { historical_capital_for_country = PREV }
+					}
+				}
+
+				if = {
+					limit = { is_pony_race = yes }
+					add_ideas = pony_race
+				}
+				else_if = {
+					limit = { is_changeling_race = yes }
+					add_ideas = changeling_race
+				}
+				else_if = {
+					limit = { is_deer_race = yes }
+					add_ideas = deer_race
+				}
+				else_if = {
+					limit = { is_giraffe_race = yes }
+					add_ideas = giraffe_race
+				}
+				else_if = {
+					limit = { is_griffon_race = yes }
+					add_ideas = griffon_race
+					country_event = {
+						id = fantasyflavor.11
+						days = 345
+					}
+					if = {
+						limit = {
+							check_variable = { random > 0.90 }
+							is_ai = no
+							NOT = {
+								tag = MNC
+								tag = AET
+							}
+						}
+						country_event = {
+							id = fantasyflavor.12
+							days = 400
+							random = 25000
+						}
+					}
+				}
+				else_if = {
+					limit = { is_cat_race = yes }
+					add_ideas = cat_race
+				}
+				else_if = {
+					limit = { is_camel_race = yes }
+					add_ideas = camel_race
+				}
+				else_if = {
+					limit = { is_centaur_race = yes }
+					add_ideas = centaur_race
+				}
+				else_if = {
+					limit = { is_diamond_dog_race = yes }
+					add_ideas = diamond_dog_race
+				}
+				else_if = {
+					limit = { is_donkey_race = yes }
+					add_ideas = donkey_race
+				}
+				else_if = {
+					limit = { is_gargoyle_race = yes }
+					add_ideas = gargoyle_race
+				}
+				else_if = {
+					limit = { is_horse_race = yes }
+					add_ideas = horse_race
+				}
+				else_if = {
+					limit = { is_hippogriff_race = yes }
+					add_ideas = hippogriff_race
+				}
+				else_if = {
+					limit = { is_zebra_race = yes }
+					add_ideas = zebra_race
+				}
+				else_if = {
+					limit = { is_kirin_race = yes }
+					add_ideas = kirin_race
+					add_ideas = mare_society_hidden
+				}
+				else_if = {
+					limit = { is_llama_race = yes }
+					add_ideas = llama_race
+				}
+				else_if = {
+					limit = { is_harpy_race = yes }
+					add_ideas = harpy_race
+				}
+				else_if = {
+					limit = { is_minotaur_race = yes }
+					add_ideas = minotaur_race
+				}
+				else_if = {
+					limit = { is_penguin_race = yes }
+					add_ideas = penguin_race
+				}
+				else_if = {
+					limit = { is_dragon_race = yes }
+					add_ideas = dragon_race
+				}
+				else_if = {
+					limit = { is_undead_race = yes }
+					add_ideas = undead_race
+				}
+				else_if = {
+					limit = { is_buffalo_race = yes }
+					add_ideas = buffalo_race
+				}
+				else_if = {
+					limit = { is_yak_race = yes }
+					add_ideas = yak_race
+				}
+				else_if = {
+					limit = { is_yeti_race = yes }
+					add_ideas = yeti_race
+				}
+				else_if = {
+					limit = { is_polar_race = yes }
+					add_ideas = polar_race
+				}
+				else = {
+					set_technology = { popup = no generic_race = 1 }
+					add_ideas = generic_race_idea
+				}
+
+				if = {
+					limit = {
+						is_on_equestrian_continent = no
+						OR = {
+							has_idea = dummy_idea_science
+							NOT = {
+								has_idea_with_trait = science_idea
+							}
+						}
+					}
+					if = {
+						limit = {
+							num_of_civilian_factories > 2
+							has_tech = melee_weapons1
+							NOT = { owns_big_griffon_city = yes }
+							NOT = { owns_major_griffon_city = yes }
+							NOT = { owns_big_zebra_city = yes }
+							NOT = { owns_major_zebra_city = yes }
+						}
+						#log = "[Root.GetName] better_science_base"
+						add_ideas = better_science_base
+
+					}
+					else_if = {
+						limit = {
+							OR = {
+								owns_big_griffon_city = yes
+								owns_big_zebra_city = yes
+							}
+						}
+						#log = "[Root.GetName] big_science_base"
+						add_ideas = big_science_base
+					}
+					else_if = {
+						limit = {
+							OR = {
+								owns_major_griffon_city = yes
+								owns_major_zebra_city = yes
+							}
+						}
+						#log = "[Root.GetName] proper_science_base"
+						add_ideas = proper_science_base
+					}
+					else_if = {
+						limit = {
+							NOT = { owns_major_griffon_city = yes }
+							NOT = { owns_big_griffon_city = yes }
+							NOT = { owns_major_zebra_city = yes }
+							NOT = { owns_big_zebra_city = yes }
+							OR = {
+								NOT = { has_tech = melee_weapons1 }
+								NOT = { num_of_civilian_factories > 2 }
+							}
+							OR = {
+								is_griffon_continent_country = yes
+								is_zebrican_continent_country = yes
+							}
+						}
+						#log = "[Root.GetName] poor_science_base"
+						add_ideas = poor_science_base
+					}
+				}
+
+				if = {
+					limit = {
+						OR = {
+							#is_on_equestrian_continent = yes #This is borking science levels for Equus nations. If you want to have a full science base, specify it in the Equus nation's history file. - Test4Echo
+							has_idea = dummy_idea_science
+							NOT = {
+								has_idea_with_trait = science_idea
+							}
+						}
+					}
+					add_ideas = proper_science_base
+				}
+
+				if = {
+					limit = {
+						OR = {
+							has_idea = dummy_idea_society
+							NOT = {
+								has_idea_with_trait = society_idea
+							}
+						}
+					}
+					if = {
+						limit = {
+							OR = {
+								is_griffon_continent_country = yes
+								is_zebrican_continent_country = yes
+							}
+						}
+						add_ideas = outdated_industry
+						else = {
+							add_ideas = modern_society
+						}
+					}
+				}
+
+				if = {
+					limit = {
+						OR = {
+							has_idea = dummy_idea_literacy
+							NOT = { has_idea_with_trait = illiteracy_idea }
+						}
+					}
+					add_ideas = no_lack_of_scientists
+				}
+
+				if = {
+					limit = {
+						OR = {
+							has_idea = dummy_idea_poverty
+							NOT = { has_idea_with_trait = poverty_idea }
+						}
+					}
+					add_ideas = no_poverty
+				}
+
+				###Will be re-enabled later on
+				#if = {
+				#	limit = {
+				#		is_ai = no
+				#	}
+				#	set_variable = { eaw_welcome_screen = 1 }
+				#}
+
+				if = {
+					limit = {
+						is_griffon_continent_country = yes
+						OR = {
+							has_tribal_society = yes
+							has_agrarian_society = yes
+							has_pre_industrial_society = yes
+							has_illiteracy = yes
+						}
+					}
+					country_event = { id = griffonian.166 days = 912 } #comet sighted
+				}
+
+				if = {
+					limit = {
+						NOT = {
+							tag = GRI
+							any_owned_state = {
+								OR = {
+									is_coastal = yes
+									is_island_state = yes
+								}
+							}
+						}
+					}
+					set_country_flag = started_out_as_landlocked
+				}
+				if = {
+					limit = {
+						OR = {
+							has_idea = agrarian_society
+							has_idea = tribal_society
+							has_idea = communal_society
+							has_idea = detached_country
+						}
+					}
+					add_fuel = 25000
+				}
+				every_owned_state = {
+					for_each_scope_loop = {
+						array = core_countries
+						add_to_array = { original_cores = PREV }
+						add_to_array = { PREV.state_original_cores = THIS }
+					}
+				}
+				adjust_research_modifier = yes
+				update_global_arrays = yes
+				if = {
+					limit = { NOT = { has_country_flag = weapons_fixed_at_start } }
+					actually_fix_weapon_techs = yes
+				}
+			}
+
+			# this extra loop is intentional
+			# adjust_research_modifier needs to be fired again after force_update_dynamic_modifier for the value to work correctly
+			# first loop is above, in every_country
+			for_each_scope_loop = {
+				array = global.countries
+				force_update_dynamic_modifier = yes
+				adjust_research_modifier = yes
+			}
+			random_country = {
+				set_continent_flags_on_every_possible_country = yes #Create own version later that will assign Equus continent and Equus pony continent country flags to both
+			}
         }
     }
 }
