@@ -1865,6 +1865,21 @@ all_original_cores_owned_by_ROOT_or_subject = {
 	}
 }
 
+# All original cores of ROOT are owned and controlled by ROOT
+# Example
+# GRF = { all_original_cores_owned_and_controlled_by_ROOT = yes } #check if ROOT owns and controlles all original cores of GRF
+all_original_cores_owned_and_controlled_by_ROOT = {
+	custom_trigger_tooltip = {
+		tooltip = owns_and_controlls_all_cores_original_tt
+		hidden_trigger = {
+			all_of_scopes = {
+				array = original_cores
+				is_owned_and_controlled_by = ROOT
+			}
+		}
+	}
+}
+
 # Any cores owned by THIS are controlled by ROOT
 # Example:
 # GRF = { any_cores_controlled_by_ROOT = yes } #check if ROOT controlls at least one core of GRF
@@ -2302,5 +2317,54 @@ exists_outside_sphere_of_influence = {
 			is_subject_of = ROOT
 			has_war_with = ROOT
 		}
+	}
+}
+
+# Country Scope - Whether a country is suitable for wargoal declaration #
+exists_outside_sphere_of_influence = {
+	custom_trigger_tooltip = {
+		tooltip = exists_outside_sphere_of_influence_tt
+		exists = yes
+		NOT = {
+			is_in_faction_with = ROOT
+			is_subject_of = ROOT
+			has_war_with = ROOT
+		}
+	}
+}
+
+# Country Scope - Tests whether the country in question is on historical AI behaviour
+has_historical_ai_behaviour = {
+    meta_trigger = {
+        text = {
+            OR = {
+                AND = {
+                    is_historical_focus_on = yes
+                    has_game_rule = {
+                        rule = [TAG]_ai_behavior
+                        option = DEFAULT
+                    }
+                }
+                has_country_flag = [TAG]_AI_HISTORICAL
+                has_game_rule = {
+                    rule = [TAG]_ai_behavior
+                    option = HISTORICAL
+                }
+            }
+        }
+         TAG = "[THIS.GetTag]"
+    }
+}
+
+# Country Scope - list of countries that are exempt from reverting to a generic focus tree when puppeted
+always_retains_focus_tree_as_puppet = {
+	OR = {
+		has_country_flag = retains_focus_tree_on_puppeting
+		original_tag = GRU
+		original_tag = CTH
+		original_tag = LUS
+		original_tag = FLO
+		original_tag = BRF
+		original_tag = WIT
 	}
 }
