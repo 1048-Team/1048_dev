@@ -339,7 +339,7 @@ country_event = { #CER forms alliance with CLD
 				has_country_flag = CLD_accepted_defense_faction
 			}
 		}
-		create_faction = CER_dem_faction
+		create_faction = CER_dem_faction #Eventually change this, but for now it's fine to use the depricated command
 		add_to_faction = FROM
 		news_event = fhequusnews.3
 		hidden_effect = {
@@ -463,10 +463,22 @@ country_event = { #CER proposes complete integration to fight against Daybreaker
 	}
 	option = { #Autonomous region is acceptable.
 		name = equestria_activity.22.b
+		ai_chance = {
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
 		set_country_flag = CER_compromise_integration
 	}
 	option = { #This was a ploy! Never!
 		name = equestria_activity.22.c
+		ai_chance = {
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0.5
+			}
+		}
 		set_country_flag = CER_rejected_integration
 	}
 
@@ -513,7 +525,7 @@ country_event = { #CER creates a united heartlands
 	is_triggered_only = yes
 	
 	option = { #We must integrate to fight the Solarists!
-		name = equestria_activity.25.a
+		name = equestria_activity.23.a
 		trigger = {
 			FROM = {
 				has_country_flag = CER_accepted_integration
@@ -526,7 +538,7 @@ country_event = { #CER creates a united heartlands
 		FROM = { clr_country_flag = CER_accepted_integration }
 	}
 	option = { #It's acceptable enough.
-		name = equestria_activity.25.b
+		name = equestria_activity.23.b
 		trigger = {
 			FROM = {
 				has_country_flag = CER_compromise_integration
@@ -539,7 +551,7 @@ country_event = { #CER creates a united heartlands
 		FROM = { clr_country_flag = CER_compromise_integration }
 	}
 	option = { #Harmony is paramount, even if spread by the sword.
-		name = equestria_activity.25.c
+		name = equestria_activity.23.c
 		trigger = {
 			FROM = {
 				has_country_flag = CER_rejected_integration
@@ -641,24 +653,27 @@ country_event = { #BRF proposes to other free nation league members about unifyi
 		set_country_flag = FH_league_integration_compromise
 		ai_chance = {
 			factor = 2
-		}
-	}
-	option = { #A nonsense proposal. We work together as allies.
-		name = griffonia_activity.1.c
-		set_country_flag = FH_league_integration_rejection
-		ai_chance = {
-			factor = 1
 			modifier = {
 				is_historical_focus_on = yes
-				factor = 0
+				factor = 0.5
 			}
 		}
 	}
+	#option = { #A nonsense proposal. We work together as allies.
+	#	name = griffonia_activity.1.c
+	#	set_country_flag = FH_league_integration_rejection
+	#	ai_chance = {
+	#		factor = 1
+	#		modifier = {
+	#			is_historical_focus_on = yes
+	#			factor = 0
+	#		}
+	#	}
+	#}
 	option = { #He's no better than the Empire! It's been a farce the entire time!
 		name = griffonia_activity.1.e
 		set_country_flag = FH_league_integration_complete_rejection
 		ai_chance = {
-			factor = 1
 			modifier = {
 				is_historical_focus_on = yes
 				factor = 0
@@ -689,10 +704,10 @@ country_event = { #Consequences of the integration proposal
 		trigger = { FROM = { has_country_flag = FH_league_integration_compromise } }
 		text = griffonia_activity.2.d_b
 	}
-	desc = {
-		trigger = { FROM = { has_country_flag = FH_league_integration_rejection } }
-		text = griffonia_activity.2.d_c
-	}
+	#desc = {
+	#	trigger = { FROM = { has_country_flag = FH_league_integration_rejection } }
+	#	text = griffonia_activity.2.d_c
+	#}
 	desc = {
 		trigger = { FROM = { has_country_flag = FH_league_integration_complete_rejection } }
 		text = griffonia_activity.2.d_d
@@ -702,50 +717,57 @@ country_event = { #Consequences of the integration proposal
 
 	option = { #Excellent!/An acceptable compromise/They will see reason eventually/Everygriff will be free of communism, whether they like it or not!
 		name = griffonia_activity.2.a #This should be scripted loc
-		if = {
-			limit = {
-				FROM = {
-					has_country_flag = FH_accepted_league_integration
-				}
-			}
-			FROM = { clr_country_flag = FH_accepted_league_integration }
-			annex_country = {
-				target = FROM
-				transfer_troops = yes
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					has_country_flag = FH_league_integration_compromise
-				}
-			}
-			FROM = { clr_country_flag = FH_league_integration_compromise }
-			set_autonomy = {
-				target = FROM
-				autonomous_state = autonomy_puppet
-			}
-		}
-		else_if = {
-			limit = {
-				FROM = {
-					has_country_flag = FH_league_integration_rejection
-				}
-			}
-			FROM = { clr_country_flag = FH_league_integration_rejection }
-			add_stability = -0.02
-			add_political_power = -25
-		}
-		else = {
-			FROM = { clr_country_flag = FH_league_integration_complete_rejection }
+		trigger = {
 			FROM = {
-				FROM = { clr_country_flag = FH_league_integration_complete_rejection }
-				leave_faction = yes
+				has_country_flag = FH_accepted_league_integration
 			}
-			create_wargoal = {
-				target = FROM
-				type = annex_everything
+		}
+		FROM = { clr_country_flag = FH_accepted_league_integration }
+		annex_country = {
+			target = FROM
+			transfer_troops = yes
+		}
+		#else_if = {
+		#	limit = {
+		#		FROM = {
+		#			has_country_flag = FH_league_integration_rejection
+		#		}
+		#	}
+		#	FROM = { clr_country_flag = FH_league_integration_rejection }
+		#	add_stability = -0.02
+		#	add_political_power = -25
+		#}
+	}
+
+	option = { #An acceptable compromise
+		name = griffonia_activity.2.b
+		trigger = {
+			FROM = {
+				has_country_flag = FH_league_integration_compromise
 			}
+		}
+		FROM = { clr_country_flag = FH_league_integration_compromise }
+		set_autonomy = {
+			target = FROM
+			autonomous_state = autonomy_puppet
+		}
+	}
+
+	option = { #They WILL fight against communism, willingly or not!
+		name = griffonia_activity.2.c
+		trigger = {
+			FROM = {
+				has_country_flag = FH_league_integration_complete_rejection
+			}
+		}
+		FROM = { clr_country_flag = FH_league_integration_complete_rejection }
+		FROM = {
+			FROM = { clr_country_flag = FH_league_integration_complete_rejection }
+			leave_faction = yes
+		}
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
 		}
 	}
 
