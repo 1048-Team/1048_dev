@@ -208,21 +208,36 @@ on_actions = {
 	on_capitulation = {
 		effect = {
 			log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_capitulation"
+			#if = {
+			#	limit = {
+			#		OR = {
+			#			original_tag = CNT
+			#			original_tag = TAI
+			#			original_tag = MEL
+			#			original_tag = ZOO
+			#		}
+			#		FROM = {
+			#			has_focus_tree = generic_zebra_focus
+			#			is_ai = yes
+			#		}
+			#	}
+			#	set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 } #this should be removed if you wanna add something for ABY, YMN, MGY
+			#	transfer_navy = { target = FROM }
+			#}
 			if = {
 				limit = {
-					OR = {
-						original_tag = CNT
-						original_tag = TAI
-						original_tag = MEL
-						original_tag = ZOO
+					ROOT = {
+						has_country_flag = SEE
 					}
 					FROM = {
-						has_focus_tree = generic_zebra_focus
-						is_ai = yes
+						has_country_flag = SEE
 					}
 				}
-				set_country_flag = { flag = bypass_on_peaceconference_ended days = 1 value = 1 } #this should be removed if you wanna add something for ABY, YMN, MGY
-				transfer_navy = { target = FROM }
+				FROM = {
+					transfer_navy = {
+						target = ROOT
+					}
+				}
 			}
 		}
 	}
