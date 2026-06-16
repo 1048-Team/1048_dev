@@ -6026,6 +6026,7 @@ HIP_formables_category = {
         }
         fire_only_once = yes
         complete_effect = {
+			log = "[GetDateText]: [ROOT.GetName]: decision HIP_core_all_hippogriffia"
             remove_ideas = HPS_HIP_civil_war
             if = {
                 limit = {
@@ -6035,9 +6036,6 @@ HIP_formables_category = {
                     remove_ideas = HPS_HIP_civil_war
                 }
             }
-        }
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision HIP_core_all_hippogriffia"
             every_state = {
                 limit = {
 					is_on_continent = africa
@@ -6047,7 +6045,6 @@ HIP_formables_category = {
                         is_in_array = { HRL.original_cores = THIS }
                         is_in_array = { DOH.original_cores = THIS }
                     }
-                    is_owned_by = ROOT
                 }
                 add_core_of = ROOT
             }
@@ -6066,8 +6063,44 @@ HIP_formables_category = {
                     add_core_of = DOH
                 }
             }
+            hidden_effect = {
+				set_variable_to_random = {
+					var = HIP_randomizer_variable
+					min = 30
+					max = 61
+					integer = yes
+				}
+				country_event = {
+					id = zebrica_activity.5
+					days = 1
+				}
+            }
         }
         ai_will_do = { factor = 100 }
+    }
+    HIP_request_DOH_integration = {
+		allowed = {
+			tag = HIP
+		}
+		visible = {
+			DOH = {
+				NOT = { has_idea = HPS_HIP_civil_war }
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [ROOT.GetName]: decision HIP_request_DOH_integration"
+			DOH = {
+				country_event = zebrica_activity.3
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				check_variable = { HIP_randomizer_variable > 0 }
+				factor = 0
+			}
+		}
     }
     HIP_reclaim_foreign_owned_land = {
         available = {
@@ -6159,39 +6192,18 @@ HIP_formables_category = {
             factor = 100
         }
     }
-    HIP_end_legation_city_status = {
-        available = {
-            1204 = { is_owned_and_controlled_by = ROOT }
-        }
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision HIP_end_legation_city_status"
-            1204 = {
-				add_core_of = ROOT
-            }
-        }
-    }
-    HPS_reunite_with_the_party = {
-        allowed = {
-            tag = HPS
-        }
-        available = {
-            HIP_civil_war_over = yes
-        }
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision HPS_reunite_with_the_party"
-            custom_effect_tooltip = GAME_OVER_TT
-            EQC = {
-                country_event = {
-                    id = zebrica_activity.1
-                }
-            }
-        }
-        ai_will_do = {
-			factor = 10
-        }
-    }
+    #HIP_end_legation_city_status = {
+    #    available = {
+    #        1204 = { is_owned_and_controlled_by = ROOT }
+    #    }
+    #    fire_only_once = yes
+    #    complete_effect = {
+    #        log = "[GetDateText]: [ROOT.GetName]: decision HIP_end_legation_city_status"
+    #        1204 = {
+	#			add_core_of = ROOT
+    #        }
+    #    }
+    #}
     HPS_proclaim_perfect_zebrican_socialism = {
         allowed = {
             tag = HPS
@@ -6206,12 +6218,17 @@ HIP_formables_category = {
                 tooltip = HPS_owns_possible_MCW_cores_tt
                 all_of_scopes = {
                     array = MCW.original_cores
-                    OR = {
-                        is_owned_by = ROOT
-                        AND = {
-                            NOT = { country_exists = MCW }
-                            is_owned_by = MIT
-                        }
+                    is_on_continent = africa
+                    if = {
+						limit = {
+							NOT = {
+								state = 720
+								state = 806
+								state = 717
+								state = 718
+							}
+						}
+						is_owned_by = ROOT
                     }
                 }
             }
@@ -6232,14 +6249,19 @@ HIP_formables_category = {
                     is_in_array = { CGI.original_cores = THIS }
                     AND = {
                         is_in_array = { MCW.original_cores = THIS }
-                        is_owned_by = ROOT
+                        NOT = {
+							state = 720
+							state = 806
+							state = 717
+							state = 718
+                        }
                     }
                 }
             }
         }
         fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove HPS_proclaim_perfect_zebrican_socialism"
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision HPS_proclaim_perfect_zebrican_socialism"
             set_cosmetic_tag = HPS_north_zebrica
             every_state = {
                 limit = {
@@ -6269,6 +6291,35 @@ HIP_formables_category = {
         }
         ai_will_do = {
             factor = 50
+        }
+    }
+    HPS_reunite_with_the_party = {
+        allowed = {
+            tag = HPS
+        }
+        available = {
+            HIP_civil_war_over = yes
+            has_cosmetic_tag = HPS_north_zebrica
+        }
+        visible = {
+			is_ai = yes
+			EQC = { is_ai = yes }
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision HPS_reunite_with_the_party"
+            EQC = {
+                country_event = {
+                    id = zebrica_activity.1
+                }
+            }
+        }
+        ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1057.1.1
+				factor = 0
+			}
         }
     }
     #HIP_consider_backstabbing = {
