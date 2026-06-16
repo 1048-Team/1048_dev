@@ -84,13 +84,13 @@ on_actions = {
 				}
 				log = "[GetDateText]: ROOT: [Root.GetName] FROM: [From.GetName] on_peaceconference_ended"
 				#Should later do news events for SLE wars with CHN
-				#if = {
-				#	limit = {
-				#		tag = CCA
-				#		FROM = { tag = CHN }
-				#	}
-				#	ROOT = { country_event = changeling_activity.38 }
-				#}
+				if = {
+					limit = {
+						tag = CCA
+						FROM = { tag = CHN }
+					}
+					#ROOT = { country_event = changeling_activity.38 }
+				}
 				else_if = { #CHN end war news
 					limit = {
 						tag = BUG
@@ -128,18 +128,6 @@ on_actions = {
 						}
 						FROM = { add_to_ROOT_potential_cores = yes }
 					}
-					else_if = {
-						limit = {
-							any_other_country = {
-								is_in_array = { ROOT.i_will_kill_you_later = THIS }
-							}
-						}
-						country_event = {
-							id = zebrica_activity.23
-							days = 120
-						}
-					}
-					else = { clear_array = ROOT.i_will_kill_you_later }
 				}
 				#Return MTS/SCS to not call in offensive wars
 				if = {
@@ -185,21 +173,6 @@ on_actions = {
 						}
 					}
 					FROM = { add_to_ROOT_potential_cores = yes }
-				}
-				if = {
-					limit = {
-						ROOT = {
-							has_country_flag = SEE
-						}
-						FROM = {
-							has_country_flag = SEE
-						}
-					}
-					FROM = {
-						transfer_navy = {
-							target = ROOT
-						}
-					}
 				}
 				###Possibly if the transfering of navies doesn't help the AI naval invade
 				#if = {
@@ -292,20 +265,6 @@ on_actions = {
 					is_subject = no
 				}
 				add_to_variable = { EEE_doom_rate = 1 }
-			}
-			if = {
-				limit = {
-					tag = ILU
-					has_war = no
-				}
-				delete_unit_template_and_units = {
-					division_template = "Illuminated Militia"
-					disband = yes
-				}
-				delete_unit_template_and_units = {
-					division_template = "Illuminated Infantry"
-					disband = yes
-				}
 			}
 		}
 	}
