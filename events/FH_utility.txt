@@ -791,37 +791,146 @@ country_event = { #Consequences of the integration proposal
 country_event = { #HPS joins EQC if they win
 	id = zebrica_activity.1
 	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.1"}
-	title = zebrica_activity.1.t
-	desc = zebrica_activity.1.d
 	hidden = yes
 	
 	is_triggered_only = yes
 	
 	option = {
 		name = zebrica_activity.1.a
-		add_to_faction = HPS
-		hidden_effect = {
+		set_autonomy = {
+			target = HPS
+			autonomous_state = autonomy_integrated_puppet
+		}
+		HPS = {
+			set_cosmetic_tag = HPS_zeelandia
+		}
+	}
+}
+
+#country_event = { #HPS is annexed by EQC
+#	id = zebrica_activity.2
+#	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.2"}
+#	title = zebrica_activity.2.t
+#	desc = zebrica_activity.2.d
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = zebrica_activity.2.a
+#		set_autonomy = {
+#			target = HPS
+#			autonomous_state = autonomy_integrated_puppet
+#		}
+#	}
+#}
+
+country_event = { #HIP requests DOH to fully integrate into it so they can work most efficiently and as friends
+	id = zebrica_activity.3
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.1"}
+	title = zebrica_activity.3.t
+	desc = zebrica_activity.3.d
+
+	is_triggered_only = yes
+
+	option = { #We were friends, once...
+		name = zebrica_activity.3.a
+		ai_chance = {
+			factor = 2
+		}
+		set_country_flag = DOH_accepted_integration
+	}
+	option = { #Our differences are too great, especially now.
+		name = zebrica_activity.3.b
+	}
+
+	after = {
+		FROM = {
 			country_event = {
-				id = zebrica_activity.2
-				days = 730
-				random_days = 365
+				id = zebrica_activity.4
+				days = 1
 			}
 		}
 	}
 }
 
-country_event = { #HPS is annexed by EQC
-	id = zebrica_activity.2
-	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.2"}
-	title = zebrica_activity.2.t
-	desc = zebrica_activity.2.d
+country_event = { #DOH gives its acceptance or rejection of integration
+	id = zebrica_activity.4
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.4"}
+	title = zebrica_activity.4.t
+	desc = {
+		trigger = {
+			FROM = {
+				has_country_flag = DOH_accepted_integration
+			}
+		}
+		text = zebrica_activity.4.d_a
+	}
+	desc = {
+		trigger = {
+			FROM = {
+				NOT = {
+					has_country_flag = DOH_accepted_integration
+				}
+			}
+		}
+		text = zebrica_activity.4.d_b
+	}
+
 	is_triggered_only = yes
-	
+
+	option = { #Friendship always wins!
+		name = zebrica_activity.4.a
+		trigger = {
+			FROM = {
+				has_country_flag = DOH_accepted_integration
+			}
+		}
+		annex_country = {
+			target = FROM
+			transfer_troops = yes
+		}
+		FROM = {
+			DOH_posada = {
+				set_nationality = ROOT
+			}
+		}
+	}
+	option = { #Oh, but we were friends...
+		name = zebrica_activity.4.b
+		trigger = {
+			FROM = {
+				NOT = {
+					has_country_flag = DOH_accepted_integration
+				}
+			}
+		}
+		remove_from_faction = FROM
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+country_event = { #Low-cost way of counting down a random variable so AI HIP doesn't immediately ask DOH to be annexed after the civil war
+	id = zebrica_activity.5
+	immediate = {log = "[GetDateText]: [Root.GetName] event zebrica_activity.5"}
+	hidden = yes
+
+	is_triggered_only = yes
+
 	option = {
-		name = zebrica_activity.2.a
-		set_autonomy = {
-			target = HPS
-			autonomous_state = autonomy_integrated_puppet
+		subtract_from_variable = { HIP_randomizer_variable = 1 }
+	}
+
+	after = {
+		if = {
+			limit = {
+				check_variable = { HIP_randomizer_variable > 0 }
+			}
+			country_event = {
+				id = zebrica_activity.5
+				days = 1
+			}
 		}
 	}
 }
