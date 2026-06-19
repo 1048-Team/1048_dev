@@ -91,9 +91,17 @@ FH_demo_south_east_skeleton_category = {
                 }
                 if = {
                     limit = {
-                        NEI = { is_ai = yes }
+                        any_other_country = {
+                            has_country_flag = SEE
+                        }
+                        NOT = {
+                            any_other_country = {
+                                has_country_flag = SEE
+                                is_ai = no
+                            }
+                        }
                     }
-                    add_ideas = EEE_shank_NEI_AI
+                    add_ideas = southeast_chosen_ones
                 }
             }
         }
@@ -111,6 +119,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = EEE
+            is_ai = no
         }
         cost = 50 #Placeholder
         fire_only_once = yes
@@ -118,7 +127,6 @@ FH_demo_south_east_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
             remove_ideas = EEE_tribal_militias
         }
-        ai_will_do = { factor = 100 }
     }
     EEE_national_reform = {
         available = {
@@ -126,6 +134,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = EEE
+            is_ai = no
         }
         cost = 75
         fire_only_once = yes
@@ -133,7 +142,6 @@ FH_demo_south_east_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision EEE_national_reform"
             remove_ideas = EEE_tribal_politics
         }
-        ai_will_do = { factor = 100 }
     }
     EEE_industrial_boons = {
         available = {
@@ -141,6 +149,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = EEE
+            is_ai = no
         }
         cost = 100
         fire_only_once = yes
@@ -148,26 +157,115 @@ FH_demo_south_east_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision EEE_industrial_boons"
             remove_ideas = EEE_tribal_holdings
         }
-        ai_will_do = { factor = 100 }
     }
     EEE_eliminating_the_cults = {
         available = {
             NEI = { all_cores_owned_by_ROOT_or_subject = yes }
             has_manpower > 70000
-            has_stability > 0.6
+            has_stability > 0.5
         }
         visible = {
             tag = EEE
+            is_ai = no
         }
         cost = 75
         fire_only_once = yes
         complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia"
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_eliminating_the_cults"
+            add_manpower = -28395
+            add_stability = -0.1
+            remove_ideas = EEE_night_whispering
+        }
+    }
+    EEE_reform_militia_ai = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 75
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_reform_militia_ai"
+            remove_ideas = EEE_tribal_militias
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                date < 1049.10.1
+                factor = 0
+            }
+        }
+    }
+    EEE_national_reform_ai = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 140
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_national_reform"
+            remove_ideas = EEE_tribal_politics
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                date < 1049.10.1
+                factor = 0
+            }
+        }
+    }
+    EEE_industrial_boons_ai = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 210
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_industrial_boons"
+            remove_ideas = EEE_tribal_holdings
+        }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                date < 1049.10.1
+                factor = 0
+            }
+        }
+    }
+    EEE_eliminating_the_cults_ai = {
+        available = {
+            NEI = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = EEE
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 300
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision EEE_eliminating_the_cults"
             add_manpower = -28395
             add_stability = -0.15
             remove_ideas = EEE_night_whispering
         }
-        ai_will_do = { factor = 1000 }
+        ai_will_do = {
+            factor = 100
+            modifier = {
+                date < 1049.10.1
+                factor = 0
+            }
+        }
     }
     BAL_civilize_tribals = {
         available = {
@@ -353,6 +451,12 @@ FH_demo_south_east_skeleton_category = {
                 target = CLI
                 type = annex_everything
             }
+            if = {
+                limit = {
+                    is_ai = yes
+                }
+                add_ideas = southeast_speedy_naval_invasions
+            }
         }
         ai_will_do = {
             factor = 10
@@ -379,6 +483,12 @@ FH_demo_south_east_skeleton_category = {
                 target = NID
                 type = annex_everything
             }
+            if = {
+                limit = {
+                    is_ai = yes
+                }
+                add_ideas = southeast_speedy_naval_invasions
+            }
         }
         ai_will_do = {
             factor = 10
@@ -399,6 +509,21 @@ FH_demo_south_east_skeleton_category = {
             declare_war_on = {
                 target = NRP
                 type = annex_everything
+            }
+            if = {
+                limit = {
+                    is_ai = yes
+                    any_other_country = {
+                        has_country_flag = SEE
+                    }
+                    NOT = {
+                        any_other_country = {
+                            has_country_flag = SEE
+                            is_ai = no
+                        }
+                    }
+                }
+                add_ideas = southeast_chosen_ones
             }
         }
         ai_will_do = {
@@ -425,13 +550,6 @@ FH_demo_south_east_skeleton_category = {
             declare_war_on = {
                 target = NID
                 type = annex_everything
-            }
-            if = {
-                limit = {
-                    is_ai = yes
-                    NID = { is_ai = yes }
-                }
-                add_ideas = STB_gank_NID_AI
             }
         }
         ai_will_do = {
@@ -522,6 +640,7 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = STB
+            is_ai = no
         }
         cost = 75
         fire_only_once = yes
@@ -537,8 +656,38 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = STB
+            is_ai = no
         }
         cost = 100
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STB_underwhelm_results"
+            remove_ideas = STB_overwhelmed_militia
+        }
+    }
+    STB_refocus_efforts_ai = {
+        available = {
+            date > 1049.9.1
+        }
+        visible = {
+            tag = STB
+            is_ai = yes
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision STB_refocus_efforts"
+            remove_ideas = STB_industrial_economy
+        }
+    }
+    STB_underwhelm_results_ai = {
+        available = {
+            date > 1050.7.1
+            controls_state = 33
+        }
+        visible = {
+            tag = STB
+            is_ai = yes
+        }
         fire_only_once = yes
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision STB_underwhelm_results"
@@ -597,7 +746,7 @@ FH_demo_south_east_skeleton_category = {
     }
     NID_solidify_assets = {
         available = {
-            date > 1049.11.1
+            date > 1049.6.1
         }
         visible = {
             tag = NID
@@ -611,6 +760,146 @@ FH_demo_south_east_skeleton_category = {
                 target = SPF
                 type = annex_everything
             }
+            if = {
+                limit = {
+                    is_ai = yes
+                }
+                add_ideas = southeast_speedy_naval_invasions
+                if = {
+                    limit = {
+                        SPF = {
+                            is_ai = yes
+                        }
+                    }
+                    SPF = { add_ideas = surrender_limit_reduction }
+                }
+            }
+            #if = {
+            #    limit = {
+            #        is_ai = yes
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #}
+            #if = {
+            #    limit = {
+            #        SPF = {
+            #            is_ai = yes
+            #        }
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_light_2
+            #        equipment_variant = "Antagonist Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_cruiser_2
+            #        equipment_variant = "Antax Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_cruiser_2
+            #        equipment_variant = "Antax Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #    create_ship = {
+            #        type = ship_hull_cruiser_2
+            #        equipment_variant = "Mandible Class"
+            #        creator = NID
+            #        amount = 1
+            #    }
+            #}
         }
         ai_will_do = {
             factor = 10
@@ -660,6 +949,9 @@ FH_demo_south_east_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NID_pay_down_squabbles_ai"
             remove_ideas = NID_merc_prt_tensions
         }
+        ai_will_do = {
+            factor = 10
+        }
     }
     NID_shirk_restrictions_ai = {
         available = {
@@ -669,11 +961,14 @@ FH_demo_south_east_skeleton_category = {
             tag = NID
             is_ai = yes
         }
-        days_remove = 368
+        days_remove = 365
         fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NID_shirk_restrictions_ai"
             remove_ideas = NID_no_aviation_industry_idea
+        }
+        ai_will_do = {
+            factor = 10
         }
     }
     MTS_wipe_out_thestral_resistance = {
@@ -874,6 +1169,21 @@ FH_demo_south_east_skeleton_category = {
                 }
                 add_ideas = MTS_whallop_BLS_AI
             }
+            if = {
+                limit = {
+                    is_ai = yes
+                    any_other_country = {
+                        has_country_flag = SEE
+                    }
+                    NOT = {
+                        any_other_country = {
+                            has_country_flag = SEE
+                            is_ai = no
+                        }
+                    }
+                }
+                add_ideas = southeast_chosen_ones
+            }
         }
         ai_will_do = {
             factor = 10
@@ -885,8 +1195,6 @@ FH_demo_south_east_skeleton_category = {
             EEE = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            NEI = { all_original_cores_owned_by_ROOT_or_subject = yes }
-            EEE = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_global_flag = balsplosion
         }
         highlight_states = {
@@ -921,8 +1229,6 @@ FH_demo_south_east_skeleton_category = {
             NRP = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            STB = { all_original_cores_owned_by_ROOT_or_subject = yes }
-            NRP = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_global_flag = balsplosion
         }
         highlight_states = {
@@ -953,12 +1259,14 @@ FH_demo_south_east_skeleton_category = {
     }
     south_east_recore_northwest_end = {
         available = {
-            MTS = { all_original_cores_owned_by_ROOT_or_subject = yes }
-            BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+            MTS = { all_original_cores_owned_by_ROOT = yes }
+            owns_state = 1214
+            owns_state = 13
+            owns_state = 82
+            owns_state = 90
         }
         visible = {
-            MTS = { all_original_cores_owned_by_ROOT_or_subject = yes }
-            BAL = { all_cores_owned_by_ROOT_or_subject = yes }
+            has_global_flag = balsplosion
         }
         highlight_states = {
             highlight_states_trigger = {
@@ -999,9 +1307,6 @@ FH_demo_south_east_skeleton_category = {
             SPF = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         visible = {
-            NID = { all_original_cores_owned_by_ROOT_or_subject = yes }
-            CLI = { all_original_cores_owned_by_ROOT_or_subject = yes }
-            SPF = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_global_flag = balsplosion
         }
         highlight_states = {

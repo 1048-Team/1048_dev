@@ -25,62 +25,12 @@ country_event = {
     option = {
         name = fh_demo.1.a
         custom_effect_tooltip = STB_cheeky_insta_fracture_tt
-        hidden_effect = {
-            NRP = {
-                transfer_state = 36
-                transfer_state = 32
-                transfer_state = 86
-                transfer_state = 26
-                transfer_state = 353
-                transfer_state = 25
-                transfer_state = 79
-                transfer_state = 33
-                transfer_state = 35
-                transfer_state = 81
-                transfer_state = 50
-                add_state_core = 33
-                add_state_core = 36
-                add_state_core = 32
-                add_state_core = 86
-                add_state_core = 26
-                add_state_core = 353
-                add_state_core = 25
-                add_state_core = 79
-                add_state_core = 35
-                add_state_core = 81
-                add_state_core = 50
-                load_oob = "NRP_1048"
-            }
-        }
     }
     option = {
         name = fh_demo.1.b
         custom_effect_tooltip = STB_rage_against_the_demo_tt
         hidden_effect = {
             NRP = {
-                transfer_state = 36
-                transfer_state = 32
-                transfer_state = 86
-                transfer_state = 26
-                transfer_state = 353
-                transfer_state = 25
-                transfer_state = 79
-                transfer_state = 33
-                transfer_state = 35
-                transfer_state = 81
-                transfer_state = 50
-                add_state_core = 33
-                add_state_core = 36
-                add_state_core = 32
-                add_state_core = 86
-                add_state_core = 26
-                add_state_core = 353
-                add_state_core = 25
-                add_state_core = 79
-                add_state_core = 35
-                add_state_core = 81
-                add_state_core = 50
-                load_oob = "NRP_1048"
                 change_tag_from = ROOT
             }
         }
@@ -108,6 +58,39 @@ country_event = {
                 add_state_core = 351
                 add_state_core = 52
             }
+            NRP = {
+                transfer_state = 36
+                transfer_state = 32
+                transfer_state = 86
+                transfer_state = 26
+                transfer_state = 353
+                transfer_state = 25
+                transfer_state = 79
+                transfer_state = 33
+                transfer_state = 35
+                transfer_state = 81
+                transfer_state = 50
+                add_state_core = 33
+                add_state_core = 36
+                add_state_core = 32
+                add_state_core = 86
+                add_state_core = 26
+                add_state_core = 353
+                add_state_core = 25
+                add_state_core = 79
+                add_state_core = 35
+                add_state_core = 81
+                add_state_core = 50
+                load_oob = "NRP_1048"
+                every_owned_state = {
+					limit = {
+						is_in_array = { BAL.original_cores = THIS }
+					}
+					add_to_array = { NRP.original_cores = THIS }
+					add_to_array = { state_original_cores = NRP }
+					add_to_array = { NRP.state_all_original_cores = THIS }
+				}
+            }
             every_state = {
                 limit = {
                     OR = {
@@ -118,6 +101,7 @@ country_event = {
                 }
                 set_demilitarized_zone = no
             }
+            update_global_arrays = yes
         }
     }
 }
@@ -133,40 +117,12 @@ country_event = {
     option = {
         name = fh_demo.2.a
         custom_effect_tooltip = EEE_default_expression_tt
-        hidden_effect = {
-            NEI = {
-                transfer_state = 88
-                transfer_state = 348
-                transfer_state = 16
-                transfer_state = 352
-                transfer_state = 24
-                transfer_state = 83
-                add_state_core = 88
-                add_state_core = 348
-                add_state_core = 16
-                add_state_core = 352
-                add_state_core = 24
-                add_state_core = 83
-            }
-        }
     }
     option = {
         name = fh_demo.2.b
         custom_effect_tooltip = EEE_default_rage_tt
         hidden_effect = {
             NEI = {
-                transfer_state = 88
-                transfer_state = 348
-                transfer_state = 16
-                transfer_state = 352
-                transfer_state = 24
-                transfer_state = 83
-                add_state_core = 88
-                add_state_core = 348
-                add_state_core = 16
-                add_state_core = 352
-                add_state_core = 24
-                add_state_core = 83
                 change_tag_from = ROOT
             }
         }
@@ -174,14 +130,19 @@ country_event = {
     after = {
         hidden_effect = {
             set_global_flag = balsplosion
-            every_state = {
-                limit = {
-                    is_owned_by = NEI
-                    is_demilitarized_zone = yes
-                }
-                set_demilitarized_zone = no
-            }
             NEI = {
+                transfer_state = 88
+                transfer_state = 348
+                transfer_state = 16
+                transfer_state = 352
+                transfer_state = 24
+                transfer_state = 83
+                add_state_core = 88
+                add_state_core = 348
+                add_state_core = 16
+                add_state_core = 352
+                add_state_core = 24
+                add_state_core = 83
                 load_oob = "NEI_1048"
                 if = {
                     limit = {
@@ -192,7 +153,22 @@ country_event = {
                 else = {
                     load_oob = "NEI_1048_naval_legacy"
                 }
+                every_owned_state = {
+					limit = {
+						is_in_array = { BAL.original_cores = THIS }
+					}
+					add_to_array = { NEI.original_cores = THIS }
+					add_to_array = { state_original_cores = NEI }
+					add_to_array = { NEI.state_all_original_cores = THIS }
+					if = {
+                        limit = {
+                            is_demilitarized_zone = yes
+                        }
+                        set_demilitarized_zone = no
+					}
+				}
             }
+            update_global_arrays = yes
         }
     }
 }
