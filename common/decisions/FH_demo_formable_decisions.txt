@@ -440,7 +440,13 @@ form_changelingian_protectorates_category = {
 		available = {
 			date > 1048.12.31
 		}
-		cost = 150
+		visible = {
+			is_ai = no
+		}
+		custom_cost_trigger = {
+			has_army_experience > 49.99
+		}
+		custom_cost_text = CHN_dynamic_xp_cost_tt
 		days_remove = 365
 		fire_only_once = yes
 		modifier = {
@@ -448,6 +454,11 @@ form_changelingian_protectorates_category = {
 			war_support_factor = -0.15
 			consumer_goods_factor = 0.2
 			army_org_factor = -0.2
+		}
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -50
+			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_revive_military_apparatus"
@@ -466,8 +477,12 @@ form_changelingian_protectorates_category = {
 		}
 		visible = {
 			has_idea = CHN_idea_memory_44_better
+			is_ai = no
 		}
-		cost = 100
+		custom_cost_trigger = {
+			has_army_experience > 74.99
+		}
+		custom_cost_text = CHN_dynamic_xp_cost_tt
 		days_remove = 180
 		fire_only_once = yes
 		modifier = {
@@ -475,6 +490,11 @@ form_changelingian_protectorates_category = {
 			army_defence_factor = -0.1
 			army_attack_factor = -0.1
 			army_org_factor = -0.05
+		}
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -75
+			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_finish_military_restructuring"
@@ -497,6 +517,9 @@ form_changelingian_protectorates_category = {
 	CHN_break_the_corporate_backs = {
 		available = {
 			date > 1049.6.30
+		}
+		visible = {
+			is_ai = no
 		}
 		cost = 75
 		days_remove = 90
@@ -524,11 +547,14 @@ form_changelingian_protectorates_category = {
 		available = {
 			date > 1049.6.30
 		}
+		visible = {
+			is_ai = no
+		}
 		cost = 35
 		days_remove = 150
 		fire_only_once = yes
 		modifier = {
-			political_power_gain = -0.4
+			political_power_gain = -0.25
 			stability_weekly = 0.001
 			fascism_drift = 0.02
 		}
@@ -552,11 +578,14 @@ form_changelingian_protectorates_category = {
 		available = {
 			date > 1049.10.31
 		}
+		visible = {
+			is_ai = no
+		}
 		cost = 60
 		days_remove = 60
 		fire_only_once = yes
 		modifier = {
-			political_power_gain = -0.15
+			political_power_gain = -0.05
 			monthly_population = -0.25
 			weekly_manpower = -250
 		}
@@ -576,6 +605,9 @@ form_changelingian_protectorates_category = {
 	CHN_stimulate_other_economic_activities = {
 		available = {
 			date > 1050.6.30
+		}
+		visible = {
+			is_ai = no
 		}
 		cost = 125
 		days_remove = 365
@@ -599,6 +631,163 @@ form_changelingian_protectorates_category = {
 				CHN_Chrysalis_FH = { remove_trait = { trait = the_sick_bug ideology = changeling_ideology } }
 				clear_variable = CHN_revitalization_tracker
 			}
+		}
+	}
+	CHN_revive_military_apparatus_ai = {
+		available = {
+			date > 1048.12.31
+		}
+		visible = {
+			is_ai = yes
+		}
+		days_remove = 730
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_revive_military_apparatus_ai"
+			swap_ideas = {
+				remove_idea = CHN_idea_memory_44
+				add_idea = CHN_idea_memory_44_better
+			}
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CHN_finish_military_restructuring_ai = {
+		available = {
+			date > 1050.12.31
+		}
+		visible = {
+			has_idea = CHN_idea_memory_44_better
+			is_ai = yes
+		}
+		days_remove = 320
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_finish_military_restructuring_ai"
+			remove_ideas = CHN_idea_memory_44_better
+			add_to_variable = { CHN_revitalization_tracker = 1 }
+			if = {
+				limit = {
+					check_variable = { CHN_revitalization_tracker = 5 }
+				}
+				CHN_Chrysalis_FH = {
+					set_portraits = {
+						civilian = { large = "gfx/leaders/CHN/Chrysalis_Hardline.tga" }
+					}
+					remove_trait = { trait = the_sick_bug ideology = changeling_ideology }
+				}
+				clear_variable = CHN_revitalization_tracker
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CHN_break_the_corporate_backs_ai = {
+		available = {
+			date > 1049.6.30
+		}
+		visible = {
+			is_ai = yes
+		}
+		days_remove = 180
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_break_the_corporate_backs_ai"
+			remove_ideas = CHN_idea_corp
+			add_to_variable = { CHN_revitalization_tracker = 1 }
+			if = {
+				limit = {
+					check_variable = { CHN_revitalization_tracker = 5 }
+				}
+				CHN_Chrysalis_FH = { remove_trait = { trait = the_sick_bug ideology = changeling_ideology } }
+				clear_variable = CHN_revitalization_tracker
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CHN_rally_around_the_queen = {
+		available = {
+			date > 1049.6.30
+		}
+		visible = {
+			is_ai = yes
+		}
+		days_remove = 270
+		fire_only_once = yes
+		complete_effect = {
+			add_stability = -0.1
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_rally_around_the_queen_ai"
+			remove_ideas = CHN_idea_politic_unified
+			add_to_variable = { CHN_revitalization_tracker = 1 }
+			if = {
+				limit = {
+					check_variable = { CHN_revitalization_tracker = 5 }
+				}
+				CHN_Chrysalis_FH = { remove_trait = { trait = the_sick_bug ideology = changeling_ideology } }
+				clear_variable = CHN_revitalization_tracker
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CHN_arrest_squabblers_ai = {
+		available = {
+			date > 1049.10.31
+		}
+		visible = {
+			is_ai = yes
+		}
+		days_remove = 200
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_arrest_squabblers_ai"
+			remove_ideas = CHN_political_infighting
+			add_to_variable = { CHN_revitalization_tracker = 1 }
+			if = {
+				limit = {
+					check_variable = { CHN_revitalization_tracker = 5 }
+				}
+				CHN_Chrysalis_FH = { remove_trait = { trait = the_sick_bug ideology = changeling_ideology } }
+				clear_variable = CHN_revitalization_tracker
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CHN_stimulate_other_economic_activities_ai = {
+		available = {
+			date > 1050.6.30
+		}
+		visible = {
+			is_ai = yes
+		}
+		days_remove = 580
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHN_stimulate_other_economic_activities_ai"
+			remove_ideas = CHN_idea_CHN_economy
+			add_to_variable = { CHN_revitalization_tracker = 1 }
+			if = {
+				limit = {
+					check_variable = { CHN_revitalization_tracker = 5 }
+				}
+				CHN_Chrysalis_FH = { remove_trait = { trait = the_sick_bug ideology = changeling_ideology } }
+				clear_variable = CHN_revitalization_tracker
+			}
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 	CHN_institute_polar_bear_authority = {
