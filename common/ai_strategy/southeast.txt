@@ -12,6 +12,108 @@
 # contain
 # area_priority
 
+#Should hopefully counter the division limiter while the South-East is at war with itself
+SE_want_to_kill = {
+    allowed = {
+        OR = {
+            tag = BAL
+            tag = NRP
+            tag = STB
+            tag = EEE
+            tag = NEI
+            tag = NID
+            tag = SPF
+            tag = CLI
+            tag = MTS
+        }
+    }
+    enable = {
+        any_other_country = {
+            if = {
+                limit = {
+                    has_country_flag = SEE
+                }
+                exists = yes
+                has_war_with = ROOT
+            }
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = ai_wanted_divisions_factor
+        value = 210
+    }
+}
+
+#Wastes divisions when they should be trying to kill each other
+SE_stop_garrisoning_ports = {
+    allowed = {
+        OR = {
+            tag = BAL
+            tag = NRP
+            tag = STB
+            tag = EEE
+            tag = NEI
+            tag = NID
+            tag = SPF
+            tag = CLI
+            tag = MTS
+        }
+    }
+    enable = {
+        any_other_country = {
+            if = {
+                limit = {
+                    has_country_flag = SEE
+                }
+                exists = yes
+            }
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = garrison
+        value = -1000 #Seriously, stop
+    }
+    ai_strategy = {
+        type = garrison_reinforcement_priority
+        value = -250
+    }
+}
+
+MTS_shank_BAL_quickly = {
+    allowed = {
+        tag = MTS
+    }
+    enable = {
+        country_exists = BAL
+        NOT = { has_war_with = BAL }
+        date > 1050.3.1
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = prepare_for_war
+        id = BAL
+        value = 250
+    }
+}
+
+EEE_ready_to_gank = {
+    allowed = {
+        original_tag = EEE
+    }
+    enable = {
+        country_exists = NEI
+        NOT = { has_war_with = NEI }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = prepare_for_war
+        id = NEI
+        value = 250
+    }
+}
+
 ###Whole bunch of bossing the AI to try and actually invade
 SPF_do_the_invade_CLI = {
     allowed = {
@@ -34,6 +136,7 @@ SPF_do_the_invade_NID = {
     }
     enable = {
         has_war_with = NID
+        NOT = { has_war_with = CLI }
     }
     abort_when_not_enabled = yes
     ai_strategy = {
@@ -43,12 +146,36 @@ SPF_do_the_invade_NID = {
     }
 }
 
+SPF_care_less_about_PCB = {
+    allowed = {
+        original_tag = SPF
+    }
+    enable = {
+        OR = {
+            has_war_with = CLI
+            has_war_with = NID
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = area_priority
+        id = puerto_caballo
+        value = -50 #Still want them to care a bit
+    }
+    ai_strategy = {
+        type = area_priority
+        id = spa_islands
+        value = 50
+    }
+}
+
 NID_do_the_invade_CLI = {
     allowed = {
         original_tag = NID
     }
     enable = {
         has_war_with = CLI
+        NOT = { country_exists = SPF }
     }
     abort_when_not_enabled = yes
     ai_strategy = {
@@ -58,18 +185,81 @@ NID_do_the_invade_CLI = {
     }
 }
 
-NID_do_the_invade_SPF = {
+#NID_do_the_invade_SPF = {
+#    allowed = {
+#        original_tag = NID
+#    }
+#    enable = {
+#        has_war_with = SPF
+#    }
+#    abort_when_not_enabled = yes
+#    ai_strategy = {
+#        type = invade
+#        id = SPF
+#        value = 100
+#    }
+#}
+
+NID_plan_the_invade_SPF = {
     allowed = {
         original_tag = NID
     }
     enable = {
         has_war_with = SPF
+        NOT = {
+            controls_state = 1194
+            controls_state = 1193
+        }
     }
     abort_when_not_enabled = yes
     ai_strategy = {
-        type = invade
-        id = SPF
+        type = naval_invasion_focus
         value = 100
+    }
+
+    ai_strategy = {
+        type = invasion_unit_request
+        area = puerto_caballo
+        value = 1000 #Really need more divisions than two, guys
+    }
+
+    ai_strategy = {
+        type = area_priority
+        id = puerto_caballo
+        value = 500 #Seriously, stop caring about Spa Islands at all
+    }
+}
+
+NID_plan_the_invade_SPF2 = {
+    allowed = {
+        original_tag = NID
+    }
+    enable = {
+        has_war_with = SPF
+        controls_state = 1194
+        controls_state = 1193
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = naval_invasion_focus
+        value = 100
+    }
+
+    ai_strategy = {
+        type = invasion_unit_request
+        area = spa_islands
+        value = 1000 #Make sure you actually kill SPF
+    }
+
+    ai_strategy = {
+        type = area_priority
+        id = spa_islands
+        value = 500
+    }
+    ai_strategy = {
+        type = area_priority
+        id = puerto_caballo
+        value = -250 #Don't focus on this if you're invading from Spa Islands area
     }
 }
 
@@ -79,6 +269,7 @@ CLI_do_the_invade_NID = {
     }
     enable = {
         has_war_with = NID
+        NOT = { has_war_with = SPF }
     }
     abort_when_not_enabled = yes
     ai_strategy = {
@@ -166,5 +357,153 @@ SE_everypony_get_in_on_the_act3 = {
         type = invade
         id = CLI
         value = 100
+    }
+}
+
+SE_increase_unit_prio_for_invasion_CLI = {
+    allowed = {
+        OR = {
+            original_tag = STB
+            original_tag = BAL
+            original_tag = MTS
+            original_tag = NEI
+            original_tag = EEE
+            original_tag = NRP
+            #original_tag = SPF
+            #original_tag = NID
+        }
+    }
+    enable = {
+        has_war_with = CLI
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = invasion_unit_request
+        strategic_region = 30
+        value = 100
+    }
+}
+
+SE_increase_unit_prio_for_invasion_SPF = {
+    allowed = {
+        OR = {
+            original_tag = STB
+            original_tag = BAL
+            original_tag = MTS
+            original_tag = NEI
+            original_tag = EEE
+            original_tag = NRP
+            #original_tag = CLI
+            #original_tag = NID
+        }
+    }
+    enable = {
+        has_war_with = SPF
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = invasion_unit_request
+        strategic_region = 130
+        strategic_region = 7
+        state = 4
+        state = 1212
+        state = 1193
+        state = 1194
+        value = 100
+    }
+}
+
+#May not need this one
+#SE_increase_unit_prio_for_invasion_NID = {
+#    allowed = {
+#        OR = {
+#            original_tag = STB
+#            original_tag = BAL
+#            original_tag = MTS
+#            original_tag = NEI
+#            original_tag = EEE
+#            original_tag = NRP
+#            original_tag = SPF
+#            original_tag = CLI
+#        }
+#    }
+#    enable = {
+#        has_war_with = NID
+#    }
+#    abort_when_not_enabled = yes
+#    ai_strategy = {
+#        type = invasion_unit_request
+#        state = 221
+#        value = 100
+#    }
+#}
+
+SE_please_actually_do_navy1 = {
+    allowed = {
+        OR = {
+            original_tag = STB
+            original_tag = BAL
+            original_tag = MTS
+            original_tag = NEI
+            original_tag = EEE
+            original_tag = NRP
+            original_tag = SPF
+            original_tag = CLI
+            original_tag = NID
+        }
+    }
+    enable = {
+        OR = {
+            has_war_with = STB
+            has_war_with = BAL
+            has_war_with = MTS
+            has_war_with = NEI
+            has_war_with = EEE
+            has_war_with = NRP
+            has_war_with = SPF
+            has_war_with = CLI
+            has_war_with = NID
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = naval_mission_threshold
+        id = MISSION_PATROL
+        value = -100
+    }
+}
+
+SE_please_actually_do_navy2 = {
+    allowed = {
+        OR = {
+            original_tag = STB
+            original_tag = BAL
+            original_tag = MTS
+            original_tag = NEI
+            original_tag = EEE
+            original_tag = NRP
+            original_tag = SPF
+            original_tag = CLI
+            original_tag = NID
+        }
+    }
+    enable = {
+        OR = {
+            has_war_with = STB
+            has_war_with = BAL
+            has_war_with = MTS
+            has_war_with = NEI
+            has_war_with = EEE
+            has_war_with = NRP
+            has_war_with = SPF
+            has_war_with = CLI
+            has_war_with = NID
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = naval_mission_threshold
+        id = MISSION_STRIKE_FORCE
+        value = -100
     }
 }
