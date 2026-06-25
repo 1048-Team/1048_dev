@@ -260,15 +260,19 @@ is_big_equus_core = {
 owns_all_equus_states = {
 	custom_trigger_tooltip = {
 		tooltip = owns_all_states_on_equus
-		NOT = {
-			any_state = {
-				is_on_continent = europe
-				NOT = {
+		all_state = {
+			if = {
+				limit = {
+					is_on_continent = europe
+					NOT = {
+						state = 1196
+						state = 1197
+					}
+				}
+				OWNER = {
 					OR = {
-						is_owned_by = ROOT
-						owner = {
-							is_puppet_of = ROOT
-						}
+						tag = ROOT
+						is_subject_of = ROOT
 					}
 				}
 			}

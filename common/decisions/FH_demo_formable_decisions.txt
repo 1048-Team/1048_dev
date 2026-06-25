@@ -198,6 +198,10 @@ form_ussre_category = {
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = europe
+				NOT = {
+					state = 1196
+					state = 1197
+				}
 			}
 		}
 		complete_effect = {
@@ -205,6 +209,10 @@ form_ussre_category = {
 			every_state = {
 				limit = {
 					is_on_continent = europe
+					NOT = {
+						state = 1196
+						state = 1197
+					}
 				}
 				add_core_of = ROOT
 			}
@@ -1851,12 +1859,17 @@ form_changelingian_protectorates_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision CHN_claim_final_hegemony"
 			set_cosmetic_tag = CHN_final_hegemony
-			every_country = {
+			every_other_country = {
 				limit = {
 					capital_scope = {
 						is_on_continent = europe
 					}
-					is_puppet_of = CHN
+					#Do not ask me why I must do this. Pordox broke something
+					#is_subject_of works in trigger checks, but effect checks
+					#All this does is do the same thing as is_subject_of - T4E
+					OVERLORD = {
+						tag = ROOT
+					}
 				}
 				ROOT = {
 					annex_country = {
@@ -7303,11 +7316,6 @@ NVA_formables_category = {
 		}
 	}
 	NVA_channel_flame = {
-		available = {
-			owns_state = 1057
-			owns_state = 1058
-			owns_state = 1086
-		}
 		visible = {
 			has_country_flag = NVA_niriking_time
 		}
@@ -7657,8 +7665,8 @@ MEL_formables_category = {
 			highlight_states_trigger = {
 				is_on_continent = africa
 				OR = {
-					is_in_array = { MEL.original_cores = THIS }
 					is_in_array = { ZOO.original_cores = THIS }
+					is_in_array = { TAI.original_cores = THIS }
 					is_in_array = { DEL.original_cores = THIS }
 					is_in_array = { IDO.original_cores = THIS }
 				}
@@ -7689,6 +7697,7 @@ MEL_formables_category = {
 				limit = {
 					is_on_continent = africa
 					OR = {
+						is_in_array = { ZOO.original_cores = THIS }
 						is_in_array = { MEL.original_cores = THIS }
 						is_in_array = { ZOO.original_cores = THIS }
 					}
@@ -7815,7 +7824,7 @@ MEL_formables_category = {
 				}
 				add_core_of = ROOT
 			}
-			set_cosmetic_tag = MEL_SCY
+			set_cosmetic_tag = MEL_SCL
 		}
 		ai_will_do = {
 			factor = 100
@@ -10423,6 +10432,17 @@ MTA_formables_category = {
 				}
 			}
 			hidden_effect = {
+				every_state = {
+					limit = {
+						is_on_continent = africa
+						is_in_array = { ABY.original_cores = THIS }
+					}
+					transfer_state_to = ABY
+				}
+				set_autonomy = {
+					target = ABY
+					autonomous_state = autonomy_puppet
+				}
 				create_dynamic_country = {
 					reserve_dynamic_country = yes
 					original_tag = ANS
@@ -10453,17 +10473,6 @@ MTA_formables_category = {
 						}
 					}
 				}
-				every_state = {
-					limit = {
-						is_on_continent = africa
-						is_in_array = { ABY.original_cores = THIS }
-					}
-					transfer_state_to = ABY
-				}
-				set_autonomy = {
-					target = ABY
-					autonomous_state = autonomy_puppet
-				}
 			}
 			if = {
 				limit = {
@@ -10487,6 +10496,7 @@ MTA_formables_category = {
 					is_in_array = { YMN.original_cores = THIS }
 				}
 				add_core_of = ROOT
+				transfer_state_to = ROOT
 			}
 			if = {
 				limit = {
@@ -12116,6 +12126,7 @@ AWR_formables_category = {
 					state = 477
 					state = 476
 					state = 459
+					state = 582
 				}
 			}
 		}
@@ -12150,6 +12161,7 @@ AWR_formables_category = {
 							state = 477
 							state = 476
 							state = 459
+							state = 582
 						}
 					}
 					add_core_of = GRI
