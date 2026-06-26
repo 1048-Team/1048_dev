@@ -110,7 +110,7 @@ SOL_Celestia_Returned = {
 			target = SLW
 		}
 	}
-	
+
 	set_politics = {
 		ruling_party = democratic
 		elections_allowed = no
@@ -156,7 +156,7 @@ SOL_Celestia_Returned = {
 	EQS_Nova_Glow = { set_nationality = SLW }
 	EQS_Dotted_Quill = { set_nationality = SLW }
 	IF = {
-		limit = { 
+		limit = {
 			has_country_flag = aurora_general
 		}
 		clr_country_flag = aurora_general
@@ -314,7 +314,7 @@ SOL_end_of_civil_war_SLW = {
 			}
 			EQS_Locust_Glow = { set_nationality = SLW }
 			EQS_Quasar_Pulse = { set_nationality = SLW }
-		}	
+		}
 	}
 }
 EQS_destroy_solar_temple = {
@@ -505,60 +505,34 @@ EQS_light_drafting = {
 EQS_create_daybreak = {
 	if = {
 		limit = { NOT = { has_tech = semi_modern_ship_hull_super_heavy } }
-		set_technology = { semi_modern_ship_hull_super_heavy = 1 }
-	}
-	if = {
-		limit = {
-			EQS_hms_daybreak_not_upgraded = yes
-		}
-		create_equipment_variant = { #Base variant
-			name = "Daybreak Class"
-			type = ship_hull_super_heavy_2
-			name_group = SOL_SHBB_HISTORICAL
-			parent_version = 0
-			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-			modules = {
-				fixed_ship_battery_slot = ship_super_heavy_battery_1
-				fixed_ship_anti_air_slot = ship_anti_air_2
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = heavy_ship_engine_2
-				fixed_ship_secondaries_slot = ship_secondaries_1
-				fixed_ship_armor_slot = ship_armor_shbb
-				front_1_custom_slot = empty
-				front_2_custom_slot = empty
-				mid_1_custom_slot = empty
-				mid_2_custom_slot = ship_secondaries_1
-				mid_3_custom_slot = empty
-				rear_1_custom_slot = ship_super_heavy_battery_1
-				rear_2_custom_slot = empty
-			}
+		set_technology = {
+			semi_modern_ship_hull_super_heavy = 1
+			popup = no
 		}
 	}
-	else = {
-		create_equipment_variant = { #Base variant
-			name = "Daybreak-Class"
-			type = ship_hull_super_heavy_2
-			name_group = SOL_SHBB_HISTORICAL
-			parent_version = 0
-			obsolete = yes
-			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-			modules = {
-				fixed_ship_battery_slot = ship_super_heavy_battery_1
-				fixed_ship_anti_air_slot = ship_anti_air_2
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = heavy_ship_engine_2
-				fixed_ship_secondaries_slot = ship_secondaries_1
-				fixed_ship_armor_slot = ship_armor_shbb
-				front_1_custom_slot = empty
-				front_2_custom_slot = empty
-				mid_1_custom_slot = empty
-				mid_2_custom_slot = ship_secondaries_1
-				mid_3_custom_slot = empty
-				rear_1_custom_slot = ship_super_heavy_battery_1
-				rear_2_custom_slot = empty
-			}
+	create_equipment_variant = { #Base variant
+		name = "Daybreak Class"
+		type = ship_hull_super_heavy_2
+		name_group = SOL_SHBB_HISTORICAL
+		parent_version = 0
+		obsolete = yes
+		show_position = no
+		design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+		modules = {
+			fixed_ship_battery_slot = empty
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = empty
+			fixed_ship_secondaries_slot = empty
+			fixed_ship_armor_slot = empty
+			front_1_custom_slot = empty
+			front_2_custom_slot = empty
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			mid_3_custom_slot = empty
+			rear_1_custom_slot = empty
+			rear_2_custom_slot = empty
 		}
 	}
 	###For equipping upgraded tech
@@ -580,947 +554,646 @@ EQS_create_daybreak = {
 }
 EQS_upgrade_secondaries = {
 	if = {
-		limit = {
-			EQS_hms_daybreak_only_upgraded_secondaries = no
-		}
-		if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = ship_secondaries_2
-					mid_2_custom_slot = ship_secondaries_2
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_1
-					mid_2_custom_slot = dp_ship_secondaries_1
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_2
-					mid_2_custom_slot = dp_ship_secondaries_2
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_3
-					mid_2_custom_slot = dp_ship_secondaries_3
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 5 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_4
-					mid_2_custom_slot = dp_ship_secondaries_4
-				}
+		limit = { check_variable = { EQS_SOL_secondaries_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 1
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_secondaries_slot = ship_secondaries_1
+				mid_2_custom_slot = ship_secondaries_1
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = ship_secondaries_2
-					mid_2_custom_slot = ship_secondaries_2
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondaries_upgraded = 1 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 1
+			show_position = no
+			obsolete = yes
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_secondaries_slot = ship_secondaries_2
+				mid_2_custom_slot = ship_secondaries_2
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_1
-					mid_2_custom_slot = dp_ship_secondaries_1
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondaries_upgraded = 2 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 1
+			show_position = no
+			obsolete = yes
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_secondaries_slot = dp_ship_secondaries_1
+				mid_2_custom_slot = dp_ship_secondaries_1
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_2
-					mid_2_custom_slot = dp_ship_secondaries_2
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondaries_upgraded = 3 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 1
+			show_position = no
+			obsolete = yes
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_secondaries_slot = dp_ship_secondaries_2
+				mid_2_custom_slot = dp_ship_secondaries_2
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_3
-					mid_2_custom_slot = dp_ship_secondaries_3
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondaries_upgraded = 4 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 1
+			show_position = no
+			obsolete = yes
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_secondaries_slot = dp_ship_secondaries_3
+				mid_2_custom_slot = dp_ship_secondaries_3
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondaries_upgraded = 5 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 1
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_secondaries_slot = dp_ship_secondaries_4
-					mid_2_custom_slot = dp_ship_secondaries_4
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondaries_upgraded = 5 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 1
+			show_position = no
+			obsolete = yes
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_secondaries_slot = dp_ship_secondaries_4
+				mid_2_custom_slot = dp_ship_secondaries_4
 			}
 		}
 	}
 }
 EQS_upgrade_aa = {
 	if = {
-		limit = { EQS_hms_daybreak_only_light_weapons_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_3
-					front_2_custom_slot = ship_anti_air_3
-					mid_1_custom_slot = ship_anti_air_3
-					mid_3_custom_slot = ship_anti_air_3
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_4
-					front_2_custom_slot = ship_anti_air_4
-					mid_1_custom_slot = ship_anti_air_4
-					mid_3_custom_slot = ship_anti_air_4
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_5
-					front_2_custom_slot = ship_anti_air_5
-					mid_1_custom_slot = ship_anti_air_5
-					mid_3_custom_slot = ship_anti_air_5
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_6
-					front_2_custom_slot = ship_anti_air_6
-					mid_1_custom_slot = ship_anti_air_6
-					mid_3_custom_slot = ship_anti_air_6
-				}
+		limit = { check_variable = { EQS_SOL_aa_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 2
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_anti_air_slot = ship_anti_air_2
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_3
-					front_2_custom_slot = ship_anti_air_3
-					mid_1_custom_slot = ship_anti_air_3
-					mid_3_custom_slot = ship_anti_air_3
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_aa_upgraded = 1 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 2
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_anti_air_slot = ship_anti_air_3
+				front_2_custom_slot = ship_anti_air_3
+				mid_1_custom_slot = ship_anti_air_3
+				mid_3_custom_slot = ship_anti_air_3
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_4
-					front_2_custom_slot = ship_anti_air_4
-					mid_1_custom_slot = ship_anti_air_4
-					mid_3_custom_slot = ship_anti_air_4
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_aa_upgraded = 2 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 2
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_anti_air_slot = ship_anti_air_4
+				front_2_custom_slot = ship_anti_air_4
+				mid_1_custom_slot = ship_anti_air_4
+				mid_3_custom_slot = ship_anti_air_4
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_5
-					front_2_custom_slot = ship_anti_air_5
-					mid_1_custom_slot = ship_anti_air_5
-					mid_3_custom_slot = ship_anti_air_5
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_aa_upgraded = 3 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 2
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_anti_air_slot = ship_anti_air_5
+				front_2_custom_slot = ship_anti_air_5
+				mid_1_custom_slot = ship_anti_air_5
+				mid_3_custom_slot = ship_anti_air_5
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_aa_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 2
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_anti_air_slot = ship_anti_air_6
-					front_2_custom_slot = ship_anti_air_6
-					mid_1_custom_slot = ship_anti_air_6
-					mid_3_custom_slot = ship_anti_air_6
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_aa_upgraded = 4 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 2
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_anti_air_slot = ship_anti_air_6
+				front_2_custom_slot = ship_anti_air_6
+				mid_1_custom_slot = ship_anti_air_6
+				mid_3_custom_slot = ship_anti_air_6
 			}
 		}
 	}
 }
 EQS_upgrade_primaries = {
 	if = {
-		limit = { EQS_hms_daybreak_only_light_weapons_and_main_gun_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_primaries_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 3
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_battery_slot = ship_super_heavy_battery_2
-				}
+		limit = { check_variable = { EQS_SOL_primaries_upgraded = 0 } }
+		create_equipment_variant = { #Base variant
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 3
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_battery_slot = ship_super_heavy_battery_1
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_primaries_upgraded = 1 } }
-				create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 3
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_battery_slot = ship_super_heavy_battery_2
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_primaries_upgraded = 1 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 3
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_battery_slot = ship_super_heavy_battery_2
 			}
 		}
 	}
 }
 EQS_upgrade_secondary_cannons = {
 	if = {
-		limit = { EQS_hms_daybreak_only_all_weaponry_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 1 } }
-				create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 4
-				obsolete = yes
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					front_1_custom_slot = ship_super_heavy_battery_1
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 4
-				obsolete = yes
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					front_1_custom_slot = ship_super_heavy_battery_2
-					rear_1_custom_slot = ship_super_heavy_battery_2
-				}
+		limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 4
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				rear_1_custom_slot = ship_super_heavy_battery_1
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 1 } }
-				create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 4
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					front_1_custom_slot = ship_super_heavy_battery_1
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 1 } }
+			create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 4
+			obsolete = yes
+			show_position = no
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				front_1_custom_slot = ship_super_heavy_battery_1
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 4
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					front_1_custom_slot = ship_super_heavy_battery_2
-					rear_1_custom_slot = ship_super_heavy_battery_2
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_secondary_cannons_upgraded = 2 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 4
+			obsolete = yes
+			show_position = no
+			#allow_without_tech = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				front_1_custom_slot = ship_super_heavy_battery_2
+				rear_1_custom_slot = ship_super_heavy_battery_2
 			}
 		}
 	}
 }
 EQS_upgrade_armor = {
 	if = {
-		limit = { EQS_hms_daybreak_only_weapons_and_armor_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_armor_upgraded = 1 } }
-				create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 5
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_armor_slot = ship_armor_shbb_2
-				}
+		limit = { check_variable = { EQS_SOL_armor_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 5
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_armor_slot = ship_armor_shbb
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_armor_upgraded = 1 } }
-				create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 5
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_armor_slot = ship_armor_shbb_2
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_armor_upgraded = 1 } }
+			create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 5
+			#allow_without_tech = yes
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_armor_slot = ship_armor_shbb_2
 			}
 		}
 	}
 }
 EQS_upgrade_fcs = {
 	if = {
-		limit = { EQS_hms_daybreak_only_weapons_armor_rcs_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_1
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_3
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_4
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 5 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_5
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 6 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_6
-				}
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_1
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 1 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_1
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_2
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 2 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_2
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_3
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 3 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_3
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_4
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 4 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_4
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 5 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_5
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 5 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_5
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 6 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 6
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_6
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_rangefinding_upgraded = 6 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 6
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_6
 			}
 		}
 	}
 }
 EQS_upgrade_radar = {
 	if = {
-		limit = { EQS_hms_daybreak_only_weapons_armor_rcs_radar_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_1
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_2
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_3
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_4
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 5 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_5
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 6 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_6
-				}
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = empty
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_1
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 1 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = ship_radar_1
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_2
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 2 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = ship_radar_2
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_3
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 3 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = ship_radar_3
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_4
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 4 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = ship_radar_4
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 5 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_5
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 5 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = ship_radar_5
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_radar_upgraded = 6 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 7
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_radar_slot = ship_radar_6
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_radar_upgraded = 6 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 7
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_radar_slot = ship_radar_6
 			}
 		}
 	}
 }
 EQS_upgrade_engines = {
 	if = {
-		limit = { EQS_hms_daybreak_everything_but_recon_upgraded = no }
-		if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_3
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_4
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_5
-				}
-			}
-		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak-Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				obsolete = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_6
-				}
+		limit = { check_variable = { EQS_SOL_engine_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 8
+			obsolete = yes
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_engine_slot = heavy_ship_engine_2
 			}
 		}
 	}
-	else = {
-		if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 1 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_3
-				}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_engine_upgraded = 1 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 8
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_engine_slot = heavy_ship_engine_3
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 2 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_4
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_engine_upgraded = 2 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 8
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_engine_slot = heavy_ship_engine_4
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 3 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_5
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_engine_upgraded = 3 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 8
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_engine_slot = heavy_ship_engine_5
 			}
 		}
-		else_if = {
-			limit = { check_variable = { EQS_SOL_engine_upgraded = 4 } }
-			create_equipment_variant = {
-				name = "Daybreak Class"
-				type = ship_hull_super_heavy_2
-				name_group = SOL_SHBB_HISTORICAL
-				parent_version = 8
-				#allow_without_tech = yes
-				design_team = mio:EQS_SOL_apparatus_mechanicus_organization
-				modules = {
-					fixed_ship_engine_slot = heavy_ship_engine_6
-				}
+	}
+	else_if = {
+		limit = { check_variable = { EQS_SOL_engine_upgraded = 4 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 8
+			#allow_without_tech = yes
+			show_position = no
+			obsolete = yes
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				fixed_ship_engine_slot = heavy_ship_engine_6
 			}
 		}
 	}
 }
 EQS_upgrade_recon = {
 	if = {
+		limit = { check_variable = { EQS_SOL_recon_upgraded = 0 } }
+		create_equipment_variant = {
+			name = "Daybreak Class"
+			type = ship_hull_super_heavy_2
+			name_group = SOL_SHBB_HISTORICAL
+			parent_version = 9
+			show_position = no
+			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
+			modules = {
+				rear_2_custom_slot = empty
+			}
+		}
+	}
+	else_if = {
 		limit = { check_variable = { EQS_SOL_recon_upgraded = 1 } }
 		create_equipment_variant = {
 			name = "Daybreak Class"
 			type = ship_hull_super_heavy_2
 			name_group = SOL_SHBB_HISTORICAL
 			parent_version = 9
+			show_position = no
 			#allow_without_tech = yes
 			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
 			modules = {
@@ -1535,6 +1208,7 @@ EQS_upgrade_recon = {
 			type = ship_hull_super_heavy_2
 			name_group = SOL_SHBB_HISTORICAL
 			parent_version = 9
+			show_position = no
 			#allow_without_tech = yes
 			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
 			modules = {
@@ -1549,6 +1223,7 @@ EQS_upgrade_recon = {
 			type = ship_hull_super_heavy_2
 			name_group = SOL_SHBB_HISTORICAL
 			parent_version = 9
+			show_position = no
 			#allow_without_tech = yes
 			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
 			modules = {
@@ -1563,6 +1238,7 @@ EQS_upgrade_recon = {
 			type = ship_hull_super_heavy_2
 			name_group = SOL_SHBB_HISTORICAL
 			parent_version = 9
+			show_position = no
 			#allow_without_tech = yes
 			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
 			modules = {
@@ -1577,6 +1253,7 @@ EQS_upgrade_recon = {
 			type = ship_hull_super_heavy_2
 			name_group = SOL_SHBB_HISTORICAL
 			parent_version = 9
+			show_position = no
 			#allow_without_tech = yes
 			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
 			modules = {
@@ -1591,6 +1268,7 @@ EQS_upgrade_recon = {
 			type = ship_hull_super_heavy_2
 			name_group = SOL_SHBB_HISTORICAL
 			parent_version = 9
+			show_position = no
 			#allow_without_tech = yes
 			design_team = mio:EQS_SOL_apparatus_mechanicus_organization
 			modules = {
@@ -1602,11 +1280,17 @@ EQS_upgrade_recon = {
 EQS_create_daybreak_fleet = {
 	if = {
 		limit = { NOT = { has_tech = advanced_ship_hull_light } }
-		set_technology = { advanced_ship_hull_light = 1 }
+		set_technology = {
+			advanced_ship_hull_light = 1
+			popup = no
+		}
 	}
 	if = {
 		limit = { NOT = { has_tech = advanced_ship_hull_cruiser } }
-		set_technology = { advanced_ship_hull_cruiser = 1 }
+		set_technology = {
+			advanced_ship_hull_cruiser = 1
+			popup = no
+		}
 	}
 	create_equipment_variant = {
 		name = "Polebearer Class"
