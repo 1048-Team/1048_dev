@@ -12,6 +12,344 @@
 # contain
 # area_priority
 
+SE_southeast_who = {
+    allowed = {
+        NOT = {
+            OR = {
+                tag = BAL
+                tag = NRP
+                tag = STB
+                tag = EEE
+                tag = NEI
+                tag = NID
+                tag = SPF
+                tag = CLI
+                tag = MTS
+            }
+        }
+    }
+    enable = {
+        BAL = {
+            exists = yes
+            has_idea = BAL_no_recognition
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = antagonize
+        id = BAL
+        value = 100
+    }
+}
+SE_southeast_who2 = {
+    allowed = {
+        NOT = {
+            OR = {
+                tag = BAL
+                tag = NRP
+                tag = STB
+                tag = EEE
+                tag = NEI
+                tag = NID
+                tag = SPF
+                tag = CLI
+                tag = MTS
+            }
+        }
+    }
+    enable = {
+        count_triggers = {
+            amount = 2
+            country_exists = MTS
+            country_exists = STB
+            country_exists = NEI
+            country_exists = EEE
+            country_exists = SPF
+            country_exists = CLI
+            country_exists = NRP
+        }
+    }
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = antagonize
+        id = MTS
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = STB
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = CLI
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = SPF
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = EEE
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = NEI
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = NRP
+        value = 100
+    }
+}
+SE_BAL_hates_everyone = {
+    allowed = {
+        tag = BAL
+    }
+    enable = {
+        NOT = { tag = BAL }
+    }
+    enable_reverse = {
+        BAL = { has_idea = BAL_no_recognition }
+    }
+    abort = {
+        BAL = {
+            NOT = { has_idea = BAL_no_recognition }
+        }
+    }
+    reversed = yes
+    ai_strategy = {
+        type = antagonize
+        id = BAL
+        value = 100
+    }
+}
+SE_SE_hates_everyone_else = {
+    allowed = {
+        OR = {
+            tag = NRP
+            tag = STB
+            tag = EEE
+            tag = NEI
+            tag = SPF
+            tag = CLI
+            tag = MTS
+        }
+    }
+    enable = {
+        NOT = {
+            OR = {
+                tag = NRP
+                tag = STB
+                tag = EEE
+                tag = NEI
+                tag = NID
+                tag = SPF
+                tag = CLI
+                tag = MTS
+            }
+        }
+    }
+    enable_reverse = {
+        any_country = {
+            has_country_flag = SEE
+            NOT = { tag = BAL }
+            exists = yes
+            any_other_country = {
+                has_country_flag = SEE
+                exists = yes
+            }
+        }
+    }
+    abort = {
+        any_country = {
+            has_country_flag = SEE
+            NOT = { tag = BAL }
+            exists = yes
+            NOT = {
+                any_other_country = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+            }
+        }
+    }
+    reversed = yes
+    ai_strategy = {
+        type = antagonize
+        id = NRP
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = STB
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = EEE
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = NEI
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = SPF
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = MTS
+        value = 100
+    }
+    ai_strategy = {
+        type = antagonize
+        id = CLI
+        value = 100
+    }
+}
+#Because this game is weird, I swear
+SE_BAL_now_likes_everyone = {
+    allowed = {
+        tag = BAL
+    }
+    enable = {
+        NOT = { tag = BAL }
+    }
+    enable_reverse = {
+        BAL = { NOT = { has_idea = BAL_no_recognition } }
+    }
+    reversed = yes
+    abort_when_not_enabled = yes
+    ai_strategy = {
+        type = befriend
+        id = BAL
+        value = 100
+    }
+}
+SE_SE_now_likes_everyone_else = {
+    allowed = {
+        OR = {
+            tag = NRP
+            tag = STB
+            tag = EEE
+            tag = NEI
+            tag = SPF
+            tag = CLI
+            tag = MTS
+        }
+    }
+    enable = {
+        NOT = {
+            OR = {
+                tag = NRP
+                tag = STB
+                tag = EEE
+                tag = NEI
+                tag = NID
+                tag = SPF
+                tag = CLI
+                tag = MTS
+            }
+        }
+    }
+    enable_reverse = {
+        any_country = {
+            has_country_flag = SEE
+            NOT = { tag = BAL }
+            exists = yes
+            NOT = {
+                any_other_country = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+            }
+        }
+    }
+    abort_when_not_enabled = yes
+    reversed = yes
+    ai_strategy = {
+        type = befriend
+        id = NRP
+        value = 100
+    }
+    ai_strategy = {
+        type = befriend
+        id = STB
+        value = 100
+    }
+    ai_strategy = {
+        type = befriend
+        id = EEE
+        value = 100
+    }
+    ai_strategy = {
+        type = befriend
+        id = NEI
+        value = 100
+    }
+    ai_strategy = {
+        type = befriend
+        id = SPF
+        value = 100
+    }
+    ai_strategy = {
+        type = befriend
+        id = MTS
+        value = 100
+    }
+    ai_strategy = {
+        type = befriend
+        id = CLI
+        value = 100
+    }
+}
+#SE_no_one_home = {
+#    allowed = {
+#        OR = {
+#            tag = BAL
+#            tag = NRP
+#            tag = STB
+#            tag = EEE
+#            tag = NEI
+#            tag = NID
+#            tag = SPF
+#            tag = CLI
+#            tag = MTS
+#        }
+#    }
+#    enable = {
+#        OR = {
+#            AND = {
+#                tag = BAL
+#                has_idea = BAL_no_recognition
+#            }
+#            AND = {
+#                NOT = { tag = BAL }
+#                has_country_flag = SEE
+#                NOT = {
+#                    any_other_country = {
+#                        has_country_flag = SEE
+#                        exists = yes
+#                    }
+#                }
+#            }
+#        }
+#    }
+#    abort_when_not_enabled = yes
+#    ai_strategy = {
+#        type = ignore
+#        id = THIS
+#        value = 1000
+#    }
+#}
 #Should hopefully counter the division limiter while the South-East is at war with itself
 SE_want_to_kill = {
     allowed = {
