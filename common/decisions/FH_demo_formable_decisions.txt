@@ -292,28 +292,40 @@ form_crystal_empire_category = {
 		available = {
 			date > 1048.6.30
 		}
+		visible = { is_ai = no }
 		fire_only_once = yes
 		cost = 150
 		days_remove = 35
 		modifier = {
-			political_power_gain = -0.5
+			political_power_gain = -0.3
 			stability_weekly = -0.02
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_end_the_protests"
 			remove_ideas = CRY_union_unrest
 		}
+	}
+	CRY_end_the_protests_ai = {
+		available = {
+			date > 1049.1.1
+		}
+		visible = { is_ai = yes }
+		fire_only_once = yes
+		days_remove = 140
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_end_the_protests_ai"
+			remove_ideas = CRY_union_unrest
+			add_stability = -0.1
+		}
 		ai_will_do = {
-			modifier = {
-				date < 1049.1.1
-				factor = 0
-			}
+			factor = 10
 		}
 	}
 	CRY_re_establish_military_funding = {
 		available = {
-			date > 1050.6.30
+			date > 1050.2.28
 		}
+		visible = { is_ai = no }
 		fire_only_once = yes
 		cost = 75
 		days_remove = 70
@@ -324,6 +336,29 @@ form_crystal_empire_category = {
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_re_establish_military_funding"
 			remove_ideas = CRY_dilapidated_army
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				date < 1051.1.1
+			}
+		}
+	}
+	CRY_re_establish_military_funding_ai = {
+		available = {
+			date > 1050.2.28
+		}
+		visible = { is_ai = yes }
+		fire_only_once = yes
+		days_remove = 210
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_re_establish_military_funding_ai"
+			remove_ideas = CRY_dilapidated_army
+			add_war_support = 0.1
+		}
+		ai_will_do = {
+			factor = 10
 		}
 	}
 	CRY_repudiate_CHN_treaty = {
@@ -333,6 +368,7 @@ form_crystal_empire_category = {
 				size > 500000
 			}
 		}
+		visible = { is_ai = no }
 		fire_only_once = yes
 		cost = 100
 		days_remove = 21
@@ -359,9 +395,48 @@ form_crystal_empire_category = {
 				}
 			}
 		}
+	}
+	CRY_repudiate_CHN_treaty_ai = {
+		available = {
+			date > 1051.8.31
+			has_army_manpower = {
+				size > 500000
+			}
+		}
+		visible = { is_ai = yes }
+		fire_only_once = yes
+		days_remove = 60
+		war_with_on_remove = CHN
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_repudiate_CHN_treaty_ai"
+			remove_ideas = CRY_treaty_of_gossamer_hills
+			1220 = {
+				set_demilitarized_zone = no
+			}
+			custom_effect_tooltip = CRY_could_lead_to_war_tt
+			hidden_effect = {
+				diplomatic_relation = {
+					country = CHN
+					relation = non_aggression_pact
+					active = no
+				}
+				CHN = {
+					country_event = {
+						id = formable_event.57
+						days = 7
+					}
+					remove_ideas = CHN_gossamer_hills
+				}
+			}
+		}
 		ai_will_do = {
+			factor = 1
 			modifier = {
 				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				date < 1054.1.1
 				factor = 0
 			}
 		}
@@ -405,9 +480,13 @@ form_crystal_empire_category = {
 			}
 		}
 		ai_will_do = {
+			factor = 10
 			modifier = {
 				has_war = yes
 				factor = 0
+			}
+			modifier = {
+				date < 1052.6.1
 			}
 		}
 	}
@@ -440,6 +519,101 @@ form_crystal_empire_category = {
 		}
 		ai_will_do = {
 			factor = 200
+		}
+	}
+	CRY_the_last_ditch = {
+		available = {
+			CWR = { all_original_cores_owned_by_ROOT = yes }
+			NOT = { has_idea = CRY_treaty_of_gossamer_hills }
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = EQS
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CRY_the_last_ditch"
+			create_wargoal = {
+				target = EQS
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	CRY_return_of_harmony = {
+		available = {
+			EQS = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		highlight_states = {
+			highlight_states_trigger = {
+				is_on_continent = europe
+				is_core_of = EQS
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision CRY_return_of_harmony"
+			effect_tooltip = {
+				release_autonomy = {
+					target = EQS
+					autonomous_state = autonomy_puppet
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = EQS
+							is_claimed_by = EQS
+						}
+						is_owned_by = ROOT
+					}
+					transfer_state_to = EQS
+				}
+				set_autonomy = {
+					target = EQS
+					autonomous_state = autonomy_puppet
+				}
+				EQS = {
+					drop_cosmetic_tag = yes
+					if = {
+						limit = {
+							ROOT = {
+								has_country_leader = { character = CRY_luna ruling_only = yes }
+							}
+						}
+						ROOT = {
+							CRY_twilight_sparkle = {
+								set_nationality = EQS
+							}
+						}
+					}
+					else = {
+						ROOT = {
+							CRY_luna = {
+								set_nationality = EQS
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_character = CRY_twilight_sparkle
+						}
+						CRY_twilight_sparkle = {
+							promote_character = yes
+						}
+					}
+					else = {
+						CRY_luna = {
+							promote_character = yes
+						}
+					}
+				}
+			}
 		}
 	}
 }
