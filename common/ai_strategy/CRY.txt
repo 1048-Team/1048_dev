@@ -20,9 +20,7 @@ forced_trade_partners_CRY = {
 	enable = {
 		has_idea = CRY_treaty_of_gossamer_hills
 	}
-	abort = {
-		NOT = { has_idea = CRY_treaty_of_gossamer_hills }
-	}
+	abort_when_not_enabled = yes
 	ai_strategy = {
 		type = diplo_action_desire
 		id = CHN
@@ -33,5 +31,46 @@ forced_trade_partners_CRY = {
 		type = befriend
 		id = CHN
 		value = 1000
+	}
+}
+
+CRY_prep_to_gank_CWR = {
+	allowed = {
+		tag = CRY
+	}
+	enable = {
+		NOT = { has_idea = CRY_dilapidated_army }
+		country_exists = CWR
+		NOT = { has_war_with = CWR }
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = prepare_for_war
+		id = CWR
+		value = 250
+	}
+	ai_strategy = {
+		type = force_build_army
+		value = 24
+	}
+}
+
+CRY_prep_to_gank_CHN = {
+	allowed = {
+		tag = CRY
+	}
+	enable = {
+		CWR = { all_original_cores_owned_by_ROOT = yes }
+		has_idea = CRY_treaty_of_gossamer_hills
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = prepare_for_war
+		id = CHN
+		value = 250
+	}
+	ai_strategy = {
+		type = force_build_army
+		value = 72
 	}
 }
