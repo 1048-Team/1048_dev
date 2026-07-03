@@ -325,11 +325,21 @@ EQS_shoof_organization = {
 	icon = GFX_idea_EQS_shoof
 	allowed = {	
 		OR = {
-			is_eqs_civil_war_tag_tag = yes
-			original_tag = TEM
-			original_tag = ELF
+			original_tag = EQS
+			original_tag = SCS
+			original_tag = SLW
+			original_tag = OAU
 		}
 		has_dlc = "Arms Against Tyranny"
+	}
+	visible = {
+		owner = {
+			owns_state = 3
+			OR = {
+				tag = EQS #Purposeful. Don't want SCS getting Mustang/Shoof, but don't want them actually to be selectable by SCS when it has its own MIOs
+				tag = SLW
+			}
+		}
 	}
 
 	initial_trait = {
@@ -386,11 +396,21 @@ EQS_mustang_organization = {
 	icon = GFX_idea_EQS_mustang
 	allowed = {
 		OR = {
-			is_eqs_civil_war_tag_tag = yes #Thanks, EaW, for the extra errors
-			original_tag = TEM
-			original_tag = ELF
+			original_tag = EQS
+			original_tag = SCS
+			original_tag = SLW
+			original_tag = OAU
 		}
 		has_dlc = "Arms Against Tyranny"
+	}
+	visible = {
+		owner = {
+			owns_state = 3
+			OR = {
+				tag = EQS
+				tag = SLW
+			}
+		}
 	}
 	# available = { # This can't be checked for with AAT :(
 	# 	owner = {
@@ -452,6 +472,7 @@ EQS_SOL_apparatus_mechanicus_organization = {
 		OR = {
 			original_tag = EQS
 			original_tag = SLW
+			original_tag = OAU
 		}
 		has_dlc = "Arms Against Tyranny"
 	}
@@ -461,7 +482,8 @@ EQS_SOL_apparatus_mechanicus_organization = {
 		}
 	}
 	visible = {
-		FROM = {
+		owner = {
+			owns_state = 3
 			NOT = { has_country_leader = { character = EQS_Sunbutt ruling_only = yes } }
 		}
 	}
@@ -941,6 +963,8 @@ EQS_mustangia_shipyards_organization = {
 			original_tag = CLD
 			#original_tag = NER #is deprecated til they have loyalist path
 			original_tag = WHY
+			original_tag = SLW
+			original_tag = OAU
 		}
 		has_dlc = "Arms Against Tyranny"
 	}
@@ -1024,17 +1048,23 @@ EQS_SOL_crimson_glare_manufactorum_organization = {
 
 	allowed = {
 		OR = {
-			tag = EQS
-			tag = SLW
+			original_tag = EQS
+			original_tag = SLW
+			original_tag = OAU
 		}
 		has_dlc = "Arms Against Tyranny"
+	}
+	visible = {
+		owner = {
+			owns_state = 3
+		}
 	}
 	
 	initial_trait = {
 		name = EQS_SOL_crimson_glare_manufactorum_holy_bomber
 		organization_modifier = { military_industrial_organization_research_bonus = 0.05 }
 		equipment_bonus = {
-			air_ground_attack = 0.1 air_attack = 0.02 reliability = -0.1
+			air_ground_attack = 0.1 air_attack = 0.1 reliability = -0.1
 		}
 	}
 	
@@ -1386,9 +1416,18 @@ EQS_ultramarine_organization = {
 	name = EQS_ultramarine
 	include = generic_naval_aircraft_organization
 	icon = GFX_idea_EQS_ultramarine
-	allowed = {	
-		tag = EQS
+	allowed = {
+		OR = {
+			original_tag = EQS
+			original_tag = SLW
+			original_tag = OAU
+		}
 		has_dlc = "Arms Against Tyranny"
+	}
+	visible = {
+		owner = {
+			owns_state = 12
+		}
 	}
 }
 
@@ -1425,7 +1464,7 @@ EQS_SOL_bitterburry_ballistics_organization = {
 	initial_trait = {
 		name = EQS_SOL_bitterburry_ballistics_imperial_armorer
 		equipment_bonus = {
-			breakthrough = 0.01
+			breakthrough = 0.03
 		}
 		production_bonus = {
 			production_capacity_factor = 0.02
