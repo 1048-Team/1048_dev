@@ -2009,10 +2009,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_foal_stimulus_cheques = {
-        visible = {
-            tag = BLS
+        available = {
             date > 1050.6.1
         }
+        visible = { tag = BLS }
         cost = 100
         days_remove = 90
         fire_only_once = yes
@@ -2029,10 +2029,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_rectify_complaints = {
-        visible = {
-            tag = BLS
+        available = {
             date > 1051.3.1
         }
+        visible = { tag = BLS }
         cost = 100
         days_remove = 60
         fire_only_once = yes
@@ -2042,10 +2042,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_secure_northern_perimeter = {
-        visible = {
-            tag = BLS
+        available = {
             date > 1051.5.1
         }
+        visible = { tag = BLS }
         days_remove = 21
         fire_only_once = yes
         war_with_on_remove = WHY
@@ -2061,11 +2061,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_eastern_buffer = {
-        visible = {
-            tag = BLS
+        available = {
             date > 1051.10.1
             country_exists = NER
         }
+        visible = { tag = BLS }
         days_remove = 21
         fire_only_once = yes
         war_with_on_remove = NER
@@ -2085,10 +2085,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_foreign_student_integration = {
-        visible = {
-            tag = BLS
+        available = {
             WHY = { all_cores_owned_by_ROOT = yes }
         }
+        visible = { tag = BLS }
         highlight_states = {
             highlight_states_trigger = {
                 is_on_continent = europe
@@ -2110,10 +2110,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_buffer_around_changelings = {
-        visible = {
-            tag = BLS
+        available = {
             NER = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
+        visible = { tag = BLS }
         highlight_states = {
             highlight_states_trigger = {
                 is_on_continent = europe
@@ -2149,9 +2149,8 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_expand_the_safety_net = {
-        visible = {
-            tag = BLS
-            date > 1052.2.24
+        available = {
+            date > 1052.3.1
             NER = {
                 is_subject_of = ROOT
             }
@@ -2160,6 +2159,7 @@ FH_demo_equus_heartland_skeleton_category = {
                 country_exists = CLD
             }
         }
+        visible = { tag = BLS }
         days_remove = 35
         fire_only_once = yes
         remove_effect = {
@@ -2188,13 +2188,13 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_neutral_forts = {
-        visible = {
-            tag = BLS
+        available = {
             OR = {
                 CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
                 CLD = { all_original_cores_owned_by_ROOT_or_subject = yes }
             }
         }
+        visible = { tag = BLS }
         highlight_states = {
             highlight_states_trigger = {
                 is_on_continent = europe
@@ -2262,10 +2262,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_secure_science = {
-        visible = {
-            tag = BLS
+        available = {
             date > 1053.8.1
         }
+        visible = { tag = BLS }
         days_remove = 35
         fire_only_once = yes
         remove_effect = {
@@ -2292,10 +2292,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     BLS_integrate_glory = {
-        visible = {
-            tag = BLS
+        available = {
             EQS = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
+        visible = { tag = BLS }
         highlight_states = {
             highlight_states_trigger = {
                 is_on_continent = europe
@@ -2356,9 +2356,12 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_the_final_push = {
-        visible = {
-            tag = WHY
+        available = {
             date > 1049.6.1
+        }
+        visible = {
+            is_ai = no
+            tag = WHY
         }
         cost = 100
         fire_only_once = yes
@@ -2379,6 +2382,31 @@ FH_demo_equus_heartland_skeleton_category = {
             }
             remove_ideas = WHY_communist_agitators
         }
+    }
+    WHY_the_final_push_ai = {
+        visible = {
+            tag = WHY
+            date > 1049.6.1
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 140
+        modifier = {
+            weekly_manpower = -375
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_the_final_push_ai"
+            add_manpower = -7283
+            save_current_manpower = yes
+            70 = {
+                add_manpower = -18492
+                damage_building = {
+                    type = arms_factory
+                    damage = 0.5
+                }
+            }
+            remove_ideas = WHY_communist_agitators
+        }
         ai_will_do = {
             factor = 10
         }
@@ -2387,6 +2415,7 @@ FH_demo_equus_heartland_skeleton_category = {
         visible = {
             tag = WHY
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+            is_ai = no
         }
         cost = 75
         fire_only_once = yes
@@ -2450,15 +2479,85 @@ FH_demo_equus_heartland_skeleton_category = {
                 }
             }
         }
+    }
+    WHY_cleanse_the_heretics_ai = {
+        visible = {
+            tag = WHY
+            has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 140
+        modifier = {
+            stability_weekly_factor = -0.005
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_cleanse_the_heretics_ai"
+            add_manpower = -12832
+            save_current_manpower = yes
+            70 = {
+                add_manpower = -72719
+            }
+            178 = {
+                add_manpower = -24782
+            }
+            135 = {
+                add_manpower = -8827
+            }
+            134 = {
+                add_manpower = -4929
+            }
+            176 = {
+                add_manpower = -11028
+            }
+            56 = {
+                add_manpower = -44281
+            }
+            restore_previous_manpower = yes
+            add_popularity = {
+                ideology = neutrality
+                popularity = -0.15
+            }
+            add_popularity = {
+                ideology = communism
+                popularity = -0.075
+            }
+            add_popularity = {
+                ideology = democratic
+                popularity = -0.1
+            }
+            retire_character = WHY_Horizon_Sunrise
+            remove_ideas = WHY_heretic_cult
+            hidden_effect = {
+                set_party_name = {
+                    ideology = neutrality
+                    name = WHY_heresy
+                    long_name = WHY_heresy
+                }
+                set_party_name = {
+                    ideology = democratic
+                    name = WHY_heresy
+                    long_name = WHY_heresy
+                }
+                set_party_name = {
+                    ideology = democratic
+                    name = WHY_heresy
+                    long_name = WHY_heresy
+                }
+            }
+        }
         ai_will_do = {
             factor = 10
         }
     }
     WHY_legalize_pluralistic_teachings = {
+        available = {
+            date > 1051.1.1
+        }
         visible = {
             tag = WHY
+            is_ai = no
             NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
-            date > 1051.1.1
         }
         cost = 125
         fire_only_once = yes
@@ -2475,15 +2574,37 @@ FH_demo_equus_heartland_skeleton_category = {
             }
             remove_ideas = WHY_heretic_cult
         }
+    }
+    WHY_legalize_pluralistic_teachings_ai = {
+        visible = {
+            tag = WHY
+            NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+            date > 1051.1.1
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 70
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_legalize_pluralistic_teachings_ai"
+            add_stability = -0.075
+            add_popularity = {
+                ideology = neutrality
+                popularity = 0.075
+            }
+            remove_ideas = WHY_heretic_cult
+        }
         ai_will_do = {
             factor = 10
         }
     }
     WHY_formalize_control = {
+        available = {
+            date > 1051.1.1
+        }
         visible = {
             tag = WHY
+            is_ai = no
             has_country_leader = { character = WHY_Solar_Strike ruling_only = yes }
-            date > 1051.1.1
         }
         cost = 75
         fire_only_once = yes
@@ -2491,20 +2612,52 @@ FH_demo_equus_heartland_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision WHY_formalize_control"
             remove_ideas = WHY_imperial_military_junta
         }
+    }
+    WHY_formalize_control_ai = {
+        visible = {
+            tag = WHY
+            has_country_leader = { character = WHY_Solar_Strike ruling_only = yes }
+            date > 1051.1.1
+            is_ai = yes
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision WHY_formalize_control_ai"
+            remove_ideas = WHY_imperial_military_junta
+        }
         ai_will_do = {
             factor = 10
         }
     }
     WHY_formal_representation = {
+        available = {
+            date > 1051.4.1
+        }
         visible = {
             tag = WHY
-            date > 1051.4.1
+            is_ai = no
         }
         cost = 60
         fire_only_once = yes
         days_remove = 35
         remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_formalize_control"
+            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_formal_representation"
+            remove_ideas = WHY_ephemeral_rule
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    WHY_formal_representation_ai = {
+        visible = {
+            tag = WHY
+            date > 1051.4.1
+            is_ai = yes
+        }
+        fire_only_once = yes
+        days_remove = 35
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_formal_representation_ai"
             remove_ideas = WHY_ephemeral_rule
         }
         ai_will_do = {
@@ -2512,9 +2665,12 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_brainwash_the_conscripts = {
+        available = {
+            date > 1052.2.1
+        }
         visible = {
             tag = WHY
-            date > 1052.2.1
+            is_ai = no
         }
         cost = 100
         fire_only_once = yes
@@ -2527,10 +2683,29 @@ FH_demo_equus_heartland_skeleton_category = {
             factor = 10
         }
     }
-    WHY_finish_the_war = {
+    WHY_brainwash_the_conscripts_ai = {
         visible = {
             tag = WHY
+            date > 1052.2.1
+            is_ai = yes
+        }
+        cost = 100
+        fire_only_once = yes
+        days_remove = 35
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove WHY_brainwash_the_conscripts_ai"
+            remove_ideas = WHY_forced_conscription
+        }
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    WHY_finish_the_war = {
+        available = {
             date > 1051.10.1
+        }
+        visible = {
+            tag = WHY
         }
         fire_only_once = yes
         days_remove = 21
@@ -2547,9 +2722,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_violate_neutrality = {
+        available = {
+            date > 1052.4.1
+        }
         visible = {
             tag = WHY
-            date > 1052.4.1
         }
         fire_only_once = yes
         days_remove = 21
@@ -2570,9 +2747,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_crash_the_clouds = {
+        available = {
+            date > 1052.9.1
+        }
         visible = {
             tag = WHY
-            date > 1052.9.12
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
         fire_only_once = yes
@@ -2594,9 +2773,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_harmonic_mistakes = {
+        available = {
+            date > 1053.2.1
+        }
         visible = {
             tag = WHY
-            date > 1053.2.4
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
         fire_only_once = yes
@@ -2618,9 +2799,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_the_new_generation = {
+        available = {
+            CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
+        }
         visible = {
             tag = WHY
-            CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
         cost = 10
@@ -2645,9 +2828,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_ascend_to_alicornhood = {
+        available = {
+            date > 1055.1.1
+        }
         visible = {
             tag = WHY
-            date > 1055.1.1
             has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
         }
         fire_only_once = yes
@@ -2668,9 +2853,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_government_expansion = {
+        available = {
+            NER = { all_original_cores_owned_by_ROOT_or_subject = yes }
+        }
         visible = {
             tag = WHY
-            NER = { all_original_cores_owned_by_ROOT_or_subject = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
@@ -2695,9 +2882,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_university_integration = {
+        available = {
+            BLS = { all_cores_owned_by_ROOT_or_subject = yes }
+        }
         visible = {
             tag = WHY
-            BLS = { all_cores_owned_by_ROOT_or_subject = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
@@ -2720,10 +2909,12 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     WHY_harmonys_gasp = {
-        visible = {
-            tag = WHY
+        available = {
             CER = { all_original_cores_owned_by_ROOT_or_subject = yes }
             CLD = { all_original_cores_owned_by_ROOT_or_subject = yes }
+        }
+        visible = {
+            tag = WHY
         }
         highlight_states = {
             highlight_states_trigger = {
@@ -2878,9 +3069,12 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     CER_end_the_hunt = {
+        available = {
+            date > 1049.4.1
+        }
         visible = {
             tag = CER
-            date > 1049.4.1
+            is_ai = no
         }
         cost = 70
         days_remove = 105
@@ -2894,12 +3088,32 @@ FH_demo_equus_heartland_skeleton_category = {
             remove_ideas = CER_legitimacy_crisis
             remove_ideas = CER_infinite_regency
         }
-        ai_will_do = { factor = 1 }
     }
-    CER_council_funds_for_industry = {
+    CER_end_the_hunt_ai = {
         visible = {
             tag = CER
+            date > 1049.4.1
+            is_ai = yes
+        }
+        days_remove = 210
+        fire_only_once = yes
+        modifier = {
+            stability_weekly_factor = -0.001
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_end_the_hunt_ai"
+            remove_ideas = CER_legitimacy_crisis
+            remove_ideas = CER_infinite_regency
+        }
+        ai_will_do = { factor = 10 }
+    }
+    CER_council_funds_for_industry = {
+        available = {
             date > 1050.9.1
+        }
+        visible = {
+            tag = CER
+            is_ai = no
         }
         cost = 120
         days_remove = 140
@@ -2913,17 +3127,37 @@ FH_demo_equus_heartland_skeleton_category = {
             remove_ideas = CER_lacking_urbanization
             remove_ideas = CER_equestrias_breadbasket
         }
-        ai_will_do = { factor = 1 }
     }
-    CER_recognize_daybreakers_threat = {
+    CER_council_funds_for_industry_ai = {
         visible = {
             tag = CER
-            date > 1051.4.17
+            date > 1050.9.1
+            is_ai = yes
+        }
+        days_remove = 280
+        fire_only_once = yes
+        modifier = {
+            consumer_goods_factor = 0.25
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_council_funds_for_industry_ai"
+            remove_ideas = CER_lacking_urbanization
+            remove_ideas = CER_equestrias_breadbasket
+        }
+        ai_will_do = { factor = 10 }
+    }
+    CER_recognize_daybreakers_threat = {
+        available = {
+            date > 1051.4.1
             is_subject = no
             CLD = {
                 exists = yes
                 is_subject = no
             }
+        }
+        visible = {
+            tag = CER
+            is_ai = no
         }
         cost = 35
         days_remove = 35
@@ -2932,16 +3166,36 @@ FH_demo_equus_heartland_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove CER_recognize_daybreakers_threat"
             CLD = { country_event = equestria_activity.19 }
         }
+    }
+    CER_recognize_daybreakers_threat_ai = {
+        visible = {
+            tag = CER
+            date > 1051.4.1
+            is_subject = no
+            CLD = {
+                exists = yes
+                is_subject = no
+            }
+        }
+        days_remove = 70
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_recognize_daybreakers_threat_ai"
+            CLD = { country_event = equestria_activity.19 }
+        }
         ai_will_do = {
             factor = 100
         }
     }
     CER_expand_defense_faction_membership = {
+        available = {
+            date > 1053.1.1
+            is_subject = no
+        }
         visible = {
             tag = CER
-            date > 1053.1.1
+            is_ai = no
             is_faction_leader = yes
-            is_subject = no
             any_other_country = {
                 OR = {
                     tag = NER
@@ -2972,23 +3226,62 @@ FH_demo_equus_heartland_skeleton_category = {
                 country_event = equestria_activity.20
             }
         }
+    }
+    CER_expand_defense_faction_membership_ai = {
+        visible = {
+            tag = CER
+            date > 1053.1.1
+            is_faction_leader = yes
+            is_subject = no
+            any_other_country = {
+                OR = {
+                    tag = NER
+                    tag = BLS
+                    tag = WHY
+                }
+                NOT = { has_country_flag = CER_rejected_alliance }
+                NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+                is_subject = no
+            }
+            is_ai = yes
+        }
+        days_remove = 14
+        days_re_enable = 150
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove CER_expand_defense_faction_membership_ai"
+            random_other_country = {
+                limit = {
+                    OR = {
+                        tag = NER
+                        tag = BLS
+                        tag = WHY
+                    }
+                    is_subject = no
+                    NOT = { has_country_flag = CER_rejected_alliance }
+                    NOT = { has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes } }
+                }
+                country_event = equestria_activity.20
+            }
+        }
         ai_will_do = {
             factor = 100
         }
     }
     CER_topple_the_mad_inquisitor = {
+        available = {
+            date > 1053.6.1
+            is_subject = no
+        }
         visible = {
             tag = CER
-            date > 1054.1.1
-            is_faction_leader = yes
-            is_subject = no
+            is_ai = no
             WHY = {
                 exists = yes
                 NOT = { is_subject_of = SLE }
                 has_country_leader = { character = WHY_Opaline_Arcana ruling_only = yes }
             }
+            is_faction_leader = yes
         }
-        cost = 25
         days_remove = 35
         war_with_on_remove = WHY
         fire_only_once = yes
@@ -3008,8 +3301,7 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     CER_a_complete_front = {
-        visible = {
-            tag = CER
+        available = {
             CLD = {
                 OR = {
                     exists = no
@@ -3035,7 +3327,10 @@ FH_demo_equus_heartland_skeleton_category = {
                 }
             }
         }
-        cost = 75
+        visible = {
+            tag = CER
+            is_faction_leader = yes
+        }
         days_remove = 70
         fire_only_once = yes
         remove_effect = {
@@ -3059,13 +3354,14 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     CER_beat_down_EQS = {
-        visible = {
-            tag = CER
-            date > 1055.1.1
+        available = {
+            date > 1054.1.1
             is_subject = no
             country_exists = SLE
         }
-        cost = 50
+        visible = {
+            tag = CER
+        }
         days_remove = 70
         war_with_on_remove = EQS
         war_with_on_remove = SLW
@@ -3086,10 +3382,11 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     CER_united_at_last = {
+        available = {
+            EQS = { all_original_cores_owned_by_ROOT = yes }
+        }
         visible = {
             tag = CER
-            owns_state = 3
-            EQS = { all_original_cores_owned_by_ROOT = yes }
         }
         highlight_states = {
             highlight_states_trigger = {
@@ -3139,6 +3436,10 @@ FH_demo_equus_heartland_skeleton_category = {
         }
         ai_will_do = {
             factor = 100
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
         }
     }
     CER_reclaim_harmonys_birthright = {
@@ -3181,12 +3482,15 @@ FH_demo_equus_heartland_skeleton_category = {
         }
     }
     CLD_redelegate_responsibilities = {
+        available = {
+            date > 1051.5.7
+        }
         visible = {
             tag = CLD
-            date > 1051.5.7
         }
         cost = 75
         days_remove = 70
+        fire_only_once = yes
         modifier = {
             stability_weekly_factor = -0.005
             political_power_gain = -0.25
@@ -3195,54 +3499,109 @@ FH_demo_equus_heartland_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove CLD_redelegate_responsibilities"
             remove_ideas = CLD_extreme_centralization
         }
-        ai_will_do = { factor = 1 }
+        ai_will_do = { factor = 10 }
     }
     NER_singular_purposes = {
-        visible = {
-            tag = NER
+        available = {
             WHY = { all_cores_owned_by_ROOT = yes }
         }
+        visible = {
+            tag = NER
+            is_ai = no
+        }
         cost = 25
+        fire_only_once = yes
         days_remove = 14
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NER_singular_purposes"
             remove_ideas = NER_splintered_community
         }
-        ai_will_do = { factor = 1 }
     }
-    NER_community_intercessions = {
+    NER_singular_purposes_ai = {
         visible = {
             tag = NER
+            WHY = { all_cores_owned_by_ROOT = yes }
+            is_ai = yes
+        }
+        days_remove = 28
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_singular_purposes_ai"
+            remove_ideas = NER_splintered_community
+        }
+        ai_will_do = { factor = 10 }
+    }
+    NER_community_intercessions = {
+        available = {
             date > 1052.1.1
+        }
+        visible = {
+            tag = NER
+            is_ai = no
         }
         cost = 75
         days_remove = 35
+        fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NER_community_intercessions"
             remove_ideas = NER_inter_commune_rivalries
         }
-        ai_will_do = { factor = 1 }
     }
-    NER_centralize_military_command = {
+    NER_community_intercessions_ai = {
         visible = {
             tag = NER
+            date > 1052.1.1
+            is_ai = yes
+        }
+        days_remove = 70
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_community_intercessions_ai"
+            remove_ideas = NER_inter_commune_rivalries
+        }
+        ai_will_do = { factor = 10 }
+    }
+    NER_centralize_military_command = {
+        available = {
             date > 1050.9.1
+        }
+        visible = {
+            tag = NER
+            is_ai = no
         }
         cost = 100
         days_remove = 35
+        fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NER_centralize_military_command"
             remove_ideas = NER_commune_militias
         }
-        ai_will_do = { factor = 1 }
     }
-    NER_retire_vascular_brood = {
+    NER_centralize_military_command_ai = {
         visible = {
             tag = NER
+            date > 1050.9.1
+            is_ai = yes
+        }
+        days_remove = 105
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_centralize_military_command_ai"
+            remove_ideas = NER_commune_militias
+        }
+        ai_will_do = { factor = 10 }
+    }
+    NER_retire_vascular_brood = {
+        available = {
             date > 1051.6.1
+        }
+        visible = {
+            tag = NER
+            is_ai = no
         }
         cost = 125
         days_remove = 35
+        fire_only_once = yes
         modifier = {
             consumer_goods_factor = 0.25
             war_support_weekly_factor = -0.02
@@ -3252,6 +3611,24 @@ FH_demo_equus_heartland_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NER_retire_vascular_brood"
             remove_ideas = NER_veteran_changeling_commanders
         }
-        ai_will_do = { factor = 1 }
+    }
+    NER_retire_vascular_brood_ai = {
+        visible = {
+            tag = NER
+            date > 1051.6.1
+            is_ai = yes
+        }
+        days_remove = 70
+        fire_only_once = yes
+        modifier = {
+            consumer_goods_factor = 0.25
+            war_support_weekly_factor = -0.01
+            experience_gain_army = -0.03
+        }
+        remove_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision remove NER_retire_vascular_brood_ai"
+            remove_ideas = NER_veteran_changeling_commanders
+        }
+        ai_will_do = { factor = 10 }
     }
 }
