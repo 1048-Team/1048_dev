@@ -58,6 +58,8 @@ EQC_AI_decision_category = {
     EQC_start_limited_war_1 = {
         available = {
             date > 1048.4.1
+            NOT = { has_country_flag = FH_block_limited_war }
+            check_variable = { FH_limited_war_escalator < 4 }
         }
         fire_only_once = yes
         days_remove = 20
@@ -65,11 +67,14 @@ EQC_AI_decision_category = {
         war_with_on_remove = BRF
         war_with_on_remove = RCT
         complete_effect = {
+            griffonia_alert_nations = yes
             GRI = { activate_mission = GRI_limited_war_1_mission }
             RCT = { activate_mission = RCT_limited_war_1_mission }
         }
         remove_effect = {
             log = "[GetDateText]: [Root.GetName]: decision remove EQC_start_limited_war_1"
+            add_to_variable = { FH_limited_war_escalator = 1 }
+            set_country_flag = FH_block_limited_war
             #GRI & Puppets
             declare_war_on = {
                 target = BOI
@@ -107,57 +112,12 @@ EQC_AI_decision_category = {
             always = no
         }
         available = {
-            IF = {
-                limit = {
-                    has_country_flag = EQC_GRI_war_flag_2
-                }
-            }
-            OR = {
-                AND = {
-                    532 = { is_controlled_by_ROOT_or_ally = yes }
-                    391 = { is_controlled_by_ROOT_or_ally = yes }
-                    489 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    532 = { is_controlled_by_ROOT_or_ally = yes }
-                    391 = { is_controlled_by_ROOT_or_ally = yes }
-                    494 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    532 = { is_controlled_by_ROOT_or_ally = yes }
-                    489 = { is_controlled_by_ROOT_or_ally = yes }
-                    494 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-            }
+            owns_needed_GRI_territory_EQC = yes
         }
         days_mission_timeout = 100
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete EQC_war_GRI_mission"
-            every_enemy_country = {
-                limit = {
-                    OR = {
-                        tag = GRI
-                        is_in_faction_with = GRI
-                    }
-                }
-                white_peace = EQC
-                white_peace = SIC
-                white_peace = MIT
-                white_peace = HPS
-            }
-            IF = {
-                limit = {
-                    has_country_flag = EQC_GRI_war_flag_2
-                }
-                transfer_state = 679
-                transfer_state = 471
-                transfer_state = 488
-                transfer_state = 532
-                transfer_state = 489
-                clr_country_flag = EQC_GRI_war_flag_2
-                set_country_flag = EQC_GRI_war_flag_1
-                GRI = { clr_country_flag = EQC_GRI_war_flag_2 set_country_flag = EQC_GRI_war_flag_1 }
-            }
+            griffonia_GRI_land_transfer_EQC = yes
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout EQC_war_GRI_mission"
@@ -174,61 +134,12 @@ EQC_AI_decision_category = {
             always = no
         }
         available = {
-            IF = {
-                limit = {
-                    has_country_flag = EQC_LFN_war_flag_1
-                }
-            }
-            OR = {
-                AND = {
-                    615 = { is_controlled_by_ROOT_or_ally = yes }
-                    385 = { is_controlled_by_ROOT_or_ally = yes }
-                    589 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    615 = { is_controlled_by_ROOT_or_ally = yes }
-                    385 = { is_controlled_by_ROOT_or_ally = yes }
-                    414 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    615 = { is_controlled_by_ROOT_or_ally = yes }
-                    589 = { is_controlled_by_ROOT_or_ally = yes }
-                    414 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-            }
+            owns_needed_BRF_territory_EQC = yes
         }
         days_mission_timeout = 80
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete EQC_war_LFN_mission"
-            every_enemy_country = {
-                limit = {
-                    NOT = {
-                        OR = {
-                            tag = GRI
-                            is_in_faction_with = GRI
-                        }
-                    }
-                }
-                white_peace = EQC
-                white_peace = SIC
-                white_peace = MIT
-                white_peace = HPS
-            }
-            IF = {
-                limit = {
-                    has_country_flag = EQC_LFN_war_flag_1
-                }
-                SIC = {
-                    transfer_state = 606
-                }
-                MIT = {
-                    transfer_state = 651
-                    transfer_state = 589
-                    transfer_state = 385
-                }
-                clr_country_flag = EQC_LFN_war_flag_1
-                set_country_flag = EQC_LFN_war_flag_0
-            }
+            griffonia_BRF_land_transfer_EQC = yes
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout EQC_war_LFN_mission"
@@ -250,19 +161,14 @@ EQC_AI_decision_category = {
     }
 }
 
-
-
-
-
-
-
-
 GRI_AI_decision_category = {
     #Only triggers if EQC is played by a human
     GRI_start_limited_war_1 = {
         available = {
             date > 1048.4.1
             EQC = { is_ai = no }
+            NOT = { has_country_flag = FH_block_limited_war }
+            check_variable = { FH_limited_war_escalator < 4 }
         }
         fire_only_once = yes
         days_remove = 20
@@ -270,11 +176,14 @@ GRI_AI_decision_category = {
         war_with_on_remove = BRF
         war_with_on_remove = RCT
         complete_effect = {
+            griffonia_alert_nations = yes
             RCT = { activate_mission = RCT_limited_war_1_mission }
         }
         remove_effect = {
             log = "[GetDateText]: [Root.GetName]: decision remove GRI_start_limited_war_1"
-            #GRI & Puppets
+            add_to_variable = { FH_limited_war_escalator = 1 }
+            set_country_flag = FH_block_limited_war
+            #EQC & Puppets
             declare_war_on = {
                 target = SIC
                 type = annex_everything
@@ -355,71 +264,12 @@ GRI_AI_decision_category = {
             always = no
         }
         available = {
-            IF = {
-                limit = {
-                    has_country_flag = GRI_RCT_war_flag_2
-                }
-            }
-            OR = {
-                AND = {
-                    1210 = { is_controlled_by_ROOT_or_ally = yes }
-                    552 = { is_controlled_by_ROOT_or_ally = yes }
-                    634 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    1210 = { is_controlled_by_ROOT_or_ally = yes }
-                    552 = { is_controlled_by_ROOT_or_ally = yes }
-                    543 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    1210 = { is_controlled_by_ROOT_or_ally = yes }
-                    634 = { is_controlled_by_ROOT_or_ally = yes }
-                    543 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-            }
+            owns_needed_RCT_territory_GRI = yes
         }
         days_mission_timeout = 100
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete GRI_war_RCT_mission"
-            every_enemy_country = {
-                limit = {
-                    OR = {
-                        tag = RCT
-                        is_in_faction_with = RCT
-                    }
-                }
-                white_peace = GRI
-                white_peace = BOI
-                white_peace = HLQ
-                white_peace = NTR
-            }
-            IF = {
-                limit = {
-                    has_country_flag = GRI_RCT_war_flag_2
-                }
-                IF = {
-                    limit = {
-                        HLQ = { exists = yes }
-                    }
-                    HLQ = {
-                        transfer_state = 634
-                        transfer_state = 1230
-                        transfer_state = 537
-                        transfer_state = 1210
-                        transfer_state = 552
-                    }
-                }
-                ELSE = {
-                    transfer_state = 634
-                    transfer_state = 1230
-                    transfer_state = 537
-                    transfer_state = 1210
-                    transfer_state = 552
-                }
-                clr_country_flag = GRI_RCT_war_flag_2
-                set_country_flag = GRI_RCT_war_flag_3
-                RCT = { clr_country_flag = GRI_RCT_war_flag_2 set_country_flag = GRI_RCT_war_flag_3 }
-            }
+            griffonia_RCT_land_transfer_GRI = yes
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout GRI_war_RCT_mission"
@@ -436,74 +286,12 @@ GRI_AI_decision_category = {
             always = no
         }
         available = {
-            IF = {
-                limit = {
-                    has_country_flag = EQC_GRI_war_flag_2
-                }
-            }
-            OR = {
-                AND = {
-                    389 = { is_controlled_by_ROOT_or_ally = yes }
-                    470 = { is_controlled_by_ROOT_or_ally = yes }
-                    442 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    389 = { is_controlled_by_ROOT_or_ally = yes }
-                    470 = { is_controlled_by_ROOT_or_ally = yes }
-                    401 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    389 = { is_controlled_by_ROOT_or_ally = yes }
-                    442 = { is_controlled_by_ROOT_or_ally = yes }
-                    401 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-            }
+            owns_needed_EQC_territory_GRI = yes
         }
         days_mission_timeout = 100
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete GRI_war_EQC_mission"
-            every_enemy_country = {
-                limit = {
-                    OR = {
-                        tag = EQC
-                        is_in_faction_with = EQC
-                    }
-                }
-                white_peace = GRI
-                white_peace = BOI
-                white_peace = HLQ
-                white_peace = NTR
-            }
-            IF = {
-                limit = {
-                    has_country_flag = EQC_GRI_war_flag_2
-                }
-                IF = {
-                    limit = {
-                        BOI = {
-                            exists = yes
-                            is_subject_of = GRI
-                        }
-                    }
-                    BOI = {
-                        transfer_state = 383
-                        transfer_state = 384
-                        transfer_state = 389
-                        transfer_state = 531
-                        transfer_state = 490
-                    }
-                }
-                ELSE = {
-                    transfer_state = 383
-                    transfer_state = 384
-                    transfer_state = 389
-                    transfer_state = 531
-                    transfer_state = 490
-                }
-                clr_country_flag = EQC_GRI_war_flag_2
-                set_country_flag = EQC_GRI_war_flag_3
-                EQC = { clr_country_flag = EQC_GRI_war_flag_2 set_country_flag = EQC_GRI_war_flag_3 }
-            }
+            griffonia_EQC_land_transfer_GRI = yes
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout GRI_war_EQC_mission"
@@ -656,73 +444,12 @@ RCT_AI_decision_category = {
             always = no
         }
         available = {
-            IF = {
-                limit = {
-                    has_country_flag = GRI_RCT_war_flag_2
-                }
-            }
-            OR = {
-                AND = {
-                    1211 = { is_controlled_by_ROOT_or_ally = yes }
-                    633 = { is_controlled_by_ROOT_or_ally = yes }
-                    554 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    1211 = { is_controlled_by_ROOT_or_ally = yes }
-                    633 = { is_controlled_by_ROOT_or_ally = yes }
-                    505 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    1211 = { is_controlled_by_ROOT_or_ally = yes }
-                    505 = { is_controlled_by_ROOT_or_ally = yes }
-                    554 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-            }
+            owns_needed_GRI_territory_RCT = yes
         }
         days_mission_timeout = 100
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete RCT_war_GRI_mission"
-            every_enemy_country = {
-                limit = {
-                    OR = {
-                        tag = GRI
-                        is_in_faction_with = GRI
-                    }
-                }
-                white_peace = RCT
-                white_peace = LNS
-                white_peace = BAR
-                white_peace = NIM
-            }
-            IF = {
-                limit = {
-                    has_country_flag = GRI_RCT_war_flag_2
-                }
-                IF = {
-                    limit = {
-                        LNS = { exists = yes }
-                    }
-                    LNS = {
-                        transfer_state = 650
-                        transfer_state = 633
-                        transfer_state = 553
-                        transfer_state = 1211
-                        transfer_state = 540
-                        transfer_state = 505
-                    }
-                }
-                ELSE = {
-                    transfer_state = 650
-                    transfer_state = 633
-                    transfer_state = 553
-                    transfer_state = 1211
-                    transfer_state = 540
-                    transfer_state = 505
-                }
-                clr_country_flag = GRI_RCT_war_flag_2
-                set_country_flag = GRI_RCT_war_flag_1
-                GRI = { clr_country_flag = GRI_RCT_war_flag_2 set_country_flag = GRI_RCT_war_flag_1 }
-            }
+            griffonia_GRI_land_transfer_RCT = yes
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout RCT_war_GRI_mission"
@@ -739,60 +466,12 @@ RCT_AI_decision_category = {
             always = no
         }
         available = {
-            IF = {
-                limit = {
-                    has_country_flag = RCT_LFN_war_flag_1
-                }
-            }
-            OR = {
-                AND = {
-                    598 = { is_controlled_by_ROOT_or_ally = yes }
-                    608 = { is_controlled_by_ROOT_or_ally = yes }
-                    610 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    598 = { is_controlled_by_ROOT_or_ally = yes }
-                    608 = { is_controlled_by_ROOT_or_ally = yes }
-                    596 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-                AND = {
-                    598 = { is_controlled_by_ROOT_or_ally = yes }
-                    610 = { is_controlled_by_ROOT_or_ally = yes }
-                    596 = { is_controlled_by_ROOT_or_ally = yes }
-                }
-            }
+            owns_needed_BRF_territory_RCT = yes
         }
         days_mission_timeout = 80
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete RCT_war_LFN_mission"
-            every_enemy_country = {
-                limit = {
-                    NOT = {
-                        OR = {
-                            tag = GRI
-                            is_in_faction_with = GRI
-                        }
-                    }
-                }
-                white_peace = RCT
-                white_peace = LNS
-                white_peace = BAR
-                white_peace = NIM
-            }
-            IF = {
-                limit = {
-                    has_country_flag = RCT_LFN_war_flag_1
-                }
-                transfer_state = 592
-                transfer_state = 610
-                transfer_state = 631
-                transfer_state = 597
-                transfer_state = 598
-                transfer_state = 609
-                transfer_state = 596
-                clr_country_flag = RCT_LFN_war_flag_1
-                set_country_flag = RCT_LFN_war_flag_0
-            }
+            griffonia_BRF_land_transfer_RCT = yes
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout RCT_war_LFN_mission"
