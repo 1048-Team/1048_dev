@@ -4,7 +4,6 @@ EQC_AI_decision_category = {
             date > 1052.1.1
         }
         days_remove = 730
-        cost = 150
         fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [Root.GetName]: decision remove EQC_fix_economy_1"
@@ -25,7 +24,6 @@ EQC_AI_decision_category = {
             date > 1050.1.1
         }
         days_remove = 365
-        cost = 150
         fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [Root.GetName]: decision remove EQC_fix_economy_2"
@@ -57,7 +55,7 @@ EQC_AI_decision_category = {
     }
     EQC_start_limited_war_1 = {
         available = {
-            date > 1048.4.1
+            griffonia_its_time = yes
             NOT = { has_country_flag = FH_block_limited_war }
             check_variable = { FH_limited_war_escalator < 4 }
         }
@@ -68,6 +66,7 @@ EQC_AI_decision_category = {
         war_with_on_remove = RCT
         complete_effect = {
             griffonia_alert_nations = yes
+            griffonia_trigger_cooldown = yes
             GRI = { activate_mission = GRI_limited_war_1_mission }
             RCT = { activate_mission = RCT_limited_war_1_mission }
         }
@@ -92,7 +91,7 @@ EQC_AI_decision_category = {
             }
             activate_mission = EQC_war_GRI_mission
             activate_mission = EQC_war_LFN_mission
-            add_threat = -42.5
+            griffonia_calm_down_a_bit = yes
             if = {
                 limit = {
                     GRI = { is_ai = no }
@@ -165,7 +164,7 @@ GRI_AI_decision_category = {
     #Only triggers if EQC is played by a human
     GRI_start_limited_war_1 = {
         available = {
-            date > 1048.4.1
+            griffonia_its_time = yes
             EQC = { is_ai = no }
             NOT = { has_country_flag = FH_block_limited_war }
             check_variable = { FH_limited_war_escalator < 4 }
@@ -177,6 +176,7 @@ GRI_AI_decision_category = {
         war_with_on_remove = RCT
         complete_effect = {
             griffonia_alert_nations = yes
+            griffonia_trigger_cooldown = yes
             RCT = { activate_mission = RCT_limited_war_1_mission }
         }
         remove_effect = {
@@ -198,7 +198,7 @@ GRI_AI_decision_category = {
                 target = LNS
                 type = annex_everything
             }
-            add_threat = -42.5
+            griffonia_calm_down_a_bit = yes
             activate_mission = GRI_limited_war_1_mission
             if = {
                 limit = {
@@ -214,7 +214,7 @@ GRI_AI_decision_category = {
                         target = SIC
                         type = annex_everything
                     }
-                    add_threat = -15
+                    griffonia_calm_down_a_bit = yes
                 }
             }
         }
@@ -424,7 +424,6 @@ RCT_AI_decision_category = {
             }
             activate_mission = RCT_war_GRI_mission
             activate_mission = RCT_war_LFN_mission
-            add_threat = -7.4
             if = {
                 limit = {
                     GRI = {
@@ -435,8 +434,8 @@ RCT_AI_decision_category = {
                     target = HLQ
                     type = annex_everything
                 }
-                add_threat = -11
             }
+            griffonia_calm_down_a_bit = yes
         }
     }
     RCT_war_GRI_mission = {
