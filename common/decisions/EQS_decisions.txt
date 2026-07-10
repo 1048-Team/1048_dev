@@ -124,8 +124,10 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = EQS_SOL_fully_armed_and_operational_tt
-				EQS_SOL_upgraded_as_can_be = yes
+				tooltip = EQS_SOL_mostly_armed_and_operational_tt
+				check_variable = {
+					EQS_SOL_daybreak_upgrade_status > 11
+				}
 			}
 		}
 		selectable_mission = yes
@@ -148,6 +150,16 @@ EQS_SOL_launching_HMS_daybreak_category = {
 					has_country_flag = EQS_SOL_daybreak_create_sister_ships
 				}
 				add_political_power = 100
+			}
+			if = {
+				limit = {
+					EQS_SOL_upgraded_as_can_be = yes
+				}
+				add_ideas = EQS_rock_iron_ships
+			}
+			else = {
+				custom_effect_tooltip = EQS_SOL_fully_armed_and_operational_tt
+				show_ideas_tooltip = EQS_rock_iron_ships
 			}
 			hidden_effect = {
 				###Create ship as a specific effect, looking at how far along the ship is, and creating a design from there. Will probably be a long scripted effect. For now, just create a default design
@@ -190,6 +202,18 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			custom_effect_tooltip = EQS_SOL_launch_required_tt
 			add_stability = 0.03
 			add_war_support = 0.03
+			if = {
+				limit = {
+					has_country_flag = EQS_SOL_construct_escort_fleet
+				}
+				navy_experience = 30
+			}
+			if = {
+				limit = {
+					has_country_flag = EQS_SOL_daybreak_create_sister_ships
+				}
+				add_political_power = 45
+			}
 			hidden_effect = {
 				###Same as above
 				EQS_create_daybreak = yes
@@ -371,6 +395,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_secondaries_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
 			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
+			add_to_variable = {
 				EQS_SOL_secondaries_upgraded = 1
 			}
 			add_days_mission_timeout = {
@@ -399,6 +426,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_aa_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_defenses_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = {
 				EQS_SOL_aa_upgraded = 1
 			}
@@ -429,6 +459,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_main_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
 			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
+			add_to_variable = {
 				EQS_SOL_primaries_upgraded = 1
 			}
 			add_days_mission_timeout = {
@@ -457,6 +490,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_secondary_battery_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = { EQS_SOL_secondary_cannons_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
@@ -484,6 +520,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_armor_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_defenses_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = { EQS_SOL_armor_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
@@ -511,6 +550,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_fcs_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = { EQS_SOL_rangefinding_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
@@ -538,6 +580,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_radar_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = { EQS_SOL_radar_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
@@ -565,6 +610,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_plane_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = { EQS_SOL_recon_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
@@ -592,6 +640,9 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		complete_effect = {
 			custom_effect_tooltip = EQS_SOL_upgrade_path_engine_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
+			}
 			add_to_variable = { EQS_SOL_engine_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
