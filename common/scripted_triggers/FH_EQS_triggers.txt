@@ -745,60 +745,54 @@ SOL_ordo_confundas_visible = {
 	}
 }
 SOL_ordo_tenuis_visible = {
-	AND = {
-		OR = {
-			CRY = { SOL_check_if_puppet = yes }
-			all_of_scopes = {
-				array = global.crystal_core_territory
-				
-				is_owned_by = ROOT
-			}
-		}
-		NOT = {
-			OR = {
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = ROOT
-				}
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = CRY
-				}
-			}
-		}
-		NOT = { controls_state = 1220 }
-		NOT = {	CWR = { SOL_check_if_puppet = yes } }
-		NOT = { CRY = { controls_state = 1220 } }
-	}
+	always = no
+	#AND = {
+	#	CRY = {
+	#		OR = {
+	#			SOL_check_if_puppet = yes
+	#			all_original_cores_owned_by_ROOT = yes
+	#		}
+	#	}
+	#	NOT = {
+	#		OR = {
+	#			all_of_scopes = {
+	#				array = CWR.original_cores
+	#
+	#				is_owned_by = ROOT
+	#			}
+	#			all_of_scopes = {
+	#				array = CWR.original_cores
+	#
+	#				is_owned_by = CRY
+	#			}
+	#		}
+	#	}
+	#	NOT = { controls_state = 1220 }
+	#	NOT = {	CWR = { SOL_check_if_puppet = yes } }
+	#	NOT = { CRY = { controls_state = 1220 } }
+	#}
 }
 SOL_ordo_tenuis_CWR_visible = {
 	AND = {
 		OR = {
-			CWR = { SOL_check_if_puppet = yes }
-			ROOT = {
-				AND = {
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-					NOT = {	CRY = { SOL_check_if_puppet = yes } }
-					NOT = { controls_state = 1220 }
-				}
+			CWR = {
+				SOL_check_if_puppet = yes
+			}
+			AND = {
+				CWR = { all_original_cores_owned_by_ROOT = yes }
+				NOT = {	CRY = { SOL_check_if_puppet = yes } }
 			}
 		}
 		NOT = {	CRY = { SOL_check_if_puppet = yes } }
 		NOT = {
 			OR = {
 				all_of_scopes = {
-					array = global.crystal_core_territory
+					array = CRY.original_cores
 					
 					is_owned_by = CWR
 				}
 				all_of_scopes = {
-					array = global.crystal_core_territory
+					array = CRY.original_cores
 					
 					is_owned_by = ROOT
 				}
@@ -807,108 +801,72 @@ SOL_ordo_tenuis_CWR_visible = {
 	}
 }
 SOL_ordo_tenuis_CRY_CWR_visible = {
-	AND = {
-		OR = {
-			AND = {
-				CWR = { SOL_check_if_puppet = yes }
-				CRY = { SOL_check_if_puppet = yes }
-			}
-			CWR = {
-				AND = {
-					SOL_check_if_puppet = yes
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-			}
-			CRY = {
-				AND = {
-					SOL_check_if_puppet = yes
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-			}
-			ROOT = {
-				AND = {
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-					NOT = { CWR = { SOL_check_if_puppet = yes } }
-					NOT = { CRY = { SOL_check_if_puppet = yes } }
-				}
-			}
-			AND = {
-				ROOT = {
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-				CWR = { SOL_check_if_puppet = yes }
-			}
-			AND = {
-				ROOT = {
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-				CRY = { SOL_check_if_puppet = yes }
-			}
-		}
-		OR = {
-			AND = {
-				NOT = { ROOT = { controls_state = 1220 } }
-				NOT = { CWR = { controls_state = 1220 } }
-				NOT = { CRY = { controls_state = 1220 } }
-			}
-		}
-	}
+	#Clean up later
+	always = no
+	#AND = {
+	#	OR = {
+	#		AND = {
+	#			CWR = { SOL_check_if_puppet = yes }
+	#			CRY = { SOL_check_if_puppet = yes }
+	#		}
+	#		CWR = {
+	#			AND = {
+	#				SOL_check_if_puppet = yes
+	#				all_of_scopes = {
+	#					array = CRY.original_cores
+	#
+	#					is_owned_by = ROOT
+	#				}
+	#			}
+	#		}
+	#		CRY = {
+	#			AND = {
+	#				SOL_check_if_puppet = yes
+	#				all_of_scopes = {
+	#					array = CWR.original_cores
+	#
+	#					is_owned_by = ROOT
+	#				}
+	#			}
+	#		}
+	#		CRY = { all_original_cores_owned_by_ROOT = yes }
+	#		CWR = { all_original_cores_owned_by_ROOT = yes }
+	#		AND = {
+	#			all_original_cores_owned_by_ROOT = yes
+	#			CWR = { SOL_check_if_puppet = yes }
+	#		}
+	#		AND = {
+	#			CWR = { all_original_cores_owned_by_ROOT = yes }
+	#			CRY = { SOL_check_if_puppet = yes }
+	#		}
+	#	}
+	#	OR = {
+	#		AND = {
+	#			NOT = { ROOT = { controls_state = 1220 } }
+	#			NOT = { CWR = { controls_state = 1220 } }
+	#			NOT = { CRY = { controls_state = 1220 } }
+	#		}
+	#	}
+	#}
 }
 SOL_ordo_tenuis_CRY_CHN_visible = {
 	AND = {
 		OR = {
 			CRY = {
-				AND = {
-					SOL_check_if_puppet = yes
-					controls_state = 1220
-				}
+				SOL_check_if_puppet = yes
 			}
-			ROOT = {
-				AND = {
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-					controls_state = 1220
-				}
-			}
+			CRY = { all_original_cores_owned_by_ROOT = yes }
 		}
 		NOT = { CWR = { SOL_check_if_puppet = yes } }
 		NOT = {
 			OR = {
 				all_of_scopes = {
-					array = global.CWR_territory
+					array = CWR.original_cores
 					
 					is_owned_by = ROOT
 				}
 				all_of_scopes = {
-					array = global.CWR_territory
+					array = CWR.original_cores
 					
 					is_owned_by = CRY
 				}
@@ -922,19 +880,17 @@ SOL_ordo_tenuis_full_visible = {
 			AND = {
 				SOL_check_if_puppet = yes
 				all_of_scopes = {
-					array = global.CWR_territory
+					array = CWR.original_cores
 					
 					is_owned_by = CRY
 				}
-				controls_state = 1220
 			}
 		}
 		CWR = {
 			AND = {
 				SOL_check_if_puppet = yes
-				controls_state = 1220
 				all_of_scopes = {
-					array = global.crystal_core_territory
+					array = CRY.original_cores
 					
 					is_owned_by = CWR
 				}
@@ -943,60 +899,18 @@ SOL_ordo_tenuis_full_visible = {
 		AND = {
 			CWR = { SOL_check_if_puppet = yes }
 			CRY = { SOL_check_if_puppet = yes }
-			OR = {
-				CRY = {
-					controls_state = 1220
-				}
-				CWR = {
-					controls_state = 1220
-				}
-				ROOT = {
-					controls_state = 1220
-				}
-			}
 		}
 		ROOT = {
-			AND = {
-				controls_state = 1220
-				all_of_scopes = {
-					array = global.crystal_core_territory
-					
-					is_owned_by = ROOT
-				}
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = ROOT
-				}
-			}
+			CWR = { all_original_cores_owned_by_ROOT = yes }
+			CRY = { all_original_cores_owned_by_ROOT = yes }
 		}
 		AND = {
-			ROOT = {
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = ROOT
-				}
-			}
+			CWR = { all_original_cores_owned_by_ROOT = yes }
 			CRY = { SOL_check_if_puppet = yes }
-			OR = {
-				CRY = { controls_state = 1220 }
-				ROOT = { controls_state = 1220 }
-			}
 		}
 		AND = {
-			ROOT = {
-				all_of_scopes = {
-					array = global.crystal_core_territory
-					
-					is_owned_by = ROOT
-				}
-			}
+			CRY = { all_original_cores_owned_by_ROOT = yes}
 			CWR = { SOL_check_if_puppet = yes }
-			OR = {
-				CWR = { controls_state = 1220 }
-				ROOT = { controls_state = 1220 }
-			}
 		}
 	}
 }
