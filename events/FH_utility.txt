@@ -67,48 +67,35 @@ country_event = { #Remove the flag blocking all three nations from going to war 
 }
 
 ###Equus###
-#country_event = { #MWR leaves STG
-#	id = equestria_activity.4
-#	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.4"}
-#	hidden = yes
-#
-#	trigger = {
-#		original_tag = MWR
-#		exists = yes
-#		has_war = no
-#		date > 1050.7.1
-#	}
-#
-#	fire_only_once = yes
-#
-#	option = {
-#		leave_faction = yes
-#		OVERLORD = {
-#			end_puppet = ROOT
-#		}
-#		set_politics = {
-#			ruling_party = fascism
-#			elections_allowed = no
-#		}
-#		add_popularity = {
-#			ideology = fascism
-#			popularity = 0.33
-#		}
-#		random_list = {
-#			35 = {
-#				STG = {
-#					declare_war_on = {
-#						target = MWR
-#						type = puppet_wargoal_focus
-#					}
-#				}
-#			}
-#			65 = {
-#				remove_from_array = { global.shield_of_steel = ROOT.id }
-#			}
-#		}
-#	}
-#}
+country_event = { #MWR leaves STG
+	id = equestria_activity.4
+	title = equestria_activity.4.t
+	desc = equestria_activity.4.d
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.4"}
+
+	is_triggered_only = yes
+
+	option = {
+		name = equestria_activity.4.a
+		ai_chance = {
+			factor = 20
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+		create_wargoal = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
+	}
+	option = {
+		name = equestria_activity.4.b
+		ai_chance = {
+			factor = 80
+		}
+	}
+}
 
 country_event = { #WHY gets the option to stay or leave SOL
 	id = equestria_activity.11

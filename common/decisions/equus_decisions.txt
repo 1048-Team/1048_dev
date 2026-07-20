@@ -313,6 +313,7 @@ form_yakyakistan_category = {
 	YAH_SMH_claim_the_throne = {
 		available = {
 			11 = { is_owned_and_controlled_by = ROOT }
+			is_subject = no
 			custom_trigger_tooltip = {
 				tooltip = YAK_dead_rival_warlord_tt
 				OR = {
@@ -341,8 +342,12 @@ form_yakyakistan_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision YAH_SMH_claim_the_throne"
-			set_country_flag = reformed_YAK
-			every_state = {
+			set_country_flag = {
+				flag = reformed_YAK
+				value = 1
+				days = 120
+			}
+			every_owned_state = {
 				limit = {
 					is_on_continent = europe
 					is_in_array = {
@@ -361,6 +366,63 @@ form_yakyakistan_category = {
 				}
 			}
 		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	YAH_SMH_ask_politely = {
+		available = {
+			11 = { is_owned_and_controlled_by = ROOT }
+			is_subject = no
+			custom_trigger_tooltip = {
+				tooltip = YAK_dead_rival_warlord_tt
+				OR = {
+					AND = {
+						original_tag = YAH
+						owns_state = 11
+						NOT = { country_exists = SMH }
+					}
+					AND = {
+						original_tag = SMH
+						owns_state = 274
+						NOT = { country_exists = YAH }
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		highlight_states = {
+			highlight_state_targets = {
+				state = 335
+				state = 336
+				state = 337
+				state = 281
+				state = 278
+				state = 277
+				state = 342
+			}
+		}
+		days_remove = 30
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove YAH_SMH_ask_politely"
+			335 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_country_flag = reformed_YAK
+				factor = 0
+			}
+		}
 	}
 	YAH_SMH_integrate_old_territory = {
 		available = {
@@ -371,6 +433,7 @@ form_yakyakistan_category = {
 			278 = { is_owned_and_controlled_by = ROOT }
 			277 = { is_owned_and_controlled_by = ROOT }
 			342 = { is_owned_and_controlled_by = ROOT }
+			is_subject = no
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -385,7 +448,7 @@ form_yakyakistan_category = {
 			}
 		}
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision integrate_old_territory"
+			log = "[GetDateText]: [Root.GetName]: Decision YAH_SMH_integrate_old_territory"
 			add_state_core = 335
 			add_state_core = 336
 			add_state_core = 337
@@ -394,12 +457,49 @@ form_yakyakistan_category = {
 			add_state_core = 277
 			add_state_core = 342
 		}
+		ai_will_do = {
+			factor = 100
+		}
 	}
 }
 form_PLB_category = {
+	JGR_skin_yaks = {
+		available = {
+			date > 1051.6.30
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = YAH
+		war_with_on_remove = SMH
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JGR_skin_yaks"
+			if = {
+				limit = {
+					country_exists = YAH
+				}
+				create_wargoal = {
+					target = YAH
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = SMH
+				}
+				create_wargoal = {
+					target = SMH
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	JGR_reform_our_communities = {
 		available = {
 			290 = { is_owned_and_controlled_by = ROOT }
+			is_subject = no
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -413,7 +513,7 @@ form_PLB_category = {
 		}
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision JGR_reform_our_communities"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = europe
 					is_in_array = {
@@ -431,6 +531,9 @@ form_PLB_category = {
 					hours = 6
 				}
 			}
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 }
@@ -490,6 +593,9 @@ form_nova_griffonia_cetegory = {
 				set_cosmetic_tag = GRF_NEW
 			}
 		}
+		ai_will_do = {
+			factor = 100
+		}
 	}
 }
 form_western_griffonian_empire_category = {
@@ -516,8 +622,8 @@ form_western_griffonian_empire_category = {
 			}
 		}
 		fire_only_once = yes
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove GRF_assert_imperial_de_jure_authority"
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRF_assert_imperial_de_jure_authority"
 			set_country_flag = GRF_first_core_expansion
 			every_state = {
 				limit = {
@@ -533,6 +639,9 @@ form_western_griffonian_empire_category = {
 				}
 				add_core_of = ROOT
 			}
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 	GRF_return_the_old_colonial_borders = {
@@ -559,8 +668,8 @@ form_western_griffonian_empire_category = {
 			}
 		}
 		fire_only_once = yes
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove GRF_return_the_old_colonial_borders"
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision GRF_return_the_old_colonial_borders"
 			every_state = {
 				limit = {
 					is_on_continent = europe
@@ -575,6 +684,9 @@ form_western_griffonian_empire_category = {
 				}
 				add_core_of = ROOT
 			}
+		}
+		ai_will_do = {
+			factor = 100
 		}
 	}
 	GRF_rebirth_of_the_western_empire = {
@@ -689,9 +801,142 @@ form_western_griffonian_empire_category = {
 				}
 			}
 		}
+		ai_will_do = {
+			factor = 100
+		}
 	}
 }
 SCH_formables_category = {
+	SCH_break_the_bears = {
+		available = {
+			date > 1051.7.31
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = JGR
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SCH_break_the_bears"
+			create_wargoal = {
+				target = JGR
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	SCH_yelping_yaks = {
+		available = {
+			JGR = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = YAH
+		war_with_on_remove = SMH
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SCH_yelping_yaks"
+			if = {
+				limit = {
+					country_exists = YAH
+				}
+				create_wargoal = {
+					target = YAH
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = SMH
+				}
+				create_wargoal = {
+					target = SMH
+					type = annex_everything
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_in_array = { JGR.original_cores = THIS }
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				date < 1052.4.30
+				factor = 0
+			}
+		}
+	}
+	SCH_pluck_bird_feathers = {
+		available = {
+			YAH = { all_original_cores_owned_by_ROOT = yes }
+			SMH = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = VRG
+		war_with_on_remove = NVC
+		war_with_on_remove = GRF
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SCH_pluck_bird_feathers"
+			if = {
+				limit = {
+					country_exists = NVC
+				}
+				create_wargoal = {
+					target = NVC
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = VRG
+				}
+				create_wargoal = {
+					target = VRG
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = GRF
+				}
+				create_wargoal = {
+					target = GRF
+					type = annex_everything
+				}
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_in_array = { YAH.original_cores = THIS }
+						is_in_array = { SMH.original_cores = THIS }
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				date < 1053.8.31
+				factor = 0
+			}
+		}
+	}
 	SCH_form_auroral_north = {
 		available = {
 			GRF = { all_original_cores_owned_by_ROOT = yes }
@@ -719,8 +964,8 @@ SCH_formables_category = {
 		}
 		fire_only_once = yes
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision rebirth_of_the_western_empire"
-			every_state = {
+			log = "[GetDateText]: [Root.GetName]: Decision SCH_form_auroral_north"
+			every_owned_state = {
 				limit = {
 					is_on_continent = europe
 					OR = {
@@ -734,6 +979,7 @@ SCH_formables_category = {
 						state = 305
 						state = 306
 					}
+					NOT = { is_core_of = ROOT }
 				}
 				add_core_of = ROOT
 			}
