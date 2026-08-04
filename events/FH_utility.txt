@@ -621,11 +621,49 @@ country_event = { #AWR is couped again by unhappy soldiers or sailors
 	is_triggered_only = yes
 	
 	option = {
+		name = equestria_activity.28.a
 		set_cosmetic_tag = AWR_doubleplusfree
-		STG = {
-			set_country_flag = STG_spurned_AWR_puppet
-		}
 		retire_character = AWR_Sheer_Skill
+		leave_faction = yes
+		hidden_effect = {
+			STG = {
+				country_event = {
+					id = equestria_activity.29
+					days = 3
+					random_days = 11
+				}
+			}
+		}
+	}
+}
+
+country_event = { #STG can choose to retaliate or ignore AWR
+	id = equestria_activity.29
+	immediate = {log = "[GetDateText]: [Root.GetName] event equestria_activity.29"}
+	title = equestria_activity.29.t
+	desc = equestria_activity.29.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = equestria_activity.29.a
+		ai_chance = {
+			factor = 70
+		}
+	}
+	option = {
+		name = equestria_activity.29.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+		create_wargoal = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
 	}
 }
 
