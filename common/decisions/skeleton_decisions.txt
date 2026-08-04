@@ -1060,7 +1060,6 @@ WGE_skeleton_category = {
             date > 1050.7.1
         }
         visible = {
-            date > 1050.7.1
             tag = MWR
         }
         fire_only_once = yes
@@ -1070,7 +1069,14 @@ WGE_skeleton_category = {
             hidden_effect = {
                 leave_faction = yes
                 OVERLORD = {
-                    end_puppet = yes
+                    set_autonomy = {
+                        target = ROOT
+                        autonomy_state = autonomy_free
+                    }
+                    country_event = {
+                        id = equestria_activity.4
+                        days = 1
+                    }
                 }
                 set_politics = {
                     ruling_party = fascism
@@ -1084,6 +1090,9 @@ WGE_skeleton_category = {
                 remove_from_array = { global.shield_of_steel = ROOT.id }
             }
         }
+        ai_will_do = {
+            factor = 10
+        }
     }
     NVC_capture_the_throne = {
         available = {
@@ -1092,7 +1101,6 @@ WGE_skeleton_category = {
             date > 1051.5.1
         }
         visible = {
-            date > 1051.5.1
             tag = NVC
         }
         fire_only_once = yes
@@ -1114,8 +1122,10 @@ WGE_skeleton_category = {
             date > 1051.6.1
         }
         visible = {
-            date > 1051.6.1
-            tag = VRG
+            OR = {
+                tag = VRG
+                tag = MWR
+            }
         }
         fire_only_once = yes
         days_remove = 7
@@ -1131,28 +1141,42 @@ WGE_skeleton_category = {
                 target = GRF
                 type = annex_everything
             }
+            modifier = {
+                AND = {
+                    tag = MWR
+                    date < 1051.8.1
+                }
+                factor = 0
+            }
         }
         ai_will_do = { factor = 10 }
     }
     VRG_NVC_recapture_southern_GRF = {
         available = {
-            owns_state = 1217
+            if = {
+                limit = {
+                    tag = VRG
+                }
+                1217 = {
+                    OR = {
+                        is_owned_and_controlled_by = ROOT
+                        is_owned_and_controlled_by = MWR
+                    }
+                }
+            }
+            else = {
+                1217 = { is_owned_and_controlled_by = ROOT }
+            }
             is_subject = no
             date > 1052.8.10
         }
         visible = {
-            date > 1052.8.10
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
             }
-            country_exists = MWR #For now
+            country_exists = MWR
         }
         fire_only_once = yes
         cost = 50
@@ -1163,6 +1187,57 @@ WGE_skeleton_category = {
                 type = annex_everything
                 target = MWR
             }
+            if = {
+                limit = {
+                    OR = {
+                        MWR = {
+                            is_subject_of = STG
+                        }
+                        338 = { is_owned_by = STG }
+                    }
+                }
+                custom_effect_tooltip = VRG_NVC_force_surrender_tt
+                set_country_flag = VRG_NVC_can_force_white_peace
+            }
+        }
+        ai_will_do = {
+            factor = 10
+            modifier = {
+                has_war = yes
+                factor = 0
+            }
+            modifier = {
+                AND = {
+                    MWR = {
+                        is_subject = yes
+                    }
+                    date < 1054.1.1
+                }
+                factor = 0
+            }
+        }
+    }
+    VRG_NVC_submit_our_demands = {
+        available = {
+            338 = { is_controlled_by = ROOT }
+        }
+        visible = {
+            has_country_flag = VRG_NVC_can_force_white_peace
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision VRG_NVC_submit_our_demands"
+            #Change this to a series of events, probably
+            white_peace = STG
+            every_state = {
+                limit = {
+                    is_in_array = { STG.original_cores = THIS }
+                }
+                transfer_state_to = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 10
         }
         ai_will_do = { factor = 10 }
     }
@@ -1173,16 +1248,11 @@ WGE_skeleton_category = {
             date > 1054.2.14
         }
         visible = {
-            date > 1054.2.14
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
+                tag = MWR
             }
             OR = {
                 country_exists = SCH
@@ -1222,16 +1292,11 @@ WGE_skeleton_category = {
             date > 1056.1.1
         }
         visible = {
-            date > 1056.1.1
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
+                tag = MWR
             }
             OR = {
                 country_exists = SMH
@@ -1281,16 +1346,11 @@ WGE_skeleton_category = {
             date > 1057.6.1
         }
         visible = {
-            date > 1057.6.1
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
+                tag = MWR
             }
         }
         cost = 100
@@ -1324,6 +1384,9 @@ STG_region_skeleton_category = {
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove AWR_peace_out_STG"
             country_event = equestria_activity.27
+        }
+        ai_will_do = {
+            factor = 100
         }
     }
     STG_end_AWRs_crap = {
