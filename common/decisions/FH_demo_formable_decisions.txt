@@ -4356,6 +4356,28 @@ EQC_formables_category = {
 	}
 }
 BRF_formables_category = {
+	BRF_woopsie_doodles = {
+		available = {
+			FBK = { any_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			FBK = { any_original_cores_owned_by_ROOT_or_subject = yes }
+			HLR = { is_in_faction_with = ROOT }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BRF_woopsie_doodles"
+			every_owned_state = {
+				limit = {
+					is_owned_by = ROOT
+					is_in_array = { FBK.original_cores = THIS }
+				}
+				transfer_state_to = HLR
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	BRF_propose_unification = {
         available = {
             date > 1051.12.31
@@ -4371,12 +4393,16 @@ BRF_formables_category = {
             }
         }
         visible = {
-			tag = BRF
 			OR = {
-				BRF = { exists = no }
-				tag = LUS
-				tag = GRY
-				tag = GRU
+				tag = BRF
+				AND = {
+					BRF = { exists = no }
+					OR = {
+						tag = LUS
+						tag = GRY
+						tag = GRU
+					}
+				}
 			}
         }
         cost = 50
@@ -4395,8 +4421,52 @@ BRF_formables_category = {
                 country_event = griffonia_activity.1
             }
         }
+    }
+    BRF_propose_unification_ai = {
+        available = {
+            date > 1051.12.31
+            is_subject = no
+            is_faction_leader = yes
+            any_other_country = {
+                OR = {
+                    tag = LUS
+                    tag = GRY
+                    tag = GRU
+                }
+                is_in_faction_with = ROOT
+            }
+        }
+        visible = {
+			OR = {
+				tag = BRF
+				AND = {
+					BRF = { exists = no }
+					OR = {
+						tag = LUS
+						tag = GRY
+						tag = GRU
+					}
+				}
+			}
+			is_ai = yes
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision BRF_propose_unification_ai"
+            every_other_country = {
+                limit = {
+                    OR = {
+                        tag = LUS
+                        tag = GRY
+                        tag = GRU
+                    }
+                    is_in_faction_with = ROOT
+                }
+                country_event = griffonia_activity.1
+            }
+        }
         ai_will_do = {
-            factor = 1000
+            factor = 100
         }
     }
 	BRF_revive_coltstream_treaty = {
@@ -4569,10 +4639,7 @@ BRF_formables_category = {
 	}
 	BRF_request_peace = {
 		available = {
-			OR = {
-				date > 1051.1.1
-				threat > 0.33
-			}
+			date > 1051.1.1
 			country_exists = HLR
 		}
 		visible = {
@@ -4597,10 +4664,7 @@ BRF_formables_category = {
 	}
 	BRF_ponies_united = {
 		available = {
-			OR = {
-				date > 1051.1.1
-				threat > 0.33
-			}
+			date > 1051.1.1
 			country_exists = FBK
 		}
 		visible = {
@@ -4625,10 +4689,7 @@ BRF_formables_category = {
 	}
 	BRF_big_stonks = {
 		available = {
-			OR = {
-				date > 1052.1.1
-				threat > 0.45
-			}
+			date > 1052.1.1
 			country_exists = TRD
 		}
 		visible = {
@@ -4653,10 +4714,7 @@ BRF_formables_category = {
 	}
 	BRF_zealous_republicans = {
 		available = {
-			OR = {
-				date > 1052.6.1
-				threat > 0.5
-			}
+			date > 1052.6.1
 			country_exists = FAT
 		}
 		visible = {
@@ -4681,10 +4739,7 @@ BRF_formables_category = {
 	}
 	BRF_return_the_exiles = {
 		available = {
-			OR = {
-				date > 1054.1.1
-				threat > 0.6
-			}
+			date > 1054.1.1
 			country_exists = WNG
 		}
 		visible = {
