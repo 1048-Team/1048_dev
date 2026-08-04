@@ -85,8 +85,6 @@ on_actions = {
 				add_to_variable = { global.wc_states_required = 1 }
 			}
 
-			ZZZ = { initialize_night_trait_tokens = yes }
-
 			if = {
 				limit = {
 					OR = {
@@ -180,45 +178,6 @@ on_actions = {
 
 			###Lots of EaW copied stuff###
 			every_possible_country = {
-                #Create a list of all generals who have night related traits.
-				every_unit_leader = {
-					for_each_loop = {
-						array = global.night_trait_tokens
-						value = v
-
-						#Loop through all the traits in initialize_night_trait_tokens and see if the unit leader has any.
-						#For some reason there's no trigger to check if a unit leader has a trait.
-						#replace_unit_leader_trait is a broken effect that does not work properly (it doesn't even have official documentation lol).
-						#However, it does add the "trait" if and only if the unit leader has the specified "replace" trait.
-						#This can be used to see if the unit leader has the "replace" trait by checking for a custom modifier in night_test_trait.
-						#Ask me for further details. -Blue
-						meta_effect = {
-							text = {
-								replace_unit_leader_trait = {
-									trait = night_test_trait
-									replace = [TRAIT]
-								}
-							}
-							TRAIT = "[?v.GetTokenKey]"
-						}
-						if = {
-							#If this is true, then the unit leader has v as a trait
-							limit = {
-								check_variable = { leader_modifier@night_test_trait_modifier = 1 }
-							}
-							add_to_array = { night_related_traits = v }
-							if = {
-								limit = {
-									NOT = { is_in_array = { global.unit_leaders_to_update = THIS } }
-								}
-								add_to_array = { global.unit_leaders_to_update = THIS }
-							}
-
-							#Remove the test trait
-							remove_unit_leader_trait = night_test_trait
-						}
-					}
-				}
 				# added in vanilla 1.9.2
 				add_ai_strategy = {
 					type = pp_spend_priority

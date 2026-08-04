@@ -36,6 +36,8 @@ NDefines.NFactions.FACTION_INTELLIGENCE_ALLOWED_ADVISOR_TRAIT = { -- Head off at
     "HUN_stalinist_agent",
     "JAP_tokko_chief",
     "CHI_spymaster",
+    "AST_intelligence_director",
+    "AST_indomitable_scout",
     "head_of_intelligence_kirin",
     "HEL_general_secretary",
     "HEL_general_secretary_lar",
@@ -55,6 +57,14 @@ NDefines.NFactions.FACTION_INTELLIGENCE_ALLOWED_ADVISOR_TRAIT = { -- Head off at
     "JER_kindly_enigma",
     "JER_kindly_enigma_lar",
     "head_of_intelligence_useless",
+    "HYE_little_shadow_lar",
+    "HYE_little_shadow",
     "TBK_AF_lightbringer_advisor",
-    "TBK_AF_lightbringer_advisor_expanded"
+    "TBK_AF_lightbringer_advisor_expanded",
+    --FH
+    "speculatore_director",
+    "speculatore_director_lar",
+    "speculatore_agent",
+    "speculatore_agent_lar"
+
 }
