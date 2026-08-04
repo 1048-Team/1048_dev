@@ -3,6 +3,7 @@ NDefines.NGame.END_DATE = "1075.1.1.1"
 NDefines.NGame.HANDS_OFF_START_TAG = "GRF"
 
 NDefines.NDiplomacy.TENSION_TIME_SCALE_START_DATE = "1053.1.1.12" -- Same logic as in Vanilla. World begins to wake up again in 1053, which is roughly when SOL should begin its reconquest. Should adjust to that average start point, though
+NDefines.NDiplomacy.TENSION_DECAY_DAILY = 0.005 --Vanilla is 0.005. Tension decay removed as the Griffonia wars screw with tension too much. ZZZ has an on_monthly to tick down tension by 0.5% per month if there is over 0% world tension
 
 NDefines.NFactions.FACTION_INTELLIGENCE_ALLOWED_ADVISOR_TRAIT = { -- Head off at the pass given that there will be some unique spymaster traits throughout the development process
     "head_of_intelligence",
