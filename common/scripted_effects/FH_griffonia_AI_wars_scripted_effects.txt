@@ -1,94 +1,240 @@
-griffonia_calm_down_a_bit = {
-    IF = {
+#griffonia_WT_baseline = {
+#    set_temp_variable = { FH_world_tension = global.threat }
+#    multiply_temp_variable = { FH_world_tension = 100 }
+#    round_temp_variable = FH_world_tension
+#    IF = {
+#        limit = {
+#            threat < 10
+#            check_variable = { global.FH_limited_war_escalator = 1 }
+#        }
+#        add_threat = var:FH_world_tension
+#        add_threat = 10
+#    }
+#    ELSE_IF = {
+#        limit = {
+#            threat < 30
+#            check_variable = { global.FH_limited_war_escalator = 2 }
+#        }
+#        add_threat = var:FH_world_tension
+#        add_threat = 30
+#    }
+#    ELSE_IF = {
+#        limit = {
+#            threat < 65
+#            check_variable = { global.FH_limited_war_escalator = 3 }
+#        }
+#        add_threat = var:FH_world_tension
+#        add_threat = 65
+#    }
+#}
+griffonia_peace_out_GRI_faction = {
+    every_enemy_country = {
         limit = {
             OR = {
-                tag = EQC
                 tag = GRI
+                is_in_faction_with = GRI
             }
         }
-        IF = {
+        every_other_country = {
             limit = {
-                check_variable = { FH_limited_war_escalator = 1 }
-            }
-            add_threat = -42.5
-        }
-        ELSE_IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 2 }
-            }
-            add_threat = -30
-        }
-        ELSE_IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 3 }
-            }
-            add_threat = -15
-        }
-    }
-    ELSE_IF = {
-        limit = {
-            tag = BRF
-        }
-        IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 1 }
-            }
-            add_threat = -15
-        }
-        ELSE_IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 2 }
-            }
-            add_threat = -8
-        }
-        ELSE_IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 3 }
-            }
-            add_threat = -4
-        }
-    }
-    ELSE_IF = {
-        limit = {
-            tag = RCT
-        }
-        IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 1 }
-            }
-            add_threat = -7.4
-        }
-        ELSE_IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 2 }
-            }
-            add_threat = -3
-        }
-        IF = {
-            limit = {
-                GRI = {
-                    is_ai = no
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
                 }
             }
-            IF = {
-            limit = {
-                check_variable = { FH_limited_war_escalator = 1 }
-            }
-                add_threat = -11
-            }
-            ELSE_IF = {
-                limit = {
-                    check_variable = { FH_limited_war_escalator = 2 }
-                }
-                add_threat = -4
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
             }
         }
     }
 }
+griffonia_peace_out_BRF_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = BRF
+                is_in_faction_with = BRF
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_peace_out_RCT_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = RCT
+                is_in_faction_with = RCT
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_peace_out_EQC_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = EQC
+                is_in_faction_with = EQC
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_calm_down_a_bit = {
+    #IF = {
+    #    limit = {
+    #        tag = EQC
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -100
+    #        add_threat = -100
+    #        add_threat = -45
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -100
+    #        add_threat = -100
+    #        add_threat = -22
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 3 }
+    #        }
+    #        add_threat = -100
+    #        add_threat = -94
+    #    }
+    #}
+    #ELSE_IF = {
+    #    limit = {
+    #        tag = GRI
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -55
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -46
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 3 }
+    #        }
+    #        add_threat = -30
+    #    }
+    #}
+    #ELSE_IF = {
+    #    limit = {
+    #        tag = BRF
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -15
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -8
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 3 }
+    #        }
+    #        add_threat = -4
+    #    }
+    #}
+    #ELSE_IF = {
+    #    limit = {
+    #        tag = RCT
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -30
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -22
+    #    }
+    #    IF = {
+    #        limit = {
+    #            GRI = {
+    #                is_ai = no
+    #            }
+    #        }
+    #        IF = {
+    #            limit = {
+    #                check_variable = { global.FH_limited_war_escalator = 1 }
+    #            }
+    #            add_threat = -11
+    #        }
+    #        ELSE_IF = {
+    #            limit = {
+    #                check_variable = { global.FH_limited_war_escalator = 2 }
+    #            }
+    #            add_threat = -4
+    #        }
+    #    }
+    #}
+}
 griffonia_trigger_cooldown = {
     IF = {
         limit = {
-            check_variable = { FH_limited_war_escalator = 0 }
+            check_variable = { global.FH_limited_war_escalator = 0 }
         }
         country_event = {
             id = fh_utility.3
@@ -98,7 +244,7 @@ griffonia_trigger_cooldown = {
     }
     ELSE_IF = {
         limit = {
-            check_variable = { FH_limited_war_escalator = 1 }
+            check_variable = { global.FH_limited_war_escalator = 1 }
         }
         country_event = {
             id = fh_utility.3
@@ -108,7 +254,7 @@ griffonia_trigger_cooldown = {
     }
     ELSE_IF = {
         limit = {
-            check_variable = { FH_limited_war_escalator = 2 }
+            check_variable = { global.FH_limited_war_escalator = 2 }
         }
         country_event = {
             id = fh_utility.3
@@ -183,18 +329,8 @@ griffonia_alert_nations = {
 }
 griffonia_GRI_land_transfer_EQC = {
     #From GRI to EQC
-    every_enemy_country = {
-        limit = {
-            OR = {
-                tag = GRI
-                is_in_faction_with = GRI
-            }
-        }
-        white_peace = EQC
-        white_peace = SIC
-        white_peace = MIT
-        white_peace = HPS
-    }
+    griffonia_peace_out_GRI_faction = yes
+    griffonia_peace_out_RCT_faction = yes
     IF = {
         limit = {
             has_country_flag = EQC_GRI_war_flag_4
@@ -259,20 +395,8 @@ griffonia_GRI_land_transfer_EQC = {
     }
 }
 griffonia_BRF_land_transfer_EQC = {
-    every_enemy_country = {
-        limit = {
-            NOT = {
-                OR = {
-                    tag = GRI
-                    is_in_faction_with = GRI
-                }
-            }
-        }
-        white_peace = EQC
-        white_peace = SIC
-        white_peace = MIT
-        white_peace = HPS
-    }
+    #From BRF to EQC
+    griffonia_peace_out_BRF_faction = yes
     #Original
     IF = {
         limit = {
@@ -292,18 +416,7 @@ griffonia_BRF_land_transfer_EQC = {
 }
 griffonia_RCT_land_transfer_GRI = {
     #From RCT to GRI
-    every_enemy_country = {
-        limit = {
-            OR = {
-                tag = RCT
-                is_in_faction_with = RCT
-            }
-        }
-        white_peace = GRI
-        white_peace = BOI
-        white_peace = HLQ
-        white_peace = NTR
-    }
+    griffonia_peace_out_RCT_faction = yes
     IF = {
         limit = {
             has_country_flag = GRI_RCT_war_flag_0
@@ -328,12 +441,14 @@ griffonia_RCT_land_transfer_GRI = {
             transfer_state = 1211
             transfer_state = 540
             transfer_state = 505
+            get_current_government_type = yes
             GRI = {
                 set_autonomy = {
                     target = HLQ
                     autonomous_state = autonomy_autonomous_vassal
                 }
             }
+            restore_previous_government_type = yes
         }
         clr_country_flag = GRI_RCT_war_flag_1
         set_country_flag = GRI_RCT_war_flag_2
@@ -403,18 +518,7 @@ griffonia_RCT_land_transfer_GRI = {
 }
 griffonia_EQC_land_transfer_GRI = {
     #From EQC to GRI
-    every_enemy_country = {
-        limit = {
-            OR = {
-                tag = EQC
-                is_in_faction_with = EQC
-            }
-        }
-        white_peace = GRI
-        white_peace = BOI
-        white_peace = HLQ
-        white_peace = NTR
-    }
+    griffonia_peace_out_EQC_faction = yes
     IF = {
         limit = {
             has_country_flag = EQC_GRI_war_flag_0
@@ -443,13 +547,14 @@ griffonia_EQC_land_transfer_GRI = {
             transfer_state = 389
             transfer_state = 531
             transfer_state = 490
-            get_current_government = yes
+            get_current_government_type = yes
             GRI = {
                 set_autonomy = {
                     target = BOI
                     autonomous_state = autonomy_subjugated_vassal
                 }
             }
+            restore_previous_government_type = yes
         }
         clr_country_flag = EQC_GRI_war_flag_1
         set_country_flag = EQC_GRI_war_flag_2
@@ -506,18 +611,8 @@ griffonia_EQC_land_transfer_GRI = {
 }
 griffonia_GRI_land_transfer_RCT = {
     #From GRI to RCT
-    every_enemy_country = {
-        limit = {
-            OR = {
-                tag = GRI
-                is_in_faction_with = GRI
-            }
-        }
-        white_peace = RCT
-        white_peace = LNS
-        white_peace = BAR
-        white_peace = NIM
-    }
+    griffonia_peace_out_GRI_faction = yes
+    griffonia_peace_out_EQC_faction = yes
     IF = {
         limit = {
             has_country_flag = GRI_RCT_war_flag_4
@@ -544,12 +639,14 @@ griffonia_GRI_land_transfer_RCT = {
             transfer_state = 537
             transfer_state = 1210
             transfer_state = 552
+            get_current_government_type = yes
             RCT = {
                 set_autonomy = {
                     target = LNS
                     autonomous_state = autonomy_puppet
                 }
             }
+            restore_previous_government_type = yes
         }
         clr_country_flag = GRI_RCT_war_flag_3
         set_country_flag = GRI_RCT_war_flag_2
@@ -614,20 +711,7 @@ griffonia_GRI_land_transfer_RCT = {
     }
 }
 griffonia_BRF_land_transfer_RCT = {
-    every_enemy_country = {
-        limit = {
-            NOT = {
-                OR = {
-                    tag = GRI
-                    is_in_faction_with = GRI
-                }
-            }
-        }
-        white_peace = RCT
-        white_peace = LNS
-        white_peace = BAR
-        white_peace = NIM
-    }
+    griffonia_peace_out_BRF_faction = yes
     #Original
     IF = {
         limit = {
