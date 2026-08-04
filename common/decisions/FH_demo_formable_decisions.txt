@@ -2343,41 +2343,27 @@ SCS_formables_category = {
 	}
 	SCS_core_go_up = {
 		available = {
-			all_of_scopes = {
+			custom_trigger_tooltip = {
 				tooltip = SCS_owns_all_original_EQS_states_tt
-				array = global.EQS_original_territory
-				hidden_trigger = {
-					is_on_continent = europe
-					OWNER = {
-						OR = {
-							tag = ROOT
-							AND = {
-								tag = CHN
-								ROOT = {
-									is_subject_of = CHN
+				all_of_scopes = {
+					array = global.EQS_original_territory
+					tooltip = SCS_owns_all_original_EQS_states_tt
+					hidden_trigger = {
+						is_on_continent = europe
+						OWNER = {
+							OR = {
+								tag = ROOT
+								AND = {
+									tag = CHN
+									ROOT = {
+										is_subject_of = CHN
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-			#Pending actually useful documentation from PDX
-			#all_collection_elements = {
-			#	collection = {
-			#		input = collection:equestrian_original_states
-			#	}
-			#	OWNER = {
-			#		OR = {
-			#			tag = ROOT
-			#			AND = {
-			#				tag = CHN
-			#				ROOT = {
-			#					is_subject_of = CHN
-			#				}
-			#			}
-			#		}
-			#	}
-			#}
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -2503,18 +2489,21 @@ CCA_formables_category = {
 	}
 	CCA_equestrian_refinancing = {
 		available = {
-			all_of_scopes = {
-				array = global.EQS_original_territory
+			custom_trigger_tooltip = {
 				tooltip = SCS_owns_all_original_EQS_states_tt
-				hidden_trigger = {
-					is_on_continent = europe
-					OWNER = {
-						OR = {
-							tag = ROOT
-							AND = {
-								tag = CHN
-								ROOT = {
-									is_subject_of = CHN
+				all_of_scopes = {
+					array = global.EQS_original_territory
+					tooltip = SCS_owns_all_original_EQS_states_tt
+					hidden_trigger = {
+						is_on_continent = europe
+						OWNER = {
+							OR = {
+								tag = ROOT
+								AND = {
+									tag = CHN
+									ROOT = {
+										is_subject_of = CHN
+									}
 								}
 							}
 						}
@@ -2951,6 +2940,53 @@ OLE_formables_category = {
 
 ###Griffonia###
 HLR_formables_category = {
+	HLR_stabilize_the_free = {
+		available = {
+			OR = {
+				571 = {
+					is_owned_and_controlled_by = FBK
+				}
+				all_state = {
+					if = {
+						limit = {
+							is_core_of = FBK
+						}
+						is_owned_and_controlled_by = BAK
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = BAK
+		war_with_on_remove = FBK
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove HLR_stabilize_the_free"
+			if = {
+				limit = {
+					country_exists = FBK
+				}
+				create_wargoal = {
+					target = FBK
+					type = annex_everything
+				}
+			}
+			create_wargoal = {
+				target = BAK
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				OR = {
+					date < 1050.4.1
+					has_war = yes
+				}
+				factor = 0
+			}
+		}
+	}
     HLR_expand_the_kingdom = {
         available = {
             FBK = { all_original_cores_owned_by_ROOT = yes }
@@ -2989,6 +3025,32 @@ HLR_formables_category = {
         ai_will_do = {
             factor = 100
         }
+    }
+    HLR_sailing_the_trio = {
+		available = {
+			FBK = { all_original_cores_owned_by_ROOT = yes }
+			BAK = { all_original_cores_owned_by_ROOT = yes }
+			date > 1052.6.1
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = RCT
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove HLR_sailing_the_trio"
+			619 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
     }
     HLR_freedom_of_river_ponies = {
 		available = {
@@ -3048,10 +3110,47 @@ HLR_formables_category = {
 				}
 				random_country = {
 					limit = {
-						has_character = BAK_river_swirl
+						has_character = RCT_river_swirl
 					}
-					promote_character = BAK_river_swirl
+					promote_character = RCT_river_swirl
 				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 100
+		}
+    }
+    HLR_bop_GRI = {
+		available = {
+			RCT = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			NIM = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			BAR = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		fire_only_once = yes
+		days_remove = 70
+		war_with_on_remove = GRI
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove HLR_bop_GRI"
+			674 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				OR = {
+					has_war = yes
+					date < 1054.5.1
+				}
+				factor = 0
 			}
 		}
     }
@@ -3285,6 +3384,28 @@ reform_griffonian_empire_category = {
     }
 }
 FAT_formables_category = {
+	FAT_formalize_old_alliance = {
+		available = {
+			date > 1049.6.1
+		}
+		war_with_on_remove = TRD
+		fire_only_once = yes
+		days_remove = 21
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAT_formalize_old_alliance"
+			create_wargoal = {
+				target = TRD
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
     FAT_incorporate_freedom = {
         available = {
             TRD = { all_original_cores_owned_by_ROOT = yes }
@@ -3309,6 +3430,29 @@ FAT_formables_category = {
         ai_will_do = {
             factor = 100
         }
+    }
+    FAT_kemerskais_revenge = {
+		available = {
+			date > 1052.7.1
+			TRD = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		war_with_on_remove = GRI
+		days_remove = 35
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAT_kemerskais_revenge"
+			create_wargoal = {
+				target = GRI
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
     }
     FAT_the_dream_realized = {
         available = {
@@ -5773,6 +5917,36 @@ MCW_formables_category = {
 	}
 }
 CTH_formables_category = {
+	CTH_et_tu_batte = {
+		available = {
+			date > 1050.10.1
+		}
+		fire_only_once = yes
+		war_with_on_remove = NZA
+		war_with_on_remove = ZAR
+		war_with_on_remove = BAT
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove CTH_et_tu_batte"
+			if = {
+				limit = {
+					is_ai = no
+				}
+				create_wargoal = {
+					target = NZA
+					type = annex_everything
+				}
+			}
+			else = {
+				declare_war_on = {
+					target = NZA
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	CTH_llam_bomb = {
 		available = {
 			LMB = { all_original_cores_owned_by_ROOT = yes }
@@ -5945,12 +6119,133 @@ CTL_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision remove CTL_raid_call_center"
 			remove_ideas = CTL_princely_estates
 		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	CTL_dextop_wirus = {
+		available = {
+			date > 1049.4.20
+		}
+		days_remove = 35
+		war_with_on_remove = BRS
+		war_with_on_remove = KIR
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove CTL_dextop_wirus"
+			declare_war_on = {
+				target = BRS
+				type = annex_everything
+			}
+			activate_mission = CTL_neighcrosoft_tech_support
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				date > 1049.9.20
+				factor = 0
+			}
+		}
+	}
+	CTL_neighcrosoft_tech_support = {
+		activation = {
+			always = no
+		}
+		available = {
+			controls_state = 1097
+			controls_state = 1227
+			OR = {
+				controls_state = 924
+				controls_state = 1088
+			}
+			OR = {
+				controls_state = 1087
+				controls_state = 1072
+			}
+		}
+		days_mission_timeout = 120
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission complete CTL_neighcrosoft_tech_support"
+			add_stability = 0.05
+			add_war_support = 0.05
+			transfer_state = 1097
+			transfer_state = 1227
+			every_faction_member = {
+				every_enemy_country = {
+					limit = {
+						is_in_faction_with = KIR
+					}
+					white_peace = PREV
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: mission timeout CTL_neighcrosoft_tech_support"
+			add_political_power = -100
+			every_faction_member = {
+				every_enemy_country = {
+					limit = {
+						is_in_faction_with = KIR
+					}
+					white_peace = PREV
+				}
+			}
+		}
+	}
+	CTL_harp_on_harpies = {
+		available = {
+			date > 1052.1.1
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = MCW
+		war_with_on_remove = CTH
+		war_with_on_remove = CGI
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove CTL_harp_on_harpies"
+			create_wargoal = {
+				target = MCW
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+	CTL_second_helping = {
+		available = {
+			date > 1053.4.1
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = KIR
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove CTL_second_helping"
+			create_wargoal = {
+				target = KIR
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
 	}
 	CTL_yoink_birbs = {
 		available = {
-			all_of_scopes = {
-				array = global.starting_MCW_states
-				is_owned_by = ROOT
+			custom_trigger_tooltip = {
+				tooltip = CTL_vibe_coding_tt
+				all_of_scopes = {
+					array = global.starting_MCW_states
+					is_owned_by = ROOT
+				}
 			}
 		}
 		highlight_states = {
@@ -6390,7 +6685,7 @@ CGI_formables_category = {
 ZAR_formables_category = {
 	ZAR_sand_love_letters = {
 		available = {
-			is_subject = no
+			date > 1049.6.1
 		}
 		visible = {
 			OR = {
@@ -6417,6 +6712,9 @@ ZAR_formables_category = {
 				country_event = formable_event.20
 			}
 		}
+		ai_will_do = {
+			factor = 0
+		}
 	}
 	ZAR_camel_cams = {
 		available = {
@@ -6440,6 +6738,9 @@ ZAR_formables_category = {
 				country_event = formable_event.20
 			}
 		}
+		ai_will_do = {
+			factor = 0
+		}
 	}
 	ZAR_riverlands_mk_2 = {
 		available = {
@@ -6459,6 +6760,9 @@ ZAR_formables_category = {
 			REM = {
 				country_event = formable_event.20
 			}
+		}
+		ai_will_do = {
+			factor = 0
 		}
 	}
 	ZAR_yankee_go_home = {
@@ -6497,9 +6801,31 @@ ZAR_formables_category = {
 			}
 			set_cosmetic_tag = ZAR_CON
 		}
+		ai_will_do = {
+			factor = 0
+		}
 	}
 }
 BAT_formables_category = {
+	BAT_eeeeeeevil_backstab = {
+		available = {
+			date > 1050.8.1
+		}
+		days_remove = 21
+		war_with_on_remove = CTH
+		war_with_on_remove = CGI
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove BAT_eeeeeeevil_backstab"
+			create_wargoal = {
+				target = CTH
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	BAT_finished_backstab = {
 		available = {
 			CTH = { all_original_cores_owned_by_ROOT_or_subject = yes }
@@ -6856,18 +7182,58 @@ HIP_formables_category = {
             factor = 100
         }
     }
-    #HIP_end_legation_city_status = {
-    #    available = {
-    #        1204 = { is_owned_and_controlled_by = ROOT }
-    #    }
-    #    fire_only_once = yes
-    #    complete_effect = {
-    #        log = "[GetDateText]: [ROOT.GetName]: decision HIP_end_legation_city_status"
-    #        1204 = {
-	#			add_core_of = ROOT
-    #        }
-    #    }
-    #}
+    HPS_always_hipsoc = {
+		allowed = {
+			tag = HPS
+		}
+		available = {
+			HIP_civil_war_over = yes
+		}
+		fire_only_once = yes
+		days_remove = 70
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision HPS_always_hipsoc"
+			create_wargoal = {
+				target = BAT
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = ZAR
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = NZA
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CGI
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CTH
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = LMB
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CTL
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = CMW
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				date < 1054.4.1
+				factor = 0
+			}
+		}
+    }
     HPS_proclaim_perfect_zebrican_socialism = {
         allowed = {
             tag = HPS
@@ -6986,86 +7352,6 @@ HIP_formables_category = {
 			}
         }
     }
-    #HIP_consider_backstabbing = {
-    #    allowed = {
-    #        tag = HIP
-    #    }
-    #    available = {
-    #        date > 1048.7.1
-    #        country_exists = DOH
-    #        OR = {
-    #            NOT = { country_exists = HRL }
-    #            NOT = { country_exists = HPS }
-    #        }
-    #    }
-    #    visible = {
-    #        is_ai = yes
-    #    }
-    #    days_remove = 21
-    #    war_with_on_remove = DOH
-    #    remove_effect = {
-    #        log = "[GetDateText]: [ROOT.GetName]: decision remove HIP_consider_backstabbing"
-    #        random_list = {
-    #            60 = {
-    #                DOH = {
-    #                    set_country_flag = DOH_pass_the_knife
-    #                }
-    #            }
-    #            40 = {
-    #                remove_from_faction = DOH
-    #                declare_war_on = {
-    #                    target = DOH
-    #                    type = annex_everything
-    #                }
-    #            }
-    #        }
-    #    }
-    #    ai_will_do = {
-    #        factor = 10
-    #    }
-    #}
-    #DOH_ponder_betrayal = {
-    #    allowed = {
-    #        tag = DOH
-    #    }
-    #    available = {
-    #        OR = {
-    #            has_country_flag = DOH_pass_the_knife
-    #            AND = {
-    #                date > 1048.8.1
-    #                HIP = {
-    #                    is_ai = no
-    #                    exists = yes
-    #                }
-    #            }
-    #            OR = {
-    #                NOT = { country_exists = HRL }
-    #                NOT = { country_exists = HPS }
-    #            }
-    #        }
-    #    }
-    #    visible = {
-    #        is_ai = yes
-    #    }
-    #    days_remove = 21
-    #    war_with_on_remove = HIP
-    #    remove_effect = {
-    #        log = "[GetDateText]: [ROOT.GetName]: decision remove DOH_ponder_betrayal"
-    #        random_list = {
-    #            65 = {
-    #                leave_faction = yes
-    #                declare_war_on = {
-    #                    target = HIP
-    #                    type = annex_everything
-    #                }
-    #            }
-    #            35 = { }
-    #        }
-    #    }
-    #    ai_will_do = {
-    #        factor = 10
-    #    }
-    #}
 }
 BRS_formables_category = {
 	BRS_hindian_support_center = {
@@ -8294,6 +8580,41 @@ MEL_formables_category = {
 	}
 }
 ZOO_formables_category = {
+	ZOO_regrow_the_west = {
+		available = {
+			date > 1048.5.1
+		}
+		fire_only_once = yes
+		days_remove = 21
+		war_with_on_remove = MEL
+		war_with_on_remove = TAI
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision ZOO_regrow_the_west"
+			create_wargoal = {
+				target = MEL
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = TAI
+				type = annex_everything
+			}
+			if = {
+				limit = {
+					MEL = { is_ai = yes }
+					is_ai = yes
+				}
+				MEL = {
+					add_ideas = surrender_limit_reduction
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				date < 1048.7.31
+			}
+		}
+	}
 	ZOO_settle_legions = {
 		available = {
 			MEL = { all_original_cores_owned_by_ROOT = yes }
@@ -8324,6 +8645,33 @@ ZOO_formables_category = {
 		}
 		ai_will_do = {
 			factor = 100
+		}
+	}
+	ZOO_the_unconquerable_barbarians = {
+		available = {
+			date > 1049.5.1
+		}
+		fire_only_once = yes
+		days_remove = 21
+		war_with_on_remove = IDO
+		war_with_on_remove = DEL
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove ZOO_the_unconquerable_barbarians"
+			create_wargoal = {
+				target = IDO
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = DEL
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
 		}
 	}
 	ZOO_eastern_federatii = {
@@ -9203,6 +9551,24 @@ CNT_formables_category = {
 	}
 }
 ROA_formables_category = {
+	ROA_march_the_legions = {
+		available = {
+			date > 1049.6.1
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = CNT
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove ROA_march_the_legions"
+			create_wargoal = {
+				target = CNT
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	ROA_crush_barbarians = {
 		available = {
 			CNT = { all_original_cores_owned_by_ROOT = yes }
@@ -9213,6 +9579,9 @@ ROA_formables_category = {
 				is_in_array = { CNT.original_cores = THIS }
 			}
 		}
+		war_with_on_complete = ZOO
+		war_with_on_complete = TAI
+		war_with_on_complete = MEL
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ROA_crush_barbarians"
@@ -9278,6 +9647,18 @@ ROA_formables_category = {
 				}
 				add_core_of = ROOT
 			}
+			create_wargoal = {
+				target = ZOO
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = MEL
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = TAI
+				type = annex_everything
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -9301,6 +9682,8 @@ ROA_formables_category = {
 				is_in_array = { ZLU.original_cores = THIS }
 			}
 		}
+		war_with_on_complete = ZLU
+		war_with_on_complete = KIR
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ROA_definitely_not_danzig_or_war"
@@ -9318,7 +9701,7 @@ ROA_formables_category = {
 				limit = {
 					ZLU = {
 						exists = yes
-						is_subject = no
+						NOT = { is_subject_of = KIR }
 					}
 				}
 				country_event = formable_event.38
@@ -9644,7 +10027,7 @@ MGY_formables_category = {
 				is_on_continent = africa
 				OR = {
 					is_in_array = { REM.original_cores = THIS }
-					is_in_array = { NDR.original_cores = THIS }
+					state = 766
 				}
 			}
 		}
@@ -9659,8 +10042,8 @@ MGY_formables_category = {
 					is_on_continent = africa
 					is_claimed_by = ROOT
 					OR = {
-						is_in_array = { NDR.original_cores = THIS }
 						is_in_array = { REM.original_cores = THIS }
+						state = 766
 					}
 				}
 				add_core_of = ROOT
@@ -9694,8 +10077,10 @@ MGY_formables_category = {
 	}
 	MGY_catnip_intervention = {
 		available = {
-			NDR = { all_original_cores_owned_by_ROOT = yes }
-			REM = { all_original_cores_owned_by_ROOT = yes }
+			766 = {
+				is_owned_and_controlled_by = ROOT
+			}
+			REM = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			OR = {
 				ZWA = {
 					exists = yes
@@ -10017,6 +10402,85 @@ ZIT_formables_category = {
 	}
 }
 ILU_formables_category = {
+	ILU_small_brain_time = {
+		available = {
+			date > 1050.2.1
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = ZIT
+		war_with_on_remove = AZI
+		war_with_on_remove = ZAJ
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove ILU_small_brain_time"
+			create_wargoal = {
+				target = ZIT
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = AZI
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = ZAJ
+				type = annex_everything
+			}
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				add_ideas = supply_diet
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	ILU_medium_brain_time = {
+		available = {
+			ZAJ = { all_original_cores_owned_by_ROOT = yes }
+			ZIT = { all_original_cores_owned_by_ROOT = yes }
+			AZI = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		days_remove = 14
+		war_with_on_remove = NDR
+		war_with_on_remove = REM
+		war_with_on_remove = MGY
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove ILU_medium_brain_time"
+			if = {
+				limit = {
+					country_exists = REM
+				}
+				create_wargoal = {
+					target = REM
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = NDR
+				}
+				create_wargoal = {
+					target = NDR
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = MGY
+				}
+				create_wargoal = {
+					target = MGY
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	ILU_big_brain_time = {
 		available = {
 			ZAJ = { all_original_cores_owned_by_ROOT = yes }
@@ -10024,6 +10488,7 @@ ILU_formables_category = {
 			AZI = { all_original_cores_owned_by_ROOT = yes }
 			ZIT = { all_original_cores_owned_by_ROOT = yes }
 			NDR = { all_original_cores_owned_by_ROOT = yes }
+			MGY = { all_original_cores_owned_by_ROOT = yes }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -10034,6 +10499,7 @@ ILU_formables_category = {
 					is_in_array = { AZI.original_cores = THIS }
 					is_in_array = { REM.original_cores = THIS }
 					is_in_array = { NDR.original_cores = THIS }
+					is_in_array = { MGY.original_cores = THIS }
 				}
 			}
 		}
@@ -10049,6 +10515,7 @@ ILU_formables_category = {
 						is_in_array = { AZI.original_cores = THIS }
 						is_in_array = { REM.original_cores = THIS }
 						is_in_array = { NDR.original_cores = THIS }
+						is_in_array = { MGY.original_cores = THIS }
 					}
 				}
 				add_core_of = ROOT
@@ -10128,6 +10595,7 @@ ILU_formables_category = {
 				}
 			}
 		}
+		days_re_enable = 120
 		#days_remove = 365
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision ILU_expand_big_brain"
@@ -10150,6 +10618,29 @@ ILU_formables_category = {
 					NOT = { is_core_of = ROOT }
 				}
 				add_core_of = ROOT
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				any_owned_state = {
+					OR = {
+						is_in_array = { MGY.original_cores = THIS }
+						is_in_array = { BAT.original_cores = THIS }
+						is_in_array = { ZAR.original_cores = THIS }
+						is_in_array = { TIM.original_cores = THIS }
+						is_in_array = { TNT.original_cores = THIS }
+						is_in_array = { ZWA.original_cores = THIS }
+						is_in_array = { CAM.original_cores = THIS }
+						is_in_array = { HSO.original_cores = THIS }
+						AND = {
+							is_claimed_by = MGY
+							is_core_of = ABY
+						}
+					}
+					NOT = { is_core_of = ROOT }
+				}
+				add = 100
 			}
 		}
 	}
@@ -10569,7 +11060,7 @@ ZWA_TIM_formables_category = {
 			else = {
 				TIM = { all_original_cores_owned_by_ROOT = yes }
 			}
-			NDR = { all_original_cores_owned_by_ROOT = yes }
+			NDR = { all_cores_owned_by_ROOT_or_ally = yes }
 			if = {
 				limit = {
 					ZWA = { is_ai = no }
@@ -10602,7 +11093,7 @@ ZWA_TIM_formables_category = {
 			else = {
 				TIM = { all_original_cores_owned_by_ROOT = yes }
 			}
-			NDR = { all_original_cores_owned_by_ROOT = yes }
+			NDR = { all_cores_owned_by_ROOT_or_ally = yes }
 			if = {
 				limit = {
 					ZWA = { is_ai = no }
@@ -10865,6 +11356,10 @@ MTA_formables_category = {
 		}
 		ai_will_do = {
 			factor = 100
+			modifier = {
+				date < 1050.7.1
+				factor = 0
+			}
 		}
 	}
 	MTA_guardians_of_zebrica = {
@@ -11117,6 +11612,33 @@ YMN_formables_category = {
 	}
 }
 EMR_formables_category = {
+	EMR_first_embers = {
+		available = {
+			date > 1049.1.1
+		}
+		fire_only_once = yes
+		days_remove = 21
+		war_with_on_remove = ABY
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove EMR_first_embers"
+			create_wargoal = {
+				target = ABY
+				type = annex_everything
+			}
+			if = {
+				limit = {
+					country_exists = YMN
+				}
+				create_wargoal = {
+					target = YMN
+					type = annex_everything
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	EMR_faith_by_fire = {
 		available = {
 			ABY = { all_original_cores_owned_by_ROOT = yes }
@@ -11130,11 +11652,21 @@ EMR_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EMR_faith_by_fire"
+			remove_ideas = EMR_radical_desert_lovers
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.25
+			}
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
 			every_state = {
 				limit = {
 					is_on_continent = africa
 					is_in_array = { ABY.original_cores = THIS }
 				}
+				add_core_of = ROOT
 			}
 			787 = {
 				OWNER = {
@@ -11434,6 +11966,8 @@ WNG_formables_category = {
 					country_event = formable_event.48
 				}
 			}
+			custom_effect_tooltip = WNG_spaghetti_supremacy_tt
+			set_country_flag = WNG_somepony_touched_his_spaghet
 			if = {
 				limit = {
 					country_exists = HPS
@@ -11498,11 +12032,9 @@ WNG_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision WNG_griff_alliance"
 			every_state = {
 				limit = {
-					is_on_continent = africa
-					is_claimed_by = HIP
-					NOT = {
-						is_core_of = ROOT
-						is_core_of = BAT
+					OR = {
+						is_claimed_by = HIP
+						is_core_of = HIP
 					}
 				}
 				add_core_of = ROOT
@@ -11541,6 +12073,23 @@ WNG_formables_category = {
 				}
 				country_event = formable_event.50
 			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	WNG_bweeep = {
+		available = {
+			date > 1052.4.1
+		}
+		visible = {
+			has_cosmetic_tag = WNG_HIP
+		}
+		fire_only_once = yes
+		days_remove = 70
+		war_with_on_remove = EQC
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision remove WNG_bweeep"
 			create_wargoal = {
 				target = EQC
 				type = annex_everything
@@ -11556,16 +12105,16 @@ WNG_formables_category = {
 		}
 		highlight_states = {
 			highlight_states_trigger = {
-				is_on_continent = africa
+				is_on_continent = asia
 				is_in_array = { EQC.original_cores = THIS }
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision WNG_no_place_like_home"
-			every_state = {
+			every_owned_state = {
 				limit = {
-					is_on_continent = africa
+					is_on_continent = asia
 					is_in_array = { EQC.original_cores = THIS }
 				}
 				add_core_of = ROOT

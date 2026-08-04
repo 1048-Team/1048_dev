@@ -685,6 +685,9 @@ FH_demo_south_east_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision STB_refocus_efforts"
             remove_ideas = STB_industrial_economy
         }
+        ai_will_do = {
+            factor = 100
+        }
     }
     STB_underwhelm_results_ai = {
         available = {
@@ -699,6 +702,9 @@ FH_demo_south_east_skeleton_category = {
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision STB_underwhelm_results"
             remove_ideas = STB_overwhelmed_militia
+        }
+        ai_will_do = {
+            factor = 100
         }
     }
     NRP_install_pesticide = {
@@ -1054,7 +1060,6 @@ FH_demo_south_east_skeleton_category = {
     MTS_micro_compensation_ai = {
         available = {
             date > 1049.6.1
-            num_of_civilian_factories > 7
         }
         visible = {
             tag = MTS
@@ -1073,13 +1078,12 @@ FH_demo_south_east_skeleton_category = {
     MTS_reject_rejection_ai = {
         available = {
             date > 1049.6.1
-            num_divisions > 11
         }
         visible = {
             tag = MTS
             is_ai = yes
         }
-        days_remove = 65
+        days_remove = 160
         fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_reject_rejection_ai"
@@ -1092,13 +1096,12 @@ FH_demo_south_east_skeleton_category = {
     MTS_acquire_sunscreen_ai = {
         available = {
             date > 1049.6.1
-            has_war_support > 0.45
         }
         visible = {
             tag = MTS
             is_ai = yes
         }
-        days_remove = 120
+        days_remove = 225
         fire_only_once = yes
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove MTS_acquire_sunscreen_ai"
@@ -1119,11 +1122,32 @@ FH_demo_south_east_skeleton_category = {
         }
         visible = {
             tag = MTS
+            is_ai = no
         }
         cost = 150
         fire_only_once = yes
         complete_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision MTS_forgiven_ordo"
+            remove_ideas = MTS_unsanctioned_ordo
+            set_cosmetic_tag = MTS_SOL_puppet
+        }
+    }
+    MTS_forgiven_ordo_ai = {
+        available = {
+            NOT = {
+                any_other_country = {
+                    has_country_flag = SEE
+                    exists = yes
+                }
+            }
+        }
+        visible = {
+            tag = MTS
+            is_ai = yes
+        }
+        fire_only_once = yes
+        complete_effect = {
+            log = "[GetDateText]: [ROOT.GetName]: decision MTS_forgiven_ordo_ai"
             remove_ideas = MTS_unsanctioned_ordo
             set_cosmetic_tag = MTS_SOL_puppet
         }
@@ -1503,7 +1527,6 @@ FH_demo_WGE_skeleton_category = {
             date > 1050.7.1
         }
         visible = {
-            date > 1050.7.1
             tag = MWR
         }
         fire_only_once = yes
@@ -1516,6 +1539,10 @@ FH_demo_WGE_skeleton_category = {
                     set_autonomy = {
                         target = ROOT
                         autonomy_state = autonomy_free
+                    }
+                    country_event = {
+                        id = equestria_activity.4
+                        days = 1
                     }
                 }
                 set_politics = {
@@ -1530,6 +1557,9 @@ FH_demo_WGE_skeleton_category = {
                 remove_from_array = { global.shield_of_steel = ROOT.id }
             }
         }
+        ai_will_do = {
+            factor = 10
+        }
     }
     NVC_capture_the_throne = {
         available = {
@@ -1538,7 +1568,6 @@ FH_demo_WGE_skeleton_category = {
             date > 1051.5.1
         }
         visible = {
-            date > 1051.5.1
             tag = NVC
         }
         fire_only_once = yes
@@ -1566,8 +1595,10 @@ FH_demo_WGE_skeleton_category = {
             date > 1051.6.1
         }
         visible = {
-            date > 1051.6.1
-            tag = VRG
+            OR = {
+                tag = VRG
+                tag = MWR
+            }
         }
         fire_only_once = yes
         days_remove = 7
@@ -1595,25 +1626,39 @@ FH_demo_WGE_skeleton_category = {
                 has_war = yes
                 factor = 0
             }
+            modifier = {
+                AND = {
+                    tag = MWR
+                    date < 1051.8.1
+                }
+                factor = 0
+            }
         }
     }
     VRG_NVC_recapture_southern_GRF = {
         available = {
-            1217 = { is_owned_and_controlled_by = ROOT }
+            if = {
+                limit = {
+                    tag = VRG
+                }
+                1217 = {
+                    OR = {
+                        is_owned_and_controlled_by = ROOT
+                        is_owned_and_controlled_by = MWR
+                    }
+                }
+            }
+            else = {
+                1217 = { is_owned_and_controlled_by = ROOT }
+            }
             is_subject = no
             date > 1051.8.10
         }
         visible = {
-            date > 1051.8.10
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
             }
             country_exists = MWR
         }
@@ -1642,6 +1687,15 @@ FH_demo_WGE_skeleton_category = {
             factor = 10
             modifier = {
                 has_war = yes
+                factor = 0
+            }
+            modifier = {
+                AND = {
+                    MWR = {
+                        is_subject = yes
+                    }
+                    date < 1054.1.1
+                }
                 factor = 0
             }
         }
@@ -1676,16 +1730,11 @@ FH_demo_WGE_skeleton_category = {
             date > 1052.2.14
         }
         visible = {
-            date > 1052.2.14
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
+                tag = MWR
             }
             OR = {
                 country_exists = SCH
@@ -1730,16 +1779,11 @@ FH_demo_WGE_skeleton_category = {
             date > 1053.1.1
         }
         visible = {
-            date > 1053.1.1
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
+                tag = MWR
             }
             OR = {
                 country_exists = SMH
@@ -1794,16 +1838,11 @@ FH_demo_WGE_skeleton_category = {
             date > 1054.6.1
         }
         visible = {
-            date > 1054.6.1
             OR = {
-                AND = {
-                    tag = NVC
-                    NOT = { country_exists = VRG }
-                }
-                AND = {
-                    tag = VRG
-                    NOT = { country_exists = NVC }
-                }
+                tag = NVC
+                tag = GRF
+                tag = VRG
+                tag = MWR
             }
         }
         fire_only_once = yes
@@ -1842,6 +1881,9 @@ FH_demo_STG_region_skeleton_category = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove AWR_peace_out_STG"
             custom_effect_tooltip = AWR_may_make_STG_angy_tt
             country_event = equestria_activity.27
+        }
+        ai_will_do = {
+            factor = 100
         }
     }
     STG_end_AWRs_crap = {
