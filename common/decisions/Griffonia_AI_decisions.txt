@@ -53,13 +53,12 @@ EQC_AI_decision_category = {
             }
         }
     }
-    EQC_start_limited_war_1 = {
+    EQC_start_limited_war = {
         available = {
             griffonia_its_time = yes
             NOT = { has_country_flag = FH_block_limited_war }
-            check_variable = { FH_limited_war_escalator < 4 }
+            check_variable = { global.FH_limited_war_escalator < 4 }
         }
-        fire_only_once = yes
         days_remove = 20
         war_with_on_remove = GRI
         war_with_on_remove = BRF
@@ -71,30 +70,92 @@ EQC_AI_decision_category = {
             RCT = { activate_mission = RCT_limited_war_1_mission }
         }
         remove_effect = {
-            log = "[GetDateText]: [Root.GetName]: decision remove EQC_start_limited_war_1"
-            add_to_variable = { FH_limited_war_escalator = 1 }
+            log = "[GetDateText]: [Root.GetName]: decision remove EQC_start_limited_war"
+            add_to_variable = { global.FH_limited_war_escalator = 1 }
             set_country_flag = FH_block_limited_war
             #GRI & Puppets
-            declare_war_on = {
-                target = BOI
-                type = annex_everything
+            if = {
+                limit = {
+                    NOT = { country_exists = BOI }
+                }
+                declare_war_on = {
+                    target = GRI
+                    type = annex_everything
+                }
             }
+            else = {
+                declare_war_on = {
+                    target = BOI
+                    type = annex_everything
+                }
+            }
+            #declare_war_on = {
+            #    target = NTR
+            #    type = annex_everything
+            #}
+            #declare_war_on = {
+            #    target = HLQ
+            #    type = annex_everything
+            #}
             #League of Free Nations
-            declare_war_on = {
-                target = BRF
-                type = annex_everything
+            if = {
+                limit = {
+                    has_country_flag = EQC_LFN_war_flag_1
+                }
+                declare_war_on = {
+                    target = BRF
+                    type = annex_everything
+                }
+                #declare_war_on = {
+                #    target = GRU
+                #    type = annex_everything
+                #}
+                #declare_war_on = {
+                #    target = GRY
+                #    type = annex_everything
+                #}
+                #declare_war_on = {
+                #    target = LUS
+                #    type = annex_everything
+                #}
             }
             #River Republic
-            declare_war_on = {
-                target = LNS
-                type = annex_everything
+            if = {
+                limit = {
+                    NOT = { country_exists = LNS }
+                }
+                declare_war_on = {
+                    target = RCT
+                    type = annex_everything
+                }
             }
-            activate_mission = EQC_war_GRI_mission
-            activate_mission = EQC_war_LFN_mission
+            else = {
+                declare_war_on = {
+                    target = LNS
+                    type = annex_everything
+                }
+            }
+            #declare_war_on = {
+            #    target = NIM
+            #    type = annex_everything
+            #}
+            #declare_war_on = {
+            #    target = BAR
+            #    type = annex_everything
+            #}
+            if = {
+                limit = {
+                    check_variable = { global.FH_limited_war_escalator < 4 }
+                }
+                activate_mission = EQC_war_GRI_mission
+                activate_mission = EQC_war_LFN_mission
+            }
             griffonia_calm_down_a_bit = yes
             if = {
                 limit = {
-                    GRI = { is_ai = no }
+                    GRI = {
+                        is_ai = no
+                    }
                 }
                 RCT = {
                     activate_mission = RCT_limited_war_1_mission
@@ -117,15 +178,13 @@ EQC_AI_decision_category = {
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete EQC_war_GRI_mission"
             griffonia_GRI_land_transfer_EQC = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout EQC_war_GRI_mission"
-            every_enemy_country = {
-                white_peace = EQC
-                white_peace = SIC
-                white_peace = MIT
-                white_peace = HPS
-            }
+            griffonia_peace_out_GRI_faction = yes
+            griffonia_peace_out_RCT_faction = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
     }
     EQC_war_LFN_mission = {
@@ -139,37 +198,64 @@ EQC_AI_decision_category = {
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete EQC_war_LFN_mission"
             griffonia_BRF_land_transfer_EQC = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout EQC_war_LFN_mission"
-            every_enemy_country = {
+            griffonia_peace_out_BRF_faction = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
+        }
+    }
+    EQC_only_griffonia = {
+        available = {
+            GRI = {
+                OR = {
+                    exists = no
+                    is_subject = yes
+                }
+            }
+            RCT = {
+                OR = {
+                    exists = no
+                    is_subject = yes
+                }
+            }
+            is_subject = no
+        }
+        days_remove = 30
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [Root.GetName]: decision remove EQC_only_griffonia"
+            every_other_country = {
                 limit = {
-                    NOT = {
-                        OR = {
-                            tag = GRI
-                            is_in_faction_with = GRI
-                        }
+                    capital_scope = {
+                        is_on_continent = asia
+                    }
+                    NOT = { is_in_faction_with = ROOT }
+                }
+                ROOT = {
+                    declare_war_on = {
+                        target = PREV
+                        type = annex_everything
                     }
                 }
-                white_peace = EQC
-                white_peace = SIC
-                white_peace = MIT
-                white_peace = HPS
             }
+        }
+        ai_will_do = {
+            factor = 100
         }
     }
 }
 
 GRI_AI_decision_category = {
     #Only triggers if EQC is played by a human
-    GRI_start_limited_war_1 = {
+    GRI_start_limited_war = {
         available = {
             griffonia_its_time = yes
             EQC = { is_ai = no }
             NOT = { has_country_flag = FH_block_limited_war }
-            check_variable = { FH_limited_war_escalator < 4 }
+            check_variable = { global.FH_limited_war_escalator < 4 }
         }
-        fire_only_once = yes
         days_remove = 20
         war_with_on_remove = EQC
         war_with_on_remove = BRF
@@ -180,24 +266,68 @@ GRI_AI_decision_category = {
             RCT = { activate_mission = RCT_limited_war_1_mission }
         }
         remove_effect = {
-            log = "[GetDateText]: [Root.GetName]: decision remove GRI_start_limited_war_1"
-            add_to_variable = { FH_limited_war_escalator = 1 }
+            log = "[GetDateText]: [Root.GetName]: decision remove GRI_start_limited_war"
+            add_to_variable = { global.FH_limited_war_escalator = 1 }
             set_country_flag = FH_block_limited_war
             #EQC & Puppets
+            #declare_war_on = {
+            #    target = EQC
+            #    type = annex_everything
+            #}
             declare_war_on = {
                 target = SIC
                 type = annex_everything
             }
+            #declare_war_on = {
+            #    target = MIT
+            #    type = annex_everything
+            #}
             #League of Free Nations
-            declare_war_on = {
-                target = BRF
-                type = annex_everything
+            if = {
+                limit = {
+                    has_country_flag = EQC_LFN_war_flag_1
+                }
+                declare_war_on = {
+                    target = BRF
+                    type = annex_everything
+                }
+                #declare_war_on = {
+                #    target = GRU
+                #    type = annex_everything
+                #}
+                #declare_war_on = {
+                #    target = GRY
+                #    type = annex_everything
+                #}
+                #declare_war_on = {
+                #    target = LUS
+                #    type = annex_everything
+                #}
             }
             #River Republic
-            declare_war_on = {
-                target = LNS
-                type = annex_everything
+            if = {
+                limit = {
+                    NOT = { country_exists = LNS }
+                }
+                declare_war_on = {
+                    target = RCT
+                    type = annex_everything
+                }
             }
+            else = {
+                declare_war_on = {
+                    target = LNS
+                    type = annex_everything
+                }
+            }
+            #declare_war_on = {
+            #    target = NIM
+            #    type = annex_everything
+            #}
+            #declare_war_on = {
+            #    target = BAR
+            #    type = annex_everything
+            #}
             griffonia_calm_down_a_bit = yes
             activate_mission = GRI_limited_war_1_mission
             if = {
@@ -233,13 +363,37 @@ GRI_AI_decision_category = {
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout GRI_limited_war_1_mission"
             #River Republic
-            declare_war_on = {
-                target = LNS
-                type = annex_everything
+            if = {
+                limit = {
+                    NOT = { country_exists = LNS }
+                }
+                declare_war_on = {
+                    target = RCT
+                    type = annex_everything
+                }
             }
-            activate_mission = GRI_war_RCT_mission
-            activate_mission = GRI_war_EQC_mission
-            add_threat = -11.1
+            else = {
+                declare_war_on = {
+                    target = LNS
+                    type = annex_everything
+                }
+            }
+            #declare_war_on = {
+            #    target = NIM
+            #    type = annex_everything
+            #}
+            #declare_war_on = {
+            #    target = BAR
+            #    type = annex_everything
+            #}
+            if = {
+                limit = {
+                    check_variable = { global.FH_limited_war_escalator < 4 }
+                }
+                activate_mission = GRI_war_RCT_mission
+                activate_mission = GRI_war_EQC_mission
+            }
+            griffonia_calm_down_a_bit = yes
             if = {
                 limit = {
                     RCT = {
@@ -254,7 +408,7 @@ GRI_AI_decision_category = {
                         target = LNS
                         type = annex_everything
                     }
-                    add_threat = -11
+                    griffonia_calm_down_a_bit = yes
                 }
             }
         }
@@ -270,15 +424,12 @@ GRI_AI_decision_category = {
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete GRI_war_RCT_mission"
             griffonia_RCT_land_transfer_GRI = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout GRI_war_RCT_mission"
-            every_enemy_country = {
-                white_peace = GRI
-                white_peace = BOI
-                white_peace = HLQ
-                white_peace = NTR
-            }
+            griffonia_peace_out_RCT_faction = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
     }
     GRI_war_EQC_mission = {
@@ -292,15 +443,12 @@ GRI_AI_decision_category = {
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete GRI_war_EQC_mission"
             griffonia_EQC_land_transfer_GRI = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout GRI_war_EQC_mission"
-            every_enemy_country = {
-                white_peace = GRI
-                white_peace = BOI
-                white_peace = HLQ
-                white_peace = NTR
-            }
+            griffonia_peace_out_EQC_faction = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
     }
     GRI_kill_FAT = {
@@ -316,6 +464,14 @@ GRI_AI_decision_category = {
             declare_war_on = {
                 target = FAT
                 type = annex_everything
+            }
+            if = {
+                limit = {
+                    FAT = {
+                        is_ai = yes
+                    }
+                }
+                add_ideas = GRI_kill_em_all
             }
         }
 
@@ -403,6 +559,45 @@ GRI_AI_decision_category = {
             base = 10
         }
     }
+    GRI_only_griffonia = {
+        available = {
+            RCT = {
+                OR = {
+                    exists = no
+                    is_subject = yes
+                }
+            }
+            EQC = {
+                OR = {
+                    exists = no
+                    is_subject = yes
+                }
+            }
+            is_subject = no
+        }
+        days_remove = 30
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [Root.GetName]: decision remove GRI_only_griffonia"
+            every_other_country = {
+                limit = {
+                    capital_scope = {
+                        is_on_continent = asia
+                    }
+                    NOT = { is_in_faction_with = ROOT }
+                }
+                ROOT = {
+                    declare_war_on = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
 }
 
 RCT_AI_decision_category = {
@@ -418,21 +613,77 @@ RCT_AI_decision_category = {
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout RCT_limited_war_1_mission"
             #League of Free Nations
-            declare_war_on = {
-                target = GRY
-                type = annex_everything
+            if = {
+                limit = {
+                    OR = {
+                        has_country_flag = RCT_LFN_war_flag_1
+                        check_variable = { global.FH_limited_war_escalator > 3 }
+                    }
+                }
+                if = {
+                    limit = {
+                        NOT = { country_exists = GRY }
+                    }
+                    declare_war_on = {
+                        target = BRF
+                        type = annex_everything
+                    }
+                }
+                #declare_war_on = {
+                #    target = GRU
+                #    type = annex_everything
+                #}
+                else = {
+                    declare_war_on = {
+                        target = GRY
+                        type = annex_everything
+                    }
+                }
+                #declare_war_on = {
+                #    target = LUS
+                #    type = annex_everything
+                #}
             }
-            activate_mission = RCT_war_GRI_mission
-            activate_mission = RCT_war_LFN_mission
+            if = {
+                limit = {
+                    check_variable = { global.FH_limited_war_escalator < 4 }
+                }
+                activate_mission = RCT_war_GRI_mission
+                if = {
+                    limit = {
+                        has_country_flag = RCT_LFN_war_flag_1
+                    }
+                    activate_mission = RCT_war_LFN_mission
+                }
+            }
             if = {
                 limit = {
                     GRI = {
                         is_ai = no
                     }
                 }
-                declare_war_on = {
-                    target = HLQ
-                    type = annex_everything
+                if = {
+                    limit = {
+                        NOT = { country_exists = HLQ }
+                    }
+                    declare_war_on = {
+                        target = GRI
+                        type = annex_everything
+                    }
+                }
+                #declare_war_on = {
+                #    target = BOI
+                #    type = annex_everything
+                #}
+                #declare_war_on = {
+                #    target = NTR
+                #    type = annex_everything
+                #}
+                else = {
+                    declare_war_on = {
+                        target = HLQ
+                        type = annex_everything
+                    }
                 }
             }
             griffonia_calm_down_a_bit = yes
@@ -449,15 +700,13 @@ RCT_AI_decision_category = {
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete RCT_war_GRI_mission"
             griffonia_GRI_land_transfer_RCT = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout RCT_war_GRI_mission"
-            every_enemy_country = {
-                white_peace = RCT
-                white_peace = LNS
-                white_peace = BAR
-                white_peace = NIM
-            }
+            griffonia_peace_out_GRI_faction = yes
+            griffonia_peace_out_EQC_faction = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
     }
     RCT_war_LFN_mission = {
@@ -471,23 +720,12 @@ RCT_AI_decision_category = {
         complete_effect = {
             log = "[GetDateText]: [Root.GetName]: mission complete RCT_war_LFN_mission"
             griffonia_BRF_land_transfer_RCT = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
         timeout_effect = {
             log = "[GetDateText]: [Root.GetName]: mission timeout RCT_war_LFN_mission"
-            every_enemy_country = {
-                limit = {
-                    NOT = {
-                        OR = {
-                            tag = GRI
-                            is_in_faction_with = GRI
-                        }
-                    }
-                }
-                white_peace = RCT
-                white_peace = LNS
-                white_peace = BAR
-                white_peace = NIM
-            }
+            griffonia_peace_out_BRF_faction = yes
+            add_to_variable = { global.griffonia_world_tension_tracker = 1 }
         }
     }
     RCT_integrate_NIM = {
@@ -580,6 +818,46 @@ RCT_AI_decision_category = {
             base = 10
         }
     }
+    #Should have a prepare for war on any nation that is still on Griffonia
+    RCT_only_griffonia = {
+        available = {
+            GRI = {
+                OR = {
+                    exists = no
+                    is_subject = yes
+                }
+            }
+            EQC = {
+                OR = {
+                    exists = no
+                    is_subject = yes
+                }
+            }
+            is_subject = no
+        }
+        days_remove = 30
+        fire_only_once = yes
+        remove_effect = {
+            log = "[GetDateText]: [Root.GetName]: decision remove RCT_only_griffonia"
+            every_other_country = {
+                limit = {
+                    capital_scope = {
+                        is_on_continent = asia
+                    }
+                    NOT = { is_in_faction_with = ROOT }
+                }
+                ROOT = {
+                    declare_war_on = {
+                        target = PREV
+                        type = annex_everything
+                    }
+                }
+            }
+        }
+        ai_will_do = {
+            factor = 100
+        }
+    }
 }
 
 BAK_AI_decision_category = {
@@ -640,43 +918,43 @@ BAK_AI_decision_category = {
 #    }
 }
 
-HLR_AI_decision_category = {
-    HLR_posture_north = {
-        available = {
-            GRI = { has_war = yes }
-            NTR = { is_ai = yes }
-        }
-        days_remove = 15
-        cost = 50
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [Root.GetName]: decision remove HLR_posture_north"
-            573 = {
-                transfer_state_to = HLR
-                remove_core_of = NTR
-                add_core_of = HLR
-            }
-            602 = {
-                transfer_state_to = HLR
-                remove_core_of = NTR
-                add_core_of = HLR
-            }
-            574 = {
-                transfer_state_to = HLR
-                remove_core_of = NTR
-                add_core_of = HLR
-            }
-            hidden_effect = {
-            two_random_industrial_complex = yes
-            two_random_industrial_complex = yes
-            two_random_industrial_complex = yes
-            }
-        }
-
-        ai_will_do = {
-            base = 100
-        }
-    }
+#HLR_AI_decision_category = {
+#    HLR_posture_north = {
+#        available = {
+#            GRI = { has_war = yes }
+#            NTR = { is_ai = yes }
+#        }
+#        days_remove = 15
+#        cost = 50
+#        fire_only_once = yes
+#        remove_effect = {
+#            log = "[GetDateText]: [Root.GetName]: decision remove HLR_posture_north"
+#            573 = {
+#                transfer_state_to = HLR
+#                remove_core_of = NTR
+#                add_core_of = HLR
+#            }
+#            602 = {
+#                transfer_state_to = HLR
+#                remove_core_of = NTR
+#                add_core_of = HLR
+#            }
+#            574 = {
+#                transfer_state_to = HLR
+#                remove_core_of = NTR
+#                add_core_of = HLR
+#            }
+#            hidden_effect = {
+#            two_random_industrial_complex = yes
+#            two_random_industrial_complex = yes
+#            two_random_industrial_complex = yes
+#            }
+#        }
+#
+#        ai_will_do = {
+#            base = 100
+#        }
+#    }
 #    HLR_ally_BAK = {
 #        available = {
 #            BAK = { exists = yes }
@@ -758,36 +1036,36 @@ HLR_AI_decision_category = {
 #            base = 100
 #        }
 #    }
-    HLR_posture_north_2 = {
-        available = {
-            GRI = { has_war = yes }
-            date > 1051.09.1
-            NTR = { is_ai = yes }
-        }
-        days_remove = 15
-        cost = 50
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [Root.GetName]: decision remove HLR_posture_north_2"
-            459 = {
-                transfer_state_to = HLR
-                add_core_of = HLR
-            }
-            1226 = {
-                transfer_state_to = HLR
-                add_core_of = HLR
-            }
-            476 = {
-                transfer_state_to = HLR
-                add_core_of = HLR
-            }
-        }
-
-        ai_will_do = {
-            base = 100
-        }
-    }
-}
+#    HLR_posture_north_2 = {
+#        available = {
+#            GRI = { has_war = yes }
+#            date > 1051.09.1
+#            NTR = { is_ai = yes }
+#        }
+#        days_remove = 15
+#        cost = 50
+#        fire_only_once = yes
+#        remove_effect = {
+#            log = "[GetDateText]: [Root.GetName]: decision remove HLR_posture_north_2"
+#            459 = {
+#                transfer_state_to = HLR
+#                add_core_of = HLR
+#            }
+#            1226 = {
+#                transfer_state_to = HLR
+#                add_core_of = HLR
+#            }
+#            476 = {
+#                transfer_state_to = HLR
+#                add_core_of = HLR
+#            }
+#        }
+#
+#        ai_will_do = {
+#            base = 100
+#        }
+#    }
+#}
 
 FBK_AI_decision_category = {
     FBK_expel_BAK = {

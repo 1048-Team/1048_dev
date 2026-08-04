@@ -3572,8 +3572,13 @@ GRI_formables_category = {
 		}
 		available = {
 			date > 1050.12.1
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
-		visible = { is_ai = no }
 		fire_only_once = yes
 		days_remove = 300
 		custom_cost_trigger = {
@@ -3599,9 +3604,11 @@ GRI_formables_category = {
 			tag = GRI
 		}
 		available = {
-			date > 1051.8.1
+			date > 1051.2.1
 		}
-		visible = { is_ai = yes }
+		visible = {
+			is_ai = yes
+		}
 		fire_only_once = yes
 		days_remove = 300
 		remove_effect = {
@@ -3624,9 +3631,14 @@ GRI_formables_category = {
 			tag = GRI
 		}
 		available = {
-			date > 1051.11.1
+			date > 1051.7.1
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
-		visible = { is_ai = no }
 		fire_only_once = yes
 		days_remove = 215
 		cost = 125
@@ -3647,9 +3659,11 @@ GRI_formables_category = {
 			tag = GRI
 		}
 		available = {
-			date > 1051.4.1
+			date > 1051.8.1
 		}
-		visible = { is_ai = yes }
+		visible = {
+			is_ai = yes
+		}
 		fire_only_once = yes
 		days_remove = 215
 		remove_effect = {
@@ -3952,9 +3966,14 @@ EQC_formables_category = {
 		allowed = {
 			tag = EQC
 		}
-		visible = {
+		available = {
 			date > 1050.1.1
-			is_ai = no
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
 		cost = 150
 		fire_only_once = yes
@@ -3969,9 +3988,14 @@ EQC_formables_category = {
 		allowed = {
 			tag = EQC
 		}
-		visible = {
+		available = {
 			date > 1052.1.1
-			is_ai = no
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
 		cost = 150
 		fire_only_once = yes
@@ -3985,9 +4009,14 @@ EQC_formables_category = {
 		allowed = {
 			tag = EQC
 		}
-		visible = {
+		available = {
 			date > 1051.1.1
-			is_ai = no
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
 		custom_cost_trigger = {
 			set_temp_variable = { EQC_decision_army_xp_cost = 75 }
@@ -4009,13 +4038,15 @@ EQC_formables_category = {
         }
 	}
 	EQC_always_griffonian = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			GRI = { all_original_cores_owned_by_ROOT = yes }
 			BOI = { all_original_cores_owned_by_ROOT = yes }
 			JER = { all_original_cores_owned_by_ROOT = yes }
 			TRD = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -4030,7 +4061,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_griffonian"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = asia
 					OR = {
@@ -4048,13 +4079,15 @@ EQC_formables_category = {
 		}
 	}
 	EQC_always_evian = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			owns_state = 508
 			owns_state = 608
 			owns_state = 598
 			owns_state = 512
 		}
-		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -4064,7 +4097,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_evian"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = asia
 					is_in_array = { global.league_states = THIS }
@@ -4077,10 +4110,12 @@ EQC_formables_category = {
 		}
 	}
 	EQC_unpony_limelight = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			RCT = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -4090,7 +4125,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_limelight"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = asia
 					is_in_array = { RCT.original_cores = THIS }
@@ -4107,12 +4142,12 @@ EQC_formables_category = {
 		}
 	}
 	EQC_hug_MIT = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			MIT = { is_in_faction_with = ROOT }
-		}
-		visible = {
 			date > 1051.1.1
-			tag = EQC
 		}
 		fire_only_once = yes
 		complete_effect = {
@@ -4126,6 +4161,9 @@ EQC_formables_category = {
 		}
 	}
 	EQC_GRIFFSOC = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			FAT = { all_cores_owned_by_ROOT_or_subject = yes }
             JER = { all_cores_owned_by_ROOT_or_subject = yes }
@@ -4147,7 +4185,6 @@ EQC_formables_category = {
             BAK = { all_cores_owned_by_ROOT_or_subject = yes }
             HLR = { all_cores_owned_by_ROOT_or_subject = yes }
 		}
-		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -4158,7 +4195,7 @@ EQC_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_GRIFFSOC"
 			set_country_flag = EQC_complete_griffonian_control
 			set_cosmetic_tag = EQC_griffonia
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = asia
 					NOT = { is_core_of = ROOT }
@@ -4171,13 +4208,15 @@ EQC_formables_category = {
 		}
 	}
 	EQC_said_the_line = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			has_country_flag = EQC_complete_griffonian_control
 		}
 		visible = {
 			has_country_flag = EQC_complete_griffonian_control
-			date > 1056.1.1
-			tag = EQC
+			date > 1053.1.1
 		}
 		fire_only_once = yes
 		days_remove = 180
@@ -4191,7 +4230,7 @@ EQC_formables_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision remove EQC_said_the_line"
-			every_country = {
+			every_other_country = {
 				limit = {
 					exists = yes
 					NOT = { is_subject_of = ROOT }
@@ -4213,6 +4252,13 @@ EQC_formables_category = {
 		}
 	}
 	EQC_always_daybreaker = {
+		allowed = {
+			tag = EQC
+		}
+		visible = {
+			has_country_flag = EQC_complete_griffonian_control
+			date > 1053.1.1
+		}
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = EQC_controls_all_original_EQS_territory
@@ -4226,7 +4272,6 @@ EQC_formables_category = {
 				}
 			}
 		}
-		visible = { tag = EQC }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = europe
@@ -4240,7 +4285,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_always_daybreaker"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = europe
 					OR = {
@@ -4257,10 +4302,16 @@ EQC_formables_category = {
 		}
 	}
 	EQC_unpony_chrysalis = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			CHN = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = EQC }
+		visible = {
+			has_country_flag = EQC_complete_griffonian_control
+			date > 1053.1.1
+		}
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = europe
@@ -4271,7 +4322,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_chrysalis"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = europe
 					is_in_array = { CHN.original_cores = THIS }
@@ -4285,10 +4336,16 @@ EQC_formables_category = {
 		}
 	}
 	EQC_unpony_caramel_marks = {
+		allowed = {
+			tag = EQC
+		}
 		available = {
 			STG = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = EQC }
+		visible = {
+			has_country_flag = EQC_complete_griffonian_control
+			date > 1053.1.1
+		}
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = europe
@@ -4298,7 +4355,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision EQC_unpony_caramel_marks"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = europe
 					is_in_array = { STG.original_cores = THIS }
@@ -4315,56 +4372,26 @@ EQC_formables_category = {
 		}
 	}
 	EQC_the_party_rules_all = {
+		allowed = {
+			tag = EQC
+		}
+		visible = {
+			has_country_flag = EQC_complete_griffonian_control
+			date > 1053.1.1
+		}
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = EQC_wc_boi_tt
-				HIP = { all_original_cores_owned_by_ROOT = yes }
-				HPS = { all_original_cores_owned_by_ROOT = yes }
-				DOH = { all_original_cores_owned_by_ROOT = yes }
-				HRL = { all_original_cores_owned_by_ROOT = yes }
-				WIN = { all_original_cores_owned_by_ROOT = yes }
-				BAT = { all_original_cores_owned_by_ROOT = yes }
-				ZAR = { all_original_cores_owned_by_ROOT = yes }
-				NZA = { all_original_cores_owned_by_ROOT = yes }
-				CTH = { all_original_cores_owned_by_ROOT = yes }
-				CGI = { all_original_cores_owned_by_ROOT = yes }
-				MCW = { all_original_cores_owned_by_ROOT = yes }
-				CTL = { all_original_cores_owned_by_ROOT = yes }
-				LMB = { all_original_cores_owned_by_ROOT = yes }
-				ABY = { all_original_cores_owned_by_ROOT = yes }
-				MGY = { all_original_cores_owned_by_ROOT = yes }
-				REM = { all_original_cores_owned_by_ROOT = yes }
-				NDR = { all_original_cores_owned_by_ROOT = yes }
-				ZAJ = { all_original_cores_owned_by_ROOT = yes }
-				AZI = { all_original_cores_owned_by_ROOT = yes }
-				CAM = { all_original_cores_owned_by_ROOT = yes }
-				TIM = { all_original_cores_owned_by_ROOT = yes }
-				YMN = { all_original_cores_owned_by_ROOT = yes }
-				ILU = { all_original_cores_owned_by_ROOT = yes }
-				ZIT = { all_original_cores_owned_by_ROOT = yes }
-				TNT = { all_original_cores_owned_by_ROOT = yes }
-				ZWA = { all_original_cores_owned_by_ROOT = yes }
-				HSO = { all_original_cores_owned_by_ROOT = yes }
-				EMR = { all_original_cores_owned_by_ROOT = yes }
-				MTA = { all_original_cores_owned_by_ROOT = yes }
-				KAR = { all_original_cores_owned_by_ROOT = yes }
-				STM = { all_original_cores_owned_by_ROOT = yes }
-				ROA = { all_original_cores_owned_by_ROOT = yes }
-				CNT = { all_original_cores_owned_by_ROOT = yes }
-				TAI = { all_original_cores_owned_by_ROOT = yes }
-				MEL = { all_original_cores_owned_by_ROOT = yes }
-				ZOO = { all_original_cores_owned_by_ROOT = yes }
-				IDO = { all_original_cores_owned_by_ROOT = yes }
-				DEL = { all_original_cores_owned_by_ROOT = yes }
-				YAN = { all_original_cores_owned_by_ROOT = yes }
-				ZLU = { all_original_cores_owned_by_ROOT = yes }
-				KIR = { all_original_cores_owned_by_ROOT = yes }
-				NVA = { all_original_cores_owned_by_ROOT = yes }
-				GAZ = { all_original_cores_owned_by_ROOT = yes }
-				BRS = { all_original_cores_owned_by_ROOT = yes }
+				all_state = {
+					if = {
+						limit = {
+							is_on_continent = africa
+						}
+						is_owned_and_controlled_by = ROOT
+					}
+				}
 			}
 		}
-		visible = { tag = EQC }
 		highlight_states = {
 			highlight_state_targets = {
 				state = 1202
@@ -4468,12 +4495,13 @@ EQC_formables_category = {
 		}
 	}
 	SIC_MIT_mares_mares_mares = {
-		available = {
-			356 = { is_owned_and_controlled_by = ROOT }
+		allowed = {
+			OR = {
+				tag = MIT
+				tag = SIC
+			}
 		}
-		visible = {
-			NOT = { tag = EQC }
-			NOT = { country_exists = EQC }
+		available = {
 			356 = { is_owned_and_controlled_by = ROOT }
 		}
 		highlight_states = {
@@ -4485,7 +4513,7 @@ EQC_formables_category = {
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision SIC_MIT_mares_mares_mares"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = asia
 					is_in_array = { EQC.original_cores = THIS }
@@ -4548,6 +4576,7 @@ BRF_formables_category = {
 					}
 				}
 			}
+			is_ai = no
         }
         cost = 50
         fire_only_once = yes
@@ -5410,8 +5439,13 @@ RCT_formables_category = {
 		}
 		available = {
 			date > 1052.3.1
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
-		visible = { is_ai = no }
 		cost = 200
 		days_remove = 65
 		fire_only_once = yes
@@ -5427,7 +5461,9 @@ RCT_formables_category = {
 		available = {
 			date > 1052.9.1
 		}
-		visible = { is_ai = yes }
+		visible = {
+			is_ai = yes
+		}
 		days_remove = 130
 		fire_only_once = yes
 		remove_effect = {
@@ -5444,8 +5480,13 @@ RCT_formables_category = {
 		}
 		available = {
 			date > 1052.3.1
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				is_ai = no
+			}
 		}
-		visible = { is_ai = no }
 		custom_cost_trigger = {
 			set_temp_variable = { RCT_army_experience_cost = 125 }
 			set_temp_variable = { RCT_pp_experience_cost = 150 }
@@ -5485,13 +5526,15 @@ RCT_formables_category = {
 		}
 	}
 	RCT_safe_society = {
+		allowed = {
+			tag = RCT
+		}
 		available = {
 			BRF = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			LUS = { all_original_cores_owned_by_ROOT = yes }
 			GRU = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			GRY = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -5550,11 +5593,13 @@ RCT_formables_category = {
 		}
 	}
 	RCT_secure_society = {
+		allowed = {
+			tag = RCT
+		}
 		available = {
 			SIC = { all_original_cores_owned_by_ROOT = yes }
 			MIT = { all_original_cores_owned_by_ROOT_or_subject = yes }
 		}
-		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -5595,10 +5640,12 @@ RCT_formables_category = {
 		}
 	}
 	RCT_dead_reds = {
+		allowed = {
+			tag = RCT
+		}
 		available = {
 			EQC = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -5668,10 +5715,12 @@ RCT_formables_category = {
 		}
 	}
 	RCT_end_griffonian_war = {
+		allowed = {
+			tag = RCT
+		}
 		available = {
 			GRI = { all_original_cores_owned_by_ROOT = yes }
 		}
-		visible = { tag = RCT }
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
@@ -5723,15 +5772,15 @@ RCT_formables_category = {
 		}
 	}
 	RCT_somehow_RCT_returned = {
-		available = {
-			RCT = { all_original_cores_owned_by_ROOT = yes }
-		}
-		visible = {
+		allowed = {
 			OR = {
 				tag = BAR
 				tag = NIM
 				tag = LNS
 			}
+		}
+		available = {
+			RCT = { all_original_cores_owned_by_ROOT = yes }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -6718,7 +6767,6 @@ ZAR_formables_category = {
 	}
 	ZAR_camel_cams = {
 		available = {
-			is_subject = no
 			OR = {
 				ZAJ = { all_original_cores_owned_by_ROOT = yes }
 				AZI = { all_original_cores_owned_by_ROOT = yes }
@@ -6744,7 +6792,6 @@ ZAR_formables_category = {
 	}
 	ZAR_riverlands_mk_2 = {
 		available = {
-			is_subject = no
 			CAM = { all_original_cores_owned_by_ROOT = yes }
 		}
 		visible = { country_exists = REM }
@@ -6767,7 +6814,6 @@ ZAR_formables_category = {
 	}
 	ZAR_yankee_go_home = {
 		available = {
-			is_subject = no
 			REM = { all_original_cores_owned_by_ROOT = yes }
 		}
 		visible = {
@@ -9591,6 +9637,18 @@ ROA_formables_category = {
 				}
 				add_core_of = ROOT
 			}
+			create_wargoal = {
+				target = ZOO
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = MEL
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = TAI
+				type = annex_everything
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -9646,18 +9704,6 @@ ROA_formables_category = {
 					}
 				}
 				add_core_of = ROOT
-			}
-			create_wargoal = {
-				target = ZOO
-				type = annex_everything
-			}
-			create_wargoal = {
-				target = MEL
-				type = annex_everything
-			}
-			create_wargoal = {
-				target = TAI
-				type = annex_everything
 			}
 		}
 		ai_will_do = {
@@ -10942,7 +10988,7 @@ KAR_formables_category = {
 ZWA_TIM_formables_category = {
 	ZWA_TIM_united_federation = {
 		available = {
-			NDR = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			NDR = { all_cores_owned_by_ROOT_or_ally = yes }
 			if = {
 				limit = {
 					tag = TIM
@@ -12036,6 +12082,7 @@ WNG_formables_category = {
 						is_claimed_by = HIP
 						is_core_of = HIP
 					}
+					NOT = { is_core_of = ROOT }
 				}
 				add_core_of = ROOT
 			}
