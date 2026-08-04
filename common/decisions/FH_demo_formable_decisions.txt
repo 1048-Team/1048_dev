@@ -3,8 +3,169 @@ SOL_formables_category = {
 	SOL_avenge_secession = {
 		visible = {
 			has_country_flag = SOL_finished_official_content
+			is_ai = no
 		}
 		cost = 35
+		days_remove = 35
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_avenge_secession"
+			every_country = {
+				limit = {
+					exists = yes
+					is_in_array = { global.southeast_countries = THIS }
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+	}
+	SOL_end_the_betrayers = {
+		available = {
+			BAL = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+			is_ai = no
+		}
+		cost = 35
+		days_remove = 35
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_end_the_betrayers"
+			every_country = {
+				limit = {
+					exists = yes
+					OR = {
+						tag = CRY
+						is_in_array = { global.shield_of_steel = THIS }
+					}
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+	}
+	SOL_recompense_for_the_great_war = {
+		available = {
+			STG = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			CWR = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			AWR = { all_original_cores_owned_by_ROOT_or_subject = yes }
+			CRY = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+			is_ai = no
+		}
+		cost = 70
+		days_remove = 70
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_recompense_for_the_great_war"
+			every_country = {
+				limit = {
+					exists = yes
+					is_in_array = { global.changeling_hegemony = THIS }
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_array = { global.changeling_hegemony = THIS }
+					NOT = {
+						tag = CHN
+						tag = OLE
+					}
+				}
+				add_to_ROOT_potential_cores = yes
+			}
+		}
+	}
+	SOL_drag_them_back = {
+		available = {
+			CHN = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+			is_ai = no
+		}
+		highlight_states = {
+			highlight_states_trigger = {
+				is_on_continent = europe
+				is_claimed_by = ROOT
+				is_core_of = CHN
+			}
+		}
+		cost = 100
+		days_remove = 180
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_drag_them_back"
+			every_state = {
+				limit = {
+					is_on_continent = europe
+					is_claimed_by = ROOT
+					is_core_of = CHN
+				}
+				add_core_of = ROOT
+			}
+			set_province_name = {
+				id = 748
+				name = renamed_chrysalia
+			}
+			1216 = {
+				set_state_name = renamed_chrysalia_state
+			}
+			136 = {
+				set_state_name = renamed_chrysalia_plains_state
+			}
+		}
+	}
+	SOL_retake_crown_jewel = {
+		available = {
+			CHN = { all_original_cores_owned_by_ROOT_or_subject = yes }
+		}
+		visible = {
+			has_country_flag = SOL_finished_official_content
+		}
+		war_with_on_remove = EQC
+		cost = 75
+		days_remove = 70
+		fire_only_once = yes
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_retake_crown_jewel"
+			356 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+	}
+	SOL_avenge_secession_ai = {
+		visible = {
+			has_country_flag = SOL_finished_official_content
+			is_ai = yes
+		}
 		days_remove = 35
 		fire_only_once = yes
 		war_with_on_remove = BAL
@@ -17,7 +178,7 @@ SOL_formables_category = {
 		war_with_on_remove = SPF
 		war_with_on_remove = CLI
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_avenge_secession"
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_avenge_secession_ai"
 			every_country = {
 				limit = {
 					exists = yes
@@ -44,14 +205,14 @@ SOL_formables_category = {
 			}
 		}
 	}
-	SOL_end_the_betrayers = {
+	SOL_end_the_betrayers_ai = {
 		available = {
 			BAL = { all_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		visible = {
 			has_country_flag = SOL_finished_official_content
+			is_ai = yes
 		}
-		cost = 35
 		days_remove = 35
 		fire_only_once = yes
 		war_with_on_remove = STG
@@ -60,7 +221,7 @@ SOL_formables_category = {
 		war_with_on_remove = MWR
 		war_with_on_remove = CRY
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_end_the_betrayers"
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_end_the_betrayers_ai"
 			every_country = {
 				limit = {
 					exists = yes
@@ -90,7 +251,7 @@ SOL_formables_category = {
 			}
 		}
 	}
-	SOL_recompense_for_the_great_war = {
+	SOL_recompense_for_the_great_war_ai = {
 		available = {
 			STG = { all_original_cores_owned_by_ROOT_or_subject = yes }
 			CWR = { all_original_cores_owned_by_ROOT_or_subject = yes }
@@ -99,8 +260,8 @@ SOL_formables_category = {
 		}
 		visible = {
 			has_country_flag = SOL_finished_official_content
+			is_ai = yes
 		}
-		cost = 70
 		days_remove = 70
 		fire_only_once = yes
 		war_with_on_remove = CHN
@@ -109,7 +270,7 @@ SOL_formables_category = {
 		war_with_on_remove = CCA
 		war_with_on_remove = NCA
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_recompense_for_the_great_war"
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_recompense_for_the_great_war_ai"
 			every_country = {
 				limit = {
 					exists = yes
@@ -145,12 +306,13 @@ SOL_formables_category = {
 			}
 		}
 	}
-	SOL_drag_them_back = {
+	SOL_drag_them_back_ai = {
 		available = {
 			CHN = { all_original_cores_owned_by_ROOT_or_subject = yes }
 		}
 		visible = {
 			has_country_flag = SOL_finished_official_content
+			is_ai = yes
 		}
 		highlight_states = {
 			highlight_states_trigger = {
@@ -159,12 +321,11 @@ SOL_formables_category = {
 				is_core_of = CHN
 			}
 		}
-		cost = 100
 		days_remove = 180
 		fire_only_once = yes
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_drag_them_back"
-			every_owned_state = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove SOL_drag_them_back_ai"
+			every_state = {
 				limit = {
 					is_on_continent = europe
 					is_claimed_by = ROOT
