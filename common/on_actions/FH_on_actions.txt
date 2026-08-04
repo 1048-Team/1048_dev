@@ -124,27 +124,27 @@ on_actions = {
 					}
 					SOL_calculate_ordo_image = yes
 				}
-				else_if = { #ABY-YMN war and YMN stuffs
-					limit = {
-						ROOT = {
-							OR = {
-								original_tag = ABY
-								original_tag = YMN
-							}
-						}
-					}
-					if = {
-						limit = {
-							FROM = {
-								OR = {
-									original_tag = ABY
-									original_tag = YMN
-								}
-							}
-						}
-						FROM = { add_to_ROOT_potential_cores = yes }
-					}
-				}
+				#else_if = { #ABY-YMN war and YMN stuffs
+				#	limit = {
+				#		ROOT = {
+				#			OR = {
+				#				original_tag = ABY
+				#				original_tag = YMN
+				#			}
+				#		}
+				#	}
+				#	if = {
+				#		limit = {
+				#			FROM = {
+				#				OR = {
+				#					original_tag = ABY
+				#					original_tag = YMN
+				#				}
+				#			}
+				#		}
+				#		FROM = { add_to_ROOT_potential_cores = yes }
+				#	}
+				#}
 				#Return MTS/SCS to not call in offensive wars
 				if = {
 					limit = {
@@ -208,6 +208,19 @@ on_actions = {
 						remove_ideas = SE_international_isolation
 					}
 				}
+				if = {
+					limit = {
+						ROOT = {
+							tag = MGY
+						}
+						FROM = {
+							tag = NDR
+						}
+					}
+					766 = {
+						remove_core_of = NDR
+					}
+				}
 				###Possibly if the transfering of navies doesn't help the AI naval invade
 				#if = {
 				#	limit = {
@@ -260,6 +273,7 @@ on_actions = {
 			#}
 			if = {
 				limit = {
+					is_ai = yes
 					ROOT = {
 						has_country_flag = SEE
 					}

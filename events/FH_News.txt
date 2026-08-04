@@ -14,22 +14,17 @@ news_event = { #Daybreaker returns from crisis
 	desc = solarempirenews.1.d
 	picture = GFX_news_daybreaker #Temp
 	major = yes
-	trigger = {
-		EQS = {
-			EQS_Daybreaker = { is_country_leader = yes }
-			has_country_flag = daybreaker_reigns
-		}
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 
 	option = {
 		name = solarempirenews.1.a
 		trigger = { 
 			OR = {
 				tag = EQS
+				tag = MTS
 				AND = {
 					tag = WHY
-					WHY_Solar_Strike = { is_country_leader = yes }
+					has_country_leader = { character = WHY_Solar_Strike ruling_only = yes }
 				}
 			}
 		}
@@ -38,18 +33,15 @@ news_event = { #Daybreaker returns from crisis
 	option = {
 		name = solarempirenews.1.b
 		trigger = { 
-			OR = {
-				tag = CHN 
-				tag = BLS
-				tag = NER
-				tag = CER
+			capital_scope = {
+				is_on_continent = europe
+			}
+			NOT = {
+				tag = MTS
 				AND = {
 					tag = WHY
-					NOT = { WHY_Solar_Strike = { is_country_leader = yes } }
+					has_country_leader = { character = WHY_Solar_Strike ruling_only = yes }
 				}
-				tag = CLD
-				tag = CRY
-				tag = BAL
 			}
 		}
 	}
@@ -57,19 +49,13 @@ news_event = { #Daybreaker returns from crisis
 	option = {
 		name = solarempirenews.1.c
 		trigger = { 
-			NOT = {
-				tag = EQS
-				tag = CHN 
-				tag = BLS
-				tag = NER
-				tag = CER
-				AND = {
-					tag = WHY
-					NOT = { WHY_Solar_Strike = { is_country_leader = yes } }
+			OR = {
+				capital_scope = {
+					OR = {
+						is_on_continent = africa
+						is_on_continent = asia
+					}
 				}
-				tag = CLD
-				tag = CRY
-				tag = BAL
 			}
 		}
 	}
@@ -82,15 +68,7 @@ news_event = { #Crowning of regent
 	desc = solarempirenews.2.d
 	picture = GFX_news_forever_sun #Temp
 	major = yes
-	trigger = {
-		EQS = {
-			OR = {
-				EQS_Sunset_Shimmer_1048 = { is_country_leader = yes }
-				EQS_Aurora_Shinespark = { is_country_leader = yes }
-			}
-		}
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 
 	option = {
 		name = solarempirenews.2.a
@@ -99,7 +77,7 @@ news_event = { #Crowning of regent
 				tag = EQS
 				AND = {
 					tag = WHY
-					WHY_Solar_Strike = { is_country_leader = yes }
+					has_country_leader = { character = WHY_Solar_Strike ruling_only = yes }
 				}
 			}
 		}
@@ -120,7 +98,7 @@ news_event = { #Crowning of regent
 				tag = CRY
 				AND = {
 					tag = WHY
-					NOT = { WHY_Solar_Strike = { is_country_leader = yes } }
+					has_country_leader = { character = WHY_Solar_Strike ruling_only = yes }
 				}
 			}
 		}
@@ -134,12 +112,7 @@ news_event = { #Celestia returns
 	desc = solarempirenews.3.d
 	picture = GFX_news_event_canterlot_celestia #Temp
 	major = yes
-	trigger = {
-		EQS = {
-			EQS_Sunbutt = { is_country_leader = yes }
-		}
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 
 	option = {
 		name = solarempirenews.3.a
@@ -181,12 +154,7 @@ news_event = { #Dyx is a motherbucking general
 	desc = solarempirenews.4.d
 	picture = GFX_news_forever_sun #Temp
 	major = yes
-	trigger = {
-		EQS = {
-			has_country_flag = dyx_is_being_dyx
-		}
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 
 	option = {
 		name = solarempirenews.4.a
@@ -957,12 +925,7 @@ news_event = { #Griffonia war with EQC
 	desc = fhgriffonianews.1.d
 	
 	major = yes
-	trigger = {
-		GRI = {
-			has_war_with = EQC
-		}
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 	
 	option = { #Two evils fighting it out
 		name = fhgriffonianews.1.a
@@ -976,18 +939,7 @@ news_event = { #Griffonia war 2, now with RCT
 	desc = fhgriffonianews.2.d
 	
 	major = yes
-	trigger = {
-		GRI = {
-			has_war_with = EQC
-		}
-		RCT = {
-			has_war_with = EQC
-		}
-		RCT = {
-			has_war_with = GRI
-		}
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 	
 	option = { #A whole continental war!
 		name = fhgriffonianews.2.a
