@@ -4644,7 +4644,15 @@ BRF_formables_category = {
     }
 	BRF_revive_coltstream_treaty = {
 		available = {
-			RCT = { all_original_cores_owned_by_ROOT_or_ally = yes }
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
+			RCT = {
+				all_original_cores_owned_by_ROOT_or_ally = yes
+			}
 		}
 		visible = {
 			NOT = { has_global_flag = BRF_splintered_RCT }
@@ -5530,20 +5538,27 @@ RCT_formables_category = {
 			tag = RCT
 		}
 		available = {
-			BRF = { all_original_cores_owned_by_ROOT_or_subject = yes }
-			LUS = { all_original_cores_owned_by_ROOT = yes }
-			GRU = { all_original_cores_owned_by_ROOT_or_subject = yes }
-			GRY = { all_original_cores_owned_by_ROOT = yes }
+			custom_trigger_tooltip = {
+				tooltip = RCT_a_little_evil_tt
+				all_state = {
+					if = {
+						limit = {
+							is_in_array = { global.league_states = THIS }
+						}
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
+						}
+					}
+				}
+			}
 		}
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = asia
-				OR = {
-					is_in_array = { BRF.original_cores = THIS }
-					is_in_array = { LUS.original_cores = THIS }
-					is_in_array = { GRU.original_cores = THIS }
-					is_in_array = { GRY.original_cores = THIS }
-				}
+				is_in_array = { global.league_states = THIS }
 			}
 		}
 		fire_only_once = yes
@@ -5559,12 +5574,7 @@ RCT_formables_category = {
 				every_state = {
 					limit = {
 						is_on_continent = asia
-						OR = {
-							is_in_array = { LUS.original_cores = THIS }
-							is_in_array = { GRU.original_cores = THIS }
-							is_in_array = { GRY.original_cores = THIS }
-							is_in_array = { BRF.original_cores = THIS }
-						}
+						is_in_array = { global.league_states = THIS }
 					}
 					add_core_of = BRF
 					transfer_state_to = BRF
@@ -5572,6 +5582,19 @@ RCT_formables_category = {
 				set_autonomy = {
 					target = BRF
 					autonomous_state = autonomy_puppet
+				}
+				every_owned_state = {
+					limit = {
+						is_in_array = { GRY.original_cores = THIS }
+					}
+					add_core_of = ROOT
+				}
+				every_state = {
+					limit = {
+						is_in_array = { GRU.original_cores = THIS }
+						is_owned_and_controlled_by = BAR
+					}
+					add_core_of = BAR
 				}
 			}
 			BRF = { set_cosmetic_tag = BRF_RCT }
