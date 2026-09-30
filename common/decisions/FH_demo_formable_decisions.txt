@@ -6392,13 +6392,17 @@ CTL_formables_category = {
 		highlight_states = {
 			highlight_states_trigger = {
 				is_on_continent = africa
-				is_in_array = { global.starting_MCW_states = THIS }
+				OR = {
+					state = 719
+					state = 716
+					state = 715
+				}
 			}
 		}
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: decision CTL_yoink_birbs"
-			every_state = {
+			every_owned_state = {
 				limit = {
 					is_on_continent = africa
 					OR = {
@@ -6408,6 +6412,7 @@ CTL_formables_category = {
 						state = 725
 						state = 721
 						state = 723
+						state = 724
 					}
 				}
 				add_core_of = ROOT
@@ -6423,7 +6428,11 @@ CTL_formables_category = {
 				every_owned_state = {
 					limit = {
 						NOT = { is_core_of = ROOT }
-						is_in_array = { MCW.original_cores = THIS }
+						OR = {
+							state = 719
+							state = 716
+							state = 715
+						}
 					}
 					transfer_state_to = MCW
 				}
@@ -7676,7 +7685,8 @@ KIR_formables_category = {
 				remove_idea = KIR_thousand_year_peace3
 				add_idea = KIR_thousand_year_peace4
 			}
-			add_ideas = civilian_economy
+			set_country_flag = economic_laws_blocked
+			add_ideas = low_economic_mobilisation
 		}
 		ai_will_do = {
 			factor = 1000
@@ -7694,17 +7704,13 @@ KIR_formables_category = {
 			log = "[GetDateText]: [Root.GetName]: decision remove KIR_finally_awake"
 			remove_ideas = KIR_thousand_year_peace4
 			clr_country_flag = trade_laws_blocked
+			set_country_flag = KIR_banner_system1_flag
+			set_country_flag = KIR_can_have_banner_system
+			set_country_flag = KIR_can_remove_banner_system
+			clr_country_flag = economic_laws_blocked
 			add_ideas = export_focus
-			if = {
-				limit = {
-					OR = {
-						has_idea = civilian_economy
-						has_idea = low_economic_mobilisation
-					}
-				}
-				add_ideas = partial_economic_mobilisation
-			}
-			add_ideas = limited_conscription
+			add_ideas = partial_economic_mobilisation
+			add_ideas = KIR_banner_system1
 		}
 		ai_will_do = {
 			factor = 1000
@@ -9891,8 +9897,9 @@ ROA_formables_category = {
 		available = {
 			KIR = { all_original_cores_owned_by_ROOT = yes }
 			NVA = { all_original_cores_owned_by_ROOT = yes }
-			BRS = { all_original_cores_owned_by_ROOT = yes }
 			GAZ = { all_original_cores_owned_by_ROOT = yes }
+			1097 = { is_owned_by = ROOT }
+			1227 = { is_owned_by = ROOT }
 		}
 		highlight_states = {
 			highlight_states_trigger = {
