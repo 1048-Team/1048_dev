@@ -102,6 +102,12 @@ form_crystal_empire_category = {
 	CRY_end_the_protests = {
 		available = {
 			date > 1048.6.30
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		visible = { is_ai = no }
 		fire_only_once = yes
@@ -119,6 +125,12 @@ form_crystal_empire_category = {
 	CRY_end_the_protests_ai = {
 		available = {
 			date > 1049.1.1
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		visible = { is_ai = yes }
 		fire_only_once = yes
@@ -135,6 +147,12 @@ form_crystal_empire_category = {
 	CRY_re_establish_military_funding = {
 		available = {
 			date > 1050.2.28
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		visible = { is_ai = no }
 		fire_only_once = yes
@@ -159,6 +177,12 @@ form_crystal_empire_category = {
 	CRY_re_establish_military_funding_ai = {
 		available = {
 			date > 1050.2.28
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		visible = { is_ai = yes }
 		fire_only_once = yes
@@ -177,6 +201,12 @@ form_crystal_empire_category = {
 			date > 1051.8.31
 			has_army_manpower = {
 				size > 500000
+			}
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
 			}
 		}
 		visible = { is_ai = no }
@@ -212,6 +242,12 @@ form_crystal_empire_category = {
 			date > 1051.8.31
 			has_army_manpower = {
 				size > 500000
+			}
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
 			}
 		}
 		visible = { is_ai = yes }
@@ -255,6 +291,12 @@ form_crystal_empire_category = {
 	CRY_send_STG_ultimatum = {
 		available = {
 			NOT = { has_idea = CRY_dilapidated_army }
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		fire_only_once = yes
 		days_remove = 14
@@ -304,6 +346,12 @@ form_crystal_empire_category = {
 	CRY_welcome_back_lost_friends = {
 		available = {
 			CWR = { all_original_cores_owned_by_ROOT = yes }
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -336,6 +384,12 @@ form_crystal_empire_category = {
 		available = {
 			CWR = { all_original_cores_owned_by_ROOT = yes }
 			NOT = { has_idea = CRY_treaty_of_gossamer_hills }
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		fire_only_once = yes
 		days_remove = 35
@@ -358,6 +412,12 @@ form_crystal_empire_category = {
 	CRY_return_of_harmony = {
 		available = {
 			EQS = { all_original_cores_owned_by_ROOT = yes }
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				is_subject = no
+			}
 		}
 		fire_only_once = yes
 		highlight_states = {
@@ -437,6 +497,7 @@ form_changelingian_protectorates_category = {
 			is_ai = no
 		}
 		custom_cost_trigger = {
+			set_temp_variable = { CHN_army_experience_cost = 50 }
 			has_army_experience > 49.99
 		}
 		custom_cost_text = CHN_dynamic_xp_cost_tt
@@ -473,6 +534,7 @@ form_changelingian_protectorates_category = {
 			is_ai = no
 		}
 		custom_cost_trigger = {
+			set_temp_variable = { CHN_army_experience_cost = 75 }
 			has_army_experience > 74.99
 		}
 		custom_cost_text = CHN_dynamic_xp_cost_tt
@@ -1818,17 +1880,23 @@ form_changelingian_protectorates_category = {
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = CHN_all_protectorates_established
-				OLE = { all_cores_owned_by_ROOT_or_subject = yes }
-				CHN = { all_cores_owned_by_ROOT_or_subject = yes }
-				CRY = { all_cores_owned_by_ROOT_or_subject = yes }
-				CCA = { all_cores_owned_by_ROOT_or_subject = yes }
-				NCA = { all_cores_owned_by_ROOT_or_subject = yes }
-				SCS = { all_cores_owned_by_ROOT_or_subject = yes }
-				SCH = { all_cores_owned_by_ROOT_or_subject = yes }
-				SMH = { all_cores_owned_by_ROOT_or_subject = yes }
-				STG = { all_cores_owned_by_ROOT_or_subject = yes }
-				JGR = { all_cores_owned_by_ROOT_or_subject = yes }
-				GRF = { all_cores_owned_by_ROOT_or_subject = yes }
+				all_state = {
+					if = {
+						limit = {
+							is_on_continent = europe
+							NOT = {
+								state = 1196
+								state = 1197
+							}
+						}
+						OWNER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+							}
+						}
+					}
+				}
 			}
 		}
 		fire_only_once = yes
