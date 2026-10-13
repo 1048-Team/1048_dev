@@ -1,0 +1,45 @@
+on_actions = {
+    #ROOT Is new controller, FROM is old controller, FROM.FROM is state ID
+    on_state_control_changed = {
+        #Daybreaker/Solarists won't keep a shield up for the enemy
+        if = {
+            limit = {
+                FROM.FROM = { state = 3 }
+            }
+            if = {
+                limit = {
+                    FROM = {
+                        OR = {
+                            tag = EQS
+                            tag = SLW
+                            tag = MTS
+                        }
+                    }
+                }
+                3 = {
+                    remove_province_modifer = {
+                        static_modifiers = { canterlot_shield }
+                        province = 179
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    ROOT = {
+                        OR = {
+                            tag = EQS
+                            tag = SLW
+                            tag = MTS
+                        }
+                    }
+                }
+                3 = {
+                    add_province_modifier = {
+                        static_modifiers = { canterlot_shield }
+                        province = 179
+                    }
+                }
+            }
+        }
+    }
+}
