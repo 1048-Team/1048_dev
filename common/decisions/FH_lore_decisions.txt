@@ -2,6 +2,7 @@ FH_lore_decision_category = {
     FH_disable_category = {
         fire_only_once = yes
         complete_effect = {
+            log = "GetDateText: [ROOT.GetName]: decision FH_disable_category"
             #custom_effect_tooltip = FH_super_sad_librarian_noises_tt
             set_country_flag = FH_ignorance_is_knowledge
         }
@@ -48,6 +49,32 @@ FH_lore_decision_category = {
             custom_effect_tooltip = FH_summarization_tt
             custom_effect_tooltip = generic_skip_one_line_tt
             country_event = fh_lore.9
+        }
+    }
+}
+
+FH_dramatis_personae_category = {
+    FH_disable_dramatis_personae = {
+        fire_only_once = yes
+        complete_effect = {
+            log = "GetDateText: [ROOT.GetName]: decision FH_disable_dramatis_personae"
+            set_country_flag = FH_no_pretty_pictures
+        }
+    }
+    FH_get_dramatis_personae = {
+        fire_only_once = yes
+        complete_effect = {
+            log = "GetDateText: [ROOT.GetName]: decision FH_get_dramatis_personae"
+            custom_effect_tooltip = FH_only_once_tt
+            custom_effect_tooltip = generic_skip_one_line_tt
+            #Make this a scripted effect eventually, but for now it's fine here
+            if = {
+                limit = {
+                    tag = EQS
+                }
+                country_event = FH_dramatis_personae.1
+            }
+            set_country_flag = FH_no_pretty_pictures
         }
     }
 }
