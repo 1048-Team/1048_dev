@@ -2,8 +2,18 @@ add_namespace = FH_dramatis_personae
 
 #Works a bit differently. One namespace, but use FH_dramatis_personae.t/.desc for the generic title and description.
 #For the individual nations, use TAG_dramatis_personae.x.a/b/c/etc. for responses. Break into as many events as needed. Events can fit up to four options easily without running off the page.
+country_event = { #To trigger the pages of FH_dramatis_personae.x
+    id = FH_dramatis_personae.0
+    hidden = yes
 
-country_event = { #Note Jotter's blurb about herself.
+    is_triggered_only = yes
+
+    option = {
+        FH_dramatis_personae_event_clean = yes
+    }
+}
+
+country_event = {
     id = FH_dramatis_personae.1
     title = FH_dramatis_personae.t
     desc = FH_dramatis_personae.desc
@@ -361,7 +371,7 @@ country_event = { #Note Jotter's blurb about herself.
             set_country_flag = SOL_dp_12
         }
         hidden_effect = {
-            country_event = FH_dramatis_personae.2
+            country_event = FH_dramatis_personae.0
         }
     }
     option = {
@@ -373,18 +383,801 @@ country_event = { #Note Jotter's blurb about herself.
     }
 }
 
-country_event = { #To trigger the pages of FH_dramatis_personae.x
+country_event = {
     id = FH_dramatis_personae.2
-    hidden = yes
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.2"}
+    picture = GFX_event_solarempire
 
     is_triggered_only = yes
 
     option = {
+        name = CRY_dramatis_personae.1.a
+        trigger = {
+            has_country_flag = CRY_dp_1
+        }
+        custom_effect_tooltip = CRY_princess_cadance_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CRY_dramatis_personae.1.b
+        trigger = {
+            has_country_flag = CRY_dp_1
+        }
+        custom_effect_tooltip = CRY_princess_luna_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CRY_dramatis_personae.1.c
+        trigger = {
+            has_country_flag = CRY_dp_1
+        }
+        custom_effect_tooltip = CRY_princess_twilight_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CRY_dramatis_personae.1.d
+        trigger = {
+            has_country_flag = CRY_dp_2
+        }
+        custom_effect_tooltip = CRY_princess_flurry_heart_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CRY_dramatis_personae.1.e
+        trigger = {
+            has_country_flag = CRY_dp_2
+        }
+        custom_effect_tooltip = CRY_rainbow_dash_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CRY_dramatis_personae.1.f
+        trigger = {
+            has_country_flag = CRY_dp_2
+        }
+        custom_effect_tooltip = CRY_sweetie_belle_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CRY_dramatis_personae.1.g
+        trigger = {
+            has_country_flag = CRY_dp_3
+        }
+        custom_effect_tooltip = CRY_nightmare_moon_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.next
+        trigger = {
+            NOT = { has_country_flag = CRY_dp_3 }
+        }
         if = {
             limit = {
-                tag = EQS
+                has_country_flag = CRY_dp_1
             }
-            country_event = FH_dramatis_personae.1
+            clr_country_flag = CRY_dp_1
+            set_country_flag = CRY_dp_2
         }
+        else_if = {
+            limit = {
+                has_country_flag = CRY_dp_2
+            }
+            clr_country_flag = CRY_dp_2
+            set_country_flag = CRY_dp_3
+            custom_effect_tooltip = FH_river_song_moment_tt
+        }
+        hidden_effect = {
+            country_event = FH_dramatis_personae.0
+        }
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        trigger = {
+            has_country_flag = CRY_dp_3
+        }
+        clr_country_flag = CRY_dp_3
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.3
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.3"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = BLS_dramatis_personae.1.a
+        trigger = {
+            has_country_flag = BLS_dp_1
+        }
+        custom_effect_tooltip = BLS_bunsen_beaker_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.b
+        trigger = {
+            has_country_flag = BLS_dp_1
+        }
+        custom_effect_tooltip = BLS_stratus_stream_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.c
+        trigger = {
+            has_country_flag = BLS_dp_1
+        }
+        custom_effect_tooltip = BLS_nebula_flare_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.d
+        trigger = {
+            has_country_flag = BLS_dp_2
+        }
+        custom_effect_tooltip = BLS_note_jotter_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.e
+        trigger = {
+            has_country_flag = BLS_dp_2
+        }
+        custom_effect_tooltip = BLS_positron_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.f
+        trigger = {
+            has_country_flag = BLS_dp_3
+        }
+        custom_effect_tooltip = BLS_sci_twi_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.g
+        trigger = {
+            has_country_flag = BLS_dp_3
+        }
+        custom_effect_tooltip = BLS_rainbow_dash_human_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.h
+        trigger = {
+            has_country_flag = BLS_dp_3
+        }
+        custom_effect_tooltip = BLS_sunset_shimmer_human_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.i
+        trigger = {
+            has_country_flag = BLS_dp_4
+        }
+        custom_effect_tooltip = BLS_adagio_dazzle_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.j
+        trigger = {
+            has_country_flag = BLS_dp_4
+        }
+        custom_effect_tooltip = BLS_aria_blaze_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.k
+        trigger = {
+            has_country_flag = BLS_dp_4
+        }
+        custom_effect_tooltip = BLS_sonata_dusk_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.l
+        trigger = {
+            has_country_flag = BLS_dp_5
+        }
+        custom_effect_tooltip = BLS_luster_dawn_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.m
+        trigger = {
+            has_country_flag = BLS_dp_5
+        }
+        custom_effect_tooltip = BLS_blazing_sheath_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.n
+        trigger = {
+            has_country_flag = BLS_dp_5
+        }
+        custom_effect_tooltip = BLS_melting_point_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.o
+        trigger = {
+            has_country_flag = BLS_dp_6
+        }
+        custom_effect_tooltip = BLS_purple_haze_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = BLS_dramatis_personae.1.p
+        trigger = {
+            has_country_flag = BLS_dp_6
+        }
+        custom_effect_tooltip = BLS_solar_flare_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.next
+        trigger = {
+            NOT = { has_country_flag = BLS_dp_6 }
+        }
+        if = {
+            limit = {
+                has_country_flag = BLS_dp_1
+            }
+            clr_country_flag = BLS_dp_1
+            set_country_flag = BLS_dp_2
+        }
+
+        else_if = {
+            limit = {
+                has_country_flag = BLS_dp_2
+            }
+            clr_country_flag = BLS_dp_2
+            set_country_flag = BLS_dp_3
+            custom_effect_tooltip = FH_river_song_moment_tt
+        }
+        else_if = {
+            limit = {
+                has_country_flag = BLS_dp_3
+            }
+            clr_country_flag = BLS_dp_3
+            set_country_flag = BLS_dp_4
+        }
+        else_if = {
+            limit = {
+                has_country_flag = BLS_dp_4
+            }
+            clr_country_flag = BLS_dp_4
+            set_country_flag = BLS_dp_5
+        }
+        else_if = {
+            limit = {
+                has_country_flag = BLS_dp_5
+            }
+            clr_country_flag = BLS_dp_5
+            set_country_flag = BLS_dp_6
+        }
+        hidden_effect = {
+            country_event = FH_dramatis_personae.0
+        }
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        trigger = {
+            has_country_flag = BLS_dp_6
+        }
+        clr_country_flag = BLS_dp_6
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.4
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.4"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = EEE_dramatis_personae.1.a
+        trigger = {
+            has_country_flag = EEE_dp_1
+        }
+        custom_effect_tooltip = EEE_stellar_note_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.b
+        trigger = {
+            has_country_flag = EEE_dp_1
+        }
+        custom_effect_tooltip = EEE_waning_crescent_moonspeaker_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.c
+        trigger = {
+            has_country_flag = EEE_dp_1
+        }
+        custom_effect_tooltip = EEE_nocturne_vision_moonspeaker_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.d
+        trigger = {
+            has_country_flag = EEE_dp_2
+        }
+        custom_effect_tooltip = EEE_red_dusk_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.e
+        trigger = {
+            has_country_flag = EEE_dp_2
+        }
+        custom_effect_tooltip = EEE_tranquil_serenade_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.f
+        trigger = {
+            has_country_flag = EEE_dp_2
+        }
+        custom_effect_tooltip = EEE_nightshine_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.g
+        trigger = {
+            has_country_flag = EEE_dp_3
+        }
+        custom_effect_tooltip = EEE_moonlight_crescent_nice_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.h
+        trigger = {
+            has_country_flag = EEE_dp_3
+        }
+        custom_effect_tooltip = EEE_gushing_pulse_nice_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.i
+        trigger = {
+            has_country_flag = EEE_dp_4
+        }
+        custom_effect_tooltip = EEE_gushing_pulse_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.j
+        trigger = {
+            has_country_flag = EEE_dp_4
+        }
+        custom_effect_tooltip = EEE_moonlight_crescent_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.k
+        trigger = {
+            has_country_flag = EEE_dp_4
+        }
+        custom_effect_tooltip = EEE_waning_crescent_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.l
+        trigger = {
+            has_country_flag = EEE_dp_5
+        }
+        custom_effect_tooltip = EEE_moonbeam_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.m
+        trigger = {
+            has_country_flag = EEE_dp_5
+        }
+        custom_effect_tooltip = EEE_laconic_azure_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = EEE_dramatis_personae.1.n
+        trigger = {
+            has_country_flag = EEE_dp_5
+        }
+        custom_effect_tooltip = EEE_nocturne_vision_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.next
+        trigger = {
+            NOT = { has_country_flag = EEE_dp_5 }
+        }
+        if = {
+            limit = {
+                has_country_flag = EEE_dp_1
+            }
+            clr_country_flag = EEE_dp_1
+            set_country_flag = EEE_dp_2
+        }
+
+        else_if = {
+            limit = {
+                has_country_flag = EEE_dp_2
+            }
+            clr_country_flag = EEE_dp_2
+            set_country_flag = EEE_dp_3
+        }
+        else_if = {
+            limit = {
+                has_country_flag = EEE_dp_3
+            }
+            clr_country_flag = EEE_dp_3
+            set_country_flag = EEE_dp_4
+            custom_effect_tooltip = FH_river_song_moment_tt
+        }
+        else_if = {
+            limit = {
+                has_country_flag = EEE_dp_4
+            }
+            clr_country_flag = EEE_dp_4
+            set_country_flag = EEE_dp_5
+        }
+        hidden_effect = {
+            country_event = FH_dramatis_personae.0
+        }
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        trigger = {
+            has_country_flag = EEE_dp_5
+        }
+        clr_country_flag = EEE_dp_5
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.5
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.5"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = MTS_dramatis_personae.1.a
+        trigger = {
+            has_country_flag = MTS_dp_1
+        }
+        custom_effect_tooltip = MTS_scorched_earth_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = MTS_dramatis_personae.1.b
+        trigger = {
+            has_country_flag = MTS_dp_1
+        }
+        custom_effect_tooltip = MTS_luminous_blade_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = MTS_dramatis_personae.1.c
+        trigger = {
+            has_country_flag = MTS_dp_1
+        }
+        custom_effect_tooltip = MTS_warm_night_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = MTS_dramatis_personae.1.d
+        trigger = {
+            has_country_flag = MTS_dp_2
+        }
+        custom_effect_tooltip = MTS_pinpoint_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = MTS_dramatis_personae.1.e
+        trigger = {
+            has_country_flag = MTS_dp_2
+        }
+        custom_effect_tooltip = MTS_light_jolt_serenade_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = MTS_dramatis_personae.1.f
+        trigger = {
+            has_country_flag = MTS_dp_2
+        }
+        custom_effect_tooltip = MTS_emerald_days_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = MTS_dramatis_personae.1.g
+        trigger = {
+            has_country_flag = MTS_dp_3
+        }
+        custom_effect_tooltip = MTS_happy_couple_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.next
+        trigger = {
+            NOT = { has_country_flag = MTS_dp_3 }
+        }
+        if = {
+            limit = {
+                has_country_flag = MTS_dp_1
+            }
+            clr_country_flag = MTS_dp_1
+            set_country_flag = MTS_dp_2
+        }
+        else_if = {
+            limit = {
+                has_country_flag = MTS_dp_2
+            }
+            clr_country_flag = MTS_dp_2
+            set_country_flag = MTS_dp_3
+            custom_effect_tooltip = FH_river_song_moment_tt
+        }
+        hidden_effect = {
+            country_event = FH_dramatis_personae.0
+        }
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        trigger = {
+            has_country_flag = MTS_dp_3
+        }
+        clr_country_flag = MTS_dp_3
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.6
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.6"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = WHY_dramatis_personae.1.a
+        trigger = {
+            has_country_flag = WHY_dp_1
+        }
+        custom_effect_tooltip = WHY_solar_strike_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = WHY_dramatis_personae.1.b
+        trigger = {
+            has_country_flag = WHY_dp_1
+        }
+        custom_effect_tooltip = WHY_ayza_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = SOL_dramatis_personae.1.r
+        trigger = {
+            has_country_flag = WHY_dp_1
+        }
+        custom_effect_tooltip = SOL_horizon_sunrise_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = WHY_dramatis_personae.1.d
+        trigger = {
+            has_country_flag = WHY_dp_2
+        }
+        custom_effect_tooltip = WHY_opaline_arcana_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.next
+        trigger = {
+            NOT = { has_country_flag = WHY_dp_2 }
+        }
+        clr_country_flag = WHY_dp_1
+        set_country_flag = WHY_dp_2
+        hidden_effect = {
+            country_event = FH_dramatis_personae.0
+        }
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        trigger = {
+            has_country_flag = WHY_dp_2
+        }
+        clr_country_flag = WHY_dp_2
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.7
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.7"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = CER_dramatis_personae.1.a
+        trigger = {
+            has_country_flag = CER_dp_1
+        }
+        custom_effect_tooltip = CER_diamond_tiara_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CER_dramatis_personae.1.b
+        trigger = {
+            has_country_flag = CER_dp_1
+        }
+        custom_effect_tooltip = CER_taco_bell_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CER_dramatis_personae.1.c
+        trigger = {
+            has_country_flag = CER_dp_1
+        }
+        custom_effect_tooltip = CER_apple_bloom_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = CER_dramatis_personae.1.d
+        trigger = {
+            has_country_flag = CER_dp_2
+        }
+        custom_effect_tooltip = CER_coloratura_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.next
+        trigger = {
+            NOT = { has_country_flag = CER_dp_2 }
+        }
+        clr_country_flag = CER_dp_1
+        set_country_flag = CER_dp_2
+        hidden_effect = {
+            country_event = FH_dramatis_personae.0
+        }
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        trigger = {
+            has_country_flag = CER_dp_2
+        }
+        clr_country_flag = CER_dp_2
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.8
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.8"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = CLD_dramatis_personae.1.a
+        custom_effect_tooltip = CLD_scootaloo_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        clr_country_flag = CLD_dp_1
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.9
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.8"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = NCA_dramatis_personae.1.a
+        custom_effect_tooltip = NCA_ocellus_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        clr_country_flag = NCA_dp_1
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.10
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.10"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = CHN_dramatis_personae.1.a
+        custom_effect_tooltip = CHN_chrysalis_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        clr_country_flag = CHN_dp_1
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.11
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.11"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = NER_dramatis_personae.1.a
+        custom_effect_tooltip = NER_treehugger_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        clr_country_flag = NER_dp_1
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.12
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.12"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = RCT_dramatis_personae.1.a
+        custom_effect_tooltip = RCT_limelight_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        clr_country_flag = RCT_dp_1
+    }
+}
+
+country_event = {
+    id = FH_dramatis_personae.13
+    title = FH_dramatis_personae.t
+    desc = FH_dramatis_personae.desc
+    immediate = {log = "GetDateText: [ROOT.GetName]: event FH_dramatis_personae.13"}
+    picture = GFX_event_solarempire
+
+    is_triggered_only = yes
+
+    option = {
+        name = NID_dramatis_personae.1.a
+        custom_effect_tooltip = NID_cerebrum_tt
+        custom_effect_tooltip = generic_lorem_ispum_tt
+    }
+    option = {
+        name = FH_dramatis_personae.end
+        clr_country_flag = NID_dp_1
     }
 }
