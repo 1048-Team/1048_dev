@@ -16,5 +16,6 @@ replace_path="common/bookmarks"
 replace_path="events"
 replace_path="history/countries"
 path="/mod/1048_dev"
+picture="fh.jpg"
 
 supported_version="1.19.*"
