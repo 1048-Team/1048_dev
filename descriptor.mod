@@ -18,4 +18,4 @@ replace_path="history/countries"
 path="/mod/1048_dev"
 picture="fh.jpg"
 
-supported_version="1.19.*"
+supported_version="1.20.*"
