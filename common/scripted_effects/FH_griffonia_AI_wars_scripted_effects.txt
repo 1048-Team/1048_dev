@@ -1,0 +1,730 @@
+#griffonia_WT_baseline = {
+#    set_temp_variable = { FH_world_tension = global.threat }
+#    multiply_temp_variable = { FH_world_tension = 100 }
+#    round_temp_variable = FH_world_tension
+#    IF = {
+#        limit = {
+#            threat < 10
+#            check_variable = { global.FH_limited_war_escalator = 1 }
+#        }
+#        add_threat = var:FH_world_tension
+#        add_threat = 10
+#    }
+#    ELSE_IF = {
+#        limit = {
+#            threat < 30
+#            check_variable = { global.FH_limited_war_escalator = 2 }
+#        }
+#        add_threat = var:FH_world_tension
+#        add_threat = 30
+#    }
+#    ELSE_IF = {
+#        limit = {
+#            threat < 65
+#            check_variable = { global.FH_limited_war_escalator = 3 }
+#        }
+#        add_threat = var:FH_world_tension
+#        add_threat = 65
+#    }
+#}
+griffonia_peace_out_GRI_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = GRI
+                is_in_faction_with = GRI
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_peace_out_BRF_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = BRF
+                is_in_faction_with = BRF
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_peace_out_RCT_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = RCT
+                is_in_faction_with = RCT
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_peace_out_EQC_faction = {
+    every_enemy_country = {
+        limit = {
+            OR = {
+                tag = EQC
+                is_in_faction_with = EQC
+            }
+        }
+        every_other_country = {
+            limit = {
+                OR = {
+                    tag = ROOT
+                    is_in_faction_with = ROOT
+                }
+            }
+            white_peace = PREV
+            remove_wargoal = {
+                type = all
+                target = PREV
+            }
+        }
+    }
+}
+griffonia_calm_down_a_bit = {
+    #IF = {
+    #    limit = {
+    #        tag = EQC
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -100
+    #        add_threat = -100
+    #        add_threat = -45
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -100
+    #        add_threat = -100
+    #        add_threat = -22
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 3 }
+    #        }
+    #        add_threat = -100
+    #        add_threat = -94
+    #    }
+    #}
+    #ELSE_IF = {
+    #    limit = {
+    #        tag = GRI
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -55
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -46
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 3 }
+    #        }
+    #        add_threat = -30
+    #    }
+    #}
+    #ELSE_IF = {
+    #    limit = {
+    #        tag = BRF
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -15
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -8
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 3 }
+    #        }
+    #        add_threat = -4
+    #    }
+    #}
+    #ELSE_IF = {
+    #    limit = {
+    #        tag = RCT
+    #    }
+    #    IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 1 }
+    #        }
+    #        add_threat = -30
+    #    }
+    #    ELSE_IF = {
+    #        limit = {
+    #            check_variable = { global.FH_limited_war_escalator = 2 }
+    #        }
+    #        add_threat = -22
+    #    }
+    #    IF = {
+    #        limit = {
+    #            GRI = {
+    #                is_ai = no
+    #            }
+    #        }
+    #        IF = {
+    #            limit = {
+    #                check_variable = { global.FH_limited_war_escalator = 1 }
+    #            }
+    #            add_threat = -11
+    #        }
+    #        ELSE_IF = {
+    #            limit = {
+    #                check_variable = { global.FH_limited_war_escalator = 2 }
+    #            }
+    #            add_threat = -4
+    #        }
+    #    }
+    #}
+}
+griffonia_trigger_cooldown = {
+    IF = {
+        limit = {
+            check_variable = { global.FH_limited_war_escalator = 0 }
+        }
+        country_event = {
+            id = fh_utility.3
+            days = 455
+            random_days = 31
+        }
+    }
+    ELSE_IF = {
+        limit = {
+            check_variable = { global.FH_limited_war_escalator = 1 }
+        }
+        country_event = {
+            id = fh_utility.3
+            days = 426
+            random_days = 28
+        }
+    }
+    ELSE_IF = {
+        limit = {
+            check_variable = { global.FH_limited_war_escalator = 2 }
+        }
+        country_event = {
+            id = fh_utility.3
+            days = 849
+            random_days = 31
+        }
+    }
+}
+griffonia_alert_nations = {
+    RCT = {
+        country_event = griffonia_activity.3
+    }
+    LNS = {
+        country_event = griffonia_activity.3
+    }
+    NIM = {
+        country_event = griffonia_activity.3
+    }
+    BAR = {
+        country_event = griffonia_activity.3
+    }
+    if = {
+        limit = {
+            tag = EQC
+        }
+        GRI = {
+            country_event = griffonia_activity.3
+        }
+        BOI = {
+            country_event = griffonia_activity.3
+        }
+        NTR = {
+            country_event = griffonia_activity.3
+        }
+        HLQ = {
+            country_event = griffonia_activity.3
+        }
+    }
+    else = {
+        EQC = {
+            country_event = griffonia_activity.3
+        }
+        SIC = {
+            country_event = griffonia_activity.3
+        }
+        MIT = {
+            country_event = griffonia_activity.3
+        }
+        if = {
+            limit = {
+                HPS = {
+                    is_in_faction_with = EQC
+                }
+            }
+            HPS = {
+                country_event = griffonia_activity.3
+            }
+        }
+    }
+    BRF = {
+        country_event = griffonia_activity.3
+    }
+    LUS = {
+        country_event = griffonia_activity.3
+    }
+    GRU = {
+        country_event = griffonia_activity.3
+    }
+    GRY = {
+        country_event = griffonia_activity.3
+    }
+}
+griffonia_GRI_land_transfer_EQC = {
+    #From GRI to EQC
+    griffonia_peace_out_GRI_faction = yes
+    griffonia_peace_out_RCT_faction = yes
+    IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_4
+        }
+        #AVI, ERI, POM, FLO
+        transfer_state = 401
+        transfer_state = 500
+        transfer_state = 673
+        transfer_state = 470
+        transfer_state = 501
+        transfer_state = 672
+        transfer_state = 442
+        clr_country_flag = EQC_GRI_war_flag_4
+        set_country_flag = EQC_GRI_war_flag_3
+        GRI = { clr_country_flag = EQC_GRI_war_flag_4 set_country_flag = EQC_GRI_war_flag_3 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_3
+        }
+        #Initial occupied BOI states
+        transfer_state = 383
+        transfer_state = 384
+        transfer_state = 389
+        transfer_state = 531
+        transfer_state = 490
+        clr_country_flag = EQC_GRI_war_flag_3
+        set_country_flag = EQC_GRI_war_flag_2
+        GRI = { clr_country_flag = EQC_GRI_war_flag_3 set_country_flag = EQC_GRI_war_flag_2 }
+    }
+    #Original
+    ELSE_IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_2
+        }
+        #Remaining BOI states
+        transfer_state = 679
+        transfer_state = 471
+        transfer_state = 488
+        transfer_state = 532
+        transfer_state = 489
+        clr_country_flag = EQC_GRI_war_flag_2
+        set_country_flag = EQC_GRI_war_flag_1
+        GRI = { clr_country_flag = EQC_GRI_war_flag_2 set_country_flag = EQC_GRI_war_flag_1 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_1
+        }
+        #YAL and ANG
+        transfer_state = 439
+        transfer_state = 400
+        transfer_state = 391
+        transfer_state = 398
+        transfer_state = 422
+        transfer_state = 411
+        transfer_state = 506
+        transfer_state = 547
+        clr_country_flag = EQC_GRI_war_flag_1
+        set_country_flag = EQC_GRI_war_flag_0
+        GRI = { clr_country_flag = EQC_GRI_war_flag_1 set_country_flag = EQC_GRI_war_flag_0 }
+    }
+}
+griffonia_BRF_land_transfer_EQC = {
+    #From BRF to EQC
+    griffonia_peace_out_BRF_faction = yes
+    #Original
+    IF = {
+        limit = {
+            has_country_flag = EQC_LFN_war_flag_1
+        }
+        SIC = {
+            transfer_state = 606
+        }
+        MIT = {
+            transfer_state = 559
+            transfer_state = 512
+            transfer_state = 385
+        }
+        clr_country_flag = EQC_LFN_war_flag_1
+        set_country_flag = EQC_LFN_war_flag_0
+    }
+}
+griffonia_RCT_land_transfer_GRI = {
+    #From RCT to GRI
+    griffonia_peace_out_RCT_faction = yes
+    IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_0
+        }
+        transfer_state = 568
+        transfer_state = 479
+        transfer_state = 555
+        transfer_state = 423
+        transfer_state = 554
+        clr_country_flag = GRI_RCT_war_flag_0
+        set_country_flag = GRI_RCT_war_flag_1
+        RCT = { clr_country_flag = GRI_RCT_war_flag_0 set_country_flag = GRI_RCT_war_flag_1 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_1
+        }
+        HLQ = {
+            transfer_state = 650
+            transfer_state = 633
+            transfer_state = 553
+            transfer_state = 1211
+            transfer_state = 540
+            transfer_state = 505
+            get_current_government_type = yes
+            GRI = {
+                set_autonomy = {
+                    target = HLQ
+                    autonomous_state = autonomy_autonomous_vassal
+                }
+            }
+            restore_previous_government_type = yes
+        }
+        clr_country_flag = GRI_RCT_war_flag_1
+        set_country_flag = GRI_RCT_war_flag_2
+        RCT = { clr_country_flag = GRI_RCT_war_flag_1 set_country_flag = GRI_RCT_war_flag_2 }
+    }
+    #Original
+    ELSE_IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_2
+        }
+        IF = {
+            limit = {
+                HLQ = { exists = yes }
+            }
+            HLQ = {
+                transfer_state = 634
+                transfer_state = 1230
+                transfer_state = 537
+                transfer_state = 1210
+                transfer_state = 552
+            }
+        }
+        ELSE = {
+            transfer_state = 634
+            transfer_state = 1230
+            transfer_state = 537
+            transfer_state = 1210
+            transfer_state = 552
+        }
+        clr_country_flag = GRI_RCT_war_flag_2
+        set_country_flag = GRI_RCT_war_flag_3
+        RCT = { clr_country_flag = GRI_RCT_war_flag_2 set_country_flag = GRI_RCT_war_flag_3 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_3
+        }
+        IF = {
+            limit = {
+                HLQ = { exists = yes }
+            }
+            HLQ = {
+                transfer_state = 635
+                transfer_state = 543
+                transfer_state = 541
+                transfer_state = 560
+                transfer_state = 499
+                transfer_state = 637
+                transfer_state = 491
+                transfer_state = 387
+            }
+        }
+        ELSE = {
+            transfer_state = 635
+            transfer_state = 543
+            transfer_state = 541
+            transfer_state = 560
+            transfer_state = 499
+            transfer_state = 637
+            transfer_state = 491
+            transfer_state = 387
+        }
+        clr_country_flag = GRI_RCT_war_flag_3
+        set_country_flag = GRI_RCT_war_flag_4
+        RCT = { clr_country_flag = GRI_RCT_war_flag_3 set_country_flag = GRI_RCT_war_flag_4 }
+    }
+}
+griffonia_EQC_land_transfer_GRI = {
+    #From EQC to GRI
+    griffonia_peace_out_EQC_faction = yes
+    IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_0
+        }
+        #YAL and ANG
+        transfer_state = 439
+        transfer_state = 400
+        transfer_state = 391
+        transfer_state = 398
+        transfer_state = 422
+        transfer_state = 411
+        transfer_state = 506
+        transfer_state = 547
+        clr_country_flag = EQC_GRI_war_flag_0
+        set_country_flag = EQC_GRI_war_flag_1
+        EQC = { clr_country_flag = EQC_GRI_war_flag_0 set_country_flag = EQC_GRI_war_flag_1 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_1
+        }
+        #Initial BOI states
+        BOI = {
+            transfer_state = 383
+            transfer_state = 384
+            transfer_state = 389
+            transfer_state = 531
+            transfer_state = 490
+            get_current_government_type = yes
+            GRI = {
+                set_autonomy = {
+                    target = BOI
+                    autonomous_state = autonomy_subjugated_vassal
+                }
+            }
+            restore_previous_government_type = yes
+        }
+        clr_country_flag = EQC_GRI_war_flag_1
+        set_country_flag = EQC_GRI_war_flag_2
+        EQC = { clr_country_flag = EQC_GRI_war_flag_1 set_country_flag = EQC_GRI_war_flag_2 }
+    }
+    #Original
+    ELSE_IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_2
+        }
+        #Occupied BOI states
+        IF = {
+            limit = {
+                BOI = {
+                    exists = yes
+                    is_subject_of = GRI
+                }
+            }
+            BOI = {
+                transfer_state = 383
+                transfer_state = 384
+                transfer_state = 389
+                transfer_state = 531
+                transfer_state = 490
+            }
+        }
+        ELSE = {
+            transfer_state = 383
+            transfer_state = 384
+            transfer_state = 389
+            transfer_state = 531
+            transfer_state = 490
+        }
+        clr_country_flag = EQC_GRI_war_flag_2
+        set_country_flag = EQC_GRI_war_flag_3
+        EQC = { clr_country_flag = EQC_GRI_war_flag_2 set_country_flag = EQC_GRI_war_flag_3 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = EQC_GRI_war_flag_3
+        }
+        #AVI, ERI, POM, FLO
+        transfer_state = 401
+        transfer_state = 500
+        transfer_state = 673
+        transfer_state = 470
+        transfer_state = 501
+        transfer_state = 672
+        transfer_state = 442
+        clr_country_flag = EQC_GRI_war_flag_3
+        set_country_flag = EQC_GRI_war_flag_4
+        EQC = { clr_country_flag = EQC_GRI_war_flag_3 set_country_flag = EQC_GRI_war_flag_4 }
+    }
+}
+griffonia_GRI_land_transfer_RCT = {
+    #From GRI to RCT
+    griffonia_peace_out_GRI_faction = yes
+    griffonia_peace_out_EQC_faction = yes
+    IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_4
+        }
+        transfer_state = 635
+        transfer_state = 543
+        transfer_state = 541
+        transfer_state = 560
+        transfer_state = 499
+        transfer_state = 637
+        transfer_state = 491
+        transfer_state = 387
+        clr_country_flag = GRI_RCT_war_flag_4
+        set_country_flag = GRI_RCT_war_flag_3
+        GRI = { clr_country_flag = GRI_RCT_war_flag_4 set_country_flag = GRI_RCT_war_flag_3 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_3
+        }
+        LNS = {
+            transfer_state = 634
+            transfer_state = 1230
+            transfer_state = 537
+            transfer_state = 1210
+            transfer_state = 552
+            get_current_government_type = yes
+            RCT = {
+                set_autonomy = {
+                    target = LNS
+                    autonomous_state = autonomy_puppet
+                }
+            }
+            restore_previous_government_type = yes
+        }
+        clr_country_flag = GRI_RCT_war_flag_3
+        set_country_flag = GRI_RCT_war_flag_2
+        GRI = { clr_country_flag = GRI_RCT_war_flag_3 set_country_flag = GRI_RCT_war_flag_2 }
+    }
+    #Original
+    ELSE_IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_2
+        }
+        IF = {
+            limit = {
+                LNS = { exists = yes }
+            }
+            LNS = {
+                transfer_state = 650
+                transfer_state = 633
+                transfer_state = 553
+                transfer_state = 1211
+                transfer_state = 540
+                transfer_state = 505
+            }
+        }
+        ELSE = {
+            transfer_state = 650
+            transfer_state = 633
+            transfer_state = 553
+            transfer_state = 1211
+            transfer_state = 540
+            transfer_state = 505
+        }
+        clr_country_flag = GRI_RCT_war_flag_2
+        set_country_flag = GRI_RCT_war_flag_1
+        GRI = { clr_country_flag = GRI_RCT_war_flag_2 set_country_flag = GRI_RCT_war_flag_1 }
+    }
+    ELSE_IF = {
+        limit = {
+            has_country_flag = GRI_RCT_war_flag_1
+        }
+        IF = {
+            limit = {
+                LNS = { exists = yes }
+            }
+            LNS = {
+                transfer_state = 568
+                transfer_state = 479
+                transfer_state = 555
+                transfer_state = 423
+                transfer_state = 554
+            }
+        }
+        ELSE = {
+            transfer_state = 568
+            transfer_state = 479
+            transfer_state = 555
+            transfer_state = 423
+            transfer_state = 554
+        }
+        clr_country_flag = GRI_RCT_war_flag_1
+        set_country_flag = GRI_RCT_war_flag_0
+        GRI = { clr_country_flag = GRI_RCT_war_flag_1 set_country_flag = GRI_RCT_war_flag_0 }
+    }
+}
+griffonia_BRF_land_transfer_RCT = {
+    griffonia_peace_out_BRF_faction = yes
+    #Original
+    IF = {
+        limit = {
+            has_country_flag = RCT_LFN_war_flag_1
+        }
+        transfer_state = 592
+        transfer_state = 610
+        transfer_state = 631
+        transfer_state = 597
+        transfer_state = 598
+        transfer_state = 609
+        transfer_state = 596
+        clr_country_flag = RCT_LFN_war_flag_1
+        set_country_flag = RCT_LFN_war_flag_0
+    }
+}

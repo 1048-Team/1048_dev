@@ -124,17 +124,43 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = EQS_SOL_fully_armed_and_operational_tt
-				EQS_SOL_upgraded_as_can_be = yes
+				tooltip = EQS_SOL_mostly_armed_and_operational_tt
+				check_variable = {
+					EQS_SOL_daybreak_upgrade_status > 11
+				}
 			}
 		}
 		selectable_mission = yes
 		priority = 10
-		days_mission_timeout = 480
+		days_mission_timeout = 730
 		fire_only_once = yes
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_fully_completed"
 			custom_effect_tooltip = EQS_SOL_launch_immediately_tt
+			add_stability = 0.1
+			add_war_support = 0.1
+			if = {
+				limit = {
+					has_country_flag = EQS_SOL_construct_escort_fleet
+				}
+				navy_experience = 75
+			}
+			if = {
+				limit = {
+					has_country_flag = EQS_SOL_daybreak_create_sister_ships
+				}
+				add_political_power = 100
+			}
+			if = {
+				limit = {
+					EQS_SOL_upgraded_as_can_be = yes
+				}
+				add_ideas = EQS_rock_iron_ships
+			}
+			else = {
+				custom_effect_tooltip = EQS_SOL_fully_armed_and_operational_tt
+				show_ideas_tooltip = EQS_rock_iron_ships
+			}
 			hidden_effect = {
 				###Create ship as a specific effect, looking at how far along the ship is, and creating a design from there. Will probably be a long scripted effect. For now, just create a default design
 				EQS_create_daybreak = yes
@@ -143,18 +169,82 @@ EQS_SOL_launching_HMS_daybreak_category = {
 					#Make small escort fleet: a heavy cruiser, three light cruisers, eight destroyers
 					EQS_create_daybreak_fleet = yes
 				}
+				if = {
+					limit = { has_country_flag = EQS_SOL_daybreak_create_sister_ships }
+					add_equipment_production = {
+						equipment = {
+							type = ship_hull_super_heavy_2
+							version_name = "Daybreak Class"
+						}
+						name = "HMS Sunrise"
+						requested_factories = 5
+						progress = 0.33
+						amount = 1
+						industrial_manufacturer = mio:EQS_SOL_apparatus_mechanicus_organization
+					}
+					add_equipment_production = {
+						equipment = {
+							type = ship_hull_super_heavy_2
+							version_name = "Daybreak Class"
+						}
+						name = "HMS Dawnbreak"
+						requested_factories = 5
+						progress = 0.17
+						amount = 1
+						industrial_manufacturer = mio:EQS_SOL_apparatus_mechanicus_organization
+					}
+				}
 			}
 			set_country_flag = EQS_SOL_launched_daybreak
 		}
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_the_launch_ran_out_of_time"
 			custom_effect_tooltip = EQS_SOL_launch_required_tt
+			add_stability = 0.03
+			add_war_support = 0.03
+			if = {
+				limit = {
+					has_country_flag = EQS_SOL_construct_escort_fleet
+				}
+				navy_experience = 30
+			}
+			if = {
+				limit = {
+					has_country_flag = EQS_SOL_daybreak_create_sister_ships
+				}
+				add_political_power = 45
+			}
 			hidden_effect = {
 				###Same as above
 				EQS_create_daybreak = yes
 				if = {
 					limit = { has_country_flag = EQS_SOL_daybreak_construct_fleet }
 					EQS_create_daybreak_fleet = yes
+				}
+				if = {
+					limit = { has_country_flag = EQS_SOL_daybreak_create_sister_ships }
+					add_equipment_production = {
+						equipment = {
+							type = ship_hull_super_heavy_2
+							version_name = "Daybreak Class"
+						}
+						name = "HMS Sunrise"
+						requested_factories = 5
+						progress = 0.33
+						amount = 1
+						industrial_manufacturer = mio:EQS_SOL_apparatus_mechanicus_organization
+					}
+					add_equipment_production = {
+						equipment = {
+							type = ship_hull_super_heavy_2
+							version_name = "Daybreak Class"
+						}
+						name = "HMS Dawnbreak"
+						requested_factories = 5
+						progress = 0.17
+						amount = 1
+						industrial_manufacturer = mio:EQS_SOL_apparatus_mechanicus_organization
+					}
 				}
 			}
 			set_country_flag = EQS_SOL_launched_daybreak
@@ -246,7 +336,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 			set_country_flag = {
 				flag = EQS_SOL_delayed_launch_flag
-				days = 90
+				days = 70
 				value = 1
 			}
 		}
@@ -278,7 +368,7 @@ EQS_SOL_launching_HMS_daybreak_category = {
 			}
 			set_country_flag = {
 				flag = EQS_SOL_delayed_launch_flag
-				days = 75
+				days = 60
 				value = 1
 			}
 		}
@@ -293,25 +383,26 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = {
 			check_variable = { EQS_SOL_secondaries_upgraded < 5 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
 		}
 		custom_cost_trigger = {
 			has_navy_experience > 9.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_10_text_tt
-		days_remove = 45
+		days_remove = 60
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision EQS_SOL_recaliber_secondary_weapons"
+			custom_effect_tooltip = EQS_SOL_upgrade_path_secondaries_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = {
-					EQS_SOL_secondaries_upgraded = 1
-				}
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = {
+				EQS_SOL_secondaries_upgraded = 1
+			}
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 90
+				days = 120
 			}
 			hidden_effect = { navy_experience = -10 }
 		}
@@ -325,24 +416,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = {
 			check_variable = { EQS_SOL_aa_upgraded < 4 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
 		}
 		custom_cost_trigger = {
 			has_navy_experience > 4.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_5_text_tt
-		days_remove = 30
+		days_remove = 45
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_aa_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_defenses_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = {
-					EQS_SOL_aa_upgraded = 1
-				}
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = {
+				EQS_SOL_aa_upgraded = 1
+			}
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 60
+				days = 90
 			}
 			hidden_effect = { navy_experience = -5 }
 		}
@@ -356,24 +448,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = {
 			check_variable = { EQS_SOL_primaries_upgraded < 1 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
 		}
 		custom_cost_trigger = {
 			has_navy_experience > 14.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_15_text_tt
-		days_remove = 105
+		days_remove = 140
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_main_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = {
-					EQS_SOL_primaries_upgraded = 1
-				}
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = {
+				EQS_SOL_primaries_upgraded = 1
+			}
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 210
+				days = 280
 			}
 			hidden_effect = { navy_experience = -15 }
 		}
@@ -387,22 +480,23 @@ EQS_SOL_launching_HMS_daybreak_category = {
 		}
 		visible = {
 			check_variable = { EQS_SOL_secondary_cannons_upgraded < 2 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
 		}
 		custom_cost_trigger = {
 			has_navy_experience > 24.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_25_text_tt
-		days_remove = 75
+		days_remove = 110
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_secondary_battery_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_guns_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = { EQS_SOL_secondary_cannons_upgraded = 1 }
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = { EQS_SOL_secondary_cannons_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 150
+				days = 220
 			}
 			hidden_effect = { navy_experience = -25 }
 		}
@@ -414,22 +508,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 				EQS_SOL_armor_upgrade_available = yes
 			}
 		}
-		visible = { check_variable = { EQS_SOL_armor_upgraded < 1 } }
+		visible = {
+			check_variable = { EQS_SOL_armor_upgraded < 1 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
 		custom_cost_trigger = {
 			has_navy_experience > 19.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_20_text_tt
-		days_remove = 105
+		days_remove = 140
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_armor_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_defenses_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = { EQS_SOL_armor_upgraded = 1 }
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = { EQS_SOL_armor_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 210
+				days = 280
 			}
 			hidden_effect = { navy_experience = -20 }
 		}
@@ -441,22 +538,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 				EQS_SOL_fcs_upgrade_available = yes
 			}
 		}
-		visible = { check_variable = { EQS_SOL_rangefinding_upgraded < 6 } }
+		visible = {
+			check_variable = { EQS_SOL_rangefinding_upgraded < 6 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
 		custom_cost_trigger = {
 			has_navy_experience > 2.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_3_text_tt
-		days_remove = 10
+		days_remove = 15
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_fcs_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = { EQS_SOL_rangefinding_upgraded = 1 }
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = { EQS_SOL_rangefinding_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 20
+				days = 30
 			}
 			hidden_effect = { navy_experience = -3 }
 		}
@@ -468,22 +568,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 				EQS_SOL_radar_upgrade_available = yes
 			}
 		}
-		visible = { check_variable = { EQS_SOL_radar_upgraded < 6 } }
+		visible = {
+			check_variable = { EQS_SOL_radar_upgraded < 6 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
 		custom_cost_trigger = {
 			has_navy_experience > 2.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_3_text_tt
-		days_remove = 7
+		days_remove = 10
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_radar_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = { EQS_SOL_radar_upgraded = 1 }
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = { EQS_SOL_radar_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 15
+				days = 20
 			}
 			hidden_effect = { navy_experience = -3 }
 		}
@@ -495,22 +598,25 @@ EQS_SOL_launching_HMS_daybreak_category = {
 				EQS_SOL_recon_upgrade_available = yes
 			}
 		}
-		visible = { check_variable = { EQS_SOL_recon_upgraded < 6 } }
+		visible = {
+			check_variable = { EQS_SOL_recon_upgraded < 6 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
 		custom_cost_trigger = {
 			has_navy_experience > 4.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_5_text_tt
-		days_remove = 15
+		days_remove = 25
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_plane_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = { EQS_SOL_recon_upgraded = 1 }
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = { EQS_SOL_recon_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 30
+				days = 50
 			}
 			hidden_effect = { navy_experience = -5 }
 		}
@@ -522,44 +628,88 @@ EQS_SOL_launching_HMS_daybreak_category = {
 				EQS_SOL_engine_uprade_available = yes
 			}
 		}
-		visible = { check_variable = { EQS_SOL_engine_upgraded < 4 } }
+		visible = {
+			check_variable = { EQS_SOL_engine_upgraded < 4 }
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
 		custom_cost_trigger = {
 			has_navy_experience > 14.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_15_text_tt
-		days_remove = 90
+		days_remove = 150
 		complete_effect = {
+			custom_effect_tooltip = EQS_SOL_upgrade_path_engine_tt
 			custom_effect_tooltip = EQS_SOL_upgrade_them_subsystems_tt
-			if = {
-				limit = { has_dlc = "Man the Guns" }
-				add_to_variable = { EQS_SOL_engine_upgraded = 1 }
+			add_to_variable = {
+				EQS_SOL_daybreak_upgrade_status = 1
 			}
-			else = { add_to_variable = { EQS_SOL_daybreak_upgrades = 1 } }
+			add_to_variable = { EQS_SOL_engine_upgraded = 1 }
 			add_days_mission_timeout = {
 				mission = EQS_SOL_the_launch
-				days = 180
+				days = 300
 			}
 			hidden_effect = { navy_experience = -15 }
 		}
 	}
 	EQS_SOL_construct_escort_fleet = {
 		available = {
-			date > 1054.1.1
+			date > 1051.1.1
 			dockyard > 10
 		}
 		visible = {
-			date > 1054.1.1
+			date > 1051.1.1
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
 		}
 		custom_cost_trigger = {
 			has_navy_experience > 34.99
 		}
 		custom_cost_text = EQS_SOL_custom_cost_35_text_tt
 		days_remove = 365
-		modifier = { dockyard_donations = -10 }
+		modifier = {
+			custom_modifier_tooltip = EQS_SOL_succ_dockyards_tt
+			hidden_modifier = {
+				dockyard_donations = -10
+			}
+		}
 		fire_only_once = yes
 		complete_effect = { hidden_effect = { navy_experience = -35 } }
 		remove_effect = {
+			custom_effect_tooltip = EQS_SOL_fancy_fleet_tt
 			set_country_flag = EQS_SOL_daybreak_construct_fleet
+		}
+	}
+	EQS_SOL_begin_sister_ships = {
+		available = {
+			date > 1052.1.1
+			dockyard > 20
+		}
+		visible = {
+			date > 1052.1.1
+			NOT = { has_country_flag = EQS_SOL_launched_daybreak }
+		}
+		custom_cost_trigger = {
+			has_navy_experience > 54.99
+		}
+		custom_cost_text = EQS_SOL_custom_cost_55_text_tt
+		days_remove = 365
+		modifier = {
+			custom_modifier_tooltip = EQS_SOL_slurp_dockyards_tt
+			hidden_modifier = {
+				dockyard_donations = -20
+			}
+		}
+		fire_only_once = yes
+		complete_effect = {
+			hidden_effect = { navy_experience = -55 }
+			add_days_mission_timeout = {
+				mission = EQS_SOL_the_launch
+				days = 200
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_begin_sister_ships"
+			custom_effect_tooltip = EQS_SOL_bear_twins_tt
+			set_country_flag = EQS_SOL_daybreak_create_sister_ships
 		}
 	}
 }
@@ -1526,28 +1676,28 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		available = {
-			AND = {
-				has_full_control_of_state = 39
-				has_full_control_of_state = 107
-				has_full_control_of_state = 185
-				has_full_control_of_state = 188
-				has_full_control_of_state = 186
-			}
+			39 = { is_owned_and_controlled_by = ROOT }
+			107 = { is_owned_and_controlled_by = ROOT }
+			185 = { is_owned_and_controlled_by = ROOT }
+			188 = { is_owned_and_controlled_by = ROOT }
+			186 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 2
 		}
 		visible = {
 			has_country_flag = EQS_SOL_new_mining_decisions
-			AND = {
-				has_full_control_of_state = 39
-				has_full_control_of_state = 107
-				has_full_control_of_state = 185
-				has_full_control_of_state = 188
-				has_full_control_of_state = 186
-			}
+			39 = { is_owned_and_controlled_by = ROOT }
+			107 = { is_owned_and_controlled_by = ROOT }
+			185 = { is_owned_and_controlled_by = ROOT }
+			188 = { is_owned_and_controlled_by = ROOT }
+			186 = { is_owned_and_controlled_by = ROOT }
 		}
 		highlight_states = {
 			highlight_state_targets = {
+				state = 39
+				state = 107
+				state = 185
 				state = 188
+				state = 186
 			}
 		}
 		fire_only_once = yes
@@ -1563,6 +1713,12 @@ EQS_SOL_project_solaris_category = {
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_ordo_meurom_new_mines"
+			186 = {
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
 			add_tech_bonus = {
 				name = excavation_bonus
 				bonus = 0.75
@@ -1572,41 +1728,41 @@ EQS_SOL_project_solaris_category = {
 			set_country_flag = expanded_meurom
 		}
 	}
-	EQS_SOL_reactor_prototypes = {
-		allowed = {
-			OR = {
-				original_tag = EQS
-				original_tag = SLW
-			}
-		}
-		available = {
-			has_tech = atomic_research
-			num_of_civilian_factories > 4
-		}
-		visible = {
-			has_country_flag = EQS_SOL_new_mining_decisions
-			has_tech = atomic_research
-		}
-		fire_only_once = yes
-		cost = 35
-		days_remove = 150
-		ai_will_do = {
-			base = 5
-		}
-		modifier = {
-			civilian_factory_use = 6
-			country_resource_crystals = -15
-		}
-		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_reactor_prototypes"
-			add_tech_bonus = {
-				name = nuke_bonus
-				bonus = 0.75
-				uses = 1
-				technology = nuclear_reactor
-			}
-		}
-	}
+	#EQS_SOL_reactor_prototypes = {
+	#	allowed = {
+	#		OR = {
+	#			original_tag = EQS
+	#			original_tag = SLW
+	#		}
+	#	}
+	#	available = {
+	#		has_tech = atomic_research
+	#		num_of_civilian_factories > 9
+	#	}
+	#	visible = {
+	#		has_country_flag = EQS_SOL_new_mining_decisions
+	#	}
+	#	fire_only_once = yes
+	#	cost = 75
+	#	days_remove = 300
+	#	ai_will_do = {
+	#		base = 5
+	#	}
+	#	modifier = {
+	#		civilian_factory_use = 10
+	#		country_resource_crystals = -15
+	#	}
+	#	remove_effect = {
+	#		log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_reactor_prototypes"
+	#		#Pointless in modern HOI4. Change to free civilian reactor, but take longer to do
+	#		add_tech_bonus = {
+	#			name = nuke_bonus
+	#			bonus = 0.75
+	#			uses = 1
+	#			technology = nuclear_reactor
+	#		}
+	#	}
+	#}
 	EQS_SOL_dig_deeper = {
 		allowed = {
 			OR = {
@@ -1615,12 +1771,11 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		available = {
-			has_full_control_of_state = 107
+			107 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 2
 		}
 		visible = {
 			has_country_flag = EQS_SOL_new_mining_decisions
-			has_full_control_of_state = 107
 		}
 		cost = 25
 		fire_only_once = yes
@@ -1643,7 +1798,7 @@ EQS_SOL_project_solaris_category = {
 			107 = {
 				add_resource = {
 					type = crystals
-					amount = 8
+					amount = 10
 				}
 			}
 		}
@@ -1657,13 +1812,11 @@ EQS_SOL_project_solaris_category = {
 		}
 		available = {
 			has_country_flag = expanded_meurom
-			AND = {
-				has_full_control_of_state = 39
-				has_full_control_of_state = 107
-				has_full_control_of_state = 185
-				has_full_control_of_state = 188
-				has_full_control_of_state = 186
-			}
+			39 = { is_owned_and_controlled_by = ROOT }
+			107 = { is_owned_and_controlled_by = ROOT }
+			185 = { is_owned_and_controlled_by = ROOT }
+			188 = { is_owned_and_controlled_by = ROOT }
+			186 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 4
 		}
 		visible = {
@@ -1682,6 +1835,10 @@ EQS_SOL_project_solaris_category = {
 		}
 		highlight_states = {
 			highlight_state_targets = {
+				state = 39
+				state = 107
+				state = 185
+				state = 188
 				state = 186
 			}
 		}
@@ -1692,8 +1849,11 @@ EQS_SOL_project_solaris_category = {
 					type = crystals
 					amount = 12
 				}
+				add_resource = {
+					type = chromium
+					amount = 6
+				}
 			}
-			set_country_flag = EQS_finished_meurom_expansion
 		}
 	}
 	EQS_SOL_clear_skies_forges = {
@@ -1704,12 +1864,11 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		available = {
-			has_full_control_of_state = 185
+			185 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 3
 		}
 		visible = {
 			has_country_flag = EQS_SOL_new_mining_decisions
-			has_full_control_of_state = 185
 		}
 		cost = 40
 		days_remove = 90
@@ -1750,12 +1909,11 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		available = {
-			has_full_control_of_state = 68
+			68 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 2
 		}
 		visible = {
 			has_country_flag = EQS_SOL_new_mining_decisions
-			has_full_control_of_state = 68
 		}
 		cost = 35
 		days_remove = 75
@@ -1777,7 +1935,7 @@ EQS_SOL_project_solaris_category = {
 			68 = {
 				add_resource = {
 					type = aluminium
-					amount = 8
+					amount = 12
 				}
 			}
 		}
@@ -1790,12 +1948,11 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		available = {
-			has_full_control_of_state = 122
+			122 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 5
 		}
 		visible = {
 			has_country_flag = EQS_SOL_new_mining_decisions
-			has_full_control_of_state = 122
 		}
 		cost = 60
 		days_remove = 100
@@ -1836,11 +1993,10 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		available = {
-			has_full_control_of_state = 70
+			70 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 9
 		}
 		visible = {
-			has_full_control_of_state = 70
 			has_country_flag = EQS_SOL_new_mining_decisions
 		}
 		cost = 75
@@ -1895,14 +2051,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 78
-			has_country_flag = EQS_SOL_new_mining_decisions
+			78 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 3
 		}
 		visible = {
-			has_full_control_of_state = 78
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 30
 		days_remove = 70
@@ -1932,14 +2085,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 124
-			has_country_flag = EQS_SOL_new_mining_decisions
+			125 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 1
 		}
 		visible = {
-			has_full_control_of_state = 124
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 20
 		days_remove = 100
@@ -1952,11 +2102,11 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		highlight_states = {
-			highlight_state_targets = { state = 124 }
+			highlight_state_targets = { state = 125 }
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_reopen_mad_mountain_mine"
-			124 = {
+			125 = {
 				add_resource = {
 					type = tungsten
 					amount = 6
@@ -1969,14 +2119,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 61
-			has_country_flag = EQS_SOL_new_mining_decisions
+			61 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 2
 		}
 		visible = {
-			has_full_control_of_state = 61
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 30
 		days_remove = 75
@@ -2006,14 +2153,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 79
-			has_country_flag = EQS_SOL_new_mining_decisions
+			79 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 1
 		}
 		visible = {
-			has_full_control_of_state = 79
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 35
 		days_remove = 120
@@ -2043,14 +2187,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 53
-			has_country_flag = EQS_SOL_new_mining_decisions
+			53 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 4
 		}
 		visible = {
-			has_full_control_of_state = 53
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 45
 		days_remove = 60
@@ -2080,14 +2221,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 525
-			has_country_flag = EQS_SOL_new_mining_decisions
+			525 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 2
 		}
 		visible = {
-			has_full_control_of_state = 525
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 40
 		days_remove = 140
@@ -2103,7 +2241,7 @@ EQS_SOL_project_solaris_category = {
 			highlight_state_targets = { state = 525 }
 		}
 		remove_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_reopen_mad_mountain_mine"
+			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_repair_imperial_drydocks"
 			525 = {
 				add_resource = {
 					type = steel
@@ -2123,18 +2261,12 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 57
-			has_full_control_of_state = 58
-			has_country_flag = EQS_SOL_new_mining_decisions
+			57 = { is_owned_and_controlled_by = ROOT }
+			58 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 5
 		}
 		visible = {
-			OR = {
-				has_full_control_of_state = 57
-				has_full_control_of_state = 58
-			}
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 60
 		days_remove = 210
@@ -2148,7 +2280,10 @@ EQS_SOL_project_solaris_category = {
 			}
 		}
 		highlight_states = {
-			highlight_state_targets = { state = 57 }
+			highlight_state_targets = {
+				state = 57
+				state = 58
+			}
 		}
 		remove_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove EQS_SOL_tunnel_into_the_peaks"
@@ -2185,14 +2320,11 @@ EQS_SOL_project_solaris_category = {
 			original_tag = EQS
 		}
 		available = {
-			has_full_control_of_state = 67
-			has_country_flag = EQS_SOL_new_mining_decisions
+			67 = { is_owned_and_controlled_by = ROOT }
 			num_of_civilian_factories > 2
 		}
 		visible = {
-			has_full_control_of_state = 67
 			has_country_flag = EQS_SOL_new_mining_decisions
-			tag = EQS
 		}
 		cost = 35
 		days_remove = 150

@@ -1,0 +1,163 @@
+on_actions = {
+	# ROOT is country, this is ran for every country
+	on_daily = {
+		effect = {
+			if = {
+				limit = { has_military_access_to = ROOT }
+				diplomatic_relation = { country = ROOT relation = military_access active = no }
+			}
+			if = {
+				limit = { has_guaranteed = ROOT }
+				diplomatic_relation = { country = ROOT relation = guarantee active = no }
+			}
+			update_global_arrays = yes
+			adjust_research_modifier = yes
+			daily_fix_weapon_techs = yes
+			if = {
+				limit = {
+					has_tech = nukes
+				}
+				if = {
+					limit = {
+						OR = { #TODO later after next patch simplify and remove the idea version 17-12-2024
+							has_dynamic_modifier = {
+								modifier = no_crystals_reactor
+							}
+							has_idea = no_crystals_reactor_prevent
+						}
+						set_temp_variable = {
+							tot_crystal_resource_income = resource_produced@crystals
+						}
+						add_to_temp_variable = {
+							tot_crystal_resource_income = resource_imported@crystals
+						}
+						check_variable = { tot_crystal_resource_income > -1 }
+					}
+					if = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = no_crystals_reactor
+							}
+						}
+						remove_dynamic_modifier = {
+							modifier = no_crystals_reactor
+						}
+					}
+					if = {
+						limit = {
+							has_idea = no_crystals_reactor_prevent
+						}
+						remove_ideas = no_crystals_reactor_prevent
+					}
+				}
+				else_if = {
+					limit = { 
+						set_temp_variable = {
+							tot_crystal_resource_income = resource_produced@crystals
+						}
+						add_to_temp_variable = {
+							tot_crystal_resource_income = resource_imported@crystals
+						}
+						check_variable = { tot_crystal_resource_income < 0 }
+						OR = {
+							nuclear_reactor > 0
+							nuclear_reactor_heavy_water > 0
+							commercial_nuclear_reactor > 0
+							modern_nuclear_reactor > 0
+							modern_commercial_nuclear_reactor > 0
+						}
+					}
+					if = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = no_crystals_reactor
+							}
+						}
+						remove_dynamic_modifier = {
+							modifier = no_crystals_reactor
+						}
+					}
+
+					set_variable = {
+						tot_reactor_res = modifier@total_crystal_consumption_reactors
+					}
+
+					set_variable = {
+						tot_res_shortage = resource_produced@crystals
+					}
+					add_to_variable = {
+						tot_res_shortage = resource_imported@crystals
+					}
+					
+					divide_variable = {
+						tot_res_shortage = tot_reactor_res 
+					}
+
+					set_variable = {
+						var_no_crystals_reactor = modifier@nuclear_production_factor
+					}
+					
+					multiply_variable = {
+						var_no_crystals_reactor = tot_res_shortage
+					}
+					
+					set_variable = {
+						var_no_crystals_thermoreactor = modifier@thermonuclear_production_factor
+					}
+
+					multiply_variable = {
+						var_no_crystals_thermoreactor = tot_res_shortage
+					}
+					clamp_variable = {
+						var = var_no_crystals_reactor
+						max = 0
+					}
+					clamp_variable = {
+						var = var_no_crystals_thermoreactor
+						max = 0
+					}
+
+					add_dynamic_modifier = {
+						modifier = no_crystals_reactor
+					}
+				}
+				if = {
+					limit = {
+						NOT = { has_global_flag = first_nuke_done }
+						num_of_nukes > 0.99
+					}
+					news_event = { id = nuke_first.1 days = 1 }
+					set_global_flag = first_nuke_done
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						NOT = { has_event_target = griffonian_empire }
+						if = {
+							limit = { has_event_target = griffonian_empire }
+							event_target:griffonian_empire = { exists = no }
+						}
+					}
+					exists = yes
+					OR = {
+						AND = {
+							owns_state = 382
+							has_cosmetic_tag = GRIF_EMPIRE
+						}
+						if = {
+							limit = {
+								382 = {
+									owner = { NOT = { has_cosmetic_tag = GRIF_EMPIRE } }
+								}
+							}
+							tag = GRI
+						}
+					}
+				}
+				save_global_event_target_as = griffonian_empire
+				set_variable = { global.griffonian_empire_var = THIS }
+			}
+		}
+	}
+}

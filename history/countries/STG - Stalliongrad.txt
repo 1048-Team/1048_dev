@@ -50,8 +50,9 @@ if = {
 		basic_small_airframe = 1
 		basic_medium_airframe = 1
 		aircraft_construction = 1
+		bba_early_transport_plane = 1
 	}
-	
+
 	create_equipment_variant = {
 		name = "I-5"
 		type = small_plane_airframe_0
@@ -82,11 +83,12 @@ if = {
 			engine_type_slot = engine_1_1x
 			special_type_slot_1 = empty
 		}
-		icon = "GFX_SOV_fighter1_medium"
+		icon = "GFX_stalliongrad_2d_fighter1_medium"
 	}
 	create_equipment_variant = {
 		name = "I-14" #1933 plane
 		type = small_plane_airframe_1
+		design_team = mio:STG_prolet_airfleet_organization
 		modules = {
 			fixed_main_weapon_slot = aircraft_cannon_1_2x
 			fixed_auxiliary_weapon_slot_1 = light_mg_2x
@@ -94,21 +96,50 @@ if = {
 			special_type_slot_1 = empty
 		}
 		icon = "GFX_stalliongrad_2d_heavy_fighter1_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "LB-3"
+		type = small_plane_cas_airframe_1
+		modules = {
+			fixed_main_weapon_slot = small_bomb_bay
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
+			engine_type_slot = engine_1_2x
+			special_type_slot_1 = lmg_defense_turret
+			special_type_slot_2 = fuel_tanks_small
+		}
+		icon = "GFX_stalliongrad_2d_early_bomber_medium"
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "LB-7"
+		type = small_plane_cas_airframe_1
+		design_team = mio:STG_zarya_organization
+		modules = {
+			fixed_main_weapon_slot = small_bomb_bay
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
+			engine_type_slot = engine_2_2x
+			special_type_slot_1 = lmg_defense_turret
+			special_type_slot_2 = fuel_tanks_small
+		}
+		icon = "GFX_stalliongrad_2d_early_bomber_medium"
 	}
 	create_equipment_variant = {
 		name = "DB-3"
 		type = medium_plane_airframe_0
 		modules = {
 			fixed_main_weapon_slot = medium_bomb_bay
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
 			engine_type_slot = engine_1_3x
-			special_type_slot_1 = lmg_defense_turret
+			special_type_slot_1 = lmg_defense_turret_2x
 		}
-		icon = "GFX_stalliongrad_2d_early_bomber_medium"
+		icon = "GFX_stalliongrad_2d_strategic_bomber1_medium"
 		obsolete = yes
 	}
 	create_equipment_variant = {
 		name = "DB-4" #ANT-40
 		type = medium_plane_airframe_1
+		design_team = mio:STG_voskhod_organization
 		modules = {
 			fixed_main_weapon_slot = medium_bomb_bay
 			fixed_auxiliary_weapon_slot_1 = bomb_locks
@@ -124,6 +155,7 @@ if = {
 			early_fighter = 1
 			fighter1 = 1
 			early_bomber = 1
+			early_transport_plane = 1
 			tactical_bomber1 = 1
 		}
 		set_air_oob = "STG_1048_air_legacy"
@@ -138,12 +170,6 @@ if = {
 		gwtank = 1
 		basic_light_tank = 1
 		basic_heavy_tank = 1
-	}
-	add_tech_bonus = {
-		name = armor_bonus
-		bonus = 0.15
-		uses = 1
-		category = cat_light_armor
 	}
 }
 if = {
@@ -207,13 +233,14 @@ set_politics = {
 	ruling_party = communism
 	last_election = "1003.5.3"
 	election_frequency = 36
-	elections_allowed = yes
+	elections_allowed = no
 }
 
 
 add_ideas = {
 	#severe_famine
 	#incomplete_industrialization
+	limited_conscription
 	poverty4
 	no_lack_of_scientists
 	outdated_industry
@@ -223,7 +250,6 @@ add_ideas = {
 }
 set_stability = 0.5
 set_war_support = 0.35
-add_manpower = 5000
 set_country_flag = the_palace_constructed
 
 set_cosmetic_tag = STG_SIN
@@ -296,6 +322,7 @@ if = {
 	create_equipment_variant = {
 		name = "T-18"
 		type = light_tank_chassis_0
+		design_team = mio:STG_PegAz_organization
 		parent_version = 0
 		modules = {
 			main_armament_slot = tank_small_cannon
@@ -314,6 +341,7 @@ if = {
 	create_equipment_variant = {
 		name = "T-27"
 		type = light_tank_chassis_0
+		design_team = mio:STG_PegAz_organization
 		parent_version = 0
 		modules = {
 			main_armament_slot = tank_heavy_machine_gun
@@ -331,7 +359,8 @@ if = {
 	}
 	create_equipment_variant = {
 		name = "OT-27"
-		type = light_tank_chassis_0
+		type = light_tank_flame_chassis_0
+		design_team = mio:STG_PegAz_organization
 		parent_version = 1
 		modules = {
 			main_armament_slot = flamethrower
@@ -348,37 +377,18 @@ if = {
 		obsolete = yes
 		icon = "gfx/interface/technologies/gwtank.dds"
 	}
-
-	create_equipment_variant = {
-		name = "T-26"
-		type = light_tank_chassis_1
-		parent_version = 0
-		modules = {
-			main_armament_slot = tank_heavy_machine_gun
-			turret_type_slot = tank_light_one_man_tank_turret
-			suspension_type_slot = tank_bogie_suspension
-			armor_type_slot = tank_riveted_armor
-			engine_type_slot = tank_diesel_engine
-			special_type_slot_1 = secondary_turret_hmg
-		}
-		upgrades = {
-			tank_nsb_engine_upgrade = 2
-			tank_nsb_armor_upgrade = 1
-		}
-		obsolete = yes
-		icon = "gfx/interface/technologies/SOV_basic_light_tank.dds"
-	}
 	create_equipment_variant = {
 		name = "OT-26"
 		type = light_tank_flame_chassis_1
+		design_team = mio:STG_PegAz_organization
 		parent_version = 1
 		modules = {
 			main_armament_slot = flamethrower
-			turret_type_slot = tank_light_one_man_tank_turret
+			turret_type_slot = tank_light_two_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
 			engine_type_slot = tank_diesel_engine
-			special_type_slot_1 = secondary_turret_hmg
+			special_type_slot_1 = tank_radio_1
 		}
 		upgrades = {
 			tank_nsb_engine_upgrade = 4
@@ -387,8 +397,9 @@ if = {
 		icon = "GFX_stalliongrad_2d_basic_light_tank_medium"
 	}
 	create_equipment_variant = {
-		name = "T-26 Obr. 1003"
+		name = "T-26 Obr.1003"
 		type = light_tank_chassis_1
+		design_team = mio:STG_PegAz_organization
 		parent_version = 2
 		modules = {
 			main_armament_slot = tank_small_cannon
@@ -408,14 +419,15 @@ if = {
 	create_equipment_variant = {
 		name = "T-26 Obr.1004"
 		type = light_tank_chassis_1
+		design_team = mio:STG_PegAz_organization
 		parent_version = 3
 		modules = {
 			main_armament_slot = tank_small_cannon_2
-			turret_type_slot = tank_light_three_man_tank_turret
+			turret_type_slot = tank_light_two_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
 			engine_type_slot = tank_diesel_engine
-			special_type_slot_1 = empty
+			special_type_slot_1 = additional_machine_guns
 		}
 		upgrades = {
 			tank_nsb_engine_upgrade = 4
@@ -427,10 +439,11 @@ if = {
 	create_equipment_variant = {
 		name = "T-26 Obr.1006"
 		type = light_tank_chassis_1
+		design_team = mio:STG_PegAz_organization
 		parent_version = 4
 		modules = {
 			main_armament_slot = tank_small_cannon_2
-			turret_type_slot = tank_light_three_man_tank_turret
+			turret_type_slot = tank_light_two_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
 			engine_type_slot = tank_diesel_engine
@@ -443,27 +456,46 @@ if = {
 		obsolete = yes
 		icon = "GFX_stalliongrad_2d_basic_light_tank_medium"
 	}
-
 	create_equipment_variant = {
-		name = "BT-7"
+		name = "BT-2"
+		type = light_tank_chassis_2
+		design_team = mio:STG_PegAz_organization
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = additional_machine_guns
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 9
+			tank_nsb_armor_upgrade = 0
+		}
+		obsolete = yes
+		icon = "GFX_SOV_improved_light_tank_medium"
+	}
+	create_equipment_variant = {
+		name = "BT-5"
 		type = light_tank_chassis_2
 		design_team = mio:STG_PegAz_organization
 		parent_version = 0
 		modules = {
 			main_armament_slot = tank_small_cannon_2
-			turret_type_slot = tank_light_three_man_tank_turret
+			turret_type_slot = tank_light_two_man_tank_turret
 			suspension_type_slot = tank_christie_suspension
 			armor_type_slot = tank_riveted_armor
 			engine_type_slot = tank_gasoline_engine
-			special_type_slot_1 = tank_radio_1
+			special_type_slot_1 = additional_machine_guns
 		}
 		upgrades = {
-			tank_nsb_engine_upgrade = 6
-			tank_nsb_armor_upgrade = 3
+			tank_nsb_engine_upgrade = 9
+			tank_nsb_armor_upgrade = 0
 		}
-		icon = "GFX_stalliongrad_2d_improved_light_tank_medium"
+		obsolete = yes
+		icon = "GFX_SOV_improved_light_tank_medium"
 	}
-
 	create_equipment_variant = {
 		name = "BT-7A"
 		type = light_tank_chassis_2
@@ -478,15 +510,34 @@ if = {
 			special_type_slot_1 = tank_radio_1
 		}
 		upgrades = {
-			tank_nsb_engine_upgrade = 7
-			tank_nsb_armor_upgrade = 5
+			tank_nsb_engine_upgrade = 9
+			tank_nsb_armor_upgrade = 4
 		}
 		icon = "GFX_stalliongrad_2d_improved_light_art_medium"
+	}
+	create_equipment_variant = {
+		name = "BT-7"
+		type = light_tank_chassis_2
+		design_team = mio:STG_PegAz_organization
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon_2
+			turret_type_slot = tank_light_three_man_tank_turret
+			suspension_type_slot = tank_christie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = 9
+			tank_nsb_armor_upgrade = 4
+		}
+		icon = "GFX_stalliongrad_2d_improved_light_tank_medium"
 	}
 
 	create_equipment_variant = {
 		name = "T-28"
-		type = medium_tank_chassis_1
+		type = medium_tank_chassis_0
 		design_team = mio:STG_stalliongrad_tractor_factory_organization
 		parent_version = 0
 		modules = {
@@ -494,10 +545,11 @@ if = {
 			turret_type_slot = tank_medium_three_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
-			engine_type_slot = tank_diesel_engine
+			engine_type_slot = tank_gasoline_engine
 			special_type_slot_1 = tank_radio_1
 			special_type_slot_2 = secondary_turret_hmg
 			special_type_slot_3 = secondary_turret_hmg
+			special_type_slot_4 = wet_ammo_storage
 		}
 		upgrades = {
 			tank_nsb_armor_upgrade = 1
@@ -508,6 +560,7 @@ if = {
 	create_equipment_variant = {
 		name = "T-35"
 		type = heavy_tank_chassis_0
+		design_team = mio:STG_PegAz_organization
 		parent_version = 0
 		modules = {
 			main_armament_slot = tank_close_support_gun
@@ -515,7 +568,7 @@ if = {
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
 			engine_type_slot = tank_gasoline_engine
-			special_type_slot_1 = tank_radio_1
+			special_type_slot_1 = secondary_turret_small_cannon
 			special_type_slot_2 = secondary_turret_hmg
 			special_type_slot_3 = secondary_turret_hmg
 			special_type_slot_4 = secondary_turret_small_cannon
@@ -582,6 +635,7 @@ create_equipment_variant = {
 	name = "Orfey Class"
 	name_group = STG_DD_HISTORICAL
 	type = ship_hull_light_1
+	design_team = mio:STG_petershoof_zavod_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
@@ -598,6 +652,7 @@ create_equipment_variant = {
 create_equipment_variant = {
 	name = "Fidonisi Class"
 	type = ship_hull_light_1
+	design_team = mio:STG_petershoof_zavod_organization
 	name_group = STG_DD_HISTORICAL
 	parent_version = 0
 	modules = {
@@ -616,6 +671,7 @@ create_equipment_variant = { #Minelayer
 	name = "Bug Class"
 	name_group = STG_DD_HISTORICAL
 	type = ship_hull_light_1
+	design_team = mio:STG_petershoof_zavod_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
@@ -631,6 +687,7 @@ create_equipment_variant = { #Minelayer
 create_equipment_variant = {
 	name = "Gnevny Class"
 	type = ship_hull_light_2
+	design_team = mio:STG_petershoof_zavod_organization
 	name_group = STG_DD_HISTORICAL
 	parent_version = 0
 	modules = {
@@ -694,13 +751,15 @@ create_equipment_variant = {
 		fixed_ship_engine_slot = cruiser_ship_engine_2
 		fixed_ship_armor_slot = ship_armor_cruiser_1
 		mid_1_custom_slot = ship_light_medium_battery_1
-		mid_2_custom_slot = ship_torpedo_1
+		mid_2_custom_slot = ship_light_medium_battery_1
 		rear_1_custom_slot = ship_mine_layer_1
 	}
 }
+# Heavy Cruisers
 create_equipment_variant = {
 	name = "Molniya Class"
 	type = ship_hull_cruiser_2
+	design_team = mio:STG_yantar_organization
 	name_group = STG_CL_HISTORICAL
 	parent_version = 0
 	modules = {
@@ -711,10 +770,10 @@ create_equipment_variant = {
 		fixed_ship_engine_slot = cruiser_ship_engine_2
 		fixed_ship_armor_slot = ship_armor_cruiser_1
 		fixed_ship_secondaries_slot = ship_secondaries_2
-		front_1_custom_slot = ship_anti_air_1
-		mid_1_custom_slot = empty
-		mid_2_custom_slot = ship_medium_battery_2
-		rear_1_custom_slot = empty
+		front_1_custom_slot = ship_medium_battery_2
+		mid_1_custom_slot = ship_medium_battery_2
+		mid_2_custom_slot = ship_mine_layer_1
+		rear_1_custom_slot = ship_mine_layer_1
 	}
 }
 # Battleships #
@@ -741,6 +800,7 @@ create_equipment_variant = {
 	name = "Stalliongrad Class"
 	name_group = STG_BB_BC_HISTORICAL
 	type = ship_hull_heavy_1
+	design_team = mio:STG_yantar_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_heavy_battery_1
@@ -756,6 +816,7 @@ create_equipment_variant = {
 		rear_1_custom_slot = ship_heavy_battery_1
 	}
 }
+
 if = {
 	limit = {
 		has_dlc = "Arms Against Tyranny"

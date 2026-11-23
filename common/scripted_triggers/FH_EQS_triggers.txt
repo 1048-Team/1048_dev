@@ -1,67 +1,4 @@
 ###HMS DAYBREAK###
-EQS_hms_daybreak_not_upgraded = {
-	check_variable = { EQS_SOL_secondaries_upgraded = 0 }
-	check_variable = { EQS_SOL_primaries_upgraded = 0 }
-	check_variable = { EQS_SOL_secondary_cannons_upgraded = 0 }
-	check_variable = { EQS_SOL_aa_upgraded = 0 }
-	check_variable = { EQS_SOL_armor_upgraded = 0 }
-	check_variable = { EQS_SOL_rangefinding_upgraded = 0 }
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_upgraded_secondaries = {
-	check_variable = { EQS_SOL_primaries_upgraded = 0 }
-	check_variable = { EQS_SOL_secondary_cannons_upgraded = 0 }
-	check_variable = { EQS_SOL_aa_upgraded = 0 }
-	check_variable = { EQS_SOL_armor_upgraded = 0 }
-	check_variable = { EQS_SOL_rangefinding_upgraded = 0 }
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_light_weapons_upgraded = {
-	check_variable = { EQS_SOL_primaries_upgraded = 0 }
-	check_variable = { EQS_SOL_secondary_cannons_upgraded = 0 }
-	check_variable = { EQS_SOL_armor_upgraded = 0 }
-	check_variable = { EQS_SOL_rangefinding_upgraded = 0 }
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_light_weapons_and_main_gun_upgraded = {
-	check_variable = { EQS_SOL_secondary_cannons_upgraded = 0 }
-	check_variable = { EQS_SOL_armor_upgraded = 0 }
-	check_variable = { EQS_SOL_rangefinding_upgraded = 0 }
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_all_weaponry_upgraded = {
-	check_variable = { EQS_SOL_armor_upgraded = 0 }
-	check_variable = { EQS_SOL_rangefinding_upgraded = 0 }
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_weapons_and_armor_upgraded = {
-	check_variable = { EQS_SOL_rangefinding_upgraded = 0 }
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_weapons_armor_rcs_upgraded = {
-	check_variable = { EQS_SOL_radar_upgraded = 0 }
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_only_weapons_armor_rcs_radar_upgraded = {
-	check_variable = { EQS_SOL_engine_upgraded = 0 }
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
-EQS_hms_daybreak_everything_but_recon_upgraded = {
-	check_variable = { EQS_SOL_recon_upgraded = 0 }
-}
 EQS_SOL_upgraded_as_can_be = {
 	check_variable = { EQS_SOL_secondaries_upgraded = 5 }
 	check_variable = { EQS_SOL_primaries_upgraded = 1 }
@@ -115,18 +52,18 @@ EQS_SOL_aa_upgrade_available = {
 	}
 }
 EQS_SOL_main_battery_upgrade_available = {
-	has_tech = advanced_ship_hull_heavy
+	has_tech = advanced_heavy_battery
 	check_variable = { EQS_SOL_primaries_upgraded = 0 }
 }
 EQS_SOL_secondary_battery_upgrade_available = {
 	OR = {
 		AND = {
-			has_tech = improved_ship_hull_heavy
-			check_variable = { EQS_SOL_secondaries_upgraded = 0 }
+			has_tech = improved_heavy_battery
+			check_variable = { EQS_SOL_secondary_cannons_upgraded = 0 }
 		}
 		AND = {
-			has_tech = advanced_ship_hull_heavy
-			check_variable = { EQS_SOL_secondaries_upgraded = 1 }
+			has_tech = advanced_heavy_battery
+			check_variable = { EQS_SOL_secondary_cannons_upgraded = 1 }
 		}
 	}
 }
@@ -138,19 +75,27 @@ EQS_SOL_fcs_upgrade_available = {
 	OR = {
 		AND = {
 			has_tech = basic_fire_control_system
-			check_variable = { EQS_SOL_rangefinding_upgraded < 2 }
+			check_variable = { EQS_SOL_rangefinding_upgraded < 1 }
 		}
 		AND = {
 			has_tech = improved_fire_control_system
-			check_variable = { EQS_SOL_rangefinding_upgraded < 3 }
+			check_variable = { EQS_SOL_rangefinding_upgraded < 2 }
 		}
 		AND = {
 			has_tech = advanced_fire_control_system
-			check_variable = { EQS_SOL_rangefinding_upgraded < 4 }
+			check_variable = { EQS_SOL_rangefinding_upgraded < 3 }
 		}
 		AND = {
 			has_tech = semi_modern_fire_control_system
+			check_variable = { EQS_SOL_rangefinding_upgraded < 4 }
+		}
+		AND = {
+			has_tech = modern_fire_control_system
 			check_variable = { EQS_SOL_rangefinding_upgraded < 5 }
+		}
+		AND = {
+			has_tech = modern_fire_control_system_2
+			check_variable = { EQS_SOL_rangefinding_upgraded < 6 }
 		}
 	}
 }
@@ -800,60 +745,54 @@ SOL_ordo_confundas_visible = {
 	}
 }
 SOL_ordo_tenuis_visible = {
-	AND = {
-		OR = {
-			CRY = { SOL_check_if_puppet = yes }
-			all_of_scopes = {
-				array = global.crystal_core_territory
-				
-				is_owned_by = ROOT
-			}
-		}
-		NOT = {
-			OR = {
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = ROOT
-				}
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = CRY
-				}
-			}
-		}
-		NOT = { controls_state = 1220 }
-		NOT = {	CWR = { SOL_check_if_puppet = yes } }
-		NOT = { CRY = { controls_state = 1220 } }
-	}
+	always = no
+	#AND = {
+	#	CRY = {
+	#		OR = {
+	#			SOL_check_if_puppet = yes
+	#			all_original_cores_owned_by_ROOT = yes
+	#		}
+	#	}
+	#	NOT = {
+	#		OR = {
+	#			all_of_scopes = {
+	#				array = CWR.original_cores
+	#
+	#				is_owned_by = ROOT
+	#			}
+	#			all_of_scopes = {
+	#				array = CWR.original_cores
+	#
+	#				is_owned_by = CRY
+	#			}
+	#		}
+	#	}
+	#	NOT = { controls_state = 1220 }
+	#	NOT = {	CWR = { SOL_check_if_puppet = yes } }
+	#	NOT = { CRY = { controls_state = 1220 } }
+	#}
 }
 SOL_ordo_tenuis_CWR_visible = {
 	AND = {
 		OR = {
-			CWR = { SOL_check_if_puppet = yes }
-			ROOT = {
-				AND = {
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-					NOT = {	CRY = { SOL_check_if_puppet = yes } }
-					NOT = { controls_state = 1220 }
-				}
+			CWR = {
+				SOL_check_if_puppet = yes
+			}
+			AND = {
+				CWR = { all_original_cores_owned_by_ROOT = yes }
+				NOT = {	CRY = { SOL_check_if_puppet = yes } }
 			}
 		}
 		NOT = {	CRY = { SOL_check_if_puppet = yes } }
 		NOT = {
 			OR = {
 				all_of_scopes = {
-					array = global.crystal_core_territory
+					array = CRY.original_cores
 					
 					is_owned_by = CWR
 				}
 				all_of_scopes = {
-					array = global.crystal_core_territory
+					array = CRY.original_cores
 					
 					is_owned_by = ROOT
 				}
@@ -862,108 +801,72 @@ SOL_ordo_tenuis_CWR_visible = {
 	}
 }
 SOL_ordo_tenuis_CRY_CWR_visible = {
-	AND = {
-		OR = {
-			AND = {
-				CWR = { SOL_check_if_puppet = yes }
-				CRY = { SOL_check_if_puppet = yes }
-			}
-			CWR = {
-				AND = {
-					SOL_check_if_puppet = yes
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-			}
-			CRY = {
-				AND = {
-					SOL_check_if_puppet = yes
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-			}
-			ROOT = {
-				AND = {
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-					NOT = { CWR = { SOL_check_if_puppet = yes } }
-					NOT = { CRY = { SOL_check_if_puppet = yes } }
-				}
-			}
-			AND = {
-				ROOT = {
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-				CWR = { SOL_check_if_puppet = yes }
-			}
-			AND = {
-				ROOT = {
-					all_of_scopes = {
-						array = global.CWR_territory
-						
-						is_owned_by = ROOT
-					}
-				}
-				CRY = { SOL_check_if_puppet = yes }
-			}
-		}
-		OR = {
-			AND = {
-				NOT = { ROOT = { controls_state = 1220 } }
-				NOT = { CWR = { controls_state = 1220 } }
-				NOT = { CRY = { controls_state = 1220 } }
-			}
-		}
-	}
+	#Clean up later
+	always = no
+	#AND = {
+	#	OR = {
+	#		AND = {
+	#			CWR = { SOL_check_if_puppet = yes }
+	#			CRY = { SOL_check_if_puppet = yes }
+	#		}
+	#		CWR = {
+	#			AND = {
+	#				SOL_check_if_puppet = yes
+	#				all_of_scopes = {
+	#					array = CRY.original_cores
+	#
+	#					is_owned_by = ROOT
+	#				}
+	#			}
+	#		}
+	#		CRY = {
+	#			AND = {
+	#				SOL_check_if_puppet = yes
+	#				all_of_scopes = {
+	#					array = CWR.original_cores
+	#
+	#					is_owned_by = ROOT
+	#				}
+	#			}
+	#		}
+	#		CRY = { all_original_cores_owned_by_ROOT = yes }
+	#		CWR = { all_original_cores_owned_by_ROOT = yes }
+	#		AND = {
+	#			all_original_cores_owned_by_ROOT = yes
+	#			CWR = { SOL_check_if_puppet = yes }
+	#		}
+	#		AND = {
+	#			CWR = { all_original_cores_owned_by_ROOT = yes }
+	#			CRY = { SOL_check_if_puppet = yes }
+	#		}
+	#	}
+	#	OR = {
+	#		AND = {
+	#			NOT = { ROOT = { controls_state = 1220 } }
+	#			NOT = { CWR = { controls_state = 1220 } }
+	#			NOT = { CRY = { controls_state = 1220 } }
+	#		}
+	#	}
+	#}
 }
 SOL_ordo_tenuis_CRY_CHN_visible = {
 	AND = {
 		OR = {
 			CRY = {
-				AND = {
-					SOL_check_if_puppet = yes
-					controls_state = 1220
-				}
+				SOL_check_if_puppet = yes
 			}
-			ROOT = {
-				AND = {
-					all_of_scopes = {
-						array = global.crystal_core_territory
-						
-						is_owned_by = ROOT
-					}
-					controls_state = 1220
-				}
-			}
+			CRY = { all_original_cores_owned_by_ROOT = yes }
 		}
 		NOT = { CWR = { SOL_check_if_puppet = yes } }
 		NOT = {
 			OR = {
 				all_of_scopes = {
-					array = global.CWR_territory
+					array = CWR.original_cores
 					
 					is_owned_by = ROOT
 				}
 				all_of_scopes = {
-					array = global.CWR_territory
+					array = CWR.original_cores
 					
 					is_owned_by = CRY
 				}
@@ -977,19 +880,17 @@ SOL_ordo_tenuis_full_visible = {
 			AND = {
 				SOL_check_if_puppet = yes
 				all_of_scopes = {
-					array = global.CWR_territory
+					array = CWR.original_cores
 					
 					is_owned_by = CRY
 				}
-				controls_state = 1220
 			}
 		}
 		CWR = {
 			AND = {
 				SOL_check_if_puppet = yes
-				controls_state = 1220
 				all_of_scopes = {
-					array = global.crystal_core_territory
+					array = CRY.original_cores
 					
 					is_owned_by = CWR
 				}
@@ -998,60 +899,18 @@ SOL_ordo_tenuis_full_visible = {
 		AND = {
 			CWR = { SOL_check_if_puppet = yes }
 			CRY = { SOL_check_if_puppet = yes }
-			OR = {
-				CRY = {
-					controls_state = 1220
-				}
-				CWR = {
-					controls_state = 1220
-				}
-				ROOT = {
-					controls_state = 1220
-				}
-			}
 		}
 		ROOT = {
-			AND = {
-				controls_state = 1220
-				all_of_scopes = {
-					array = global.crystal_core_territory
-					
-					is_owned_by = ROOT
-				}
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = ROOT
-				}
-			}
+			CWR = { all_original_cores_owned_by_ROOT = yes }
+			CRY = { all_original_cores_owned_by_ROOT = yes }
 		}
 		AND = {
-			ROOT = {
-				all_of_scopes = {
-					array = global.CWR_territory
-					
-					is_owned_by = ROOT
-				}
-			}
+			CWR = { all_original_cores_owned_by_ROOT = yes }
 			CRY = { SOL_check_if_puppet = yes }
-			OR = {
-				CRY = { controls_state = 1220 }
-				ROOT = { controls_state = 1220 }
-			}
 		}
 		AND = {
-			ROOT = {
-				all_of_scopes = {
-					array = global.crystal_core_territory
-					
-					is_owned_by = ROOT
-				}
-			}
+			CRY = { all_original_cores_owned_by_ROOT = yes}
 			CWR = { SOL_check_if_puppet = yes }
-			OR = {
-				CWR = { controls_state = 1220 }
-				ROOT = { controls_state = 1220 }
-			}
 		}
 	}
 }

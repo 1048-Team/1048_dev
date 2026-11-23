@@ -1,12 +1,13 @@
 ﻿capital = 909
-set_research_slots = 2
-oob = "ROA_1007"
+set_research_slots = 3
+oob = "ROA_1048"
 
 set_stability = 0.45
 set_war_support = 0.65
 
 set_technology = {
 	zebra_race = 1
+	tech_spirit_warriors = 1
 	tech_knights = 1
 	melee_weapons = 1
 	pre_gw_artillery = 1
@@ -22,18 +23,17 @@ set_technology = {
 }
 actually_fix_weapon_techs = yes
 set_technology = {
-	basic_naval_mines = 1
+	torpedo_gunboats = 1
+	protected_cruisers = 1
+	pre_dreadnoughts = 1
 	early_ship_hull_light = 1
 	early_ship_hull_cruiser = 1
 	early_ship_hull_heavy = 1
 	early_ship_hull_carrier = 1
-	ship_hull_super_heavy = 1
 	basic_battery = 1
 	basic_light_battery = 1
 	basic_heavy_battery = 1
 	basic_torpedo = 1
-	sonar = 1
-	smoke_generator = 1
 	basic_depth_charges = 1
 	basic_cruiser_armor_scheme = 1
 	basic_heavy_armor_scheme = 1
@@ -43,7 +43,7 @@ set_technology = {
 create_equipment_variant = {
 	name = "Type XXXVI"
 	type = ship_hull_light_1
-	#name_group = CNT_DD_HISTORICAL
+	name_group = GENERIC_FASCISM_DESTROYER
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
@@ -59,7 +59,7 @@ create_equipment_variant = {
 create_equipment_variant = {
 	name = "Imperium Class"
 	type = ship_hull_heavy_1
-	#name_group = CNT_BB_HISTORICAL
+	name_group = GENERIC_FASCISM_BATTLESHIP
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_heavy_battery_1
@@ -68,7 +68,7 @@ create_equipment_variant = {
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = heavy_ship_engine_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
-		fixed_ship_armor_slot = ship_armor_bc_1
+		fixed_ship_armor_slot = ship_armor_bb_1
 		front_1_custom_slot = empty
 		mid_1_custom_slot = empty
 		mid_2_custom_slot = ship_secondaries_1
@@ -78,7 +78,7 @@ create_equipment_variant = {
 create_equipment_variant = {
 	name = "Mare Class"
 	type = ship_hull_cruiser_1
-	#name_group = SOL_CL_HISTORICAL
+	name_group = GENERIC_FASCISM_CRUISER
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_medium_battery_1
@@ -97,11 +97,20 @@ set_naval_oob = "ROA_1048_naval"
 set_convoys = 476
 
 add_ideas = {
-	slavery_economy
-	lack_of_scientists1
-	pre_industrial_society
+	civilian_economy
+	lack_of_scientists2
+	outdated_industry
+	big_science_base
+	poverty3
 
 	ROA_republican_revanchism #So ROA can actually expand for their decisions
+}
+
+if = { #To prevent the AI from justifying since it has claims
+	limit = {
+		is_ai = yes
+	}
+	add_ideas = block_ai_justification
 }
 
 set_popularities = {
@@ -124,7 +133,6 @@ recruit_character = ROA_lansin
 recruit_character = ROA_valcostus
 recruit_character = ROA_alsa
 recruit_character = ROA_dassal
-recruit_character = ROA_Marius
 
 set_rule = {
 	can_generate_female_aces = yes

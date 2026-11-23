@@ -466,6 +466,7 @@ is_former_subject = {
 
 # TODO make this proper
 is_equestrian_continent_country = {
+	NOT = { tag = ZZZ }
 	is_griffon_continent_country = no
 	is_zebrican_continent_country = no
 }
@@ -932,6 +933,8 @@ is_zebrican_continent_country_tag = {
 		original_tag = KLG
 		original_tag = HIE
 		original_tag = TRO
+		original_tag = IBZ
+		original_tag = KTZ
 		###Fractured Harmony###
 		original_tag = REM
 		original_tag = NDR
@@ -951,6 +954,7 @@ is_zebrican_continent_country_tag = {
 		original_tag = KAF
 		original_tag = KAW
 		original_tag = KAD
+		original_tag = NZA
 	}
 }
 
@@ -1003,6 +1007,7 @@ is_zebrican_zebra_country_tag = {
 		original_tag = AZI
 		original_tag = ILU
 		original_tag = ZIT
+		original_tag = NZA
 	}
 }
 is_zebrican_pony_country = {
@@ -1050,7 +1055,7 @@ is_storm_king_country = {
 
 owns_major_zebra_city = {
 	OR = {
-		owns_state = 1165 # Mt Aris
+		#owns_state = 1165 # Mt Aris
 		owns_state = 734 # Alexmanedria
 		AND = {
 			NOT = {
@@ -1068,7 +1073,7 @@ owns_major_zebra_city = {
 }
 is_major_zebra_core = {
 	OR = {
-		1165 = { is_core_of = PREV } # Mt Aris
+		#1165 = { is_core_of = PREV } # Mt Aris
 		734 = { is_core_of = PREV } # Alexmanedria
 		AND = {
 			NOT = {
@@ -1330,7 +1335,7 @@ is_eqs_civil_war_tag_tag = {
 }
 owns_major_griffon_city = {
 	OR = {
-		owns_state = 382
+		#owns_state = 382
 		owns_state = 381
 		owns_state = 665
 		owns_state = 371
@@ -1340,7 +1345,10 @@ owns_major_griffon_city = {
 			NOT = { tag = FEZ }
 			owns_state = 390
 		}
-		owns_state = 356
+		AND = {
+			NOT = { tag = EQC }
+			owns_state = 356
+		}
 		AND = {
 			NOT = { tag = LCT }
 			owns_state = 387
@@ -1353,7 +1361,7 @@ owns_major_griffon_city = {
 }
 is_major_griffon_core = {
 	OR = {
-		382 = { is_core_of = PREV }
+		#382 = { is_core_of = PREV }
 		381 = { is_core_of = PREV }
 		665 = { is_core_of = PREV }
 		371 = { is_core_of = PREV }
@@ -1362,6 +1370,7 @@ is_major_griffon_core = {
 		390 = { is_core_of = PREV }
 		387 = { is_core_of = PREV }
 		619 = { is_core_of = PREV }
+		356 = { is_core_of = PREV }
 	}
 }
 owns_big_griffon_city = {
@@ -1686,6 +1695,16 @@ any_controlled_state_is_coastal = {
 	}
 }
 
+has_large_town_or_higher = { # in state scope
+	OR = {
+		has_state_category = large_town
+		has_state_category = city
+		has_state_category = large_city
+		has_state_category = metropolis
+		has_state_category = megalopolis
+	}
+}
+
 # All cores owned by THIS are owned by ROOT
 # Example:
 # GRF = { all_cores_owned_by_ROOT = yes } #check if ROOT owns all cores of GRF
@@ -1849,6 +1868,21 @@ all_original_cores_owned_by_ROOT_or_subject = {
 						is_subject_of = ROOT
 					}
 				}
+			}
+		}
+	}
+}
+
+# All original cores of ROOT are owned and controlled by ROOT
+# Example
+# GRF = { all_original_cores_owned_and_controlled_by_ROOT = yes } #check if ROOT owns and controlles all original cores of GRF
+all_original_cores_owned_and_controlled_by_ROOT = {
+	custom_trigger_tooltip = {
+		tooltip = owns_and_controlls_all_cores_original_tt
+		hidden_trigger = {
+			all_of_scopes = {
+				array = original_cores
+				is_owned_and_controlled_by = ROOT
 			}
 		}
 	}
@@ -2291,5 +2325,54 @@ exists_outside_sphere_of_influence = {
 			is_subject_of = ROOT
 			has_war_with = ROOT
 		}
+	}
+}
+
+# Country Scope - Whether a country is suitable for wargoal declaration #
+exists_outside_sphere_of_influence = {
+	custom_trigger_tooltip = {
+		tooltip = exists_outside_sphere_of_influence_tt
+		exists = yes
+		NOT = {
+			is_in_faction_with = ROOT
+			is_subject_of = ROOT
+			has_war_with = ROOT
+		}
+	}
+}
+
+# Country Scope - Tests whether the country in question is on historical AI behaviour
+has_historical_ai_behaviour = {
+    meta_trigger = {
+        text = {
+            OR = {
+                AND = {
+                    is_historical_focus_on = yes
+                    has_game_rule = {
+                        rule = [TAG]_ai_behavior
+                        option = DEFAULT
+                    }
+                }
+                has_country_flag = [TAG]_AI_HISTORICAL
+                has_game_rule = {
+                    rule = [TAG]_ai_behavior
+                    option = HISTORICAL
+                }
+            }
+        }
+         TAG = "[THIS.GetTag]"
+    }
+}
+
+# Country Scope - list of countries that are exempt from reverting to a generic focus tree when puppeted
+always_retains_focus_tree_as_puppet = {
+	OR = {
+		has_country_flag = retains_focus_tree_on_puppeting
+		original_tag = GRU
+		original_tag = CTH
+		original_tag = LUS
+		original_tag = FLO
+		original_tag = BRF
+		original_tag = WIT
 	}
 }

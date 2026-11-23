@@ -1,6 +1,20 @@
 on_actions = {
     on_startup = {
         effect = {
+            every_possible_country = {
+                limit = {
+                    OR = {
+                        tag = NRP
+                        tag = EEE
+                        tag = NEI
+                        tag = STB
+                        tag = CLI
+                        tag = SPF
+                        tag = MTS
+                    }
+                }
+                add_ideas = SE_international_isolation
+            }
             every_country = {
                 limit = {
                     is_griffon_continent_country = yes
@@ -19,30 +33,10 @@ on_actions = {
                 limit = {
                     is_griffon_continent_country = no
                     is_zebrican_continent_country = no
+                    NOT = { tag = ZZZ }
                     has_custom_focus_tree_content = no
                 }
                 load_focus_tree = generic_focus
-            }
-            every_possible_country = {
-                limit = {
-                    OR = {
-                        has_idea = zebrica_legacy_of_storm3
-                        has_idea = zebrica_legacy_of_storm2
-                        has_idea = zebrica_legacy_of_storm1
-                    }
-                }
-                if = {
-                    limit = { has_idea = zebrica_legacy_of_storm1 }
-                    remove_ideas = zebrica_legacy_of_storm1
-                }
-                else_if = {
-                    limit = { has_idea = zebrica_legacy_of_storm2 }
-                    remove_ideas = zebrica_legacy_of_storm2
-                }
-                else_if = {
-                    limit = { has_idea = zebrica_legacy_of_storm3 }
-                    remove_ideas = zebrica_legacy_of_storm3
-                }
             }
         }
     }

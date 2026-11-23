@@ -40,6 +40,12 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_laypony_fear"
 		#Event for Daybreaker speaking to the workers and driving them into a fanantical frenzy to make them work harder
 		country_event = solar.125
+		hidden_effect = {
+			news_event = {
+				id = solarempirenews.1
+				hours = 6
+			}
+		}
 	}
 	ai_will_do = { factor = 45 }
 }
@@ -58,6 +64,12 @@ shared_focus = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_placate_clergy"
 		#Event for Daybreaker gathering the closest Adoratio and reassuring she is now fine, if weak
 		country_event = solar.102
+		hidden_effect = {
+			news_event = {
+				id = solarempirenews.1
+				hours = 6
+			}
+		}
 	}
 	ai_will_do = { factor = 65 }
 }
@@ -204,7 +216,7 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_forever_angry"
-		add_country_leader_trait = daybreaker_god2
+		add_country_leader_trait = daybreaker_god2_1048
 	}
 	
 	ai_will_do = { factor = 45 }
@@ -404,9 +416,15 @@ shared_focus = {
 	x = -1
 	y = 2
 	relative_position_id = EQS_lonely_top
-	
-	bypass = { has_idea = service_by_requirement }
-	
+
+	bypass = {
+		OR = {
+			has_idea = service_by_requirement
+			has_idea = all_adults_serve
+			has_idea = scraping_the_barrel
+		}
+	}
+
 	cost = 4
 	prerequisite = {
 		focus = EQS_counsel_councilors
@@ -425,13 +443,17 @@ shared_focus = {
 			limit = { 
 			    has_idea = disarmed_nation 
 			}
-			add_ideas = volunteer_only
+			add_ideas = extensive_conscription
+			add_stability = -0.1
+			add_war_support = -0.1
 		}
 		else_if = {
 			limit = { 
 			    has_idea = volunteer_only 
 			}
-			add_ideas = limited_conscription
+			add_ideas = extensive_conscription
+			add_stability = -0.05
+			add_war_support = -0.05
 		}
 		else_if = {
 			limit = { 
@@ -444,6 +466,7 @@ shared_focus = {
 			    has_idea = extensive_conscription 
 			}
 			add_ideas = service_by_requirement
+			add_political_power = -75
 		}
 	}
 	ai_will_do = { factor = 55 }
@@ -495,13 +518,16 @@ shared_focus = {
 	
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus EQS_mandatory_sacrifice"
+		custom_effect_tooltip = EQS_who_needs_feelings_tt
 		if = {
 			limit = { has_idea = civilian_economy }
-			add_ideas = low_economic_mobilisation
+			add_ideas = war_economy
+			add_stability = -0.1
 		}
 		else_if = {
 			limit = { has_idea = low_economic_mobilisation }
-			add_ideas = partial_economic_mobilisation
+			add_ideas = war_economy
+			add_stability = -0.05
 		}
 		else_if = {
 			limit = { has_idea = partial_economic_mobilisation }
@@ -609,6 +635,10 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 25
+		modifier = {
+			has_war = yes
+			factor = 0.1
+		}
 	}
 }
 
@@ -639,6 +669,10 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 25
+		modifier = {
+			has_war = yes
+			factor = 0.1
+		}
 	}
 }
 
@@ -669,6 +703,10 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 25
+		modifier = {
+			has_war = yes
+			factor = 0.1
+		}
 	}
 }
 
@@ -699,6 +737,10 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 25
+		modifier = {
+			has_war = yes
+			factor = 0.1
+		}
 	}
 }
 
@@ -728,6 +770,10 @@ shared_focus = {
 	}
 	ai_will_do = {
 		factor = 25
+		modifier = {
+			has_war = yes
+			factor = 0.1
+		}
 	}
 }
 
