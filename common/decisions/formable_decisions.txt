@@ -2264,12 +2264,15 @@ HLR_formables_category = {
 				571 = {
 					is_owned_and_controlled_by = FBK
 				}
-				all_state = {
-					if = {
-						limit = {
-							is_core_of = FBK
+				custom_trigger_tooltip = {
+					tooltip = HLR_naughty_river_swirl_tt
+					all_state = {
+						if = {
+							limit = {
+								is_core_of = FBK
+							}
+							is_owned_and_controlled_by = BAK
 						}
-						is_owned_and_controlled_by = BAK
 					}
 				}
 			}
@@ -2298,7 +2301,7 @@ HLR_formables_category = {
 			factor = 100
 			modifier = {
 				OR = {
-					date < 1050.4.1
+					date < 1049.7.1
 					has_war = yes
 				}
 				factor = 0
@@ -4722,6 +4725,24 @@ BAK_formables_category = {
 			factor = 100
 		}
 	}
+	BAK_punch_birbs = {
+		available = {
+			FBK = { all_original_cores_owned_by_ROOT = yes }
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = HLR
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BAK_punch_birbs"
+			create_wargoal = {
+				target = HLR
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
 	BAK_spread_constitutional_monarchism = {
 		available = {
 			HLR = { all_original_cores_owned_by_ROOT = yes }
@@ -4746,6 +4767,35 @@ BAK_formables_category = {
 			factor = 100
 		}
 	}
+	BAK_triumphant_return = {
+		available = {
+			FBK = { all_original_cores_owned_by_ROOT = yes }
+			date > 1051.6.1
+		}
+		fire_only_once = yes
+		days_remove = 35
+		war_with_on_remove = RCT
+		war_with_on_remove = LNS
+		war_with_on_remove = NIM
+		war_with_on_remove = BAK
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: decision BAK_triumphant_return"
+			create_wargoal = {
+				target = RCT
+				type = annex_everything
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				OR = {
+					date < 1052.1.1
+					has_war = yes
+				}
+				factor = 0
+			}
+		}
+	}
 	BAK_manifest_destiny = {
 		available = {
 			RCT = { all_original_cores_owned_by_ROOT = yes }
@@ -4766,6 +4816,10 @@ BAK_formables_category = {
 				add_core_of = ROOT
 			}
 			set_cosmetic_tag = RIV_13
+			set_capital = {
+				state = 619
+				remember_old_capital = no
+			}
 			hidden_effect = {
 				country_event = formable_flavor_event.3
 			}
