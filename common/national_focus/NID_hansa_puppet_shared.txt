@@ -1,0 +1,1107 @@
+focus_tree = {
+	id = NID_hansa_puppet_tree
+
+	country = {
+		factor = 0
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 50 y = 1050 }
+
+	shared_focus = NID_hp_hanseatic_charter
+}
+
+shared_focus = {
+	id = NID_hp_hanseatic_charter
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 5
+	y = 0
+
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_hanseatic_charter"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.10
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_company_magistrates
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -3
+	y = 1
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_hanseatic_charter }
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_company_magistrates"
+		add_ideas = NID_hp_administration_idea
+	}
+}
+
+shared_focus = {
+	id = NID_hp_loyalty_oaths
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -4
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_company_magistrates }
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_loyalty_oaths"
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.10
+		}
+		add_war_support = 0.05
+	}
+}
+
+shared_focus = {
+	id = NID_hp_petition_relief
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -2
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_company_magistrates }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_petition_relief"
+		custom_effect_tooltip = NID_hp_petition_tt
+		hidden_effect = {
+			OVERLORD = { country_event = { id = hansa_puppet.1 days = 1 } }
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_hanseatic_constabulary
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -4
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_loyalty_oaths }
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_hanseatic_constabulary"
+		swap_ideas = {
+			remove_idea = NID_hp_administration_idea
+			add_idea = NID_hp_administration_2_idea
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_open_company_books
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 1
+	y = 1
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_hanseatic_charter }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_open_company_books"
+		capital_scope = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_feeder_roads
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 0
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_open_company_books }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_feeder_roads"
+		custom_effect_tooltip = NID_hp_feeder_roads_tt
+		hidden_effect = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { is_capital = no }
+				set_state_flag = NID_hp_feeder_road_flag
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+					NOT = { has_state_flag = NID_hp_feeder_road_flag }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			every_owned_state = {
+				limit = { has_state_flag = NID_hp_feeder_road_flag }
+				clr_state_flag = NID_hp_feeder_road_flag
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_extraction_concessions
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 2
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_open_company_books }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_extraction_concessions"
+		add_ideas = NID_hp_concessions_idea
+	}
+}
+
+shared_focus = {
+	id = NID_hp_petition_development
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 1
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_feeder_roads }
+	prerequisite = { focus = NID_hp_extraction_concessions }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_petition_development"
+		custom_effect_tooltip = NID_hp_petition_tt
+		hidden_effect = {
+			OVERLORD = { country_event = { id = hansa_puppet.2 days = 1 } }
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_tithes_to_yukka
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 1
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_petition_development }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_tithes_to_yukka"
+		custom_effect_tooltip = NID_hp_tithes_tt
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_country_flag = NID_hp_tithe_paid_flag } }
+				set_country_flag = NID_hp_tithe_paid_flag
+				OVERLORD = {
+					add_to_variable = { var = gain_quaterly value = 0.5 }
+					add_to_variable = { var = gain_total value = 0.5 }
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_muster_home_guard
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 5
+	y = 1
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_hanseatic_charter }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_hp_rearmament_started_tt
+			is_subject = yes
+			OVERLORD = { has_completed_focus = NID_begin_colonial_rearmament }
+		}
+	}
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_muster_home_guard"
+		custom_effect_tooltip = NID_hp_home_guard_tt
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_template = "Hanseatic Home Guard" } }
+				division_template = {
+					name = "Hanseatic Home Guard"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Hanseatic Home Guard\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+				owner = ROOT
+				count = 2
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_fortify_capital
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 4
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_muster_home_guard }
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_fortify_capital"
+		capital_scope = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = {
+					all_provinces = yes
+				}
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_petition_arms
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 6
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_muster_home_guard }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_petition_arms"
+		custom_effect_tooltip = NID_hp_petition_tt
+		hidden_effect = {
+			OVERLORD = { country_event = { id = hansa_puppet.3 days = 1 } }
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_hanseatic_auxiliaries
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 5
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_fortify_capital }
+	prerequisite = { focus = NID_hp_petition_arms }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_hanseatic_auxiliaries"
+		add_manpower = -4000
+		custom_effect_tooltip = NID_hp_auxiliaries_tt
+		hidden_effect = {
+			OVERLORD = {
+				if = {
+					limit = { NOT = { has_template = "Hanseatic Auxiliaries" } }
+					division_template = {
+						name = "Hanseatic Auxiliaries"
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+						}
+					}
+				}
+				create_unit = {
+					division = "division_template = \"Hanseatic Auxiliaries\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+					owner = THIS
+					count = 2
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_pillar_of_the_hansa
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -2
+	y = 5
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_hanseatic_constabulary }
+	prerequisite = { focus = NID_hp_tithes_to_yukka }
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_pillar_of_the_hansa"
+		swap_ideas = {
+			remove_idea = NID_hp_administration_2_idea
+			add_idea = NID_hp_administration_3_idea
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_request_governor
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -2
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_petition_relief }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_request_governor"
+		custom_effect_tooltip = NID_hp_governor_tt
+		hidden_effect = {
+			OVERLORD = { country_event = { id = hansa_puppet.4 days = 1 } }
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_report_unrest
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -4
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_hanseatic_constabulary }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_report_unrest"
+		custom_effect_tooltip = NID_hp_unrest_tt
+		hidden_effect = {
+			OVERLORD = { country_event = { id = hansa_puppet.5 days = 1 } }
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_shareholder_report
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -2
+	y = 6
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_pillar_of_the_hansa }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 20
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_shareholder_report"
+		custom_effect_tooltip = NID_hp_shareholder_report_tt
+		hidden_effect = {
+			country_event = { id = hansa_puppet.20 days = 365 }
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_freight_lines
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = -1
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_feeder_roads }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_freight_lines"
+		custom_effect_tooltip = NID_hp_freight_lines_tt
+		hidden_effect = {
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					infrastructure < 4
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_prospecting_surveys
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 3
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_extraction_concessions }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_prospecting_surveys"
+		add_tech_bonus = {
+			name = NID_hp_prospecting_surveys
+			bonus = 0.5
+			uses = 1
+			category = excavation_tech
+		}
+		custom_effect_tooltip = NID_hp_prospecting_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				random_list = {
+					25 = { add_resource = { type = steel amount = 4 } }
+					25 = { add_resource = { type = aluminium amount = 4 } }
+					25 = { add_resource = { type = tungsten amount = 4 } }
+					25 = { add_resource = { type = chromium amount = 4 } }
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_contract_arsenal
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 1
+	y = 5
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_tithes_to_yukka }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_contract_arsenal"
+		capital_scope = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_company_towns
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 0
+	y = 6
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_contract_arsenal }
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_company_towns"
+		custom_effect_tooltip = NID_hp_company_towns_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = { is_capital = no }
+				set_state_flag = NID_hp_company_town_flag
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_capital = no
+					NOT = { has_state_flag = NID_hp_company_town_flag }
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			every_owned_state = {
+				limit = { has_state_flag = NID_hp_company_town_flag }
+				clr_state_flag = NID_hp_company_town_flag
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_company_drydocks
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 2
+	y = 6
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_contract_arsenal }
+	bypass = {
+		NOT = { capital_scope = { is_coastal = yes } }
+	}
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_company_drydocks"
+		capital_scope = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		if = {
+			limit = { is_subject_of = NID }
+			custom_effect_tooltip = NID_hp_drydocks_tt
+			hidden_effect = {
+				NID = {
+					add_to_variable = { var = flotte_destroyers value = 1 }
+					NID_spawn_handelsflotte_destroyers = yes
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_reconstruction_contracts
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 0
+	y = 7
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_company_towns }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_hp_declaw_done_tt
+			is_subject = yes
+			OVERLORD = { has_country_flag = NID_declaw_done_flag }
+		}
+	}
+	ai_will_do = {
+		factor = 30
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_reconstruction_contracts"
+		custom_effect_tooltip = NID_hp_reconstruction_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				set_state_flag = NID_hp_reconstruction_flag
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			random_owned_controlled_state = {
+				limit = { NOT = { has_state_flag = NID_hp_reconstruction_flag } }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			every_owned_state = {
+				limit = { has_state_flag = NID_hp_reconstruction_flag }
+				clr_state_flag = NID_hp_reconstruction_flag
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_concession_zinten_windford
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 3
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_prospecting_surveys }
+	mutually_exclusive = {
+		focus = NID_hp_concession_yabmanein
+		focus = NID_hp_concession_hiveworks
+		focus = NID_hp_concession_prt
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			add = 50
+			has_resources_amount = { resource = steel amount > 5 }
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_concession_zinten_windford"
+		custom_effect_tooltip = NID_hp_concession_zinten_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				add_resource = { type = steel amount = 4 }
+				add_resource = { type = chromium amount = 2 }
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_concession_yabmanein
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 5
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_prospecting_surveys }
+	mutually_exclusive = {
+		focus = NID_hp_concession_zinten_windford
+		focus = NID_hp_concession_hiveworks
+		focus = NID_hp_concession_prt
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			add = 50
+			has_resources_amount = { resource = oil amount > 0 }
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_concession_yabmanein"
+		custom_effect_tooltip = NID_hp_concession_yabmanein_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				add_resource = { type = oil amount = 4 }
+			}
+		}
+		add_tech_bonus = {
+			name = NID_hp_concession_yabmanein
+			bonus = 0.5
+			uses = 1
+			category = synth_resources
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_concession_hiveworks
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 7
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_prospecting_surveys }
+	mutually_exclusive = {
+		focus = NID_hp_concession_zinten_windford
+		focus = NID_hp_concession_yabmanein
+		focus = NID_hp_concession_prt
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			add = 50
+			num_of_factories > 15
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_concession_hiveworks"
+		add_ideas = NID_hp_hiveworks_idea
+	}
+}
+
+shared_focus = {
+	id = NID_hp_concession_prt
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 9
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_prospecting_surveys }
+	mutually_exclusive = {
+		focus = NID_hp_concession_zinten_windford
+		focus = NID_hp_concession_yabmanein
+		focus = NID_hp_concession_hiveworks
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			add = 50
+			has_stability < 0.5
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_concession_prt"
+		add_ideas = NID_hp_prt_concession_idea
+	}
+}
+
+shared_focus = {
+	id = NID_hp_police_battalions
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 8
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_muster_home_guard }
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_police_battalions"
+		custom_effect_tooltip = NID_hp_police_tt
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_template = "Hanseatic Police Battalion" } }
+				division_template = {
+					name = "Hanseatic Police Battalion"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+					}
+					support = {
+						military_police = { x = 0 y = 0 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Hanseatic Police Battalion\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+				owner = ROOT
+				count = 2
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_emergency_levies
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 10
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_muster_home_guard }
+	available = {
+		has_war = yes
+	}
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			add = 90
+			has_war = yes
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_emergency_levies"
+		add_timed_idea = { idea = NID_hp_levies_idea days = 180 }
+		custom_effect_tooltip = NID_hp_levies_tt
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_template = "Hanseatic Home Guard" } }
+				division_template = {
+					name = "Hanseatic Home Guard"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Hanseatic Home Guard\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+				owner = ROOT
+				count = 2
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_air_wardens
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 8
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_police_battalions }
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_air_wardens"
+		capital_scope = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_prt_garrison_contract
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 10
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_police_battalions }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_hp_prt_franchised_tt
+			is_subject = yes
+			OVERLORD = { has_completed_focus = NID_franchise_prt_to_hansa }
+		}
+	}
+	ai_will_do = {
+		factor = 10
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_prt_garrison_contract"
+		add_ideas = NID_hp_prt_contract_idea
+	}
+}
+
+shared_focus = {
+	id = NID_hp_company_schools
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 13
+	y = 1
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_hanseatic_charter }
+	ai_will_do = {
+		factor = 15
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_company_schools"
+		add_ideas = NID_hp_schools_idea
+	}
+}
+
+shared_focus = {
+	id = NID_hp_licensed_production
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 12
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_company_schools }
+	ai_will_do = {
+		factor = 15
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_licensed_production"
+		add_tech_bonus = {
+			name = NID_hp_licensed_production
+			bonus = 0.5
+			uses = 2
+			category = industry
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_electrical_concessions
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 14
+	y = 2
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_company_schools }
+	ai_will_do = {
+		factor = 15
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_electrical_concessions"
+		add_tech_bonus = {
+			name = NID_hp_electrical_concessions
+			bonus = 0.5
+			uses = 1
+			category = electronics
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_seconded_engineers
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 13
+	y = 3
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_licensed_production }
+	prerequisite = { focus = NID_hp_electrical_concessions }
+	bypass = {
+		is_subject = no
+	}
+	ai_will_do = {
+		factor = 15
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_seconded_engineers"
+		OVERLORD = {
+			add_tech_bonus = {
+				name = NID_hp_seconded_engineers
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = NID_hp_join_research_pool
+	icon = GFX_BAL_please_help
+	cost = 8.58
+	x = 13
+	y = 4
+	relative_position_id = NID_hp_hanseatic_charter
+
+	prerequisite = { focus = NID_hp_seconded_engineers }
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_hp_research_coop_tt
+			is_subject = yes
+			OVERLORD = { has_completed_focus = NID_hanseatic_research_cooperation }
+		}
+	}
+	ai_will_do = {
+		factor = 15
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus NID_hp_join_research_pool"
+		swap_ideas = {
+			remove_idea = NID_hp_schools_idea
+			add_idea = NID_hp_schools_2_idea
+		}
+	}
+}

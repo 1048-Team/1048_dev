@@ -1,0 +1,396 @@
+add_namespace = hansa_puppet
+
+#Relief funds
+country_event = {
+	id = hansa_puppet.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hansa_puppet.1"}
+	title = hansa_puppet.1.t
+	desc = hansa_puppet.1.d
+	picture = GFX_event_solarempire
+
+	is_triggered_only = yes
+
+	#Fund it fully
+	option = {
+		name = hansa_puppet.1.a
+		trigger = {
+			check_variable = { var = bank_million value > 3.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 19.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_4_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 4 }
+		}
+		FROM = {
+			add_stability = 0.10
+			if = {
+				limit = { has_idea = NID_hp_neglected_idea }
+				remove_ideas = NID_hp_neglected_idea
+			}
+		}
+	}
+	#Fund part of it
+	option = {
+		name = hansa_puppet.1.b
+		trigger = {
+			check_variable = { var = bank_million value > 1.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 7.99 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { var = bank_million value > 19.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_2_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 2 }
+		}
+		FROM = {
+			add_stability = 0.05
+		}
+	}
+	#Refuse
+	option = {
+		name = hansa_puppet.1.c
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			add_timed_idea = { idea = NID_hp_neglected_idea days = 180 }
+		}
+	}
+}
+
+#Development grants
+country_event = {
+	id = hansa_puppet.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hansa_puppet.2"}
+	title = hansa_puppet.2.t
+	desc = hansa_puppet.2.d
+	picture = GFX_event_solarempire
+
+	is_triggered_only = yes
+
+	#Fund it fully
+	option = {
+		name = hansa_puppet.2.a
+		trigger = {
+			check_variable = { var = bank_million value > 7.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 19.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_8_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 8 }
+		}
+		FROM = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#Fund part of it
+	option = {
+		name = hansa_puppet.2.b
+		trigger = {
+			check_variable = { var = bank_million value > 3.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 7.99 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { var = bank_million value > 19.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_4_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 4 }
+		}
+		FROM = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#Refuse
+	option = {
+		name = hansa_puppet.2.c
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			add_timed_idea = { idea = NID_hp_neglected_idea days = 180 }
+		}
+	}
+}
+
+#Arms shipments
+country_event = {
+	id = hansa_puppet.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hansa_puppet.3"}
+	title = hansa_puppet.3.t
+	desc = hansa_puppet.3.d
+	picture = GFX_event_solarempire
+
+	is_triggered_only = yes
+
+	#Fund it fully
+	option = {
+		name = hansa_puppet.3.a
+		trigger = {
+			check_variable = { var = bank_million value > 5.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 19.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_6_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 6 }
+		}
+		FROM = {
+			add_equipment_to_stockpile = { type = infantry_equipment amount = 2000 producer = ROOT }
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 300 producer = ROOT }
+			add_equipment_to_stockpile = { type = support_equipment amount = 100 producer = ROOT }
+		}
+	}
+	#Fund part of it
+	option = {
+		name = hansa_puppet.3.b
+		trigger = {
+			check_variable = { var = bank_million value > 2.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 7.99 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { var = bank_million value > 19.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_3_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 3 }
+		}
+		FROM = {
+			add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 producer = ROOT }
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 150 producer = ROOT }
+			add_equipment_to_stockpile = { type = support_equipment amount = 50 producer = ROOT }
+		}
+	}
+	#Refuse
+	option = {
+		name = hansa_puppet.3.c
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			add_timed_idea = { idea = NID_hp_neglected_idea days = 180 }
+		}
+	}
+}
+
+#Loads the Hansa puppet tree (fired by NID_load_hansa_puppet_tree)
+country_event = {
+	id = hansa_puppet.10
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hansa_puppet.10"
+		if = {
+			limit = {
+				is_subject_of = NID
+				NOT = { has_focus_tree = NID_hansa_puppet_tree }
+			}
+			load_focus_tree = NID_hansa_puppet_tree
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
+
+#Council governor (free choice)
+country_event = {
+	id = hansa_puppet.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hansa_puppet.4"}
+	title = hansa_puppet.4.t
+	desc = hansa_puppet.4.d
+	picture = GFX_event_solarempire
+
+	is_triggered_only = yes
+
+	#Administrator
+	option = {
+		name = hansa_puppet.4.a
+		ai_chance = {
+			base = 10
+		}
+		FROM = { add_ideas = NID_hp_governor_admin_idea }
+	}
+	#Industrialist
+	option = {
+		name = hansa_puppet.4.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				FROM = { num_of_factories > 15 }
+			}
+		}
+		FROM = { add_ideas = NID_hp_governor_industry_idea }
+	}
+	#Security chief
+	option = {
+		name = hansa_puppet.4.c
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 80
+				FROM = { has_stability < 0.4 }
+			}
+		}
+		FROM = { add_ideas = NID_hp_governor_security_idea }
+	}
+}
+
+#Unrest report
+country_event = {
+	id = hansa_puppet.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hansa_puppet.5"}
+	title = hansa_puppet.5.t
+	desc = hansa_puppet.5.d
+	picture = GFX_event_solarempire
+
+	is_triggered_only = yes
+
+	#Send the PRT
+	option = {
+		name = hansa_puppet.5.a
+		trigger = {
+			check_variable = { var = bank_million value > 1.99 }
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				check_variable = { var = bank_million value > 7.99 }
+			}
+		}
+		custom_effect_tooltip = NID_pay_2_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 2 }
+		}
+		FROM = {
+			add_stability = 0.10
+			if = {
+				limit = { has_idea = NID_hp_neglected_idea }
+				remove_ideas = NID_hp_neglected_idea
+			}
+		}
+	}
+	#Let them crush it
+	option = {
+		name = hansa_puppet.5.b
+		ai_chance = {
+			base = 10
+		}
+		FROM = {
+			add_war_support = 0.05
+			add_stability = -0.05
+		}
+	}
+	#Ignore it
+	option = {
+		name = hansa_puppet.5.c
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			add_timed_idea = { idea = NID_hp_neglected_idea days = 180 }
+		}
+	}
+}
+
+#Shareholder report loop on the puppet (started by NID_hp_shareholder_report, yearly)
+country_event = {
+	id = hansa_puppet.20
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hansa_puppet.20"
+		if = {
+			limit = { is_subject_of = NID }
+			NID = { country_event = { id = hansa_puppet.21 days = 1 } }
+			country_event = { id = hansa_puppet.20 days = 365 }
+		}
+	}
+}
+
+#Shareholder report to NID, FROM = the puppet
+country_event = {
+	id = hansa_puppet.21
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hansa_puppet.21"}
+	title = hansa_puppet.21.t
+	desc = hansa_puppet.21.d
+	picture = GFX_event_solarempire
+
+	is_triggered_only = yes
+
+	#Praise them
+	option = {
+		name = hansa_puppet.21.a
+		ai_chance = {
+			base = 30
+		}
+		FROM = { add_stability = 0.05 }
+	}
+	#Demand a dividend
+	option = {
+		name = hansa_puppet.21.b
+		ai_chance = {
+			base = 70
+		}
+		custom_effect_tooltip = NID_hp_dividend_tt
+		hidden_effect = {
+			add_to_variable = { var = bank_million value = 1 }
+		}
+		FROM = { add_stability = -0.05 }
+	}
+}
