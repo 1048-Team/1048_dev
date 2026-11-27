@@ -1840,7 +1840,7 @@ shared_focus = {
 			}
 		}
 		division_template = {
-			name = "Süd-Ost Marineinfanterie"
+			name = "Hanseatische Marineinfanterie"
 			is_locked = no
 				regiments = {
 					marine_commando = { x = 0 y = 0 }
@@ -1861,7 +1861,7 @@ shared_focus = {
 		}
 		capital_scope = {
 			create_unit = {
-				division = "name = \"NYC Marineinfanterie Division\" division_template = \"Süd-Ost Marineinfanterie\" start_experience_factor = 0.5 start_equipment_factor = 0.95"
+				division = "name = \"NYC Marineinfanterie Division\" division_template = \"Hanseatische Marineinfanterie\" start_experience_factor = 0.9 start_equipment_factor = 0.95"
 				owner = ROOT
 			}
 		}
@@ -3555,7 +3555,36 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_copy_greifvogel"
-		
+		air_experience = 15
+		if = {
+			limit = { has_dlc = "By Blood Alone" }
+			if = {
+				limit = { NOT = { has_tech = basic_small_airframe } }
+				set_technology = { basic_small_airframe = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_copy_greifvogel
+					bonus = 0.5
+					uses = 1
+					category = light_air
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { NOT = { has_tech = fighter1 } }
+				set_technology = { fighter1 = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_copy_greifvogel
+					bonus = 0.5
+					uses = 1
+					category = light_air
+				}
+			}
+		}
 	}
 }  
 
@@ -3570,12 +3599,72 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_invest_in_aviation
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_10_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 9.99
+			}
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_buy_vespidae_licenses"
-		
+		custom_effect_tooltip = NID_pay_10_mil_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 10
+			}
+		}
+		if = {
+			limit = { has_dlc = "By Blood Alone" }
+			if = {
+				limit = { NOT = { has_tech = basic_medium_airframe } }
+				set_technology = { basic_medium_airframe = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_buy_vespidae_licenses
+					bonus = 0.5
+					uses = 1
+					category = medium_air
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { NOT = { has_tech = tactical_bomber1 } }
+				set_technology = { tactical_bomber1 = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_buy_vespidae_licenses
+					bonus = 0.5
+					uses = 1
+					category = medium_air
+				}
+			}
+		}
+		if = {
+			limit = { has_dlc = "By Blood Alone" }
+			custom_effect_tooltip = NID_vespidae_variant_tt
+			hidden_effect = {
+				create_equipment_variant = {
+					name = "Vespidae Licence Bomber"
+					type = medium_plane_airframe_1
+					modules = {
+						fixed_main_weapon_slot = medium_bomb_bay
+						engine_type_slot = engine_1_2x
+						special_type_slot_1 = lmg_defense_turret
+					}
+					icon = "GFX_medium_plane_1_medium"
+				}
+			}
+		}
 	}
 }  
 
@@ -3595,7 +3684,14 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_operation_nightlight"
-		
+		add_tech_bonus = {
+			name = NID_operation_nightlight
+			bonus = 0.5
+			uses = 1
+			category = radar_tech
+		}
+		add_ideas = NID_operation_nightlight_idea
+		hidden_effect = { NID_check_air_spirit_merge = yes }
 	}
 } 
 
@@ -3610,12 +3706,28 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_invest_in_aviation
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 4.99
+			}
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_aerial_wargames"
-		
+		custom_effect_tooltip = NID_pay_5_mil_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 5
+			}
+		}
+		air_experience = 100
 	}
 } 
 
@@ -3635,7 +3747,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_hire_speers_reformers"
-		
+		add_doctrine_cost_reduction = {
+			name = NID_hire_speers_reformers
+			cost_reduction = 0.5
+			uses = 2
+			category = air_doctrine
+		}
 	}
 } 
 
@@ -3659,7 +3776,13 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_race_for_next_gen_fighter"
-		
+		add_tech_bonus = {
+			name = NID_race_for_next_gen_fighter
+			bonus = 1
+			uses = 1
+			ahead_reduction = 1
+			category = light_fighter
+		}
 	}
 } 
 
@@ -3679,7 +3802,19 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_invest_early_warning_systems"
-		
+		add_tech_bonus = {
+			name = NID_invest_early_warning_systems
+			bonus = 0.5
+			uses = 2
+			category = radar_tech
+		}
+		capital_scope = {
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
 	}
 } 
 
@@ -3699,7 +3834,13 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_jet_engine_research"
-		
+		add_tech_bonus = {
+			name = NID_jet_engine_research
+			bonus = 1
+			uses = 1
+			ahead_reduction = 4
+			category = jet_technology
+		}
 	}
 } 
 
@@ -3719,7 +3860,14 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_unequaled_speed"
-		
+		add_tech_bonus = {
+			name = NID_unequaled_speed
+			bonus = 0.5
+			uses = 1
+			category = jet_technology
+		}
+		add_ideas = NID_unequaled_speed_idea
+		hidden_effect = { NID_check_air_spirit_merge = yes }
 	}
 } 
 
@@ -3740,7 +3888,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_doctrinal_flexibility"
-		
+		add_doctrine_cost_reduction = {
+			name = NID_doctrinal_flexibility
+			cost_reduction = 0.5
+			uses = 2
+			category = air_doctrine
+		}
 	}
 } 
 
@@ -3756,12 +3909,31 @@ shared_focus = {
 		focus = NID_jet_engine_research
 		focus = NID_invest_early_warning_systems
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 4.99
+			}
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_fund_mayflys_expansion"
-		
+		custom_effect_tooltip = NID_pay_5_mil_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 5
+			}
+		}
+		show_mio_tooltip = NID_mayfly_electronics_organization
+		mio:NID_mayfly_electronics_organization = {
+			add_mio_size = 1
+		}
 	}
 } 
 
@@ -3782,7 +3954,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_devils_in_wind"
-		
+		add_tech_bonus = {
+			name = NID_devils_in_wind
+			bonus = 0.5
+			uses = 2
+			category = cas_bomber
+		}
 	}
 } 
 
@@ -3803,7 +3980,18 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_solarist_book_pages"
-		
+		add_tech_bonus = {
+			name = NID_solarist_book_pages
+			bonus = 0.5
+			uses = 1
+			category = heavy_air
+		}
+		add_mastery_bonus = {
+			name = NID_solarist_book_pages
+			bonus = 0.1
+			days = 180
+			track = strike_aircraft
+		}
 	}
 } 
 
@@ -3824,7 +4012,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_rotary_aviation_advances"
-		
+		add_tech_bonus = {
+			name = NID_rotary_aviation_advances
+			bonus = 1
+			uses = 1
+			category = helicopter_tech
+		}
 	}
 } 
 
@@ -3845,7 +4038,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_steel_dragons"
-		
+		add_tech_bonus = {
+			name = NID_steel_dragons
+			bonus = 0.5
+			uses = 2
+			category = cat_heavy_fighter
+		}
 	}
 } 
 
@@ -3866,7 +4064,8 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_leapfrogging_aeronautical_engineering"
-		
+		add_ideas = NID_leapfrogging_aeronautics_idea
+		hidden_effect = { NID_check_air_spirit_merge = yes }
 	}
 } 
 
@@ -3891,7 +4090,13 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_aim_for_practicality"
-		
+		navy_experience = 25
+		custom_effect_tooltip = NID_flotte_order_start_tt
+		hidden_effect = {
+			set_variable = { flotte_order_destroyers = 1 }
+			set_variable = { flotte_order_cruisers = 0 }
+			set_variable = { flotte_order_subs = 0 }
+		}
 	}
 } 
 
@@ -3907,6 +4112,10 @@ shared_focus = {
 		focus = NID_aim_for_practicality
 	}
 	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+			check_variable = { var = bank_million value > 4.99 }
+		}
 		has_completed_focus = NID_modern_navy_achieved
 	}
 
@@ -3915,7 +4124,11 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_aim_for_power_projection"
-		
+		custom_effect_tooltip = NID_pay_5_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 5 }
+		}
+		navy_experience = 25
 	}
 } 
 
@@ -3935,7 +4148,16 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_ocen_is_our_dominion"
-		
+		add_doctrine_cost_reduction = {
+			name = NID_ocen_is_our_dominion
+			cost_reduction = 0.5
+			uses = 1
+			category = naval_doctrine
+		}
+		custom_effect_tooltip = NID_flotte_order_ca_tt
+		hidden_effect = {
+			add_to_variable = { var = flotte_order_cruisers value = 1 }
+		}
 	}
 } 
 
@@ -3956,7 +4178,13 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_expand_marine_corps"
-		
+		add_tech_bonus = {
+			name = NID_expand_marine_corps
+			bonus = 0.5
+			uses = 2
+			category = marine_tech
+		}
+		add_idea = NID_elite_training_idea
 	}
 } 
 
@@ -3971,12 +4199,73 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_aim_for_power_projection
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_15_mil_tt
+			check_variable = { var = bank_million value > 14.99 }
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_the_end_of_battleships"
-		
+		custom_effect_tooltip = NID_pay_15_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 15 }
+		}
+		if = {
+			limit = { has_dlc = "Man the Guns" }
+			if = {
+				limit = { NOT = { has_tech = basic_ship_hull_carrier } }
+				set_technology = { early_ship_hull_carrier = 1 basic_ship_hull_carrier = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_the_end_of_battleships
+					bonus = 1.0
+					uses = 1
+					category = cv_tech
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { NOT = { has_tech = basic_carrier } }
+				set_technology = { early_carrier = 1 basic_carrier = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_the_end_of_battleships
+					bonus = 1.0
+					uses = 1
+					category = cv_tech
+				}
+			}
+		}
+		custom_effect_tooltip = {
+			localization_key = naval_facility_construction_tt
+			temp_facility_state_loc = "[351.GetName]"
+			temp_facility_province_loc = "[351.GetCapitalVictoryPointName]"
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					351 = {
+						is_fully_controlled_by = ROOT
+						can_build_facility_here = yes
+					}
+				}
+				351 = {
+					add_building_construction = {
+						type = naval_facility
+						level = 1
+						instant_build = yes
+						province = 668
+					}
+				}
+			}
+		}
 	}
 } 
 
@@ -3996,7 +4285,16 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_screens_for_convoys"
-		
+		add_tech_bonus = {
+			name = NID_screens_for_convoys
+			bonus = 0.5
+			uses = 2
+			category = dd_tech
+		}
+		custom_effect_tooltip = NID_flotte_order_dd_tt
+		hidden_effect = {
+			add_to_variable = { var = flotte_order_destroyers value = 1 }
+		}
 	}
 } 
 
@@ -4020,7 +4318,14 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_amphibious_apcs"
-		
+		add_tech_bonus = {
+			name = NID_amphibious_apcs
+			bonus = 0.5
+			uses = 1
+			technology = amphibious_mechanized_infantry
+			technology = amphibious_mechanized_infantry_2
+			technology = amphibious_mechanized_infantry_3
+		}
 	}
 } 
 
@@ -4044,7 +4349,17 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_floating_tank_battalions"
-		
+		add_tech_bonus = {
+			name = NID_floating_tank_battalions
+			bonus = 0.5
+			uses = 1
+			technology = amphibious_tank
+			technology = amphibious_tank_2
+			technology = amphibious_tank_3
+			technology = amphibious_tank_4
+			technology = amphibious_tank_5
+			technology = amphibious_tank_6
+		}
 	}
 } 
 
@@ -4059,12 +4374,33 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_the_end_of_battleships
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+			check_variable = { var = bank_million value > 4.99 }
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_mobile_airbases"
-		
+		custom_effect_tooltip = NID_pay_5_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 5 }
+		}
+		add_tech_bonus = {
+			name = NID_mobile_airbases
+			bonus = 1.0
+			uses = 1
+			category = naval_air
+		}
+		add_mastery_bonus = {
+			name = NID_mobile_airbases
+			bonus = 0.1
+			days = 180
+			track = carriers
+		}
 	}
 } 
 
@@ -4076,16 +4412,28 @@ shared_focus = {
 	y = 3
 	relative_position_id = NID_aim_for_practicality
 
+	prerequisite = { focus = NID_screens_for_convoys }
 	prerequisite = {
-		focus = NID_screens_for_convoys
-		focus = NID_mobile_airbases
+		focus = NID_amphibious_apcs
+		focus = NID_floating_tank_battalions
 	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_light_batteries"
-		
+		add_tech_bonus = {
+			name = NID_light_batteries
+			bonus = 0.5
+			uses = 1
+			category = ca_tech
+		}
+		add_tech_bonus = {
+			name = NID_light_batteries_art
+			bonus = 0.5
+			uses = 1
+			category = naval_artillery
+		}
 	}
 } 
 
@@ -4106,7 +4454,9 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_combined_wargames"
-		
+		navy_experience = 50
+		army_experience = 50
+		air_experience = 50
 	}
 } 
 
@@ -4118,16 +4468,22 @@ shared_focus = {
 	y = 3
 	relative_position_id = NID_aim_for_practicality
 
+	prerequisite = { focus = NID_mobile_airbases }
 	prerequisite = {
-		focus = NID_screens_for_convoys
-		focus = NID_mobile_airbases
+		focus = NID_amphibious_apcs
+		focus = NID_floating_tank_battalions
 	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_safety_engineering"
-		
+		add_tech_bonus = {
+			name = NID_safety_engineering
+			bonus = 0.5
+			uses = 2
+			category = ship_modules_tech
+		}
 	}
 } 
 
@@ -4147,7 +4503,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_blanket_the_sea"
-		
+		add_tech_bonus = {
+			name = NID_blanket_the_sea
+			bonus = 0.5
+			uses = 2
+			category = asw_tech
+		}
 	}
 } 
 
@@ -4169,7 +4530,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_theory_of_victory"
-		
+		add_doctrine_cost_reduction = {
+			name = NID_theory_of_victory
+			cost_reduction = 0.5
+			uses = 2
+			category = naval_doctrine
+		}
 	}
 } 
 
@@ -4191,7 +4557,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_mines_mines_mines"
-		
+		add_tech_bonus = {
+			name = NID_mines_mines_mines
+			bonus = 1.0
+			uses = 2
+			category = naval_mines
+		}
 	}
 } 
 
@@ -4206,12 +4577,52 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_safety_engineering
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_10_mil_tt
+			check_variable = { var = bank_million value > 9.99 }
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_carrier_strike_groups"
-		
+		custom_effect_tooltip = NID_pay_10_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 10 }
+		}
+		if = {
+			limit = { has_dlc = "Man the Guns" }
+			if = {
+				limit = { NOT = { has_tech = improved_ship_hull_carrier } }
+				set_technology = { improved_ship_hull_carrier = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_carrier_strike_groups
+					bonus = 1.0
+					uses = 1
+					ahead_reduction = 1
+					category = cv_tech
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { NOT = { has_tech = improved_carrier } }
+				set_technology = { improved_carrier = 1 popup = no }
+			}
+			else = {
+				add_tech_bonus = {
+					name = NID_carrier_strike_groups
+					bonus = 1.0
+					uses = 1
+					ahead_reduction = 1
+					category = cv_tech
+				}
+			}
+		}
 	}
 } 
 
@@ -4231,7 +4642,16 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_two_sides_of_coin"
-		
+		add_tech_bonus = {
+			name = NID_two_sides_of_coin
+			bonus = 0.5
+			uses = 2
+			category = ss_tech
+		}
+		custom_effect_tooltip = NID_flotte_order_ss_tt
+		hidden_effect = {
+			add_to_variable = { var = flotte_order_subs value = 1 }
+		}
 	}
 } 
 
@@ -4251,7 +4671,15 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_destroyers_for_protection"
-		
+		custom_effect_tooltip = NID_flotte_2_dd_now_tt
+		hidden_effect = {
+			add_to_variable = { var = flotte_destroyers value = 2 }
+			NID_spawn_handelsflotte_destroyers = yes
+		}
+		custom_effect_tooltip = NID_flotte_order_dd_tt
+		hidden_effect = {
+			add_to_variable = { var = flotte_order_destroyers value = 1 }
+		}
 	}
 } 
 
@@ -4272,7 +4700,11 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_iron_hoof_of_commerce"
-		
+		custom_effect_tooltip = NID_gain_3_trade_deal_tt
+		hidden_effect = {
+			add_to_variable = { var = gain_trade_deals value = 3 }
+			add_to_variable = { var = gain_total value = 3 }
+		}
 	}
 } 
 
@@ -4287,12 +4719,28 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_carrier_strike_groups
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_10_mil_tt
+			check_variable = { var = bank_million value > 9.99 }
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_naval_missile_carriers"
-		
+		custom_effect_tooltip = NID_pay_10_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 10 }
+		}
+		add_tech_bonus = {
+			name = NID_naval_missile_carriers
+			bonus = 1.0
+			uses = 2
+			ahead_reduction = 1
+			category = naval_weaponry
+		}
 	}
 } 
 
@@ -4307,12 +4755,28 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_carrier_strike_groups
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+			check_variable = { var = bank_million value > 4.99 }
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_modern_rangefinders"
-		
+		custom_effect_tooltip = NID_pay_5_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 5 }
+		}
+		add_tech_bonus = {
+			name = NID_modern_rangefinders
+			bonus = 1.0
+			uses = 3
+			ahead_reduction = 1
+			category = fire_control
+		}
 	}
 } 
 
@@ -4333,7 +4797,8 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_unified_production_designs"
-		
+		custom_effect_tooltip = NID_flotte_subscription_tt
+		set_country_flag = NID_flotte_subscription_flag
 	}
 } 
 
@@ -4348,12 +4813,26 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_iron_hoof_of_commerce
 	}
+	available = {
+		has_tech = atomic_research
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_nuclear_engines"
-		
+		if = {
+			limit = {
+				NOT = { is_special_project_completed = sp:sp_nuclear_engines }
+			}
+			complete_special_project = sp:sp_nuclear_engines
+		}
+		else = {
+			add_breakthrough_points = {
+				specialization = specialization_nuclear
+				value = 1
+			}
+		}
 	}
 } 
 
@@ -4369,12 +4848,49 @@ shared_focus = {
 		focus = NID_naval_missile_carriers
 		focus = NID_modern_rangefinders
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_20_mil_tt
+			check_variable = { var = bank_million value > 19.99 }
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_supercarriers"
-		
+		custom_effect_tooltip = NID_pay_20_mil_tt
+		hidden_effect = {
+			subtract_from_variable = { var = bank_million value = 20 }
+		}
+		add_tech_bonus = {
+			name = NID_supercarriers
+			bonus = 2.0
+			uses = 2
+			ahead_reduction = 2
+			category = cv_tech
+		}
+		if = {
+			limit = { 351 = { is_fully_controlled_by = ROOT } }
+			351 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		else = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
 	}
 } 
 
@@ -4397,7 +4913,22 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_begin_colonial_rearmament"
-		
+		custom_effect_tooltip = NID_colonial_rearmament_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				add_ideas = NID_colonial_arms_treaty
+				if = {
+					limit = { has_idea = disarmed_nation }
+					remove_ideas = disarmed_nation
+				}
+				country_lock_all_division_template = { is_locked = no }
+				clr_country_flag = manpower_laws_blocked
+			}
+		}
 	}
 } 
 
@@ -4412,12 +4943,43 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_begin_colonial_rearmament
 	}
+	available = {
+		STB = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { STB = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_stallingen_seaborne"
-		
+		custom_effect_tooltip = NID_hansa_stb_units_tt
+		STB = {
+			add_ideas = NID_hansa_seebataillon_idea
+			if = {
+				limit = { NOT = { has_template = "Stallingen Seebataillon" } }
+				division_template = {
+					name = "Stallingen Seebataillon"
+					regiments = {
+						marine = { x = 0 y = 0 }
+						marine = { x = 0 y = 1 }
+						marine = { x = 0 y = 2 }
+						marine = { x = 1 y = 0 }
+						marine = { x = 1 y = 1 }
+						marine = { x = 1 y = 2 }
+					}
+					support = {
+						engineer = { x = 0 y = 0 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Stallingen Seebataillon\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+				owner = STB
+				count = 3
+			}
+		}
 	}
 } 
 
@@ -4432,12 +4994,43 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_begin_colonial_rearmament
 	}
+	available = {
+		EEE = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { EEE = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_mondstadt_nightraiders"
-		
+		custom_effect_tooltip = NID_hansa_eee_units_tt
+		EEE = {
+			add_ideas = NID_hansa_nachtjaeger_idea
+			if = {
+				limit = { NOT = { has_template = "Mondstadt Nachtjaeger" } }
+				division_template = {
+					name = "Mondstadt Nachtjaeger"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+					support = {
+						recon = { x = 0 y = 0 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Mondstadt Nachtjaeger\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+				owner = EEE
+				count = 3
+			}
+		}
 	}
 } 
 
@@ -4452,12 +5045,43 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_begin_colonial_rearmament
 	}
+	available = {
+		NRP = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { NRP = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_sonnenburg_jungle_fighters"
-		
+		custom_effect_tooltip = NID_hansa_nrp_units_tt
+		NRP = {
+			add_ideas = NID_hansa_dschungel_idea
+			if = {
+				limit = { NOT = { has_template = "Sonnenburg Dschungelkaempfer" } }
+				division_template = {
+					name = "Sonnenburg Dschungelkaempfer"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+					support = {
+						engineer = { x = 0 y = 0 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Sonnenburg Dschungelkaempfer\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+				owner = NRP
+				count = 3
+			}
+		}
 	}
 } 
 
@@ -4472,12 +5096,45 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_begin_colonial_rearmament
 	}
+	available = {
+		NEI = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { NEI = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_neu_baltimare_vanguard"
-		
+		custom_effect_tooltip = NID_hansa_nei_units_tt
+		NEI = {
+			add_ideas = NID_hansa_vorhut_idea
+			if = {
+				limit = { NOT = { has_template = "Baltimare Vorhut" } }
+				division_template = {
+					name = "Baltimare Vorhut"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						artillery_brigade = { x = 2 y = 0 }
+					}
+					support = {
+						anti_tank = { x = 0 y = 0 }
+						engineer = { x = 0 y = 1 }
+					}
+				}
+			}
+			create_unit = {
+				division = "division_template = \"Baltimare Vorhut\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+				owner = NEI
+				count = 3
+			}
+		}
 	}
 } 
 
@@ -4492,12 +5149,42 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_stallingen_seaborne
 	}
+	available = {
+		STB = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { STB = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_luna_ocean_wall"
-		
+			STB = {
+				every_owned_state = {
+					limit = { is_coastal = yes }
+					add_building_construction = {
+						type = coastal_bunker
+						level = 1
+						province = {
+							all_provinces = yes
+							limit_to_coastal = yes
+						}
+						instant_build = yes
+					}
+				}
+				capital_scope = {
+					add_building_construction = {
+						type = naval_base
+						level = 4
+						province = {
+							all_provinces = yes
+							limit_to_naval_base = yes
+						}
+						instant_build = yes
+					}
+				}
+			}
 	}
 } 
 
@@ -4512,12 +5199,28 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_mondstadt_nightraiders
 	}
+	available = {
+		EEE = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { EEE = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_mango_airbases"
-		
+			EEE = {
+				capital_scope = {
+					add_building_construction = { type = air_base level = 2 instant_build = yes }
+					add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+				}
+				random_owned_controlled_state = {
+					limit = { is_capital = no }
+					prioritize = { 50 81 35 37 17 84 }
+					add_building_construction = { type = air_base level = 2 instant_build = yes }
+				}
+			}
 	}
 } 
 
@@ -4532,12 +5235,26 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_sonnenburg_jungle_fighters
 	}
+	available = {
+		NRP = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { NRP = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_first_pony_jaegers"
-		
+			NRP = {
+				every_owned_state = {
+					add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+				}
+				capital_scope = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = { type = arms_factory level = 1 instant_build = yes }
+				}
+			}
 	}
 } 
 
@@ -4552,19 +5269,30 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_neu_baltimare_vanguard
 	}
+	available = {
+		NEI = { is_subject_of = ROOT }
+	}
+	bypass = {
+		NOT = { NEI = { is_subject_of = ROOT } }
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_restore_baltimare_arsenal"
-		
+			NEI = {
+				capital_scope = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = { type = arms_factory level = 3 instant_build = yes }
+				}
+			}
 	}
 } 
 
 shared_focus = {
 	id = NID_rewrite_hansa_arms_treaty
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = 0
 	y = 3
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4586,14 +5314,33 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_rewrite_hansa_arms_treaty"
-		
+		remove_ideas = NID_propping_up_hansa
+		custom_effect_tooltip = NID_hansa_treaty_rewritten_tt
+		custom_effect_tooltip = NID_hansa_upkeep_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				remove_ideas = NID_colonial_arms_treaty
+				if = {
+					limit = { NOT = { has_country_flag = NID_hansa_upkeep_flag } }
+					set_country_flag = NID_hansa_upkeep_flag
+					ROOT = {
+						subtract_from_variable = { var = gain_quaterly value = 1 }
+						subtract_from_variable = { var = gain_total value = 1 }
+					}
+				}
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_hanseatic_research_cooperation
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = -2
 	y = 4
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4606,14 +5353,24 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_hanseatic_research_cooperation"
-		
+		add_to_tech_sharing_group = NID_hansa_research_group
+		custom_effect_tooltip = NID_hansa_research_group_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				add_to_tech_sharing_group = NID_hansa_research_group
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_siphon_recruits
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = 2
 	y = 4
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4626,14 +5383,24 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_siphon_recruits"
-		
+		custom_effect_tooltip = NID_hansa_siphon_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				add_manpower = -25000
+				ROOT = { add_manpower = 25000 }
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_joint_training_maneuvers
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = -3
 	y = 5
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4646,14 +5413,24 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_joint_training_maneuvers"
-		
+		army_experience = 25
+		custom_effect_tooltip = NID_hansa_joint_training_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				army_experience = 25
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_more_minds_think_better
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = -1
 	y = 5
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4666,14 +5443,14 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_more_minds_think_better"
-		
+		add_ideas = NID_more_minds_idea
 	}
 } 
 
 shared_focus = {
 	id = NID_fortify_hayseed_macintosh_line
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = 1
 	y = 5
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4686,14 +5463,115 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_fortify_hayseed_macintosh_line"
-		
+		custom_effect_tooltip = NID_hansa_fort_line_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					27 = {
+						OR = {
+							is_owned_by = ROOT
+							OWNER = { is_subject_of = ROOT }
+						}
+					}
+				}
+				27 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = {
+							all_provinces = yes
+							limit_to_border = yes
+						}
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					23 = {
+						OR = {
+							is_owned_by = ROOT
+							OWNER = { is_subject_of = ROOT }
+						}
+					}
+				}
+				23 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = {
+							all_provinces = yes
+							limit_to_border = yes
+						}
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					35 = {
+						OR = {
+							is_owned_by = ROOT
+							OWNER = { is_subject_of = ROOT }
+						}
+					}
+				}
+				35 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = {
+							all_provinces = yes
+							limit_to_border = yes
+						}
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					81 = {
+						OR = {
+							is_owned_by = ROOT
+							OWNER = { is_subject_of = ROOT }
+						}
+					}
+				}
+				81 = {
+					add_building_construction = {
+						type = supply_node
+						level = 1
+						province = 11858
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					84 = {
+						OR = {
+							is_owned_by = ROOT
+							OWNER = { is_subject_of = ROOT }
+						}
+					}
+				}
+				84 = {
+					add_building_construction = {
+						type = supply_node
+						level = 1
+						province = 9539
+						instant_build = yes
+					}
+				}
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_arterial_military_railroads
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = 3
 	y = 5
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4706,14 +5584,76 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_arterial_military_railroads"
-		
+		custom_effect_tooltip = NID_hansa_railroads_tt
+		hidden_effect = {
+			if = {
+				limit = { STB = { is_subject_of = ROOT } }
+				STB = {
+					every_owned_state = {
+						add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+					}
+				}
+				build_railway = {
+					level = 1
+					build_only_on_allied = yes
+					fallback = yes
+					start_state = 221
+					target_state = 15
+				}
+			}
+			if = {
+				limit = { EEE = { is_subject_of = ROOT } }
+				EEE = {
+					every_owned_state = {
+						add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+					}
+				}
+				build_railway = {
+					level = 1
+					build_only_on_allied = yes
+					fallback = yes
+					start_state = 221
+					target_state = 30
+				}
+			}
+			if = {
+				limit = { NRP = { is_subject_of = ROOT } }
+				NRP = {
+					every_owned_state = {
+						add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+					}
+				}
+				build_railway = {
+					level = 1
+					build_only_on_allied = yes
+					fallback = yes
+					start_state = 221
+					target_state = 16
+				}
+			}
+			if = {
+				limit = { NEI = { is_subject_of = ROOT } }
+				NEI = {
+					every_owned_state = {
+						add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+					}
+				}
+				build_railway = {
+					level = 1
+					build_only_on_allied = yes
+					fallback = yes
+					start_state = 221
+					target_state = 1214
+				}
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_cross_hansa_officer_training
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = -2
 	y = 6
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4727,14 +5667,31 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_cross_hansa_officer_training"
-		#Unique Academy-Spirit for officer corps
+		custom_effect_tooltip = NID_hansa_officers_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				create_corps_commander = {
+					name = "PRT Attachee"
+					skill = 2
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 2
+				}
+			}
+		}
+		every_unit_leader = {gain_xp = 500}
 	}
 } 
 
 shared_focus = {
 	id = NID_implement_the_pan_hanseatic_corps
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = 2
 	y = 6
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4748,14 +5705,44 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_implement_the_pan_hanseatic_corps"
-		#Unique Spirit of the Army for officer corps
+		custom_effect_tooltip = NID_hansa_corps_tt
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = { tag = STB tag = NRP tag = EEE tag = NEI }
+					is_subject_of = ROOT
+				}
+				if = {
+					limit = { NOT = { has_template = "Pan-Hanseatic Corps" } }
+					division_template = {
+						name = "Pan-Hanseatic Corps"
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+						}
+					}
+				}
+				create_unit = {
+					division = "division_template = \"Pan-Hanseatic Corps\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+					owner = THIS
+					count = 2
+				}
+			}
+		}
 	}
 } 
 
 shared_focus = {
 	id = NID_franchise_prt_to_hansa
 	icon = GFX_BAL_please_help
-	cost = 4.52
+	cost = 4.42
 	x = 0
 	y = 7
 	relative_position_id = NID_begin_colonial_rearmament
@@ -4769,7 +5756,17 @@ shared_focus = {
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_franchise_prt_to_hansa"
-		
+		custom_effect_tooltip = NID_hansa_upkeep_removed_tt
+		hidden_effect = {
+			every_country = {
+				limit = { has_country_flag = NID_hansa_upkeep_flag }
+				clr_country_flag = NID_hansa_upkeep_flag
+				ROOT = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+		}
 	}
 } 
 

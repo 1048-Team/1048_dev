@@ -50,6 +50,7 @@ country_event = {
 		}
 		add_political_power = 20
 		add_stability = -0.02
+		NID = { country_event = gesellschaft.4 }
 	}
 }
 
@@ -963,6 +964,7 @@ country_event = {
 	mean_time_to_happen = {
 		days = 50
 	}
+	fire_only_once = yes
 	
 	option = { 
 		name = gesellschaft.35.a
@@ -1184,56 +1186,6 @@ country_event = {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 country_event = {
 	id = corpofluff.1
 	immediate = {log = "[GetDateText]: [Root.GetName]: event corpofluff.1"}
@@ -1241,7 +1193,14 @@ country_event = {
 	desc = corpofluff.1.d
 	picture = GFX_event_solarempire 
 	
-	is_triggered_only = yes
+	trigger = {
+		tag = NID
+		OR = {
+			owns_state = 3
+			any_subject_country = { owns_state = 3 }
+		}
+	}
+	fire_only_once = yes
 	
 	option = { 
 		name = corpofluff.1.a
@@ -1364,6 +1323,8 @@ country_event = {
 	title = corpofluff.4.t
 	desc = corpofluff.4.d
 	picture = GFX_event_solarempire 
+
+	fire_only_once = yes
 	
 	trigger = {
 		tag = NID
@@ -1372,6 +1333,7 @@ country_event = {
 	mean_time_to_happen = {
 		days = 100
 	}
+	fire_only_once = yes
 	
 	option = { 
 		name = corpofluff.4.a
@@ -1387,11 +1349,34 @@ country_event = {
 	picture = GFX_event_solarempire 
 	
 	is_triggered_only = yes
+	fire_only_once = yes
 	
 	option = {
 		name = gesellschaft.43.a
 		ai_chance = {
 			base = 50
 		}
+	}
+}
+
+#Aviation spirits merge
+country_event = {
+	id = gesellschaft.44
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.44"}
+	title = gesellschaft.44.t
+	desc = gesellschaft.44.d
+	picture = GFX_event_solarempire
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = gesellschaft.44.a
+		remove_ideas = {
+			NID_operation_nightlight_idea
+			NID_unequaled_speed_idea
+			NID_leapfrogging_aeronautics_idea
+		}
+		add_ideas = NID_unified_aeronautics_idea
 	}
 }

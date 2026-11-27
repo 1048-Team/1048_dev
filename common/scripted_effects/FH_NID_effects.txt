@@ -258,3 +258,31 @@ NID_update_kerntruppen = {
 	}
 	force_update_dynamic_modifier = yes
 }
+
+#Merges the three aviation spirits once NID holds all of them
+NID_check_air_spirit_merge = {
+	if = {
+		limit = {
+			has_idea = NID_operation_nightlight_idea
+			has_idea = NID_unequaled_speed_idea
+			has_idea = NID_leapfrogging_aeronautics_idea
+			NOT = { has_country_flag = NID_air_spirits_merged_flag }
+		}
+		set_country_flag = NID_air_spirits_merged_flag
+		country_event = { id = gesellschaft.44 days = 1 }
+	}
+}
+
+#Quarterly Handelsflotte delivery 
+NID_flotte_quarterly_delivery = {
+	if = {
+		limit = { has_country_flag = NID_flotte_subscription_flag }
+		custom_effect_tooltip = NID_flotte_delivery_tt
+		hidden_effect = {
+			add_to_variable = { var = flotte_destroyers value = flotte_order_destroyers }
+			add_to_variable = { var = flotte_cruisers value = flotte_order_cruisers }
+			add_to_variable = { var = flotte_subs value = flotte_order_subs }
+			NID_spawn_handelsflotte = yes
+		}
+	}
+}
