@@ -159,3 +159,24 @@ NID_improve_rebellion = {
 		add_war_support = 0.05
 	}
 }
+
+NID_supremacy_for_subjects = {
+	every_country = {
+		limit = {
+			is_subject_of = ROOT
+			NOT = { has_country_flag = NID_supremacy_imposed_flag }
+		}
+		set_country_flag = NID_supremacy_imposed_flag
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.5
+		}
+		if = {
+			limit = { NOT = { has_government = fascism } }
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+		}
+	}
+}
