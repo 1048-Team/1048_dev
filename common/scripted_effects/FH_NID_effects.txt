@@ -180,3 +180,81 @@ NID_supremacy_for_subjects = {
 		}
 	}
 }
+
+#Recalculates the NID_kerntruppen dynamic modifier.
+NID_update_kerntruppen = {
+	#--- sf: 11 steps, 1.36% each ---
+	set_variable = { NID_kt_sf = 0 }
+	if = {
+		limit = { has_country_flag = NID_kt_sf_unlocked }
+		if = { limit = { has_tech = tech_jager } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = tech_jager2 } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = tech_jager3 } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = tech_jager_a } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = tech_jager_b } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = tech_jager_c } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = tech_special_forces } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = improved_special_forces } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = advanced_special_forces } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = elite_forces } add_to_variable = { NID_kt_sf = 1 } }
+		if = { limit = { has_tech = super_elite_forces } add_to_variable = { NID_kt_sf = 1 } }
+		multiply_variable = { NID_kt_sf = 0.15 }
+		divide_variable = { NID_kt_sf = 11 } #11 steps, full line = +15%
+		if = {
+			limit = { has_country_flag = NID_kt_elite_unlocked }
+			add_to_variable = { NID_kt_sf = 0.05 }
+		}
+	}
+	#--- mot: 9 steps, 1.67% each ---
+	set_variable = { NID_kt_mot = 0 }
+	if = {
+		limit = { has_country_flag = NID_kt_mot_unlocked }
+		if = { limit = { has_tech = tech_trucks } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = motorised_infantry } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = motorised_infantry_2 } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = motorised_infantry_3 } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = armored_car1 } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = armored_car2 } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = armored_car3 } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = armored_car4 } add_to_variable = { NID_kt_mot = 1 } }
+		if = { limit = { has_tech = armored_car5 } add_to_variable = { NID_kt_mot = 1 } }
+		multiply_variable = { NID_kt_mot = 0.15 }
+		divide_variable = { NID_kt_mot = 9 } #9 steps, full line = +15%
+		if = {
+			limit = { has_country_flag = NID_kt_elite_unlocked }
+			add_to_variable = { NID_kt_mot = 0.05 }
+		}
+	}
+	#--- mech: 4 steps, 3.75% each ---
+	set_variable = { NID_kt_mech = 0 }
+	if = {
+		limit = { has_country_flag = NID_kt_mech_unlocked }
+		if = { limit = { has_tech = mechanised_infantry } add_to_variable = { NID_kt_mech = 1 } }
+		if = { limit = { has_tech = mechanised_infantry2 } add_to_variable = { NID_kt_mech = 1 } }
+		if = { limit = { has_tech = mechanised_infantry3 } add_to_variable = { NID_kt_mech = 1 } }
+		if = { limit = { has_tech = mechanised_infantry_a } add_to_variable = { NID_kt_mech = 1 } }
+		multiply_variable = { NID_kt_mech = 0.15 }
+		divide_variable = { NID_kt_mech = 4 } #4 steps, full line = +15%
+		if = {
+			limit = { has_country_flag = NID_kt_elite_unlocked }
+			add_to_variable = { NID_kt_mech = 0.05 }
+		}
+	}
+	#--- arm: 5 steps, 3.00% each ---
+	set_variable = { NID_kt_arm = 0 }
+	if = {
+		limit = { has_country_flag = NID_kt_arm_unlocked }
+		if = { limit = { OR = { has_tech = basic_light_tank has_tech = basic_medium_tank has_tech = basic_heavy_tank has_tech = basic_light_tank_chassis has_tech = basic_medium_tank_chassis has_tech = basic_heavy_tank_chassis } } add_to_variable = { NID_kt_arm = 1 } }
+		if = { limit = { OR = { has_tech = improved_light_tank has_tech = improved_medium_tank has_tech = improved_heavy_tank has_tech = improved_light_tank_chassis has_tech = improved_medium_tank_chassis has_tech = improved_heavy_tank_chassis } } add_to_variable = { NID_kt_arm = 1 } }
+		if = { limit = { OR = { has_tech = advanced_light_tank has_tech = advanced_medium_tank has_tech = advanced_heavy_tank has_tech = advanced_light_tank_chassis has_tech = advanced_medium_tank_chassis has_tech = advanced_heavy_tank_chassis } } add_to_variable = { NID_kt_arm = 1 } }
+		if = { limit = { OR = { has_tech = main_battle_tank has_tech = main_battle_tank_chassis } } add_to_variable = { NID_kt_arm = 1 } }
+		if = { limit = { OR = { has_tech = main_battle_tank_b has_tech = main_battle_tank_chassis_b has_tech = modern_light_tank_chassis } } add_to_variable = { NID_kt_arm = 1 } }
+		multiply_variable = { NID_kt_arm = 0.15 }
+		divide_variable = { NID_kt_arm = 5 } #5 steps, full line = +15%
+		if = {
+			limit = { has_country_flag = NID_kt_elite_unlocked }
+			add_to_variable = { NID_kt_arm = 0.05 }
+		}
+	}
+	force_update_dynamic_modifier = yes
+}
