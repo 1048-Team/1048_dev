@@ -217,7 +217,7 @@ country_event = {
 
 country_event = {
 	id = gesellschaft.11
-	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.1"}
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.11"}
 	title = gesellschaft.11.t
 	desc = gesellschaft.11.d
 	picture = GFX_event_solarempire 
@@ -259,15 +259,15 @@ country_event = {
 
 country_event = {
 	id = gesellschaft.12
-	immediate = {log = "[GetDateText]: [Root.GetName]: event gesellschaft.12"}
 	title = gesellschaft.12.t
 	desc = gesellschaft.12.d
-	picture = GFX_event_solarempire 
-	
+	picture = GFX_event_solarempire
+
 	is_triggered_only = yes
 	hidden = yes
 	immediate = {
-		if = { 
+		log = "[GetDateText]: [Root.GetName]: event gesellschaft.12"
+		if = {
 			limit = { has_dlc = "Man the Guns" }
 			create_equipment_variant = {
 				name = "Profit Class"
@@ -309,9 +309,7 @@ country_event = {
 				}
 			}
 		}
-		NID_spawn_handelsflotte_subs = yes
-		NID_spawn_handelsflotte_cruisers = yes
-		NID_spawn_handelsflotte_destroyers = yes
+		NID_spawn_handelsflotte = yes
 	}
 	
 	option = { 
@@ -541,6 +539,10 @@ country_event = {
 				var = bank_million
 				value = 9
 			}
+			IF = { 
+				limit = { has_country_flag = NID_fleet_launched_flag }
+				NID_spawn_handelsflotte = yes
+			}
 		}
 	}
 }
@@ -571,6 +573,10 @@ country_event = {
 				var = bank_million
 				value = 15
 			}
+			IF = {
+				limit = { has_country_flag = NID_fleet_launched_flag }
+				NID_spawn_handelsflotte = yes
+			}
 		}
 	}
 }
@@ -600,6 +606,10 @@ country_event = {
 			subtract_from_variable = {
 				var = bank_million
 				value = 24
+			}
+			IF = {
+				limit = { has_country_flag = NID_fleet_launched_flag }
+				NID_spawn_handelsflotte = yes
 			}
 		}
 	}
@@ -1120,6 +1130,7 @@ country_event = {
 	trigger = {
 		tag = NID
 		NRP = { exists = yes }
+		NOT = { has_country_flag = NID_stage_2_flag } #Already collapsed via another path (e.g. BAL debug effect)
 	}
 	fire_only_once = yes
 	

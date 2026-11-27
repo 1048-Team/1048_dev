@@ -59,3 +59,614 @@ characters = {
 		}
 	}
 }
+
+###NID Corporate Council
+	NID_corp_hiveworks = { #HIVEworks - Consumer Goods & Infrastructure - home: CHN
+		name = NID_corp_hiveworks
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_hiveworks_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_new_construction_contracts }
+			available = {
+				country_exists = CHN
+				NOT = { has_war_with = CHN }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_4_mil_tt
+					check_variable = { var = bank_million value > 3.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_4_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 4 } }
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_hiveworks_seated_once } }
+					set_country_flag = NID_corp_hiveworks_seated_once
+					CHN = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { NID_corp_hiveworks_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_nutrichew = { #NutriChew - Foodstuffs & Polymers - home: RCT
+		name = NID_corp_nutrichew
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_nutrichew_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			available = {
+				country_exists = RCT
+				NOT = { has_war_with = RCT }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_3_mil_tt
+					check_variable = { var = bank_million value > 2.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_3_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 3 } }
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+				custom_effect_tooltip = NID_corp_nutrichew_resources_tt
+				hidden_effect = {
+					add_to_variable = { var = resource_rubber value = 2 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_nutrichew_seated_once } }
+					set_country_flag = NID_corp_nutrichew_seated_once
+					RCT = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+				custom_effect_tooltip = NID_corp_nutrichew_resources_lost_tt
+				hidden_effect = {
+					subtract_from_variable = { var = resource_rubber value = 2 }
+				}
+			}
+			traits = { NID_corp_nutrichew_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_zinten_windford = { #Zinten-Windford Mining - Mining & Refining - home: GRI
+		name = NID_corp_zinten_windford
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_zinten_windford_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			#TODO: Replace with the Griffonia foreign-policy focus once that branch exists
+			visible = { has_completed_focus = NID_our_own_hegemony }
+			available = {
+				country_exists = GRI
+				NOT = { has_war_with = GRI }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_5_mil_tt
+					check_variable = { var = bank_million value > 4.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_5_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 5 } }
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+				custom_effect_tooltip = NID_corp_zinten_windford_resources_tt
+				hidden_effect = {
+					add_to_variable = { var = resource_tungsten value = 3 }
+					add_to_variable = { var = resource_chromium value = 3 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_zinten_windford_seated_once } }
+					set_country_flag = NID_corp_zinten_windford_seated_once
+					GRI = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+				custom_effect_tooltip = NID_corp_zinten_windford_resources_lost_tt
+				hidden_effect = {
+					subtract_from_variable = { var = resource_tungsten value = 3 }
+					subtract_from_variable = { var = resource_chromium value = 3 }
+				}
+			}
+			traits = { NID_corp_zinten_windford_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_yabmanein = { #Yabmanein Petroleum - Oil, Derivatives & Real Estate - home: EMR
+		name = NID_corp_yabmanein
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_yabmanein_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_invite_yabmanein }
+			available = {
+				country_exists = EMR
+				NOT = { has_war_with = EMR }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_5_mil_tt
+					check_variable = { var = bank_million value > 4.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_5_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 5 } }
+				custom_effect_tooltip = NID_gain_1_foreign_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_assets value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+				custom_effect_tooltip = NID_corp_yabmanein_resources_tt
+				hidden_effect = {
+					add_to_variable = { var = resource_oil value = 4 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_yabmanein_seated_once } }
+					set_country_flag = NID_corp_yabmanein_seated_once
+					EMR = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_loose_1_foreign_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_assets value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+				custom_effect_tooltip = NID_corp_yabmanein_resources_lost_tt
+				hidden_effect = {
+					subtract_from_variable = { var = resource_oil value = 4 }
+				}
+			}
+			traits = { NID_corp_yabmanein_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_grc_polytechnics = { #GRC-Polytechnics - Education - home: BAT
+		name = NID_corp_grc_polytechnics
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_grc_polytechnics_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_north_zebrican_cooperation }
+			available = {
+				country_exists = BAT
+				NOT = { has_war_with = BAT }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_4_mil_tt
+					check_variable = { var = bank_million value > 3.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_4_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 4 } }
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_grc_polytechnics_seated_once } }
+					set_country_flag = NID_corp_grc_polytechnics_seated_once
+					BAT = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { NID_corp_grc_polytechnics_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_panacea = { #Panacea - Pharmaceuticals & Medical Tech - home: NID
+		name = NID_corp_panacea
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_panacea_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = NID_has_3_mil_tt
+					check_variable = { var = bank_million value > 2.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_3_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 3 } }
+			}
+			traits = { NID_corp_panacea_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_apex = { #APEX - Agriculture & Chemicals - home: NCA
+		name = NID_corp_apex
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_apex_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_achieve_agricultural_independance }
+			available = {
+				country_exists = NCA
+				NOT = { has_war_with = NCA }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_4_mil_tt
+					check_variable = { var = bank_million value > 3.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_4_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 4 } }
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_apex_seated_once } }
+					set_country_flag = NID_corp_apex_seated_once
+					NCA = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { NID_corp_apex_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_prt = { #Protectorate (PRT) - Security Services - home: NID
+		name = NID_corp_prt
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_prt_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			available = {
+				NOT = { has_idea = NID_merc_prt_tensions }
+				NOT = { has_idea = NID_merc_prt_tensions2 }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_3_mil_tt
+					check_variable = { var = bank_million value > 2.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_3_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 3 } }
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_prt_seated_once } }
+					set_country_flag = NID_corp_prt_seated_once
+					NID_improve_PRT = yes
+				}
+			}
+			traits = { NID_corp_prt_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_vpr_link = { #VPR-Link - Telecommunications - home: CRY
+		name = NID_corp_vpr_link
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_vpr_link_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			#TODO: Replace with the Crystal Empire foreign-policy focus once that branch exists
+			visible = { has_completed_focus = NID_our_own_hegemony }
+			available = {
+				country_exists = CRY
+				NOT = { has_war_with = CRY }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_4_mil_tt
+					check_variable = { var = bank_million value > 3.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_4_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 4 } }
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_vpr_link_seated_once } }
+					set_country_flag = NID_corp_vpr_link_seated_once
+					CRY = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { NID_corp_vpr_link_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_six_h_group = { #6-H Group - Media - home: CHN
+		name = NID_corp_six_h_group
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_six_h_group_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			available = {
+				country_exists = CHN
+				NOT = { has_war_with = CHN }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_3_mil_tt
+					check_variable = { var = bank_million value > 2.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_3_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 3 } }
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_six_h_group_seated_once } }
+					set_country_flag = NID_corp_six_h_group_seated_once
+					CHN = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			traits = { NID_corp_six_h_group_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_corp_blautronic = { #Blautronic - Electronics & Microchips - home: GRI
+		name = NID_corp_blautronic
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } 
+		advisor = {
+			slot = political_advisor
+			idea_token = NID_corp_blautronic_seat
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { OR = { has_completed_focus = NID_industrial_research_incentives has_completed_focus = NID_military_rnd } }
+			available = {
+				country_exists = GRI
+				NOT = { has_war_with = GRI }
+				custom_trigger_tooltip = {
+					tooltip = NID_has_5_mil_tt
+					check_variable = { var = bank_million value > 4.99 }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = NID_pay_5_mil_tt
+				hidden_effect = { subtract_from_variable = { var = bank_million value = 5 } }
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+				IF = { #First seating only
+					limit = { NOT = { has_country_flag = NID_corp_blautronic_seated_once } }
+					set_country_flag = NID_corp_blautronic_seated_once
+					GRI = { add_opinion_modifier = { target = ROOT modifier = medium_increase } }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { NID_corp_blautronic_trait }
+			ai_will_do = { factor = 1 }
+		}
+	}
+
+	###Think-tanks###
+	NID_tt_doctrinal_bureau = { #Think-tank: Protectorate Doctrinal Bureau
+		name = NID_tt_doctrinal_bureau
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } #GFX placeholder: think-tank emblem
+		advisor = {
+			slot = theorist
+			idea_token = NID_tt_doctrinal_bureau
+			cost = 100
+			allowed = { original_tag = NID }
+			on_add = { #Think-tanks are funded out of Council profits
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { military_theorist }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_tt_strategic_office = { #Think-tank: Handelsflotte Strategic Office
+		name = NID_tt_strategic_office
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } #GFX placeholder: think-tank emblem
+		advisor = {
+			slot = theorist
+			idea_token = NID_tt_strategic_office
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_modernize_the_handelsflotte }
+			on_add = { #Think-tanks are funded out of Council profits
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { naval_theorist }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_tt_flight_institute = { #Think-tank: Mayfly Flight Research Institute
+		name = NID_tt_flight_institute
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } #GFX placeholder: think-tank emblem
+		advisor = {
+			slot = theorist
+			idea_token = NID_tt_flight_institute
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_invest_in_aviation }
+			on_add = { #Think-tanks are funded out of Council profits
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { air_warfare_theorist }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_tt_field_evaluation = { #Think-tank: Nidhogg Field Evaluation Group
+		name = NID_tt_field_evaluation
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } #GFX placeholder: think-tank emblem
+		advisor = {
+			slot = army_chief
+			ledger = army
+			idea_token = NID_tt_field_evaluation
+			cost = 100
+			allowed = { original_tag = NID }
+			on_add = { #Think-tanks are funded out of Council profits
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { army_chief_defensive_2 }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_tt_convoy_board = { #Think-tank: Council Convoy Protection Board
+		name = NID_tt_convoy_board
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } #GFX placeholder: think-tank emblem
+		advisor = {
+			slot = navy_chief
+			ledger = navy
+			idea_token = NID_tt_convoy_board
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_modernize_the_handelsflotte }
+			on_add = { #Think-tanks are funded out of Council profits
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { navy_chief_commerce_raiding_2 }
+			ai_will_do = { factor = 1 }
+		}
+	}
+	NID_tt_air_safety_board = { #Think-tank: Council Air Safety Board
+		name = NID_tt_air_safety_board
+		portraits = { civilian = { small = "GFX_idea_JER_generic_advisor" } } #GFX placeholder: think-tank emblem
+		advisor = {
+			slot = air_chief
+			ledger = air
+			idea_token = NID_tt_air_safety_board
+			cost = 100
+			allowed = { original_tag = NID }
+			visible = { has_completed_focus = NID_invest_in_aviation }
+			on_add = { #Think-tanks are funded out of Council profits
+				custom_effect_tooltip = NID_loose_1_domestic_investment_tt
+				hidden_effect = {
+					subtract_from_variable = { var = gain_quaterly value = 1 }
+					subtract_from_variable = { var = gain_total value = 1 }
+				}
+			}
+			on_remove = {
+				custom_effect_tooltip = NID_gain_1_domestic_investment_tt
+				hidden_effect = {
+					add_to_variable = { var = gain_quaterly value = 1 }
+					add_to_variable = { var = gain_total value = 1 }
+				}
+			}
+			traits = { air_chief_safety_2 }
+			ai_will_do = { factor = 1 }
+		}
+}
+

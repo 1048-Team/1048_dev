@@ -333,6 +333,7 @@ south_east_skeleton_category = {
         }
         visible = {
             tag = BAL
+            is_subject = no #Not while BAL is NID's (or anyone's) puppet
             date > 1050.9.1
             OR = {
                 country_exists = STB
@@ -471,6 +472,7 @@ south_east_skeleton_category = {
         }
         visible = {
             tag = CLI
+            is_subject = no #Not while CLI is NID's (or anyone's) puppet
         }
         fire_only_once = yes
         days_remove = 14
@@ -478,13 +480,27 @@ south_east_skeleton_category = {
         war_with_on_remove = NID
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove CLI_liberate_the_islands"
-            declare_war_on = {
-                target = SPF
-                type = annex_everything
+            if = { #Re-check: CLI may have been puppeted during the 14 days
+                limit = {
+                    is_subject = no
+                    country_exists = SPF
+                    NOT = { is_in_faction_with = SPF }
+                }
+                declare_war_on = {
+                    target = SPF
+                    type = annex_everything
+                }
             }
-            declare_war_on = {
-                target = NID
-                type = annex_everything
+            if = {
+                limit = {
+                    is_subject = no
+                    country_exists = NID
+                    NOT = { is_in_faction_with = NID }
+                }
+                declare_war_on = {
+                    target = NID
+                    type = annex_everything
+                }
             }
             if = {
                 limit = {
@@ -500,18 +516,29 @@ south_east_skeleton_category = {
     NRP_install_pesticide = {
         available = {
             date > 1049.9.1
+            is_subject = no
+            country_exists = NID
+            NOT = { is_in_faction_with = NID }
         }
         visible = {
             tag = NRP
+            is_subject = no #Not while NRP is NID's (or anyone's) puppet
         }
         fire_only_once = yes
         days_remove = 14
         war_with_on_remove = NID
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NRP_install_pesticide"
-            declare_war_on = {
-                target = NID
-                type = annex_everything
+            if = { #Re-check: NRP may have been puppeted during the 14 days
+                limit = {
+                    is_subject = no
+                    country_exists = NID
+                    NOT = { is_in_faction_with = NID }
+                }
+                declare_war_on = {
+                    target = NID
+                    type = annex_everything
+                }
             }
         }
         ai_will_do = {
@@ -525,18 +552,29 @@ south_east_skeleton_category = {
     NRP_dictatorship_toppling = {
         available = {
             date > 1050.1.1
+            is_subject = no
+            country_exists = STB
+            NOT = { is_in_faction_with = STB }
         }
         visible = {
             tag = NRP
+            is_subject = no #Not while NRP is NID's (or anyone's) puppet
         }
         fire_only_once = yes
         days_remove = 14
-        war_with_on_remove = NRP
+        war_with_on_remove = STB
         remove_effect = {
             log = "[GetDateText]: [ROOT.GetName]: decision remove NRP_dictatorship_toppling"
-            declare_war_on = {
-                target = STB
-                type = annex_everything
+            if = { #Re-check: NRP may have been puppeted during the 14 days
+                limit = {
+                    is_subject = no
+                    country_exists = STB
+                    NOT = { is_in_faction_with = STB }
+                }
+                declare_war_on = {
+                    target = STB
+                    type = annex_everything
+                }
             }
         }
         ai_will_do = {
@@ -545,233 +583,6 @@ south_east_skeleton_category = {
                 has_war = yes
                 factor = 0
             }
-        }
-    }
-    NID_solidify_assets = {
-        available = {
-            date > 1049.6.1
-        }
-        visible = {
-            tag = NID
-        }
-        fire_only_once = yes
-        days_remove = 14
-        war_with_on_remove = SPF
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_solidify_assets"
-            declare_war_on = {
-                target = SPF
-                type = annex_everything
-            }
-            if = {
-                limit = {
-                    is_ai = yes
-                }
-                add_ideas = southeast_speedy_naval_invasions
-                if = {
-                    limit = {
-                        SPF = {
-                            is_ai = yes
-                        }
-                    }
-                    SPF = { add_ideas = surrender_limit_reduction }
-                }
-            }
-            #if = {
-            #    limit = {
-            #        is_ai = yes
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #}
-            #if = {
-            #    limit = {
-            #        SPF = {
-            #            is_ai = yes
-            #        }
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_light_2
-            #        equipment_variant = "Antagonist Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_cruiser_2
-            #        equipment_variant = "Antax Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_cruiser_2
-            #        equipment_variant = "Antax Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #    create_ship = {
-            #        type = ship_hull_cruiser_2
-            #        equipment_variant = "Mandible Class"
-            #        creator = NID
-            #        amount = 1
-            #    }
-            #}
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    NID_pay_down_squabbles = {
-        available = {
-            date > 1049.6.1
-        }
-        visible = {
-            tag = NID
-            is_ai = no
-        }
-        cost = 125
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision NID_pay_down_squabbles"
-            remove_ideas = NID_merc_prt_tensions
-        }
-    }
-    NID_shirk_restrictions = {
-        available = {
-            date > 1049.6.1
-        }
-        visible = {
-            tag = NID
-            is_ai = no
-        }
-        cost = 75
-        fire_only_once = yes
-        complete_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision NID_shirk_restrictions"
-            remove_ideas = NID_no_aviation_industry_idea
-        }
-    }
-    NID_pay_down_squabbles_ai = {
-        available = {
-            date > 1049.6.1
-        }
-        visible = {
-            tag = NID
-            is_ai = yes
-        }
-        days_remove = 120
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_pay_down_squabbles_ai"
-            remove_ideas = NID_merc_prt_tensions
-        }
-        ai_will_do = {
-            factor = 10
-        }
-    }
-    NID_shirk_restrictions_ai = {
-        available = {
-            date > 1049.6.1
-        }
-        visible = {
-            tag = NID
-            is_ai = yes
-        }
-        days_remove = 365
-        fire_only_once = yes
-        remove_effect = {
-            log = "[GetDateText]: [ROOT.GetName]: decision remove NID_shirk_restrictions_ai"
-            remove_ideas = NID_no_aviation_industry_idea
-        }
-        ai_will_do = {
-            factor = 10
         }
     }
     south_east_recore_jungle = {
@@ -1009,6 +820,7 @@ south_east_skeleton_category = {
     south_east_get_on_with_it = {
         visible = {
             date > 1052.1.1
+            is_subject = no #Hansa puppets must not declare on NID / each other
             NOT = {
                 tag = MTS
                 tag = BAL
@@ -1034,6 +846,10 @@ south_east_skeleton_category = {
                 limit = {
                     has_country_flag = SEE
                     exists = yes
+                    NOT = { tag = ROOT }
+                    NOT = { is_subject_of = ROOT }
+                    NOT = { is_in_faction_with = ROOT }
+                    NOT = { has_war_with = ROOT }
                 }
                 ROOT = {
                     declare_war_on = {

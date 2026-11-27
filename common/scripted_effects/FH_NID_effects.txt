@@ -41,121 +41,92 @@ NID_improve_PRT = {
 	}
 }
 
+###Spawns every ship commissioned so far (flotte_* counters) and resets the counters to 0.
+NID_spawn_handelsflotte = {
+	NID_spawn_handelsflotte_subs = yes
+	NID_spawn_handelsflotte_cruisers = yes
+	NID_spawn_handelsflotte_destroyers = yes
+}
+
 NID_spawn_handelsflotte_subs = {
-		IF = {
+	NID = {
+		while_loop_effect = {
 			limit = {
-				has_dlc = "Man the Guns" 
+				check_variable = { flotte_subs > 0 }
 			}
-			NID = {
+			IF = {
+				limit = { has_dlc = "Man the Guns" }
 				create_ship = {
 					type = ship_hull_submarine_2
 					equipment_variant = "Type VII Class"
 				}
 			}
-		}
-		ELSE = {
-			NID = {
+			ELSE = {
 				create_ship = {
 					type = submarine_2
 					equipment_variant = submarine_2
 				}
 			}
-		}
-		NID = {
 			subtract_from_variable = {
-			var = flotte_subs
-			value = 1
+				var = flotte_subs
+				value = 1
 			}
 		}
-
-	IF = {
-		limit = {
-			NID = {
-				check_variable = {
-					flotte_subs > 0
-				}
-			}
-		}
-		NID = {NID_spawn_handelsflotte_subs = yes}
 	}
 }
 
 NID_spawn_handelsflotte_destroyers = {
-	IF = {
-		limit = {
-			has_dlc = "Man the Guns" 
-		}
-		NID = {
-			create_ship = {
-				type = ship_hull_light_3
-				equipment_variant = "Profit Class"
-			}
-		}
-	}
-	ELSE = {
-		NID = {
-			create_ship = {
-				type = destroyer_3
-				equipment_variant = destroyer_3
-			}
-		}
-	}
 	NID = {
-		subtract_from_variable = {
-		var = flotte_destroyers
-		value = 1
-		}
-	}
-
-IF = {
-	limit = {
-		NID = {
-			check_variable = {
-				flotte_destroyers > 0
+		while_loop_effect = {
+			limit = {
+				check_variable = { flotte_destroyers > 0 }
+			}
+			IF = {
+				limit = { has_dlc = "Man the Guns" }
+				create_ship = {
+					type = ship_hull_light_3
+					equipment_variant = "Profit Class"
+				}
+			}
+			ELSE = {
+				create_ship = {
+					type = destroyer_3
+					equipment_variant = destroyer_3
+				}
+			}
+			subtract_from_variable = {
+				var = flotte_destroyers
+				value = 1
 			}
 		}
 	}
-	NID = {NID_spawn_handelsflotte_destroyers = yes}
-}
 }
 
 NID_spawn_handelsflotte_cruisers = {
-	IF = {
-		limit = {
-			has_dlc = "Man the Guns" 
-		}
-		NID = {
-			create_ship = {
-				type = ship_hull_cruiser_3
-				equipment_variant = "Commerce Class"
-			}
-		}
-	}
-	ELSE = {
-		NID = {
-			create_ship = {
-				type = heavy_cruiser_3
-				equipment_variant = heavy_cruiser_3
-			}
-		}
-	}
 	NID = {
-		subtract_from_variable = {
-		var = flotte_cruisers
-		value = 1
-		}
-	}
-
-IF = {
-	limit = {
-		NID = {
-			check_variable = {
-				flotte_cruisers > 0
+		while_loop_effect = {
+			limit = {
+				check_variable = { flotte_cruisers > 0 }
+			}
+			IF = {
+				limit = { has_dlc = "Man the Guns" }
+				create_ship = {
+					type = ship_hull_cruiser_3
+					equipment_variant = "Commerce Class"
+				}
+			}
+			ELSE = {
+				create_ship = {
+					type = heavy_cruiser_3
+					equipment_variant = heavy_cruiser_3
+				}
+			}
+			subtract_from_variable = {
+				var = flotte_cruisers
+				value = 1
 			}
 		}
 	}
-	NID = {NID_spawn_handelsflotte_cruisers = yes}
-}
 }
 
 NID_improve_rebellion = {

@@ -114,10 +114,10 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = NID_has_12p5_mil_tt
-		}
-		check_variable = {
-			var = bank_million
-			value > 12.49
+			check_variable = {
+				var = bank_million
+				value > 12.49
+			}
 		}
 	}
 	ai_will_do = {
@@ -310,10 +310,10 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = NID_has_20_mil_tt
-		}
-		check_variable = {
-			var = bank_million
-			value > 20.0
+			check_variable = {
+				var = bank_million
+				value > 19.99
+			}
 		}
 	}
 	ai_will_do = {
@@ -444,10 +444,10 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = NID_has_9_mil_tt
-		}
-		check_variable = {
-			var = bank_million
-			value > 9
+			check_variable = {
+				var = bank_million
+				value > 8.99
+			}
 		}
 	}
 	bypass = {
@@ -476,10 +476,10 @@ shared_focus = {
 	available = {
 		custom_trigger_tooltip = {
 			tooltip = NID_has_3_mil_tt
-		}
-		check_variable = {
-			var = bank_million
-			value > 3
+			check_variable = {
+				var = bank_million
+				value > 2.99
+			}
 		}
 	}
 	ai_will_do = {
@@ -1102,7 +1102,7 @@ shared_focus = {
 			tooltip = NID_has_7p5_mil_tt
 			check_variable = {
 				var = bank_million
-				value > 7.50
+				value > 7.49
 			}
 		}
 	}
@@ -1213,6 +1213,12 @@ shared_focus = {
 
 	ai_will_do = {
 		factor = 100
+	}
+	bypass = {
+		OR = {
+			owns_state = 15
+			any_subject_country = { owns_state = 15 }
+		}
 	}
 	available = {
 		has_completed_focus = NID_beg_vesalipolis_for_aid
@@ -1430,11 +1436,20 @@ shared_focus = {
 			add_political_power = -100
 			add_stability = -0.03
 		}
-		else = {
+		else_if = {
+			limit = {
+				has_idea = NID_merc_prt_tensions3
+			}
 			swap_ideas = {
 				remove_idea = NID_merc_prt_tensions3
 				add_idea = NID_merc_prt_tensions4
 			}
+		}
+		else_if = {
+			limit = {
+				NOT = { has_idea = NID_merc_prt_tensions4 }
+			}
+			add_ideas = NID_merc_prt_tensions4
 		}
 	}
 }
@@ -1467,12 +1482,27 @@ shared_focus = {
 	prerequisite = {
 		focus = NID_beg_vesalipolis_for_aid
 	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = NID_has_5_mil_tt
+			check_variable = {
+				var = bank_million
+				value > 4.99
+			}
+		}
+	}
 	ai_will_do = {
 		factor = 100
 	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NID_hire_silver_claws"
 		custom_effect_tooltip = NID_pay_5_mil_tt
+		hidden_effect = {
+			subtract_from_variable = {
+				var = bank_million
+				value = 5
+			}
+		}
 		custom_effect_tooltip = NID_spawn_eingriffstruppe_tt
 		division_template = {
 			name = "Schnelle Eingriffstruppe"
@@ -1710,7 +1740,7 @@ shared_focus = {
 			tooltip = NID_has_6_mil_tt
 			check_variable = {
 				var = bank_million
-				value > 6
+				value > 5.99
 			}
 		}
 	}
@@ -2219,7 +2249,7 @@ shared_focus = {
 			tooltip = NID_has_4_mil_tt
 			check_variable = {
 				var = bank_million
-				value > 4
+				value > 3.99
 			}
 		}
 	}

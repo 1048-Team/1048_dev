@@ -197,7 +197,7 @@ NID_banking_decisions_category = {
 			has_stability < 0.9
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 2 }
+			check_variable = { bank_million > 1.99 }
 		}
 		custom_cost_text = NID_bank_cost_2_mil_tt
 		available = {
@@ -225,7 +225,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_establish_sovereign_development_fund
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 3 }
+			check_variable = { bank_million > 2.99 }
 		}
 		custom_cost_text = NID_bank_cost_3_mil_tt
 		available = {
@@ -269,7 +269,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_establish_sovereign_development_fund
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 4 }
+			check_variable = { bank_million > 3.99 }
 		}
 		custom_cost_text = NID_bank_cost_4_mil_tt
 		available = {
@@ -303,7 +303,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_establish_sovereign_development_fund
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 10 }
+			check_variable = { bank_million > 9.99 }
 		}
 		custom_cost_text = NID_bank_cost_10_mil_tt
 		available = {
@@ -338,7 +338,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_establish_sovereign_development_fund
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 10 }
+			check_variable = { bank_million > 9.99 }
 		}
 		custom_cost_text = NID_bank_cost_10_mil_tt
 		available = {
@@ -373,7 +373,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_establish_sovereign_development_fund
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 40 }
+			check_variable = { bank_million > 39.99 }
 		}
 		custom_cost_text = NID_bank_cost_40_mil_tt
 		available = {
@@ -409,7 +409,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_machine_of_war
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 8 }
+			check_variable = { bank_million > 7.99 }
 		}
 		custom_cost_text = NID_bank_cost_8_mil_tt
 		available = {
@@ -444,7 +444,7 @@ NID_banking_decisions_category = {
 			has_completed_focus = NID_foreign_industrial_grants
 		}
 		custom_cost_trigger = {
-			check_variable = { bank_million > 2 }
+			check_variable = { bank_million > 1.99 }
 		}
 		custom_cost_text = NID_bank_cost_2_mil_tt
 		available = {
@@ -478,11 +478,8 @@ NID_trade_decisions_category = {
 		
 		visible = {
 			has_resources_rights = {
-				state = 741
+				state = 777
 			}
-		}
-		available = {
-			has_country_flag = NID_allow_cancel_deal
 		}
 		is_good = no
 		ai_will_do = {
@@ -491,7 +488,7 @@ NID_trade_decisions_category = {
 		
 		fire_only_once = yes
 		complete_effect = {
-			remove_resource_rights = 741
+			remove_resource_rights = 777
 			IF = {
 				limit = {
 					has_resources_rights = {
@@ -521,10 +518,7 @@ NID_trade_decisions_category = {
 				state = 189
 			}
 		}
-		available = {
-			has_country_flag = NID_allow_cancel_deal
-		}
-		
+
 		fire_only_once = yes
 		ai_will_do = {
 			base = 0
@@ -665,10 +659,10 @@ NID_international_affairs_decisions_category = {
 		custom_cost_trigger = {
 			custom_trigger_tooltip = {
 				tooltip = NID_bank_cost_2p25_mil_tt
-			}
-			check_variable = {
-				var = bank_million
-				value > 2.25
+				check_variable = {
+					var = bank_million
+					value > 2.24
+				}
 			}
 		}
 		
@@ -717,10 +711,10 @@ NID_international_affairs_decisions_category = {
 		custom_cost_trigger = {
 			custom_trigger_tooltip = {
 				tooltip = NID_bank_cost_4_mil_tt
-			}
-			check_variable = {
-				var = bank_million
-				value > 4
+				check_variable = {
+					var = bank_million
+					value > 3.99
+				}
 			}
 		}
 		
@@ -791,12 +785,16 @@ NID_handelsflotte_decisions_category = {
 	NID_request_extension = {
 		icon = GFX_decision_unknown
 		cost = 50
-		
+		visible = {
+			has_active_mission = NID_finish_fleet
+		}
+		available = {
+			has_active_mission = NID_finish_fleet
+		}
 		fire_only_once = yes
 		ai_will_do = {
 			base = 0
 		}
-		days_re_enable = 5
 		complete_effect = {
 			add_days_mission_timeout = {
 				mission = NID_finish_fleet
@@ -806,20 +804,22 @@ NID_handelsflotte_decisions_category = {
 	}
 	NID_commission_sub = {
 		icon = GFX_decision_unknown
-		
+		visible = { #Orders are only collected until the fleet launches
+			NOT = { has_country_flag = NID_fleet_launched_flag }
+		}
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = NID_1_free_dockyard_tt
-			}
-			check_variable = {
-				var = free_foreign_dockyards
-				value > 1
+				check_variable = {
+					var = free_foreign_dockyards
+					value > 0
+				}
 			}
 		}
 		custom_cost_trigger = {
 			check_variable = {
 				var = bank_million
-				value > 4
+				value > 3.99
 			}
 		}
 		custom_cost_text = NID_bank_cost_4_mil_tt
@@ -848,20 +848,22 @@ NID_handelsflotte_decisions_category = {
 	}
 	NID_commission_destroyer = {
 		icon = GFX_decision_unknown
-		
+		visible = { #Orders are only collected until the fleet launches
+			NOT = { has_country_flag = NID_fleet_launched_flag }
+		}
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = NID_1_free_dockyard_tt
-			}
-			check_variable = {
-				var = free_foreign_dockyards
-				value > 1
+				check_variable = {
+					var = free_foreign_dockyards
+					value > 0
+				}
 			}
 		}
 		custom_cost_trigger = {
 			check_variable = {
 				var = bank_million
-				value > 5
+				value > 4.99
 			}
 		}
 		custom_cost_text = NID_bank_cost_5_mil_tt
@@ -890,20 +892,22 @@ NID_handelsflotte_decisions_category = {
 	}
 	NID_commission_cruiser = {
 		icon = GFX_decision_unknown
-		
+		visible = { #Orders are only collected until the fleet launches
+			NOT = { has_country_flag = NID_fleet_launched_flag }
+		}
 		available = {
 			custom_trigger_tooltip = {
 				tooltip = NID_2_free_dockyard_tt
-			}
-			check_variable = {
-				var = free_foreign_dockyards
-				value > 2
+				check_variable = {
+					var = free_foreign_dockyards
+					value > 1
+				}
 			}
 		}
 		custom_cost_trigger = {
 			check_variable = {
 				var = bank_million
-				value > 8
+				value > 7.99
 			}
 		}
 		custom_cost_text = NID_bank_cost_8_mil_tt
